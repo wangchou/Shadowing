@@ -10,6 +10,8 @@ An app that trains your speaking via Text-To-Speech and Speech Recognition
 2. 算分
 3. 統計、追蹤進度 
 
+<img src="https://raw.githubusercontent.com/wangchou/Shadowing/master/img/shadowing_flow.jpg" height="300">
+
 ### 內容
 * 日常對話 100 句 / 歌詞 (一個 set 1分鐘 ~ 5分鐘)
 
