@@ -1,5 +1,6 @@
 const osa = require('osa2')
 const promptly = require('promptly')
+const chalk = require('chalk')
 
 const say = osa((text, props) => {
   var app = Application.currentApplication()
@@ -35,26 +36,27 @@ const kyokoSlow = {
   //pitch: 120,
   //modulation: 100
 }
-
 const meijia = { using: "Mei-Jia" }
-const hint = "請跟著唸："
-const sentence = "おはようございます"
 
-const white = (text) => console.log('\x1b[37m%s\x1b[0m', text);
-const blue = (text) => console.log('\x1b[34m%s\x1b[0m', text);
-const green = (text) => console.log('\x1b[32m%s\x1b[0m', text);
-const red = (text) => console.log('\x1b[31m%s\x1b[0m', text);
+const listenMe = "請仔細聽："
 
-const main = async () => {
-  white(hint + '\n')
-  await say(hint, meijia)
+const white = (text) => console.log(chalk.white(text));
+const blue = (text) => console.log(chalk.blue(text));
+const green = (text) => console.log(chalk.green(text));
+const red = (text) => console.log(chalk.red(text));
+const gray = (text) => console.log(chalk.gray(text));
+
+const learn = async (sentence) => {
+  gray('--------------------------------------------')
+  white(listenMe)
+  await say(listenMe, meijia)
 
   blue(sentence + '\n')
   await say(sentence, kyokoSlow)
 
-  toggleListen()
-  const speakText = await promptly.prompt('換你說：')
-  toggleListen()
+  await toggleListen()
+  const speakText = await promptly.prompt(repeatMe)
+  await toggleListen()
   // press the enter after recognition when prototyping
   if(speakText === sentence) {
     green('O')
@@ -63,7 +65,27 @@ const main = async () => {
   }
 }
 
+const main = async () => {
+  await learn('そりゃ無理だ')
+  await learn('安い')
+  await learn('イリアちゃんも')
+}
+
 main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
