@@ -36,15 +36,18 @@ const kyokoSlow = {
   //pitch: 120,
   //modulation: 100
 }
+const kyoko = { using: "Kyoko"}
 const meijia = { using: "Mei-Jia" }
 
 const listenMe = "請仔細聽："
+const repeatMe = "請跟著唸："
 
-const white = (text) => console.log(chalk.white(text));
-const blue = (text) => console.log(chalk.blue(text));
-const green = (text) => console.log(chalk.green(text));
-const red = (text) => console.log(chalk.red(text));
-const gray = (text) => console.log(chalk.gray(text));
+const colorLog = (color) => (text) => console.log(chalk[color](text))
+const white = colorLog('white')
+const blue = colorLog('blue')
+const green = colorLog('green')
+const red = colorLog('red')
+const gray = colorLog('gray')
 
 const learn = async (sentence) => {
   gray('--------------------------------------------')
@@ -60,8 +63,10 @@ const learn = async (sentence) => {
   // press the enter after recognition when prototyping
   if(speakText === sentence) {
     green('O')
+    await say('いいね', kyoko)
   } else {
     red('X')
+    await say('がんばろ', kyoko)
   }
 }
 
