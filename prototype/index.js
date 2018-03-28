@@ -1,6 +1,16 @@
+// 1. use node 9 or above for async
+// 2. install tts sound on Mac by
+//    System Preference -> Accessibility -> Speech -> 聲 -> Japanese
 const osa = require('osa2')
 const promptly = require('promptly')
 const chalk = require('chalk')
+
+const colorLog = (color) => (text) => process.stdout.write(chalk[color](text))
+const white = colorLog('white')
+const blue = colorLog('blue')
+const green = colorLog('green')
+const red = colorLog('red')
+const gray = colorLog('gray')
 
 const say = osa((text, props) => {
   var app = Application.currentApplication()
@@ -9,71 +19,88 @@ const say = osa((text, props) => {
   return app.say(text, props)
 })
 
-const displayDialog = osa((text) => {
-  var app = Application.currentApplication()
-  app.includeStandardAdditions = true
-
-  return app.displayDialog(text, {
-    defaultAnswer: "",
-    buttons: ["done"],
-    givingUpAfter: 10
-  })
-})
-
-const toggleListen = osa(() => {
+const toggleListen = osa((seconds = 0) => {
   const fnKeyCode = 63
-  // press Fn twice to enable dictation
-  Application('System Events').keyCode([fnKeyCode, fnKeyCode])
+  delay(seconds)
+  return Application('System Events').keyCode([fnKeyCode, fnKeyCode])
 })
 
-// async is supported in node 9
-// need to install tts sound from
-// System Preference -> Accessibility -> Speech -> 聲 -> Japanese
+const enter = osa(() => {
+  const enterKeyCode = 36
+  delay(3)
+  return Application('System Events').keyCode([enterKeyCode])
+})
 
-const kyokoSlow = {
-  using: "Kyoko",
-  speakingRate: 140,
-  //pitch: 120,
-  //modulation: 100
-}
-const kyoko = { using: "Kyoko"}
+
+const kyoko = { using: "Kyoko" }
+const otoya = { using: "Otoya" }
 const meijia = { using: "Mei-Jia" }
 
-const listenMe = "請仔細聽："
 const repeatMe = "請跟著唸："
+const repeatMeSecond = "再跟著唸："
 
-const colorLog = (color) => (text) => console.log(chalk[color](text))
-const white = colorLog('white')
-const blue = colorLog('blue')
-const green = colorLog('green')
-const red = colorLog('red')
-const gray = colorLog('gray')
-
-const learn = async (sentence) => {
-  gray('--------------------------------------------')
-  white(listenMe)
-  await say(listenMe, meijia)
-
-  blue(sentence + '\n')
-  await say(sentence, kyokoSlow)
-
-  await toggleListen()
-  const speakText = await promptly.prompt(repeatMe)
-  await toggleListen()
-  // press the enter after recognition when prototyping
-  if(speakText === sentence) {
-    green('O')
-    await say('いいね', kyoko)
+async function learn (item, isFirstTime = true) {
+  if(isFirstTime) {
+    gray('--------------------------------------------\n')
+    white(repeatMe)
   } else {
-    red('X')
-    await say('がんばろ', kyoko)
+    white(repeatMeSecond)
+  }
+
+  blue(item.text + '\n')
+  await toggleListen()
+  let speaker = {
+    using: item.gender === 'f' ? "Kyoko" : "Otoya",
+    speakingRate: isFirstTime ? 160 : 120
+  }
+  say(item.text, speaker)
+  const speakText = await promptly.prompt('換你說：')
+  await toggleListen()
+
+  // press the enter after recognition when prototyping
+  if(speakText === item.text) {
+    green('いいね\n')
+    await say('いいね', kyoko)
+  } else if(isFirstTime) {
+    red('もう一回\n')
+    await say('もう一回', otoya)
+    await learn(item, false)
+  } else {
+    red('やっぱりだめだ\n')
+    await say('やっぱりだめだ', otoya)
   }
 }
 
+const items = [
+  {text: "こんにちは。", gender: 'm'},
+  {text: "なぜですか？", gender: 'f'},
+  {text: "そりゃ無理だ", gender: 'm'},
+  {text: "おね様", gender: 'f'},
+  {text: "真実はいつもひとつ！", gender: 'm'},
+  {text: "私、気になります！", gender: 'f'},
+  {text: "おまえはもう死んでる", gender: 'm'},
+  {text: "わーい！たーのしー！すごい！", gender: 'f'},
+  {text: "はじめまして", gender: 'm'},
+  {text: "不愉快です~", gender: 'f'},
+  {text: "はい、わかりました", gender: 'm'},
+  {text: "うるさい、うるさい！", gender: 'f'},
+  {text: "どなたですか", gender: 'm'},
+  {text: "あんたバカ？", gender: 'f'},
+  {text: "どうしましたか？", gender: 'm'},
+  {text: "頑張ります！", gender: 'f'},
+]
+
 const main = async () => {
-  await learn('そりゃ無理だ')
-  await learn('安い')
-  await learn('イリアちゃんも')
+  for(let i = 0; i < items.length; i++) {
+    await learn(items[i])
+    /*
+    let item = items[i]
+    let speaker = {
+      using: item.gender === 'f' ? "Kyoko" : "Otoya",
+    }
+    await say(item.text, speaker)
+    */
+  }
 }
 
 main()
