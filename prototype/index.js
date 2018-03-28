@@ -1,9 +1,11 @@
 // 1. use node 9 or above for async
 // 2. install tts sound on Mac by
 //    System Preference -> Accessibility -> Speech -> 聲 -> Japanese
+// 3. make sure the network is connected for Apple Speech Recognition
 const osa = require('osa2')
 const promptly = require('promptly')
 const chalk = require('chalk')
+const calcDist = require('js-levenshtein')
 
 const colorLog = (color) => (text) => process.stdout.write(chalk[color](text))
 const white = colorLog('white')
@@ -39,6 +41,11 @@ const meijia = { using: "Mei-Jia" }
 const repeatMe = "請跟著唸："
 const repeatMeSecond = "再跟著唸："
 
+let max = (x, y) => (x > y) ? x : y
+let trim = str => {
+  return str.replace(/[！？、。]/g, '')
+}
+
 async function learn (item, isFirstTime = true) {
   if(isFirstTime) {
     gray('--------------------------------------------\n')
@@ -58,21 +65,26 @@ async function learn (item, isFirstTime = true) {
   await toggleListen()
 
   // press the enter after recognition when prototyping
-  if(speakText === item.text) {
-    green('いいね\n')
-    await say('いいね', kyoko)
+  let trimedText = trim(item.text)
+  let strDist = calcDist(speakText, trimedText)
+  let len = max(trimedText.length, speakText.length)
+  let score = Math.trunc(max(len - strDist, 0) * 100 / len)
+  if(score >= 80) {
+    let goodWord = score === 100 ? "すごい" : "いいね"
+    green(`${score}点: ${goodWord}\n`)
+    await say(goodWord, kyoko)
   } else if(isFirstTime) {
-    red('もう一回\n')
+    red(`${score}点: ${strDist}/${len} もう一回\n`)
     await say('もう一回', otoya)
     await learn(item, false)
   } else {
-    red('やっぱりだめだ\n')
+    red(`${score}点: ${strDist}/${len} やっぱりだめだ\n`)
     await say('やっぱりだめだ', otoya)
   }
 }
 
 const items = [
-  {text: "こんにちは。", gender: 'm'},
+  {text: "こんにちは", gender: 'm'},
   {text: "なぜですか？", gender: 'f'},
   {text: "そりゃ無理だ", gender: 'm'},
   {text: "おね様", gender: 'f'},
@@ -81,7 +93,7 @@ const items = [
   {text: "おまえはもう死んでる", gender: 'm'},
   {text: "わーい！たーのしー！すごい！", gender: 'f'},
   {text: "はじめまして", gender: 'm'},
-  {text: "不愉快です~", gender: 'f'},
+  {text: "不愉快です", gender: 'f'},
   {text: "はい、わかりました", gender: 'm'},
   {text: "うるさい、うるさい！", gender: 'f'},
   {text: "どなたですか", gender: 'm'},
@@ -93,6 +105,7 @@ const items = [
 const main = async () => {
   for(let i = 0; i < items.length; i++) {
     await learn(items[i])
+    // console.log(trim(items[i].text))
     /*
     let item = items[i]
     let speaker = {
