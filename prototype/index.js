@@ -60,7 +60,7 @@ async function learn (item, isFirstTime = true) {
   blue(' ' + item.text + '\n')
 
   // Key Part Start //////////////////////////////////////////////////////////////
-  let speakingRate = isFirstTime ? 160 : 120
+  let speakingRate = isFirstTime ? 120 : 90
   let speaker = {
     using: item.gender === 'f' ? "Kyoko" : "Otoya",
     speakingRate
@@ -89,13 +89,17 @@ async function learn (item, isFirstTime = true) {
 }
 
 const items = [
+  {text: "安い", gender: 'm'},
+  {text: "いいね", gender: 'f'},
+  {text: "すごい", gender: 'm'},
+  {text: "はじめまして", gender: 'f'},
   {text: "こんにちは", gender: 'm'},
   {text: "なぜですか？", gender: 'f'},
   {text: "どうしましたか？", gender: 'm'},
   {text: "おねさま", gender: 'f'},
   {text: "真実はいつもひとつ！", gender: 'm'},
   {text: "わたし、気になります！", gender: 'f'},
-  {text: "おまえはもう死んでる", gender: 'm'},
+  {text: "お前はもう死んでる", gender: 'm'},
   {text: "わーい！たーのしー！すごい！", gender: 'f'},
   {text: "はじめまして", gender: 'm'},
   {text: "頑張ります！", gender: 'f'},
