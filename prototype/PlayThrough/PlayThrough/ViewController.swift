@@ -9,6 +9,24 @@
 import UIKit
 import AVFoundation
 
+// Test setup
+// channel one: sound -> iphone mic -> this play through app -> usb mixer -> garageband
+// channel two: sound -> macbook mic -> garageband
+// latency ~= the time interval between signal appear of channel one and channel two
+
+/*
+ test: AudioKit code with (mic -> speaker) latency ~= 16.25ms
+ decision: Not using AudioKit anymore
+ 
+ AKSettings.bufferLength = .Shortest
+ let mic = AKMicrophone()
+ AudioKit.output = mic
+ AudioKit.start()
+*/
+
+// tested result
+// following AVAudioEngine code with (mic -> speaker latency) ~= 5.41ms
+
 class ViewController: UIViewController {
 
     var session: AVAudioSession = AVAudioSession.sharedInstance()
@@ -25,6 +43,7 @@ class ViewController: UIViewController {
                 //options: AVAudioSessionCategoryOptions.interruptSpokenAudioAndMixWithOthers
             )
             
+            // per ioBufferDuration
             // default  23ms | 1024 frames | <1% CPU (iphone SE)
             // 0.001   0.7ms |   32 frames |  8% CPU
             try session.setPreferredIOBufferDuration(0.001)
