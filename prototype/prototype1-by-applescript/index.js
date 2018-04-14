@@ -99,7 +99,7 @@ const items = [
   {text: "おねさま", gender: 'f'},
   {text: "真実はいつもひとつ！", gender: 'm'},
   {text: "わたし、気になります！", gender: 'f'},
-  {text: "お前はもう死んでる", gender: 'm'},
+  {text: "おまえはもう死んでる", gender: 'm'},
   {text: "わーい！たーのしー！すごい！", gender: 'f'},
   {text: "はじめまして", gender: 'm'},
   {text: "頑張ります！", gender: 'f'},
