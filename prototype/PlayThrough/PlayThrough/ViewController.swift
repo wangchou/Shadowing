@@ -27,7 +27,7 @@ import AVFoundation
 // tested result
 // following AVAudioEngine code with (mic -> speaker latency) ~= 5.41ms
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, AVSpeechSynthesizerDelegate {
 
     var session: AVAudioSession = AVAudioSession.sharedInstance()
     var engine: AVAudioEngine = AVAudioEngine()
@@ -37,6 +37,7 @@ class ViewController: UIViewController {
     var bgm: AVAudioPlayerNode!
     var bgmFile: AVAudioFile!
     var bgmBuffer: AVAudioPCMBuffer!
+    var speechSynthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
     
     func buildNodeGraph() {
         do {
@@ -62,6 +63,16 @@ class ViewController: UIViewController {
             print("\(error)")
         }
         
+    }
+    
+    func speak(
+        _ text: String,
+        _ name: String
+    ) {
+        speechSynthesizer.delegate = self
+        let utterance = AVSpeechUtterance(string: text)
+        utterance.voice = AVSpeechSynthesisVoice(identifier: name)
+        speechSynthesizer.speak(utterance)
     }
     
     func startPlayThrough() {
@@ -90,13 +101,24 @@ class ViewController: UIViewController {
             try engine.start()
             bgm.scheduleBuffer(bgmBuffer, at: nil, options: .loops)
             bgm.play()
+            speak("可以下班了嗎？星期天累累的。", "com.apple.ttsbundle.Mei-Jia-compact")
+            speak("紘一の息子。大学卒業後、「こはぜ屋」を手伝いながら就職活動中。", "com.apple.ttsbundle.Otoya-premium")
         } catch {
             print("Start Play through failed \(error)")
         }
     }
     
+    func dumpVoices() {
+        for availableVoice in AVSpeechSynthesisVoice.speechVoices() {
+            //if ((availableVoice.language == AVSpeechSynthesisVoice.currentLanguageCode()) &&
+            //    (availableVoice.quality == AVSpeechSynthesisVoiceQuality.enhanced)) {
+                print("\(availableVoice.name) with Quality: \(availableVoice.quality.rawValue) \(availableVoice.identifier)")
+            //}
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        dumpVoices()
         startPlayThrough()
     }
 
@@ -104,7 +126,12 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
+                           willSpeakRangeOfSpeechString characterRange: NSRange,
+                           utterance: AVSpeechUtterance) {
+        //print(characterRange, utterance)
+    }
 }
+
 
