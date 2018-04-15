@@ -31,16 +31,45 @@ class ViewController: UIViewController {
 
     var session: AVAudioSession = AVAudioSession.sharedInstance()
     var engine: AVAudioEngine = AVAudioEngine()
-    var input: AVAudioInputNode!
-    var output: AVAudioOutputNode!
+    var mainMixer: AVAudioMixerNode!
+    var mic: AVAudioInputNode!
+    var speaker: AVAudioOutputNode!
+    var bgm: AVAudioPlayerNode!
+    var bgmFile: AVAudioFile!
+    var bgmBuffer: AVAudioPCMBuffer!
+    
+    func buildNodeGraph() {
+        do {
+            // create nodes
+            mainMixer = engine.mainMixerNode
+            mic = engine.inputNode
+            speaker = engine.outputNode
+            
+            // bgm
+            let path = Bundle.main.path(forResource: "drumLoop", ofType: "caf")!
+            let url = URL(fileURLWithPath: path)
+            bgmFile = try AVAudioFile(forReading: url)
+            bgmBuffer = AVAudioPCMBuffer(pcmFormat: bgmFile.processingFormat, frameCapacity: UInt32(bgmFile.length))
+            try bgmFile.read(into: bgmBuffer)
+            bgm = AVAudioPlayerNode()
+            
+            // connect nodes
+            engine.attach(bgm)
+            engine.connect(bgm, to: mainMixer, format: bgmBuffer.format)
+            // only for real device, not for simulator
+            //engine.connect(mic, to: mainMixer, format: mic.outputFormat(forBus: 0))
+        } catch {
+            print("\(error)")
+        }
+        
+    }
     
     func startPlayThrough() {
         do {
             try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
             try session.setCategory(
                 AVAudioSessionCategoryPlayAndRecord,
-                mode: AVAudioSessionModeMeasurement//,
-                //options: AVAudioSessionCategoryOptions.interruptSpokenAudioAndMixWithOthers
+                mode: AVAudioSessionModeMeasurement
             )
             
             // per ioBufferDuration
@@ -54,11 +83,13 @@ class ViewController: UIViewController {
                     print("Permission fail")
                 }
             })
-            input = engine.inputNode
-            output = engine.outputNode
-            engine.connect(input, to: output, format: input.outputFormat(forBus: 0))
+            
+            buildNodeGraph()
+            
             engine.prepare()
             try engine.start()
+            bgm.scheduleBuffer(bgmBuffer, at: nil, options: .loops)
+            bgm.play()
         } catch {
             print("Start Play through failed \(error)")
         }
