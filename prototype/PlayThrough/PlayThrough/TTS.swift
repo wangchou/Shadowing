@@ -10,16 +10,39 @@ import Foundation
 import AVFoundation
 
 class TTS: NSObject, AVSpeechSynthesizerDelegate {
-    var speechSynthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
+    var synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
+    
+    // only for real device, not for simulator
+    func useLeftChannel() {
+        let session = AVAudioSession.sharedInstance()
+        let outputs = session.currentRoute.outputs
+        if outputs.count == 0 {
+            print("unable to set sythesizer to left channel only (simulator is not supported)")
+            return
+        }
+        let leftChannel = outputs[0].channels?[0]
+        synthesizer.outputChannels = [leftChannel] as? [AVAudioSessionChannelDescription]
+    }
     
     func speak(
         _ text: String,
-        _ name: String
+        _ name: String,
+        volume: Float = 0.5,
+        leftChannelOnly: Bool = false
         ) {
-        speechSynthesizer.delegate = self
+        if(leftChannelOnly) {
+            useLeftChannel()
+        }
+        synthesizer.delegate = self
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(identifier: name)
-        speechSynthesizer.speak(utterance)
+        utterance.volume = volume
+        synthesizer.speak(utterance)
+    }
+    
+    override init() {
+        super.init()
+        // dumpVoices()
     }
     
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,

@@ -37,10 +37,8 @@ class ViewController: UIViewController {
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        dumpVoices()
         engineStart()
         bgm.play()
         tts.speak("可以下班了嗎？星期天累累的。", "com.apple.ttsbundle.Mei-Jia-compact")

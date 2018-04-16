@@ -16,7 +16,7 @@ class BGM {
     
     init() {
         do {
-            node.pan = -0.5 // -1.0 ~ 1.0
+            node.pan = 0.5 // -1.0 ~ 1.0
             let path = Bundle.main.path(forResource: "drumLoop", ofType: "caf")!
             let url = URL(fileURLWithPath: path)
             file = try AVAudioFile(forReading: url)
