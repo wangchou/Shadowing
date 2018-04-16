@@ -18,6 +18,31 @@ func dumpVoices() {
     }
 }
 
+func configureAudioSession() {
+    do {
+        let session: AVAudioSession = AVAudioSession.sharedInstance()
+        try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
+        try session.setCategory(
+            AVAudioSessionCategoryPlayAndRecord,
+            mode: AVAudioSessionModeMeasurement
+        )
+        
+        // per ioBufferDuration
+        // default  23ms | 1024 frames | <1% CPU (iphone SE)
+        // 0.001   0.7ms |   32 frames |  8% CPU
+        try session.setPreferredIOBufferDuration(0.001)
+        print(session.ioBufferDuration)
+        
+        session.requestRecordPermission({ (success) in
+            if success { print("Permission Granted") } else {
+                print("Permission fail")
+            }
+        })
+    } catch {
+        print("configuare audio session with \(error)")
+    }
+}
+
 // Latency tested result
 // AVAudioEngine ~= 5.41ms
 // AudioKit ~= 16.25ms
