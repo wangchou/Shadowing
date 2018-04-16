@@ -22,10 +22,8 @@ func configureAudioSession() {
     do {
         let session: AVAudioSession = AVAudioSession.sharedInstance()
         try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
-        try session.setCategory(
-            AVAudioSessionCategoryPlayAndRecord,
-            mode: AVAudioSessionModeMeasurement
-        )
+        try session.setMode(AVAudioSessionModeMeasurement)
+        try session.setActive(true, with: .notifyOthersOnDeactivation)
         
         // per ioBufferDuration
         // default  23ms | 1024 frames | <1% CPU (iphone SE)
@@ -34,8 +32,8 @@ func configureAudioSession() {
         print(session.ioBufferDuration)
         
         session.requestRecordPermission({ (success) in
-            if success { print("Permission Granted") } else {
-                print("Permission fail")
+            if success { print("Record Permission Granted") } else {
+                print("Record Permission fail")
             }
         })
     } catch {
