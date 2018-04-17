@@ -14,11 +14,13 @@ let MeiJia = "com.apple.ttsbundle.Mei-Jia-compact"
 let Otoya = "com.apple.ttsbundle.Otoya-premium"
 
 class ViewController: UIViewController {
-    var engine: AVAudioEngine = AVAudioEngine()
+    var engine = AVAudioEngine()
+    var speedEffectNode = AVAudioUnitTimePitch()
+    var replayUnit: ReplayUnit!
     var speechRecognizer: SpeechRecognizer = SpeechRecognizer()
     var mic: AVAudioInputNode!
-    var bgm: BGM = BGM()
-    var tts: TTS = TTS()
+    var bgm = BGM()
+    var tts = TTS()
     
     func buildNodeGraph() {
         let mainMixer = engine.mainMixerNode
@@ -29,7 +31,16 @@ class ViewController: UIViewController {
         
         // mic only for real device, not for simulator
         mic = engine.inputNode
-        engine.connect(mic, to: mainMixer, format: mic.outputFormat(forBus: 0))
+        let format = mic.outputFormat(forBus: 0)
+        engine.connect(mic, to: mainMixer, format: format)
+        
+        // replay unit
+        replayUnit = ReplayUnit(pcmFormat: format)
+        engine.attach(replayUnit.node)
+        engine.attach(speedEffectNode)
+        engine.connect(replayUnit.node, to: speedEffectNode, format: format)
+        engine.connect(speedEffectNode, to: mainMixer, format: format)
+        speedEffectNode.rate = 0.8 // replay slowly
         
         // for dev
         bgm.node.pan = -1.0
@@ -84,9 +95,11 @@ class ViewController: UIViewController {
             print("\n<<< \(result.bestTranscription.formattedString)\n")
             if(isFinal) {
                 tts.speak("我聽到你說：", MeiJia) {
-                    self.tts.speak(result.bestTranscription.formattedString, Otoya) {
+                    //self.tts.speak(result.bestTranscription.formattedString, Otoya) {
+                    self.replayUnit.play() {
                         self.tts.speak("請說日文給我聽", MeiJia, onCompleteHandler: self.startListening)
                     }
+                    //}
                 }
             }
         }
@@ -96,7 +109,7 @@ class ViewController: UIViewController {
         }
         
         if error != nil {
-            print("\nError=\(error.debugDescription)")
+            print(error)
             tts.speak("聽不清楚、再說一次", MeiJia, onCompleteHandler: startListening)
         }
     }

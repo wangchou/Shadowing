@@ -9,12 +9,16 @@
 import Foundation
 import Speech
 
+let RECORD_URL = URL(fileURLWithPath: Bundle.main.path(forResource: "recoding", ofType: "caf")!)
+
 class SpeechRecognizer: NSObject {
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ja-JP"))!
     
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     
     private var recognitionTask: SFSpeechRecognitionTask?
+    
+    public var recordFile: AVAudioFile!
     
     private var isRunning: Bool = false
     
@@ -52,7 +56,8 @@ class SpeechRecognizer: NSObject {
     func start(inputNode: AVAudioInputNode,
                stopAfterSeconds: Double = 5,
                startHandler: @escaping () -> Void,
-               resultHandler: @escaping (SFSpeechRecognitionResult?, Error?) -> Void) {
+               resultHandler: @escaping (SFSpeechRecognitionResult?, Error?) -> Void
+               ) {
         if(!isAuthorized) {
             print("speech service is unauthorized, cannot start recogniztion")
             return
@@ -73,8 +78,24 @@ class SpeechRecognizer: NSObject {
         self.inputNode = inputNode
         let recordingFormat = inputNode.outputFormat(forBus: 0)
         
+        // for replay, record into file for replay
+        do {
+            let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as NSString
+            let url = NSURL.init(string: path .appendingPathComponent("audio.caf"))
+            recordFile = try AVAudioFile(forWriting: url! as URL, settings: [:])
+        } catch {
+            print("open recoding file error")
+        }
+        
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
+            // for recognition
             self.recognitionRequest?.append(buffer)
+            
+            do {
+                try self.recordFile.write(from: buffer)
+            } catch let error {
+                print("recordFile.writeFromBuffer error:", error)
+            }
         }
         self.isRunning = true
         // print("............listening..............")

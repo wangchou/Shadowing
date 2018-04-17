@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BE2533DC2083204200CAF7B7 /* drumLoop.caf in Resources */ = {isa = PBXBuildFile; fileRef = BE2533DB2083204200CAF7B7 /* drumLoop.caf */; };
+		BE4DD4992085F1AE001A95F6 /* ReplayUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4DD4982085F1AE001A95F6 /* ReplayUnit.swift */; };
 		BEA41A872081FB370016FDC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA41A862081FB370016FDC2 /* AppDelegate.swift */; };
 		BEA41A892081FB370016FDC2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA41A882081FB370016FDC2 /* ViewController.swift */; };
 		BEA41A8C2081FB370016FDC2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEA41A8A2081FB370016FDC2 /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		BE2533DB2083204200CAF7B7 /* drumLoop.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = drumLoop.caf; sourceTree = "<group>"; };
+		BE4DD4982085F1AE001A95F6 /* ReplayUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplayUnit.swift; sourceTree = "<group>"; };
 		BEA41A832081FB370016FDC2 /* PlayThrough.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayThrough.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEA41A862081FB370016FDC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEA41A882081FB370016FDC2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				BEA41A882081FB370016FDC2 /* ViewController.swift */,
 				BEAC23A920844D39005C283E /* TTS.swift */,
 				BEAC23AB208451B5005C283E /* BGM.swift */,
+				BE4DD4982085F1AE001A95F6 /* ReplayUnit.swift */,
 				BEAC23A7208449E2005C283E /* utilities.swift */,
 				BEA41A8A2081FB370016FDC2 /* Main.storyboard */,
 				BEA41A8D2081FB380016FDC2 /* Assets.xcassets */,
@@ -168,6 +171,7 @@
 				BEA41A892081FB370016FDC2 /* ViewController.swift in Sources */,
 				BEA41A872081FB370016FDC2 /* AppDelegate.swift in Sources */,
 				BEAC23AA20844D39005C283E /* TTS.swift in Sources */,
+				BE4DD4992085F1AE001A95F6 /* ReplayUnit.swift in Sources */,
 				BEDB129D20847AE40007D4E6 /* SpeechRecognizer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

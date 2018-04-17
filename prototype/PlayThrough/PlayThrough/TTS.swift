@@ -34,7 +34,8 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
     func speak(
         _ text: String,
         _ name: String,
-        volume: Float = 0.05,
+        volume: Float = 0.05, // 0 ~ 1.0
+        rate: Float = 0.5, // 0 ~ 1.0
         leftChannelOn: Bool = true,
         rightChannelOn: Bool = true,
         onCompleteHandler: @escaping () -> Void = {}
@@ -45,6 +46,7 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(identifier: name)
         utterance.volume = volume
+        utterance.rate = rate
     
         
         self.onCompleteHandler = onCompleteHandler
