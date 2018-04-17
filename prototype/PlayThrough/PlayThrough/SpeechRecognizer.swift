@@ -9,7 +9,7 @@
 import Foundation
 import Speech
 
-class SpeechRecognizer {
+class SpeechRecognizer: NSObject {
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ja-JP"))!
     
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
@@ -44,11 +44,15 @@ class SpeechRecognizer {
         }
     }
     
-    init() {
+    override init() {
+        super.init()
         authorize()
     }
     
-    func start(inputNode: AVAudioInputNode, resultHandler: @escaping (SFSpeechRecognitionResult?, Error?) -> Void) {
+    func start(inputNode: AVAudioInputNode,
+               stopAfterSeconds: Double = 5,
+               startHandler: @escaping () -> Void,
+               resultHandler: @escaping (SFSpeechRecognitionResult?, Error?) -> Void) {
         if(!isAuthorized) {
             print("speech service is unauthorized, cannot start recogniztion")
             return
@@ -61,7 +65,8 @@ class SpeechRecognizer {
     
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         guard let recognitionRequest = recognitionRequest else { fatalError("Unable to created a SFSpeechAudioBufferRecognitionRequest object") }
-        recognitionRequest.shouldReportPartialResults = true
+        
+        recognitionRequest.shouldReportPartialResults = false
 
         recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest, resultHandler: resultHandler)
         
@@ -71,9 +76,12 @@ class SpeechRecognizer {
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
             self.recognitionRequest?.append(buffer)
         }
-    
         self.isRunning = true
-        print("(Go ahead, I'm listening)")
+        // print("............listening..............")
+        startHandler()
+        Timer.scheduledTimer(withTimeInterval: stopAfterSeconds, repeats: false) { timer in
+            self.stop()
+        }
     }
     
     func stop() {
@@ -84,7 +92,7 @@ class SpeechRecognizer {
             self.recognitionRequest = nil
             self.recognitionTask = nil
             self.isRunning = false
-            print("Speech recognition is stopped")
+            // print("Speech recognition is stopped")
         }
     }
 }

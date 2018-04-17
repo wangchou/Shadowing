@@ -14,31 +14,38 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
     var onCompleteHandler: (() -> Void)? = nil
     
     // only for real device, not for simulator
-    func useLeftChannel() {
+    func setChannels(_ leftChannelOn: Bool, _ rightChannelOn: Bool) {
         let session = AVAudioSession.sharedInstance()
         let outputs = session.currentRoute.outputs
-        if outputs.count == 0 {
-            print("unable to set sythesizer to left channel only (simulator is not supported)")
+        if outputs.count == 0 || (outputs[0].channels?.isEmpty)! {
+            print("unable to set sythesizer to right/lefit channel (simulator is not supported)")
             return
         }
-        let leftChannel = outputs[0].channels?[0]
-        synthesizer.outputChannels = [leftChannel] as? [AVAudioSessionChannelDescription]
+        var outputChannels: [AVAudioSessionChannelDescription] = []
+        if(leftChannelOn) {
+            outputChannels.append(outputs[0].channels![0])
+        }
+        if(rightChannelOn) {
+            outputChannels.append(outputs[0].channels![1])
+        }
+        synthesizer.outputChannels = outputChannels
     }
     
     func speak(
         _ text: String,
         _ name: String,
-        volume: Float = 0.5,
-        leftChannelOnly: Bool = false,
+        volume: Float = 0.05,
+        leftChannelOn: Bool = true,
+        rightChannelOn: Bool = true,
         onCompleteHandler: @escaping () -> Void = {}
         ) {
-        if(leftChannelOnly) {
-            useLeftChannel()
-        }
+        
+        setChannels(leftChannelOn, rightChannelOn)
         synthesizer.delegate = self
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(identifier: name)
         utterance.volume = volume
+    
         
         self.onCompleteHandler = onCompleteHandler
         synthesizer.speak(utterance)
@@ -51,7 +58,7 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
     
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
                            didFinish utterance: AVSpeechUtterance) {
-        print("\(utterance.speechString) is said")
+        print(">>>", "\(utterance.speechString)")
         guard let onCompleteHandler = onCompleteHandler else { return }
         onCompleteHandler()
     }

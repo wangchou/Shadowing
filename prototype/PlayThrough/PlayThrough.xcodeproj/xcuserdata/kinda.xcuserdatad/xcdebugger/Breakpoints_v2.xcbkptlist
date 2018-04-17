@@ -10,28 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PlayThrough/TTS.swift"
-            timestampString = "545561075.734879"
+            timestampString = "545632261.7573169"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "speak(_:_:volume:leftChannelOnly:onCompleteHandler:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PlayThrough/SpeechRecognizer.swift"
-            timestampString = "545561075.734969"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
-            landmarkName = "start(inputNode:resultHandler:)"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "speak(_:_:volume:leftChannelOn:rightChannelOn:onCompleteHandler:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
