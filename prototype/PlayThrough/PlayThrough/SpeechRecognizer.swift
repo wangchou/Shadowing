@@ -55,7 +55,7 @@ class SpeechRecognizer: NSObject {
     
     func start(inputNode: AVAudioInputNode,
                stopAfterSeconds: Double = 5,
-               startHandler: @escaping () -> Void,
+               startCompleteHandler: @escaping () -> Void,
                resultHandler: @escaping (SFSpeechRecognitionResult?, Error?) -> Void
                ) {
         if(!isAuthorized) {
@@ -98,11 +98,12 @@ class SpeechRecognizer: NSObject {
             }
         }
         self.isRunning = true
-        // print("............listening..............")
-        startHandler()
+        
         Timer.scheduledTimer(withTimeInterval: stopAfterSeconds, repeats: false) { timer in
             self.stop()
         }
+        
+        startCompleteHandler()
     }
     
     func stop() {

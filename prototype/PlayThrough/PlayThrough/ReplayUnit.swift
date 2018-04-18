@@ -14,7 +14,7 @@ class ReplayUnit {
     public var buffer: AVAudioPCMBuffer!
     
     init(pcmFormat: AVAudioFormat) {
-        node.pan = 0.5 // -1.0 ~ 1.0
+        node.pan = 0.7 // -1.0 ~ 1.0
     }
     
     func play(

@@ -10,8 +10,19 @@ import UIKit
 import AVFoundation
 import Speech
 
-let MeiJia = "com.apple.ttsbundle.Mei-Jia-compact"
+let MeiJia = "com.apple.ttsbundle.Mei-Jia-premium"
 let Otoya = "com.apple.ttsbundle.Otoya-premium"
+let Kyoko = "com.apple.ttsbundle.Kyoko-premium"
+
+let CANNOT_HEAR_HINT = "聽不清楚、再說一次"
+let I_HEAR_YOU_HINT = "我聽到你說："
+let SPEAK_TO_ME_HINT = "請說日文給我聽"
+
+let replayRate: Float = 0.8
+
+// move the right earphone close to the mic
+// then you can test the app on real device in quite space
+let isDevMode = true
 
 class ViewController: UIViewController {
     var engine = AVAudioEngine()
@@ -23,29 +34,32 @@ class ViewController: UIViewController {
     var tts = TTS()
     
     func buildNodeGraph() {
+        // get nodes
         let mainMixer = engine.mainMixerNode
-        
-        // bgm
-        engine.attach(bgm.node)
-        engine.connect(bgm.node, to: mainMixer, format: bgm.buffer.format)
-        
-        // mic only for real device, not for simulator
-        mic = engine.inputNode
+        mic = engine.inputNode // only for real device, simulator will crash
         let format = mic.outputFormat(forBus: 0)
-        engine.connect(mic, to: mainMixer, format: format)
-        
-        // replay unit
         replayUnit = ReplayUnit(pcmFormat: format)
+        
+        // attach nodes
+        engine.attach(bgm.node)
         engine.attach(replayUnit.node)
         engine.attach(speedEffectNode)
+        
+        // connect nodes
+        engine.connect(bgm.node, to: mainMixer, format: bgm.buffer.format)
+        engine.connect(mic, to: mainMixer, format: format)
         engine.connect(replayUnit.node, to: speedEffectNode, format: format)
         engine.connect(speedEffectNode, to: mainMixer, format: format)
-        speedEffectNode.rate = 0.8 // replay slowly
+        
+        // misc
+        speedEffectNode.rate = replayRate // replay slowly
         
         // for dev
-        bgm.node.pan = -1.0
-        bgm.node.volume = 0.05
-        mic.pan = -1.0
+        if(isDevMode) {
+            bgm.node.pan = -1.0
+            bgm.node.volume = 0.05
+            mic.pan = -1.0
+        }
     }
     
     func engineStart() {
@@ -63,7 +77,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         engineStart()
         bgm.play()
-        tts.speak("請說日文給我聽", MeiJia, onCompleteHandler: startListening)
+        speakToMe()
     }
     
     override func didReceiveMemoryWarning() {
@@ -71,46 +85,60 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func speechStartHandler() {
-        // for dev mode
-        self.tts.speak("読めば分かる！説明できない面白さ！！", Otoya, volume: 1.0, leftChannelOn: false)
-        
-        // make a beep sound for normal mode
+    func speakDevTTS() {
+        if(isDevMode) {
+            self.tts.speak("読めば分かる！説明できない面白さ！！", Otoya, volume: 1.0, leftChannelOn: false)
+        }
     }
     
-    func startListening() {
-        self.speechRecognizer.start(
-            inputNode: self.mic,
-            stopAfterSeconds: 5,
-            startHandler: self.speechStartHandler,
-            resultHandler: self.speechResultHandler
-        )
+    func speakToMe() {
+        self.tts.speak(SPEAK_TO_ME_HINT, MeiJia) {
+            self.speechRecognizer.start(
+                inputNode: self.mic,
+                stopAfterSeconds: 5,
+                startCompleteHandler: self.speakDevTTS,
+                resultHandler: self.speechResultHandler
+            )
+        }
+    }
+    
+    func iHearYouSaid(_ result: SFSpeechRecognitionResult) {
+        print("\n<<< \(result.bestTranscription.formattedString)\n")
+        tts.speak(I_HEAR_YOU_HINT, MeiJia) {
+            self.bgm.node.volume = self.bgm.node.volume * 0.2
+            var isReplayUnitComplete = false
+            var isTTSSpeakComplete = false
+            func afterReplayComplete() {
+                if(isReplayUnitComplete && isTTSSpeakComplete) {
+                    self.speakToMe()
+                    self.bgm.node.volume = self.bgm.node.volume * 5
+                }
+            }
+            self.replayUnit.play() {
+                isReplayUnitComplete = true
+                afterReplayComplete()
+            }
+            self.tts.speak(result.bestTranscription.formattedString,
+                           Kyoko,
+                           rate: AVSpeechUtteranceDefaultSpeechRate * replayRate,
+                           rightChannelOn: false
+            ) {
+                isTTSSpeakComplete = true
+                afterReplayComplete()
+            }
+        }
     }
     
     func speechResultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
-        var isFinal = false
-        
         if let result = result {
-            isFinal = result.isFinal
-            print("\n<<< \(result.bestTranscription.formattedString)\n")
-            if(isFinal) {
-                tts.speak("我聽到你說：", MeiJia) {
-                    //self.tts.speak(result.bestTranscription.formattedString, Otoya) {
-                    self.replayUnit.play() {
-                        self.tts.speak("請說日文給我聽", MeiJia, onCompleteHandler: self.startListening)
-                    }
-                    //}
-                }
+            if(result.isFinal) {
+                iHearYouSaid(result)
             }
         }
         
-        if isFinal {
-            speechRecognizer.stop()
-        }
-        
-        if error != nil {
+        if let error = error {
             print(error)
-            tts.speak("聽不清楚、再說一次", MeiJia, onCompleteHandler: startListening)
+            speakToMe()
         }
     }
 }
