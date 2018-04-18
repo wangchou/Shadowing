@@ -55,7 +55,7 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
     
     override init() {
         super.init()
-        //dumpVoices()
+        dumpVoices()
     }
     
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
@@ -64,10 +64,11 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         guard let onCompleteHandler = onCompleteHandler else { return }
         onCompleteHandler()
     }
-    
+    /*
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
                            willSpeakRangeOfSpeechString characterRange: NSRange,
                            utterance: AVSpeechUtterance) {
         //print(characterRange, utterance)
     }
+     */
 }

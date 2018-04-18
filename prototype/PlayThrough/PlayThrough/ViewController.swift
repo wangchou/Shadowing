@@ -13,6 +13,8 @@ import Speech
 let MeiJia = "com.apple.ttsbundle.Mei-Jia-premium"
 let Otoya = "com.apple.ttsbundle.Otoya-premium"
 let Kyoko = "com.apple.ttsbundle.Kyoko-premium"
+let Oren = "com.apple.ttsbundle.siri_female_ja-JP_compact"
+let Hattori = "com.apple.ttsbundle.siri_male_ja-JP_compact"
 
 let CANNOT_HEAR_HINT = "聽不清楚、再說一次"
 let I_HEAR_YOU_HINT = "我聽到你說："
@@ -87,7 +89,7 @@ class ViewController: UIViewController {
     
     func speakDevTTS() {
         if(isDevMode) {
-            self.tts.speak("読めば分かる！説明できない面白さ！！", Otoya, volume: 1.0, leftChannelOn: false)
+            self.tts.speak("読めば分かる！説明できない面白さ！！", Hattori, volume: 1.0, leftChannelOn: false)
         }
     }
     
@@ -119,7 +121,7 @@ class ViewController: UIViewController {
                 afterReplayComplete()
             }
             self.tts.speak(result.bestTranscription.formattedString,
-                           Kyoko,
+                           Oren,
                            rate: AVSpeechUtteranceDefaultSpeechRate * replayRate,
                            rightChannelOn: false
             ) {

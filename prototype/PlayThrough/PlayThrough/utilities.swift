@@ -10,10 +10,12 @@ import Foundation
 import AVFoundation
 
 func dumpVoices() {
-    for availableVoice in AVSpeechSynthesisVoice.speechVoices() {
+    for voice in AVSpeechSynthesisVoice.speechVoices() {
         //if ((availableVoice.language == AVSpeechSynthesisVoice.currentLanguageCode()) &&
         //    (availableVoice.quality == AVSpeechSynthesisVoiceQuality.enhanced)) {
-        print("\(availableVoice.name) with Quality: \(availableVoice.quality.rawValue) \(availableVoice.identifier)")
+        if(voice.language == "ja-JP" || voice.language == "zh-TW") {
+            print("\(voice.name) on \(voice.language) with Quality: \(voice.quality.rawValue) \(voice.identifier)")
+        }
         //}
     }
 }
