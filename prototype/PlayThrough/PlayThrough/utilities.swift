@@ -20,6 +20,7 @@ func dumpVoices() {
     }
 }
 
+// measure performance
 var startTime: Double = 0
 func setStartTime(_ tag: String = "") {
     startTime = NSDate().timeIntervalSince1970

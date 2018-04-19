@@ -13,6 +13,7 @@ class BGM {
     public var node: AVAudioPlayerNode = AVAudioPlayerNode()
     var file: AVAudioFile!
     public var buffer: AVAudioPCMBuffer!
+    var tmpVolume: Float? = nil
     
     init() {
         do {
@@ -29,5 +30,21 @@ class BGM {
     func play() {
         node.scheduleBuffer(buffer, at: nil, options: .loops)
         node.play()
+    }
+    
+    func reduceVolume() {
+        if tmpVolume == nil {
+            tmpVolume = node.volume
+            node.volume = 0.2 * node.volume
+        } else {
+            print("Error: cannot reduce volume twice. restore it first")
+        }
+    }
+    
+    func restoreVolume() {
+        if let tmpVolume = tmpVolume {
+            node.volume = tmpVolume
+            self.tmpVolume = nil
+        }
     }
 }

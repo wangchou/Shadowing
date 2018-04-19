@@ -10,36 +10,25 @@ import UIKit
 import AVFoundation
 import Speech
 
-let MeiJia = "com.apple.ttsbundle.Mei-Jia-premium"
-let Otoya = "com.apple.ttsbundle.Otoya-premium"
-let Kyoko = "com.apple.ttsbundle.Kyoko-premium"
-let Oren = "com.apple.ttsbundle.siri_female_ja-JP_compact"
-let Hattori = "com.apple.ttsbundle.siri_male_ja-JP_compact"
-
-let CANNOT_HEAR_HINT = "聽不清楚、再說一次"
-let I_HEAR_YOU_HINT = "我聽到你說："
-let SPEAK_TO_ME_HINT = "請說日文給我聽"
+let sentenceIndex = 0
 
 let replayRate: Float = 0.8
 
-// move the right earphone close to the mic
-// then you can test the app on real device in quite space
-let isDevMode = false//true
+let assistant = MeiJia
+let teacher = Hattori
 
 class ViewController: UIViewController {
     var engine = AVAudioEngine()
     var speedEffectNode = AVAudioUnitTimePitch()
     var replayUnit: ReplayUnit!
     var speechRecognizer: SpeechRecognizer = SpeechRecognizer()
-    var mic: AVAudioInputNode!
     var bgm = BGM()
     var tts = TTS()
-    var ttsVolume: Float = 1.0
     
     func buildNodeGraph() {
         // get nodes
         let mainMixer = engine.mainMixerNode
-        mic = engine.inputNode // only for real device, simulator will crash
+        let mic = engine.inputNode // only for real device, simulator will crash
         let format = mic.outputFormat(forBus: 0)
         replayUnit = ReplayUnit()
         
@@ -57,21 +46,8 @@ class ViewController: UIViewController {
         // misc
         speedEffectNode.rate = replayRate // replay slowly
         
-        // pan
-        bgm.node.pan = 0 // -1.0 ~ 1.0
-        replayUnit.node.pan = 0
-        mic.pan = 0
-        
         // volume
         bgm.node.volume = 0.5
-        ttsVolume = 1.0
-        
-        // for dev
-        if(isDevMode) {
-            bgm.node.pan = -1.0
-            bgm.node.volume = 0.05
-            mic.pan = -1.0
-        }
     }
     
     func engineStart() {
@@ -89,7 +65,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         engineStart()
         bgm.play()
-        speakToMe()
+        repeatAfterMe()
     }
     
     override func didReceiveMemoryWarning() {
@@ -97,50 +73,53 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func speakDevTTS() {
-        if(isDevMode) {
-            self.tts.speak("読めば分かる！説明できない面白さ！！", Hattori, volume: ttsVolume, leftChannelOn: false)
+    // sugar function
+    func say(
+        _ text: String,
+        _ name: String,
+        rate: Float = normalRate,
+        onCompleteHandler: @escaping () -> Void = {}
+    ) {
+        tts.say(text, name, rate: rate, onCompleteHandler: onCompleteHandler)
+    }
+    
+    func repeatAfterMe(str: String = "おはようございます") {
+        say(REPEAT_AFTER_ME_HINT, assistant) {
+            self.bgm.reduceVolume()
+            self.say(str, teacher, rate: teachingRate) {
+                self.bgm.restoreVolume()
+                self.speechRecognizer.start(
+                    inputNode: self.engine.inputNode,
+                    stopAfterSeconds: 5,
+                    startCompleteHandler: {},
+                    resultHandler: self.speechResultHandler
+                )
+            }
         }
     }
     
-    func speakToMe() {
-        tts.speak(
-            SPEAK_TO_ME_HINT,
-            MeiJia, volume:
-            ttsVolume) {
-            self.speechRecognizer.start(
-                inputNode: self.mic,
-                stopAfterSeconds: 5,
-                startCompleteHandler: self.speakDevTTS,
-                resultHandler: self.speechResultHandler
-            )
-        }
-    }
-    
-    func iHearYouSaid(_ result: SFSpeechRecognitionResult) {
-        print("\n<<< \(result.bestTranscription.formattedString)\n")
-        tts.speak(
-            I_HEAR_YOU_HINT,
-            MeiJia,
-            volume: ttsVolume
-        ) {
-            self.bgm.node.volume = self.bgm.node.volume * 0.2
+    func iHearYouSaid(_ saidString: String) {
+        print("\n<<< \(saidString)\n")
+        say(I_HEAR_YOU_HINT, assistant) {
+            self.bgm.reduceVolume()
+            
             var isReplayUnitComplete = false
             var isTTSSpeakComplete = false
             func afterReplayComplete() {
+                //mimic promise.all
                 if(isReplayUnitComplete && isTTSSpeakComplete) {
-                    self.speakToMe()
-                    self.bgm.node.volume = self.bgm.node.volume * 5
+                    self.bgm.restoreVolume()
+                    self.repeatAfterMe()
                 }
             }
             self.replayUnit.play() {
                 isReplayUnitComplete = true
                 afterReplayComplete()
             }
-            self.tts.speak(result.bestTranscription.formattedString,
-                           Oren,
-                           volume: self.ttsVolume,
-                           rate: AVSpeechUtteranceDefaultSpeechRate * replayRate
+            self.say(
+                saidString,
+                Oren,
+                rate: teachingRate * replayRate
             ) {
                 isTTSSpeakComplete = true
                 afterReplayComplete()
@@ -149,15 +128,13 @@ class ViewController: UIViewController {
     }
     
     func speechResultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
-        if let result = result {
-            if(result.isFinal) {
-                iHearYouSaid(result)
-            }
+        if (result?.isFinal) != nil {
+            iHearYouSaid(result!.bestTranscription.formattedString)
         }
         
         if let error = error {
             print(error)
-            speakToMe()
+            repeatAfterMe()
         }
     }
 }

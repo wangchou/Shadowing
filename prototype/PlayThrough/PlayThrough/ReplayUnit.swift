@@ -12,9 +12,7 @@ import AVFoundation
 class ReplayUnit {
     public var node = AVAudioPlayerNode()
 
-    func play(
-        onCompleteHandler: @escaping () -> Void = {}
-    ) {
+    func play(onCompleteHandler: @escaping () -> Void = {}) {
         do {
             let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as NSString
             let url = NSURL.init(string: path .appendingPathComponent("audio.caf"))

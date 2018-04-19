@@ -18,6 +18,7 @@
 		BEAC23A8208449E2005C283E /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAC23A7208449E2005C283E /* utilities.swift */; };
 		BEAC23AA20844D39005C283E /* TTS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAC23A920844D39005C283E /* TTS.swift */; };
 		BEAC23AC208451B5005C283E /* BGM.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAC23AB208451B5005C283E /* BGM.swift */; };
+		BEAD327E20885D4400C2ACEC /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAD327D20885D4400C2ACEC /* constants.swift */; };
 		BEDB129D20847AE40007D4E6 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDB129C20847AE40007D4E6 /* SpeechRecognizer.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		BEAC23A7208449E2005C283E /* utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utilities.swift; sourceTree = "<group>"; };
 		BEAC23A920844D39005C283E /* TTS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTS.swift; sourceTree = "<group>"; };
 		BEAC23AB208451B5005C283E /* BGM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGM.swift; sourceTree = "<group>"; };
+		BEAD327D20885D4400C2ACEC /* constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		BEDB129C20847AE40007D4E6 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,6 +79,7 @@
 				BEAC23AB208451B5005C283E /* BGM.swift */,
 				BE4DD4982085F1AE001A95F6 /* ReplayUnit.swift */,
 				BEAC23A7208449E2005C283E /* utilities.swift */,
+				BEAD327D20885D4400C2ACEC /* constants.swift */,
 				BEA41A8A2081FB370016FDC2 /* Main.storyboard */,
 				BEA41A8D2081FB380016FDC2 /* Assets.xcassets */,
 				BEA41A8F2081FB380016FDC2 /* LaunchScreen.storyboard */,
@@ -173,6 +176,7 @@
 				BEAC23AA20844D39005C283E /* TTS.swift in Sources */,
 				BE4DD4992085F1AE001A95F6 /* ReplayUnit.swift in Sources */,
 				BEDB129D20847AE40007D4E6 /* SpeechRecognizer.swift in Sources */,
+				BEAD327E20885D4400C2ACEC /* constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,7 +323,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ETE87474CU;
 				INFOPLIST_FILE = PlayThrough/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = idv.wcl.PlayThrough;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -334,7 +341,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ETE87474CU;
 				INFOPLIST_FILE = PlayThrough/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = idv.wcl.PlayThrough;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
