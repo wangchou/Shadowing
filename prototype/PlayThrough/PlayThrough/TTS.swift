@@ -14,11 +14,12 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
     var onCompleteHandler: (() -> Void)? = nil
     
     // only for real device, not for simulator
+    // this function will introduce 4 ms delay
     func setChannels(_ leftChannelOn: Bool, _ rightChannelOn: Bool) {
         let session = AVAudioSession.sharedInstance()
         let outputs = session.currentRoute.outputs
         if outputs.count == 0 || (outputs[0].channels?.isEmpty)! {
-            print("unable to set sythesizer to right/lefit channel (simulator is not supported)")
+            print("unable to set sythesizer to right/left channel (simulator is not supported)")
             return
         }
         var outputChannels: [AVAudioSessionChannelDescription] = []
@@ -31,31 +32,52 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         synthesizer.outputChannels = outputChannels
     }
     
+    // it will take 1~9 ms if use one channel
+    //              0-3 ms if use both channel
     func speak(
         _ text: String,
         _ name: String,
-        volume: Float = 0.03, // 0 ~ 1.0
+        volume: Float = 1.0, // 0 ~ 1.0
         rate: Float = AVSpeechUtteranceDefaultSpeechRate, // 0.5, range 0 ~ 1.0
         leftChannelOn: Bool = true,
         rightChannelOn: Bool = true,
         onCompleteHandler: @escaping () -> Void = {}
         ) {
         
-        setChannels(leftChannelOn, rightChannelOn)
+        if(!leftChannelOn || !rightChannelOn) {
+            setChannels(leftChannelOn, rightChannelOn)
+        }
         synthesizer.delegate = self
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(identifier: name)
         utterance.volume = volume
         utterance.rate = rate
         
-        
         self.onCompleteHandler = onCompleteHandler
         synthesizer.speak(utterance)
     }
     
+    func speakLeftOnly(
+        _ text: String,
+        _ name: String,
+        volume: Float = 1.0, // 0 ~ 1.0
+        rate: Float = AVSpeechUtteranceDefaultSpeechRate, // 0.5, range 0 ~ 1.0
+        onCompleteHandler: @escaping () -> Void = {}) {
+        speak(text, name, volume: volume, rate: rate, leftChannelOn: true, rightChannelOn: false, onCompleteHandler: onCompleteHandler)
+    }
+    
+    func speakRightOnly(
+        _ text: String,
+        _ name: String,
+        volume: Float = 1.0, // 0 ~ 1.0
+        rate: Float = AVSpeechUtteranceDefaultSpeechRate, // 0.5, range 0 ~ 1.0
+        onCompleteHandler: @escaping () -> Void = {}) {
+        speak(text, name, volume: volume, rate: rate, leftChannelOn: false, rightChannelOn: true, onCompleteHandler: onCompleteHandler)
+    }
+    
     override init() {
         super.init()
-        dumpVoices()
+        //dumpVoices()
     }
     
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,

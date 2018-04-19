@@ -20,6 +20,15 @@ func dumpVoices() {
     }
 }
 
+var startTime: Double = 0
+func setStartTime(_ tag: String = "") {
+    startTime = NSDate().timeIntervalSince1970
+    print(tag)
+}
+func printDuration(_ tag: String = "") {
+    print(tag, (NSDate().timeIntervalSince1970 - startTime)*1000)
+}
+
 func configureAudioSession() {
     do {
         let session: AVAudioSession = AVAudioSession.sharedInstance()

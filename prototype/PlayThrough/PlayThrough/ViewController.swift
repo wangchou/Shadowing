@@ -24,7 +24,7 @@ let replayRate: Float = 0.8
 
 // move the right earphone close to the mic
 // then you can test the app on real device in quite space
-let isDevMode = true
+let isDevMode = false//true
 
 class ViewController: UIViewController {
     var engine = AVAudioEngine()
@@ -34,13 +34,14 @@ class ViewController: UIViewController {
     var mic: AVAudioInputNode!
     var bgm = BGM()
     var tts = TTS()
+    var ttsVolume: Float = 1.0
     
     func buildNodeGraph() {
         // get nodes
         let mainMixer = engine.mainMixerNode
         mic = engine.inputNode // only for real device, simulator will crash
         let format = mic.outputFormat(forBus: 0)
-        replayUnit = ReplayUnit(pcmFormat: format)
+        replayUnit = ReplayUnit()
         
         // attach nodes
         engine.attach(bgm.node)
@@ -55,6 +56,15 @@ class ViewController: UIViewController {
         
         // misc
         speedEffectNode.rate = replayRate // replay slowly
+        
+        // pan
+        bgm.node.pan = 0 // -1.0 ~ 1.0
+        replayUnit.node.pan = 0
+        mic.pan = 0
+        
+        // volume
+        bgm.node.volume = 0.5
+        ttsVolume = 1.0
         
         // for dev
         if(isDevMode) {
@@ -89,12 +99,15 @@ class ViewController: UIViewController {
     
     func speakDevTTS() {
         if(isDevMode) {
-            self.tts.speak("読めば分かる！説明できない面白さ！！", Hattori, volume: 1.0, leftChannelOn: false)
+            self.tts.speak("読めば分かる！説明できない面白さ！！", Hattori, volume: ttsVolume, leftChannelOn: false)
         }
     }
     
     func speakToMe() {
-        self.tts.speak(SPEAK_TO_ME_HINT, MeiJia) {
+        tts.speak(
+            SPEAK_TO_ME_HINT,
+            MeiJia, volume:
+            ttsVolume) {
             self.speechRecognizer.start(
                 inputNode: self.mic,
                 stopAfterSeconds: 5,
@@ -106,7 +119,11 @@ class ViewController: UIViewController {
     
     func iHearYouSaid(_ result: SFSpeechRecognitionResult) {
         print("\n<<< \(result.bestTranscription.formattedString)\n")
-        tts.speak(I_HEAR_YOU_HINT, MeiJia) {
+        tts.speak(
+            I_HEAR_YOU_HINT,
+            MeiJia,
+            volume: ttsVolume
+        ) {
             self.bgm.node.volume = self.bgm.node.volume * 0.2
             var isReplayUnitComplete = false
             var isTTSSpeakComplete = false
@@ -122,8 +139,8 @@ class ViewController: UIViewController {
             }
             self.tts.speak(result.bestTranscription.formattedString,
                            Oren,
-                           rate: AVSpeechUtteranceDefaultSpeechRate * replayRate,
-                           rightChannelOn: false
+                           volume: self.ttsVolume,
+                           rate: AVSpeechUtteranceDefaultSpeechRate * replayRate
             ) {
                 isTTSSpeakComplete = true
                 afterReplayComplete()
