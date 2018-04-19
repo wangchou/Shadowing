@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import Speech
 
-let sentenceIndex = 0
+var sentenceIndex = 0
 
 let replayRate: Float = 0.8
 
@@ -83,14 +83,16 @@ class ViewController: UIViewController {
         tts.say(text, name, rate: rate, onCompleteHandler: onCompleteHandler)
     }
     
-    func repeatAfterMe(str: String = "おはようございます") {
+    func repeatAfterMe() {
         say(REPEAT_AFTER_ME_HINT, assistant) {
             self.bgm.reduceVolume()
-            self.say(str, teacher, rate: teachingRate) {
+            let sentence = sentences[sentenceIndex]
+            let listeningDuration: Double = Double((Float(sentence.count) * 0.6 * teachingRate) + 1.5)
+            self.say(sentence, teacher, rate: teachingRate) {
                 self.bgm.restoreVolume()
                 self.speechRecognizer.start(
                     inputNode: self.engine.inputNode,
-                    stopAfterSeconds: 5,
+                    stopAfterSeconds: listeningDuration,
                     startCompleteHandler: {},
                     resultHandler: self.speechResultHandler
                 )
@@ -99,6 +101,7 @@ class ViewController: UIViewController {
     }
     
     func iHearYouSaid(_ saidString: String) {
+        sentenceIndex = (sentenceIndex + 1) % sentences.count
         print("\n<<< \(saidString)\n")
         say(I_HEAR_YOU_HINT, assistant) {
             self.bgm.reduceVolume()
@@ -121,8 +124,10 @@ class ViewController: UIViewController {
                 Oren,
                 rate: teachingRate * replayRate
             ) {
-                isTTSSpeakComplete = true
-                afterReplayComplete()
+                self.say("100分", assistant) {
+                    isTTSSpeakComplete = true
+                    afterReplayComplete()
+                }
             }
         }
     }
@@ -134,7 +139,9 @@ class ViewController: UIViewController {
         
         if let error = error {
             print(error)
-            repeatAfterMe()
+            say(CANNOT_HEAR_HINT, assistant) {
+                self.repeatAfterMe()
+            }
         }
     }
 }
