@@ -1,0 +1,16 @@
+{
+  "name": "nlpService",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node --experimental-modules index.mjs"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "mecab-async": "^0.1.2",
+    "morgan": "^1.9.0"
+  },
+  "engines" : { "node" : ">=9.0" }
+}
