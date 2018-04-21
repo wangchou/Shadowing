@@ -6,10 +6,16 @@ import fs from 'fs'
 import path from 'path'
 
 const mecab = new MeCab()
-mecab.command = 'mecab -d /usr/local/lib/mecab/dic/mecab-ipadic-neologd/ -E "<改行>\\n"';
+// mac
+// mecab.command = 'mecab -d /usr/local/lib/mecab/dic/mecab-ipadic-neologd/ -E "<改行>\\n"';
+// ubuntu
+mecab.command = 'mecab -d /usr/lib/mecab/dic/mecab-ipadic-neologd -E "<改行>\\n"';
 const app = express()
 
-const __dirname = './log'
+// mac
+//const __dirname = './log'
+// ubuntu on ec2
+const __dirname = '/home/ubuntu/Shadowing/prototype/nlpService/log'
 var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'})
 app.use(morgan((tokens, req, res) => {
     return [
