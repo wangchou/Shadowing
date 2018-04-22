@@ -5,17 +5,25 @@ import morgan from 'morgan'
 import fs from 'fs'
 import path from 'path'
 
+import os from 'os'
+const isMac = os.type() === 'Darwin'
+
 const mecab = new MeCab()
-// mac
-// mecab.command = 'mecab -d /usr/local/lib/mecab/dic/mecab-ipadic-neologd/ -E "<改行>\\n"';
-// ubuntu
-mecab.command = 'mecab -d /usr/lib/mecab/dic/mecab-ipadic-neologd -E "<改行>\\n"';
+if(isMac){
+  mecab.command = 'mecab -d /usr/local/lib/mecab/dic/mecab-ipadic-neologd/ -E "<改行>\\n"';
+} else {
+  mecab.command = 'mecab -d /usr/lib/mecab/dic/mecab-ipadic-neologd -E "<改行>\\n"';
+}
+
 const app = express()
 
-// mac
-//const __dirname = './log'
-// ubuntu on ec2
-const __dirname = '/home/ubuntu/Shadowing/prototype/nlpService/log'
+var __dirname
+if(isMac) {
+  __dirname = './log'
+} else {
+  __dirname = '/home/ubuntu/Shadowing/prototype/nlpService/log'
+}
+
 var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'})
 app.use(morgan((tokens, req, res) => {
     return [
@@ -30,10 +38,10 @@ app.use(morgan((tokens, req, res) => {
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-app.get('/nlp', (req, res) => {
-  if (!req.query || !req.query.jpnStr) return res.sendStatus(400)
-  console.log(req.query.jpnStr)
-  mecab.parse(req.query.jpnStr, function(err, result) {
+app.post('/nlp', (req, res) => {
+  if (!req.body || !req.body.jpnStr) return res.sendStatus(400)
+  console.log(req.body.jpnStr)
+  mecab.parse(req.body.jpnStr, function(err, result) {
     if (err) {
       return res.status(500).send({ error: 'Something failed!' })
     }
@@ -41,4 +49,8 @@ app.get('/nlp', (req, res) => {
   });
 })
 
-app.listen(80)
+if(isMac) {
+  app.listen(3000)
+} else {
+  app.listen(80)
+}

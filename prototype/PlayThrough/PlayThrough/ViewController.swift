@@ -24,6 +24,21 @@ class ViewController: UIViewController {
     var speechRecognizer: SpeechRecognizer = SpeechRecognizer()
     var bgm = BGM()
     var tts = TTS()
+    let request: Request = Request()
+    
+    
+    func getKana(_ kanjiString: String) {
+        let url: URL = URL(string: "http://54.250.149.163/nlp")!
+        let body: NSMutableDictionary = NSMutableDictionary()
+        body.setValue("真実はいつもひとつ！", forKey: "jpnStr")
+        do {
+            try request.post(url: url, body: body, completionHandler: { data, response, error in
+                print(data, response, error)
+            })
+        } catch {
+            print("error occurs in getKana")
+        }
+    }
     
     func buildNodeGraph() {
         // get nodes
@@ -63,6 +78,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getKana("真実はいつもひとつ！")
         engineStart()
         bgm.play()
         repeatAfterMe()
