@@ -110,7 +110,6 @@ class SpeechRecognizer: NSObject {
         if(self.isRunning) {
             self.inputNode.removeTap(onBus: 0)
             self.recognitionRequest?.endAudio()
-            self.recognitionTask?.cancel()
             
             self.recognitionRequest = nil
             self.recognitionTask = nil

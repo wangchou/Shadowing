@@ -12,7 +12,7 @@ import Speech
 
 var sentenceIndex = 0
 
-let replayRate: Float = 0.8
+let replayRate: Float = 1
 
 let assistant = MeiJia
 let teacher = Hattori
@@ -103,10 +103,14 @@ class ViewController: UIViewController {
     func iHearYouSaid(_ saidString: String) {
         let targetSentence = sentences[sentenceIndex]
         var speechScore: Int = 0
+        var isGotScore = false
         getSpeechScore(targetSentence, saidString) { score in
+            isGotScore = true
             speechScore = score
         }
+        
         sentenceIndex = (sentenceIndex + 1) % sentences.count
+        
         print("\nhear <<< \(saidString)\n")
         say(I_HEAR_YOU_HINT, assistant) {
             self.bgm.reduceVolume()
@@ -120,19 +124,25 @@ class ViewController: UIViewController {
                     self.repeatAfterMe()
                 }
             }
+            
             self.replayUnit.play() {
                 isReplayUnitComplete = true
                 afterReplayComplete()
             }
+            
             self.say(
                 saidString,
                 Oren,
                 rate: teachingRate * replayRate
             ) {
+                while !isGotScore {
+                    usleep(10000) // 10 ms, ps: will block ui thread
+                }
                 self.say(String(speechScore)+"分", assistant) {
                     isTTSSpeakComplete = true
                     afterReplayComplete()
                 }
+                
             }
         }
     }
@@ -143,6 +153,9 @@ class ViewController: UIViewController {
         }
         
         if error != nil {
+            // dev test
+            //iHearYouSaid("いいね!")
+            
             say(CANNOT_HEAR_HINT, assistant) {
                 self.repeatAfterMe()
             }

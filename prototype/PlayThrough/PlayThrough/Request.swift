@@ -26,14 +26,14 @@ func getKana(
     _ kanjiString: String,
     onKanaGenerated: @escaping (String, Error?) -> Void
     ) {
-    setStartTime("request start")
+    //setStartTime("request start")
     let request: Request = Request()
     let url: URL = URL(string: "http://54.250.149.163/nlp")!
     let body: NSMutableDictionary = ["jpnStr": kanjiString]
     do {
         try request.post(url: url, body: body, completionHandler: { data, response, error in
             do {
-                printDuration("got response")
+                //printDuration("got response")
                 let tokenInfos: [[String]] = try JSONSerialization.jsonObject(with: data!, options:[]) as! [[String]]
                 let kanaStr = tokenInfos.reduce("", { kanaStr, tokenInfo in
                     kanaStr + tokenInfo.last!
@@ -65,8 +65,8 @@ func getSpeechScore(
     var isTargetKanaReady = false
     var isSaidKanaReady = false
     func calcScore(_ str1: String, _ str2: String) -> Int {
-        print(str1, str2)
-        return distanceBetween(str1, str2) * 100 / max(str1.count, str2.count)
+        let len = max(str1.count, str2.count)
+        return (len - distanceBetween(str1, str2)) * 100 / len
     }
     getKana(targetSentence) { str, error in
         targetKana = str

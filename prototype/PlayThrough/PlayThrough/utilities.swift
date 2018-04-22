@@ -27,7 +27,7 @@ func setStartTime(_ tag: String = "") {
     print(tag)
 }
 func printDuration(_ tag: String = "") {
-    print(tag, (NSDate().timeIntervalSince1970 - startTime)*1000)
+    print(tag, (NSDate().timeIntervalSince1970 - startTime)*1000, "ms")
 }
 
 func configureAudioSession() {
