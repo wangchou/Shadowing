@@ -93,7 +93,7 @@ class SpeechRecognizer: NSObject {
             
             do {
                 try self.recordFile.write(from: buffer)
-            } catch let error {
+            } catch {
                 print("recordFile.writeFromBuffer error:", error)
             }
         }
@@ -108,8 +108,9 @@ class SpeechRecognizer: NSObject {
     
     func stop() {
         if(self.isRunning) {
-            recognitionRequest?.endAudio()
-            inputNode.removeTap(onBus: 0)
+            self.inputNode.removeTap(onBus: 0)
+            self.recognitionRequest?.endAudio()
+            self.recognitionTask?.cancel()
             
             self.recognitionRequest = nil
             self.recognitionTask = nil
