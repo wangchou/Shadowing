@@ -25,12 +25,12 @@ let teachingRate = AVSpeechUtteranceDefaultSpeechRate * 0.7
 let slowestRate = AVSpeechUtteranceDefaultSpeechRate * 0.6
 
 let sentences: [String] = [
-    "安い",
-    "いいね",
-    "すごい",
-    "はじめまして",
-    "こんにちは",
-    "なぜですか？",
+//    "安い",
+//    "いいね",
+//    "すごい",
+//    "はじめまして",
+//    "こんにちは",
+//    "なぜですか？",
     "どうしましたか？",
     "おねさま",
     "真実はいつもひとつ！",
