@@ -9,13 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
-    let audioController: AudioController = AudioController()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        audioController.engineStart()
-        audioController.playBGM()
-        audioController.repeatAfterMe()
+        
     }
     
     override func didReceiveMemoryWarning() {

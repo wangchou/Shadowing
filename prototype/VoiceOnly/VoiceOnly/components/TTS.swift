@@ -28,6 +28,10 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         synthesizer.speak(utterance)
     }
     
+    func stop() {
+        synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
+    }
+    
     func speechSynthesizer(
         _ synthesizer: AVSpeechSynthesizer,
         didFinish utterance: AVSpeechUtterance

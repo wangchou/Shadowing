@@ -35,7 +35,7 @@ class BGM {
     func reduceVolume() {
         if tmpVolume == nil {
             tmpVolume = node.volume
-            node.volume = 0.2 * node.volume
+            node.volume = 0.5 * node.volume
         } else {
             print("Error: cannot reduce volume twice. restore it first")
         }

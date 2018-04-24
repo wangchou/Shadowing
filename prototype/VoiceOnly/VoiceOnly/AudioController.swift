@@ -24,10 +24,7 @@ class AudioController {
     var speechRecognizer: SpeechRecognizer = SpeechRecognizer()
     var bgm = BGM()
     var tts = TTS()
-    
-    func playBGM() {
-        bgm.node.play()
-    }
+    var isRunning = false
     
     func buildNodeGraph() {
         // get nodes
@@ -54,15 +51,25 @@ class AudioController {
         bgm.node.volume = 0.5
     }
     
-    func engineStart() {
+    func start() {
         do {
+            isRunning = true
             configureAudioSession()
             buildNodeGraph()
             engine.prepare()
             try engine.start()
+            bgm.play()
+            repeatAfterMe()
         } catch {
             print("Start Play through failed \(error)")
         }
+    }
+    
+    func stop() {
+        isRunning = false
+        engine.stop()
+        tts.stop()
+        speechRecognizer.stop()
     }
     
     // sugar function
@@ -72,10 +79,16 @@ class AudioController {
         rate: Float = normalRate,
         onCompleteHandler: @escaping () -> Void = {}
         ) {
+        if !isRunning {
+            return
+        }
         tts.say(text, name, rate: rate, onCompleteHandler: onCompleteHandler)
     }
     
     func repeatAfterMe() {
+        if !isRunning {
+            return
+        }
         say(REPEAT_AFTER_ME_HINT, assistant) {
             self.bgm.reduceVolume()
             let sentence = sentences[sentenceIndex]
@@ -140,6 +153,10 @@ class AudioController {
     }
     
     func speechResultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
+        if !isRunning {
+            return
+        }
+        
         if (result?.isFinal) != nil {
             iHearYouSaid(result!.bestTranscription.formattedString)
         }

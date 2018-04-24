@@ -22,6 +22,14 @@
 		BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD8208EF15F00C18520 /* constants.swift */; };
 		BEBDEDE3208EF17100C18520 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBDEDE2208EF17100C18520 /* AVFoundation.framework */; };
 		BEBDEDE5208EFE1700C18520 /* AudioController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDE4208EFE1700C18520 /* AudioController.swift */; };
+		BEBDEDE8208F227C00C18520 /* P1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDE7208F227C00C18520 /* P1ViewController.swift */; };
+		BEBDEDEA208F23DE00C18520 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDE9208F23DE00C18520 /* MainNavigationController.swift */; };
+		BEBDEDEC208F286300C18520 /* P2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDEB208F286300C18520 /* P2ViewController.swift */; };
+		BEBDEDF2208F28BD00C18520 /* P6ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDED208F28BC00C18520 /* P6ViewController.swift */; };
+		BEBDEDF3208F28BD00C18520 /* P3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDEE208F28BC00C18520 /* P3ViewController.swift */; };
+		BEBDEDF4208F28BD00C18520 /* P4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDEF208F28BC00C18520 /* P4ViewController.swift */; };
+		BEBDEDF5208F28BD00C18520 /* P5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDF0208F28BC00C18520 /* P5ViewController.swift */; };
+		BEBDEDF6208F28BD00C18520 /* P7ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDF1208F28BD00C18520 /* P7ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +50,14 @@
 		BEBDEDD8208EF15F00C18520 /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		BEBDEDE2208EF17100C18520 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		BEBDEDE4208EFE1700C18520 /* AudioController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioController.swift; sourceTree = "<group>"; };
+		BEBDEDE7208F227C00C18520 /* P1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P1ViewController.swift; sourceTree = "<group>"; };
+		BEBDEDE9208F23DE00C18520 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		BEBDEDEB208F286300C18520 /* P2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P2ViewController.swift; sourceTree = "<group>"; };
+		BEBDEDED208F28BC00C18520 /* P6ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P6ViewController.swift; sourceTree = "<group>"; };
+		BEBDEDEE208F28BC00C18520 /* P3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P3ViewController.swift; sourceTree = "<group>"; };
+		BEBDEDEF208F28BC00C18520 /* P4ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P4ViewController.swift; sourceTree = "<group>"; };
+		BEBDEDF0208F28BC00C18520 /* P5ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P5ViewController.swift; sourceTree = "<group>"; };
+		BEBDEDF1208F28BD00C18520 /* P7ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P7ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,8 +92,8 @@
 		BEBDEDBE208EF09F00C18520 /* VoiceOnly */ = {
 			isa = PBXGroup;
 			children = (
-				BEBDEDE6208EFF3000C18520 /* components */,
 				BEBDEDD3208EF15E00C18520 /* drumLoop.caf */,
+				BEBDEDE6208EFF3000C18520 /* components */,
 				BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */,
 				BEBDEDC1208EF09F00C18520 /* ViewController.swift */,
 				BEBDEDE4208EFE1700C18520 /* AudioController.swift */,
@@ -85,6 +101,8 @@
 				BEBDEDC6208EF0A000C18520 /* Assets.xcassets */,
 				BEBDEDC8208EF0A000C18520 /* LaunchScreen.storyboard */,
 				BEBDEDCB208EF0A000C18520 /* Info.plist */,
+				BEBDEDF7208F28E100C18520 /* prototypes */,
+				BEBDEDE9208F23DE00C18520 /* MainNavigationController.swift */,
 			);
 			path = VoiceOnly;
 			sourceTree = "<group>";
@@ -109,6 +127,20 @@
 				BEBDEDD1208EF15E00C18520 /* utilities.swift */,
 			);
 			path = components;
+			sourceTree = "<group>";
+		};
+		BEBDEDF7208F28E100C18520 /* prototypes */ = {
+			isa = PBXGroup;
+			children = (
+				BEBDEDE7208F227C00C18520 /* P1ViewController.swift */,
+				BEBDEDEB208F286300C18520 /* P2ViewController.swift */,
+				BEBDEDEE208F28BC00C18520 /* P3ViewController.swift */,
+				BEBDEDEF208F28BC00C18520 /* P4ViewController.swift */,
+				BEBDEDF0208F28BC00C18520 /* P5ViewController.swift */,
+				BEBDEDED208F28BC00C18520 /* P6ViewController.swift */,
+				BEBDEDF1208F28BD00C18520 /* P7ViewController.swift */,
+			);
+			path = prototypes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,12 +218,20 @@
 				BEBDEDE5208EFE1700C18520 /* AudioController.swift in Sources */,
 				BEBDEDDF208EF15F00C18520 /* ReplayUnit.swift in Sources */,
 				BEBDEDD9208EF15F00C18520 /* utilities.swift in Sources */,
+				BEBDEDF6208F28BD00C18520 /* P7ViewController.swift in Sources */,
 				BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */,
+				BEBDEDF4208F28BD00C18520 /* P4ViewController.swift in Sources */,
 				BEBDEDDC208EF15F00C18520 /* BGM.swift in Sources */,
+				BEBDEDF5208F28BD00C18520 /* P5ViewController.swift in Sources */,
 				BEBDEDC2208EF09F00C18520 /* ViewController.swift in Sources */,
+				BEBDEDEA208F23DE00C18520 /* MainNavigationController.swift in Sources */,
 				BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */,
 				BEBDEDDE208EF15F00C18520 /* Request.swift in Sources */,
+				BEBDEDE8208F227C00C18520 /* P1ViewController.swift in Sources */,
 				BEBDEDDA208EF15F00C18520 /* TTS.swift in Sources */,
+				BEBDEDEC208F286300C18520 /* P2ViewController.swift in Sources */,
+				BEBDEDF2208F28BD00C18520 /* P6ViewController.swift in Sources */,
+				BEBDEDF3208F28BD00C18520 /* P3ViewController.swift in Sources */,
 				BEBDEDDD208EF15F00C18520 /* SpeechRecognizer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

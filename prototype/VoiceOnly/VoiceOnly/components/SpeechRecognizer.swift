@@ -100,20 +100,33 @@ class SpeechRecognizer: NSObject {
         self.isRunning = true
         
         Timer.scheduledTimer(withTimeInterval: stopAfterSeconds, repeats: false) { timer in
-            self.stop()
+            self.endAudio()
         }
         
         startCompleteHandler()
     }
     
+    func endAudio() {
+        if(self.isRunning) {
+            inputNode.removeTap(onBus: 0)
+            recognitionRequest?.endAudio()
+            
+            recognitionRequest = nil
+            recognitionTask = nil
+            isRunning = false
+            // print("Speech recognition is stopped")
+        }
+    }
+    
     func stop() {
         if(self.isRunning) {
-            self.inputNode.removeTap(onBus: 0)
-            self.recognitionRequest?.endAudio()
+            inputNode.removeTap(onBus: 0)
+            recognitionRequest?.endAudio()
+            recognitionTask?.cancel()
             
-            self.recognitionRequest = nil
-            self.recognitionTask = nil
-            self.isRunning = false
+            recognitionRequest = nil
+            recognitionTask = nil
+            isRunning = false
             // print("Speech recognition is stopped")
         }
     }
