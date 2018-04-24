@@ -32,7 +32,7 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         _ synthesizer: AVSpeechSynthesizer,
         didFinish utterance: AVSpeechUtterance
     ) {
-        print(">>>", "\(utterance.speechString)")
+        print("saying >>>", "\(utterance.speechString)")
         guard let onCompleteHandler = onCompleteHandler else { return }
         onCompleteHandler()
     }
