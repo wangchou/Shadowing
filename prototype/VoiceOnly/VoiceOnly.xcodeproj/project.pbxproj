@@ -21,6 +21,7 @@
 		BEBDEDDF208EF15F00C18520 /* ReplayUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD7208EF15E00C18520 /* ReplayUnit.swift */; };
 		BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD8208EF15F00C18520 /* constants.swift */; };
 		BEBDEDE3208EF17100C18520 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBDEDE2208EF17100C18520 /* AVFoundation.framework */; };
+		BEBDEDE5208EFE1700C18520 /* AudioController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDE4208EFE1700C18520 /* AudioController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		BEBDEDD7208EF15E00C18520 /* ReplayUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplayUnit.swift; sourceTree = "<group>"; };
 		BEBDEDD8208EF15F00C18520 /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		BEBDEDE2208EF17100C18520 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		BEBDEDE4208EFE1700C18520 /* AudioController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,16 +76,11 @@
 		BEBDEDBE208EF09F00C18520 /* VoiceOnly */ = {
 			isa = PBXGroup;
 			children = (
-				BEBDEDD4208EF15E00C18520 /* BGM.swift */,
-				BEBDEDD8208EF15F00C18520 /* constants.swift */,
+				BEBDEDE6208EFF3000C18520 /* components */,
 				BEBDEDD3208EF15E00C18520 /* drumLoop.caf */,
-				BEBDEDD7208EF15E00C18520 /* ReplayUnit.swift */,
-				BEBDEDD6208EF15E00C18520 /* Request.swift */,
-				BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */,
-				BEBDEDD2208EF15E00C18520 /* TTS.swift */,
-				BEBDEDD1208EF15E00C18520 /* utilities.swift */,
 				BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */,
 				BEBDEDC1208EF09F00C18520 /* ViewController.swift */,
+				BEBDEDE4208EFE1700C18520 /* AudioController.swift */,
 				BEBDEDC3208EF09F00C18520 /* Main.storyboard */,
 				BEBDEDC6208EF0A000C18520 /* Assets.xcassets */,
 				BEBDEDC8208EF0A000C18520 /* LaunchScreen.storyboard */,
@@ -98,6 +95,20 @@
 				BEBDEDE2208EF17100C18520 /* AVFoundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BEBDEDE6208EFF3000C18520 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				BEBDEDD4208EF15E00C18520 /* BGM.swift */,
+				BEBDEDD8208EF15F00C18520 /* constants.swift */,
+				BEBDEDD7208EF15E00C18520 /* ReplayUnit.swift */,
+				BEBDEDD6208EF15E00C18520 /* Request.swift */,
+				BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */,
+				BEBDEDD2208EF15E00C18520 /* TTS.swift */,
+				BEBDEDD1208EF15E00C18520 /* utilities.swift */,
+			);
+			path = components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,6 +183,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEBDEDE5208EFE1700C18520 /* AudioController.swift in Sources */,
 				BEBDEDDF208EF15F00C18520 /* ReplayUnit.swift in Sources */,
 				BEBDEDD9208EF15F00C18520 /* utilities.swift in Sources */,
 				BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */,
