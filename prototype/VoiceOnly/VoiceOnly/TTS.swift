@@ -1,6 +1,6 @@
 //
 //  TTS.swift (Text to Speech)
-//  PlayThrough
+//  VoiceOnly
 //
 //  Created by Wangchou Lu on H30/04/16.
 //  Copyright © 平成30年 Lu, WangChou. All rights reserved.
