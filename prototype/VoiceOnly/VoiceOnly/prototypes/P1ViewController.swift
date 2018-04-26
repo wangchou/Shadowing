@@ -10,19 +10,18 @@ import Foundation
 import UIKit
 
 class P1ViewController: UIViewController {
-    let audioController: AudioController = AudioController()
-    
+    var audio = AudioController.shared
+    var flow = FlowController.shared
     override func viewDidLoad() {
         super.viewDidLoad()
         print("P1 viewDidLoad")
-        audioController.start()
-        
+        audio.start()
+        flow.repeatAfterMe()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         print("P1 viewDidDisappear")
-        audioController.stop()
-        
+        audio.stop()
     }
 }

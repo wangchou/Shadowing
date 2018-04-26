@@ -55,7 +55,6 @@ class SpeechRecognizer: NSObject {
     
     func start(inputNode: AVAudioInputNode,
                stopAfterSeconds: Double = 5,
-               startCompleteHandler: @escaping () -> Void,
                resultHandler: @escaping (SFSpeechRecognitionResult?, Error?) -> Void
                ) {
         if(!isAuthorized) {
@@ -69,7 +68,9 @@ class SpeechRecognizer: NSObject {
         }
     
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
-        guard let recognitionRequest = recognitionRequest else { fatalError("Unable to created a SFSpeechAudioBufferRecognitionRequest object") }
+        guard let recognitionRequest = recognitionRequest else {
+            fatalError("Unable to created a SFSpeechAudioBufferRecognitionRequest object")
+        }
         
         recognitionRequest.shouldReportPartialResults = false
 
@@ -102,8 +103,6 @@ class SpeechRecognizer: NSObject {
         Timer.scheduledTimer(withTimeInterval: stopAfterSeconds, repeats: false) { timer in
             self.endAudio()
         }
-        
-        startCompleteHandler()
     }
     
     func endAudio() {
