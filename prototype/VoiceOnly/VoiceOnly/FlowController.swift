@@ -20,56 +20,58 @@ class FlowController {
     func repeatAfterMe() {
         let audio = AudioController.shared
         print("repeat after me", audio)
-        audio.say(REPEAT_AFTER_ME_HINT, assistant) {
-            let sentence = sentences[sentenceIndex]
+        
+        // completionHandler chain
+        audio.say(REPEAT_AFTER_ME_HINT, assistant)
+        {   let sentence = sentences[sentenceIndex]
             let listeningDuration: Double = Double((Float(sentence.count) * 0.6 * teachingRate) + 1.5)
-            audio.say(sentence, teacher, rate: teachingRate) {
-                audio.speechRecognizer.start(
-                    inputNode: audio.engine.inputNode,
-                    stopAfterSeconds: listeningDuration,
-                    resultHandler: self.speechResultHandler
-                )
-            }
+            audio.say(sentence, teacher, rate: teachingRate)
+        {   audio.speechRecognizer.start(
+                inputNode: audio.engine.inputNode,
+                stopAfterSeconds: listeningDuration,
+                resultHandler: self.speechResultHandler
+            )
+        }}
+    }
+    
+    // do these concurrently
+    // 1. replay recording
+    // 2. getScore from server kana str
+    // 3. play recognition result in tts
+    private func repeatSaid(_ saidSentence: String, completionHandler: @escaping (Int)->Void) {
+        let audio = AudioController.shared
+        var speechScore: Int = 0
+        let group = DispatchGroup()
+        
+        group.enter()
+        audio.replay() { group.leave() }
+        
+        group.enter()
+        audio.say(saidSentence, Oren, rate: teachingRate * replayRate) { group.leave() }
+        
+        group.enter()
+        let targetSentence = sentences[sentenceIndex]
+        getSpeechScore(targetSentence, saidSentence) {
+            speechScore = $0
+            group.leave()
+        }
+        
+        group.notify(queue: .main) {
+            completionHandler(speechScore)
         }
     }
     
-    func iHearYouSaid(_ saidString: String) {
+    func iHearYouSaid(_ saidSentence: String) {
         let audio = AudioController.shared
-        let targetSentence = sentences[sentenceIndex]
-        var speechScore: Int = 0
-        var isGotScore = false
-        getSpeechScore(targetSentence, saidString) { score in
-            isGotScore = true
-            speechScore = score
-        }
+        print("\nhear <<< \(saidSentence)\n")
         
-        sentenceIndex = (sentenceIndex + 1) % sentences.count
-        
-        print("\nhear <<< \(saidString)\n")
-        audio.say(I_HEAR_YOU_HINT, assistant) {
-            var isReplayUnitComplete = false
-            var isTTSSpeakComplete = false
-            
-            audio.replay() {
-                isReplayUnitComplete = true
-                if(isTTSSpeakComplete) {
-                    self.repeatAfterMe()
-                }
-            }
-            
-            audio.say(saidString, Oren, rate: teachingRate * replayRate) {
-                while !isGotScore {
-                    usleep(10000) // 10 ms, ps: will block ui thread
-                }
-                audio.say(String(speechScore)+"分", assistant) {
-                    isTTSSpeakComplete = true
-                    if(isReplayUnitComplete) {
-                        self.repeatAfterMe()
-                    }
-                }
-                
-            }
-        }
+        // completionHandler chain
+        audio.say(I_HEAR_YOU_HINT, assistant)
+        {   self.repeatSaid(saidSentence)
+        {   sentenceIndex = (sentenceIndex + 1) % sentences.count
+            audio.say(String($0)+"分", assistant)
+        {   self.repeatAfterMe()
+        }}}
     }
     
     func speechResultHandler(result: SFSpeechRecognitionResult?, error: Error?) {

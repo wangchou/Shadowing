@@ -9,27 +9,6 @@
 import Foundation
 import AVFoundation
 
-func dumpVoices() {
-    for voice in AVSpeechSynthesisVoice.speechVoices() {
-        //if ((availableVoice.language == AVSpeechSynthesisVoice.currentLanguageCode()) &&
-        //    (availableVoice.quality == AVSpeechSynthesisVoiceQuality.enhanced)) {
-        if(voice.language == "ja-JP" || voice.language == "zh-TW") {
-            print("\(voice.name) on \(voice.language) with Quality: \(voice.quality.rawValue) \(voice.identifier)")
-        }
-        //}
-    }
-}
-
-// measure performance
-var startTime: Double = 0
-func setStartTime(_ tag: String = "") {
-    startTime = NSDate().timeIntervalSince1970
-    print(tag)
-}
-func printDuration(_ tag: String = "") {
-    print(tag, (NSDate().timeIntervalSince1970 - startTime)*1000, "ms")
-}
-
 func configureAudioSession() {
     do {
         let session: AVAudioSession = AVAudioSession.sharedInstance()
@@ -54,12 +33,6 @@ func configureAudioSession() {
 }
 
 // EditDistance from https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#Swift
-/**
- * Levenshtein edit distance calculator
- *
- * Inspired by https://gist.github.com/bgreenlee/52d93a1d8fa1b8c1f38b
- * Improved with http://stackoverflow.com/questions/26990394/slow-swift-arrays-and-strings-performance
- */
 
 func min3(_ a: Int, _ b: Int, _ c: Int) -> Int {
     return min( min(a, c), min(b, c))
@@ -128,6 +101,29 @@ func distanceBetween(_ aStr: String, _ bStr: String) -> Int {
     return dist[a.count, b.count]
 }
 
+//////////////////////////////////
+// misc section: only used in DEV
+
+func dumpVoices() {
+    for voice in AVSpeechSynthesisVoice.speechVoices() {
+        //if ((availableVoice.language == AVSpeechSynthesisVoice.currentLanguageCode()) &&
+        //    (availableVoice.quality == AVSpeechSynthesisVoiceQuality.enhanced)) {
+        if(voice.language == "ja-JP" || voice.language == "zh-TW") {
+            print("\(voice.name) on \(voice.language) with Quality: \(voice.quality.rawValue) \(voice.identifier)")
+        }
+        //}
+    }
+}
+
+// measure performance
+var startTime: Double = 0
+func setStartTime(_ tag: String = "") {
+    startTime = NSDate().timeIntervalSince1970
+    print(tag)
+}
+func printDuration(_ tag: String = "") {
+    print(tag, (NSDate().timeIntervalSince1970 - startTime)*1000, "ms")
+}
 
 // Latency tested result
 // AVAudioEngine ~= 5.41ms
