@@ -24,6 +24,9 @@ class P3ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        sentences = getSentences(
+            "ただの人間には興味ありません。この中に宇宙人、未来人、異世界人、超能力者がいたら、あたしのところに来なさい。以上。"
+        )
         audio.start()
         repeatAfterMe()
     }

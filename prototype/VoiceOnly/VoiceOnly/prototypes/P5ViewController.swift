@@ -11,7 +11,6 @@ import UIKit
 import Speech
 
 fileprivate let listenPauseDuration = 0.25
-
 // Prototype 5: 一個 run 5.5秒，但 辨識出 TTS 的日文，會讓人混亂。
 // Loop {
 //  日文

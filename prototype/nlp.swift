@@ -23,3 +23,32 @@ tagger.enumerateTags(in: range, scheme: .tokenType, options: []) { (tag, tokenRa
     colorIndex = ((colorIndex - 1) % 6) + 2
   }
 }
+
+func getSentences(_ text: String) -> [String] {
+  let tagger = NSLinguisticTagger(
+    tagSchemes: NSLinguisticTagger.availableTagSchemes(forLanguage: "ja"),
+    options: 0
+  )
+
+  var sentences: [String] = []
+  var curSentences = ""
+
+  tagger.string = text
+  let range = NSMakeRange(0, text.count)
+  let options: NSLinguisticTagger.Options = [.omitWhitespace]
+
+  tagger.enumerateTags(in: range, scheme: .tokenType, options: []) { (tag, tokenRange, sentenceRange, stop) in
+    let token = (text as NSString).substring(with: tokenRange)
+    if(tag?.rawValue == "Punctuation") {
+      curSentences += token
+      sentences.append(curSentences)
+      curSentences = ""
+    } else {
+      curSentences += token
+    }
+  }
+
+  return sentences
+}
+
+print(getSentences(text))

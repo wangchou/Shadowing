@@ -36,6 +36,33 @@ func getNow() -> Double {
     return NSDate().timeIntervalSince1970
 }
 
+// separate long text by punctuations
+func getSentences(_ text: String) -> [String] {
+    let tagger = NSLinguisticTagger(
+        tagSchemes: NSLinguisticTagger.availableTagSchemes(forLanguage: "ja"),
+        options: 0
+    )
+    
+    var sentences: [String] = []
+    var curSentences = ""
+    
+    tagger.string = text
+    let range = NSMakeRange(0, text.count)
+    
+    tagger.enumerateTags(in: range, scheme: .tokenType, options: []) { (tag, tokenRange, sentenceRange, stop) in
+        let token = (text as NSString).substring(with: tokenRange)
+        if(tag?.rawValue == "Punctuation") {
+            curSentences += token
+            sentences.append(curSentences)
+            curSentences = ""
+        } else {
+            curSentences += token
+        }
+    }
+    return sentences
+}
+
+
 // EditDistance from https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#Swift
 
 func min3(_ a: Int, _ b: Int, _ c: Int) -> Int {
