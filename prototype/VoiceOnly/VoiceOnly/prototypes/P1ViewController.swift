@@ -10,22 +10,21 @@ import Foundation
 import UIKit
 import Speech
 
-fileprivate var isDev = true
+fileprivate var isDev = false
 fileprivate let listenPauseDuration = 0.25
 
 class P1ViewController: UIViewController {
-
+    let audio = AudioController.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if(isDev) {
-            AudioController.shared.start()
-            repeatAfterMe()
-        }
+        audio.start()
+        repeatAfterMe()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        AudioController.shared.stop()
+        audio.stop()
     }
     
     func repeatAfterMe() {

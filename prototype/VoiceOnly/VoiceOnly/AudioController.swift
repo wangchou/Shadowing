@@ -30,7 +30,11 @@ class AudioController {
     var tts = TTS()
     public var isRunning = false
     
-    private init() {}
+    private init() {
+        configureAudioSession()
+        buildNodeGraph()
+        engine.prepare()
+    }
     
     private func buildNodeGraph() {
         // get nodes
@@ -60,9 +64,6 @@ class AudioController {
     func start() {
         do {
             isRunning = true
-            configureAudioSession()
-            buildNodeGraph()
-            engine.prepare()
             try engine.start()
             bgm.play()
         } catch {
