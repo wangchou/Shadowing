@@ -10,6 +10,9 @@ import Foundation
 import AVFoundation
 import Speech
 
+var isDev = true
+let listenPauseDuration = 0.25
+
 class FlowController {
     
     //Singleton
@@ -19,16 +22,17 @@ class FlowController {
     
     func repeatAfterMe() {
         let audio = AudioController.shared
-        print("repeat after me", audio)
         
         // completionHandler chain
         audio.say(REPEAT_AFTER_ME_HINT, assistant)
         {   let sentence = sentences[sentenceIndex]
-            let listeningDuration: Double = Double((Float(sentence.count) * 0.6 * teachingRate) + 1.5)
+            let startTime = NSDate().timeIntervalSince1970
             audio.say(sentence, teacher, rate: teachingRate)
-        {   audio.speechRecognizer.start(
+        {   let listenDuration = (NSDate().timeIntervalSince1970 - startTime) +
+                                 listenPauseDuration
+            audio.speechRecognizer.start(
                 inputNode: audio.engine.inputNode,
-                stopAfterSeconds: listeningDuration,
+                stopAfterSeconds: listenDuration,
                 resultHandler: self.speechResultHandler
             )
         }}
@@ -38,7 +42,7 @@ class FlowController {
     // 1. replay recording
     // 2. getScore from server kana str
     // 3. play recognition result in tts
-    private func repeatSaid(_ saidSentence: String, completionHandler: @escaping (Int)->Void) {
+    private func repeatWhatSaid(_ saidSentence: String, completionHandler: @escaping (Int)->Void) {
         let audio = AudioController.shared
         var speechScore: Int = 0
         let group = DispatchGroup()
@@ -67,7 +71,7 @@ class FlowController {
         
         // completionHandler chain
         audio.say(I_HEAR_YOU_HINT, assistant)
-        {   self.repeatSaid(saidSentence)
+        {   self.repeatWhatSaid(saidSentence)
         {   sentenceIndex = (sentenceIndex + 1) % sentences.count
             audio.say(String($0)+"分", assistant)
         {   self.repeatAfterMe()
@@ -85,8 +89,12 @@ class FlowController {
         }
         
         if error != nil {
-            audio.say(CANNOT_HEAR_HINT, assistant) {
-                self.repeatAfterMe()
+            if(isDev) {
+                iHearYouSaid("おねさま")
+            } else {
+                audio.say(CANNOT_HEAR_HINT, assistant) {
+                    self.repeatAfterMe()
+                }
             }
         }
     }

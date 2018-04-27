@@ -20,7 +20,7 @@ func configureAudioSession() {
         // default  23ms | 1024 frames | <1% CPU (iphone SE)
         // 0.001   0.7ms |   32 frames |  8% CPU
         try session.setPreferredIOBufferDuration(0.002)
-        print(session.ioBufferDuration)
+        // print(session.ioBufferDuration)
         
         session.requestRecordPermission({ (success) in
             if success { print("Record Permission Granted") } else {

@@ -71,7 +71,6 @@ func getSpeechScore(
         
         let len = max(str1.count, str2.count)
         let score = (len - distanceBetween(str1, str2)) * 100 / len
-        print("distance(\(str1), \(str2)) = \(score)")
         return score
     }
     getKana(targetSentence) { str, error in

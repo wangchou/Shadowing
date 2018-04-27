@@ -32,12 +32,21 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
     }
     
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
+                           willSpeakRangeOfSpeechString characterRange: NSRange,
+                           utterance: AVSpeechUtterance) {
+        if(isDev) {
+            let speechString = utterance.speechString as NSString
+            print(speechString.substring(with: characterRange), terminator: "")
+        }
+    }
+    
     func speechSynthesizer(
         _ synthesizer: AVSpeechSynthesizer,
         didFinish utterance: AVSpeechUtterance
     ) {
-        print("saying >>>", "\(utterance.speechString)")
         guard let completionHandler = completionHandler else { return }
+        if(isDev) { print("") }
         completionHandler()
     }
 }

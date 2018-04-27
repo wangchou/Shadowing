@@ -9,9 +9,14 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var audio = AudioController.shared
+    var flow = FlowController.shared
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if(isDev) {
+            audio.start()
+            self.flow.repeatAfterMe()
+        }
     }
     
     override func didReceiveMemoryWarning() {
