@@ -35,10 +35,9 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
                            willSpeakRangeOfSpeechString characterRange: NSRange,
                            utterance: AVSpeechUtterance) {
-        if(isDev) {
-            let speechString = utterance.speechString as NSString
-            print(speechString.substring(with: characterRange), terminator: "")
-        }
+        let speechString = utterance.speechString as NSString
+        print(speechString.substring(with: characterRange), terminator: "")
+        
     }
     
     func speechSynthesizer(
@@ -46,7 +45,7 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         didFinish utterance: AVSpeechUtterance
     ) {
         guard let completionHandler = completionHandler else { return }
-        if(isDev) { print("") }
+        print("")
         completionHandler()
     }
 }

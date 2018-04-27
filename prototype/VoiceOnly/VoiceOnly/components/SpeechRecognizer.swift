@@ -113,20 +113,13 @@ class SpeechRecognizer: NSObject {
             recognitionRequest = nil
             recognitionTask = nil
             isRunning = false
-            // print("Speech recognition is stopped")
         }
     }
     
     func stop() {
         if(self.isRunning) {
-            inputNode.removeTap(onBus: 0)
-            recognitionRequest?.endAudio()
             recognitionTask?.cancel()
-            
-            recognitionRequest = nil
-            recognitionTask = nil
-            isRunning = false
-            // print("Speech recognition is stopped")
+            self.endAudio()
         }
     }
 }

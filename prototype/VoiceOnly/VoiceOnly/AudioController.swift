@@ -98,9 +98,18 @@ class AudioController {
         }
     }
     
+    func listen(listenDuration: Double,
+                resultHandler: @escaping (SFSpeechRecognitionResult?, Error?) -> Void
+        ) {
+        speechRecognizer.start(
+            inputNode: engine.inputNode,
+            stopAfterSeconds: listenDuration,
+            resultHandler: resultHandler
+        )
+    }
+    
     func replay(completionHandler: @escaping () -> Void) {
         replayUnit.play()
         completionHandler()
     }
-    
 }

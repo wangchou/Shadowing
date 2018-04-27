@@ -30,7 +30,6 @@
 		BEBDEDF4208F28BD00C18520 /* P4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDEF208F28BC00C18520 /* P4ViewController.swift */; };
 		BEBDEDF5208F28BD00C18520 /* P5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDF0208F28BC00C18520 /* P5ViewController.swift */; };
 		BEBDEDF6208F28BD00C18520 /* P7ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDF1208F28BD00C18520 /* P7ViewController.swift */; };
-		BEFEE8DC20917297001AA769 /* FlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFEE8DB20917297001AA769 /* FlowController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,7 +58,6 @@
 		BEBDEDEF208F28BC00C18520 /* P4ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P4ViewController.swift; sourceTree = "<group>"; };
 		BEBDEDF0208F28BC00C18520 /* P5ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P5ViewController.swift; sourceTree = "<group>"; };
 		BEBDEDF1208F28BD00C18520 /* P7ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P7ViewController.swift; sourceTree = "<group>"; };
-		BEFEE8DB20917297001AA769 /* FlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +97,6 @@
 				BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */,
 				BEBDEDC1208EF09F00C18520 /* ViewController.swift */,
 				BEBDEDE4208EFE1700C18520 /* AudioController.swift */,
-				BEFEE8DB20917297001AA769 /* FlowController.swift */,
 				BEBDEDC3208EF09F00C18520 /* Main.storyboard */,
 				BEBDEDC6208EF0A000C18520 /* Assets.xcassets */,
 				BEBDEDC8208EF0A000C18520 /* LaunchScreen.storyboard */,
@@ -236,7 +233,6 @@
 				BEBDEDF2208F28BD00C18520 /* P6ViewController.swift in Sources */,
 				BEBDEDF3208F28BD00C18520 /* P3ViewController.swift in Sources */,
 				BEBDEDDD208EF15F00C18520 /* SpeechRecognizer.swift in Sources */,
-				BEFEE8DC20917297001AA769 /* FlowController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

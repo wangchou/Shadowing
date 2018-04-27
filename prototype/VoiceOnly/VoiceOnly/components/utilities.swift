@@ -32,6 +32,10 @@ func configureAudioSession() {
     }
 }
 
+func getNow() -> Double {
+    return NSDate().timeIntervalSince1970
+}
+
 // EditDistance from https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#Swift
 
 func min3(_ a: Int, _ b: Int, _ c: Int) -> Int {
