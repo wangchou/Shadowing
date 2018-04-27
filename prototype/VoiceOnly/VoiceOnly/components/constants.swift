@@ -25,6 +25,8 @@ let normalRate = AVSpeechUtteranceDefaultSpeechRate
 let teachingRate = AVSpeechUtteranceDefaultSpeechRate * 0.7
 let slowestRate = AVSpeechUtteranceDefaultSpeechRate * 0.6
 
+let micVolumeIncreaseRate: Float = 3
+
 let sentences: [String] = [
 //    "安い",
 //    "いいね",

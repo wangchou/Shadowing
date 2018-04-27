@@ -10,8 +10,15 @@ import Foundation
 import UIKit
 import Speech
 
-fileprivate var isDev = false
 fileprivate let listenPauseDuration = 0.25
+
+// Prototype 2: 一個 run 7.5秒
+// Loop {
+//  日文
+//  使用者複述
+//  播錄音
+//  分數
+// }
 
 class P2ViewController: UIViewController {
     let audio = AudioController.shared
@@ -28,6 +35,8 @@ class P2ViewController: UIViewController {
     }
     
     func repeatAfterMe() {
+        printDuration()
+        setStartTime()
         let audio = AudioController.shared
         let sentence = sentences[sentenceIndex]
         
@@ -35,8 +44,8 @@ class P2ViewController: UIViewController {
         let speakTime = getNow()
         audio.say(sentence, teacher, rate: teachingRate)
         {   audio.listen(
-            listenDuration: (getNow() - speakTime) + listenPauseDuration,
-            resultHandler: self.speechResultHandler
+                listenDuration: (getNow() - speakTime) + listenPauseDuration,
+                resultHandler: self.speechResultHandler
             )
         }
     }

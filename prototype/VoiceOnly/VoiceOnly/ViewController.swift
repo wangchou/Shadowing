@@ -8,9 +8,12 @@
 
 import UIKit
 
+var isDev = false
+
 class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        // AudioController.shared.start()
     }
 
     override func didReceiveMemoryWarning() {

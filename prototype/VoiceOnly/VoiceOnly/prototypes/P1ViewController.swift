@@ -10,8 +10,18 @@ import Foundation
 import UIKit
 import Speech
 
-fileprivate var isDev = false
+
 fileprivate let listenPauseDuration = 0.25
+
+// Prototype 1: 一個 run 10.9秒
+// Loop {
+//  説(請跟我說日文)
+//  日文
+//  複述
+//  説(我聽到你說)
+//  播錄音 & 辨識出的 TTS
+//  分數
+// }
 
 class P1ViewController: UIViewController {
     let audio = AudioController.shared
@@ -28,6 +38,8 @@ class P1ViewController: UIViewController {
     }
     
     func repeatAfterMe() {
+        printDuration()
+        setStartTime()
         let audio = AudioController.shared
         let sentence = sentences[sentenceIndex]
         

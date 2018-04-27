@@ -24,7 +24,7 @@ class SpeechRecognizer: NSObject {
     
     private var isAuthorized: Bool = false
     
-    private var inputNode: AVAudioInputNode!
+    private var inputNode: AVAudioNode!
     
     func authorize() {
         SFSpeechRecognizer.requestAuthorization { authStatus in
@@ -53,7 +53,7 @@ class SpeechRecognizer: NSObject {
         authorize()
     }
     
-    func start(inputNode: AVAudioInputNode,
+    func start(inputNode: AVAudioNode,
                stopAfterSeconds: Double = 5,
                resultHandler: @escaping (SFSpeechRecognitionResult?, Error?) -> Void
                ) {

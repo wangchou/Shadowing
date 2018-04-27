@@ -24,6 +24,7 @@ class AudioController {
     
     var engine = AVAudioEngine()
     var speedEffectNode = AVAudioUnitTimePitch()
+    var boosterNode = AVAudioMixerNode()
     var replayUnit: ReplayUnit!
     var speechRecognizer: SpeechRecognizer = SpeechRecognizer()
     var bgm = BGM()
@@ -47,15 +48,18 @@ class AudioController {
         engine.attach(bgm.node)
         engine.attach(replayUnit.node)
         engine.attach(speedEffectNode)
+        engine.attach(boosterNode)
         
         // connect nodes
         engine.connect(bgm.node, to: mainMixer, format: bgm.buffer.format)
-        engine.connect(mic, to: mainMixer, format: format)
+        engine.connect(mic, to: boosterNode, format: mic.inputFormat(forBus: 0))
+        engine.connect(boosterNode, to: mainMixer, format: boosterNode.outputFormat(forBus: 0))
         engine.connect(replayUnit.node, to: speedEffectNode, format: format)
         engine.connect(speedEffectNode, to: mainMixer, format: format)
         
         // misc
         speedEffectNode.rate = replayRate // replay slowly
+        boosterNode.volume = micVolumeIncreaseRate
         
         // volume
         bgm.node.volume = 0.5

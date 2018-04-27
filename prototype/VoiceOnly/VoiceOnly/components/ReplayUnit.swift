@@ -21,6 +21,7 @@ class ReplayUnit {
             try file.read(into: buffer)
             node.scheduleBuffer(buffer, completionHandler: completionHandler)
             node.play()
+            node.volume = micVolumeIncreaseRate
         } catch {
             print("ReplayUnit play error \(error)")
         }
