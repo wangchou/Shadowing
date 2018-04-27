@@ -11,7 +11,7 @@ import UIKit
 import Speech
 
 
-fileprivate let listenPauseDuration = 0.25
+fileprivate let listenPauseDuration = 0.4
 
 // Prototype 1: 一個 run 10.9秒
 // Loop {

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Speech
 
-fileprivate let listenPauseDuration = 0.25
+fileprivate let listenPauseDuration = 0.4
 
 // Prototype 4: 一個 run 4.2秒
 // Loop {

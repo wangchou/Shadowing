@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Speech
 
-fileprivate let listenPauseDuration = 0.25
+fileprivate let listenPauseDuration = 0.4
 
 // Prototype 3: 一個 run 5.6秒
 // Loop {
@@ -24,9 +24,7 @@ class P3ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        sentences = getSentences(
-            "ただの人間には興味ありません。この中に宇宙人、未来人、異世界人、超能力者がいたら、あたしのところに来なさい。以上。"
-        )
+        sentences = getSentences(HARUHI)
         audio.start()
         repeatAfterMe()
     }

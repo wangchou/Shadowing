@@ -21,6 +21,8 @@ let I_HEAR_YOU_HINT = "我聽到你說："
 let SPEAK_TO_ME_HINT = "請說日文給我聽"
 let REPEAT_AFTER_ME_HINT = "請跟著唸日文"
 
+let HARUHI = "ただの人間には興味ありません。この中に宇宙人、未来人、異世界人、超能力者がいたら、あたしのところに来なさい。以上。"
+
 let normalRate = AVSpeechUtteranceDefaultSpeechRate
 let teachingRate = AVSpeechUtteranceDefaultSpeechRate * 0.7
 let slowestRate = AVSpeechUtteranceDefaultSpeechRate * 0.6

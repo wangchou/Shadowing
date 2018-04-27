@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Speech
 
-fileprivate let listenPauseDuration = 0.25
+fileprivate let listenPauseDuration = 0.4
 
 // Prototype 2: 一個 run 7.5秒
 // Loop {
@@ -25,6 +25,7 @@ class P2ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        sentences = getSentences(HARUHI)
         audio.start()
         repeatAfterMe()
     }
