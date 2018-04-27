@@ -110,7 +110,8 @@ class AudioController {
     }
     
     func replay(completionHandler: @escaping () -> Void) {
-        replayUnit.play()
-        completionHandler()
+        replayUnit.play() {
+            completionHandler()
+        }
     }
 }
