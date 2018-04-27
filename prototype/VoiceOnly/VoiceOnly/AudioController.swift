@@ -82,7 +82,7 @@ class AudioController {
         _ text: String,
         _ name: String,
         rate: Float = normalRate,
-        onCompleteHandler: @escaping () -> Void = {}
+        completionHandler: @escaping () -> Void = {}
         ) {
         if !isRunning {
             return
@@ -91,7 +91,7 @@ class AudioController {
             bgm.reduceVolume()
         }
         tts.say(text, name, rate: rate) {
-            onCompleteHandler()
+            completionHandler()
             if(name == teacher) {
                 self.bgm.restoreVolume()
             }

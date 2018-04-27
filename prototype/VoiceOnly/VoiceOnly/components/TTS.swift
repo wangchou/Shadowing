@@ -11,20 +11,20 @@ import AVFoundation
 
 class TTS: NSObject, AVSpeechSynthesizerDelegate {
     var synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
-    var onCompleteHandler: (() -> Void)? = nil
+    var completionHandler: (() -> Void)? = nil
     
     func say(
         _ text: String,
         _ name: String,
         rate: Float = AVSpeechUtteranceDefaultSpeechRate, // 0.5, range 0 ~ 1.0
-        onCompleteHandler: @escaping () -> Void = {}
+        completionHandler: @escaping () -> Void = {}
     ) {
         synthesizer.delegate = self
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(identifier: name)
         utterance.rate = rate
         
-        self.onCompleteHandler = onCompleteHandler
+        self.completionHandler = completionHandler
         synthesizer.speak(utterance)
     }
     
@@ -37,7 +37,7 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         didFinish utterance: AVSpeechUtterance
     ) {
         print("saying >>>", "\(utterance.speechString)")
-        guard let onCompleteHandler = onCompleteHandler else { return }
-        onCompleteHandler()
+        guard let completionHandler = completionHandler else { return }
+        completionHandler()
     }
 }

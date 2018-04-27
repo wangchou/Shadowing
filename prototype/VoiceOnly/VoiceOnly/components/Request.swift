@@ -24,7 +24,7 @@ class Request {
 // freaking slow... T.T
 func getKana(
     _ kanjiString: String,
-    onKanaGenerated: @escaping (String, Error?) -> Void
+    completionHandler: @escaping (String, Error?) -> Void
     ) {
     let request: Request = Request()
     let url: URL = URL(string: "http://54.250.149.163/nlp")!
@@ -41,19 +41,19 @@ func getKana(
                     return kanaStr
                     
                 })
-                onKanaGenerated(kanaStr, nil)
+                completionHandler(kanaStr, nil)
             } catch {
-                onKanaGenerated("", error)
+                completionHandler("", error)
                 print("Error with parse json: \(error)")
             }
             
             if error != nil {
-                onKanaGenerated("", error)
+                completionHandler("", error)
                 print("post request error")
             }
         }
     } catch {
-        onKanaGenerated("", error)
+        completionHandler("", error)
         print("error occurs in getKana")
     }
 }
@@ -61,7 +61,7 @@ func getKana(
 func getSpeechScore(
     _ targetSentence: String,
     _ saidSentence: String,
-    onScore: @escaping (Int) -> Void
+    completionHandler: @escaping (Int) -> Void
 ) {
     var targetKana = ""
     var saidKana = ""
@@ -78,14 +78,14 @@ func getSpeechScore(
         targetKana = str
         isTargetKanaReady = true
         if isSaidKanaReady {
-            onScore(calcScore(targetKana, saidKana))
+            completionHandler(calcScore(targetKana, saidKana))
         }
     }
     getKana(saidSentence) { str, error in
         saidKana = str
         isSaidKanaReady = true
         if isTargetKanaReady {
-            onScore(calcScore(targetKana, saidKana))
+            completionHandler(calcScore(targetKana, saidKana))
         }
     }
 }
