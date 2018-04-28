@@ -80,6 +80,7 @@ class AudioController {
         _ text: String,
         _ name: String,
         rate: Float = normalRate,
+        delegate: AVSpeechSynthesizerDelegate? = nil,
         completionHandler: @escaping () -> Void = {}
         ) {
         if !isRunning {
@@ -89,7 +90,7 @@ class AudioController {
             bgm.reduceVolume()
             boosterNode.volume = 0
         }
-        tts.say(text, name, rate: rate) {
+        tts.say(text, name, rate: rate, delegate: delegate) {
             self.boosterNode.volume = micOutVolume
             completionHandler()
             if(name == teacher) {

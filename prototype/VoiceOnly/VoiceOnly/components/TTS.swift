@@ -17,9 +17,14 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         _ text: String,
         _ name: String,
         rate: Float = AVSpeechUtteranceDefaultSpeechRate, // 0.5, range 0 ~ 1.0
+        delegate: AVSpeechSynthesizerDelegate?,
         completionHandler: @escaping () -> Void = {}
     ) {
-        synthesizer.delegate = self
+        if let delegate = delegate {
+            synthesizer.delegate = delegate
+        } else {
+            synthesizer.delegate = self
+        }
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(identifier: name)
         utterance.rate = rate
@@ -37,7 +42,6 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
                            utterance: AVSpeechUtterance) {
         let speechString = utterance.speechString as NSString
         print(speechString.substring(with: characterRange), terminator: "")
-        
     }
     
     func speechSynthesizer(
