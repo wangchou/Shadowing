@@ -181,9 +181,16 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         let isGameClear = bloodBar.progress > 0
         
         if isGameClear {
+            targetTextView.layer.borderColor = UIColor.black.cgColor
+            saidTextView.layer.borderColor = UIColor.yellow.cgColor
+            saidTextView.text = ""
+            targetTextView.text = ""
             downloadImage(url: URL(string: rihoUrl)!)
-            audio.say("きみのこと、大好きだよ", Oren, rate: teachingRate * 0.8, delegate: self)
+            audio.say("恭喜你全破了。接下來有人想跟你說話...", assistant) {
+                audio.say("きみのこと、大好きだよ", Oren, rate: teachingRate * 0.7, delegate: self)
+            }
         } else {
+            audio.say("生命值為零，遊戲結束", assistant)
             scoreDescLabel.text = "遊戲結束"
             scoreDescLabel.textColor = UIColor.red
         }
@@ -192,13 +199,13 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         let scoreDesc = getScoreDesc(score)
         switch scoreDesc {
         case .perfect:
-            bloodBar.progress = min(1.0, bloodBar.progress + 0.1)
+            bloodBar.progress = min(1.0, bloodBar.progress + 0.15)
         case .great:
-            bloodBar.progress = min(1.0, bloodBar.progress + 0.05)
+            bloodBar.progress = min(1.0, bloodBar.progress + 0.08)
         case .good:
             bloodBar.progress = min(1.0, bloodBar.progress + 0.02)
         case .poor:
-            bloodBar.progress = max(0, bloodBar.progress - 0.1)
+            bloodBar.progress = max(0, bloodBar.progress - 0.15)
             if bloodBar.progress == 0 {
                 isGameFinished = true
                 afterGameFinished()
@@ -221,6 +228,7 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     }
     
     func updateScoreDescLabel(_ score: Int) {
+        saidTextView.text = saidTextView.text + "(" + String(score) + "分)"
         let scoreDesc = getScoreDesc(score)
         switch scoreDesc {
         case .perfect:
