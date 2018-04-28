@@ -9,6 +9,9 @@
 import Foundation
 import AVFoundation
 
+// I found I don't want to hear my voice
+let replayVolume: Float = 6
+
 class ReplayUnit {
     public var node = AVAudioPlayerNode()
 
@@ -21,7 +24,7 @@ class ReplayUnit {
             try file.read(into: buffer)
             node.scheduleBuffer(buffer, completionHandler: completionHandler)
             node.play()
-            node.volume = micVolumeIncreaseRate
+            node.volume = replayVolume
         } catch {
             print("ReplayUnit play error \(error)")
         }

@@ -19,7 +19,7 @@ fileprivate let listenPauseDuration = 0.4
 //  日文
 //  複述
 //  説(我聽到你說)
-//  播錄音 & 辨識出的 TTS
+//  辨識出的 TTS
 //  分數
 // }
 
@@ -38,8 +38,7 @@ class P1ViewController: UIViewController {
     }
     
     func repeatAfterMe() {
-        printDuration()
-        setStartTime()
+        print("----------------------------------")
         let audio = AudioController.shared
         let sentence = sentences[sentenceIndex]
         
@@ -63,8 +62,10 @@ class P1ViewController: UIViewController {
         var speechScore: Int = 0
         let group = DispatchGroup()
         
+        /*
         group.enter()
         audio.replay() { group.leave() }
+        */
         
         group.enter()
         audio.say(saidSentence, Oren, rate: teachingRate * replayRate) { group.leave() }

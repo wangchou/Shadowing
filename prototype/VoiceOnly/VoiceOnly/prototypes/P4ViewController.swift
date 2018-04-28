@@ -33,8 +33,7 @@ class P4ViewController: UIViewController {
     }
     
     func repeatAfterMe() {
-        printDuration()
-        setStartTime()
+        print("----------------------------------")
         let audio = AudioController.shared
         let sentence = sentences[sentenceIndex]
         
@@ -42,8 +41,8 @@ class P4ViewController: UIViewController {
         let speakTime = getNow()
         audio.say(sentence, teacher, rate: teachingRate)
         {   audio.listen(
-            listenDuration: (getNow() - speakTime) + listenPauseDuration,
-            resultHandler: self.speechResultHandler
+                listenDuration: (getNow() - speakTime) + listenPauseDuration,
+                resultHandler: self.speechResultHandler
             )
         }
     }
@@ -53,8 +52,9 @@ class P4ViewController: UIViewController {
         
         // completionHandler chain
         let targetSentence = sentences[sentenceIndex]
+        sentenceIndex = (sentenceIndex + 1) % sentences.count
         getSpeechScore(targetSentence, saidSentence)
-        {   sentenceIndex = (sentenceIndex + 1) % sentences.count
+        {
             print(String($0)+"分")
         }
         repeatAfterMe()

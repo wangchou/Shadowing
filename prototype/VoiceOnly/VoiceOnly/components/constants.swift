@@ -27,7 +27,9 @@ let normalRate = AVSpeechUtteranceDefaultSpeechRate
 let teachingRate = AVSpeechUtteranceDefaultSpeechRate * 0.7
 let slowestRate = AVSpeechUtteranceDefaultSpeechRate * 0.6
 
-let micVolumeIncreaseRate: Float = 3
+// it's bad when monitoring at street
+// if in quite place. turn micOutVolume to 3
+let micOutVolume: Float = 0
 
 var sentences: [String] = [
 //    "安い",
@@ -42,7 +44,6 @@ var sentences: [String] = [
     "わたし、気になります！",
     "おまえはもう死んでる",
     "わーい！たーのしー！すごい！",
-    "はじめまして",
     "頑張ります！",
     "はい、わかりました",
     "うるさい、うるさい！",

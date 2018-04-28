@@ -59,7 +59,7 @@ class AudioController {
         
         // misc
         speedEffectNode.rate = replayRate // replay slowly
-        boosterNode.volume = micVolumeIncreaseRate
+        boosterNode.volume = micOutVolume
         
         // volume
         bgm.node.volume = 0.5
@@ -94,8 +94,10 @@ class AudioController {
         }
         if(name == teacher) {
             bgm.reduceVolume()
+            boosterNode.volume = 0
         }
         tts.say(text, name, rate: rate) {
+            self.boosterNode.volume = micOutVolume
             completionHandler()
             if(name == teacher) {
                 self.bgm.restoreVolume()

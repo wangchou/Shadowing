@@ -12,8 +12,8 @@ import AVFoundation
 func configureAudioSession() {
     do {
         let session: AVAudioSession = AVAudioSession.sharedInstance()
-        try session.setCategory(AVAudioSessionCategoryPlayAndRecord)//, with: .defaultToSpeaker)
-        // try session.setMode(AVAudioSessionModeMeasurement)
+        try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: .defaultToSpeaker)
+        try session.setMode(AVAudioSessionModeMeasurement)
         try session.setActive(true, with: .notifyOthersOnDeactivation)
         
         // per ioBufferDuration

@@ -19,52 +19,43 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ln0-4D-yic">
-                                <rect key="frame" x="28" y="83" width="89" height="55"/>
+                                <rect key="frame" x="18" y="83" width="252" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                <state key="normal" title="原型1"/>
+                                <state key="normal" title="原型1: 中文提示"/>
                                 <connections>
                                     <segue destination="fmK-8w-LXj" kind="show" id="bWI-iE-Lgu"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fXE-ET-eju">
-                                <rect key="frame" x="26" y="146" width="94" height="55"/>
+                                <rect key="frame" x="19" y="146" width="220" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                <state key="normal" title="原型2"/>
+                                <state key="normal" title="原型2: 無提示"/>
                                 <connections>
                                     <segue destination="JcZ-qw-O8e" kind="show" id="NCS-n3-vkB"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cob-rr-jfp">
-                                <rect key="frame" x="25" y="209" width="95" height="55"/>
+                                <rect key="frame" x="18" y="209" width="257" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                <state key="normal" title="原型3"/>
+                                <state key="normal" title="原型3: 只有分數"/>
                                 <connections>
                                     <segue destination="ecU-Zv-20i" kind="show" id="0H8-1w-36V"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWL-BQ-aRC">
-                                <rect key="frame" x="25" y="272" width="95" height="55"/>
+                                <rect key="frame" x="19" y="272" width="294" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                <state key="normal" title="原型4"/>
+                                <state key="normal" title="原型4: 沒辨識結果"/>
                                 <connections>
                                     <segue destination="N2Y-FK-7ku" kind="show" id="eS3-k0-2jr"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Mm-LC-WKb">
-                                <rect key="frame" x="25" y="335" width="95" height="55"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                <state key="normal" title="原型5"/>
-                                <connections>
-                                    <segue destination="EQs-VH-7in" kind="show" id="sFB-vD-d1k"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CM7-LJ-eWP">
-                                <rect key="frame" x="25" y="398" width="95" height="55"/>
+                                <rect key="frame" x="18" y="398" width="95" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <state key="normal" title="原型6"/>
@@ -73,12 +64,21 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDd-tC-6jf">
-                                <rect key="frame" x="26" y="461" width="93" height="55"/>
+                                <rect key="frame" x="19" y="461" width="93" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <state key="normal" title="原型7"/>
                                 <connections>
                                     <segue destination="b7f-dC-kdy" kind="show" id="uJt-yd-Ubr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Mm-LC-WKb">
+                                <rect key="frame" x="19" y="335" width="285" height="55"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                <state key="normal" title="原型5: 辨識的TTS"/>
+                                <connections>
+                                    <segue destination="EQs-VH-7in" kind="show" id="sFB-vD-d1k"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -91,10 +91,10 @@
             </objects>
             <point key="canvasLocation" x="1051.875" y="-663.38028169014081"/>
         </scene>
-        <!--原型1: 講電話-->
+        <!--原型1: 中文語音提示-->
         <scene sceneID="ElK-pY-ic3">
             <objects>
-                <viewController storyboardIdentifier="P1ViewController" title="原型1: 講電話" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fmK-8w-LXj" customClass="P1ViewController" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="P1ViewController" title="原型1: 中文語音提示" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fmK-8w-LXj" customClass="P1ViewController" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BkI-nB-upV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -109,7 +109,7 @@
 //  日文
 //  複述
 //  説(我聽到你說)
-//  播錄音 &amp; 辨識出的 TTS
+//  辨識出的 TTS
 //  分數
 // }</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -124,10 +124,10 @@
             </objects>
             <point key="canvasLocation" x="1052" y="119"/>
         </scene>
-        <!--原型2-->
+        <!--原型2: 無提示、播錄音-->
         <scene sceneID="HzY-YB-DaN">
             <objects>
-                <viewController title="原型2" id="JcZ-qw-O8e" customClass="P2ViewController" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="原型2: 無提示、播錄音" id="JcZ-qw-O8e" customClass="P2ViewController" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="77N-Uo-pc7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -155,10 +155,10 @@
             </objects>
             <point key="canvasLocation" x="1727" y="119"/>
         </scene>
-        <!--原型3-->
+        <!--原型3: 只說辨識分數-->
         <scene sceneID="eXf-Lh-tgC">
             <objects>
-                <viewController title="原型3" id="ecU-Zv-20i" customClass="P3ViewController" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="原型3: 只說辨識分數" id="ecU-Zv-20i" customClass="P3ViewController" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fG0-gF-V4s">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -185,10 +185,10 @@
             </objects>
             <point key="canvasLocation" x="2370" y="118"/>
         </scene>
-        <!--原型4-->
+        <!--原型4: 無辨識結果-->
         <scene sceneID="7Xy-l4-dWw">
             <objects>
-                <viewController title="原型4" id="N2Y-FK-7ku" customClass="P4ViewController" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="原型4: 無辨識結果" id="N2Y-FK-7ku" customClass="P4ViewController" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="veI-w4-Cct">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -214,10 +214,10 @@
             </objects>
             <point key="canvasLocation" x="3030" y="118"/>
         </scene>
-        <!--原型5-->
+        <!--原型5: 僅辨識的TTS 無分數-->
         <scene sceneID="VcJ-gi-NQa">
             <objects>
-                <viewController title="原型5" id="EQs-VH-7in" customClass="P5ViewController" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="原型5: 僅辨識的TTS 無分數" id="EQs-VH-7in" customClass="P5ViewController" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Tf3-ek-BWC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

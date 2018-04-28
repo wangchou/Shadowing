@@ -33,8 +33,7 @@ class P5ViewController: UIViewController {
     }
     
     func repeatAfterMe() {
-        printDuration()
-        setStartTime()
+        print("----------------------------------")
         let audio = AudioController.shared
         let sentence = sentences[sentenceIndex]
         

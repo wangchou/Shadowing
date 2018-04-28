@@ -25,7 +25,7 @@ class P2ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        sentences = getSentences(HARUHI)
+        // sentences = getSentences(HARUHI)
         audio.start()
         repeatAfterMe()
     }
@@ -36,8 +36,7 @@ class P2ViewController: UIViewController {
     }
     
     func repeatAfterMe() {
-        printDuration()
-        setStartTime()
+        print("----------------------------------")
         let audio = AudioController.shared
         let sentence = sentences[sentenceIndex]
         
