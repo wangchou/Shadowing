@@ -85,8 +85,10 @@ class P5ViewController: UIViewController {
             return
         }
         
-        if (result?.isFinal) != nil {
-            iHearYouSaid(result!.bestTranscription.formattedString)
+        if let result = result {
+            if result.isFinal {
+                iHearYouSaid(result.bestTranscription.formattedString)
+            }
         }
         
         if error != nil {

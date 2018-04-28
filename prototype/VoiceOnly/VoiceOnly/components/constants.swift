@@ -32,12 +32,12 @@ let slowestRate = AVSpeechUtteranceDefaultSpeechRate * 0.6
 let micOutVolume: Float = 0
 
 var sentences: [String] = [
-//    "安い",
-//    "いいね",
-//    "すごい",
-//    "はじめまして",
-//    "こんにちは",
-//    "なぜですか？",
+    "安い",
+    "いいね",
+    "すごい",
+    "はじめまして",
+    "こんにちは",
+    "なぜですか？",
     "どうしましたか？",
     "おねさま",
     "真実はいつもひとつ！",

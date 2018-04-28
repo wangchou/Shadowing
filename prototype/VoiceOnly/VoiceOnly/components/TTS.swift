@@ -17,10 +17,10 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         _ text: String,
         _ name: String,
         rate: Float = AVSpeechUtteranceDefaultSpeechRate, // 0.5, range 0 ~ 1.0
-        delegate: AVSpeechSynthesizerDelegate?,
+        delegate: AVSpeechSynthesizerDelegate? = nil,
         completionHandler: @escaping () -> Void = {}
     ) {
-        if let delegate = delegate {
+        if delegate != nil {
             synthesizer.delegate = delegate
         } else {
             synthesizer.delegate = self

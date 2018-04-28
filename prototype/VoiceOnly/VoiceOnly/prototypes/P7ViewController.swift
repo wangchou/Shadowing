@@ -29,10 +29,15 @@ enum ScoreDesc {
     case poor
 }
 
+let rihoUrl = "https://i2.kknews.cc/SIG=vanen8/66nn0002p026p2100op3.jpg"
+
 class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     let audio = AudioController.shared
+    var isGameFinished = false
+    
     @IBOutlet weak var comboLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var sentenceNumLabel: UILabel!
     @IBOutlet weak var bloodBar: UIProgressView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var targetTextView: UITextView!
@@ -41,8 +46,10 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        isGameFinished = false
         comboLabel.text = "0"
         scoreLabel.text = "0"
+        sentenceNumLabel.text = String(sentenceIndex) + "/" + String(sentences.count)
         bloodBar.progress = 0.6
         
         targetTextView.text = ""
@@ -110,11 +117,14 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         // completionHandler chain
         audio.say(I_HEAR_YOU_HINT, assistant)
         {   self.repeatWhatSaid(saidSentence)
-        {   sentenceIndex = (sentenceIndex + 1) % sentences.count
+        {   self.nextSentence()
             let score: Int = $0
             self.updateBlood(score)
             self.updateScoreLabel(score)
             self.updateComboLabel(score)
+            if(self.isGameFinished) {
+                return
+            }
             self.updateScoreDescLabel(score)
             audio.say(self.getScoreText(score), Oren)
         {   self.repeatAfterMe()
@@ -156,7 +166,28 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
             comboLabel.text = "0"
         }
     }
-
+    
+    func nextSentence() {
+        sentenceIndex = sentenceIndex + 1
+        if(sentenceIndex == sentences.count) {
+            isGameFinished = true
+            afterGameFinished()
+        }
+        sentenceNumLabel.text = String(sentenceIndex) + "/" + String(sentences.count)
+    }
+    
+    func afterGameFinished() {
+        let audio = AudioController.shared
+        let isGameClear = bloodBar.progress > 0
+        
+        if isGameClear {
+            downloadImage(url: URL(string: rihoUrl)!)
+            audio.say("きみのこと、大好きだよ", Oren, rate: teachingRate * 0.8, delegate: self)
+        } else {
+            scoreDescLabel.text = "遊戲結束"
+            scoreDescLabel.textColor = UIColor.red
+        }
+    }
     func updateBlood(_ score: Int) {
         let scoreDesc = getScoreDesc(score)
         switch scoreDesc {
@@ -168,6 +199,10 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
             bloodBar.progress = min(1.0, bloodBar.progress + 0.02)
         case .poor:
             bloodBar.progress = max(0, bloodBar.progress - 0.1)
+            if bloodBar.progress == 0 {
+                isGameFinished = true
+                afterGameFinished()
+            }
         }
     }
     
@@ -200,7 +235,6 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         case .poor:
             scoreDescLabel.text = "違います"
             scoreDescLabel.textColor = UIColor.red
-            
         }
     }
     
@@ -248,4 +282,22 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         AudioController.shared.tts.completionHandler!()
     }
     
+    // Utilities
+    // https://stackoverflow.com/questions/24231680/loading-downloading-image-from-url-on-swift
+    func getDataFromUrl(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            completion(data, response, error)
+            }.resume()
+    }
+    func downloadImage(url: URL) {
+        print("Download Started")
+        getDataFromUrl(url: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            print("Download Finished")
+            DispatchQueue.main.async() {
+                self.imageView.image = UIImage(data: data)
+            }
+        }
+    }
 }
