@@ -43,14 +43,15 @@ class P1ViewController: UIViewController {
         let sentence = sentences[sentenceIndex]
         
         // completionHandler chain
-        audio.say(REPEAT_AFTER_ME_HINT, assistant)
-        {   let speakTime = getNow()
+        //audio.say(REPEAT_AFTER_ME_HINT, assistant)
+        //{
+            let speakTime = getNow()
             audio.say(sentence, teacher, rate: teachingRate)
             {   audio.listen(
                 listenDuration: (getNow() - speakTime) + listenPauseDuration,
                 resultHandler: self.speechResultHandler
                 )
-            }}
+            }//}
     }
     
     // do these concurrently

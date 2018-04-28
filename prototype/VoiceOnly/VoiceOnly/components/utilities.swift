@@ -9,10 +9,14 @@
 import Foundation
 import AVFoundation
 
-func configureAudioSession() {
+func configureAudioSession(_ toSpeaker: Bool = false) {
     do {
         let session: AVAudioSession = AVAudioSession.sharedInstance()
-        try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: .defaultToSpeaker)
+        if toSpeaker {
+            try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: .defaultToSpeaker)
+        } else {
+            try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
+        }
         try session.setMode(AVAudioSessionModeMeasurement)
         try session.setActive(true, with: .notifyOthersOnDeactivation)
         
