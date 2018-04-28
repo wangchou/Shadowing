@@ -63,13 +63,8 @@ class P1ViewController: UIViewController {
         var speechScore: Int = 0
         let group = DispatchGroup()
         
-        /*
         group.enter()
-        audio.replay() { group.leave() }
-        */
-        
-        group.enter()
-        audio.say(saidSentence, Oren, rate: teachingRate * replayRate) { group.leave() }
+        audio.say(saidSentence, Oren, rate: teachingRate) { group.leave() }
         
         group.enter()
         let targetSentence = sentences[sentenceIndex]

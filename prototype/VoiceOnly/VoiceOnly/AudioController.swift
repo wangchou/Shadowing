@@ -12,8 +12,6 @@ import Speech
 
 var sentenceIndex = 0
 
-let replayRate: Float = 1
-
 let assistant = MeiJia
 let teacher = Hattori
 
@@ -23,7 +21,6 @@ class AudioController {
     static let shared = AudioController()
     
     var engine = AVAudioEngine()
-    var speedEffectNode = AVAudioUnitTimePitch()
     var boosterNode = AVAudioMixerNode()
     var replayUnit: ReplayUnit!
     var speechRecognizer: SpeechRecognizer = SpeechRecognizer()
@@ -47,18 +44,14 @@ class AudioController {
         // attach nodes
         engine.attach(bgm.node)
         engine.attach(replayUnit.node)
-        engine.attach(speedEffectNode)
         engine.attach(boosterNode)
         
         // connect nodes
         engine.connect(bgm.node, to: mainMixer, format: bgm.buffer.format)
         engine.connect(mic, to: boosterNode, format: mic.inputFormat(forBus: 0))
         engine.connect(boosterNode, to: mainMixer, format: boosterNode.outputFormat(forBus: 0))
-        engine.connect(replayUnit.node, to: speedEffectNode, format: format)
-        engine.connect(speedEffectNode, to: mainMixer, format: format)
-        
-        // misc
-        speedEffectNode.rate = replayRate // replay slowly
+        engine.connect(replayUnit.node, to: mainMixer, format: format)
+
         boosterNode.volume = micOutVolume
         
         // volume

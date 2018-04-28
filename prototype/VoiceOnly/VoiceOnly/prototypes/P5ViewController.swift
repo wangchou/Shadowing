@@ -57,7 +57,7 @@ class P5ViewController: UIViewController {
         let group = DispatchGroup()
         
         group.enter()
-        audio.say(saidSentence, Oren, rate: teachingRate * replayRate) { group.leave() }
+        audio.say(saidSentence, Oren, rate: teachingRate) { group.leave() }
         
         let targetSentence = sentences[sentenceIndex]
         getSpeechScore(targetSentence, saidSentence) {

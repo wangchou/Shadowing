@@ -42,8 +42,6 @@ class P6ViewController: UIViewController {
         let sentence = sentences[sentenceIndex]
         
         // completionHandler chain
-        //audio.say(REPEAT_AFTER_ME_HINT, assistant)
-        //{
         let speakTime = getNow()
         audio.say(sentence, teacher, rate: teachingRate)
         {   audio.listen(
@@ -59,7 +57,7 @@ class P6ViewController: UIViewController {
         let group = DispatchGroup()
         
         group.enter()
-        audio.say(saidSentence, Oren, rate: teachingRate * replayRate) { group.leave() }
+        audio.say(saidSentence, Oren, rate: teachingRate) { group.leave() }
         
         group.enter()
         let targetSentence = sentences[sentenceIndex]
@@ -82,8 +80,8 @@ class P6ViewController: UIViewController {
         {   self.repeatWhatSaid(saidSentence)
         {   sentenceIndex = (sentenceIndex + 1) % sentences.count
             audio.say(String($0)+"分", assistant)
-            {   self.repeatAfterMe()
-            }}}
+        {   self.repeatAfterMe()
+        }}}
     }
     
     func speechResultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
