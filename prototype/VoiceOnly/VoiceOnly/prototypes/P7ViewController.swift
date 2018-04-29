@@ -46,6 +46,7 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //downloadImage(url: URL(string: rihoUrl)!)
         isGameFinished = false
         comboLabel.text = "0"
         scoreLabel.text = "0"
