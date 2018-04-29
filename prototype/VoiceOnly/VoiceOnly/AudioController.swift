@@ -75,43 +75,52 @@ class AudioController {
         speechRecognizer.stop()
     }
     
-    // syntax sugar wrapper
+    // Warning: use it in myQueue.async {} block
+    // It blocks current thead !!!
+    // Do not call it on main thread
     func say(
         _ text: String,
         _ name: String,
         rate: Float = normalRate,
-        delegate: AVSpeechSynthesizerDelegate? = nil,
-        completionHandler: @escaping () -> Void = {}
+        delegate: AVSpeechSynthesizerDelegate? = nil
         ) {
         if !isRunning {
             return
         }
+        myGroup.enter()
         if(name == teacher) {
             bgm.reduceVolume()
             boosterNode.volume = 0
         }
+        
         tts.say(text, name, rate: rate, delegate: delegate) {
             self.boosterNode.volume = micOutVolume
-            completionHandler()
             if(name == teacher) {
                 self.bgm.restoreVolume()
             }
+            myGroup.leave()
         }
+        myGroup.wait()
     }
     
     func listen(listenDuration: Double,
                 resultHandler: @escaping (SFSpeechRecognitionResult?, Error?) -> Void
         ) {
-        speechRecognizer.start(
-            inputNode: engine.inputNode,
-            stopAfterSeconds: listenDuration,
-            resultHandler: resultHandler
-        )
+        DispatchQueue.main.async {
+            self.speechRecognizer.start(
+                inputNode: self.engine.inputNode,
+                stopAfterSeconds: listenDuration,
+                resultHandler: resultHandler
+            )
+        }
     }
     
+    // Warning: use it in myQueue.async {} block
+    // It blocks current thead !!!
+    // Do not call it on main thread
     func replay(completionHandler: @escaping () -> Void) {
-        replayUnit.play() {
-            completionHandler()
-        }
+        myGroup.enter()
+        replayUnit.play() { myGroup.leave() }
+        myGroup.wait()
     }
 }

@@ -42,39 +42,15 @@ class P1ViewController: UIViewController {
         let audio = AudioController.shared
         let sentence = sentences[sentenceIndex]
         
-        // completionHandler chain
-        //audio.say(REPEAT_AFTER_ME_HINT, assistant)
-        //{
+        // async/await
+        myQueue.async {
+            audio.say(REPEAT_AFTER_ME_HINT, assistant)
             let speakTime = getNow()
             audio.say(sentence, teacher, rate: teachingRate)
-            {   audio.listen(
+            audio.listen(
                 listenDuration: (getNow() - speakTime) + listenPauseDuration,
                 resultHandler: self.speechResultHandler
-                )
-            }//}
-    }
-    
-    // do these concurrently
-    // 1. replay recording
-    // 2. getScore from server kana str
-    // 3. play recognition result in tts
-    private func repeatWhatSaid(_ saidSentence: String, completionHandler: @escaping (Int)->Void) {
-        let audio = AudioController.shared
-        var speechScore: Int = 0
-        let group = DispatchGroup()
-        
-        group.enter()
-        audio.say(saidSentence, Oren, rate: teachingRate) { group.leave() }
-        
-        group.enter()
-        let targetSentence = sentences[sentenceIndex]
-        getSpeechScore(targetSentence, saidSentence) {
-            speechScore = $0
-            group.leave()
-        }
-        
-        group.notify(queue: .main) {
-            completionHandler(speechScore)
+            )
         }
     }
     
@@ -82,13 +58,14 @@ class P1ViewController: UIViewController {
         let audio = AudioController.shared
         print("hear <<< \(saidSentence)")
         
-        // completionHandler chain
-        audio.say(I_HEAR_YOU_HINT, assistant)
-        {   self.repeatWhatSaid(saidSentence)
-        {   sentenceIndex = (sentenceIndex + 1) % sentences.count
-            audio.say(String($0)+"分", assistant)
-            {   self.repeatAfterMe()
-            }}}
+        myQueue.async {
+            audio.say(I_HEAR_YOU_HINT, assistant)
+            audio.say(saidSentence, Oren, rate: teachingRate)
+            let score = getSpeechScore(sentences[sentenceIndex], saidSentence)
+            sentenceIndex = (sentenceIndex + 1) % sentences.count
+            audio.say(String(score)+"分", assistant)
+            self.repeatAfterMe()
+        }
     }
     
     func speechResultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
@@ -107,7 +84,8 @@ class P1ViewController: UIViewController {
             if(isDev) {
                 iHearYouSaid("おねさま")
             } else {
-                audio.say(CANNOT_HEAR_HINT, assistant) {
+                myQueue.async {
+                    audio.say(CANNOT_HEAR_HINT, assistant)
                     self.repeatAfterMe()
                 }
             }

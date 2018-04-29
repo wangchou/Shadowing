@@ -79,35 +79,20 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         let audio = AudioController.shared
         let sentence = sentences[sentenceIndex]
         
-        // completionHandler chain
         let speakTime = getNow()
-        focusTextView(isTargetView: true)
-        audio.say(sentence, teacher, rate: teachingRate, delegate: self)
-        {   self.focusTextView(isTargetView: false)
+        DispatchQueue.main.async {
+            self.focusTextView(isTargetView: true)
+        }
+        // async/await
+        myQueue.async {
+            audio.say(sentence, teacher, rate: teachingRate, delegate: self)
+            DispatchQueue.main.async {
+                self.focusTextView(isTargetView: false)
+            }
             audio.listen(
-            listenDuration: (getNow() - speakTime) + listenPauseDuration,
-            resultHandler: self.speechResultHandler
+                listenDuration: (getNow() - speakTime) + listenPauseDuration,
+                resultHandler: self.speechResultHandler
             )
-        }
-    }
-    
-    private func repeatWhatSaid(_ saidSentence: String, completionHandler: @escaping (Int)->Void) {
-        let audio = AudioController.shared
-        var speechScore: Int = 0
-        let group = DispatchGroup()
-        
-        group.enter()
-        audio.say(saidSentence, Oren, rate: teachingRate) { group.leave() }
-        
-        group.enter()
-        let targetSentence = sentences[sentenceIndex]
-        getSpeechScore(targetSentence, saidSentence) {
-            speechScore = $0
-            group.leave()
-        }
-        
-        group.notify(queue: .main) {
-            completionHandler(speechScore)
         }
     }
     
@@ -115,21 +100,25 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         let audio = AudioController.shared
         print("hear <<< \(saidSentence)")
         
-        // completionHandler chain
-        audio.say(I_HEAR_YOU_HINT, assistant)
-        {   self.repeatWhatSaid(saidSentence)
-        {   self.nextSentence()
-            let score: Int = $0
-            self.updateBlood(score)
-            self.updateScoreLabel(score)
-            self.updateComboLabel(score)
-            if(self.isGameFinished) {
-                return
+        myQueue.async {
+            audio.say(I_HEAR_YOU_HINT, assistant)
+            audio.say(saidSentence, Oren, rate: teachingRate)
+            let score = getSpeechScore(sentences[sentenceIndex], saidSentence)
+            
+            // update ui
+            DispatchQueue.main.async {
+                self.nextSentence()
+                self.updateBlood(score)
+                self.updateScoreLabel(score)
+                self.updateComboLabel(score)
+                if(self.isGameFinished) {
+                    return
+                }
+                self.updateScoreDescLabel(score)
             }
-            self.updateScoreDescLabel(score)
-            audio.say(self.getScoreText(score), Oren)
-        {   self.repeatAfterMe()
-        }}}
+            audio.say(String(score)+"分", assistant)
+            self.repeatAfterMe()
+        }
     }
     
     func getScoreDesc(_ score: Int) -> ScoreDesc {
@@ -187,11 +176,14 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
             saidTextView.text = ""
             targetTextView.text = ""
             downloadImage(url: URL(string: rihoUrl)!)
-            audio.say("恭喜你全破了。接下來有人想跟你說話...", assistant) {
+            myQueue.async {
+                audio.say("恭喜你全破了。接下來有人想跟你說話...", assistant)
                 audio.say("きみのこと、大好きだよ", Oren, rate: teachingRate * 0.7, delegate: self)
             }
         } else {
-            audio.say("生命值為零，遊戲結束", assistant)
+            myQueue.async {
+                audio.say("生命值為零，遊戲結束", assistant)
+            }
             scoreDescLabel.text = "遊戲結束"
             scoreDescLabel.textColor = UIColor.red
         }
@@ -265,7 +257,8 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
             if(isDev) {
                 iHearYouSaid("おねさま")
             } else {
-                audio.say(CANNOT_HEAR_HINT, assistant) {
+                myQueue.async {
+                    audio.say(CANNOT_HEAR_HINT, assistant) 
                     self.repeatAfterMe()
                 }
             }

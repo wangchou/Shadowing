@@ -58,35 +58,46 @@ func getKana(
     }
 }
 
+
+// Warning: use it in myQueue.async {} block
+// It blocks current thead !!!
+// Do not call it on main thread
 func getSpeechScore(
     _ targetSentence: String,
-    _ saidSentence: String,
-    completionHandler: @escaping (Int) -> Void
-) {
+    _ saidSentence: String
+) -> Int {
     var targetKana = ""
     var saidKana = ""
     var isTargetKanaReady = false
     var isSaidKanaReady = false
+    var score = -1
+    
     func calcScore(_ str1: String, _ str2: String) -> Int {
-        
         let len = max(str1.count, str2.count)
         let score = (len - distanceBetween(str1, str2)) * 100 / len
         return score
     }
+    
+    myGroup.enter()
     getKana(targetSentence) { str, error in
         targetKana = str
         isTargetKanaReady = true
         if isSaidKanaReady {
-            completionHandler(calcScore(targetKana, saidKana))
+            score = calcScore(targetKana, saidKana)
         }
+        myGroup.leave()
     }
+    myGroup.enter()
     getKana(saidSentence) { str, error in
         saidKana = str
         isSaidKanaReady = true
         if isTargetKanaReady {
-            completionHandler(calcScore(targetKana, saidKana))
+            score = calcScore(targetKana, saidKana)
         }
+        myGroup.leave()
     }
+    myGroup.wait()
+    return score
 }
 
 
