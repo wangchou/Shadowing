@@ -13,6 +13,7 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
     var synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
     var completionHandler: (() -> Void)? = nil
     
+    // MARK: - say and stop
     func say(
         _ text: String,
         _ name: String,
@@ -37,6 +38,7 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
     }
     
+    // MARK: - AVSpeechSynthesizerDelegate
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
                            willSpeakRangeOfSpeechString characterRange: NSRange,
                            utterance: AVSpeechUtterance) {

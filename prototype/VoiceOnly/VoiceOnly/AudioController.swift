@@ -26,8 +26,10 @@ class AudioController {
     var speechRecognizer: SpeechRecognizer = SpeechRecognizer()
     var bgm = BGM()
     var tts = TTS()
+    
     public var isRunning = false
     
+    // MARK: - Lifecycle
     private init() {
         configureAudioSession()
         buildNodeGraph()
@@ -36,9 +38,7 @@ class AudioController {
     
     private func buildNodeGraph() {
         // get nodes
-        
         let mainMixer = engine.mainMixerNode
-        
         let mic = engine.inputNode // only for real device, simulator will crash
         let format = mic.outputFormat(forBus: 0)
         replayUnit = ReplayUnit()
@@ -58,9 +58,9 @@ class AudioController {
         
         // volume
         bgm.node.volume = 0.5
-        
     }
     
+    // MARK: - Public
     func start() {
         do {
             isRunning = true
@@ -121,7 +121,7 @@ class AudioController {
     // Warning: use it in myQueue.async {} block
     // It blocks current thead !!!
     // Do not call it on main thread
-    func replay(completionHandler: @escaping () -> Void) {
+    func replay() {
         myGroup.enter()
         replayUnit.play() { myGroup.leave() }
         myGroup.wait()

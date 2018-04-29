@@ -26,7 +26,8 @@ class SpeechRecognizer: NSObject {
     
     private var inputNode: AVAudioNode!
     
-    func authorize() {
+    // MARK: - Private Methods
+    private func authorize() {
         SFSpeechRecognizer.requestAuthorization { authStatus in
             switch authStatus {
             case .authorized:
@@ -53,6 +54,7 @@ class SpeechRecognizer: NSObject {
         authorize()
     }
     
+    // MARK: - Public Methods
     func start(inputNode: AVAudioNode,
                stopAfterSeconds: Double = 5,
                resultHandler: @escaping (SFSpeechRecognitionResult?, Error?) -> Void

@@ -26,6 +26,7 @@ fileprivate let listenPauseDuration = 0.4
 class P1ViewController: UIViewController {
     let audio = AudioController.shared
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         audio.start()
@@ -37,6 +38,7 @@ class P1ViewController: UIViewController {
         audio.stop()
     }
     
+    // MARK: - Flow Control
     func repeatAfterMe() {
         print("----------------------------------")
         let audio = AudioController.shared

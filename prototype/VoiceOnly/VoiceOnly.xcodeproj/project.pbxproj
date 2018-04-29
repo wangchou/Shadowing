@@ -24,7 +24,6 @@
 		BEBDEDE5208EFE1700C18520 /* AudioController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDE4208EFE1700C18520 /* AudioController.swift */; };
 		BEBDEDE8208F227C00C18520 /* P1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDE7208F227C00C18520 /* P1ViewController.swift */; };
 		BEBDEDEA208F23DE00C18520 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDE9208F23DE00C18520 /* MainNavigationController.swift */; };
-		BEBDEDF3208F28BD00C18520 /* P3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDEE208F28BC00C18520 /* P3ViewController.swift */; };
 		BEBDEDF6208F28BD00C18520 /* P7ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDF1208F28BD00C18520 /* P7ViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -48,7 +47,6 @@
 		BEBDEDE4208EFE1700C18520 /* AudioController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioController.swift; sourceTree = "<group>"; };
 		BEBDEDE7208F227C00C18520 /* P1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P1ViewController.swift; sourceTree = "<group>"; };
 		BEBDEDE9208F23DE00C18520 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
-		BEBDEDEE208F28BC00C18520 /* P3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P3ViewController.swift; sourceTree = "<group>"; };
 		BEBDEDF1208F28BD00C18520 /* P7ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P7ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,7 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				BEBDEDE7208F227C00C18520 /* P1ViewController.swift */,
-				BEBDEDEE208F28BC00C18520 /* P3ViewController.swift */,
 				BEBDEDF1208F28BD00C18520 /* P7ViewController.swift */,
 			);
 			path = prototypes;
@@ -215,7 +212,6 @@
 				BEBDEDDE208EF15F00C18520 /* Request.swift in Sources */,
 				BEBDEDE8208F227C00C18520 /* P1ViewController.swift in Sources */,
 				BEBDEDDA208EF15F00C18520 /* TTS.swift in Sources */,
-				BEBDEDF3208F28BD00C18520 /* P3ViewController.swift in Sources */,
 				BEBDEDDD208EF15F00C18520 /* SpeechRecognizer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

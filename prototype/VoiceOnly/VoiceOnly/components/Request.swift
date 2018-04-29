@@ -1,8 +1,8 @@
-// copied from https://qiita.com/xshirade/items/086be09376b9cbbe7bc8
-
 import Foundation
 
-class Request {
+// MARK: - Private
+// copied from https://qiita.com/xshirade/items/086be09376b9cbbe7bc8
+fileprivate class Request {
     let session: URLSession = URLSession.shared
     
     // POST METHOD
@@ -22,7 +22,7 @@ class Request {
 // 台灣大哥大 ４G -> AWS Tokyo server の round-trip time on Sunday morning
 // ~= 400 ~ 600ms (process time in server < 10ms)
 // freaking slow... T.T
-func getKana(
+fileprivate func getKana(
     _ kanjiString: String,
     completionHandler: @escaping (String, Error?) -> Void
     ) {
@@ -58,7 +58,7 @@ func getKana(
     }
 }
 
-
+// MARK: - Public
 // Warning: use it in myQueue.async {} block
 // It blocks current thead !!!
 // Do not call it on main thread

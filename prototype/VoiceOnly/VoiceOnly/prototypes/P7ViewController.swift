@@ -44,6 +44,7 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     @IBOutlet weak var saidTextView: UITextView!
     @IBOutlet weak var scoreDescLabel: UILabel!
     
+    // MARK: - lifecycle method
     override func viewDidLoad() {
         super.viewDidLoad()
         //downloadImage(url: URL(string: rihoUrl)!)
@@ -74,6 +75,7 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         audio.stop()
     }
     
+    // MARK: - Audio Flow Control
     func repeatAfterMe() {
         print("----------------------------------")
         let audio = AudioController.shared
@@ -121,6 +123,52 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         }
     }
     
+    func speechResultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
+        let audio = AudioController.shared
+        if !audio.isRunning {
+            return
+        }
+        
+        if let result = result {
+            saidTextView.text = result.bestTranscription.formattedString
+            if result.isFinal {
+                iHearYouSaid(result.bestTranscription.formattedString)
+            }
+        }
+        
+        if error != nil {
+            if(isDev) {
+                iHearYouSaid("おねさま")
+            } else {
+                myQueue.async {
+                    audio.say(CANNOT_HEAR_HINT, assistant)
+                    self.repeatAfterMe()
+                }
+            }
+        }
+    }
+    
+    // MARK: - TTS Delegate
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
+                           willSpeakRangeOfSpeechString characterRange: NSRange,
+                           utterance: AVSpeechUtterance) {
+        let speechString = utterance.speechString as NSString
+        let token = speechString.substring(with: characterRange)
+        print(token, terminator: "")
+        targetTextView.text = targetTextView.text + token
+    }
+    
+    func speechSynthesizer(
+        _ synthesizer: AVSpeechSynthesizer,
+        didFinish utterance: AVSpeechUtterance
+        ) {
+        guard AudioController.shared.tts.completionHandler != nil else { return }
+        print("")
+        AudioController.shared.tts.completionHandler!()
+    }
+    
+    
+    // MARK: - Update UI
     func getScoreDesc(_ score: Int) -> ScoreDesc {
         if(score >= 100) { return .perfect }
         if(score >= 80) { return .great }
@@ -128,7 +176,6 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         return .poor
     }
     
-    // Pragma Mark: - update UI part
     func focusTextView(isTargetView: Bool) {
         if isTargetView {
             targetTextView.text = ""
@@ -188,6 +235,7 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
             scoreDescLabel.textColor = UIColor.red
         }
     }
+    
     func updateBlood(_ score: Int) {
         let scoreDesc = getScoreDesc(score)
         switch scoreDesc {
@@ -239,58 +287,14 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         }
     }
     
-    // Speech Recognition delegate
-    func speechResultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
-        let audio = AudioController.shared
-        if !audio.isRunning {
-            return
-        }
-        
-        if let result = result {
-            saidTextView.text = result.bestTranscription.formattedString
-            if result.isFinal {
-                iHearYouSaid(result.bestTranscription.formattedString)
-            }
-        }
-        
-        if error != nil {
-            if(isDev) {
-                iHearYouSaid("おねさま")
-            } else {
-                myQueue.async {
-                    audio.say(CANNOT_HEAR_HINT, assistant) 
-                    self.repeatAfterMe()
-                }
-            }
-        }
-    }
-
-    // TTS delegate
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
-                           willSpeakRangeOfSpeechString characterRange: NSRange,
-                           utterance: AVSpeechUtterance) {
-        let speechString = utterance.speechString as NSString
-        let token = speechString.substring(with: characterRange)
-        print(token, terminator: "")
-        targetTextView.text = targetTextView.text + token
-    }
-    
-    func speechSynthesizer(
-        _ synthesizer: AVSpeechSynthesizer,
-        didFinish utterance: AVSpeechUtterance
-        ) {
-        guard AudioController.shared.tts.completionHandler != nil else { return }
-        print("")
-        AudioController.shared.tts.completionHandler!()
-    }
-    
-    // Utilities
+    // MARK: - Utilities
     // https://stackoverflow.com/questions/24231680/loading-downloading-image-from-url-on-swift
     func getDataFromUrl(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
         URLSession.shared.dataTask(with: url) { data, response, error in
             completion(data, response, error)
             }.resume()
     }
+    
     func downloadImage(url: URL) {
         print("Download Started")
         getDataFromUrl(url: url) { data, response, error in

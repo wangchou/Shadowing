@@ -9,64 +9,28 @@
 import Foundation
 import AVFoundation
 
-// async and await
-
+// MARK: - async/await/completionHandler
+// for async and await
+// see discussion on
+// https://stackoverflow.com/questions/50035373/grand-central-dispatch-for-complex-flow/50075403#50075403
 let myGroup = DispatchGroup()
 let myQueue = DispatchQueue(label: "for Sync/Blocking version of async functions")
 
 func waitConcurrentJobs() {
     myGroup.wait()
 }
-/* async and await usage
-// original function (async version)
-func download(_ something: String, _ seconds: UInt32 = 1, completionHandler: @escaping ()->Void = {}) {
-    print("Downloading \(something)")
-    DispatchQueue.global().async {
-        sleep(seconds)
-        print("\(something) is downloaded")
-        completionHandler()
-    }
-}
 
-// wrapped function (synced version)
-// Warning:
-// It blocks current thead !!!
-// Do not call it on main thread
-func downloadSync(
-    _ something: String,
-    _ seconds: UInt32 = 1,
-    isConcurrent: Bool = false
-    ){
-    myGroup.enter()
-    download(something, seconds) { myGroup.leave() }
-    if !isConcurrent {
-        myGroup.wait()
-    }
-}
-
-// after wrapping async function to sync version
-// now it really looks like ES8 async/await
-myQueue.async {
-    downloadSync("A")
-    downloadSync("B", isConcurrent: true)
-    downloadSync("C", 4, isConcurrent: true)
-    downloadSync("D", isConcurrent: true)
-    waitConcurrentJobs()
-    downloadSync("E")
-}
-*/
-
-
+// MARK: - Audio Session
 func configureAudioSession(_ toSpeaker: Bool = false) {
     do {
         let session: AVAudioSession = AVAudioSession.sharedInstance()
         if toSpeaker {
-            try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.mixWithOthers, .allowBluetoothA2DP, .allowBluetooth, .allowAirPlay, .defaultToSpeaker])
+            try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.duckOthers, .allowBluetoothA2DP, .allowBluetooth, .allowAirPlay, .defaultToSpeaker])
         } else {
-            try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.mixWithOthers, .allowBluetoothA2DP, .allowBluetooth, .allowAirPlay])
+            try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.duckOthers, .allowBluetoothA2DP, .allowBluetooth, .allowAirPlay])
         }
         
-        // turn the measure mode will crash bluetooh and mixWithOthers
+        // turn the measure mode will crash bluetooh, duckOthers and mixWithOthers
         //try session.setMode(AVAudioSessionModeMeasurement)
         
         // per ioBufferDuration
@@ -85,10 +49,12 @@ func configureAudioSession(_ toSpeaker: Bool = false) {
     }
 }
 
+// MARK: - Misc
 func getNow() -> Double {
     return NSDate().timeIntervalSince1970
 }
 
+// MARK: - NLP
 // separate long text by punctuations
 func getSentences(_ text: String) -> [String] {
     let tagger = NSLinguisticTagger(
@@ -115,9 +81,8 @@ func getSentences(_ text: String) -> [String] {
     return sentences
 }
 
-
+// MARK: - Edit Distance
 // EditDistance from https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#Swift
-
 func min3(_ a: Int, _ b: Int, _ c: Int) -> Int {
     return min( min(a, c), min(b, c))
 }
@@ -185,9 +150,9 @@ func distanceBetween(_ aStr: String, _ bStr: String) -> Int {
     return dist[a.count, b.count]
 }
 
+// MARK: - Misc For Dev Only
 //////////////////////////////////
-// misc section: only used in DEV
-
+// MISC section: only used in DEV
 func dumpVoices() {
     for voice in AVSpeechSynthesisVoice.speechVoices() {
         //if ((availableVoice.language == AVSpeechSynthesisVoice.currentLanguageCode()) &&
