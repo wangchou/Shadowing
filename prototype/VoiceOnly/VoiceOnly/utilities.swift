@@ -61,12 +61,13 @@ func configureAudioSession(_ toSpeaker: Bool = false) {
     do {
         let session: AVAudioSession = AVAudioSession.sharedInstance()
         if toSpeaker {
-            try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: .defaultToSpeaker)
+            try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.mixWithOthers, .allowBluetoothA2DP, .allowBluetooth, .allowAirPlay, .defaultToSpeaker])
         } else {
-            try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.mixWithOthers, .allowBluetoothA2DP, .allowBluetooth, .allowAirPlay])
         }
-        try session.setMode(AVAudioSessionModeMeasurement)
-        try session.setActive(true, with: .notifyOthersOnDeactivation)
+        
+        // turn the measure mode will crash bluetooh and mixWithOthers
+        //try session.setMode(AVAudioSessionModeMeasurement)
         
         // per ioBufferDuration
         // default  23ms | 1024 frames | <1% CPU (iphone SE)

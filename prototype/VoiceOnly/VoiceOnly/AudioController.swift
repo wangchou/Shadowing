@@ -36,7 +36,9 @@ class AudioController {
     
     private func buildNodeGraph() {
         // get nodes
+        
         let mainMixer = engine.mainMixerNode
+        
         let mic = engine.inputNode // only for real device, simulator will crash
         let format = mic.outputFormat(forBus: 0)
         replayUnit = ReplayUnit()
@@ -56,6 +58,7 @@ class AudioController {
         
         // volume
         bgm.node.volume = 0.5
+        
     }
     
     func start() {
