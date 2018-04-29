@@ -32,7 +32,7 @@ enum ScoreDesc {
 let rihoUrl = "https://i2.kknews.cc/SIG=vanen8/66nn0002p026p2100op3.jpg"
 
 class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
-    let audio = AudioController.shared
+    let cmd = Commands.shared
     var isGameFinished = false
     
     @IBOutlet weak var comboLabel: UILabel!
@@ -44,10 +44,10 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     @IBOutlet weak var saidTextView: UITextView!
     @IBOutlet weak var scoreDescLabel: UILabel!
     
-    // MARK: - lifecycle method
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        //downloadImage(url: URL(string: rihoUrl)!)
+
         isGameFinished = false
         comboLabel.text = "0"
         scoreLabel.text = "0"
@@ -66,32 +66,27 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         
         scoreDescLabel.text = ""
         
-        audio.start()
+        cmd.startEngine()
         repeatAfterMe()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        audio.stop()
+        cmd.stopEngine()
     }
     
-    // MARK: - Audio Flow Control
+    // MARK: - Audio cmd Control
     func repeatAfterMe() {
-        print("----------------------------------")
-        let audio = AudioController.shared
-        let sentence = sentences[sentenceIndex]
-        
-        let speakTime = getNow()
-        DispatchQueue.main.async {
-            self.focusTextView(isTargetView: true)
-        }
         // async/await
-        myQueue.async {
-            audio.say(sentence, teacher, rate: teachingRate, delegate: self)
-            DispatchQueue.main.async {
-                self.focusTextView(isTargetView: false)
-            }
-            audio.listen(
+        cmdQueue.async {
+            print("----------------------------------")
+            let cmd = Commands.shared
+            let sentence = sentences[sentenceIndex]
+            let speakTime = getNow()
+            self.focusTextView(isTargetView: true)
+            cmd.say(sentence, teacher, rate: teachingRate, delegate: self)
+            self.focusTextView(isTargetView: false)
+            cmd.listen(
                 listenDuration: (getNow() - speakTime) + listenPauseDuration,
                 resultHandler: self.speechResultHandler
             )
@@ -99,12 +94,11 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     }
     
     func iHearYouSaid(_ saidSentence: String) {
-        let audio = AudioController.shared
-        print("hear <<< \(saidSentence)")
-        
-        myQueue.async {
-            audio.say(I_HEAR_YOU_HINT, assistant)
-            audio.say(saidSentence, Oren, rate: teachingRate)
+        cmdQueue.async {
+            let cmd = Commands.shared
+            print("hear <<< \(saidSentence)")
+            cmd.say(I_HEAR_YOU_HINT, assistant)
+            cmd.say(saidSentence, Oren, rate: teachingRate)
             let score = getSpeechScore(sentences[sentenceIndex], saidSentence)
             
             // update ui
@@ -118,14 +112,14 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
                 }
                 self.updateScoreDescLabel(score)
             }
-            audio.say(String(score)+"分", assistant)
+            cmd.say(String(score)+"分", assistant)
             self.repeatAfterMe()
         }
     }
     
     func speechResultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
-        let audio = AudioController.shared
-        if !audio.isRunning {
+        let cmd = Commands.shared
+        if !cmd.isEngineRunning {
             return
         }
         
@@ -140,8 +134,8 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
             if(isDev) {
                 iHearYouSaid("おねさま")
             } else {
-                myQueue.async {
-                    audio.say(CANNOT_HEAR_HINT, assistant)
+                cmdQueue.async {
+                    cmd.say(CANNOT_HEAR_HINT, assistant)
                     self.repeatAfterMe()
                 }
             }
@@ -162,9 +156,9 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         _ synthesizer: AVSpeechSynthesizer,
         didFinish utterance: AVSpeechUtterance
         ) {
-        guard AudioController.shared.tts.completionHandler != nil else { return }
+        guard Commands.shared.tts.completionHandler != nil else { return }
         print("")
-        AudioController.shared.tts.completionHandler!()
+        Commands.shared.tts.completionHandler!()
     }
     
     
@@ -177,16 +171,18 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     }
     
     func focusTextView(isTargetView: Bool) {
-        if isTargetView {
-            targetTextView.text = ""
-            saidTextView.text = ""
-            scoreDescLabel.text = ""
-            targetTextView.layer.borderColor = UIColor.black.cgColor
-            saidTextView.layer.borderColor = UIColor.yellow.cgColor
-        } else {
-            saidTextView.text = ""
-            saidTextView.layer.borderColor = UIColor.black.cgColor
-            targetTextView.layer.borderColor = UIColor.yellow.cgColor
+        DispatchQueue.main.async {
+            if isTargetView {
+                self.targetTextView.text = ""
+                self.saidTextView.text = ""
+                self.scoreDescLabel.text = ""
+                self.targetTextView.layer.borderColor = UIColor.black.cgColor
+                self.saidTextView.layer.borderColor = UIColor.yellow.cgColor
+            } else {
+                self.saidTextView.text = ""
+                self.saidTextView.layer.borderColor = UIColor.black.cgColor
+                self.targetTextView.layer.borderColor = UIColor.yellow.cgColor
+            }
         }
     }
     
@@ -214,7 +210,7 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     }
     
     func afterGameFinished() {
-        let audio = AudioController.shared
+        let cmd = Commands.shared
         let isGameClear = bloodBar.progress > 0
         
         if isGameClear {
@@ -223,13 +219,13 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
             saidTextView.text = ""
             targetTextView.text = ""
             downloadImage(url: URL(string: rihoUrl)!)
-            myQueue.async {
-                audio.say("恭喜你全破了。接下來有人想跟你說話...", assistant)
-                audio.say("きみのこと、大好きだよ", Oren, rate: teachingRate * 0.7, delegate: self)
+            cmdQueue.async {
+                cmd.say("恭喜你全破了。接下來有人想跟你說話...", assistant)
+                cmd.say("きみのこと、大好きだよ", Oren, rate: teachingRate * 0.7, delegate: self)
             }
         } else {
-            myQueue.async {
-                audio.say("生命值為零，遊戲結束", assistant)
+            cmdQueue.async {
+                cmd.say("生命值為零，遊戲結束", assistant)
             }
             scoreDescLabel.text = "遊戲結束"
             scoreDescLabel.textColor = UIColor.red
@@ -288,7 +284,7 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     }
     
     // MARK: - Utilities
-    // https://stackoverflow.com/questions/24231680/loading-downloading-image-from-url-on-swift
+    // https://stackovercmd.com/questions/24231680/loading-downloading-image-from-url-on-swift
     func getDataFromUrl(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
         URLSession.shared.dataTask(with: url) { data, response, error in
             completion(data, response, error)

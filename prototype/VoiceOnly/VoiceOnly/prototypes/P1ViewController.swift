@@ -24,32 +24,30 @@ fileprivate let listenPauseDuration = 0.4
 // }
 
 class P1ViewController: UIViewController {
-    let audio = AudioController.shared
+    let cmd = Commands.shared
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        audio.start()
+        cmd.startEngine()
         repeatAfterMe()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        audio.stop()
+        cmd.stopEngine()
     }
     
-    // MARK: - Flow Control
+    // MARK: - cmd Control
     func repeatAfterMe() {
-        print("----------------------------------")
-        let audio = AudioController.shared
-        let sentence = sentences[sentenceIndex]
-        
-        // async/await
-        myQueue.async {
-            audio.say(REPEAT_AFTER_ME_HINT, assistant)
+        cmdQueue.async {
+            print("----------------------------------")
+            let cmd = Commands.shared
+            let sentence = sentences[sentenceIndex]
+            cmd.say(REPEAT_AFTER_ME_HINT, assistant)
             let speakTime = getNow()
-            audio.say(sentence, teacher, rate: teachingRate)
-            audio.listen(
+            cmd.say(sentence, teacher, rate: teachingRate)
+            cmd.listen(
                 listenDuration: (getNow() - speakTime) + listenPauseDuration,
                 resultHandler: self.speechResultHandler
             )
@@ -57,22 +55,21 @@ class P1ViewController: UIViewController {
     }
     
     func iHearYouSaid(_ saidSentence: String) {
-        let audio = AudioController.shared
-        print("hear <<< \(saidSentence)")
-        
-        myQueue.async {
-            audio.say(I_HEAR_YOU_HINT, assistant)
-            audio.say(saidSentence, Oren, rate: teachingRate)
+        cmdQueue.async {
+            let cmd = Commands.shared
+            print("hear <<< \(saidSentence)")
+            cmd.say(I_HEAR_YOU_HINT, assistant)
+            cmd.say(saidSentence, Oren, rate: teachingRate)
             let score = getSpeechScore(sentences[sentenceIndex], saidSentence)
             sentenceIndex = (sentenceIndex + 1) % sentences.count
-            audio.say(String(score)+"分", assistant)
+            cmd.say(String(score)+"分", assistant)
             self.repeatAfterMe()
         }
     }
     
     func speechResultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
-        let audio = AudioController.shared
-        if !audio.isRunning {
+        let cmd = Commands.shared
+        if !cmd.isEngineRunning {
             return
         }
         
@@ -86,8 +83,8 @@ class P1ViewController: UIViewController {
             if(isDev) {
                 iHearYouSaid("おねさま")
             } else {
-                myQueue.async {
-                    audio.say(CANNOT_HEAR_HINT, assistant)
+                cmdQueue.async {
+                    cmd.say(CANNOT_HEAR_HINT, assistant)
                     self.repeatAfterMe()
                 }
             }

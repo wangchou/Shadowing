@@ -78,25 +78,25 @@ func getSpeechScore(
         return score
     }
     
-    myGroup.enter()
+    cmdGroup.enter()
     getKana(targetSentence) { str, error in
         targetKana = str
         isTargetKanaReady = true
         if isSaidKanaReady {
             score = calcScore(targetKana, saidKana)
         }
-        myGroup.leave()
+        cmdGroup.leave()
     }
-    myGroup.enter()
+    cmdGroup.enter()
     getKana(saidSentence) { str, error in
         saidKana = str
         isSaidKanaReady = true
         if isTargetKanaReady {
             score = calcScore(targetKana, saidKana)
         }
-        myGroup.leave()
+        cmdGroup.leave()
     }
-    myGroup.wait()
+    cmdGroup.wait()
     return score
 }
 

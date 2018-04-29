@@ -13,11 +13,11 @@ import AVFoundation
 // for async and await
 // see discussion on
 // https://stackoverflow.com/questions/50035373/grand-central-dispatch-for-complex-flow/50075403#50075403
-let myGroup = DispatchGroup()
-let myQueue = DispatchQueue(label: "for Sync/Blocking version of async functions")
+let cmdGroup = DispatchGroup()
+let cmdQueue = DispatchQueue(label: "for Sync/Blocking version of async functions")
 
 func waitConcurrentJobs() {
-    myGroup.wait()
+    cmdGroup.wait()
 }
 
 // MARK: - Audio Session

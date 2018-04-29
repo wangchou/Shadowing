@@ -15,19 +15,19 @@ var sentenceIndex = 0
 let assistant = MeiJia
 let teacher = Hattori
 
-class AudioController {
+class Commands {
     
     //Singleton
-    static let shared = AudioController()
+    static let shared = Commands()
     
     var engine = AVAudioEngine()
-    var boosterNode = AVAudioMixerNode()
+    var micVolumeNode = AVAudioMixerNode()
     var replayUnit: ReplayUnit!
     var speechRecognizer: SpeechRecognizer = SpeechRecognizer()
     var bgm = BGM()
     var tts = TTS()
     
-    public var isRunning = false
+    public var isEngineRunning = false
     
     // MARK: - Lifecycle
     private init() {
@@ -46,24 +46,24 @@ class AudioController {
         // attach nodes
         engine.attach(bgm.node)
         engine.attach(replayUnit.node)
-        engine.attach(boosterNode)
+        engine.attach(micVolumeNode)
         
         // connect nodes
         engine.connect(bgm.node, to: mainMixer, format: bgm.buffer.format)
-        engine.connect(mic, to: boosterNode, format: mic.inputFormat(forBus: 0))
-        engine.connect(boosterNode, to: mainMixer, format: boosterNode.outputFormat(forBus: 0))
+        engine.connect(mic, to: micVolumeNode, format: mic.inputFormat(forBus: 0))
+        engine.connect(micVolumeNode, to: mainMixer, format: micVolumeNode.outputFormat(forBus: 0))
         engine.connect(replayUnit.node, to: mainMixer, format: format)
 
-        boosterNode.volume = micOutVolume
+        micVolumeNode.volume = micOutVolume
         
         // volume
         bgm.node.volume = 0.5
     }
     
     // MARK: - Public
-    func start() {
+    func startEngine() {
         do {
-            isRunning = true
+            isEngineRunning = true
             try engine.start()
             bgm.play()
         } catch {
@@ -71,8 +71,8 @@ class AudioController {
         }
     }
     
-    func stop() {
-        isRunning = false
+    func stopEngine() {
+        isEngineRunning = false
         engine.stop()
         tts.stop()
         speechRecognizer.stop()
@@ -87,23 +87,21 @@ class AudioController {
         rate: Float = normalRate,
         delegate: AVSpeechSynthesizerDelegate? = nil
         ) {
-        if !isRunning {
+        if !isEngineRunning {
             return
         }
-        myGroup.enter()
+        cmdGroup.enter()
         if(name == teacher) {
             bgm.reduceVolume()
-            boosterNode.volume = 0
         }
         
         tts.say(text, name, rate: rate, delegate: delegate) {
-            self.boosterNode.volume = micOutVolume
             if(name == teacher) {
                 self.bgm.restoreVolume()
             }
-            myGroup.leave()
+            cmdGroup.leave()
         }
-        myGroup.wait()
+        cmdGroup.wait()
     }
     
     func listen(listenDuration: Double,
@@ -122,8 +120,8 @@ class AudioController {
     // It blocks current thead !!!
     // Do not call it on main thread
     func replay() {
-        myGroup.enter()
-        replayUnit.play() { myGroup.leave() }
-        myGroup.wait()
+        cmdGroup.enter()
+        replayUnit.play() { cmdGroup.leave() }
+        cmdGroup.wait()
     }
 }
