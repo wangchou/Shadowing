@@ -17,7 +17,7 @@ let Hattori = "com.apple.ttsbundle.siri_male_ja-JP_compact"
 
 let I_SAY_YOU_SAY = "接下來，我說一句日文，你跟著說一句"
 let CANNOT_HEAR_HINT = "聽不清楚、再一次。"
-let I_HEAR_YOU_HINT = "我聽到你說："
+let I_HEAR_YOU_HINT = "我聽到你說"
 let SPEAK_TO_ME_HINT = "請說日文給我聽"
 let REPEAT_AFTER_ME_HINT = "請跟著唸日文"
 

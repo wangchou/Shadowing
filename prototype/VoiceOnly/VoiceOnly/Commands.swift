@@ -15,6 +15,38 @@ var sentenceIndex = 0
 let assistant = MeiJia
 let teacher = Hattori
 
+enum EventType {
+    case engineStarted
+    case engineStoped
+    case teacherSaid
+    case assistantSaid
+    case recognitionResult
+    case newScore
+}
+
+struct Event {
+    var type: EventType
+    var payload: [String: Any]
+}
+
+let eventQueue: [Event] = []
+
+// need to make the command layer don't know anything about the ui
+// let many UI layer Instance monitoring the command layer events and interpreted it
+// then launch EventRunLoop...
+// in EventRunLoop it will called methods in delegate
+
+// one way data flow
+// cmd fired -> cmd event queue/history array -> event run loop -> event delegates in VC -> update UI & fire cmd
+// the command history is replayable
+
+// read GameKit stateMachine
+// create multiple stateMachine?
+// GameplayKit with UIKit
+// https://gameplaykit-programming-guide-chinese.readme.io/docs/getting-started
+// tutorial video of Finite State Machine and Delegate Pattern
+// https://www.youtube.com/watch?v=C09u4WoEufc
+
 class Commands {
     
     //Singleton
@@ -124,4 +156,20 @@ class Commands {
         replayUnit.play() { cmdGroup.leave() }
         cmdGroup.wait()
     }
+}
+
+// Define Characters like renpy
+func meijia(_ sentence: String) {
+    print("美佳 🇹🇼: ", terminator: "")
+    Commands.shared.say(sentence, assistant)
+}
+
+func oren(_ sentence: String, rate: Float = teachingRate, delegate: AVSpeechSynthesizerDelegate? = nil) {
+    print("オーレン 🇯🇵: ", terminator: "")
+    Commands.shared.say(sentence, Oren, rate: rate, delegate: delegate)
+}
+
+func hattori(_ sentence: String, rate: Float = teachingRate, delegate: AVSpeechSynthesizerDelegate? = nil) {
+    print("服部 🇯🇵: ", terminator: "")
+    Commands.shared.say(sentence, Hattori, rate: rate, delegate: delegate)
 }

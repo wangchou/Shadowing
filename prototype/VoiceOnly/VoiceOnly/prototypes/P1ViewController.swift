@@ -10,9 +10,6 @@ import Foundation
 import UIKit
 import Speech
 
-
-fileprivate let listenPauseDuration = 0.4
-
 // Prototype 1: 一個 run 10.9秒
 // Loop {
 //  説(請跟我說日文)
@@ -23,9 +20,15 @@ fileprivate let listenPauseDuration = 0.4
 //  分數
 // }
 
+fileprivate let isDev = false
+
+fileprivate let listenPauseDuration = 0.4
+
+fileprivate let cmd = Commands.shared
+
+fileprivate var targetSentence = sentences[sentenceIndex]
+
 class P1ViewController: UIViewController {
-    let cmd = Commands.shared
-    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,15 +41,18 @@ class P1ViewController: UIViewController {
         cmd.stopEngine()
     }
     
+    func nextSentence() {
+        sentenceIndex = (sentenceIndex + 1) % sentences.count
+        targetSentence = sentences[sentenceIndex]
+    }
+    
     // MARK: - cmd Control
     func repeatAfterMe() {
+        print("----------------------------------")
         cmdQueue.async {
-            print("----------------------------------")
-            let cmd = Commands.shared
-            let sentence = sentences[sentenceIndex]
-            cmd.say(REPEAT_AFTER_ME_HINT, assistant)
+            meijia(REPEAT_AFTER_ME_HINT)
             let speakTime = getNow()
-            cmd.say(sentence, teacher, rate: teachingRate)
+            hattori(targetSentence)
             cmd.listen(
                 listenDuration: (getNow() - speakTime) + listenPauseDuration,
                 resultHandler: self.speechResultHandler
@@ -55,20 +61,18 @@ class P1ViewController: UIViewController {
     }
     
     func iHearYouSaid(_ saidSentence: String) {
+        print("使用者 👨: \(saidSentence)")
         cmdQueue.async {
-            let cmd = Commands.shared
-            print("hear <<< \(saidSentence)")
-            cmd.say(I_HEAR_YOU_HINT, assistant)
-            cmd.say(saidSentence, Oren, rate: teachingRate)
-            let score = getSpeechScore(sentences[sentenceIndex], saidSentence)
-            sentenceIndex = (sentenceIndex + 1) % sentences.count
-            cmd.say(String(score)+"分", assistant)
+            meijia(I_HEAR_YOU_HINT)
+            oren(saidSentence)
+            let score = getSpeechScore(targetSentence, saidSentence)
+            self.nextSentence()
+            meijia("\(score)分")
             self.repeatAfterMe()
         }
     }
     
     func speechResultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
-        let cmd = Commands.shared
         if !cmd.isEngineRunning {
             return
         }
@@ -84,10 +88,11 @@ class P1ViewController: UIViewController {
                 iHearYouSaid("おねさま")
             } else {
                 cmdQueue.async {
-                    cmd.say(CANNOT_HEAR_HINT, assistant)
+                    meijia(CANNOT_HEAR_HINT)
                     self.repeatAfterMe()
                 }
             }
         }
+        
     }
 }

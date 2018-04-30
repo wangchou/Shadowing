@@ -12,6 +12,9 @@ import Speech
 
 
 fileprivate let listenPauseDuration = 0.4
+fileprivate let isDev = false
+fileprivate let cmd = Commands.shared
+fileprivate var targetSentence = sentences[sentenceIndex]
 
 // Prototype 7: prototype 6 + 遊戲畫面。在 getScore 後 update UI
 // Loop {
@@ -32,7 +35,6 @@ enum ScoreDesc {
 let rihoUrl = "https://i2.kknews.cc/SIG=vanen8/66nn0002p026p2100op3.jpg"
 
 class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
-    let cmd = Commands.shared
     var isGameFinished = false
     
     @IBOutlet weak var comboLabel: UILabel!
@@ -66,6 +68,9 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         
         scoreDescLabel.text = ""
         
+        sentenceIndex = 0
+        targetSentence = sentences[sentenceIndex]
+        
         cmd.startEngine()
         repeatAfterMe()
     }
@@ -76,16 +81,18 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     }
     
     // MARK: - Audio cmd Control
+    func teacher(_ sentence: String) {
+        focusTextView(isTargetView: true)
+        hattori(sentence, delegate: self)
+        focusTextView(isTargetView: false)
+    }
+    
     func repeatAfterMe() {
         // async/await
         cmdQueue.async {
             print("----------------------------------")
-            let cmd = Commands.shared
-            let sentence = sentences[sentenceIndex]
             let speakTime = getNow()
-            self.focusTextView(isTargetView: true)
-            cmd.say(sentence, teacher, rate: teachingRate, delegate: self)
-            self.focusTextView(isTargetView: false)
+            self.teacher(targetSentence)
             cmd.listen(
                 listenDuration: (getNow() - speakTime) + listenPauseDuration,
                 resultHandler: self.speechResultHandler
@@ -95,30 +102,17 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     
     func iHearYouSaid(_ saidSentence: String) {
         cmdQueue.async {
-            let cmd = Commands.shared
             print("hear <<< \(saidSentence)")
-            cmd.say(I_HEAR_YOU_HINT, assistant)
-            cmd.say(saidSentence, Oren, rate: teachingRate)
-            let score = getSpeechScore(sentences[sentenceIndex], saidSentence)
-            
-            // update ui
-            DispatchQueue.main.async {
-                self.nextSentence()
-                self.updateBlood(score)
-                self.updateScoreLabel(score)
-                self.updateComboLabel(score)
-                if(self.isGameFinished) {
-                    return
-                }
-                self.updateScoreDescLabel(score)
-            }
-            cmd.say(String(score)+"分", assistant)
+            meijia(I_HEAR_YOU_HINT)
+            oren(saidSentence)
+            let score = getSpeechScore(targetSentence, saidSentence)
+            self.updateUIByScore(score)
+            oren(self.getScoreText(score))
             self.repeatAfterMe()
         }
     }
     
     func speechResultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
-        let cmd = Commands.shared
         if !cmd.isEngineRunning {
             return
         }
@@ -135,7 +129,7 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
                 iHearYouSaid("おねさま")
             } else {
                 cmdQueue.async {
-                    cmd.say(CANNOT_HEAR_HINT, assistant)
+                    meijia(CANNOT_HEAR_HINT)
                     self.repeatAfterMe()
                 }
             }
@@ -156,13 +150,25 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         _ synthesizer: AVSpeechSynthesizer,
         didFinish utterance: AVSpeechUtterance
         ) {
-        guard Commands.shared.tts.completionHandler != nil else { return }
+        guard cmd.tts.completionHandler != nil else { return }
         print("")
-        Commands.shared.tts.completionHandler!()
+        cmd.tts.completionHandler!()
     }
     
     
     // MARK: - Update UI
+    func updateUIByScore(_ score: Int) {
+        DispatchQueue.main.async {
+            self.nextSentence()
+            self.updateBlood(score)
+            self.updateScoreLabel(score)
+            self.updateComboLabel(score)
+            if(self.isGameFinished) {
+                return
+            }
+            self.updateScoreDescLabel(score)
+        }
+    }
     func getScoreDesc(_ score: Int) -> ScoreDesc {
         if(score >= 100) { return .perfect }
         if(score >= 80) { return .great }
@@ -202,15 +208,16 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     
     func nextSentence() {
         sentenceIndex = sentenceIndex + 1
+        sentenceNumLabel.text = String(sentenceIndex) + "/" + String(sentences.count)
         if(sentenceIndex == sentences.count) {
             isGameFinished = true
             afterGameFinished()
+            return
         }
-        sentenceNumLabel.text = String(sentenceIndex) + "/" + String(sentences.count)
+        targetSentence = sentences[sentenceIndex]
     }
     
     func afterGameFinished() {
-        let cmd = Commands.shared
         let isGameClear = bloodBar.progress > 0
         
         if isGameClear {
@@ -220,15 +227,16 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
             targetTextView.text = ""
             downloadImage(url: URL(string: rihoUrl)!)
             cmdQueue.async {
-                cmd.say("恭喜你全破了。接下來有人想跟你說話...", assistant)
-                cmd.say("きみのこと、大好きだよ", Oren, rate: teachingRate * 0.7, delegate: self)
+                meijia("恭喜你全破了。接下來有人想跟你說話...")
+                oren("きみのこと、大好きだよ", rate: teachingRate * 0.7, delegate: self)
             }
         } else {
             cmdQueue.async {
-                cmd.say("生命值為零，遊戲結束", assistant)
+                meijia("生命值為零，遊戲結束")
             }
             scoreDescLabel.text = "遊戲結束"
             scoreDescLabel.textColor = UIColor.red
+            cmd.stopEngine()
         }
     }
     
@@ -260,7 +268,7 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         case .good:
             return "いいね"
         case .poor:
-            return "違います"
+            return "違うよ"
         }
     }
     
@@ -278,7 +286,7 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
             scoreDescLabel.text = "いいね"
             scoreDescLabel.textColor = UIColor.blue
         case .poor:
-            scoreDescLabel.text = "違います"
+            scoreDescLabel.text = "違うよ"
             scoreDescLabel.textColor = UIColor.red
         }
     }

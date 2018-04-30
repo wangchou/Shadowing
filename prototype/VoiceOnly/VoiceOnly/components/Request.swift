@@ -97,6 +97,7 @@ func getSpeechScore(
         cmdGroup.leave()
     }
     cmdGroup.wait()
+    
     return score
 }
 
