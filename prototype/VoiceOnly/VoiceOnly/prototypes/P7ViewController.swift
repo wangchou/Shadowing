@@ -108,31 +108,43 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
             let score = getSpeechScore(targetSentence, saidSentence)
             self.updateUIByScore(score)
             oren(self.getScoreText(score))
+            cmdGroup.wait()
+            DispatchQueue.main.async {
+                self.nextSentence()
+                if(self.isGameFinished) {
+                    return
+                }
+            }
+            
             self.repeatAfterMe()
         }
     }
     
+    // MARK: - Speech Recogntion Part
+    func onRecognitionResult(_ result: SFSpeechRecognitionResult?) {
+        guard let result = result else { return }
+        saidTextView.text = result.bestTranscription.formattedString
+        if result.isFinal {
+            iHearYouSaid(saidTextView.text)
+        }
+    }
+    
+    func onRecognitionError(_ error: Error?) {
+        if error == nil { return }
+        if(isDev) {
+            iHearYouSaid("おねさま")
+        } else {
+            cmdQueue.async {
+                meijia(CANNOT_HEAR_HINT)
+                self.repeatAfterMe()
+            }
+        }
+    }
+    
     func speechResultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
-        if !cmd.isEngineRunning {
-            return
-        }
-        
-        if let result = result {
-            saidTextView.text = result.bestTranscription.formattedString
-            if result.isFinal {
-                iHearYouSaid(result.bestTranscription.formattedString)
-            }
-        }
-        
-        if error != nil {
-            if(isDev) {
-                iHearYouSaid("おねさま")
-            } else {
-                cmdQueue.async {
-                    meijia(CANNOT_HEAR_HINT)
-                    self.repeatAfterMe()
-                }
-            }
+        if cmd.isEngineRunning {
+            onRecognitionResult(result)
+            onRecognitionError(error)
         }
     }
     
@@ -159,13 +171,9 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     // MARK: - Update UI
     func updateUIByScore(_ score: Int) {
         DispatchQueue.main.async {
-            self.nextSentence()
             self.updateBlood(score)
             self.updateScoreLabel(score)
             self.updateComboLabel(score)
-            if(self.isGameFinished) {
-                return
-            }
             self.updateScoreDescLabel(score)
         }
     }
@@ -225,10 +233,12 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
             saidTextView.layer.borderColor = UIColor.yellow.cgColor
             saidTextView.text = ""
             targetTextView.text = ""
+            scoreDescLabel.text = ""
             downloadImage(url: URL(string: rihoUrl)!)
             cmdQueue.async {
-                meijia("恭喜你全破了。接下來有人想跟你說話...")
+                meijia("恭喜你全破了。有人想和你說...")
                 oren("きみのこと、大好きだよ", rate: teachingRate * 0.7, delegate: self)
+                cmd.stopEngine()
             }
         } else {
             cmdQueue.async {
