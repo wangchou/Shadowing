@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AVFoundation
 import UIKit
 import Speech
 
@@ -71,7 +72,7 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         sentenceIndex = 0
         targetSentence = sentences[sentenceIndex]
         
-        cmd.startEngine()
+        cmd.startEngine(toSpeaker: true)
         repeatAfterMe()
     }
     
@@ -103,8 +104,8 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     func iHearYouSaid(_ saidSentence: String) {
         cmdQueue.async {
             print("hear <<< \(saidSentence)")
-            meijia(I_HEAR_YOU_HINT)
-            oren(saidSentence)
+            // meijia(I_HEAR_YOU_HINT)
+            // oren(saidSentence)
             let score = getSpeechScore(targetSentence, saidSentence)
             self.updateUIByScore(score)
             oren(self.getScoreText(score))

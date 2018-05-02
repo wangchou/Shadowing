@@ -93,9 +93,16 @@ class Commands {
     }
     
     // MARK: - Public
-    func startEngine() {
+    func startEngine(toSpeaker: Bool = false) {
         do {
+            cmdGroup.wait()
             isEngineRunning = true
+            configureAudioSession(toSpeaker: toSpeaker)
+            if(toSpeaker) {
+                bgm.node.volume = 0
+            } else {
+                bgm.node.volume = 0.5
+            }
             try engine.start()
             bgm.play()
         } catch {
@@ -139,6 +146,9 @@ class Commands {
     func listen(listenDuration: Double,
                 resultHandler: @escaping (SFSpeechRecognitionResult?, Error?) -> Void
         ) {
+        if !isEngineRunning {
+            return
+        }
         DispatchQueue.main.async {
             self.speechRecognizer.start(
                 inputNode: self.engine.inputNode,

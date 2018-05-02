@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AVFoundation
 import UIKit
 import Speech
 
@@ -32,8 +33,8 @@ class P1ViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        cmd.startEngine()
-        repeatAfterMe()
+        cmd.startEngine(toSpeaker: false)
+        repeatAfterMe() 
     }
     
     override func viewDidDisappear(_ animated: Bool) {

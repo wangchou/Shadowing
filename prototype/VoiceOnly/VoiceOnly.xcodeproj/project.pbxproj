@@ -83,16 +83,16 @@
 			isa = PBXGroup;
 			children = (
 				BEBDEDD3208EF15E00C18520 /* drumLoop.caf */,
+				BEBDEDC3208EF09F00C18520 /* Main.storyboard */,
+				BEBDEDC6208EF0A000C18520 /* Assets.xcassets */,
+				BEBDEDCB208EF0A000C18520 /* Info.plist */,
 				BEBDEDE6208EFF3000C18520 /* components */,
 				BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */,
 				BEBDEDD8208EF15F00C18520 /* constants.swift */,
 				BEBDEDD1208EF15E00C18520 /* utilities.swift */,
 				BEBDEDC1208EF09F00C18520 /* ViewController.swift */,
 				BEBDEDE4208EFE1700C18520 /* Commands.swift */,
-				BEBDEDC3208EF09F00C18520 /* Main.storyboard */,
-				BEBDEDC6208EF0A000C18520 /* Assets.xcassets */,
 				BEBDEDC8208EF0A000C18520 /* LaunchScreen.storyboard */,
-				BEBDEDCB208EF0A000C18520 /* Info.plist */,
 				BEBDEDF7208F28E100C18520 /* prototypes */,
 				BEBDEDE9208F23DE00C18520 /* MainNavigationController.swift */,
 			);

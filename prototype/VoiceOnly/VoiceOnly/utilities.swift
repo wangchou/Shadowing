@@ -21,7 +21,7 @@ func waitConcurrentJobs() {
 }
 
 // MARK: - Audio Session
-func configureAudioSession(_ toSpeaker: Bool = false) {
+func configureAudioSession(toSpeaker: Bool = false) {
     do {
         let session: AVAudioSession = AVAudioSession.sharedInstance()
         if toSpeaker {
