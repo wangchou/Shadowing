@@ -16,6 +16,7 @@ fileprivate let listenPauseDuration = 0.4
 fileprivate let isDev = false
 fileprivate let cmd = Commands.shared
 fileprivate var targetSentence = sentences[sentenceIndex]
+fileprivate var translation = translations[sentenceIndex]
 
 // Prototype 7: prototype 6 + 遊戲畫面。在 getScore 後 update UI
 // Loop {
@@ -60,17 +61,18 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         targetTextView.text = ""
         targetTextView.layer.cornerRadius = 5
         targetTextView.layer.borderColor = UIColor.black.cgColor
-        targetTextView.layer.borderWidth = 1
+        targetTextView.layer.borderWidth = 2
         
         saidTextView.text = ""
         saidTextView.layer.cornerRadius = 5
         saidTextView.layer.borderColor = UIColor.yellow.cgColor
-        saidTextView.layer.borderWidth = 1
+        saidTextView.layer.borderWidth = 2
         
         scoreDescLabel.text = ""
         
         sentenceIndex = 0
         targetSentence = sentences[sentenceIndex]
+        translation = translations[sentenceIndex]
         
         cmd.startEngine(toSpeaker: true)
         repeatAfterMe()
@@ -84,6 +86,9 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     // MARK: - Audio cmd Control
     func teacher(_ sentence: String) {
         focusTextView(isTargetView: true)
+        DispatchQueue.main.async {
+            self.targetTextView.text = "\(translation) | "
+        }
         hattori(sentence, delegate: self)
         focusTextView(isTargetView: false)
     }
@@ -94,6 +99,10 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
             print("----------------------------------")
             let speakTime = getNow()
             self.teacher(targetSentence)
+            DispatchQueue.main.async {
+                self.scoreDescLabel.text = "👂請說"
+                self.scoreDescLabel.textColor = UIColor.black
+            }
             cmd.listen(
                 listenDuration: (getNow() - speakTime) + listenPauseDuration,
                 resultHandler: self.speechResultHandler
@@ -115,9 +124,10 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
                 if(self.isGameFinished) {
                     return
                 }
+                self.repeatAfterMe()
             }
             
-            self.repeatAfterMe()
+            
         }
     }
     
@@ -126,6 +136,9 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         guard let result = result else { return }
         saidTextView.text = result.bestTranscription.formattedString
         if result.isFinal {
+            DispatchQueue.main.async {
+                self.scoreDescLabel.text = ""
+            }
             iHearYouSaid(saidTextView.text)
         }
     }
@@ -223,6 +236,7 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
             afterGameFinished()
             return
         }
+        translation = translations[sentenceIndex]
         targetSentence = sentences[sentenceIndex]
     }
     
