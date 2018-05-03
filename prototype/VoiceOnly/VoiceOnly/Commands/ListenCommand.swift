@@ -16,8 +16,8 @@ struct ListenCommand: Command {
     
     func exec() {
         let context = Commands.shared
-        cmdGroup.enter()
         if !context.isEngineRunning {
+            cmdGroup.leave()
             return
         }
         DispatchQueue.main.async {

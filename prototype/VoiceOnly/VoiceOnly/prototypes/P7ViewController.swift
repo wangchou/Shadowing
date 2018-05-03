@@ -18,14 +18,6 @@ fileprivate let cmd = Commands.shared
 fileprivate var targetSentence = sentences[sentenceIndex]
 
 // Prototype 7: prototype 6 + 遊戲畫面。在 getScore 後 update UI
-// Loop {
-//  日文
-//  使用者複述
-//  説(我聽到你說)
-//  辨識出的 TTS
-//  分數
-// }
-
 enum ScoreDesc {
     case perfect
     case great
@@ -181,6 +173,7 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
             self.updateScoreDescLabel(score)
         }
     }
+    
     func getScoreDesc(_ score: Int) -> ScoreDesc {
         if(score >= 100) { return .perfect }
         if(score >= 80) { return .great }
@@ -288,19 +281,16 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     
     func updateScoreDescLabel(_ score: Int) {
         saidTextView.text = saidTextView.text + "(" + String(score) + "分)"
+        scoreDescLabel.text = getScoreText(score)
         let scoreDesc = getScoreDesc(score)
         switch scoreDesc {
         case .perfect:
-            scoreDescLabel.text = "正解"
             scoreDescLabel.textColor = UIColor.orange
         case .great:
-            scoreDescLabel.text = "すごい"
             scoreDescLabel.textColor = UIColor.green
         case .good:
-            scoreDescLabel.text = "いいね"
             scoreDescLabel.textColor = UIColor.blue
         case .poor:
-            scoreDescLabel.text = "違うよ"
             scoreDescLabel.textColor = UIColor.red
         }
     }

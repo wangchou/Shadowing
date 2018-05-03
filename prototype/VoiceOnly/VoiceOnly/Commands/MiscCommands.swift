@@ -31,6 +31,7 @@ struct ReduceBGMCommand: Command {
     let type = CommandType.reduceBGM
     func exec() {
         Commands.shared.bgm.reduceVolume()
+        cmdGroup.leave()
     }
 }
 
@@ -38,6 +39,7 @@ struct RestoreBGMCommand: Command {
     let type = CommandType.restoreBGM
     func exec() {
         Commands.shared.bgm.restoreVolume()
+        cmdGroup.leave()
     }
 }
 
@@ -54,6 +56,7 @@ struct StartEngineCommand: Command {
         } catch {
             print("Start Play through failed \(error)")
         }
+        cmdGroup.leave()
     }
 }
 
@@ -65,5 +68,6 @@ struct StopEngineCommand: Command {
         context.engine.stop()
         context.tts.stop()
         context.speechRecognizer.stop()
+        cmdGroup.leave()
     }
 }

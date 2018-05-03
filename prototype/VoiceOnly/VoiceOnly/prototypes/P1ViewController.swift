@@ -12,19 +12,19 @@ import UIKit
 import Speech
 
 fileprivate let isDev = false
-
 fileprivate let listenPauseDuration = 0.4
-
 fileprivate let cmd = Commands.shared
-
+fileprivate var saidSentence = ""
 fileprivate var targetSentence = sentences[sentenceIndex]
-
+// Prototype 1: 全語音、只能用講電話的方式
 class P1ViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         startEngine(toSpeaker: false)
-        repeatAfterMe() 
+        sentenceIndex = 0
+        targetSentence = sentences[sentenceIndex]
+        learnNextSentence()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -32,34 +32,54 @@ class P1ViewController: UIViewController {
         stopEngine()
     }
     
-    func nextSentence() {
-        sentenceIndex = (sentenceIndex + 1) % sentences.count
-        targetSentence = sentences[sentenceIndex]
-    }
-    
     // MARK: - cmd Control
-    func repeatAfterMe() {
-        print("----------------------------------")
+    func learnNextSentence() {
         cmdQueue.async {
+            print("----------------------------------")
+            // step 1
             meijia(REPEAT_AFTER_ME_HINT)
+            
+            // step 2
             let speakTime = getNow()
-            hattori(targetSentence)
+            hattori(targetSentence, delegate: nil)
+            
+            // step 3
+            reduceBGMVolume()
+            
+            // step 4
             listen(
                 listenDuration: (getNow() - speakTime) + listenPauseDuration,
                 resultHandler: self.speechResultHandler
             )
-        }
-    }
-    
-    func iHearYouSaid(_ saidSentence: String) {
-        print("使用者 👨: \(saidSentence)")
-        cmdQueue.async {
-            meijia(I_HEAR_YOU_HINT)
-            oren(saidSentence)
-            let score = getSpeechScore(targetSentence, saidSentence)
-            self.nextSentence()
-            meijia("\(score)分")
-            self.repeatAfterMe()
+            
+            // step 5
+            restoreBGMVolume()
+            
+            if(saidSentence == "") {
+                // step 6.1
+                meijia(CANNOT_HEAR_HINT)
+                self.learnNextSentence()
+            } else {
+                print("使用者 👨: \(saidSentence)")
+                
+                // step 6.2
+                meijia(I_HEAR_YOU_HINT)
+                
+                // step 6.2.1
+                oren(saidSentence)
+                
+                // step 6.2.2
+                let score = getSpeechScore(targetSentence, saidSentence)
+                
+                // step 6.2.3
+                meijia("\(score)分")
+                sentenceIndex = sentenceIndex + 1
+                if(sentenceIndex == sentences.count) {
+                    return
+                }
+                targetSentence = sentences[sentenceIndex]
+                self.learnNextSentence()
+            }
         }
     }
     
@@ -68,21 +88,14 @@ class P1ViewController: UIViewController {
             return
         }
         
-        if let result = result {
-            if result.isFinal {
-                iHearYouSaid(result.bestTranscription.formattedString)
-            }
+        if let result = result, result.isFinal {
+            saidSentence = result.bestTranscription.formattedString
+            cmdGroup.leave()
         }
         
         if error != nil {
-            if(isDev) {
-                iHearYouSaid("おねさま")
-            } else {
-                cmdQueue.async {
-                    meijia(CANNOT_HEAR_HINT)
-                    self.repeatAfterMe()
-                }
-            }
+            saidSentence = isDev ? "おねさま" : ""
+            cmdGroup.leave()
         }
         
     }

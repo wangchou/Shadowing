@@ -25,6 +25,7 @@ func logger(_ cmd: Command) {
 
 func dispatch(_ cmd: Command) {
     cmdGroup.wait()
+    cmdGroup.enter()
     logger(cmd)
     cmd.exec()
     cmdGroup.wait()

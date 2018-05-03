@@ -19,13 +19,10 @@ struct SayCommand: Command {
     func exec() {
         let context = Commands.shared
         if !context.isEngineRunning {
+            cmdGroup.leave()
             return
         }
-        cmdGroup.enter()
         context.tts.say(text, name, rate: rate, delegate: delegate) {
-            if(self.name == Hattori ) {
-                context.bgm.restoreVolume()
-            }
             cmdGroup.leave()
         }
     }
