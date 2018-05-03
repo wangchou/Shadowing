@@ -100,25 +100,3 @@ func getSpeechScore(
     
     return score
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

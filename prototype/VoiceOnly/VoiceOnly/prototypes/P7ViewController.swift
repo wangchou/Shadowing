@@ -16,7 +16,6 @@ fileprivate let listenPauseDuration = 0.4
 fileprivate let isDev = false
 fileprivate let cmd = Commands.shared
 fileprivate var targetSentence = sentences[sentenceIndex]
-fileprivate var translation = translations[sentenceIndex]
 
 // Prototype 7: prototype 6 + 遊戲畫面。在 getScore 後 update UI
 // Loop {
@@ -38,7 +37,7 @@ let rihoUrl = "https://i2.kknews.cc/SIG=vanen8/66nn0002p026p2100op3.jpg"
 
 class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     var isGameFinished = false
-    
+   
     @IBOutlet weak var comboLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var sentenceNumLabel: UILabel!
@@ -65,15 +64,14 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         
         saidTextView.text = ""
         saidTextView.layer.cornerRadius = 5
-        saidTextView.layer.borderColor = UIColor.yellow.cgColor
+        saidTextView.layer.borderColor = UIColor.lightGray.cgColor
         saidTextView.layer.borderWidth = 2
         
         scoreDescLabel.text = ""
         
         sentenceIndex = 0
         targetSentence = sentences[sentenceIndex]
-        translation = translations[sentenceIndex]
-        
+
         cmd.startEngine(toSpeaker: true)
         repeatAfterMe()
     }
@@ -86,9 +84,6 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     // MARK: - Audio cmd Control
     func teacher(_ sentence: String) {
         focusTextView(isTargetView: true)
-        DispatchQueue.main.async {
-            self.targetTextView.text = "\(translation) | "
-        }
         hattori(sentence, delegate: self)
         focusTextView(isTargetView: false)
     }
@@ -99,9 +94,9 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
             print("----------------------------------")
             let speakTime = getNow()
             self.teacher(targetSentence)
+            cmdGroup.wait()
             DispatchQueue.main.async {
-                self.scoreDescLabel.text = "👂請說"
-                self.scoreDescLabel.textColor = UIColor.black
+                cmd.bgm.reduceVolume()
             }
             cmd.listen(
                 listenDuration: (getNow() - speakTime) + listenPauseDuration,
@@ -126,8 +121,6 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
                 }
                 self.repeatAfterMe()
             }
-            
-            
         }
     }
     
@@ -138,6 +131,7 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         if result.isFinal {
             DispatchQueue.main.async {
                 self.scoreDescLabel.text = ""
+                cmd.bgm.restoreVolume()
             }
             iHearYouSaid(saidTextView.text)
         }
@@ -205,11 +199,11 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
                 self.saidTextView.text = ""
                 self.scoreDescLabel.text = ""
                 self.targetTextView.layer.borderColor = UIColor.black.cgColor
-                self.saidTextView.layer.borderColor = UIColor.yellow.cgColor
+                self.saidTextView.layer.borderColor = UIColor.lightGray.cgColor
             } else {
                 self.saidTextView.text = ""
                 self.saidTextView.layer.borderColor = UIColor.black.cgColor
-                self.targetTextView.layer.borderColor = UIColor.yellow.cgColor
+                self.targetTextView.layer.borderColor = UIColor.lightGray.cgColor
             }
         }
     }
@@ -236,7 +230,6 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
             afterGameFinished()
             return
         }
-        translation = translations[sentenceIndex]
         targetSentence = sentences[sentenceIndex]
     }
     
@@ -245,14 +238,14 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         
         if isGameClear {
             targetTextView.layer.borderColor = UIColor.black.cgColor
-            saidTextView.layer.borderColor = UIColor.yellow.cgColor
+            saidTextView.layer.borderColor = UIColor.lightGray.cgColor
             saidTextView.text = ""
             targetTextView.text = ""
             scoreDescLabel.text = ""
-            downloadImage(url: URL(string: rihoUrl)!)
+            // downloadImage(url: URL(string: rihoUrl)!)
             cmdQueue.async {
-                meijia("恭喜你全破了。有人想和你說...")
-                oren("きみのこと、大好きだよ", rate: teachingRate * 0.7, delegate: self)
+                // meijia("恭喜你全破了。有人想和你說...")
+                // oren("きみのこと、大好きだよ", rate: teachingRate * 0.7, delegate: self)
                 cmd.stopEngine()
             }
         } else {
@@ -271,11 +264,11 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         case .perfect:
             bloodBar.progress = min(1.0, bloodBar.progress + 0.15)
         case .great:
-            bloodBar.progress = min(1.0, bloodBar.progress + 0.08)
+            bloodBar.progress = min(1.0, bloodBar.progress + 0.10)
         case .good:
-            bloodBar.progress = min(1.0, bloodBar.progress + 0.02)
+            bloodBar.progress = min(1.0, bloodBar.progress + 0.05)
         case .poor:
-            bloodBar.progress = max(0, bloodBar.progress - 0.15)
+            bloodBar.progress = max(0, bloodBar.progress - 0.20)
             if bloodBar.progress == 0 {
                 isGameFinished = true
                 afterGameFinished()

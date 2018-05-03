@@ -12,25 +12,6 @@ import Speech
 
 var sentenceIndex = 0
 
-let assistant = MeiJia
-let teacher = Hattori
-
-enum EventType {
-    case engineStarted
-    case engineStoped
-    case teacherSaid
-    case assistantSaid
-    case recognitionResult
-    case newScore
-}
-
-struct Event {
-    var type: EventType
-    var payload: [String: Any]
-}
-
-let eventQueue: [Event] = []
-
 // need to make the command layer don't know anything about the ui
 // let many UI layer Instance monitoring the command layer events and interpreted it
 // then launch EventRunLoop...
@@ -38,14 +19,7 @@ let eventQueue: [Event] = []
 
 // one way data flow
 // cmd fired -> cmd event queue/history array -> event run loop -> event delegates in VC -> update UI & fire cmd
-// the command history is replayable
-
-// read GameKit stateMachine
-// create multiple stateMachine?
-// GameplayKit with UIKit
-// https://gameplaykit-programming-guide-chinese.readme.io/docs/getting-started
-// tutorial video of Finite State Machine and Delegate Pattern
-// https://www.youtube.com/watch?v=C09u4WoEufc
+// make the command history is replayable
 
 class Commands {
     
@@ -98,11 +72,7 @@ class Commands {
             cmdGroup.wait()
             isEngineRunning = true
             configureAudioSession(toSpeaker: toSpeaker)
-            if(toSpeaker) {
-                bgm.node.volume = 0
-            } else {
-                bgm.node.volume = 0.5
-            }
+            //bgm.node.volume = toSpeaker ? 0 : 0.5
             try engine.start()
             bgm.play()
         } catch {
@@ -130,12 +100,8 @@ class Commands {
             return
         }
         cmdGroup.enter()
-        if(name == teacher) {
-            bgm.reduceVolume()
-        }
-        
         tts.say(text, name, rate: rate, delegate: delegate) {
-            if(name == teacher) {
+            if(name == Hattori ) {
                 self.bgm.restoreVolume()
             }
             cmdGroup.leave()
@@ -171,7 +137,7 @@ class Commands {
 // Define Characters like renpy
 func meijia(_ sentence: String) {
     print("美佳 🇹🇼: ", terminator: "")
-    Commands.shared.say(sentence, assistant)
+    Commands.shared.say(sentence, MeiJia)
 }
 
 func oren(_ sentence: String, rate: Float = teachingRate, delegate: AVSpeechSynthesizerDelegate? = nil) {

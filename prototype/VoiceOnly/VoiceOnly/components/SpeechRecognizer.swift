@@ -74,7 +74,7 @@ class SpeechRecognizer: NSObject {
             fatalError("Unable to created a SFSpeechAudioBufferRecognitionRequest object")
         }
         
-        recognitionRequest.shouldReportPartialResults = false
+        recognitionRequest.shouldReportPartialResults = true //false
 
         recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest, resultHandler: resultHandler)
         

@@ -84,17 +84,16 @@
 			children = (
 				BEBDEDD3208EF15E00C18520 /* drumLoop.caf */,
 				BEBDEDC3208EF09F00C18520 /* Main.storyboard */,
+				BEBDEDC8208EF0A000C18520 /* LaunchScreen.storyboard */,
 				BEBDEDC6208EF0A000C18520 /* Assets.xcassets */,
 				BEBDEDCB208EF0A000C18520 /* Info.plist */,
-				BEBDEDE6208EFF3000C18520 /* components */,
-				BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */,
-				BEBDEDD8208EF15F00C18520 /* constants.swift */,
-				BEBDEDD1208EF15E00C18520 /* utilities.swift */,
 				BEBDEDC1208EF09F00C18520 /* ViewController.swift */,
-				BEBDEDE4208EFE1700C18520 /* Commands.swift */,
-				BEBDEDC8208EF0A000C18520 /* LaunchScreen.storyboard */,
-				BEBDEDF7208F28E100C18520 /* prototypes */,
+				BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */,
 				BEBDEDE9208F23DE00C18520 /* MainNavigationController.swift */,
+				BEBDEDE6208EFF3000C18520 /* components */,
+				BEBDEDD8208EF15F00C18520 /* constants.swift */,
+				BEBDEDE4208EFE1700C18520 /* Commands.swift */,
+				BEBDEDF7208F28E100C18520 /* prototypes */,
 			);
 			path = VoiceOnly;
 			sourceTree = "<group>";
@@ -115,6 +114,7 @@
 				BEBDEDD6208EF15E00C18520 /* Request.swift */,
 				BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */,
 				BEBDEDD2208EF15E00C18520 /* TTS.swift */,
+				BEBDEDD1208EF15E00C18520 /* utilities.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
