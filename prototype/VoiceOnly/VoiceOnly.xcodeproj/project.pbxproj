@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		BE17FB37209B051100D23F22 /* SayCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB36209B051100D23F22 /* SayCommand.swift */; };
 		BE17FB3A209B0F7800D23F22 /* ListenCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB39209B0F7800D23F22 /* ListenCommand.swift */; };
+		BE17FB3C209B18C800D23F22 /* MiscCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB3B209B18C800D23F22 /* MiscCommands.swift */; };
+		BE17FB3E209B19B200D23F22 /* Commands.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB3D209B19B200D23F22 /* Commands.swift */; };
 		BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */; };
 		BEBDEDC2208EF09F00C18520 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDC1208EF09F00C18520 /* ViewController.swift */; };
 		BEBDEDC5208EF09F00C18520 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEBDEDC3208EF09F00C18520 /* Main.storyboard */; };
@@ -22,7 +24,6 @@
 		BEBDEDDE208EF15F00C18520 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD6208EF15E00C18520 /* Request.swift */; };
 		BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD8208EF15F00C18520 /* constants.swift */; };
 		BEBDEDE3208EF17100C18520 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBDEDE2208EF17100C18520 /* AVFoundation.framework */; };
-		BEBDEDE5208EFE1700C18520 /* Commands.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDE4208EFE1700C18520 /* Commands.swift */; };
 		BEBDEDE8208F227C00C18520 /* P1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDE7208F227C00C18520 /* P1ViewController.swift */; };
 		BEBDEDEA208F23DE00C18520 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDE9208F23DE00C18520 /* MainNavigationController.swift */; };
 		BEBDEDF6208F28BD00C18520 /* P7ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDF1208F28BD00C18520 /* P7ViewController.swift */; };
@@ -31,6 +32,8 @@
 /* Begin PBXFileReference section */
 		BE17FB36209B051100D23F22 /* SayCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SayCommand.swift; sourceTree = "<group>"; };
 		BE17FB39209B0F7800D23F22 /* ListenCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenCommand.swift; sourceTree = "<group>"; };
+		BE17FB3B209B18C800D23F22 /* MiscCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscCommands.swift; sourceTree = "<group>"; };
+		BE17FB3D209B19B200D23F22 /* Commands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Commands.swift; sourceTree = "<group>"; };
 		BEBDEDBC208EF09F00C18520 /* VoiceOnly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceOnly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEBDEDC1208EF09F00C18520 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -46,7 +49,6 @@
 		BEBDEDD6208EF15E00C18520 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		BEBDEDD8208EF15F00C18520 /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		BEBDEDE2208EF17100C18520 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		BEBDEDE4208EFE1700C18520 /* Commands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commands.swift; sourceTree = "<group>"; };
 		BEBDEDE7208F227C00C18520 /* P1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P1ViewController.swift; sourceTree = "<group>"; };
 		BEBDEDE9208F23DE00C18520 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		BEBDEDF1208F28BD00C18520 /* P7ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P7ViewController.swift; sourceTree = "<group>"; };
@@ -67,9 +69,10 @@
 		BE17FB38209B0F5F00D23F22 /* Commands */ = {
 			isa = PBXGroup;
 			children = (
-				BEBDEDE4208EFE1700C18520 /* Commands.swift */,
+				BE17FB3D209B19B200D23F22 /* Commands.swift */,
 				BE17FB36209B051100D23F22 /* SayCommand.swift */,
 				BE17FB39209B0F7800D23F22 /* ListenCommand.swift */,
+				BE17FB3B209B18C800D23F22 /* MiscCommands.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -211,7 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEBDEDE5208EFE1700C18520 /* Commands.swift in Sources */,
+				BE17FB3C209B18C800D23F22 /* MiscCommands.swift in Sources */,
 				BEBDEDD9208EF15F00C18520 /* utilities.swift in Sources */,
 				BEBDEDF6208F28BD00C18520 /* P7ViewController.swift in Sources */,
 				BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */,
@@ -221,6 +224,7 @@
 				BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */,
 				BEBDEDDE208EF15F00C18520 /* Request.swift in Sources */,
 				BEBDEDE8208F227C00C18520 /* P1ViewController.swift in Sources */,
+				BE17FB3E209B19B200D23F22 /* Commands.swift in Sources */,
 				BE17FB3A209B0F7800D23F22 /* ListenCommand.swift in Sources */,
 				BEBDEDDA208EF15F00C18520 /* TTS.swift in Sources */,
 				BEBDEDDD208EF15F00C18520 /* SpeechRecognizer.swift in Sources */,

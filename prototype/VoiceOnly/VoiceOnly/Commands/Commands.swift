@@ -12,25 +12,6 @@ import Speech
 
 var sentenceIndex = 0
 
-// need to make the command layer don't know anything about the ui
-// one way data flow
-// cmd fired -> cmd event queue/history array -> event run loop -> event delegates in VC -> update UI & fire cmd
-// make the command history is replayable
-
-enum CommandType {
-    case say
-    case listen
-    case engineStart
-    case engineEnd
-    case reduceBGM
-    case restoreBGM
-}
-
-protocol Command {
-    var type: CommandType { get }
-    func exec()
-}
-
 func logger(_ cmd: Command) {
     switch cmd.type {
     case CommandType.say:
@@ -90,32 +71,17 @@ class Commands {
     
     // MARK: - Public
     func startEngine(toSpeaker: Bool = false) {
-        do {
-            cmdGroup.wait()
-            isEngineRunning = true
-            configureAudioSession(toSpeaker: toSpeaker)
-            try engine.start()
-            bgm.play()
-        } catch {
-            print("Start Play through failed \(error)")
-        }
+        dispatch(StartEngineCommand(toSpeaker: toSpeaker))
     }
     
     func stopEngine() {
-        isEngineRunning = false
-        engine.stop()
-        tts.stop()
-        speechRecognizer.stop()
+        dispatch(StopEngineCommand())
     }
     
     func reduceBGMVolume() {
-        cmdGroup.wait()
-        bgm.reduceVolume()
-        cmdGroup.wait()
+        dispatch(ReduceBGMCommand())
     }
     func restoreBGMVolume() {
-        cmdGroup.wait()
-        bgm.restoreVolume()
-        cmdGroup.wait()
+        dispatch(RestoreBGMCommand())
     }
 }
