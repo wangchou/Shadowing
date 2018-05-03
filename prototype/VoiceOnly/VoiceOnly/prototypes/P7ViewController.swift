@@ -13,7 +13,7 @@ import Speech
 
 
 fileprivate let listenPauseDuration = 0.4
-fileprivate let isDev = false
+fileprivate let isDev = true //false
 fileprivate let cmd = Commands.shared
 fileprivate var targetSentence = sentences[sentenceIndex]
 
@@ -89,15 +89,11 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     }
     
     func repeatAfterMe() {
-        // async/await
         cmdQueue.async {
             print("----------------------------------")
             let speakTime = getNow()
             self.teacher(targetSentence)
-            cmdGroup.wait()
-            DispatchQueue.main.async {
-                cmd.bgm.reduceVolume()
-            }
+            cmd.reduceBGMVolume()
             cmd.listen(
                 listenDuration: (getNow() - speakTime) + listenPauseDuration,
                 resultHandler: self.speechResultHandler
@@ -108,19 +104,17 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     func iHearYouSaid(_ saidSentence: String) {
         cmdQueue.async {
             print("hear <<< \(saidSentence)")
-            // meijia(I_HEAR_YOU_HINT)
-            // oren(saidSentence)
             let score = getSpeechScore(targetSentence, saidSentence)
             self.updateUIByScore(score)
             oren(self.getScoreText(score))
-            cmdGroup.wait()
             DispatchQueue.main.async {
                 self.nextSentence()
                 if(self.isGameFinished) {
                     return
                 }
-                self.repeatAfterMe()
+                
             }
+            self.repeatAfterMe()
         }
     }
     
@@ -129,16 +123,18 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         guard let result = result else { return }
         saidTextView.text = result.bestTranscription.formattedString
         if result.isFinal {
+            cmdGroup.leave()
             DispatchQueue.main.async {
                 self.scoreDescLabel.text = ""
-                cmd.bgm.restoreVolume()
             }
+            cmd.restoreBGMVolume()
             iHearYouSaid(saidTextView.text)
         }
     }
     
     func onRecognitionError(_ error: Error?) {
         if error == nil { return }
+        cmdGroup.leave()
         if(isDev) {
             iHearYouSaid("おねさま")
         } else {

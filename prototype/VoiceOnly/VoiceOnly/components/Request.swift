@@ -66,6 +66,7 @@ func getSpeechScore(
     _ targetSentence: String,
     _ saidSentence: String
 ) -> Int {
+    cmdGroup.wait()
     var targetKana = ""
     var saidKana = ""
     var isTargetKanaReady = false

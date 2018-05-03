@@ -91,6 +91,7 @@ class Commands {
         rate: Float = normalRate,
         delegate: AVSpeechSynthesizerDelegate? = nil
         ) {
+        cmdGroup.wait()
         if !isEngineRunning {
             return
         }
@@ -107,6 +108,8 @@ class Commands {
     func listen(listenDuration: Double,
                 resultHandler: @escaping (SFSpeechRecognitionResult?, Error?) -> Void
         ) {
+        cmdGroup.wait()
+        cmdGroup.enter()
         if !isEngineRunning {
             return
         }
@@ -117,6 +120,18 @@ class Commands {
                 resultHandler: resultHandler
             )
         }
+        cmdGroup.wait()
+    }
+    
+    func reduceBGMVolume() {
+        cmdGroup.wait()
+        bgm.reduceVolume()
+        cmdGroup.wait()
+    }
+    func restoreBGMVolume() {
+        cmdGroup.wait()
+        bgm.restoreVolume()
+        cmdGroup.wait()
     }
 }
 
