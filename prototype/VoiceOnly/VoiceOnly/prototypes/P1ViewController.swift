@@ -54,7 +54,7 @@ class P1ViewController: UIViewController {
             meijia(REPEAT_AFTER_ME_HINT)
             let speakTime = getNow()
             hattori(targetSentence)
-            cmd.listen(
+            listen(
                 listenDuration: (getNow() - speakTime) + listenPauseDuration,
                 resultHandler: self.speechResultHandler
             )

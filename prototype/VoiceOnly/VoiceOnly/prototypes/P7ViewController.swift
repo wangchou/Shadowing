@@ -94,7 +94,7 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
             let speakTime = getNow()
             self.teacher(targetSentence)
             cmd.reduceBGMVolume()
-            cmd.listen(
+            listen(
                 listenDuration: (getNow() - speakTime) + listenPauseDuration,
                 resultHandler: self.speechResultHandler
             )
