@@ -13,13 +13,65 @@ import Speech
 var sentenceIndex = 0
 
 // need to make the command layer don't know anything about the ui
-// let many UI layer Instance monitoring the command layer events and interpreted it
-// then launch EventRunLoop...
-// in EventRunLoop it will called methods in delegate
-
 // one way data flow
 // cmd fired -> cmd event queue/history array -> event run loop -> event delegates in VC -> update UI & fire cmd
 // make the command history is replayable
+
+enum CommandType {
+    case say
+    case listen
+    case engineStart
+    case engineEnd
+    case reduceBGM
+    case restoreBGM
+}
+
+protocol Command {
+    var type: CommandType { get }
+    var exec: () -> Void { get }
+}
+
+class ListenCommand: Command {
+    let type = CommandType.listen
+    let exec: () -> Void
+    let listenDuration: Double
+    init(_ context: Commands,
+         listenDuration: Double,
+         resultHandler: @escaping (SFSpeechRecognitionResult?, Error?) -> Void) {
+        self.listenDuration = listenDuration
+        exec = {
+            cmdGroup.enter()
+            if !context.isEngineRunning {
+                return
+            }
+            DispatchQueue.main.async {
+                context.speechRecognizer.start(
+                    inputNode: context.engine.inputNode,
+                    stopAfterSeconds: listenDuration,
+                    resultHandler: resultHandler
+                )
+            }
+        }
+    }
+}
+
+func logger(_ cmd: Command) {
+    switch cmd.type {
+    case CommandType.say:
+        (cmd as! SayCommand).log()
+    case CommandType.listen:
+        print("listening")
+    default:
+        print("unlogging command")
+    }
+}
+
+func dispatch(_ cmd: Command) {
+    cmdGroup.wait()
+    logger(cmd)
+    cmd.exec()
+    cmdGroup.wait()
+}
 
 class Commands {
     
@@ -82,45 +134,11 @@ class Commands {
         speechRecognizer.stop()
     }
     
-    // Warning: use it in myQueue.async {} block
-    // It blocks current thead !!!
-    // Do not call it on main thread
-    func say(
-        _ text: String,
-        _ name: String,
-        rate: Float = normalRate,
-        delegate: AVSpeechSynthesizerDelegate? = nil
-        ) {
-        cmdGroup.wait()
-        if !isEngineRunning {
-            return
-        }
-        cmdGroup.enter()
-        tts.say(text, name, rate: rate, delegate: delegate) {
-            if(name == Hattori ) {
-                self.bgm.restoreVolume()
-            }
-            cmdGroup.leave()
-        }
-        cmdGroup.wait()
-    }
-    
     func listen(listenDuration: Double,
                 resultHandler: @escaping (SFSpeechRecognitionResult?, Error?) -> Void
         ) {
-        cmdGroup.wait()
-        cmdGroup.enter()
-        if !isEngineRunning {
-            return
-        }
-        DispatchQueue.main.async {
-            self.speechRecognizer.start(
-                inputNode: self.engine.inputNode,
-                stopAfterSeconds: listenDuration,
-                resultHandler: resultHandler
-            )
-        }
-        cmdGroup.wait()
+        let listenCommand = ListenCommand(self, listenDuration: listenDuration, resultHandler: resultHandler)
+        dispatch(listenCommand)
     }
     
     func reduceBGMVolume() {
@@ -133,20 +151,4 @@ class Commands {
         bgm.restoreVolume()
         cmdGroup.wait()
     }
-}
-
-// Define Characters like renpy
-func meijia(_ sentence: String) {
-    print("美佳 🇹🇼: ", terminator: "")
-    Commands.shared.say(sentence, MeiJia)
-}
-
-func oren(_ sentence: String, rate: Float = teachingRate, delegate: AVSpeechSynthesizerDelegate? = nil) {
-    print("オーレン 🇯🇵: ", terminator: "")
-    Commands.shared.say(sentence, Oren, rate: rate, delegate: delegate)
-}
-
-func hattori(_ sentence: String, rate: Float = teachingRate, delegate: AVSpeechSynthesizerDelegate? = nil) {
-    print("服部 🇯🇵: ", terminator: "")
-    Commands.shared.say(sentence, Hattori, rate: rate, delegate: delegate)
 }
