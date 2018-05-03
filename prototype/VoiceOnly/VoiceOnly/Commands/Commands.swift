@@ -28,31 +28,7 @@ enum CommandType {
 
 protocol Command {
     var type: CommandType { get }
-    var exec: () -> Void { get }
-}
-
-class ListenCommand: Command {
-    let type = CommandType.listen
-    let exec: () -> Void
-    let listenDuration: Double
-    init(_ context: Commands,
-         listenDuration: Double,
-         resultHandler: @escaping (SFSpeechRecognitionResult?, Error?) -> Void) {
-        self.listenDuration = listenDuration
-        exec = {
-            cmdGroup.enter()
-            if !context.isEngineRunning {
-                return
-            }
-            DispatchQueue.main.async {
-                context.speechRecognizer.start(
-                    inputNode: context.engine.inputNode,
-                    stopAfterSeconds: listenDuration,
-                    resultHandler: resultHandler
-                )
-            }
-        }
-    }
+    func exec()
 }
 
 func logger(_ cmd: Command) {
@@ -60,7 +36,7 @@ func logger(_ cmd: Command) {
     case CommandType.say:
         (cmd as! SayCommand).log()
     case CommandType.listen:
-        print("listening")
+        print("hear <<< ")
     default:
         print("unlogging command")
     }
@@ -74,7 +50,6 @@ func dispatch(_ cmd: Command) {
 }
 
 class Commands {
-    
     //Singleton
     static let shared = Commands()
     
@@ -119,7 +94,6 @@ class Commands {
             cmdGroup.wait()
             isEngineRunning = true
             configureAudioSession(toSpeaker: toSpeaker)
-            //bgm.node.volume = toSpeaker ? 0 : 0.5
             try engine.start()
             bgm.play()
         } catch {
@@ -137,7 +111,7 @@ class Commands {
     func listen(listenDuration: Double,
                 resultHandler: @escaping (SFSpeechRecognitionResult?, Error?) -> Void
         ) {
-        let listenCommand = ListenCommand(self, listenDuration: listenDuration, resultHandler: resultHandler)
+        let listenCommand = ListenCommand(listenDuration: listenDuration, resultHandler: resultHandler)
         dispatch(listenCommand)
     }
     

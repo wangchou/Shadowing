@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BE17FB37209B051100D23F22 /* SayCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB36209B051100D23F22 /* SayCommand.swift */; };
+		BE17FB3A209B0F7800D23F22 /* ListenCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB39209B0F7800D23F22 /* ListenCommand.swift */; };
 		BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */; };
 		BEBDEDC2208EF09F00C18520 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDC1208EF09F00C18520 /* ViewController.swift */; };
 		BEBDEDC5208EF09F00C18520 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEBDEDC3208EF09F00C18520 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		BE17FB36209B051100D23F22 /* SayCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SayCommand.swift; sourceTree = "<group>"; };
+		BE17FB39209B0F7800D23F22 /* ListenCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenCommand.swift; sourceTree = "<group>"; };
 		BEBDEDBC208EF09F00C18520 /* VoiceOnly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceOnly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEBDEDC1208EF09F00C18520 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +64,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BE17FB38209B0F5F00D23F22 /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				BEBDEDE4208EFE1700C18520 /* Commands.swift */,
+				BE17FB36209B051100D23F22 /* SayCommand.swift */,
+				BE17FB39209B0F7800D23F22 /* ListenCommand.swift */,
+			);
+			path = Commands;
+			sourceTree = "<group>";
+		};
 		BEBDEDB3208EF09F00C18520 = {
 			isa = PBXGroup;
 			children = (
@@ -92,8 +104,7 @@
 				BEBDEDE9208F23DE00C18520 /* MainNavigationController.swift */,
 				BEBDEDE6208EFF3000C18520 /* components */,
 				BEBDEDD8208EF15F00C18520 /* constants.swift */,
-				BEBDEDE4208EFE1700C18520 /* Commands.swift */,
-				BE17FB36209B051100D23F22 /* SayCommand.swift */,
+				BE17FB38209B0F5F00D23F22 /* Commands */,
 				BEBDEDF7208F28E100C18520 /* prototypes */,
 			);
 			path = VoiceOnly;
@@ -210,6 +221,7 @@
 				BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */,
 				BEBDEDDE208EF15F00C18520 /* Request.swift in Sources */,
 				BEBDEDE8208F227C00C18520 /* P1ViewController.swift in Sources */,
+				BE17FB3A209B0F7800D23F22 /* ListenCommand.swift in Sources */,
 				BEBDEDDA208EF15F00C18520 /* TTS.swift in Sources */,
 				BEBDEDDD208EF15F00C18520 /* SpeechRecognizer.swift in Sources */,
 				BE17FB37209B051100D23F22 /* SayCommand.swift in Sources */,

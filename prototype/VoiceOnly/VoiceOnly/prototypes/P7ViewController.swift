@@ -103,7 +103,7 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     
     func iHearYouSaid(_ saidSentence: String) {
         cmdQueue.async {
-            print("hear <<< \(saidSentence)")
+            print(saidSentence)
             let score = getSpeechScore(targetSentence, saidSentence)
             self.updateUIByScore(score)
             oren(self.getScoreText(score))

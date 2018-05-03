@@ -9,34 +9,24 @@
 import Foundation
 import Speech
 
-class SayCommand: Command {
+struct SayCommand: Command {
     let type = CommandType.say
-    let exec: () -> Void
+    let context = Commands.shared
     let text: String
     let name: String
     let rate: Float
     let delegate: AVSpeechSynthesizerDelegate?
     
-    init(_ context: Commands,
-         _ text: String,
-         _ name: String,
-         rate: Float = normalRate,
-         delegate: AVSpeechSynthesizerDelegate? = nil) {
-        self.text = text
-        self.name = name
-        self.rate = rate
-        self.delegate = delegate
-        exec = {
-            if !context.isEngineRunning {
-                return
+    func exec() {
+        if !context.isEngineRunning {
+            return
+        }
+        cmdGroup.enter()
+        context.tts.say(text, name, rate: rate, delegate: delegate) {
+            if(self.name == Hattori ) {
+                self.context.bgm.restoreVolume()
             }
-            cmdGroup.enter()
-            context.tts.say(text, name, rate: rate, delegate: delegate) {
-                if(name == Hattori ) {
-                    context.bgm.restoreVolume()
-                }
-                cmdGroup.leave()
-            }
+            cmdGroup.leave()
         }
     }
     
@@ -54,18 +44,25 @@ class SayCommand: Command {
     }
 }
 
+// for keeping the default memberwise initializer
+extension SayCommand {
+    init(_ text: String, _ name: String, rate: Float, delegate: AVSpeechSynthesizerDelegate?) {
+        self.init(text: text, name: name, rate: rate, delegate: delegate)
+    }
+}
+
 // Define Characters like renpy
 func meijia(_ sentence: String) {
-    let sayCommand = SayCommand(Commands.shared, sentence, MeiJia)
+    let sayCommand = SayCommand(sentence, MeiJia, rate: normalRate, delegate: nil)
     dispatch(sayCommand)
 }
 
 func oren(_ sentence: String, rate: Float = teachingRate, delegate: AVSpeechSynthesizerDelegate? = nil) {
-    let sayCommand = SayCommand(Commands.shared, sentence, Oren, rate: rate, delegate: delegate)
+    let sayCommand = SayCommand(sentence, Oren, rate: rate, delegate: delegate)
     dispatch(sayCommand)
 }
 
 func hattori(_ sentence: String, rate: Float = teachingRate, delegate: AVSpeechSynthesizerDelegate? = nil) {
-    let sayCommand = SayCommand(Commands.shared, sentence, Hattori, rate: rate, delegate: delegate)
+    let sayCommand = SayCommand(sentence, Hattori, rate: rate, delegate: delegate)
     dispatch(sayCommand)
 }
