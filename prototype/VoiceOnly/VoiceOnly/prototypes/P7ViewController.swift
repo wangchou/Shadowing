@@ -72,13 +72,13 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         sentenceIndex = 0
         targetSentence = sentences[sentenceIndex]
 
-        cmd.startEngine(toSpeaker: true)
+        startEngine(toSpeaker: true)
         repeatAfterMe()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        cmd.stopEngine()
+        stopEngine()
     }
     
     // MARK: - Audio cmd Control
@@ -93,7 +93,7 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
             print("----------------------------------")
             let speakTime = getNow()
             self.teacher(targetSentence)
-            cmd.reduceBGMVolume()
+            reduceBGMVolume()
             listen(
                 listenDuration: (getNow() - speakTime) + listenPauseDuration,
                 resultHandler: self.speechResultHandler
@@ -127,7 +127,7 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
             DispatchQueue.main.async {
                 self.scoreDescLabel.text = ""
             }
-            cmd.restoreBGMVolume()
+            restoreBGMVolume()
             iHearYouSaid(saidTextView.text)
         }
     }
@@ -242,7 +242,7 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
             cmdQueue.async {
                 // meijia("恭喜你全破了。有人想和你說...")
                 // oren("きみのこと、大好きだよ", rate: teachingRate * 0.7, delegate: self)
-                cmd.stopEngine()
+                stopEngine()
             }
         } else {
             cmdQueue.async {
@@ -250,7 +250,7 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
             }
             scoreDescLabel.text = "遊戲結束"
             scoreDescLabel.textColor = UIColor.red
-            cmd.stopEngine()
+            stopEngine()
         }
     }
     

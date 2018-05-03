@@ -62,20 +62,38 @@ class Commands {
         micVolumeNode.volume = micOutVolume
         bgm.node.volume = 0.5
     }
-    
-    // MARK: - Public
-    func startEngine(toSpeaker: Bool = false) {
-        dispatch(StartEngineCommand(toSpeaker: toSpeaker))
-    }
-    
-    func stopEngine() {
-        dispatch(StopEngineCommand())
-    }
-    
-    func reduceBGMVolume() {
-        dispatch(ReduceBGMCommand())
-    }
-    func restoreBGMVolume() {
-        dispatch(RestoreBGMCommand())
-    }
+}
+
+// MARK: - Public
+func startEngine(toSpeaker: Bool = false) {
+    dispatch(StartEngineCommand(toSpeaker: toSpeaker))
+}
+
+func stopEngine() {
+    dispatch(StopEngineCommand())
+}
+
+func reduceBGMVolume() {
+    dispatch(ReduceBGMCommand())
+}
+func restoreBGMVolume() {
+    dispatch(RestoreBGMCommand())
+}
+
+func meijia(_ sentence: String) {
+    dispatch(SayCommand(sentence, MeiJia, rate: normalRate, delegate: nil))
+}
+
+func oren(_ sentence: String, rate: Float = teachingRate, delegate: AVSpeechSynthesizerDelegate? = nil) {
+    dispatch(SayCommand(sentence, Oren, rate: rate, delegate: delegate))
+}
+
+func hattori(_ sentence: String, rate: Float = teachingRate, delegate: AVSpeechSynthesizerDelegate? = nil) {
+    dispatch(SayCommand(sentence, Hattori, rate: rate, delegate: delegate))
+}
+
+func listen(listenDuration: Double,
+            resultHandler: @escaping (SFSpeechRecognitionResult?, Error?) -> Void
+    ) {
+    dispatch(ListenCommand(listenDuration: listenDuration, resultHandler: resultHandler))
 }

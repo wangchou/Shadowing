@@ -50,15 +50,3 @@ extension SayCommand {
         self.init(text: text, name: name, rate: rate, delegate: delegate)
     }
 }
-
-func meijia(_ sentence: String) {
-    dispatch(SayCommand(sentence, MeiJia, rate: normalRate, delegate: nil))
-}
-
-func oren(_ sentence: String, rate: Float = teachingRate, delegate: AVSpeechSynthesizerDelegate? = nil) {
-    dispatch(SayCommand(sentence, Oren, rate: rate, delegate: delegate))
-}
-
-func hattori(_ sentence: String, rate: Float = teachingRate, delegate: AVSpeechSynthesizerDelegate? = nil) {
-    dispatch(SayCommand(sentence, Hattori, rate: rate, delegate: delegate))
-}

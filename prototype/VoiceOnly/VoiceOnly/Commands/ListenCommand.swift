@@ -29,10 +29,3 @@ struct ListenCommand: Command {
         }
     }
 }
-
-func listen(listenDuration: Double,
-            resultHandler: @escaping (SFSpeechRecognitionResult?, Error?) -> Void
-    ) {
-    let listenCommand = ListenCommand(listenDuration: listenDuration, resultHandler: resultHandler)
-    dispatch(listenCommand)
-}

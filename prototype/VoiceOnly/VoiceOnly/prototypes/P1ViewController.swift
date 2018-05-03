@@ -11,16 +11,6 @@ import AVFoundation
 import UIKit
 import Speech
 
-// Prototype 1: 一個 run 10.9秒
-// Loop {
-//  説(請跟我說日文)
-//  日文
-//  複述
-//  説(我聽到你說)
-//  辨識出的 TTS
-//  分數
-// }
-
 fileprivate let isDev = false
 
 fileprivate let listenPauseDuration = 0.4
@@ -33,13 +23,13 @@ class P1ViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        cmd.startEngine(toSpeaker: false)
+        startEngine(toSpeaker: false)
         repeatAfterMe() 
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        cmd.stopEngine()
+        stopEngine()
     }
     
     func nextSentence() {
