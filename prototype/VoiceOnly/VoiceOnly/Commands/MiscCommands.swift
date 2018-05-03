@@ -43,9 +43,9 @@ struct RestoreBGMCommand: Command {
 
 struct StartEngineCommand: Command {
     let type = CommandType.startEngine
-    let context = Commands.shared
     let toSpeaker: Bool
     func exec() {
+        let context = Commands.shared
         do {
             context.isEngineRunning = true
             configureAudioSession(toSpeaker: toSpeaker)
@@ -59,8 +59,8 @@ struct StartEngineCommand: Command {
 
 struct StopEngineCommand: Command {
     let type = CommandType.stopEngine
-    let context = Commands.shared
     func exec() {
+        let context = Commands.shared
         context.isEngineRunning = false
         context.engine.stop()
         context.tts.stop()

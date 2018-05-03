@@ -11,20 +11,20 @@ import Speech
 
 struct SayCommand: Command {
     let type = CommandType.say
-    let context = Commands.shared
     let text: String
     let name: String
     let rate: Float
     let delegate: AVSpeechSynthesizerDelegate?
     
     func exec() {
+        let context = Commands.shared
         if !context.isEngineRunning {
             return
         }
         cmdGroup.enter()
         context.tts.say(text, name, rate: rate, delegate: delegate) {
             if(self.name == Hattori ) {
-                self.context.bgm.restoreVolume()
+                context.bgm.restoreVolume()
             }
             cmdGroup.leave()
         }
@@ -51,18 +51,14 @@ extension SayCommand {
     }
 }
 
-// Define Characters like renpy
 func meijia(_ sentence: String) {
-    let sayCommand = SayCommand(sentence, MeiJia, rate: normalRate, delegate: nil)
-    dispatch(sayCommand)
+    dispatch(SayCommand(sentence, MeiJia, rate: normalRate, delegate: nil))
 }
 
 func oren(_ sentence: String, rate: Float = teachingRate, delegate: AVSpeechSynthesizerDelegate? = nil) {
-    let sayCommand = SayCommand(sentence, Oren, rate: rate, delegate: delegate)
-    dispatch(sayCommand)
+    dispatch(SayCommand(sentence, Oren, rate: rate, delegate: delegate))
 }
 
 func hattori(_ sentence: String, rate: Float = teachingRate, delegate: AVSpeechSynthesizerDelegate? = nil) {
-    let sayCommand = SayCommand(sentence, Hattori, rate: rate, delegate: delegate)
-    dispatch(sayCommand)
+    dispatch(SayCommand(sentence, Hattori, rate: rate, delegate: delegate))
 }

@@ -19,7 +19,7 @@ func logger(_ cmd: Command) {
     case CommandType.listen:
         print("hear <<< ")
     default:
-        print("unlogging command")
+        print(cmd.type)
     }
 }
 
@@ -39,8 +39,7 @@ class Commands {
     var speechRecognizer: SpeechRecognizer = SpeechRecognizer()
     var bgm = BGM()
     var tts = TTS()
-    
-    public var isEngineRunning = false
+    var isEngineRunning = false
     
     // MARK: - Lifecycle
     private init() {
@@ -50,22 +49,17 @@ class Commands {
     }
     
     private func buildNodeGraph() {
-        // get nodes
         let mainMixer = engine.mainMixerNode
         let mic = engine.inputNode // only for real device, simulator will crash
 
-        // attach nodes
         engine.attach(bgm.node)
         engine.attach(micVolumeNode)
         
-        // connect nodes
         engine.connect(bgm.node, to: mainMixer, format: bgm.buffer.format)
         engine.connect(mic, to: micVolumeNode, format: mic.inputFormat(forBus: 0))
         engine.connect(micVolumeNode, to: mainMixer, format: micVolumeNode.outputFormat(forBus: 0))
 
         micVolumeNode.volume = micOutVolume
-        
-        // volume
         bgm.node.volume = 0.5
     }
     

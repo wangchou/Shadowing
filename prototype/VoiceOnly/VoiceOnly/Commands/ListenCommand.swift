@@ -11,18 +11,18 @@ import Speech
 
 struct ListenCommand: Command {
     let type = CommandType.listen
-    let context = Commands.shared
     let listenDuration: Double
     let resultHandler: (SFSpeechRecognitionResult?, Error?) -> Void
     
     func exec() {
+        let context = Commands.shared
         cmdGroup.enter()
         if !context.isEngineRunning {
             return
         }
         DispatchQueue.main.async {
-            self.context.speechRecognizer.start(
-                inputNode: self.context.engine.inputNode,
+            context.speechRecognizer.start(
+                inputNode: context.engine.inputNode,
                 stopAfterSeconds: self.listenDuration,
                 resultHandler: self.resultHandler
             )
