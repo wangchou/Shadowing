@@ -80,25 +80,10 @@ class SpeechRecognizer: NSObject {
         
         self.inputNode = inputNode
         let recordingFormat = inputNode.outputFormat(forBus: 0)
-        
-        // for replay, record into file for replay
-        do {
-            let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as NSString
-            let url = NSURL.init(string: path .appendingPathComponent("audio.caf"))
-            recordFile = try AVAudioFile(forWriting: url! as URL, settings: [:])
-        } catch {
-            print("open recoding file error")
-        }
-        
+
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
             // for recognition
             self.recognitionRequest?.append(buffer)
-            
-            do {
-                try self.recordFile.write(from: buffer)
-            } catch {
-                print("recordFile.writeFromBuffer error:", error)
-            }
         }
         self.isRunning = true
         

@@ -18,7 +18,6 @@
 		BEBDEDDC208EF15F00C18520 /* BGM.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD4208EF15E00C18520 /* BGM.swift */; };
 		BEBDEDDD208EF15F00C18520 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */; };
 		BEBDEDDE208EF15F00C18520 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD6208EF15E00C18520 /* Request.swift */; };
-		BEBDEDDF208EF15F00C18520 /* ReplayUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD7208EF15E00C18520 /* ReplayUnit.swift */; };
 		BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD8208EF15F00C18520 /* constants.swift */; };
 		BEBDEDE3208EF17100C18520 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBDEDE2208EF17100C18520 /* AVFoundation.framework */; };
 		BEBDEDE5208EFE1700C18520 /* Commands.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDE4208EFE1700C18520 /* Commands.swift */; };
@@ -41,7 +40,6 @@
 		BEBDEDD4208EF15E00C18520 /* BGM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGM.swift; sourceTree = "<group>"; };
 		BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		BEBDEDD6208EF15E00C18520 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
-		BEBDEDD7208EF15E00C18520 /* ReplayUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplayUnit.swift; sourceTree = "<group>"; };
 		BEBDEDD8208EF15F00C18520 /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		BEBDEDE2208EF17100C18520 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		BEBDEDE4208EFE1700C18520 /* Commands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commands.swift; sourceTree = "<group>"; };
@@ -110,7 +108,6 @@
 			isa = PBXGroup;
 			children = (
 				BEBDEDD4208EF15E00C18520 /* BGM.swift */,
-				BEBDEDD7208EF15E00C18520 /* ReplayUnit.swift */,
 				BEBDEDD6208EF15E00C18520 /* Request.swift */,
 				BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */,
 				BEBDEDD2208EF15E00C18520 /* TTS.swift */,
@@ -201,7 +198,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEBDEDE5208EFE1700C18520 /* Commands.swift in Sources */,
-				BEBDEDDF208EF15F00C18520 /* ReplayUnit.swift in Sources */,
 				BEBDEDD9208EF15F00C18520 /* utilities.swift in Sources */,
 				BEBDEDF6208F28BD00C18520 /* P7ViewController.swift in Sources */,
 				BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */,

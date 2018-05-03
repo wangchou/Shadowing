@@ -28,7 +28,6 @@ class Commands {
     
     var engine = AVAudioEngine()
     var micVolumeNode = AVAudioMixerNode()
-    var replayUnit: ReplayUnit!
     var speechRecognizer: SpeechRecognizer = SpeechRecognizer()
     var bgm = BGM()
     var tts = TTS()
@@ -46,19 +45,15 @@ class Commands {
         // get nodes
         let mainMixer = engine.mainMixerNode
         let mic = engine.inputNode // only for real device, simulator will crash
-        let format = mic.outputFormat(forBus: 0)
-        replayUnit = ReplayUnit()
-        
+
         // attach nodes
         engine.attach(bgm.node)
-        engine.attach(replayUnit.node)
         engine.attach(micVolumeNode)
         
         // connect nodes
         engine.connect(bgm.node, to: mainMixer, format: bgm.buffer.format)
         engine.connect(mic, to: micVolumeNode, format: mic.inputFormat(forBus: 0))
         engine.connect(micVolumeNode, to: mainMixer, format: micVolumeNode.outputFormat(forBus: 0))
-        engine.connect(replayUnit.node, to: mainMixer, format: format)
 
         micVolumeNode.volume = micOutVolume
         
@@ -122,15 +117,6 @@ class Commands {
                 resultHandler: resultHandler
             )
         }
-    }
-    
-    // Warning: use it in myQueue.async {} block
-    // It blocks current thead !!!
-    // Do not call it on main thread
-    func replay() {
-        cmdGroup.enter()
-        replayUnit.play() { cmdGroup.leave() }
-        cmdGroup.wait()
     }
 }
 
