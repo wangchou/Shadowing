@@ -12,7 +12,7 @@ import UIKit
 // Prototype 1: 全語音、只能用講電話的方式
 class P1ViewController: UIViewController {
     let game = VoiceOnlyFlow.shared
-    
+    let ec = EventCenter.shared
     override func viewDidLoad() {
         super.viewDidLoad()
         game.play()

@@ -10,7 +10,6 @@ import Foundation
 import Speech
 
 fileprivate let context = CommandContext.shared
-
 class SayCommand: NSObject, Command, AVSpeechSynthesizerDelegate {
     let type = CommandType.say
     let text: String
@@ -24,15 +23,18 @@ class SayCommand: NSObject, Command, AVSpeechSynthesizerDelegate {
     }
     
     func exec() {
+        postEvent(.sayStarted, self)
         let context = CommandContext.shared
         let tmpTime = getNow()
         if !context.isEngineRunning {
             context.speakDuration = 0
+            postEvent(.sayEnded, self)
             cmdGroup.leave()
             return
         }
         context.tts.say(text, name, rate: rate, delegate: self) {
             context.speakDuration = getNow() - tmpTime
+            postEvent(.sayEnded, self)
             cmdGroup.leave()
         }
     }
@@ -55,7 +57,8 @@ class SayCommand: NSObject, Command, AVSpeechSynthesizerDelegate {
                            utterance: AVSpeechUtterance) {
         let speechString = utterance.speechString as NSString
         let token = speechString.substring(with: characterRange)
-        print(token, terminator: "")
+        //print(token, terminator: "")
+        postEvent(.stringSaid, token)
     }
     
     func speechSynthesizer(
@@ -63,7 +66,7 @@ class SayCommand: NSObject, Command, AVSpeechSynthesizerDelegate {
         didFinish utterance: AVSpeechUtterance
         ) {
         guard context.tts.completionHandler != nil else { return }
-        print("")
+        //print("")
         context.tts.completionHandler!()
     }
 }

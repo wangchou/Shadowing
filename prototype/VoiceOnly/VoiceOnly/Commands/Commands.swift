@@ -23,21 +23,9 @@ protocol Command {
     func exec()
 }
 
-func logger(_ cmd: Command) {
-    switch cmd.type {
-    case .say:
-        (cmd as! SayCommand).log()
-    case .listen:
-        print("hear <<< ")
-    default:
-        print(cmd.type)
-    }
-}
-
 func dispatch(_ cmd: Command) {
     cmdGroup.wait()
     cmdGroup.enter()
-    logger(cmd)
     cmd.exec()
     cmdGroup.wait()
 }
