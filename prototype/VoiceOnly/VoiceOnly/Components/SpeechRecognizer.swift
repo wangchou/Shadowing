@@ -75,6 +75,7 @@ class SpeechRecognizer: NSObject {
         }
         
         recognitionRequest.shouldReportPartialResults = true //false
+        recognitionRequest.taskHint = .dictation
 
         recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest, resultHandler: resultHandler)
         

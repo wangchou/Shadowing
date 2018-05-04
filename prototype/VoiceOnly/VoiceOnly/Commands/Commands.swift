@@ -42,6 +42,12 @@ class Commands {
     var tts = TTS()
     var isEngineRunning = false
     
+    var sentences: [String] = []
+    var sentenceIndex: Int = 0
+    var targetSentence: String = ""
+    var saidSentence: String = ""
+    var isDev = true
+    
     // MARK: - Lifecycle
     private init() {
         configureAudioSession()
@@ -62,6 +68,23 @@ class Commands {
 
         micVolumeNode.volume = micOutVolume
         bgm.node.volume = 0.5
+    }
+    
+    func loadLearningSentences(_ sentences: [String]) {
+        self.sentenceIndex = 0
+        self.sentences = sentences
+        self.targetSentence = sentences[0]
+    }
+    
+    func nextSentence() -> Bool {
+        sentenceIndex = sentenceIndex + 1
+        if sentenceIndex < sentences.count {
+            targetSentence = sentences[sentenceIndex]
+            saidSentence = ""
+            return true
+        } else {
+            return false
+        }
     }
 }
 
@@ -93,8 +116,8 @@ func hattori(_ sentence: String, rate: Float = teachingRate, delegate: AVSpeechS
     dispatch(SayCommand(sentence, Hattori, rate: rate, delegate: delegate))
 }
 
-func listen(listenDuration: Double,
-            resultHandler: @escaping (SFSpeechRecognitionResult?, Error?) -> Void
-    ) {
-    dispatch(ListenCommand(listenDuration: listenDuration, resultHandler: resultHandler))
+func listen(listenDuration: Double) -> String {
+    dispatch(ListenCommand(listenDuration: listenDuration))
+    cmdGroup.wait()
+    return Commands.shared.saidSentence
 }

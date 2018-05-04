@@ -12,7 +12,6 @@ import Speech
 struct ListenCommand: Command {
     let type = CommandType.listen
     let listenDuration: Double
-    let resultHandler: (SFSpeechRecognitionResult?, Error?) -> Void
     
     func exec() {
         let context = Commands.shared
@@ -27,5 +26,23 @@ struct ListenCommand: Command {
                 resultHandler: self.resultHandler
             )
         }
+    }
+    
+    func resultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
+        let context = Commands.shared
+        if !context.isEngineRunning {
+            return
+        }
+        
+        if let result = result, result.isFinal {
+            context.saidSentence = result.bestTranscription.formattedString
+            cmdGroup.leave()
+        }
+        
+        if error != nil {
+            context.saidSentence = context.isDev ? "おねさま" : ""
+            cmdGroup.leave()
+        }
+        
     }
 }
