@@ -62,7 +62,7 @@ fileprivate func getKana(
 // Warning: use it in myQueue.async {} block
 // It blocks current thead !!!
 // Do not call it on main thread
-func getSpeechScore(
+func calculateScore(
     _ targetSentence: String,
     _ saidSentence: String
 ) -> Int {

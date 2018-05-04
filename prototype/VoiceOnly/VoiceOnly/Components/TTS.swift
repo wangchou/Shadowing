@@ -9,11 +9,10 @@
 import Foundation
 import AVFoundation
 
-class TTS: NSObject, AVSpeechSynthesizerDelegate {
+class TTS {
     var synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
     var completionHandler: (() -> Void)? = nil
     
-    // MARK: - say and stop
     func say(
         _ text: String,
         _ name: String,
@@ -21,11 +20,7 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         delegate: AVSpeechSynthesizerDelegate? = nil,
         completionHandler: @escaping () -> Void = {}
     ) {
-        if delegate != nil {
-            synthesizer.delegate = delegate
-        } else {
-            synthesizer.delegate = self
-        }
+        synthesizer.delegate = delegate
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(identifier: name)
         utterance.rate = rate
@@ -36,22 +31,5 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
     
     func stop() {
         synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
-    }
-    
-    // MARK: - AVSpeechSynthesizerDelegate
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
-                           willSpeakRangeOfSpeechString characterRange: NSRange,
-                           utterance: AVSpeechUtterance) {
-        let speechString = utterance.speechString as NSString
-        print(speechString.substring(with: characterRange), terminator: "")
-    }
-    
-    func speechSynthesizer(
-        _ synthesizer: AVSpeechSynthesizer,
-        didFinish utterance: AVSpeechUtterance
-    ) {
-        guard let completionHandler = completionHandler else { return }
-        print("")
-        completionHandler()
     }
 }

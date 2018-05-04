@@ -11,7 +11,7 @@ import UIKit
 
 // Prototype 1: 全語音、只能用講電話的方式
 class P1ViewController: UIViewController {
-    let game = TalkingPhoneFlow.shared
+    let game = VoiceOnlyFlow.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()

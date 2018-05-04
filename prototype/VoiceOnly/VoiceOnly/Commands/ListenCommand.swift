@@ -11,10 +11,10 @@ import Speech
 
 struct ListenCommand: Command {
     let type = CommandType.listen
-    let listenDuration: Double
+    let duration: Double
     
     func exec() {
-        let context = Commands.shared
+        let context = CommandContext.shared
         if !context.isEngineRunning {
             cmdGroup.leave()
             return
@@ -22,14 +22,14 @@ struct ListenCommand: Command {
         DispatchQueue.main.async {
             context.speechRecognizer.start(
                 inputNode: context.engine.inputNode,
-                stopAfterSeconds: self.listenDuration,
+                stopAfterSeconds: self.duration,
                 resultHandler: self.resultHandler
             )
         }
     }
     
     func resultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
-        let context = Commands.shared
+        let context = CommandContext.shared
         if !context.isEngineRunning {
             return
         }

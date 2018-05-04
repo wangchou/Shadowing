@@ -9,20 +9,30 @@
 import Foundation
 import Speech
 
-struct SayCommand: Command {
+fileprivate let context = CommandContext.shared
+
+class SayCommand: NSObject, Command, AVSpeechSynthesizerDelegate {
     let type = CommandType.say
     let text: String
     let name: String
     let rate: Float
-    let delegate: AVSpeechSynthesizerDelegate?
+    
+    init(_ text: String, _ name: String, rate: Float) {
+        self.text = text
+        self.name = name
+        self.rate = rate
+    }
     
     func exec() {
-        let context = Commands.shared
+        let context = CommandContext.shared
+        let tmpTime = getNow()
         if !context.isEngineRunning {
+            context.speakDuration = 0
             cmdGroup.leave()
             return
         }
-        context.tts.say(text, name, rate: rate, delegate: delegate) {
+        context.tts.say(text, name, rate: rate, delegate: self) {
+            context.speakDuration = getNow() - tmpTime
             cmdGroup.leave()
         }
     }
@@ -39,11 +49,21 @@ struct SayCommand: Command {
             return
         }
     }
-}
-
-// for keeping the default memberwise initializer
-extension SayCommand {
-    init(_ text: String, _ name: String, rate: Float, delegate: AVSpeechSynthesizerDelegate?) {
-        self.init(text: text, name: name, rate: rate, delegate: delegate)
+    
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
+                           willSpeakRangeOfSpeechString characterRange: NSRange,
+                           utterance: AVSpeechUtterance) {
+        let speechString = utterance.speechString as NSString
+        let token = speechString.substring(with: characterRange)
+        print(token, terminator: "")
+    }
+    
+    func speechSynthesizer(
+        _ synthesizer: AVSpeechSynthesizer,
+        didFinish utterance: AVSpeechUtterance
+        ) {
+        guard context.tts.completionHandler != nil else { return }
+        print("")
+        context.tts.completionHandler!()
     }
 }

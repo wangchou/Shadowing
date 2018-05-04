@@ -9,21 +9,16 @@
 import Foundation
 import Speech
 
-let RECORD_URL = URL(fileURLWithPath: Bundle.main.path(forResource: "recoding", ofType: "caf")!)
+enum SpeechRecognitionError: Error {
+    case unauthorized
+}
 
 class SpeechRecognizer: NSObject {
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ja-JP"))!
-    
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
-    
     private var recognitionTask: SFSpeechRecognitionTask?
-    
-    public var recordFile: AVAudioFile!
-    
     private var isRunning: Bool = false
-    
     private var isAuthorized: Bool = false
-    
     private var inputNode: AVAudioNode!
     
     // MARK: - Private Methods
@@ -60,8 +55,7 @@ class SpeechRecognizer: NSObject {
                resultHandler: @escaping (SFSpeechRecognitionResult?, Error?) -> Void
                ) {
         if(!isAuthorized) {
-            print("speech service is unauthorized, cannot start recogniztion")
-            return
+            return resultHandler(nil, SpeechRecognitionError.unauthorized)
         }
    
         if let recognitionTask = recognitionTask {
@@ -82,15 +76,16 @@ class SpeechRecognizer: NSObject {
         self.inputNode = inputNode
         let recordingFormat = inputNode.outputFormat(forBus: 0)
 
-        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
-            // for recognition
-            self.recognitionRequest?.append(buffer)
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) {
+            (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
+                self.recognitionRequest?.append(buffer)
         }
-        self.isRunning = true
         
         Timer.scheduledTimer(withTimeInterval: stopAfterSeconds, repeats: false) { timer in
             self.endAudio()
         }
+        
+        self.isRunning = true
     }
     
     func endAudio() {

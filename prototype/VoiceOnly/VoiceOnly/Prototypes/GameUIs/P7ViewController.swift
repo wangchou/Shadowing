@@ -14,8 +14,10 @@ import Speech
 
 fileprivate let listenPauseDuration = 0.4
 fileprivate let isDev = true //false
-fileprivate let cmd = Commands.shared
+fileprivate let context = CommandContext.shared
+fileprivate var sentenceIndex = 0
 fileprivate var targetSentence = sentences[sentenceIndex]
+
 
 // Prototype 7: prototype 6 + 遊戲畫面。在 getScore 後 update UI
 enum ScoreDesc {
@@ -76,24 +78,23 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     // MARK: - Audio cmd Control
     func teacher(_ sentence: String) {
         focusTextView(isTargetView: true)
-        hattori(sentence, delegate: self)
+        hattori(sentence)
         focusTextView(isTargetView: false)
     }
     
     func repeatAfterMe() {
         cmdQueue.async {
             print("----------------------------------")
-            let speakTime = getNow()
             self.teacher(targetSentence)
             reduceBGMVolume()
-            listen(listenDuration: (getNow() - speakTime) + listenPauseDuration)
+            _ = listen(duration: context.speakDuration + listenPauseDuration)
         }
     }
     
     func iHearYouSaid(_ saidSentence: String) {
         cmdQueue.async {
             print(saidSentence)
-            let score = getSpeechScore(targetSentence, saidSentence)
+            let score = calculateScore(targetSentence, saidSentence)
             self.updateUIByScore(score)
             oren(self.getScoreText(score))
             DispatchQueue.main.async {
@@ -135,7 +136,7 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     }
     
     func speechResultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
-        if cmd.isEngineRunning {
+        if context.isEngineRunning {
             onRecognitionResult(result)
             onRecognitionError(error)
         }
@@ -155,9 +156,9 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         _ synthesizer: AVSpeechSynthesizer,
         didFinish utterance: AVSpeechUtterance
         ) {
-        guard cmd.tts.completionHandler != nil else { return }
+        guard context.tts.completionHandler != nil else { return }
         print("")
-        cmd.tts.completionHandler!()
+        context.tts.completionHandler!()
     }
     
     

@@ -10,8 +10,9 @@
 		BE17FB37209B051100D23F22 /* SayCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB36209B051100D23F22 /* SayCommand.swift */; };
 		BE17FB3A209B0F7800D23F22 /* ListenCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB39209B0F7800D23F22 /* ListenCommand.swift */; };
 		BE17FB3C209B18C800D23F22 /* MiscCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB3B209B18C800D23F22 /* MiscCommands.swift */; };
-		BE17FB3E209B19B200D23F22 /* Commands.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB3D209B19B200D23F22 /* Commands.swift */; };
-		BE6AF37E209C145200CBDB63 /* TalkingPhoneFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6AF37D209C145200CBDB63 /* TalkingPhoneFlow.swift */; };
+		BE17FB3E209B19B200D23F22 /* CommandContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB3D209B19B200D23F22 /* CommandContext.swift */; };
+		BE8C8F02209C476A00E32F09 /* VoiceOnlyFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8C8F01209C476A00E32F09 /* VoiceOnlyFlow.swift */; };
+		BE9A6539209C41930072C4D8 /* Commands.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9A6538209C41930072C4D8 /* Commands.swift */; };
 		BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */; };
 		BEBDEDC2208EF09F00C18520 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDC1208EF09F00C18520 /* ViewController.swift */; };
 		BEBDEDC5208EF09F00C18520 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEBDEDC3208EF09F00C18520 /* Main.storyboard */; };
@@ -34,8 +35,9 @@
 		BE17FB36209B051100D23F22 /* SayCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SayCommand.swift; sourceTree = "<group>"; };
 		BE17FB39209B0F7800D23F22 /* ListenCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenCommand.swift; sourceTree = "<group>"; };
 		BE17FB3B209B18C800D23F22 /* MiscCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscCommands.swift; sourceTree = "<group>"; };
-		BE17FB3D209B19B200D23F22 /* Commands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Commands.swift; sourceTree = "<group>"; };
-		BE6AF37D209C145200CBDB63 /* TalkingPhoneFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkingPhoneFlow.swift; sourceTree = "<group>"; };
+		BE17FB3D209B19B200D23F22 /* CommandContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandContext.swift; sourceTree = "<group>"; };
+		BE8C8F01209C476A00E32F09 /* VoiceOnlyFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceOnlyFlow.swift; sourceTree = "<group>"; };
+		BE9A6538209C41930072C4D8 /* Commands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commands.swift; sourceTree = "<group>"; };
 		BEBDEDBC208EF09F00C18520 /* VoiceOnly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceOnly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEBDEDC1208EF09F00C18520 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -71,7 +73,8 @@
 		BE17FB38209B0F5F00D23F22 /* Commands */ = {
 			isa = PBXGroup;
 			children = (
-				BE17FB3D209B19B200D23F22 /* Commands.swift */,
+				BE17FB3D209B19B200D23F22 /* CommandContext.swift */,
+				BE9A6538209C41930072C4D8 /* Commands.swift */,
 				BE17FB36209B051100D23F22 /* SayCommand.swift */,
 				BE17FB39209B0F7800D23F22 /* ListenCommand.swift */,
 				BE17FB3B209B18C800D23F22 /* MiscCommands.swift */,
@@ -82,7 +85,7 @@
 		BE6AF37F209C146B00CBDB63 /* GameFlows */ = {
 			isa = PBXGroup;
 			children = (
-				BE6AF37D209C145200CBDB63 /* TalkingPhoneFlow.swift */,
+				BE8C8F01209C476A00E32F09 /* VoiceOnlyFlow.swift */,
 			);
 			path = GameFlows;
 			sourceTree = "<group>";
@@ -236,17 +239,18 @@
 				BE17FB3C209B18C800D23F22 /* MiscCommands.swift in Sources */,
 				BEBDEDD9208EF15F00C18520 /* utilities.swift in Sources */,
 				BEBDEDF6208F28BD00C18520 /* P7ViewController.swift in Sources */,
+				BE9A6539209C41930072C4D8 /* Commands.swift in Sources */,
 				BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */,
 				BEBDEDDC208EF15F00C18520 /* BGM.swift in Sources */,
 				BEBDEDC2208EF09F00C18520 /* ViewController.swift in Sources */,
+				BE8C8F02209C476A00E32F09 /* VoiceOnlyFlow.swift in Sources */,
 				BEBDEDEA208F23DE00C18520 /* MainNavigationController.swift in Sources */,
 				BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */,
 				BEBDEDDE208EF15F00C18520 /* Request.swift in Sources */,
 				BEBDEDE8208F227C00C18520 /* P1ViewController.swift in Sources */,
-				BE17FB3E209B19B200D23F22 /* Commands.swift in Sources */,
+				BE17FB3E209B19B200D23F22 /* CommandContext.swift in Sources */,
 				BE17FB3A209B0F7800D23F22 /* ListenCommand.swift in Sources */,
 				BEBDEDDA208EF15F00C18520 /* TTS.swift in Sources */,
-				BE6AF37E209C145200CBDB63 /* TalkingPhoneFlow.swift in Sources */,
 				BEBDEDDD208EF15F00C18520 /* SpeechRecognizer.swift in Sources */,
 				BE17FB37209B051100D23F22 /* SayCommand.swift in Sources */,
 			);
