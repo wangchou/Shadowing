@@ -10,6 +10,13 @@ import Foundation
 import Speech
 
 fileprivate let context = CommandContext.shared
+
+extension EventType {
+    static let sayStarted = EventType("sayStarted")
+    static let stringSaid = EventType("stringSaid")
+    static let sayEnded = EventType("sayEnded")
+}
+
 class SayCommand: NSObject, Command, AVSpeechSynthesizerDelegate {
     let type = CommandType.say
     let text: String

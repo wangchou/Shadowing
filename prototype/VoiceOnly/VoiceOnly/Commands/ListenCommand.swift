@@ -9,14 +9,22 @@
 import Foundation
 import Speech
 
+extension EventType {
+    static let listenStarted = EventType("listenStarted")
+    static let stringRecognized = EventType("stringRecognized")
+    static let listenEnded = EventType("listenEnded")
+}
+
 struct ListenCommand: Command {
     let type = CommandType.listen
     let duration: Double
     
     func exec() {
+        postEvent(.listenStarted, "")
         let context = CommandContext.shared
         if !context.isEngineRunning {
             cmdGroup.leave()
+            postEvent(.listenEnded, "")
             return
         }
         DispatchQueue.main.async {
@@ -34,13 +42,19 @@ struct ListenCommand: Command {
             return
         }
         
-        if let result = result, result.isFinal {
-            context.saidSentence = result.bestTranscription.formattedString
-            cmdGroup.leave()
+        if let result = result {
+            if result.isFinal {
+                context.saidSentence = result.bestTranscription.formattedString
+                postEvent(.listenEnded, context.saidSentence)
+                cmdGroup.leave()
+            } else {
+                postEvent(.stringRecognized, result.bestTranscription.formattedString)
+            }
         }
         
         if error != nil {
             context.saidSentence = context.isDev ? "おねさま" : ""
+            postEvent(.listenEnded, context.saidSentence)
             cmdGroup.leave()
         }
         
