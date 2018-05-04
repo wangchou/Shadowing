@@ -8,43 +8,46 @@
 
 import Foundation
 
-extension Notification.Name {
-    static let sayStarted = Notification.Name("sayStarted")
-    static let stringSaid = Notification.Name("stringSaid")
-    static let sayEnded = Notification.Name("sayEnded")
+typealias EventType = Notification.Name
+typealias Event = Notification
+
+extension EventType {
+    static let sayStarted = EventType("sayStarted")
+    static let stringSaid = EventType("stringSaid")
+    static let sayEnded = EventType("sayEnded")
 }
 
-func postEvent (_ name: Notification.Name, _ object: Any) {
-    NotificationCenter.default.post(name: name, object: object)
+func postEvent (_ type: EventType, _ object: Any) {
+    NotificationCenter.default.post(name: type, object: object)
 }
 
 class EventCenter {
     static let shared = EventCenter()
     
     init() {
-        observe(.sayStarted, selector: #selector(onSayStarted(notification:)))
-        observe(.stringSaid, selector: #selector(onStringSaid(notification:)))
-        observe(.sayEnded, selector: #selector(onSayEnded(notification:)))
+        observe(.sayStarted, #selector(onSayStarted(_:)))
+        observe(.stringSaid, #selector(onStringSaid(_:)))
+        observe(.sayEnded, #selector(onSayEnded(_:)))
     }
     
-    func observe(_ name: Notification.Name, selector: Selector) {
+    func observe(_ type: EventType, _ eventHandler: Selector) {
         NotificationCenter.default.addObserver(
             self,
-            selector: selector,
-            name: name,
+            selector: eventHandler,
+            name: type,
             object: nil
         )
     }
     
-    @objc func onSayStarted(notification: Notification) {
-        (notification.object as! SayCommand).log()
+    @objc func onSayStarted(_ event: Event) {
+        (event.object as! SayCommand).log()
     }
     
-    @objc func onStringSaid(notification: Notification) {
-        print(notification.object as! String, terminator: "")
+    @objc func onStringSaid(_ event: Event) {
+        print(event.object as! String, terminator: "")
     }
     
-    @objc func onSayEnded(notification: Notification) {
+    @objc func onSayEnded(_ event: Event) {
         print("")
     }
 }
