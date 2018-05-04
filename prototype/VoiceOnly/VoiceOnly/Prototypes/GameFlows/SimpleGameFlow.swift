@@ -8,16 +8,11 @@
 
 import Foundation
 
-protocol GameFlow {
-    func play()
-    func stop()
-}
-
 fileprivate let pauseDuration = 0.4
 fileprivate let context = CommandContext.shared
 
-class VoiceOnlyFlow: GameFlow {
-    static let shared = VoiceOnlyFlow()
+class SimpleGameFlow: GameFlow {
+    static let shared = SimpleGameFlow()
     
     func play() {
         startEngine(toSpeaker: false)
@@ -29,17 +24,8 @@ class VoiceOnlyFlow: GameFlow {
     private func learnNext() {
         cmdQueue.async {
             let targetString = context.targetString
-            meijia("請跟著唸日文")
             hattori(targetString)
             let userSaidString = listen(duration: context.speakDuration + pauseDuration)
-            
-            if(userSaidString == "") {
-                meijia("聽不清楚、再一次。")
-                self.learnNext()
-                return
-            }
-            meijia("我聽到你說")
-            oren(userSaidString)
             let score = calculateScore(targetString, userSaidString)
             meijia("\(score)分")
             if(context.nextSentence()) {

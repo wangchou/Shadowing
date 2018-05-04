@@ -15,16 +15,29 @@ func postEvent (_ type: EventType, _ object: Any) {
     NotificationCenter.default.post(name: type, object: object)
 }
 
+fileprivate typealias EventDelegate = EventCenter
+
+fileprivate extension Selector {
+    static let sayStarted = #selector(EventDelegate.onSayStarted(_:))
+    static let stringSaid = #selector(EventDelegate.onStringSaid(_:))
+    static let sayEnded = #selector(EventDelegate.onSayEnded(_:))
+    static let listenStarted = #selector(EventDelegate.onListenEnded(_:))
+    static let stringRecognized = #selector(EventDelegate.onStringRecognized(_:))
+    static let listenEnded = #selector(EventDelegate.onListenEnded(_:))
+    static let scoreCalculated = #selector(EventDelegate.onScoreCalculated(_:))
+}
+
 class EventCenter {
     static let shared = EventCenter()
     
     init() {
-        observe(.sayStarted, #selector(onSayStarted(_:)))
-        observe(.stringSaid, #selector(onStringSaid(_:)))
-        observe(.sayEnded, #selector(onSayEnded(_:)))
-        observe(.listenStarted, #selector(onListenStarted(_:)))
-        observe(.stringRecognized, #selector(onStringRecognized(_:)))
-        observe(.listenEnded, #selector(onListenEnded(_:)))
+        observe(.sayStarted, .sayStarted)
+        observe(.stringSaid, .stringSaid)
+        observe(.sayEnded, .sayEnded)
+        observe(.listenStarted, .listenStarted)
+        observe(.stringRecognized, .stringRecognized)
+        observe(.listenEnded, .listenEnded)
+        observe(.scoreCalculated, .scoreCalculated)
     }
     
     func observe(_ type: EventType, _ eventHandler: Selector) {
@@ -60,6 +73,11 @@ class EventCenter {
     
     @objc func onListenEnded(_ event: Event) {
         print(event.object as! String)
+    }
+    
+    // onScore
+    @objc func onScoreCalculated(_ event: Event) {
+        print("score calculated: \(event.object as! Int)")
     }
 }
 

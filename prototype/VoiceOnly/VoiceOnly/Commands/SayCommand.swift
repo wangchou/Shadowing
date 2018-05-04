@@ -64,7 +64,6 @@ class SayCommand: NSObject, Command, AVSpeechSynthesizerDelegate {
                            utterance: AVSpeechUtterance) {
         let speechString = utterance.speechString as NSString
         let token = speechString.substring(with: characterRange)
-        //print(token, terminator: "")
         postEvent(.stringSaid, token)
     }
     
@@ -73,7 +72,6 @@ class SayCommand: NSObject, Command, AVSpeechSynthesizerDelegate {
         didFinish utterance: AVSpeechUtterance
         ) {
         guard context.tts.completionHandler != nil else { return }
-        //print("")
         context.tts.completionHandler!()
     }
 }

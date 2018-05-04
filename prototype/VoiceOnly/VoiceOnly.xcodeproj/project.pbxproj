@@ -12,6 +12,7 @@
 		BE17FB3C209B18C800D23F22 /* MiscCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB3B209B18C800D23F22 /* MiscCommands.swift */; };
 		BE17FB3E209B19B200D23F22 /* CommandContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB3D209B19B200D23F22 /* CommandContext.swift */; };
 		BE65A939209C6E67006645CA /* EventCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65A938209C6E67006645CA /* EventCenter.swift */; };
+		BE65A93B209C8696006645CA /* SimpleGameFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65A93A209C8696006645CA /* SimpleGameFlow.swift */; };
 		BE8C8F02209C476A00E32F09 /* VoiceOnlyFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8C8F01209C476A00E32F09 /* VoiceOnlyFlow.swift */; };
 		BE9A6539209C41930072C4D8 /* Commands.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9A6538209C41930072C4D8 /* Commands.swift */; };
 		BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */; };
@@ -24,7 +25,7 @@
 		BEBDEDDB208EF15F00C18520 /* drumLoop.caf in Resources */ = {isa = PBXBuildFile; fileRef = BEBDEDD3208EF15E00C18520 /* drumLoop.caf */; };
 		BEBDEDDC208EF15F00C18520 /* BGM.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD4208EF15E00C18520 /* BGM.swift */; };
 		BEBDEDDD208EF15F00C18520 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */; };
-		BEBDEDDE208EF15F00C18520 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD6208EF15E00C18520 /* Request.swift */; };
+		BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */; };
 		BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD8208EF15F00C18520 /* constants.swift */; };
 		BEBDEDE3208EF17100C18520 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBDEDE2208EF17100C18520 /* AVFoundation.framework */; };
 		BEBDEDE8208F227C00C18520 /* P1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDE7208F227C00C18520 /* P1ViewController.swift */; };
@@ -38,6 +39,7 @@
 		BE17FB3B209B18C800D23F22 /* MiscCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscCommands.swift; sourceTree = "<group>"; };
 		BE17FB3D209B19B200D23F22 /* CommandContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandContext.swift; sourceTree = "<group>"; };
 		BE65A938209C6E67006645CA /* EventCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCenter.swift; sourceTree = "<group>"; };
+		BE65A93A209C8696006645CA /* SimpleGameFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleGameFlow.swift; sourceTree = "<group>"; };
 		BE8C8F01209C476A00E32F09 /* VoiceOnlyFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceOnlyFlow.swift; sourceTree = "<group>"; };
 		BE9A6538209C41930072C4D8 /* Commands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commands.swift; sourceTree = "<group>"; };
 		BEBDEDBC208EF09F00C18520 /* VoiceOnly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceOnly.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,7 +54,7 @@
 		BEBDEDD3208EF15E00C18520 /* drumLoop.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = drumLoop.caf; sourceTree = "<group>"; };
 		BEBDEDD4208EF15E00C18520 /* BGM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGM.swift; sourceTree = "<group>"; };
 		BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
-		BEBDEDD6208EF15E00C18520 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculateScore.swift; sourceTree = "<group>"; };
 		BEBDEDD8208EF15F00C18520 /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		BEBDEDE2208EF17100C18520 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		BEBDEDE7208F227C00C18520 /* P1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P1ViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 		BE17FB38209B0F5F00D23F22 /* Commands */ = {
 			isa = PBXGroup;
 			children = (
+				BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */,
 				BE17FB3D209B19B200D23F22 /* CommandContext.swift */,
 				BE9A6538209C41930072C4D8 /* Commands.swift */,
 				BE17FB36209B051100D23F22 /* SayCommand.swift */,
@@ -89,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				BE8C8F01209C476A00E32F09 /* VoiceOnlyFlow.swift */,
+				BE65A93A209C8696006645CA /* SimpleGameFlow.swift */,
 			);
 			path = GameFlows;
 			sourceTree = "<group>";
@@ -150,7 +154,6 @@
 			isa = PBXGroup;
 			children = (
 				BEBDEDD4208EF15E00C18520 /* BGM.swift */,
-				BEBDEDD6208EF15E00C18520 /* Request.swift */,
 				BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */,
 				BEBDEDD2208EF15E00C18520 /* TTS.swift */,
 				BEBDEDD1208EF15E00C18520 /* utilities.swift */,
@@ -250,7 +253,8 @@
 				BE8C8F02209C476A00E32F09 /* VoiceOnlyFlow.swift in Sources */,
 				BEBDEDEA208F23DE00C18520 /* MainNavigationController.swift in Sources */,
 				BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */,
-				BEBDEDDE208EF15F00C18520 /* Request.swift in Sources */,
+				BE65A93B209C8696006645CA /* SimpleGameFlow.swift in Sources */,
+				BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */,
 				BEBDEDE8208F227C00C18520 /* P1ViewController.swift in Sources */,
 				BE17FB3E209B19B200D23F22 /* CommandContext.swift in Sources */,
 				BE17FB3A209B0F7800D23F22 /* ListenCommand.swift in Sources */,

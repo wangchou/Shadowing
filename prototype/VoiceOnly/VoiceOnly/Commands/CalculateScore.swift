@@ -58,6 +58,10 @@ fileprivate func getKana(
     }
 }
 
+extension EventType {
+    static let scoreCalculated = EventType("scoreCalculated")
+}
+
 // MARK: - Public
 // Warning: use it in myQueue.async {} block
 // It blocks current thead !!!
@@ -98,6 +102,6 @@ func calculateScore(
         cmdGroup.leave()
     }
     cmdGroup.wait()
-    
+    postEvent(.scoreCalculated, score)
     return score
 }
