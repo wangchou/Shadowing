@@ -25,6 +25,7 @@ fileprivate extension Selector {
     static let stringRecognized = #selector(EventDelegate.onStringRecognized(_:))
     static let listenEnded = #selector(EventDelegate.onListenEnded(_:))
     static let scoreCalculated = #selector(EventDelegate.onScoreCalculated(_:))
+    static let gameStateChanged = #selector(EventDelegate.onGameStateChanged(_:))
 }
 
 class EventCenter {
@@ -38,6 +39,7 @@ class EventCenter {
         observe(.stringRecognized, .stringRecognized)
         observe(.listenEnded, .listenEnded)
         observe(.scoreCalculated, .scoreCalculated)
+        observe(.gameStateChanged, .gameStateChanged)
     }
     
     func observe(_ type: EventType, _ eventHandler: Selector) {
@@ -78,6 +80,10 @@ class EventCenter {
     // onScore
     @objc func onScoreCalculated(_ event: Event) {
         print("score calculated: \(event.object as! Int)")
+    }
+    
+    @objc func onGameStateChanged(_ event: Event) {
+        print("= game state changed: \(event.object as! GameState) =")
     }
 }
 

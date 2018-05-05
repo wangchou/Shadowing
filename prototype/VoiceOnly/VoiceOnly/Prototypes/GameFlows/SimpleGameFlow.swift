@@ -14,6 +14,8 @@ fileprivate let context = CommandContext.shared
 class SimpleGameFlow: GameFlow {
     static let shared = SimpleGameFlow()
     
+    var state: GameState = .stopped
+    
     func play() {
         startEngine(toSpeaker: false)
         context.isDev = true
