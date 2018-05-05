@@ -50,42 +50,23 @@ class EventCenter {
     @objc func onEventHappened(_ notification: Notification) {
         let event = notification.object as! Event
         switch event.type {
+        case .sayStarted:
+            (event.object as! SayCommand).log()
+        case .stringSaid:
+            print(event.object as! String, terminator: "")
+        case .sayEnded:
+            print("")
+        case .listenStarted:
+            print("hear <<< ", terminator: "")
+        case .listenEnded:
+            print(event.object as! String)
+        case .scoreCalculated:
+            print("score calculated: \(event.object as! Int)")
         case .gameStateChanged:
             onGameStateChanged(event)
         default:
             return
         }
-    }
-    
-    // SayCommand
-    func onSayStarted(_ event: Event) {
-        (event.object as! SayCommand).log()
-    }
-    
-    func onStringSaid(_ event: Event) {
-        print(event.object as! String, terminator: "")
-    }
-    
-    func onSayEnded(_ event: Event) {
-        print("")
-    }
-    
-    // ListenCommand
-    func onListenStarted(_ event: Event) {
-        print("hear <<< ", terminator: "")
-    }
-    
-    func onStringRecognized(_ event: Event) {
-        //print(event.object as! String, terminator: "")
-    }
-    
-    func onListenEnded(_ event: Event) {
-        print(event.object as! String)
-    }
-    
-    // onScore
-    func onScoreCalculated(_ event: Event) {
-        print("score calculated: \(event.object as! Int)")
     }
     
     func onGameStateChanged(_ event: Event) {
