@@ -21,7 +21,7 @@ class SimpleGameFlow: GameFlow {
     }
     
     func play() {
-        startEngine(toSpeaker: false)
+        startEngine(toSpeaker: true)
         context.isDev = true
         context.loadLearningSentences(sentences)
         learnNext()
@@ -37,10 +37,11 @@ class SimpleGameFlow: GameFlow {
             self.state = .listening
             let userSaidString = listen(duration: context.speakDuration + pauseDuration)
             
+            self.state = .stringRecognized
             let score = calculateScore(targetString, userSaidString)
-            self.state = .scoreCalculated
             meijia("\(score)分")
             
+            self.state = .sentenceSessionEnded
             if(context.nextSentence()) {
                 self.learnNext()
             }

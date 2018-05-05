@@ -12,13 +12,13 @@ fileprivate let pauseDuration = 0.4
 fileprivate let context = GameContext.shared
 
 class VoiceOnlyFlow: GameFlow {
+    static let shared = VoiceOnlyFlow()
+    
     var state: GameState = .stopped {
         didSet {
             postEvent(.gameStateChanged, state)
         }
     }
-    
-    static let shared = VoiceOnlyFlow()
     
     func play() {
         startEngine(toSpeaker: false)

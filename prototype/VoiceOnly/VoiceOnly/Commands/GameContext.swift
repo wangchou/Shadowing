@@ -27,6 +27,7 @@ class GameContext {
     var saidSentence: String = ""
     var isDev = true
     var speakDuration: Double = 0
+    var score = 0
     
     // MARK: - Lifecycle
     private init() {

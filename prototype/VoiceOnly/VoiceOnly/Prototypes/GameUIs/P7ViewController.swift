@@ -11,13 +11,8 @@ import AVFoundation
 import UIKit
 import Speech
 
-
-fileprivate let listenPauseDuration = 0.4
-fileprivate let isDev = true //false
-fileprivate let context = GameContext.shared
-fileprivate var sentenceIndex = 0
-fileprivate var targetSentence = sentences[sentenceIndex]
-
+// before 315 lines
+// after ?
 
 // Prototype 7: prototype 6 + 遊戲畫面。在 getScore 後 update UI
 enum ScoreDesc {
@@ -29,7 +24,50 @@ enum ScoreDesc {
 
 let rihoUrl = "https://i2.kknews.cc/SIG=vanen8/66nn0002p026p2100op3.jpg"
 
-class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
+fileprivate let context = GameContext.shared
+
+extension P7ViewController: EventDelegate {
+    @objc func onEventHappened(_ notification: Notification) {
+        let event = notification.object as! Event
+        let status: (GameState, EventType) = (game.state, event.type)
+        
+        DispatchQueue.main.async {
+            switch status {
+            case (.speakingJapanese, .sayStarted):
+                self.focusTextView(isTargetView: true)
+                
+            case (.speakingJapanese, .stringSaid):
+                let token = event.object as! String
+                print(token, terminator: "")
+                self.targetTextView.text = self.targetTextView.text + token
+                
+            case (.speakingJapanese, .sayEnded):
+                print("")
+                self.focusTextView(isTargetView: false)
+                
+            case (.stringRecognized, .gameStateChanged):
+                self.scoreDescLabel.text = ""
+                
+            case (.stringRecognized, .scoreCalculated):
+                self.updateUIByScore(event.object as! Int)
+                
+            case (.sentenceSessionEnded, .gameStateChanged):
+                self.sentenceNumLabel.text = "\(context.sentenceIndex)/\(context.sentences.count)"
+                if(context.sentenceIndex == context.sentences.count) {
+                    self.isGameFinished = true
+                    self.afterGameFinished()
+                }
+                
+            default:
+                ()//print("unhandle \(status)")
+            }
+        }
+    }
+}
+
+class P7ViewController: UIViewController {
+    
+    let game = SimpleGameFlow.shared
     var isGameFinished = false
    
     @IBOutlet weak var comboLabel: UILabel!
@@ -45,10 +83,13 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        startEventObserving(self)
+        game.play()
+        
         isGameFinished = false
         comboLabel.text = "0"
         scoreLabel.text = "0"
-        sentenceNumLabel.text = String(sentenceIndex) + "/" + String(sentences.count)
+        sentenceNumLabel.text = "\(context.sentenceIndex)/\(context.sentences.count)"
         bloodBar.progress = 0.6
         
         targetTextView.text = ""
@@ -62,114 +103,20 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         saidTextView.layer.borderWidth = 2
         
         scoreDescLabel.text = ""
-        
-        sentenceIndex = 0
-        targetSentence = sentences[sentenceIndex]
-
-        startEngine(toSpeaker: true)
-        repeatAfterMe()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        stopEngine()
+        game.stop()
+        stopEventObserving(self)
     }
-    
-    // MARK: - Audio cmd Control
-    func teacher(_ sentence: String) {
-        focusTextView(isTargetView: true)
-        hattori(sentence)
-        focusTextView(isTargetView: false)
-    }
-    
-    func repeatAfterMe() {
-        cmdQueue.async {
-            print("----------------------------------")
-            self.teacher(targetSentence)
-            reduceBGMVolume()
-            _ = listen(duration: context.speakDuration + listenPauseDuration)
-        }
-    }
-    
-    func iHearYouSaid(_ saidSentence: String) {
-        cmdQueue.async {
-            print(saidSentence)
-            let score = calculateScore(targetSentence, saidSentence)
-            self.updateUIByScore(score)
-            oren(self.getScoreText(score))
-            DispatchQueue.main.async {
-                self.nextSentence()
-                if(self.isGameFinished) {
-                    return
-                }
-                
-            }
-            self.repeatAfterMe()
-        }
-    }
-    
-    // MARK: - Speech Recogntion Part
-    func onRecognitionResult(_ result: SFSpeechRecognitionResult?) {
-        guard let result = result else { return }
-        saidTextView.text = result.bestTranscription.formattedString
-        if result.isFinal {
-            cmdGroup.leave()
-            DispatchQueue.main.async {
-                self.scoreDescLabel.text = ""
-            }
-            restoreBGMVolume()
-            iHearYouSaid(saidTextView.text)
-        }
-    }
-    
-    func onRecognitionError(_ error: Error?) {
-        if error == nil { return }
-        cmdGroup.leave()
-        if(isDev) {
-            iHearYouSaid("おねさま")
-        } else {
-            cmdQueue.async {
-                meijia(CANNOT_HEAR_HINT)
-                self.repeatAfterMe()
-            }
-        }
-    }
-    
-    func speechResultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
-        if context.isEngineRunning {
-            onRecognitionResult(result)
-            onRecognitionError(error)
-        }
-    }
-    
-    // MARK: - TTS Delegate
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
-                           willSpeakRangeOfSpeechString characterRange: NSRange,
-                           utterance: AVSpeechUtterance) {
-        let speechString = utterance.speechString as NSString
-        let token = speechString.substring(with: characterRange)
-        print(token, terminator: "")
-        targetTextView.text = targetTextView.text + token
-    }
-    
-    func speechSynthesizer(
-        _ synthesizer: AVSpeechSynthesizer,
-        didFinish utterance: AVSpeechUtterance
-        ) {
-        guard context.tts.completionHandler != nil else { return }
-        print("")
-        context.tts.completionHandler!()
-    }
-    
     
     // MARK: - Update UI
     func updateUIByScore(_ score: Int) {
-        DispatchQueue.main.async {
-            self.updateBlood(score)
-            self.updateScoreLabel(score)
-            self.updateComboLabel(score)
-            self.updateScoreDescLabel(score)
-        }
+        self.updateBlood(score)
+        self.updateScoreLabel(score)
+        self.updateComboLabel(score)
+        self.updateScoreDescLabel(score)
     }
     
     func getScoreDesc(_ score: Int) -> ScoreDesc {
@@ -180,19 +127,18 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
     }
     
     func focusTextView(isTargetView: Bool) {
-        DispatchQueue.main.async {
-            if isTargetView {
-                self.targetTextView.text = ""
-                self.saidTextView.text = ""
-                self.scoreDescLabel.text = ""
-                self.targetTextView.layer.borderColor = UIColor.black.cgColor
-                self.saidTextView.layer.borderColor = UIColor.lightGray.cgColor
-            } else {
-                self.saidTextView.text = ""
-                self.saidTextView.layer.borderColor = UIColor.black.cgColor
-                self.targetTextView.layer.borderColor = UIColor.lightGray.cgColor
-            }
+        if isTargetView {
+            self.targetTextView.text = ""
+            self.saidTextView.text = ""
+            self.scoreDescLabel.text = ""
+            self.targetTextView.layer.borderColor = UIColor.black.cgColor
+            self.saidTextView.layer.borderColor = UIColor.lightGray.cgColor
+        } else {
+            self.saidTextView.text = ""
+            self.saidTextView.layer.borderColor = UIColor.black.cgColor
+            self.targetTextView.layer.borderColor = UIColor.lightGray.cgColor
         }
+        
     }
     
     func updateScoreLabel(_ score: Int) {
@@ -207,17 +153,6 @@ class P7ViewController: UIViewController, AVSpeechSynthesizerDelegate {
         case .good, .poor:
             comboLabel.text = "0"
         }
-    }
-    
-    func nextSentence() {
-        sentenceIndex = sentenceIndex + 1
-        sentenceNumLabel.text = String(sentenceIndex) + "/" + String(sentences.count)
-        if(sentenceIndex == sentences.count) {
-            isGameFinished = true
-            afterGameFinished()
-            return
-        }
-        targetSentence = sentences[sentenceIndex]
     }
     
     func afterGameFinished() {
