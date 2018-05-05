@@ -8,22 +8,6 @@
 
 import Foundation
 
-enum GameState {
-    case stopped
-    case speakingJapanese
-    case listening
-    case stringRecognized
-    case repeatingWhatSaid
-    case scoreCalculated
-    case speakingScore
-}
-
-protocol GameFlow {
-    var state: GameState { get set}
-    func play()
-    func stop()
-}
-
 fileprivate let pauseDuration = 0.4
 fileprivate let context = GameContext.shared
 

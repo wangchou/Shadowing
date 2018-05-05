@@ -14,7 +14,11 @@ fileprivate let context = GameContext.shared
 class SimpleGameFlow: GameFlow {
     static let shared = SimpleGameFlow()
     
-    var state: GameState = .stopped
+    var state: GameState = .stopped {
+        didSet {
+            postEvent(.gameStateChanged, state)
+        }
+    }
     
     func play() {
         startEngine(toSpeaker: false)
@@ -26,10 +30,17 @@ class SimpleGameFlow: GameFlow {
     private func learnNext() {
         cmdQueue.async {
             let targetString = context.targetString
+            
+            self.state = .speakingJapanese
             hattori(targetString)
+            
+            self.state = .listening
             let userSaidString = listen(duration: context.speakDuration + pauseDuration)
+            
             let score = calculateScore(targetString, userSaidString)
+            self.state = .scoreCalculated
             meijia("\(score)分")
+            
             if(context.nextSentence()) {
                 self.learnNext()
             }
