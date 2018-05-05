@@ -24,10 +24,6 @@ protocol GameFlow {
     func stop()
 }
 
-extension EventType {
-    static let gameStateChanged = EventType("gameStateChanged")
-}
-
 fileprivate let pauseDuration = 0.4
 fileprivate let context = CommandContext.shared
 

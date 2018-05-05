@@ -8,37 +8,48 @@
 
 import Foundation
 
-typealias Event = Notification
-typealias EventType = Notification.Name
+enum EventType{
+    case sayStarted
+    case stringSaid
+    case sayEnded
+    case listenStarted
+    case stringRecognized
+    case listenEnded
+    case scoreCalculated
+    case gameStateChanged
+}
+
+struct Event {
+    let type: EventType
+    let object: Any
+}
+
+extension Notification.Name {
+    static let eventHappened = Notification.Name("eventHappended")
+}
 
 func postEvent (_ type: EventType, _ object: Any) {
-    NotificationCenter.default.post(name: type, object: object)
+    NotificationCenter.default.post(
+        name: .eventHappened,
+        object: Event(type: type, object: object)
+    )
 }
 
 class EventCenter {
     static let shared = EventCenter()
-
-    func observe(_ type: EventType) {
+    
+    init() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(onAll(_:)),
-            name: type,
+            selector: #selector(onEventHappened(_:)),
+            name: .eventHappened,
             object: nil
         )
     }
     
-    init() {
-        observe(.stringSaid)
-        observe(.sayEnded)
-        observe(.listenStarted)
-        observe(.stringRecognized)
-        observe(.listenEnded)
-        observe(.scoreCalculated)
-        observe(.gameStateChanged)
-    }
-    
-    @objc func onAll(_ event: Event) {
-        switch event.name {
+    @objc func onEventHappened(_ notification: Notification) {
+        let event = notification.object as! Event
+        switch event.type {
         case .gameStateChanged:
             onGameStateChanged(event)
         default:

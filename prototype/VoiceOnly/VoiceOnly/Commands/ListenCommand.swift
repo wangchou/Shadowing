@@ -9,12 +9,6 @@
 import Foundation
 import Speech
 
-extension EventType {
-    static let listenStarted = EventType("listenStarted")
-    static let stringRecognized = EventType("stringRecognized")
-    static let listenEnded = EventType("listenEnded")
-}
-
 struct ListenCommand: Command {
     let type = CommandType.listen
     let duration: Double
