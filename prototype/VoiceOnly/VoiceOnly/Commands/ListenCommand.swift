@@ -15,7 +15,7 @@ struct ListenCommand: Command {
     
     func exec() {
         postEvent(.listenStarted, "")
-        let context = CommandContext.shared
+        let context = GameContext.shared
         if !context.isEngineRunning {
             cmdGroup.leave()
             postEvent(.listenEnded, "")
@@ -31,7 +31,7 @@ struct ListenCommand: Command {
     }
     
     func resultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
-        let context = CommandContext.shared
+        let context = GameContext.shared
         if !context.isEngineRunning {
             return
         }

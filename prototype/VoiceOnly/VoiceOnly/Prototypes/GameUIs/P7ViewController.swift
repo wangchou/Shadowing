@@ -14,7 +14,7 @@ import Speech
 
 fileprivate let listenPauseDuration = 0.4
 fileprivate let isDev = true //false
-fileprivate let context = CommandContext.shared
+fileprivate let context = GameContext.shared
 fileprivate var sentenceIndex = 0
 fileprivate var targetSentence = sentences[sentenceIndex]
 

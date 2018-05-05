@@ -9,7 +9,7 @@
 import Foundation
 
 fileprivate let pauseDuration = 0.4
-fileprivate let context = CommandContext.shared
+fileprivate let context = GameContext.shared
 
 class SimpleGameFlow: GameFlow {
     static let shared = SimpleGameFlow()

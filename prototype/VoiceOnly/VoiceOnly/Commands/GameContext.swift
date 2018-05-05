@@ -10,9 +10,9 @@ import Foundation
 import AVFoundation
 import Speech
 
-class CommandContext {
+class GameContext {
     //Singleton
-    static let shared = CommandContext()
+    static let shared = GameContext()
     
     var engine = AVAudioEngine()
     var micVolumeNode = AVAudioMixerNode()

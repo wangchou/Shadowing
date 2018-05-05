@@ -25,7 +25,7 @@ protocol GameFlow {
 }
 
 fileprivate let pauseDuration = 0.4
-fileprivate let context = CommandContext.shared
+fileprivate let context = GameContext.shared
 
 class VoiceOnlyFlow: GameFlow {
     var state: GameState = .stopped {

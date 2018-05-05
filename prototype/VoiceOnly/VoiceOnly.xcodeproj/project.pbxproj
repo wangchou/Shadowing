@@ -10,7 +10,7 @@
 		BE17FB37209B051100D23F22 /* SayCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB36209B051100D23F22 /* SayCommand.swift */; };
 		BE17FB3A209B0F7800D23F22 /* ListenCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB39209B0F7800D23F22 /* ListenCommand.swift */; };
 		BE17FB3C209B18C800D23F22 /* MiscCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB3B209B18C800D23F22 /* MiscCommands.swift */; };
-		BE17FB3E209B19B200D23F22 /* CommandContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB3D209B19B200D23F22 /* CommandContext.swift */; };
+		BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB3D209B19B200D23F22 /* GameContext.swift */; };
 		BE65A939209C6E67006645CA /* EventCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65A938209C6E67006645CA /* EventCenter.swift */; };
 		BE65A93B209C8696006645CA /* SimpleGameFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65A93A209C8696006645CA /* SimpleGameFlow.swift */; };
 		BE8C8F02209C476A00E32F09 /* VoiceOnlyFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8C8F01209C476A00E32F09 /* VoiceOnlyFlow.swift */; };
@@ -37,7 +37,7 @@
 		BE17FB36209B051100D23F22 /* SayCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SayCommand.swift; sourceTree = "<group>"; };
 		BE17FB39209B0F7800D23F22 /* ListenCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenCommand.swift; sourceTree = "<group>"; };
 		BE17FB3B209B18C800D23F22 /* MiscCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscCommands.swift; sourceTree = "<group>"; };
-		BE17FB3D209B19B200D23F22 /* CommandContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandContext.swift; sourceTree = "<group>"; };
+		BE17FB3D209B19B200D23F22 /* GameContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameContext.swift; sourceTree = "<group>"; };
 		BE65A938209C6E67006645CA /* EventCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCenter.swift; sourceTree = "<group>"; };
 		BE65A93A209C8696006645CA /* SimpleGameFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleGameFlow.swift; sourceTree = "<group>"; };
 		BE8C8F01209C476A00E32F09 /* VoiceOnlyFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceOnlyFlow.swift; sourceTree = "<group>"; };
@@ -78,7 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */,
-				BE17FB3D209B19B200D23F22 /* CommandContext.swift */,
+				BE17FB3D209B19B200D23F22 /* GameContext.swift */,
 				BE9A6538209C41930072C4D8 /* Commands.swift */,
 				BE17FB36209B051100D23F22 /* SayCommand.swift */,
 				BE17FB39209B0F7800D23F22 /* ListenCommand.swift */,
@@ -256,7 +256,7 @@
 				BE65A93B209C8696006645CA /* SimpleGameFlow.swift in Sources */,
 				BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */,
 				BEBDEDE8208F227C00C18520 /* P1ViewController.swift in Sources */,
-				BE17FB3E209B19B200D23F22 /* CommandContext.swift in Sources */,
+				BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */,
 				BE17FB3A209B0F7800D23F22 /* ListenCommand.swift in Sources */,
 				BEBDEDDA208EF15F00C18520 /* TTS.swift in Sources */,
 				BEBDEDDD208EF15F00C18520 /* SpeechRecognizer.swift in Sources */,

@@ -9,7 +9,7 @@
 import Foundation
 import Speech
 
-fileprivate let context = CommandContext.shared
+fileprivate let context = GameContext.shared
 
 class SayCommand: NSObject, Command, AVSpeechSynthesizerDelegate {
     let type = CommandType.say
@@ -25,7 +25,7 @@ class SayCommand: NSObject, Command, AVSpeechSynthesizerDelegate {
     
     func exec() {
         postEvent(.sayStarted, self)
-        let context = CommandContext.shared
+        let context = GameContext.shared
         let tmpTime = getNow()
         if !context.isEngineRunning {
             context.speakDuration = 0

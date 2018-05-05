@@ -60,5 +60,5 @@ func hattori(_ sentence: String, rate: Float = teachingRate) {
 func listen(duration: Double) -> String {
     dispatch(ListenCommand(duration: duration))
     cmdGroup.wait()
-    return CommandContext.shared.saidSentence
+    return GameContext.shared.saidSentence
 }
