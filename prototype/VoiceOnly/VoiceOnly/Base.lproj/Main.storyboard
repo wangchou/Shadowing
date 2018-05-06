@@ -204,7 +204,7 @@
         <!--原型7: 音樂遊戲-->
         <scene sceneID="aWi-RA-nps">
             <objects>
-                <viewController title="原型7: 音樂遊戲" id="b7f-dC-kdy" customClass="P07ViewController" sceneMemberID="viewController">
+                <viewController title="原型7: 音樂遊戲" id="b7f-dC-kdy" customClass="P07ViewController" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Uag-yR-6BI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -254,8 +254,8 @@
                                 <color key="progressTintColor" red="1" green="0.068591357991497626" blue="0.11676832601040221" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="trackTintColor" red="0.005560661764705932" green="0.00038141334177257751" blue="0.00064930916577476071" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </progressView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="16/16" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvw-55-2Dv">
-                                <rect key="frame" x="99" y="82" width="107" height="43"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="106/106" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvw-55-2Dv">
+                                <rect key="frame" x="99" y="82" width="133" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <nil key="textColor"/>

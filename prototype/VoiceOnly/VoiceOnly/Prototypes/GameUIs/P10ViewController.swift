@@ -43,8 +43,6 @@ class P10ViewController: UIViewController, EventDelegate {
         case .sayStarted:
             let sayCommand = event.object as! SayCommand
             switch sayCommand.name {
-            case MeiJia:
-                cprint("美佳 🇹🇼: ", terminator: "")
             case Hattori:
                 cprint("---")
                 cprint("服部 🇯🇵: ", terminator: "")
@@ -65,7 +63,7 @@ class P10ViewController: UIViewController, EventDelegate {
         case .listenStarted:
             cprint("你說： ", terminator: "")
         case .listenEnded:
-            cprint(event.object as! String)
+            cprint(event.object as! String, terminator: " ")
         default:
             return
         }

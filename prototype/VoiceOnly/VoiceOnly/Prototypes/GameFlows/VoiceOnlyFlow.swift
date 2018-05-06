@@ -22,7 +22,7 @@ class VoiceOnlyFlow: GameFlow {
     
     func play() {
         startEngine(toSpeaker: false)
-        context.isDev = true
+        context.isDev = false
         context.loadLearningSentences(sentences)
         learnNext()
     }

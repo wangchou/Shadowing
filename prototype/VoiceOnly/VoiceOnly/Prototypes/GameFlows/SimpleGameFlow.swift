@@ -22,7 +22,7 @@ class SimpleGameFlow: GameFlow {
     
     func play() {
         startEngine(toSpeaker: true)
-        context.isDev = true
+        context.isDev = false
         context.loadLearningSentences(sentences)
         learnNext()
     }
