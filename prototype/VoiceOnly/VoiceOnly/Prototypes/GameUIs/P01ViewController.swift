@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 // Prototype 1: 全語音、只能用講電話的方式
-class P1ViewController: UIViewController, EventDelegate {
+class P01ViewController: UIViewController, EventDelegate {
     let game = VoiceOnlyFlow.shared
     
     override func viewDidLoad() {

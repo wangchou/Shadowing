@@ -23,7 +23,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <state key="normal" title="原型1: 語音only">
-                                    <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <segue destination="fmK-8w-LXj" kind="show" id="bWI-iE-Lgu"/>
@@ -33,11 +33,44 @@
                                 <rect key="frame" x="21" y="137" width="255" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                <state key="normal" title="原型7: 遊戲畫面">
-                                    <color key="titleColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="原型7: 音樂遊戲">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <segue destination="b7f-dC-kdy" kind="show" id="uJt-yd-Ubr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSh-ih-mPJ">
+                                <rect key="frame" x="21" y="200" width="284" height="55"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                <state key="normal" title="原型8: Messenger">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="aXC-LK-wE8" kind="show" id="wXI-sl-ppl"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wf8-0A-VOV">
+                                <rect key="frame" x="21" y="257" width="257" height="55"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                <state key="normal" title="原型9: 文章朗讀">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Kb8-RJ-rtB" kind="show" id="cK5-io-A72"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rji-Lb-nb8">
+                                <rect key="frame" x="21" y="312" width="249" height="55"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                <state key="normal" title="原型10: console">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="cVo-N6-yfY" kind="show" id="a5B-3b-NbS"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -50,10 +83,104 @@
             </objects>
             <point key="canvasLocation" x="1051.875" y="-663.38028169014081"/>
         </scene>
+        <!--原型8: Messenger-->
+        <scene sceneID="BzA-hn-0uu">
+            <objects>
+                <viewController title="原型8: Messenger" id="aXC-LK-wE8" customClass="P08ViewController" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tao-re-xPt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="koT-W6-PaP"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OW2-cg-rJd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2370" y="118"/>
+        </scene>
+        <!--原型9: 文章閱讀器-->
+        <scene sceneID="L4l-iK-SUn">
+            <objects>
+                <viewController title="原型9: 文章閱讀器" id="Kb8-RJ-rtB" customClass="P09ViewController" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="euR-qe-fAi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="V0D-eQ-906">
+                                <rect key="frame" x="5" y="64" width="315" height="493.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">ただの人間には興味ありません。この中に宇宙人、未来人、異世界人、超能力者がいたら、あたしのところに来なさい。以上。 ただの人間には興味ありません。この中に宇宙人、未来人、異世界人、超能力者がいたら、あたしのところに来なさい。以上。 ただの人間には興味ありません。この中に宇宙人、未来人、異世界人、超能力者がいたら、あたしのところに来なさい。以上。 ただの人間には興味ありません。この中に宇宙人、未来人、異世界人、超能力者がいたら、あたしのところに来なさい。以上。</string>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b8N-PW-WT7">
+                                <rect key="frame" x="0.0" y="519" width="320" height="49"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <tabBarItem systemItem="favorites" id="9Mj-8S-QVl"/>
+                                    <tabBarItem systemItem="more" id="Dpk-sN-ku2"/>
+                                </items>
+                            </tabBar>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="夢なんて、そんな大げさなもの、なくても。いいんじゃない？" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="Fcy-g7-zCu">
+                                <rect key="frame" x="0.0" y="455" width="320" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="m9r-WW-iZh"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b6Z-Xr-4G5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3060" y="117.25352112676056"/>
+        </scene>
+        <!--原型10: 黑底 console-->
+        <scene sceneID="mvo-NN-HJp">
+            <objects>
+                <viewController title="原型10: 黑底 console" id="cVo-N6-yfY" customClass="P10ViewController" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="82z-f9-F8r">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ppa-HO-wpU">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <string key="text">-------------------------- 美佳 🇹🇼: 請跟著說日文
+服部 🇯🇵: おはようございます 聽👂&lt;&lt;&lt; ございます
+美佳 🇹🇼: 我聽到你說
+オーレン 🇯🇵: ございます
+美佳 🇹🇼: ５0分、下一句 -------------------------- 美佳 🇹🇼: 請跟著說日文
+服部 🇯🇵: おはようございます 聽👂 &lt;&lt;&lt; ございます
+美佳 🇹🇼: 我聽到你說
+オーレン 🇯🇵: ございます
+美佳 🇹🇼: ５0分、下一句</string>
+                                <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="iN2-Sc-mW6"/>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="Ppa-HO-wpU" id="DSe-Xd-p6H"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JzF-kv-NYI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3744.375" y="124.64788732394366"/>
+        </scene>
         <!--原型1: 中文語音提示-->
         <scene sceneID="ElK-pY-ic3">
             <objects>
-                <viewController storyboardIdentifier="P1ViewController" title="原型1: 中文語音提示" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fmK-8w-LXj" customClass="P1ViewController" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="P1ViewController" title="原型1: 中文語音提示" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fmK-8w-LXj" customClass="P01ViewController" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BkI-nB-upV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -74,10 +201,10 @@
             </objects>
             <point key="canvasLocation" x="1051.875" y="118.30985915492958"/>
         </scene>
-        <!--原型7: 原型 + 畫面-->
+        <!--原型7: 音樂遊戲-->
         <scene sceneID="aWi-RA-nps">
             <objects>
-                <viewController title="原型7: 原型 + 畫面" id="b7f-dC-kdy" customClass="P7ViewController" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="原型7: 音樂遊戲" id="b7f-dC-kdy" customClass="P07ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Uag-yR-6BI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

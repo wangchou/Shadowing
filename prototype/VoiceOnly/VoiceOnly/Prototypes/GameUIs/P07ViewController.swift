@@ -26,7 +26,7 @@ let rihoUrl = "https://i2.kknews.cc/SIG=vanen8/66nn0002p026p2100op3.jpg"
 
 fileprivate let context = GameContext.shared
 
-extension P7ViewController: EventDelegate {
+extension P07ViewController: EventDelegate {
     @objc func onEventHappened(_ notification: Notification) {
         let event = notification.object as! Event
         let status: (GameState, EventType) = (game.state, event.type)
@@ -65,7 +65,7 @@ extension P7ViewController: EventDelegate {
     }
 }
 
-class P7ViewController: UIViewController {
+class P07ViewController: UIViewController {
     
     let game = SimpleGameFlow.shared
     var isGameFinished = false

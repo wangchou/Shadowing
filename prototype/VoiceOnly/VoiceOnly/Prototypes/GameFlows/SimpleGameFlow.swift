@@ -39,6 +39,8 @@ class SimpleGameFlow: GameFlow {
             
             self.state = .stringRecognized
             let score = calculateScore(targetString, userSaidString)
+            
+            self.state = .scoreCalculated
             meijia("\(score)分")
             
             self.state = .sentenceSessionEnded
