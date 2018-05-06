@@ -35,7 +35,11 @@ func startEngine(toSpeaker: Bool = false) {
 }
 
 func stopEngine() {
-    dispatch(StopEngineCommand())
+    let context = GameContext.shared
+    context.isEngineRunning = false
+    context.speechRecognizer.stop()
+    context.engine.stop()
+    context.tts.stop()
 }
 
 func reduceBGMVolume() {

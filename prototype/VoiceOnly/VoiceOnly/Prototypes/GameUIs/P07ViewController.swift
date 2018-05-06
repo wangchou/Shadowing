@@ -30,7 +30,7 @@ extension P07ViewController: EventDelegate {
     @objc func onEventHappened(_ notification: Notification) {
         let event = notification.object as! Event
         let status: (GameState, EventType) = (game.state, event.type)
-        
+        print(status)
         DispatchQueue.main.async {
             switch status {
             case (.speakingJapanese, .sayStarted):
@@ -44,6 +44,9 @@ extension P07ViewController: EventDelegate {
             case (.speakingJapanese, .sayEnded):
                 print("")
                 self.focusTextView(isTargetView: false)
+            
+            case (.listening, .stringRecognized):
+                self.saidTextView.text = event.object as! String
                 
             case (.stringRecognized, .gameStateChanged):
                 self.scoreDescLabel.text = ""
@@ -108,7 +111,7 @@ class P07ViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         game.stop()
-        stopEventObserving(self)
+        //stopEventObserving(self)
     }
     
     // MARK: - Update UI

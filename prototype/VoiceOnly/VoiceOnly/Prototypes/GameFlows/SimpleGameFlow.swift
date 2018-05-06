@@ -23,7 +23,7 @@ class SimpleGameFlow: GameFlow {
     func play() {
         startEngine(toSpeaker: true)
         context.isDev = false
-        context.loadLearningSentences(sentences)
+        context.loadLearningSentences(allSentences)
         learnNext()
     }
     

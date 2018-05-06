@@ -68,4 +68,8 @@ class SayCommand: NSObject, Command, AVSpeechSynthesizerDelegate {
         guard context.tts.completionHandler != nil else { return }
         context.tts.completionHandler!()
     }
+    
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+        cmdGroup.leave()
+    }
 }

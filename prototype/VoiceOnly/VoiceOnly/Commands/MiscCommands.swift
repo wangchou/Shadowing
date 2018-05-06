@@ -46,14 +46,15 @@ struct StartEngineCommand: Command {
     }
 }
 
-struct StopEngineCommand: Command {
-    let type = CommandType.stopEngine
-    func exec() {
-        let context = GameContext.shared
-        context.isEngineRunning = false
-        context.engine.stop()
-        context.tts.stop()
-        context.speechRecognizer.stop()
-        cmdGroup.leave()
-    }
-}
+//struct StopEngineCommand: Command {
+//    let type = CommandType.stopEngine
+//    func exec() {
+//        print("engine stop")
+//        let context = GameContext.shared
+//        context.isEngineRunning = false
+//        context.engine.stop()
+//        context.tts.stop()
+//        context.speechRecognizer.stop()
+//        cmdGroup.leave()
+//    }
+//}

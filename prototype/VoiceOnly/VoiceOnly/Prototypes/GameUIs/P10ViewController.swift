@@ -13,7 +13,7 @@ func rgb(_ red: Float, _ green: Float, _ blue: Float) -> UIColor {
     return UIColor(red: CGFloat(red/255.0), green: CGFloat(green/255.0), blue: CGFloat(blue/255.0), alpha: 1)
 }
 
-let myBlue = rgb(0, 148, 217)
+let myBlue = rgb(20, 168, 237)
 let myRed = rgb(254, 67, 134)
 let myGreen = rgb(150, 207, 42)
 
@@ -45,7 +45,6 @@ class P10ViewController: UIViewController, EventDelegate {
             switch sayCommand.name {
             case Hattori:
                 cprint("---")
-                cprint("服部 🇯🇵: ", terminator: "")
             default:
                 return
             }
@@ -60,8 +59,6 @@ class P10ViewController: UIViewController, EventDelegate {
             cprint(event.object as! String, color, terminator: "")
         case .sayEnded:
             cprint("")
-        case .listenStarted:
-            cprint("你說： ", terminator: "")
         case .listenEnded:
             cprint(event.object as! String, terminator: " ")
         default:
@@ -69,12 +66,17 @@ class P10ViewController: UIViewController, EventDelegate {
         }
     }
     
+    func scrollTextIntoView() {
+        let range = NSMakeRange(textView.text.count - 1, 0)
+        textView.scrollRangeToVisible(range)
+    }
+    
     // console color print
     func cprint(_ text: String, _ color: UIColor = .lightText, terminator: String = "\n") {
         let colorText = NSMutableAttributedString(string: "\(text)\(terminator)")
         colorText.addAttributes([
                 .foregroundColor: color,
-                .font: UIFont.systemFont(ofSize: 20)
+                .font: UIFont.systemFont(ofSize: 24)
             ],
             range: NSMakeRange(0, colorText.length)
         )
@@ -83,6 +85,7 @@ class P10ViewController: UIViewController, EventDelegate {
             let newText = self.textView.attributedText.mutableCopy() as! NSMutableAttributedString
             newText.append(colorText)
             self.textView.attributedText = newText
+            self.scrollTextIntoView()
         }
     }
     

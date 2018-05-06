@@ -43,7 +43,7 @@ var translations: [String] = [
     "夢想什麼的、用不著那麼誇張的東西吧",
 ]
 
-var sentences: [String] = [
+var allSentences: [String] = [
     "甘くみてましたねぇ。",
     "恋人になってもらえませんか。",
     "恋人とはなろうとして、",

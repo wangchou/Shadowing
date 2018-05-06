@@ -53,8 +53,8 @@ class GameContext {
     
     func loadLearningSentences(_ sentences: [String]) {
         self.sentenceIndex = 0
-        self.sentences = sentences
-        self.targetString = sentences[0]
+        self.sentences = sentences.shuffled()
+        self.targetString = self.sentences[0]
     }
     
     func nextSentence() -> Bool {
