@@ -39,10 +39,10 @@ class P10ViewController: UIViewController, EventDelegate {
     
     @objc func onEventHappened(_ notification: Notification) {
         let event = notification.object as! Event
+
         switch event.type {
         case .sayStarted:
-            let sayCommand = event.object as! SayCommand
-            switch sayCommand.name {
+            switch event.object as! String {
             case Hattori:
                 cprint("---")
             default:

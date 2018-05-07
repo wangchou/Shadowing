@@ -7,19 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BE17FB37209B051100D23F22 /* SayCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB36209B051100D23F22 /* SayCommand.swift */; };
-		BE17FB3A209B0F7800D23F22 /* ListenCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB39209B0F7800D23F22 /* ListenCommand.swift */; };
-		BE17FB3C209B18C800D23F22 /* MiscCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB3B209B18C800D23F22 /* MiscCommands.swift */; };
 		BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB3D209B19B200D23F22 /* GameContext.swift */; };
 		BE1CA956209D5D0900086853 /* GameFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA955209D5D0900086853 /* GameFlow.swift */; };
 		BE1CA958209DC43800086853 /* P08ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA957209DC43800086853 /* P08ViewController.swift */; };
 		BE1CA95A209DC4BE00086853 /* P09ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA959209DC4BE00086853 /* P09ViewController.swift */; };
 		BE1CA95C209DC4E800086853 /* P10ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA95B209DC4E800086853 /* P10ViewController.swift */; };
-		BE291B7F20A02C9B00B3EB87 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE291B7D20A02BBE00B3EB87 /* PromiseKit.framework */; };
+		BE291B9220A06CDF00B3EB87 /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE291B9020A06CDF00B3EB87 /* Promises.framework */; };
+		BE291B9320A06CDF00B3EB87 /* Promises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE291B9020A06CDF00B3EB87 /* Promises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BE291B9420A06CDF00B3EB87 /* FBLPromises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE291B9120A06CDF00B3EB87 /* FBLPromises.framework */; };
+		BE291B9520A06CDF00B3EB87 /* FBLPromises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE291B9120A06CDF00B3EB87 /* FBLPromises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE65A939209C6E67006645CA /* EventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65A938209C6E67006645CA /* EventDelegate.swift */; };
 		BE65A93B209C8696006645CA /* SimpleGameFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65A93A209C8696006645CA /* SimpleGameFlow.swift */; };
 		BE8C8F02209C476A00E32F09 /* VoiceOnlyFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8C8F01209C476A00E32F09 /* VoiceOnlyFlow.swift */; };
-		BE9A6539209C41930072C4D8 /* Commands.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9A6538209C41930072C4D8 /* Commands.swift */; };
 		BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */; };
 		BEBDEDC2208EF09F00C18520 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDC1208EF09F00C18520 /* ViewController.swift */; };
 		BEBDEDC5208EF09F00C18520 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEBDEDC3208EF09F00C18520 /* Main.storyboard */; };
@@ -38,20 +37,36 @@
 		BEBDEDF6208F28BD00C18520 /* P07ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDF1208F28BD00C18520 /* P07ViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		BE291B9620A06CDF00B3EB87 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BE291B9320A06CDF00B3EB87 /* Promises.framework in Embed Frameworks */,
+				BE291B9520A06CDF00B3EB87 /* FBLPromises.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		BE17FB36209B051100D23F22 /* SayCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SayCommand.swift; sourceTree = "<group>"; };
-		BE17FB39209B0F7800D23F22 /* ListenCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenCommand.swift; sourceTree = "<group>"; };
-		BE17FB3B209B18C800D23F22 /* MiscCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscCommands.swift; sourceTree = "<group>"; };
 		BE17FB3D209B19B200D23F22 /* GameContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameContext.swift; sourceTree = "<group>"; };
 		BE1CA955209D5D0900086853 /* GameFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFlow.swift; sourceTree = "<group>"; };
 		BE1CA957209DC43800086853 /* P08ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P08ViewController.swift; sourceTree = "<group>"; };
 		BE1CA959209DC4BE00086853 /* P09ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P09ViewController.swift; sourceTree = "<group>"; };
 		BE1CA95B209DC4E800086853 /* P10ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P10ViewController.swift; sourceTree = "<group>"; };
-		BE291B7D20A02BBE00B3EB87 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
+		BE291B8520A06BEF00B3EB87 /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBLPromises.framework; path = Carthage/Build/iOS/FBLPromises.framework; sourceTree = "<group>"; };
+		BE291B8720A06C4000B3EB87 /* Promises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Promises.framework; path = Carthage/Build/iOS/Promises.framework; sourceTree = "<group>"; };
+		BE291B8920A06C9700B3EB87 /* Promises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Promises.framework; path = Carthage/Build/iOS/Promises.framework; sourceTree = "<group>"; };
+		BE291B8A20A06C9700B3EB87 /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBLPromises.framework; path = Carthage/Build/iOS/FBLPromises.framework; sourceTree = "<group>"; };
+		BE291B9020A06CDF00B3EB87 /* Promises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Promises.framework; path = Carthage/Build/iOS/Promises.framework; sourceTree = "<group>"; };
+		BE291B9120A06CDF00B3EB87 /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBLPromises.framework; path = Carthage/Build/iOS/FBLPromises.framework; sourceTree = "<group>"; };
 		BE65A938209C6E67006645CA /* EventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDelegate.swift; sourceTree = "<group>"; };
 		BE65A93A209C8696006645CA /* SimpleGameFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleGameFlow.swift; sourceTree = "<group>"; };
 		BE8C8F01209C476A00E32F09 /* VoiceOnlyFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceOnlyFlow.swift; sourceTree = "<group>"; };
-		BE9A6538209C41930072C4D8 /* Commands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commands.swift; sourceTree = "<group>"; };
 		BEBDEDBC208EF09F00C18520 /* VoiceOnly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceOnly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEBDEDC1208EF09F00C18520 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -77,8 +92,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE291B9420A06CDF00B3EB87 /* FBLPromises.framework in Frameworks */,
+				BE291B9220A06CDF00B3EB87 /* Promises.framework in Frameworks */,
 				BEBDEDE3208EF17100C18520 /* AVFoundation.framework in Frameworks */,
-				BE291B7F20A02C9B00B3EB87 /* PromiseKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,10 +106,6 @@
 			children = (
 				BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */,
 				BE17FB3D209B19B200D23F22 /* GameContext.swift */,
-				BE9A6538209C41930072C4D8 /* Commands.swift */,
-				BE17FB36209B051100D23F22 /* SayCommand.swift */,
-				BE17FB39209B0F7800D23F22 /* ListenCommand.swift */,
-				BE17FB3B209B18C800D23F22 /* MiscCommands.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -123,6 +135,10 @@
 		BEBDEDB3208EF09F00C18520 = {
 			isa = PBXGroup;
 			children = (
+				BE291B8A20A06C9700B3EB87 /* FBLPromises.framework */,
+				BE291B9120A06CDF00B3EB87 /* FBLPromises.framework */,
+				BE291B8920A06C9700B3EB87 /* Promises.framework */,
+				BE291B9020A06CDF00B3EB87 /* Promises.framework */,
 				BEBDEDBE208EF09F00C18520 /* VoiceOnly */,
 				BEBDEDBD208EF09F00C18520 /* Products */,
 				BEBDEDE1208EF17100C18520 /* Frameworks */,
@@ -160,7 +176,8 @@
 		BEBDEDE1208EF17100C18520 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BE291B7D20A02BBE00B3EB87 /* PromiseKit.framework */,
+				BE291B8720A06C4000B3EB87 /* Promises.framework */,
+				BE291B8520A06BEF00B3EB87 /* FBLPromises.framework */,
 				BEBDEDE2208EF17100C18520 /* AVFoundation.framework */,
 			);
 			name = Frameworks;
@@ -196,6 +213,7 @@
 				BEBDEDB8208EF09F00C18520 /* Sources */,
 				BEBDEDB9208EF09F00C18520 /* Frameworks */,
 				BEBDEDBA208EF09F00C18520 /* Resources */,
+				BE291B9620A06CDF00B3EB87 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -258,13 +276,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE17FB3C209B18C800D23F22 /* MiscCommands.swift in Sources */,
 				BE1CA958209DC43800086853 /* P08ViewController.swift in Sources */,
 				BEBDEDD9208EF15F00C18520 /* utilities.swift in Sources */,
 				BEBDEDF6208F28BD00C18520 /* P07ViewController.swift in Sources */,
 				BE1CA956209D5D0900086853 /* GameFlow.swift in Sources */,
 				BE65A939209C6E67006645CA /* EventDelegate.swift in Sources */,
-				BE9A6539209C41930072C4D8 /* Commands.swift in Sources */,
 				BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */,
 				BEBDEDDC208EF15F00C18520 /* BGM.swift in Sources */,
 				BE1CA95A209DC4BE00086853 /* P09ViewController.swift in Sources */,
@@ -277,10 +293,8 @@
 				BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */,
 				BEBDEDE8208F227C00C18520 /* P01ViewController.swift in Sources */,
 				BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */,
-				BE17FB3A209B0F7800D23F22 /* ListenCommand.swift in Sources */,
 				BEBDEDDA208EF15F00C18520 /* TTS.swift in Sources */,
 				BEBDEDDD208EF15F00C18520 /* SpeechRecognizer.swift in Sources */,
-				BE17FB37209B051100D23F22 /* SayCommand.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

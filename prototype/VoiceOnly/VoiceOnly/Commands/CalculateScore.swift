@@ -1,4 +1,5 @@
 import Foundation
+import Promises
 
 // MARK: - Private
 // copied from https://qiita.com/xshirade/items/086be09376b9cbbe7bc8
@@ -20,17 +21,27 @@ fileprivate class Request {
 }
 
 // 台灣大哥大 ４G -> AWS Tokyo server の round-trip time on Sunday morning
-// ~= 400 ~ 600ms (process time in server < 10ms)
+// ~= 200ms (process time in server < 10ms)
 // freaking slow... T.T
 fileprivate func getKana(
-    _ kanjiString: String,
-    completionHandler: @escaping (String, Error?) -> Void
-    ) {
+    _ kanjiString: String
+    ) -> Promise<String> {
+    let promise = Promise<String>.pending()
     let request: Request = Request()
     let url: URL = URL(string: "http://54.250.149.163/nlp")!
     let body: NSMutableDictionary = ["jpnStr": kanjiString]
+    
+    if(kanjiString == "") {
+        promise.fulfill("")
+        return promise
+    }
     do {
         try request.post(url: url, body: body) { data, response, error in
+            if error != nil {
+                promise.reject(error!)
+                print("post request error")
+            }
+            
             do {
                 let tokenInfos: [[String]] = try JSONSerialization.jsonObject(with: data!, options:[]) as! [[String]]
                 let kanaStr = tokenInfos.reduce("", { kanaStr, tokenInfo in
@@ -41,32 +52,24 @@ fileprivate func getKana(
                     return kanaStr
                     
                 })
-                completionHandler(kanaStr, nil)
+                promise.fulfill(kanaStr)
             } catch {
-                completionHandler("", error)
-                print("Error with parse json: \(error)")
-            }
-            
-            if error != nil {
-                completionHandler("", error)
-                print("post request error")
+                //promise.reject(error)
+                //print("MyError with parse json:\n \(error)")
             }
         }
     } catch {
-        completionHandler("", error)
+        promise.reject(error)
         print("error occurs in getKana")
     }
+    return promise
 }
 
-// MARK: - Public
-// Warning: use it in myQueue.async {} block
-// It blocks current thead !!!
-// Do not call it on main thread
 func calculateScore(
     _ targetSentence: String,
     _ saidSentence: String
-) -> Int {
-    cmdGroup.wait()
+) -> Promise<Int> {
+    let promise = Promise<Int>.pending()
     var targetKana = ""
     var saidKana = ""
     var isTargetKanaReady = false
@@ -79,25 +82,16 @@ func calculateScore(
         return score
     }
     
-    cmdGroup.enter()
-    getKana(targetSentence) { str, error in
-        targetKana = str
-        isTargetKanaReady = true
-        if isSaidKanaReady {
-            score = calcScore(targetKana, saidKana)
-        }
-        cmdGroup.leave()
+    all([
+        getKana(targetSentence),
+        getKana(saidSentence)
+    ]).then { result in
+        let score = calcScore(result.first!, result.last!)
+        postEvent(.scoreCalculated, score)
+        promise.fulfill(score)
+    }.catch { error in
+        promise.reject(error)
     }
-    cmdGroup.enter()
-    getKana(saidSentence) { str, error in
-        saidKana = str
-        isSaidKanaReady = true
-        if isTargetKanaReady {
-            score = calcScore(targetKana, saidKana)
-        }
-        cmdGroup.leave()
-    }
-    cmdGroup.wait()
-    postEvent(.scoreCalculated, score)
-    return score
+    
+    return promise
 }

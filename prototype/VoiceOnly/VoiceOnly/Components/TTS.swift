@@ -8,28 +8,46 @@
 
 import Foundation
 import AVFoundation
+import Promises
 
-class TTS {
+class TTS: NSObject, AVSpeechSynthesizerDelegate {
     var synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
-    var completionHandler: (() -> Void)? = nil
+    var promise = Promise<Void>.pending()
+    var name: String = ""
     
     func say(
         _ text: String,
         _ name: String,
-        rate: Float = AVSpeechUtteranceDefaultSpeechRate, // 0.5, range 0 ~ 1.0
-        delegate: AVSpeechSynthesizerDelegate? = nil,
-        completionHandler: @escaping () -> Void = {}
-    ) {
-        synthesizer.delegate = delegate
+        rate: Float = AVSpeechUtteranceDefaultSpeechRate // 0.5, range 0 ~ 1.0
+        ) -> Promise<Void> {
+        synthesizer.delegate = self
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(identifier: name)
         utterance.rate = rate
-        
-        self.completionHandler = completionHandler
+        postEvent(.sayStarted, name)
         synthesizer.speak(utterance)
+        promise = Promise<Void>.pending()
+        self.name = name
+        return promise
     }
     
     func stop() {
         synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
+    }
+    
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
+                           willSpeakRangeOfSpeechString characterRange: NSRange,
+                           utterance: AVSpeechUtterance) {
+        let speechString = utterance.speechString as NSString
+        let token = speechString.substring(with: characterRange)
+        postEvent(.stringSaid, token)
+    }
+    
+    func speechSynthesizer(
+        _ synthesizer: AVSpeechSynthesizer,
+        didFinish utterance: AVSpeechUtterance
+        ) {
+        postEvent(.sayEnded, name)
+        promise.fulfill(())
     }
 }

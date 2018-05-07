@@ -7,12 +7,18 @@
 //
 
 import Foundation
+import Promises
 
 fileprivate let pauseDuration = 0.4
 fileprivate let context = GameContext.shared
 
+typealias gg = Promise<Void>
+
 class VoiceOnlyFlow: GameFlow {
     static let shared = VoiceOnlyFlow()
+    var userSaidString: String = ""
+    var targetString: String = ""
+    var score: Int = 0
     
     var state: GameState = .stopped {
         didSet {
@@ -22,41 +28,39 @@ class VoiceOnlyFlow: GameFlow {
     
     func play() {
         startEngine(toSpeaker: false)
-        context.isDev = false
+        context.isDev = true
         context.loadLearningSentences(allSentences)
         learnNext()
     }
     
     private func learnNext() {
-        cmdQueue.async {
-            let targetString = context.targetString
-            meijia("請跟著唸日文")
-            
+        targetString = context.targetString
+        var startTime: Double = 0
+        meijia("請跟著唸日文").then { ()-> Promise<Void> in
             self.state = .speakingJapanese
-            hattori(targetString)
-            
+            startTime = getNow()
+            return hattori(self.targetString)
+        }.then { ()-> Promise<String> in
             self.state = .listening
-            let userSaidString = listen(duration: context.speakDuration + pauseDuration)
-            
+            let speakDuration = getNow() - startTime
+            return listenJP(duration: (speakDuration + pauseDuration))
+        }.then { userSaidString -> Promise<Void> in
+            self.userSaidString = userSaidString
             self.state = .stringRecognized
-            if(userSaidString == "") {
-                meijia("聽不清楚、再一次。")
-                self.learnNext()
-                return
-            }
-            
-            self.state = .repeatingWhatSaid
-            meijia("我聽到你說")
-            oren(userSaidString)
-            
+            return meijia("我聽到你說")
+        }.then {
+            oren(self.userSaidString)
+        }.then {
+            calculateScore(self.targetString, self.userSaidString)
+        }.then { score -> Promise<Void> in
             self.state = .scoreCalculated
-            let score = calculateScore(targetString, userSaidString)
-            
-            self.state = .speakingScore
-            meijia("\(score)分")
+            return meijia("\(score)分")
+        }.then {
             if(context.nextSentence()) {
                 self.learnNext()
             }
+        }.catch { error in
+            print("error ... \(error)")
         }
     }
     

@@ -8,10 +8,16 @@
 
 import Foundation
 import Speech
+import Promises
+
+fileprivate let context = GameContext.shared
 
 enum SpeechRecognitionError: Error {
     case unauthorized
+    case engineStopped
 }
+
+
 
 class SpeechRecognizer: NSObject {
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ja-JP"))!
@@ -20,6 +26,7 @@ class SpeechRecognizer: NSObject {
     private var isRunning: Bool = false
     private var isAuthorized: Bool = false
     private var inputNode: AVAudioNode!
+    private var promise = Promise<String>.pending()
     
     // MARK: - Private Methods
     private func authorize() {
@@ -50,12 +57,12 @@ class SpeechRecognizer: NSObject {
     }
     
     // MARK: - Public Methods
-    func start(inputNode: AVAudioNode,
-               stopAfterSeconds: Double = 5,
-               resultHandler: @escaping (SFSpeechRecognitionResult?, Error?) -> Void
-               ) {
+    func start(stopAfterSeconds: Double = 5) -> Promise<String> {
+        promise = Promise<String>.pending()
+        
         if(!isAuthorized) {
-            return resultHandler(nil, SpeechRecognitionError.unauthorized)
+            promise.reject(SpeechRecognitionError.unauthorized)
+            return promise
         }
    
         if let recognitionTask = recognitionTask {
@@ -73,7 +80,7 @@ class SpeechRecognizer: NSObject {
 
         recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest, resultHandler: resultHandler)
         
-        self.inputNode = inputNode
+        self.inputNode = context.engine.inputNode
         let recordingFormat = inputNode.outputFormat(forBus: 0)
 
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) {
@@ -86,6 +93,8 @@ class SpeechRecognizer: NSObject {
         }
         
         self.isRunning = true
+        postEvent(.listenStarted, "")
+        return promise
     }
     
     func endAudio() {
@@ -108,6 +117,30 @@ class SpeechRecognizer: NSObject {
             recognitionRequest = nil
             recognitionTask = nil
             isRunning = false
+            postEvent(.listenEnded, "")
+        }
+    }
+    
+    func resultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
+        if !context.isEngineRunning {
+            promise.reject(SpeechRecognitionError.engineStopped)
+            return
+        }
+        
+        if let result = result {
+            if result.isFinal {
+                context.saidSentence = result.bestTranscription.formattedString
+                postEvent(.listenEnded, context.saidSentence)
+                promise.fulfill(context.saidSentence)
+            } else {
+                postEvent(.stringRecognized, result.bestTranscription.formattedString)
+            }
+        }
+        
+        if error != nil {
+            context.saidSentence = context.isDev ? "おねさま" : ""
+            postEvent(.listenEnded, context.saidSentence)
+            promise.fulfill(context.saidSentence)
         }
     }
 }

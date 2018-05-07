@@ -29,7 +29,7 @@ class P01ViewController: UIViewController, EventDelegate {
         let event = notification.object as! Event
         switch event.type {
         case .sayStarted:
-            (event.object as! SayCommand).log()
+            ()
         case .stringSaid:
             print(event.object as! String, terminator: "")
         case .sayEnded:

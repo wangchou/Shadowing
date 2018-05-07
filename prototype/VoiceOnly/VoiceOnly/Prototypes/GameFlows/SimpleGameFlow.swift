@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Promises
 
 fileprivate let pauseDuration = 0.4
 fileprivate let context = GameContext.shared
@@ -28,25 +29,27 @@ class SimpleGameFlow: GameFlow {
     }
     
     private func learnNext() {
-        cmdQueue.async {
-            let targetString = context.targetString
-            
-            self.state = .speakingJapanese
-            hattori(targetString)
-            
+        let targetString = context.targetString
+        let startTime = getNow()
+        self.state = .speakingJapanese
+        
+        hattori(targetString).then { () -> Promise<String> in
             self.state = .listening
-            let userSaidString = listen(duration: context.speakDuration + pauseDuration)
-            
+            let speakDuration = getNow() - startTime
+            return listenJP(duration: speakDuration + pauseDuration)
+        }.then { userSaidString -> Promise<Int> in
             self.state = .stringRecognized
-            let score = calculateScore(targetString, userSaidString)
-            
+            return calculateScore(targetString, userSaidString)
+        }.then { score -> Promise<Void> in
             self.state = .scoreCalculated
-            meijia("\(score)分")
-            
+            return meijia("\(score)分")
+        }.then {
             self.state = .sentenceSessionEnded
             if(context.nextSentence()) {
                 self.learnNext()
             }
+        }.catch { error in
+            print("Promise chain 死了。", error)
         }
     }
     
