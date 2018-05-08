@@ -9,12 +9,15 @@
 import Foundation
 
 enum EventType{
+    // tts
     case sayStarted
     case stringSaid
     case sayEnded
+    // speech recognition
     case listenStarted
     case stringRecognized
     case listenEnded
+    
     case scoreCalculated
     case gameStateChanged
 }
@@ -28,16 +31,16 @@ extension Notification.Name {
     static let eventHappened = Notification.Name("eventHappended")
 }
 
-@objc protocol GameEventDelegate {
-    @objc func onEventHappened(_ notification: Notification)
-}
-
-
 func postEvent (_ type: EventType, _ object: Any) {
     NotificationCenter.default.post(
         name: .eventHappened,
         object: Event(type: type, object: object)
     )
+}
+
+// for Game UI watching events
+@objc protocol GameEventDelegate {
+    @objc func onEventHappened(_ notification: Notification)
 }
 
 func startEventObserving(_ delegate: GameEventDelegate) {
