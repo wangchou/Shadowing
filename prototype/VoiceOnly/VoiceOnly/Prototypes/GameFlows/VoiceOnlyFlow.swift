@@ -16,9 +16,7 @@ typealias gg = Promise<Void>
 
 class VoiceOnlyFlow: GameFlow {
     static let shared = VoiceOnlyFlow()
-    var userSaidString: String = ""
-    var targetString: String = ""
-    var score: Int = 0
+    var startTime: Double = 0
     
     var state: GameState = .stopped {
         didSet {
@@ -33,38 +31,55 @@ class VoiceOnlyFlow: GameFlow {
         learnNext()
     }
     
+    func stop() {
+        stopEngine()
+    }
+    
     private func learnNext() {
-        targetString = context.targetString
-        var startTime: Double = 0
-        meijia("請跟著唸日文").then { ()-> Promise<Void> in
-            self.state = .speakingJapanese
-            startTime = getNow()
-            return hattori(self.targetString)
-        }.then { ()-> Promise<String> in
-            self.state = .listening
-            let speakDuration = getNow() - startTime
-            return listenJP(duration: (speakDuration + pauseDuration))
-        }.then { userSaidString -> Promise<Void> in
-            self.userSaidString = userSaidString
-            self.state = .stringRecognized
-            return meijia("我聽到你說")
-        }.then {
-            oren(self.userSaidString)
-        }.then {
-            calculateScore(self.targetString, self.userSaidString)
-        }.then { score -> Promise<Void> in
-            self.state = .scoreCalculated
-            return meijia("\(score)分")
-        }.then {
+        speakHint()
+        .then(speakJapanese)
+        .then(listen)
+        .then(iHearYouSaid)
+        .then(getScore)
+        .then(speakScore)
+        .catch { error in
+            print("error ... \(error)")
+        }.always {
             if(context.nextSentence()) {
                 self.learnNext()
             }
-        }.catch { error in
-            print("error ... \(error)")
         }
     }
     
-    func stop() {
-        stopEngine()
+    private func speakHint() -> Promise<Void> {
+        return meijia("請跟著唸日文")
+    }
+    
+    private func speakJapanese() -> Promise<Void> {
+        self.state = .speakingJapanese
+        self.startTime = getNow()
+        return hattori(context.targetString)
+    }
+    
+    private func listen() -> Promise<String> {
+        self.state = .listening
+        let speakDuration = getNow() - self.startTime
+        return listenJP(duration: speakDuration + pauseDuration)
+    }
+    
+    private func iHearYouSaid(userSaidString: String) -> Promise<Void> {
+        self.state = .stringRecognized
+        context.userSaidString = userSaidString
+        return meijia("我聽到你說")
+            .then{ oren(userSaidString) }
+    }
+    
+    private func getScore() -> Promise<Int> {
+        return calculateScore(context.targetString, context.userSaidString)
+    }
+    
+    private func speakScore(score: Int) -> Promise<Void> {
+        self.state = .scoreCalculated
+        return meijia("\(score)分")
     }
 }

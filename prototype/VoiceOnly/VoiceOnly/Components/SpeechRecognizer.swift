@@ -129,18 +129,18 @@ class SpeechRecognizer: NSObject {
         
         if let result = result {
             if result.isFinal {
-                context.saidSentence = result.bestTranscription.formattedString
-                postEvent(.listenEnded, context.saidSentence)
-                promise.fulfill(context.saidSentence)
+                context.userSaidString = result.bestTranscription.formattedString
+                postEvent(.listenEnded, context.userSaidString)
+                promise.fulfill(context.userSaidString)
             } else {
                 postEvent(.stringRecognized, result.bestTranscription.formattedString)
             }
         }
         
         if error != nil {
-            context.saidSentence = context.isDev ? "おねさま" : ""
-            postEvent(.listenEnded, context.saidSentence)
-            promise.fulfill(context.saidSentence)
+            context.userSaidString = context.isDev ? "おねさま" : ""
+            postEvent(.listenEnded, context.userSaidString)
+            promise.fulfill(context.userSaidString)
         }
     }
 }

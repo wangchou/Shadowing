@@ -23,9 +23,7 @@ fileprivate class Request {
 // 台灣大哥大 ４G -> AWS Tokyo server の round-trip time on Sunday morning
 // ~= 200ms (process time in server < 10ms)
 // freaking slow... T.T
-fileprivate func getKana(
-    _ kanjiString: String
-    ) -> Promise<String> {
+fileprivate func getKana(_ kanjiString: String) -> Promise<String> {
     let promise = Promise<String>.pending()
     let request: Request = Request()
     let url: URL = URL(string: "http://54.250.149.163/nlp")!
@@ -35,6 +33,7 @@ fileprivate func getKana(
         promise.fulfill("")
         return promise
     }
+    
     do {
         try request.post(url: url, body: body) { data, response, error in
             if error != nil {
@@ -62,6 +61,7 @@ fileprivate func getKana(
         promise.reject(error)
         print("error occurs in getKana")
     }
+    
     return promise
 }
 

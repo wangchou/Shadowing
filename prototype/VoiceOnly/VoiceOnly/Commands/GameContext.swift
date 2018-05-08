@@ -25,7 +25,7 @@ class GameContext {
     var sentences: [String] = []
     var sentenceIndex: Int = 0
     var targetString: String = ""
-    var saidSentence: String = ""
+    var userSaidString: String = ""
     var isDev = true
     var score = 0
     
@@ -61,7 +61,7 @@ class GameContext {
         sentenceIndex = sentenceIndex + 1
         if sentenceIndex < sentences.count {
             targetString = sentences[sentenceIndex]
-            saidSentence = ""
+            userSaidString = ""
             return true
         } else {
             return false
@@ -69,45 +69,4 @@ class GameContext {
     }
 }
 
-fileprivate let context = GameContext.shared
-func startEngine(toSpeaker: Bool = false) {
-    let context = GameContext.shared
-    do {
-        context.isEngineRunning = true
-        configureAudioSession(toSpeaker: toSpeaker)
-        try context.engine.start()
-        context.bgm.play()
-    } catch {
-        print("Start Play through failed \(error)")
-    }
-}
 
-func stopEngine() {
-    context.isEngineRunning = false
-    context.speechRecognizer.stop()
-    context.engine.stop()
-    context.tts.stop()
-}
-
-func reduceBGMVolume() {
-    context.bgm.reduceVolume()
-}
-func restoreBGMVolume() {
-    context.bgm.restoreVolume()
-}
-
-func meijia(_ sentence: String) -> Promise<Void> {
-    return context.tts.say(sentence, MeiJia, rate: normalRate)
-}
-
-func oren(_ sentence: String, rate: Float = teachingRate) -> Promise<Void> {
-    return context.tts.say(sentence, Oren, rate: rate)
-}
-
-func hattori(_ sentence: String, rate: Float = teachingRate) -> Promise<Void> {
-    return context.tts.say(sentence, Hattori, rate: rate)
-}
-
-func listenJP(duration: Double) -> Promise<String> {
-    return context.speechRecognizer.start(stopAfterSeconds: duration)
-}

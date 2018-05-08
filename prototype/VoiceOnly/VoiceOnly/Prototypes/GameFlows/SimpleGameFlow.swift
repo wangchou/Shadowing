@@ -14,6 +14,7 @@ fileprivate let context = GameContext.shared
 
 class SimpleGameFlow: GameFlow {
     static let shared = SimpleGameFlow()
+    private var startTime: Double = 0
     
     var state: GameState = .stopped {
         didSet {
@@ -28,32 +29,43 @@ class SimpleGameFlow: GameFlow {
         learnNext()
     }
     
+    func stop() {
+        stopEngine()
+    }
+    
     private func learnNext() {
-        let targetString = context.targetString
-        let startTime = getNow()
-        self.state = .speakingJapanese
-        
-        hattori(targetString).then { () -> Promise<String> in
-            self.state = .listening
-            let speakDuration = getNow() - startTime
-            return listenJP(duration: speakDuration + pauseDuration)
-        }.then { userSaidString -> Promise<Int> in
-            self.state = .stringRecognized
-            return calculateScore(targetString, userSaidString)
-        }.then { score -> Promise<Void> in
-            self.state = .scoreCalculated
-            return meijia("\(score)分")
-        }.then {
+        speakJapanese()
+        .then(listen)
+        .then(getScore)
+        .then(speakScore)
+        .catch { error in print("Promise chain 死了。", error)}
+        .always {
             self.state = .sentenceSessionEnded
             if(context.nextSentence()) {
                 self.learnNext()
             }
-        }.catch { error in
-            print("Promise chain 死了。", error)
         }
     }
     
-    func stop() {
-        stopEngine()
+    private func speakJapanese() -> Promise<Void> {
+        self.state = .speakingJapanese
+        self.startTime = getNow()
+        return hattori(context.targetString)
+    }
+    
+    private func listen() -> Promise<String> {
+        self.state = .listening
+        let speakDuration = getNow() - self.startTime
+        return listenJP(duration: speakDuration + pauseDuration)
+    }
+    
+    private func getScore(userSaidString: String) -> Promise<Int> {
+        self.state = .stringRecognized
+        return calculateScore(context.targetString, userSaidString)
+    }
+    
+    private func speakScore(score: Int) -> Promise<Void> {
+        self.state = .scoreCalculated
+        return meijia("\(score)分")
     }
 }
