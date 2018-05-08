@@ -16,6 +16,10 @@ extension P08ViewController: GameEventDelegate {
         switch event.type {
         case .sayStarted:
             switch event.object as! String {
+            case MeiJia:
+                if game.state == .stopped {
+                    addLabel("")
+                }
             case Hattori:
                 addLabel("")
             default:
@@ -24,7 +28,7 @@ extension P08ViewController: GameEventDelegate {
             
         case .stringSaid:
             let saidWord = event.object as! String
-            if game.state == .speakingJapanese {
+            if game.state == .speakingJapanese || game.state == .stopped {
                 updateLastLabelText(lastLabel.text! + saidWord)
             }
             

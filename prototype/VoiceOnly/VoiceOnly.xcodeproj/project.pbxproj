@@ -166,7 +166,6 @@
 				BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */,
 				BEBDEDE9208F23DE00C18520 /* MainNavigationController.swift */,
 				BEBDEDE6208EFF3000C18520 /* GameEngineComponents */,
-				BEBDEDD8208EF15F00C18520 /* constants.swift */,
 				BEBDEDF7208F28E100C18520 /* Prototypes */,
 			);
 			path = VoiceOnly;
@@ -197,6 +196,7 @@
 		BEBDEDF7208F28E100C18520 /* Prototypes */ = {
 			isa = PBXGroup;
 			children = (
+				BEBDEDD8208EF15F00C18520 /* constants.swift */,
 				BE17FB38209B0F5F00D23F22 /* GameCommands */,
 				BE6AF37F209C146B00CBDB63 /* GameFlows */,
 				BE6AF380209C147A00CBDB63 /* GameUIs */,
