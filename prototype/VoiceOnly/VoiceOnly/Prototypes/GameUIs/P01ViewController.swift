@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 // Prototype 1: 全語音、只能用講電話的方式
-class P01ViewController: UIViewController, EventDelegate {
-    let game = VoiceOnlyFlow.shared
+class P01ViewController: UIViewController, GameEventDelegate {
+    let game = VoiceOnlyGame.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +28,6 @@ class P01ViewController: UIViewController, EventDelegate {
     @objc func onEventHappened(_ notification: Notification) {
         let event = notification.object as! Event
         switch event.type {
-        case .sayStarted:
-            ()
         case .stringSaid:
             print(event.object as! String, terminator: "")
         case .sayEnded:
@@ -38,16 +36,8 @@ class P01ViewController: UIViewController, EventDelegate {
             print("hear <<< ", terminator: "")
         case .listenEnded:
             print(event.object as! String)
-//        case .scoreCalculated:
-//            print("score calculated: \(event.object as! Int)")
-        case .gameStateChanged:
-            onGameStateChanged(event)
         default:
             return
         }
-    }
-    
-    func onGameStateChanged(_ event: Event) {
-        // print("= game state changed: \(event.object as! GameState) =")
     }
 }

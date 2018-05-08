@@ -8,12 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB3D209B19B200D23F22 /* GameContext.swift */; };
-		BE1CA956209D5D0900086853 /* GameFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA955209D5D0900086853 /* GameFlow.swift */; };
+		BE1CA956209D5D0900086853 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA955209D5D0900086853 /* Game.swift */; };
 		BE1CA958209DC43800086853 /* P08ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA957209DC43800086853 /* P08ViewController.swift */; };
 		BE1CA95A209DC4BE00086853 /* P09ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA959209DC4BE00086853 /* P09ViewController.swift */; };
 		BE1CA95C209DC4E800086853 /* P10ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA95B209DC4E800086853 /* P10ViewController.swift */; };
-		BE65A939209C6E67006645CA /* EventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65A938209C6E67006645CA /* EventDelegate.swift */; };
-		BE65A93B209C8696006645CA /* SimpleGameFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65A93A209C8696006645CA /* SimpleGameFlow.swift */; };
+		BE65A939209C6E67006645CA /* GameEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65A938209C6E67006645CA /* GameEventDelegate.swift */; };
 		BE6ED54A20A1373700553D1A /* Commands.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6ED54920A1373700553D1A /* Commands.swift */; };
 		BE6ED56020A16B6300553D1A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE6ED55E20A16B6300553D1A /* Alamofire.framework */; };
 		BE6ED56120A16B6300553D1A /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE6ED55E20A16B6300553D1A /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -21,7 +20,8 @@
 		BE6ED56320A16B6300553D1A /* Promises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE6ED55F20A16B6300553D1A /* Promises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE6ED56520A16B7700553D1A /* FBLPromises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE6ED56420A16B7600553D1A /* FBLPromises.framework */; };
 		BE6ED56620A16B7700553D1A /* FBLPromises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE6ED56420A16B7600553D1A /* FBLPromises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BE8C8F02209C476A00E32F09 /* VoiceOnlyFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8C8F01209C476A00E32F09 /* VoiceOnlyFlow.swift */; };
+		BE6ED56820A17BB000553D1A /* SimpleGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6ED56720A17BB000553D1A /* SimpleGame.swift */; };
+		BE8C8F02209C476A00E32F09 /* VoiceOnlyGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8C8F01209C476A00E32F09 /* VoiceOnlyGame.swift */; };
 		BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */; };
 		BEBDEDC2208EF09F00C18520 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDC1208EF09F00C18520 /* ViewController.swift */; };
 		BEBDEDC5208EF09F00C18520 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEBDEDC3208EF09F00C18520 /* Main.storyboard */; };
@@ -58,17 +58,17 @@
 
 /* Begin PBXFileReference section */
 		BE17FB3D209B19B200D23F22 /* GameContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameContext.swift; sourceTree = "<group>"; };
-		BE1CA955209D5D0900086853 /* GameFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFlow.swift; sourceTree = "<group>"; };
+		BE1CA955209D5D0900086853 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		BE1CA957209DC43800086853 /* P08ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P08ViewController.swift; sourceTree = "<group>"; };
 		BE1CA959209DC4BE00086853 /* P09ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P09ViewController.swift; sourceTree = "<group>"; };
 		BE1CA95B209DC4E800086853 /* P10ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P10ViewController.swift; sourceTree = "<group>"; };
-		BE65A938209C6E67006645CA /* EventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDelegate.swift; sourceTree = "<group>"; };
-		BE65A93A209C8696006645CA /* SimpleGameFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleGameFlow.swift; sourceTree = "<group>"; };
+		BE65A938209C6E67006645CA /* GameEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEventDelegate.swift; sourceTree = "<group>"; };
 		BE6ED54920A1373700553D1A /* Commands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commands.swift; sourceTree = "<group>"; };
 		BE6ED55E20A16B6300553D1A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		BE6ED55F20A16B6300553D1A /* Promises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Promises.framework; path = Carthage/Build/iOS/Promises.framework; sourceTree = "<group>"; };
 		BE6ED56420A16B7600553D1A /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBLPromises.framework; path = Carthage/Build/iOS/FBLPromises.framework; sourceTree = "<group>"; };
-		BE8C8F01209C476A00E32F09 /* VoiceOnlyFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceOnlyFlow.swift; sourceTree = "<group>"; };
+		BE6ED56720A17BB000553D1A /* SimpleGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleGame.swift; sourceTree = "<group>"; };
+		BE8C8F01209C476A00E32F09 /* VoiceOnlyGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceOnlyGame.swift; sourceTree = "<group>"; };
 		BEBDEDBC208EF09F00C18520 /* VoiceOnly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceOnly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEBDEDC1208EF09F00C18520 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -104,22 +104,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BE17FB38209B0F5F00D23F22 /* Commands */ = {
+		BE17FB38209B0F5F00D23F22 /* GameCommands */ = {
 			isa = PBXGroup;
 			children = (
 				BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */,
 				BE17FB3D209B19B200D23F22 /* GameContext.swift */,
 				BE6ED54920A1373700553D1A /* Commands.swift */,
 			);
-			path = Commands;
+			path = GameCommands;
 			sourceTree = "<group>";
 		};
 		BE6AF37F209C146B00CBDB63 /* GameFlows */ = {
 			isa = PBXGroup;
 			children = (
-				BE1CA955209D5D0900086853 /* GameFlow.swift */,
-				BE8C8F01209C476A00E32F09 /* VoiceOnlyFlow.swift */,
-				BE65A93A209C8696006645CA /* SimpleGameFlow.swift */,
+				BE65A938209C6E67006645CA /* GameEventDelegate.swift */,
+				BE6ED56720A17BB000553D1A /* SimpleGame.swift */,
+				BE1CA955209D5D0900086853 /* Game.swift */,
+				BE8C8F01209C476A00E32F09 /* VoiceOnlyGame.swift */,
 			);
 			path = GameFlows;
 			sourceTree = "<group>";
@@ -164,10 +165,8 @@
 				BEBDEDC1208EF09F00C18520 /* ViewController.swift */,
 				BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */,
 				BEBDEDE9208F23DE00C18520 /* MainNavigationController.swift */,
-				BEBDEDE6208EFF3000C18520 /* Components */,
+				BEBDEDE6208EFF3000C18520 /* GameEngineComponents */,
 				BEBDEDD8208EF15F00C18520 /* constants.swift */,
-				BE17FB38209B0F5F00D23F22 /* Commands */,
-				BE65A938209C6E67006645CA /* EventDelegate.swift */,
 				BEBDEDF7208F28E100C18520 /* Prototypes */,
 			);
 			path = VoiceOnly;
@@ -184,7 +183,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		BEBDEDE6208EFF3000C18520 /* Components */ = {
+		BEBDEDE6208EFF3000C18520 /* GameEngineComponents */ = {
 			isa = PBXGroup;
 			children = (
 				BEBDEDD4208EF15E00C18520 /* BGM.swift */,
@@ -192,12 +191,13 @@
 				BEBDEDD2208EF15E00C18520 /* TTS.swift */,
 				BEBDEDD1208EF15E00C18520 /* utilities.swift */,
 			);
-			path = Components;
+			path = GameEngineComponents;
 			sourceTree = "<group>";
 		};
 		BEBDEDF7208F28E100C18520 /* Prototypes */ = {
 			isa = PBXGroup;
 			children = (
+				BE17FB38209B0F5F00D23F22 /* GameCommands */,
 				BE6AF37F209C146B00CBDB63 /* GameFlows */,
 				BE6AF380209C147A00CBDB63 /* GameUIs */,
 			);
@@ -280,18 +280,18 @@
 				BE1CA958209DC43800086853 /* P08ViewController.swift in Sources */,
 				BEBDEDD9208EF15F00C18520 /* utilities.swift in Sources */,
 				BEBDEDF6208F28BD00C18520 /* P07ViewController.swift in Sources */,
+				BE6ED56820A17BB000553D1A /* SimpleGame.swift in Sources */,
 				BE6ED54A20A1373700553D1A /* Commands.swift in Sources */,
-				BE1CA956209D5D0900086853 /* GameFlow.swift in Sources */,
-				BE65A939209C6E67006645CA /* EventDelegate.swift in Sources */,
+				BE1CA956209D5D0900086853 /* Game.swift in Sources */,
+				BE65A939209C6E67006645CA /* GameEventDelegate.swift in Sources */,
 				BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */,
 				BEBDEDDC208EF15F00C18520 /* BGM.swift in Sources */,
 				BE1CA95A209DC4BE00086853 /* P09ViewController.swift in Sources */,
 				BEBDEDC2208EF09F00C18520 /* ViewController.swift in Sources */,
-				BE8C8F02209C476A00E32F09 /* VoiceOnlyFlow.swift in Sources */,
+				BE8C8F02209C476A00E32F09 /* VoiceOnlyGame.swift in Sources */,
 				BEBDEDEA208F23DE00C18520 /* MainNavigationController.swift in Sources */,
 				BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */,
 				BE1CA95C209DC4E800086853 /* P10ViewController.swift in Sources */,
-				BE65A93B209C8696006645CA /* SimpleGameFlow.swift in Sources */,
 				BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */,
 				BEBDEDE8208F227C00C18520 /* P01ViewController.swift in Sources */,
 				BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */,

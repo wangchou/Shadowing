@@ -8,17 +8,7 @@
 
 import Foundation
 import AVFoundation
-
-// MARK: - async/await/completionHandler
-// for async and await
-// see discussion on
-// https://stackoverflow.com/questions/50035373/grand-central-dispatch-for-complex-flow/50075403#50075403
-let cmdGroup = DispatchGroup()
-let cmdQueue = DispatchQueue(label: "for Sync/Blocking version of async functions")
-
-func waitConcurrentJobs() {
-    cmdGroup.wait()
-}
+import UIKit
 
 // MARK: - Audio Session
 func configureAudioSession(toSpeaker: Bool = false) {
@@ -200,23 +190,17 @@ extension Sequence {
     }
 }
 
-// Latency tested result
-// AVAudioEngine ~= 5.41ms
-// AudioKit ~= 16.25ms
-// Decision: use AVAudioEngine
+func rgb(_ red: Float, _ green: Float, _ blue: Float) -> UIColor {
+    return UIColor(red: CGFloat(red/255.0), green: CGFloat(green/255.0), blue: CGFloat(blue/255.0), alpha: 1)
+}
 
-// Tested setup
-// channel one: sound -> iphone mic -> this play through app -> usb mixer -> garageband
-// channel two: sound -> macbook mic -> garageband
-// latency ~= the time interval between signal appear of channel one and channel two
-
-/*
- test: AudioKit code with (mic -> speaker) latency ~= 16.25ms
- 
- AKSettings.bufferLength = .Shortest
- let mic = AKMicrophone()
- AudioKit.output = mic
- AudioKit.start()
- */
-
-
+func colorText(_ text: String, _ color: UIColor = .lightText, terminator: String = "") -> NSMutableAttributedString {
+    let colorText = NSMutableAttributedString(string: "\(text)\(terminator)")
+    colorText.addAttributes([
+        .foregroundColor: color,
+        .font: UIFont.systemFont(ofSize: 24)
+        ],
+                            range: NSMakeRange(0, colorText.length)
+    )
+    return colorText
+}

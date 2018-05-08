@@ -10,6 +10,10 @@ import Foundation
 import AVFoundation
 import Promises
 
+enum TTSError: Error {
+    case stop
+}
+
 class TTS: NSObject, AVSpeechSynthesizerDelegate {
     var synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
     var promise = Promise<Void>.pending()
@@ -33,6 +37,8 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
     
     func stop() {
         synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
+        postEvent(.sayEnded, "")
+        promise.reject(TTSError.stop)
     }
     
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,

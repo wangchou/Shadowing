@@ -11,9 +11,6 @@ import AVFoundation
 import UIKit
 import Speech
 
-// before 315 lines
-// after ?
-
 // Prototype 7: prototype 6 + 遊戲畫面。在 getScore 後 update UI
 enum ScoreDesc {
     case perfect
@@ -26,51 +23,50 @@ let rihoUrl = "https://i2.kknews.cc/SIG=vanen8/66nn0002p026p2100op3.jpg"
 
 fileprivate let context = GameContext.shared
 
-extension P07ViewController: EventDelegate {
+extension P07ViewController: GameEventDelegate {
     @objc func onEventHappened(_ notification: Notification) {
         let event = notification.object as! Event
         let status: (GameState, EventType) = (game.state, event.type)
         
-        DispatchQueue.main.async {
-            switch status {
-            case (.speakingJapanese, .sayStarted):
-                self.focusTextView(isTargetView: true)
-                
-            case (.speakingJapanese, .stringSaid):
-                let token = event.object as! String
-                print(token, terminator: "")
-                self.targetTextView.text = self.targetTextView.text + token
-                
-            case (.speakingJapanese, .sayEnded):
-                print("")
-                self.focusTextView(isTargetView: false)
+        switch status {
+        case (.speakingJapanese, .sayStarted):
+            self.focusTextView(isTargetView: true)
             
-            case (.listening, .stringRecognized):
-                self.saidTextView.text = event.object as! String
-                
-            case (.stringRecognized, .gameStateChanged):
-                self.scoreDescLabel.text = ""
-                
-            case (.stringRecognized, .scoreCalculated):
-                self.updateUIByScore(event.object as! Int)
-                
-            case (.sentenceSessionEnded, .gameStateChanged):
-                self.sentenceNumLabel.text = "\(context.sentenceIndex)/\(context.sentences.count)"
-                if(context.sentenceIndex == context.sentences.count) {
-                    self.isGameFinished = true
-                    self.afterGameFinished()
-                }
-                
-            default:
-                ()//print("unhandle \(status)")
+        case (.speakingJapanese, .stringSaid):
+            let token = event.object as! String
+            print(token, terminator: "")
+            self.targetTextView.text = self.targetTextView.text + token
+            
+        case (.speakingJapanese, .sayEnded):
+            print("")
+            self.focusTextView(isTargetView: false)
+            
+        case (.listening, .stringRecognized):
+            self.saidTextView.text = event.object as! String
+            
+        case (.stringRecognized, .gameStateChanged):
+            self.scoreDescLabel.text = ""
+            
+        case (.stringRecognized, .scoreCalculated):
+            self.updateUIByScore(event.object as! Int)
+            
+        case (.sentenceSessionEnded, .gameStateChanged):
+            self.sentenceNumLabel.text = "\(context.sentenceIndex)/\(context.sentences.count)"
+            if(context.sentenceIndex == context.sentences.count) {
+                self.isGameFinished = true
+                self.afterGameFinished()
             }
+            
+        default:
+            ()//print("unhandle \(status)")
         }
+        
     }
 }
 
 class P07ViewController: UIViewController {
     
-    let game = SimpleGameFlow.shared
+    let game = SimpleGame.shared
     var isGameFinished = false
    
     @IBOutlet weak var comboLabel: UILabel!
@@ -167,19 +163,18 @@ class P07ViewController: UIViewController {
             saidTextView.text = ""
             targetTextView.text = ""
             scoreDescLabel.text = ""
-            // downloadImage(url: URL(string: rihoUrl)!)
-            cmdQueue.async {
-                // meijia("恭喜你全破了。有人想和你說...")
-                // oren("きみのこと、大好きだよ", rate: teachingRate * 0.7, delegate: self)
+            downloadImage(url: URL(string: rihoUrl)!)
+            meijia("恭喜你全破了。有人想和你說...").then {
+                oren("きみのこと、大好きだよ", rate: teachingRate * 0.7)
+            }.always {
                 stopEngine()
             }
         } else {
-            cmdQueue.async {
-                meijia("生命值為零，遊戲結束")
+            meijia("生命值為零，遊戲結束").always {
+                self.scoreDescLabel.text = "遊戲結束"
+                self.scoreDescLabel.textColor = UIColor.red
+                stopEngine()
             }
-            scoreDescLabel.text = "遊戲結束"
-            scoreDescLabel.textColor = UIColor.red
-            stopEngine()
         }
     }
     

@@ -12,9 +12,11 @@ import Promises
 fileprivate let pauseDuration = 0.4
 fileprivate let context = GameContext.shared
 
-class SimpleGameFlow: GameFlow {
-    static let shared = SimpleGameFlow()
-    private var startTime: Double = 0
+typealias gg = Promise<Void>
+
+class VoiceOnlyGame: Game {
+    static let shared = VoiceOnlyGame()
+    var startTime: Double = 0
     
     var state: GameState = .stopped {
         didSet {
@@ -23,8 +25,7 @@ class SimpleGameFlow: GameFlow {
     }
     
     func play() {
-        startEngine(toSpeaker: true)
-        context.isDev = true
+        startEngine(toSpeaker: false)
         context.loadLearningSentences(allSentences)
         learnNext()
     }
@@ -34,17 +35,23 @@ class SimpleGameFlow: GameFlow {
     }
     
     private func learnNext() {
-        speakJapanese()
+        speakHint()
+        .then(speakJapanese)
         .then(listen)
+        .then(iHearYouSaid)
         .then(getScore)
         .then(speakScore)
-        .catch { error in print("Promise chain 死了。", error)}
-        .always {
-            self.state = .sentenceSessionEnded
+        .catch { error in
+            print("error ... \(error)")
+        }.always {
             if(context.nextSentence()) {
                 self.learnNext()
             }
         }
+    }
+    
+    private func speakHint() -> Promise<Void> {
+        return meijia("請跟著唸日文")
     }
     
     private func speakJapanese() -> Promise<Void> {
@@ -59,9 +66,15 @@ class SimpleGameFlow: GameFlow {
         return listenJP(duration: speakDuration + pauseDuration)
     }
     
-    private func getScore(userSaidString: String) -> Promise<Int> {
+    private func iHearYouSaid(userSaidString: String) -> Promise<Void> {
         self.state = .stringRecognized
-        return calculateScore(context.targetString, userSaidString)
+        context.userSaidString = userSaidString
+        return meijia("我聽到你說")
+            .then{ oren(userSaidString) }
+    }
+    
+    private func getScore() -> Promise<Int> {
+        return calculateScore(context.targetString, context.userSaidString)
     }
     
     private func speakScore(score: Int) -> Promise<Void> {

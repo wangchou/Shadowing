@@ -9,17 +9,13 @@
 import Foundation
 import UIKit
 
-func rgb(_ red: Float, _ green: Float, _ blue: Float) -> UIColor {
-    return UIColor(red: CGFloat(red/255.0), green: CGFloat(green/255.0), blue: CGFloat(blue/255.0), alpha: 1)
-}
-
-let myBlue = rgb(20, 168, 237)
-let myRed = rgb(254, 67, 134)
-let myGreen = rgb(150, 207, 42)
+fileprivate let myBlue = rgb(20, 168, 237)
+fileprivate let myRed = rgb(254, 67, 134)
+fileprivate let myGreen = rgb(150, 207, 42)
 
 // Prototype 10: black console
-class P10ViewController: UIViewController, EventDelegate {
-    let game = SimpleGameFlow.shared
+class P10ViewController: UIViewController, GameEventDelegate {
+    let game = SimpleGame.shared
     var score: Int = 0
     var tmpText: NSMutableAttributedString = colorText("")
     
@@ -66,7 +62,11 @@ class P10ViewController: UIViewController, EventDelegate {
         
         case .stringRecognized, .listenEnded:
             let curText = tmpText.mutableCopy() as! NSMutableAttributedString
-            curText.append(colorText(event.object as! String, terminator: " "))
+            var saidString = event.object as! String
+            if(event.type == .listenEnded && saidString == "") {
+               saidString = "聽不清楚"
+            }
+            curText.append(colorText(saidString, terminator: " "))
             textView.attributedText = curText
         
         case .scoreCalculated:
@@ -82,21 +82,11 @@ class P10ViewController: UIViewController, EventDelegate {
         textView.scrollRangeToVisible(range)
     }
     
+    // color print to self.textView
     func cprint(_ text: String, _ color: UIColor = .lightText, terminator: String = "\n") {
-        let newText = self.textView.attributedText.mutableCopy() as! NSMutableAttributedString
+        let newText = textView.attributedText.mutableCopy() as! NSMutableAttributedString
         newText.append(colorText(text, color, terminator: terminator))
-        self.textView.attributedText = newText
-        self.scrollTextIntoView()
+        textView.attributedText = newText
+        scrollTextIntoView()
     }
-}
-
-func colorText(_ text: String, _ color: UIColor = .lightText, terminator: String = "") -> NSMutableAttributedString {
-    let colorText = NSMutableAttributedString(string: "\(text)\(terminator)")
-    colorText.addAttributes([
-            .foregroundColor: color,
-            .font: UIFont.systemFont(ofSize: 24)
-        ],
-        range: NSMakeRange(0, colorText.length)
-    )
-    return colorText
 }

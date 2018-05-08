@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 // Prototype 9: article reader
-class P09ViewController: UIViewController, EventDelegate {
-    let game = VoiceOnlyFlow.shared
+class P09ViewController: UIViewController, GameEventDelegate {
+    let game = VoiceOnlyGame.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()

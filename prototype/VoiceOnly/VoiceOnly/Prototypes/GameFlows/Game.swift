@@ -19,7 +19,7 @@ enum GameState {
     case sentenceSessionEnded
 }
 
-protocol GameFlow {
+protocol Game {
     var state: GameState { get set}
     func play()
     func stop()

@@ -17,8 +17,6 @@ enum SpeechRecognitionError: Error {
     case engineStopped
 }
 
-
-
 class SpeechRecognizer: NSObject {
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ja-JP"))!
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
@@ -138,7 +136,7 @@ class SpeechRecognizer: NSObject {
         }
         
         if error != nil {
-            context.userSaidString = context.isDev ? "聽不清楚..." : ""
+            context.userSaidString = ""
             postEvent(.listenEnded, context.userSaidString)
             promise.fulfill(context.userSaidString)
         }

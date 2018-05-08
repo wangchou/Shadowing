@@ -30,18 +30,6 @@ let slowestRate = AVSpeechUtteranceDefaultSpeechRate * 0.6
 // it's bad when monitoring at street
 // if in quite place. turn micOutVolume to 3
 let micOutVolume: Float = 0
-var translations: [String] = [
-    "真好",
-    "真厲害",
-    "初次見面",
-    "你好",
-    "我會加油",
-    "真相只有一個",
-    "我很好奇！",
-    "你已經死了",
-    "我對普通的人類沒有興趣",
-    "夢想什麼的、用不著那麼誇張的東西吧",
-]
 
 var allSentences: [String] = [
     "甘くみてましたねぇ。",
@@ -98,8 +86,7 @@ var allSentences: [String] = [
     "世の中に失敗というものはない。",
     "チャレンジしているうちは失敗はない。",
     "あきらめた時が失敗である。",
-    "持てる力を一點に集中させれば、",
-    "必ず穴があく。",
+    "持てる力を一點に集中させれば、必ず穴があく。",
     "おはようございます",
     "今日は、いい天気ですね",
     "そうですね",

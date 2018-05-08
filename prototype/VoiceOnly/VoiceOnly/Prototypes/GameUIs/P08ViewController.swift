@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 // Prototype 8: messenger / line interface
-class P08ViewController: UIViewController, EventDelegate {
-    let game = VoiceOnlyFlow.shared
+class P08ViewController: UIViewController, GameEventDelegate {
+    let game = VoiceOnlyGame.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()

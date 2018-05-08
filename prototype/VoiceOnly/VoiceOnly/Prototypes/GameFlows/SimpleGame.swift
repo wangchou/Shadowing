@@ -12,11 +12,9 @@ import Promises
 fileprivate let pauseDuration = 0.4
 fileprivate let context = GameContext.shared
 
-typealias gg = Promise<Void>
-
-class VoiceOnlyFlow: GameFlow {
-    static let shared = VoiceOnlyFlow()
-    var startTime: Double = 0
+class SimpleGame: Game {
+    static let shared = SimpleGame()
+    private var startTime: Double = 0
     
     var state: GameState = .stopped {
         didSet {
@@ -25,34 +23,30 @@ class VoiceOnlyFlow: GameFlow {
     }
     
     func play() {
-        startEngine(toSpeaker: false)
-        context.isDev = true
+        startEngine(toSpeaker: true)
         context.loadLearningSentences(allSentences)
-        learnNext()
+        meijia("每次日文說完後，請跟著說～").always {
+            self.learnNext()
+        }
     }
     
     func stop() {
+        state = .stopped
         stopEngine()
     }
     
     private func learnNext() {
-        speakHint()
-        .then(speakJapanese)
+        speakJapanese()
         .then(listen)
-        .then(iHearYouSaid)
         .then(getScore)
         .then(speakScore)
-        .catch { error in
-            print("error ... \(error)")
-        }.always {
-            if(context.nextSentence()) {
+        .catch { error in print("Promise chain 死了。", error)}
+        .always {
+            self.state = .sentenceSessionEnded
+            if(context.nextSentence() && context.isEngineRunning) {
                 self.learnNext()
             }
         }
-    }
-    
-    private func speakHint() -> Promise<Void> {
-        return meijia("請跟著唸日文")
     }
     
     private func speakJapanese() -> Promise<Void> {
@@ -67,15 +61,9 @@ class VoiceOnlyFlow: GameFlow {
         return listenJP(duration: speakDuration + pauseDuration)
     }
     
-    private func iHearYouSaid(userSaidString: String) -> Promise<Void> {
+    private func getScore(userSaidString: String) -> Promise<Int> {
         self.state = .stringRecognized
-        context.userSaidString = userSaidString
-        return meijia("我聽到你說")
-            .then{ oren(userSaidString) }
-    }
-    
-    private func getScore() -> Promise<Int> {
-        return calculateScore(context.targetString, context.userSaidString)
+        return calculateScore(context.targetString, userSaidString)
     }
     
     private func speakScore(score: Int) -> Promise<Void> {

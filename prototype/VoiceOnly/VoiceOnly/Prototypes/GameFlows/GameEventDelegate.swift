@@ -28,7 +28,7 @@ extension Notification.Name {
     static let eventHappened = Notification.Name("eventHappended")
 }
 
-@objc protocol EventDelegate {
+@objc protocol GameEventDelegate {
     @objc func onEventHappened(_ notification: Notification)
 }
 
@@ -40,7 +40,7 @@ func postEvent (_ type: EventType, _ object: Any) {
     )
 }
 
-func startEventObserving(_ delegate: EventDelegate) {
+func startEventObserving(_ delegate: GameEventDelegate) {
     NotificationCenter.default.addObserver(
         delegate,
         selector: #selector(delegate.onEventHappened(_:)),
@@ -49,6 +49,6 @@ func startEventObserving(_ delegate: EventDelegate) {
     )
 }
 
-func stopEventObserving(_ delegate: EventDelegate) {
+func stopEventObserving(_ delegate: GameEventDelegate) {
     NotificationCenter.default.removeObserver(delegate)
 }

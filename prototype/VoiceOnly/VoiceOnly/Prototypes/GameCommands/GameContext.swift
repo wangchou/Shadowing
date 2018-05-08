@@ -17,16 +17,15 @@ class GameContext {
     
     var engine = AVAudioEngine()
     var micVolumeNode = AVAudioMixerNode()
-    var speechRecognizer: SpeechRecognizer = SpeechRecognizer()
+    var speechRecognizer = SpeechRecognizer()
     var bgm = BGM()
     var tts = TTS()
-    var isEngineRunning = false
     
+    var isEngineRunning = false
     var sentences: [String] = []
     var sentenceIndex: Int = 0
     var targetString: String = ""
     var userSaidString: String = ""
-    var isDev = true
     var score = 0
     
     // MARK: - Lifecycle
@@ -51,10 +50,11 @@ class GameContext {
         bgm.node.volume = 0.5
     }
     
-    func loadLearningSentences(_ sentences: [String]) {
-        self.sentenceIndex = 0
-        self.sentences = sentences.shuffled()
-        self.targetString = self.sentences[0]
+    func loadLearningSentences(_ allSentences: [String]) {
+        sentenceIndex = 0
+        sentences = allSentences.shuffled()
+        targetString = sentences[0]
+        userSaidString = ""
     }
     
     func nextSentence() -> Bool {
