@@ -96,7 +96,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OW2-cg-rJd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2370" y="118"/>
+            <point key="canvasLocation" x="1588" y="442"/>
         </scene>
         <!--原型9: 文章閱讀器-->
         <scene sceneID="L4l-iK-SUn">
@@ -138,7 +138,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b6Z-Xr-4G5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3060" y="117.25352112676056"/>
+            <point key="canvasLocation" x="2205" y="442"/>
         </scene>
         <!--原型10: 黑底 console-->
         <scene sceneID="mvo-NN-HJp">
@@ -175,7 +175,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JzF-kv-NYI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3744.375" y="124.64788732394366"/>
+            <point key="canvasLocation" x="2826" y="442"/>
         </scene>
         <!--原型1: 中文語音提示-->
         <scene sceneID="ElK-pY-ic3">
@@ -199,7 +199,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5mT-4Q-Jfp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1051.875" y="118.30985915492958"/>
+            <point key="canvasLocation" x="360" y="442"/>
         </scene>
         <!--原型7: 音樂遊戲-->
         <scene sceneID="aWi-RA-nps">
@@ -292,7 +292,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FkE-6V-Lyw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1721.25" y="117.25352112676056"/>
+            <point key="canvasLocation" x="975" y="442"/>
         </scene>
         <!--VoiceFirst (沒畫面的原型)-->
         <scene sceneID="xok-3W-CGj">

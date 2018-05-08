@@ -21,6 +21,7 @@ let myGreen = rgb(150, 207, 42)
 class P10ViewController: UIViewController, EventDelegate {
     let game = SimpleGameFlow.shared
     var score: Int = 0
+    var tmpText: NSMutableAttributedString = colorText("")
     
     @IBOutlet weak var textView: UITextView!
     
@@ -39,7 +40,7 @@ class P10ViewController: UIViewController, EventDelegate {
     
     @objc func onEventHappened(_ notification: Notification) {
         let event = notification.object as! Event
-
+        
         switch event.type {
         case .sayStarted:
             switch event.object as! String {
@@ -48,8 +49,7 @@ class P10ViewController: UIViewController, EventDelegate {
             default:
                 return
             }
-        case .scoreCalculated:
-            score = event.object as! Int
+            
         case .stringSaid:
             var color: UIColor = .lightText
             color = game.state == .speakingJapanese ? myBlue : color
@@ -57,10 +57,21 @@ class P10ViewController: UIViewController, EventDelegate {
                 color = score >= 60 ? myGreen : myRed
             }
             cprint(event.object as! String, color, terminator: "")
+        
         case .sayEnded:
             cprint("")
-        case .listenEnded:
-            cprint(event.object as! String, terminator: " ")
+        
+        case .listenStarted:
+            tmpText = textView.attributedText.mutableCopy() as! NSMutableAttributedString
+        
+        case .stringRecognized, .listenEnded:
+            let curText = tmpText.mutableCopy() as! NSMutableAttributedString
+            curText.append(colorText(event.object as! String, terminator: " "))
+            textView.attributedText = curText
+        
+        case .scoreCalculated:
+            score = event.object as! Int
+            
         default:
             return
         }
@@ -71,22 +82,21 @@ class P10ViewController: UIViewController, EventDelegate {
         textView.scrollRangeToVisible(range)
     }
     
-    // console color print
     func cprint(_ text: String, _ color: UIColor = .lightText, terminator: String = "\n") {
-        let colorText = NSMutableAttributedString(string: "\(text)\(terminator)")
-        colorText.addAttributes([
-                .foregroundColor: color,
-                .font: UIFont.systemFont(ofSize: 24)
-            ],
-            range: NSMakeRange(0, colorText.length)
-        )
-        
-        DispatchQueue.main.async {
-            let newText = self.textView.attributedText.mutableCopy() as! NSMutableAttributedString
-            newText.append(colorText)
-            self.textView.attributedText = newText
-            self.scrollTextIntoView()
-        }
+        let newText = self.textView.attributedText.mutableCopy() as! NSMutableAttributedString
+        newText.append(colorText(text, color, terminator: terminator))
+        self.textView.attributedText = newText
+        self.scrollTextIntoView()
     }
-    
+}
+
+func colorText(_ text: String, _ color: UIColor = .lightText, terminator: String = "") -> NSMutableAttributedString {
+    let colorText = NSMutableAttributedString(string: "\(text)\(terminator)")
+    colorText.addAttributes([
+            .foregroundColor: color,
+            .font: UIFont.systemFont(ofSize: 24)
+        ],
+        range: NSMakeRange(0, colorText.length)
+    )
+    return colorText
 }

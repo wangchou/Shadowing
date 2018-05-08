@@ -30,7 +30,7 @@ extension P07ViewController: EventDelegate {
     @objc func onEventHappened(_ notification: Notification) {
         let event = notification.object as! Event
         let status: (GameState, EventType) = (game.state, event.type)
-        print(status)
+        
         DispatchQueue.main.async {
             switch status {
             case (.speakingJapanese, .sayStarted):

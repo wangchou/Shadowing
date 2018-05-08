@@ -138,7 +138,7 @@ class SpeechRecognizer: NSObject {
         }
         
         if error != nil {
-            context.userSaidString = context.isDev ? "おねさま" : ""
+            context.userSaidString = context.isDev ? "聽不清楚..." : ""
             postEvent(.listenEnded, context.userSaidString)
             promise.fulfill(context.userSaidString)
         }
