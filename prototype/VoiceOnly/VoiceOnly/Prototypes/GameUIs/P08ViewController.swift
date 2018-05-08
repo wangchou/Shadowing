@@ -9,9 +9,54 @@
 import Foundation
 import UIKit
 
+extension P08ViewController: GameEventDelegate {
+    @objc func onEventHappened(_ notification: Notification) {
+        let event = notification.object as! Event
+        
+        switch event.type {
+        case .sayStarted:
+            switch event.object as! String {
+            case Hattori:
+                addLabel("")
+            default:
+                return
+            }
+            
+        case .stringSaid:
+            let saidWord = event.object as! String
+            if game.state == .speakingJapanese {
+                updateLastLabelText(lastLabel.text! + saidWord)
+            }
+            
+        case .listenStarted:
+            addLabel("", isLeft: false)
+            
+        case .stringRecognized, .listenEnded:
+            var saidString = event.object as! String
+            if(event.type == .listenEnded && saidString == "") {
+                saidString = "聽不清楚"
+            }
+            updateLastLabelText(saidString, isLeft: false)
+            
+        case .scoreCalculated:
+            let score = event.object as! Int
+            var newText = "\(lastLabel.text!) \(score)分"
+            newText = score == 100 ? "\(newText) ⭐️" : newText
+            updateLastLabelText(newText, isLeft: false)
+            
+            if score < 60 {
+                lastLabel.backgroundColor = myRed
+            }
+            
+        default:
+            return
+        }
+    }
+}
+
 // Prototype 8: messenger / line interface
-class P08ViewController: UIViewController, GameEventDelegate {
-    let game = VoiceOnlyGame.shared
+class P08ViewController: UIViewController {
+    let game = SimpleGame.shared
     let spacing: Int = 8
     var y: Int = 8
     var previousY: Int = 0
@@ -20,7 +65,7 @@ class P08ViewController: UIViewController, GameEventDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     
     func addLabel(_ text: String, isLeft: Bool = true) {
-        let myLabel = UITextView(frame: CGRect(x: 5, y: y, width: 210, height: 30))
+        let myLabel = UITextView()
         updateLabel(myLabel, text: text, isLeft: isLeft)
         scrollView.addSubview(myLabel)
         lastLabel = myLabel
@@ -31,10 +76,15 @@ class P08ViewController: UIViewController, GameEventDelegate {
         myLabel.textContainerInset = UIEdgeInsetsMake(4, 4, 4, 4)
         myLabel.layer.borderWidth = 1.5;
         myLabel.font = UIFont(name: "Helvetica-Light", size: 20)
-        myLabel.backgroundColor = .white
+        if isLeft {
+            myLabel.backgroundColor = .white
+        } else {
+            myLabel.backgroundColor = myGreen
+        }
+        myLabel.frame = CGRect(x: 5, y: y, width: 210, height: 30)
         myLabel.sizeToFit()
         myLabel.clipsToBounds = true
-        myLabel.layer.cornerRadius = 10.0
+        myLabel.layer.cornerRadius = 15.0
         
         previousY = y
         y = y + Int(myLabel.frame.height) + spacing
@@ -57,34 +107,14 @@ class P08ViewController: UIViewController, GameEventDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addLabel("ただの人間には")
-        updateLastLabelText("qoo", isLeft: false)
-        DispatchQueue.global().async {
-            for _ in 1...10 {
-                sleep(1)
-                DispatchQueue.main.async {
-                    self.addLabel("ただの人間には")
-                    self.addLabel("今日はいい天気ですね", isLeft: false)
-                }
-            }
-        }
-        addLabel("今日はいい天気ですね今日はすね今日はいい天気ですね")
-        
-
-        
-//        startEventObserving(self)
-//        game.play()
+        startEventObserving(self)
+        game.play()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-//        stopEventObserving(self)
-//        game.stop()
-    }
-    
-    @objc func onEventHappened(_ notification: Notification) {
-        let event = notification.object as! Event
-        print(game.state, event.type)
+        stopEventObserving(self)
+        game.stop()
     }
     
 }

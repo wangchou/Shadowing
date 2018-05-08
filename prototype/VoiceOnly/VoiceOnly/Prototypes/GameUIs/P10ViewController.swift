@@ -9,9 +9,10 @@
 import Foundation
 import UIKit
 
-fileprivate let myBlue = rgb(20, 168, 237)
-fileprivate let myRed = rgb(254, 67, 134)
-fileprivate let myGreen = rgb(150, 207, 42)
+let myBlue = rgb(20, 168, 237)
+let myRed = rgb(254, 67, 134)
+let myGreen = rgb(150, 207, 42)
+let myOrange = rgb(255, 195, 0)
 
 // Prototype 10: black console
 class P10ViewController: UIViewController, GameEventDelegate {
