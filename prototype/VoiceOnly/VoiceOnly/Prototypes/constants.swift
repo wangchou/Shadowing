@@ -18,7 +18,6 @@ let Hattori = "com.apple.ttsbundle.siri_male_ja-JP_compact"
 let HARUHI = "ただの人間には興味ありません。この中に宇宙人、未来人、異世界人、超能力者がいたら、あたしのところに来なさい。以上。"
 
 let normalRate = AVSpeechUtteranceDefaultSpeechRate
-let teachingRate = AVSpeechUtteranceDefaultSpeechRate * 0.7
 let slowestRate = AVSpeechUtteranceDefaultSpeechRate * 0.6
 
 // it's bad when monitoring at street

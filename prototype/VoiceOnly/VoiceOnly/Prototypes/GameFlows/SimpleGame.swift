@@ -71,6 +71,25 @@ class SimpleGame: Game {
     
     private func speakScore(score: Int) -> Promise<Void> {
         self.state = .scoreCalculated
+        
+        // change life will change the teachingSpeed
+        if score == 100 {
+            context.life = context.life + 10
+        } else if score >= 80 {
+            context.life = context.life + 5
+        } else if score >= 60 {
+            context.life = context.life + 2
+        } else {
+            context.life = context.life - 10
+        }
+        
+        if context.life > 100 {
+            context.life = 100
+        }
+        if context.life < 0 {
+            context.life = 0
+        }
+        
         return meijia("\(score)分")
     }
 }

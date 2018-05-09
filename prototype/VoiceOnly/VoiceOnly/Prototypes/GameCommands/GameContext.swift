@@ -27,6 +27,12 @@ class GameContext {
     var targetString: String = ""
     var userSaidString: String = ""
     var score = 0
+    var life: Int = 40 {
+        didSet {
+            teachingRate = AVSpeechUtteranceDefaultSpeechRate * (0.5 + (Float(life) * 0.005))
+        }
+    }
+    var teachingRate = AVSpeechUtteranceDefaultSpeechRate * 0.7
     
     // MARK: - Lifecycle
     private init() {
@@ -55,6 +61,7 @@ class GameContext {
         sentences = allSentences.shuffled()
         targetString = sentences[0]
         userSaidString = ""
+        life = 40
     }
     
     func nextSentence() -> Bool {

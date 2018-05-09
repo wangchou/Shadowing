@@ -41,12 +41,12 @@ func meijia(_ sentence: String) -> Promise<Void> {
     return context.tts.say(sentence, MeiJia, rate: normalRate)
 }
 
-func oren(_ sentence: String, rate: Float = teachingRate) -> Promise<Void> {
-    return context.tts.say(sentence, Oren, rate: rate)
+func oren(_ sentence: String) -> Promise<Void> {
+    return context.tts.say(sentence, Oren, rate: context.teachingRate)
 }
 
-func hattori(_ sentence: String, rate: Float = teachingRate) -> Promise<Void> {
-    return context.tts.say(sentence, Hattori, rate: rate)
+func hattori(_ sentence: String) -> Promise<Void> {
+    return context.tts.say(sentence, Hattori, rate: context.teachingRate)
 }
 
 func listenJP(duration: Double) -> Promise<String> {

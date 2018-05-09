@@ -169,7 +169,7 @@ class P07ViewController: UIViewController {
             scoreDescLabel.text = ""
             downloadImage(url: URL(string: rihoUrl)!)
             meijia("恭喜你全破了。有人想和你說...").then {
-                oren("きみのこと、大好きだよ", rate: teachingRate * 0.7)
+                oren("きみのこと、大好きだよ")
             }.always {
                 stopEngine()
             }
