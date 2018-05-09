@@ -79,6 +79,8 @@ class P08ViewController: UIViewController {
     }
     
     func updateLabel(_ myLabel: UITextView, text: String, isLeft: Bool = true) {
+        let maxLabelWidth: Int = Int(screenSize.width*2/3)
+        
         myLabel.text = text
         myLabel.textContainerInset = UIEdgeInsetsMake(4, 4, 4, 4)
         myLabel.layer.borderWidth = 1.5;
@@ -88,7 +90,7 @@ class P08ViewController: UIViewController {
         } else {
             myLabel.backgroundColor = myGreen
         }
-        myLabel.frame = CGRect(x: 5, y: y, width: 210, height: 30)
+        myLabel.frame = CGRect(x: 5, y: y, width: maxLabelWidth, height: 30)
         myLabel.sizeToFit()
         myLabel.clipsToBounds = true
         myLabel.layer.cornerRadius = 15.0
@@ -97,7 +99,7 @@ class P08ViewController: UIViewController {
         y = y + Int(myLabel.frame.height) + spacing
         
         if(!isLeft) {
-            myLabel.frame.origin.x = CGFloat(320 - spacing - Int(myLabel.frame.width))
+            myLabel.frame.origin.x = CGFloat(Int(screenSize.width) - spacing - Int(myLabel.frame.width))
         }
         
         scrollView.contentSize = CGSize(
@@ -123,5 +125,4 @@ class P08ViewController: UIViewController {
         stopEventObserving(self)
         game.stop()
     }
-    
 }

@@ -75,10 +75,10 @@ class SimpleGame: Game {
         // change life will change the teachingSpeed
         var text = ""
         if score == 100 {
-            context.life = context.life + 10
+            context.life = context.life + 6
             text = "正解"
         } else if score >= 80 {
-            context.life = context.life + 5
+            context.life = context.life + 4
             text = "すごい"
         } else if score >= 60 {
             context.life = context.life + 2
