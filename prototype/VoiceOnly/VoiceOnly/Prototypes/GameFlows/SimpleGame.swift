@@ -73,14 +73,19 @@ class SimpleGame: Game {
         self.state = .scoreCalculated
         
         // change life will change the teachingSpeed
+        var text = ""
         if score == 100 {
             context.life = context.life + 10
+            text = "正解"
         } else if score >= 80 {
             context.life = context.life + 5
+            text = "すごい"
         } else if score >= 60 {
             context.life = context.life + 2
+            text = "いいね"
         } else {
             context.life = context.life - 10
+            text = "違うよ"
         }
         
         if context.life > 100 {
@@ -90,6 +95,6 @@ class SimpleGame: Game {
             context.life = 0
         }
         
-        return meijia("\(score)分")
+        return oren(text, rate: normalRate)
     }
 }

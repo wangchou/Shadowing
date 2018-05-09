@@ -41,7 +41,10 @@ func meijia(_ sentence: String) -> Promise<Void> {
     return context.tts.say(sentence, MeiJia, rate: normalRate)
 }
 
-func oren(_ sentence: String) -> Promise<Void> {
+func oren(_ sentence: String, rate: Float? = nil) -> Promise<Void> {
+    if let rate = rate {
+        return context.tts.say(sentence, Oren, rate: rate)
+    }
     return context.tts.say(sentence, Oren, rate: context.teachingRate)
 }
 

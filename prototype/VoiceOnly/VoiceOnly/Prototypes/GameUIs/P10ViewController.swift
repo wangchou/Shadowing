@@ -51,10 +51,8 @@ class P10ViewController: UIViewController, GameEventDelegate {
         case .stringSaid:
             var color: UIColor = .lightText
             color = game.state == .speakingJapanese ? myBlue : color
-            if (game.state == .scoreCalculated) {
-                color = score >= 60 ? myGreen : myRed
-            }
-            if let str = event.string {
+            if game.state != .scoreCalculated,
+               let str = event.string {
                 cprint(str, color, terminator: "")
             }
         
@@ -76,6 +74,8 @@ class P10ViewController: UIViewController, GameEventDelegate {
         case .scoreCalculated:
             if let score = event.int {
                 self.score = score
+                let color = score >= 60 ? myGreen : myRed
+                cprint(" \(score)分", color, terminator: "")
             }
             
         default:
