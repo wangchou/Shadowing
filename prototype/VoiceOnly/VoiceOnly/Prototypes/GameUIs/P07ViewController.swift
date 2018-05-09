@@ -33,7 +33,7 @@ extension P07ViewController: GameEventDelegate {
             self.focusTextView(isTargetView: true)
             
         case (.speakingJapanese, .stringSaid):
-            let token = event.object as! String
+            guard let token = event.string else { return }
             print(token, terminator: "")
             self.targetTextView.text = self.targetTextView.text + token
             
@@ -42,13 +42,17 @@ extension P07ViewController: GameEventDelegate {
             self.focusTextView(isTargetView: false)
             
         case (.listening, .stringRecognized):
-            self.saidTextView.text = event.object as! String
+            if let str = event.string {
+                self.saidTextView.text = str
+            }
             
         case (.stringRecognized, .gameStateChanged):
             self.scoreDescLabel.text = ""
             
         case (.stringRecognized, .scoreCalculated):
-            self.updateUIByScore(event.object as! Int)
+            if let score = event.int {
+                self.updateUIByScore(score)
+            }
             
         case (.sentenceSessionEnded, .gameStateChanged):
             self.sentenceNumLabel.text = "\(context.sentenceIndex)/\(context.sentences.count)"

@@ -8,11 +8,12 @@
 
 import Foundation
 
-enum EventType{
+enum EventType {
     // tts
     case sayStarted
     case stringSaid
     case sayEnded
+    
     // speech recognition
     case listenStarted
     case stringRecognized
@@ -24,17 +25,21 @@ enum EventType{
 
 struct Event {
     let type: EventType
-    let object: Any
+    
+    // only accept three types of data for type safety
+    let string: String?
+    let int: Int?
+    let gameState: GameState?
 }
 
 extension Notification.Name {
     static let eventHappened = Notification.Name("eventHappended")
 }
 
-func postEvent (_ type: EventType, _ object: Any) {
+func postEvent (_ type: EventType, string: String? = nil, int: Int? = nil, gameState: GameState? = nil) {
     NotificationCenter.default.post(
         name: .eventHappened,
-        object: Event(type: type, object: object)
+        object: Event(type: type, string: string, int: int, gameState: gameState)
     )
 }
 

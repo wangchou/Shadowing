@@ -28,7 +28,7 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(identifier: name)
         utterance.rate = rate
-        postEvent(.sayStarted, name)
+        postEvent(.sayStarted, string: name)
         synthesizer.speak(utterance)
         promise = Promise<Void>.pending()
         self.name = name
@@ -37,7 +37,7 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
     
     func stop() {
         synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
-        postEvent(.sayEnded, "")
+        postEvent(.sayEnded, string: "")
         promise.reject(TTSError.stop)
     }
     
@@ -46,14 +46,14 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
                            utterance: AVSpeechUtterance) {
         let speechString = utterance.speechString as NSString
         let token = speechString.substring(with: characterRange)
-        postEvent(.stringSaid, token)
+        postEvent(.stringSaid, string: token)
     }
     
     func speechSynthesizer(
         _ synthesizer: AVSpeechSynthesizer,
         didFinish utterance: AVSpeechUtterance
         ) {
-        postEvent(.sayEnded, name)
+        postEvent(.sayEnded, string: name)
         promise.fulfill(())
     }
 }

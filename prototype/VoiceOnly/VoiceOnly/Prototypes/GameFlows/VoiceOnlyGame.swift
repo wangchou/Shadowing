@@ -20,7 +20,7 @@ class VoiceOnlyGame: Game {
     
     var state: GameState = .stopped {
         didSet {
-            postEvent(.gameStateChanged, state)
+            postEvent(.gameStateChanged, gameState: state)
         }
     }
     

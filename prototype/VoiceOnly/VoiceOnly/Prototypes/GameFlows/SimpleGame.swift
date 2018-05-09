@@ -18,13 +18,16 @@ class SimpleGame: Game {
     
     var state: GameState = .stopped {
         didSet {
-            postEvent(.gameStateChanged, state)
+            postEvent(.gameStateChanged, gameState: state)
         }
     }
     
     func play() {
         startEngine(toSpeaker: true)
-        context.loadLearningSentences(n5_2)
+        
+        let index: Int = Int(arc4random_uniform(UInt32(allSentences.count)))
+        let randomSentences = Array(allSentences.values)[index]
+        context.loadLearningSentences(randomSentences)
         meijia("每次日文說完後，請跟著說～").always {
             self.learnNext()
         }

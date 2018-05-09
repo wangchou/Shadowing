@@ -40,7 +40,8 @@ class P10ViewController: UIViewController, GameEventDelegate {
         
         switch event.type {
         case .sayStarted:
-            switch event.object as! String {
+            guard let name = event.string else { return }
+            switch name {
             case Hattori:
                 cprint("---")
             default:
@@ -53,7 +54,9 @@ class P10ViewController: UIViewController, GameEventDelegate {
             if (game.state == .scoreCalculated) {
                 color = score >= 60 ? myGreen : myRed
             }
-            cprint(event.object as! String, color, terminator: "")
+            if let str = event.string {
+                cprint(str, color, terminator: "")
+            }
         
         case .sayEnded:
             cprint("")
@@ -63,7 +66,7 @@ class P10ViewController: UIViewController, GameEventDelegate {
         
         case .stringRecognized, .listenEnded:
             let curText = tmpText.mutableCopy() as! NSMutableAttributedString
-            var saidString = event.object as! String
+            guard var saidString = event.string else { return }
             if(event.type == .listenEnded && saidString == "") {
                saidString = "聽不清楚"
             }
@@ -71,7 +74,9 @@ class P10ViewController: UIViewController, GameEventDelegate {
             textView.attributedText = curText
         
         case .scoreCalculated:
-            score = event.object as! Int
+            if let score = event.int {
+                self.score = score
+            }
             
         default:
             return

@@ -29,13 +29,17 @@ class P01ViewController: UIViewController, GameEventDelegate {
         let event = notification.object as! Event
         switch event.type {
         case .stringSaid:
-            print(event.object as! String, terminator: "")
+            if let str = event.string {
+                print(str, terminator: "")
+            }
         case .sayEnded:
             print("")
         case .listenStarted:
             print("hear <<< ", terminator: "")
         case .listenEnded:
-            print(event.object as! String)
+            if let str = event.string {
+                print(str)
+            }
         default:
             return
         }

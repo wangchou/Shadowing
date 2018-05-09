@@ -50,7 +50,7 @@ func calculateScore(
         getKana(sentence2)
     ]).then { result in
         let score = calcScore(result.first!, result.last!)
-        postEvent(.scoreCalculated, score)
+        postEvent(.scoreCalculated, int: score)
         promise.fulfill(score)
     }.catch { error in
         promise.reject(error)

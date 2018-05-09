@@ -15,7 +15,10 @@ extension P08ViewController: GameEventDelegate {
         
         switch event.type {
         case .sayStarted:
-            switch event.object as! String {
+            guard let name = event.string else {
+                return
+            }
+            switch name {
             case MeiJia:
                 if game.state == .stopped {
                     addLabel("")
@@ -27,7 +30,7 @@ extension P08ViewController: GameEventDelegate {
             }
             
         case .stringSaid:
-            let saidWord = event.object as! String
+            guard let saidWord = event.string else { return }
             if game.state == .speakingJapanese || game.state == .stopped {
                 updateLastLabelText(lastLabel.text! + saidWord)
             }
@@ -36,14 +39,14 @@ extension P08ViewController: GameEventDelegate {
             addLabel("", isLeft: false)
             
         case .stringRecognized, .listenEnded:
-            var saidString = event.object as! String
+            guard var saidString = event.string else { return }
             if(event.type == .listenEnded && saidString == "") {
                 saidString = "聽不清楚"
             }
             updateLastLabelText(saidString, isLeft: false)
             
         case .scoreCalculated:
-            let score = event.object as! Int
+            guard let score = event.int else { return }
             var newText = "\(lastLabel.text!) \(score)分"
             newText = score == 100 ? "\(newText) ⭐️" : newText
             updateLastLabelText(newText, isLeft: false)

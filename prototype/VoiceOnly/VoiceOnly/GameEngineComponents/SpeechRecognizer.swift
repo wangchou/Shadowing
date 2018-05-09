@@ -91,7 +91,7 @@ class SpeechRecognizer: NSObject {
         }
         
         self.isRunning = true
-        postEvent(.listenStarted, "")
+        postEvent(.listenStarted, string: "")
         return promise
     }
     
@@ -115,7 +115,7 @@ class SpeechRecognizer: NSObject {
             recognitionRequest = nil
             recognitionTask = nil
             isRunning = false
-            postEvent(.listenEnded, "")
+            postEvent(.listenEnded, string: "")
         }
     }
     
@@ -128,16 +128,16 @@ class SpeechRecognizer: NSObject {
         if let result = result {
             if result.isFinal {
                 context.userSaidString = result.bestTranscription.formattedString
-                postEvent(.listenEnded, context.userSaidString)
+                postEvent(.listenEnded, string: context.userSaidString)
                 promise.fulfill(context.userSaidString)
             } else {
-                postEvent(.stringRecognized, result.bestTranscription.formattedString)
+                postEvent(.stringRecognized, string: result.bestTranscription.formattedString)
             }
         }
         
         if error != nil {
             context.userSaidString = ""
-            postEvent(.listenEnded, context.userSaidString)
+            postEvent(.listenEnded, string: context.userSaidString)
             promise.fulfill(context.userSaidString)
         }
     }
