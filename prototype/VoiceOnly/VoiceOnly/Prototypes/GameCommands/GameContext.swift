@@ -11,42 +11,6 @@ import AVFoundation
 import Speech
 import Promises
 
-struct GameRecord {
-    let dataSetKey: String
-    let sentencesCount: Int
-    var perfectCount: Int
-    var greatCount: Int
-    var goodCount: Int
-    
-    func getP() -> Int {
-        return 100 * (perfectCount + greatCount) / sentencesCount
-    }
-    
-    var rank: String {
-        let p = getP()
-        if p == 100 && perfectCount == sentencesCount { return "SS" }
-        if p == 100 { return "S" }
-        if p > 90 { return "A" }
-        if p > 80 { return "B" }
-        if p > 70 { return "C" }
-        if p > 60 { return "D" }
-        if p > 50 { return "E" }
-        return "F"
-    }
-    
-    init(_ dataSetKey: String, sentencesCount: Int, perfectCount: Int = 0, greatCount: Int = 0, goodCount: Int = 0) {
-        self.dataSetKey = dataSetKey
-        self.sentencesCount = sentencesCount
-        self.perfectCount = perfectCount
-        self.greatCount = greatCount
-        self.goodCount = goodCount
-    }
-    
-    var progress: String {
-       return "\(getP())%"
-    }
-}
-
 class GameContext {
     //Singleton
     static let shared = GameContext()

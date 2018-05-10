@@ -32,6 +32,10 @@ class BGM {
         node.play()
     }
     
+    func stop() {
+        node.stop()
+    }
+    
     func reduceVolume() {
         if tmpVolume == nil {
             tmpVolume = node.volume

@@ -26,6 +26,7 @@ func startEngine(toSpeaker: Bool = false) {
 func stopEngine() {
     context.isEngineRunning = false
     context.speechRecognizer.stop()
+    context.bgm.stop()
     context.engine.stop()
     context.tts.stop()
 }

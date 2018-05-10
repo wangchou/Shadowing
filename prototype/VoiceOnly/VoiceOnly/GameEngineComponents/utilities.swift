@@ -190,6 +190,10 @@ extension Sequence {
     }
 }
 
+func getSentencesKeys() -> [String] {
+    return Array(allSentences.keys).sorted().reversed()
+}
+
 func rgb(_ red: Float, _ green: Float, _ blue: Float) -> UIColor {
     return UIColor(red: CGFloat(red/255.0), green: CGFloat(green/255.0), blue: CGFloat(blue/255.0), alpha: 1)
 }
@@ -203,4 +207,9 @@ func colorText(_ text: String, _ color: UIColor = .lightText, terminator: String
         range: NSMakeRange(0, colorText.length)
     )
     return colorText
+}
+
+func launchStoryboard(_ originVC: UIViewController, _ storyboardId: String) {
+    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: storyboardId)
+    originVC.present(vc, animated: true, completion: nil)
 }

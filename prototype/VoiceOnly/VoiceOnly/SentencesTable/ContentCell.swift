@@ -22,7 +22,7 @@ func getStrokeText(_ string: String, _ color: UIColor) -> NSMutableAttributedStr
     return text
 }
 
-class SentencesTableViewCell: UITableViewCell {
+class ContentCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var progress: UILabel!
     @IBOutlet weak var rank: UILabel!

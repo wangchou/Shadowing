@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+fileprivate let context = GameContext.shared
+
 extension P08ViewController: GameEventDelegate {
     @objc func onEventHappened(_ notification: Notification) {
         let event = notification.object as! Event
@@ -55,6 +57,13 @@ extension P08ViewController: GameEventDelegate {
                 lastLabel.backgroundColor = myRed
             }
             
+        case .gameStateChanged:
+            if game.state == .gameOver {
+                addLabel("遊戲結束。\n達成率：\(context.gameRecord!.progress), \nRank: \(context.gameRecord!.rank)")
+            }
+            if game.state == .mainScreen {
+                launchStoryboard(self, "ContentViewController")
+            }
         default:
             return
         }

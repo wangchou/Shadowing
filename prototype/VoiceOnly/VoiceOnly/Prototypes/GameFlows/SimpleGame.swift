@@ -44,7 +44,7 @@ class SimpleGame: Game {
         .catch { error in print("Promise chain 死了。", error)}
         .always {
             self.state = .sentenceSessionEnded
-            if(context.nextSentence() && context.isEngineRunning) {
+            if(context.nextSentence() && context.isEngineRunning && context.life > 0) {
                 self.learnNext()
             } else {
                 if let previousRecord = context.gameHistory[(context.gameRecord?.dataSetKey)!],
@@ -54,7 +54,12 @@ class SimpleGame: Game {
                 }
                 
                 context.gameHistory[(context.gameRecord?.dataSetKey)!] = context.gameRecord
-        
+                self.state = .gameOver
+                
+                meijia("遊戲結束").then {_ in
+                    self.state = .mainScreen
+                }
+                
             }
         }
     }

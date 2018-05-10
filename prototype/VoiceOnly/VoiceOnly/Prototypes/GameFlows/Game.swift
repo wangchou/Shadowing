@@ -17,6 +17,8 @@ enum GameState {
     case scoreCalculated
     case speakingScore
     case sentenceSessionEnded
+    case gameOver
+    case mainScreen
 }
 
 protocol Game {
