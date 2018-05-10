@@ -37,9 +37,12 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SentencesCell", for: indexPath) as! SentencesTableViewCell
+        //let cell = UITableViewCell() as SentencesTableCell
         let keys = getSentencesKeys()
-        cell.textLabel?.text = keys[indexPath.row]
+        cell.title.text = keys[indexPath.row]
+        cell.strockedProgressText = "95%"
+        cell.strockedRankText = "A"
         return cell
     }
 }

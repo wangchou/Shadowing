@@ -25,7 +25,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="191" height="46"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                         <state key="normal" title="原型1: 語音only">
-                                            <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <segue destination="fmK-8w-LXj" kind="show" id="bWI-iE-Lgu"/>
@@ -35,7 +35,7 @@
                                         <rect key="frame" x="0.0" y="46" width="199" height="46"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                         <state key="normal" title="原型7: 音樂遊戲">
-                                            <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <segue destination="b7f-dC-kdy" kind="show" id="uJt-yd-Ubr"/>
@@ -45,7 +45,7 @@
                                         <rect key="frame" x="0.0" y="92" width="222" height="46"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                         <state key="normal" title="原型8: Messenger">
-                                            <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <segue destination="aXC-LK-wE8" kind="show" id="wXI-sl-ppl"/>
@@ -55,7 +55,7 @@
                                         <rect key="frame" x="0.0" y="138" width="195" height="46"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                         <state key="normal" title="原型10: console">
-                                            <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <segue destination="cVo-N6-yfY" kind="show" id="a5B-3b-NbS"/>
@@ -65,7 +65,7 @@
                                         <rect key="frame" x="0.0" y="184" width="201" height="46"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                         <state key="normal" title="原型9: 文章朗讀">
-                                            <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <segue destination="Kb8-RJ-rtB" kind="show" id="cK5-io-A72"/>
@@ -79,13 +79,104 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="265" id="TXV-Hm-db6"/>
                                 </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SentencesCell" rowHeight="65" id="dBP-pO-iCD" customClass="SentencesTableViewCell" customModule="VoiceOnly" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="65"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.69999999999999996" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dBP-pO-iCD" id="u6e-75-GJe">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="64.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="2iU-yl-Lpw">
+                                                    <rect key="frame" x="5" y="5" width="310" height="54.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="N5 50句 - 第一關" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jN5-CV-8qC">
+                                                            <rect key="frame" x="0.0" y="16.5" width="174.5" height="21.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="yGY-8x-xy2">
+                                                            <rect key="frame" x="174.5" y="1.5" width="84" height="52"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="達成率" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qwr-6i-713">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="37" height="14.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gh5-YY-3KL">
+                                                                    <rect key="frame" x="0.0" y="14.5" width="68" height="37.5"/>
+                                                                    <attributedString key="attributedText">
+                                                                        <fragment content="99%">
+                                                                            <attributes>
+                                                                                <color key="NSColor" red="0.26379683613777161" green="0.26379683613777161" blue="0.74704861111111109" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                <font key="NSFont" metaFont="system" size="32"/>
+                                                                            </attributes>
+                                                                        </fragment>
+                                                                    </attributedString>
+                                                                    <nil key="highlightedColor"/>
+                                                                    <size key="shadowOffset" width="1" height="2"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Xv6-Tm-jXS">
+                                                            <rect key="frame" x="258.5" y="1.5" width="51.5" height="52"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rank" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Spm-ma-gpe">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="28" height="14.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6hZ-za-hDH">
+                                                                    <rect key="frame" x="0.0" y="14.5" width="41.5" height="37.5"/>
+                                                                    <attributedString key="attributedText">
+                                                                        <fragment content="SS">
+                                                                            <attributes>
+                                                                                <color key="NSColor" red="1" green="0.56961647956321504" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                <font key="NSFont" metaFont="system" size="32"/>
+                                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                            </attributes>
+                                                                        </fragment>
+                                                                    </attributedString>
+                                                                    <nil key="highlightedColor"/>
+                                                                    <size key="shadowOffset" width="2" height="2"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                </stackView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QTw-gI-IOk">
+                                                    <rect key="frame" x="15" y="40" width="0.0" height="0.0"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="2iU-yl-Lpw" firstAttribute="leading" secondItem="u6e-75-GJe" secondAttribute="leading" constant="5" id="MWI-IX-UXf"/>
+                                                <constraint firstAttribute="trailing" secondItem="2iU-yl-Lpw" secondAttribute="trailing" constant="5" id="PPV-mQ-uI4"/>
+                                                <constraint firstAttribute="bottom" secondItem="2iU-yl-Lpw" secondAttribute="bottom" constant="5" id="oTP-vS-cxM"/>
+                                                <constraint firstItem="2iU-yl-Lpw" firstAttribute="top" secondItem="u6e-75-GJe" secondAttribute="top" constant="5" id="oW5-l1-TQ2"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="progress" destination="gh5-YY-3KL" id="xo4-WJ-RKs"/>
+                                            <outlet property="rank" destination="6hZ-za-hDH" id="M5x-ub-Ggl"/>
+                                            <outlet property="title" destination="jN5-CV-8qC" id="fW9-eC-whq"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="5Vg-qB-yFh"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Wdf-Bd-zzd"/>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.27802148170000002" green="0.7436149997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="9Ar-lL-ket" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="2Hz-UJ-xCH"/>
                             <constraint firstItem="9Ar-lL-ket" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Anx-Xm-Osv"/>

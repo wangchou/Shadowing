@@ -29,6 +29,7 @@
 		BE7725C920A2CBC200DF186A /* n5_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725C220A2CBC100DF186A /* n5_1.swift */; };
 		BE7725CA20A2CBC200DF186A /* n5_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725C320A2CBC100DF186A /* n5_3.swift */; };
 		BE7725CC20A3FB0900DF186A /* ContentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725CB20A3FB0900DF186A /* ContentTableViewController.swift */; };
+		BE7725CE20A4216700DF186A /* SentencesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725CD20A4216700DF186A /* SentencesTableViewCell.swift */; };
 		BE8C8F02209C476A00E32F09 /* VoiceOnlyGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8C8F01209C476A00E32F09 /* VoiceOnlyGame.swift */; };
 		BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */; };
 		BEBDEDC2208EF09F00C18520 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDC1208EF09F00C18520 /* ViewController.swift */; };
@@ -84,6 +85,7 @@
 		BE7725C220A2CBC100DF186A /* n5_1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n5_1.swift; sourceTree = "<group>"; };
 		BE7725C320A2CBC100DF186A /* n5_3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n5_3.swift; sourceTree = "<group>"; };
 		BE7725CB20A3FB0900DF186A /* ContentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTableViewController.swift; sourceTree = "<group>"; };
+		BE7725CD20A4216700DF186A /* SentencesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentencesTableViewCell.swift; sourceTree = "<group>"; };
 		BE8C8F01209C476A00E32F09 /* VoiceOnlyGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceOnlyGame.swift; sourceTree = "<group>"; };
 		BEBDEDBC208EF09F00C18520 /* VoiceOnly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceOnly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -166,6 +168,15 @@
 			path = sentences;
 			sourceTree = "<group>";
 		};
+		BE7725CF20A4291600DF186A /* SentencesTable */ = {
+			isa = PBXGroup;
+			children = (
+				BEBDEDC1208EF09F00C18520 /* ViewController.swift */,
+				BE7725CD20A4216700DF186A /* SentencesTableViewCell.swift */,
+			);
+			path = SentencesTable;
+			sourceTree = "<group>";
+		};
 		BEBDEDB3208EF09F00C18520 = {
 			isa = PBXGroup;
 			children = (
@@ -191,7 +202,7 @@
 				BEBDEDC8208EF0A000C18520 /* LaunchScreen.storyboard */,
 				BEBDEDC6208EF0A000C18520 /* Assets.xcassets */,
 				BEBDEDCB208EF0A000C18520 /* Info.plist */,
-				BEBDEDC1208EF09F00C18520 /* ViewController.swift */,
+				BE7725CF20A4291600DF186A /* SentencesTable */,
 				BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */,
 				BEBDEDE9208F23DE00C18520 /* MainNavigationController.swift */,
 				BE7725CB20A3FB0900DF186A /* ContentTableViewController.swift */,
@@ -327,6 +338,7 @@
 				BE7725CA20A2CBC200DF186A /* n5_3.swift in Sources */,
 				BEBDEDC2208EF09F00C18520 /* ViewController.swift in Sources */,
 				BE7725C520A2CBC200DF186A /* n3_all.swift in Sources */,
+				BE7725CE20A4216700DF186A /* SentencesTableViewCell.swift in Sources */,
 				BE8C8F02209C476A00E32F09 /* VoiceOnlyGame.swift in Sources */,
 				BEBDEDEA208F23DE00C18520 /* MainNavigationController.swift in Sources */,
 				BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */,

@@ -200,7 +200,7 @@ func colorText(_ text: String, _ color: UIColor = .lightText, terminator: String
         .foregroundColor: color,
         .font: UIFont.systemFont(ofSize: 24)
         ],
-                            range: NSMakeRange(0, colorText.length)
+        range: NSMakeRange(0, colorText.length)
     )
     return colorText
 }
