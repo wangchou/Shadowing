@@ -84,7 +84,7 @@ class P08ViewController: UIViewController {
         myLabel.text = text
         myLabel.textContainerInset = UIEdgeInsetsMake(4, 4, 4, 4)
         myLabel.layer.borderWidth = 1.5;
-        myLabel.font = UIFont(name: "Helvetica-Light", size: 20)
+        myLabel.font = UIFont.systemFont(ofSize: 20)
         if isLeft {
             myLabel.backgroundColor = .white
         } else {

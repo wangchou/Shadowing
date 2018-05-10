@@ -46,6 +46,15 @@ class SimpleGame: Game {
             self.state = .sentenceSessionEnded
             if(context.nextSentence() && context.isEngineRunning) {
                 self.learnNext()
+            } else {
+                if let previousRecord = context.gameHistory[(context.gameRecord?.dataSetKey)!],
+                    context.gameRecord!.getP() <= previousRecord.getP() &&
+                    context.gameRecord!.perfectCount != context.gameRecord!.sentencesCount {
+                    return
+                }
+                
+                context.gameHistory[(context.gameRecord?.dataSetKey)!] = context.gameRecord
+        
             }
         }
     }
@@ -74,12 +83,15 @@ class SimpleGame: Game {
         var text = ""
         if score == 100 {
             context.life = context.life + 6
+            context.gameRecord?.perfectCount += 1
             text = "正解"
         } else if score >= 80 {
             context.life = context.life + 4
+            context.gameRecord?.greatCount += 1
             text = "すごい"
         } else if score >= 60 {
             context.life = context.life + 2
+            context.gameRecord?.goodCount += 1
             text = "いいね"
         } else {
             context.life = context.life - 10

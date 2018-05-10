@@ -27,15 +27,23 @@ class SentencesTableViewCell: UITableViewCell {
     @IBOutlet weak var progress: UILabel!
     @IBOutlet weak var rank: UILabel!
     
-    var strockedRankText: String = "" {
+    var strockedRankText: String? = "" {
         willSet(string) {
-            rank.attributedText = getStrokeText(string, myRed)
+            if let string = string {
+                rank.attributedText = getStrokeText(string, myRed)
+            } else {
+                rank.attributedText = getStrokeText("?", .lightText)
+            }
         }
     }
     
-    var strockedProgressText: String = "" {
+    var strockedProgressText: String? = "" {
         willSet(string) {
-            progress.attributedText = getStrokeText(string, myGreen)
+            if let string = string {
+                progress.attributedText = getStrokeText(string, myGreen)
+            } else {
+                progress.attributedText = getStrokeText("??%", .lightText)
+            }
         }
     }
 }

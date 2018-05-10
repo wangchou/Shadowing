@@ -12,9 +12,17 @@ fileprivate let context = GameContext.shared
 
 class ViewController: UIViewController {
     @IBOutlet weak var sentencesTableView: UITableView!
+    let transparentView = UIView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        sentencesTableView.selectRow(at: [0, 1], animated: false, scrollPosition: UITableViewScrollPosition(rawValue: 0)!)
+        transparentView.backgroundColor = .clear
+        sentencesTableView.selectRow(at: [0, 0], animated: false, scrollPosition: UITableViewScrollPosition(rawValue: 0)!)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        sentencesTableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,11 +46,13 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SentencesCell", for: indexPath) as! SentencesTableViewCell
-        //let cell = UITableViewCell() as SentencesTableCell
+        
         let keys = getSentencesKeys()
-        cell.title.text = keys[indexPath.row]
-        cell.strockedProgressText = "95%"
-        cell.strockedRankText = "A"
+        let dataSetKey = keys[indexPath.row]
+        cell.title.text = dataSetKey
+        cell.strockedProgressText = context.gameHistory[dataSetKey]?.progress
+        cell.strockedRankText = context.gameHistory[dataSetKey]?.rank
+        cell.selectedBackgroundView = transparentView
         return cell
     }
 }
@@ -51,5 +61,15 @@ extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let keys = getSentencesKeys()
         context.dataSetKey = keys[indexPath.row]
+        
+        let v = tableView.cellForRow(at: indexPath)!.contentView
+        v.alpha = 1
+        v.backgroundColor = myBlue
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let v = tableView.cellForRow(at: indexPath)!.contentView
+        v.alpha = 0.5
+        v.backgroundColor = .white
     }
 }
