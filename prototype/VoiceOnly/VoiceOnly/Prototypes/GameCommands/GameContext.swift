@@ -33,6 +33,7 @@ class GameContext {
         }
     }
     var teachingRate = AVSpeechUtteranceDefaultSpeechRate * 0.7
+    var dataSetKey: String = allSentences.keys.first!
     
     // MARK: - Lifecycle
     private init() {
@@ -56,9 +57,9 @@ class GameContext {
         bgm.node.volume = 0.5
     }
     
-    func loadLearningSentences(_ allSentences: [String]) {
+    func loadLearningSentences() {
         sentenceIndex = 0
-        sentences = allSentences.shuffled()
+        sentences = allSentences[dataSetKey]!.shuffled()
         targetString = sentences[0]
         userSaidString = ""
         life = 40

@@ -26,7 +26,7 @@ class VoiceOnlyGame: Game {
     
     func play() {
         startEngine(toSpeaker: false)
-        context.loadLearningSentences(n5_3)
+        context.loadLearningSentences()
         learnNext()
     }
     

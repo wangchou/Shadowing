@@ -28,6 +28,7 @@
 		BE7725C820A2CBC200DF186A /* n4_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725C120A2CBC100DF186A /* n4_1.swift */; };
 		BE7725C920A2CBC200DF186A /* n5_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725C220A2CBC100DF186A /* n5_1.swift */; };
 		BE7725CA20A2CBC200DF186A /* n5_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725C320A2CBC100DF186A /* n5_3.swift */; };
+		BE7725CC20A3FB0900DF186A /* ContentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725CB20A3FB0900DF186A /* ContentTableViewController.swift */; };
 		BE8C8F02209C476A00E32F09 /* VoiceOnlyGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8C8F01209C476A00E32F09 /* VoiceOnlyGame.swift */; };
 		BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */; };
 		BEBDEDC2208EF09F00C18520 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDC1208EF09F00C18520 /* ViewController.swift */; };
@@ -82,6 +83,7 @@
 		BE7725C120A2CBC100DF186A /* n4_1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n4_1.swift; sourceTree = "<group>"; };
 		BE7725C220A2CBC100DF186A /* n5_1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n5_1.swift; sourceTree = "<group>"; };
 		BE7725C320A2CBC100DF186A /* n5_3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n5_3.swift; sourceTree = "<group>"; };
+		BE7725CB20A3FB0900DF186A /* ContentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTableViewController.swift; sourceTree = "<group>"; };
 		BE8C8F01209C476A00E32F09 /* VoiceOnlyGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceOnlyGame.swift; sourceTree = "<group>"; };
 		BEBDEDBC208EF09F00C18520 /* VoiceOnly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceOnly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				BEBDEDC1208EF09F00C18520 /* ViewController.swift */,
 				BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */,
 				BEBDEDE9208F23DE00C18520 /* MainNavigationController.swift */,
+				BE7725CB20A3FB0900DF186A /* ContentTableViewController.swift */,
 				BEBDEDE6208EFF3000C18520 /* GameEngineComponents */,
 				BEBDEDF7208F28E100C18520 /* Prototypes */,
 			);
@@ -328,6 +331,7 @@
 				BEBDEDEA208F23DE00C18520 /* MainNavigationController.swift in Sources */,
 				BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */,
 				BE1CA95C209DC4E800086853 /* P10ViewController.swift in Sources */,
+				BE7725CC20A3FB0900DF186A /* ContentTableViewController.swift in Sources */,
 				BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */,
 				BEBDEDE8208F227C00C18520 /* P01ViewController.swift in Sources */,
 				BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */,

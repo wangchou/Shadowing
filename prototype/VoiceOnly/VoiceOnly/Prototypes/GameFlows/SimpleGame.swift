@@ -25,9 +25,7 @@ class SimpleGame: Game {
     func play() {
         startEngine(toSpeaker: true)
         
-        let index: Int = Int(arc4random_uniform(UInt32(allSentences.count)))
-        let randomSentences = Array(allSentences.values)[index]
-        context.loadLearningSentences(randomSentences)
+        context.loadLearningSentences()
         meijia("每次日文說完後，請跟著說～").always {
             self.learnNext()
         }
