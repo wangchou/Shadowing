@@ -54,6 +54,7 @@ class SimpleGame: Game {
                 }
                 
                 context.gameHistory[(context.gameRecord?.dataSetKey)!] = context.gameRecord
+                saveGameHistory()
                 self.state = .gameOver
                 
                 meijia("遊戲結束").then {_ in
