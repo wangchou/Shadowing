@@ -190,10 +190,6 @@ extension Sequence {
     }
 }
 
-func getSentencesKeys() -> [String] {
-    return Array(allSentences.keys).sorted().reversed()
-}
-
 func rgb(_ red: Float, _ green: Float, _ blue: Float) -> UIColor {
     return UIColor(red: CGFloat(red/255.0), green: CGFloat(green/255.0), blue: CGFloat(blue/255.0), alpha: 1)
 }

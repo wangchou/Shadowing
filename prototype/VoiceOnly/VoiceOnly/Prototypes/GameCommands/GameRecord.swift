@@ -34,22 +34,24 @@ class GameRecord: NSObject, NSCoding {
     var goodCount: Int
     
     func getP() -> Int {
-        return 100 * (perfectCount + greatCount + goodCount) / sentencesCount
+        let sum = Float(perfectCount + greatCount) + Float(goodCount) * 0.5
+        return Int(100 * sum / Float(sentencesCount))
     }
     
     func getGreatP() -> Int {
-        return 100 * (perfectCount + greatCount) / sentencesCount
+        let sum = Float(perfectCount + greatCount)
+        return Int(100 * sum / Float(sentencesCount))
     }
     
     var rank: String {
         let p = getGreatP()
-        if p == 100 && perfectCount == sentencesCount { return "SS" }
+        if p == 100 && Int(Float(perfectCount) * 1.2) >=  sentencesCount { return "SS" }
         if p == 100 { return "S" }
-        if p > 90 { return "A" }
-        if p > 80 { return "B" }
-        if p > 70 { return "C" }
-        if p > 60 { return "D" }
-        if p > 50 { return "E" }
+        if p >= 90 { return "A" }
+        if p >= 80 { return "B" }
+        if p >= 70 { return "C" }
+        if p >= 60 { return "D" }
+        if p >= 40 { return "E" }
         return "F"
     }
     

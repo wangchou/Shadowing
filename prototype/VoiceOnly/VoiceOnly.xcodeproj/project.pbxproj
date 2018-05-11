@@ -22,12 +22,9 @@
 		BE6ED56620A16B7700553D1A /* FBLPromises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE6ED56420A16B7600553D1A /* FBLPromises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE6ED56820A17BB000553D1A /* SimpleGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6ED56720A17BB000553D1A /* SimpleGame.swift */; };
 		BE7725C420A2CBC200DF186A /* sentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725BC20A2CBC100DF186A /* sentences.swift */; };
-		BE7725C520A2CBC200DF186A /* n3_all.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725BE20A2CBC100DF186A /* n3_all.swift */; };
-		BE7725C620A2CBC200DF186A /* n4_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725BF20A2CBC100DF186A /* n4_2.swift */; };
-		BE7725C720A2CBC200DF186A /* n5_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725C020A2CBC100DF186A /* n5_2.swift */; };
-		BE7725C820A2CBC200DF186A /* n4_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725C120A2CBC100DF186A /* n4_1.swift */; };
-		BE7725C920A2CBC200DF186A /* n5_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725C220A2CBC100DF186A /* n5_1.swift */; };
-		BE7725CA20A2CBC200DF186A /* n5_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725C320A2CBC100DF186A /* n5_3.swift */; };
+		BE7725C520A2CBC200DF186A /* n3.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725BE20A2CBC100DF186A /* n3.swift */; };
+		BE7725C820A2CBC200DF186A /* n4.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725C120A2CBC100DF186A /* n4.swift */; };
+		BE7725C920A2CBC200DF186A /* n5.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725C220A2CBC100DF186A /* n5.swift */; };
 		BE7725CE20A4216700DF186A /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725CD20A4216700DF186A /* ContentCell.swift */; };
 		BE8C8F02209C476A00E32F09 /* VoiceOnlyGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8C8F01209C476A00E32F09 /* VoiceOnlyGame.swift */; };
 		BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */; };
@@ -77,12 +74,9 @@
 		BE6ED56420A16B7600553D1A /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBLPromises.framework; path = Carthage/Build/iOS/FBLPromises.framework; sourceTree = "<group>"; };
 		BE6ED56720A17BB000553D1A /* SimpleGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleGame.swift; sourceTree = "<group>"; };
 		BE7725BC20A2CBC100DF186A /* sentences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sentences.swift; sourceTree = "<group>"; };
-		BE7725BE20A2CBC100DF186A /* n3_all.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n3_all.swift; sourceTree = "<group>"; };
-		BE7725BF20A2CBC100DF186A /* n4_2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n4_2.swift; sourceTree = "<group>"; };
-		BE7725C020A2CBC100DF186A /* n5_2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n5_2.swift; sourceTree = "<group>"; };
-		BE7725C120A2CBC100DF186A /* n4_1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n4_1.swift; sourceTree = "<group>"; };
-		BE7725C220A2CBC100DF186A /* n5_1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n5_1.swift; sourceTree = "<group>"; };
-		BE7725C320A2CBC100DF186A /* n5_3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n5_3.swift; sourceTree = "<group>"; };
+		BE7725BE20A2CBC100DF186A /* n3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n3.swift; sourceTree = "<group>"; };
+		BE7725C120A2CBC100DF186A /* n4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n4.swift; sourceTree = "<group>"; };
+		BE7725C220A2CBC100DF186A /* n5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n5.swift; sourceTree = "<group>"; };
 		BE7725CD20A4216700DF186A /* ContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
 		BE8C8F01209C476A00E32F09 /* VoiceOnlyGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceOnlyGame.swift; sourceTree = "<group>"; };
 		BEBDEDBC208EF09F00C18520 /* VoiceOnly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceOnly.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,12 +151,9 @@
 		BE7725BD20A2CBC100DF186A /* sentences */ = {
 			isa = PBXGroup;
 			children = (
-				BE7725BE20A2CBC100DF186A /* n3_all.swift */,
-				BE7725BF20A2CBC100DF186A /* n4_2.swift */,
-				BE7725C020A2CBC100DF186A /* n5_2.swift */,
-				BE7725C120A2CBC100DF186A /* n4_1.swift */,
-				BE7725C220A2CBC100DF186A /* n5_1.swift */,
-				BE7725C320A2CBC100DF186A /* n5_3.swift */,
+				BE7725BE20A2CBC100DF186A /* n3.swift */,
+				BE7725C120A2CBC100DF186A /* n4.swift */,
+				BE7725C220A2CBC100DF186A /* n5.swift */,
 			);
 			path = sentences;
 			sourceTree = "<group>";
@@ -320,21 +311,18 @@
 				BEDEDD3920A46FCA00E7B60B /* GameRecord.swift in Sources */,
 				BE1CA958209DC43800086853 /* P08ViewController.swift in Sources */,
 				BEBDEDD9208EF15F00C18520 /* utilities.swift in Sources */,
-				BE7725C920A2CBC200DF186A /* n5_1.swift in Sources */,
+				BE7725C920A2CBC200DF186A /* n5.swift in Sources */,
 				BEBDEDF6208F28BD00C18520 /* P07ViewController.swift in Sources */,
-				BE7725C820A2CBC200DF186A /* n4_1.swift in Sources */,
+				BE7725C820A2CBC200DF186A /* n4.swift in Sources */,
 				BE6ED56820A17BB000553D1A /* SimpleGame.swift in Sources */,
 				BE6ED54A20A1373700553D1A /* Commands.swift in Sources */,
-				BE7725C620A2CBC200DF186A /* n4_2.swift in Sources */,
 				BE1CA956209D5D0900086853 /* Game.swift in Sources */,
 				BE7725C420A2CBC200DF186A /* sentences.swift in Sources */,
 				BE65A939209C6E67006645CA /* GameEventDelegate.swift in Sources */,
-				BE7725C720A2CBC200DF186A /* n5_2.swift in Sources */,
 				BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */,
 				BEBDEDDC208EF15F00C18520 /* BGM.swift in Sources */,
 				BE1CA95A209DC4BE00086853 /* P09ViewController.swift in Sources */,
-				BE7725CA20A2CBC200DF186A /* n5_3.swift in Sources */,
-				BE7725C520A2CBC200DF186A /* n3_all.swift in Sources */,
+				BE7725C520A2CBC200DF186A /* n3.swift in Sources */,
 				BEDEDD3720A46D1B00E7B60B /* ContentViewController.swift in Sources */,
 				BE7725CE20A4216700DF186A /* ContentCell.swift in Sources */,
 				BE8C8F02209C476A00E32F09 /* VoiceOnlyGame.swift in Sources */,

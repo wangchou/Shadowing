@@ -13,6 +13,12 @@ fileprivate let context = GameContext.shared
 class ContentViewController: UIViewController {
     @IBOutlet weak var sentencesTableView: UITableView!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addSentences(sentences: n5, prefix: n5Prefix)
+        addSentences(sentences: n4, prefix: n4Prefix)
+        addSentences(sentences: n3, prefix: n3Prefix)
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadGameHistory()
@@ -31,14 +37,13 @@ extension ContentViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allSentences.capacity
+        return allSentences.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SentencesCell", for: indexPath) as! ContentCell
         
-        let keys = getSentencesKeys()
-        let dataSetKey = keys[indexPath.row]
+        let dataSetKey = allSentencesKeys[indexPath.row]
         
         cell.title.text = dataSetKey
         cell.strockedProgressText = context.gameHistory[dataSetKey]?.progress
@@ -50,8 +55,7 @@ extension ContentViewController: UITableViewDataSource {
 
 extension ContentViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let keys = getSentencesKeys()
-        context.dataSetKey = keys[indexPath.row]
+        context.dataSetKey = allSentencesKeys[indexPath.row]
         launchStoryboard(self, "MessengerGame")
     }
 }

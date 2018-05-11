@@ -38,7 +38,7 @@ extension P08ViewController: GameEventDelegate {
             }
             
         case .listenStarted:
-            addLabel("", isLeft: false)
+            addLabel("...", isLeft: false)
             
         case .stringRecognized, .listenEnded:
             guard var saidString = event.string else { return }
@@ -82,6 +82,7 @@ class P08ViewController: UIViewController {
     
     func addLabel(_ text: String, isLeft: Bool = true) {
         let myLabel = UITextView()
+        myLabel.isEditable = false
         updateLabel(myLabel, text: text, isLeft: isLeft)
         scrollView.addSubview(myLabel)
         lastLabel = myLabel
@@ -94,22 +95,26 @@ class P08ViewController: UIViewController {
         myLabel.textContainerInset = UIEdgeInsetsMake(4, 4, 4, 4)
         myLabel.layer.borderWidth = 1.5;
         myLabel.font = UIFont.systemFont(ofSize: 20)
-        if isLeft {
-            myLabel.backgroundColor = .white
-        } else {
-            myLabel.backgroundColor = myGreen
-        }
         myLabel.frame = CGRect(x: 5, y: y, width: maxLabelWidth, height: 30)
         myLabel.sizeToFit()
         myLabel.clipsToBounds = true
         myLabel.layer.cornerRadius = 15.0
         
+        if isLeft {
+            myLabel.backgroundColor = .white
+        } else {
+            myLabel.frame.origin.x = CGFloat(Int(screenSize.width) - spacing - Int(myLabel.frame.width))
+            if text == "..." {
+                myLabel.backgroundColor = .gray
+            } else if text == "聽不清楚" {
+                myLabel.backgroundColor = myRed
+            } else{
+                myLabel.backgroundColor = myGreen
+            }
+        }
+        
         previousY = y
         y = y + Int(myLabel.frame.height) + spacing
-        
-        if(!isLeft) {
-            myLabel.frame.origin.x = CGFloat(Int(screenSize.width) - spacing - Int(myLabel.frame.width))
-        }
         
         scrollView.contentSize = CGSize(
             width: scrollView.frame.size.width,
