@@ -86,29 +86,26 @@ class SimpleGame: Game {
         
         // change life will change the teachingSpeed
         var text = ""
-        if score == 100 {
-            context.life = context.life + 6
+        var life = context.life
+        switch score {
+        case 100:
+            life += 6
             context.gameRecord?.perfectCount += 1
             text = "正解"
-        } else if score >= 80 {
-            context.life = context.life + 4
+        case 80...99:
+            life += 4
             context.gameRecord?.greatCount += 1
             text = "すごい"
-        } else if score >= 60 {
-            context.life = context.life + 2
+        case 60...79:
+            life += 2
             context.gameRecord?.goodCount += 1
             text = "いいね"
-        } else {
-            context.life = context.life - 10
+        default:
+            life -= 10
             text = "違うよ"
         }
         
-        if context.life > 100 {
-            context.life = 100
-        }
-        if context.life < 0 {
-            context.life = 0
-        }
+        context.life = max(min(100, life), 0)
         
         postEvent(.lifeChanged, int: context.life)
         
