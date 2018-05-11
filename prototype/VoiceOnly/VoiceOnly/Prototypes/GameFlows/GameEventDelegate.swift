@@ -20,6 +20,7 @@ enum EventType {
     case listenEnded
     
     case scoreCalculated
+    case lifeChanged
     case gameStateChanged
 }
 

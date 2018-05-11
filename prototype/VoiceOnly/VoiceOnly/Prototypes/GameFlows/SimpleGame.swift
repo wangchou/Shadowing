@@ -26,6 +26,7 @@ class SimpleGame: Game {
         startEngine(toSpeaker: true)
         
         context.loadLearningSentences()
+        
         meijia("每次日文說完後，請跟著說～").always {
             self.learnNext()
         }
@@ -110,6 +111,8 @@ class SimpleGame: Game {
         if context.life < 0 {
             context.life = 0
         }
+        
+        postEvent(.lifeChanged, int: context.life)
         
         return oren(text, rate: normalRate)
     }

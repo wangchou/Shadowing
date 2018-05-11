@@ -57,10 +57,18 @@ extension P08ViewController: GameEventDelegate {
                 lastLabel.backgroundColor = myRed
             }
             
+        case .lifeChanged:
+            guard let life = event.int else { return }
+           
+            UIView.animate(withDuration: 1.5, delay: 0, options: .curveEaseOut, animations: {
+                self.updateLifeBar(life)
+            }, completion: nil)
+            
         case .gameStateChanged:
             if game.state == .gameOver {
                 addLabel("遊戲結束。\n達成率：\(context.gameRecord!.progress), \nRank: \(context.gameRecord!.rank)")
             }
+            
             if game.state == .mainScreen {
                 launchStoryboard(self, "ContentViewController")
             }
@@ -78,6 +86,8 @@ class P08ViewController: UIViewController {
     var previousY: Int = 0
     var lastLabel: UITextView = UITextView()
     
+    @IBOutlet weak var lifeBar: UIView!
+    @IBOutlet weak var lifeBarOuter: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     
     func addLabel(_ text: String, isLeft: Bool = true) {
@@ -128,10 +138,30 @@ class P08ViewController: UIViewController {
         updateLabel(lastLabel, text: text, isLeft: isLeft)
     }
     
+    func updateLifeBar(_ life: Int) {
+        lifeBar.frame.size.width = screenSize.width * CGFloat(life)/100
+        if life >= 70 {
+            self.lifeBar.backgroundColor = myGreen
+        } else if life >= 30 {
+            self.lifeBar.backgroundColor = myOrange
+        } else {
+            self.lifeBar.backgroundColor = UIColor.red
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         startEventObserving(self)
         game.play()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        DispatchQueue.main.async {
+            self.lifeBarOuter.layer.borderWidth = 1
+            self.lifeBar.layer.borderWidth = 0.5
+            self.updateLifeBar(40)
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
