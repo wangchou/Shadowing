@@ -44,16 +44,17 @@ class SimpleGame: Game {
         .catch { error in print("Promise chain 死了。", error)}
         .always {
             self.state = .sentenceSessionEnded
-            if(context.nextSentence() && context.isEngineRunning && context.life > 0) {
+            if(context.nextSentence() && context.isEngineRunning) {
                 self.learnNext()
             } else {
-                if let previousRecord = context.gameHistory[(context.gameRecord?.dataSetKey)!],
-                    context.gameRecord!.getP() <= previousRecord.getP() &&
-                    context.gameRecord!.perfectCount != context.gameRecord!.sentencesCount {
+                let record = context.gameRecord!
+                if let previousRecord = context.gameHistory[record.dataSetKey],
+                    record.p <= previousRecord.p &&
+                    record.rank != "SS" {
                     return
                 }
                 
-                context.gameHistory[(context.gameRecord?.dataSetKey)!] = context.gameRecord
+                context.gameHistory[record.dataSetKey] = record
                 saveGameHistory()
                 self.state = .gameOver
                 

@@ -129,7 +129,6 @@
 		BE17FB38209B0F5F00D23F22 /* GameEngine */ = {
 			isa = PBXGroup;
 			children = (
-				BEBDEDD8208EF15F00C18520 /* constants.swift */,
 				BEDEDD4F20A5DA8C00E7B60B /* components */,
 				BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */,
 				BE17FB3D209B19B200D23F22 /* GameContext.swift */,
@@ -142,9 +141,9 @@
 		BE6AF37F209C146B00CBDB63 /* GameFlows */ = {
 			isa = PBXGroup;
 			children = (
+				BE1CA955209D5D0900086853 /* Game.swift */,
 				BE65A938209C6E67006645CA /* GameEventDelegate.swift */,
 				BE6ED56720A17BB000553D1A /* SimpleGame.swift */,
-				BE1CA955209D5D0900086853 /* Game.swift */,
 				BE8C8F01209C476A00E32F09 /* VoiceOnlyGame.swift */,
 			);
 			path = GameFlows;
@@ -188,6 +187,7 @@
 				BEBDEDCB208EF0A000C18520 /* Info.plist */,
 				BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */,
 				BEBDEDD1208EF15E00C18520 /* utilities.swift */,
+				BEBDEDD8208EF15F00C18520 /* constants.swift */,
 				BE7725BD20A2CBC100DF186A /* Content */,
 				BE17FB38209B0F5F00D23F22 /* GameEngine */,
 				BE6AF37F209C146B00CBDB63 /* GameFlows */,

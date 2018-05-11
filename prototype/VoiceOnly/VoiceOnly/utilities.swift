@@ -73,11 +73,11 @@ func getSentences(_ text: String) -> [String] {
 
 // MARK: - Edit Distance
 // EditDistance from https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#Swift
-func min3(_ a: Int, _ b: Int, _ c: Int) -> Int {
+fileprivate func min3(_ a: Int, _ b: Int, _ c: Int) -> Int {
     return min( min(a, c), min(b, c))
 }
 
-class Array2D {
+fileprivate class Array2D {
     var cols:Int, rows:Int
     var matrix: [Int]
     
@@ -140,31 +140,7 @@ func distanceBetween(_ aStr: String, _ bStr: String) -> Int {
     return dist[a.count, b.count]
 }
 
-// MARK: - Misc For Dev Only
-//////////////////////////////////
-// MISC section: only used in DEV
-func dumpVoices() {
-    for voice in AVSpeechSynthesisVoice.speechVoices() {
-        //if ((availableVoice.language == AVSpeechSynthesisVoice.currentLanguageCode()) &&
-        //    (availableVoice.quality == AVSpeechSynthesisVoiceQuality.enhanced)) {
-        if(voice.language == "ja-JP" || voice.language == "zh-TW") {
-            print("\(voice.name) on \(voice.language) with Quality: \(voice.quality.rawValue) \(voice.identifier)")
-        }
-        //}
-    }
-}
-
-// measure performance
-var startTime: Double = 0
-func setStartTime(_ tag: String = "") {
-    startTime = NSDate().timeIntervalSince1970
-    print(tag)
-}
-func printDuration(_ tag: String = "") {
-    print(tag, (NSDate().timeIntervalSince1970 - startTime)*1000, "ms")
-}
-
-// array shuffle
+// MARK: - Array Shuffle
 // https://stackoverflow.com/questions/24026510/how-do-i-shuffle-an-array-in-swift?noredirect=1&lq=1
 extension MutableCollection {
     /// Shuffles the contents of this collection.
@@ -190,6 +166,15 @@ extension Sequence {
     }
 }
 
+extension Int {
+    var f: Float { return Float(self) }
+}
+
+extension Float {
+    var i: Int { return Int(self) }
+}
+
+// MARK: - rgb
 func rgb(_ red: Float, _ green: Float, _ blue: Float) -> UIColor {
     return UIColor(red: CGFloat(red/255.0), green: CGFloat(green/255.0), blue: CGFloat(blue/255.0), alpha: 1)
 }
@@ -209,3 +194,28 @@ func launchStoryboard(_ originVC: UIViewController, _ storyboardId: String) {
     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: storyboardId)
     originVC.present(vc, animated: true, completion: nil)
 }
+
+// MARK: - Misc For Dev Only
+//////////////////////////////////
+// MISC section: only used in DEV
+func dumpVoices() {
+    for voice in AVSpeechSynthesisVoice.speechVoices() {
+        //if ((availableVoice.language == AVSpeechSynthesisVoice.currentLanguageCode()) &&
+        //    (availableVoice.quality == AVSpeechSynthesisVoiceQuality.enhanced)) {
+        if(voice.language == "ja-JP" || voice.language == "zh-TW") {
+            print("\(voice.name) on \(voice.language) with Quality: \(voice.quality.rawValue) \(voice.identifier)")
+        }
+        //}
+    }
+}
+
+// measure performance
+var startTime: Double = 0
+func setStartTime(_ tag: String = "") {
+    startTime = NSDate().timeIntervalSince1970
+    print(tag)
+}
+func printDuration(_ tag: String = "") {
+    print(tag, (NSDate().timeIntervalSince1970 - startTime)*1000, "ms")
+}
+

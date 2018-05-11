@@ -38,15 +38,7 @@ extension Messenger: GameEventDelegate {
             
         case .scoreCalculated:
             guard let score = event.int else { return }
-            var newText = "\(lastLabel.text!) \(score)分"
-            newText = score == 100 ? "\(newText) ⭐️" : newText
-            updateLastLabelText(newText, isLeft: false)
-            
-            if score < 60 {
-                lastLabel.backgroundColor = myRed
-            } else if score < 80 {
-                lastLabel.backgroundColor = myOrange
-            }
+            onScore(score)
             
         case .gameStateChanged:
             if game.state == .gameOver {
@@ -58,6 +50,18 @@ extension Messenger: GameEventDelegate {
             }
         default:
             return
+        }
+    }
+    
+    private func onScore(_ score: Int) {
+        var newText = "\(lastLabel.text!) \(score)分"
+        newText = score == 100 ? "\(newText) ⭐️" : newText
+        updateLastLabelText(newText, isLeft: false)
+        
+        if score < 60 {
+            lastLabel.backgroundColor = myRed
+        } else if score < 80 {
+            lastLabel.backgroundColor = myOrange
         }
     }
 }

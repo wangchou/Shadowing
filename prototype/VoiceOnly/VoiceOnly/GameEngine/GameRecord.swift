@@ -10,8 +10,8 @@ import Foundation
 
 fileprivate let context = GameContext.shared
 
-let defaults = UserDefaults.standard
-let gameHistoryKey = "game record array"
+fileprivate let defaults = UserDefaults.standard
+fileprivate let gameHistoryKey = "game record array"
 
 func saveGameHistory() {
     let gameHistoryData = NSKeyedArchiver.archivedData(withRootObject: Array(context.gameHistory.values))
@@ -29,23 +29,28 @@ func loadGameHistory() {
 class GameRecord: NSObject, NSCoding {
     let dataSetKey: String
     let sentencesCount: Int
-    var perfectCount: Int
-    var greatCount: Int
-    var goodCount: Int
+    var perfectCount = 0
+    var greatCount = 0
+    var goodCount = 0
     
-    func getP() -> Int {
-        let sum = Float(perfectCount + greatCount) + Float(goodCount) * 0.5
-        return Int(100 * sum / Float(sentencesCount))
+    var p: Float {
+        let sum = perfectCount.f + greatCount.f + goodCount.f * 0.5
+        return 100 * sum / sentencesCount.f
     }
     
-    func getGreatP() -> Int {
-        let sum = Float(perfectCount + greatCount)
-        return Int(100 * sum / Float(sentencesCount))
+    var progress: String {
+        let prefix = p < 10 ? "0" : ""
+        return "\(prefix)\(p.i)%"
+    }
+    
+    func getGreatP() -> Float {
+        let sum = (perfectCount + greatCount).f
+        return 100 * sum / sentencesCount.f
     }
     
     var rank: String {
         let p = getGreatP()
-        if p == 100 && Int(Float(perfectCount) * 1.2) >=  sentencesCount { return "SS" }
+        if p == 100 && perfectCount.f * 1.2 >=  sentencesCount.f { return "SS" }
         if p == 100 { return "S" }
         if p >= 90 { return "A" }
         if p >= 80 { return "B" }
@@ -55,22 +60,12 @@ class GameRecord: NSObject, NSCoding {
         return "F"
     }
     
-    init(_ dataSetKey: String, sentencesCount: Int, perfectCount: Int = 0, greatCount: Int = 0, goodCount: Int = 0) {
+    init(_ dataSetKey: String, sentencesCount: Int) {
         self.dataSetKey = dataSetKey
         self.sentencesCount = sentencesCount
-        self.perfectCount = perfectCount
-        self.greatCount = greatCount
-        self.goodCount = goodCount
-    }
-    
-    var progress: String {
-        let p = getP()
-        let prefix = p < 10 ? "0" : ""
-        return "\(prefix)\(getP())%"
     }
     
     required init(coder decoder: NSCoder) {
-        //Error here "missing argument for parameter name in call
         self.dataSetKey = decoder.decodeObject(forKey: "dataSetKey") as! String
         self.sentencesCount = decoder.decodeInteger(forKey: "sentencesCount")
         self.perfectCount = decoder.decodeInteger(forKey: "perfectCount")

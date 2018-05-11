@@ -8,7 +8,7 @@ fileprivate func getKana(_ kanjiString: String) -> Promise<String> {
     let promise = Promise<String>.pending()
     let parameters: Parameters = ["jpnStr": kanjiString]
     
-    if(kanjiString == "") {
+    if kanjiString == "" {
         promise.fulfill("")
         return promise
     }

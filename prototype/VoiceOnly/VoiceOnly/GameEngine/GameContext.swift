@@ -29,13 +29,11 @@ class GameContext {
     var targetString: String = ""
     var userSaidString: String = ""
     var score = 0
-    var life: Int = 40 {
-        didSet {
-            teachingRate = AVSpeechUtteranceDefaultSpeechRate * (0.5 + (Float(life) * 0.005))
-        }
-    }
+    var life: Int = 40
     
-    var teachingRate = AVSpeechUtteranceDefaultSpeechRate * 0.7
+    var teachingRate: Float {
+        return AVSpeechUtteranceDefaultSpeechRate * (0.5 + life.f * 0.005)
+    }
     var dataSetKey: String = allSentences.keys.first!
     var gameRecord: GameRecord?
     
@@ -73,13 +71,11 @@ class GameContext {
     
     func nextSentence() -> Bool {
         sentenceIndex = sentenceIndex + 1
-        if sentenceIndex < sentences.count {
-            targetString = sentences[sentenceIndex]
-            userSaidString = ""
-            return true
-        } else {
-            return false
-        }
+        guard sentenceIndex < sentences.count else { return false }
+        
+        targetString = sentences[sentenceIndex]
+        userSaidString = ""
+        return true
     }
 }
 
