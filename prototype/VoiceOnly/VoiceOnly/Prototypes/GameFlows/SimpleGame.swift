@@ -24,9 +24,8 @@ class SimpleGame: Game {
     
     func play() {
         startEngine(toSpeaker: true)
-        
         context.loadLearningSentences()
-        
+
         meijia("每次日文說完後，請跟著說～").always {
             self.learnNext()
         }
@@ -61,7 +60,6 @@ class SimpleGame: Game {
                 meijia("遊戲結束").then {_ in
                     self.state = .mainScreen
                 }
-                
             }
         }
     }

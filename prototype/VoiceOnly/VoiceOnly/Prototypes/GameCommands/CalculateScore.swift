@@ -2,12 +2,19 @@ import Foundation
 import Promises
 import Alamofire
 
+var kanaCacheDictionary: [String: String] = [:]
+
 fileprivate func getKana(_ kanjiString: String) -> Promise<String> {
     let promise = Promise<String>.pending()
     let parameters: Parameters = ["jpnStr": kanjiString]
     
     if(kanjiString == "") {
         promise.fulfill("")
+        return promise
+    }
+    
+    if let kanaStr = kanaCacheDictionary[kanjiString] {
+        promise.fulfill(kanaStr)
         return promise
     }
     
@@ -22,8 +29,9 @@ fileprivate func getKana(_ kanjiString: String) -> Promise<String> {
             let kanaStr = tokenInfos.reduce("", { kanaStr, tokenInfo in
                 return tokenInfo[1] != "記号" ?
                     kanaStr + tokenInfo.last! :
-                kanaStr
+                    kanaStr
             })
+            kanaCacheDictionary[kanjiString] = kanaStr
             promise.fulfill(kanaStr)
         case .failure(_):
             promise.fulfill("")

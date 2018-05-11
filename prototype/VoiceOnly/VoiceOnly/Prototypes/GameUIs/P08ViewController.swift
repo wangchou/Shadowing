@@ -55,6 +55,8 @@ extension P08ViewController: GameEventDelegate {
             
             if score < 60 {
                 lastLabel.backgroundColor = myRed
+            } else if score < 80 {
+                lastLabel.backgroundColor = myOrange
             }
             
         case .lifeChanged:

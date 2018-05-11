@@ -64,6 +64,7 @@ class GameContext {
     func loadLearningSentences() {
         sentenceIndex = 0
         sentences = allSentences[dataSetKey]!.shuffled()
+        
         targetString = sentences[0]
         userSaidString = ""
         life = 40
