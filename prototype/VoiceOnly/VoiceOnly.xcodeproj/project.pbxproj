@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE05073720A68515008A29EB /* SentencesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE05073620A68515008A29EB /* SentencesTest.swift */; };
 		BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB3D209B19B200D23F22 /* GameContext.swift */; };
 		BE1CA956209D5D0900086853 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA955209D5D0900086853 /* Game.swift */; };
 		BE1CA958209DC43800086853 /* Messenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA957209DC43800086853 /* Messenger.swift */; };
@@ -68,6 +69,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BE05073620A68515008A29EB /* SentencesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentencesTest.swift; sourceTree = "<group>"; };
 		BE17FB3D209B19B200D23F22 /* GameContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameContext.swift; sourceTree = "<group>"; };
 		BE1CA955209D5D0900086853 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		BE1CA957209DC43800086853 /* Messenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messenger.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				BE65A938209C6E67006645CA /* GameEventDelegate.swift */,
 				BE6ED56720A17BB000553D1A /* SimpleGame.swift */,
 				BE8C8F01209C476A00E32F09 /* VoiceOnlyGame.swift */,
+				BE05073620A68515008A29EB /* SentencesTest.swift */,
 			);
 			path = GameFlows;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				BEBDEDD9208EF15F00C18520 /* utilities.swift in Sources */,
 				BE7725C920A2CBC200DF186A /* n5.swift in Sources */,
 				BEBDEDF6208F28BD00C18520 /* P07ViewController.swift in Sources */,
+				BE05073720A68515008A29EB /* SentencesTest.swift in Sources */,
 				BE7725C820A2CBC200DF186A /* n4.swift in Sources */,
 				BE6ED56820A17BB000553D1A /* SimpleGame.swift in Sources */,
 				BE6ED54A20A1373700553D1A /* Commands.swift in Sources */,

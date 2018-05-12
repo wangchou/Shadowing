@@ -12,12 +12,14 @@ fileprivate let context = GameContext.shared
 
 class ContentViewController: UIViewController {
     @IBOutlet weak var sentencesTableView: UITableView!
+    //let game = SentencesTestGame.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addSentences(sentences: n5, prefix: n5Prefix)
         addSentences(sentences: n4, prefix: n4Prefix)
         addSentences(sentences: n3, prefix: n3Prefix)
+        //game.play()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
