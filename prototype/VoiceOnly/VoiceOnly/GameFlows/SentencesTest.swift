@@ -9,7 +9,7 @@
 import Foundation
 import Promises
 
-fileprivate let pauseDuration = 0.4
+fileprivate let pauseDuration = 0.2
 fileprivate let context = GameContext.shared
 
 // 用 iphone 線控耳機、並把耳機放到麥克風旁邊、耳機聲音開到最大
@@ -17,7 +17,7 @@ fileprivate let context = GameContext.shared
 class SentencesTestGame: Game {
     static let shared = SentencesTestGame()
     var startTime: Double = 0
-    var sentences = n3
+    var sentences = n5
     var index = 0
     var targetString = ""
     var saidString = ""
