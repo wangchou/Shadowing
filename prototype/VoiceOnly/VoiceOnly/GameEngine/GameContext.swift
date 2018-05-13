@@ -59,9 +59,10 @@ class GameContext {
         bgm.node.volume = 0.5
     }
     
-    func loadLearningSentences() {
+    func loadLearningSentences(isShuffle: Bool = true) {
         sentenceIndex = 0
-        sentences = allSentences[dataSetKey]!.shuffled()
+        
+        sentences = isShuffle ? allSentences[dataSetKey]!.shuffled() : allSentences[dataSetKey]!
         
         targetString = sentences[0]
         userSaidString = ""

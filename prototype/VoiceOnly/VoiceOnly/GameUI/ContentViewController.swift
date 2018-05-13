@@ -21,6 +21,7 @@ class ContentViewController: UIViewController {
         addSentences(sentences: n3, prefix: n3Prefix)
         //game.play()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadGameHistory()
@@ -58,7 +59,8 @@ extension ContentViewController: UITableViewDataSource {
 extension ContentViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         context.dataSetKey = allSentencesKeys[indexPath.row]
-        launchStoryboard(self, "MessengerGame")
+        context.loadLearningSentences(isShuffle: false)
+        launchStoryboard(self, "GameContentDetailPage")
     }
 }
 

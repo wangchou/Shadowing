@@ -168,6 +168,7 @@ extension Sequence {
 
 extension Int {
     var f: Float { return Float(self) }
+    var s: String { return String(self) }
 }
 
 extension Float {
