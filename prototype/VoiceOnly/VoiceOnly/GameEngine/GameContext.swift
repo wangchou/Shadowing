@@ -30,6 +30,7 @@ class GameContext {
     var userSaidString: String = ""
     var score = 0
     var life: Int = 40
+    var startTime: Double = getNow()
     
     var teachingRate: Float {
         return AVSpeechUtteranceDefaultSpeechRate * (0.5 + life.f * 0.005)

@@ -14,14 +14,15 @@ fileprivate let context = GameContext.shared
 // Prototype 8: messenger / line interface
 class Messenger: UIViewController {
     let game = SimpleGame.shared
-    
     var lastLabel: UITextView = UITextView()
     
     private var y: Int = 8
     private var previousY: Int = 0
     
-    
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var sentenceCountLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var speedLabel: UILabel!
     
     func addLabel(_ text: String, isLeft: Bool = true) {
         let myLabel = UITextView()
@@ -76,6 +77,10 @@ class Messenger: UIViewController {
         super.viewDidLoad()
         startEventObserving(self)
         game.play()
+        sentenceCountLabel.text = "還有\(context.sentences.count)句"
+        speedLabel.text = String(format: "%.2f 倍速", context.teachingRate * 2)
+        timeLabel.text = "00:00"
+        context.startTime = getNow()
     }
     
     override func viewDidDisappear(_ animated: Bool) {

@@ -40,6 +40,17 @@ extension Messenger: GameEventDelegate {
             guard let score = event.int else { return }
             onScore(score)
             
+        case .lifeChanged:
+            speedLabel.text = String(format: "%.2f 倍速", context.teachingRate * 2)
+            
+        case .playTimeUpdate:
+            guard let seconds = event.int else { return }
+            func add0(_ s: String) -> String{
+                return s.count == 1 ? "0" + s : s
+            }
+            
+            timeLabel.text = "\(add0((seconds/60).s)):\(add0((seconds%60).s))"
+            
         case .gameStateChanged:
             if game.state == .gameOver {
                 addLabel("遊戲結束。")
@@ -63,5 +74,7 @@ extension Messenger: GameEventDelegate {
         } else if score < 80 {
             lastLabel.backgroundColor = myOrange
         }
+        
+        sentenceCountLabel.text = "還有\(context.sentences.count - context.sentenceIndex - 1)句"
     }
 }

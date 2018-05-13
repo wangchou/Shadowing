@@ -22,6 +22,8 @@ enum EventType {
     case scoreCalculated
     case lifeChanged
     case gameStateChanged
+    
+    case playTimeUpdate
 }
 
 struct Event {

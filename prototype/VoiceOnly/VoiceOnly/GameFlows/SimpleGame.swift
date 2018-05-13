@@ -15,6 +15,8 @@ fileprivate let context = GameContext.shared
 class SimpleGame: Game {
     static let shared = SimpleGame()
     private var startTime: Double = 0
+    private var gameStartTime: Double = 0
+    private var timer: Timer?
     
     var state: GameState = .stopped {
         didSet {
@@ -24,14 +26,20 @@ class SimpleGame: Game {
     
     func play() {
         startEngine(toSpeaker: true)
+        gameStartTime = getNow()
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            postEvent(.playTimeUpdate, int: Int(getNow() - self.gameStartTime))
+        }
         context.loadLearningSentences()
         meijia("每次日文說完後，請跟著說～").always {
             self.learnNext()
         }
+        
     }
     
     func stop() {
         state = .stopped
+        timer?.invalidate()
         stopEngine()
     }
     

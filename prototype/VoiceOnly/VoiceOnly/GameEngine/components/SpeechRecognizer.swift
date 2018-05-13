@@ -94,7 +94,7 @@ class SpeechRecognizer: NSObject {
         postEvent(.listenStarted, string: "")
         return promise
     }
-    
+
     func endAudio() {
         if(self.isRunning) {
             inputNode.removeTap(onBus: 0)
