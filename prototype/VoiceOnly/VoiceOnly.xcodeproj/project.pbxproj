@@ -44,7 +44,6 @@
 		BEBDEDF6208F28BD00C18520 /* P07ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDF1208F28BD00C18520 /* P07ViewController.swift */; };
 		BEDEDD3720A46D1B00E7B60B /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3620A46D1B00E7B60B /* ContentViewController.swift */; };
 		BEDEDD3920A46FCA00E7B60B /* GameRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */; };
-		BEDEDD4120A5D80100E7B60B /* Messenger.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEDEDD4020A5D80100E7B60B /* Messenger.storyboard */; };
 		BEDEDD4620A5D8C200E7B60B /* p7.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEDEDD4520A5D8C200E7B60B /* p7.storyboard */; };
 		BEDEDD4920A5D8FD00E7B60B /* p10.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEDEDD4820A5D8FD00E7B60B /* p10.storyboard */; };
 		BEDEDD4C20A5D93A00E7B60B /* p9.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEDEDD4B20A5D93A00E7B60B /* p9.storyboard */; };
@@ -105,7 +104,6 @@
 		BEBDEDF1208F28BD00C18520 /* P07ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P07ViewController.swift; sourceTree = "<group>"; };
 		BEDEDD3620A46D1B00E7B60B /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRecord.swift; sourceTree = "<group>"; };
-		BEDEDD4020A5D80100E7B60B /* Messenger.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Messenger.storyboard; sourceTree = "<group>"; };
 		BEDEDD4520A5D8C200E7B60B /* p7.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = p7.storyboard; sourceTree = "<group>"; };
 		BEDEDD4820A5D8FD00E7B60B /* p10.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = p10.storyboard; sourceTree = "<group>"; };
 		BEDEDD4B20A5D93A00E7B60B /* p9.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = p9.storyboard; sourceTree = "<group>"; };
@@ -228,7 +226,6 @@
 				BEBDEDC3208EF09F00C18520 /* Main.storyboard */,
 				BEDEDD3620A46D1B00E7B60B /* ContentViewController.swift */,
 				BE7725CD20A4216700DF186A /* ContentCell.swift */,
-				BEDEDD4020A5D80100E7B60B /* Messenger.storyboard */,
 				BE1CA957209DC43800086853 /* Messenger.swift */,
 				BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */,
 			);
@@ -341,7 +338,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEBDEDCA208EF0A000C18520 /* LaunchScreen.storyboard in Resources */,
-				BEDEDD4120A5D80100E7B60B /* Messenger.storyboard in Resources */,
 				BEBDEDC7208EF0A000C18520 /* Assets.xcassets in Resources */,
 				BEDEDD4620A5D8C200E7B60B /* p7.storyboard in Resources */,
 				BEDEDD4920A5D8FD00E7B60B /* p10.storyboard in Resources */,

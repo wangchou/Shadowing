@@ -148,5 +148,34 @@
             </objects>
             <point key="canvasLocation" x="958" y="-238"/>
         </scene>
+        <!--原型8: Messenger-->
+        <scene sceneID="StW-Ng-TGH">
+            <objects>
+                <viewController storyboardIdentifier="MessengerGame" title="原型8: Messenger" id="RQm-Fc-gWw" customClass="Messenger" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jgn-D6-kw4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DHd-5r-BdM">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.27802148170000002" green="0.7436149997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="DHd-5r-BdM" firstAttribute="leading" secondItem="UO9-t0-mw3" secondAttribute="leading" id="E4a-Sg-M6q"/>
+                            <constraint firstItem="UO9-t0-mw3" firstAttribute="bottom" secondItem="DHd-5r-BdM" secondAttribute="bottom" id="KQa-Ci-gIO"/>
+                            <constraint firstItem="DHd-5r-BdM" firstAttribute="top" secondItem="UO9-t0-mw3" secondAttribute="top" id="Vnu-Ch-ck7"/>
+                            <constraint firstItem="DHd-5r-BdM" firstAttribute="trailing" secondItem="UO9-t0-mw3" secondAttribute="trailing" id="Y6P-oE-bLB"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="UO9-t0-mw3"/>
+                    </view>
+                    <connections>
+                        <outlet property="scrollView" destination="DHd-5r-BdM" id="C1I-Tk-IR1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dpM-1i-CIn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7174" y="435"/>
+        </scene>
     </scenes>
 </document>
