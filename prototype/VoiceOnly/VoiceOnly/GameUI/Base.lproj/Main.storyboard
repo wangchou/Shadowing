@@ -676,19 +676,50 @@
             </objects>
             <point key="canvasLocation" x="360" y="1969"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="nC5-24-Z9i">
+        <!--Pause Overlay View Controller-->
+        <scene sceneID="WgL-2b-ElE">
             <objects>
-                <viewController id="gXh-GP-9lW" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="psR-Fg-4Ec">
+                <viewController storyboardIdentifier="PauseOverlay" id="xbq-5x-hVH" customClass="PauseOverlayViewController" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="IVc-qA-oVM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="VmM-gC-Z7T"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fzY-jo-0bH">
+                                <rect key="frame" x="58" y="254" width="205" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <state key="normal" title="結束遊戲">
+                                    <color key="titleColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="finishButtonClicked:" destination="xbq-5x-hVH" eventType="touchUpInside" id="7MY-XQ-icA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Px8-Is-Bt1">
+                                <rect key="frame" x="58" y="345" width="205" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <state key="normal" title="繼續">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="resumeButtonClicked:" destination="xbq-5x-hVH" eventType="touchUpInside" id="585-2g-u3f"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59990368150684936" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="N3t-I3-Erf"/>
                     </view>
+                    <connections>
+                        <outlet property="finishButton" destination="fzY-jo-0bH" id="721-h0-gZj"/>
+                        <outlet property="resumeButton" destination="Px8-Is-Bt1" id="18r-8U-Zat"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ieo-V5-TO5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5zE-yR-MUM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="360" y="2655.6338028169016"/>
         </scene>
     </scenes>
 </document>

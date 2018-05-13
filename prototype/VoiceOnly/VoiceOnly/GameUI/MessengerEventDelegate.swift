@@ -59,6 +59,9 @@ extension Messenger: GameEventDelegate {
             if game.state == .mainScreen {
                 launchStoryboard(self, "ContentViewController")
             }
+        case .resume:
+            game.resume()
+            
         default:
             return
         }

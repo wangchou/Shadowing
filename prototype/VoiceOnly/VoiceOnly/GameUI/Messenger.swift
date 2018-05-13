@@ -73,6 +73,12 @@ class Messenger: UIViewController {
         updateLabel(lastLabel, text: text, isLeft: isLeft)
     }
     
+    @objc func scrollViewTapped() {
+        print("scrollViewTapped")
+        game.pause()
+        launchStoryboard(self, "PauseOverlay", isOverCurrent: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         startEventObserving(self)
@@ -81,6 +87,10 @@ class Messenger: UIViewController {
         speedLabel.text = String(format: "%.2f 倍速", context.teachingRate * 2)
         timeLabel.text = "00:00"
         context.startTime = getNow()
+        
+        let scrollViewTap = UITapGestureRecognizer(target: self, action: #selector(scrollViewTapped))
+        scrollViewTap.numberOfTapsRequired = 1
+        scrollView.addGestureRecognizer(scrollViewTap)
     }
     
     override func viewDidDisappear(_ animated: Bool) {

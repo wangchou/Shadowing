@@ -47,6 +47,7 @@
 		BEDEDD3720A46D1B00E7B60B /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3620A46D1B00E7B60B /* ContentViewController.swift */; };
 		BEDEDD3920A46FCA00E7B60B /* GameRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */; };
 		BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */; };
+		BEDFCDAB20A87AF800736153 /* PauseOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -105,6 +106,7 @@
 		BEDEDD3620A46D1B00E7B60B /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRecord.swift; sourceTree = "<group>"; };
 		BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerEventDelegate.swift; sourceTree = "<group>"; };
+		BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseOverlayViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +224,7 @@
 				BEBDEDC3208EF09F00C18520 /* Main.storyboard */,
 				BEDEDD3620A46D1B00E7B60B /* ContentViewController.swift */,
 				BE7725CD20A4216700DF186A /* ContentCell.swift */,
+				BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */,
 				BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */,
 				BEDBCCD720A82AC4001CF11D /* GameDetailTableCell.swift */,
 				BE1CA957209DC43800086853 /* Messenger.swift */,
@@ -323,6 +326,7 @@
 				BE5D838920A80BD0002031BF /* GameContentDetailPage.swift in Sources */,
 				BE6ED56820A17BB000553D1A /* SimpleGame.swift in Sources */,
 				BE6ED54A20A1373700553D1A /* Commands.swift in Sources */,
+				BEDFCDAB20A87AF800736153 /* PauseOverlayViewController.swift in Sources */,
 				BE1CA956209D5D0900086853 /* Game.swift in Sources */,
 				BE7725C420A2CBC200DF186A /* sentences.swift in Sources */,
 				BE65A939209C6E67006645CA /* GameEventDelegate.swift in Sources */,

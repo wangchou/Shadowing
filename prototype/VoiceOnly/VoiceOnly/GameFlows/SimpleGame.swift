@@ -14,8 +14,10 @@ fileprivate let context = GameContext.shared
 
 class SimpleGame: Game {
     static let shared = SimpleGame()
+    private var isPaused: Bool = false
+    private var wait: Promise<Void> = Promise<Void>.pending()
     private var startTime: Double = 0
-    private var gameStartTime: Double = 0
+    private var gameSeconds: Int = 0
     private var timer: Timer?
     
     var state: GameState = .stopped {
@@ -26,15 +28,29 @@ class SimpleGame: Game {
     
     func play() {
         startEngine(toSpeaker: true)
-        gameStartTime = getNow()
+        gameSeconds = 0
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            postEvent(.playTimeUpdate, int: Int(getNow() - self.gameStartTime))
+            if self.isPaused { return }
+            
+            postEvent(.playTimeUpdate, int: self.gameSeconds)
+            self.gameSeconds += 1
         }
         context.loadLearningSentences()
         meijia("每次日文說完後，請跟著說～").always {
             self.learnNext()
         }
-        
+        isPaused = false
+        wait.fulfill(())
+    }
+    
+    func pause() {
+        wait = Promise<Void>.pending()
+        isPaused = true
+    }
+    
+    func resume() {
+        isPaused = false
+        wait.fulfill(())
     }
     
     func stop() {
@@ -45,9 +61,11 @@ class SimpleGame: Game {
     
     private func learnNext() {
         speakJapanese()
+        .then { self.wait }
         .then(listen)
         .then(getScore)
         .then(speakScore)
+        .then { self.wait }
         .catch { error in print("Promise chain 死了。", error)}
         .always {
             self.state = .sentenceSessionEnded
