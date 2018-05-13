@@ -93,23 +93,25 @@ class SimpleGame: Game {
         self.state = .scoreCalculated
         
         // change life will change the teachingSpeed
+        // life 100 => 1.0x
+        // life 0 => 0.5x
         var text = ""
         var life = context.life
         switch score {
         case 100:
-            life += 6
+            life += 4
             context.gameRecord?.perfectCount += 1
             text = "正解"
         case 80...99:
-            life += 4
+            life += 2
             context.gameRecord?.greatCount += 1
             text = "すごい"
         case 60...79:
-            life += 2
+            life += -6
             context.gameRecord?.goodCount += 1
             text = "いいね"
         default:
-            life -= 10
+            life += -12
             text = "違うよ"
         }
         
