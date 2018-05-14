@@ -32,6 +32,7 @@ class GameRecord: NSObject, NSCoding {
     var perfectCount = 0
     var greatCount = 0
     var goodCount = 0
+    var sentencesScore: [String: Int] = [:]
     
     var p: Float {
         let sum = perfectCount.f + greatCount.f + goodCount.f * 0.5
@@ -43,13 +44,7 @@ class GameRecord: NSObject, NSCoding {
         return "\(prefix)\(p.i)%"
     }
     
-    func getGreatP() -> Float {
-        let sum = (perfectCount + greatCount).f
-        return 100 * sum / sentencesCount.f
-    }
-    
     var rank: String {
-        let p = getGreatP()
         if p == 100 && perfectCount.f * 1.2 >=  sentencesCount.f { return "SS" }
         if p == 100 { return "S" }
         if p >= 90 { return "A" }
@@ -71,6 +66,7 @@ class GameRecord: NSObject, NSCoding {
         self.perfectCount = decoder.decodeInteger(forKey: "perfectCount")
         self.greatCount = decoder.decodeInteger(forKey: "greatCount")
         self.goodCount = decoder.decodeInteger(forKey: "goodCount")
+        self.sentencesScore = decoder.decodeObject(forKey: "sentencesScore") as! [String: Int]
         super.init()
     }
     
@@ -80,5 +76,6 @@ class GameRecord: NSObject, NSCoding {
         coder.encodeCInt(Int32(self.perfectCount), forKey: "perfectCount")
         coder.encodeCInt(Int32(self.greatCount), forKey: "greatCount")
         coder.encodeCInt(Int32(self.goodCount), forKey: "goodCount")
+        coder.encode(self.sentencesScore, forKey: "sentencesScore")
     }
 }

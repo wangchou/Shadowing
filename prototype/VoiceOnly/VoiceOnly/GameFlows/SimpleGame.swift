@@ -115,9 +115,12 @@ class SimpleGame: Game {
         // life 0 => 0.5x
         var text = ""
         var life = context.life
+        
+        context.gameRecord?.sentencesScore[context.targetString] = score
+        
         switch score {
         case 100:
-            life += 4
+            life += 5
             context.gameRecord?.perfectCount += 1
             text = "正解"
         case 80...99:
@@ -125,11 +128,11 @@ class SimpleGame: Game {
             context.gameRecord?.greatCount += 1
             text = "すごい"
         case 60...79:
-            life += -6
+            life += -5
             context.gameRecord?.goodCount += 1
             text = "いいね"
         default:
-            life += -12
+            life += -10
             text = "違うよ"
         }
         

@@ -57,10 +57,23 @@ extension GameContentDetailPage: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SentenceCell", for: indexPath) as! GameDetailTableCell
+        let sentence = context.sentences[indexPath.row]
         cell.sentenceTextView.text = context.sentences[indexPath.row]
         cell.sentenceTextView.isEditable = false
         cell.sentenceTextView.isScrollEnabled = false
-
+        
+        if let gameRecord = context.gameHistory[context.dataSetKey],
+           let score = gameRecord.sentencesScore[sentence] {
+            cell.miscLabel.text = "\(score)分"
+            var color = myRed
+            if score >= 80 {
+                color = myGreen
+            } else if score >= 60 {
+                color = myOrange
+            }
+            cell.miscLabel.textColor = color
+        }
+        
         return cell
     }
 }
