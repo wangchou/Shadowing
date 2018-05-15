@@ -64,7 +64,8 @@ class GameContext {
         sentenceIndex = 0
         
         sentences = isShuffle ? allSentences[dataSetKey]!.shuffled() : allSentences[dataSetKey]!
-        
+        // quick test game
+        // sentences = Array(sentences[0...1])
         targetString = sentences[0]
         userSaidString = ""
         life = 40
