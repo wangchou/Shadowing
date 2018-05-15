@@ -2,19 +2,14 @@ import Foundation
 import Promises
 import Alamofire
 
-var kanaCacheDictionary: [String: String] = [:]
+var kanaTokenInfosCacheDictionary: [String: [[String]]] = [:]
 
-fileprivate func getKana(_ kanjiString: String) -> Promise<String> {
-    let promise = Promise<String>.pending()
+func getKanaTokenInfos(_ kanjiString: String) -> Promise<[[String]]> {
+    let promise = Promise<[[String]]>.pending()
     let parameters: Parameters = ["jpnStr": kanjiString]
     
-    if kanjiString == "" {
-        promise.fulfill("")
-        return promise
-    }
-    
-    if let kanaStr = kanaCacheDictionary[kanjiString] {
-        promise.fulfill(kanaStr)
+    if let tokenInfos = kanaTokenInfosCacheDictionary[kanjiString] {
+        promise.fulfill(tokenInfos)
         return promise
     }
     
@@ -22,22 +17,37 @@ fileprivate func getKana(_ kanjiString: String) -> Promise<String> {
         "http://54.250.149.163/nlp",
         method: .post,
         parameters: parameters
-    ).responseJSON { response in
-        switch response.result {
-        case .success:
-            let tokenInfos: [[String]] = response.result.value as! [[String]]
-            let kanaStr = tokenInfos.reduce("", { kanaStr, tokenInfo in
-                return tokenInfo[1] != "記号" ?
-                    kanaStr + tokenInfo.last! :
-                    kanaStr
-            })
-            kanaCacheDictionary[kanjiString] = kanaStr
-            promise.fulfill(kanaStr)
-        case .failure(_):
-            promise.fulfill("")
-        }
-        
+        ).responseJSON { response in
+            switch response.result {
+            case .success:
+                let tokenInfos = response.result.value as! [[String]]
+                kanaTokenInfosCacheDictionary[kanjiString] = tokenInfos
+                promise.fulfill(tokenInfos)
+                
+            case .failure(_):
+                promise.fulfill([[]])
+            }
     }
+    return promise
+}
+
+func getKana(_ kanjiString: String) -> Promise<String> {
+    let promise = Promise<String>.pending()
+    
+    if kanjiString == "" {
+        promise.fulfill("")
+        return promise
+    }
+    
+    getKanaTokenInfos(kanjiString).then { tokenInfos in
+        let kanaStr = tokenInfos.reduce("", { kanaStr, tokenInfo in
+            return tokenInfo[1] != "記号" ?
+                kanaStr + tokenInfo.last! :
+            kanaStr
+        })
+        promise.fulfill(kanaStr)
+    }
+    
     return promise
 }
 

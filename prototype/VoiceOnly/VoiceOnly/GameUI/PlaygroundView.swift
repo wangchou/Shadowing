@@ -3,6 +3,7 @@
 
 import Foundation
 import UIKit
+import Promises
 
 extension String {
     func find(_ pattern: String) -> NSTextCheckingResult? {
@@ -30,25 +31,53 @@ extension String {
         }
     }
     
-    var furiganaAttributedString: NSMutableAttributedString {
-        return self.replace("(｜.+?《.+?》)", "👻$1👻")
-            .components(separatedBy: "👻")
-            .map { x -> NSAttributedString in
-                if let pair = x.find("｜(.+?)《(.+?)》") {
-                    let string = (x as NSString).substring(with: pair.range(at: 1))
-                    let ruby = (x as NSString).substring(with: pair.range(at: 2))
+    var furiganaAttributedString: Promise<NSMutableAttributedString> {
+        let promise = Promise<NSMutableAttributedString>.pending()
+        let attributeStr = NSMutableAttributedString()
+        getKanaTokenInfos(self).then { tokenInfos in
+            for tokenInfo in tokenInfos {
+                let token = tokenInfo[0] // ex: 懸かっ
+                let tokenKana = tokenInfo[8].kataganaToHiragana // ex: かかっ
+                var suffixPart = token // ex: かっ
+                
+                if let kanjiRange = token.range(of: "\\p{Han}*\\p{Han}", options: .regularExpression) {
+                    let kanji = String(token[kanjiRange]) // ex: 懸
+                    var kana = tokenKana
+                    
+                    if kanji.count < token.count {
+                        suffixPart.removeSubrange(kanjiRange)
+                        kana.removeLast(suffixPart.count)
+                    }
                     
                     let annotation = CTRubyAnnotationCreateWithAttributes(
-                        .auto, .auto, .before, ruby as CFString, [:] as CFDictionary)
+                        .auto, .auto, .before, kana as CFString, [:] as CFDictionary)
                     
-                    return NSAttributedString(
-                        string: string,
-                        attributes: [kCTRubyAnnotationAttributeName as NSAttributedStringKey: annotation])
+                    attributeStr.append(NSAttributedString(
+                        string: kanji,
+                        attributes: [kCTRubyAnnotationAttributeName as NSAttributedStringKey: annotation]))
+                    
+                    if kanji.count < token.count {
+                        attributeStr.append(NSAttributedString(string: suffixPart, attributes: nil))
+                    }
                 } else {
-                    return NSAttributedString(string: x, attributes: nil)
+                    attributeStr.append(NSAttributedString(string: token, attributes: nil))
                 }
             }
-            .reduce(NSMutableAttributedString()) { $0.append($1); return $0 }
+           
+            promise.fulfill(attributeStr)
+        }
+        return promise
+    }
+    
+    // Hiragana: 3040-309F
+    // Katakana: 30A0-30FF
+    var kataganaToHiragana: String {
+        var hiragana = ""
+        for ch in self {
+            let scalars = ch.unicodeScalars
+            hiragana.append(Character(UnicodeScalar(scalars[scalars.startIndex].value - 0x60)!))
+        }
+        return hiragana
     }
 }
 
@@ -87,6 +116,9 @@ class CustomLabel: UILabel {
 class PlaygroundView: UIViewController {
     @IBOutlet weak var furiganaLabel: CustomLabel!
     override func viewDidLoad() {
-       furiganaLabel.attributedText = "｜優勝《ゆうしょう》の｜懸《か》かった｜試合《しあい》。".furiganaAttributedString
+        //"｜優勝《ゆうしょう》の｜懸《か》かった｜試合《しあい》。"
+        "優勝の懸かった試合。".furiganaAttributedString.then { str in
+            self.furiganaLabel.attributedText = str
+        }
     }
 }
