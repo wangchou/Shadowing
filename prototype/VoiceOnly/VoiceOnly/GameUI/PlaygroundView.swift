@@ -36,34 +36,42 @@ extension String {
         let attributeStr = NSMutableAttributedString()
         getKanaTokenInfos(self).then { tokenInfos in
             for tokenInfo in tokenInfos {
+                if tokenInfo.count < 9 {
+                    return
+                }
                 let token = tokenInfo[0] // ex: 懸かっ
                 let tokenKana = tokenInfo[8].kataganaToHiragana // ex: かかっ
                 
                 if let kanjiRange = token.range(of: "\\p{Han}*\\p{Han}", options: .regularExpression) {
-                    let kanji = String(token[kanjiRange]) // ex: 懸
-                    var kana = tokenKana // ex: か
-                    var suffixPart = token // ex: かっ
+                    //let kanji = String(token[kanjiRange]) // ex: 懸
+                    //var kana = tokenKana // ex: か
+                    //var suffixPart = token // ex: かっ
                     
-                    if kanji.count < token.count {
-                        suffixPart.removeSubrange(kanjiRange)
-                        kana.removeLast(suffixPart.count)
-                    }
+//                    if kanji.count < token.count {
+//                        suffixPart.removeSubrange(kanjiRange)
+//                        kana.removeLast(suffixPart.count)
+//                    }
                     
                     let annotation = CTRubyAnnotationCreateWithAttributes(
-                        .auto, .auto, .before, kana as CFString, [:] as CFDictionary)
+                        .auto, .auto, .before, tokenKana as CFString, [:] as CFDictionary)
                     
                     attributeStr.append(NSAttributedString(
-                        string: kanji,
+                        string: token,
                         attributes: [kCTRubyAnnotationAttributeName as NSAttributedStringKey: annotation]))
                     
-                    if kanji.count < token.count {
-                        attributeStr.append(NSAttributedString(string: suffixPart, attributes: nil))
-                    }
+//                    if kanji.count < token.count {
+//                        attributeStr.append(NSAttributedString(string: suffixPart, attributes: nil))
+//                    }
                 } else {
                     attributeStr.append(NSAttributedString(string: token, attributes: nil))
                 }
             }
            
+            attributeStr.addAttributes(
+                [   NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16),
+                    NSAttributedStringKey.verticalGlyphForm: false,
+                ],
+                range: NSMakeRange(0, (attributeStr.length)))
             promise.fulfill(attributeStr)
         }
         return promise
@@ -114,11 +122,37 @@ class CustomLabel: UILabel {
 }
 
 class PlaygroundView: UIViewController {
-    @IBOutlet weak var furiganaLabel: CustomLabel!
     override func viewDidLoad() {
-        print("世の中に失敗というものはない。".replace("(\\p{Han}*\\p{Han})", "👻$1👻"))
-        "世の中に失敗というものはない。".furiganaAttributedString.then { str in
-            self.furiganaLabel.attributedText = str
-        }
+        
+        //print("世の中に失敗というものはない。".replace("(\\p{Han}*\\p{Han})", "👻$1👻"))
+        //"逃げるは恥だが役に立つ".furiganaAttributedString.then { str in
+        //    self.furiganaLabel.attributedText = str
+        //}
     }
+}
+
+extension PlaygroundView: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return n3.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "N3SentencesCell", for: indexPath) as! N3SentenceCell
+        
+        n3[indexPath.row].furiganaAttributedString.then { str in
+            cell.sentenceLabel.attributedText = str
+        }
+        
+        //cell.sentenceLabel.text = n3[indexPath.row]
+        
+        return cell
+    }
+}
+
+class N3SentenceCell: UITableViewCell {
+    @IBOutlet weak var sentenceLabel: CustomLabel!
 }
