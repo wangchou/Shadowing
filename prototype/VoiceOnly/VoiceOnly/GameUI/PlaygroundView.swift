@@ -38,11 +38,11 @@ extension String {
             for tokenInfo in tokenInfos {
                 let token = tokenInfo[0] // ex: 懸かっ
                 let tokenKana = tokenInfo[8].kataganaToHiragana // ex: かかっ
-                var suffixPart = token // ex: かっ
                 
                 if let kanjiRange = token.range(of: "\\p{Han}*\\p{Han}", options: .regularExpression) {
                     let kanji = String(token[kanjiRange]) // ex: 懸
-                    var kana = tokenKana
+                    var kana = tokenKana // ex: か
+                    var suffixPart = token // ex: かっ
                     
                     if kanji.count < token.count {
                         suffixPart.removeSubrange(kanjiRange)
@@ -116,8 +116,8 @@ class CustomLabel: UILabel {
 class PlaygroundView: UIViewController {
     @IBOutlet weak var furiganaLabel: CustomLabel!
     override func viewDidLoad() {
-        //"｜優勝《ゆうしょう》の｜懸《か》かった｜試合《しあい》。"
-        "優勝の懸かった試合。".furiganaAttributedString.then { str in
+        print("世の中に失敗というものはない。".replace("(\\p{Han}*\\p{Han})", "👻$1👻"))
+        "世の中に失敗というものはない。".furiganaAttributedString.then { str in
             self.furiganaLabel.attributedText = str
         }
     }
