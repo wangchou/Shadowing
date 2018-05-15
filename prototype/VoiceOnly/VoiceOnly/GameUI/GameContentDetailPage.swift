@@ -21,7 +21,7 @@ class GameContentDetailPage: UIViewController {
     @IBOutlet weak var greatCountLabel: UILabel!
     @IBOutlet weak var goodCountLabel: UILabel!
     @IBOutlet weak var missedCountLabel: UILabel!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.text = context.dataSetKey
@@ -41,6 +41,11 @@ class GameContentDetailPage: UIViewController {
             missedCountLabel.text = 0.s
         }
     }
+    
+    @IBAction func backButtonClicked(_ sender: Any) {
+        self.dismiss(animated: false, completion: nil)
+    }
+    
     @IBAction func challenge(_ sender: Any) {
         launchStoryboard(self, "MessengerGame")
     }
