@@ -17,7 +17,10 @@ func rubyAttrStr(_ string: String, _ ruby: String = " ") -> NSAttributedString {
     
     return NSAttributedString(
         string: string,
-        attributes: [kCTRubyAnnotationAttributeName as NSAttributedStringKey: annotation]
+        attributes: [
+            NSAttributedStringKey.font: UIFont(name: "HiraginoSans-W3", size: 14.0)!,
+            kCTRubyAnnotationAttributeName as NSAttributedStringKey: annotation
+        ]
     )
 }
 
@@ -39,6 +42,7 @@ func getFuriganaAttrString(_ parts: [String], _ kana: String) -> NSMutableAttrib
         let result = parts[0].jpnType == JpnType.noKanji ?
             rubyAttrStr(parts[0]) :
             rubyAttrStr(parts[0], kana)
+
         attrStr.append(result)
         return attrStr
     }
@@ -114,7 +118,7 @@ extension String {
     }
     
     var jpnType: JpnType {
-        guard let kanjiRange = self.range(of: "\\p{Han}*\\p{Han}", options: .regularExpression) else { return JpnType.noKanji }
+        guard let kanjiRange = self.range(of: "[\\p{Han}\\d]*[\\p{Han}\\d]", options: .regularExpression) else { return JpnType.noKanji }
         
         if String(self[kanjiRange]).count == self.count {
             return JpnType.kanjiOnly
@@ -131,18 +135,13 @@ extension String {
                 let kanjiStr = tokenInfo[0]
                 let kana = tokenInfo[8].kataganaToHiragana
                 let parts = kanjiStr // [わたし、| 気 | になります！]
-                    .replace("(\\p{Han}*\\p{Han})", "👻$1👻")
+                    .replace("([\\p{Han}\\d]*[\\p{Han}\\d])", "👻$1👻")
                     .components(separatedBy: "👻")
+                    .filter { $0 != "" }
                 
                 furiganaAttrStr.append(getFuriganaAttrString(parts, kana))
             }
-           
-            furiganaAttrStr.addAttributes(
-                [   NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16),
-                    NSAttributedStringKey.verticalGlyphForm: false,
-                ],
-                range: NSMakeRange(0, (furiganaAttrStr.length))
-            )
+        
             promise.fulfill(furiganaAttrStr)
         }
         return promise
@@ -169,26 +168,17 @@ class CustomLabel: UILabel {
     //override func draw(_ rect: CGRect) { // if not has drawText, use draw UIView etc
     override func drawText(in rect: CGRect) {
         let attributed = NSMutableAttributedString(attributedString: self.attributedText!)
-        let isVertical = false // if Vertical Glyph, true.
-        attributed.addAttributes([NSAttributedStringKey.verticalGlyphForm: isVertical], range: NSMakeRange(0, attributed.length))
-        drawContext(attributed, textDrawRect: rect, isVertical: isVertical)
+        drawContext(attributed, textDrawRect: rect)
     }
     
-    func drawContext(_ attributed:NSMutableAttributedString, textDrawRect:CGRect, isVertical:Bool) {
+    func drawContext(_ attributed:NSMutableAttributedString, textDrawRect:CGRect) {
         guard let context = UIGraphicsGetCurrentContext() else { return }
-        
         var path:CGPath
-        if isVertical {
-            context.rotate(by: .pi / 2)
-            context.scaleBy(x: 1.0, y: -1.0)
-            path = CGPath(rect: textDrawRect, transform: nil)
-        }
-        else {
-            context.textMatrix = CGAffineTransform.identity
-            context.translateBy(x: 0, y: textDrawRect.height)
-            context.scaleBy(x: 1.0, y: -1.0)
-            path = CGPath(rect: textDrawRect, transform: nil)
-        }
+
+        context.textMatrix = CGAffineTransform.identity
+        context.translateBy(x: 0, y: textDrawRect.height)
+        context.scaleBy(x: 1.0, y: -1.0)
+        path = CGPath(rect: textDrawRect, transform: nil)
         
         let framesetter = CTFramesetterCreateWithAttributedString(attributed)
         let frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, attributed.length), path, nil)
@@ -213,17 +203,15 @@ extension PlaygroundView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return n3.count
+        return n4.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "N3SentencesCell", for: indexPath) as! N3SentenceCell
         
-        n3[indexPath.row].furiganaAttributedString.then { str in
+        n4[indexPath.row].furiganaAttributedString.then { str in
             cell.sentenceLabel.attributedText = str
         }
-        
-        //cell.sentenceLabel.text = n3[indexPath.row]
         
         return cell
     }
@@ -232,3 +220,4 @@ extension PlaygroundView: UITableViewDataSource {
 class N3SentenceCell: UITableViewCell {
     @IBOutlet weak var sentenceLabel: CustomLabel!
 }
+
