@@ -13,12 +13,19 @@ enum JpnType {
 
 func rubyAttrStr(_ string: String, _ ruby: String = " ") -> NSAttributedString {
     let annotation = CTRubyAnnotationCreateWithAttributes(
-        .auto, .auto, .before, ruby as CFString, [:] as CFDictionary)
-    
+        .auto, .auto, .before, ruby as CFString,
+        [:] as CFDictionary)
+        //[kCTForegroundColorAttributeName: UIColor.blue.cgColor] as CFDictionary)
+        //[kCTFontAttributeName: UIFont.boldSystemFont(ofSize: 9)] as CFDictionary)
     return NSAttributedString(
         string: string,
         attributes: [
-            NSAttributedStringKey.font: UIFont(name: "HiraginoSans-W3", size: 14.0)!,
+            // if need to use same font in CTRun or 7時 furigana will not aligned
+            //.font: UIFont(name: "HiraginoSans-W3", size: 18.0)!,
+            .font: UIFont(name: ".HiraKakuInterface-W6", size: 18.0)!,
+            .foregroundColor: UIColor.white,
+            .strokeColor: UIColor.black,
+            .strokeWidth: -1,
             kCTRubyAnnotationAttributeName as NSAttributedStringKey: annotation
         ]
     )
@@ -80,6 +87,37 @@ func getFuriganaAttrString(_ parts: [String], _ kana: String) -> NSMutableAttrib
     return attrStr
 }
 
+func getFuriganaString(tokenInfos: [[String]]) -> NSMutableAttributedString {
+    let furiganaAttrStr = NSMutableAttributedString()
+    for tokenInfo in tokenInfos {
+        if tokenInfo.count == 8 { // number strings
+            furiganaAttrStr.append(rubyAttrStr(tokenInfo[0]))
+            continue
+        }
+        if tokenInfo.count == 10 {
+            let kanjiStr = tokenInfo[0]
+            let kana = tokenInfo[8].kataganaToHiragana
+            let parts = kanjiStr // [わたし、| 気 | になります！]
+                .replace("([\\p{Han}\\d]*[\\p{Han}\\d])", "👻$1👻")
+                .components(separatedBy: "👻")
+                .filter { $0 != "" }
+            
+            furiganaAttrStr.append(getFuriganaAttrString(parts, kana))
+            continue
+        }
+        print("unknown situation with tokenInfo: ", tokenInfo)
+    }
+//    let paragraphStyle = NSMutableParagraphStyle()
+//    paragraphStyle.lineHeightMultiple = 0.8
+//    paragraphStyle.lineSpacing = 0
+//    furiganaAttrStr.addAttribute(
+//        .paragraphStyle,
+//        value: paragraphStyle,
+//        range: NSMakeRange(0, furiganaAttrStr.length)
+//    )
+    return furiganaAttrStr
+}
+
 extension String {
     func find(_ pattern: String) -> NSTextCheckingResult? {
         do {
@@ -128,28 +166,9 @@ extension String {
     
     var furiganaAttributedString: Promise<NSMutableAttributedString> {
         let promise = Promise<NSMutableAttributedString>.pending()
-        let furiganaAttrStr = NSMutableAttributedString()
-        getKanaTokenInfos(self).then { tokenInfos in
-            for tokenInfo in tokenInfos {
-                if tokenInfo.count == 8 { // number strings
-                    furiganaAttrStr.append(rubyAttrStr(tokenInfo[0]))
-                    continue
-                }
-                if tokenInfo.count == 10 {
-                    let kanjiStr = tokenInfo[0]
-                    let kana = tokenInfo[8].kataganaToHiragana
-                    let parts = kanjiStr // [わたし、| 気 | になります！]
-                        .replace("([\\p{Han}\\d]*[\\p{Han}\\d])", "👻$1👻")
-                        .components(separatedBy: "👻")
-                        .filter { $0 != "" }
-                    
-                    furiganaAttrStr.append(getFuriganaAttrString(parts, kana))
-                    continue
-                }
-                print("unknown situation with tokenInfo: ", tokenInfo)
-            }
         
-            promise.fulfill(furiganaAttrStr)
+        getKanaTokenInfos(self).then {
+            promise.fulfill(getFuriganaString(tokenInfos: $0))
         }
         return promise
     }
@@ -171,32 +190,78 @@ extension String {
     }
 }
 
-class CustomLabel: UILabel {
+class FuriganaLabel: UILabel {
+    var height: CGFloat = 0
+    
+    override var attributedText: NSAttributedString? {
+        willSet {
+            if  let newValue = newValue,
+                let attributedText = self.attributedText,
+                newValue.string != attributedText.string {
+                height = heightOfCoreText(attributed: newValue)
+            }
+        }
+    }
+
     //override func draw(_ rect: CGRect) { // if not has drawText, use draw UIView etc
     override func drawText(in rect: CGRect) {
-        let attributed = NSMutableAttributedString(attributedString: self.attributedText!)
-        drawContext(attributed, textDrawRect: rect)
-    }
-    
-    func drawContext(_ attributed:NSMutableAttributedString, textDrawRect:CGRect) {
+        guard let attributed = self.attributedText else { return }
         guard let context = UIGraphicsGetCurrentContext() else { return }
         var path:CGPath
 
         context.textMatrix = CGAffineTransform.identity
-        context.translateBy(x: 0, y: textDrawRect.height)
+        context.translateBy(x: 0, y: rect.height + 6)
         context.scaleBy(x: 1.0, y: -1.0)
-        path = CGPath(rect: textDrawRect, transform: nil)
-        
+
+        path = CGPath(rect: rect, transform: nil)
+
         let framesetter = CTFramesetterCreateWithAttributedString(attributed)
         let frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, attributed.length), path, nil)
-        
+
         CTFrameDraw(frame, context)
+    }
+
+    private func heightOfCoreText(attributed: NSAttributedString) -> CGFloat {
+        var height = CGFloat()
+
+        // MEMO: height = CGFloat.greatestFiniteMagnitude
+        let textDrawRect = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.size.width, height: CGFloat.greatestFiniteMagnitude)
+        let path = CGPath(rect: textDrawRect, transform: nil)
+        let framesetter = CTFramesetterCreateWithAttributedString(attributed)
+        let frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, attributed.length), path, nil)
+        let anyArray: [AnyObject] = CTFrameGetLines(frame) as [AnyObject]
+        let lines = anyArray as! [CTLine]
+        for line in lines {
+            //print(line)
+            var ascent = CGFloat()
+            var descent = CGFloat()
+            var leading = CGFloat()
+            CTLineGetTypographicBounds(line, &ascent, &descent, &leading)
+            height += ceil(ascent + leading)
+            //print(ascent, descent, leading)
+        }
+
+        return height
+    }
+
+    override var intrinsicContentSize: CGSize {
+        var size = super.intrinsicContentSize
+        if self.attributedText != nil {
+           size.height = height + 10
+        }
+        return size
     }
 }
 
+fileprivate let dataSet = n4
+
 class PlaygroundView: UIViewController {
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         
+        all(dataSet.map {$0.furiganaAttributedString}).then {_ in
+            self.tableView.reloadData()
+        }
         //print("世の中に失敗というものはない。".replace("(\\p{Han}*\\p{Han})", "👻$1👻"))
         //"逃げるは恥だが役に立つ".furiganaAttributedString.then { str in
         //    self.furiganaLabel.attributedText = str
@@ -210,14 +275,14 @@ extension PlaygroundView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return n3.count
+        return dataSet.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "N3SentencesCell", for: indexPath) as! N3SentenceCell
-        
-        n3[indexPath.row].furiganaAttributedString.then { str in
-            cell.sentenceLabel.attributedText = str
+        let str = dataSet[indexPath.row]
+        if let tokenInfos = kanaTokenInfosCacheDictionary[str] {
+            cell.sentenceLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
         }
         
         return cell
@@ -225,6 +290,6 @@ extension PlaygroundView: UITableViewDataSource {
 }
 
 class N3SentenceCell: UITableViewCell {
-    @IBOutlet weak var sentenceLabel: CustomLabel!
+    @IBOutlet weak var sentenceLabel: FuriganaLabel!
 }
 

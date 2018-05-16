@@ -340,7 +340,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="欲しいものは、全部自分で手に入れる" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Uod-ae-ISK">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="欲しいものは、全部自分で手に入れる" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Uod-ae-ISK">
                                                     <rect key="frame" x="70" y="0.0" width="250" height="60"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -415,15 +415,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="jhO-ac-y8c" customClass="CustomLabel" customModule="VoiceOnly" customModuleProvider="target">
-                                                    <rect key="frame" x="10" y="0.0" width="300" height="60"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="60" id="cru-wh-xOE"/>
-                                                    </constraints>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhO-ac-y8c" customClass="FuriganaLabel" customModule="VoiceOnly" customModuleProvider="target">
+                                                    <rect key="frame" x="10" y="0.0" width="300" height="59.5"/>
                                                     <attributedString key="attributedText">
-                                                        <fragment content="Label">
+                                                        <fragment content="...">
                                                             <attributes>
-                                                                <font key="NSFont" size="69" name=".SFNSDisplay"/>
+                                                                <font key="NSFont" size="18" name=".SFNSDisplay"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
                                                         </fragment>
                                                     </attributedString>
@@ -433,6 +431,8 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="jhO-ac-y8c" secondAttribute="trailing" constant="10" id="3T4-KE-hPd"/>
                                                 <constraint firstItem="jhO-ac-y8c" firstAttribute="leading" secondItem="8HY-Wz-n2i" secondAttribute="leading" constant="10" id="Slp-7s-jMf"/>
+                                                <constraint firstItem="jhO-ac-y8c" firstAttribute="top" secondItem="8HY-Wz-n2i" secondAttribute="top" id="Xyv-ud-mFm"/>
+                                                <constraint firstAttribute="bottom" secondItem="jhO-ac-y8c" secondAttribute="bottom" id="fk0-zz-kfr"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -454,6 +454,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PRu-IY-urC"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="FmU-Mt-j7X" id="oe8-pj-h1q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MiC-io-7Ao" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
