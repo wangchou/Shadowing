@@ -138,6 +138,14 @@
 			path = GameEngine;
 			sourceTree = "<group>";
 		};
+		BE40C61220ABF7E7004E420F /* working */ = {
+			isa = PBXGroup;
+			children = (
+				BEE962E220AAC21D005AF008 /* PlaygroundView.swift */,
+			);
+			path = working;
+			sourceTree = "<group>";
+		};
 		BE6AF37F209C146B00CBDB63 /* GameFlows */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				BEBDEDBE208EF09F00C18520 /* VoiceOnly */,
+				BE40C61220ABF7E7004E420F /* working */,
 				BEBDEDBD208EF09F00C18520 /* Products */,
 				BEBDEDE1208EF17100C18520 /* Frameworks */,
 			);
@@ -224,7 +233,6 @@
 			isa = PBXGroup;
 			children = (
 				BEBDEDC3208EF09F00C18520 /* Main.storyboard */,
-				BEE962E220AAC21D005AF008 /* PlaygroundView.swift */,
 				BEDEDD3620A46D1B00E7B60B /* ContentViewController.swift */,
 				BE7725CD20A4216700DF186A /* ContentCell.swift */,
 				BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */,
