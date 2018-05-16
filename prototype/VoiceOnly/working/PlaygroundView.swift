@@ -6,8 +6,8 @@ import UIKit
 import Promises
 
 enum JpnType {
-    case noKanji
-    case kanjiOnly
+    case noKanjiAndNumber
+    case kanjiAndNumberOnly
     case mixed
 }
 
@@ -39,7 +39,7 @@ func getFuriganaAttrString(_ parts: [String], _ kana: String) -> NSMutableAttrib
     if parts.count == 0 { return attrStr }
     
     if parts.count == 1 {
-        let result = parts[0].jpnType == JpnType.noKanji ?
+        let result = parts[0].jpnType == JpnType.noKanjiAndNumber ?
             rubyAttrStr(parts[0]) :
             rubyAttrStr(parts[0], kana)
 
@@ -48,7 +48,7 @@ func getFuriganaAttrString(_ parts: [String], _ kana: String) -> NSMutableAttrib
     }
     
     for i in 0..<parts.count {
-        if parts[i].jpnType != JpnType.noKanji &&
+        if parts[i].jpnType != JpnType.noKanjiAndNumber &&
             kana.patternCount(parts[i].hiraganaOnly) != 1 {
             continue
         }
@@ -118,10 +118,10 @@ extension String {
     }
     
     var jpnType: JpnType {
-        guard let kanjiRange = self.range(of: "[\\p{Han}\\d]*[\\p{Han}\\d]", options: .regularExpression) else { return JpnType.noKanji }
+        guard let kanjiRange = self.range(of: "[\\p{Han}\\d]*[\\p{Han}\\d]", options: .regularExpression) else { return JpnType.noKanjiAndNumber }
         
         if String(self[kanjiRange]).count == self.count {
-            return JpnType.kanjiOnly
+            return JpnType.kanjiAndNumberOnly
         }
         return JpnType.mixed
     }
@@ -131,15 +131,22 @@ extension String {
         let furiganaAttrStr = NSMutableAttributedString()
         getKanaTokenInfos(self).then { tokenInfos in
             for tokenInfo in tokenInfos {
-                guard tokenInfo.count > 8 else { return }
-                let kanjiStr = tokenInfo[0]
-                let kana = tokenInfo[8].kataganaToHiragana
-                let parts = kanjiStr // [わたし、| 気 | になります！]
-                    .replace("([\\p{Han}\\d]*[\\p{Han}\\d])", "👻$1👻")
-                    .components(separatedBy: "👻")
-                    .filter { $0 != "" }
-                
-                furiganaAttrStr.append(getFuriganaAttrString(parts, kana))
+                if tokenInfo.count == 8 { // number strings
+                    furiganaAttrStr.append(rubyAttrStr(tokenInfo[0]))
+                    continue
+                }
+                if tokenInfo.count == 10 {
+                    let kanjiStr = tokenInfo[0]
+                    let kana = tokenInfo[8].kataganaToHiragana
+                    let parts = kanjiStr // [わたし、| 気 | になります！]
+                        .replace("([\\p{Han}\\d]*[\\p{Han}\\d])", "👻$1👻")
+                        .components(separatedBy: "👻")
+                        .filter { $0 != "" }
+                    
+                    furiganaAttrStr.append(getFuriganaAttrString(parts, kana))
+                    continue
+                }
+                print("unknown situation with tokenInfo: ", tokenInfo)
             }
         
             promise.fulfill(furiganaAttrStr)
@@ -203,13 +210,13 @@ extension PlaygroundView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return n4.count
+        return n3.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "N3SentencesCell", for: indexPath) as! N3SentenceCell
         
-        n4[indexPath.row].furiganaAttributedString.then { str in
+        n3[indexPath.row].furiganaAttributedString.then { str in
             cell.sentenceLabel.attributedText = str
         }
         
