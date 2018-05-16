@@ -34,6 +34,8 @@ extension String {
     var furiganaAttributedString: Promise<NSMutableAttributedString> {
         let promise = Promise<NSMutableAttributedString>.pending()
         let attributeStr = NSMutableAttributedString()
+        let emptyAnnotation = CTRubyAnnotationCreateWithAttributes(
+            .auto, .auto, .before, " " as CFString, [:] as CFDictionary)
         getKanaTokenInfos(self).then { tokenInfos in
             for tokenInfo in tokenInfos {
                 if tokenInfo.count < 9 {
@@ -43,27 +45,14 @@ extension String {
                 let tokenKana = tokenInfo[8].kataganaToHiragana // ex: かかっ
                 
                 if let kanjiRange = token.range(of: "\\p{Han}*\\p{Han}", options: .regularExpression) {
-                    //let kanji = String(token[kanjiRange]) // ex: 懸
-                    //var kana = tokenKana // ex: か
-                    //var suffixPart = token // ex: かっ
-                    
-//                    if kanji.count < token.count {
-//                        suffixPart.removeSubrange(kanjiRange)
-//                        kana.removeLast(suffixPart.count)
-//                    }
-                    
                     let annotation = CTRubyAnnotationCreateWithAttributes(
                         .auto, .auto, .before, tokenKana as CFString, [:] as CFDictionary)
                     
                     attributeStr.append(NSAttributedString(
                         string: token,
                         attributes: [kCTRubyAnnotationAttributeName as NSAttributedStringKey: annotation]))
-                    
-//                    if kanji.count < token.count {
-//                        attributeStr.append(NSAttributedString(string: suffixPart, attributes: nil))
-//                    }
                 } else {
-                    attributeStr.append(NSAttributedString(string: token, attributes: nil))
+                    attributeStr.append(NSAttributedString(string: token, attributes: [kCTRubyAnnotationAttributeName as NSAttributedStringKey: emptyAnnotation]))
                 }
             }
            
