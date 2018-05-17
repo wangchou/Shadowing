@@ -193,6 +193,13 @@ extension String {
 
 class FuriganaLabel: UILabel {
     var height: CGFloat = 0
+    override var text: String? {
+        willSet {
+            if let newValue = newValue {
+                self.attributedText = rubyAttrStr(newValue, "")
+            }
+        }
+    }
 
     override var attributedText: NSAttributedString? {
         willSet {
@@ -259,14 +266,9 @@ private let dataSet = n4
 class PlaygroundView: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
-
         all(dataSet.map {$0.furiganaAttributedString}).then {_ in
             self.tableView.reloadData()
         }
-        //print("世の中に失敗というものはない。".replace("(\\p{Han}*\\p{Han})", "👻$1👻"))
-        //"逃げるは恥だが役に立つ".furiganaAttributedString.then { str in
-        //    self.furiganaLabel.attributedText = str
-        //}
     }
 }
 
@@ -282,8 +284,11 @@ extension PlaygroundView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "N3SentencesCell", for: indexPath) as! N3SentenceCell
         let str = dataSet[indexPath.row]
+
         if let tokenInfos = kanaTokenInfosCacheDictionary[str] {
             cell.sentenceLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
+        } else {
+            cell.sentenceLabel.text = str
         }
 
         return cell
