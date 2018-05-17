@@ -29,6 +29,8 @@
 		BE7725C920A2CBC200DF186A /* n5.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725C220A2CBC100DF186A /* n5.swift */; };
 		BE7725CE20A4216700DF186A /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725CD20A4216700DF186A /* ContentCell.swift */; };
 		BE8C8F02209C476A00E32F09 /* VoiceOnlyGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8C8F01209C476A00E32F09 /* VoiceOnlyGame.swift */; };
+		BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */; };
+		BE9B476A20AD50520063E0DA /* FuriganaUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476920AD50520063E0DA /* FuriganaUtils.swift */; };
 		BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */; };
 		BEBDEDC5208EF09F00C18520 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEBDEDC3208EF09F00C18520 /* Main.storyboard */; };
 		BEBDEDC7208EF0A000C18520 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEBDEDC6208EF0A000C18520 /* Assets.xcassets */; };
@@ -87,6 +89,8 @@
 		BE7725C220A2CBC100DF186A /* n5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n5.swift; sourceTree = "<group>"; };
 		BE7725CD20A4216700DF186A /* ContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
 		BE8C8F01209C476A00E32F09 /* VoiceOnlyGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceOnlyGame.swift; sourceTree = "<group>"; };
+		BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaLabel.swift; sourceTree = "<group>"; };
+		BE9B476920AD50520063E0DA /* FuriganaUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaUtils.swift; sourceTree = "<group>"; };
 		BEBDEDBC208EF09F00C18520 /* VoiceOnly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceOnly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEBDEDC4208EF09F00C18520 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -240,6 +244,8 @@
 				BEDBCCD720A82AC4001CF11D /* GameDetailTableCell.swift */,
 				BE1CA957209DC43800086853 /* Messenger.swift */,
 				BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */,
+				BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */,
+				BE9B476920AD50520063E0DA /* FuriganaUtils.swift */,
 			);
 			path = GameUI;
 			sourceTree = "<group>";
@@ -357,6 +363,7 @@
 				BEDFCDAB20A87AF800736153 /* PauseOverlayViewController.swift in Sources */,
 				BE1CA956209D5D0900086853 /* Game.swift in Sources */,
 				BE7725C420A2CBC200DF186A /* sentences.swift in Sources */,
+				BE9B476A20AD50520063E0DA /* FuriganaUtils.swift in Sources */,
 				BE65A939209C6E67006645CA /* GameEventDelegate.swift in Sources */,
 				BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */,
 				BEBDEDDC208EF15F00C18520 /* BGM.swift in Sources */,
@@ -366,6 +373,7 @@
 				BEDEDD3720A46D1B00E7B60B /* ContentViewController.swift in Sources */,
 				BE7725CE20A4216700DF186A /* ContentCell.swift in Sources */,
 				BEDBCCD820A82AC4001CF11D /* GameDetailTableCell.swift in Sources */,
+				BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */,
 				BE8C8F02209C476A00E32F09 /* VoiceOnlyGame.swift in Sources */,
 				BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */,
 				BE1CA95C209DC4E800086853 /* P10ViewController.swift in Sources */,
