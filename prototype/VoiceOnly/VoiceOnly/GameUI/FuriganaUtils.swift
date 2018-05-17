@@ -29,7 +29,7 @@ func rubyAttrStr(_ string: String, _ ruby: String = "") -> NSAttributedString {
         string: string,
         attributes: [
             // need to use same font in CTRun or 7時 furigana will not aligned
-            .font: UIFont(name: "HiraginoSans-W3", size: 14.0)!,
+            .font: UIFont(name: "HiraginoSans-W3", size: 20.0)!,
 //            .font: UIFont(name: ".HiraKakuInterface-W6", size: 18.0)!,
 //            .foregroundColor: UIColor.white,
 //            .strokeColor: UIColor.black,

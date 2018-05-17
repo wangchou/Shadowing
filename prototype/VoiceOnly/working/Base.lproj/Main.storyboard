@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14112" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pQB-0Q-SxE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14112" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -322,44 +322,46 @@
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oat-aH-4X8" userLabel="句子列表">
                                 <rect key="frame" x="0.0" y="201" width="320" height="367"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="separatorColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SentenceCell" rowHeight="60" id="Dbt-EG-HLc" customClass="GameDetailTableCell" customModule="VoiceOnly" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="60"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SentenceCell" id="Dbt-EG-HLc" customClass="GameDetailTableCell" customModule="VoiceOnly" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Dbt-EG-HLc" id="KQa-Km-FxO">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="o o o" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XRu-Hi-623">
-                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="60"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XRu-Hi-623">
+                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="43.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="70" id="Ktm-8N-rvy"/>
+                                                        <constraint firstAttribute="width" constant="40" id="Ktm-8N-rvy"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="欲しいものは、全部自分で手に入れる" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Uod-ae-ISK">
-                                                    <rect key="frame" x="70" y="0.0" width="250" height="60"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                </textView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ただの人間には" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0tn-vE-CDR" customClass="FuriganaLabel" customModule="VoiceOnly" customModuleProvider="target">
+                                                    <rect key="frame" x="45" y="0.0" width="275" height="43.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="Uod-ae-ISK" secondAttribute="bottom" id="HVe-bb-Rgv"/>
-                                                <constraint firstItem="Uod-ae-ISK" firstAttribute="top" secondItem="KQa-Km-FxO" secondAttribute="top" id="dfU-yk-Bij"/>
-                                                <constraint firstAttribute="trailing" secondItem="Uod-ae-ISK" secondAttribute="trailing" id="qR9-7e-yj3"/>
-                                                <constraint firstItem="XRu-Hi-623" firstAttribute="top" secondItem="KQa-Km-FxO" secondAttribute="top" id="qzu-ZA-lmV"/>
-                                                <constraint firstAttribute="bottom" secondItem="XRu-Hi-623" secondAttribute="bottom" id="uYE-89-TBD"/>
-                                                <constraint firstItem="XRu-Hi-623" firstAttribute="leading" secondItem="KQa-Km-FxO" secondAttribute="leading" id="wYZ-7b-LC8"/>
-                                                <constraint firstItem="Uod-ae-ISK" firstAttribute="leading" secondItem="XRu-Hi-623" secondAttribute="trailing" id="wYq-ju-BVX"/>
+                                                <constraint firstItem="0tn-vE-CDR" firstAttribute="top" secondItem="KQa-Km-FxO" secondAttribute="top" id="9Hk-kj-l54"/>
+                                                <constraint firstItem="XRu-Hi-623" firstAttribute="top" secondItem="KQa-Km-FxO" secondAttribute="top" id="MjW-Yp-oEe"/>
+                                                <constraint firstAttribute="trailing" secondItem="0tn-vE-CDR" secondAttribute="trailing" id="RR1-IZ-EVb"/>
+                                                <constraint firstItem="XRu-Hi-623" firstAttribute="leading" secondItem="KQa-Km-FxO" secondAttribute="leading" id="j8U-Mf-gb9"/>
+                                                <constraint firstAttribute="bottom" secondItem="XRu-Hi-623" secondAttribute="bottom" id="op5-kd-yNH"/>
+                                                <constraint firstItem="0tn-vE-CDR" firstAttribute="leading" secondItem="XRu-Hi-623" secondAttribute="trailing" constant="5" id="vF2-6k-pGR"/>
+                                                <constraint firstAttribute="bottom" secondItem="0tn-vE-CDR" secondAttribute="bottom" id="vQh-LA-khT"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                         <connections>
+                                            <outlet property="furiganaLabel" destination="0tn-vE-CDR" id="Xca-Lv-yBs"/>
                                             <outlet property="miscLabel" destination="XRu-Hi-623" id="w2p-rM-B10"/>
-                                            <outlet property="sentenceTextView" destination="Uod-ae-ISK" id="NaJ-Gf-qRO"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -389,6 +391,7 @@
                         <outlet property="perfectCountLabel" destination="bMS-Hr-Jw8" id="J0V-IQ-eLI"/>
                         <outlet property="progressLabel" destination="bd1-65-w1n" id="ZBI-WB-USj"/>
                         <outlet property="rankLabel" destination="ZWi-Pi-rbk" id="onR-XK-IFJ"/>
+                        <outlet property="tableView" destination="oat-aH-4X8" id="bvx-0Y-ruE"/>
                         <outlet property="titleLabel" destination="1vE-IZ-8cg" id="Hpp-xr-xqX"/>
                     </connections>
                 </viewController>

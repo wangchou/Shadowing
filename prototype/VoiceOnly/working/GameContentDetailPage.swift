@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Promises
 
 private let context = GameContext.shared
 
@@ -22,6 +23,7 @@ class GameContentDetailPage: UIViewController {
     @IBOutlet weak var goodCountLabel: UILabel!
     @IBOutlet weak var missedCountLabel: UILabel!
 
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.text = context.dataSetKey
@@ -39,6 +41,11 @@ class GameContentDetailPage: UIViewController {
             greatCountLabel.text = 0.s
             goodCountLabel.text = 0.s
             missedCountLabel.text = 0.s
+        }
+        
+        // load furigana
+        all(context.sentences.map {$0.furiganaAttributedString}).then {_ in
+            self.tableView.reloadData()
         }
     }
 
@@ -63,13 +70,17 @@ extension GameContentDetailPage: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SentenceCell", for: indexPath) as! GameDetailTableCell
         let sentence = context.sentences[indexPath.row]
-        cell.sentenceTextView.text = context.sentences[indexPath.row]
-        cell.sentenceTextView.isEditable = false
-        cell.sentenceTextView.isScrollEnabled = false
+
+        if let tokenInfos = kanaTokenInfosCacheDictionary[sentence] {
+            cell.furiganaLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
+        } else {
+            cell.furiganaLabel.text = sentence
+        }
+
 
         if let gameRecord = context.gameHistory[context.dataSetKey],
            let score = gameRecord.sentencesScore[sentence] {
-            cell.miscLabel.text = "\(score)分"
+            cell.miscLabel.text = "\(score/10)"
             var color = myRed
             if score >= 80 {
                 color = myGreen

@@ -11,5 +11,5 @@ import UIKit
 
 class GameDetailTableCell: UITableViewCell {
     @IBOutlet weak var miscLabel: UILabel!
-    @IBOutlet weak var sentenceTextView: UITextView!
+    @IBOutlet weak var furiganaLabel: FuriganaLabel!
 }

@@ -3,7 +3,7 @@ import UIKit
 
 class FuriganaLabel: UILabel {
     private var height: CGFloat = 0
-    private let topPadding: CGFloat = 8
+    private let topPadding: CGFloat = 7
 
     override var text: String? {
         willSet {
