@@ -19,7 +19,7 @@ class FuriganaLabel: UILabel {
             if  let newValue = newValue,
                 let attributedText = self.attributedText,
                 newValue != attributedText {
-                height = heightOfCoreText(attributed: newValue, width: self.frame.width - widthPadding * 2)
+                height = heightOfCoreText(attributed: newValue, width: self.frame.width)
             }
         }
     }
@@ -51,11 +51,15 @@ class FuriganaLabel: UILabel {
     }
 
     func heightOfCoreText(attributed: NSAttributedString, width: CGFloat) -> CGFloat {
+        guard attributed.string != "" else { return 28 + topShift }
         var height = CGFloat()
 
-        var textDrawRect = self.frame
-        textDrawRect.size.height = CGFloat.greatestFiniteMagnitude
-        textDrawRect.size.width = width
+        let textDrawRect = CGRect(
+            x: self.frame.origin.x,
+            y: self.frame.origin.y,
+            width: width - widthPadding * 2,
+            height: CGFloat.greatestFiniteMagnitude
+        )
 
         let path = CGPath(rect: textDrawRect, transform: nil)
         let framesetter = CTFramesetterCreateWithAttributedString(attributed)
@@ -77,16 +81,22 @@ class FuriganaLabel: UILabel {
         var previousWidth = maxWidth
         var width = maxWidth
         repeat {
-            var textDrawRect = self.frame
-            textDrawRect.size.height = CGFloat.greatestFiniteMagnitude
-            textDrawRect.size.width = width - widthPadding * 2
+            let textDrawRect = CGRect(
+                x: self.frame.origin.x,
+                y: self.frame.origin.y,
+                width: width - widthPadding * 2,
+                height: CGFloat.greatestFiniteMagnitude
+            )
 
             let path = CGPath(rect: textDrawRect, transform: nil)
             let framesetter = CTFramesetterCreateWithAttributedString(attributed)
             let frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, attributed.length), path, nil)
 
-            guard let lines = CTFrameGetLines(frame) as? [CTLine],
-                  lines.count == 1 else { return previousWidth }
+            if let lines = CTFrameGetLines(frame) as? [CTLine] {
+                if lines.count > 1 { return previousWidth }
+            } else {
+                return 0
+            }
             previousWidth = width
             width -= 5
         } while(width > 30)

@@ -35,7 +35,7 @@ class Messenger: UIViewController {
         let maxLabelWidth: Int = Int(screenSize.width*2/3)
         let spacing: Int = 8
         var height: Int = 30
-        var width: Int = maxLabelWidth
+        var width: Int = 10
         if let tokenInfos = kanaTokenInfosCacheDictionary[text] {
             myLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
         } else {
@@ -43,11 +43,12 @@ class Messenger: UIViewController {
         }
 
         // initial
-        if let attributed = myLabel.attributedText {
-            // sizeToFit is not working here... T.T
-            height = Int(myLabel.heightOfCoreText(attributed: attributed, width: CGFloat(width)))
-            width = Int(myLabel.widthOfCoreText(attributed: attributed, maxWidth: CGFloat(maxLabelWidth)))
-        }
+        guard let attributed = myLabel.attributedText else { print("orz..."); return }
+
+        // sizeToFit is not working here... T.T
+        height = Int(myLabel.heightOfCoreText(attributed: attributed, width: CGFloat(maxLabelWidth)))
+        width = Int(myLabel.widthOfCoreText(attributed: attributed, maxWidth: CGFloat(maxLabelWidth)))
+
         myLabel.frame = CGRect(x: 5, y: y, width: width, height: height)
 
         myLabel.layer.borderWidth = 1.5

@@ -45,7 +45,9 @@ func getKana(_ kanjiString: String) -> Promise<String> {
 
     getKanaTokenInfos(kanjiString).then { tokenInfos in
         let kanaStr = tokenInfos.reduce("", { kanaStr, tokenInfo in
-            return tokenInfo.count > 8 ? kanaStr + tokenInfo[8] : kanaStr
+            return tokenInfo[1] != "記号" ?
+                kanaStr + tokenInfo.last! :
+                kanaStr
         })
         promise.fulfill(kanaStr)
     }

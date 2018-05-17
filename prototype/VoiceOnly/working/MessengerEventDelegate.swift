@@ -68,7 +68,7 @@ extension Messenger: GameEventDelegate {
     }
 
     private func onScore(_ score: Int) {
-        var newText = "\(lastLabel.text!) \(score)分"
+        var newText = "\(lastLabel.text!) \(score/10)分"
         newText = score == 100 ? "\(newText) ⭐️" : newText
         updateLastLabelText(newText, isLeft: false)
 
