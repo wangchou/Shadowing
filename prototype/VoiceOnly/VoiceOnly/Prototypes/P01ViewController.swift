@@ -12,21 +12,21 @@ import UIKit
 // Prototype 1: 全語音、只能用講電話的方式
 class P01ViewController: UIViewController, GameEventDelegate {
     let game = VoiceOnlyGame.shared
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         startEventObserving(self)
         game.play()
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         stopEventObserving(self)
         game.stop()
     }
-    
+
     @objc func onEventHappened(_ notification: Notification) {
-        let event = notification.object as! Event
+        guard let event = notification.object as? Event else { return }
         switch event.type {
         case .stringSaid:
             if let str = event.string {

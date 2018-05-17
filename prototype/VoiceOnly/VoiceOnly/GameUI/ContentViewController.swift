@@ -8,12 +8,12 @@
 
 import UIKit
 
-fileprivate let context = GameContext.shared
+private let context = GameContext.shared
 
 class ContentViewController: UIViewController {
     @IBOutlet weak var sentencesTableView: UITableView!
     //let game = SentencesTestGame.shared
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         addSentences(sentences: n5, prefix: n5Prefix)
@@ -21,7 +21,7 @@ class ContentViewController: UIViewController {
         addSentences(sentences: n3, prefix: n3Prefix)
         //game.play()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadGameHistory()
@@ -38,20 +38,20 @@ extension ContentViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allSentences.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SentencesCell", for: indexPath) as! ContentCell
-        
+
         let dataSetKey = allSentencesKeys[indexPath.row]
-        
+
         cell.title.text = dataSetKey
         cell.strockedProgressText = context.gameHistory[dataSetKey]?.progress
         cell.strockedRankText = context.gameHistory[dataSetKey]?.rank
-        
+
         return cell
     }
 }
@@ -63,5 +63,3 @@ extension ContentViewController: UITableViewDelegate {
         launchStoryboard(self, "GameContentDetailPage")
     }
 }
-
-

@@ -9,11 +9,9 @@ import UIKit
 import Foundation
 import AVFoundation
 
-let MeiJia = "com.apple.ttsbundle.Mei-Jia-compact"
-let Otoya = "com.apple.ttsbundle.Otoya-premium"
-let Kyoko = "com.apple.ttsbundle.Kyoko-premium"
-let Oren = "com.apple.ttsbundle.siri_female_ja-JP_compact"
-let Hattori = "com.apple.ttsbundle.siri_male_ja-JP_compact"
+let meijiaSan = "com.apple.ttsbundle.Mei-Jia-compact"
+let orenSan = "com.apple.ttsbundle.siri_female_ja-JP_compact"
+let hattoriSan = "com.apple.ttsbundle.siri_male_ja-JP_compact"
 
 let normalRate = AVSpeechUtteranceDefaultSpeechRate
 
@@ -22,4 +20,3 @@ let normalRate = AVSpeechUtteranceDefaultSpeechRate
 let micOutVolume: Float = 0
 
 let screenSize = UIScreen.main.bounds
-

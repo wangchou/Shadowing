@@ -9,8 +9,8 @@
 import Foundation
 import Promises
 
-fileprivate let pauseDuration = 0.4
-fileprivate let context = GameContext.shared
+private let pauseDuration = 0.4
+private let context = GameContext.shared
 
 class SimpleGame: Game {
     static let shared = SimpleGame()
@@ -19,19 +19,19 @@ class SimpleGame: Game {
     private var startTime: Double = 0
     private var gameSeconds: Int = 0
     private var timer: Timer?
-    
+
     var state: GameState = .stopped {
         didSet {
             postEvent(.gameStateChanged, gameState: state)
         }
     }
-    
+
     func play() {
         startEngine(toSpeaker: true)
         gameSeconds = 0
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             if self.isPaused { return }
-            
+
             postEvent(.playTimeUpdate, int: self.gameSeconds)
             self.gameSeconds += 1
         }
@@ -42,23 +42,23 @@ class SimpleGame: Game {
         isPaused = false
         wait.fulfill(())
     }
-    
+
     func pause() {
         wait = Promise<Void>.pending()
         isPaused = true
     }
-    
+
     func resume() {
         isPaused = false
         wait.fulfill(())
     }
-    
+
     func stop() {
         state = .stopped
         timer?.invalidate()
         stopEngine()
     }
-    
+
     private func learnNext() {
         speakJapanese()
         .then { self.wait }
@@ -70,45 +70,45 @@ class SimpleGame: Game {
         .always {
             self.state = .sentenceSessionEnded
             print(context.sentenceIndex, context.sentences.count)
-            if(context.nextSentence() && context.isEngineRunning) {
+            if context.nextSentence() && context.isEngineRunning {
                 self.learnNext()
             } else {
-                let record = context.gameRecord!
+                guard let record = context.gameRecord else { return }
                 self.state = .gameOver
-                
+
                 meijia("遊戲結束").then {_ in
                     self.state = .mainScreen
                 }
-                
+
                 if let previousRecord = context.gameHistory[record.dataSetKey],
                     record.p <= previousRecord.p &&
                     record.rank != "SS" {
                     return
                 }
-                
+
                 context.gameHistory[record.dataSetKey] = record
                 saveGameHistory()
             }
         }
     }
-    
+
     private func speakJapanese() -> Promise<Void> {
         self.state = .speakingJapanese
         self.startTime = getNow()
         return hattori(context.targetString)
     }
-    
+
     private func listen() -> Promise<String> {
         self.state = .listening
         let speakDuration = getNow() - self.startTime
         return listenJP(duration: speakDuration + pauseDuration)
     }
-    
+
     private func getScore(userSaidString: String) -> Promise<Int> {
         self.state = .stringRecognized
         return calculateScore(context.targetString, userSaidString)
     }
-    
+
     // change life will change the teachingSpeed
     // initial life = 40, speed = 0.7x
     // life 100 => speed 1.0x
@@ -116,10 +116,10 @@ class SimpleGame: Game {
     // 25句 Rank A 達成度90% => missed x 1, good x3, great x 9, perfect x 12 => life = 100, last speed 1.00x
     //      Rank B 達程度80% => missed x 2, good x6, great x 7, perfect x 10 => life = 82,  last speed 0.91x
     //      Rank C 達程度70% => missed x 3, good x9, great x 6, perfect x 7  => life = 62,  last speed 0.81x
-    
+
     private func updateLife(score: Int) {
         var life = context.life
-        
+
         switch score {
         case 100:
             life += 4
@@ -130,20 +130,20 @@ class SimpleGame: Game {
         default:
             life += -3
         }
-        
+
         context.life = max(min(100, life), 0)
-        
+
         postEvent(.lifeChanged, int: context.life)
     }
-    
+
     private func speakScore(score: Int) -> Promise<Void> {
         self.state = .scoreCalculated
-        
+
         updateLife(score: score)
-        
+
         var text = ""
         context.gameRecord?.sentencesScore[context.targetString] = score
-        
+
         switch score {
         case 100:
             context.gameRecord?.perfectCount += 1
@@ -157,7 +157,7 @@ class SimpleGame: Game {
         default:
             text = "違うよ"
         }
-        
+
         return oren(text, rate: normalRate)
     }
 }

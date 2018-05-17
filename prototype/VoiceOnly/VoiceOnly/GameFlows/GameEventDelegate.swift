@@ -13,23 +13,23 @@ enum EventType {
     case sayStarted
     case stringSaid
     case sayEnded
-    
+
     // speech recognition
     case listenStarted
     case stringRecognized
     case listenEnded
-    
+
     case scoreCalculated
     case lifeChanged
     case gameStateChanged
-    
+
     case playTimeUpdate
     case resume
 }
 
 struct Event {
     let type: EventType
-    
+
     // only accept three types of data for type safety
     let string: String?
     let int: Int?

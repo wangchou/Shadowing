@@ -10,16 +10,16 @@ let tagger = NSLinguisticTagger(
 )
 
 tagger.string = text
-let range = NSMakeRange(0, text.count)
+let range = NSRange(location: 0, length: text.count)
 let options: NSLinguisticTagger.Options = [.omitWhitespace]
 
 var colorIndex = 2
-tagger.enumerateTags(in: range, scheme: .tokenType, options: []) { (tag, tokenRange, sentenceRange, stop) in
+tagger.enumerateTags(in: range, scheme: .tokenType, options: []) { (tag, tokenRange, _, _) in
   let token = (text as NSString).substring(with: tokenRange)
   if(tag?.rawValue == "Punctuation") {
     print("\u{001B}[0;31m\(token)")
   } else {
-    print("\u{001B}[0;3\(colorIndex)m\(token)", terminator:"")
+    print("\u{001B}[0;3\(colorIndex)m\(token)", terminator: "")
     colorIndex = ((colorIndex - 1) % 6) + 2
   }
 }
@@ -34,10 +34,10 @@ func getSentences(_ text: String) -> [String] {
   var curSentences = ""
 
   tagger.string = text
-  let range = NSMakeRange(0, text.count)
+  let range = NSRange(location: 0, length: text.count)
   let options: NSLinguisticTagger.Options = [.omitWhitespace]
 
-  tagger.enumerateTags(in: range, scheme: .tokenType, options: []) { (tag, tokenRange, sentenceRange, stop) in
+  tagger.enumerateTags(in: range, scheme: .tokenType, options: []) { (tag, tokenRange, _, _) in
     let token = (text as NSString).substring(with: tokenRange)
     if(tag?.rawValue == "Punctuation") {
       curSentences += token

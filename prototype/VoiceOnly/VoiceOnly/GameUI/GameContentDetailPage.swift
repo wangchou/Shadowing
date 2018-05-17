@@ -9,14 +9,14 @@
 import Foundation
 import UIKit
 
-fileprivate let context = GameContext.shared
+private let context = GameContext.shared
 
 class GameContentDetailPage: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var challengeButton: UIButton!
-    
+
     @IBOutlet weak var perfectCountLabel: UILabel!
     @IBOutlet weak var greatCountLabel: UILabel!
     @IBOutlet weak var goodCountLabel: UILabel!
@@ -41,11 +41,11 @@ class GameContentDetailPage: UIViewController {
             missedCountLabel.text = 0.s
         }
     }
-    
+
     @IBAction func backButtonClicked(_ sender: Any) {
         self.dismiss(animated: false, completion: nil)
     }
-    
+
     @IBAction func challenge(_ sender: Any) {
         launchStoryboard(self, "MessengerGame")
     }
@@ -55,18 +55,18 @@ extension GameContentDetailPage: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return context.sentences.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SentenceCell", for: indexPath) as! GameDetailTableCell
         let sentence = context.sentences[indexPath.row]
         cell.sentenceTextView.text = context.sentences[indexPath.row]
         cell.sentenceTextView.isEditable = false
         cell.sentenceTextView.isScrollEnabled = false
-        
+
         if let gameRecord = context.gameHistory[context.dataSetKey],
            let score = gameRecord.sentencesScore[sentence] {
             cell.miscLabel.text = "\(score)分"
@@ -78,8 +78,7 @@ extension GameContentDetailPage: UITableViewDataSource {
             }
             cell.miscLabel.textColor = color
         }
-        
+
         return cell
     }
 }
-

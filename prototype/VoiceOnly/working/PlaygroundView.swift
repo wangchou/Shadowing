@@ -17,6 +17,7 @@ func rubyAttrStr(_ string: String, _ ruby: String = " ") -> NSAttributedString {
         [:] as CFDictionary)
         //[kCTForegroundColorAttributeName: UIColor.blue.cgColor] as CFDictionary)
         //[kCTFontAttributeName: UIFont.boldSystemFont(ofSize: 9)] as CFDictionary)
+
     return NSAttributedString(
         string: string,
         attributes: [
@@ -43,8 +44,8 @@ func rubyAttrStr(_ string: String, _ ruby: String = " ") -> NSAttributedString {
 //    kana: ...
 func getFuriganaAttrString(_ parts: [String], _ kana: String) -> NSMutableAttributedString {
     let attrStr = NSMutableAttributedString()
-    if parts.count == 0 { return attrStr }
-    
+    if parts.isEmpty { return attrStr }
+
     if parts.count == 1 {
         let result = parts[0].jpnType == JpnType.noKanjiAndNumber ?
             rubyAttrStr(parts[0]) :
@@ -53,32 +54,32 @@ func getFuriganaAttrString(_ parts: [String], _ kana: String) -> NSMutableAttrib
         attrStr.append(result)
         return attrStr
     }
-    
+
     for i in 0..<parts.count {
         if parts[i].jpnType != JpnType.noKanjiAndNumber &&
             kana.patternCount(parts[i].hiraganaOnly) != 1 {
             continue
         }
-        
+
         var kanaParts = kana.components(separatedBy: parts[i].hiraganaOnly)
         kanaParts = kanaParts.filter { $0 != "" }
-        
+
         if i > 0 {
             attrStr.append(getFuriganaAttrString(Array(parts[0..<i]), kanaParts[0]))
         }
-        
+
         attrStr.append(rubyAttrStr(parts[i]))
-        
+
         if i + 1 < parts.count {
             let suffixKanaPartsIndex = i == 0 ? 0 : 1
             attrStr.append(
                 getFuriganaAttrString(Array(parts[i+1..<parts.count]), kanaParts[suffixKanaPartsIndex])
             )
         }
-        
+
         return attrStr
     }
-    
+
     var kanjiPart = ""
     for part in parts {
         kanjiPart += part
@@ -101,7 +102,7 @@ func getFuriganaString(tokenInfos: [[String]]) -> NSMutableAttributedString {
                 .replace("([\\p{Han}\\d]*[\\p{Han}\\d])", "👻$1👻")
                 .components(separatedBy: "👻")
                 .filter { $0 != "" }
-            
+
             furiganaAttrStr.append(getFuriganaAttrString(parts, kana))
             continue
         }
@@ -125,54 +126,54 @@ extension String {
             return re.firstMatch(
                 in: self,
                 options: [],
-                range: NSMakeRange(0, self.utf16.count))
+                range: NSRange(location: 0, length: self.utf16.count))
         } catch {
             return nil
         }
     }
-    
+
     func replace(_ pattern: String, _ template: String) -> String {
         do {
             let re = try NSRegularExpression(pattern: pattern, options: [])
             return re.stringByReplacingMatches(
                 in: self,
                 options: [],
-                range: NSMakeRange(0, self.utf16.count),
+                range: NSRange(location: 0, length: self.utf16.count),
                 withTemplate: template)
         } catch {
             return self
         }
     }
-    
+
     func patternCount(_ pattern: String) -> Int {
         return self.components(separatedBy: pattern).count - 1
     }
-    
+
     var hiraganaOnly: String {
         let hiragana = self.kataganaToHiragana
         guard let hiraganaRange = hiragana.range(of: "\\p{Hiragana}*\\p{Hiragana}", options: .regularExpression)
             else { return "" }
         return String(hiragana[hiraganaRange])
     }
-    
+
     var jpnType: JpnType {
         guard let kanjiRange = self.range(of: "[\\p{Han}\\d]*[\\p{Han}\\d]", options: .regularExpression) else { return JpnType.noKanjiAndNumber }
-        
+
         if String(self[kanjiRange]).count == self.count {
             return JpnType.kanjiAndNumberOnly
         }
         return JpnType.mixed
     }
-    
+
     var furiganaAttributedString: Promise<NSMutableAttributedString> {
         let promise = Promise<NSMutableAttributedString>.pending()
-        
+
         getKanaTokenInfos(self).then {
             promise.fulfill(getFuriganaString(tokenInfos: $0))
         }
         return promise
     }
-    
+
     // Hiragana: 3040-309F
     // Katakana: 30A0-30FF
     var kataganaToHiragana: String {
@@ -192,7 +193,7 @@ extension String {
 
 class FuriganaLabel: UILabel {
     var height: CGFloat = 0
-    
+
     override var attributedText: NSAttributedString? {
         willSet {
             if  let newValue = newValue,
@@ -207,7 +208,7 @@ class FuriganaLabel: UILabel {
     override func drawText(in rect: CGRect) {
         guard let attributed = self.attributedText else { return }
         guard let context = UIGraphicsGetCurrentContext() else { return }
-        var path:CGPath
+        var path: CGPath
 
         context.textMatrix = CGAffineTransform.identity
         context.translateBy(x: 0, y: rect.height + 6)
@@ -225,12 +226,12 @@ class FuriganaLabel: UILabel {
         var height = CGFloat()
 
         // MEMO: height = CGFloat.greatestFiniteMagnitude
-        let textDrawRect = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.size.width, height: CGFloat.greatestFiniteMagnitude)
+        var textDrawRect = self.frame
+        textDrawRect.size.height = CGFloat.greatestFiniteMagnitude
         let path = CGPath(rect: textDrawRect, transform: nil)
         let framesetter = CTFramesetterCreateWithAttributedString(attributed)
         let frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, attributed.length), path, nil)
-        let anyArray: [AnyObject] = CTFrameGetLines(frame) as [AnyObject]
-        let lines = anyArray as! [CTLine]
+        guard let lines = CTFrameGetLines(frame) as? [CTLine] else { return height }
         for line in lines {
             //print(line)
             var ascent = CGFloat()
@@ -253,12 +254,12 @@ class FuriganaLabel: UILabel {
     }
 }
 
-fileprivate let dataSet = n4
+private let dataSet = n4
 
 class PlaygroundView: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
-        
+
         all(dataSet.map {$0.furiganaAttributedString}).then {_ in
             self.tableView.reloadData()
         }
@@ -273,18 +274,18 @@ extension PlaygroundView: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSet.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "N3SentencesCell", for: indexPath) as! N3SentenceCell
         let str = dataSet[indexPath.row]
         if let tokenInfos = kanaTokenInfosCacheDictionary[str] {
             cell.sentenceLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
         }
-        
+
         return cell
     }
 }
@@ -292,4 +293,3 @@ extension PlaygroundView: UITableViewDataSource {
 class N3SentenceCell: UITableViewCell {
     @IBOutlet weak var sentenceLabel: FuriganaLabel!
 }
-

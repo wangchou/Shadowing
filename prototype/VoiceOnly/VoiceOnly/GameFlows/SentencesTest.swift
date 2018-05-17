@@ -9,8 +9,8 @@
 import Foundation
 import Promises
 
-fileprivate let pauseDuration = 0.2
-fileprivate let context = GameContext.shared
+private let pauseDuration = 0.2
+private let context = GameContext.shared
 
 // 用 iphone 線控耳機、並把耳機放到麥克風旁邊、耳機聲音開到最大
 // 測試 siri 能不能辨識他自己說的日文
@@ -23,18 +23,18 @@ class SentencesTestGame: Game {
     var saidString = ""
 
     var state: GameState = .stopped
-    
+
     func play() {
         startEngine(toSpeaker: false)
         context.life = 100
         context.bgm.node.volume = 0
         testNext()
     }
-    
+
     func testNext() {
         guard index < sentences.count else { return }
         targetString = sentences[index]
-        
+
         startTime = getNow()
         hattori(targetString).then({ ()-> Promise<String> in
             let duration = getNow() - self.startTime + pauseDuration
@@ -53,9 +53,8 @@ class SentencesTestGame: Game {
             print(error)
         })
     }
-    
+
     func stop() {
         stopEngine()
     }
 }
-    

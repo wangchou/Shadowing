@@ -21,15 +21,15 @@ class PauseOverlayViewController: UIViewController {
         resumeButton.layer.borderWidth = 1.5
         resumeButton.layer.cornerRadius = 15
     }
-    
+
     @IBAction func finishButtonClicked(_ sender: Any) {
         SimpleGame.shared.stop()
         launchStoryboard(self, "ContentViewController")
     }
-    
+
     @IBAction func resumeButtonClicked(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
         postEvent(.resume)
     }
-    
+
 }

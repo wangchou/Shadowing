@@ -17,7 +17,7 @@ func getStrokeText(_ string: String, _ color: UIColor) -> NSMutableAttributedStr
             .foregroundColor: color,
             .font: UIFont.boldSystemFont(ofSize: 32)
         ],
-        range: NSMakeRange(0, text.length)
+        range: NSRange(location: 0, length: text.length)
     )
     return text
 }
@@ -26,7 +26,7 @@ class ContentCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var progress: UILabel!
     @IBOutlet weak var rank: UILabel!
-    
+
     var strockedRankText: String? = "" {
         willSet(string) {
             if let string = string {
@@ -36,7 +36,7 @@ class ContentCell: UITableViewCell {
             }
         }
     }
-    
+
     var strockedProgressText: String? = "" {
         willSet(string) {
             if let string = string {
@@ -47,4 +47,3 @@ class ContentCell: UITableViewCell {
         }
     }
 }
-

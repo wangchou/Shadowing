@@ -19,16 +19,16 @@ func configureAudioSession(toSpeaker: Bool = false) {
         } else {
             try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.duckOthers, .allowBluetoothA2DP, .allowBluetooth, .allowAirPlay])
         }
-        
+
         // turn the measure mode will crash bluetooh, duckOthers and mixWithOthers
         //try session.setMode(AVAudioSessionModeMeasurement)
-        
+
         // per ioBufferDuration
         // default  23ms | 1024 frames | <1% CPU (iphone SE)
         // 0.001   0.7ms |   32 frames |  8% CPU
         try session.setPreferredIOBufferDuration(0.002)
         // print(session.ioBufferDuration)
-        
+
         session.requestRecordPermission({ (success) in
             if success { print("Record Permission Granted") } else {
                 print("Record Permission fail")
@@ -51,16 +51,16 @@ func getSentences(_ text: String) -> [String] {
         tagSchemes: NSLinguisticTagger.availableTagSchemes(forLanguage: "ja"),
         options: 0
     )
-    
+
     var sentences: [String] = []
     var curSentences = ""
-    
+
     tagger.string = text
-    let range = NSMakeRange(0, text.count)
-    
-    tagger.enumerateTags(in: range, scheme: .tokenType, options: []) { (tag, tokenRange, sentenceRange, stop) in
+    let range = NSRange(location: 0, length: text.count)
+
+    tagger.enumerateTags(in: range, scheme: .tokenType, options: []) { (tag, tokenRange, _, _) in
         let token = (text as NSString).substring(with: tokenRange)
-        if(tag?.rawValue == "Punctuation") {
+        if tag?.rawValue == "Punctuation" {
             curSentences += token
             sentences.append(curSentences)
             curSentences = ""
@@ -73,21 +73,21 @@ func getSentences(_ text: String) -> [String] {
 
 // MARK: - Edit Distance
 // EditDistance from https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#Swift
-fileprivate func min3(_ a: Int, _ b: Int, _ c: Int) -> Int {
+private func min3(_ a: Int, _ b: Int, _ c: Int) -> Int {
     return min( min(a, c), min(b, c))
 }
 
-fileprivate class Array2D {
-    var cols:Int, rows:Int
+private class Array2D {
+    var cols: Int, rows: Int
     var matrix: [Int]
-    
-    init(cols:Int, rows:Int) {
+
+    init(cols: Int, rows: Int) {
         self.cols = cols
         self.rows = rows
-        matrix = Array(repeating:0, count:cols*rows)
+        matrix = Array(repeating: 0, count: cols*rows)
     }
-    
-    subscript(col:Int, row:Int) -> Int {
+
+    subscript(col: Int, row: Int) -> Int {
         get {
             return matrix[cols * row + col]
         }
@@ -95,11 +95,11 @@ fileprivate class Array2D {
             matrix[cols*row+col] = newValue
         }
     }
-    
+
     func colCount() -> Int {
         return self.cols
     }
-    
+
     func rowCount() -> Int {
         return self.rows
     }
@@ -108,21 +108,21 @@ fileprivate class Array2D {
 func distanceBetween(_ aStr: String, _ bStr: String) -> Int {
     let a = Array(aStr.utf16)
     let b = Array(bStr.utf16)
-    
-    if(a.count == 0 || b.count == 0) {
+
+    if a.isEmpty || b.isEmpty {
         return a.count + b.count
     }
-    
+
     let dist = Array2D(cols: a.count + 1, rows: b.count + 1)
-    
+
     for i in 1...a.count {
         dist[i, 0] = i
     }
-    
+
     for j in 1...b.count {
         dist[0, j] = j
     }
-    
+
     for i in 1...a.count {
         for j in 1...b.count {
             if a[i-1] == b[j-1] {
@@ -136,7 +136,7 @@ func distanceBetween(_ aStr: String, _ bStr: String) -> Int {
             }
         }
     }
-    
+
     return dist[a.count, b.count]
 }
 
@@ -147,7 +147,7 @@ extension MutableCollection {
     mutating func shuffle() {
         let c = count
         guard c > 1 else { return }
-        
+
         for (firstUnshuffled, unshuffledCount) in zip(indices, stride(from: c, to: 1, by: -1)) {
             // Change `Int` in the next line to `IndexDistance` in < Swift 4.1
             let d: Int = numericCast(arc4random_uniform(numericCast(unshuffledCount)))
@@ -186,7 +186,7 @@ func colorText(_ text: String, _ color: UIColor = .lightText, terminator: String
         .foregroundColor: color,
         .font: UIFont.systemFont(ofSize: 24)
         ],
-        range: NSMakeRange(0, colorText.length)
+        range: NSRange(location: 0, length: colorText.length)
     )
     return colorText
 }
@@ -206,7 +206,7 @@ func dumpVoices() {
     for voice in AVSpeechSynthesisVoice.speechVoices() {
         //if ((availableVoice.language == AVSpeechSynthesisVoice.currentLanguageCode()) &&
         //    (availableVoice.quality == AVSpeechSynthesisVoiceQuality.enhanced)) {
-        if(voice.language == "ja-JP" || voice.language == "zh-TW") {
+        if voice.language == "ja-JP" || voice.language == "zh-TW" {
             print("\(voice.name) on \(voice.language) with Quality: \(voice.quality.rawValue) \(voice.identifier)")
         }
         //}
@@ -222,4 +222,3 @@ func setStartTime(_ tag: String = "") {
 func printDuration(_ tag: String = "") {
     print(tag, (NSDate().timeIntervalSince1970 - startTime)*1000, "ms")
 }
-

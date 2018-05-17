@@ -8,10 +8,10 @@
 
 import Foundation
 
-fileprivate let context = GameContext.shared
+private let context = GameContext.shared
 
-fileprivate let defaults = UserDefaults.standard
-fileprivate let gameHistoryKey = "game record array"
+private let defaults = UserDefaults.standard
+private let gameHistoryKey = "game record array"
 
 func saveGameHistory() {
     let gameHistoryData = NSKeyedArchiver.archivedData(withRootObject: Array(context.gameHistory.values))
@@ -20,7 +20,7 @@ func saveGameHistory() {
 
 func loadGameHistory() {
     guard let gameHistoryData = defaults.data(forKey: gameHistoryKey) else { return }
-    let gameHistoryArray = NSKeyedUnarchiver.unarchiveObject(with: gameHistoryData) as! [GameRecord]
+    guard let gameHistoryArray = NSKeyedUnarchiver.unarchiveObject(with: gameHistoryData) as? [GameRecord] else { return }
     for gameRecord in gameHistoryArray {
         context.gameHistory[gameRecord.dataSetKey] = gameRecord
     }
@@ -33,17 +33,17 @@ class GameRecord: NSObject, NSCoding {
     var greatCount = 0
     var goodCount = 0
     var sentencesScore: [String: Int] = [:]
-    
+
     var p: Float {
         let sum = perfectCount.f + greatCount.f + goodCount.f * 0.5
         return 100 * sum / sentencesCount.f
     }
-    
+
     var progress: String {
         let prefix = p < 10 ? "0" : ""
         return "\(prefix)\(p.i)%"
     }
-    
+
     var rank: String {
         if p == 100 && perfectCount.f * 1.2 >=  sentencesCount.f { return "SS" }
         if p == 100 { return "S" }
@@ -54,12 +54,12 @@ class GameRecord: NSObject, NSCoding {
         if p >= 40 { return "E" }
         return "F"
     }
-    
+
     init(_ dataSetKey: String, sentencesCount: Int) {
         self.dataSetKey = dataSetKey
         self.sentencesCount = sentencesCount
     }
-    
+
     required init(coder decoder: NSCoder) {
         self.dataSetKey = decoder.decodeObject(forKey: "dataSetKey") as! String
         self.sentencesCount = decoder.decodeInteger(forKey: "sentencesCount")
@@ -69,7 +69,7 @@ class GameRecord: NSObject, NSCoding {
         self.sentencesScore = decoder.decodeObject(forKey: "sentencesScore") as! [String: Int]
         super.init()
     }
-    
+
     func encode(with coder: NSCoder) {
         coder.encode(self.dataSetKey, forKey: "dataSetKey")
         coder.encodeCInt(Int32(self.sentencesCount), forKey: "sentencesCount")

@@ -12,22 +12,22 @@ import UIKit
 // Prototype 9: article reader
 class P09ViewController: UIViewController, GameEventDelegate {
     let game = VoiceOnlyGame.shared
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         startEventObserving(self)
         game.play()
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         stopEventObserving(self)
         game.stop()
     }
-    
+
     @objc func onEventHappened(_ notification: Notification) {
-        let event = notification.object as! Event
+        guard let event = notification.object as? Event else { return }
         print(game.state, event.type)
     }
-    
+
 }

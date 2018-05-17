@@ -9,7 +9,7 @@
 import Foundation
 import Promises
 
-fileprivate let context = GameContext.shared
+private let context = GameContext.shared
 
 func startEngine(toSpeaker: Bool = false) {
     let context = GameContext.shared
@@ -39,18 +39,18 @@ func restoreBGMVolume() {
 }
 
 func meijia(_ sentence: String) -> Promise<Void> {
-    return context.tts.say(sentence, MeiJia, rate: normalRate)
+    return context.tts.say(sentence, meijiaSan, rate: normalRate)
 }
 
 func oren(_ sentence: String, rate: Float? = nil) -> Promise<Void> {
     if let rate = rate {
-        return context.tts.say(sentence, Oren, rate: rate)
+        return context.tts.say(sentence, orenSan, rate: rate)
     }
-    return context.tts.say(sentence, Oren, rate: context.teachingRate)
+    return context.tts.say(sentence, orenSan, rate: context.teachingRate)
 }
 
 func hattori(_ sentence: String) -> Promise<Void> {
-    return context.tts.say(sentence, Hattori, rate: context.teachingRate)
+    return context.tts.say(sentence, hattoriSan, rate: context.teachingRate)
 }
 
 func listenJP(duration: Double) -> Promise<String> {

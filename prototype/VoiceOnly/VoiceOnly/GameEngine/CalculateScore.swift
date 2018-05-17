@@ -7,12 +7,12 @@ var kanaTokenInfosCacheDictionary: [String: [[String]]] = [:]
 func getKanaTokenInfos(_ kanjiString: String) -> Promise<[[String]]> {
     let promise = Promise<[[String]]>.pending()
     let parameters: Parameters = ["jpnStr": kanjiString]
-    
+
     if let tokenInfos = kanaTokenInfosCacheDictionary[kanjiString] {
         promise.fulfill(tokenInfos)
         return promise
     }
-    
+
     Alamofire.request(
         "http://54.250.149.163/nlp",
         method: .post,
@@ -20,11 +20,15 @@ func getKanaTokenInfos(_ kanjiString: String) -> Promise<[[String]]> {
         ).responseJSON { response in
             switch response.result {
             case .success:
-                let tokenInfos = response.result.value as! [[String]]
+                guard let tokenInfos = response.result.value as? [[String]] else {
+                    print("parse tokenInfo response error")
+                    promise.fulfill([[]])
+                    return
+                }
                 kanaTokenInfosCacheDictionary[kanjiString] = tokenInfos
                 promise.fulfill(tokenInfos)
-                
-            case .failure(_):
+
+            case .failure:
                 promise.fulfill([[]])
             }
     }
@@ -33,21 +37,19 @@ func getKanaTokenInfos(_ kanjiString: String) -> Promise<[[String]]> {
 
 func getKana(_ kanjiString: String) -> Promise<String> {
     let promise = Promise<String>.pending()
-    
+
     if kanjiString == "" {
         promise.fulfill("")
         return promise
     }
-    
+
     getKanaTokenInfos(kanjiString).then { tokenInfos in
         let kanaStr = tokenInfos.reduce("", { kanaStr, tokenInfo in
-            return tokenInfo[1] != "記号" ?
-                kanaStr + tokenInfo.last! :
-            kanaStr
+            return tokenInfo.count > 8 ? kanaStr + tokenInfo[8] : kanaStr
         })
         promise.fulfill(kanaStr)
     }
-    
+
     return promise
 }
 
@@ -56,23 +58,24 @@ func calculateScore(
     _ sentence2: String
 ) -> Promise<Int> {
     let promise = Promise<Int>.pending()
-    
+
     func calcScore(_ str1: String, _ str2: String) -> Int {
         let len = max(str1.count, str2.count)
         let score = (len - distanceBetween(str1, str2)) * 100 / len
         return score
     }
-    
+
     all([
         getKana(sentence1),
         getKana(sentence2)
     ]).then { result in
-        let score = calcScore(result.first!, result.last!)
+        guard let kana1 = result.first, let kana2 = result.last else { print("get both kana fail"); return }
+        let score = calcScore(kana1, kana2)
         postEvent(.scoreCalculated, int: score)
         promise.fulfill(score)
     }.catch { error in
         promise.reject(error)
     }
-    
+
     return promise
 }

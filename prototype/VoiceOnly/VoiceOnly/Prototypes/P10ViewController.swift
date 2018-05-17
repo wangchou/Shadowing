@@ -19,35 +19,35 @@ class P10ViewController: UIViewController, GameEventDelegate {
     let game = SimpleGame.shared
     var score: Int = 0
     var tmpText: NSMutableAttributedString = colorText("")
-    
+
     @IBOutlet weak var textView: UITextView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         textView.text = ""
         startEventObserving(self)
         game.play()
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         stopEventObserving(self)
         game.stop()
     }
-    
+
     @objc func onEventHappened(_ notification: Notification) {
-        let event = notification.object as! Event
-        
+        guard let event = notification.object as? Event else { return }
+
         switch event.type {
         case .sayStarted:
             guard let name = event.string else { return }
             switch name {
-            case Hattori:
+            case hattoriSan:
                 cprint("---")
             default:
                 return
             }
-            
+
         case .stringSaid:
             var color: UIColor = .lightText
             color = game.state == .speakingJapanese ? myBlue : color
@@ -55,44 +55,49 @@ class P10ViewController: UIViewController, GameEventDelegate {
                let str = event.string {
                 cprint(str, color, terminator: "")
             }
-        
+
         case .sayEnded:
             cprint("")
-        
+
         case .listenStarted:
-            tmpText = textView.attributedText.mutableCopy() as! NSMutableAttributedString
-        
+            if let text = textView.attributedText.mutableCopy() as? NSMutableAttributedString {
+                tmpText = text
+            }
+
         case .stringRecognized, .listenEnded:
-            let curText = tmpText.mutableCopy() as! NSMutableAttributedString
+            guard let curText = tmpText.mutableCopy() as? NSMutableAttributedString else { return }
             guard var saidString = event.string else { return }
-            if(event.type == .listenEnded && saidString == "") {
+            if event.type == .listenEnded && saidString == "" {
                saidString = "聽不清楚"
             }
             curText.append(colorText(saidString, terminator: " "))
             textView.attributedText = curText
-        
+
         case .scoreCalculated:
             if let score = event.int {
                 self.score = score
                 let color = score >= 60 ? myGreen : myRed
                 cprint(" \(score)分", color, terminator: "")
             }
-            
+
         default:
             return
         }
     }
-    
+
     func scrollTextIntoView() {
-        let range = NSMakeRange(textView.text.count - 1, 0)
+        let range = NSRange(location: textView.text.count - 1, length: 0)
         textView.scrollRangeToVisible(range)
     }
-    
+
     // color print to self.textView
     func cprint(_ text: String, _ color: UIColor = .lightText, terminator: String = "\n") {
-        let newText = textView.attributedText.mutableCopy() as! NSMutableAttributedString
-        newText.append(colorText(text, color, terminator: terminator))
-        textView.attributedText = newText
-        scrollTextIntoView()
+        if let newText = textView.attributedText.mutableCopy() as? NSMutableAttributedString {
+            newText.append(colorText(text, color, terminator: terminator))
+            textView.attributedText = newText
+            scrollTextIntoView()
+        } else {
+            print("unwrap gg 999")
+        }
     }
 }

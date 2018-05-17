@@ -1,6 +1,6 @@
 import Foundation
 
-func download(_ something: String, _ seconds: UInt32 = 1, completionHandler: @escaping ()->Void = {}) {
+func download(_ something: String, _ seconds: UInt32 = 1, completionHandler: @escaping () -> Void = {}) {
   print("Downloading \(something)")
   DispatchQueue.global().async {
     sleep(seconds)
@@ -56,7 +56,6 @@ func downloadCD() {
     dispatch(DownloadCommand(text: "D"))
   }
 }
-
 
 func runCommands() {
   cmdQueue.async {

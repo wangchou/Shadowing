@@ -18,7 +18,7 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
     var synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
     var promise = Promise<Void>.pending()
     var name: String = ""
-    
+
     func say(
         _ text: String,
         _ name: String,
@@ -34,13 +34,13 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         self.name = name
         return promise
     }
-    
+
     func stop() {
         synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
         postEvent(.sayEnded, string: "")
         promise.reject(TTSError.stop)
     }
-    
+
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
                            willSpeakRangeOfSpeechString characterRange: NSRange,
                            utterance: AVSpeechUtterance) {
@@ -48,7 +48,7 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         let token = speechString.substring(with: characterRange)
         postEvent(.stringSaid, string: token)
     }
-    
+
     func speechSynthesizer(
         _ synthesizer: AVSpeechSynthesizer,
         didFinish utterance: AVSpeechUtterance
