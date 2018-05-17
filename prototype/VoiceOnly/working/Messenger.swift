@@ -14,7 +14,7 @@ private let context = GameContext.shared
 // Prototype 8: messenger / line interface
 class Messenger: UIViewController {
     let game = SimpleGame.shared
-    var lastLabel: UITextView = UITextView()
+    var lastLabel: FuriganaLabel = FuriganaLabel()
 
     private var y: Int = 8
     private var previousY: Int = 0
@@ -25,23 +25,32 @@ class Messenger: UIViewController {
     @IBOutlet weak var speedLabel: UILabel!
 
     func addLabel(_ text: String, isLeft: Bool = true) {
-        let myLabel = UITextView()
-        myLabel.isEditable = false
+        let myLabel = FuriganaLabel()
         updateLabel(myLabel, text: text, isLeft: isLeft)
         scrollView.addSubview(myLabel)
         lastLabel = myLabel
     }
 
-    func updateLabel(_ myLabel: UITextView, text: String, isLeft: Bool = true) {
+    func updateLabel(_ myLabel: FuriganaLabel, text: String, isLeft: Bool = true) {
         let maxLabelWidth: Int = Int(screenSize.width*2/3)
         let spacing: Int = 8
+        var height: Int = 30
+        var width: Int = maxLabelWidth
+        if let tokenInfos = kanaTokenInfosCacheDictionary[text] {
+            myLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
+        } else {
+            myLabel.text = text
+        }
 
-        myLabel.text = text
-        myLabel.textContainerInset = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+        // initial
+        if let attributed = myLabel.attributedText {
+            // sizeToFit is not working here... T.T
+            height = Int(myLabel.heightOfCoreText(attributed: attributed, width: CGFloat(width)))
+            width = Int(myLabel.widthOfCoreText(attributed: attributed, maxWidth: CGFloat(maxLabelWidth)))
+        }
+        myLabel.frame = CGRect(x: 5, y: y, width: width, height: height)
+
         myLabel.layer.borderWidth = 1.5
-        myLabel.font = UIFont.systemFont(ofSize: 20)
-        myLabel.frame = CGRect(x: 5, y: y, width: maxLabelWidth, height: 30)
-        myLabel.sizeToFit()
         myLabel.clipsToBounds = true
         myLabel.layer.cornerRadius = 15.0
 

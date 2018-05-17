@@ -146,8 +146,8 @@
 			isa = PBXGroup;
 			children = (
 				BEBDEDC3208EF09F00C18520 /* Main.storyboard */,
-				BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */,
-				BEDBCCD720A82AC4001CF11D /* GameDetailTableCell.swift */,
+				BE1CA957209DC43800086853 /* Messenger.swift */,
+				BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */,
 			);
 			path = working;
 			sourceTree = "<group>";
@@ -250,10 +250,10 @@
 				BEDEDD3620A46D1B00E7B60B /* ContentViewController.swift */,
 				BE7725CD20A4216700DF186A /* ContentCell.swift */,
 				BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */,
-				BE1CA957209DC43800086853 /* Messenger.swift */,
-				BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */,
 				BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */,
 				BE9B476920AD50520063E0DA /* FuriganaUtils.swift */,
+				BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */,
+				BEDBCCD720A82AC4001CF11D /* GameDetailTableCell.swift */,
 			);
 			path = GameUI;
 			sourceTree = "<group>";
