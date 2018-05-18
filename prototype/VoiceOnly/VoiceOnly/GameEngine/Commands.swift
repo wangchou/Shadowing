@@ -12,9 +12,11 @@ import Promises
 private let context = GameContext.shared
 
 func startEngine(toSpeaker: Bool = false) {
-    let context = GameContext.shared
+    context.isEngineRunning = true
+
+    guard !isSimulator else { return }
+
     do {
-        context.isEngineRunning = true
         configureAudioSession(toSpeaker: toSpeaker)
         try context.engine.start()
         context.bgm.play()
@@ -25,10 +27,14 @@ func startEngine(toSpeaker: Bool = false) {
 
 func stopEngine() {
     context.isEngineRunning = false
+    context.tts.stop()
+
+    guard !isSimulator else { return }
+
     context.speechRecognizer.stop()
     context.bgm.stop()
     context.engine.stop()
-    context.tts.stop()
+
 }
 
 func reduceBGMVolume() {

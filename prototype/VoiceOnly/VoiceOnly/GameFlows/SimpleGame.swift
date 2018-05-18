@@ -69,7 +69,6 @@ class SimpleGame: Game {
         .catch { error in print("Promise chain 死了。", error)}
         .always {
             self.state = .sentenceSessionEnded
-            print(context.sentenceIndex, context.sentences.count)
             if context.nextSentence() && context.isEngineRunning {
                 self.learnNext()
             } else {

@@ -18,7 +18,8 @@ extension Messenger: GameEventDelegate {
         switch event.type {
         case .sayStarted:
             guard let name = event.string else { return }
-            if name == meijiaSan || name == hattoriSan {
+            if name == meijiaSan ||
+               name == hattoriSan && game.state == .speakingJapanese {
                 addLabel("")
             }
 

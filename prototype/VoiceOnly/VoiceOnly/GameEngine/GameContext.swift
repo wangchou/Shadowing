@@ -40,6 +40,7 @@ class GameContext {
 
     // MARK: - Lifecycle
     private init() {
+        guard !isSimulator else { return }
         configureAudioSession()
         buildNodeGraph()
         engine.prepare()

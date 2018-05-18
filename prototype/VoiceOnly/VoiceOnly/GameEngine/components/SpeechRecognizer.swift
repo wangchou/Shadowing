@@ -18,7 +18,7 @@ enum SpeechRecognitionError: Error {
 }
 
 class SpeechRecognizer: NSObject {
-    private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ja-JP"))!
+    private var speechRecognizer: SFSpeechRecognizer?
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private var isRunning: Bool = false
@@ -52,11 +52,24 @@ class SpeechRecognizer: NSObject {
     override init() {
         super.init()
         authorize()
+        if self.isAuthorized, !isSimulator {
+            speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ja-JP"))!
+        }
+
     }
 
     // MARK: - Public Methods
     func start(stopAfterSeconds: Double = 5) -> Promise<String> {
         promise = Promise<String>.pending()
+        guard !isSimulator else {
+            self.isRunning = true
+            postEvent(.listenStarted, string: "")
+            Timer.scheduledTimer(withTimeInterval: stopAfterSeconds, repeats: false) {_ in
+                postEvent(.listenEnded, string: context.targetString)
+                self.promise.fulfill(context.targetString)
+            }
+            return promise
+        }
 
         if !isAuthorized {
             promise.reject(SpeechRecognitionError.unauthorized)
@@ -76,7 +89,7 @@ class SpeechRecognizer: NSObject {
         recognitionRequest.shouldReportPartialResults = true //false
         recognitionRequest.taskHint = .dictation
 
-        recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest, resultHandler: resultHandler)
+        recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest, resultHandler: resultHandler)
 
         self.inputNode = context.engine.inputNode
         let recordingFormat = inputNode.outputFormat(forBus: 0)
@@ -96,6 +109,14 @@ class SpeechRecognizer: NSObject {
 
     func endAudio() {
         if self.isRunning {
+            guard !isSimulator else {
+                context.userSaidString = context.targetString
+                postEvent(.listenEnded, string: context.userSaidString)
+                promise.fulfill(context.userSaidString)
+                isRunning = false
+                return
+            }
+
             inputNode.removeTap(onBus: 0)
             recognitionRequest?.endAudio()
 
@@ -107,6 +128,11 @@ class SpeechRecognizer: NSObject {
 
     func stop() {
         if self.isRunning {
+            guard !isSimulator else {
+                postEvent(.listenEnded, string: "")
+                isRunning = false
+                return
+            }
             inputNode.removeTap(onBus: 0)
             recognitionRequest?.endAudio()
             recognitionTask?.cancel()
