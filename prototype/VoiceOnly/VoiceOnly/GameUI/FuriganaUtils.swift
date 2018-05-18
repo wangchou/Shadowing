@@ -18,18 +18,22 @@ enum JpnType {
     case mixed
 }
 
-func rubyAttrStr(_ string: String, _ ruby: String = "") -> NSAttributedString {
+func rubyAttrStr(_ string: String, _ ruby: String = "", fontSize: CGFloat = 20) -> NSAttributedString {
     let annotation = CTRubyAnnotationCreateWithAttributes(
         .auto, .auto, .before, ruby as CFString,
         [:] as CFDictionary)
     //[kCTForegroundColorAttributeName: UIColor.blue.cgColor] as CFDictionary)
-    //[kCTFontAttributeName: UIFont.boldSystemFont(ofSize: 9)] as CFDictionary)
+
+    var font = UIFont.systemFont(ofSize: fontSize)
+    if let hiraginoSan = UIFont(name: "HiraginoSans-W3", size: fontSize) {
+        font = hiraginoSan
+    }
 
     return NSAttributedString(
         string: string,
         attributes: [
             // need to use same font in CTRun or 7時 furigana will not aligned
-            .font: UIFont(name: "HiraginoSans-W3", size: 20.0)!,
+            .font: font,
 //            .font: UIFont(name: ".HiraKakuInterface-W6", size: 18.0)!,
 //            .foregroundColor: UIColor.white,
 //            .strokeColor: UIColor.black,
@@ -171,7 +175,11 @@ extension String {
             let scalars = ch.unicodeScalars
             let chValue = scalars[scalars.startIndex].value
             if chValue >= 0x30A0 && chValue <= 0x30FF {
-                hiragana.append(Character(UnicodeScalar( chValue - 0x60)!))
+                if let newScalar = UnicodeScalar( chValue - 0x60) {
+                    hiragana.append(Character(newScalar))
+                } else {
+                    print("kataganaToHiragana fail")
+                }
             } else {
                 hiragana.append(ch)
             }

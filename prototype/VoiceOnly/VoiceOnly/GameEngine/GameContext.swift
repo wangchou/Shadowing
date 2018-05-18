@@ -35,7 +35,7 @@ class GameContext {
     var teachingRate: Float {
         return AVSpeechUtteranceDefaultSpeechRate * (0.5 + life.f * 0.005)
     }
-    var dataSetKey: String = allSentences.keys.first!
+    var dataSetKey: String = ""
     var gameRecord: GameRecord?
 
     // MARK: - Lifecycle

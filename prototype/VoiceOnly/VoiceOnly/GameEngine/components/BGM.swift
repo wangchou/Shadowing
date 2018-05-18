@@ -17,7 +17,9 @@ class BGM {
 
     init() {
         do {
-            let path = Bundle.main.path(forResource: "drumLoop", ofType: "caf")!
+            guard let path = Bundle.main.path(forResource: "drumLoop", ofType: "caf") else {
+                print("bgm file not found"); return
+            }
             let url = URL(fileURLWithPath: path)
             file = try AVAudioFile(forReading: url)
             buffer = AVAudioPCMBuffer(pcmFormat: file.processingFormat, frameCapacity: UInt32(file.length))

@@ -61,12 +61,19 @@ class GameRecord: NSObject, NSCoding {
     }
 
     required init(coder decoder: NSCoder) {
-        self.dataSetKey = decoder.decodeObject(forKey: "dataSetKey") as! String
+        if let dataSetKey = decoder.decodeObject(forKey: "dataSetKey") as? String,
+           let sentencesScore = decoder.decodeObject(forKey: "sentencesScore") as? [String: Int] {
+            self.dataSetKey = dataSetKey
+            self.sentencesScore = sentencesScore
+        } else {
+            self.dataSetKey = ""
+            self.sentencesScore = [:]
+            print("get dataSetKey or sentenceCount from localStorage failed")
+        }
         self.sentencesCount = decoder.decodeInteger(forKey: "sentencesCount")
         self.perfectCount = decoder.decodeInteger(forKey: "perfectCount")
         self.greatCount = decoder.decodeInteger(forKey: "greatCount")
         self.goodCount = decoder.decodeInteger(forKey: "goodCount")
-        self.sentencesScore = decoder.decodeObject(forKey: "sentencesScore") as! [String: Int]
         super.init()
     }
 

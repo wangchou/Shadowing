@@ -6,7 +6,7 @@ import Promises
 
 private let dataSet = n4
 
-class PlaygroundView: UIViewController {
+class FuriganaInTableview: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         all(dataSet.map {$0.furiganaAttributedString}).then {_ in
@@ -15,7 +15,7 @@ class PlaygroundView: UIViewController {
     }
 }
 
-extension PlaygroundView: UITableViewDataSource {
+extension FuriganaInTableview: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -25,16 +25,18 @@ extension PlaygroundView: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "N3SentencesCell", for: indexPath) as! N3SentenceCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "N3SentencesCell", for: indexPath)
+
+        guard let sentenceCell = cell as? N3SentenceCell else { return cell }
         let str = dataSet[indexPath.row]
 
         if let tokenInfos = kanaTokenInfosCacheDictionary[str] {
-            cell.sentenceLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
+            sentenceCell.sentenceLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
         } else {
-            cell.sentenceLabel.text = str
+            sentenceCell.sentenceLabel.text = str
         }
 
-        return cell
+        return sentenceCell
     }
 }
 

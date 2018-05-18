@@ -44,15 +44,16 @@ extension ContentViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SentencesCell", for: indexPath) as! ContentCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SentencesCell", for: indexPath)
+        guard let contentCell = cell as? ContentCell else { print("convert content cell error"); return cell }
 
         let dataSetKey = allSentencesKeys[indexPath.row]
 
-        cell.title.text = dataSetKey
-        cell.strockedProgressText = context.gameHistory[dataSetKey]?.progress
-        cell.strockedRankText = context.gameHistory[dataSetKey]?.rank
+        contentCell.title.text = dataSetKey
+        contentCell.strockedProgressText = context.gameHistory[dataSetKey]?.progress
+        contentCell.strockedRankText = context.gameHistory[dataSetKey]?.rank
 
-        return cell
+        return contentCell
     }
 }
 

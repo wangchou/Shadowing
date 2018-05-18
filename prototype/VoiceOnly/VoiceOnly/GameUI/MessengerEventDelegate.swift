@@ -26,7 +26,8 @@ extension Messenger: GameEventDelegate {
         case .stringSaid:
             guard let saidWord = event.string else { return }
             if game.state == .speakingJapanese || game.state == .stopped {
-                updateLastLabelText(lastLabel.text! + saidWord)
+                guard let lastText = lastLabel.text else { print("error lastLabel nil"); return }
+                updateLastLabelText(lastText + saidWord)
             }
 
         case .listenStarted:
@@ -69,7 +70,8 @@ extension Messenger: GameEventDelegate {
     }
 
     private func onScore(_ score: Int) {
-        var newText = "\(lastLabel.text!) \(score/10)分"
+        guard let lastText = lastLabel.text else { print("error onScore"); return }
+        var newText = "\(lastText) \(score/10)分"
         newText = score == 100 ? "\(newText) ⭐️" : newText
         updateLastLabelText(newText, isLeft: false)
 

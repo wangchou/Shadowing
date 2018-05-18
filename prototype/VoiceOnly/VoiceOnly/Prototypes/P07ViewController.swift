@@ -52,6 +52,7 @@ extension P07ViewController: GameEventDelegate {
         case (.stringRecognized, .scoreCalculated):
             if let score = event.int {
                 self.updateUIByScore(score)
+                sumScore += score
             }
 
         case (.sentenceSessionEnded, .gameStateChanged):
@@ -72,6 +73,9 @@ class P07ViewController: UIViewController {
 
     let game = SimpleGame.shared
     var isGameFinished = false
+
+    var sumScore = 0
+    var comboCount = 0
 
     @IBOutlet weak var comboLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -106,6 +110,8 @@ class P07ViewController: UIViewController {
         saidTextView.layer.borderWidth = 2
 
         scoreDescLabel.text = ""
+        sumScore = 0
+        comboCount = 0
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -145,17 +151,18 @@ class P07ViewController: UIViewController {
     }
 
     func updateScoreLabel(_ score: Int) {
-        scoreLabel.text = String((Int(scoreLabel.text!)! + score))
+        scoreLabel.text = String(sumScore)
     }
 
     func updateComboLabel(_ score: Int) {
         let scoreDesc = getScoreDesc(score)
         switch scoreDesc {
         case .perfect, .great:
-            comboLabel.text = String(Int(comboLabel.text!)! + 1)
+            comboCount += 1
         case .good, .poor:
-            comboLabel.text = "0"
+            comboCount = 0
         }
+        comboLabel.text = String(comboCount)
     }
 
     func afterGameFinished() {
@@ -167,7 +174,7 @@ class P07ViewController: UIViewController {
             saidTextView.text = ""
             targetTextView.text = ""
             scoreDescLabel.text = ""
-            downloadImage(url: URL(string: rihoUrl)!)
+            //downloadImage(url: URL(string: rihoUrl)!)
             meijia("恭喜你全破了。有人想和你說...").then {
                 oren("きみのこと、大好きだよ")
             }.always {

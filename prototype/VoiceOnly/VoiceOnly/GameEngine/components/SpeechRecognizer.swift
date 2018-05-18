@@ -53,7 +53,7 @@ class SpeechRecognizer: NSObject {
         super.init()
         authorize()
         if self.isAuthorized, !isSimulator {
-            speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ja-JP"))!
+            speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ja-JP"))
         }
 
     }

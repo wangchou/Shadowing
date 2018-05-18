@@ -399,10 +399,10 @@
             </objects>
             <point key="canvasLocation" x="967.5" y="-525"/>
         </scene>
-        <!--Playground View-->
+        <!--Furigana In Tableview-->
         <scene sceneID="omU-ja-rSa">
             <objects>
-                <viewController id="pQB-0Q-SxE" customClass="PlaygroundView" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="pQB-0Q-SxE" customClass="FuriganaInTableview" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g5v-oD-euY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
