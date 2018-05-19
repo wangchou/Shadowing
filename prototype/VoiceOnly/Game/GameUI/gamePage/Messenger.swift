@@ -38,7 +38,7 @@ class Messenger: UIViewController {
     @IBOutlet weak var sentenceCountLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var speedLabel: UILabel!
-    let spacing = 8
+    let spacing = 15
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
