@@ -14,7 +14,7 @@ private let context = GameContext.shared
 extension Messenger: GameEventDelegate {
     @objc func onEventHappened(_ notification: Notification) {
         guard let event = notification.object as? Event else { print("convert event fail"); return }
-
+        print(event.type)
         switch event.type {
         case .sayStarted:
             guard let name = event.string else { return }
@@ -54,6 +54,7 @@ extension Messenger: GameEventDelegate {
             timeLabel.text = "\(add0((seconds/60).s)):\(add0((seconds%60).s))"
 
         case .gameStateChanged:
+            print("\t\(game.state)")
             if game.state == .gameOver {
                 stopEventObserving(self)
                 addLabel("遊戲結束。")

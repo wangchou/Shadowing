@@ -11,7 +11,7 @@ import AVFoundation
 import Promises
 
 enum TTSError: Error {
-    case stop
+    case TTSStop
 }
 
 class TTS: NSObject, AVSpeechSynthesizerDelegate {
@@ -24,6 +24,7 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         _ name: String,
         rate: Float = AVSpeechUtteranceDefaultSpeechRate // 0.5, range 0 ~ 1.0
         ) -> Promise<Void> {
+        print(text, name)
         synthesizer.delegate = self
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(identifier: name)
@@ -38,7 +39,7 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
     func stop() {
         synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
         postEvent(.sayEnded, string: "")
-        promise.reject(TTSError.stop)
+        promise.reject(TTSError.TTSStop)
     }
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,

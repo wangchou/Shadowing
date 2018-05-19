@@ -63,6 +63,7 @@ func calculateScore(
 
     func calcScore(_ str1: String, _ str2: String) -> Int {
         let len = max(str1.count, str2.count)
+        guard len > 0 else { print("zero len error on calcScore"); return 0 }
         let score = (len - distanceBetween(str1, str2)) * 100 / len
         return score
     }

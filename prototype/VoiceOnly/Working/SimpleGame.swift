@@ -27,6 +27,7 @@ class SimpleGame: Game {
     }
 
     func play() {
+        self.state = .stopped
         startEngine(toSpeaker: true)
         gameSeconds = 0
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
@@ -69,7 +70,7 @@ class SimpleGame: Game {
         .catch { error in print("Promise chain 死了。", error)}
         .always {
             self.state = .sentenceSessionEnded
-            if context.nextSentence() && context.isEngineRunning && context.sentenceIndex < 1 {
+            if context.nextSentence() && context.isEngineRunning {
                 self.learnNext()
             } else {
                 self.gameOver()
@@ -149,8 +150,10 @@ class SimpleGame: Game {
     private func gameOver() {
         guard let record = context.gameRecord else { return }
         self.state = .gameOver
-        stop()
-        meijia("遊戲結束")
+
+        meijia("遊戲結束").then {
+            self.stop()
+        }
 
         if let previousRecord = context.gameHistory[record.dataSetKey],
             record.p <= previousRecord.p &&

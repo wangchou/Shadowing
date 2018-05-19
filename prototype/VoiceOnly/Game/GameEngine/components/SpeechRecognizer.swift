@@ -51,11 +51,10 @@ class SpeechRecognizer: NSObject {
 
     override init() {
         super.init()
-        authorize()
-        if self.isAuthorized, !isSimulator {
+        if !isSimulator {
             speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ja-JP"))
         }
-
+        authorize()
     }
 
     // MARK: - Public Methods
@@ -116,7 +115,7 @@ class SpeechRecognizer: NSObject {
                 isRunning = false
                 return
             }
-
+            print("############### endAudio")
             inputNode.removeTap(onBus: 0)
             recognitionRequest?.endAudio()
 
@@ -145,6 +144,7 @@ class SpeechRecognizer: NSObject {
     }
 
     func resultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
+        print("resultHandler:", result, error)
         if !context.isEngineRunning {
             promise.reject(SpeechRecognitionError.engineStopped)
             return
