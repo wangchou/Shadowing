@@ -36,9 +36,9 @@ class SimpleGame: Game {
             self.gameSeconds += 1
         }
         context.loadLearningSentences()
-        meijia("每次日文說完後，請跟著說～").always {
+        //meijia("每次日文說完後，請跟著說～").always {
             self.learnNext()
-        }
+        //}
         isPaused = false
         wait.fulfill(())
     }
@@ -69,24 +69,10 @@ class SimpleGame: Game {
         .catch { error in print("Promise chain 死了。", error)}
         .always {
             self.state = .sentenceSessionEnded
-            if context.nextSentence() && context.isEngineRunning {
+            if context.nextSentence() && context.isEngineRunning && context.sentenceIndex < 1 {
                 self.learnNext()
             } else {
-                guard let record = context.gameRecord else { return }
-                self.state = .gameOver
-
-                meijia("遊戲結束").then {_ in
-                    self.state = .mainScreen
-                }
-
-                if let previousRecord = context.gameHistory[record.dataSetKey],
-                    record.p <= previousRecord.p &&
-                    record.rank != "SS" {
-                    return
-                }
-
-                context.gameHistory[record.dataSetKey] = record
-                saveGameHistory()
+                self.gameOver()
             }
         }
     }
@@ -158,5 +144,22 @@ class SimpleGame: Game {
         }
 
         return oren(text, rate: normalRate)
+    }
+
+    private func gameOver() {
+        guard let record = context.gameRecord else { return }
+        self.state = .gameOver
+        stop()
+        meijia("遊戲結束")
+
+        if let previousRecord = context.gameHistory[record.dataSetKey],
+            record.p <= previousRecord.p &&
+                record.rank != "SS" {
+            return
+        }
+
+        context.gameHistory[record.dataSetKey] = record
+        saveGameHistory()
+
     }
 }

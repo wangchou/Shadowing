@@ -23,6 +23,7 @@ class Messenger: UIViewController {
     @IBOutlet weak var sentenceCountLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var speedLabel: UILabel!
+    let spacing = 8
 
     func addLabel(_ text: String, isLeft: Bool = true) {
         let myLabel = FuriganaLabel()
@@ -33,9 +34,9 @@ class Messenger: UIViewController {
 
     func updateLabel(_ myLabel: FuriganaLabel, text: String, isLeft: Bool = true) {
         let maxLabelWidth: Int = Int(screenSize.width*2/3)
-        let spacing: Int = 8
-        var height: Int = 30
-        var width: Int = 10
+
+        var height = 30
+        var width = 10
         if let tokenInfos = kanaTokenInfosCacheDictionary[text] {
             myLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
         } else {
@@ -71,11 +72,7 @@ class Messenger: UIViewController {
         previousY = y
         y += Int(myLabel.frame.height) + spacing
 
-        scrollView.contentSize = CGSize(
-            width: scrollView.frame.size.width,
-            height: max(scrollView.frame.size.height, CGFloat(y))
-        )
-        scrollView.scrollRectToVisible(CGRect(x: 5, y: y-1, width: 1, height: 1), animated: true)
+        scrollViewY(y)
     }
 
     func updateLastLabelText(_ text: String, isLeft: Bool = true) {
@@ -87,6 +84,47 @@ class Messenger: UIViewController {
         print("scrollViewTapped")
         game.pause()
         launchStoryboard(self, "PauseOverlay", isOverCurrent: true)
+    }
+
+    @objc func finishGame() {
+        launchStoryboard(self, "ContentViewController")
+    }
+
+    @objc func restartGame() {
+        launchStoryboard(self, "MessengerGame")
+    }
+
+    func scrollViewY(_ y: Int) {
+        scrollView.contentSize = CGSize(
+            width: scrollView.frame.size.width,
+            height: max(scrollView.frame.size.height, CGFloat(y))
+        )
+        scrollView.scrollRectToVisible(CGRect(x: 5, y: y-1, width: 1, height: 1), animated: true)
+    }
+
+    func addGameReport() {
+        let report = UIView()
+        report.backgroundColor = .yellow
+        report.frame = CGRect(x: 5, y: y, width: Int(screenSize.width - 10), height: 200)
+        y += Int(report.frame.height) + spacing
+
+        scrollViewY(y)
+        scrollView.addSubview(report)
+    }
+
+    func addButton(_ text: String, _ selector: Selector) {
+        let button = UIButton()
+
+        button.setTitle(text, for: .normal)
+        button.titleEdgeInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+        button.backgroundColor = .red
+        button.frame = CGRect(x: 5, y: y, width: Int(screenSize.width - 10), height: 50)
+        button.addTarget(self, action: selector, for: .touchUpInside)
+
+        y += Int(button.frame.height) + spacing
+        scrollViewY(y)
+
+        scrollView.addSubview(button)
     }
 
     override func viewDidLoad() {

@@ -18,7 +18,7 @@ extension Messenger: GameEventDelegate {
         switch event.type {
         case .sayStarted:
             guard let name = event.string else { return }
-            if name == meijiaSan ||
+            if name == meijiaSan && game.state == .stopped ||
                name == hattoriSan && game.state == .speakingJapanese {
                 addLabel("")
             }
@@ -55,12 +55,13 @@ extension Messenger: GameEventDelegate {
 
         case .gameStateChanged:
             if game.state == .gameOver {
+                stopEventObserving(self)
                 addLabel("遊戲結束。")
+                addGameReport()
+                addButton("再試一次", #selector(restartGame))
+                addButton("結束", #selector(finishGame))
             }
 
-            if game.state == .mainScreen {
-                launchStoryboard(self, "ContentViewController")
-            }
         case .resume:
             game.resume()
 
