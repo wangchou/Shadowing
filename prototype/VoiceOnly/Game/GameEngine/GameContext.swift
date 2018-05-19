@@ -69,7 +69,7 @@ class GameContext {
         // sentences = Array(sentences[0...1])
         targetString = sentences[0]
         userSaidString = ""
-        life = 40
+        life = isSimulator ? 100 : 40
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count)
     }
 

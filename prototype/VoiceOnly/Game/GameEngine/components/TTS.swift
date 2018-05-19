@@ -24,12 +24,11 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         _ name: String,
         rate: Float = AVSpeechUtteranceDefaultSpeechRate // 0.5, range 0 ~ 1.0
         ) -> Promise<Void> {
-        print(text, name)
         synthesizer.delegate = self
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(identifier: name)
         utterance.rate = rate
-        postEvent(.sayStarted, string: name)
+        postEvent(.sayStarted, string: text)
         synthesizer.speak(utterance)
         promise = Promise<Void>.pending()
         self.name = name

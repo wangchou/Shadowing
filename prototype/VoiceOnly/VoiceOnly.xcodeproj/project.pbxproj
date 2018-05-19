@@ -142,9 +142,6 @@
 		BE40C61220ABF7E7004E420F /* Working */ = {
 			isa = PBXGroup;
 			children = (
-				BE6ED56720A17BB000553D1A /* SimpleGame.swift */,
-				BE1CA957209DC43800086853 /* Messenger.swift */,
-				BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */,
 			);
 			path = Working;
 			sourceTree = "<group>";
@@ -156,6 +153,7 @@
 				BE65A938209C6E67006645CA /* GameEventDelegate.swift */,
 				BE8C8F01209C476A00E32F09 /* VoiceOnlyGame.swift */,
 				BE05073620A68515008A29EB /* SentencesTest.swift */,
+				BE6ED56720A17BB000553D1A /* SimpleGame.swift */,
 			);
 			path = GameFlows;
 			sourceTree = "<group>";
@@ -175,8 +173,8 @@
 		BE9B476B20AD5C6E0063E0DA /* Demo */ = {
 			isa = PBXGroup;
 			children = (
-				BEBDEDF7208F28E100C18520 /* Prototypes */,
 				BEE962E220AAC21D005AF008 /* FuriganaInTableview.swift */,
+				BEBDEDF7208F28E100C18520 /* Prototypes */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -269,6 +267,8 @@
 		BEFA979D20AEAECC00DE3280 /* gamePage */ = {
 			isa = PBXGroup;
 			children = (
+				BE1CA957209DC43800086853 /* Messenger.swift */,
+				BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */,
 				BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */,
 			);
 			path = gamePage;

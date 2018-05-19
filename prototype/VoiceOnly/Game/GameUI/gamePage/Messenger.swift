@@ -67,30 +67,23 @@ class Messenger: UIViewController {
         game.stop()
     }
 
-    func addLabel(_ text: String, isLeft: Bool = true) {
+    func addLabel(_ text: NSAttributedString, isLeft: Bool = true) {
         let myLabel = FuriganaLabel()
         updateLabel(myLabel, text: text, isLeft: isLeft)
         scrollView.addSubview(myLabel)
         lastLabel = myLabel
     }
 
-    func updateLabel(_ myLabel: FuriganaLabel, text: String, isLeft: Bool = true) {
-        let maxLabelWidth: Int = Int(screen.width*2/3)
+    func updateLabel(_ myLabel: FuriganaLabel, text: NSAttributedString, isLeft: Bool = true) {
+        let maxLabelWidth: Int = Int(screen.width*3/4)
 
         var height = 30
         var width = 10
-        if let tokenInfos = kanaTokenInfosCacheDictionary[text] {
-            myLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
-        } else {
-            myLabel.text = text
-        }
-
-        // initial
-        guard let attributed = myLabel.attributedText else { print("orz..."); return }
+        myLabel.attributedText = text
 
         // sizeToFit is not working here... T.T
-        height = Int(myLabel.heightOfCoreText(attributed: attributed, width: CGFloat(maxLabelWidth)))
-        width = Int(myLabel.widthOfCoreText(attributed: attributed, maxWidth: CGFloat(maxLabelWidth)))
+        height = Int(myLabel.heightOfCoreText(attributed: text, width: CGFloat(maxLabelWidth)))
+        width = Int(myLabel.widthOfCoreText(attributed: text, maxWidth: CGFloat(maxLabelWidth)))
 
         myLabel.frame = CGRect(x: 5, y: y, width: width, height: height)
 
@@ -100,9 +93,9 @@ class Messenger: UIViewController {
             myLabel.backgroundColor = myWhite
         } else {
             myLabel.frame.origin.x = CGFloat(Int(screen.width) - spacing - Int(myLabel.frame.width))
-            if text == "..." {
+            if text.string == "..." {
                 myLabel.backgroundColor = .gray
-            } else if text == "聽不清楚" {
+            } else if text.string == "聽不清楚" {
                 myLabel.backgroundColor = myRed
             } else {
                 myLabel.backgroundColor = myGreen
@@ -115,7 +108,7 @@ class Messenger: UIViewController {
         scrollViewY(y)
     }
 
-    func updateLastLabelText(_ text: String, isLeft: Bool = true) {
+    func updateLastLabelText(_ text: NSAttributedString, isLeft: Bool = true) {
         y = previousY
         updateLabel(lastLabel, text: text, isLeft: isLeft)
     }

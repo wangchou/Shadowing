@@ -332,17 +332,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XRu-Hi-623">
-                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="43.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="無分" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XRu-Hi-623">
+                                                    <rect key="frame" x="0.0" y="0.0" width="55" height="43.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="Ktm-8N-rvy"/>
+                                                        <constraint firstAttribute="width" constant="55" id="Ktm-8N-rvy"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ただの人間には" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0tn-vE-CDR" customClass="FuriganaLabel" customModule="VoiceOnly" customModuleProvider="target">
-                                                    <rect key="frame" x="45" y="0.0" width="275" height="43.5"/>
+                                                    <rect key="frame" x="55" y="0.0" width="265" height="43.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -354,7 +354,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="0tn-vE-CDR" secondAttribute="trailing" id="RR1-IZ-EVb"/>
                                                 <constraint firstItem="XRu-Hi-623" firstAttribute="leading" secondItem="KQa-Km-FxO" secondAttribute="leading" id="j8U-Mf-gb9"/>
                                                 <constraint firstAttribute="bottom" secondItem="XRu-Hi-623" secondAttribute="bottom" id="op5-kd-yNH"/>
-                                                <constraint firstItem="0tn-vE-CDR" firstAttribute="leading" secondItem="XRu-Hi-623" secondAttribute="trailing" constant="5" id="vF2-6k-pGR"/>
+                                                <constraint firstItem="0tn-vE-CDR" firstAttribute="leading" secondItem="XRu-Hi-623" secondAttribute="trailing" id="vF2-6k-pGR"/>
                                                 <constraint firstAttribute="bottom" secondItem="0tn-vE-CDR" secondAttribute="bottom" id="vQh-LA-khT"/>
                                             </constraints>
                                         </tableViewCellContentView>

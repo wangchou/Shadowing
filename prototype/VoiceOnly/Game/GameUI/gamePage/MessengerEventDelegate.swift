@@ -14,29 +14,23 @@ private let context = GameContext.shared
 extension Messenger: GameEventDelegate {
     @objc func onEventHappened(_ notification: Notification) {
         guard let event = notification.object as? Event else { print("convert event fail"); return }
-        print(event.type)
+
         switch event.type {
         case .sayStarted:
-            guard let name = event.string else { return }
-            if name == meijiaSan && game.state == .stopped ||
-               name == hattoriSan && game.state == .speakingJapanese {
-                addLabel("")
+            guard let text = event.string else { return }
+            if game.state == .stopped {
+                addLabel(rubyAttrStr(text))
             }
-
-        case .stringSaid:
-            guard let saidWord = event.string else { return }
-            if game.state == .speakingJapanese || game.state == .stopped {
-                guard let lastText = lastLabel.text else { print("error lastLabel nil"); return }
-                updateLastLabelText(lastText + saidWord)
+            if game.state == .speakingJapanese {
+                if let tokenInfos = kanaTokenInfosCacheDictionary[text] {
+                    addLabel(getFuriganaString(tokenInfos: tokenInfos))
+                } else {
+                    addLabel(rubyAttrStr(text))
+                }
             }
 
         case .listenStarted:
-            addLabel("...", isLeft: false)
-
-        case .stringRecognized, .listenEnded:
-            guard var saidString = event.string else { return }
-            saidString = saidString == "" ? "聽不清楚" : saidString
-            updateLastLabelText(saidString, isLeft: false)
+            addLabel(rubyAttrStr("..."), isLeft: false)
 
         case .scoreCalculated:
             guard let score = event.int else { return }
@@ -54,10 +48,9 @@ extension Messenger: GameEventDelegate {
             timeLabel.text = "\(add0((seconds/60).s)):\(add0((seconds%60).s))"
 
         case .gameStateChanged:
-            print("\t\(game.state)")
             if game.state == .gameOver {
                 stopEventObserving(self)
-                addLabel("遊戲結束。")
+                addLabel(rubyAttrStr("遊戲結束。"))
                 addGameReport()
                 addButton("再試一次", #selector(restartGame))
                 addButton("結束", #selector(finishGame))
@@ -72,17 +65,22 @@ extension Messenger: GameEventDelegate {
     }
 
     private func onScore(_ score: Int) {
-        guard let lastText = lastLabel.text else { print("error onScore"); return }
-        var newText = "\(lastText) \(score/10)分"
-        newText = score == 100 ? "\(newText) ⭐️" : newText
-        updateLastLabelText(newText, isLeft: false)
+        let attributed = NSMutableAttributedString()
+        if let tokenInfos = kanaTokenInfosCacheDictionary[context.userSaidString] {
+            attributed.append(getFuriganaString(tokenInfos: tokenInfos))
+        } else {
+            attributed.append(rubyAttrStr(context.userSaidString))
+        }
+
+        attributed.append(rubyAttrStr(" \(score)分 \(score == 100 ? "⭐️": "")"))
+
+        updateLastLabelText(attributed, isLeft: false)
 
         if score < 60 {
             lastLabel.backgroundColor = myRed
         } else if score < 80 {
             lastLabel.backgroundColor = myOrange
         }
-
         sentenceCountLabel.text = "還有\(context.sentences.count - context.sentenceIndex - 1)句"
     }
 }

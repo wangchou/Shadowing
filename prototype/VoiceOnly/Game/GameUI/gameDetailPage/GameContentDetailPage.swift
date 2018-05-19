@@ -81,7 +81,7 @@ extension GameContentDetailPage: UITableViewDataSource {
 
         if let gameRecord = context.gameHistory[context.dataSetKey],
            let score = gameRecord.sentencesScore[sentence] {
-            detailCell.miscLabel.text = "\(score/10)"
+            detailCell.miscLabel.text = "\(score)分"
             var color = myRed
             if score >= 80 {
                 color = myGreen

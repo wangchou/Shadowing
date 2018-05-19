@@ -64,8 +64,11 @@ class SpeechRecognizer: NSObject {
             self.isRunning = true
             postEvent(.listenStarted, string: "")
             Timer.scheduledTimer(withTimeInterval: stopAfterSeconds, repeats: false) {_ in
-                postEvent(.listenEnded, string: context.targetString)
-                self.promise.fulfill(context.targetString)
+                let fakeSuffix = ["", "", "西宮", "はは"]
+                let fakeSaidString = context.targetString + fakeSuffix[Int(arc4random_uniform(UInt32(fakeSuffix.count)))]
+                postEvent(.listenEnded, string: fakeSaidString)
+                context.userSaidString = fakeSaidString
+                self.promise.fulfill(fakeSaidString)
             }
             return promise
         }
@@ -115,7 +118,6 @@ class SpeechRecognizer: NSObject {
                 isRunning = false
                 return
             }
-            print("############### endAudio")
             inputNode.removeTap(onBus: 0)
             recognitionRequest?.endAudio()
 
@@ -144,7 +146,6 @@ class SpeechRecognizer: NSObject {
     }
 
     func resultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
-        print("resultHandler:", result, error)
         if !context.isEngineRunning {
             promise.reject(SpeechRecognitionError.engineStopped)
             return

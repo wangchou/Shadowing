@@ -4,7 +4,7 @@ import Foundation
 import UIKit
 import Promises
 
-private let dataSet = n4
+private let dataSet = ["お待たせしました"]
 
 class FuriganaInTableview: UIViewController {
     @IBOutlet weak var tableView: UITableView!
