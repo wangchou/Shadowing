@@ -18,7 +18,12 @@ enum JpnType {
     case mixed
 }
 
-func rubyAttrStr(_ string: String, _ ruby: String = "", fontSize: CGFloat = 20) -> NSAttributedString {
+func rubyAttrStr(
+    _ string: String,
+    _ ruby: String = "",
+    fontSize: CGFloat = 20,
+    color: UIColor = .black
+    ) -> NSAttributedString {
     let annotation = CTRubyAnnotationCreateWithAttributes(
         .auto, .auto, .before, ruby as CFString,
         [:] as CFDictionary)
@@ -35,6 +40,7 @@ func rubyAttrStr(_ string: String, _ ruby: String = "", fontSize: CGFloat = 20) 
             // need to use same font in CTRun or 7時 furigana will not aligned
             .font: font,
 //            .font: UIFont(name: ".HiraKakuInterface-W6", size: 18.0)!,
+            .foregroundColor: color,
 //            .foregroundColor: UIColor.white,
 //            .strokeColor: UIColor.black,
 //            .strokeWidth: -1,
@@ -53,14 +59,14 @@ func rubyAttrStr(_ string: String, _ ruby: String = "", fontSize: CGFloat = 20) 
 //    case3:
 //    parts: [ブラック | 企業勤 | めのころ]
 //    kana: ...
-func getFuriganaAttrString(_ parts: [String], _ kana: String) -> NSMutableAttributedString {
+func getFuriganaAttrString(_ parts: [String], _ kana: String, color: UIColor = .black) -> NSMutableAttributedString {
     let attrStr = NSMutableAttributedString()
     if parts.isEmpty { return attrStr }
 
     if parts.count == 1 {
         let result = parts[0].jpnType == JpnType.noKanjiAndNumber ?
-            rubyAttrStr(parts[0]) :
-            rubyAttrStr(parts[0], kana)
+            rubyAttrStr(parts[0], color: color) :
+            rubyAttrStr(parts[0], kana, color: color)
 
         attrStr.append(result)
         return attrStr
@@ -79,7 +85,7 @@ func getFuriganaAttrString(_ parts: [String], _ kana: String) -> NSMutableAttrib
             attrStr.append(getFuriganaAttrString(Array(parts[0..<i]), kanaParts[0]))
         }
 
-        attrStr.append(rubyAttrStr(parts[i]))
+        attrStr.append(rubyAttrStr(parts[i], color: color))
 
         if i + 1 < parts.count {
             let suffixKanaPartsIndex = i == 0 ? 0 : 1
@@ -95,7 +101,7 @@ func getFuriganaAttrString(_ parts: [String], _ kana: String) -> NSMutableAttrib
     for part in parts {
         kanjiPart += part
     }
-    attrStr.append(rubyAttrStr(kanjiPart, kana))
+    attrStr.append(rubyAttrStr(kanjiPart, kana, color: color))
     return attrStr
 }
 
@@ -113,8 +119,9 @@ func getFuriganaString(tokenInfos: [[String]]) -> NSMutableAttributedString {
                 .replace("([\\p{Han}\\d]*[\\p{Han}\\d])", "👻$1👻")
                 .components(separatedBy: "👻")
                 .filter { $0 != "" }
+            let color: UIColor = tokenInfo[1] == "助詞" ? .red : .black
 
-            furiganaAttrStr.append(getFuriganaAttrString(parts, kana))
+            furiganaAttrStr.append(getFuriganaAttrString(parts, kana, color: color))
             continue
         }
         print("unknown situation with tokenInfo: ", tokenInfo)

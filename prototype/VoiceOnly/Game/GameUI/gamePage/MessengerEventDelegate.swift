@@ -72,6 +72,10 @@ extension Messenger: GameEventDelegate {
             attributed.append(rubyAttrStr(context.userSaidString))
         }
 
+        if attributed.string == "" {
+            attributed.append(rubyAttrStr("聽不清楚"))
+        }
+
         attributed.append(rubyAttrStr(" \(score)分 \(score == 100 ? "⭐️": "")"))
 
         updateLastLabelText(attributed, isLeft: false)
