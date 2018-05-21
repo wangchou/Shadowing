@@ -11,6 +11,10 @@ import AVFoundation
 import Speech
 import Promises
 
+enum GameMode {
+    case phone, messenger, console, reader
+}
+
 class GameContext {
     //Singleton
     static let shared = GameContext()

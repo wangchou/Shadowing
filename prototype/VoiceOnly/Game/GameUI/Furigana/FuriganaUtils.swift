@@ -27,12 +27,14 @@ func rubyAttrStr(
     let alignMode: CTRubyAlignment = ruby.count >= string.count * 2 ? .center : .auto
     let annotation = CTRubyAnnotationCreateWithAttributes(
         alignMode, .auto, .before, ruby as CFString,
-        [:] as CFDictionary)
+        [ kCTFontAttributeName: UIFont(name: ".HiraKakuInterface-W2", size: fontSize/2)
+        ] as CFDictionary
+    )
     //[kCTForegroundColorAttributeName: UIColor.blue.cgColor] as CFDictionary)
 
     var font = UIFont.systemFont(ofSize: fontSize)
-    if let hiraginoSan = UIFont(name: "HiraginoSans-W3", size: fontSize) {
-        font = hiraginoSan
+    if let hiraginoSanW3 = UIFont(name: ".HiraKakuInterface-W3", size: fontSize) {
+        font = hiraginoSanW3
     }
 
     return NSAttributedString(

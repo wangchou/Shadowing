@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		BE05073720A68515008A29EB /* SentencesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE05073620A68515008A29EB /* SentencesTest.swift */; };
 		BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB3D209B19B200D23F22 /* GameContext.swift */; };
-		BE1B6FDD20B27EE6000099F4 /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1B6FDC20B27EE6000099F4 /* GameMode.swift */; };
 		BE1CA956209D5D0900086853 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA955209D5D0900086853 /* Game.swift */; };
 		BE1CA958209DC43800086853 /* Messenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA957209DC43800086853 /* Messenger.swift */; };
 		BE1CA95A209DC4BE00086853 /* P09ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA959209DC4BE00086853 /* P09ViewController.swift */; };
@@ -72,7 +71,6 @@
 /* Begin PBXFileReference section */
 		BE05073620A68515008A29EB /* SentencesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentencesTest.swift; sourceTree = "<group>"; };
 		BE17FB3D209B19B200D23F22 /* GameContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameContext.swift; sourceTree = "<group>"; };
-		BE1B6FDC20B27EE6000099F4 /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
 		BE1CA955209D5D0900086853 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		BE1CA957209DC43800086853 /* Messenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messenger.swift; sourceTree = "<group>"; };
 		BE1CA959209DC4BE00086853 /* P09ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P09ViewController.swift; sourceTree = "<group>"; };
@@ -270,7 +268,6 @@
 				BE1CA95B209DC4E800086853 /* ConsoleGame.swift */,
 				BEBDEDE7208F227C00C18520 /* PhoneGame.swift */,
 				BE1CA957209DC43800086853 /* Messenger.swift */,
-				BE1B6FDC20B27EE6000099F4 /* GameMode.swift */,
 				BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */,
 				BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */,
 			);
@@ -425,7 +422,6 @@
 				BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */,
 				BE8C8F02209C476A00E32F09 /* VoiceOnlyGame.swift in Sources */,
 				BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */,
-				BE1B6FDD20B27EE6000099F4 /* GameMode.swift in Sources */,
 				BE1CA95C209DC4E800086853 /* ConsoleGame.swift in Sources */,
 				BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */,
 				BEBDEDE8208F227C00C18520 /* PhoneGame.swift in Sources */,
