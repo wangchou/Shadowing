@@ -23,6 +23,8 @@ class GameContext {
     var bgm = BGM()
     var tts = TTS()
 
+    var gameMode: GameMode = .phone
+
     var isEngineRunning = false
     var sentences: [String] = []
     var sentenceIndex: Int = 0

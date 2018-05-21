@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 // Prototype 10: black console
-class P10ViewController: UIViewController, GameEventDelegate {
+class ConsoleGame: UIViewController, GameEventDelegate {
     let game = SimpleGame.shared
     var score: Int = 0
     var tmpText: NSMutableAttributedString = colorText("")
