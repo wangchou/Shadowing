@@ -18,6 +18,12 @@ enum JpnType {
     case mixed
 }
 
+// fonts
+// .HiraKakuInterface-W2
+// HiraKakuProN-W3
+// HiraginoSans
+// HiraMinProN-W6
+// 用 w2 + w4~w5 感覺最好, 但 w4 & w5 時行距會跑掉。不知道為什麼...
 func rubyAttrStr(
     _ string: String,
     _ ruby: String = "",
@@ -33,8 +39,8 @@ func rubyAttrStr(
     //[kCTForegroundColorAttributeName: UIColor.blue.cgColor] as CFDictionary)
 
     var font = UIFont.systemFont(ofSize: fontSize)
-    if let hiraginoSanW3 = UIFont(name: ".HiraKakuInterface-W3", size: fontSize) {
-        font = hiraginoSanW3
+    if let f = UIFont(name: ".HiraKakuInterface-W3", size: fontSize) {
+        font = f
     }
 
     return NSAttributedString(

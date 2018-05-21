@@ -3,7 +3,7 @@ import UIKit
 
 class FuriganaLabel: UILabel {
     private var height: CGFloat = 60
-    private let topShift: CGFloat = 7
+    private let topShift: CGFloat = 6
     private let widthPadding: CGFloat = 7
 
     override var text: String? {
@@ -71,7 +71,7 @@ class FuriganaLabel: UILabel {
             var descent = CGFloat()
             var leading = CGFloat()
             CTLineGetTypographicBounds(line, &ascent, &descent, &leading)
-            height += ceil(ascent + leading)
+            height += ceil(ascent + leading + descent)
         }
 
         return height + topShift
