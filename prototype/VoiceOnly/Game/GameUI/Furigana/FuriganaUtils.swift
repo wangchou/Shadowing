@@ -24,8 +24,9 @@ func rubyAttrStr(
     fontSize: CGFloat = 20,
     color: UIColor = .black
     ) -> NSAttributedString {
+    let alignMode: CTRubyAlignment = ruby.count >= string.count * 2 ? .center : .auto
     let annotation = CTRubyAnnotationCreateWithAttributes(
-        .auto, .auto, .before, ruby as CFString,
+        alignMode, .auto, .before, ruby as CFString,
         [:] as CFDictionary)
     //[kCTForegroundColorAttributeName: UIColor.blue.cgColor] as CFDictionary)
 
