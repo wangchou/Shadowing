@@ -3,8 +3,9 @@ import UIKit
 
 class FuriganaLabel: UILabel {
     private var height: CGFloat = 60
-    private let topShift: CGFloat = 6
+    private let topShift: CGFloat = 5
     private let widthPadding: CGFloat = 7
+    private let lineSpacing: CGFloat = 8
 
     override var text: String? {
         willSet {
@@ -71,10 +72,10 @@ class FuriganaLabel: UILabel {
             var descent = CGFloat()
             var leading = CGFloat()
             CTLineGetTypographicBounds(line, &ascent, &descent, &leading)
-            height += ceil(ascent + leading + descent)
+            height += ceil(ascent + leading + descent) + lineSpacing
         }
 
-        return height + topShift
+        return height + topShift - lineSpacing/2
     }
 
     func widthOfCoreText(attributed: NSAttributedString, maxWidth: CGFloat) -> CGFloat {

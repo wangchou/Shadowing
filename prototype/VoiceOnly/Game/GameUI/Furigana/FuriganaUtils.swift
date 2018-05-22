@@ -39,7 +39,7 @@ func rubyAttrStr(
     //[kCTForegroundColorAttributeName: UIColor.blue.cgColor] as CFDictionary)
 
     var font = UIFont.systemFont(ofSize: fontSize)
-    if let f = UIFont(name: ".HiraKakuInterface-W3", size: fontSize) {
+    if let f = UIFont(name: ".HiraKakuInterface-W4", size: fontSize) {
         font = f
     }
 
@@ -128,13 +128,21 @@ func getFuriganaString(tokenInfos: [[String]]) -> NSMutableAttributedString {
                 .replace("([\\p{Han}\\d]*[\\p{Han}\\d])", "👻$1👻")
                 .components(separatedBy: "👻")
                 .filter { $0 != "" }
-            let color: UIColor = tokenInfo[1] == "助詞" ? .red : .black
+            let color: UIColor = tokenInfo[1] == "助詞" ? rgb(0, 96, 144) : .black
 
             furiganaAttrStr.append(getFuriganaAttrString(parts, kana, color: color))
             continue
         }
         print("unknown situation with tokenInfo: ", tokenInfo)
     }
+
+    let paragraphStyle = NSMutableParagraphStyle()
+    paragraphStyle.lineSpacing = 8
+    furiganaAttrStr.addAttribute(
+        .paragraphStyle,
+        value: paragraphStyle,
+        range: NSRange(location: 0, length: furiganaAttrStr.length)
+    )
 
     return furiganaAttrStr
 }
