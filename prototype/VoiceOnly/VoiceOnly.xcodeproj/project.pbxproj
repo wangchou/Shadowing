@@ -28,6 +28,7 @@
 		BE7725C820A2CBC200DF186A /* n4.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725C120A2CBC100DF186A /* n4.swift */; };
 		BE7725C920A2CBC200DF186A /* n5.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725C220A2CBC100DF186A /* n5.swift */; };
 		BE7725CE20A4216700DF186A /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725CD20A4216700DF186A /* ContentCell.swift */; };
+		BE8180C020B3BEB6006ABCB3 /* MyFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180BF20B3BEB6006ABCB3 /* MyFont.swift */; };
 		BE8C8F02209C476A00E32F09 /* VoiceOnlyGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8C8F01209C476A00E32F09 /* VoiceOnlyGame.swift */; };
 		BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */; };
 		BE9B476A20AD50520063E0DA /* FuriganaUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476920AD50520063E0DA /* FuriganaUtils.swift */; };
@@ -87,6 +88,7 @@
 		BE7725C120A2CBC100DF186A /* n4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n4.swift; sourceTree = "<group>"; };
 		BE7725C220A2CBC100DF186A /* n5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n5.swift; sourceTree = "<group>"; };
 		BE7725CD20A4216700DF186A /* ContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
+		BE8180BF20B3BEB6006ABCB3 /* MyFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFont.swift; sourceTree = "<group>"; };
 		BE8C8F01209C476A00E32F09 /* VoiceOnlyGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceOnlyGame.swift; sourceTree = "<group>"; };
 		BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaLabel.swift; sourceTree = "<group>"; };
 		BE9B476920AD50520063E0DA /* FuriganaUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaUtils.swift; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 			children = (
 				BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */,
 				BE9B476920AD50520063E0DA /* FuriganaUtils.swift */,
+				BE8180BF20B3BEB6006ABCB3 /* MyFont.swift */,
 			);
 			path = Furigana;
 			sourceTree = "<group>";
@@ -424,6 +427,7 @@
 				BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */,
 				BE1CA95C209DC4E800086853 /* ConsoleGame.swift in Sources */,
 				BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */,
+				BE8180C020B3BEB6006ABCB3 /* MyFont.swift in Sources */,
 				BEBDEDE8208F227C00C18520 /* PhoneGame.swift in Sources */,
 				BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */,
 				BEBDEDDA208EF15F00C18520 /* TTS.swift in Sources */,

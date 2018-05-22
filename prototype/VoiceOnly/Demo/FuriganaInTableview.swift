@@ -32,6 +32,8 @@ extension FuriganaInTableview: UITableViewDataSource {
 
         if let tokenInfos = kanaTokenInfosCacheDictionary[str] {
             sentenceCell.sentenceLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
+//            sentenceCell.sentenceLabel.layer.borderWidth = 1.5
+//            sentenceCell.sentenceLabel.layer.cornerRadius = 15
         } else {
             sentenceCell.sentenceLabel.text = str
         }

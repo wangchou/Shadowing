@@ -13,7 +13,7 @@ func getStrokeText(_ string: String, _ color: UIColor) -> NSMutableAttributedStr
     let text = NSMutableAttributedString(string: string)
     text.addAttributes([
             .strokeColor: UIColor.black,
-            .strokeWidth: -1,
+            .strokeWidth: -1.5,
             .foregroundColor: color,
             .font: UIFont.boldSystemFont(ofSize: 32)
         ],

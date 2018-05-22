@@ -184,7 +184,7 @@ func colorText(_ text: String, _ color: UIColor = .lightText, terminator: String
     let colorText = NSMutableAttributedString(string: "\(text)\(terminator)")
     colorText.addAttributes([
         .foregroundColor: color,
-        .font: UIFont.systemFont(ofSize: 24)
+        .font: MyFont.systemFont(ofSize: 24)
         ],
         range: NSRange(location: 0, length: colorText.length)
     )

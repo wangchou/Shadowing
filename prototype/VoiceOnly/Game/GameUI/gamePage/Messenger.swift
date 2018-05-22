@@ -140,7 +140,7 @@ class Messenger: UIViewController {
 
     func addGameReport() {
         let report = UITextView()
-        report.font = UIFont.systemFont(ofSize: 20)
+        report.font = MyFont.systemFont(ofSize: 20)
         if let record = context.gameRecord {
             report.text = """
             達成率:\t\(record.progress)
@@ -180,7 +180,7 @@ class Messenger: UIViewController {
         let button = UIButton()
 
         button.setTitle(text, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        button.titleLabel?.font = MyFont.systemFont(ofSize: 20)
         button.titleEdgeInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
         button.backgroundColor = .red
         button.frame = CGRect(x: 5, y: y, width: Int(screen.width - 10), height: 50)
