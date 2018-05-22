@@ -28,13 +28,25 @@ func startEngine(toSpeaker: Bool = false) {
 func stopEngine() {
     context.isEngineRunning = false
     context.tts.stop()
-
+    updateGameHistory()
     guard !isSimulator else { return }
 
     context.speechRecognizer.stop()
     context.bgm.stop()
     context.engine.stop()
+}
 
+func updateGameHistory() {
+    guard let record = context.gameRecord else { return }
+
+    if let previousRecord = context.gameHistory[record.dataSetKey],
+        record.p <= previousRecord.p &&
+            record.rank != "SS" {
+        return
+    }
+
+    context.gameHistory[record.dataSetKey] = record
+    saveGameHistory()
 }
 
 func reduceBGMVolume() {

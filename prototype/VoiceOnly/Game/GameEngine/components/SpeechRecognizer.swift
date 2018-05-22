@@ -68,6 +68,7 @@ class SpeechRecognizer: NSObject {
                 let fakeSaidString = context.targetString + fakeSuffix[Int(arc4random_uniform(UInt32(fakeSuffix.count)))]
                 postEvent(.listenEnded, string: fakeSaidString)
                 context.userSaidString = fakeSaidString
+
                 self.promise.fulfill(fakeSaidString)
             }
             return promise

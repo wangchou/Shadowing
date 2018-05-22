@@ -191,12 +191,16 @@ func colorText(_ text: String, _ color: UIColor = .lightText, terminator: String
     return colorText
 }
 
-func launchStoryboard(_ originVC: UIViewController, _ storyboardId: String, isOverCurrent: Bool = false) {
+func launchStoryboard(
+    _ originVC: UIViewController,
+    _ storyboardId: String,
+    isOverCurrent: Bool = false,
+    animated: Bool = false) {
     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: storyboardId)
     if isOverCurrent {
         vc.modalPresentationStyle = .overCurrentContext
     }
-    originVC.present(vc, animated: false, completion: nil)
+    originVC.present(vc, animated: animated, completion: nil)
 }
 
 // MARK: - Misc For Dev Only

@@ -44,6 +44,11 @@ class VoiceOnlyGame: Game {
         }.always {
             if context.nextSentence() {
                 self.learnNext()
+            } else {
+                meijia("遊戲結束").then {
+                    self.state = .gameOver
+                    self.stop()
+                }
             }
         }
     }
@@ -71,12 +76,28 @@ class VoiceOnlyGame: Game {
             .then { oren(userSaidString) }
     }
 
+    private func updateRecord(score: Int) {
+        context.gameRecord?.sentencesScore[context.targetString] = score
+
+        switch score {
+        case 100:
+            context.gameRecord?.perfectCount += 1
+        case 80...99:
+            context.gameRecord?.greatCount += 1
+        case 60...79:
+            context.gameRecord?.goodCount += 1
+        default:
+            ()
+        }
+    }
+
     private func getScore() -> Promise<Int> {
         return calculateScore(context.targetString, context.userSaidString)
     }
 
     private func speakScore(score: Int) -> Promise<Void> {
         self.state = .scoreCalculated
+        updateRecord(score: score)
         return meijia("\(score)分")
     }
 }

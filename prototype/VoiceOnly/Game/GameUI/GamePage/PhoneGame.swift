@@ -40,6 +40,11 @@ class PhoneGame: UIViewController, GameEventDelegate {
             if let str = event.string {
                 print(str)
             }
+        case .gameStateChanged:
+            if let state = event.gameState,
+               state == .gameOver {
+                launchStoryboard(self, "GameFinishedPage", animated: true)
+            }
         default:
             return
         }

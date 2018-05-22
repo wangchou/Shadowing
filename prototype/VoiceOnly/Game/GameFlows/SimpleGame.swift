@@ -37,9 +37,9 @@ class SimpleGame: Game {
             self.gameSeconds += 1
         }
         context.loadLearningSentences()
-        //meijia("每次日文說完後，請跟著說～").always {
+        meijia("每句日文說完後，請跟著說～").always {
             self.learnNext()
-        //}
+        }
         isPaused = false
         wait.fulfill(())
     }
@@ -148,21 +148,9 @@ class SimpleGame: Game {
     }
 
     private func gameOver() {
-        guard let record = context.gameRecord else { return }
-        self.state = .gameOver
-
         meijia("遊戲結束").then {
+            self.state = .gameOver
             self.stop()
         }
-
-        if let previousRecord = context.gameHistory[record.dataSetKey],
-            record.p <= previousRecord.p &&
-                record.rank != "SS" {
-            return
-        }
-
-        context.gameHistory[record.dataSetKey] = record
-        saveGameHistory()
-
     }
 }

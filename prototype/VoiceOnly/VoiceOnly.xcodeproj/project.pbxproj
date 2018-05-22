@@ -29,6 +29,8 @@
 		BE7725C920A2CBC200DF186A /* n5.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725C220A2CBC100DF186A /* n5.swift */; };
 		BE7725CE20A4216700DF186A /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725CD20A4216700DF186A /* ContentCell.swift */; };
 		BE8180C020B3BEB6006ABCB3 /* MyFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180BF20B3BEB6006ABCB3 /* MyFont.swift */; };
+		BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */; };
+		BE8180C520B3E03E006ABCB3 /* GameFinishedTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180C420B3E03E006ABCB3 /* GameFinishedTableCell.swift */; };
 		BE8C8F02209C476A00E32F09 /* VoiceOnlyGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8C8F01209C476A00E32F09 /* VoiceOnlyGame.swift */; };
 		BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */; };
 		BE9B476A20AD50520063E0DA /* FuriganaUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476920AD50520063E0DA /* FuriganaUtils.swift */; };
@@ -89,6 +91,8 @@
 		BE7725C220A2CBC100DF186A /* n5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n5.swift; sourceTree = "<group>"; };
 		BE7725CD20A4216700DF186A /* ContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
 		BE8180BF20B3BEB6006ABCB3 /* MyFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFont.swift; sourceTree = "<group>"; };
+		BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFinishedPage.swift; sourceTree = "<group>"; };
+		BE8180C420B3E03E006ABCB3 /* GameFinishedTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFinishedTableCell.swift; sourceTree = "<group>"; };
 		BE8C8F01209C476A00E32F09 /* VoiceOnlyGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceOnlyGame.swift; sourceTree = "<group>"; };
 		BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaLabel.swift; sourceTree = "<group>"; };
 		BE9B476920AD50520063E0DA /* FuriganaUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaUtils.swift; sourceTree = "<group>"; };
@@ -144,6 +148,7 @@
 		BE40C61220ABF7E7004E420F /* Working */ = {
 			isa = PBXGroup;
 			children = (
+				BEBDEDC3208EF09F00C18520 /* Main.storyboard */,
 			);
 			path = Working;
 			sourceTree = "<group>";
@@ -153,9 +158,9 @@
 			children = (
 				BE1CA955209D5D0900086853 /* Game.swift */,
 				BE65A938209C6E67006645CA /* GameEventDelegate.swift */,
-				BE8C8F01209C476A00E32F09 /* VoiceOnlyGame.swift */,
 				BE05073620A68515008A29EB /* SentencesTest.swift */,
 				BE6ED56720A17BB000553D1A /* SimpleGame.swift */,
+				BE8C8F01209C476A00E32F09 /* VoiceOnlyGame.swift */,
 			);
 			path = GameFlows;
 			sourceTree = "<group>";
@@ -170,6 +175,15 @@
 			);
 			name = DataSet;
 			path = sentences;
+			sourceTree = "<group>";
+		};
+		BE8180C320B3DFEF006ABCB3 /* GameFinishedPage */ = {
+			isa = PBXGroup;
+			children = (
+				BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */,
+				BE8180C420B3E03E006ABCB3 /* GameFinishedTableCell.swift */,
+			);
+			path = GameFinishedPage;
 			sourceTree = "<group>";
 		};
 		BE9B476B20AD5C6E0063E0DA /* Demo */ = {
@@ -239,8 +253,9 @@
 			children = (
 				BEFA979F20AEAF0300DE3280 /* Furigana */,
 				BEFA979C20AEAEA400DE3280 /* InitialPage */,
-				BEFA979E20AEAEDD00DE3280 /* gameDetailPage */,
-				BEFA979D20AEAECC00DE3280 /* gamePage */,
+				BEFA979E20AEAEDD00DE3280 /* GameDetailPage */,
+				BEFA979D20AEAECC00DE3280 /* GamePage */,
+				BE8180C320B3DFEF006ABCB3 /* GameFinishedPage */,
 			);
 			path = GameUI;
 			sourceTree = "<group>";
@@ -264,7 +279,7 @@
 			path = InitialPage;
 			sourceTree = "<group>";
 		};
-		BEFA979D20AEAECC00DE3280 /* gamePage */ = {
+		BEFA979D20AEAECC00DE3280 /* GamePage */ = {
 			isa = PBXGroup;
 			children = (
 				BE1CA95B209DC4E800086853 /* ConsoleGame.swift */,
@@ -273,16 +288,16 @@
 				BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */,
 				BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */,
 			);
-			path = gamePage;
+			path = GamePage;
 			sourceTree = "<group>";
 		};
-		BEFA979E20AEAEDD00DE3280 /* gameDetailPage */ = {
+		BEFA979E20AEAEDD00DE3280 /* GameDetailPage */ = {
 			isa = PBXGroup;
 			children = (
 				BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */,
 				BEDBCCD720A82AC4001CF11D /* GameDetailTableCell.swift */,
 			);
-			path = gameDetailPage;
+			path = GameDetailPage;
 			sourceTree = "<group>";
 		};
 		BEFA979F20AEAF0300DE3280 /* Furigana */ = {
@@ -298,7 +313,6 @@
 		BEFA97A120AEB18700DE3280 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				BEBDEDC3208EF09F00C18520 /* Main.storyboard */,
 				BE7725BD20A2CBC100DF186A /* DataSet */,
 				BE17FB38209B0F5F00D23F22 /* GameEngine */,
 				BE6AF37F209C146B00CBDB63 /* GameFlows */,
@@ -409,9 +423,11 @@
 				BE5D838920A80BD0002031BF /* GameContentDetailPage.swift in Sources */,
 				BE6ED56820A17BB000553D1A /* SimpleGame.swift in Sources */,
 				BE6ED54A20A1373700553D1A /* Commands.swift in Sources */,
+				BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */,
 				BEDFCDAB20A87AF800736153 /* PauseOverlayViewController.swift in Sources */,
 				BE1CA956209D5D0900086853 /* Game.swift in Sources */,
 				BE7725C420A2CBC200DF186A /* sentences.swift in Sources */,
+				BE8180C520B3E03E006ABCB3 /* GameFinishedTableCell.swift in Sources */,
 				BE9B476A20AD50520063E0DA /* FuriganaUtils.swift in Sources */,
 				BE65A939209C6E67006645CA /* GameEventDelegate.swift in Sources */,
 				BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */,

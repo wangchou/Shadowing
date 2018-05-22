@@ -74,6 +74,11 @@ class ConsoleGame: UIViewController, GameEventDelegate {
                 let color = score >= 60 ? myGreen : myRed
                 cprint(" \(score)分", color, terminator: "")
             }
+        case .gameStateChanged:
+            if let state = event.gameState,
+               state == .gameOver {
+                launchStoryboard(self, "GameFinishedPage", animated: true)
+            }
 
         default:
             return
