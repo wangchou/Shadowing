@@ -35,8 +35,8 @@ struct TimelineBox {
 }
 
 class TimelineView: UIView {
-    let boxWidth = 18
-    let boxSpacing = 3
+    let boxWidth = 24
+    let boxSpacing = 4
     let yPadding = 4
 
     func viewWillAppear() {
