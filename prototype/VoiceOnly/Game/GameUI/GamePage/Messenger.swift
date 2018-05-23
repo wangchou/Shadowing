@@ -26,6 +26,16 @@ extension UIView {
     }
 }
 
+extension UIScrollView {
+    func scrollTo(_ y: Int) {
+        self.contentSize = CGSize(
+            width: self.frame.size.width,
+            height: max(self.frame.size.height, CGFloat(y))
+        )
+        self.scrollRectToVisible(CGRect(x: 5, y: y-1, width: 1, height: 1), animated: true)
+    }
+}
+
 // Prototype 8: messenger / line interface
 class Messenger: UIViewController {
     let game = SimpleGame.shared
@@ -105,7 +115,7 @@ class Messenger: UIViewController {
         previousY = y
         y += Int(myLabel.frame.height) + spacing
 
-        scrollViewY(y)
+        scrollView.scrollTo(y)
     }
 
     func updateLastLabelText(_ text: NSAttributedString, isLeft: Bool = true) {
@@ -125,16 +135,8 @@ class Messenger: UIViewController {
 
     @objc func restartGame() {
         y += Int(screen.height)
-        scrollViewY(y)
+        scrollView.scrollTo(y)
         end()
         start()
-    }
-
-    func scrollViewY(_ y: Int) {
-        scrollView.contentSize = CGSize(
-            width: scrollView.frame.size.width,
-            height: max(scrollView.frame.size.height, CGFloat(y))
-        )
-        scrollView.scrollRectToVisible(CGRect(x: 5, y: y-1, width: 1, height: 1), animated: true)
     }
 }

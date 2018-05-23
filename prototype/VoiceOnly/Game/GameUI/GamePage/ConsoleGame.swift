@@ -71,7 +71,12 @@ class ConsoleGame: UIViewController, GameEventDelegate {
         case .scoreCalculated:
             if let score = event.int {
                 self.score = score
-                let color = score >= 60 ? myGreen : myRed
+                var color = myRed
+                if score >= 80 {
+                    color = myGreen
+                } else if score >= 60 {
+                    color = myOrange
+                }
                 cprint(" \(score)分", color, terminator: "")
             }
         case .gameStateChanged:
@@ -86,7 +91,7 @@ class ConsoleGame: UIViewController, GameEventDelegate {
     }
 
     func scrollTextIntoView() {
-        let range = NSRange(location: textView.text.count - 1, length: 0)
+        let range = NSRange(location: textView.attributedText.string.count - 1, length: 0)
         textView.scrollRangeToVisible(range)
     }
 
