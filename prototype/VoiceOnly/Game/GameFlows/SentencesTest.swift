@@ -42,11 +42,11 @@ class SentencesTestGame: Game {
             usleep(100000)
             _ = hattori(self.targetString)
             return p1
-        }).then({ saidString -> Promise<Int> in
+        }).then({ saidString -> Promise<Score> in
             self.saidString = saidString
             return calculateScore(self.targetString, saidString)
         }).then({ score in
-            print(score, self.targetString, self.saidString)
+            print(score.value, self.targetString, self.saidString)
             self.index += 1
             self.testNext()
         }).catch({ error in

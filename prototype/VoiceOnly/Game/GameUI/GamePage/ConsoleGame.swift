@@ -12,7 +12,7 @@ import UIKit
 // Prototype 10: black console
 class ConsoleGame: UIViewController, GameEventDelegate {
     let game = SimpleGame.shared
-    var score: Int = 0
+    var score: Score = Score(value: 0)
     var tmpText: NSMutableAttributedString = colorText("")
 
     @IBOutlet weak var textView: UITextView!
@@ -69,15 +69,9 @@ class ConsoleGame: UIViewController, GameEventDelegate {
             textView.attributedText = curText
 
         case .scoreCalculated:
-            if let score = event.int {
+            if let score = event.score {
                 self.score = score
-                var color = myRed
-                if score >= 80 {
-                    color = myGreen
-                } else if score >= 60 {
-                    color = myOrange
-                }
-                cprint(" \(score)分", color, terminator: "")
+                cprint(" \(score.text)", score.color, terminator: "")
             }
         case .gameStateChanged:
             if let state = event.gameState,

@@ -33,7 +33,7 @@ extension Messenger: GameEventDelegate {
             addLabel(rubyAttrStr("..."), isLeft: false)
 
         case .scoreCalculated:
-            guard let score = event.int else { return }
+            guard let score = event.score else { return }
             onScore(score)
 
         case .lifeChanged:
@@ -62,7 +62,7 @@ extension Messenger: GameEventDelegate {
         }
     }
 
-    private func onScore(_ score: Int) {
+    private func onScore(_ score: Score) {
         let attributed = NSMutableAttributedString()
         if let tokenInfos = kanaTokenInfosCacheDictionary[context.userSaidString] {
             attributed.append(getFuriganaString(tokenInfos: tokenInfos))
@@ -74,15 +74,11 @@ extension Messenger: GameEventDelegate {
             attributed.append(rubyAttrStr("聽不清楚"))
         }
 
-        attributed.append(rubyAttrStr(" \(score)分 \(score == 100 ? "⭐️": "")"))
+        attributed.append(rubyAttrStr(" \(score.valueText) \(score.type == .perfect ? "⭐️": "")"))
 
         updateLastLabelText(attributed, isLeft: false)
 
-        if score < 60 {
-            lastLabel.backgroundColor = myRed
-        } else if score < 80 {
-            lastLabel.backgroundColor = myOrange
-        }
+        lastLabel.backgroundColor = score.color
         sentenceCountLabel.text = "還有\(context.sentences.count - context.sentenceIndex - 1)句"
     }
 }

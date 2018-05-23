@@ -34,16 +34,22 @@ struct Event {
     let string: String?
     let int: Int?
     let gameState: GameState?
+    let score: Score?
 }
 
 extension Notification.Name {
     static let eventHappened = Notification.Name("eventHappended")
 }
 
-func postEvent (_ type: EventType, string: String? = nil, int: Int? = nil, gameState: GameState? = nil) {
+func postEvent (
+    _ type: EventType,
+    string: String? = nil,
+    int: Int? = nil,
+    gameState: GameState? = nil,
+    score: Score? = nil) {
     NotificationCenter.default.post(
         name: .eventHappened,
-        object: Event(type: type, string: string, int: int, gameState: gameState)
+        object: Event(type: type, string: string, int: int, gameState: gameState, score: score)
     )
 }
 

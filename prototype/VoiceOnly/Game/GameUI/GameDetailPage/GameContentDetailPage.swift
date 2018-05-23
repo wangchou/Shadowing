@@ -128,14 +128,8 @@ extension GameContentDetailPage: UITableViewDataSource {
 
         if let gameRecord = context.gameHistory[context.dataSetKey],
            let score = gameRecord.sentencesScore[sentence] {
-            detailCell.miscLabel.text = "\(score)分"
-            var color = myRed
-            if score >= 80 {
-                color = myGreen
-            } else if score >= 60 {
-                color = myOrange
-            }
-            detailCell.miscLabel.textColor = color
+            detailCell.miscLabel.text = score.valueText
+            detailCell.miscLabel.textColor = score.color
         }
 
         return detailCell

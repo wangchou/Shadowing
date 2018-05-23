@@ -32,7 +32,7 @@ class GameRecord: NSObject, NSCoding {
     var perfectCount = 0
     var greatCount = 0
     var goodCount = 0
-    var sentencesScore: [String: Int]
+    var sentencesScore: [String: Score]
 
     var p: Float {
         let sum = perfectCount.f + greatCount.f + goodCount.f * 0.5
@@ -63,8 +63,12 @@ class GameRecord: NSObject, NSCoding {
 
     required init(coder decoder: NSCoder) {
         if let dataSetKey = decoder.decodeObject(forKey: "dataSetKey") as? String,
-           let sentencesScore = decoder.decodeObject(forKey: "sentencesScore") as? [String: Int] {
+           let sentencesIntScore = decoder.decodeObject(forKey: "sentencesScore") as? [String: Int] {
             self.dataSetKey = dataSetKey
+            var sentencesScore: [String: Score] = [:]
+            for (key, value) in sentencesIntScore {
+                sentencesScore[key] = Score(value: value)
+            }
             self.sentencesScore = sentencesScore
         } else {
             self.dataSetKey = ""
@@ -84,6 +88,10 @@ class GameRecord: NSObject, NSCoding {
         coder.encodeCInt(Int32(self.perfectCount), forKey: "perfectCount")
         coder.encodeCInt(Int32(self.greatCount), forKey: "greatCount")
         coder.encodeCInt(Int32(self.goodCount), forKey: "goodCount")
-        coder.encode(self.sentencesScore, forKey: "sentencesScore")
+        var sentencesIntScore: [String: Int] = [:]
+        for (key, score) in self.sentencesScore {
+            sentencesIntScore[key] = score.value
+        }
+        coder.encode(sentencesIntScore, forKey: "sentencesScore")
     }
 }

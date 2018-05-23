@@ -12,13 +12,6 @@ import UIKit
 import Speech
 
 // Prototype 7: prototype 6 + 遊戲畫面。在 getScore 後 update UI
-enum ScoreDesc {
-    case perfect
-    case great
-    case good
-    case poor
-}
-
 let rihoUrl = "https://i2.kknews.cc/SIG=vanen8/66nn0002p026p2100op3.jpg"
 
 private let context = GameContext.shared
@@ -50,9 +43,9 @@ extension P07ViewController: GameEventDelegate {
             self.scoreDescLabel.text = ""
 
         case (.stringRecognized, .scoreCalculated):
-            if let score = event.int {
+            if let score = event.score {
                 self.updateUIByScore(score)
-                sumScore += score
+                sumScore += score.value
             }
 
         case (.sentenceSessionEnded, .gameStateChanged):
@@ -121,18 +114,11 @@ class P07ViewController: UIViewController {
     }
 
     // MARK: - Update UI
-    func updateUIByScore(_ score: Int) {
+    func updateUIByScore(_ score: Score) {
         self.updateBlood(score)
         self.updateScoreLabel(score)
         self.updateComboLabel(score)
         self.updateScoreDescLabel(score)
-    }
-
-    func getScoreDesc(_ score: Int) -> ScoreDesc {
-        if score >= 100 { return .perfect }
-        if score >= 80 { return .great }
-        if score >= 60 { return .good}
-        return .poor
     }
 
     func focusTextView(isTargetView: Bool) {
@@ -150,13 +136,12 @@ class P07ViewController: UIViewController {
 
     }
 
-    func updateScoreLabel(_ score: Int) {
+    func updateScoreLabel(_ score: Score) {
         scoreLabel.text = String(sumScore)
     }
 
-    func updateComboLabel(_ score: Int) {
-        let scoreDesc = getScoreDesc(score)
-        switch scoreDesc {
+    func updateComboLabel(_ score: Score) {
+        switch score.type {
         case .perfect, .great:
             comboCount += 1
         case .good, .poor:
@@ -189,9 +174,8 @@ class P07ViewController: UIViewController {
         }
     }
 
-    func updateBlood(_ score: Int) {
-        let scoreDesc = getScoreDesc(score)
-        switch scoreDesc {
+    func updateBlood(_ score: Score) {
+        switch score.type {
         case .perfect:
             bloodBar.progress = min(1.0, bloodBar.progress + 0.15)
         case .great:
@@ -207,34 +191,10 @@ class P07ViewController: UIViewController {
         }
     }
 
-    func getScoreText(_ score: Int) -> String {
-        let scoreDesc = getScoreDesc(score)
-        switch scoreDesc {
-        case .perfect:
-            return "正解！"
-        case .great:
-            return "すごい"
-        case .good:
-            return "いいね"
-        case .poor:
-            return "違うよ"
-        }
-    }
-
-    func updateScoreDescLabel(_ score: Int) {
+    func updateScoreDescLabel(_ score: Score) {
         saidTextView.text = "\(saidTextView.text)(\(score)分)"
-        scoreDescLabel.text = getScoreText(score)
-        let scoreDesc = getScoreDesc(score)
-        switch scoreDesc {
-        case .perfect:
-            scoreDescLabel.textColor = UIColor.orange
-        case .great:
-            scoreDescLabel.textColor = UIColor.green
-        case .good:
-            scoreDescLabel.textColor = UIColor.blue
-        case .poor:
-            scoreDescLabel.textColor = UIColor.red
-        }
+        scoreDescLabel.text = score.text
+        scoreDescLabel.textColor = score.color
     }
 
     // MARK: - Utilities

@@ -90,7 +90,7 @@ class SimpleGame: Game {
         return listenJP(duration: speakDuration + pauseDuration)
     }
 
-    private func getScore(userSaidString: String) -> Promise<Int> {
+    private func getScore(userSaidString: String) -> Promise<Score> {
         self.state = .stringRecognized
         return calculateScore(context.targetString, userSaidString)
     }
@@ -103,15 +103,15 @@ class SimpleGame: Game {
     //      Rank B 達程度80% => missed x 2, good x6, great x 7, perfect x 10 => life = 82,  last speed 0.91x
     //      Rank C 達程度70% => missed x 3, good x9, great x 6, perfect x 7  => life = 62,  last speed 0.81x
 
-    private func updateLife(score: Int) {
+    private func updateLife(score: Score) {
         var life = context.life
 
-        switch score {
-        case 100:
+        switch score.type {
+        case .perfect:
             life += 4
-        case 80...99:
+        case .great:
             life += 2
-        case 60...79:
+        case .good:
             life += -1
         default:
             life += -3
@@ -122,7 +122,7 @@ class SimpleGame: Game {
         postEvent(.lifeChanged, int: context.life)
     }
 
-    private func speakScore(score: Int) -> Promise<Void> {
+    private func speakScore(score: Score) -> Promise<Void> {
         self.state = .scoreCalculated
 
         updateLife(score: score)
@@ -130,19 +130,17 @@ class SimpleGame: Game {
         var text = ""
         context.gameRecord?.sentencesScore[context.targetString] = score
 
-        switch score {
-        case 100:
+        switch score.type {
+        case .perfect:
             context.gameRecord?.perfectCount += 1
-            text = "正解"
-        case 80...99:
+        case .great:
             context.gameRecord?.greatCount += 1
-            text = "すごい"
-        case 60...79:
+        case .good:
             context.gameRecord?.goodCount += 1
-            text = "いいね"
         default:
-            text = "違うよ"
+            ()
         }
+        text = score.text
 
         return oren(text, rate: normalRate)
     }

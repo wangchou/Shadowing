@@ -53,6 +53,8 @@
 		BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */; };
 		BEDFCDAB20A87AF800736153 /* PauseOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */; };
 		BEE962E320AAC21D005AF008 /* FuriganaInTableview.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE962E220AAC21D005AF008 /* FuriganaInTableview.swift */; };
+		BEF28B6120B52BB000385273 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF28B6020B52BB000385273 /* Score.swift */; };
+		BEF28B6320B52BF700385273 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF28B6220B52BF700385273 /* UI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -117,6 +119,8 @@
 		BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerEventDelegate.swift; sourceTree = "<group>"; };
 		BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseOverlayViewController.swift; sourceTree = "<group>"; };
 		BEE962E220AAC21D005AF008 /* FuriganaInTableview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaInTableview.swift; sourceTree = "<group>"; };
+		BEF28B6020B52BB000385273 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
+		BEF28B6220B52BF700385273 /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				BE1CA955209D5D0900086853 /* Game.swift */,
+				BEF28B6020B52BB000385273 /* Score.swift */,
 				BE65A938209C6E67006645CA /* GameEventDelegate.swift */,
 				BE05073620A68515008A29EB /* SentencesTest.swift */,
 				BE6ED56720A17BB000553D1A /* SimpleGame.swift */,
@@ -251,7 +256,7 @@
 		BEDEDD4220A5D86500E7B60B /* GameUI */ = {
 			isa = PBXGroup;
 			children = (
-				BEFA979F20AEAF0300DE3280 /* Furigana */,
+				BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */,
 				BEFA979C20AEAEA400DE3280 /* InitialPage */,
 				BEFA979E20AEAEDD00DE3280 /* GameDetailPage */,
 				BEFA979D20AEAECC00DE3280 /* GamePage */,
@@ -268,6 +273,17 @@
 				BEBDEDD2208EF15E00C18520 /* TTS.swift */,
 			);
 			path = components;
+			sourceTree = "<group>";
+		};
+		BEF28B5F20B52B7900385273 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				BE9B476920AD50520063E0DA /* FuriganaUtils.swift */,
+				BE8180BF20B3BEB6006ABCB3 /* MyFont.swift */,
+				BEF28B6220B52BF700385273 /* UI.swift */,
+				BEBDEDD1208EF15E00C18520 /* utilities.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		BEFA979C20AEAEA400DE3280 /* InitialPage */ = {
@@ -300,16 +316,6 @@
 			path = GameDetailPage;
 			sourceTree = "<group>";
 		};
-		BEFA979F20AEAF0300DE3280 /* Furigana */ = {
-			isa = PBXGroup;
-			children = (
-				BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */,
-				BE9B476920AD50520063E0DA /* FuriganaUtils.swift */,
-				BE8180BF20B3BEB6006ABCB3 /* MyFont.swift */,
-			);
-			path = Furigana;
-			sourceTree = "<group>";
-		};
 		BEFA97A120AEB18700DE3280 /* Game */ = {
 			isa = PBXGroup;
 			children = (
@@ -317,7 +323,7 @@
 				BE17FB38209B0F5F00D23F22 /* GameEngine */,
 				BE6AF37F209C146B00CBDB63 /* GameFlows */,
 				BEDEDD4220A5D86500E7B60B /* GameUI */,
-				BEBDEDD1208EF15E00C18520 /* utilities.swift */,
+				BEF28B5F20B52B7900385273 /* Utilities */,
 				BEBDEDD8208EF15F00C18520 /* constants.swift */,
 			);
 			path = Game;
@@ -425,10 +431,12 @@
 				BE6ED54A20A1373700553D1A /* Commands.swift in Sources */,
 				BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */,
 				BEDFCDAB20A87AF800736153 /* PauseOverlayViewController.swift in Sources */,
+				BEF28B6120B52BB000385273 /* Score.swift in Sources */,
 				BE1CA956209D5D0900086853 /* Game.swift in Sources */,
 				BE7725C420A2CBC200DF186A /* sentences.swift in Sources */,
 				BE8180C520B3E03E006ABCB3 /* GameFinishedTableCell.swift in Sources */,
 				BE9B476A20AD50520063E0DA /* FuriganaUtils.swift in Sources */,
+				BEF28B6320B52BF700385273 /* UI.swift in Sources */,
 				BE65A939209C6E67006645CA /* GameEventDelegate.swift in Sources */,
 				BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */,
 				BEBDEDDC208EF15F00C18520 /* BGM.swift in Sources */,

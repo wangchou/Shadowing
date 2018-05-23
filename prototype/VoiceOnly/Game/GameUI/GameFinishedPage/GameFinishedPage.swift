@@ -68,16 +68,10 @@ extension GameFinishedPage: UITableViewDataSource {
 
         if let gameRecord = context.gameRecord,
            let score = gameRecord.sentencesScore[sentence] {
-            finishedCell.scoreLabel.text = "\(score)分"
-            var color = myRed
-            if score >= 80 {
-                color = myGreen
-            } else if score >= 60 {
-                color = myOrange
-            }
-            finishedCell.scoreLabel.textColor = color
-            finishedCell.userSaidSentenceLabel.backgroundColor = color
-            finishedCell.userSaidSentenceLabel.isHidden = score == 100 ? true : false
+            finishedCell.scoreLabel.text = score.text
+            finishedCell.scoreLabel.textColor = score.color
+            finishedCell.userSaidSentenceLabel.backgroundColor = score.color
+            finishedCell.userSaidSentenceLabel.isHidden = score.type == .perfect ? true : false
         } else {
             finishedCell.scoreLabel.text = "無分"
             finishedCell.scoreLabel.textColor = rgb(192, 192, 192)

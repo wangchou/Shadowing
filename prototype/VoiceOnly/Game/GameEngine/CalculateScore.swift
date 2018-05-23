@@ -58,8 +58,8 @@ func getKana(_ kanjiString: String) -> Promise<String> {
 func calculateScore(
     _ sentence1: String,
     _ sentence2: String
-) -> Promise<Int> {
-    let promise = Promise<Int>.pending()
+) -> Promise<Score> {
+    let promise = Promise<Score>.pending()
 
     func calcScore(_ str1: String, _ str2: String) -> Int {
         let len = max(str1.count, str2.count)
@@ -74,8 +74,8 @@ func calculateScore(
     ]).then { result in
         guard let kana1 = result.first, let kana2 = result.last else { print("get both kana fail"); return }
         let score = calcScore(kana1, kana2)
-        postEvent(.scoreCalculated, int: score)
-        promise.fulfill(score)
+        postEvent(.scoreCalculated, score: Score(value: score))
+        promise.fulfill(Score(value: score))
     }.catch { error in
         promise.reject(error)
     }

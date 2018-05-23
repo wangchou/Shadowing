@@ -76,28 +76,28 @@ class VoiceOnlyGame: Game {
             .then { oren(userSaidString) }
     }
 
-    private func updateRecord(score: Int) {
+    private func updateRecord(score: Score) {
         context.gameRecord?.sentencesScore[context.targetString] = score
 
-        switch score {
-        case 100:
+        switch score.type {
+        case .perfect:
             context.gameRecord?.perfectCount += 1
-        case 80...99:
+        case .great:
             context.gameRecord?.greatCount += 1
-        case 60...79:
+        case .good:
             context.gameRecord?.goodCount += 1
         default:
             ()
         }
     }
 
-    private func getScore() -> Promise<Int> {
+    private func getScore() -> Promise<Score> {
         return calculateScore(context.targetString, context.userSaidString)
     }
 
-    private func speakScore(score: Int) -> Promise<Void> {
+    private func speakScore(score: Score) -> Promise<Void> {
         self.state = .scoreCalculated
         updateRecord(score: score)
-        return meijia("\(score)分")
+        return meijia(score.valueText)
     }
 }
