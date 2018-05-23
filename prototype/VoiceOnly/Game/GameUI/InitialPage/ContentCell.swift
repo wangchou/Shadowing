@@ -29,8 +29,21 @@ class ContentCell: UITableViewCell {
 
     var strockedRankText: String? = "" {
         willSet(string) {
+            var color = UIColor.gray
+            switch string {
+            case "S", "SS":
+                color = UIColor.blue
+            case "A":
+                color = myGreen
+            case "B", "C", "D":
+                color = myOrange
+            case "E", "F":
+                color = myRed
+            default:
+                color = .lightText
+            }
             if let string = string {
-                rank.attributedText = getStrokeText(string, myRed)
+                rank.attributedText = getStrokeText(string, color)
             } else {
                 rank.attributedText = getStrokeText("?", .lightText)
             }
@@ -40,7 +53,7 @@ class ContentCell: UITableViewCell {
     var strockedProgressText: String? = "" {
         willSet(string) {
             if let string = string {
-                progress.attributedText = getStrokeText(string, myGreen)
+                progress.attributedText = getStrokeText(string, .white)
             } else {
                 progress.attributedText = getStrokeText("??%", .lightText)
             }

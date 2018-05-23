@@ -19,9 +19,9 @@ class ContentViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        addSentences(sentences: n5, prefix: n5Prefix)
-        addSentences(sentences: n4, prefix: n4Prefix)
-        addSentences(sentences: n3, prefix: n3Prefix)
+        addSentences(sentences: n5, prefix: n5Prefix, level: Level.n5)
+        addSentences(sentences: n4, prefix: n4Prefix, level: Level.n4)
+        addSentences(sentences: n3, prefix: n3Prefix, level: Level.n3)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -55,6 +55,21 @@ extension ContentViewController: UITableViewDataSource {
         contentCell.title.text = dataSetKey
         contentCell.strockedProgressText = context.gameHistory[dataSetKey]?.progress
         contentCell.strockedRankText = context.gameHistory[dataSetKey]?.rank
+
+        var color: UIColor = .white
+
+        if let level = allLevels[dataSetKey] {
+            switch level {
+            case .n5:
+                color = myRed
+            case .n4:
+                color = myOrange
+            case .n3:
+                color = myGreen
+            }
+        }
+
+        contentCell.backgroundColor = color.withAlphaComponent(0.1)
 
         return contentCell
     }
