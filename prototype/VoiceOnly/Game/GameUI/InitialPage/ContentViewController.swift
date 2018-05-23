@@ -13,18 +13,22 @@ private let context = GameContext.shared
 class ContentViewController: UIViewController {
     @IBOutlet weak var sentencesTableView: UITableView!
 
+    @IBOutlet weak var timeline: TimelineView!
+
+    var timelineSubviews: [String: UIView] = [:]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         addSentences(sentences: n5, prefix: n5Prefix)
         addSentences(sentences: n4, prefix: n4Prefix)
         addSentences(sentences: n3, prefix: n3Prefix)
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadGameHistory()
         sentencesTableView.reloadData()
+        timeline.viewWillAppear()
     }
 
     override func didReceiveMemoryWarning() {
