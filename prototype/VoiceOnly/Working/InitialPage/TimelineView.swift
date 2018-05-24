@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+private let context = GameContext.shared
+
 struct TimelineBox {
     var date: Date
     var row: Int
@@ -39,7 +41,11 @@ class TimelineView: UIView {
     let boxSpacing = 2
     let yPadding = 2
 
+    let dateFormatter = DateFormatter()
+
     func viewWillAppear() {
+        dateFormatter.dateFormat = "yyyy MM dd"
+
         self.frame.size.height = CGFloat(yPadding * 2 + (boxWidth + boxSpacing) * 8)
 
         self.subviews.forEach { $0.removeFromSuperview() }
@@ -48,8 +54,11 @@ class TimelineView: UIView {
         let weekday = Calendar.current.component(.weekday, from: today)
         var timelineBox = TimelineBox(date: today, row: weekday, column: 1)
         let columnCount = Int(screen.width)/(boxWidth + boxSpacing)
+        let recordsByDate = getRecordsByDate()
         while timelineBox.column < columnCount {
-            addBox(row: timelineBox.row, column: timelineBox.column)
+            let dateString = dateFormatter.string(from: timelineBox.date)
+            let color = getColorFrom(records: recordsByDate[dateString])
+            addBox(row: timelineBox.row, column: timelineBox.column, color: color)
             timelineBox.toYesterday()
             if timelineBox.day == 1 {
                 addTextLabel(row: 0, column: timelineBox.column, text: "\(timelineBox.month)月")
@@ -58,6 +67,41 @@ class TimelineView: UIView {
         addTextLabel(row: 2, column: 0, text: "月")
         addTextLabel(row: 4, column: 0, text: "水")
         addTextLabel(row: 6, column: 0, text: "金")
+    }
+
+    func getColorFrom(records: [GameRecord]?) -> UIColor {
+        guard let records = records else { return rgb(224, 224, 224) }
+        var r: Float = 0
+        var g: Float = 0
+        var b: Float = 0
+        var alpha: Float = 0
+        for record in records {
+            var color: UIColor
+            switch record.level {
+            case .n3:
+                return myGreen
+            case .n4:
+                return myOrange
+            case .n5:
+                return myRed
+            }
+
+        }
+        return rgb(224, 224, 224)
+        //return rgb(r, g, b).withAlphaComponent(alpha)
+    }
+
+    func getRecordsByDate() -> [String: [GameRecord]] {
+        var recordsByDate: [String: [GameRecord]] = [:]
+        context.gameHistory.forEach {
+            let dateString = dateFormatter.string(from: $0.startedTime)
+            if recordsByDate[dateString] != nil {
+                recordsByDate[dateString]!.append($0)
+            } else {
+                recordsByDate[dateString] = [$0]
+            }
+        }
+        return recordsByDate
     }
 
     func addTextLabel(row: Int, column: Int, text: String) {
@@ -71,7 +115,7 @@ class TimelineView: UIView {
 
     func addBox(row: Int, column: Int, color: UIColor = rgb(224, 224, 224)) {
         let box = UIView()
-        box.backgroundColor = rgb(224, 224, 224)
+        box.backgroundColor = color
         box.frame = getFrame(row: row, column: column)
         self.addSubview(box)
     }

@@ -15,6 +15,8 @@ private let context = GameContext.shared
 class VoiceOnlyGame: Game {
     static let shared = VoiceOnlyGame()
     var startTime: Double = 0
+    private var gameSeconds: Int = 0
+    private var timer: Timer?
 
     var state: GameState = .stopped {
         didSet {
@@ -24,11 +26,20 @@ class VoiceOnlyGame: Game {
 
     func play() {
         startEngine(toSpeaker: false)
+        context.gameRecord?.startedTime = Date()
+        gameSeconds = 0
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            //if self.isPaused { return }
+
+            postEvent(.playTimeUpdate, int: self.gameSeconds)
+            self.gameSeconds += 1
+        }
         context.loadLearningSentences()
         learnNext()
     }
 
     func stop() {
+        context.gameRecord?.playDuration = gameSeconds
         stopEngine()
     }
 

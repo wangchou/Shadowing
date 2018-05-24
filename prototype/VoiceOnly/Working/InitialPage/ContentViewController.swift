@@ -37,6 +37,17 @@ class ContentViewController: UIViewController {
     }
 }
 
+func getLevelColor(level: Level) -> UIColor {
+    switch level {
+    case .n5:
+        return myRed
+    case .n4:
+        return myOrange
+    case .n3:
+        return myGreen
+    }
+}
+
 extension ContentViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -53,20 +64,14 @@ extension ContentViewController: UITableViewDataSource {
         let dataSetKey = allSentencesKeys[indexPath.row]
 
         contentCell.title.text = dataSetKey
-        contentCell.strockedProgressText = context.gameHistory[dataSetKey]?.progress
-        contentCell.strockedRankText = context.gameHistory[dataSetKey]?.rank
+        let record = findBestRecord(key: dataSetKey)
+        contentCell.strockedProgressText = record?.progress
+        contentCell.strockedRankText = record?.rank
 
 //        var color: UIColor = .white
 //
 //        if let level = allLevels[dataSetKey] {
-//            switch level {
-//            case .n5:
-//                color = myRed
-//            case .n4:
-//                color = myOrange
-//            case .n3:
-//                color = myGreen
-//            }
+
 //        }
 //
 //        contentCell.backgroundColor = color.withAlphaComponent(0.1)

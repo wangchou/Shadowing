@@ -1,4 +1,4 @@
-enum Level {
+enum Level: Int {
     case n5, n4, n3
 }
 

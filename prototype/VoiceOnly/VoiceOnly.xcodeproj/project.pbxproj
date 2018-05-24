@@ -145,8 +145,6 @@
 				BEDEDD4F20A5DA8C00E7B60B /* components */,
 				BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */,
 				BE6ED54920A1373700553D1A /* Commands.swift */,
-				BE17FB3D209B19B200D23F22 /* GameContext.swift */,
-				BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */,
 			);
 			path = GameEngine;
 			sourceTree = "<group>";
@@ -291,6 +289,8 @@
 		BEFA979C20AEAEA400DE3280 /* InitialPage */ = {
 			isa = PBXGroup;
 			children = (
+				BE17FB3D209B19B200D23F22 /* GameContext.swift */,
+				BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */,
 				BEDEDD3620A46D1B00E7B60B /* ContentViewController.swift */,
 				BEF258B220B57C7F00D0026C /* TimelineView.swift */,
 				BE7725CD20A4216700DF186A /* ContentCell.swift */,

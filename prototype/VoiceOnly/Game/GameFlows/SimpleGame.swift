@@ -28,6 +28,7 @@ class SimpleGame: Game {
 
     func play() {
         self.state = .stopped
+        context.gameRecord?.startedTime = Date()
         startEngine(toSpeaker: true)
         gameSeconds = 0
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
@@ -55,6 +56,7 @@ class SimpleGame: Game {
     }
 
     func stop() {
+        context.gameRecord?.playDuration = gameSeconds
         state = .stopped
         timer?.invalidate()
         stopEngine()

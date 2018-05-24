@@ -14,21 +14,53 @@ private let defaults = UserDefaults.standard
 private let gameHistoryKey = "game record array"
 
 func saveGameHistory() {
-    let gameHistoryData = NSKeyedArchiver.archivedData(withRootObject: Array(context.gameHistory.values))
+    let gameHistoryData = NSKeyedArchiver.archivedData(withRootObject: Array(context.gameHistory))
     defaults.set(gameHistoryData, forKey: gameHistoryKey)
 }
 
 func loadGameHistory() {
     guard let gameHistoryData = defaults.data(forKey: gameHistoryKey) else { return }
     guard let gameHistoryArray = NSKeyedUnarchiver.unarchiveObject(with: gameHistoryData) as? [GameRecord] else { return }
-    for gameRecord in gameHistoryArray {
-        context.gameHistory[gameRecord.dataSetKey] = gameRecord
+    context.gameHistory = gameHistoryArray
+    
+//    context.gameHistory.forEach {
+//        print($0.dataSetKey, $0.level, $0.startedTime, $0.playDuration, $0.progress, $0.rank)
+
     }
 }
 
+func isBetter(_ record1: GameRecord, to record2: GameRecord) -> Bool {
+    return record1.p <= record2.p && record1.rank != "SS"
+}
+
+func findBestRecord(key: String) -> GameRecord? {
+    return context.gameHistory.first(where: {$0.dataSetKey == key})
+}
+
+//func findRecordsInDate(date: Date) -> [GameRecord] {
+//    return context.gameHistory.filter {
+//        $0.startedTime
+//    }
+//}
+
+// best record will insert at array HEAD
+func updateGameHistory() {
+    guard let record = context.gameRecord else { return }
+    if let bestRecord = findBestRecord(key: record.dataSetKey),
+       isBetter(record, to: bestRecord) {
+        context.gameHistory.insert(record, at: 0)
+    } else {
+        context.gameHistory.append(record)
+    }
+    saveGameHistory()
+}
+
 class GameRecord: NSObject, NSCoding {
+    var startedTime: Date
+    var playDuration: Int = 0
     let dataSetKey: String
     let sentencesCount: Int
+    let level: Level
     var perfectCount = 0
     var greatCount = 0
     var goodCount = 0
@@ -55,10 +87,12 @@ class GameRecord: NSObject, NSCoding {
         return "F"
     }
 
-    init(_ dataSetKey: String, sentencesCount: Int) {
+    init(_ dataSetKey: String, sentencesCount: Int, level: Level) {
         self.dataSetKey = dataSetKey
         self.sentencesCount = sentencesCount
+        self.level = level
         self.sentencesScore = [:]
+        self.startedTime = Date()
     }
 
     required init(coder decoder: NSCoder) {
@@ -79,6 +113,19 @@ class GameRecord: NSObject, NSCoding {
         self.perfectCount = decoder.decodeInteger(forKey: "perfectCount")
         self.greatCount = decoder.decodeInteger(forKey: "greatCount")
         self.goodCount = decoder.decodeInteger(forKey: "goodCount")
+        self.playDuration = decoder.decodeInteger(forKey: "playDuration")
+        if let level = Level(rawValue: decoder.decodeInteger(forKey: "level")) {
+            self.level = level
+        } else {
+            self.level = Level.n5
+            print("decode level fail")
+        }
+        if let startedTime = decoder.decodeObject(forKey: "startedTime") as? Date {
+            self.startedTime = startedTime
+        } else {
+            print("decode started time as Date failed")
+            self.startedTime = Date()
+        }
         super.init()
     }
 
@@ -88,10 +135,13 @@ class GameRecord: NSObject, NSCoding {
         coder.encodeCInt(Int32(self.perfectCount), forKey: "perfectCount")
         coder.encodeCInt(Int32(self.greatCount), forKey: "greatCount")
         coder.encodeCInt(Int32(self.goodCount), forKey: "goodCount")
+        coder.encodeCInt(Int32(self.playDuration), forKey: "playDuration")
+        coder.encodeCInt(Int32(self.level.rawValue), forKey: "level")
         var sentencesIntScore: [String: Int] = [:]
         for (key, score) in self.sentencesScore {
             sentencesIntScore[key] = score.value
         }
         coder.encode(sentencesIntScore, forKey: "sentencesScore")
+        coder.encode(self.startedTime, forKey: "startedTime")
     }
 }

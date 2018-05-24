@@ -36,7 +36,7 @@ class GameContentDetailPage: UIViewController {
         super.viewDidLoad()
         updateGameModeSelection()
         titleLabel.text = context.dataSetKey
-        if let gameRecord = context.gameHistory[context.dataSetKey] {
+        if let gameRecord = findBestRecord(key: context.dataSetKey) {
             rankLabel.text = gameRecord.rank
             progressLabel.text = gameRecord.progress
             perfectCountLabel.text = gameRecord.perfectCount.s
@@ -126,7 +126,7 @@ extension GameContentDetailPage: UITableViewDataSource {
             detailCell.furiganaLabel.text = sentence
         }
 
-        if let gameRecord = context.gameHistory[context.dataSetKey],
+        if let gameRecord = findBestRecord(key: context.dataSetKey),
            let score = gameRecord.sentencesScore[sentence] {
             detailCell.miscLabel.text = score.valueText
             detailCell.miscLabel.textColor = score.color

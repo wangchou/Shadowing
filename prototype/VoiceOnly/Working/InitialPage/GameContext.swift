@@ -19,7 +19,7 @@ class GameContext {
     //Singleton
     static let shared = GameContext()
 
-    var gameHistory = [String: GameRecord]()
+    var gameHistory = [GameRecord]()
 
     var engine = AVAudioEngine()
     var micVolumeNode = AVAudioMixerNode()
@@ -84,7 +84,7 @@ class GameContext {
 
         targetString = sentences[0]
         life = isSimulator ? 100 : 40
-        gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count)
+        gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: allLevels[dataSetKey]!)
     }
 
     func nextSentence() -> Bool {
