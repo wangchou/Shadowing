@@ -56,20 +56,20 @@ extension ContentViewController: UITableViewDataSource {
         contentCell.strockedProgressText = context.gameHistory[dataSetKey]?.progress
         contentCell.strockedRankText = context.gameHistory[dataSetKey]?.rank
 
-        var color: UIColor = .white
-
-        if let level = allLevels[dataSetKey] {
-            switch level {
-            case .n5:
-                color = myRed
-            case .n4:
-                color = myOrange
-            case .n3:
-                color = myGreen
-            }
-        }
-
-        contentCell.backgroundColor = color.withAlphaComponent(0.1)
+//        var color: UIColor = .white
+//
+//        if let level = allLevels[dataSetKey] {
+//            switch level {
+//            case .n5:
+//                color = myRed
+//            case .n4:
+//                color = myOrange
+//            case .n3:
+//                color = myGreen
+//            }
+//        }
+//
+//        contentCell.backgroundColor = color.withAlphaComponent(0.1)
 
         return contentCell
     }

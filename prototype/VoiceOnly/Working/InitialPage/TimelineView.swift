@@ -35,9 +35,9 @@ struct TimelineBox {
 }
 
 class TimelineView: UIView {
-    let boxWidth = 24
-    let boxSpacing = 4
-    let yPadding = 4
+    let boxWidth = 12
+    let boxSpacing = 2
+    let yPadding = 2
 
     func viewWillAppear() {
         self.frame.size.height = CGFloat(yPadding * 2 + (boxWidth + boxSpacing) * 8)

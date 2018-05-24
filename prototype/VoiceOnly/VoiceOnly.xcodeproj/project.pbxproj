@@ -154,6 +154,7 @@
 		BE40C61220ABF7E7004E420F /* Working */ = {
 			isa = PBXGroup;
 			children = (
+				BEFA979C20AEAEA400DE3280 /* InitialPage */,
 				BEBDEDC3208EF09F00C18520 /* Main.storyboard */,
 			);
 			path = Working;
@@ -259,7 +260,6 @@
 			isa = PBXGroup;
 			children = (
 				BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */,
-				BEFA979C20AEAEA400DE3280 /* InitialPage */,
 				BEFA979E20AEAEDD00DE3280 /* GameDetailPage */,
 				BEFA979D20AEAECC00DE3280 /* GamePage */,
 				BE8180C320B3DFEF006ABCB3 /* GameFinishedPage */,

@@ -68,7 +68,7 @@ extension GameFinishedPage: UITableViewDataSource {
 
         if let gameRecord = context.gameRecord,
            let score = gameRecord.sentencesScore[sentence] {
-            finishedCell.scoreLabel.text = score.text
+            finishedCell.scoreLabel.text = score.valueText
             finishedCell.scoreLabel.textColor = score.color
             finishedCell.userSaidSentenceLabel.backgroundColor = score.color
             finishedCell.userSaidSentenceLabel.isHidden = score.type == .perfect ? true : false

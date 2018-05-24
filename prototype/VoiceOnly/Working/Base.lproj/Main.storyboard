@@ -26,7 +26,7 @@
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="ca0-bb-sN7" customClass="TimelineView" customModule="VoiceOnly" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="165"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="SentencesCell" rowHeight="80" id="dBP-pO-iCD" customClass="ContentCell" customModule="VoiceOnly" customModuleProvider="target">
