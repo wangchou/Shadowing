@@ -103,29 +103,19 @@ class GameRecord: NSObject, NSCoding {
         self.greatCount = decoder.decodeInteger(forKey: "greatCount")
         self.goodCount = decoder.decodeInteger(forKey: "goodCount")
         self.playDuration = decoder.decodeInteger(forKey: "playDuration")
-        if let level = Level(rawValue: decoder.decodeInteger(forKey: "level")) {
-            self.level = level
-        } else {
-            if let level = allLevels[self.dataSetKey] {
-                self.level = level
-            } else {
-                self.level = .n5
-            }
-            print("decode level fail")
-        }
+        self.level = allLevels[self.dataSetKey] ??
+                     Level(rawValue: decoder.decodeInteger(forKey: "level")) ??
+                     .n5
         if let startedTime = decoder.decodeObject(forKey: "startedTime") as? Date {
             self.startedTime = startedTime
         } else {
             print("decode started time as Date failed")
 
             // random date for test
-            var date = Date()
+            let date = Date()
             var dateComponent = DateComponents()
             dateComponent.day = -1 * Int(arc4random_uniform(14))
-            if let newDate = Calendar.current.date(byAdding: dateComponent, to: date) {
-                date = newDate
-            }
-            self.startedTime = date
+            self.startedTime = Calendar.current.date(byAdding: dateComponent, to: date) ?? date
         }
         super.init()
     }

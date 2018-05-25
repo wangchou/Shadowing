@@ -37,7 +37,7 @@ struct TimelineBox {
 }
 
 class TimelineView: UIView {
-    let boxWidth = 12
+    let boxWidth = Int(screen.width * 12/320)
     let boxSpacing = 2
     let yPadding = 2
 
@@ -120,6 +120,7 @@ class TimelineView: UIView {
         let box = UIView()
         box.backgroundColor = color
         box.frame = getFrame(row: row, column: column)
+        box.layer.cornerRadius = 1.5
         self.addSubview(box)
     }
 
