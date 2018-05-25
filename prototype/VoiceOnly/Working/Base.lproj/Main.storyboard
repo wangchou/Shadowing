@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,14 +24,34 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" id="ca0-bb-sN7" customClass="TimelineView" customModule="VoiceOnly" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="165"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="U0O-4m-O5g" userLabel="TopView">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ca0-bb-sN7" customClass="TimelineView" customModule="VoiceOnly" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="120"/>
+                                            <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mu1-Ft-6RO" userLabel="Character" customClass="CharacterView" customModule="VoiceOnly" customModuleProvider="target">
+                                            <rect key="frame" x="200" y="0.0" width="120" height="120"/>
+                                            <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="ca0-bb-sN7" firstAttribute="top" secondItem="U0O-4m-O5g" secondAttribute="top" id="4bl-bq-xGJ"/>
+                                        <constraint firstItem="ca0-bb-sN7" firstAttribute="width" secondItem="U0O-4m-O5g" secondAttribute="height" multiplier="5:3" id="A6q-Wd-P6s"/>
+                                        <constraint firstItem="mu1-Ft-6RO" firstAttribute="leading" secondItem="ca0-bb-sN7" secondAttribute="trailing" id="UAU-67-9jH"/>
+                                        <constraint firstAttribute="bottom" secondItem="ca0-bb-sN7" secondAttribute="bottom" id="aRe-Ts-hFe"/>
+                                        <constraint firstAttribute="trailing" secondItem="mu1-Ft-6RO" secondAttribute="trailing" id="gWB-sC-3Vl"/>
+                                        <constraint firstAttribute="bottom" secondItem="mu1-Ft-6RO" secondAttribute="bottom" id="lyj-E7-NZx"/>
+                                        <constraint firstItem="mu1-Ft-6RO" firstAttribute="top" secondItem="U0O-4m-O5g" secondAttribute="top" id="sJk-FB-Wb6"/>
+                                        <constraint firstItem="ca0-bb-sN7" firstAttribute="leading" secondItem="U0O-4m-O5g" secondAttribute="leading" id="uvV-pP-0QS"/>
+                                    </constraints>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="SentencesCell" rowHeight="80" id="dBP-pO-iCD" customClass="ContentCell" customModule="VoiceOnly" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="193" width="320" height="80"/>
+                                        <rect key="frame" x="0.0" y="148" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dBP-pO-iCD" id="u6e-75-GJe">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
@@ -145,8 +166,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="characterView" destination="mu1-Ft-6RO" id="Gla-o8-Kmc"/>
                         <outlet property="sentencesTableView" destination="9Ar-lL-ket" id="lAY-Dp-77e"/>
                         <outlet property="timeline" destination="ca0-bb-sN7" id="Etn-sX-vff"/>
+                        <outlet property="topView" destination="U0O-4m-O5g" id="3cf-yj-NPp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -14,6 +14,8 @@ class ContentViewController: UIViewController {
     @IBOutlet weak var sentencesTableView: UITableView!
 
     @IBOutlet weak var timeline: TimelineView!
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var characterView: CharacterView!
 
     var timelineSubviews: [String: UIView] = [:]
 
@@ -22,6 +24,12 @@ class ContentViewController: UIViewController {
         addSentences(sentences: n5, prefix: n5Prefix, level: Level.n5)
         addSentences(sentences: n4, prefix: n4Prefix, level: Level.n4)
         addSentences(sentences: n3, prefix: n3Prefix, level: Level.n3)
+        let height = screen.width * 120/320
+        topView.frame.size.height = height
+        timeline.frame.size.width = height * 5 / 3
+        timeline.frame.size.height = height
+        characterView.frame.size.width = height
+        characterView.frame.size.height = height
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -29,6 +37,7 @@ class ContentViewController: UIViewController {
         loadGameHistory()
         sentencesTableView.reloadData()
         timeline.viewWillAppear()
+        characterView.viewWillAppear()
     }
 
     override func didReceiveMemoryWarning() {

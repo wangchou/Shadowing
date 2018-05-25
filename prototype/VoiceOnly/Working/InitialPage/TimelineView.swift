@@ -37,23 +37,22 @@ struct TimelineBox {
 }
 
 class TimelineView: UIView {
-    let boxWidth = Int(screen.width * 12/320)
-    let boxSpacing = 2
-    let yPadding = 2
+    var boxWidth = 12
+    var boxSpacing = 2
+    var yPadding = 2
 
     let dateFormatter = DateFormatter()
 
     func viewWillAppear() {
+        boxWidth = Int((self.frame.height - boxSpacing.c * 9) / 8)
         dateFormatter.dateFormat = "yyyy MM dd"
-
-        self.frame.size.height = CGFloat(yPadding * 2 + (boxWidth + boxSpacing) * 8)
 
         self.subviews.forEach { $0.removeFromSuperview() }
 
         let today = Date()
         let weekday = Calendar.current.component(.weekday, from: today)
         var timelineBox = TimelineBox(date: today, row: weekday, column: 1)
-        let columnCount = Int(screen.width)/(boxWidth + boxSpacing)
+        let columnCount = Int(self.frame.width)/(boxWidth + boxSpacing)
         let recordsByDate = getRecordsByDate()
         while timelineBox.column < columnCount {
             let dateString = dateFormatter.string(from: timelineBox.date)
@@ -128,7 +127,7 @@ class TimelineView: UIView {
     // row from top to down
     func getFrame(row: Int, column: Int) -> CGRect {
         return CGRect(
-            x: Int(screen.width) - (boxWidth + boxSpacing) * (column + 1),
+            x: Int(self.frame.width) - (boxWidth + boxSpacing) * (column + 1),
             y: (boxWidth + boxSpacing) * row + yPadding,
             width: boxWidth,
             height: boxWidth
