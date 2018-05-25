@@ -47,7 +47,7 @@ class TimelineView: UIView {
         boxWidth = Int((self.frame.height - boxSpacing.c * 9) / 8)
         dateFormatter.dateFormat = "yyyy MM dd"
 
-        self.subviews.forEach { $0.removeFromSuperview() }
+        self.removeAllSubviews()
 
         let today = Date()
         let weekday = Calendar.current.component(.weekday, from: today)

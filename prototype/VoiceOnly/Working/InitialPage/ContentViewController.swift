@@ -26,7 +26,7 @@ class ContentViewController: UIViewController {
         addSentences(sentences: n3, prefix: n3Prefix, level: Level.n3)
         let height = screen.width * 120/320
         topView.frame.size.height = height
-        timeline.frame.size.width = height * 5 / 3
+        timeline.frame.size.width = height * 5/3
         timeline.frame.size.height = height
         characterView.frame.size.width = height
         characterView.frame.size.height = height

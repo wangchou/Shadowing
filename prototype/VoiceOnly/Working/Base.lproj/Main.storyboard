@@ -40,7 +40,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="ca0-bb-sN7" firstAttribute="top" secondItem="U0O-4m-O5g" secondAttribute="top" id="4bl-bq-xGJ"/>
-                                        <constraint firstItem="ca0-bb-sN7" firstAttribute="width" secondItem="U0O-4m-O5g" secondAttribute="height" multiplier="5:3" id="A6q-Wd-P6s"/>
+                                        <constraint firstItem="ca0-bb-sN7" firstAttribute="width" secondItem="U0O-4m-O5g" secondAttribute="height" multiplier="5:3" id="8y8-Ip-4hf"/>
                                         <constraint firstItem="mu1-Ft-6RO" firstAttribute="leading" secondItem="ca0-bb-sN7" secondAttribute="trailing" id="UAU-67-9jH"/>
                                         <constraint firstAttribute="bottom" secondItem="ca0-bb-sN7" secondAttribute="bottom" id="aRe-Ts-hFe"/>
                                         <constraint firstAttribute="trailing" secondItem="mu1-Ft-6RO" secondAttribute="trailing" id="gWB-sC-3Vl"/>

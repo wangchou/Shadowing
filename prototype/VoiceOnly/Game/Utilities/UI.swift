@@ -22,6 +22,10 @@ extension UIView {
         self.frame.origin.x = boundRect.origin.x + xPadding
         self.frame.origin.y = boundRect.origin.y + yPadding
     }
+
+    func removeAllSubviews() {
+        self.subviews.forEach { $0.removeFromSuperview() }
+    }
 }
 
 extension UIScrollView {
