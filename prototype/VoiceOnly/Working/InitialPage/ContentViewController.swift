@@ -68,14 +68,6 @@ extension ContentViewController: UITableViewDataSource {
         contentCell.strockedProgressText = record?.progress
         contentCell.strockedRankText = record?.rank
 
-//        var color: UIColor = .white
-//
-//        if let level = allLevels[dataSetKey] {
-
-//        }
-//
-//        contentCell.backgroundColor = color.withAlphaComponent(0.1)
-
         return contentCell
     }
 }

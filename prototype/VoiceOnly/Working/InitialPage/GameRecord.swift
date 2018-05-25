@@ -22,11 +22,6 @@ func loadGameHistory() {
     guard let gameHistoryData = defaults.data(forKey: gameHistoryKey) else { return }
     guard let gameHistoryArray = NSKeyedUnarchiver.unarchiveObject(with: gameHistoryData) as? [GameRecord] else { return }
     context.gameHistory = gameHistoryArray
-    
-//    context.gameHistory.forEach {
-//        print($0.dataSetKey, $0.level, $0.startedTime, $0.playDuration, $0.progress, $0.rank)
-
-    }
 }
 
 func isBetter(_ record1: GameRecord, to record2: GameRecord) -> Bool {
@@ -36,12 +31,6 @@ func isBetter(_ record1: GameRecord, to record2: GameRecord) -> Bool {
 func findBestRecord(key: String) -> GameRecord? {
     return context.gameHistory.first(where: {$0.dataSetKey == key})
 }
-
-//func findRecordsInDate(date: Date) -> [GameRecord] {
-//    return context.gameHistory.filter {
-//        $0.startedTime
-//    }
-//}
 
 // best record will insert at array HEAD
 func updateGameHistory() {
@@ -117,14 +106,26 @@ class GameRecord: NSObject, NSCoding {
         if let level = Level(rawValue: decoder.decodeInteger(forKey: "level")) {
             self.level = level
         } else {
-            self.level = Level.n5
+            if let level = allLevels[self.dataSetKey] {
+                self.level = level
+            } else {
+                self.level = .n5
+            }
             print("decode level fail")
         }
         if let startedTime = decoder.decodeObject(forKey: "startedTime") as? Date {
             self.startedTime = startedTime
         } else {
             print("decode started time as Date failed")
-            self.startedTime = Date()
+
+            // random date for test
+            var date = Date()
+            var dateComponent = DateComponents()
+            dateComponent.day = -1 * Int(arc4random_uniform(14))
+            if let newDate = Calendar.current.date(byAdding: dateComponent, to: date) {
+                date = newDate
+            }
+            self.startedTime = date
         }
         super.init()
     }

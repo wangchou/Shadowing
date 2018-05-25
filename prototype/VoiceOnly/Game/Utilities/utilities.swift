@@ -168,16 +168,22 @@ extension Sequence {
 
 extension Int {
     var f: Float { return Float(self) }
+    var c: CGFloat { return CGFloat(self) }
     var s: String { return String(self) }
 }
 
 extension Float {
     var i: Int { return Int(self) }
+    var c: CGFloat { return CGFloat(self) }
+}
+
+extension CGFloat {
+    var f: Float { return Float(self) }
 }
 
 // MARK: - rgb
-func rgb(_ red: Float, _ green: Float, _ blue: Float) -> UIColor {
-    return UIColor(red: CGFloat(red/255.0), green: CGFloat(green/255.0), blue: CGFloat(blue/255.0), alpha: 1)
+func rgb(_ red: Float, _ green: Float, _ blue: Float, _ alpha: Float = 1.0) -> UIColor {
+    return UIColor(red: CGFloat(red/255.0), green: CGFloat(green/255.0), blue: CGFloat(blue/255.0), alpha: CGFloat(alpha))
 }
 
 func colorText(_ text: String, _ color: UIColor = .lightText, terminator: String = "") -> NSMutableAttributedString {

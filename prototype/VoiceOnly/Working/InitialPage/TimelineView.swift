@@ -70,25 +70,28 @@ class TimelineView: UIView {
     }
 
     func getColorFrom(records: [GameRecord]?) -> UIColor {
-        guard let records = records else { return rgb(224, 224, 224) }
-        var r: Float = 0
-        var g: Float = 0
-        var b: Float = 0
-        var alpha: Float = 0
+        guard let records = records, !records.isEmpty else { return rgb(224, 224, 224) }
+        var sumRed = 0.c
+        var sumGreen = 0.c
+        var sumBlue = 0.c
+        var sumAlpha: CGFloat = 0.33
         for record in records {
-            var color: UIColor
-            switch record.level {
-            case .n3:
-                return myGreen
-            case .n4:
-                return myOrange
-            case .n5:
-                return myRed
-            }
-
+            let color = getLevelColor(level: record.level)
+            var red = 0.c
+            var green = 0.c
+            var blue = 0.c
+            var alpha = 0.c
+            color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+            sumRed += red
+            sumGreen += green
+            sumBlue += blue
         }
-        return rgb(224, 224, 224)
-        //return rgb(r, g, b).withAlphaComponent(alpha)
+        sumRed *= 255 / records.count.c
+        sumGreen *= 255 / records.count.c
+        sumBlue *= 255 / records.count.c
+        if records.count >= 3 { sumAlpha = 0.66 }
+        if records.count >= 7 { sumAlpha = 1.0 }
+        return rgb(sumRed.f, sumGreen.f, sumBlue.f, sumAlpha.f)
     }
 
     func getRecordsByDate() -> [String: [GameRecord]] {
@@ -96,7 +99,7 @@ class TimelineView: UIView {
         context.gameHistory.forEach {
             let dateString = dateFormatter.string(from: $0.startedTime)
             if recordsByDate[dateString] != nil {
-                recordsByDate[dateString]!.append($0)
+                recordsByDate[dateString]?.append($0)
             } else {
                 recordsByDate[dateString] = [$0]
             }

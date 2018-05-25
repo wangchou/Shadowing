@@ -84,7 +84,8 @@ class GameContext {
 
         targetString = sentences[0]
         life = isSimulator ? 100 : 40
-        gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: allLevels[dataSetKey]!)
+        let level = allLevels[dataSetKey] ?? .n5
+        gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level)
     }
 
     func nextSentence() -> Bool {
