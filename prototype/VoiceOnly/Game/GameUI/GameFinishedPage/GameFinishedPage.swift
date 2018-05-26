@@ -20,9 +20,10 @@ class GameFinishedPage: UIViewController {
     @IBOutlet weak var greatCountLabel: UILabel!
     @IBOutlet weak var goodCountLabel: UILabel!
     @IBOutlet weak var missedCountLabel: UILabel!
+    @IBOutlet weak var newRecordLabel: UILabel!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         titleLabel.text = "  " + context.dataSetKey
         guard let record = context.gameRecord else { return }
         rankLabel.text = record.rank
@@ -31,6 +32,7 @@ class GameFinishedPage: UIViewController {
         greatCountLabel.text = record.greatCount.s
         goodCountLabel.text = record.goodCount.s
         missedCountLabel.text = (context.sentences.count - record.perfectCount - record.greatCount - record.goodCount).s
+        newRecordLabel.isHidden = !context.isNewRecord
     }
 
     @IBAction func finshedButtonClicked(_ sender: Any) {

@@ -30,6 +30,7 @@ class GameContext {
     var gameMode: GameMode = .phone
 
     var isEngineRunning = false
+    var isNewRecord = false
     var sentences: [String] = []
     var userSaidSentences: [String] = []
     var sentenceIndex: Int = 0
@@ -84,8 +85,11 @@ class GameContext {
 
         targetString = sentences[0]
         life = isSimulator ? 100 : 40
+
         let level = allLevels[dataSetKey] ?? .n5
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level)
+
+        isNewRecord = false
     }
 
     func nextSentence() -> Bool {

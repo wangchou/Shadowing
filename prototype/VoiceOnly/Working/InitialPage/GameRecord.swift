@@ -35,11 +35,16 @@ func findBestRecord(key: String) -> GameRecord? {
 // best record will insert at array HEAD
 func updateGameHistory() {
     guard let record = context.gameRecord else { return }
-    if let bestRecord = findBestRecord(key: record.dataSetKey),
-       isBetter(record, to: bestRecord) {
-        context.gameHistory.insert(record, at: 0)
+
+    if let bestRecord = findBestRecord(key: record.dataSetKey) {
+        if isBetter(record, to: bestRecord) {
+            context.gameHistory.insert(record, at: 0)
+            context.isNewRecord = true
+        }
+        context.isNewRecord = false
     } else {
         context.gameHistory.append(record)
+        context.isNewRecord = true
     }
     saveGameHistory()
 }

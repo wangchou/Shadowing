@@ -882,6 +882,7 @@
                         <outlet property="goodCountLabel" destination="IZZ-DK-Y1r" id="cVG-HU-UPP"/>
                         <outlet property="greatCountLabel" destination="IQA-ai-1LN" id="iM3-eM-SG4"/>
                         <outlet property="missedCountLabel" destination="SMF-Po-hVH" id="N7C-Bt-Jd3"/>
+                        <outlet property="newRecordLabel" destination="5Md-mf-U52" id="BHS-NZ-YR0"/>
                         <outlet property="perfectCountLabel" destination="S3s-ht-8i2" id="jbg-PV-Hfl"/>
                         <outlet property="progressLabel" destination="L7e-u4-Ybo" id="hNb-si-TkB"/>
                         <outlet property="rankLabel" destination="Zss-dW-Hta" id="coV-Oy-qHi"/>
