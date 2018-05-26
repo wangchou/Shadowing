@@ -32,12 +32,19 @@ class ContentViewController: UIViewController {
         characterView.frame.size.height = height
     }
 
+    @objc func characterViewTapped() {
+        print("characterViewTapped")
+        launchStoryboard(self, "DataPageViewOverlay", isOverCurrent: true, animated: true)
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadGameHistory()
         sentencesTableView.reloadData()
         timeline.viewWillAppear()
         characterView.viewWillAppear()
+        let characterViewTap = UITapGestureRecognizer(target: self, action: #selector(self.characterViewTapped))
+        characterView.addGestureRecognizer(characterViewTap)
     }
 
     override func didReceiveMemoryWarning() {

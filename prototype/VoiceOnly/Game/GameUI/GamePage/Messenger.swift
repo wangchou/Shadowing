@@ -77,7 +77,7 @@ class Messenger: UIViewController {
         if isLeft {
             myLabel.backgroundColor = myWhite
         } else {
-            myLabel.frame.origin.x = CGFloat(Int(screen.width) - spacing - Int(myLabel.frame.width))
+            myLabel.frame.origin.x = CGFloat(Int(screen.width) - 5 - Int(myLabel.frame.width))
             if text.string == "..." {
                 myLabel.backgroundColor = .gray
             } else if text.string == "聽不清楚" {

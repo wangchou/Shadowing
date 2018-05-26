@@ -567,7 +567,60 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MiC-io-7Ao" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="163" y="322"/>
+            <point key="canvasLocation" x="900" y="1123"/>
+        </scene>
+        <!--Data Page View Controller-->
+        <scene sceneID="pD5-HZ-PEe">
+            <objects>
+                <pageViewController storyboardIdentifier="DataPageViewOverlay" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="mVC-xN-5Oe" customClass="DataPageViewController" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VSN-9Z-odg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="975" y="-581"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="RRd-qc-4qy">
+            <objects>
+                <viewController storyboardIdentifier="CharacterStatusPage" id="V6r-vS-0uO" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5Of-w9-cDV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="d7b-le-fms"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ti6-bI-gQ2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-345" y="90"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="EGN-Up-13g">
+            <objects>
+                <viewController storyboardIdentifier="ItemPage" id="NxB-qG-2V4" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="luN-tE-Ba7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="b1C-KX-z3k"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vyx-WP-K52" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="328" y="90"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="vEa-a4-FPi">
+            <objects>
+                <viewController storyboardIdentifier="SettingPage" id="82R-r1-qvM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gYL-BU-Rh6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="maf-bZ-K0q"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cRu-MH-vEh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="975" y="90"/>
         </scene>
         <!--原型9: 文章閱讀器-->
         <scene sceneID="FT9-Nb-eyT">
@@ -1026,7 +1079,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aaN-tZ-72g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="842" y="321"/>
+            <point key="canvasLocation" x="1581" y="1122"/>
         </scene>
         <!--原型1: 中文語音提示-->
         <scene sceneID="U7a-rN-9qm">

@@ -130,6 +130,9 @@ extension GameContentDetailPage: UITableViewDataSource {
            let score = gameRecord.sentencesScore[sentence] {
             detailCell.miscLabel.text = score.valueText
             detailCell.miscLabel.textColor = score.color
+        } else {
+            detailCell.miscLabel.text = "無分"
+            detailCell.miscLabel.textColor = .lightGray
         }
 
         return detailCell
