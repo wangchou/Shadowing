@@ -5,7 +5,6 @@
 //  Created by Wangchou Lu on H30/05/26.
 //  Copyright © 平成30年 Lu, WangChou. All rights reserved.
 //
-
 // from https://www.youtube.com/watch?v=9BKwrOoIOcA
 
 import UIKit

@@ -31,5 +31,4 @@ class PauseOverlayViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
         postEvent(.resume)
     }
-
 }

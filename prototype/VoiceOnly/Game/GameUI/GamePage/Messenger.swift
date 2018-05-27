@@ -44,7 +44,7 @@ class Messenger: UIViewController {
         context.startTime = getNow()
 
         let scrollViewTap = UITapGestureRecognizer(target: self, action: #selector(scrollViewTapped))
-        scrollViewTap.numberOfTapsRequired = 1
+        scrollView.addGestureRecognizer(scrollViewTap)
     }
 
     func end() {

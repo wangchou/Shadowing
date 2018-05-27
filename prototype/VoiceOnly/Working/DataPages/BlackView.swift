@@ -9,28 +9,29 @@
 import Foundation
 import UIKit
 
-// grid system width = 48 grids
-private let stepCount: Int = 48
-private let step: CGFloat = screen.width/stepCount.c
-private func getFrame(x: Int, y: Int, w: Int, h: Int) -> CGRect {
-    let x = (x + stepCount) % stepCount
-    return CGRect(
-        x: step * x.c,
-        y: step * y.c,
-        width: step * w.c,
-        height: step * h.c
-    )
-}
-
 class BlackView: UIView {
+    var gridSystem: GridSystem = GridSystem()
+
     func viewWillAppear() {
+        gridSystem = GridSystem(axis: .horizontal, gridCount: 48, bounds: self.frame)
+        // grid system setting
         self.backgroundColor = UIColor.black.withAlphaComponent(0.85)
         self.removeAllSubviews()
+        addBackButton()
+    }
+
+    func addBackButton() {
         let backButton = UIButton()
         backButton.setTitle("X", for: .normal)
-        backButton.titleLabel?.font = MyFont.systemFont(ofSize: step * 4)
+        backButton.titleLabel?.font = MyFont.systemFont(ofSize: gridSystem.step * 4)
         backButton.titleLabel?.textColor = myLightText
-        backButton.frame = getFrame(x: -4, y: 2, w: 3, h: 3)
+        gridSystem.frame(backButton, x: -4, y: 2, w: 3, h: 3)
         self.addSubview(backButton)
+        let backButtonTap = UITapGestureRecognizer(target: self, action: #selector(self.backButtonTapped))
+        backButton.addGestureRecognizer(backButtonTap)
+    }
+
+    @objc func backButtonTapped() {
+        UIApplication.getPresentedViewController()?.dismiss(animated: true, completion: nil)
     }
 }

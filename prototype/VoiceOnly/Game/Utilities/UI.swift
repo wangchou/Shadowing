@@ -37,3 +37,54 @@ extension UIScrollView {
         self.scrollRectToVisible(CGRect(x: 5, y: y-1, width: 1, height: 1), animated: true)
     }
 }
+
+extension UIApplication {
+    class func getPresentedViewController() -> UIViewController? {
+        var presentViewController = UIApplication.shared.keyWindow?.rootViewController
+        while let pVC = presentViewController?.presentedViewController {
+            presentViewController = pVC
+        }
+
+        return presentViewController
+    }
+}
+
+enum GridAxis {
+    case horizontal
+    case vertical
+}
+
+let emptyCGRect = CGRect(x: 0, y: 0, width: 5, height: 5)
+
+struct GridSystem {
+    var axis: GridAxis
+    var gridCount: Int
+    var bounds: CGRect
+    var step: CGFloat {
+        let axisBound = axis == GridAxis.horizontal ? bounds.width : bounds.height
+        return axisBound / gridCount.c
+    }
+
+    init(axis: GridAxis = .horizontal, gridCount: Int = 0, bounds: CGRect? = nil) {
+        self.axis = axis
+        self.gridCount = gridCount
+        self.bounds = bounds ?? emptyCGRect
+    }
+
+    func frame(_ view: UIView, x: Int, y: Int, w: Int, h: Int) {
+        var x = x
+        var y = y
+        if axis == GridAxis.horizontal {
+            x = (x + gridCount) % gridCount
+        } else {
+            y = (y + gridCount) % gridCount
+        }
+
+        view.frame = CGRect(
+            x: x.c * step,
+            y: y.c * step,
+            width: w.c * step,
+            height: h.c * step
+        )
+    }
+}

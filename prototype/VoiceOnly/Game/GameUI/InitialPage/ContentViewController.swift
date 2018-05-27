@@ -33,7 +33,6 @@ class ContentViewController: UIViewController {
     }
 
     @objc func characterViewTapped() {
-        print("characterViewTapped")
         launchStoryboard(self, "DataPageViewOverlay", isOverCurrent: true, animated: true)
     }
 
