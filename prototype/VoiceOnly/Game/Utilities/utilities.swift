@@ -181,11 +181,6 @@ extension CGFloat {
     var f: Float { return Float(self) }
 }
 
-// MARK: - rgb
-func rgb(_ red: Float, _ green: Float, _ blue: Float, _ alpha: Float = 1.0) -> UIColor {
-    return UIColor(red: CGFloat(red/255.0), green: CGFloat(green/255.0), blue: CGFloat(blue/255.0), alpha: CGFloat(alpha))
-}
-
 func colorText(_ text: String, _ color: UIColor = .lightText, terminator: String = "") -> NSMutableAttributedString {
     let colorText = NSMutableAttributedString(string: "\(text)\(terminator)")
     colorText.addAttributes([

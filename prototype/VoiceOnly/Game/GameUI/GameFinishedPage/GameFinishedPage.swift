@@ -26,7 +26,7 @@ class GameFinishedPage: UIViewController {
         super.viewWillAppear(animated)
         titleLabel.text = "  " + context.dataSetKey
         guard let record = context.gameRecord else { return }
-        rankLabel.text = record.rank
+        rankLabel.text = record.rank.rawValue
         progressLabel.text = record.progress
         perfectCountLabel.text = record.perfectCount.s
         greatCountLabel.text = record.greatCount.s
@@ -76,7 +76,7 @@ extension GameFinishedPage: UITableViewDataSource {
             finishedCell.userSaidSentenceLabel.isHidden = score.type == .perfect ? true : false
         } else {
             finishedCell.scoreLabel.text = "無分"
-            finishedCell.scoreLabel.textColor = rgb(192, 192, 192)
+            finishedCell.scoreLabel.textColor = myGray
             finishedCell.userSaidSentenceLabel.isHidden = true
         }
 

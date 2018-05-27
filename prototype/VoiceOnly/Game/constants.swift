@@ -30,9 +30,3 @@ let normalRate = AVSpeechUtteranceDefaultSpeechRate
 let micOutVolume: Float = 0
 
 let screen = UIScreen.main.bounds
-
-let myBlue = rgb(20, 168, 237)
-let myRed = rgb(254, 67, 134)
-let myGreen = rgb(150, 207, 42)
-let myOrange = rgb(255, 195, 0)
-let myWhite = rgb(240, 240, 240)

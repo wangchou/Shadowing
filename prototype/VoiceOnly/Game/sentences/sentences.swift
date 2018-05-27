@@ -2,6 +2,17 @@ enum Level: Int {
     case n5, n4, n3
 }
 
+enum Rank: String {
+    case ss = "SS"
+    case s = "S"
+    case a = "A"
+    case b = "B"
+    case c = "C"
+    case d = "D"
+    case e = "E"
+    case f = "F"
+}
+
 var allSentences: [String: [String]] = [:]
 var allSentencesKeys: [String] = []
 var allLevels: [String: Level] = [:]

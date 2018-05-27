@@ -53,17 +53,6 @@ class ContentViewController: UIViewController {
     }
 }
 
-func getLevelColor(level: Level) -> UIColor {
-    switch level {
-    case .n5:
-        return myRed
-    case .n4:
-        return myOrange
-    case .n3:
-        return myGreen
-    }
-}
-
 extension ContentViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -82,7 +71,7 @@ extension ContentViewController: UITableViewDataSource {
         contentCell.title.text = dataSetKey
         let record = findBestRecord(key: dataSetKey)
         contentCell.strockedProgressText = record?.progress
-        contentCell.strockedRankText = record?.rank
+        contentCell.strockedRankText = record?.rank.rawValue
 
         return contentCell
     }

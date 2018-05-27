@@ -69,7 +69,7 @@ class TimelineView: UIView {
     }
 
     func getColorFrom(records: [GameRecord]?) -> UIColor {
-        guard let records = records, !records.isEmpty else { return rgb(224, 224, 224) }
+        guard let records = records, !records.isEmpty else { return myLightText }
         var sumRed = 0.c
         var sumGreen = 0.c
         var sumBlue = 0.c
@@ -115,7 +115,7 @@ class TimelineView: UIView {
         self.addSubview(label)
     }
 
-    func addBox(row: Int, column: Int, color: UIColor = rgb(224, 224, 224)) {
+    func addBox(row: Int, column: Int, color: UIColor = myLightText) {
         let box = UIView()
         box.backgroundColor = color
         box.frame = getFrame(row: row, column: column)

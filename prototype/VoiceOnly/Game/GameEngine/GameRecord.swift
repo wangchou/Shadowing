@@ -25,7 +25,7 @@ func loadGameHistory() {
 }
 
 func isBetter(_ record1: GameRecord, to record2: GameRecord) -> Bool {
-    return record1.p <= record2.p && record1.rank != "SS"
+    return record1.p <= record2.p && record1.rank != .ss
 }
 
 func findBestRecord(key: String) -> GameRecord? {
@@ -70,15 +70,15 @@ class GameRecord: NSObject, NSCoding {
         return "\(prefix)\(p.i)%"
     }
 
-    var rank: String {
-        if p == 100 && perfectCount.f * 1.2 >=  sentencesCount.f { return "SS" }
-        if p == 100 { return "S" }
-        if p >= 90 { return "A" }
-        if p >= 80 { return "B" }
-        if p >= 70 { return "C" }
-        if p >= 60 { return "D" }
-        if p >= 40 { return "E" }
-        return "F"
+    var rank: Rank {
+        if p == 100 && perfectCount.f * 1.2 >=  sentencesCount.f { return .ss }
+        if p == 100 { return .s }
+        if p >= 90 { return .a }
+        if p >= 80 { return .b }
+        if p >= 70 { return .c }
+        if p >= 60 { return .d }
+        if p >= 40 { return .e }
+        return .f
     }
 
     init(_ dataSetKey: String, sentencesCount: Int, level: Level) {

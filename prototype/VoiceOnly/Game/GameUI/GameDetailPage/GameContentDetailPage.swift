@@ -37,7 +37,7 @@ class GameContentDetailPage: UIViewController {
         updateGameModeSelection()
         titleLabel.text = context.dataSetKey
         if let gameRecord = findBestRecord(key: context.dataSetKey) {
-            rankLabel.text = gameRecord.rank
+            rankLabel.text = gameRecord.rank.rawValue
             progressLabel.text = gameRecord.progress
             perfectCountLabel.text = gameRecord.perfectCount.s
             greatCountLabel.text = gameRecord.greatCount.s

@@ -11,7 +11,7 @@ import UIKit
 
 // square view, w == h
 // 20 x 20 grid system
-let stepCount = 20
+private let stepCount = 20
 class CharacterView: UIView {
     var w = 120.c
     var step: CGFloat {

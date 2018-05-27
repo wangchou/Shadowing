@@ -577,50 +577,92 @@
             </objects>
             <point key="canvasLocation" x="975" y="-581"/>
         </scene>
-        <!--View Controller-->
+        <!--Character Page Controller-->
         <scene sceneID="RRd-qc-4qy">
             <objects>
-                <viewController storyboardIdentifier="CharacterStatusPage" id="V6r-vS-0uO" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5Of-w9-cDV">
+                <viewController storyboardIdentifier="CharacterStatusPage" id="V6r-vS-0uO" customClass="CharacterPageController" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5Of-w9-cDV" userLabel="View" customClass="BlackView" customModule="VoiceOnly" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nUf-eY-TMK" customClass="BlackView" customModule="VoiceOnly" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="d7b-le-fms" firstAttribute="trailing" secondItem="nUf-eY-TMK" secondAttribute="trailing" id="6Ww-Cr-DY8"/>
+                            <constraint firstItem="nUf-eY-TMK" firstAttribute="leading" secondItem="d7b-le-fms" secondAttribute="leading" id="VAq-OQ-Qii"/>
+                            <constraint firstItem="nUf-eY-TMK" firstAttribute="top" secondItem="d7b-le-fms" secondAttribute="top" id="Y02-kn-Pzu"/>
+                            <constraint firstItem="d7b-le-fms" firstAttribute="bottom" secondItem="nUf-eY-TMK" secondAttribute="bottom" id="wJD-D9-eey"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="d7b-le-fms"/>
                     </view>
+                    <connections>
+                        <outlet property="blackView" destination="nUf-eY-TMK" id="L50-oa-CCX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ti6-bI-gQ2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-345" y="90"/>
         </scene>
-        <!--View Controller-->
+        <!--Item Page Controller-->
         <scene sceneID="EGN-Up-13g">
             <objects>
-                <viewController storyboardIdentifier="ItemPage" id="NxB-qG-2V4" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ItemPage" id="NxB-qG-2V4" customClass="ItemPageController" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="luN-tE-Ba7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U2I-jH-ytD" customClass="BlackView" customModule="VoiceOnly" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="U2I-jH-ytD" firstAttribute="top" secondItem="b1C-KX-z3k" secondAttribute="top" id="2Nk-fT-p2y"/>
+                            <constraint firstItem="U2I-jH-ytD" firstAttribute="leading" secondItem="b1C-KX-z3k" secondAttribute="leading" id="JGQ-iS-uc2"/>
+                            <constraint firstItem="b1C-KX-z3k" firstAttribute="bottom" secondItem="U2I-jH-ytD" secondAttribute="bottom" id="VHY-M2-pUm"/>
+                            <constraint firstItem="b1C-KX-z3k" firstAttribute="trailing" secondItem="U2I-jH-ytD" secondAttribute="trailing" id="jej-wy-5bp"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="b1C-KX-z3k"/>
                     </view>
+                    <connections>
+                        <outlet property="blackView" destination="U2I-jH-ytD" id="be4-Uu-nEv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vyx-WP-K52" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="328" y="90"/>
         </scene>
-        <!--View Controller-->
+        <!--Setting Page Controller-->
         <scene sceneID="vEa-a4-FPi">
             <objects>
-                <viewController storyboardIdentifier="SettingPage" id="82R-r1-qvM" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingPage" id="82R-r1-qvM" customClass="SettingPageController" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gYL-BU-Rh6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zol-62-BlX" customClass="BlackView" customModule="VoiceOnly" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="zol-62-BlX" firstAttribute="leading" secondItem="gYL-BU-Rh6" secondAttribute="leading" id="d1L-Pc-7ez"/>
+                            <constraint firstItem="maf-bZ-K0q" firstAttribute="bottom" secondItem="zol-62-BlX" secondAttribute="bottom" id="dJJ-yH-xkZ"/>
+                            <constraint firstItem="zol-62-BlX" firstAttribute="top" secondItem="maf-bZ-K0q" secondAttribute="top" id="fcU-uq-64A"/>
+                            <constraint firstItem="maf-bZ-K0q" firstAttribute="trailing" secondItem="zol-62-BlX" secondAttribute="trailing" id="h15-xA-jF6"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="maf-bZ-K0q"/>
                     </view>
+                    <connections>
+                        <outlet property="blackView" destination="zol-62-BlX" id="26T-XE-ICm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cRu-MH-vEh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="975" y="90"/>
+            <point key="canvasLocation" x="975" y="89.788732394366193"/>
         </scene>
         <!--原型9: 文章閱讀器-->
         <scene sceneID="FT9-Nb-eyT">

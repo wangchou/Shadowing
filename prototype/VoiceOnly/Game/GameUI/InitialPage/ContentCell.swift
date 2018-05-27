@@ -29,20 +29,8 @@ class ContentCell: UITableViewCell {
 
     var strockedRankText: String? = "" {
         willSet(string) {
-            var color = UIColor.gray
-            switch string {
-            case "S", "SS":
-                color = UIColor.blue
-            case "A":
-                color = myGreen
-            case "B", "C", "D":
-                color = myOrange
-            case "E", "F":
-                color = myRed
-            default:
-                color = .lightText
-            }
             if let string = string {
+                let color = getRankColor(rank: Rank(rawValue: string))
                 rank.attributedText = getStrokeText(string, color)
             } else {
                 rank.attributedText = getStrokeText("?", .lightText)
