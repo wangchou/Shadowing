@@ -20,7 +20,7 @@ class BlackView: UIView {
         font = UIFont(name: "Menlo", size: lineHeight * 0.8) ?? font
         gridSystem = GridSystem(axis: .horizontal, gridCount: 48, bounds: self.frame)
         // grid system setting
-        self.backgroundColor = UIColor.black.withAlphaComponent(0.85)
+        self.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         self.removeAllSubviews()
         addBackButton()
         addText("涼宮ハルヒ", row: 0, column: 0)
@@ -33,9 +33,9 @@ class BlackView: UIView {
         addText("10022 G", row: 5, column: 1)
 
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = myOrange
+        scrollView.backgroundColor = myOrange.withAlphaComponent(0.5)
         scrollView.roundBorder()
-        gridSystem.frame(scrollView, x: 0, y: 24, w: 48, h: 33)
+        gridSystem.frame(scrollView, x: 1, y: 24, w: 46, h: 33)
         self.addSubview(scrollView)
 
         addText("説明はここにいます。", row: 15, column: 0)

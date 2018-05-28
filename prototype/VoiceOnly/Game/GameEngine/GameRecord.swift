@@ -24,8 +24,8 @@ func loadGameHistory() {
     context.gameHistory = gameHistoryArray
 }
 
-func isBetter(_ record1: GameRecord, to record2: GameRecord) -> Bool {
-    return record1.p <= record2.p && record1.rank != .ss
+func isBetter(_ record: GameRecord, to bestRecord: GameRecord) -> Bool {
+    return record.p > bestRecord.p || record.rank == .ss
 }
 
 func findBestRecord(key: String) -> GameRecord? {
@@ -35,7 +35,6 @@ func findBestRecord(key: String) -> GameRecord? {
 // best record will insert at array HEAD
 func updateGameHistory() {
     guard let record = context.gameRecord else { return }
-
     if let bestRecord = findBestRecord(key: record.dataSetKey) {
         if isBetter(record, to: bestRecord) {
             context.gameHistory.insert(record, at: 0)
