@@ -65,7 +65,7 @@ struct GridSystem {
         return axisBound / gridCount.c
     }
 
-    init(axis: GridAxis = .horizontal, gridCount: Int = 0, bounds: CGRect? = nil) {
+    init(axis: GridAxis = .horizontal, gridCount: Int = 1, bounds: CGRect? = nil) {
         self.axis = axis
         self.gridCount = gridCount
         self.bounds = bounds ?? emptyCGRect

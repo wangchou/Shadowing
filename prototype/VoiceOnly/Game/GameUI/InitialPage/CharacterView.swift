@@ -19,12 +19,10 @@ class CharacterView: UIView {
         return gridSystem.step * 2
     }
 
-    var font: UIFont {
-        return UIFont(name: "Menlo", size: lineHeight * 0.8) ??
-               UIFont.systemFont(ofSize: lineHeight * 0.8)
-    }
+    var font: UIFont = UIFont.systemFont(ofSize: 20)
 
     func viewWillAppear() {
+        font = UIFont(name: "Menlo", size: lineHeight * 0.8) ?? font
         gridSystem = GridSystem(axis: .horizontal, gridCount: 20, bounds: frame)
         self.removeAllSubviews()
 
