@@ -10,7 +10,7 @@ import UIKit
 
 private let context = GameContext.shared
 
-class ContentViewController: UIViewController {
+class MainViewController: UIViewController {
     @IBOutlet weak var sentencesTableView: UITableView!
 
     @IBOutlet weak var timeline: TimelineView!
@@ -44,15 +44,28 @@ class ContentViewController: UIViewController {
         characterView.viewWillAppear()
         let characterViewTap = UITapGestureRecognizer(target: self, action: #selector(self.characterViewTapped))
         characterView.addGestureRecognizer(characterViewTap)
+        addGradientSeparatorLine()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+    func addGradientSeparatorLine() {
+        let lightRGBs = [myRed, myOrange, myGreen, myBlue].map { $0.cgColor }
+        let layer = CAGradientLayer()
+        layer.frame = topView.bounds
+        layer.frame.origin.y = topView.frame.height - 1.5
+        layer.frame.size.height = 1.5
+        layer.startPoint = CGPoint(x: 0, y: 0)
+        layer.endPoint = CGPoint(x: 1.0, y: 0)
+        layer.colors = lightRGBs
+        topView.layer.insertSublayer(layer, at: 0)
+    }
 }
 
-extension ContentViewController: UITableViewDataSource {
+extension MainViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -76,7 +89,7 @@ extension ContentViewController: UITableViewDataSource {
     }
 }
 
-extension ContentViewController: UITableViewDelegate {
+extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         context.dataSetKey = allSentencesKeys[indexPath.row]
         context.loadLearningSentences(isShuffle: false)

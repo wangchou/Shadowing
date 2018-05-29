@@ -51,7 +51,7 @@
 		BEBDEDE8208F227C00C18520 /* PhoneGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDE7208F227C00C18520 /* PhoneGame.swift */; };
 		BEBDEDF6208F28BD00C18520 /* P07ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDF1208F28BD00C18520 /* P07ViewController.swift */; };
 		BEDBCCD820A82AC4001CF11D /* GameDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDBCCD720A82AC4001CF11D /* GameDetailTableCell.swift */; };
-		BEDEDD3720A46D1B00E7B60B /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3620A46D1B00E7B60B /* ContentViewController.swift */; };
+		BEDEDD3720A46D1B00E7B60B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3620A46D1B00E7B60B /* MainViewController.swift */; };
 		BEDEDD3920A46FCA00E7B60B /* GameRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */; };
 		BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */; };
 		BEDFCDAB20A87AF800736153 /* PauseOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */; };
@@ -127,7 +127,7 @@
 		BEBDEDE7208F227C00C18520 /* PhoneGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneGame.swift; sourceTree = "<group>"; };
 		BEBDEDF1208F28BD00C18520 /* P07ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P07ViewController.swift; sourceTree = "<group>"; };
 		BEDBCCD720A82AC4001CF11D /* GameDetailTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailTableCell.swift; sourceTree = "<group>"; };
-		BEDEDD3620A46D1B00E7B60B /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
+		BEDEDD3620A46D1B00E7B60B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRecord.swift; sourceTree = "<group>"; };
 		BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerEventDelegate.swift; sourceTree = "<group>"; };
 		BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseOverlayViewController.swift; sourceTree = "<group>"; };
@@ -327,7 +327,7 @@
 		BEFA979C20AEAEA400DE3280 /* InitialPage */ = {
 			isa = PBXGroup;
 			children = (
-				BEDEDD3620A46D1B00E7B60B /* ContentViewController.swift */,
+				BEDEDD3620A46D1B00E7B60B /* MainViewController.swift */,
 				BE500AED20B822CA004E73D1 /* CharacterView.swift */,
 				BEF258B220B57C7F00D0026C /* TimelineView.swift */,
 				BE7725CD20A4216700DF186A /* ContentCell.swift */,
@@ -490,7 +490,7 @@
 				BE500AEE20B822CA004E73D1 /* CharacterView.swift in Sources */,
 				BE7725C520A2CBC200DF186A /* n3.swift in Sources */,
 				BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */,
-				BEDEDD3720A46D1B00E7B60B /* ContentViewController.swift in Sources */,
+				BEDEDD3720A46D1B00E7B60B /* MainViewController.swift in Sources */,
 				BE7725CE20A4216700DF186A /* ContentCell.swift in Sources */,
 				BEDBCCD820A82AC4001CF11D /* GameDetailTableCell.swift in Sources */,
 				BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */,

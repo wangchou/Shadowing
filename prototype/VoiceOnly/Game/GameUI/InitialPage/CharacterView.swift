@@ -22,13 +22,13 @@ class CharacterView: UIView {
     var font: UIFont = UIFont.systemFont(ofSize: 20)
 
     func viewWillAppear() {
+        self.backgroundColor = .clear
         gridSystem = GridSystem(axis: .horizontal, gridCount: 20, bounds: frame)
         font = UIFont(name: "Menlo", size: lineHeight * 0.7) ?? font
         self.removeAllSubviews()
-        self.backgroundColor = .white
         let imageView = UIView()
         imageView.backgroundColor = UIColor.brown
-        gridSystem.frame(imageView, x: 0, y: 0, w: 19, h: 19)
+        gridSystem.frame(imageView, x: 0, y: 1, w: 19, h: 18)
         self.addSubview(imageView)
 
         let statusLayer = UIView()
