@@ -16,7 +16,7 @@ class CharacterView: UIView {
     var gridSystem: GridSystem = GridSystem()
 
     var lineHeight: CGFloat {
-        return gridSystem.step * 2
+        return gridSystem.step * 3
     }
 
     var font: UIFont = UIFont.systemFont(ofSize: 20)
@@ -25,24 +25,30 @@ class CharacterView: UIView {
         font = UIFont(name: "Menlo", size: lineHeight * 0.8) ?? font
         gridSystem = GridSystem(axis: .horizontal, gridCount: 20, bounds: frame)
         self.removeAllSubviews()
-
-        addText("Lv.12", x: 2, y: 15)
-        addText("白石恵", x: 2, y: 17)
-        addText("HP: 123", x: 11, y: 15)
-
-        addText("MP:  23", x: 11, y: 17)
-
+        self.backgroundColor = .white
         let imageView = UIView()
         imageView.backgroundColor = UIColor.brown
-        gridSystem.frame(imageView, x: 2, y: 2, w: 16, h: 12)
+        gridSystem.frame(imageView, x: 0, y: 0, w: 19, h: 19)
         self.addSubview(imageView)
+
+        let statusLayer = UIView()
+        statusLayer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        gridSystem.frame(statusLayer, x: 0, y: 13, w: 19, h: 6)
+
+        self.addSubview(statusLayer)
+
+        addText(" Lv.12", x: 0, y: 13)
+        addText(" 白石恵", x: 0, y: 16)
+        addText(" HP 123", x: 10, y: 13)
+        addText(" MP  23", x: 10, y: 16)
     }
 
     func addText(_ text: String, x: Int, y: Int) {
         let label = UILabel()
         label.font = font
         label.text = text
-        gridSystem.frame(label, x: x, y: y, w: stepCount - x, h: 2)
+        label.textColor = myWhite
+        gridSystem.frame(label, x: x, y: y, w: stepCount - x, h: 3)
         self.addSubview(label)
     }
 
