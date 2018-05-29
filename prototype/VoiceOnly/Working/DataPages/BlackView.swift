@@ -23,22 +23,22 @@ class BlackView: UIView {
         self.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         self.removeAllSubviews()
         addBackButton()
-        addText("涼宮ハルヒ", row: 0, column: 0)
-        addText("HP:    121", row: 1, column: 6)
-        addText("MP:    121", row: 2, column: 6)
-        addText("EXP: 12121", row: 3, column: 6)
-        addText("STR:    21", row: 4, column: 6)
-        addText("DEF:    13", row: 5, column: 6)
-        addText("Lv. 11", row: 4, column: 1)
-        addText("10022 G", row: 5, column: 1)
+        addText("涼宮ハルヒ", row: 1, column: 0)
+        addText("HP:    121", row: 2, column: 6)
+        addText("MP:    121", row: 3, column: 6)
+        addText("EXP: 12121", row: 4, column: 6)
+        addText("STR:    21", row: 5, column: 6)
+        addText("DEF:    13", row: 6, column: 6)
+        addText("Lv. 11", row: 5, column: 1)
+        addText("10022 G", row: 6, column: 1)
 
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = myOrange.withAlphaComponent(0.5)
+        scrollView.backgroundColor = myGray.withAlphaComponent(0.7)
         scrollView.roundBorder()
-        gridSystem.frame(scrollView, x: 1, y: 24, w: 46, h: 33)
+        gridSystem.frame(scrollView, x: 1, y: 28, w: 46, h: 33)
         self.addSubview(scrollView)
 
-        addText("説明はここにいます。", row: 15, column: 0)
+        addText("説明はここにいます。", row: 16, column: 0)
     }
 
     func addText(_ text: String, row: Int, column: Int) {
@@ -55,7 +55,7 @@ class BlackView: UIView {
         backButton.setTitle("X", for: .normal)
         backButton.titleLabel?.font = MyFont.systemFont(ofSize: gridSystem.step * 4)
         backButton.titleLabel?.textColor = myLightText
-        gridSystem.frame(backButton, x: -6, y: 0, w: 4, h: 4)
+        gridSystem.frame(backButton, x: -6, y: 4, w: 4, h: 4)
         self.addSubview(backButton)
         let backButtonTap = UITapGestureRecognizer(target: self, action: #selector(self.backButtonTapped))
         backButton.addGestureRecognizer(backButtonTap)
@@ -63,5 +63,6 @@ class BlackView: UIView {
 
     @objc func backButtonTapped() {
         UIApplication.getPresentedViewController()?.dismiss(animated: true, completion: nil)
+            UIApplication.shared.statusBarStyle = .default
     }
 }

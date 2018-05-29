@@ -10,9 +10,8 @@ import Foundation
 import UIKit
 
 class ItemPageController: UIViewController {
-    @IBOutlet var blackView: BlackView!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        blackView.viewWillAppear()
+        (view as? BlackView)?.viewWillAppear()
     }
 }

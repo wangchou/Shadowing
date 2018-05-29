@@ -38,6 +38,17 @@ class DataPageViewController: UIPageViewController, UIPageViewControllerDataSour
         dataSource = self
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("viewWillDisappear")
+        UIApplication.shared.statusBarStyle = .default
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
