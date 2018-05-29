@@ -17,25 +17,30 @@ class BlackView: UIView {
     var font: UIFont = UIFont.systemFont(ofSize: 20)
 
     func viewWillAppear() {
-        font = UIFont(name: "Menlo", size: lineHeight * 0.8) ?? font
         gridSystem = GridSystem(axis: .horizontal, gridCount: 48, bounds: self.frame)
+        font = UIFont(name: "Menlo", size: lineHeight * 0.8) ?? font
+
         // grid system setting
         self.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         self.removeAllSubviews()
         addBackButton()
+
+        // left side
         addText("涼宮ハルヒ", row: 1, column: 0)
-        addText("HP:    121", row: 2, column: 6)
-        addText("MP:    121", row: 3, column: 6)
-        addText("EXP: 12121", row: 4, column: 6)
-        addText("STR:    21", row: 5, column: 6)
-        addText("DEF:    13", row: 6, column: 6)
-        addText("Lv. 11", row: 5, column: 1)
-        addText("10022 G", row: 6, column: 1)
+        addText("Lv. 11", row: 5, column: 0)
+        addText("10022 G", row: 6, column: 0)
+
+        // right side
+        addText("HP:    121", row: 2, column: 5)
+        addText("MP:    121", row: 3, column: 5)
+        addText("EXP: 12121", row: 4, column: 5)
+        addText("STR:    21", row: 5, column: 5)
+        addText("DEF:    13", row: 6, column: 5)
 
         let scrollView = UIScrollView()
         scrollView.backgroundColor = myGray.withAlphaComponent(0.7)
         scrollView.roundBorder()
-        gridSystem.frame(scrollView, x: 1, y: 28, w: 46, h: 33)
+        gridSystem.frame(scrollView, x: 1, y: 29, w: 46, h: 33)
         self.addSubview(scrollView)
 
         addText("説明はここにいます。", row: 16, column: 0)
@@ -63,6 +68,6 @@ class BlackView: UIView {
 
     @objc func backButtonTapped() {
         UIApplication.getPresentedViewController()?.dismiss(animated: true, completion: nil)
-            UIApplication.shared.statusBarStyle = .default
+        UIApplication.shared.statusBarStyle = .default
     }
 }

@@ -22,8 +22,8 @@ class CharacterView: UIView {
     var font: UIFont = UIFont.systemFont(ofSize: 20)
 
     func viewWillAppear() {
-        font = UIFont(name: "Menlo", size: lineHeight * 0.8) ?? font
         gridSystem = GridSystem(axis: .horizontal, gridCount: 20, bounds: frame)
+        font = UIFont(name: "Menlo", size: lineHeight * 0.7) ?? font
         self.removeAllSubviews()
         self.backgroundColor = .white
         let imageView = UIView()
@@ -39,8 +39,8 @@ class CharacterView: UIView {
 
         addText(" Lv.12", x: 0, y: 13)
         addText(" 白石恵", x: 0, y: 16)
-        addText(" HP 123", x: 10, y: 13)
-        addText(" MP  23", x: 10, y: 16)
+        addText(" HP 123", x: 9, y: 13)
+        addText(" MP  23", x: 9, y: 16)
     }
 
     func addText(_ text: String, x: Int, y: Int) {
