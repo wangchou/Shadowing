@@ -96,44 +96,33 @@ func getFuriganaAttrString(_ parts: [String], _ kana: String, color: UIColor = .
         return attrStr
     }
 
-    for i in 0..<parts.count {
-        let divider = parts[i]
-//        print(divider, divider.hiraganaOnly, divider.jpnType, kana.patternCount(divider.hiraganaOnly), (parts.filter {$0.hiraganaOnly == divider.hiraganaOnly}).count)
+    for dividerIndex in 0..<parts.count {
+        let divider = parts[dividerIndex]
         guard divider.jpnType == JpnType.noKanjiAndNumber &&
             kana.patternCount(divider.hiraganaOnly) == (parts.filter {$0.hiraganaOnly == divider.hiraganaOnly}).count
             else {
             continue
         }
 
-        let hasBeforePart = i > 0
-        let hasAfterPart = i + 1 < parts.count
+        guard let range = kana.range(of: divider.hiraganaOnly) else { continue }
 
-//        print(hasBeforePart, divider, hasAfterPart)
-        if let range = kana.range(of: divider.hiraganaOnly) {
-            // before part
-            if hasBeforePart {
-                attrStr.append(getFuriganaAttrString(Array(parts[..<i]), kana[..<range.lowerBound].s))
-            }
+        // before divider part
+        if dividerIndex > 0 {
+            attrStr.append(getFuriganaAttrString(parts[..<dividerIndex].a, kana[..<range.lowerBound].s))
+        }
 
-            // divider
-            attrStr.append(rubyAttrStr(divider, color: color))
+        // divider
+        attrStr.append(rubyAttrStr(divider, color: color))
 
-            // after part
-            if hasAfterPart {
-                attrStr.append(
-                    getFuriganaAttrString(Array(parts[(i+1)...]), kana[range.upperBound...].s)
-                )
-            }
+        // after divider part
+        if dividerIndex + 1 < parts.count {
+            attrStr.append(getFuriganaAttrString(parts[(dividerIndex+1)...].a, kana[range.upperBound...].s))
         }
 
         return attrStr
     }
 
-    var kanjiPart = ""
-    for part in parts {
-        kanjiPart += part
-    }
-    attrStr.append(rubyAttrStr(kanjiPart, kana, color: color))
+    attrStr.append(rubyAttrStr(parts.joined(separator: ""), kana, color: color))
     return attrStr
 }
 
@@ -164,6 +153,10 @@ func getFuriganaString(tokenInfos: [[String]]) -> NSMutableAttributedString {
 
 extension Substring {
     var s: String { return String(self) }
+}
+
+extension ArraySlice {
+    var a: [Element] { return Array(self) }
 }
 
 extension String {
