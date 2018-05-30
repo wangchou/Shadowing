@@ -11,26 +11,18 @@ import UIKit
 
 // square view, w == h
 // 20 x 20 grid system
-private let stepCount = 20
+private let gridCount = 20
 class CharacterView: UIView {
     var gridSystem: GridSystem = GridSystem()
-    var backgroundView: UIView!
-
-    var lineHeight: CGFloat {
-        return gridSystem.step * 3
-    }
-
-    var font: UIFont = UIFont.systemFont(ofSize: 20)
 
     func viewWillAppear() {
         self.backgroundColor = .clear
-        gridSystem = GridSystem(axis: .horizontal, gridCount: 20, bounds: frame)
-        font = UIFont(name: "Menlo", size: lineHeight * 0.7) ?? font
+        gridSystem = GridSystem(axis: .horizontal, gridCount: gridCount, bounds: frame)
         self.removeAllSubviews()
         self.roundBorder()
 
         // bg view
-        backgroundView = UIView()
+        let backgroundView = UIView()
         backgroundView.backgroundColor = UIColor.brown
         gridSystem.frame(backgroundView, x: 0, y: 0, w: 20, h: 20)
         self.addSubview(backgroundView)
@@ -45,12 +37,13 @@ class CharacterView: UIView {
         addText("HP： 105/123", x: 1, y: 16)
     }
 
-    func addText(_ text: String, x: Int, y: Int) {
+    func addText(_ text: String, x: Int, y: Int, lineHeight: Int = 3) {
         let label = UILabel()
-        label.font = font
+        label.font = UIFont(name: "Menlo", size: lineHeight.c * gridSystem.step * 0.7) ??
+                     UIFont.systemFont(ofSize: 20)
         label.text = text
         label.textColor = myWhite
-        gridSystem.frame(label, x: x, y: y, w: stepCount - x, h: 3)
+        gridSystem.frame(label, x: x, y: y, w: gridCount - x, h: lineHeight)
         self.addSubview(label)
     }
 

@@ -11,32 +11,35 @@ import UIKit
 
 private let context = GameContext.shared
 
+private let gridCount = 48
 class GameFinishedPage: UIViewController {
+    var gridSystem: GridSystem = GridSystem()
 
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var rankLabel: UILabel!
-    @IBOutlet weak var progressLabel: UILabel!
-    @IBOutlet weak var perfectCountLabel: UILabel!
-    @IBOutlet weak var greatCountLabel: UILabel!
-    @IBOutlet weak var goodCountLabel: UILabel!
-    @IBOutlet weak var missedCountLabel: UILabel!
-    @IBOutlet weak var newRecordLabel: UILabel!
+    @IBOutlet weak var reportView: UIView!
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        titleLabel.text = "  " + context.dataSetKey
-        guard let record = context.gameRecord else { return }
-        rankLabel.text = record.rank.rawValue
-        progressLabel.text = record.progress
-        perfectCountLabel.text = record.perfectCount.s
-        greatCountLabel.text = record.greatCount.s
-        goodCountLabel.text = record.goodCount.s
-        missedCountLabel.text = (context.sentences.count - record.perfectCount - record.greatCount - record.goodCount).s
-        newRecordLabel.isHidden = !context.isNewRecord
+        reportView.removeAllSubviews()
+        gridSystem = GridSystem(axis: .horizontal, gridCount: gridCount, bounds: reportView.frame)
+
+        addText("口說　５", x: 2, y: 3, lineHeight: 6)
+        addText("A", x: 2, y: 9)
+        addText("93%", x: 2, y: 12)
+        addText("正解：　　17", x: 2, y: 15)
+        addText("すごい：　4", x: 2, y: 18)
+        addText("いいね：　2", x: 2, y: 21)
+        addText("違うよ：　2", x: 2, y: 24)
+        addText("新しい記録！！", x: 2, y: 27, lineHeight: 6)
     }
 
-    @IBAction func finshedButtonClicked(_ sender: Any) {
-        launchStoryboard(self, "ContentViewController")
+    func addText(_ text: String, x: Int, y: Int, lineHeight: Int = 3) {
+        let label = UILabel()
+        label.font = UIFont(name: "Menlo", size: lineHeight.c * gridSystem.step * 0.7) ??
+                     UIFont.systemFont(ofSize: 20)
+        label.text = text
+        label.textColor = myWhite
+        gridSystem.frame(label, x: x, y: y, w: gridCount - x, h: lineHeight)
+        reportView.addSubview(label)
     }
 }
 

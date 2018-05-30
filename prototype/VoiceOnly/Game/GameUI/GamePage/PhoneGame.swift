@@ -43,7 +43,7 @@ class PhoneGame: UIViewController, GameEventDelegate {
         case .gameStateChanged:
             if let state = event.gameState,
                state == .gameOver {
-                launchStoryboard(self, "GameFinishedPage", animated: true)
+                launchStoryboard(self, "GameFinishedPage", isOverCurrent: true, animated: true)
             }
         default:
             return

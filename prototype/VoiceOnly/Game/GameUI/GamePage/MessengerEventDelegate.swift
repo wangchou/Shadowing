@@ -51,7 +51,7 @@ extension Messenger: GameEventDelegate {
             if game.state == .gameOver {
                 stopEventObserving(self)
                 addLabel(rubyAttrStr("遊戲結束。"))
-                launchStoryboard(self, "GameFinishedPage", animated: true)
+                launchStoryboard(self, "GameFinishedPage", isOverCurrent: true, animated: true)
             }
 
         case .resume:
