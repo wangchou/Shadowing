@@ -33,7 +33,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mu1-Ft-6RO" userLabel="Character" customClass="CharacterView" customModule="VoiceOnly" customModuleProvider="target">
-                                            <rect key="frame" x="200" y="0.0" width="120" height="120"/>
+                                            <rect key="frame" x="205" y="5" width="110" height="110"/>
                                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         </view>
                                     </subviews>
@@ -41,11 +41,11 @@
                                     <constraints>
                                         <constraint firstItem="ca0-bb-sN7" firstAttribute="top" secondItem="U0O-4m-O5g" secondAttribute="top" id="4bl-bq-xGJ"/>
                                         <constraint firstItem="ca0-bb-sN7" firstAttribute="width" secondItem="U0O-4m-O5g" secondAttribute="height" multiplier="5:3" id="8y8-Ip-4hf"/>
-                                        <constraint firstItem="mu1-Ft-6RO" firstAttribute="leading" secondItem="ca0-bb-sN7" secondAttribute="trailing" id="UAU-67-9jH"/>
+                                        <constraint firstItem="mu1-Ft-6RO" firstAttribute="leading" secondItem="ca0-bb-sN7" secondAttribute="trailing" constant="5" id="UAU-67-9jH"/>
                                         <constraint firstAttribute="bottom" secondItem="ca0-bb-sN7" secondAttribute="bottom" id="aRe-Ts-hFe"/>
-                                        <constraint firstAttribute="trailing" secondItem="mu1-Ft-6RO" secondAttribute="trailing" id="gWB-sC-3Vl"/>
-                                        <constraint firstAttribute="bottom" secondItem="mu1-Ft-6RO" secondAttribute="bottom" id="lyj-E7-NZx"/>
-                                        <constraint firstItem="mu1-Ft-6RO" firstAttribute="top" secondItem="U0O-4m-O5g" secondAttribute="top" id="sJk-FB-Wb6"/>
+                                        <constraint firstAttribute="trailing" secondItem="mu1-Ft-6RO" secondAttribute="trailing" constant="5" id="gWB-sC-3Vl"/>
+                                        <constraint firstAttribute="bottom" secondItem="mu1-Ft-6RO" secondAttribute="bottom" constant="5" id="lyj-E7-NZx"/>
+                                        <constraint firstItem="mu1-Ft-6RO" firstAttribute="top" secondItem="U0O-4m-O5g" secondAttribute="top" constant="5" id="sJk-FB-Wb6"/>
                                         <constraint firstItem="ca0-bb-sN7" firstAttribute="leading" secondItem="U0O-4m-O5g" secondAttribute="leading" id="uvV-pP-0QS"/>
                                     </constraints>
                                 </view>

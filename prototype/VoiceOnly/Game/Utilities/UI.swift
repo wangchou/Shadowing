@@ -10,9 +10,10 @@ import Foundation
 import UIKit
 
 extension UIView {
-    func roundBorder(borderWidth: CGFloat = 1.5, cornerRadius: CGFloat = 15) {
+    func roundBorder(borderWidth: CGFloat = 1.5, cornerRadius: CGFloat = 15, color: UIColor = .black) {
         self.layer.borderWidth = borderWidth
         self.layer.cornerRadius = cornerRadius
+        self.layer.borderColor = color.cgColor
         self.clipsToBounds = true
     }
 

@@ -14,6 +14,7 @@ import UIKit
 private let stepCount = 20
 class CharacterView: UIView {
     var gridSystem: GridSystem = GridSystem()
+    var backgroundView: UIView!
 
     var lineHeight: CGFloat {
         return gridSystem.step * 3
@@ -26,21 +27,22 @@ class CharacterView: UIView {
         gridSystem = GridSystem(axis: .horizontal, gridCount: 20, bounds: frame)
         font = UIFont(name: "Menlo", size: lineHeight * 0.7) ?? font
         self.removeAllSubviews()
-        let imageView = UIView()
-        imageView.backgroundColor = UIColor.brown
-        gridSystem.frame(imageView, x: 0, y: 1, w: 19, h: 18)
-        self.addSubview(imageView)
+        self.roundBorder()
 
+        // bg view
+        backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.brown
+        gridSystem.frame(backgroundView, x: 0, y: 0, w: 20, h: 20)
+        self.addSubview(backgroundView)
+
+        // status bar
         let statusLayer = UIView()
         statusLayer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-        gridSystem.frame(statusLayer, x: 0, y: 13, w: 19, h: 6)
+        gridSystem.frame(statusLayer, x: 0, y: 12, w: 20, h: 8)
 
         self.addSubview(statusLayer)
-
-        addText(" Lv.12", x: 0, y: 13)
-        addText(" 白石恵", x: 0, y: 16)
-        addText(" HP 123", x: 9, y: 13)
-        addText(" MP  23", x: 9, y: 16)
+        addText("Lv.12 涼宮ハルヒ", x: 1, y: 13)
+        addText("HP： 105/123", x: 1, y: 16)
     }
 
     func addText(_ text: String, x: Int, y: Int) {

@@ -28,8 +28,8 @@ class MainViewController: UIViewController {
         topView.frame.size.height = height
         timeline.frame.size.width = height * 5/3
         timeline.frame.size.height = height
-        characterView.frame.size.width = height
-        characterView.frame.size.height = height
+        characterView.frame.size.width = height - 10
+        characterView.frame.size.height = height - 10
     }
 
     @objc func characterViewTapped() {
