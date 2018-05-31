@@ -58,7 +58,7 @@ class BlackView: UIView {
     func addBackButton() {
         let backButton = UIButton()
         backButton.setTitle("X", for: .normal)
-        backButton.titleLabel?.font = MyFont.systemFont(ofSize: gridSystem.step * 4)
+        backButton.titleLabel?.font = MyFont.regular(ofSize: gridSystem.step * 4)
         backButton.titleLabel?.textColor = myLightText
         gridSystem.frame(backButton, x: -6, y: 4, w: 4, h: 4)
         self.addSubview(backButton)

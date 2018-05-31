@@ -181,22 +181,12 @@ extension CGFloat {
     var f: Float { return Float(self) }
 }
 
-func colorText(_ text: String, _ color: UIColor = .lightText, terminator: String = "") -> NSMutableAttributedString {
-    let colorText = NSMutableAttributedString(string: "\(text)\(terminator)")
-    colorText.addAttributes([
-        .foregroundColor: color,
-        .font: MyFont.systemFont(ofSize: 24)
-        ],
-        range: NSRange(location: 0, length: colorText.length)
-    )
-    return colorText
-}
-
 func launchStoryboard(
     _ originVC: UIViewController,
     _ storyboardId: String,
     isOverCurrent: Bool = false,
-    animated: Bool = false) {
+    animated: Bool = false
+    ) {
     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: storyboardId)
     if isOverCurrent {
         vc.modalPresentationStyle = .overCurrentContext

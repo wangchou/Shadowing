@@ -30,9 +30,9 @@ func rubyAttrStr(
     color: UIColor = .black
     ) -> NSAttributedString {
 //    print("main=\(string), ruby=\(ruby)")
-    let fontRuby = MyFont.thinSystemFont(ofSize: fontSize/2)
-    let fontRegular = MyFont.systemFont(ofSize: fontSize)
-    let fontBold = MyFont.boldSystemFont(ofSize: fontSize)
+    let fontRuby = MyFont.thin(ofSize: fontSize/2)
+    let fontRegular = MyFont.regular(ofSize: fontSize)
+    let fontBold = MyFont.bold(ofSize: fontSize)
 
     let alignMode: CTRubyAlignment = ruby.count >= string.count * 2 ? .center : .auto
     let annotation = CTRubyAnnotationCreateWithAttributes(

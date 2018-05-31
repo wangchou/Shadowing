@@ -9,19 +9,6 @@
 import Foundation
 import UIKit
 
-func getStrokeText(_ string: String, _ color: UIColor) -> NSMutableAttributedString {
-    let text = NSMutableAttributedString(string: string)
-    text.addAttributes([
-            .strokeColor: UIColor.black,
-            .strokeWidth: -1.5,
-            .foregroundColor: color,
-            .font: UIFont.boldSystemFont(ofSize: 32)
-        ],
-        range: NSRange(location: 0, length: text.length)
-    )
-    return text
-}
-
 class ContentCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var progress: UILabel!

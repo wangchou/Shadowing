@@ -34,8 +34,17 @@ class GameFinishedPage: UIViewController {
 
     func addText(_ text: String, x: Int, y: Int, lineHeight: Int = 3) {
         let label = UILabel()
-        label.font = UIFont(name: "Menlo", size: lineHeight.c * gridSystem.step * 0.7) ??
-                     UIFont.systemFont(ofSize: 20)
+        let fontSize = lineHeight.c * gridSystem.step * 0.7
+        let font = MyFont.bold(ofSize: fontSize)
+        label.attributedText = getText(text, color: .blue, strokeWidth: -3.5, strokeColor: .white, font: font)
+        gridSystem.frame(label, x: x, y: y, w: gridCount - x, h: lineHeight)
+        reportView.addSubview(label)
+    }
+
+    func addDigits(_ text: String, x: Int, y: Int, lineHeight: Int = 3) {
+        let label = UILabel()
+        let fontSize = lineHeight.c * gridSystem.step * 0.7
+        label.font = UIFont.monospacedDigitSystemFont(ofSize: fontSize, weight: UIFont.Weight.medium)
         label.text = text
         label.textColor = myWhite
         gridSystem.frame(label, x: x, y: y, w: gridCount - x, h: lineHeight)

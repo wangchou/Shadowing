@@ -111,7 +111,7 @@ class TimelineView: UIView {
         label.frame = getFrame(row: row, column: column)
         label.frame.size.width = CGFloat(boxWidth * 3)
         label.text = text
-        label.font = MyFont.thinSystemFont(ofSize: CGFloat(boxWidth))
+        label.font = MyFont.thin(ofSize: CGFloat(boxWidth))
         self.addSubview(label)
     }
 
