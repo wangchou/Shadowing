@@ -20,23 +20,36 @@ class GameFinishedPage: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reportView.removeAllSubviews()
+        reportView.backgroundColor = UIColor.black
         gridSystem = GridSystem(axis: .horizontal, gridCount: gridCount, bounds: reportView.frame)
 
-        addText("口說　５", x: 2, y: 3, lineHeight: 6)
-        addText("A", x: 2, y: 9)
-        addText("93%", x: 2, y: 12)
-        addText("正解：　　17", x: 2, y: 15)
-        addText("すごい：　4", x: 2, y: 18)
-        addText("いいね：　2", x: 2, y: 21)
-        addText("違うよ：　2", x: 2, y: 24)
-        addText("新しい記録！！", x: 2, y: 27, lineHeight: 6)
+        addText("口說　５", x: 2, y: 0, lineHeight: 6)
+
+        addText("達成率", x: 2, y: 6, lineHeight: 2)
+        addText("100%", x: 2, y: 6, lineHeight: 12)
+        addText("Rank", x: 28, y: 6, lineHeight: 2)
+        addText("SS", color: myBlue, x: 28, y: 6, lineHeight: 12)
+        addText("正解 20 | すごい 8 | いいね 3 | 違うよ 0", x: 2, y: 17)
+
+        addRoundRect(x: 18, y: 22, w: 28, h: 6, color: myBlue)
+        addText("+320 EXP", x: 19, y: 22, lineHeight: 6)
+
+        addRoundRect(x: 18, y: 29, w: 28, h: 6, color: myOrange)
+        addText("+120 G", x: 19, y: 29, lineHeight: 6)
     }
 
-    func addText(_ text: String, x: Int, y: Int, lineHeight: Int = 3) {
+    func addRoundRect(x: Int, y: Int, w: Int, h: Int, color: UIColor = .white) {
+        let roundRect = UIView()
+        gridSystem.frame(roundRect, x: x, y: y, w: w, h: h)
+        roundRect.roundBorder(borderWidth: 3, cornerRadius: h.c * gridSystem.step / 2, color: color)
+        reportView.addSubview(roundRect)
+    }
+
+    func addText(_ text: String, color: UIColor = .white, x: Int, y: Int, lineHeight: Int = 3) {
         let label = UILabel()
         let fontSize = lineHeight.c * gridSystem.step * 0.7
         let font = MyFont.bold(ofSize: fontSize)
-        label.attributedText = getText(text, color: .blue, strokeWidth: -3.5, strokeColor: .white, font: font)
+        label.attributedText = getText(text, color: color, strokeWidth: -1.5, strokeColor: .gray, font: font)
         gridSystem.frame(label, x: x, y: y, w: gridCount - x, h: lineHeight)
         reportView.addSubview(label)
     }

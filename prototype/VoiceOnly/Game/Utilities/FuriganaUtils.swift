@@ -21,7 +21,7 @@ enum JpnType {
 // fonts
 // .HiraKakuInterface-W2
 // HiraKakuProN-W3
-// HiraginoSans
+// HiraginoSans-W3
 // HiraMinProN-W6
 func rubyAttrStr(
     _ string: String,

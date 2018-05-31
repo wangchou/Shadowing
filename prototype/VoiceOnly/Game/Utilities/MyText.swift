@@ -9,29 +9,28 @@
 import Foundation
 import UIKit
 
+//Hiragino Maru Gothic ProN
+//    -- HiraMaruProN-W4
+//Hiragino Mincho ProN
+//    -- HiraMinProN-W3
+//    -- HiraMinProN-W6
+//Hiragino Sans
+//    -- HiraginoSans-W3
+//    -- HiraginoSans-W6
 class MyFont {
     static func thin(ofSize fontSize: CGFloat) -> UIFont {
-        var fontThin = UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.thin)
-        if let fontW2 = UIFont(name: ".HiraKakuInterface-W2", size: fontSize) {
-            fontThin = fontW2
-        }
-        return fontThin
+        return UIFont(name: ".HiraKakuInterface-W2", size: fontSize) ??
+               UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.thin)
     }
 
     static func regular(ofSize fontSize: CGFloat) -> UIFont {
-        var fontRegular = UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.regular)
-        if let fontW3 = UIFont(name: ".HiraKakuInterface-W3", size: fontSize) {
-            fontRegular = fontW3
-        }
-        return fontRegular
+        return UIFont(name: ".HiraKakuInterface-W3", size: fontSize) ??
+               UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.regular)
     }
 
     static func bold(ofSize fontSize: CGFloat) -> UIFont {
-        var fontBold = UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.bold)
-        if let fontW6 = UIFont(name: ".HiraKakuInterface-W6", size: fontSize) {
-            fontBold = fontW6
-        }
-        return fontBold
+        return UIFont(name: ".HiraKakuInterface-W6", size: fontSize) ??
+               UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.bold)
     }
 }
 
