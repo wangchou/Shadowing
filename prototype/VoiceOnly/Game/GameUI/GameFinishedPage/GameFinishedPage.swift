@@ -23,7 +23,7 @@ class GameFinishedPage: UIViewController {
         reportView.backgroundColor = UIColor.black
         gridSystem = GridSystem(axis: .horizontal, gridCount: gridCount, bounds: reportView.frame)
 
-        guard let record = context.gameRecord else { return }
+        guard var record = context.gameRecord else { return }
         addText(context.dataSetKey, x: 2, y: 0, lineHeight: 6)
 
         record.perfectCount = 15

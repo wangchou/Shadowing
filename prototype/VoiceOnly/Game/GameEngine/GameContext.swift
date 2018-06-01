@@ -58,7 +58,6 @@ class GameContext {
     private init() {
         guard !isSimulator else { return }
         configureAudioSession()
-        gameCharacter = loadGameCharacter()
         buildNodeGraph()
         engine.prepare()
     }

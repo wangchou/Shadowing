@@ -13,13 +13,13 @@ private let context = GameContext.shared
 private let defaults = UserDefaults.standard
 private let gameCharacterKey = "game character"
 
-enum Item: String {
+enum Item: String, Codable {
     case weakHealer
     case weakShield
     case unknown
 }
 
-enum Ability: String {
+enum Ability: String, Codable {
     case timeLeap
     case speedController
     case lightShield
@@ -31,17 +31,29 @@ enum Ability: String {
 private let newGameCharacter = GameCharacter()
 
 func saveGameCharacter() {
-    let gameCharacterData = NSKeyedArchiver.archivedData(withRootObject: context.gameCharacter)
-    defaults.set(gameCharacterData, forKey: gameCharacterKey)
+    let encoder = JSONEncoder()
+
+    if let encoded = try? encoder.encode(context.gameCharacter) {
+        UserDefaults.standard.set(encoded, forKey: gameCharacterKey)
+        print("saveGameCharacter Sucess")
+    } else {
+        print("saveGameCharacter Failed")
+    }
+
 }
 
-func loadGameCharacter() -> GameCharacter {
-    guard let gameCharacterData = defaults.data(forKey: gameCharacterKey) else { return newGameCharacter}
-    guard let gameCharacter = NSKeyedUnarchiver.unarchiveObject(with: gameCharacterData) as? GameCharacter else { return newGameCharacter}
-    return gameCharacter
+func loadGameCharacter() {
+    let decoder = JSONDecoder()
+    if let gameCharacterData = UserDefaults.standard.data(forKey: gameCharacterKey),
+       let gameCharacter = try? decoder.decode(GameCharacter.self, from: gameCharacterData) {
+        context.gameCharacter = gameCharacter
+        print("loadGameCharacter Success")
+    } else {
+        print("loadGameCharacter Failed")
+    }
 }
 
-class GameCharacter: NSObject, NSCoding {
+struct GameCharacter: Codable {
     var name: String
     var maxHP: Int
     var remainingHP: Int
@@ -52,66 +64,21 @@ class GameCharacter: NSObject, NSCoding {
     var items: [Item]
     var armed: [Item]
     var abilities: [Ability]
+}
 
-    override init() {
-        self.name = "未命名"
-        self.maxHP = 26
-        self.remainingHP = self.maxHP
-        self.abilityPoint = 0
-        self.level = 0
-        self.exp = 0
-        self.gold = 100
-        self.items = [.weakShield, .weakHealer, .weakHealer, .weakHealer]
-        self.armed = [.weakShield]
-        self.abilities = []
-        super.init()
-    }
-
-    required init(coder decoder: NSCoder) {
-        if let name = decoder.decodeObject(forKey: "name") as? String {
-            self.name = name
-        } else {
-            self.name = "不知名"
-            print("get name from localStorage failed")
-        }
-        self.maxHP = decoder.decodeInteger(forKey: "maxHP")
-        self.remainingHP = decoder.decodeInteger(forKey: "remainingHP")
-        self.abilityPoint = decoder.decodeInteger(forKey: "abilityPoint")
-        self.level = decoder.decodeInteger(forKey: "level")
-        self.exp = decoder.decodeInteger(forKey: "exp")
-        self.gold = decoder.decodeInteger(forKey: "gold")
-
-        if let items = decoder.decodeObject(forKey: "items") as? [String] {
-            self.items = (items.map { Item(rawValue: $0) ?? Item.unknown }).filter { $0 != Item.unknown }
-        } else {
-            self.items = []
-        }
-
-        if let armed = decoder.decodeObject(forKey: "armed") as? [String] {
-            self.armed = (armed.map { Item(rawValue: $0) ?? Item.unknown }).filter { $0 != Item.unknown }
-        } else {
-            self.armed = []
-        }
-
-        if let abilities = decoder.decodeObject(forKey: "abilities") as? [String] {
-            self.abilities = (abilities.map { Ability(rawValue: $0) ?? Ability.unknown }).filter { $0 != Ability.unknown }
-        } else {
-            self.abilities = []
-        }
-
-        super.init()
-    }
-
-    func encode(with coder: NSCoder) {
-        coder.encode(self.name, forKey: "name")
-        coder.encodeCInt(Int32(self.maxHP), forKey: "maxHP")
-        coder.encodeCInt(Int32(self.remainingHP), forKey: "remainingHP")
-        coder.encodeCInt(Int32(self.abilityPoint), forKey: "abilityPoint")
-        coder.encodeCInt(Int32(self.level), forKey: "level")
-        coder.encodeCInt(Int32(self.exp), forKey: "exp")
-        coder.encodeCInt(Int32(self.gold), forKey: "gold")
-        coder.encode(self.items.map { $0.rawValue }, forKey: "items")
-        coder.encode(self.armed.map { $0.rawValue }, forKey: "armed")
-        coder.encode(self.abilities.map { $0.rawValue }, forKey: "abilities")
+extension GameCharacter {
+    init() {
+        self.init(
+            name: "未命名",
+            maxHP: 26,
+            remainingHP: 26,
+            abilityPoint: 0,
+            level: 0,
+            exp: 0,
+            gold: 100,
+            items: [.weakShield, .weakHealer, .weakHealer, .weakHealer],
+            armed: [.weakShield],
+            abilities: []
+        )
     }
 }

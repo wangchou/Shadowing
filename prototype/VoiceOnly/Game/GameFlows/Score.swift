@@ -9,14 +9,14 @@
 import Foundation
 import UIKit
 
-enum ScoreType {
+enum ScoreType: String, Codable {
     case perfect
     case great
     case good
     case poor
 }
 
-struct Score {
+struct Score: Codable {
     var value: Int
 
     var type: ScoreType {

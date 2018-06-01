@@ -39,6 +39,7 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadGameHistory()
+        loadGameCharacter()
         sentencesTableView.reloadData()
         timeline.viewWillAppear()
         characterView.viewWillAppear()
@@ -92,6 +93,8 @@ extension MainViewController: UITableViewDataSource {
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         context.dataSetKey = allSentencesKeys[indexPath.row]
+        context.gameCharacter.maxHP += 1
+        saveGameCharacter()
         context.loadLearningSentences(isShuffle: false)
         launchStoryboard(self, "GameFinishedPage")
     }
