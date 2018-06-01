@@ -21,9 +21,9 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        addSentences(sentences: n5, prefix: n5Prefix, level: Level.n5)
-        addSentences(sentences: n4, prefix: n4Prefix, level: Level.n4)
-        addSentences(sentences: n3, prefix: n3Prefix, level: Level.n3)
+        addSentences(sentences: n5, prefix: n5Prefix, level: Level.n5a)
+        addSentences(sentences: n4, prefix: n4Prefix, level: Level.n4a)
+        addSentences(sentences: n3, prefix: n3Prefix, level: Level.n3a)
         let height = screen.width * 120/320
         topView.frame.size.height = height
         timeline.frame.size.width = height * 5/3

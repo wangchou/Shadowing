@@ -54,9 +54,30 @@ class GameRecord: NSObject, NSCoding {
     let dataSetKey: String
     let sentencesCount: Int
     let level: Level
+    var isNewRecord = false
     var perfectCount = 0
     var greatCount = 0
     var goodCount = 0
+    var missedCount: Int {
+        return sentencesCount - perfectCount - greatCount - goodCount
+    }
+
+    var exp: Int {
+        var levelFactor: Float = level.rawValue.f/10
+
+        let base = (perfectCount * 3 + greatCount * 2 + goodCount * 1 + playDuration/5)
+        levelFactor *= isNewRecord ? 1.2 : 1.0
+        return Int(base.f * levelFactor)
+    }
+
+    var gold: Int {
+        var levelFactor: Float = level.rawValue.f/10
+
+        let base = perfectCount * 2 + greatCount
+        levelFactor *= isNewRecord ? 1.2 : 1.0
+        return Int(base.f * levelFactor)
+    }
+
     var sentencesScore: [String: Score]
 
     var p: Float {
@@ -109,7 +130,7 @@ class GameRecord: NSObject, NSCoding {
         self.playDuration = decoder.decodeInteger(forKey: "playDuration")
         self.level = allLevels[self.dataSetKey] ??
                      Level(rawValue: decoder.decodeInteger(forKey: "level")) ??
-                     .n5
+                     .n5a
         if let startedTime = decoder.decodeObject(forKey: "startedTime") as? Date {
             self.startedTime = startedTime
         } else {

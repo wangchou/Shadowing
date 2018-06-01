@@ -23,19 +23,24 @@ class GameFinishedPage: UIViewController {
         reportView.backgroundColor = UIColor.black
         gridSystem = GridSystem(axis: .horizontal, gridCount: gridCount, bounds: reportView.frame)
 
-        addText("口說　５", x: 2, y: 0, lineHeight: 6)
+        guard let record = context.gameRecord else { return }
+        addText(context.dataSetKey, x: 2, y: 0, lineHeight: 6)
 
+        record.perfectCount = 15
+        record.greatCount = 4
+        record.goodCount = 5
+        record.playDuration = 150
         addText("達成率", x: 2, y: 6, lineHeight: 2)
-        addText("100%", x: 2, y: 6, lineHeight: 12)
+        addText(record.progress, x: 2, y: 6, lineHeight: 12)
         addText("Rank", x: 28, y: 6, lineHeight: 2)
-        addText("SS", color: myBlue, x: 28, y: 6, lineHeight: 12)
-        addText("正解 20 | すごい 8 | いいね 3 | 違うよ 0", x: 2, y: 17)
+        addText(record.rank.rawValue, color: getRankColor(rank: record.rank), x: 28, y: 6, lineHeight: 12)
+        addText("正解 \(record.perfectCount) | すごい \(record.greatCount) | いいね \(record.goodCount) | ミス \(record.missedCount)", x: 2, y: 17)
 
         addRoundRect(x: 18, y: 22, w: 28, h: 6, color: myBlue)
-        addText("+320 EXP", x: 19, y: 22, lineHeight: 6)
+        addText("+\(record.exp) EXP", x: 19, y: 22, lineHeight: 6)
 
         addRoundRect(x: 18, y: 29, w: 28, h: 6, color: myOrange)
-        addText("+120 G", x: 19, y: 29, lineHeight: 6)
+        addText("+\(record.gold) G", x: 19, y: 29, lineHeight: 6)
     }
 
     func addRoundRect(x: Int, y: Int, w: Int, h: Int, color: UIColor = .white) {

@@ -1,5 +1,5 @@
 enum Level: Int {
-    case n5, n4, n3
+    case n5a=5, n5b=7, n5c=10, n4a=20, n4b=28, n4c=40, n3a=80, n3b=110
 }
 
 enum Rank: String {

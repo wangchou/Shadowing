@@ -86,7 +86,7 @@ class GameContext {
         targetString = sentences[0]
         life = isSimulator ? 100 : 40
 
-        let level = allLevels[dataSetKey] ?? .n5
+        let level = allLevels[dataSetKey] ?? .n5a
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level)
 
         isNewRecord = false
