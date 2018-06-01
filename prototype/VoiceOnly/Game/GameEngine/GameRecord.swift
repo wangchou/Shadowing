@@ -28,7 +28,7 @@ func saveGameHistory() {
 func loadGameHistory() {
     let decoder = JSONDecoder()
     if let gameHistoryData = UserDefaults.standard.data(forKey: gameHistoryKey),
-        let gameHistory = try? decoder.decode([GameRecord].self, from: gameHistoryData) {
+       let gameHistory = try? decoder.decode([GameRecord].self, from: gameHistoryData) {
         context.gameHistory = gameHistory
         print("loadGameHistory Success")
     } else {
@@ -50,12 +50,13 @@ func updateGameHistory() {
     if let bestRecord = findBestRecord(key: record.dataSetKey) {
         if isBetter(record, to: bestRecord) {
             context.gameHistory.insert(record, at: 0)
-            context.isNewRecord = true
+            context.gameRecord?.isNewRecord = true
+        } else {
+            context.gameRecord?.isNewRecord = false
         }
-        context.isNewRecord = false
     } else {
         context.gameHistory.append(record)
-        context.isNewRecord = true
+        context.gameRecord?.isNewRecord = true
     }
     saveGameHistory()
 }

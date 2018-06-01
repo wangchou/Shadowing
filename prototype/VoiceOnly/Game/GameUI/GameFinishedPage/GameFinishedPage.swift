@@ -26,10 +26,6 @@ class GameFinishedPage: UIViewController {
         guard var record = context.gameRecord else { return }
         addText(context.dataSetKey, x: 2, y: 0, lineHeight: 6)
 
-        record.perfectCount = 15
-        record.greatCount = 4
-        record.goodCount = 5
-        record.playDuration = 150
         addText("達成率", x: 2, y: 6, lineHeight: 2)
         addText(record.progress, x: 2, y: 6, lineHeight: 12)
         addText("Rank", x: 28, y: 6, lineHeight: 2)
@@ -41,6 +37,12 @@ class GameFinishedPage: UIViewController {
 
         addRoundRect(x: 18, y: 29, w: 28, h: 6, color: myOrange)
         addText("+\(record.gold) G", x: 19, y: 29, lineHeight: 6)
+
+        context.gameCharacter.gold += record.gold
+        context.gameCharacter.exp += record.exp
+        saveGameCharacter()
+
+        addBackButton(x: 9, y: 43)
     }
 
     func addRoundRect(x: Int, y: Int, w: Int, h: Int, color: UIColor = .white) {
@@ -67,6 +69,24 @@ class GameFinishedPage: UIViewController {
         label.textColor = myWhite
         gridSystem.frame(label, x: x, y: y, w: gridCount - x, h: lineHeight)
         reportView.addSubview(label)
+    }
+
+    func addBackButton(x: Int, y: Int, lineHeight: Int = 6) {
+        let backButton = UIButton()
+        backButton.setTitle("戻 る", for: .normal)
+        backButton.backgroundColor = .red
+        backButton.titleLabel?.font = MyFont.regular(ofSize: gridSystem.step * 4)
+        backButton.titleLabel?.textColor = myLightText
+        backButton.roundBorder(borderWidth: 3, cornerRadius: 15, color: UIColor.white.withAlphaComponent(0.5))
+
+        let backButtonTap = UITapGestureRecognizer(target: self, action: #selector(self.backButtonTapped))
+        backButton.addGestureRecognizer(backButtonTap)
+        gridSystem.frame(backButton, x: x, y: y, w: 28, h: lineHeight)
+        reportView.addSubview(backButton)
+    }
+
+    @objc func backButtonTapped() {
+        launchStoryboard(self, "MainViewController")
     }
 }
 

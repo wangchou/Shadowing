@@ -93,9 +93,7 @@ extension MainViewController: UITableViewDataSource {
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         context.dataSetKey = allSentencesKeys[indexPath.row]
-        context.gameCharacter.maxHP += 1
-        saveGameCharacter()
         context.loadLearningSentences(isShuffle: false)
-        launchStoryboard(self, "GameFinishedPage")
+        launchStoryboard(self, "GameContentDetailPage")
     }
 }

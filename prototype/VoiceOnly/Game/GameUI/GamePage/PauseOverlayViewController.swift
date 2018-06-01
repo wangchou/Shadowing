@@ -24,7 +24,7 @@ class PauseOverlayViewController: UIViewController {
 
     @IBAction func finishButtonClicked(_ sender: Any) {
         SimpleGame.shared.stop()
-        launchStoryboard(self, "ContentViewController")
+        launchStoryboard(self, "MainViewController")
     }
 
     @IBAction func resumeButtonClicked(_ sender: Any) {
