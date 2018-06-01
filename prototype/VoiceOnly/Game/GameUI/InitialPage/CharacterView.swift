@@ -12,6 +12,7 @@ import UIKit
 // square view, w == h
 // 20 x 20 grid system
 private let gridCount = 20
+private let context = GameContext.shared
 class CharacterView: UIView {
     var gridSystem: GridSystem = GridSystem()
 
@@ -33,8 +34,9 @@ class CharacterView: UIView {
         gridSystem.frame(statusLayer, x: 0, y: 12, w: 20, h: 8)
 
         self.addSubview(statusLayer)
-        addText("Lv.12 涼宮ハルヒ", x: 1, y: 13)
-        addText("HP： 105/123", x: 1, y: 16)
+        let gameCharacter = context.gameCharacter
+        addText("Lv.\(gameCharacter.level) \(gameCharacter.name)", x: 1, y: 13)
+        addText("HP： \(gameCharacter.remainingHP)/\(gameCharacter.maxHP)", x: 1, y: 16)
     }
 
     func addText(_ text: String, x: Int, y: Int, lineHeight: Int = 3) {

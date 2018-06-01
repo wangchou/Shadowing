@@ -20,7 +20,7 @@ class GameContext {
     static let shared = GameContext()
 
     var gameHistory = [GameRecord]()
-
+    var gameCharacter: GameCharacter = GameCharacter()
     var engine = AVAudioEngine()
     var micVolumeNode = AVAudioMixerNode()
     var speechRecognizer = SpeechRecognizer()
@@ -58,6 +58,7 @@ class GameContext {
     private init() {
         guard !isSimulator else { return }
         configureAudioSession()
+        gameCharacter = loadGameCharacter()
         buildNodeGraph()
         engine.prepare()
     }
