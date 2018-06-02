@@ -9,6 +9,21 @@
 import Foundation
 import UIKit
 
+// https://medium.com/@robnorback/the-secret-to-1-second-compile-times-in-xcode-9de4ec8345a1
+
+protocol ReloadableView {
+    func viewWillAppear()
+}
+
+extension UIView {
+
+    #if DEBUG
+    @objc func injected() {
+        (self as? ReloadableView)?.viewWillAppear()
+    }
+    #endif
+}
+
 extension UIView {
     func roundBorder(borderWidth: CGFloat = 1.5, cornerRadius: CGFloat = 15, color: UIColor = .black) {
         self.layer.borderWidth = borderWidth

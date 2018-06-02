@@ -13,7 +13,7 @@ import UIKit
 // 20 x 20 grid system
 private let gridCount = 20
 private let context = GameContext.shared
-class CharacterView: UIView {
+class CharacterView: UIView, ReloadableView {
     var gridSystem: GridSystem = GridSystem()
 
     func viewWillAppear() {

@@ -21,7 +21,7 @@ extension String {
     }
 }
 
-class BlackView: UIView {
+class BlackView: UIView, ReloadableView {
     var gridSystem: GridSystem = GridSystem()
     var lineHeight: CGFloat {
         return gridSystem.step * 4
