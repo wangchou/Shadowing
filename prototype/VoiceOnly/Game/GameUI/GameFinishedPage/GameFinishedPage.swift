@@ -18,25 +18,28 @@ class GameFinishedPage: UIViewController {
     @IBOutlet weak var reportView: UIView!
 
     override func viewWillAppear(_ animated: Bool) {
+        UIApplication.shared.statusBarStyle = .lightContent
         super.viewWillAppear(animated)
         reportView.removeAllSubviews()
         reportView.backgroundColor = UIColor.black
-        gridSystem = GridSystem(axis: .horizontal, gridCount: gridCount, bounds: reportView.frame)
+        let frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.1)
+        reportView.frame = frame
+        gridSystem = GridSystem(axis: .horizontal, gridCount: gridCount, bounds: frame)
 
-        guard var record = context.gameRecord else { return }
-        addText(context.dataSetKey, x: 2, y: 0, lineHeight: 6)
+        guard let record = context.gameRecord else { return }
+        addText(context.dataSetKey, x: 2, y: 1, lineHeight: 6)
 
-        addText("達成率", x: 2, y: 6, lineHeight: 2)
-        addText(record.progress, x: 2, y: 6, lineHeight: 12)
-        addText("Rank", x: 28, y: 6, lineHeight: 2)
-        addText(record.rank.rawValue, color: getRankColor(rank: record.rank), x: 28, y: 6, lineHeight: 12)
-        addText("正解 \(record.perfectCount) | すごい \(record.greatCount) | いいね \(record.goodCount) | ミス \(record.missedCount)", x: 2, y: 17)
+        addText("達成率", x: 2, y: 7, lineHeight: 2)
+        addText(record.progress, x: 2, y: 7, lineHeight: 12)
+        addText("Rank", x: 28, y: 7, lineHeight: 2)
+        addText(record.rank.rawValue, color: getRankColor(rank: record.rank), x: 28, y: 7, lineHeight: 12)
+        addText("正解 \(record.perfectCount) | すごい \(record.greatCount) | いいね \(record.goodCount) | ミス \(record.missedCount)", x: 2, y: 18)
 
-        addRoundRect(x: 18, y: 22, w: 28, h: 6, color: myBlue)
-        addText("+\(record.exp) EXP", x: 19, y: 22, lineHeight: 6)
+        addRoundRect(x: 18, y: 23, w: 28, h: 6, color: myBlue)
+        addText("+\(record.exp) EXP", x: 19, y: 23, lineHeight: 6)
 
-        addRoundRect(x: 18, y: 29, w: 28, h: 6, color: myOrange)
-        addText("+\(record.gold) G", x: 19, y: 29, lineHeight: 6)
+        addRoundRect(x: 18, y: 30, w: 28, h: 6, color: myOrange)
+        addText("+\(record.gold) G", x: 19, y: 30, lineHeight: 6)
 
         context.gameCharacter.gold += record.gold
         context.gameCharacter.exp += record.exp
@@ -87,6 +90,7 @@ class GameFinishedPage: UIViewController {
 
     @objc func backButtonTapped() {
         launchStoryboard(self, "MainViewController")
+        UIApplication.shared.statusBarStyle = .default
     }
 }
 

@@ -9,6 +9,18 @@
 import Foundation
 import UIKit
 
+private let context = GameContext.shared
+
+extension String {
+    func fillWidth(width: Int) -> String {
+        var filledString = ""
+        while filledString.count + self.count < width {
+            filledString.append(" ")
+        }
+        return filledString + self
+    }
+}
+
 class BlackView: UIView {
     var gridSystem: GridSystem = GridSystem()
     var lineHeight: CGFloat {
@@ -26,15 +38,19 @@ class BlackView: UIView {
         addBackButton()
 
         // left side
-        addText("涼宮ハルヒ", row: 1, column: 0)
-        addText("Lv. 11", row: 5, column: 0)
-        addText("10022 G", row: 6, column: 0)
+        let player = context.gameCharacter
+        addText(player.name, row: 1, column: 0)
+        addText("\(player.gold) G".fillWidth(width: 7), row: 6, column: 0)
 
         // right side
-        addText("HP:    121", row: 2, column: 5)
-        addText("MP:    121", row: 3, column: 5)
-        addText("EXP: 12121", row: 4, column: 5)
-        addText("STR:    21", row: 5, column: 5)
+        let rightColumnStart = 5
+        addText("Lv.\(player.level)", row: 3, column: rightColumnStart)
+
+        addText("HP:", row: 4, column: rightColumnStart)
+        addText("\(player.maxHP)".fillWidth(width: 6), row: 4, column: rightColumnStart + 2)
+
+        addText("EXP:", row: 5, column: rightColumnStart)
+        addText("\(player.exp)".fillWidth(width: 6), row: 5, column: rightColumnStart + 2)
         addText("DEF:    13", row: 6, column: 5)
 
         let scrollView = UIScrollView()
@@ -57,10 +73,16 @@ class BlackView: UIView {
 
     func addBackButton() {
         let backButton = UIButton()
-        backButton.setTitle("X", for: .normal)
-        backButton.titleLabel?.font = MyFont.regular(ofSize: gridSystem.step * 4)
-        backButton.titleLabel?.textColor = myLightText
-        gridSystem.frame(backButton, x: -6, y: 4, w: 4, h: 4)
+        let gridWidth = 6
+        let lineHeight = gridSystem.step * gridWidth.c
+
+        backButton.setTitle("x", for: .normal)
+        backButton.setTitleColor(.white, for: .normal)
+        backButton.roundBorder(borderWidth: 1.5, cornerRadius: lineHeight/2, color: .black)
+        backButton.backgroundColor = UIColor.gray
+        backButton.titleLabel?.font = UIFont(name: "HiraMaruProN-W4", size: lineHeight * 0.85) ?? font
+        backButton.contentVerticalAlignment = .top
+        gridSystem.frame(backButton, x: -7, y: 4, w: gridWidth, h: gridWidth)
         self.addSubview(backButton)
         let backButtonTap = UITapGestureRecognizer(target: self, action: #selector(self.backButtonTapped))
         backButton.addGestureRecognizer(backButtonTap)

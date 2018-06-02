@@ -35,7 +35,6 @@ func saveGameCharacter() {
 
     if let encoded = try? encoder.encode(context.gameCharacter) {
         UserDefaults.standard.set(encoded, forKey: gameCharacterKey)
-        print("saveGameCharacter Sucess")
     } else {
         print("saveGameCharacter Failed")
     }
@@ -47,7 +46,6 @@ func loadGameCharacter() {
     if let gameCharacterData = UserDefaults.standard.data(forKey: gameCharacterKey),
        let gameCharacter = try? decoder.decode(GameCharacter.self, from: gameCharacterData) {
         context.gameCharacter = gameCharacter
-        print("loadGameCharacter Success")
     } else {
         print("loadGameCharacter Failed")
     }
@@ -73,7 +71,7 @@ extension GameCharacter {
             maxHP: 26,
             remainingHP: 26,
             abilityPoint: 0,
-            level: 0,
+            level: 1,
             exp: 0,
             gold: 100,
             items: [.weakShield, .weakHealer, .weakHealer, .weakHealer],

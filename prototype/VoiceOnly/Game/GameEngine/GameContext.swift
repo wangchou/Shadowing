@@ -95,7 +95,7 @@ class GameContext {
     func nextSentence() -> Bool {
         sentenceIndex += 1
         // guard sentenceIndex < sentences.count else { return false }
-        guard sentenceIndex < 3 else { return false }
+        guard sentenceIndex < 1 else { return false }
         targetString = sentences[sentenceIndex]
         userSaidString = ""
         return true

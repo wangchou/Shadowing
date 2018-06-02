@@ -45,6 +45,10 @@ class MainViewController: UIViewController {
         characterView.viewWillAppear()
         let characterViewTap = UITapGestureRecognizer(target: self, action: #selector(self.characterViewTapped))
         characterView.addGestureRecognizer(characterViewTap)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         addGradientSeparatorLine()
     }
 
@@ -56,7 +60,7 @@ class MainViewController: UIViewController {
     func addGradientSeparatorLine() {
         let lightRGBs = [myRed, myOrange, myGreen, myBlue].map { $0.cgColor }
         let layer = CAGradientLayer()
-        layer.frame = topView.bounds
+        layer.frame = topView.frame
         layer.frame.origin.y = topView.frame.height - 1.5
         layer.frame.size.height = 1.5
         layer.startPoint = CGPoint(x: 0, y: 0)

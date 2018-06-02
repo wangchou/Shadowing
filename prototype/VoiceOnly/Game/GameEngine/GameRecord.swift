@@ -18,7 +18,6 @@ func saveGameHistory() {
 
     if let encoded = try? encoder.encode(context.gameHistory) {
         UserDefaults.standard.set(encoded, forKey: gameHistoryKey)
-        print("saveGameCharacter Sucess")
     } else {
         print("saveGameCharacter Failed")
     }
@@ -30,7 +29,6 @@ func loadGameHistory() {
     if let gameHistoryData = UserDefaults.standard.data(forKey: gameHistoryKey),
        let gameHistory = try? decoder.decode([GameRecord].self, from: gameHistoryData) {
         context.gameHistory = gameHistory
-        print("loadGameHistory Success")
     } else {
         print("loadGameHistory Failed")
     }

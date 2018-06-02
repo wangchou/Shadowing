@@ -665,29 +665,29 @@
         <scene sceneID="DIF-sJ-I4U">
             <objects>
                 <viewController storyboardIdentifier="GameFinishedPage" id="Qnp-4h-Hat" customClass="GameFinishedPage" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="oBI-5z-UVk">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="oBI-5z-UVk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="H4W-eR-YuF">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H4W-eR-YuF">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" id="V2Z-wa-Qsc">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="342"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="V2Z-wa-Qsc">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                    <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="FinishedSentenceCell" rowHeight="63" id="U4Y-kF-8LG" customClass="GameFinishedTableCell" customModule="VoiceOnly" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="370" width="320" height="63"/>
+                                        <rect key="frame" x="0.0" y="348" width="320" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="U4Y-kF-8LG" id="316-Iq-LBo">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="62.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="無分" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPn-cX-hpI">
-                                                    <rect key="frame" x="0.0" y="19.5" width="55" height="24"/>
+                                                    <rect key="frame" x="0.0" y="20" width="55" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="55" id="mxJ-fC-4bl"/>
                                                     </constraints>
@@ -696,16 +696,16 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6mu-3B-LpP">
-                                                    <rect key="frame" x="55" y="0.0" width="265" height="62.5"/>
+                                                    <rect key="frame" x="55" y="0.0" width="265" height="63"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="ただの人間には" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NB6-xL-cJu" customClass="FuriganaLabel" customModule="VoiceOnly" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="265" height="35"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="265" height="35.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ただの人間には" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhw-Di-rgQ" customClass="FuriganaLabel" customModule="VoiceOnly" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="35" width="265" height="27.5"/>
+                                                            <rect key="frame" x="0.0" y="35.5" width="265" height="27.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -737,12 +737,11 @@
                             </tableView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="H4W-eR-YuF" firstAttribute="top" secondItem="0Ud-wn-htS" secondAttribute="top" id="IFR-Tv-7tK"/>
-                            <constraint firstItem="0Ud-wn-htS" firstAttribute="trailing" secondItem="H4W-eR-YuF" secondAttribute="trailing" id="QrG-Fh-1Oa"/>
-                            <constraint firstItem="0Ud-wn-htS" firstAttribute="bottom" secondItem="H4W-eR-YuF" secondAttribute="bottom" id="eVG-o3-reo"/>
-                            <constraint firstItem="H4W-eR-YuF" firstAttribute="leading" secondItem="0Ud-wn-htS" secondAttribute="leading" id="h0c-rS-XdT"/>
+                            <constraint firstItem="H4W-eR-YuF" firstAttribute="leading" secondItem="oBI-5z-UVk" secondAttribute="leading" id="2Qp-md-PQ5"/>
+                            <constraint firstItem="H4W-eR-YuF" firstAttribute="top" secondItem="oBI-5z-UVk" secondAttribute="top" id="4b3-Rs-hCA"/>
+                            <constraint firstAttribute="trailing" secondItem="H4W-eR-YuF" secondAttribute="trailing" id="Fsa-jc-7Z3"/>
+                            <constraint firstItem="H4W-eR-YuF" firstAttribute="bottom" secondItem="oBI-5z-UVk" secondAttribute="bottom" id="Wa2-KJ-kJd"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="0Ud-wn-htS"/>
                     </view>
                     <connections>
                         <outlet property="reportView" destination="V2Z-wa-Qsc" id="Uog-II-oKV"/>
