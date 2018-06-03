@@ -122,7 +122,7 @@ func getFuriganaAttrString(_ parts: [String], _ kana: String, color: UIColor = .
         return attrStr
     }
 
-    attrStr.append(rubyAttrStr(parts.joined(separator: ""), kana, color: color))
+    attrStr.append(rubyAttrStr(parts.joined(), kana, color: color))
     return attrStr
 }
 

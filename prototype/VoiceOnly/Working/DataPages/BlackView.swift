@@ -12,12 +12,12 @@ import UIKit
 private let context = GameContext.shared
 
 extension String {
-    func fillWidth(width: Int) -> String {
-        var filledString = ""
-        while filledString.count + self.count < width {
-            filledString.append(" ")
-        }
-        return filledString + self
+    func padWidthTo(_ width: Int) -> String {
+        let padCount = max(width - self.count, 0)
+        var leftPadSpace = ""
+        for _ in 1...padCount { leftPadSpace += " " }
+
+        return leftPadSpace + self
     }
 }
 
@@ -40,17 +40,17 @@ class BlackView: UIView, ReloadableView {
         // left side
         let player = context.gameCharacter
         addText(player.name, row: 1, column: 0)
-        addText("\(player.gold) G".fillWidth(width: 7), row: 6, column: 0)
+        addText("\(player.gold) G".padWidthTo(7), row: 6, column: 0)
 
         // right side
         let rightColumnStart = 5
         addText("Lv.\(player.level)", row: 3, column: rightColumnStart)
 
         addText("HP:", row: 4, column: rightColumnStart)
-        addText("\(player.maxHP)".fillWidth(width: 6), row: 4, column: rightColumnStart + 2)
+        addText("\(player.maxHP)".padWidthTo(6), row: 4, column: rightColumnStart + 2)
 
         addText("EXP:", row: 5, column: rightColumnStart)
-        addText("\(player.exp)".fillWidth(width: 6), row: 5, column: rightColumnStart + 2)
+        addText("\(player.exp)".padWidthTo(6), row: 5, column: rightColumnStart + 2)
         addText("DEF:    13", row: 6, column: 5)
 
         let scrollView = UIScrollView()

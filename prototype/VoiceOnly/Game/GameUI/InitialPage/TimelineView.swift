@@ -36,7 +36,7 @@ struct TimelineBox {
     }
 }
 
-class TimelineView: UIView {
+class TimelineView: UIView, ReloadableView {
     var boxWidth = 12
     var boxSpacing = 2
     var yPadding = 2
