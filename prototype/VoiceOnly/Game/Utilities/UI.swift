@@ -22,9 +22,7 @@ extension UIView {
         (self as? ReloadableView)?.viewWillAppear()
     }
     #endif
-}
 
-extension UIView {
     func roundBorder(borderWidth: CGFloat = 1.5, cornerRadius: CGFloat = 15, color: UIColor = .black) {
         self.layer.borderWidth = borderWidth
         self.layer.cornerRadius = cornerRadius

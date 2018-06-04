@@ -36,6 +36,10 @@ class MainViewController: UIViewController {
         launchStoryboard(self, "DataPageViewOverlay", isOverCurrent: true, animated: true)
     }
 
+    @objc func injected() {
+        viewWillAppear(false)
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadGameHistory()

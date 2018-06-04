@@ -97,8 +97,7 @@ struct GameRecord: Codable {
     }
 
     var progress: String {
-        let prefix = p < 10 ? "0" : ""
-        return "\(prefix)\(p.i)%"
+        return "\(p.i)"
     }
 
     var rank: Rank {

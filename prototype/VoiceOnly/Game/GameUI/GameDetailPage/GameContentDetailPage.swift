@@ -39,7 +39,8 @@ class GameContentDetailPage: UIViewController {
         if let gameRecord = findBestRecord(key: context.dataSetKey) {
             rankLabel.text = gameRecord.rank.rawValue
             rankLabel.textColor = getRankColor(rank: gameRecord.rank)
-            progressLabel.text = gameRecord.progress
+
+            progressLabel.attributedText = getProgressAttrText(progress: gameRecord.progress)
 
             perfectCountLabel.text = gameRecord.perfectCount.s
             greatCountLabel.text = gameRecord.greatCount.s
@@ -47,7 +48,7 @@ class GameContentDetailPage: UIViewController {
             missedCountLabel.text = (context.sentences.count - gameRecord.perfectCount - gameRecord.greatCount - gameRecord.goodCount).s
         } else {
             rankLabel.text = "?"
-            progressLabel.text = "??%"
+            progressLabel.attributedText = getProgressAttrText(progress: "??")
             perfectCountLabel.text = 0.s
             greatCountLabel.text = 0.s
             goodCountLabel.text = 0.s
@@ -58,6 +59,20 @@ class GameContentDetailPage: UIViewController {
         all(context.sentences.map {$0.furiganaAttributedString}).then {_ in
             self.tableView.reloadData()
         }
+    }
+
+    func getProgressAttrText(progress: String) -> NSAttributedString {
+        let attrText = NSMutableAttributedString()
+        attrText.append(getStrokeText(progress, .black, strokeWidth: -1.5, strokColor: .lightGray, font: UIFont.boldSystemFont(ofSize: 60)))
+        attrText.append(getStrokeText("%", .white, strokeWidth: 0, strokColor: .black, font: UIFont.boldSystemFont(ofSize: 20)))
+
+        return attrText
+    }
+
+    @objc func injected() {
+        #if DEBUG
+            viewDidLoad()
+        #endif
     }
 
     @IBAction func backButtonClicked(_ sender: Any) {
