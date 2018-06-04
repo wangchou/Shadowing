@@ -37,7 +37,9 @@ class MainViewController: UIViewController {
     }
 
     @objc func injected() {
+        #if DEBUG
         viewWillAppear(false)
+        #endif
     }
 
     override func viewWillAppear(_ animated: Bool) {

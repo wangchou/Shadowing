@@ -723,7 +723,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="6mu-3B-LpP" secondAttribute="trailing" id="vpO-eq-qZ7"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.6992722602739726" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="scoreLabel" destination="PPn-cX-hpI" id="9Q3-xa-525"/>
                                             <outlet property="sentenceLabel" destination="NB6-xL-cJu" id="0Ea-NG-b2M"/>
@@ -742,6 +742,7 @@
                             <constraint firstAttribute="trailing" secondItem="H4W-eR-YuF" secondAttribute="trailing" id="Fsa-jc-7Z3"/>
                             <constraint firstItem="H4W-eR-YuF" firstAttribute="bottom" secondItem="oBI-5z-UVk" secondAttribute="bottom" id="Wa2-KJ-kJd"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="1Zp-v0-eaQ"/>
                     </view>
                     <connections>
                         <outlet property="reportView" destination="V2Z-wa-Qsc" id="Uog-II-oKV"/>
