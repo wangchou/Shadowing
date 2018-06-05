@@ -14,11 +14,10 @@ import UIKit
 private let gridCount = 20
 private let context = GameContext.shared
 class CharacterView: UIView, ReloadableView {
-    var gridSystem: GridSystem = GridSystem()
+    var gridSystem: GridSystem = GridSystem(gridCount: gridCount)
 
     func viewWillAppear() {
         self.backgroundColor = .clear
-        gridSystem = GridSystem(axis: .horizontal, gridCount: gridCount, bounds: frame)
         self.removeAllSubviews()
         self.roundBorder()
 

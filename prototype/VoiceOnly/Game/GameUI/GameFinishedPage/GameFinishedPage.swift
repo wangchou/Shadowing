@@ -13,7 +13,7 @@ private let context = GameContext.shared
 
 private let gridCount = 48
 class GameFinishedPage: UIViewController {
-    var gridSystem: GridSystem = GridSystem()
+    var gridSystem: GridSystem = GridSystem(gridCount: gridCount)
 
     @IBOutlet weak var reportView: UIView!
 
@@ -24,13 +24,13 @@ class GameFinishedPage: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        UIApplication.shared.statusBarStyle = .lightContent
         super.viewWillAppear(animated)
         reportView.removeAllSubviews()
+
+        UIApplication.shared.statusBarStyle = .lightContent
         reportView.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         let frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.1)
         reportView.frame = frame
-        gridSystem = GridSystem(axis: .horizontal, gridCount: gridCount, bounds: frame)
 
         guard let record = context.gameRecord else { return }
 

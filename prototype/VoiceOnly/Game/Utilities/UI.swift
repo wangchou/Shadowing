@@ -73,16 +73,15 @@ let emptyCGRect = CGRect(x: 0, y: 0, width: 5, height: 5)
 struct GridSystem {
     var axis: GridAxis
     var gridCount: Int
-    var bounds: CGRect
+    var axisBound: CGFloat
     var step: CGFloat {
-        let axisBound = axis == GridAxis.horizontal ? bounds.width : bounds.height
         return axisBound / gridCount.c
     }
 
-    init(axis: GridAxis = .horizontal, gridCount: Int = 1, bounds: CGRect? = nil) {
+    init(gridCount: Int, axis: GridAxis = .horizontal, axisBound: CGFloat = screen.width) {
         self.axis = axis
         self.gridCount = gridCount
-        self.bounds = bounds ?? emptyCGRect
+        self.axisBound = axisBound
     }
 
     func frame(_ view: UIView, x: Int, y: Int, w: Int, h: Int) {
