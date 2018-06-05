@@ -38,7 +38,7 @@ class GameContentDetailPage: UIViewController {
         titleLabel.text = context.dataSetKey
         if let gameRecord = findBestRecord(key: context.dataSetKey) {
             rankLabel.text = gameRecord.rank.rawValue
-            rankLabel.textColor = getRankColor(rank: gameRecord.rank)
+            rankLabel.textColor = gameRecord.rank.color
 
             progressLabel.attributedText = getProgressAttrText(progress: gameRecord.progress)
 

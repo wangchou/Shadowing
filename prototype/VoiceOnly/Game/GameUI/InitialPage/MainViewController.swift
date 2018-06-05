@@ -91,7 +91,7 @@ extension MainViewController: UITableViewDataSource {
 
         let dataSetKey = allSentencesKeys[indexPath.row]
 
-        contentCell.title.text = dataSetKey
+        contentCell.titleLabel.text = dataSetKey
         let record = findBestRecord(key: dataSetKey)
         contentCell.strockedProgressText = record?.progress
         contentCell.strockedRankText = record?.rank.rawValue

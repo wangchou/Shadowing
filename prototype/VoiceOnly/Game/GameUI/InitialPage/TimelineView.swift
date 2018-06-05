@@ -75,7 +75,7 @@ class TimelineView: UIView, ReloadableView {
         var sumBlue = 0.c
         var sumAlpha: CGFloat = 0.33
         for record in records {
-            let color = getLevelColor(level: record.level)
+            let color = record.level.color
             var red = 0.c
             var green = 0.c
             var blue = 0.c

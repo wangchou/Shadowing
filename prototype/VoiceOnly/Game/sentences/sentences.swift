@@ -1,5 +1,10 @@
+import UIKit
+
 enum Level: Int, Codable {
     case n5a=5, n5b=7, n5c=10, n4a=20, n4b=28, n4c=40, n3a=80, n3b=110
+    var color: UIColor {
+        return getLevelColor(level: self)
+    }
 }
 
 enum Rank: String, Codable {
@@ -11,6 +16,10 @@ enum Rank: String, Codable {
     case d = "D"
     case e = "E"
     case f = "F"
+
+    var color: UIColor {
+        return getRankColor(rank: self)
+    }
 }
 
 var allSentences: [String: [String]] = [:]

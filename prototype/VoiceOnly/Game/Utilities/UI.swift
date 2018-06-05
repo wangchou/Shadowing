@@ -71,6 +71,7 @@ enum GridAxis {
 let emptyCGRect = CGRect(x: 0, y: 0, width: 5, height: 5)
 
 struct GridSystem {
+    var view: UIView?
     var axis: GridAxis
     var gridCount: Int
     var axisBound: CGFloat
@@ -78,13 +79,55 @@ struct GridSystem {
         return axisBound / gridCount.c
     }
 
-    init(gridCount: Int, axis: GridAxis = .horizontal, axisBound: CGFloat = screen.width) {
+    init(gridCount: Int, axis: GridAxis = .horizontal, axisBound: CGFloat = screen.width, view: UIView? = nil) {
         self.axis = axis
         self.gridCount = gridCount
         self.axisBound = axisBound
+        self.view = view
     }
 
-    func frame(_ view: UIView, x: Int, y: Int, w: Int, h: Int) {
+    func addText(x: Int, y: Int, w: Int, h: Int, text: String, font: UIFont, color: UIColor) {
+        guard let view = self.view else { print("no view to addText in grid system"); return }
+        let label = UILabel()
+        label.font = font
+        label.textColor = color
+        label.text = text
+        frame(x, y, w, h, label)
+        view.addSubview(label)
+    }
+
+    func addAttrText(x: Int, y: Int, w: Int, h: Int, text: NSAttributedString) {
+        guard let view = self.view else { print("no view to addText in grid system"); return }
+        let label = UILabel()
+        label.attributedText = text
+        frame(x, y, w, h, label)
+        view.addSubview(label)
+    }
+
+    func addRoundRect(x: Int, y: Int, w: Int, h: Int,
+                      borderColor: UIColor, radius: CGFloat? = nil, backgroundColor: UIColor? = nil) {
+        guard let view = self.view else { print("no view to addRoundRect in grid system"); return }
+        let roundRect = UIView()
+        frame(x, y, w, h, roundRect)
+        let radius = radius ?? h.c * step / 2
+        roundRect.roundBorder(borderWidth: 3, cornerRadius: radius, color: borderColor)
+        if let backgroundColor = backgroundColor {
+            roundRect.backgroundColor = backgroundColor
+        }
+        view.addSubview(roundRect)
+    }
+
+    func addRect(x: Int, y: Int, w: Int, h: Int,
+                backgroundColor: UIColor) {
+        guard let view = self.view else { print("no view to addRect in grid system"); return }
+        let roundRect = UIView()
+        frame(x, y, w, h, roundRect)
+
+            roundRect.backgroundColor = backgroundColor
+        view.addSubview(roundRect)
+    }
+
+    func frame(_ x: Int, _ y: Int, _ w: Int, _ h: Int, _ view: UIView) {
         var x = x
         var y = y
         if axis == GridAxis.horizontal {
