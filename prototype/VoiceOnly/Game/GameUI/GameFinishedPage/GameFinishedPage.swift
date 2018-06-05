@@ -23,11 +23,14 @@ class GameFinishedPage: UIViewController {
         #endif
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reportView.removeAllSubviews()
 
-        UIApplication.shared.statusBarStyle = .lightContent
         reportView.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         let frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.2)
         reportView.frame = frame
@@ -115,7 +118,6 @@ class GameFinishedPage: UIViewController {
 
     @objc func backButtonTapped() {
         launchStoryboard(self, "MainViewController")
-        UIApplication.shared.statusBarStyle = .default
     }
 }
 

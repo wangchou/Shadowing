@@ -49,7 +49,7 @@ func getText(
     terminator: String = ""
     ) -> NSMutableAttributedString {
     let text = NSMutableAttributedString(string: "\(text)\(terminator)")
-    var attributes: [NSAttributedStringKey: Any] = [:]
+    var attributes: [NSAttributedString.Key: Any] = [:]
     if let color = color { attributes[.foregroundColor] = color }
     if let strokeWidth = strokeWidth { attributes[.strokeWidth] = strokeWidth }
     if let strokeColor = strokeColor { attributes[.strokeColor] = strokeColor }

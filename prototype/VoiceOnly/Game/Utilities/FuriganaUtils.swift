@@ -47,7 +47,7 @@ func rubyAttrStr(
             attributes: [
                 .font: fontRegular,
                 .foregroundColor: color,
-                kCTRubyAnnotationAttributeName as NSAttributedStringKey: annotation
+                kCTRubyAnnotationAttributeName as NSAttributedString.Key: annotation
             ]
         )
     } else {
@@ -58,7 +58,7 @@ func rubyAttrStr(
                 .foregroundColor: color,
                 .strokeColor: UIColor.black,
                 .strokeWidth: -1.5,
-                kCTRubyAnnotationAttributeName as NSAttributedStringKey: annotation
+                kCTRubyAnnotationAttributeName as NSAttributedString.Key: annotation
         ])
     }
 

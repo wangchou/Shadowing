@@ -118,7 +118,7 @@ struct GridSystem {
     }
 
     func addRect(x: Int, y: Int, w: Int, h: Int,
-                backgroundColor: UIColor) {
+                 backgroundColor: UIColor) {
         guard let view = self.view else { print("no view to addRect in grid system"); return }
         let roundRect = UIView()
         frame(x, y, w, h, roundRect)

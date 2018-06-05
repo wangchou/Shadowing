@@ -86,6 +86,5 @@ class BlackView: UIView, ReloadableView {
 
     @objc func backButtonTapped() {
         UIApplication.getPresentedViewController()?.dismiss(animated: true, completion: nil)
-        UIApplication.shared.statusBarStyle = .default
     }
 }
