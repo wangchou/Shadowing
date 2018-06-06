@@ -13,21 +13,21 @@ import UIKit
 // 20 x 20 grid system
 private let gridCount = 20
 private let context = GameContext.shared
-class CharacterView: UIView, ReloadableView {
-    var gridSystem: GridSystem = GridSystem(gridCount: gridCount)
+
+class CharacterView: UIView, ReloadableView, GridLayout {
+    var gridCount: Int = 20
+    var axis: GridAxis = .horizontal
     var imageView: UIImageView?
 
     func viewWillAppear() {
-        gridSystem = GridSystem(gridCount: gridCount, axisBound: self.frame.width)
-        gridSystem.view =  self
-        self.backgroundColor = .clear
-        self.removeAllSubviews()
-        self.roundBorder()
+        backgroundColor = .clear
+        removeAllSubviews()
+        roundBorder()
 
         // bg view
         imageView = UIImageView()
         guard let imageView = imageView else { return }
-        gridSystem.frame(0, 0, 20, 20, imageView)
+        layout(0, 0, 20, 20, imageView)
         imageView.backgroundColor = myBlue.withAlphaComponent(0.2)
 
         if let image = context.characterImage {
@@ -37,20 +37,16 @@ class CharacterView: UIView, ReloadableView {
 
         addSubview(imageView)
 
-        // status bar
-        let statusLayer = UIView()
-        statusLayer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-        gridSystem.frame(0, 12, 20, 8, statusLayer)
-        addSubview(statusLayer)
+        addRect(x: 0, y: 12, w: 20, h: 8, color: UIColor.black.withAlphaComponent(0.5))
 
         let gameCharacter = context.gameCharacter
-        addText(1, 13, "Lv.\(gameCharacter.level) \(gameCharacter.name)")
-        addText(1, 16, "HP： \(gameCharacter.remainingHP)/\(gameCharacter.maxHP)")
+        addLabel(1, 13, "Lv.\(gameCharacter.level) \(gameCharacter.name)")
+        addLabel(1, 16, "HP： \(gameCharacter.remainingHP)/\(gameCharacter.maxHP)")
     }
 
-    func addText(_ x: Int, _ y: Int, _ text: String, h: Int = 3) {
-        let font = UIFont(name: "Menlo", size: h.c * gridSystem.step * 0.8) ??
+    func addLabel(_ x: Int, _ y: Int, _ text: String, h: Int = 3) {
+        let font = UIFont(name: "Menlo", size: h.c * step * 0.8) ??
                      UIFont.systemFont(ofSize: 20)
-        gridSystem.addText(x: x, y: y, w: gridCount - x, h: h, text: text, font: font, color: myWhite)
+        addText(x: x, y: y, w: gridCount - x, h: h, text: text, font: font, color: myWhite)
     }
 }
