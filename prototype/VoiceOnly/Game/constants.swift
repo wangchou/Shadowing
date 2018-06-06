@@ -30,3 +30,5 @@ let normalRate = AVSpeechUtteranceDefaultSpeechRate
 let micOutVolume: Float = 0
 
 let screen = UIScreen.main.bounds
+
+let rihoUrl = "https://i2.kknews.cc/SIG=vanen8/66nn0002p026p2100op3.jpg"

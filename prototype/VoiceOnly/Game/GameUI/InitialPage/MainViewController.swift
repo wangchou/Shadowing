@@ -46,6 +46,7 @@ class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         loadGameHistory()
         loadGameCharacter()
+        loadCharacterProfile()
         sentencesTableView.reloadData()
         timeline.viewWillAppear()
         characterView.viewWillAppear()

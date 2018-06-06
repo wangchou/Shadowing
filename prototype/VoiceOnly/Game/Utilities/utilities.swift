@@ -10,6 +10,26 @@ import Foundation
 import AVFoundation
 import UIKit
 
+// MARK: - Utilities
+// https://stackovercmd.com/questions/24231680/loading-downloading-image-from-url-on-swift
+func getDataFromUrl(url: String, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
+    guard let url = URL(string: url) else { print("invalid url"); return }
+    URLSession.shared.dataTask(with: url) { data, response, error in
+        completion(data, response, error)
+    }.resume()
+}
+
+func loadCharacterProfile() {
+    print("Download Started")
+    getDataFromUrl(url: rihoUrl) { data, response, error in
+        guard let data = data, error == nil else { return }
+        print("Download Finished")
+        DispatchQueue.main.async {
+            GameContext.shared.characterImage = UIImage(data: data)
+        }
+    }
+}
+
 // MARK: - Audio Session
 func configureAudioSession(toSpeaker: Bool = false) {
     do {

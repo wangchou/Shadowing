@@ -15,6 +15,7 @@ private let gridCount = 20
 private let context = GameContext.shared
 class CharacterView: UIView, ReloadableView {
     var gridSystem: GridSystem = GridSystem(gridCount: gridCount)
+    var imageView: UIImageView?
 
     func viewWillAppear() {
         gridSystem = GridSystem(gridCount: gridCount, axisBound: self.frame.width)
@@ -24,16 +25,23 @@ class CharacterView: UIView, ReloadableView {
         self.roundBorder()
 
         // bg view
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = UIColor.yellow.withAlphaComponent(0.5)
-        gridSystem.frame(0, 0, 20, 20, backgroundView)
-        self.addSubview(backgroundView)
+        imageView = UIImageView()
+        guard let imageView = imageView else { return }
+        gridSystem.frame(0, 0, 20, 20, imageView)
+        imageView.backgroundColor = myBlue.withAlphaComponent(0.2)
+
+        if let image = context.characterImage {
+            imageView.image = image
+            imageView.contentMode = .scaleAspectFill
+        }
+
+        addSubview(imageView)
 
         // status bar
         let statusLayer = UIView()
         statusLayer.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         gridSystem.frame(0, 12, 20, 8, statusLayer)
-        self.addSubview(statusLayer)
+        addSubview(statusLayer)
 
         let gameCharacter = context.gameCharacter
         addText(1, 13, "Lv.\(gameCharacter.level) \(gameCharacter.name)")
@@ -45,5 +53,4 @@ class CharacterView: UIView, ReloadableView {
                      UIFont.systemFont(ofSize: 20)
         gridSystem.addText(x: x, y: y, w: gridCount - x, h: h, text: text, font: font, color: myWhite)
     }
-
 }

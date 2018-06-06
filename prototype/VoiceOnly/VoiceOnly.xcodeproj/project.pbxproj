@@ -120,9 +120,9 @@
 		BEBDEDE7208F227C00C18520 /* PhoneGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneGame.swift; sourceTree = "<group>"; };
 		BEBDEDF1208F28BD00C18520 /* P07ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P07ViewController.swift; sourceTree = "<group>"; };
 		BEC1F02120C12680001B4982 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
-		BED3F07420C6E2C2006B4A1D /* Promises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Promises.framework; path = Carthage/Build/iOS/Promises.framework; sourceTree = "<group>"; };
-		BED3F07520C6E2C2006B4A1D /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		BED3F07620C6E2C2006B4A1D /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBLPromises.framework; path = Carthage/Build/iOS/FBLPromises.framework; sourceTree = "<group>"; };
+		BED3F07420C6E2C2006B4A1D /* Promises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Promises.framework; sourceTree = "<group>"; };
+		BED3F07520C6E2C2006B4A1D /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Alamofire.framework; sourceTree = "<group>"; };
+		BED3F07620C6E2C2006B4A1D /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBLPromises.framework; sourceTree = "<group>"; };
 		BEDBCCD720A82AC4001CF11D /* GameDetailTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailTableCell.swift; sourceTree = "<group>"; };
 		BEDEDD3620A46D1B00E7B60B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRecord.swift; sourceTree = "<group>"; };
@@ -220,11 +220,7 @@
 		BEBDEDB3208EF09F00C18520 = {
 			isa = PBXGroup;
 			children = (
-				BED3F07520C6E2C2006B4A1D /* Alamofire.framework */,
-				BED3F07620C6E2C2006B4A1D /* FBLPromises.framework */,
-				BED3F07420C6E2C2006B4A1D /* Promises.framework */,
 				BEBDEDBE208EF09F00C18520 /* VoiceOnly */,
-				BE9B476B20AD5C6E0063E0DA /* Demo */,
 				BEFA97A120AEB18700DE3280 /* Game */,
 				BE40C61220ABF7E7004E420F /* Working */,
 			);
@@ -247,6 +243,7 @@
 				BEBDEDD3208EF15E00C18520 /* drumLoop.caf */,
 				BEBDEDC8208EF0A000C18520 /* LaunchScreen.storyboard */,
 				BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */,
+				BE9B476B20AD5C6E0063E0DA /* Demo */,
 				BEBDEDBD208EF09F00C18520 /* Products */,
 				BEBDEDE1208EF17100C18520 /* Frameworks */,
 			);
@@ -256,6 +253,9 @@
 		BEBDEDE1208EF17100C18520 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BED3F07520C6E2C2006B4A1D /* Alamofire.framework */,
+				BED3F07620C6E2C2006B4A1D /* FBLPromises.framework */,
+				BED3F07420C6E2C2006B4A1D /* Promises.framework */,
 			);
 			name = Frameworks;
 			path = ..;

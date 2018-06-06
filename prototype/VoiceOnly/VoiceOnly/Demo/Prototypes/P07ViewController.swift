@@ -12,8 +12,6 @@ import UIKit
 import Speech
 
 // Prototype 7: prototype 6 + 遊戲畫面。在 getScore 後 update UI
-let rihoUrl = "https://i2.kknews.cc/SIG=vanen8/66nn0002p026p2100op3.jpg"
-
 private let context = GameContext.shared
 
 extension P07ViewController: GameEventDelegate {
@@ -197,19 +195,10 @@ class P07ViewController: UIViewController {
         scoreDescLabel.textColor = score.color
     }
 
-    // MARK: - Utilities
-    // https://stackovercmd.com/questions/24231680/loading-downloading-image-from-url-on-swift
-    func getDataFromUrl(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            completion(data, response, error)
-            }.resume()
-    }
-
-    func downloadImage(url: URL) {
+    func downloadImage(url: String) {
         print("Download Started")
         getDataFromUrl(url: url) { data, response, error in
             guard let data = data, error == nil else { return }
-            print(response?.suggestedFilename ?? url.lastPathComponent)
             print("Download Finished")
             DispatchQueue.main.async {
                 self.imageView.image = UIImage(data: data)

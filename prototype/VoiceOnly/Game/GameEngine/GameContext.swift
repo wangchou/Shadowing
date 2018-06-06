@@ -10,17 +10,22 @@ import Foundation
 import AVFoundation
 import Speech
 import Promises
+import UIKit
 
 enum GameMode {
     case phone, messenger, console, reader
 }
 
 class GameContext {
-    //Singleton
+    // Singleton
     static let shared = GameContext()
 
+    // Long term data will be kept in UserDefault
     var gameHistory = [GameRecord]()
     var gameCharacter: GameCharacter = GameCharacter()
+    var characterImage: UIImage?
+
+    // Short term data for single game
     var engine = AVAudioEngine()
     var micVolumeNode = AVAudioMixerNode()
     var speechRecognizer = SpeechRecognizer()
