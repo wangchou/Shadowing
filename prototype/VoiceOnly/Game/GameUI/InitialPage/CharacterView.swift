@@ -22,7 +22,7 @@ class CharacterView: UIView, ReloadableView, GridLayout {
     func viewWillAppear() {
         backgroundColor = .clear
         removeAllSubviews()
-        roundBorder()
+        roundBorder(borderWidth: 1.5, cornerRadius: step, color: UIColor.black.withAlphaComponent(0.6))
 
         // bg view
         imageView = UIImageView()
@@ -37,15 +37,15 @@ class CharacterView: UIView, ReloadableView, GridLayout {
 
         addSubview(imageView)
 
-        addRect(x: 0, y: 12, w: 20, h: 8, color: UIColor.black.withAlphaComponent(0.5))
+        addRect(x: 0, y: 14, w: 20, h: 6, color: UIColor.black.withAlphaComponent(0.6))
 
         let gameCharacter = context.gameCharacter
-        addLabel(1, 13, "Lv.\(gameCharacter.level) \(gameCharacter.name)")
-        addLabel(1, 16, "HP： \(gameCharacter.remainingHP)/\(gameCharacter.maxHP)")
+        addLabel(1, 14, "Lv.\(gameCharacter.level) \(gameCharacter.name)")
+        addLabel(1, 17, "HP： \(gameCharacter.remainingHP)/\(gameCharacter.maxHP)")
     }
 
     func addLabel(_ x: Int, _ y: Int, _ text: String, h: Int = 3) {
-        let font = UIFont(name: "Menlo", size: h.c * step * 0.8) ??
+        let font = UIFont(name: "Menlo", size: h.c * step * 0.7) ??
                      UIFont.systemFont(ofSize: 20)
         addText(x: x, y: y, w: gridCount - x, h: h, text: text, font: font, color: myWhite)
     }

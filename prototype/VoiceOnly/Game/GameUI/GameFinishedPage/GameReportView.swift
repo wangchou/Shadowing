@@ -25,16 +25,15 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
     }
 
     func renderTopTitle() {
-        addRect(x: 0, y: 0, w: 44, h: 8, color: UIColor.white)
         guard let record = context.gameRecord else { return }
         roundBorder(cornerRadius: 15, color: myLightText)
-        addText(2, 1, 6, record.dataSetKey, color: getRankColor(rank: record.rank), strokeColor: .black)
+        addText(2, 1, 6, record.dataSetKey, color: myLightText, strokeColor: .black)
     }
 
     func renderMiddleRecord() {
         guard let record = context.gameRecord else { return }
 
-        let y = 9
+        let y = 7
         addText(2, y, 2, "達成率")
         let progress = getAttrText([
             ( record.progress, .white, getFontSize(h: 12)),
@@ -49,25 +48,26 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
     }
 
     func renderBottomCharacter() {
+        let rect = UIView()
+        layout(2, 23, 40, 1, rect)
+        rect.backgroundColor = .lightGray
+        rect.frame.size.height = step/4
+        self.addSubview(rect)
+
         guard let record = context.gameRecord else { return }
         let y = 26
         addRoundRect(22, y, 20, 4, color: myBlue)
-        addText(23, y, 4, " +\(record.exp) EXP")
+        addText(23, y, 4, " +\(record.exp) EXP", strokeColor: .black)
 
-        let goldText = getAttrText([
-            (" +\(record.gold)", .white, getFontSize(h: 4)),
-            (" G", myOrange, getFontSize(h: 4))
-            ])
-        addRoundRect(22, y+5, 20, 4, color: myOrange)
-        addAttrText(23, y+5, 4, goldText)
+        addRoundRect(22, y+7, 20, 4, color: myOrange)
+        addText(23, y+7, 4, " +\(record.gold) G", strokeColor: .black)
 
-        addRoundRect(22, y+10, 20, 4, color: myRed)
-        addText(23, y+10, 4, " Level Up!")
+        addRoundRect(22, y+14, 20, 4, color: myRed)
+        addText(23, y+14, 4, " Level Up!", strokeColor: .black)
 
         let characterView = CharacterView()
         layout(2, y, 18, 18, characterView)
         addReloadableSubview(characterView)
-//        addRoundRect(2, y, 18, 18, color: myLightText, radius: 15, backgroundColor: UIColor.white.withAlphaComponent(0.6))
 
         // data part
         context.gameCharacter.gold += record.gold
