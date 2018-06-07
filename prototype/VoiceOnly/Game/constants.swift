@@ -32,3 +32,4 @@ let micOutVolume: Float = 0
 let screen = UIScreen.main.bounds
 
 let rihoUrl = "https://i2.kknews.cc/SIG=vanen8/66nn0002p026p2100op3.jpg"
+let yuiUrl = "https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2018/03/06/draft/4545744.jpg&s=Y&x=307&y=3&sw=283&sh=283&sl=W&fw=360"
