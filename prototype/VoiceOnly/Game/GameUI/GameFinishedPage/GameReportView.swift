@@ -36,13 +36,13 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         let y = 7
         addText(2, y, 2, "達成率")
         let progress = getAttrText([
-            ( record.progress, .white, getFontSize(h: 12)),
+            ( record.progress.padWidthTo(4), .white, getFontSize(h: 12)),
             ( "%", .lightGray, getFontSize(h: 4))
             ])
         addAttrText(2, y, 12, progress)
 
         addText(26, y, 2, "Rank")
-        addText(26, y, 12, record.rank.rawValue, color: record.rank.color)
+        addText(26, y, 12, record.rank.rawValue.padWidthTo(3), color: record.rank.color)
 
         addText(2, y+11, 3, "正解 \(record.perfectCount) | すごい \(record.greatCount) | いいね \(record.goodCount) | ミス \(record.missedCount)")
     }
@@ -55,18 +55,21 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         self.addSubview(rect)
 
         guard let record = context.gameRecord else { return }
-        let y = 26
+        let y = 25
         addRoundRect(22, y, 20, 4, color: myBlue)
         addText(23, y, 4, " +\(record.exp) EXP", strokeColor: .black)
 
-        addRoundRect(22, y+7, 20, 4, color: myOrange)
-        addText(23, y+7, 4, " +\(record.gold) G", strokeColor: .black)
+        addRoundRect(22, y+5, 20, 4, color: myOrange)
+        addText(23, y+5, 4, " +\(record.gold) G", strokeColor: .black)
 
-        addRoundRect(22, y+14, 20, 4, color: myRed)
-        addText(23, y+14, 4, " Level Up!", strokeColor: .black)
+        addRoundRect(22, y+10, 20, 4, color: myRed)
+        addText(23, y+10, 4, " Level Up!", strokeColor: .black)
+
+        addRoundRect(22, y+15, 20, 4, color: myGreen)
+        addText(23, y+15, 4, " back up?", strokeColor: .black)
 
         let characterView = CharacterView()
-        layout(2, y, 18, 18, characterView)
+        layout(2, y, 19, 19, characterView)
         addReloadableSubview(characterView)
 
         // data part
