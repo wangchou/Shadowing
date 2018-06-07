@@ -29,6 +29,7 @@
 		BE8C8F02209C476A00E32F09 /* VoiceOnlyGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8C8F01209C476A00E32F09 /* VoiceOnlyGame.swift */; };
 		BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */; };
 		BE9B476A20AD50520063E0DA /* FuriganaUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476920AD50520063E0DA /* FuriganaUtils.swift */; };
+		BE9D243A20C8DEE9000515DD /* GameReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9D243920C8DEE9000515DD /* GameReportView.swift */; };
 		BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */; };
 		BEBDEDC5208EF09F00C18520 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEBDEDC3208EF09F00C18520 /* Main.storyboard */; };
 		BEBDEDC7208EF0A000C18520 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEBDEDC6208EF0A000C18520 /* Assets.xcassets */; };
@@ -104,6 +105,7 @@
 		BE8C8F01209C476A00E32F09 /* VoiceOnlyGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceOnlyGame.swift; sourceTree = "<group>"; };
 		BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaLabel.swift; sourceTree = "<group>"; };
 		BE9B476920AD50520063E0DA /* FuriganaUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaUtils.swift; sourceTree = "<group>"; };
+		BE9D243920C8DEE9000515DD /* GameReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameReportView.swift; sourceTree = "<group>"; };
 		BEBDEDBC208EF09F00C18520 /* VoiceOnly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceOnly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEBDEDC4208EF09F00C18520 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -166,15 +168,6 @@
 			path = GameEngine;
 			sourceTree = "<group>";
 		};
-		BE40C61220ABF7E7004E420F /* Working */ = {
-			isa = PBXGroup;
-			children = (
-				BEE797DE20B94B4000328635 /* DataPages */,
-				BEBDEDC3208EF09F00C18520 /* Main.storyboard */,
-			);
-			path = Working;
-			sourceTree = "<group>";
-		};
 		BE6AF37F209C146B00CBDB63 /* GameFlows */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +198,7 @@
 			children = (
 				BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */,
 				BE8180C420B3E03E006ABCB3 /* GameFinishedTableCell.swift */,
+				BE9D243920C8DEE9000515DD /* GameReportView.swift */,
 			);
 			path = GameFinishedPage;
 			sourceTree = "<group>";
@@ -222,7 +216,6 @@
 			children = (
 				BEBDEDBE208EF09F00C18520 /* VoiceOnly */,
 				BEFA97A120AEB18700DE3280 /* Game */,
-				BE40C61220ABF7E7004E420F /* Working */,
 			);
 			sourceTree = "<group>";
 		};
@@ -273,11 +266,13 @@
 		BEDEDD4220A5D86500E7B60B /* GameUI */ = {
 			isa = PBXGroup;
 			children = (
+				BEBDEDC3208EF09F00C18520 /* Main.storyboard */,
 				BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */,
 				BEFA979C20AEAEA400DE3280 /* InitialPage */,
 				BEFA979E20AEAEDD00DE3280 /* GameDetailPage */,
 				BEFA979D20AEAECC00DE3280 /* GamePage */,
 				BE8180C320B3DFEF006ABCB3 /* GameFinishedPage */,
+				BEE797DE20B94B4000328635 /* DataPages */,
 			);
 			path = GameUI;
 			sourceTree = "<group>";
@@ -452,6 +447,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEDEDD3920A46FCA00E7B60B /* GameRecord.swift in Sources */,
+				BE9D243A20C8DEE9000515DD /* GameReportView.swift in Sources */,
 				BE1CA958209DC43800086853 /* Messenger.swift in Sources */,
 				BEBDEDD9208EF15F00C18520 /* utilities.swift in Sources */,
 				BEE665E220BA634600E4E322 /* Colors.swift in Sources */,

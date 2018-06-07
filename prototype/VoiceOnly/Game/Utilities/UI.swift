@@ -40,6 +40,13 @@ extension UIView {
     func removeAllSubviews() {
         self.subviews.forEach { $0.removeFromSuperview() }
     }
+
+    func addReloadableSubview(_ view: UIView) {
+        addSubview(view)
+        if let view = view as? ReloadableView {
+            view.viewWillAppear()
+        }
+    }
 }
 
 extension UIScrollView {
