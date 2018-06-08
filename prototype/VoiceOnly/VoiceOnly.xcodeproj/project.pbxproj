@@ -44,6 +44,10 @@
 		BEBDEDE8208F227C00C18520 /* PhoneGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDE7208F227C00C18520 /* PhoneGame.swift */; };
 		BEBDEDF6208F28BD00C18520 /* P07ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDF1208F28BD00C18520 /* P07ViewController.swift */; };
 		BEC1F02220C12680001B4982 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC1F02120C12680001B4982 /* Character.swift */; };
+		BEC1FFEB20C95DFC0065E228 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEC1FFE920C95DFB0065E228 /* Fabric.framework */; };
+		BEC1FFEC20C95DFC0065E228 /* Fabric.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BEC1FFE920C95DFB0065E228 /* Fabric.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BEC1FFED20C95DFC0065E228 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEC1FFEA20C95DFB0065E228 /* Crashlytics.framework */; };
+		BEC1FFEE20C95DFC0065E228 /* Crashlytics.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BEC1FFEA20C95DFB0065E228 /* Crashlytics.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BED3F07720C6E2C2006B4A1D /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED3F07420C6E2C2006B4A1D /* Promises.framework */; };
 		BED3F07820C6E2C2006B4A1D /* Promises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BED3F07420C6E2C2006B4A1D /* Promises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BED3F07920C6E2C2006B4A1D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED3F07520C6E2C2006B4A1D /* Alamofire.framework */; };
@@ -74,8 +78,10 @@
 			dstSubfolderSpec = 10;
 			files = (
 				BED3F07C20C6E2C2006B4A1D /* FBLPromises.framework in Embed Frameworks */,
+				BEC1FFEE20C95DFC0065E228 /* Crashlytics.framework in Embed Frameworks */,
 				BED3F07820C6E2C2006B4A1D /* Promises.framework in Embed Frameworks */,
 				BED3F07A20C6E2C2006B4A1D /* Alamofire.framework in Embed Frameworks */,
+				BEC1FFEC20C95DFC0065E228 /* Fabric.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -122,6 +128,8 @@
 		BEBDEDE7208F227C00C18520 /* PhoneGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneGame.swift; sourceTree = "<group>"; };
 		BEBDEDF1208F28BD00C18520 /* P07ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = P07ViewController.swift; sourceTree = "<group>"; };
 		BEC1F02120C12680001B4982 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		BEC1FFE920C95DFB0065E228 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		BEC1FFEA20C95DFB0065E228 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		BED3F07420C6E2C2006B4A1D /* Promises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Promises.framework; sourceTree = "<group>"; };
 		BED3F07520C6E2C2006B4A1D /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Alamofire.framework; sourceTree = "<group>"; };
 		BED3F07620C6E2C2006B4A1D /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBLPromises.framework; sourceTree = "<group>"; };
@@ -147,8 +155,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BED3F07B20C6E2C2006B4A1D /* FBLPromises.framework in Frameworks */,
+				BEC1FFED20C95DFC0065E228 /* Crashlytics.framework in Frameworks */,
 				BED3F07720C6E2C2006B4A1D /* Promises.framework in Frameworks */,
 				BED3F07920C6E2C2006B4A1D /* Alamofire.framework in Frameworks */,
+				BEC1FFEB20C95DFC0065E228 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +256,8 @@
 		BEBDEDE1208EF17100C18520 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BEC1FFEA20C95DFB0065E228 /* Crashlytics.framework */,
+				BEC1FFE920C95DFB0065E228 /* Fabric.framework */,
 				BED3F07520C6E2C2006B4A1D /* Alamofire.framework */,
 				BED3F07620C6E2C2006B4A1D /* FBLPromises.framework */,
 				BED3F07420C6E2C2006B4A1D /* Promises.framework */,

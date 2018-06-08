@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if DEBUG
         Bundle(path: "/Applications/InjectionIII.app/Contents/Resources/iOSInjection.bundle")?.load()
         #endif
+
+        if !isSimulator {
+            Fabric.with([Crashlytics.self])
+        }
+
         return true
     }
 

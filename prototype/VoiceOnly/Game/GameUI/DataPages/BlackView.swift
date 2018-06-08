@@ -12,12 +12,23 @@ import UIKit
 private let context = GameContext.shared
 
 extension String {
-    func padWidthTo(_ width: Int) -> String {
+    func padWidthTo(_ width: Int, isBothSide: Bool = false) -> String {
         let padCount = max(width - self.count, 0)
-        var leftPadSpace = ""
-        for _ in 1...padCount { leftPadSpace += " " }
 
-        return leftPadSpace + self
+        func getEmptySpaces(_ padCount: Int) -> String {
+            guard padCount > 0 else { return "" }
+            var spaces = ""
+            for _ in 1...padCount { spaces += " " }
+            return spaces
+        }
+
+        if isBothSide {
+            let leftPadCount =  padCount / 2
+            let rightPadCount = padCount - leftPadCount
+            return getEmptySpaces(leftPadCount) + self + getEmptySpaces(rightPadCount)
+        }
+
+        return getEmptySpaces(padCount) + self
     }
 }
 
@@ -25,7 +36,7 @@ class BlackView: UIView, ReloadableView, GridLayout {
     let gridCount: Int = 48
     let axis: GridAxis = .horizontal
     var lineHeight: CGFloat {
-        return step * 4
+        return step * 3
     }
     var fontSize: CGFloat {
         return lineHeight * 0.8
@@ -35,41 +46,70 @@ class BlackView: UIView, ReloadableView, GridLayout {
     }
 
     func viewWillAppear() {
-        backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        backgroundColor = UIColor.black.withAlphaComponent(0.85)
         frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.height)
         removeAllSubviews()
-        addBackButton()
+
         renderPlayer()
         renderItems()
+
+        addBackButton()
     }
 
     func renderPlayer() {
         let player = context.gameCharacter
-        addLabel(1, 0, player.name)
-        addLabel(6, 0, "\(player.gold) G".padWidthTo(7))
 
-        addLabel(3, 5, "Lv. \(player.level)")
+        var x = 2
+        var y = 3
+        addPicture(x: x, y: y, w: 21)
 
-        addLabel(4, 5, "HP:")
-        addLabel(4, 7, "\(player.maxHP)".padWidthTo(6))
+        y += 22
+        addRoundRect(x: x, y: y, w: 21, h: 5, borderColor: .white, backgroundColor: UIColor.black.withAlphaComponent(0.5))
+        addLabel(x+2, y+1, player.name) { label in
+            label.sizeToFit()
+            label.centerIn(self.getFrame(x, y, 21, 5))
+        }
 
-        addLabel(5, 5, "EXP:")
-        addLabel(5, 7, "\(player.exp)".padWidthTo(6))
+        // right side
+        y = 10
+        x = 25
+        addRoundRect(x: x, y: y, w: 21, h: 5, borderColor: .white, backgroundColor: UIColor.black.withAlphaComponent(0.5))
+        addLabel(x+2, y+1, "100 G".padWidthTo(12))
 
-        addLabel(6, 5, "DEF:    13")
+        y = 16
+        addRoundRect(x: x, y: y, w: 21, h: 14, borderColor: .white, radius: step * 3, backgroundColor: UIColor.black.withAlphaComponent(0.5))
+
+        addLabel(x+2, y+1, "Level: 3")
+        addLabel(x+2, y+4, "HP :" + "123/245".padWidthTo(8))
+        addLabel(x+2, y+7, "DEF:" + "22".padWidthTo(8))
+        addLabel(x+2, y+10, "EXP:" + "3432".padWidthTo(8) )
     }
 
-    func addLabel(_ row: Int, _ column: Int, _ text: String) {
-        addText(x: column * 4 + 4, y: row * 4, w: 40, h: 4, text: text, font: font, color: myLightText)
+    func addPicture(x: Int, y: Int, w: Int) {
+        let imageView = UIImageView()
+        layout(x, y, w, w, imageView)
+        imageView.backgroundColor = myBlue.withAlphaComponent(0.2)
+        imageView.roundBorder(borderWidth: 0, cornerRadius: step*3, color: .clear)
+
+        if let image = context.characterImage {
+            imageView.image = image
+            imageView.contentMode = .scaleAspectFill
+        }
+
+        addSubview(imageView)
+    }
+
+    func addLabel(_ x: Int, _ y: Int, _ text: String, completion: ((UIView) -> Void)? = nil) {
+        addText(x: x, y: y, w: 40, h: 3, text: text, font: font, color: myLightText, completion: completion)
     }
 
     func renderItems() {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = myGray.withAlphaComponent(0.7)
         scrollView.roundBorder()
-        layout(1, 29, 46, 33, scrollView)
+        layout(2, 32, 44, 33, scrollView)
         addSubview(scrollView)
-        addLabel(16, 0, "説明はここにいます。")
+        addLabel(2, 66, "説明はここにいます。")
     }
 
     func addBackButton() {
@@ -83,7 +123,7 @@ class BlackView: UIView, ReloadableView, GridLayout {
         backButton.backgroundColor = UIColor.gray
         backButton.titleLabel?.font = UIFont(name: "HiraMaruProN-W4", size: lineHeight * 0.85) ?? font
         backButton.contentVerticalAlignment = .top
-        layout(-7, 4, gridWidth, gridWidth, backButton)
+        layout(-7, 3, gridWidth, gridWidth, backButton)
         addSubview(backButton)
         let backButtonTap = UITapGestureRecognizer(target: self, action: #selector(self.backButtonTapped))
         backButton.addGestureRecognizer(backButtonTap)

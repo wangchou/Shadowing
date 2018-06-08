@@ -91,20 +91,23 @@ extension GridLayout where Self: UIView {
         return axisBound / gridCount.c
     }
 
-    func addText(x: Int, y: Int, w: Int, h: Int, text: String, font: UIFont, color: UIColor) {
+    func addText(x: Int, y: Int, w: Int, h: Int, text: String, font: UIFont, color: UIColor, completion: ((UIView) -> Void)? = nil) {
         let label = UILabel()
         label.font = font
         label.textColor = color
         label.text = text
         layout(x, y, w, h, label)
         self.addSubview(label)
+
+        completion?(label)
     }
 
-    func addAttrText(x: Int, y: Int, w: Int, h: Int, text: NSAttributedString) {
+    func addAttrText(x: Int, y: Int, w: Int, h: Int, text: NSAttributedString, completion: ((UIView) -> Void)? = nil) {
         let label = UILabel()
         label.attributedText = text
         layout(x, y, w, h, label)
         self.addSubview(label)
+        completion?(label)
     }
 
     func addRoundRect(x: Int, y: Int, w: Int, h: Int,
@@ -136,7 +139,11 @@ extension GridLayout where Self: UIView {
             y = (y + gridCount) % gridCount
         }
 
-        view.frame = CGRect(
+        view.frame = getFrame(x, y, w, h)
+    }
+
+    func getFrame(_ x: Int, _ y: Int, _ w: Int, _ h: Int) -> CGRect {
+        return CGRect(
             x: x.c * step,
             y: y.c * step,
             width: w.c * step,
