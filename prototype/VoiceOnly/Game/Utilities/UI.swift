@@ -80,6 +80,7 @@ let emptyCGRect = CGRect(x: 0, y: 0, width: 5, height: 5)
 protocol GridLayout: class {
     var gridCount: Int { get }
     var axis: GridAxis { get }
+    var spacing: CGFloat { get }
 }
 
 extension GridLayout where Self: UIView {
@@ -87,8 +88,12 @@ extension GridLayout where Self: UIView {
         return axis == GridAxis.horizontal ? frame.width : frame.height
     }
 
-    var step: CGFloat {
-        return axisBound / gridCount.c
+    var fontSize: CGFloat {
+        return step - spacing
+    }
+
+    var step: CGFloat { // is multiple of retina pixel width 0.5, ex 18, 19.5...
+        return floor((axisBound - spacing)*2 / gridCount.c)/2
     }
 
     func addText(x: Int, y: Int, w: Int, h: Int, text: String, font: UIFont, color: UIColor, completion: ((UIView) -> Void)? = nil) {
@@ -115,7 +120,7 @@ extension GridLayout where Self: UIView {
         let roundRect = UIView()
         layout(x, y, w, h, roundRect)
         let radius = radius ?? h.c * step / 2
-        roundRect.roundBorder(borderWidth: 3, cornerRadius: radius, color: borderColor)
+        roundRect.roundBorder(borderWidth: 1.5, cornerRadius: radius, color: borderColor)
         if let backgroundColor = backgroundColor {
             roundRect.backgroundColor = backgroundColor
         }
@@ -131,84 +136,10 @@ extension GridLayout where Self: UIView {
     }
 
     func layout(_ x: Int, _ y: Int, _ w: Int, _ h: Int, _ view: UIView) {
-        var x = x
-        var y = y
-        if axis == GridAxis.horizontal {
-            x = (x + gridCount) % gridCount
-        } else {
-            y = (y + gridCount) % gridCount
-        }
-
         view.frame = getFrame(x, y, w, h)
     }
 
     func getFrame(_ x: Int, _ y: Int, _ w: Int, _ h: Int) -> CGRect {
-        return CGRect(
-            x: x.c * step,
-            y: y.c * step,
-            width: w.c * step,
-            height: h.c * step
-        )
-    }
-}
-
-struct GridSystem {
-    var view: UIView?
-    var axis: GridAxis
-    var gridCount: Int
-    var axisBound: CGFloat
-    var step: CGFloat {
-        return axisBound / gridCount.c
-    }
-
-    init(gridCount: Int, axis: GridAxis = .horizontal, axisBound: CGFloat = screen.width, view: UIView? = nil) {
-        self.axis = axis
-        self.gridCount = gridCount
-        self.axisBound = axisBound
-        self.view = view
-    }
-
-    func addText(x: Int, y: Int, w: Int, h: Int, text: String, font: UIFont, color: UIColor) {
-        guard let view = self.view else { print("no view to addText in grid system"); return }
-        let label = UILabel()
-        label.font = font
-        label.textColor = color
-        label.text = text
-        frame(x, y, w, h, label)
-        view.addSubview(label)
-    }
-
-    func addAttrText(x: Int, y: Int, w: Int, h: Int, text: NSAttributedString) {
-        guard let view = self.view else { print("no view to addText in grid system"); return }
-        let label = UILabel()
-        label.attributedText = text
-        frame(x, y, w, h, label)
-        view.addSubview(label)
-    }
-
-    func addRoundRect(x: Int, y: Int, w: Int, h: Int,
-                      borderColor: UIColor, radius: CGFloat? = nil, backgroundColor: UIColor? = nil) {
-        guard let view = self.view else { print("no view to addRoundRect in grid system"); return }
-        let roundRect = UIView()
-        frame(x, y, w, h, roundRect)
-        let radius = radius ?? h.c * step / 2
-        roundRect.roundBorder(borderWidth: 3, cornerRadius: radius, color: borderColor)
-        if let backgroundColor = backgroundColor {
-            roundRect.backgroundColor = backgroundColor
-        }
-        view.addSubview(roundRect)
-    }
-
-    func addRect(x: Int, y: Int, w: Int, h: Int,
-                 color: UIColor = myBlue) {
-        guard let view = self.view else { print("no view to addRect in grid system"); return }
-        let rect = UIView()
-        frame(x, y, w, h, rect)
-        rect.backgroundColor = color
-        view.addSubview(rect)
-    }
-
-    func frame(_ x: Int, _ y: Int, _ w: Int, _ h: Int, _ view: UIView) {
         var x = x
         var y = y
         if axis == GridAxis.horizontal {
@@ -217,7 +148,7 @@ struct GridSystem {
             y = (y + gridCount) % gridCount
         }
 
-        view.frame = CGRect(
+        return CGRect(
             x: x.c * step,
             y: y.c * step,
             width: w.c * step,

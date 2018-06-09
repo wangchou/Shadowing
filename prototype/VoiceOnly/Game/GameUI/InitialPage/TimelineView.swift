@@ -14,7 +14,7 @@ private let context = GameContext.shared
 struct TimelineBox {
     var date: Date
     var row: Int
-    var column: Int
+    var column: Int // right to left
     var day: Int {
         return Calendar.current.component(.day, from: date)
     }
@@ -36,23 +36,26 @@ struct TimelineBox {
     }
 }
 
-class TimelineView: UIView, ReloadableView {
-    var boxWidth = 12
-    var boxSpacing = 2
-    var yPadding = 2
+class TimelineView: UIView, ReloadableView, GridLayout {
+    var gridCount: Int = 8
+    var axis: GridAxis = .vertical
+    var spacing: CGFloat = 2
+    var yPadding: CGFloat = 2
+    var columnCount: Int {
+        return Int(frame.width/step)
+    }
 
     let dateFormatter = DateFormatter()
 
     func viewWillAppear() {
-        boxWidth = Int((self.frame.height - boxSpacing.c * 9) / 8)
+        print(step)
         dateFormatter.dateFormat = "yyyy MM dd"
 
-        self.removeAllSubviews()
+        removeAllSubviews()
 
         let today = Date()
         let weekday = Calendar.current.component(.weekday, from: today)
         var timelineBox = TimelineBox(date: today, row: weekday, column: 1)
-        let columnCount = Int(self.frame.width)/(boxWidth + boxSpacing)
         let recordsByDate = getRecordsByDate()
         while timelineBox.column < columnCount {
             let dateString = dateFormatter.string(from: timelineBox.date)
@@ -107,30 +110,23 @@ class TimelineView: UIView, ReloadableView {
     }
 
     func addTextLabel(row: Int, column: Int, text: String) {
-        let label = UILabel()
-        label.frame = getFrame(row: row, column: column)
-        label.frame.size.width = CGFloat(boxWidth * 3)
-        label.text = text
-        label.font = MyFont.thin(ofSize: CGFloat(boxWidth))
-        self.addSubview(label)
+        addText(
+            x: columnCount - column,
+            y: row,
+            w: 3, h: 1,
+            text: text,
+            font: MyFont.thin(ofSize: fontSize),
+            color: .black
+        )
     }
 
     func addBox(row: Int, column: Int, color: UIColor = myLightText) {
         let box = UIView()
         box.backgroundColor = color
-        box.frame = getFrame(row: row, column: column)
+        layout(columnCount - column, row, 1, 1, box)
+        box.frame.size.width = fontSize
+        box.frame.size.height = fontSize
         box.layer.cornerRadius = 1.5
-        self.addSubview(box)
-    }
-
-    // column from left to right
-    // row from top to down
-    func getFrame(row: Int, column: Int) -> CGRect {
-        return CGRect(
-            x: Int(self.frame.width) - (boxWidth + boxSpacing) * (column + 1),
-            y: (boxWidth + boxSpacing) * row + yPadding,
-            width: boxWidth,
-            height: boxWidth
-        )
+        addSubview(box)
     }
 }

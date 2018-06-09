@@ -17,6 +17,7 @@ private let context = GameContext.shared
 class CharacterView: UIView, ReloadableView, GridLayout {
     var gridCount: Int = 20
     var axis: GridAxis = .horizontal
+    var spacing: CGFloat = 0
     var imageView: UIImageView?
 
     func viewWillAppear() {

@@ -11,10 +11,7 @@ import UIKit
 
 private let context = GameContext.shared
 
-private let gridCount = 48
 class GameFinishedPage: UIViewController {
-    var gridSystem: GridSystem = GridSystem(gridCount: gridCount)
-
     @IBOutlet weak var reportView: GameReportView!
 
     @objc func injected() {

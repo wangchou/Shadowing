@@ -14,6 +14,7 @@ private let context = GameContext.shared
 class GameReportBoxView: UIView, ReloadableView, GridLayout {
     let gridCount = 44
     let axis: GridAxis = .horizontal
+    let spacing: CGFloat = 0
 
     func viewWillAppear() {
         removeAllSubviews()
@@ -104,6 +105,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
 class GameReportView: UIView, ReloadableView, GridLayout {
     let gridCount = 48
     let axis: GridAxis = .horizontal
+    let spacing: CGFloat = 0
 
     func viewWillAppear() {
         removeAllSubviews()

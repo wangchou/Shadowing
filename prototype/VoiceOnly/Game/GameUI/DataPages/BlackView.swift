@@ -35,6 +35,7 @@ extension String {
 class BlackView: UIView, ReloadableView, GridLayout {
     let gridCount: Int = 48
     let axis: GridAxis = .horizontal
+    let spacing: CGFloat = 0
     var lineHeight: CGFloat {
         return step * 3
     }
