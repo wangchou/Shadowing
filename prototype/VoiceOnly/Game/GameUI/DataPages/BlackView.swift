@@ -80,10 +80,10 @@ class BlackView: UIView, ReloadableView, GridLayout {
         y = 16
         addRoundRect(x: x, y: y, w: 21, h: 14, borderColor: .white, radius: step * 3, backgroundColor: UIColor.black.withAlphaComponent(0.5))
 
-        addLabel(x+2, y+1, "Level: 3")
-        addLabel(x+2, y+4, "HP :" + "123/245".padWidthTo(8))
+        addLabel(x+2, y+1, "Level: \(player.level)")
+        addLabel(x+2, y+4, "HP :" + "\(player.remainingHP)/\(player.maxHP)".padWidthTo(8))
         addLabel(x+2, y+7, "DEF:" + "22".padWidthTo(8))
-        addLabel(x+2, y+10, "EXP:" + "3432".padWidthTo(8) )
+        addLabel(x+2, y+10, "EXP:" + "\(player.exp)".padWidthTo(8) )
     }
 
     func addPicture(x: Int, y: Int, w: Int) {

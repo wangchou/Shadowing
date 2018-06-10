@@ -20,10 +20,8 @@ func getDataFromUrl(url: String, completion: @escaping (Data?, URLResponse?, Err
 }
 
 func loadCharacterProfile() {
-    print("Download Started")
     getDataFromUrl(url: yuiUrl) { data, response, error in
         guard let data = data, error == nil else { return }
-        print("Download Finished")
         DispatchQueue.main.async {
             GameContext.shared.characterImage = UIImage(data: data)
         }

@@ -49,6 +49,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
     }
 
     func renderBottomCharacter() {
+        print(context.gameCharacter)
         let rect = UIView()
         layout(2, 23, 40, 1, rect)
         rect.backgroundColor = .lightGray
@@ -56,26 +57,35 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         self.addSubview(rect)
 
         guard let record = context.gameRecord else { return }
-        let y = 25
+        var y = 25
+        if record.isNewRecord {
+            addRoundRect(22, y, 20, 4, color: myRed)
+            addText(23, y, 4, " 新記録 +20%", strokeColor: .black)
+            y += 5
+        }
+
         addRoundRect(22, y, 20, 4, color: myBlue)
         addText(23, y, 4, " +\(record.exp) EXP", strokeColor: .black)
+        y += 5
 
-        addRoundRect(22, y+5, 20, 4, color: myOrange)
-        addText(23, y+5, 4, " +\(record.gold) G", strokeColor: .black)
-
-        addRoundRect(22, y+10, 20, 4, color: myRed)
-        addText(23, y+10, 4, " Level Up!", strokeColor: .black)
-
-        addRoundRect(22, y+15, 20, 4, color: myGreen)
-        addText(23, y+15, 4, " back up?", strokeColor: .black)
+        addRoundRect(22, y, 20, 4, color: myOrange)
+        addText(23, y, 4, " +\(record.gold) G", strokeColor: .black)
+        y += 5
 
         let characterView = CharacterView()
-        layout(2, y, 19, 19, characterView)
+        layout(2, 25, 19, 19, characterView)
         addReloadableSubview(characterView)
 
         // data part
         context.gameCharacter.gold += record.gold
         context.gameCharacter.exp += record.exp
+
+        if context.gameCharacter.levelUp() {
+            addRoundRect(22, y, 20, 4, color: myGreen)
+            addText(23, y, 4, " Level Up!", strokeColor: .black)
+        }
+
+        characterView.viewWillAppear()
 
         saveGameCharacter()
     }
