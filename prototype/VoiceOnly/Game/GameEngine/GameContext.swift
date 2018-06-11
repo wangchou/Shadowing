@@ -101,7 +101,7 @@ class GameContext {
         sentenceIndex += 1
         var sentencesBound = sentences.count
         if isSimulator {
-            sentencesBound = 1
+            sentencesBound = 3
         }
         guard sentenceIndex < sentencesBound else { return false }
         targetString = sentences[sentenceIndex]

@@ -26,8 +26,20 @@ class GameFinishedPage: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        sortSentenceByScore()
         reportView.viewWillAppear()
     }
+
+    func sortSentenceByScore() {
+        context.sentences.sort { str1, str2 in
+            guard let record = context.gameRecord else { return true }
+            guard let score1 = record.sentencesScore[str1] else { return false }
+            guard let score2 = record.sentencesScore[str2] else { return true }
+
+            return score1.value < score2.value
+        }
+    }
+
 }
 
 extension GameFinishedPage: UITableViewDataSource {
