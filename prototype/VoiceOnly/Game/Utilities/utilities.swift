@@ -33,13 +33,15 @@ func configureAudioSession(toSpeaker: Bool = false) {
     do {
         let session: AVAudioSession = AVAudioSession.sharedInstance()
         if toSpeaker {
-            try session.setCategory(AVAudioSession.Category.playAndRecord,
-                                    mode: AVAudioSession.Mode.default,
-                                    options: [.duckOthers, .allowBluetoothA2DP, .allowBluetooth, .allowAirPlay, .defaultToSpeaker])
+            try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.duckOthers, .allowBluetoothA2DP, .allowBluetooth, .allowAirPlay, .defaultToSpeaker])
+//            try session.setCategory(AVAudioSession.Category.playAndRecord,
+//                                    mode: AVAudioSession.Mode.default,
+//                                    options: [.duckOthers, .allowBluetoothA2DP, .allowBluetooth, .allowAirPlay, .defaultToSpeaker])
         } else {
-            try session.setCategory(AVAudioSession.Category.playAndRecord,
-                                    mode: AVAudioSession.Mode.default,
-                                    options: [.duckOthers, .allowBluetoothA2DP, .allowBluetooth, .allowAirPlay])
+            try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.duckOthers, .allowBluetoothA2DP, .allowBluetooth, .allowAirPlay])
+//            try session.setCategory(AVAudioSession.Category.playAndRecord,
+//                                    mode: AVAudioSession.Mode.default,
+//                                    options: [.duckOthers, .allowBluetoothA2DP, .allowBluetooth, .allowAirPlay])
         }
 
         // turn the measure mode will crash bluetooh, duckOthers and mixWithOthers

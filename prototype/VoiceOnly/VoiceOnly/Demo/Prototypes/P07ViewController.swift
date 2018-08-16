@@ -26,7 +26,7 @@ extension P07ViewController: GameEventDelegate {
         case (.speakingJapanese, .stringSaid):
             guard let token = event.string else { return }
             print(token, terminator: "")
-            self.targetTextView.text = "\(String(describing: targetTextView.text))\(token)"
+            self.targetTextView.text = "\(self.targetTextView.text)\(token)"
 
         case (.speakingJapanese, .sayEnded):
             print("")
@@ -190,7 +190,7 @@ class P07ViewController: UIViewController {
     }
 
     func updateScoreDescLabel(_ score: Score) {
-        saidTextView.text = "\(String(describing: saidTextView.text))(\(score)分)"
+        saidTextView.text = "\(saidTextView.text)(\(score)分)"
         scoreDescLabel.text = score.text
         scoreDescLabel.textColor = score.color
     }
