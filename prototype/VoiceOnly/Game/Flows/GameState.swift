@@ -22,6 +22,6 @@ enum GameState {
 
 protocol Game {
     var state: GameState { get set}
-    func play()
+    func start()
     func stop()
 }

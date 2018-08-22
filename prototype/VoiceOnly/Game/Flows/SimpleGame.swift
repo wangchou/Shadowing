@@ -26,7 +26,7 @@ class SimpleGame: Game {
         }
     }
 
-    func play() {
+    func start() {
         self.state = .stopped
         context.gameRecord?.startedTime = Date()
         startEngine(toSpeaker: true)

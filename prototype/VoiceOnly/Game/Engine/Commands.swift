@@ -44,6 +44,7 @@ func restoreBGMVolume() {
     context.bgm.restoreVolume()
 }
 
+// MARK: - TTS / Speak Japanese
 func meijia(_ sentence: String) -> Promise<Void> {
     return context.tts.say(sentence, meijiaSan, rate: normalRate)
 }
@@ -59,6 +60,7 @@ func hattori(_ sentence: String) -> Promise<Void> {
     return context.tts.say(sentence, hattoriSan, rate: context.teachingRate)
 }
 
+// MARK: - Voice Recognition
 func listenJP(duration: Double) -> Promise<String> {
     return context.speechRecognizer.start(stopAfterSeconds: duration)
 }

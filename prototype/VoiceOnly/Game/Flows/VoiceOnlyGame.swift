@@ -24,7 +24,7 @@ class VoiceOnlyGame: Game {
         }
     }
 
-    func play() {
+    func start() {
         startEngine(toSpeaker: false)
         context.gameRecord?.startedTime = Date()
         gameSeconds = 0

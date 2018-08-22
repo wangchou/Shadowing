@@ -21,7 +21,7 @@ class ConsoleGame: UIViewController, GameEventDelegate {
         super.viewDidLoad()
         textView.text = ""
         startEventObserving(self)
-        game.play()
+        game.start()
     }
 
     override func viewDidDisappear(_ animated: Bool) {

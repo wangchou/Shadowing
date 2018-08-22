@@ -24,7 +24,7 @@ class SentencesTestGame: Game {
 
     var state: GameState = .stopped
 
-    func play() {
+    func start() {
         startEngine(toSpeaker: false)
         context.life = 100
         context.bgm.node.volume = 0

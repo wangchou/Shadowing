@@ -37,7 +37,7 @@ class Messenger: UIViewController {
 
     func start() {
         startEventObserving(self)
-        game.play()
+        game.start()
         sentenceCountLabel.text = "還有\(context.sentences.count)句"
         speedLabel.text = String(format: "%.2f 倍速", context.teachingRate * 2)
         timeLabel.text = "00:00"

@@ -16,7 +16,7 @@ class P09ViewController: UIViewController, GameEventDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         startEventObserving(self)
-        game.play()
+        game.start()
     }
 
     override func viewDidDisappear(_ animated: Bool) {

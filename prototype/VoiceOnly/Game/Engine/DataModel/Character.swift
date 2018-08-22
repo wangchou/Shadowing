@@ -99,7 +99,7 @@ struct GameCharacter: Codable {
             skillPoint += getLevelUpSp()
             return true
         }
-        
+
         return false
     }
 

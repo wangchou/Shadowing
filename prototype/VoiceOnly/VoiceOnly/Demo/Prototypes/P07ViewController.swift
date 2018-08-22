@@ -82,7 +82,7 @@ class P07ViewController: UIViewController {
         super.viewDidLoad()
 
         startEventObserving(self)
-        game.play()
+        game.start()
 
         isGameFinished = false
         comboLabel.text = "0"
