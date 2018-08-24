@@ -44,11 +44,10 @@ class VoiceOnlyGame: Game {
     }
 
     private func learnNext() {
-        speakHint()
-        .then(speakJapanese)
+        speakJapanese()
         .then(listen)
-        .then(iHearYouSaid)
         .then(getScore)
+        .then(iHearYouSaid)
         .then(speakScore)
         .catch { error in
             print("error ... \(error)")
@@ -64,27 +63,35 @@ class VoiceOnlyGame: Game {
         }
     }
 
-    private func speakHint() -> Promise<Void> {
-        return meijia("請跟著唸日文")
-    }
-
     private func speakJapanese() -> Promise<Void> {
         self.state = .speakingJapanese
         self.startTime = getNow()
         return hattori(context.targetString)
     }
 
-    private func listen() -> Promise<String> {
+    private func listen() -> Promise<Void> {
         self.state = .listening
         let speakDuration = getNow() - self.startTime
         return listenJP(duration: speakDuration + pauseDuration)
+                 .then(saveUserSaidString)
     }
 
-    private func iHearYouSaid(userSaidString: String) -> Promise<Void> {
+    private func saveUserSaidString(userSaidString: String) -> Promise<Void> {
         self.state = .stringRecognized
         context.userSaidString = userSaidString
-        return meijia("我聽到你說")
-            .then { oren(userSaidString) }
+        return fulfilledPromise()
+    }
+
+    private func getScore() -> Promise<Void> {
+        return calculateScore(context.targetString, context.userSaidString)
+                 .then(saveScore)
+    }
+
+    private func saveScore(score: Score) -> Promise<Void> {
+        self.state = .scoreCalculated
+        context.score = score
+        updateRecord(score: score)
+        return fulfilledPromise()
     }
 
     private func updateRecord(score: Score) {
@@ -102,13 +109,19 @@ class VoiceOnlyGame: Game {
         }
     }
 
-    private func getScore() -> Promise<Score> {
-        return calculateScore(context.targetString, context.userSaidString)
+    private func iHearYouSaid() -> Promise<Void> {
+        guard context.score.value != 100 else { return fulfilledPromise() }
+        return meijia("我聽到")
+            .then { oren(context.userSaidString) }
     }
 
-    private func speakScore(score: Score) -> Promise<Void> {
-        self.state = .scoreCalculated
-        updateRecord(score: score)
-        return meijia(score.valueText)
+    private func fulfilledPromise() -> Promise<Void> {
+        let promise = Promise<Void>.pending()
+        promise.fulfill(())
+        return promise
+    }
+
+    private func speakScore() -> Promise<Void> {
+        return meijia(context.score.valueText)
     }
 }

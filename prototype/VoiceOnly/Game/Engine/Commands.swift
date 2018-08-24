@@ -46,7 +46,7 @@ func restoreBGMVolume() {
 
 // MARK: - TTS / Speak Japanese
 func meijia(_ sentence: String) -> Promise<Void> {
-    return context.tts.say(sentence, meijiaSan, rate: normalRate)
+    return context.tts.say(sentence, meijiaSan, rate: fastRate)
 }
 
 func oren(_ sentence: String, rate: Float? = nil) -> Promise<Void> {

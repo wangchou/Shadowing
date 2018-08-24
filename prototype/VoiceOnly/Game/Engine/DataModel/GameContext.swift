@@ -49,7 +49,7 @@ class GameContext {
             userSaidSentences[sentenceIndex] = newValue
         }
     }
-    var score = 0
+    var score: Score = Score(value: 0)
     var life: Int = 40
     var startTime: Double = getNow()
 

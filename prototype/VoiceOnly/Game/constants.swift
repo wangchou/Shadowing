@@ -24,6 +24,7 @@ let meijiaSan = "com.apple.ttsbundle.Mei-Jia-compact"
 #endif
 
 let normalRate = AVSpeechUtteranceDefaultSpeechRate
+let fastRate = AVSpeechUtteranceDefaultSpeechRate * 1.1
 
 // it's bad when monitoring at street
 // if in quite place. turn micOutVolume to 3
