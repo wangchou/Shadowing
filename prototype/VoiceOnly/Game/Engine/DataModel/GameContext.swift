@@ -37,16 +37,16 @@ class GameContext {
     var isEngineRunning = false
     var isNewRecord = false
     var sentences: [String] = []
-    var userSaidSentences: [String] = []
+    var userSaidSentences: [String: String] = [:]
     var sentenceIndex: Int = 0
     var targetString: String = ""
     var userSaidString: String {
         get {
-            return userSaidSentences[sentenceIndex]
+            return userSaidSentences[self.targetString] ?? ""
         }
 
         set {
-            userSaidSentences[sentenceIndex] = newValue
+            userSaidSentences[self.targetString] = newValue
         }
     }
     var score: Score = Score(value: 0)
@@ -86,7 +86,7 @@ class GameContext {
         sentenceIndex = 0
         guard let selectedDataSet = allSentences[dataSetKey] else { return }
         sentences = isShuffle ? selectedDataSet.shuffled() : selectedDataSet
-        userSaidSentences = sentences.map { _ in "" }
+        userSaidSentences = [:]
 
         targetString = sentences[0]
         life = isSimulator ? 100 : 40

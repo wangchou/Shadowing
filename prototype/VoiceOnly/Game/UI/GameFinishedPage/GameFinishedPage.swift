@@ -63,7 +63,7 @@ extension GameFinishedPage: UITableViewDataSource {
             finishedCell.sentenceLabel.text = sentence
         }
 
-        let userSaidSentence = context.userSaidSentences[indexPath.row]
+        let userSaidSentence = context.userSaidSentences[sentence] ?? ""
         if let tokenInfos = kanaTokenInfosCacheDictionary[userSaidSentence] {
             finishedCell.userSaidSentenceLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
         } else {
