@@ -23,7 +23,7 @@ class CharacterView: UIView, ReloadableView, GridLayout {
     func viewWillAppear() {
         backgroundColor = .clear
         removeAllSubviews()
-        roundBorder(borderWidth: 1.5, cornerRadius: step, color: UIColor.red.withAlphaComponent(0.6))
+        roundBorder(borderWidth: 1.5, cornerRadius: step, color: UIColor.black.withAlphaComponent(0.6))
 
         // bg view
         imageView = UIImageView()
