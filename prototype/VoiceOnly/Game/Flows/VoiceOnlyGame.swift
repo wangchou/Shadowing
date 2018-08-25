@@ -44,7 +44,8 @@ class VoiceOnlyGame: Game {
     }
 
     private func learnNext() {
-        speakJapanese()
+        sayRemainingSentenceCount()
+        .then(speakJapanese)
         .then(listen)
         .then(getScore)
         .then(iHearYouSaid)
@@ -61,6 +62,11 @@ class VoiceOnlyGame: Game {
                 }
             }
         }
+    }
+
+    private func sayRemainingSentenceCount() -> Promise<Void> {
+        let count = context.sentences.count - context.sentenceIndex
+        return hattori(count.s)
     }
 
     private func speakJapanese() -> Promise<Void> {

@@ -40,6 +40,7 @@ func stopEngine() {
 func reduceBGMVolume() {
     context.bgm.reduceVolume()
 }
+
 func restoreBGMVolume() {
     context.bgm.restoreVolume()
 }
@@ -56,7 +57,10 @@ func oren(_ sentence: String, rate: Float? = nil) -> Promise<Void> {
     return context.tts.say(sentence, orenSan, rate: context.teachingRate)
 }
 
-func hattori(_ sentence: String) -> Promise<Void> {
+func hattori(_ sentence: String, rate: Float? = nil) -> Promise<Void> {
+    if let rate = rate {
+        return context.tts.say(sentence, hattoriSan, rate: rate)
+    }
     return context.tts.say(sentence, hattoriSan, rate: context.teachingRate)
 }
 
