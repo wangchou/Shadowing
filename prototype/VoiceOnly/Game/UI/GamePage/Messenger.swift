@@ -105,6 +105,7 @@ class Messenger: UIViewController {
     }
 
     @objc func finishGame() {
+        end()
         launchStoryboard(self, "MainViewController")
     }
 

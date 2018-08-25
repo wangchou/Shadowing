@@ -21,6 +21,10 @@ class PhoneGame: UIViewController, GameEventDelegate {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        end()
+    }
+
+    func end() {
         stopEventObserving(self)
         game.stop()
     }
@@ -43,6 +47,7 @@ class PhoneGame: UIViewController, GameEventDelegate {
         case .gameStateChanged:
             if let state = event.gameState,
                state == .gameOver {
+                end()
                 launchStoryboard(self, "GameFinishedPage", isOverCurrent: true, animated: true)
             }
         default:

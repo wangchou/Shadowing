@@ -76,6 +76,7 @@ class ConsoleGame: UIViewController, GameEventDelegate {
         case .gameStateChanged:
             if let state = event.gameState,
                state == .gameOver {
+                stopEventObserving(self)
                 launchStoryboard(self, "GameFinishedPage", isOverCurrent: true, animated: true)
             }
 
