@@ -64,6 +64,13 @@ func hattori(_ sentence: String, rate: Float? = nil) -> Promise<Void> {
     return context.tts.say(sentence, hattoriSan, rate: context.teachingRate)
 }
 
+func kyoko(_ sentence: String, rate: Float? = nil) -> Promise<Void> {
+    if let rate = rate {
+        return context.tts.say(sentence, kyokoSan, rate: rate)
+    }
+    return context.tts.say(sentence, kyokoSan, rate: context.teachingRate)
+}
+
 // MARK: - Voice Recognition
 func listenJP(duration: Double) -> Promise<String> {
     return context.speechRecognizer.start(stopAfterSeconds: duration)

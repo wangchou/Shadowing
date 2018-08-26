@@ -66,7 +66,7 @@ class VoiceOnlyGame: Game {
 
     private func sayRemainingSentenceCount() -> Promise<Void> {
         let count = context.sentences.count - context.sentenceIndex
-        return hattori(count.s)
+        return kyoko(count.s, rate: normalRate)
     }
 
     private func speakJapanese() -> Promise<Void> {
