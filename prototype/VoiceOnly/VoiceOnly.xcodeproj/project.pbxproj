@@ -32,6 +32,7 @@
 		BE8180C020B3BEB6006ABCB3 /* MyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180BF20B3BEB6006ABCB3 /* MyText.swift */; };
 		BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */; };
 		BE8180C520B3E03E006ABCB3 /* GameFinishedTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180C420B3E03E006ABCB3 /* GameFinishedTableCell.swift */; };
+		BE8283B42133DAE2008BC875 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8283B32133DAE2008BC875 /* GameEngine.swift */; };
 		BE8C8F02209C476A00E32F09 /* VoiceOnlyGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8C8F01209C476A00E32F09 /* VoiceOnlyGame.swift */; };
 		BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */; };
 		BE9B476A20AD50520063E0DA /* FuriganaUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476920AD50520063E0DA /* FuriganaUtils.swift */; };
@@ -111,6 +112,7 @@
 		BE8180BF20B3BEB6006ABCB3 /* MyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyText.swift; sourceTree = "<group>"; };
 		BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFinishedPage.swift; sourceTree = "<group>"; };
 		BE8180C420B3E03E006ABCB3 /* GameFinishedTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFinishedTableCell.swift; sourceTree = "<group>"; };
+		BE8283B32133DAE2008BC875 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		BE8C8F01209C476A00E32F09 /* VoiceOnlyGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceOnlyGame.swift; sourceTree = "<group>"; };
 		BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaLabel.swift; sourceTree = "<group>"; };
 		BE9B476920AD50520063E0DA /* FuriganaUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaUtils.swift; sourceTree = "<group>"; };
@@ -168,10 +170,10 @@
 		BE17FB38209B0F5F00D23F22 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
-				BEDEDD4F20A5DA8C00E7B60B /* Core */,
-				BE9556EF212D7C130045E578 /* DataModel */,
-				BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */,
+				BE8283B32133DAE2008BC875 /* GameEngine.swift */,
 				BE6ED54920A1373700553D1A /* Commands.swift */,
+				BEDEDD4F20A5DA8C00E7B60B /* VoiceCore */,
+				BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -210,15 +212,16 @@
 			path = GameFinishedPage;
 			sourceTree = "<group>";
 		};
-		BE9556EF212D7C130045E578 /* DataModel */ = {
+		BE9556EF212D7C130045E578 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BE7725BD20A2CBC100DF186A /* Sentences */,
 				BEF28B6020B52BB000385273 /* Score.swift */,
 				BE17FB3D209B19B200D23F22 /* GameContext.swift */,
 				BEC1F02120C12680001B4982 /* Character.swift */,
 				BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */,
 			);
-			path = DataModel;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		BE9B476B20AD5C6E0063E0DA /* Demo */ = {
@@ -297,14 +300,14 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
-		BEDEDD4F20A5DA8C00E7B60B /* Core */ = {
+		BEDEDD4F20A5DA8C00E7B60B /* VoiceCore */ = {
 			isa = PBXGroup;
 			children = (
 				BEBDEDD4208EF15E00C18520 /* BGM.swift */,
 				BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */,
 				BEBDEDD2208EF15E00C18520 /* TTS.swift */,
 			);
-			path = Core;
+			path = VoiceCore;
 			sourceTree = "<group>";
 		};
 		BEE797DE20B94B4000328635 /* DataPages */ = {
@@ -366,7 +369,7 @@
 		BEFA97A120AEB18700DE3280 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				BE7725BD20A2CBC100DF186A /* Sentences */,
+				BE9556EF212D7C130045E578 /* Model */,
 				BE17FB38209B0F5F00D23F22 /* Engine */,
 				BE6AF37F209C146B00CBDB63 /* Flows */,
 				BEDEDD4220A5D86500E7B60B /* UI */,
@@ -509,6 +512,7 @@
 				BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */,
 				BE8180C020B3BEB6006ABCB3 /* MyText.swift in Sources */,
 				BEBDEDE8208F227C00C18520 /* PhoneGame.swift in Sources */,
+				BE8283B42133DAE2008BC875 /* GameEngine.swift in Sources */,
 				BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */,
 				BEBDEDDA208EF15F00C18520 /* TTS.swift in Sources */,
 				BEF258B320B57C7F00D0026C /* TimelineView.swift in Sources */,

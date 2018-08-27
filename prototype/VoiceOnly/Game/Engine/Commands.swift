@@ -10,68 +10,60 @@ import Foundation
 import Promises
 
 private let context = GameContext.shared
+private let engine = GameEngine.shared
 
 func startEngine(toSpeaker: Bool = false) {
-    context.isEngineRunning = true
+    engine.isEngineRunning = true
 
     guard !isSimulator else { return }
 
     do {
         configureAudioSession(toSpeaker: toSpeaker)
-        try context.engine.start()
-        context.bgm.play()
+        try engine.audioEngine.start()
+        engine.bgm.play()
     } catch {
         print("Start Play through failed \(error)")
     }
 }
 
 func stopEngine() {
-    guard context.isEngineRunning else { return }
-    context.isEngineRunning = false
-    context.tts.stop()
+    guard engine.isEngineRunning else { return }
+    engine.isEngineRunning = false
+    engine.tts.stop()
     updateGameHistory()
     guard !isSimulator else { return }
 
-    context.speechRecognizer.stop()
-    context.bgm.stop()
-    context.engine.stop()
+    engine.speechRecognizer.stop()
+    engine.bgm.stop()
+    engine.audioEngine.stop()
 }
 
 func reduceBGMVolume() {
-    context.bgm.reduceVolume()
+    engine.bgm.reduceVolume()
 }
 
 func restoreBGMVolume() {
-    context.bgm.restoreVolume()
+    engine.bgm.restoreVolume()
 }
 
 // MARK: - TTS / Speak Japanese
-func meijia(_ sentence: String) -> Promise<Void> {
-    return context.tts.say(sentence, meijiaSan, rate: fastRate)
+func meijia(_ sentence: String, rate: Float = fastRate) -> Promise<Void> {
+    return engine.tts.say(sentence, meijiaSan, rate: rate)
 }
 
-func oren(_ sentence: String, rate: Float? = nil) -> Promise<Void> {
-    if let rate = rate {
-        return context.tts.say(sentence, orenSan, rate: rate)
-    }
-    return context.tts.say(sentence, orenSan, rate: context.teachingRate)
+func oren(_ sentence: String, rate: Float = context.teachingRate) -> Promise<Void> {
+    return engine.tts.say(sentence, orenSan, rate: context.teachingRate)
 }
 
-func hattori(_ sentence: String, rate: Float? = nil) -> Promise<Void> {
-    if let rate = rate {
-        return context.tts.say(sentence, hattoriSan, rate: rate)
-    }
-    return context.tts.say(sentence, hattoriSan, rate: context.teachingRate)
+func hattori(_ sentence: String, rate: Float = context.teachingRate) -> Promise<Void> {
+    return engine.tts.say(sentence, hattoriSan, rate: rate)
 }
 
-func kyoko(_ sentence: String, rate: Float? = nil) -> Promise<Void> {
-    if let rate = rate {
-        return context.tts.say(sentence, kyokoSan, rate: rate)
-    }
-    return context.tts.say(sentence, kyokoSan, rate: context.teachingRate)
+func kyoko(_ sentence: String, rate: Float = context.teachingRate) -> Promise<Void> {
+    return engine.tts.say(sentence, kyokoSan, rate: context.teachingRate)
 }
 
 // MARK: - Voice Recognition
 func listenJP(duration: Double) -> Promise<String> {
-    return context.speechRecognizer.start(stopAfterSeconds: duration)
+    return engine.speechRecognizer.start(stopAfterSeconds: duration)
 }

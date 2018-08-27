@@ -11,6 +11,7 @@ import Promises
 
 private let pauseDuration = 0.2
 private let context = GameContext.shared
+private let engine = GameEngine.shared
 
 // 用 iphone 線控耳機、並把耳機放到麥克風旁邊、耳機聲音開到最大
 // 測試 siri 能不能辨識他自己說的日文
@@ -27,7 +28,7 @@ class SentencesTestGame: Game {
     func start() {
         startEngine(toSpeaker: false)
         context.life = 100
-        context.bgm.node.volume = 0
+        engine.bgm.node.volume = 0
         testNext()
     }
 

@@ -11,6 +11,7 @@ import Speech
 import Promises
 
 private let context = GameContext.shared
+private let engine = GameEngine.shared
 
 enum SpeechRecognitionError: Error {
     case unauthorized
@@ -95,7 +96,7 @@ class SpeechRecognizer: NSObject {
 
         recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest, resultHandler: resultHandler)
 
-        self.inputNode = context.engine.inputNode
+        self.inputNode = engine.audioEngine.inputNode
         let recordingFormat = inputNode.outputFormat(forBus: 0)
 
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
@@ -148,7 +149,7 @@ class SpeechRecognizer: NSObject {
     }
 
     func resultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
-        if !context.isEngineRunning {
+        if !engine.isEngineRunning {
             promise.reject(SpeechRecognitionError.engineStopped)
             return
         }

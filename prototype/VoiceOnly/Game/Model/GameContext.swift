@@ -7,10 +7,9 @@
 //
 
 import Foundation
-import AVFoundation
-import Speech
 import Promises
 import UIKit
+import AVFoundation
 
 enum GameMode {
     case phone, messenger, console, reader
@@ -20,21 +19,14 @@ class GameContext {
     // Singleton
     static let shared = GameContext()
 
-    // Long term data will be kept in UserDefault
+    // Long-term data will be kept in UserDefault
     var gameHistory = [GameRecord]()
     var gameCharacter: GameCharacter = GameCharacter()
     var characterImage: UIImage?
 
-    // Short term data for single game
-    var engine = AVAudioEngine()
-    var micVolumeNode = AVAudioMixerNode()
-    var speechRecognizer = SpeechRecognizer()
-    var bgm = BGM()
-    var tts = TTS()
-
+    // Short-term data of a single game
     var gameMode: GameMode = .phone
 
-    var isEngineRunning = false
     var isNewRecord = false
     var sentences: [String] = []
     var userSaidSentences: [String: String] = [:]
@@ -49,6 +41,11 @@ class GameContext {
             userSaidSentences[self.targetString] = newValue
         }
     }
+
+    var isEngineRunning: Bool {
+        return GameEngine.shared.isEngineRunning
+    }
+
     var score: Score = Score(value: 0)
     var life: Int = 40
     var startTime: Double = getNow()
@@ -58,29 +55,6 @@ class GameContext {
     }
     var dataSetKey: String = ""
     var gameRecord: GameRecord?
-
-    // MARK: - Lifecycle
-    private init() {
-        guard !isSimulator else { return }
-        configureAudioSession()
-        buildNodeGraph()
-        engine.prepare()
-    }
-
-    private func buildNodeGraph() {
-        let mainMixer = engine.mainMixerNode
-        let mic = engine.inputNode // only for real device, simulator will crash
-
-        engine.attach(bgm.node)
-        engine.attach(micVolumeNode)
-
-        engine.connect(bgm.node, to: mainMixer, format: bgm.buffer.format)
-        engine.connect(mic, to: micVolumeNode, format: mic.inputFormat(forBus: 0))
-        engine.connect(micVolumeNode, to: mainMixer, format: micVolumeNode.outputFormat(forBus: 0))
-
-        micVolumeNode.volume = micOutVolume
-        bgm.node.volume = 0.5
-    }
 
     func loadLearningSentences(isShuffle: Bool = true) {
         sentenceIndex = 0
