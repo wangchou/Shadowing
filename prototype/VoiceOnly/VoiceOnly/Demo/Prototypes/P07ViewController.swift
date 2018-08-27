@@ -197,7 +197,7 @@ class P07ViewController: UIViewController {
 
     func downloadImage(url: String) {
         print("Download Started")
-        getDataFromUrl(url: url) { data, response, error in
+        getDataFromUrl(url: url) { data, _, error in
             guard let data = data, error == nil else { return }
             print("Download Finished")
             DispatchQueue.main.async {

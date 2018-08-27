@@ -16,21 +16,32 @@ enum GameMode {
 }
 
 class GameContext {
-    // Singleton
+    // MARK: - Singleton
     static let shared = GameContext()
 
-    // Long-term data will be kept in UserDefault
+    // MARK: - Long-term data will be kept in UserDefault
     var gameHistory = [GameRecord]()
     var gameCharacter: GameCharacter = GameCharacter()
     var characterImage: UIImage?
 
-    // Short-term data of a single game
+    // MARK: - Short-term data of a single game
     var gameMode: GameMode = .phone
-
+    var dataSetKey: String = "" // the sentence set key in current game
+    var gameRecord: GameRecord? // of current game
+    var isEngineRunning: Bool {
+        return GameEngine.shared.isEngineRunning
+    }
+    var life: Int = 40
+    var startTime: Double = getNow()
+    var teachingRate: Float {
+        return AVSpeechUtteranceDefaultSpeechRate * (0.5 + life.f * 0.005)
+    }
     var isNewRecord = false
     var sentences: [String] = []
     var userSaidSentences: [String: String] = [:]
     var sentenceIndex: Int = 0
+
+    // MARK: - Short-term data for a single sentence
     var targetString: String = ""
     var userSaidString: String {
         get {
@@ -41,21 +52,9 @@ class GameContext {
             userSaidSentences[self.targetString] = newValue
         }
     }
-
-    var isEngineRunning: Bool {
-        return GameEngine.shared.isEngineRunning
-    }
-
     var score: Score = Score(value: 0)
-    var life: Int = 40
-    var startTime: Double = getNow()
 
-    var teachingRate: Float {
-        return AVSpeechUtteranceDefaultSpeechRate * (0.5 + life.f * 0.005)
-    }
-    var dataSetKey: String = ""
-    var gameRecord: GameRecord?
-
+    // MARK: - functions for a single game
     func loadLearningSentences(isShuffle: Bool = true) {
         sentenceIndex = 0
         guard let selectedDataSet = allSentences[dataSetKey] else { return }

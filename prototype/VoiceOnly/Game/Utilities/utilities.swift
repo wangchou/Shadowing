@@ -20,7 +20,7 @@ func getDataFromUrl(url: String, completion: @escaping (Data?, URLResponse?, Err
 }
 
 func loadCharacterProfile() {
-    getDataFromUrl(url: yuiUrl) { data, response, error in
+    getDataFromUrl(url: yuiUrl) { data, _, error in
         guard let data = data, error == nil else { return }
         DispatchQueue.main.async {
             GameContext.shared.characterImage = UIImage(data: data)
@@ -34,20 +34,14 @@ func configureAudioSession(toSpeaker: Bool = false) {
         let session: AVAudioSession = AVAudioSession.sharedInstance()
         if toSpeaker {
             try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.duckOthers, .allowBluetoothA2DP, .allowBluetooth, .allowAirPlay, .defaultToSpeaker])
-//            try session.setCategory(AVAudioSession.Category.playAndRecord,
-//                                    mode: AVAudioSession.Mode.default,
-//                                    options: [.duckOthers, .allowBluetoothA2DP, .allowBluetooth, .allowAirPlay, .defaultToSpeaker])
         } else {
             try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.duckOthers, .allowBluetoothA2DP, .allowBluetooth, .allowAirPlay])
-//            try session.setCategory(AVAudioSession.Category.playAndRecord,
-//                                    mode: AVAudioSession.Mode.default,
-//                                    options: [.duckOthers, .allowBluetoothA2DP, .allowBluetooth, .allowAirPlay])
         }
 
         // turn the measure mode will crash bluetooh, duckOthers and mixWithOthers
         //try session.setMode(AVAudioSessionModeMeasurement)
 
-        // per ioBufferDuration
+        // per ioBufferDuration delay
         // default  23ms | 1024 frames | <1% CPU (iphone SE)
         // 0.001   0.7ms |   32 frames |  8% CPU
         try session.setPreferredIOBufferDuration(0.002)
@@ -164,7 +158,7 @@ func distanceBetween(_ aStr: String, _ bStr: String) -> Int {
     return dist[a.count, b.count]
 }
 
-// MARK: - Array Shuffle
+// MARK: - Array Shuffle for calculate edit distance
 // https://stackoverflow.com/questions/24026510/how-do-i-shuffle-an-array-in-swift?noredirect=1&lq=1
 extension MutableCollection {
     /// Shuffles the contents of this collection.
@@ -205,6 +199,7 @@ extension CGFloat {
     var f: Float { return Float(self) }
 }
 
+// MARK: - launch storyboard
 func launchStoryboard(
     _ originVC: UIViewController,
     _ storyboardId: String,
@@ -219,9 +214,7 @@ func launchStoryboard(
 }
 
 // MARK: - Misc For Dev Only
-//////////////////////////////////
-// MISC section: only used in DEV
-func dumpVoices() {
+func dumpAvaliableVoices() {
     for voice in AVSpeechSynthesisVoice.speechVoices() {
         //if ((availableVoice.language == AVSpeechSynthesisVoice.currentLanguageCode()) &&
         //    (availableVoice.quality == AVSpeechSynthesisVoiceQuality.enhanced)) {

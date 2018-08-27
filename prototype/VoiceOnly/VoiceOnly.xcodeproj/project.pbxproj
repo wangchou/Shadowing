@@ -173,7 +173,6 @@
 				BE8283B32133DAE2008BC875 /* GameEngine.swift */,
 				BE6ED54920A1373700553D1A /* Commands.swift */,
 				BEDEDD4F20A5DA8C00E7B60B /* VoiceCore */,
-				BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -325,6 +324,7 @@
 		BEF28B5F20B52B7900385273 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */,
 				BE9B476920AD50520063E0DA /* FuriganaUtils.swift */,
 				BE8180BF20B3BEB6006ABCB3 /* MyText.swift */,
 				BEF28B6220B52BF700385273 /* UI.swift */,
