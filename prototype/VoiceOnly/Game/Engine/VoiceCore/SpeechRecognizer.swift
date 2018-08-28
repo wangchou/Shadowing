@@ -27,29 +27,6 @@ class SpeechRecognizer: NSObject {
     private var inputNode: AVAudioNode!
     private var promise = Promise<String>.pending()
 
-    // MARK: - Private Methods
-    private func authorize() {
-        SFSpeechRecognizer.requestAuthorization { authStatus in
-            switch authStatus {
-            case .authorized:
-                self.isAuthorized = true
-                print("Speech Recogntion is authorized")
-
-            case .denied:
-                self.isAuthorized = false
-                print("User denied access to speech recognition")
-
-            case .restricted:
-                self.isAuthorized = false
-                print("Speech recognition restricted on this device")
-
-            case .notDetermined:
-                self.isAuthorized = false
-                print("Speech recognition not yet authorized")
-            }
-        }
-    }
-
     override init() {
         super.init()
         if !isSimulator {
@@ -62,18 +39,10 @@ class SpeechRecognizer: NSObject {
     // MARK: - Public Methods
     func start(stopAfterSeconds: Double = 5) -> Promise<String> {
         promise = Promise<String>.pending()
-        guard !isSimulator else {
-            self.isRunning = true
-            postEvent(.listenStarted, string: "")
-            Timer.scheduledTimer(withTimeInterval: stopAfterSeconds, repeats: false) {_ in
-                let fakeSuffix = ["", "", "西宮", "はは"]
-                let fakeSaidString = context.targetString + fakeSuffix[Int(arc4random_uniform(UInt32(fakeSuffix.count)))]
-                postEvent(.listenEnded, string: fakeSaidString)
-                context.userSaidString = fakeSaidString
 
-                self.promise.fulfill(fakeSaidString)
-            }
-            return promise
+        // mocked start for simulator
+        guard !isSimulator else {
+            return startFaked(stopAfterSeconds: stopAfterSeconds)
         }
 
         if !isAuthorized {
@@ -112,44 +81,75 @@ class SpeechRecognizer: NSObject {
         return promise
     }
 
-    func endAudio() {
-        if self.isRunning {
-            guard !isSimulator else {
-                context.userSaidString = context.targetString
-                postEvent(.listenEnded, string: context.userSaidString)
-                promise.fulfill(context.userSaidString)
-                isRunning = false
-                return
-            }
-            inputNode.removeTap(onBus: 0)
-            recognitionRequest?.endAudio()
-
-            recognitionRequest = nil
-            recognitionTask = nil
-            isRunning = false
-        }
-    }
-
     func stop() {
-        if self.isRunning {
-            guard !isSimulator else {
-                postEvent(.listenEnded, string: "")
-                isRunning = false
-                return
-            }
-            inputNode.removeTap(onBus: 0)
-            recognitionRequest?.endAudio()
-            recognitionTask?.cancel()
+        guard isRunning else { return }
 
-            recognitionRequest = nil
-            recognitionTask = nil
-            isRunning = false
+        guard !isSimulator else {
             postEvent(.listenEnded, string: "")
+            isRunning = false
+            return
+        }
+
+        inputNode.removeTap(onBus: 0)
+        recognitionRequest?.endAudio()
+        recognitionTask?.cancel()
+
+        recognitionRequest = nil
+        recognitionTask = nil
+        isRunning = false
+        postEvent(.listenEnded, string: "")
+    }
+
+    // MARK: - Private Methods
+    private func authorize() {
+        SFSpeechRecognizer.requestAuthorization { authStatus in
+            switch authStatus {
+            case .authorized:
+                self.isAuthorized = true
+                print("Speech Recogntion is authorized")
+
+            case .denied:
+                self.isAuthorized = false
+                print("User denied access to speech recognition")
+
+            case .restricted:
+                self.isAuthorized = false
+                print("Speech recognition restricted on this device")
+
+            case .notDetermined:
+                self.isAuthorized = false
+                print("Speech recognition not yet authorized")
+            }
         }
     }
 
-    func resultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
-        if !engine.isEngineRunning {
+    private func startFaked(stopAfterSeconds: Double = 5) -> Promise<String> {
+        isRunning = true
+        postEvent(.listenStarted, string: "")
+        Timer.scheduledTimer(withTimeInterval: stopAfterSeconds, repeats: false) {_ in
+            let fakeSuffix = ["", "", "西宮", "はは"]
+            let fakeSaidString = context.targetString + fakeSuffix[Int(arc4random_uniform(UInt32(fakeSuffix.count)))]
+            context.userSaidString = fakeSaidString
+            postEvent(.listenEnded, string: fakeSaidString)
+
+            self.promise.fulfill(fakeSaidString)
+        }
+        return promise
+    }
+
+    private func endAudio() {
+        guard isRunning else { return }
+
+        inputNode.removeTap(onBus: 0)
+        recognitionRequest?.endAudio()
+
+        recognitionRequest = nil
+        recognitionTask = nil
+        isRunning = false
+    }
+
+    private func resultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
+        guard engine.isEngineRunning else {
             promise.reject(SpeechRecognitionError.engineStopped)
             return
         }

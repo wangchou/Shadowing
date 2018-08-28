@@ -26,6 +26,7 @@ class SimpleGame: Game {
         }
     }
 
+    // MARK: - Private Functions
     func start() {
         self.state = .stopped
         context.gameRecord?.startedTime = Date()
@@ -62,6 +63,7 @@ class SimpleGame: Game {
         stopEngine()
     }
 
+    // MARK: - Private Functions
     private func learnNext() {
         speakJapanese()
         .then { self.wait }

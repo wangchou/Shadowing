@@ -177,10 +177,17 @@
 			path = Engine;
 			sourceTree = "<group>";
 		};
-		BE6AF37F209C146B00CBDB63 /* Flows */ = {
+		BE5E2CB421356F9100C9DB5E /* Events */ = {
 			isa = PBXGroup;
 			children = (
 				BE65A938209C6E67006645CA /* GameEventDelegate.swift */,
+			);
+			path = Events;
+			sourceTree = "<group>";
+		};
+		BE6AF37F209C146B00CBDB63 /* Flows */ = {
+			isa = PBXGroup;
+			children = (
 				BE1CA955209D5D0900086853 /* GameState.swift */,
 				BE05073620A68515008A29EB /* SentencesTestGame.swift */,
 				BE6ED56720A17BB000553D1A /* SimpleGame.swift */,
@@ -292,7 +299,7 @@
 				BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */,
 				BEFA979C20AEAEA400DE3280 /* InitialPage */,
 				BEFA979E20AEAEDD00DE3280 /* GameDetailPage */,
-				BEFA979D20AEAECC00DE3280 /* GamePage */,
+				BEFA979D20AEAECC00DE3280 /* GamingPage */,
 				BE8180C320B3DFEF006ABCB3 /* GameFinishedPage */,
 				BEE797DE20B94B4000328635 /* DataPages */,
 			);
@@ -345,7 +352,7 @@
 			path = InitialPage;
 			sourceTree = "<group>";
 		};
-		BEFA979D20AEAECC00DE3280 /* GamePage */ = {
+		BEFA979D20AEAECC00DE3280 /* GamingPage */ = {
 			isa = PBXGroup;
 			children = (
 				BE1CA95B209DC4E800086853 /* ConsoleGame.swift */,
@@ -354,7 +361,7 @@
 				BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */,
 				BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */,
 			);
-			path = GamePage;
+			path = GamingPage;
 			sourceTree = "<group>";
 		};
 		BEFA979E20AEAEDD00DE3280 /* GameDetailPage */ = {
@@ -372,6 +379,7 @@
 				BE9556EF212D7C130045E578 /* Model */,
 				BE17FB38209B0F5F00D23F22 /* Engine */,
 				BE6AF37F209C146B00CBDB63 /* Flows */,
+				BE5E2CB421356F9100C9DB5E /* Events */,
 				BEDEDD4220A5D86500E7B60B /* UI */,
 				BEF28B5F20B52B7900385273 /* Utilities */,
 				BEBDEDD8208EF15F00C18520 /* constants.swift */,

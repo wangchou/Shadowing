@@ -24,6 +24,7 @@ class VoiceOnlyGame: Game {
         }
     }
 
+    // MARK: - Public Functions
     func start() {
         startEngine(toSpeaker: false)
         context.gameRecord?.startedTime = Date()
@@ -43,6 +44,7 @@ class VoiceOnlyGame: Game {
         stopEngine()
     }
 
+    // MARK: - Private Functions
     private func learnNext() {
         sayRemainingSentenceCount()
         .then(speakJapanese)
