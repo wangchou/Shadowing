@@ -19,6 +19,8 @@ class GameContext {
     // MARK: - Singleton
     static let shared = GameContext()
 
+    private init() {}
+
     // MARK: - Long-term data will be kept in UserDefault
     var gameHistory = [GameRecord]()
     var gameCharacter: GameCharacter = GameCharacter()
