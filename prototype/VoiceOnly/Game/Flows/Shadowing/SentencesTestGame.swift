@@ -23,7 +23,7 @@ class SentencesTestGame: Game {
     var targetString = ""
     var saidString = ""
 
-    var state: GameState = .stopped
+    var gameState: GameState = .stopped
 
     func start() {
         startEngine(toSpeaker: false)

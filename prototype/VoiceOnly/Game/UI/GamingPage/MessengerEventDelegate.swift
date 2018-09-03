@@ -18,10 +18,10 @@ extension Messenger: GameEventDelegate {
         switch event.type {
         case .sayStarted:
             guard let text = event.string else { return }
-            if game.state == .stopped {
+            if context.gameState == .stopped {
                 addLabel(rubyAttrStr(text))
             }
-            if game.state == .speakingJapanese {
+            if context.gameState == .speakingTargetString {
                 if let tokenInfos = kanaTokenInfosCacheDictionary[text] {
                     addLabel(getFuriganaString(tokenInfos: tokenInfos))
                 } else {
@@ -48,7 +48,7 @@ extension Messenger: GameEventDelegate {
             timeLabel.text = "\(add0((seconds/60).s)):\(add0((seconds%60).s))"
 
         case .gameStateChanged:
-            if game.state == .gameOver {
+            if context.gameState == .gameOver {
                 stopEventObserving(self)
                 addLabel(rubyAttrStr("遊戲結束。"))
                 launchStoryboard(self, "GameFinishedPage", isOverCurrent: true, animated: true)

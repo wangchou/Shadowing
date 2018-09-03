@@ -9,6 +9,7 @@
 import Foundation
 import AVFoundation
 import UIKit
+import Promises
 
 // MARK: - Utilities
 // https://stackovercmd.com/questions/24231680/loading-downloading-image-from-url-on-swift
@@ -233,4 +234,11 @@ func setStartTime(_ tag: String = "") {
 }
 func printDuration(_ tag: String = "") {
     print(tag, (NSDate().timeIntervalSince1970 - startTime)*1000, "ms")
+}
+
+// Promise Utilities
+func fulfilledVoidPromise() -> Promise<Void> {
+    let promise = Promise<Void>.pending()
+    promise.fulfill(())
+    return promise
 }

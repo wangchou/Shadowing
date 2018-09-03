@@ -27,6 +27,11 @@ class GameContext {
     var characterImage: UIImage?
 
     // MARK: - Short-term data of a single game
+    var gameState: GameState = .stopped {
+        didSet {
+            postEvent(.gameStateChanged, gameState: gameState)
+        }
+    }
     var gameMode: GameMode = .phone
     var dataSetKey: String = "" // the sentence set key in current game
     var gameRecord: GameRecord? // of current game
@@ -42,9 +47,13 @@ class GameContext {
     var sentences: [String] = []
     var userSaidSentences: [String: String] = [:]
     var sentenceIndex: Int = 0
+    var remainingSentenceCount: Int {
+        return sentences.count - sentenceIndex
+    }
 
     // MARK: - Short-term data for a single sentence
     var targetString: String = ""
+    var speakDuration: Double = 0
     var userSaidString: String {
         get {
             return userSaidSentences[self.targetString] ?? ""

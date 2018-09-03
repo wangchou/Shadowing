@@ -10,7 +10,7 @@ import Foundation
 
 enum GameState {
     case stopped
-    case speakingJapanese
+    case speakingTargetString
     case listening
     case stringRecognized
     case repeatingWhatSaid
@@ -21,7 +21,6 @@ enum GameState {
 }
 
 protocol Game {
-    var state: GameState { get set}
     func start()
     func stop()
 }

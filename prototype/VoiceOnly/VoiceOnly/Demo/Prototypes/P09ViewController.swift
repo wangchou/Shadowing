@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+private let context = GameContext.shared
 // Prototype 9: article reader
 class P09ViewController: UIViewController, GameEventDelegate {
     let game = VoiceOnlyGame.shared
@@ -27,7 +28,7 @@ class P09ViewController: UIViewController, GameEventDelegate {
 
     @objc func onEventHappened(_ notification: Notification) {
         guard let event = notification.object as? Event else { return }
-        print(game.state, event.type)
+        print(context.gameState, event.type)
     }
 
 }

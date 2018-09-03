@@ -17,18 +17,18 @@ private let context = GameContext.shared
 extension P07ViewController: GameEventDelegate {
     @objc func onEventHappened(_ notification: Notification) {
         guard let event = notification.object as? Event else { return }
-        let status: (GameState, EventType) = (game.state, event.type)
+        let status: (GameState, EventType) = (context.gameState, event.type)
 
         switch status {
-        case (.speakingJapanese, .sayStarted):
+        case (.speakingTargetString, .sayStarted):
             self.focusTextView(isTargetView: true)
 
-        case (.speakingJapanese, .stringSaid):
+        case (.speakingTargetString, .stringSaid):
             guard let token = event.string else { return }
             print(token, terminator: "")
             self.targetTextView.text = "\(self.targetTextView.text)\(token)"
 
-        case (.speakingJapanese, .sayEnded):
+        case (.speakingTargetString, .sayEnded):
             print("")
             self.focusTextView(isTargetView: false)
 

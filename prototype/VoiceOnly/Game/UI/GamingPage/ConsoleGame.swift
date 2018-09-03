@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+private let context = GameContext.shared
+
 // Prototype 10: black console
 class ConsoleGame: UIViewController, GameEventDelegate {
     let game = SimpleGame.shared
@@ -45,8 +47,8 @@ class ConsoleGame: UIViewController, GameEventDelegate {
 
         case .stringSaid:
             var color: UIColor = .lightText
-            color = game.state == .speakingJapanese ? myBlue : color
-            if game.state != .scoreCalculated,
+            color = context.gameState == .speakingTargetString ? myBlue : color
+            if context.gameState != .scoreCalculated,
                let str = event.string {
                 cprint(str, color, terminator: "")
             }
