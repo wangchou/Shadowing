@@ -31,10 +31,10 @@ class GameFinishedPage: UIViewController {
     }
 
     func sortSentenceByScore() {
-        context.sentences.sort { str1, str2 in
+        context.sentences.sort { chStr1, chStr2 in
             guard let record = context.gameRecord else { return true }
-            guard let score1 = record.sentencesScore[str1] else { return false }
-            guard let score2 = record.sentencesScore[str2] else { return true }
+            guard let score1 = record.sentencesScore[chStr1.string] else { return false }
+            guard let score2 = record.sentencesScore[chStr2.string] else { return true }
 
             return score1.value < score2.value
         }
@@ -55,7 +55,7 @@ extension GameFinishedPage: UITableViewDataSource {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "FinishedSentenceCell", for: indexPath)
         guard let finishedCell = cell as? GameFinishedTableCell else { print("detailCell convert error"); return cell }
-        let sentence = context.sentences[indexPath.row]
+        let sentence = context.sentences[indexPath.row].string
 
         if let tokenInfos = kanaTokenInfosCacheDictionary[sentence] {
             finishedCell.sentenceLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)

@@ -22,12 +22,7 @@ class VoiceOnlyGame: Game {
         context.gameState = .stopped
         context.gameRecord?.startedTime = Date()
         gameSeconds = 0
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            //if self.isPaused { return }
-
-            postEvent(.playTimeUpdate, int: self.gameSeconds)
-            self.gameSeconds += 1
-        }
+        prepareTimer()
         context.loadLearningSentences()
         meijia("每句日文說完後，請跟著說～").always {
             self.learnNext()
@@ -72,6 +67,13 @@ class VoiceOnlyGame: Game {
 
     private func speakScore() -> Promise<Void> {
         return meijia(context.score.valueText)
+    }
+
+    private func prepareTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            postEvent(.playTimeUpdate, int: self.gameSeconds)
+            self.gameSeconds += 1
+        }
     }
 
     private func gameOver() {

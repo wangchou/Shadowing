@@ -11,8 +11,12 @@ import Promises
 import UIKit
 import AVFoundation
 
-enum GameMode {
+enum GameUIMode {
     case phone, messenger, console, reader
+}
+
+enum GameFlowMode {
+    case shadowing, chat
 }
 
 class GameContext {
@@ -27,12 +31,13 @@ class GameContext {
     var characterImage: UIImage?
 
     // MARK: - Short-term data of a single game
+    var gameUIMode: GameUIMode = .phone
+    var gameFlowMode: GameFlowMode = .chat
     var gameState: GameState = .stopped {
         didSet {
             postEvent(.gameStateChanged, gameState: gameState)
         }
     }
-    var gameMode: GameMode = .phone
     var dataSetKey: String = "" // the sentence set key in current game
     var gameRecord: GameRecord? // of current game
     var isEngineRunning: Bool {
@@ -44,7 +49,7 @@ class GameContext {
         return AVSpeechUtteranceDefaultSpeechRate * (0.5 + life.f * 0.005)
     }
     var isNewRecord = false
-    var sentences: [String] = []
+    var sentences: [(speaker: ChatSpeaker, string: String)] = []
     var userSaidSentences: [String: String] = [:]
     var sentenceIndex: Int = 0
     var remainingSentenceCount: Int {
@@ -52,7 +57,9 @@ class GameContext {
     }
 
     // MARK: - Short-term data for a single sentence
-    var targetString: String = ""
+    var targetString: String {
+        return sentences[sentenceIndex].string
+    }
     var speakDuration: Double = 0
     var userSaidString: String {
         get {
@@ -72,7 +79,6 @@ class GameContext {
         sentences = isShuffle ? selectedDataSet.shuffled() : selectedDataSet
         userSaidSentences = [:]
 
-        targetString = sentences[0]
         life = isSimulator ? 100 : 40
 
         let level = allLevels[dataSetKey] ?? .n5a
@@ -85,10 +91,9 @@ class GameContext {
         sentenceIndex += 1
         var sentencesBound = sentences.count
         if isSimulator {
-            sentencesBound = 3
+            sentencesBound = 5
         }
         guard sentenceIndex < sentencesBound else { return false }
-        targetString = sentences[sentenceIndex]
         userSaidString = ""
         return true
     }

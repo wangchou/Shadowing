@@ -56,7 +56,7 @@ class GameContentDetailPage: UIViewController {
         }
 
         // load furigana
-        all(context.sentences.map {$0.furiganaAttributedString}).then {_ in
+        all(context.sentences.map {$0.string.furiganaAttributedString}).then {_ in
             self.tableView.reloadData()
         }
     }
@@ -80,7 +80,7 @@ class GameContentDetailPage: UIViewController {
     }
 
     @IBAction func challenge(_ sender: Any) {
-        switch context.gameMode {
+        switch context.gameUIMode {
         case .phone:
             launchStoryboard(self, "PhoneGame")
         case .messenger:
@@ -88,32 +88,32 @@ class GameContentDetailPage: UIViewController {
         case .console:
             launchStoryboard(self, "ConsoleGame")
         default:
-            print("\(context.gameMode) game mode is not implemented yet")
+            print("\(context.gameUIMode) game mode is not implemented yet")
         }
     }
 
     @IBAction func phoneButtonClicked(_ sender: Any) {
-        context.gameMode = .phone
+        context.gameUIMode = .phone
         updateGameModeSelection()
     }
 
     @IBAction func messengerButtonClicked(_ sender: Any) {
-        context.gameMode = .messenger
+        context.gameUIMode = .messenger
         updateGameModeSelection()
     }
 
     @IBAction func consoleButtonClicked(_ sender: Any) {
-        context.gameMode = .console
+        context.gameUIMode = .console
         updateGameModeSelection()
     }
 
     @IBAction func readerButtonClicked(_ sender: Any) {
-        context.gameMode = .reader
+        context.gameUIMode = .reader
         updateGameModeSelection()
     }
 
     func updateGameModeSelection() {
-        let mode = context.gameMode
+        let mode = context.gameUIMode
         phoneButton.layer.borderWidth = mode == .phone ? 1.5 : 0
         messengerButton.layer.borderWidth = mode == .messenger ? 1.5 : 0
         consoleButton.layer.borderWidth = mode == .console ? 1.5 : 0
@@ -135,7 +135,7 @@ extension GameContentDetailPage: UITableViewDataSource {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "SentenceCell", for: indexPath)
         guard let detailCell = cell as? GameDetailTableCell else { print("detailCell convert error"); return cell }
-        let sentence = context.sentences[indexPath.row]
+        let sentence = context.sentences[indexPath.row].string
 
         if let tokenInfos = kanaTokenInfosCacheDictionary[sentence] {
             detailCell.furiganaLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)

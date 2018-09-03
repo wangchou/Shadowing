@@ -22,7 +22,7 @@ enum Rank: String, Codable {
     }
 }
 
-var allSentences: [String: [String]] = [:]
+var allSentences: [String: [(speaker: ChatSpeaker, string: String)]] = [:]
 var allSentencesKeys: [String] = []
 var allLevels: [String: Level] = [:]
 
@@ -35,7 +35,10 @@ func addSentences(sentences: [String], prefix: String, level: Level) {
     var index = 0
     var serial = 1
     repeat {
-        let subSentences = Array(sentences[index..<index+sectionNum])
+        let subSentences: [(speaker: ChatSpeaker, string: String)] = Array(sentences[index..<index+sectionNum])
+            .map { s in
+                return (ChatSpeaker.user, s)
+            }
         let key = "\(prefix) \(serial)"
         allSentences[key] = subSentences
         allSentencesKeys.append(key)
