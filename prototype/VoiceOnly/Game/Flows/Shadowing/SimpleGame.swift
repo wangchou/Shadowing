@@ -42,23 +42,9 @@ class SimpleGame: Game {
 
     // MARK: - Private Functions
     private func learnNext() {
-        speakTargetString()
+        speakPart()
         .then { self.wait }
-        .then({ () -> Promise<Void> in
-            if context.gameFlowMode == .shadowing {
-                return self.listen()
-                    .then(self.getScore)
-                    .then(self.speakScore)
-            }
-
-            // chat mode
-            if context.isTargetSentencePlayedByUser {
-                return self.listen()
-                    .then(self.getScore)
-            }
-
-            return fulfilledVoidPromise()
-        })
+        .then( listenPart )
         .then { self.wait }
         .catch { error in print("Promise chain 死了。", error)}
         .always {
@@ -69,6 +55,29 @@ class SimpleGame: Game {
                 self.gameOver()
             }
         }
+    }
+
+    private func speakPart() -> Promise<Void> {
+        if context.isTargetSentencePlayedByUser {
+            return fulfilledVoidPromise()
+        }
+        return speakTargetString()
+    }
+
+    private func listenPart() -> Promise<Void> {
+        if context.gameFlowMode == .shadowing {
+            return listen()
+                .then(getScore)
+                .then(speakScore)
+        }
+
+        // chat mode
+        if context.isTargetSentencePlayedByUser {
+            return listen()
+                .then(getScore)
+        }
+
+        return fulfilledVoidPromise()
     }
 
     // change life will change the teachingSpeed

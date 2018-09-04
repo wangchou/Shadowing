@@ -15,12 +15,15 @@ let meijiaSan = "com.apple.ttsbundle.Mei-Jia-compact"
 
 #if targetEnvironment(simulator)
     let isSimulator = true
+    let otoyaSan = kyokoSan
     let orenSan = kyokoSan
     let hattoriSan = kyokoSan
 #else
     let isSimulator = false
     let orenSan = "com.apple.ttsbundle.siri_female_ja-JP_compact"
     let hattoriSan = "com.apple.ttsbundle.siri_male_ja-JP_compact"
+    let otoyaSan = "com.apple.ttsbundle.Otoya-compact"
+
 #endif
 
 let normalRate = AVSpeechUtteranceDefaultSpeechRate

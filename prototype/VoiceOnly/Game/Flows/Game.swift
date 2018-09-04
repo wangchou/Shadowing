@@ -59,16 +59,16 @@ extension Game {
 
     internal func speakTargetString() -> Promise<Void> {
         context.gameState = .TTSSpeaking
-        if context.isTargetSentencePlayedByUser {
-            return fulfilledVoidPromise()
-        }
-
         switch context.targetSpeaker {
-        case .hattori:
+        case .man1:
             return hattori(context.targetString)
-        case .oren:
+        case .man2:
+            return otoya(context.targetString)
+        case .woman1:
             return oren(context.targetString)
-        case .kyoko:
+        case .woman2:
+            return kyoko(context.targetString)
+        case .narrator:
             return kyoko(context.targetString)
         }
     }

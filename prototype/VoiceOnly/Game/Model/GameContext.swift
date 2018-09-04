@@ -41,7 +41,7 @@ class GameContext {
             postEvent(.gameStateChanged, gameState: gameState)
         }
     }
-    var userPlayedCharacter: ChatSpeaker = .oren
+    var userPlayedCharacter: ChatSpeaker = .woman1
     var dataSetKey: String = "" // the sentence set key in current game
     var gameRecord: GameRecord? // of current game
     var isEngineRunning: Bool {
@@ -66,7 +66,7 @@ class GameContext {
         return sentences[sentenceIndex].string
     }
     var targetSpeaker: ChatSpeaker {
-        guard sentenceIndex < sentences.count else { return ChatSpeaker.hattori }
+        guard sentenceIndex < sentences.count else { return ChatSpeaker.man1 }
         return sentences[sentenceIndex].speaker
     }
     var speakDuration: Promise<Float> {

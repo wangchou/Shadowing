@@ -59,6 +59,10 @@ func hattori(_ sentence: String, rate: Float = context.teachingRate) -> Promise<
     return engine.tts.say(sentence, hattoriSan, rate: rate)
 }
 
+func otoya(_ sentence: String, rate: Float = context.teachingRate) -> Promise<Void> {
+    return engine.tts.say(sentence, otoyaSan, rate: rate)
+}
+
 func kyoko(_ sentence: String, rate: Float = context.teachingRate) -> Promise<Void> {
     return engine.tts.say(sentence, kyokoSan, rate: context.teachingRate)
 }
