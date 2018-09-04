@@ -10,6 +10,7 @@ import Foundation
 import Promises
 
 private let context = GameContext.shared
+private let engine = GameEngine.shared
 private let pauseDuration = 0.4
 
 enum GameState {
@@ -59,7 +60,17 @@ extension Game {
     internal func speakTargetString() -> Promise<Void> {
         context.gameState = .TTSSpeaking
         let speakStartedTime = getNow()
-        return hattori(context.targetString).then {
+        var p: Promise<Void>
+        switch context.targetSpeaker {
+        case .hattori:
+            p = hattori(context.targetString)
+        case .oren:
+            p = oren(context.targetString)
+        case .kyoko:
+            p = kyoko(context.targetString)
+        }
+
+        return p.then {
             context.speakDuration = getNow() - speakStartedTime
         }
     }

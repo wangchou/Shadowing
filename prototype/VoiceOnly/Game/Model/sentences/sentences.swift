@@ -37,7 +37,7 @@ func addSentences(sentences: [String], prefix: String, level: Level) {
     repeat {
         let subSentences: [(speaker: ChatSpeaker, string: String)] = Array(sentences[index..<index+sectionNum])
             .map { s in
-                return (ChatSpeaker.user, s)
+                return (ChatSpeaker.kyoko, s)
             }
         let key = "\(prefix) \(serial)"
         allSentences[key] = subSentences

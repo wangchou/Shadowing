@@ -21,9 +21,16 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let tmpKey = "ChatDemo"
+        allSentences[tmpKey] = chatDemo
+        allSentencesKeys.append(tmpKey)
+        allLevels[tmpKey] = Level.n5b
+
         addSentences(sentences: n5, prefix: n5Prefix, level: Level.n5a)
         addSentences(sentences: n4, prefix: n4Prefix, level: Level.n4a)
         addSentences(sentences: n3, prefix: n3Prefix, level: Level.n3a)
+
         let height = screen.width * 120/320
         topView.frame.size.height = height
         timeline.frame.size.width = height * 5/3

@@ -38,6 +38,7 @@ class GameContext {
             postEvent(.gameStateChanged, gameState: gameState)
         }
     }
+    var userPlayedCharacter: ChatSpeaker = .kyoko
     var dataSetKey: String = "" // the sentence set key in current game
     var gameRecord: GameRecord? // of current game
     var isEngineRunning: Bool {
@@ -58,7 +59,12 @@ class GameContext {
 
     // MARK: - Short-term data for a single sentence
     var targetString: String {
+        guard sentenceIndex < sentences.count else { return ""}
         return sentences[sentenceIndex].string
+    }
+    var targetSpeaker: ChatSpeaker {
+        guard sentenceIndex < sentences.count else { return ChatSpeaker.hattori }
+        return sentences[sentenceIndex].speaker
     }
     var speakDuration: Double = 0
     var userSaidString: String {
@@ -73,7 +79,7 @@ class GameContext {
     var score: Score = Score(value: 0)
 
     // MARK: - functions for a single game
-    func loadLearningSentences(isShuffle: Bool = true) {
+    func loadLearningSentences(isShuffle: Bool = false) {
         sentenceIndex = 0
         guard let selectedDataSet = allSentences[dataSetKey] else { return }
         sentences = isShuffle ? selectedDataSet.shuffled() : selectedDataSet
@@ -89,10 +95,10 @@ class GameContext {
 
     func nextSentence() -> Bool {
         sentenceIndex += 1
-        var sentencesBound = sentences.count
-        if isSimulator {
-            sentencesBound = 3
-        }
+        let sentencesBound = sentences.count
+//        if isSimulator {
+//            sentencesBound = 3
+//        }
         guard sentenceIndex < sentencesBound else { return false }
         userSaidString = ""
         return true

@@ -8,19 +8,18 @@
 
 import Foundation
 
-enum ChatSpeaker {
+enum ChatSpeaker: String {
     case oren
     case hattori
     case kyoko
-    case user
 }
 
 let chatDemo: [(speaker: ChatSpeaker, string: String)] = [
-    (.oren, "おはよう"),
-    (.user, "あ...おはようございます"),
-    (.oren, "今日は早いですようね"),
-    (.user, "はい、今日学校が始まります"),
-    (.oren, "そうれは、よっかた"),
-    (.user, "じゃ、行ってきます"),
-    (.oren, "バイバイ")
+    (.oren, "おはよう〜"),
+    (.hattori, "おはようございます。"),
+    (.oren, "今日は、早いですね。"),
+    (.hattori, "はい、今日学校が始まります。"),
+    (.oren, "そうか。"),
+    (.hattori, "じゃ、お先に。"),
+    (.oren, "バイバイ。")
 ]
