@@ -45,14 +45,19 @@ class SimpleGame: Game {
         speakTargetString()
         .then { self.wait }
         .then({ () -> Promise<Void> in
-            return fulfilledVoidPromise()
-            guard context.sentences[context.sentenceIndex].speaker == context.userPlayedCharacter else {
-                return fulfilledVoidPromise()
+            if context.gameFlowMode == .shadowing {
+                return self.listen()
+                    .then(self.getScore)
+                    .then(self.speakScore)
             }
 
-            return self.listen()
-                .then(self.getScore)
-                .then(self.speakScore)
+            // chat mode
+            if context.isTargetSentencePlayedByUser {
+                return self.listen()
+                    .then(self.getScore)
+            }
+
+            return fulfilledVoidPromise()
         })
         .then { self.wait }
         .catch { error in print("Promise chain 死了。", error)}

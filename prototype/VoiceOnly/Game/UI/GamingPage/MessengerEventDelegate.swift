@@ -30,7 +30,17 @@ extension Messenger: GameEventDelegate {
             }
 
         case .listenStarted:
-            addLabel(rubyAttrStr("..."), isLeft: false)
+            if context.gameFlowMode == .shadowing {
+                addLabel(rubyAttrStr("..."), isLeft: false)
+            }
+            if context.gameFlowMode == .chat {
+                let text = context.targetString
+                if let tokenInfos = kanaTokenInfosCacheDictionary[text] {
+                    addLabel(getFuriganaString(tokenInfos: tokenInfos), isLeft: false)
+                } else {
+                    addLabel(rubyAttrStr(text), isLeft: false)
+                }
+            }
 
         case .scoreCalculated:
             guard let score = event.score else { return }

@@ -15,6 +15,7 @@ enum ChatSpeaker: String {
 }
 
 let chatDemo: [(speaker: ChatSpeaker, string: String)] = [
+    (.hattori, "佐藤さん"),
     (.oren, "おはよう〜"),
     (.hattori, "おはようございます。"),
     (.oren, "今日は、早いですね。"),

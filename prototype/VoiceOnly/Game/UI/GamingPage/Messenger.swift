@@ -78,7 +78,9 @@ class Messenger: UIViewController {
             myLabel.backgroundColor = myWhite
         } else {
             myLabel.frame.origin.x = CGFloat(Int(screen.width) - 5 - Int(myLabel.frame.width))
-            if text.string == "..." {
+            if context.isTargetSentencePlayedByUser {
+                myLabel.backgroundColor = myWhite
+            } else if text.string == "..." {
                 myLabel.backgroundColor = .gray
             } else if text.string == "聽不清楚" {
                 myLabel.backgroundColor = myRed

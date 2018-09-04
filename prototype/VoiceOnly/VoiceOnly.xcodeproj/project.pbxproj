@@ -21,7 +21,6 @@
 		BE38FFC82125979900F0ADCE /* FBLPromises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE38FFC22125979900F0ADCE /* FBLPromises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE500AEE20B822CA004E73D1 /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE500AED20B822CA004E73D1 /* CharacterView.swift */; };
 		BE5D838920A80BD0002031BF /* GameContentDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */; };
-		BE62CA5D213CD6EA00CF6DD6 /* ChatVoiceOnlyGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE62CA5C213CD6EA00CF6DD6 /* ChatVoiceOnlyGame.swift */; };
 		BE62CA61213D11C700CF6DD6 /* chatDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE62CA60213D11C700CF6DD6 /* chatDemo.swift */; };
 		BE65A939209C6E67006645CA /* GameEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65A938209C6E67006645CA /* GameEventDelegate.swift */; };
 		BE6ED54A20A1373700553D1A /* Commands.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6ED54920A1373700553D1A /* Commands.swift */; };
@@ -103,7 +102,6 @@
 		BE38FFC22125979900F0ADCE /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBLPromises.framework; path = Carthage/Build/iOS/FBLPromises.framework; sourceTree = "<group>"; };
 		BE500AED20B822CA004E73D1 /* CharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
 		BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameContentDetailPage.swift; sourceTree = "<group>"; };
-		BE62CA5C213CD6EA00CF6DD6 /* ChatVoiceOnlyGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVoiceOnlyGame.swift; sourceTree = "<group>"; };
 		BE62CA60213D11C700CF6DD6 /* chatDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatDemo.swift; sourceTree = "<group>"; };
 		BE65A938209C6E67006645CA /* GameEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEventDelegate.swift; sourceTree = "<group>"; };
 		BE6ED54920A1373700553D1A /* Commands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commands.swift; sourceTree = "<group>"; };
@@ -199,19 +197,10 @@
 			path = Shadowing;
 			sourceTree = "<group>";
 		};
-		BE62CA5B213CD6B400CF6DD6 /* Chat */ = {
-			isa = PBXGroup;
-			children = (
-				BE62CA5C213CD6EA00CF6DD6 /* ChatVoiceOnlyGame.swift */,
-			);
-			path = Chat;
-			sourceTree = "<group>";
-		};
 		BE6AF37F209C146B00CBDB63 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
 				BE1CA955209D5D0900086853 /* Game.swift */,
-				BE62CA5B213CD6B400CF6DD6 /* Chat */,
 				BE62CA5A213CD6A200CF6DD6 /* Shadowing */,
 			);
 			path = Flows;
@@ -545,7 +534,6 @@
 				BEBDEDE8208F227C00C18520 /* PhoneGame.swift in Sources */,
 				BE8283B42133DAE2008BC875 /* GameEngine.swift in Sources */,
 				BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */,
-				BE62CA5D213CD6EA00CF6DD6 /* ChatVoiceOnlyGame.swift in Sources */,
 				BEBDEDDA208EF15F00C18520 /* TTS.swift in Sources */,
 				BEF258B320B57C7F00D0026C /* TimelineView.swift in Sources */,
 				BEBDEDDD208EF15F00C18520 /* SpeechRecognizer.swift in Sources */,

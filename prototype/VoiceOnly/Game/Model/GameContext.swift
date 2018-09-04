@@ -33,12 +33,15 @@ class GameContext {
     // MARK: - Short-term data of a single game
     var gameUIMode: GameUIMode = .phone
     var gameFlowMode: GameFlowMode = .chat
+    var isTargetSentencePlayedByUser: Bool {
+        return gameFlowMode == .chat && userPlayedCharacter == targetSpeaker
+    }
     var gameState: GameState = .stopped {
         didSet {
             postEvent(.gameStateChanged, gameState: gameState)
         }
     }
-    var userPlayedCharacter: ChatSpeaker = .kyoko
+    var userPlayedCharacter: ChatSpeaker = .oren
     var dataSetKey: String = "" // the sentence set key in current game
     var gameRecord: GameRecord? // of current game
     var isEngineRunning: Bool {
@@ -47,7 +50,7 @@ class GameContext {
     var life: Int = 40
     var startTime: Double = getNow()
     var teachingRate: Float {
-        return AVSpeechUtteranceDefaultSpeechRate * (0.5 + life.f * 0.005)
+        return AVSpeechUtteranceDefaultSpeechRate //* (0.5 + life.f * 0.005)
     }
     var isNewRecord = false
     var sentences: [(speaker: ChatSpeaker, string: String)] = []
@@ -66,7 +69,13 @@ class GameContext {
         guard sentenceIndex < sentences.count else { return ChatSpeaker.hattori }
         return sentences[sentenceIndex].speaker
     }
-    var speakDuration: Double = 0
+    var speakDuration: Promise<Float> {
+        let duration: Promise<Float> = Promise<Float>.pending()
+        getKana(targetString).then({ kana in
+            duration.fulfill(0.3 + kana.count.f * 0.12 / self.teachingRate)
+        })
+        return duration
+    }
     var userSaidString: String {
         get {
             return userSaidSentences[self.targetString] ?? ""
@@ -95,10 +104,10 @@ class GameContext {
 
     func nextSentence() -> Bool {
         sentenceIndex += 1
-        let sentencesBound = sentences.count
-//        if isSimulator {
-//            sentencesBound = 3
-//        }
+        var sentencesBound = sentences.count
+        if isSimulator {
+            sentencesBound = 5
+        }
         guard sentenceIndex < sentencesBound else { return false }
         userSaidString = ""
         return true

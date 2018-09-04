@@ -79,7 +79,17 @@ class GameContentDetailPage: UIViewController {
         self.dismiss(animated: false, completion: nil)
     }
 
+    @IBAction func pratice(_ sender: Any) {
+        context.gameFlowMode = .shadowing
+        launchGame()
+    }
+
     @IBAction func challenge(_ sender: Any) {
+        context.gameFlowMode = .chat
+        launchGame()
+    }
+
+    private func launchGame() {
         switch context.gameUIMode {
         case .phone:
             launchStoryboard(self, "PhoneGame")

@@ -11,7 +11,7 @@ import Promises
 
 private let context = GameContext.shared
 private let engine = GameEngine.shared
-private let pauseDuration = 0.4
+private let pauseDuration: Float = 0.4
 
 enum GameState {
     case stopped
@@ -59,26 +59,26 @@ extension Game {
 
     internal func speakTargetString() -> Promise<Void> {
         context.gameState = .TTSSpeaking
-        let speakStartedTime = getNow()
-        var p: Promise<Void>
-        switch context.targetSpeaker {
-        case .hattori:
-            p = hattori(context.targetString)
-        case .oren:
-            p = oren(context.targetString)
-        case .kyoko:
-            p = kyoko(context.targetString)
+        if context.isTargetSentencePlayedByUser {
+            return fulfilledVoidPromise()
         }
 
-        return p.then {
-            context.speakDuration = getNow() - speakStartedTime
+        switch context.targetSpeaker {
+        case .hattori:
+            return hattori(context.targetString)
+        case .oren:
+            return oren(context.targetString)
+        case .kyoko:
+            return kyoko(context.targetString)
         }
     }
 
     internal func listen() -> Promise<Void> {
         context.gameState = .listening
-        return listenJP(duration: context.speakDuration + pauseDuration)
-            .then(saveUserSaidString)
+        return context.speakDuration.then({ speakDuration -> Promise<String> in
+            return listenJP(duration: Double(speakDuration + pauseDuration))
+        })
+        .then(saveUserSaidString)
     }
 
     private func saveUserSaidString(userSaidString: String) -> Promise<Void> {
