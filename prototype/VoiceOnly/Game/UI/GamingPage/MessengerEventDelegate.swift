@@ -21,7 +21,7 @@ extension Messenger: GameEventDelegate {
             if context.gameState == .stopped {
                 addLabel(rubyAttrStr(text))
             }
-            if context.gameState == .speakingTargetString {
+            if context.gameState == .TTSSpeaking {
                 if let tokenInfos = kanaTokenInfosCacheDictionary[text] {
                     addLabel(getFuriganaString(tokenInfos: tokenInfos))
                 } else {

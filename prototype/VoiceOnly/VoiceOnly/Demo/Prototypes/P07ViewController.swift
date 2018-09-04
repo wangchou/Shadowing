@@ -20,15 +20,15 @@ extension P07ViewController: GameEventDelegate {
         let status: (GameState, EventType) = (context.gameState, event.type)
 
         switch status {
-        case (.speakingTargetString, .sayStarted):
+        case (.TTSSpeaking, .sayStarted):
             self.focusTextView(isTargetView: true)
 
-        case (.speakingTargetString, .stringSaid):
+        case (.TTSSpeaking, .stringSaid):
             guard let token = event.string else { return }
             print(token, terminator: "")
             self.targetTextView.text = "\(self.targetTextView.text)\(token)"
 
-        case (.speakingTargetString, .sayEnded):
+        case (.TTSSpeaking, .sayEnded):
             print("")
             self.focusTextView(isTargetView: false)
 

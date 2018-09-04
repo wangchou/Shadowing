@@ -13,11 +13,9 @@ private let context = GameContext.shared
 
 class VoiceOnlyGame: Game {
     static let shared = VoiceOnlyGame()
-    private var gameSeconds: Int = 0
-    private var timer: Timer?
 
     // MARK: - Public Functions
-    func start() {
+    override func start() {
         startEngine(toSpeaker: false)
         context.gameState = .stopped
         context.gameRecord?.startedTime = Date()
@@ -27,13 +25,6 @@ class VoiceOnlyGame: Game {
         meijia("每句日文說完後，請跟著說～").always {
             self.learnNext()
         }
-    }
-
-    func stop() {
-        context.gameRecord?.playDuration = gameSeconds
-        context.gameState = .stopped
-        timer?.invalidate()
-        stopEngine()
     }
 
     // MARK: - Private Functions
@@ -66,20 +57,6 @@ class VoiceOnlyGame: Game {
     }
 
     private func speakScore() -> Promise<Void> {
-        return meijia(context.score.valueText)
-    }
-
-    private func prepareTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            postEvent(.playTimeUpdate, int: self.gameSeconds)
-            self.gameSeconds += 1
-        }
-    }
-
-    private func gameOver() {
-        meijia("遊戲結束").then {
-            context.gameState = .gameOver
-            self.stop()
-        }
+        return oren(context.score.valueText, rate: normalRate)
     }
 }

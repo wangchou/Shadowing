@@ -13,13 +13,9 @@ private let context = GameContext.shared
 
 class SimpleGame: Game {
     static let shared = SimpleGame()
-    private var isPaused: Bool = false
-    private var wait: Promise<Void> = Promise<Void>.pending()
-    private var gameSeconds: Int = 0
-    private var timer: Timer?
 
-    // MARK: - Private Functions
-    func start() {
+    // MARK: - Public Functions
+    override func start() {
         startEngine(toSpeaker: true)
         context.gameState = .stopped
         context.gameRecord?.startedTime = Date()
@@ -29,6 +25,7 @@ class SimpleGame: Game {
         meijia("每句日文說完後，請跟著說～").always {
             self.learnNext()
         }
+
         isPaused = false
         wait.fulfill(())
     }
@@ -41,13 +38,6 @@ class SimpleGame: Game {
     func resume() {
         isPaused = false
         wait.fulfill(())
-    }
-
-    func stop() {
-        context.gameRecord?.playDuration = gameSeconds
-        context.gameState = .stopped
-        timer?.invalidate()
-        stopEngine()
     }
 
     // MARK: - Private Functions
@@ -96,28 +86,11 @@ class SimpleGame: Game {
         postEvent(.lifeChanged, int: context.life)
     }
 
-    private func prepareTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            if self.isPaused { return }
-
-            postEvent(.playTimeUpdate, int: self.gameSeconds)
-            self.gameSeconds += 1
-        }
-    }
-
     private func speakScore() -> Promise<Void> {
         context.gameState = .scoreCalculated
         let score = context.score
         updateLife(score: score)
-        updateGameRecord(score: score)
 
         return oren(score.text, rate: normalRate)
-    }
-
-    private func gameOver() {
-        meijia("遊戲結束").then {
-            context.gameState = .gameOver
-            self.stop()
-        }
     }
 }

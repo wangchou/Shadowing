@@ -17,6 +17,7 @@ private let engine = GameEngine.shared
 // 測試 siri 能不能辨識他自己說的日文
 class SentencesTestGame: Game {
     static let shared = SentencesTestGame()
+
     var startTime: Double = 0
     var sentences = n5
     var index = 0
@@ -25,7 +26,7 @@ class SentencesTestGame: Game {
 
     var gameState: GameState = .stopped
 
-    func start() {
+    override func start() {
         startEngine(toSpeaker: false)
         context.life = 100
         engine.bgm.node.volume = 0
@@ -37,7 +38,7 @@ class SentencesTestGame: Game {
         targetString = sentences[index]
 
         startTime = getNow()
-        hattori(targetString).then({ ()-> Promise<String> in
+        hattori(targetString).then({ () -> Promise<String> in
             let duration = getNow() - self.startTime + pauseDuration
             let p1 = listenJP(duration: duration)
             usleep(100000)
@@ -53,9 +54,5 @@ class SentencesTestGame: Game {
         }).catch({ error in
             print(error)
         })
-    }
-
-    func stop() {
-        stopEngine()
     }
 }

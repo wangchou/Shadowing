@@ -40,5 +40,5 @@ struct Score: Codable {
         return myRed
     }
 
-    var valueText: String { return "\(value)分"}
+    var valueText: String { return "\(value)点" }
 }

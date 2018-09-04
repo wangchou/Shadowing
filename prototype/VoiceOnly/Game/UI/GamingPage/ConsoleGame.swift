@@ -47,7 +47,7 @@ class ConsoleGame: UIViewController, GameEventDelegate {
 
         case .stringSaid:
             var color: UIColor = .lightText
-            color = context.gameState == .speakingTargetString ? myBlue : color
+            color = context.gameState == .TTSSpeaking ? myBlue : color
             if context.gameState != .scoreCalculated,
                let str = event.string {
                 cprint(str, color, terminator: "")
