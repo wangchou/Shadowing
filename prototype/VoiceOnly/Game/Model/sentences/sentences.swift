@@ -31,7 +31,7 @@ let n4Prefix = "N4 口說"
 let n3Prefix = "N3 口說"
 
 func addSentences(sentences: [String], prefix: String, level: Level) {
-    let sectionNum = 25
+    let sectionNum = 20
     var index = 0
     var serial = 1
     repeat {

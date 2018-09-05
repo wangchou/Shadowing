@@ -10,7 +10,7 @@ import UIKit
 
 private let context = GameContext.shared
 
-class MainViewController: UIViewController {
+class ShadowingListPage: UIViewController {
     @IBOutlet weak var sentencesTableView: UITableView!
 
     @IBOutlet weak var timeline: TimelineView!
@@ -26,11 +26,6 @@ class MainViewController: UIViewController {
         allSentences[tmpKey] = chatDemo
         allSentencesKeys.append(tmpKey)
         allLevels[tmpKey] = Level.n5b
-
-//        tmpKey = "ChatDemo2"
-//        allSentences[tmpKey] = chatDemo2
-//        allSentencesKeys.append(tmpKey)
-//        allLevels[tmpKey] = Level.n4b
 
         addSentences(sentences: n5, prefix: n5Prefix, level: Level.n5a)
         addSentences(sentences: n4, prefix: n4Prefix, level: Level.n4a)
@@ -83,7 +78,7 @@ class MainViewController: UIViewController {
     }
 }
 
-extension MainViewController: UITableViewDataSource {
+extension ShadowingListPage: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -107,7 +102,7 @@ extension MainViewController: UITableViewDataSource {
     }
 }
 
-extension MainViewController: UITableViewDelegate {
+extension ShadowingListPage: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         context.dataSetKey = allSentencesKeys[indexPath.row]
         context.loadLearningSentences(isShuffle: false)

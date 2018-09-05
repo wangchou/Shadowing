@@ -48,9 +48,11 @@
 		BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD8208EF15F00C18520 /* constants.swift */; };
 		BEC1F02220C12680001B4982 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC1F02120C12680001B4982 /* Character.swift */; };
 		BEDBCCD820A82AC4001CF11D /* GameDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDBCCD720A82AC4001CF11D /* GameDetailTableCell.swift */; };
-		BEDEDD3720A46D1B00E7B60B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3620A46D1B00E7B60B /* MainViewController.swift */; };
+		BEDEDD3720A46D1B00E7B60B /* ShadowingListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3620A46D1B00E7B60B /* ShadowingListPage.swift */; };
 		BEDEDD3920A46FCA00E7B60B /* GameRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */; };
 		BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */; };
+		BEDF761B213FE4B1009A7C25 /* MainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDF761A213FE4B1009A7C25 /* MainPage.swift */; };
+		BEDF761D213FE5E0009A7C25 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDF761C213FE5E0009A7C25 /* MainView.swift */; };
 		BEDFCDAB20A87AF800736153 /* PauseOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */; };
 		BEE665E020BA5E1000E4E322 /* BlackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE665DF20BA5E1000E4E322 /* BlackView.swift */; };
 		BEE665E220BA634600E4E322 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE665E120BA634600E4E322 /* Colors.swift */; };
@@ -116,9 +118,11 @@
 		BEBDEDD8208EF15F00C18520 /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		BEC1F02120C12680001B4982 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		BEDBCCD720A82AC4001CF11D /* GameDetailTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailTableCell.swift; sourceTree = "<group>"; };
-		BEDEDD3620A46D1B00E7B60B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		BEDEDD3620A46D1B00E7B60B /* ShadowingListPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowingListPage.swift; sourceTree = "<group>"; };
 		BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRecord.swift; sourceTree = "<group>"; };
 		BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerEventDelegate.swift; sourceTree = "<group>"; };
+		BEDF761A213FE4B1009A7C25 /* MainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPage.swift; sourceTree = "<group>"; };
+		BEDF761C213FE5E0009A7C25 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseOverlayViewController.swift; sourceTree = "<group>"; };
 		BEE665DF20BA5E1000E4E322 /* BlackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackView.swift; sourceTree = "<group>"; };
 		BEE665E120BA634600E4E322 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -252,7 +256,9 @@
 			children = (
 				BEBDEDC3208EF09F00C18520 /* Main.storyboard */,
 				BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */,
-				BEFA979C20AEAEA400DE3280 /* InitialPage */,
+				BEDF761A213FE4B1009A7C25 /* MainPage.swift */,
+				BEDF761C213FE5E0009A7C25 /* MainView.swift */,
+				BEFA979C20AEAEA400DE3280 /* ShadowingListPage */,
 				BEFA979E20AEAEDD00DE3280 /* GameDetailPage */,
 				BEFA979D20AEAECC00DE3280 /* GamingPage */,
 				BE8180C320B3DFEF006ABCB3 /* GameFinishedPage */,
@@ -292,15 +298,15 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		BEFA979C20AEAEA400DE3280 /* InitialPage */ = {
+		BEFA979C20AEAEA400DE3280 /* ShadowingListPage */ = {
 			isa = PBXGroup;
 			children = (
-				BEDEDD3620A46D1B00E7B60B /* MainViewController.swift */,
+				BEDEDD3620A46D1B00E7B60B /* ShadowingListPage.swift */,
 				BE500AED20B822CA004E73D1 /* CharacterView.swift */,
 				BEF258B220B57C7F00D0026C /* TimelineView.swift */,
 				BE7725CD20A4216700DF186A /* ContentCell.swift */,
 			);
-			path = InitialPage;
+			path = ShadowingListPage;
 			sourceTree = "<group>";
 		};
 		BEFA979D20AEAECC00DE3280 /* GamingPage */ = {
@@ -426,6 +432,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEDEDD3920A46FCA00E7B60B /* GameRecord.swift in Sources */,
+				BEDF761D213FE5E0009A7C25 /* MainView.swift in Sources */,
 				BE9D243A20C8DEE9000515DD /* GameReportView.swift in Sources */,
 				BE1CA958209DC43800086853 /* Messenger.swift in Sources */,
 				BEBDEDD9208EF15F00C18520 /* utilities.swift in Sources */,
@@ -449,11 +456,12 @@
 				BE65A939209C6E67006645CA /* GameEventDelegate.swift in Sources */,
 				BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */,
 				BEBDEDDC208EF15F00C18520 /* BGM.swift in Sources */,
+				BEDF761B213FE4B1009A7C25 /* MainPage.swift in Sources */,
 				BE500AEE20B822CA004E73D1 /* CharacterView.swift in Sources */,
 				BE7725C520A2CBC200DF186A /* n3.swift in Sources */,
 				BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */,
 				BE62CA61213D11C700CF6DD6 /* chatDemo.swift in Sources */,
-				BEDEDD3720A46D1B00E7B60B /* MainViewController.swift in Sources */,
+				BEDEDD3720A46D1B00E7B60B /* ShadowingListPage.swift in Sources */,
 				BE7725CE20A4216700DF186A /* ContentCell.swift in Sources */,
 				BEDBCCD820A82AC4001CF11D /* GameDetailTableCell.swift in Sources */,
 				BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */,

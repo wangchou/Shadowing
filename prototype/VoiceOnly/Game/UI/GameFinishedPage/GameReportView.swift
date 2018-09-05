@@ -145,7 +145,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
 
     @objc func backButtonTapped() {
         if let vc = UIApplication.getPresentedViewController() {
-            launchStoryboard(vc, "MainViewController")
+            launchStoryboard(vc, "ShadowingListPage", animated: true)
         }
     }
 }
