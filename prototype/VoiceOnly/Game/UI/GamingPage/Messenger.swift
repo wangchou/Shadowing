@@ -76,6 +76,10 @@ class Messenger: UIViewController {
 
         if isLeft {
             myLabel.backgroundColor = myWhite
+            if context.gameFlowMode == .chat {
+                myLabel.backgroundColor = myBlue
+                myLabel.textColor = myWhite
+            }
         } else {
             myLabel.frame.origin.x = CGFloat(Int(screen.width) - 5 - Int(myLabel.frame.width))
             if context.isTargetSentencePlayedByUser {

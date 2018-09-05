@@ -22,15 +22,15 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        var tmpKey = "ChatDemo"
+        let tmpKey = "ChatDemo"
         allSentences[tmpKey] = chatDemo
         allSentencesKeys.append(tmpKey)
         allLevels[tmpKey] = Level.n5b
 
-        tmpKey = "ChatDemo2"
-        allSentences[tmpKey] = chatDemo2
-        allSentencesKeys.append(tmpKey)
-        allLevels[tmpKey] = Level.n4b
+//        tmpKey = "ChatDemo2"
+//        allSentences[tmpKey] = chatDemo2
+//        allSentencesKeys.append(tmpKey)
+//        allLevels[tmpKey] = Level.n4b
 
         addSentences(sentences: n5, prefix: n5Prefix, level: Level.n5a)
         addSentences(sentences: n4, prefix: n4Prefix, level: Level.n4a)
@@ -42,10 +42,6 @@ class MainViewController: UIViewController {
         timeline.frame.size.height = height
         characterView.frame.size.width = height - 10
         characterView.frame.size.height = height - 10
-    }
-
-    @objc func characterViewTapped() {
-        launchStoryboard(self, "DataPageViewOverlay", isOverCurrent: true, animated: true)
     }
 
     @objc func injected() {
@@ -62,8 +58,6 @@ class MainViewController: UIViewController {
         sentencesTableView.reloadData()
         timeline.viewWillAppear()
         characterView.viewWillAppear()
-        let characterViewTap = UITapGestureRecognizer(target: self, action: #selector(self.characterViewTapped))
-        characterView.addGestureRecognizer(characterViewTap)
     }
 
     override func viewDidAppear(_ animated: Bool) {

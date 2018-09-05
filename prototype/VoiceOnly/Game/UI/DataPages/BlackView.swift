@@ -11,27 +11,6 @@ import UIKit
 
 private let context = GameContext.shared
 
-extension String {
-    func padWidthTo(_ width: Int, isBothSide: Bool = false) -> String {
-        let padCount = max(width - self.count, 0)
-
-        func getEmptySpaces(_ padCount: Int) -> String {
-            guard padCount > 0 else { return "" }
-            var spaces = ""
-            for _ in 1...padCount { spaces += " " }
-            return spaces
-        }
-
-        if isBothSide {
-            let leftPadCount =  padCount / 2
-            let rightPadCount = padCount - leftPadCount
-            return getEmptySpaces(leftPadCount) + self + getEmptySpaces(rightPadCount)
-        }
-
-        return getEmptySpaces(padCount) + self
-    }
-}
-
 class BlackView: UIView, ReloadableView, GridLayout {
     let gridCount: Int = 48
     let axis: GridAxis = .horizontal

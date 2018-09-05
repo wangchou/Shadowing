@@ -51,6 +51,7 @@ extension Game {
     }
 
     func stop() {
+        restoreBGMVolume()
         context.gameRecord?.playDuration = gameSeconds
         context.gameState = .stopped
         timer?.invalidate()
@@ -69,7 +70,7 @@ extension Game {
         case .woman2:
             return kyoko(context.targetString)
         case .narrator:
-            return kyoko(context.targetString)
+            return meijia(context.targetString)
         }
     }
 

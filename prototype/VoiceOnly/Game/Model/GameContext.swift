@@ -31,7 +31,7 @@ class GameContext {
     var characterImage: UIImage?
 
     // MARK: - Short-term data of a single game
-    var gameUIMode: GameUIMode = .phone
+    var gameUIMode: GameUIMode = .messenger
     var gameFlowMode: GameFlowMode = .chat
     var isTargetSentencePlayedByUser: Bool {
         return gameFlowMode == .chat && userPlayedCharacter == targetSpeaker
@@ -50,7 +50,7 @@ class GameContext {
     var life: Int = 40
     var startTime: Double = getNow()
     var teachingRate: Float {
-        return AVSpeechUtteranceDefaultSpeechRate //* (0.5 + life.f * 0.005)
+        return AVSpeechUtteranceDefaultSpeechRate * (0.5 + life.f * 0.005)
     }
     var isNewRecord = false
     var sentences: [(speaker: ChatSpeaker, string: String)] = []
@@ -72,7 +72,7 @@ class GameContext {
     var speakDuration: Promise<Float> {
         let duration: Promise<Float> = Promise<Float>.pending()
         getKana(targetString).then({ kana in
-            duration.fulfill(0.3 + kana.count.f * 0.12 / self.teachingRate)
+            duration.fulfill(0.5 + kana.count.f * 0.12 / (0.5 + self.life.f * 0.005))
         })
         return duration
     }

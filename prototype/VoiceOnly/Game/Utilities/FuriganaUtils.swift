@@ -140,7 +140,10 @@ func getFuriganaString(tokenInfos: [[String]]) -> NSMutableAttributedString {
                 .replace("([\\p{Han}\\d]*[\\p{Han}\\d])", "👻$1👻")
                 .components(separatedBy: "👻")
                 .filter { $0 != "" }
-            let color: UIColor = tokenInfo[1] == "助詞" ? myWaterBlue : .black
+            let color: UIColor = (tokenInfo[1] == "助詞" &&
+                                  (kana == "は" || kana == "が" || kana == "と" ||
+                                   kana == "で" || kana == "に" || kana == "を"))
+                                    ? myWaterBlue : .black
 
             furiganaAttrStr.append(getFuriganaAttrString(parts, kana, color: color))
             continue

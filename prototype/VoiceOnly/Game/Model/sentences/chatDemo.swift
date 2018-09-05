@@ -22,13 +22,12 @@ let chatDemo: [(speaker: ChatSpeaker, string: String)] = [
     (.man1, "おはようございます。"),
     (.woman1, "今日は、早いですね。"),
     (.man1, "はい、今日学校が始まります。"),
-    (.woman1, "そうか。"),
-    (.man1, "じゃ、お先に。"),
-    (.woman1, "バイバイ。")
+    (.woman1, "夏休みが終わりましたか。"),
+    (.man1, "はい、お先に失礼します。"),
+    (.woman1, "頑張ったね")
 ]
 
 let chatDemo2: [(speaker: ChatSpeaker, string: String)] = [
-    (.narrator, "男の人と女の人が話しています。男の人は何を食べますか？"),
     (.man1, "お腹が減ったな。何か食べようかな。"),
     (.woman1, "またインスタントラーメン？野菜は食べてるの？"),
     (.man1, "ネットで安売りしてたからね。佐藤さんは手作り弁当？"),

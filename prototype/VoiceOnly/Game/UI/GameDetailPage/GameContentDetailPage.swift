@@ -23,18 +23,9 @@ class GameContentDetailPage: UIViewController {
     @IBOutlet weak var goodCountLabel: UILabel!
     @IBOutlet weak var missedCountLabel: UILabel!
 
-    @IBOutlet weak var phoneButton: UIButton!
-
-    @IBOutlet weak var messengerButton: UIButton!
-
-    @IBOutlet weak var consoleButton: UIButton!
-
-    @IBOutlet weak var readerButton: UIButton!
-
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateGameModeSelection()
         titleLabel.text = context.dataSetKey
         if let gameRecord = findBestRecord(key: context.dataSetKey) {
             rankLabel.text = gameRecord.rank.rawValue
@@ -79,57 +70,14 @@ class GameContentDetailPage: UIViewController {
         self.dismiss(animated: false, completion: nil)
     }
 
-    @IBAction func pratice(_ sender: Any) {
+    @IBAction func challenge(_ sender: Any) {
         context.gameFlowMode = .shadowing
         launchGame()
     }
 
-    @IBAction func challenge(_ sender: Any) {
-        context.gameFlowMode = .chat
-        launchGame()
-    }
-
     private func launchGame() {
-        switch context.gameUIMode {
-        case .phone:
-            launchStoryboard(self, "PhoneGame")
-        case .messenger:
-            launchStoryboard(self, "MessengerGame")
-        case .console:
-            launchStoryboard(self, "ConsoleGame")
-        default:
-            print("\(context.gameUIMode) game mode is not implemented yet")
-        }
+        launchStoryboard(self, "MessengerGame")
     }
-
-    @IBAction func phoneButtonClicked(_ sender: Any) {
-        context.gameUIMode = .phone
-        updateGameModeSelection()
-    }
-
-    @IBAction func messengerButtonClicked(_ sender: Any) {
-        context.gameUIMode = .messenger
-        updateGameModeSelection()
-    }
-
-    @IBAction func consoleButtonClicked(_ sender: Any) {
-        context.gameUIMode = .console
-        updateGameModeSelection()
-    }
-
-    @IBAction func readerButtonClicked(_ sender: Any) {
-        context.gameUIMode = .reader
-        updateGameModeSelection()
-    }
-
-    func updateGameModeSelection() {
-        let mode = context.gameUIMode
-        phoneButton.layer.borderWidth = mode == .phone ? 1.5 : 0
-        messengerButton.layer.borderWidth = mode == .messenger ? 1.5 : 0
-        consoleButton.layer.borderWidth = mode == .console ? 1.5 : 0
-        readerButton.layer.borderWidth = mode == .reader ? 1.5 : 0
-    }
-
 }
 
 extension GameContentDetailPage: UITableViewDataSource {

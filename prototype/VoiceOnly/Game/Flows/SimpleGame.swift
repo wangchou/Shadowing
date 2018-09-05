@@ -17,12 +17,17 @@ class SimpleGame: Game {
     // MARK: - Public Functions
     override func start() {
         startEngine(toSpeaker: true)
+        reduceBGMVolume()
         context.gameState = .stopped
         context.gameRecord?.startedTime = Date()
         gameSeconds = 0
         prepareTimer()
         context.loadLearningSentences()
-        meijia("每句日文說完後，請跟著說～").always {
+        var hintSentence = "每句日文說完後，請跟著說～"
+        if context.gameFlowMode == .chat {
+            hintSentence = "模擬會話，請唸白色框框裡的日文。"
+        }
+        meijia(hintSentence).always {
             self.learnNext()
         }
 
