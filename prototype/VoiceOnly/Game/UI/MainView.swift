@@ -53,7 +53,11 @@ class MainView: UIView, ReloadableView, GridLayout {
             launchStoryboard(vc, "ShadowingListPage")
         }
     }
-    @objc func kaiwaiButtonClicked() {print(1)}
+    @objc func kaiwaiButtonClicked() {
+        if let vc = UIApplication.getPresentedViewController() {
+            launchStoryboard(vc, "ChatGamePage")
+        }
+    }
 
     func addLabel(_ x: Int, _ y: Int, _ text: String, completion: ((UIView) -> Void)? = nil) {
         addText(x: x, y: y, w: 18, h: 6, text: text, font: font, color: .black, completion: completion)

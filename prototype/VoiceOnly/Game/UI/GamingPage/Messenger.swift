@@ -13,7 +13,7 @@ private let context = GameContext.shared
 
 // Prototype 8: messenger / line interface
 class Messenger: UIViewController {
-    let game = SimpleGame.shared
+    let game = ShadowingFlow.shared
     var lastLabel: FuriganaLabel = FuriganaLabel()
 
     private var y: Int = 8
@@ -76,15 +76,9 @@ class Messenger: UIViewController {
 
         if isLeft {
             myLabel.backgroundColor = myWhite
-            if context.gameFlowMode == .chat {
-                myLabel.backgroundColor = myBlue
-                myLabel.textColor = myWhite
-            }
         } else {
             myLabel.frame.origin.x = CGFloat(Int(screen.width) - 5 - Int(myLabel.frame.width))
-            if context.isTargetSentencePlayedByUser {
-                myLabel.backgroundColor = myWhite
-            } else if text.string == "..." {
+            if text.string == "..." {
                 myLabel.backgroundColor = .gray
             } else if text.string == "聽不清楚" {
                 myLabel.backgroundColor = myRed

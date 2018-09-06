@@ -85,7 +85,7 @@ class GameContext {
             userSaidSentences[self.targetString] = newValue
         }
     }
-    var score: Score = Score(value: 0)
+    var score: Score = Score(value: 100)
 
     // MARK: - functions for a single game
     func loadLearningSentences(isShuffle: Bool = false) {
@@ -100,6 +100,12 @@ class GameContext {
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level)
 
         isNewRecord = false
+    }
+
+    func loadChatDemoSentences() {
+        sentenceIndex = 0
+        sentences = chatDemo
+        userSaidSentences = [:]
     }
 
     func nextSentence() -> Bool {

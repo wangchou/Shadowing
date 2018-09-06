@@ -23,7 +23,7 @@ class PauseOverlayViewController: UIViewController {
     }
 
     @IBAction func finishButtonClicked(_ sender: Any) {
-        SimpleGame.shared.stop()
+        ShadowingFlow.shared.stop()
         launchStoryboard(self, "ShadowingListPage")
     }
 

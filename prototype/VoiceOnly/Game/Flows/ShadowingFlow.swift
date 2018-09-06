@@ -11,23 +11,21 @@ import Promises
 
 private let context = GameContext.shared
 
-class SimpleGame: Game {
-    static let shared = SimpleGame()
+class ShadowingFlow: Game {
+    static let shared = ShadowingFlow()
 
     // MARK: - Public Functions
     override func start() {
         startEngine(toSpeaker: true)
         reduceBGMVolume()
+        context.gameFlowMode = .shadowing
         context.gameState = .stopped
         context.gameRecord?.startedTime = Date()
         gameSeconds = 0
         prepareTimer()
         context.loadLearningSentences()
-        var hintSentence = "每句日文說完後，請跟著說～"
-        if context.gameFlowMode == .chat {
-            hintSentence = "模擬會話，請唸白色框框裡的日文。"
-        }
-        meijia(hintSentence).always {
+
+        meijia("每句日文說完後，請跟著說～").always {
             self.learnNext()
         }
 
@@ -47,7 +45,7 @@ class SimpleGame: Game {
 
     // MARK: - Private Functions
     private func learnNext() {
-        speakPart()
+        speakTargetString()
         .then { self.wait }
         .then( listenPart )
         .then { self.wait }
@@ -62,27 +60,10 @@ class SimpleGame: Game {
         }
     }
 
-    private func speakPart() -> Promise<Void> {
-        if context.isTargetSentencePlayedByUser {
-            return fulfilledVoidPromise()
-        }
-        return speakTargetString()
-    }
-
     private func listenPart() -> Promise<Void> {
-        if context.gameFlowMode == .shadowing {
-            return listen()
-                .then(getScore)
-                .then(speakScore)
-        }
-
-        // chat mode
-        if context.isTargetSentencePlayedByUser {
-            return listen()
-                .then(getScore)
-        }
-
-        return fulfilledVoidPromise()
+        return listen()
+            .then(getScore)
+            .then(speakScore)
     }
 
     // change life will change the teachingSpeed

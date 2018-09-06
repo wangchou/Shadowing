@@ -77,6 +77,7 @@ extension Game {
     internal func listen() -> Promise<Void> {
         context.gameState = .listening
         return context.speakDuration.then({ speakDuration -> Promise<String> in
+            print(context.targetString, "listen duration:", speakDuration + pauseDuration)
             return listenJP(duration: Double(speakDuration + pauseDuration))
         })
         .then(saveUserSaidString)

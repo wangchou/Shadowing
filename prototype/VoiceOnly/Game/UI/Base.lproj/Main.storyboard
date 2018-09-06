@@ -456,6 +456,21 @@
             </objects>
             <point key="canvasLocation" x="1635" y="-1282.3943661971832"/>
         </scene>
+        <!--Chat-->
+        <scene sceneID="qOs-gM-WGL">
+            <objects>
+                <viewController storyboardIdentifier="ChatGamePage" id="kB7-8p-c5Z" customClass="Chat" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Fj1-HJ-Igi" customClass="ChatView" customModule="VoiceOnly" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="SnX-l0-npT"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="afe-Io-1JN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="263" y="-540"/>
+        </scene>
         <!--Game Finished Page-->
         <scene sceneID="DIF-sJ-I4U">
             <objects>

@@ -21,8 +21,11 @@
 		BE5D838920A80BD0002031BF /* GameContentDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */; };
 		BE62CA61213D11C700CF6DD6 /* chatDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE62CA60213D11C700CF6DD6 /* chatDemo.swift */; };
 		BE65A939209C6E67006645CA /* GameEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65A938209C6E67006645CA /* GameEventDelegate.swift */; };
+		BE6D1D2221410E8500BC4A0E /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6D1D2121410E8500BC4A0E /* Chat.swift */; };
+		BE6D1D2421410F9600BC4A0E /* ChatFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6D1D2321410F9600BC4A0E /* ChatFlow.swift */; };
+		BE6D1D262141122400BC4A0E /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6D1D252141122400BC4A0E /* ChatView.swift */; };
 		BE6ED54A20A1373700553D1A /* Commands.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6ED54920A1373700553D1A /* Commands.swift */; };
-		BE6ED56820A17BB000553D1A /* SimpleGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6ED56720A17BB000553D1A /* SimpleGame.swift */; };
+		BE6ED56820A17BB000553D1A /* ShadowingFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6ED56720A17BB000553D1A /* ShadowingFlow.swift */; };
 		BE7725C420A2CBC200DF186A /* sentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725BC20A2CBC100DF186A /* sentences.swift */; };
 		BE7725C520A2CBC200DF186A /* n3.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725BE20A2CBC100DF186A /* n3.swift */; };
 		BE7725C820A2CBC200DF186A /* n4.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725C120A2CBC100DF186A /* n4.swift */; };
@@ -89,8 +92,11 @@
 		BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameContentDetailPage.swift; sourceTree = "<group>"; };
 		BE62CA60213D11C700CF6DD6 /* chatDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatDemo.swift; sourceTree = "<group>"; };
 		BE65A938209C6E67006645CA /* GameEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEventDelegate.swift; sourceTree = "<group>"; };
+		BE6D1D2121410E8500BC4A0E /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		BE6D1D2321410F9600BC4A0E /* ChatFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatFlow.swift; sourceTree = "<group>"; };
+		BE6D1D252141122400BC4A0E /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		BE6ED54920A1373700553D1A /* Commands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commands.swift; sourceTree = "<group>"; };
-		BE6ED56720A17BB000553D1A /* SimpleGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleGame.swift; sourceTree = "<group>"; };
+		BE6ED56720A17BB000553D1A /* ShadowingFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowingFlow.swift; sourceTree = "<group>"; };
 		BE7725BC20A2CBC100DF186A /* sentences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sentences.swift; sourceTree = "<group>"; };
 		BE7725BE20A2CBC100DF186A /* n3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n3.swift; sourceTree = "<group>"; };
 		BE7725C120A2CBC100DF186A /* n4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n4.swift; sourceTree = "<group>"; };
@@ -167,7 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				BE1CA955209D5D0900086853 /* Game.swift */,
-				BE6ED56720A17BB000553D1A /* SimpleGame.swift */,
+				BE6ED56720A17BB000553D1A /* ShadowingFlow.swift */,
 				BE05073620A68515008A29EB /* SentencesTestGame.swift */,
 			);
 			path = Flows;
@@ -207,6 +213,16 @@
 				BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		BEA99E472141162E00A1A61B /* working */ = {
+			isa = PBXGroup;
+			children = (
+				BE6D1D2121410E8500BC4A0E /* Chat.swift */,
+				BE6D1D252141122400BC4A0E /* ChatView.swift */,
+				BE6D1D2321410F9600BC4A0E /* ChatFlow.swift */,
+			);
+			path = working;
 			sourceTree = "<group>";
 		};
 		BEBDEDB3208EF09F00C18520 = {
@@ -336,6 +352,7 @@
 				BE6AF37F209C146B00CBDB63 /* Flows */,
 				BE5E2CB421356F9100C9DB5E /* Events */,
 				BEDEDD4220A5D86500E7B60B /* UI */,
+				BEA99E472141162E00A1A61B /* working */,
 				BEF28B5F20B52B7900385273 /* Utilities */,
 			);
 			path = Game;
@@ -442,7 +459,7 @@
 				BEC1F02220C12680001B4982 /* Character.swift in Sources */,
 				BE7725C820A2CBC200DF186A /* n4.swift in Sources */,
 				BE5D838920A80BD0002031BF /* GameContentDetailPage.swift in Sources */,
-				BE6ED56820A17BB000553D1A /* SimpleGame.swift in Sources */,
+				BE6ED56820A17BB000553D1A /* ShadowingFlow.swift in Sources */,
 				BE6ED54A20A1373700553D1A /* Commands.swift in Sources */,
 				BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */,
 				BEDFCDAB20A87AF800736153 /* PauseOverlayViewController.swift in Sources */,
@@ -453,12 +470,14 @@
 				BE8180C520B3E03E006ABCB3 /* GameFinishedTableCell.swift in Sources */,
 				BE9B476A20AD50520063E0DA /* FuriganaUtils.swift in Sources */,
 				BEF28B6320B52BF700385273 /* UI.swift in Sources */,
+				BE6D1D262141122400BC4A0E /* ChatView.swift in Sources */,
 				BE65A939209C6E67006645CA /* GameEventDelegate.swift in Sources */,
 				BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */,
 				BEBDEDDC208EF15F00C18520 /* BGM.swift in Sources */,
 				BEDF761B213FE4B1009A7C25 /* MainPage.swift in Sources */,
 				BE500AEE20B822CA004E73D1 /* CharacterView.swift in Sources */,
 				BE7725C520A2CBC200DF186A /* n3.swift in Sources */,
+				BE6D1D2221410E8500BC4A0E /* Chat.swift in Sources */,
 				BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */,
 				BE62CA61213D11C700CF6DD6 /* chatDemo.swift in Sources */,
 				BEDEDD3720A46D1B00E7B60B /* ShadowingListPage.swift in Sources */,
@@ -469,6 +488,7 @@
 				BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */,
 				BE8180C020B3BEB6006ABCB3 /* MyText.swift in Sources */,
 				BE8283B42133DAE2008BC875 /* GameEngine.swift in Sources */,
+				BE6D1D2421410F9600BC4A0E /* ChatFlow.swift in Sources */,
 				BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */,
 				BEBDEDDA208EF15F00C18520 /* TTS.swift in Sources */,
 				BEF258B320B57C7F00D0026C /* TimelineView.swift in Sources */,
