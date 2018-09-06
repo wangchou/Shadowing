@@ -19,10 +19,10 @@ class MainView: UIView, ReloadableView, GridLayout {
         return step * 6
     }
     var fontSize: CGFloat {
-        return lineHeight * 0.8
+        return lineHeight
     }
     var font: UIFont {
-        return UIFont(name: "Menlo", size: fontSize) ?? UIFont.systemFont(ofSize: fontSize)
+        return MyFont.regular(ofSize: fontSize)
     }
 
     func viewWillAppear() {
@@ -54,7 +54,6 @@ class MainView: UIView, ReloadableView, GridLayout {
         }
     }
     @objc func kaiwaiButtonClicked() {print(1)}
-
 
     func addLabel(_ x: Int, _ y: Int, _ text: String, completion: ((UIView) -> Void)? = nil) {
         addText(x: x, y: y, w: 18, h: 6, text: text, font: font, color: .black, completion: completion)
