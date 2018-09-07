@@ -15,7 +15,7 @@ enum GameUIMode {
     case phone, messenger, console, reader
 }
 
-enum GameFlowMode {
+enum GameFlowMode: String, Codable {
     case shadowing, chat
 }
 
@@ -35,6 +35,9 @@ class GameContext {
     var gameFlowMode: GameFlowMode = .chat
     var isTargetSentencePlayedByUser: Bool {
         return gameFlowMode == .chat && userPlayedCharacter == targetSpeaker
+    }
+    var isNarratorSpeaking: Bool {
+        return targetSpeaker == .narrator
     }
     var gameState: GameState = .stopped {
         didSet {
@@ -72,7 +75,7 @@ class GameContext {
     var speakDuration: Promise<Float> {
         let duration: Promise<Float> = Promise<Float>.pending()
         getKana(targetString).then({ kana in
-            duration.fulfill(0.5 + kana.count.f * 0.12 / (0.5 + self.life.f * 0.005))
+            duration.fulfill(0.6 + kana.count.f * 0.12 / (0.5 + self.life.f * 0.005))
         })
         return duration
     }
@@ -97,7 +100,7 @@ class GameContext {
         life = isSimulator ? 100 : 40
 
         let level = allLevels[dataSetKey] ?? .n5a
-        gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level)
+        gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level, flowMode: .shadowing)
 
         isNewRecord = false
     }
@@ -112,7 +115,7 @@ class GameContext {
         sentenceIndex += 1
         var sentencesBound = sentences.count
         if isSimulator {
-            sentencesBound = 5
+            sentencesBound = 3
         }
         guard sentenceIndex < sentencesBound else { return false }
         userSaidString = ""

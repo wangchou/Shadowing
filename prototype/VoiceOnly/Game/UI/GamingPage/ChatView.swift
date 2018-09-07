@@ -77,20 +77,3 @@ class ChatView: UIView, ReloadableView, GridLayout {
         addText(x: x, y: y, w: 18, h: 6, text: text, font: font, color: .black, completion: completion)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -30,14 +30,10 @@ func loadCharacterProfile() {
 }
 
 // MARK: - Audio Session
-func configureAudioSession(toSpeaker: Bool = false) {
+func configureAudioSession() {
     do {
         let session: AVAudioSession = AVAudioSession.sharedInstance()
-        if toSpeaker {
-            try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.duckOthers, .allowBluetoothA2DP, .allowBluetooth, .allowAirPlay, .defaultToSpeaker])
-        } else {
-            try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.duckOthers, .allowBluetoothA2DP, .allowBluetooth, .allowAirPlay])
-        }
+        try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.duckOthers, .allowBluetoothA2DP, .allowBluetooth, .allowAirPlay, .defaultToSpeaker])
 
         // turn the measure mode will crash bluetooh, duckOthers and mixWithOthers
         //try session.setMode(AVAudioSessionModeMeasurement)
@@ -241,6 +237,14 @@ func fulfilledVoidPromise() -> Promise<Void> {
     let promise = Promise<Void>.pending()
     promise.fulfill(())
     return promise
+}
+
+func pausePromise(_ seconds: Double) -> Promise<Void> {
+    let p = Promise<Void>.pending()
+    Timer.scheduledTimer(withTimeInterval: seconds, repeats: false) { _ in
+        p.fulfill(())
+    }
+    return p
 }
 
 extension String {

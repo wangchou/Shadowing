@@ -51,11 +51,10 @@ extension Game {
     }
 
     func stop() {
-        restoreBGMVolume()
+//        restoreBGMVolume()
         context.gameRecord?.playDuration = gameSeconds
         context.gameState = .stopped
         timer?.invalidate()
-        stopEngine()
     }
 
     internal func speakTargetString() -> Promise<Void> {

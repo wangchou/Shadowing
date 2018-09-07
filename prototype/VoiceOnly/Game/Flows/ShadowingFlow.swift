@@ -16,8 +16,7 @@ class ShadowingFlow: Game {
 
     // MARK: - Public Functions
     override func start() {
-        startEngine(toSpeaker: true)
-        reduceBGMVolume()
+//        reduceBGMVolume()
         context.gameFlowMode = .shadowing
         context.gameState = .stopped
         context.gameRecord?.startedTime = Date()

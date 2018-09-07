@@ -17,14 +17,18 @@ enum ChatSpeaker: String {
 }
 
 let chatDemo: [(speaker: ChatSpeaker, string: String)] = [
-    (.man1, "佐藤さん"),
-    (.woman1, "おはよう〜"),
-    (.man1, "おはようございます。"),
-    (.woman1, "今日は、早いですね。"),
-    (.man1, "はい、今日学校が始まります。"),
-    (.woman1, "夏休みが終わりましたか。"),
-    (.man1, "はい、お先に失礼します。"),
-    (.woman1, "頑張ったね")
+    (.man1, "佐藤さん、こんにちは"),
+    (.woman1, "こんにちは"),
+    (.man1, "今日は、いい天気ですね"),
+    (.woman1, "そうですね"),
+    (.man1, "最近お元気ですか？"),
+    (.woman1, "ええ、元気ですよ"),
+    (.man1, "今日はどちらへ？"),
+    (.woman1, "ちょっと買い物に"),
+    (.man1, "次の水曜日、一緒にカラオケへ行きませんか？"),
+    (.woman1, "いいですよ、ぜひ"),
+    (.man1, "じゃ、お先に失礼します"),
+    (.woman1, "じゃ、また。")
 ]
 
 let chatDemo2: [(speaker: ChatSpeaker, string: String)] = [

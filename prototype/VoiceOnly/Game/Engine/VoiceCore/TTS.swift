@@ -28,9 +28,7 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(identifier: name)
         utterance.rate = rate
-        if name != meijiaSan {
-            postEvent(.sayStarted, string: text)
-        }
+        postEvent(.sayStarted, string: text)
         synthesizer.speak(utterance)
         promise = Promise<Void>.pending()
         self.name = name

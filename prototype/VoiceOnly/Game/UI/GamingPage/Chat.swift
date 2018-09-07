@@ -48,8 +48,12 @@ extension Chat: GameEventDelegate {
         switch event.type {
         case .sayStarted:
             guard let text = event.string else { return }
-            if context.score.value >= 80 {
+            if context.gameState == .stopped {
+                chatView?.faceExpression = .beforeTalk
+            } else if context.score.value >= 80 {
                 chatView?.faceExpression = .talking
+            } else if context.userSaidString == "" {
+                chatView?.faceExpression = .cannotHear
             } else {
                 chatView?.faceExpression = .wrong
             }

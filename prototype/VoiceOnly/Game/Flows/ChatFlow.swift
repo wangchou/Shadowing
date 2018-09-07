@@ -18,8 +18,7 @@ class ChatFlow: Game {
 
     // MARK: - Public Functions
     override func start() {
-        startEngine(toSpeaker: true)
-        reduceBGMVolume()
+//        reduceBGMVolume()
         context.gameFlowMode = .chat
         context.gameState = .stopped
         context.gameRecord?.startedTime = Date()
@@ -65,7 +64,8 @@ class ChatFlow: Game {
         if context.isTargetSentencePlayedByUser {
             return fulfilledVoidPromise()
         }
-        return speakTargetString()
+        return pausePromise(0.3)
+            .then(speakTargetString)
     }
 
     private func listenPart() -> Promise<Void> {
@@ -73,8 +73,13 @@ class ChatFlow: Game {
             return listen()
                 .then(getScore)
                 .then({ () -> Promise<Void> in
+
+                    if context.userSaidString == "" {
+                        return hattori("聞こえない")
+                            .then({ context.score.value = 100 })
+                    }
                     if context.score.value < 80 {
-                        return oren("すみませんが、理解できません。")
+                        return hattori("すみませんが、理解できません。")
                             .then({ context.score.value = 100 })
                     }
                     return fulfilledVoidPromise()

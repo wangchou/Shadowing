@@ -12,15 +12,15 @@ import Promises
 private let context = GameContext.shared
 private let engine = GameEngine.shared
 
-func startEngine(toSpeaker: Bool = false) {
+func startEngine() {
     engine.isEngineRunning = true
 
     guard !isSimulator else { return }
 
     do {
-        configureAudioSession(toSpeaker: toSpeaker)
+        configureAudioSession()
         try engine.audioEngine.start()
-        engine.bgm.play()
+        // engine.bgm.play()
     } catch {
         print("Start Play through failed \(error)")
     }
@@ -34,17 +34,17 @@ func stopEngine() {
     guard !isSimulator else { return }
 
     engine.speechRecognizer.stop()
-    engine.bgm.stop()
+    // engine.bgm.stop()
     engine.audioEngine.stop()
 }
 
-func reduceBGMVolume() {
-    engine.bgm.reduceVolume()
-}
-
-func restoreBGMVolume() {
-    engine.bgm.restoreVolume()
-}
+//func reduceBGMVolume() {
+//    engine.bgm.reduceVolume()
+//}
+//
+//func restoreBGMVolume() {
+//    engine.bgm.restoreVolume()
+//}
 
 // MARK: - TTS / Speak Japanese
 func meijia(_ sentence: String, rate: Float = fastRate) -> Promise<Void> {

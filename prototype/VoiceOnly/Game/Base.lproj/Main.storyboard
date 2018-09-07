@@ -543,6 +543,7 @@
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="Qnp-4h-Hat" id="9i0-Ve-Za8"/>
+                                    <outlet property="delegate" destination="Qnp-4h-Hat" id="Ng8-0q-f38"/>
                                 </connections>
                             </tableView>
                         </subviews>

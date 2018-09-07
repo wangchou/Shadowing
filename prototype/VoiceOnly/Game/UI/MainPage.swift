@@ -10,6 +10,11 @@ import UIKit
 private let context = GameContext.shared
 
 class MainPage: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        startEngine()
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         (view as? MainView)?.viewWillAppear()

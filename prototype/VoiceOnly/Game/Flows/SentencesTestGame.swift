@@ -27,7 +27,7 @@ class SentencesTestGame: Game {
     var gameState: GameState = .stopped
 
     override func start() {
-        startEngine(toSpeaker: false)
+        startEngine()
         context.life = 100
         engine.bgm.node.volume = 0
         testNext()

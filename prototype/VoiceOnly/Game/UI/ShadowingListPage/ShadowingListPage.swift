@@ -22,10 +22,10 @@ class ShadowingListPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let tmpKey = "ChatDemo"
-        allSentences[tmpKey] = chatDemo
-        allSentencesKeys.append(tmpKey)
-        allLevels[tmpKey] = Level.n5b
+//        let tmpKey = "ChatDemo"
+//        allSentences[tmpKey] = chatDemo
+//        allSentencesKeys.append(tmpKey)
+//        allLevels[tmpKey] = Level.n5b
 
         addSentences(sentences: n5, prefix: n5Prefix, level: Level.n5a)
         addSentences(sentences: n4, prefix: n4Prefix, level: Level.n4a)
