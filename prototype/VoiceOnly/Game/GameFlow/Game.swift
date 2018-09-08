@@ -71,6 +71,8 @@ extension Game {
             return kyoko(context.targetString)
         case .narrator:
             return meijia(context.targetString)
+        case .user:
+            return fulfilledVoidPromise()
         }
     }
 

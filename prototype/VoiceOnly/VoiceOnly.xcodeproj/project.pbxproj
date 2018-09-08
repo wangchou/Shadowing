@@ -147,33 +147,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BE17FB38209B0F5F00D23F22 /* Engine */ = {
+		BE17FB38209B0F5F00D23F22 /* AudioEngine */ = {
 			isa = PBXGroup;
 			children = (
 				BE8283B32133DAE2008BC875 /* GameEngine.swift */,
 				BE6ED54920A1373700553D1A /* Commands.swift */,
-				BEDEDD4F20A5DA8C00E7B60B /* VoiceCore */,
+				BEBDEDD4208EF15E00C18520 /* BGM.swift */,
+				BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */,
+				BEBDEDD2208EF15E00C18520 /* TTS.swift */,
 			);
-			path = Engine;
+			path = AudioEngine;
 			sourceTree = "<group>";
 		};
-		BE5E2CB421356F9100C9DB5E /* Events */ = {
+		BE6AF37F209C146B00CBDB63 /* GameFlow */ = {
 			isa = PBXGroup;
 			children = (
 				BE65A938209C6E67006645CA /* GameEventDelegate.swift */,
-			);
-			path = Events;
-			sourceTree = "<group>";
-		};
-		BE6AF37F209C146B00CBDB63 /* Flows */ = {
-			isa = PBXGroup;
-			children = (
 				BE1CA955209D5D0900086853 /* Game.swift */,
 				BE6ED56720A17BB000553D1A /* ShadowingFlow.swift */,
-				BE05073620A68515008A29EB /* SentencesTestGame.swift */,
 				BE6D1D2321410F9600BC4A0E /* ChatFlow.swift */,
+				BE05073620A68515008A29EB /* SentencesTestGame.swift */,
 			);
-			path = Flows;
+			path = GameFlow;
 			sourceTree = "<group>";
 		};
 		BE8180C320B3DFEF006ABCB3 /* GameFinishedPage */ = {
@@ -258,16 +253,6 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
-		BEDEDD4F20A5DA8C00E7B60B /* VoiceCore */ = {
-			isa = PBXGroup;
-			children = (
-				BEBDEDD4208EF15E00C18520 /* BGM.swift */,
-				BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */,
-				BEBDEDD2208EF15E00C18520 /* TTS.swift */,
-			);
-			path = VoiceCore;
-			sourceTree = "<group>";
-		};
 		BEF28B5F20B52B7900385273 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -318,9 +303,8 @@
 			children = (
 				BEBDEDC3208EF09F00C18520 /* Main.storyboard */,
 				BE9556EF212D7C130045E578 /* Model */,
-				BE17FB38209B0F5F00D23F22 /* Engine */,
-				BE6AF37F209C146B00CBDB63 /* Flows */,
-				BE5E2CB421356F9100C9DB5E /* Events */,
+				BE17FB38209B0F5F00D23F22 /* AudioEngine */,
+				BE6AF37F209C146B00CBDB63 /* GameFlow */,
 				BEDEDD4220A5D86500E7B60B /* UI */,
 				BEF28B5F20B52B7900385273 /* Utilities */,
 			);

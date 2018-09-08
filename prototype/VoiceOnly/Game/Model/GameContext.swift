@@ -11,10 +11,6 @@ import Promises
 import UIKit
 import AVFoundation
 
-enum GameUIMode {
-    case phone, messenger, console, reader
-}
-
 enum GameFlowMode: String, Codable {
     case shadowing, chat
 }
@@ -30,27 +26,20 @@ class GameContext {
     var characterImage: UIImage?
 
     // MARK: - Short-term data of a single game
-    var gameUIMode: GameUIMode = .messenger
     var gameFlowMode: GameFlowMode = .chat
-    var isTargetSentencePlayedByUser: Bool {
-        return gameFlowMode == .chat && userPlayedCharacter == targetSpeaker
-    }
-    var isNarratorSpeaking: Bool {
-        return targetSpeaker == .narrator
-    }
     var gameState: GameState = .stopped {
         didSet {
             postEvent(.gameStateChanged, gameState: gameState)
         }
     }
-    var userPlayedCharacter: ChatSpeaker = .woman1
     var dataSetKey: String = "" // the sentence set key in current game
     var gameRecord: GameRecord? // of current game
     var isEngineRunning: Bool {
         return GameEngine.shared.isEngineRunning
     }
-    var life: Int = 40
     var startTime: Double = getNow()
+    var life: Int = 40
+
     var teachingRate: Float {
         return AVSpeechUtteranceDefaultSpeechRate * (0.5 + life.f * 0.005)
     }
@@ -70,6 +59,12 @@ class GameContext {
     var targetSpeaker: ChatSpeaker {
         guard sentenceIndex < sentences.count else { return ChatSpeaker.man1 }
         return sentences[sentenceIndex].speaker
+    }
+    var isTargetSentencePlayedByUser: Bool {
+        return targetSpeaker == .user
+    }
+    var isNarratorSpeaking: Bool {
+        return targetSpeaker == .narrator
     }
     var speakDuration: Promise<Float> {
         let duration: Promise<Float> = Promise<Float>.pending()

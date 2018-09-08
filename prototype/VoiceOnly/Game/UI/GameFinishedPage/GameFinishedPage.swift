@@ -89,6 +89,5 @@ extension GameFinishedPage: UITableViewDataSource {
 extension GameFinishedPage: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         _ = hattori(context.sentences[indexPath.row].string)
-        print("speak", context.sentences[indexPath.row].string)
     }
 }
