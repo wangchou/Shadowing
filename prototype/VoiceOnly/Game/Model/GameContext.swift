@@ -27,7 +27,6 @@ class GameContext {
 
     // MARK: - Long-term data will be kept in UserDefault
     var gameHistory = [GameRecord]()
-    var gameCharacter: GameCharacter = GameCharacter()
     var characterImage: UIImage?
 
     // MARK: - Short-term data of a single game

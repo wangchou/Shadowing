@@ -37,12 +37,6 @@ class CharacterView: UIView, ReloadableView, GridLayout {
         }
 
         addSubview(imageView)
-
-        addRect(x: 0, y: 14, w: 20, h: 6, color: UIColor.black.withAlphaComponent(0.6))
-
-        let gameCharacter = context.gameCharacter
-        addLabel(1, 14, "Lv.\(gameCharacter.level) \(gameCharacter.name)")
-        addLabel(1, 17, "HP： \(gameCharacter.remainingHP)/\(gameCharacter.maxHP)")
     }
 
     func addLabel(_ x: Int, _ y: Int, _ text: String, h: Int = 3) {

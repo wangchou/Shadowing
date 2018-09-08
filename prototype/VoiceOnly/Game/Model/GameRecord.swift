@@ -59,29 +59,6 @@ func updateGameHistory() {
     saveGameHistory()
 }
 
-// https://docs.google.com/spreadsheets/d/1n19cAjeKv2G3t_Nz5rgvEyZm5C8ksjxFhHiqMZxTNus/edit#gid=0
-private let expLevelBase: [Int] = [
-    97,
-    176,
-    285,
-    445,
-    785,
-    1359,
-    2330,
-    3969
-]
-
-private let goldLevelBase: [Int] = [
-    24,
-    37,
-    52,
-    71,
-    106,
-    156,
-    227,
-    330
-]
-
 struct GameRecord: Codable {
     var gameFlowMode: GameFlowMode = .shadowing
     var startedTime: Date
@@ -95,18 +72,6 @@ struct GameRecord: Codable {
     var goodCount = 0
     var missedCount: Int {
         return sentencesCount - perfectCount - greatCount - goodCount
-    }
-
-    var exp: Int {
-        let base = expLevelBase[level.rawValue].f * p/100
-        let factor: Float = isNewRecord ? 1.2 : 1.0
-        return Int(base * factor)
-    }
-
-    var gold: Int {
-        let base = goldLevelBase[level.rawValue].f * p/100
-        let factor: Float = isNewRecord ? 1.2 : 1.0
-        return max(Int(base * factor), 1)
     }
 
     var sentencesScore: [String: Score]

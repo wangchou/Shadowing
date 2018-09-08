@@ -49,7 +49,6 @@
 		BEBDEDDD208EF15F00C18520 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */; };
 		BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */; };
 		BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD8208EF15F00C18520 /* constants.swift */; };
-		BEC1F02220C12680001B4982 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC1F02120C12680001B4982 /* Character.swift */; };
 		BEDBCCD820A82AC4001CF11D /* GameDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDBCCD720A82AC4001CF11D /* GameDetailTableCell.swift */; };
 		BEDEDD3720A46D1B00E7B60B /* ShadowingListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3620A46D1B00E7B60B /* ShadowingListPage.swift */; };
 		BEDEDD3920A46FCA00E7B60B /* GameRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */; };
@@ -57,7 +56,6 @@
 		BEDF761B213FE4B1009A7C25 /* MainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDF761A213FE4B1009A7C25 /* MainPage.swift */; };
 		BEDF761D213FE5E0009A7C25 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDF761C213FE5E0009A7C25 /* MainView.swift */; };
 		BEDFCDAB20A87AF800736153 /* PauseOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */; };
-		BEE665E020BA5E1000E4E322 /* BlackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE665DF20BA5E1000E4E322 /* BlackView.swift */; };
 		BEE665E220BA634600E4E322 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE665E120BA634600E4E322 /* Colors.swift */; };
 		BEF258B320B57C7F00D0026C /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF258B220B57C7F00D0026C /* TimelineView.swift */; };
 		BEF28B6120B52BB000385273 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF28B6020B52BB000385273 /* Score.swift */; };
@@ -122,7 +120,6 @@
 		BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculateScore.swift; sourceTree = "<group>"; };
 		BEBDEDD8208EF15F00C18520 /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
-		BEC1F02120C12680001B4982 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		BEDBCCD720A82AC4001CF11D /* GameDetailTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailTableCell.swift; sourceTree = "<group>"; };
 		BEDEDD3620A46D1B00E7B60B /* ShadowingListPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowingListPage.swift; sourceTree = "<group>"; };
 		BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRecord.swift; sourceTree = "<group>"; };
@@ -130,7 +127,6 @@
 		BEDF761A213FE4B1009A7C25 /* MainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPage.swift; sourceTree = "<group>"; };
 		BEDF761C213FE5E0009A7C25 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseOverlayViewController.swift; sourceTree = "<group>"; };
-		BEE665DF20BA5E1000E4E322 /* BlackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackView.swift; sourceTree = "<group>"; };
 		BEE665E120BA634600E4E322 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		BEF258B220B57C7F00D0026C /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		BEF28B6020B52BB000385273 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
@@ -180,19 +176,6 @@
 			path = Flows;
 			sourceTree = "<group>";
 		};
-		BE7725BD20A2CBC100DF186A /* Sentences */ = {
-			isa = PBXGroup;
-			children = (
-				BE7725BC20A2CBC100DF186A /* sentences.swift */,
-				BE7725BE20A2CBC100DF186A /* n3.swift */,
-				BE7725C120A2CBC100DF186A /* n4.swift */,
-				BE7725C220A2CBC100DF186A /* n5.swift */,
-				BE62CA60213D11C700CF6DD6 /* chatDemo.swift */,
-			);
-			name = Sentences;
-			path = sentences;
-			sourceTree = "<group>";
-		};
 		BE8180C320B3DFEF006ABCB3 /* GameFinishedPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,10 +190,13 @@
 			isa = PBXGroup;
 			children = (
 				BEBDEDD8208EF15F00C18520 /* constants.swift */,
-				BE7725BD20A2CBC100DF186A /* Sentences */,
+				BE7725BC20A2CBC100DF186A /* sentences.swift */,
+				BE7725BE20A2CBC100DF186A /* n3.swift */,
+				BE7725C120A2CBC100DF186A /* n4.swift */,
+				BE7725C220A2CBC100DF186A /* n5.swift */,
+				BE62CA60213D11C700CF6DD6 /* chatDemo.swift */,
 				BEF28B6020B52BB000385273 /* Score.swift */,
 				BE17FB3D209B19B200D23F22 /* GameContext.swift */,
-				BEC1F02120C12680001B4982 /* Character.swift */,
 				BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */,
 			);
 			path = Model;
@@ -268,7 +254,6 @@
 				BEFA979E20AEAEDD00DE3280 /* GameDetailPage */,
 				BEFA979D20AEAECC00DE3280 /* GamingPage */,
 				BE8180C320B3DFEF006ABCB3 /* GameFinishedPage */,
-				BEE797DE20B94B4000328635 /* DataPages */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -281,14 +266,6 @@
 				BEBDEDD2208EF15E00C18520 /* TTS.swift */,
 			);
 			path = VoiceCore;
-			sourceTree = "<group>";
-		};
-		BEE797DE20B94B4000328635 /* DataPages */ = {
-			isa = PBXGroup;
-			children = (
-				BEE665DF20BA5E1000E4E322 /* BlackView.swift */,
-			);
-			path = DataPages;
 			sourceTree = "<group>";
 		};
 		BEF28B5F20B52B7900385273 /* Utilities */ = {
@@ -448,14 +425,12 @@
 				BEE665E220BA634600E4E322 /* Colors.swift in Sources */,
 				BE7725C920A2CBC200DF186A /* n5.swift in Sources */,
 				BE05073720A68515008A29EB /* SentencesTestGame.swift in Sources */,
-				BEC1F02220C12680001B4982 /* Character.swift in Sources */,
 				BE7725C820A2CBC200DF186A /* n4.swift in Sources */,
 				BE5D838920A80BD0002031BF /* GameContentDetailPage.swift in Sources */,
 				BE6ED56820A17BB000553D1A /* ShadowingFlow.swift in Sources */,
 				BE6ED54A20A1373700553D1A /* Commands.swift in Sources */,
 				BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */,
 				BEDFCDAB20A87AF800736153 /* PauseOverlayViewController.swift in Sources */,
-				BEE665E020BA5E1000E4E322 /* BlackView.swift in Sources */,
 				BEF28B6120B52BB000385273 /* Score.swift in Sources */,
 				BE1CA956209D5D0900086853 /* Game.swift in Sources */,
 				BE7725C420A2CBC200DF186A /* sentences.swift in Sources */,

@@ -48,7 +48,6 @@ class ShadowingListPage: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadGameHistory()
-        loadGameCharacter()
         loadCharacterProfile()
         sentencesTableView.reloadData()
         timeline.viewWillAppear()
