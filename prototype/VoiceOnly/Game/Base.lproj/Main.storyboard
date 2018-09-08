@@ -59,7 +59,7 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="yGY-8x-xy2">
                                                             <rect key="frame" x="175" y="9" width="90" height="52"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="達成率" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qwr-6i-713">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="完成率" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qwr-6i-713">
                                                                     <rect key="frame" x="0.0" y="0.0" width="37" height="14.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <nil key="textColor"/>
@@ -400,22 +400,34 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ただの人間には" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0tn-vE-CDR" customClass="FuriganaLabel" customModule="VoiceOnly" customModuleProvider="target">
-                                                    <rect key="frame" x="55" y="0.0" width="265" height="43.5"/>
+                                                    <rect key="frame" x="55" y="0.0" width="230" height="43.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eSI-ij-KEn">
+                                                    <rect key="frame" x="285" y="8" width="30" height="28"/>
+                                                    <color key="backgroundColor" red="1" green="0.68644813711089303" blue="0.15337851178199391" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="gTF-9E-BVh"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="16"/>
+                                                    <state key="normal" title="練">
+                                                        <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="XRu-Hi-623" firstAttribute="centerY" secondItem="0tn-vE-CDR" secondAttribute="centerY" id="3tj-nm-R1c"/>
                                                 <constraint firstItem="0tn-vE-CDR" firstAttribute="top" secondItem="KQa-Km-FxO" secondAttribute="top" id="9Hk-kj-l54"/>
                                                 <constraint firstItem="XRu-Hi-623" firstAttribute="leading" secondItem="KQa-Km-FxO" secondAttribute="leading" id="KDf-D0-Uud"/>
+                                                <constraint firstItem="eSI-ij-KEn" firstAttribute="leading" secondItem="0tn-vE-CDR" secondAttribute="trailing" id="LQP-xt-V9k"/>
                                                 <constraint firstItem="XRu-Hi-623" firstAttribute="top" secondItem="KQa-Km-FxO" secondAttribute="top" id="MjW-Yp-oEe"/>
                                                 <constraint firstItem="0tn-vE-CDR" firstAttribute="leading" secondItem="XRu-Hi-623" secondAttribute="trailing" id="PvJ-GH-iKU"/>
-                                                <constraint firstAttribute="trailing" secondItem="0tn-vE-CDR" secondAttribute="trailing" id="RR1-IZ-EVb"/>
                                                 <constraint firstItem="XRu-Hi-623" firstAttribute="leading" secondItem="KQa-Km-FxO" secondAttribute="leading" id="j8U-Mf-gb9"/>
+                                                <constraint firstItem="eSI-ij-KEn" firstAttribute="centerY" secondItem="KQa-Km-FxO" secondAttribute="centerY" id="lJK-qd-d1P"/>
                                                 <constraint firstAttribute="bottom" secondItem="XRu-Hi-623" secondAttribute="bottom" id="op5-kd-yNH"/>
-                                                <constraint firstItem="0tn-vE-CDR" firstAttribute="leading" secondItem="XRu-Hi-623" secondAttribute="trailing" id="vF2-6k-pGR"/>
+                                                <constraint firstAttribute="trailing" secondItem="eSI-ij-KEn" secondAttribute="trailing" constant="5" id="qS7-aZ-Ave"/>
                                                 <constraint firstAttribute="bottom" secondItem="0tn-vE-CDR" secondAttribute="bottom" id="vQh-LA-khT"/>
                                             </constraints>
                                         </tableViewCellContentView>

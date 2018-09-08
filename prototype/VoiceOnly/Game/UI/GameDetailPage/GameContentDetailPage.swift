@@ -101,6 +101,10 @@ extension GameContentDetailPage: UITableViewDataSource {
             detailCell.furiganaLabel.text = sentence
         }
 
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = myGreen.withAlphaComponent(0.1)
+        cell.selectedBackgroundView = backgroundView
+
         if let gameRecord = findBestRecord(key: context.dataSetKey),
            let score = gameRecord.sentencesScore[sentence] {
             detailCell.miscLabel.text = score.valueText
