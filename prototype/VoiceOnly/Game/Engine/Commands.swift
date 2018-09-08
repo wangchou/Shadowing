@@ -30,7 +30,6 @@ func stopEngine() {
     guard engine.isEngineRunning else { return }
     engine.isEngineRunning = false
     engine.tts.stop()
-    updateGameHistory()
     guard !isSimulator else { return }
 
     engine.speechRecognizer.stop()
