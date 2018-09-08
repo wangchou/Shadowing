@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class ContentCell: UITableViewCell {
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: FuriganaLabel!
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var rankLabel: UILabel!
 

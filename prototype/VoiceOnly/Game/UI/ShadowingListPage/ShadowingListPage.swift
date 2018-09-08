@@ -22,14 +22,9 @@ class ShadowingListPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        let tmpKey = "ChatDemo"
-//        allSentences[tmpKey] = chatDemo
-//        allSentencesKeys.append(tmpKey)
-//        allLevels[tmpKey] = Level.n5b
-
-        addSentences(sentences: n5, prefix: n5Prefix, level: Level.n5a)
-        addSentences(sentences: n4, prefix: n4Prefix, level: Level.n4a)
-        addSentences(sentences: n3, prefix: n3Prefix, level: Level.n3a)
+        addSentences(sentences: n5, level: Level.n5a)
+        addSentences(sentences: n4, level: Level.n4a)
+        addSentences(sentences: n3, level: Level.n3a)
 
         let height = screen.width * 120/320
         topView.frame.size.height = height
@@ -96,7 +91,7 @@ extension ShadowingListPage: UITableViewDataSource {
 
         let dataSetKey = allSentencesKeys[indexPath.row]
 
-        contentCell.titleLabel.text = dataSetKey
+        contentCell.titleLabel.attributedText = rubyAttrStr(dataSetKey, fontSize: 16)
         let record = findBestRecord(key: dataSetKey)
         contentCell.strockedProgressText = record?.progress
         contentCell.strockedRankText = record?.rank.rawValue

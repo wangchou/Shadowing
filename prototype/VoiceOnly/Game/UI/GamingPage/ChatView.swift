@@ -57,7 +57,8 @@ class ChatView: UIView, ReloadableView, GridLayout {
     func viewWillAppear() {
         updateFace(faceExpression)
         removeAllSubviews()
-        addDialog(4, 60, nextString)
+        addDialog(4, 63, nextString)
+        addLabel(4, 58, "\(context.sentenceIndex + 1)/\(context.sentences.count)")
     }
 
     func updateFace(_ expression: FaceExpression) {
