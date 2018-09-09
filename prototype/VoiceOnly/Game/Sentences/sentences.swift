@@ -26,18 +26,15 @@ var allSentences: [String: [(speaker: ChatSpeaker, string: String)]] = [:]
 var allSentencesKeys: [String] = []
 var allLevels: [String: Level] = [:]
 
-func addSentences(sentences: [String], level: Level) {
-    let sectionNum = 20
-    var index = 0
-    repeat {
-        let subSentences: [(speaker: ChatSpeaker, string: String)] = Array(sentences[index..<index+sectionNum])
+func addSentences() {
+    shadowingSentences.forEach { sentences in
+        let subSentences: [(speaker: ChatSpeaker, string: String)] = sentences
             .map { s in
                 return (ChatSpeaker.woman1, s)
-            }
+        }
         let key = "\(subSentences[0].string)"
         allSentences[key] = subSentences
         allSentencesKeys.append(key)
-        allLevels[key] = level
-        index += sectionNum
-    } while (index + sectionNum) <= sentences.count
+        allLevels[key] = Level.n5a
+    }
 }

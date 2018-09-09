@@ -22,9 +22,7 @@ class ShadowingListPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        addSentences(sentences: n5, level: Level.n5a)
-        addSentences(sentences: n4, level: Level.n4a)
-        addSentences(sentences: n3, level: Level.n3a)
+        addSentences()
 
         let height = screen.width * 120/320
         topView.frame.size.height = height
