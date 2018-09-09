@@ -13,6 +13,8 @@ class MainPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         startEngine()
+        loadGameSetting()
+        loadGameHistory()
     }
 
     override func viewWillAppear(_ animated: Bool) {

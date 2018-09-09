@@ -8,12 +8,16 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 private let context = GameContext.shared
 
 class PauseOverlayViewController: UIViewController {
     @IBOutlet weak var finishButton: UIButton!
     @IBOutlet weak var resumeButton: UIButton!
+    @IBOutlet weak var autoSpeedSwitch: UISwitch!
+    @IBOutlet weak var ttsSpeedLabel: UILabel!
+    @IBOutlet weak var ttsSpeedSlider: UISlider!
     override func viewDidLoad() {
         super.viewDidLoad()
         finishButton.layer.borderColor = UIColor.lightText.cgColor
@@ -24,6 +28,26 @@ class PauseOverlayViewController: UIViewController {
         resumeButton.layer.cornerRadius = 15
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ttsSpeedSlider.minimumValue = AVSpeechUtteranceMinimumSpeechRate
+        ttsSpeedSlider.maximumValue = AVSpeechUtteranceMaximumSpeechRate
+        autoSpeedSwitch.isOn = context.gameSetting.isAutoSpeed
+        ttsSpeedLabel.text = "\(String(format: "%.2f", context.gameSetting.preferredSpeed*2))X"
+        ttsSpeedSlider.value = context.gameSetting.preferredSpeed
+        ttsSpeedSlider.isEnabled = !context.gameSetting.isAutoSpeed
+    }
+
+    @IBAction func onAutoSpeedSwitchTapped(_ sender: Any) {
+        context.gameSetting.isAutoSpeed = autoSpeedSwitch.isOn
+        saveGameSetting()
+        viewWillAppear(false)
+    }
+    @IBAction func onTTSSpeedSliderValueChanged(_ sender: Any) {
+        context.gameSetting.preferredSpeed = ttsSpeedSlider.value
+        saveGameSetting()
+        viewWillAppear(false)
+    }
     @IBAction func finishButtonClicked(_ sender: Any) {
         ShadowingFlow.shared.stop()
         if context.gameFlowMode == .shadowing {

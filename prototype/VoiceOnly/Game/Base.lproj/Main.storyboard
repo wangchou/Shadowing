@@ -671,7 +671,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fzY-jo-0bH">
-                                <rect key="frame" x="58" y="254" width="205" height="61"/>
+                                <rect key="frame" x="58" y="232" width="205" height="61"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
@@ -683,7 +683,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Px8-Is-Bt1">
-                                <rect key="frame" x="58" y="345" width="205" height="58"/>
+                                <rect key="frame" x="58" y="321" width="205" height="58"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
@@ -694,18 +694,64 @@
                                     <action selector="resumeButtonClicked:" destination="xbq-5x-hVH" eventType="touchUpInside" id="585-2g-u3f"/>
                                 </connections>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4P9-61-8fN">
+                                <rect key="frame" x="241" y="422" width="51" height="31"/>
+                                <connections>
+                                    <action selector="onAutoSpeedSwitchTapped:" destination="xbq-5x-hVH" eventType="valueChanged" id="AVr-tB-9y7"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="自動語音速度：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="08G-Eb-JgR">
+                                <rect key="frame" x="30" y="420" width="206" height="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="語音速度：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RdF-dD-vMW">
+                                <rect key="frame" x="30" y="468" width="147" height="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.8X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EeT-r9-a3f">
+                                <rect key="frame" x="228" y="468" width="62" height="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.80000000000000004" minValue="0.5" maxValue="1.5" translatesAutoresizingMaskIntoConstraints="NO" id="cM8-Gz-KMi">
+                                <rect key="frame" x="28" y="518" width="264" height="31"/>
+                                <connections>
+                                    <action selector="onTTSSpeedSliderValueChanged:" destination="xbq-5x-hVH" eventType="valueChanged" id="XR5-Bd-bMO"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59990368150684936" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="N3t-I3-Erf" firstAttribute="trailing" secondItem="4P9-61-8fN" secondAttribute="trailing" constant="30" id="0bo-Kt-PN9"/>
+                            <constraint firstItem="08G-Eb-JgR" firstAttribute="leading" secondItem="N3t-I3-Erf" secondAttribute="leading" constant="30" id="63p-Nv-jhg"/>
+                            <constraint firstItem="N3t-I3-Erf" firstAttribute="bottom" secondItem="cM8-Gz-KMi" secondAttribute="bottom" constant="20" id="8CG-0t-t1i"/>
+                            <constraint firstItem="RdF-dD-vMW" firstAttribute="leading" secondItem="N3t-I3-Erf" secondAttribute="leading" constant="30" id="CQC-8c-kRX"/>
+                            <constraint firstItem="cM8-Gz-KMi" firstAttribute="leading" secondItem="N3t-I3-Erf" secondAttribute="leading" constant="30" id="Y8F-RC-VcB"/>
+                            <constraint firstItem="N3t-I3-Erf" firstAttribute="trailing" secondItem="EeT-r9-a3f" secondAttribute="trailing" constant="30" id="Y9h-XA-s18"/>
+                            <constraint firstItem="08G-Eb-JgR" firstAttribute="centerY" secondItem="4P9-61-8fN" secondAttribute="centerY" id="bVg-EA-jUA"/>
+                            <constraint firstItem="N3t-I3-Erf" firstAttribute="trailing" secondItem="cM8-Gz-KMi" secondAttribute="trailing" constant="30" id="cEa-gp-2ZL"/>
+                            <constraint firstItem="EeT-r9-a3f" firstAttribute="top" secondItem="4P9-61-8fN" secondAttribute="bottom" constant="15" id="eQY-a0-3Wn"/>
+                            <constraint firstItem="RdF-dD-vMW" firstAttribute="centerY" secondItem="EeT-r9-a3f" secondAttribute="centerY" id="lH4-lN-vJT"/>
+                            <constraint firstItem="cM8-Gz-KMi" firstAttribute="top" secondItem="EeT-r9-a3f" secondAttribute="bottom" constant="15" id="r7h-mH-2xW"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="N3t-I3-Erf"/>
                     </view>
                     <connections>
+                        <outlet property="autoSpeedSwitch" destination="4P9-61-8fN" id="GMW-Jw-mW6"/>
                         <outlet property="finishButton" destination="fzY-jo-0bH" id="721-h0-gZj"/>
                         <outlet property="resumeButton" destination="Px8-Is-Bt1" id="18r-8U-Zat"/>
+                        <outlet property="ttsSpeedLabel" destination="EeT-r9-a3f" id="1en-Zx-gpx"/>
+                        <outlet property="ttsSpeedSlider" destination="cM8-Gz-KMi" id="KBl-SF-KtG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5zE-yR-MUM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2361" y="-600"/>
+            <point key="canvasLocation" x="2360.625" y="-600"/>
         </scene>
     </scenes>
 </document>

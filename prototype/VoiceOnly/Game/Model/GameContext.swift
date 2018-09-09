@@ -24,6 +24,7 @@ class GameContext {
     // MARK: - Long-term data will be kept in UserDefault
     var gameHistory = [GameRecord]()
     var characterImage: UIImage?
+    var gameSetting = GameSetting()
 
     // MARK: - Short-term data of a single game
     var gameFlowMode: GameFlowMode = .chat
@@ -41,7 +42,11 @@ class GameContext {
     var life: Int = 40
 
     var teachingRate: Float {
-        return AVSpeechUtteranceDefaultSpeechRate * (0.5 + life.f * 0.005)
+        if gameSetting.isAutoSpeed {
+            return AVSpeechUtteranceDefaultSpeechRate * (0.5 + life.f * 0.005)
+        } else {
+            return gameSetting.preferredSpeed
+        }
     }
     var isNewRecord = false
     var sentences: [(speaker: ChatSpeaker, string: String)] = []
