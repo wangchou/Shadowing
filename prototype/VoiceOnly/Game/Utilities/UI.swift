@@ -88,6 +88,11 @@ extension GridLayout where Self: UIView {
         return axis == GridAxis.horizontal ? frame.width : frame.height
     }
 
+    var anotherAxisGridCount: CGFloat {
+        return (axis == GridAxis.horizontal ? frame.height : frame.width) /
+               (axisBound / gridCount.c)
+    }
+
     var fontSize: CGFloat {
         return step - spacing
     }
@@ -96,7 +101,7 @@ extension GridLayout where Self: UIView {
         return floor((axisBound - spacing)*2 / gridCount.c)/2
     }
 
-    func addText(x: Int, y: Int, w: Int, h: Int, text: String, font: UIFont, color: UIColor, completion: ((UIView) -> Void)? = nil) {
+    func addText(x: Int, y: Int, w: Int, h: Int, text: String, font: UIFont, color: UIColor, completion: ((UILabel) -> Void)? = nil) {
         let label = UILabel()
         label.font = font
         label.textColor = color

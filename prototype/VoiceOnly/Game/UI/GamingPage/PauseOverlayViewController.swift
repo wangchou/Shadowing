@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+private let context = GameContext.shared
+
 class PauseOverlayViewController: UIViewController {
     @IBOutlet weak var finishButton: UIButton!
     @IBOutlet weak var resumeButton: UIButton!
@@ -24,7 +26,11 @@ class PauseOverlayViewController: UIViewController {
 
     @IBAction func finishButtonClicked(_ sender: Any) {
         ShadowingFlow.shared.stop()
-        launchStoryboard(self, "ShadowingListPage")
+        if context.gameFlowMode == .shadowing {
+            launchStoryboard(self, "ShadowingListPage")
+        } else {
+            launchStoryboard(self, "MainPage")
+        }
     }
 
     @IBAction func resumeButtonClicked(_ sender: Any) {

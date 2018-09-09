@@ -36,6 +36,8 @@ class Chat: UIViewController {
     func start() {
         startEventObserving(self)
         game.start()
+        let screenTapped = UITapGestureRecognizer(target: self, action: #selector(onScreenTapped))
+        chatView?.addGestureRecognizer(screenTapped)
     }
 
     func end() {
@@ -47,6 +49,10 @@ class Chat: UIViewController {
         chatView?.cprint(text, color, terminator: terminator)
     }
 
+    @objc func onScreenTapped() {
+        game.pause()
+        launchStoryboard(self, "PauseOverlay", isOverCurrent: true)
+    }
 }
 
 extension Chat: GameEventDelegate {
@@ -65,8 +71,10 @@ extension Chat: GameEventDelegate {
             } else {
                 chatView?.faceExpression = .wrong
             }
+            chatView?.updateSentenceLabel()
 
         case .listenStarted:
+            chatView?.updateSentenceLabel()
             chatView?.faceExpression = .listening
             cprint(context.targetString)
             if let text = textView?.attributedText.mutableCopy() as? NSMutableAttributedString {

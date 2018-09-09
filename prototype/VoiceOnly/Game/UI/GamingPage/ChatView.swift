@@ -24,6 +24,7 @@ class ChatView: UIView, ReloadableView, GridLayout {
     let axis: GridAxis = .horizontal
     let spacing: CGFloat = 0
     var textView: UITextView! = UITextView()
+    var sentenceLabel: UILabel!
     var pFaceExpression: FaceExpression = .beforeTalk
     var faceExpression: FaceExpression {
         get {
@@ -48,11 +49,13 @@ class ChatView: UIView, ReloadableView, GridLayout {
     func viewWillAppear() {
         updateFace(faceExpression)
         removeAllSubviews()
-        //addDialog(4, 63, nextString)
+        let y = Int(floor(anotherAxisGridCount)) - 30
 
-        //addLabel(4, 55, "\(context.sentenceIndex + 1)/\(context.sentences.count)")
+        addLabel(40, y, "") { label -> Void in
+            self.sentenceLabel = label
+        }
 
-        layout(2, 60, 46, 24, textView)
+        layout(1, y + 5, 47, 26, textView)
         self.addSubview(textView)
         textView.layer.backgroundColor = UIColor.black.cgColor
     }
@@ -61,16 +64,7 @@ class ChatView: UIView, ReloadableView, GridLayout {
         layer.contents = UIImage(named: expression.rawValue)?.cgImage
     }
 
-    func addDialog(_ x: Int, _ y: Int, _ text: String) {
-        addRoundRect(x: x, y: y, w: 42, h: 18, borderColor: .black, radius: 10, backgroundColor: UIColor.white.withAlphaComponent(0.5))
-
-        addLabel(x, y, text) { label in
-            label.sizeToFit()
-            label.centerIn(self.getFrame(x, y, 42, 18))
-        }
-    }
-
-    func addLabel(_ x: Int, _ y: Int, _ text: String, completion: ((UIView) -> Void)? = nil) {
+    func addLabel(_ x: Int, _ y: Int, _ text: String, completion: ((UILabel) -> Void)? = nil) {
         addText(x: x, y: y, w: 18, h: 6, text: text, font: font, color: .black, completion: completion)
     }
 
@@ -88,5 +82,9 @@ class ChatView: UIView, ReloadableView, GridLayout {
         } else {
             print("unwrap gg 999")
         }
+    }
+
+    func updateSentenceLabel() {
+        sentenceLabel.text = "\(context.sentenceIndex + 1)/\(context.sentences.count)"
     }
 }
