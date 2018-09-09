@@ -85,7 +85,8 @@ func getStrokeText(
 func colorText(
     _ text: String,
     _ color: UIColor = .lightText,
-    terminator: String = ""
+    terminator: String = "",
+    fontSize: CGFloat = 24
     ) -> NSMutableAttributedString {
-    return getText(text, color: color, font: MyFont.regular(ofSize: 24), terminator: terminator)
+    return getText(text, color: color, font: MyFont.regular(ofSize: fontSize), terminator: terminator)
 }

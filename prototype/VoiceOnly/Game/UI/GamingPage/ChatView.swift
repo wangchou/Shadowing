@@ -23,16 +23,7 @@ class ChatView: UIView, ReloadableView, GridLayout {
     let gridCount: Int = 48
     let axis: GridAxis = .horizontal
     let spacing: CGFloat = 0
-    var pNextString: String = "等下請唸框框中的台詞"
-    var nextString: String {
-        get {
-            return pNextString
-        }
-        set {
-            pNextString = newValue
-            viewWillAppear()
-        }
-    }
+    var textView: UITextView! = UITextView()
     var pFaceExpression: FaceExpression = .beforeTalk
     var faceExpression: FaceExpression {
         get {
@@ -57,8 +48,13 @@ class ChatView: UIView, ReloadableView, GridLayout {
     func viewWillAppear() {
         updateFace(faceExpression)
         removeAllSubviews()
-        addDialog(4, 63, nextString)
-        addLabel(4, 58, "\(context.sentenceIndex + 1)/\(context.sentences.count)")
+        //addDialog(4, 63, nextString)
+
+        //addLabel(4, 55, "\(context.sentenceIndex + 1)/\(context.sentences.count)")
+
+        layout(2, 60, 46, 24, textView)
+        self.addSubview(textView)
+        textView.layer.backgroundColor = UIColor.black.cgColor
     }
 
     func updateFace(_ expression: FaceExpression) {
@@ -76,5 +72,21 @@ class ChatView: UIView, ReloadableView, GridLayout {
 
     func addLabel(_ x: Int, _ y: Int, _ text: String, completion: ((UIView) -> Void)? = nil) {
         addText(x: x, y: y, w: 18, h: 6, text: text, font: font, color: .black, completion: completion)
+    }
+
+    func scrollTextIntoView() {
+        let range = NSRange(location: textView.attributedText.string.count - 1, length: 0)
+        textView.scrollRangeToVisible(range)
+    }
+
+    // color print to self.textView
+    func cprint(_ text: String, _ color: UIColor = .lightText, terminator: String = "\n") {
+        if let newText = textView.attributedText.mutableCopy() as? NSMutableAttributedString {
+            newText.append(colorText(text, color, terminator: terminator, fontSize: 20))
+            textView.attributedText = newText
+            scrollTextIntoView()
+        } else {
+            print("unwrap gg 999")
+        }
     }
 }

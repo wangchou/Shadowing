@@ -14,8 +14,12 @@ private let context = GameContext.shared
 // Prototype 8: messenger / line interface
 class Chat: UIViewController {
     let game = ChatFlow.shared
+    var tmpText: NSMutableAttributedString = colorText("", fontSize: 20)
     var chatView: ChatView? {
         return (view as? ChatView)
+    }
+    var textView: UITextView? {
+        return chatView?.textView
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -39,6 +43,10 @@ class Chat: UIViewController {
         game.stop()
     }
 
+    func cprint(_ text: String, _ color: UIColor = .lightText, terminator: String = "\n") {
+        chatView?.cprint(text, color, terminator: terminator)
+    }
+
 }
 
 extension Chat: GameEventDelegate {
@@ -57,20 +65,29 @@ extension Chat: GameEventDelegate {
             } else {
                 chatView?.faceExpression = .wrong
             }
-            chatView?.nextString = ""
 
         case .listenStarted:
             chatView?.faceExpression = .listening
-            chatView?.nextString = context.targetString
-//            if let tokenInfos = kanaTokenInfosCacheDictionary[text] {
-//                //addLabel(getFuriganaString(tokenInfos: tokenInfos), isLeft: false)
-//            } else {
-//                    //addLabel(rubyAttrStr(text), isLeft: false)
-//            }
+            cprint(context.targetString)
+            if let text = textView?.attributedText.mutableCopy() as? NSMutableAttributedString {
+                tmpText = text
+                print(text.string)
+            }
+
+        case .stringRecognized, .listenEnded:
+            guard let curText = tmpText.mutableCopy() as? NSMutableAttributedString else { return }
+            guard var saidString = event.string else { return }
+            if event.type == .listenEnded && saidString == "" {
+                saidString = "聽不清楚"
+            }
+            curText.append(colorText(saidString, terminator: " ", fontSize: 20))
+            textView?.attributedText = curText
 
         case .scoreCalculated:
-            guard let score = event.score else { return }
-            print("分數", score)
+            if let score = event.score {
+                cprint(" \(score.valueText)", score.color)
+                cprint("---")
+            }
 
         case .lifeChanged:
             return
