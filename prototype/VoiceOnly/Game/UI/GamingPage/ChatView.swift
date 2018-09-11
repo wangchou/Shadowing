@@ -56,6 +56,9 @@ class ChatView: UIView, ReloadableView, GridLayout {
         }
 
         layout(1, y + 5, 47, 26, textView)
+        textView.isEditable = false
+        textView.isSelectable = false
+        textView.isUserInteractionEnabled = false
         self.addSubview(textView)
         textView.layer.backgroundColor = UIColor.black.cgColor
     }

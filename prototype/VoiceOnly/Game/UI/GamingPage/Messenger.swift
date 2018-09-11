@@ -106,7 +106,7 @@ class Messenger: UIViewController {
 
     @objc func finishGame() {
         end()
-        launchStoryboard(self, "ShadowingListPage")
+        launchStoryboard(self, "SwipeMainPage")
     }
 
     @objc func restartGame() {

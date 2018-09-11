@@ -109,7 +109,7 @@ extension Chat: GameEventDelegate {
         case .gameStateChanged:
             if context.gameState == .gameOver {
                 stopEventObserving(self)
-                launchStoryboard(self, "MainPage", isOverCurrent: false, animated: true)
+                launchStoryboard(self, "SwipeMainPage", isOverCurrent: false, animated: true)
             }
 
         case .resume:

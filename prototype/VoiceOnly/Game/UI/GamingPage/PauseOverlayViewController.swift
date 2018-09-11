@@ -50,11 +50,7 @@ class PauseOverlayViewController: UIViewController {
     }
     @IBAction func finishButtonClicked(_ sender: Any) {
         ShadowingFlow.shared.stop()
-        if context.gameFlowMode == .shadowing {
-            launchStoryboard(self, "ShadowingListPage")
-        } else {
-            launchStoryboard(self, "MainPage")
-        }
+        launchStoryboard(self, "SwipeMainPage")
     }
 
     @IBAction func resumeButtonClicked(_ sender: Any) {
