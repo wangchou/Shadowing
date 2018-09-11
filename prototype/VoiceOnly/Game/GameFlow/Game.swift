@@ -34,7 +34,7 @@ class Game {
 }
 
 extension Game {
-    internal func prepareTimer() {
+    internal func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             if self.isPaused { return }
 
@@ -51,11 +51,10 @@ extension Game {
     }
 
     func stop() {
-//        restoreBGMVolume()
-        updateGameHistory()
         context.gameRecord?.playDuration = gameSeconds
         context.gameState = .stopped
         timer?.invalidate()
+        updateGameHistory()
     }
 
     internal func speakTargetString() -> Promise<Void> {

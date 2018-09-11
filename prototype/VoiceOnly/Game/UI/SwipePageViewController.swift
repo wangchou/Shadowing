@@ -51,14 +51,14 @@ extension SwipePageViewController: UIPageViewControllerDataSource {
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         if let index = pages.index(of: viewController) {
-            return pages[(index + 1)%pages.count]
+            return pages[(index + 1) % pages.count]
         }
         return nil
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         if let index = pages.index(of: viewController) {
-            return pages[(index - 1 + pages.count)%pages.count]
+            return pages[(index - 1 + pages.count * 100) % pages.count]
         }
         return nil
     }

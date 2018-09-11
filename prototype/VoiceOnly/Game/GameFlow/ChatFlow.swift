@@ -18,12 +18,11 @@ class ChatFlow: Game {
 
     // MARK: - Public Functions
     override func start() {
-//        reduceBGMVolume()
         context.gameFlowMode = .chat
         context.gameState = .stopped
         context.gameRecord?.startedTime = Date()
         gameSeconds = 0
-        prepareTimer()
+        startTimer()
         context.loadChatDemoSentences()
         meijia("模擬會話，等下請念框框裡的日文。").always {
             self.learnNext()
@@ -79,7 +78,7 @@ class ChatFlow: Game {
                             .then({ context.score.value = 100 })
                     }
                     if context.score.value < 80 {
-                        return hattori("すみませんが、理解できません。")
+                        return hattori("もう一度お願いします")
                             .then({ context.score.value = 100 })
                     }
                     return fulfilledVoidPromise()

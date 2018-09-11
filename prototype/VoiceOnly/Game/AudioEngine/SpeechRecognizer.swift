@@ -137,7 +137,7 @@ class SpeechRecognizer: NSObject {
         return promise
     }
 
-    private func endAudio() {
+    func endAudio() {
         guard isRunning else { return }
 
         inputNode.removeTap(onBus: 0)

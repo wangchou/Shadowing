@@ -16,12 +16,11 @@ class ShadowingFlow: Game {
 
     // MARK: - Public Functions
     override func start() {
-//        reduceBGMVolume()
         context.gameFlowMode = .shadowing
         context.gameState = .stopped
         context.gameRecord?.startedTime = Date()
         gameSeconds = 0
-        prepareTimer()
+        startTimer()
         context.loadLearningSentences()
 
         meijia("每句日文說完後，請跟著說～").always {
@@ -48,7 +47,7 @@ class ShadowingFlow: Game {
         .then { self.wait }
         .then( listenPart )
         .then { self.wait }
-        .catch { error in print("Promise chain 死了。", error)}
+        .catch { error in print("Promise chain is dead", error)}
         .always {
             context.gameState = .sentenceSessionEnded
             if context.nextSentence() && context.isEngineRunning {
@@ -69,22 +68,18 @@ class ShadowingFlow: Game {
     // initial life = 40, speed = 0.7x
     // life 100 => speed 1.0x
     // life 0   => speed 0.5x
-    // 25句 Rank A 達成度90% => missed x 1, good x3, great x 9, perfect x 12 => life = 100, last speed 1.00x
-    //      Rank B 達程度80% => missed x 2, good x6, great x 7, perfect x 10 => life = 82,  last speed 0.91x
-    //      Rank C 達程度70% => missed x 3, good x9, great x 6, perfect x 7  => life = 62,  last speed 0.81x
-
     private func updateLife(score: Score) {
         var life = context.life
 
         switch score.type {
         case .perfect:
-            life += 4
+            life += 5
         case .great:
             life += 2
         case .good:
             life += -1
-        default:
-            life += -3
+        case .poor:
+            life += -4
         }
 
         context.life = max(min(100, life), 0)

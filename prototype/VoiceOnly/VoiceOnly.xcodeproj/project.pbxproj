@@ -22,7 +22,7 @@
 		BE62CA61213D11C700CF6DD6 /* chatDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE62CA60213D11C700CF6DD6 /* chatDemo.swift */; };
 		BE65A939209C6E67006645CA /* GameEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65A938209C6E67006645CA /* GameEventDelegate.swift */; };
 		BE66343B2147869000A9166A /* SwipePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE66343A2147869000A9166A /* SwipePageViewController.swift */; };
-		BE6D1D2221410E8500BC4A0E /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6D1D2121410E8500BC4A0E /* Chat.swift */; };
+		BE6D1D2221410E8500BC4A0E /* ChatPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6D1D2121410E8500BC4A0E /* ChatPage.swift */; };
 		BE6D1D2421410F9600BC4A0E /* ChatFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6D1D2321410F9600BC4A0E /* ChatFlow.swift */; };
 		BE6D1D262141122400BC4A0E /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6D1D252141122400BC4A0E /* ChatView.swift */; };
 		BE6ED54A20A1373700553D1A /* Commands.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6ED54920A1373700553D1A /* Commands.swift */; };
@@ -33,6 +33,8 @@
 		BE7725C820A2CBC200DF186A /* n4.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725C120A2CBC100DF186A /* n4.swift */; };
 		BE7725C920A2CBC200DF186A /* n5.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725C220A2CBC100DF186A /* n5.swift */; };
 		BE7725CE20A4216700DF186A /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725CD20A4216700DF186A /* ContentCell.swift */; };
+		BE7DF8B42147E7DD00D4A780 /* ChatAIBotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DF8B32147E7DD00D4A780 /* ChatAIBotView.swift */; };
+		BE7DF8B62147EBE000D4A780 /* ChatAIBotPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DF8B52147EBE000D4A780 /* ChatAIBotPage.swift */; };
 		BE8180C020B3BEB6006ABCB3 /* MyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180BF20B3BEB6006ABCB3 /* MyText.swift */; };
 		BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */; };
 		BE8180C520B3E03E006ABCB3 /* GameFinishedTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180C420B3E03E006ABCB3 /* GameFinishedTableCell.swift */; };
@@ -95,7 +97,7 @@
 		BE62CA60213D11C700CF6DD6 /* chatDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatDemo.swift; sourceTree = "<group>"; };
 		BE65A938209C6E67006645CA /* GameEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEventDelegate.swift; sourceTree = "<group>"; };
 		BE66343A2147869000A9166A /* SwipePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipePageViewController.swift; sourceTree = "<group>"; };
-		BE6D1D2121410E8500BC4A0E /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		BE6D1D2121410E8500BC4A0E /* ChatPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPage.swift; sourceTree = "<group>"; };
 		BE6D1D2321410F9600BC4A0E /* ChatFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatFlow.swift; sourceTree = "<group>"; };
 		BE6D1D252141122400BC4A0E /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		BE6ED54920A1373700553D1A /* Commands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commands.swift; sourceTree = "<group>"; };
@@ -106,6 +108,8 @@
 		BE7725C120A2CBC100DF186A /* n4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n4.swift; sourceTree = "<group>"; };
 		BE7725C220A2CBC100DF186A /* n5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n5.swift; sourceTree = "<group>"; };
 		BE7725CD20A4216700DF186A /* ContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
+		BE7DF8B32147E7DD00D4A780 /* ChatAIBotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAIBotView.swift; sourceTree = "<group>"; };
+		BE7DF8B52147EBE000D4A780 /* ChatAIBotPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAIBotPage.swift; sourceTree = "<group>"; };
 		BE8180BF20B3BEB6006ABCB3 /* MyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyText.swift; sourceTree = "<group>"; };
 		BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFinishedPage.swift; sourceTree = "<group>"; };
 		BE8180C420B3E03E006ABCB3 /* GameFinishedTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFinishedTableCell.swift; sourceTree = "<group>"; };
@@ -192,14 +196,17 @@
 			path = Sentences;
 			sourceTree = "<group>";
 		};
-		BE8180C320B3DFEF006ABCB3 /* GameFinishedPage */ = {
+		BE7DF8B02147E22000D4A780 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */,
-				BE8180C420B3E03E006ABCB3 /* GameFinishedTableCell.swift */,
-				BE9D243920C8DEE9000515DD /* GameReportView.swift */,
+				BEDF761A213FE4B1009A7C25 /* ChatListPage.swift */,
+				BEDF761C213FE5E0009A7C25 /* ChatListView.swift */,
+				BE6D1D2121410E8500BC4A0E /* ChatPage.swift */,
+				BE6D1D252141122400BC4A0E /* ChatView.swift */,
+				BE7DF8B52147EBE000D4A780 /* ChatAIBotPage.swift */,
+				BE7DF8B32147E7DD00D4A780 /* ChatAIBotView.swift */,
 			);
-			path = GameFinishedPage;
+			path = Chat;
 			sourceTree = "<group>";
 		};
 		BE9556EF212D7C130045E578 /* Model */ = {
@@ -262,12 +269,9 @@
 			children = (
 				BE66343A2147869000A9166A /* SwipePageViewController.swift */,
 				BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */,
-				BEDF761A213FE4B1009A7C25 /* ChatListPage.swift */,
-				BEDF761C213FE5E0009A7C25 /* ChatListView.swift */,
-				BEFA979C20AEAEA400DE3280 /* ShadowingListPage */,
-				BEFA979E20AEAEDD00DE3280 /* GameDetailPage */,
-				BEFA979D20AEAECC00DE3280 /* GamingPage */,
-				BE8180C320B3DFEF006ABCB3 /* GameFinishedPage */,
+				BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */,
+				BEFA979C20AEAEA400DE3280 /* Shadowing */,
+				BE7DF8B02147E22000D4A780 /* Chat */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -285,36 +289,22 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		BEFA979C20AEAEA400DE3280 /* ShadowingListPage */ = {
+		BEFA979C20AEAEA400DE3280 /* Shadowing */ = {
 			isa = PBXGroup;
 			children = (
 				BEDEDD3620A46D1B00E7B60B /* ShadowingListPage.swift */,
 				BE500AED20B822CA004E73D1 /* CharacterView.swift */,
 				BEF258B220B57C7F00D0026C /* TimelineView.swift */,
+				BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */,
 				BE7725CD20A4216700DF186A /* ContentCell.swift */,
-			);
-			path = ShadowingListPage;
-			sourceTree = "<group>";
-		};
-		BEFA979D20AEAECC00DE3280 /* GamingPage */ = {
-			isa = PBXGroup;
-			children = (
+				BEDBCCD720A82AC4001CF11D /* GameDetailTableCell.swift */,
 				BE1CA957209DC43800086853 /* Messenger.swift */,
 				BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */,
-				BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */,
-				BE6D1D252141122400BC4A0E /* ChatView.swift */,
-				BE6D1D2121410E8500BC4A0E /* Chat.swift */,
+				BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */,
+				BE8180C420B3E03E006ABCB3 /* GameFinishedTableCell.swift */,
+				BE9D243920C8DEE9000515DD /* GameReportView.swift */,
 			);
-			path = GamingPage;
-			sourceTree = "<group>";
-		};
-		BEFA979E20AEAEDD00DE3280 /* GameDetailPage */ = {
-			isa = PBXGroup;
-			children = (
-				BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */,
-				BEDBCCD720A82AC4001CF11D /* GameDetailTableCell.swift */,
-			);
-			path = GameDetailPage;
+			path = Shadowing;
 			sourceTree = "<group>";
 		};
 		BEFA97A120AEB18700DE3280 /* Game */ = {
@@ -432,6 +422,7 @@
 				BE05073720A68515008A29EB /* SentencesTestGame.swift in Sources */,
 				BE7725C820A2CBC200DF186A /* n4.swift in Sources */,
 				BE5D838920A80BD0002031BF /* GameContentDetailPage.swift in Sources */,
+				BE7DF8B62147EBE000D4A780 /* ChatAIBotPage.swift in Sources */,
 				BE6ED56820A17BB000553D1A /* ShadowingFlow.swift in Sources */,
 				BE6ED54A20A1373700553D1A /* Commands.swift in Sources */,
 				BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */,
@@ -451,7 +442,7 @@
 				BE500AEE20B822CA004E73D1 /* CharacterView.swift in Sources */,
 				BE7725C520A2CBC200DF186A /* n3.swift in Sources */,
 				BE66343B2147869000A9166A /* SwipePageViewController.swift in Sources */,
-				BE6D1D2221410E8500BC4A0E /* Chat.swift in Sources */,
+				BE6D1D2221410E8500BC4A0E /* ChatPage.swift in Sources */,
 				BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */,
 				BE62CA61213D11C700CF6DD6 /* chatDemo.swift in Sources */,
 				BEDEDD3720A46D1B00E7B60B /* ShadowingListPage.swift in Sources */,
@@ -461,6 +452,7 @@
 				BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */,
 				BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */,
 				BE8180C020B3BEB6006ABCB3 /* MyText.swift in Sources */,
+				BE7DF8B42147E7DD00D4A780 /* ChatAIBotView.swift in Sources */,
 				BE8283B42133DAE2008BC875 /* GameEngine.swift in Sources */,
 				BE6D1D2421410F9600BC4A0E /* ChatFlow.swift in Sources */,
 				BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */,

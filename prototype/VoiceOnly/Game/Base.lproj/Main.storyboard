@@ -466,10 +466,10 @@
             </objects>
             <point key="canvasLocation" x="167" y="-908"/>
         </scene>
-        <!--Chat-->
+        <!--Chat Page-->
         <scene sceneID="qOs-gM-WGL">
             <objects>
-                <viewController storyboardIdentifier="ChatGame" id="kB7-8p-c5Z" customClass="Chat" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatGame" id="kB7-8p-c5Z" customClass="ChatPage" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Fj1-HJ-Igi" customClass="ChatView" customModule="VoiceOnly" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -480,6 +480,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="afe-Io-1JN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1635" y="-600"/>
+        </scene>
+        <!--ChatAI Bot Page-->
+        <scene sceneID="x3v-yZ-Alj">
+            <objects>
+                <viewController storyboardIdentifier="ChatBotGame" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fvs-8J-GWi" customClass="ChatAIBotPage" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qyn-jY-mIx" customClass="ChatAIBotView" customModule="VoiceOnly" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="mVF-L5-jzy"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VZR-7J-l3J" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1635" y="82"/>
         </scene>
         <!--Game Finished Page-->
         <scene sceneID="DIF-sJ-I4U">

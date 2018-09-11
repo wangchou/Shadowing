@@ -17,9 +17,4 @@ class ChatListPage: UIViewController {
         loadGameSetting()
         loadGameHistory()
     }
-
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        (view as? ChatListView)?.viewWillAppear()
-//    }
 }

@@ -55,9 +55,10 @@ class ChatListView: UIView, ReloadableView, GridLayout {
             launchStoryboard(vc, "ChatGame")
         }
     }
+    
     @objc func twoButtonClicked() {
         if let vc = UIApplication.getPresentedViewController() {
-            launchStoryboard(vc, "ChatGame")
+            launchStoryboard(vc, "ChatBotGame")
         }
     }
 

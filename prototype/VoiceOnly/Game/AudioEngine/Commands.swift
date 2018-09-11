@@ -33,17 +33,8 @@ func stopEngine() {
     guard !isSimulator else { return }
 
     engine.speechRecognizer.stop()
-    // engine.bgm.stop()
     engine.audioEngine.stop()
 }
-
-//func reduceBGMVolume() {
-//    engine.bgm.reduceVolume()
-//}
-//
-//func restoreBGMVolume() {
-//    engine.bgm.restoreVolume()
-//}
 
 // MARK: - TTS / Speak Japanese
 func meijia(_ sentence: String, rate: Float = fastRate) -> Promise<Void> {
@@ -69,4 +60,8 @@ func kyoko(_ sentence: String, rate: Float = context.teachingRate) -> Promise<Vo
 // MARK: - Voice Recognition
 func listenJP(duration: Double) -> Promise<String> {
     return engine.speechRecognizer.start(stopAfterSeconds: duration)
+}
+
+func stopListen() {
+    engine.speechRecognizer.endAudio()
 }

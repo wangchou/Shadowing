@@ -11,8 +11,7 @@ import UIKit
 
 private let context = GameContext.shared
 
-// Prototype 8: messenger / line interface
-class Chat: UIViewController {
+class ChatPage: UIViewController {
     let game = ChatFlow.shared
     var tmpText: NSMutableAttributedString = colorText("", fontSize: 20)
     var chatView: ChatView? {
@@ -55,7 +54,7 @@ class Chat: UIViewController {
     }
 }
 
-extension Chat: GameEventDelegate {
+extension ChatPage: GameEventDelegate {
     @objc func onEventHappened(_ notification: Notification) {
         guard let event = notification.object as? Event else { print("convert event fail"); return }
 
