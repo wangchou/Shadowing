@@ -89,6 +89,7 @@ extension ChatPage: GameEventDelegate {
             }
             curText.append(colorText(saidString, terminator: " ", fontSize: 20))
             textView?.attributedText = curText
+            chatView?.scrollTextIntoView()
 
         case .scoreCalculated:
             if let score = event.score {

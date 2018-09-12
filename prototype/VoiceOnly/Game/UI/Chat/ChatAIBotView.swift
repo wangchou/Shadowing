@@ -86,6 +86,7 @@ class ChatAIBotView: UIView, ReloadableView, GridLayout {
 
     func updateFace(_ expression: FaceExpression) {
         layer.contents = UIImage(named: expression.rawValue)?.cgImage
+        layer.contentsRect = CGRect(x: 0, y: 0, width: 1, height: 1125 / screen.size.width * screen.size.height / 2436)
     }
 }
 

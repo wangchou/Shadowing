@@ -49,22 +49,21 @@ class ChatView: UIView, ReloadableView, GridLayout {
     func viewWillAppear() {
         updateFace(faceExpression)
         removeAllSubviews()
-        let y = Int(floor(anotherAxisGridCount)) - 30
+        let y = Int(floor(anotherAxisGridCount)) - 25
 
         addLabel(40, y, "") { label -> Void in
             self.sentenceLabel = label
         }
 
-        layout(0, y + 5, 48, 26, textView)
-        textView.isEditable = false
-        textView.isSelectable = false
-        textView.isUserInteractionEnabled = false
+        layout(0, y + 10, 48, 15, textView)
         self.addSubview(textView)
+        textView.isUserInteractionEnabled = false
         textView.layer.backgroundColor = UIColor.black.cgColor
     }
 
     func updateFace(_ expression: FaceExpression) {
         layer.contents = UIImage(named: expression.rawValue)?.cgImage
+        layer.contentsRect = CGRect(x: 0, y: 0, width: 1, height: 1125 / screen.size.width * screen.size.height / 2436)
     }
 
     func addLabel(_ x: Int, _ y: Int, _ text: String, completion: ((UILabel) -> Void)? = nil) {
@@ -72,7 +71,8 @@ class ChatView: UIView, ReloadableView, GridLayout {
     }
 
     func scrollTextIntoView() {
-        let range = NSRange(location: textView.attributedText.string.count - 1, length: 0)
+        print(textView.attributedText.string.count - 1)
+        let range = NSRange(location: textView.text.count - 1, length: 1)
         textView.scrollRangeToVisible(range)
     }
 

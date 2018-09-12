@@ -26,7 +26,9 @@ class ChatListView: UIView, ReloadableView, GridLayout {
     }
 
     func viewWillAppear() {
-        self.layer.contents = UIImage(named: "ChatListScreen.png")?.cgImage
+        layer.contents = UIImage(named: "ChatListScreen.png")?.cgImage
+        // original image is for iPhone X 1125 x 2436
+        layer.contentsRect = CGRect(x: 0, y: 0, width: 1, height: 1125 / screen.size.width * screen.size.height / 2436)
         frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.height)
         removeAllSubviews()
         addDevelopingLabel()
