@@ -8,6 +8,9 @@
 
 import Foundation
 import UIKit
+import Promises
+import Alamofire
+import SwiftyJSON
 
 class ChatAIBotView: UIView, ReloadableView, GridLayout {
     let gridCount: Int = 48
@@ -38,19 +41,35 @@ class ChatAIBotView: UIView, ReloadableView, GridLayout {
     }
 
     func viewWillAppear() {
+        _ = meijia("請按著按鈕、然後說日文")
         updateFace(faceExpression)
         removeAllSubviews()
         addVoiceButton()
     }
 
+    func listenAndReply() {
+        listenJP(duration: 30)
+            .then(getTalkAPIReply)
+            .then { reply -> Promise<Void> in
+                self.updateFace(.talking)
+                self.voiceButton.isEnabled = false
+                return hattori(reply)
+            }.then {
+                self.updateFace(.beforeTalk)
+                self.voiceButton.isEnabled = true
+            }
+    }
+
     @objc func onButtonDown() {
-        updateFace(.listening)
+        faceExpression = .listening
         voiceButton.backgroundColor = UIColor.red.withAlphaComponent(0.7)
+        listenAndReply()
     }
 
     @objc func onButtonUp() {
-        updateFace(.beforeTalk)
+        faceExpression = .beforeTalk
         voiceButton.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        stopListen()
     }
 
     func addVoiceButton() {
@@ -68,4 +87,28 @@ class ChatAIBotView: UIView, ReloadableView, GridLayout {
     func updateFace(_ expression: FaceExpression) {
         layer.contents = UIImage(named: expression.rawValue)?.cgImage
     }
+}
+
+func getTalkAPIReply(_ kanjiString: String) -> Promise<String> {
+    let promise = Promise<String>.pending()
+    let parameters = [
+        "apikey": "DZZDjkWEiLdgnIehTB3cd7BXxcb0L3Ek",
+        "query": kanjiString
+    ]
+
+    Alamofire.request(
+        "https://api.a3rt.recruit-tech.co.jp/talk/v1/smalltalk",
+        method: .post,
+        parameters: parameters
+        ).responseJSON { response in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value)
+                promise.fulfill(json["results"][0]["reply"].stringValue)
+
+            case .failure:
+                promise.fulfill("")
+            }
+    }
+    return promise
 }
