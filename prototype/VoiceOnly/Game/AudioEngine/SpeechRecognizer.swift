@@ -45,6 +45,12 @@ class SpeechRecognizer: NSObject {
             return startFaked(stopAfterSeconds: stopAfterSeconds)
         }
 
+        guard engine.isEngineRunning else {
+            print("Engine is not started error")
+            promise.fulfill("SpeechRecognizer: Eninge is not started error")
+            return promise
+        }
+
         if !isAuthorized {
             promise.reject(SpeechRecognitionError.unauthorized)
             return promise

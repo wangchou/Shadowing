@@ -4,6 +4,7 @@ import MeCab from 'mecab-async'
 import morgan from 'morgan'
 import fs from 'fs'
 import path from 'path'
+import mcache from 'memory-cache'
 
 import os from 'os'
 const isMac = os.type() === 'Darwin'
@@ -24,6 +25,26 @@ if(isMac) {
   __dirname = '/home/ubuntu/Shadowing/prototype/nlpService/log'
 }
 
+// https://medium.com/the-node-js-collection/simple-server-side-cache-for-express-js-with-node-js-45ff296ca0f0
+var cache = (duration) => {
+  return (req, res, next) => {
+    if (!req.body || !req.body.jpnStr) return res.sendStatus(400)
+    let key = req.body.jpnStr
+    let cachedBody = mcache.get(key)
+    if(cachedBody) {
+      res.send(cachedBody)
+      return
+    } else {
+      res.sendResponse = res.send
+      res.send = (body) => {
+        mcache.put(key, body, duration * 1000)
+        res.sendResponse(body)
+      }
+      next()
+    }
+  }
+}
+
 var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'})
 app.use(morgan((tokens, req, res) => {
     return [
@@ -38,7 +59,7 @@ app.use(morgan((tokens, req, res) => {
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-app.post('/nlp', (req, res) => {
+app.post('/nlp', cache(864000), (req, res) => {
   if (!req.body || !req.body.jpnStr) return res.sendStatus(400)
   console.log(req.body.jpnStr)
   mecab.parse(req.body.jpnStr, function(err, result) {
