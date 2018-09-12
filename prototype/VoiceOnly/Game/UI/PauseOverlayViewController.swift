@@ -20,12 +20,8 @@ class PauseOverlayViewController: UIViewController {
     @IBOutlet weak var ttsSpeedSlider: UISlider!
     override func viewDidLoad() {
         super.viewDidLoad()
-        finishButton.layer.borderColor = UIColor.lightText.cgColor
-        finishButton.layer.borderWidth = 1.5
-        finishButton.layer.cornerRadius = 15
-        resumeButton.layer.borderColor = UIColor.lightText.cgColor
-        resumeButton.layer.borderWidth = 1.5
-        resumeButton.layer.cornerRadius = 15
+        finishButton.layer.cornerRadius = 10
+        resumeButton.layer.cornerRadius = 10
     }
 
     override func viewWillAppear(_ animated: Bool) {

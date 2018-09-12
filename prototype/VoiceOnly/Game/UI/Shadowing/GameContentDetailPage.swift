@@ -17,6 +17,7 @@ class GameContentDetailPage: UIViewController {
     @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var challengeButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
 
     @IBOutlet weak var perfectCountLabel: UILabel!
     @IBOutlet weak var greatCountLabel: UILabel!
@@ -45,6 +46,8 @@ class GameContentDetailPage: UIViewController {
             goodCountLabel.text = 0.s
             missedCountLabel.text = 0.s
         }
+        challengeButton.roundBorder(borderWidth: 0, cornerRadius: 3, color: UIColor.black)
+        backButton.roundBorder(borderWidth: 0, cornerRadius: 3, color: UIColor.black)
 
         // load furigana
         all(context.sentences.map {$0.string.furiganaAttributedString}).then {_ in

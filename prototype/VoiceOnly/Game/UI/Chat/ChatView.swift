@@ -51,7 +51,7 @@ class ChatView: UIView, ReloadableView, GridLayout {
         removeAllSubviews()
         let y = Int(floor(anotherAxisGridCount)) - 25
 
-        addLabel(40, y, "") { label -> Void in
+        addLabel(39, y+5, "") { label -> Void in
             self.sentenceLabel = label
         }
 
