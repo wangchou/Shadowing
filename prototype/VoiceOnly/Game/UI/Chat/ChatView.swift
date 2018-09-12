@@ -55,18 +55,18 @@ class ChatView: UIView, ReloadableView, GridLayout {
             self.sentenceLabel = label
         }
 
-        layout(0, y + 10, 48, 15, textView)
+        layout(0, y + 10, 48, 16, textView)
         self.addSubview(textView)
         textView.isUserInteractionEnabled = false
         textView.layer.backgroundColor = UIColor.black.cgColor
     }
 
-    func updateFace(_ expression: FaceExpression) {
+    private func updateFace(_ expression: FaceExpression) {
         layer.contents = UIImage(named: expression.rawValue)?.cgImage
         layer.contentsRect = CGRect(x: 0, y: 0, width: 1, height: 1125 / screen.size.width * screen.size.height / 2436)
     }
 
-    func addLabel(_ x: Int, _ y: Int, _ text: String, completion: ((UILabel) -> Void)? = nil) {
+    private func addLabel(_ x: Int, _ y: Int, _ text: String, completion: ((UILabel) -> Void)? = nil) {
         addText(x: x, y: y, w: 18, h: 6, text: text, font: font, color: .black, completion: completion)
     }
 

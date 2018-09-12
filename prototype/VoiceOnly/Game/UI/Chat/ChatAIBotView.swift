@@ -12,6 +12,31 @@ import Promises
 import Alamofire
 import SwiftyJSON
 
+fileprivate func getTalkAPIReply(_ kanjiString: String) -> Promise<String> {
+    let promise = Promise<String>.pending()
+    let parameters = [
+        "apikey": "DZZDjkWEiLdgnIehTB3cd7BXxcb0L3Ek",
+        "query": kanjiString
+    ]
+
+    // free service from https://a3rt.recruit-tech.co.jp/product/talkAPI/
+    Alamofire.request(
+        "https://api.a3rt.recruit-tech.co.jp/talk/v1/smalltalk",
+        method: .post,
+        parameters: parameters
+        ).responseJSON { response in
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value as Any)
+                promise.fulfill(json["results"][0]["reply"].stringValue)
+
+            case .failure:
+                promise.fulfill("")
+            }
+    }
+    return promise
+}
+
 class ChatAIBotView: UIView, ReloadableView, GridLayout {
     let gridCount: Int = 48
     let axis: GridAxis = .horizontal
@@ -45,6 +70,8 @@ class ChatAIBotView: UIView, ReloadableView, GridLayout {
         updateFace(faceExpression)
         removeAllSubviews()
         addVoiceButton()
+        let screenTapped = UITapGestureRecognizer(target: self, action: #selector(onScreenTapped))
+        self.addGestureRecognizer(screenTapped)
     }
 
     func listenAndReply() {
@@ -73,43 +100,23 @@ class ChatAIBotView: UIView, ReloadableView, GridLayout {
     }
 
     func addVoiceButton() {
-        let buttonWidth = 15
+        let buttonWidth = 14
         voiceButton = UIButton()
-        self.addSubview(voiceButton)
-        self.layout(18, 67, buttonWidth, buttonWidth, voiceButton)
-        voiceButton.roundBorder(borderWidth: 2, cornerRadius: buttonWidth.c / 2 * self.step, color: UIColor.white)
+        addSubview(voiceButton)
+        layout(16, 69, buttonWidth, buttonWidth, voiceButton)
+        voiceButton.roundBorder(borderWidth: 2, cornerRadius: buttonWidth.c / 2 * step, color: UIColor.white)
         voiceButton.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         voiceButton.addTarget(self, action: #selector(self.onButtonDown), for: .touchDown)
         voiceButton.addTarget(self, action: #selector(self.onButtonUp), for: .touchUpInside)
         voiceButton.addTarget(self, action: #selector(self.onButtonUp), for: .touchUpOutside)
     }
 
+    @objc func onScreenTapped() {
+        launchStoryboard(UIApplication.getPresentedViewController()!, "PauseOverlay", isOverCurrent: true)
+    }
+
     func updateFace(_ expression: FaceExpression) {
         layer.contents = UIImage(named: expression.rawValue)?.cgImage
         layer.contentsRect = CGRect(x: 0, y: 0, width: 1, height: 1125 / screen.size.width * screen.size.height / 2436)
     }
-}
-
-func getTalkAPIReply(_ kanjiString: String) -> Promise<String> {
-    let promise = Promise<String>.pending()
-    let parameters = [
-        "apikey": "DZZDjkWEiLdgnIehTB3cd7BXxcb0L3Ek",
-        "query": kanjiString
-    ]
-
-    Alamofire.request(
-        "https://api.a3rt.recruit-tech.co.jp/talk/v1/smalltalk",
-        method: .post,
-        parameters: parameters
-        ).responseJSON { response in
-            switch response.result {
-            case .success:
-                let json = JSON(response.result.value)
-                promise.fulfill(json["results"][0]["reply"].stringValue)
-
-            case .failure:
-                promise.fulfill("")
-            }
-    }
-    return promise
 }

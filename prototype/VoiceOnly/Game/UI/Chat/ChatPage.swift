@@ -94,7 +94,7 @@ extension ChatPage: GameEventDelegate {
         case .scoreCalculated:
             if let score = event.score {
                 cprint(" \(score.valueText)", score.color)
-                cprint("---")
+                cprint("- - -")
             }
 
         case .lifeChanged:
