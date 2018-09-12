@@ -55,7 +55,7 @@ class ChatView: UIView, ReloadableView, GridLayout {
             self.sentenceLabel = label
         }
 
-        layout(1, y + 5, 47, 26, textView)
+        layout(0, y + 5, 48, 26, textView)
         textView.isEditable = false
         textView.isSelectable = false
         textView.isUserInteractionEnabled = false

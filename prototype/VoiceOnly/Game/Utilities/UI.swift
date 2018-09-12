@@ -101,6 +101,10 @@ extension GridLayout where Self: UIView {
         return floor((axisBound - spacing)*2 / gridCount.c)/2
     }
 
+    var stepFloat: CGFloat {
+        return (axisBound - spacing)*2 / gridCount.c / 2
+    }
+
     func addText(x: Int, y: Int, w: Int, h: Int, text: String, font: UIFont, color: UIColor, completion: ((UILabel) -> Void)? = nil) {
         let label = UILabel()
         label.font = font
@@ -154,10 +158,10 @@ extension GridLayout where Self: UIView {
         }
 
         return CGRect(
-            x: x.c * step,
-            y: y.c * step,
-            width: w.c * step,
-            height: h.c * step
+            x: x.c * stepFloat,
+            y: y.c * stepFloat,
+            width: w.c * stepFloat,
+            height: h.c * stepFloat
         )
     }
 }

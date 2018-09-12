@@ -63,6 +63,7 @@ class ShadowingListPage: UIViewController {
         layer.frame = topView.frame
         layer.frame.origin.y = topView.frame.height - 1.5
         layer.frame.size.height = 1.5
+        layer.frame.size.width = screen.size.width
         layer.startPoint = CGPoint(x: 0, y: 0)
         layer.endPoint = CGPoint(x: 1.0, y: 0)
         layer.colors = lightRGBs

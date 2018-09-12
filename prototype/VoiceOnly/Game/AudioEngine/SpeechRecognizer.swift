@@ -144,7 +144,7 @@ class SpeechRecognizer: NSObject {
     }
 
     func endAudio() {
-        guard isRunning else { return }
+        guard isRunning, !isSimulator else { return }
 
         inputNode.removeTap(onBus: 0)
         recognitionRequest?.endAudio()
