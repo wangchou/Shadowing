@@ -12,7 +12,7 @@ import Promises
 import Alamofire
 import SwiftyJSON
 
-fileprivate func getTalkAPIReply(_ kanjiString: String) -> Promise<String> {
+private func getTalkAPIReply(_ kanjiString: String) -> Promise<String> {
     let promise = Promise<String>.pending()
     let parameters = [
         "apikey": "DZZDjkWEiLdgnIehTB3cd7BXxcb0L3Ek",

@@ -36,4 +36,5 @@ func loadGameSetting() {
 struct GameSetting: Codable {
     var isAutoSpeed: Bool = true
     var preferredSpeed: Float = AVSpeechUtteranceDefaultSpeechRate
+    var isUsingTranslationInShadowingMode: Bool = true
 }
