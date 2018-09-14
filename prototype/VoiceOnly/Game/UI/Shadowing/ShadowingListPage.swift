@@ -23,6 +23,8 @@ class ShadowingListPage: UIViewController {
         super.viewDidLoad()
         startEngine()
         addSentences()
+        loadGameHistory()
+        loadGameSetting()
 
         let height = screen.width * 120/320
         topView.frame.size.height = height
@@ -40,7 +42,6 @@ class ShadowingListPage: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadGameHistory()
         loadCharacterProfile()
         sentencesTableView.reloadData()
         timeline.viewWillAppear()

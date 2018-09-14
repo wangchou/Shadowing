@@ -10,27 +10,15 @@ import Foundation
 
 private let context = GameContext.shared
 
-private let defaults = UserDefaults.standard
 private let gameHistoryKey = "game record array json"
 
 func saveGameHistory() {
-    let encoder = JSONEncoder()
-
-    if let encoded = try? encoder.encode(context.gameHistory) {
-        UserDefaults.standard.set(encoded, forKey: gameHistoryKey)
-    } else {
-        print("saveGameCharacter Failed")
-    }
-
+    saveToUserDefault(object: context.gameHistory, key: gameHistoryKey)
 }
 
 func loadGameHistory() {
-    let decoder = JSONDecoder()
-    if let gameHistoryData = UserDefaults.standard.data(forKey: gameHistoryKey),
-       let gameHistory = try? decoder.decode([GameRecord].self, from: gameHistoryData) {
+    if let gameHistory = loadFromUserDefault(type: [GameRecord].self, key: gameHistoryKey) {
         context.gameHistory = gameHistory
-    } else {
-        print("loadGameHistory Failed")
     }
 }
 

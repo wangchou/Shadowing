@@ -9,27 +9,18 @@
 import Foundation
 import AVFoundation
 
-let gameSettingKey = "GameSettingKey"
+private let gameSettingKey = "GameSettingKey"
 private let context = GameContext.shared
 
 func saveGameSetting() {
-    let encoder = JSONEncoder()
-
-    if let encoded = try? encoder.encode(context.gameSetting) {
-        UserDefaults.standard.set(encoded, forKey: gameSettingKey)
-    } else {
-        print("saveGameCharacter Failed")
-    }
-
+   print("save", context.gameSetting)
+   saveToUserDefault(object: context.gameSetting, key: gameSettingKey)
 }
 
 func loadGameSetting() {
-    let decoder = JSONDecoder()
-    if let gameSettingData = UserDefaults.standard.data(forKey: gameSettingKey),
-        let gameSetting = try? decoder.decode(GameSetting.self, from: gameSettingData) {
+    if let gameSetting = loadFromUserDefault(type: GameSetting.self, key: gameSettingKey) {
+        print("load", gameSetting)
         context.gameSetting = gameSetting
-    } else {
-        print("loadGameSetting Failed")
     }
 }
 

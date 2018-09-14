@@ -267,3 +267,22 @@ extension String {
         return getEmptySpaces(padCount) + self
     }
 }
+
+func saveToUserDefault<T: Codable>(object: T, key: String) {
+    let encoder = JSONEncoder()
+    if let encoded = try? encoder.encode(object) {
+        UserDefaults.standard.set(encoded, forKey: key)
+    } else {
+        print("save \(key) Failed")
+    }
+}
+
+func loadFromUserDefault<T: Codable>(type: T.Type, key: String) -> T? {
+    let decoder = JSONDecoder()
+    if let data = UserDefaults.standard.data(forKey: key),
+        let obj = try? decoder.decode(T.self, from: data) {
+        return obj as T
+    }
+    print("load \(key) Failed")
+    return nil
+}
