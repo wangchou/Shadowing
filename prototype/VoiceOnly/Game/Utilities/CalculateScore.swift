@@ -37,6 +37,13 @@ func getKanaTokenInfos(_ kanjiString: String) -> Promise<[[String]]> {
 
 func getKana(_ kanjiString: String) -> Promise<String> {
     let promise = Promise<String>.pending()
+    if let langCode = kanjiString.langCode,
+       langCode != "ja" {
+        let stringWithoutPuncuation = getSentences(kanjiString).joined(separator: "")
+        print("a ",kanjiString, "b ", stringWithoutPuncuation)
+        promise.fulfill(stringWithoutPuncuation)
+        return promise
+    }
 
     if kanjiString == "" {
         promise.fulfill("")

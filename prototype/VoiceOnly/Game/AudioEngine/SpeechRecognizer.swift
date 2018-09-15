@@ -30,16 +30,15 @@ class SpeechRecognizer: NSObject {
     override init() {
         super.init()
         if !isSimulator {
-            speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ja-JP"))
             authorize()
         }
-
     }
 
     // MARK: - Public Methods
-    func start(stopAfterSeconds: Double = 5) -> Promise<String> {
+    func start(stopAfterSeconds: Double = 5, localIdentifier: String = "ja") -> Promise<String> {
         promise = Promise<String>.pending()
 
+        speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: localIdentifier))
         // mocked start for simulator
         guard !isSimulator else {
             return startFaked(stopAfterSeconds: stopAfterSeconds)

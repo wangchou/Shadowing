@@ -40,7 +40,7 @@ class SentencesTestGame: Game {
         startTime = getNow()
         hattori(targetString).then({ () -> Promise<String> in
             let duration = getNow() - self.startTime + pauseDuration
-            let p1 = listenJP(duration: duration)
+            let p1 = listen(duration: duration)
             usleep(100000)
             _ = hattori(self.targetString)
             return p1

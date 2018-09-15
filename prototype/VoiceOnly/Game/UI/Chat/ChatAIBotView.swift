@@ -75,7 +75,7 @@ class ChatAIBotView: UIView, ReloadableView, GridLayout {
     }
 
     func listenAndReply() {
-        listenJP(duration: 30)
+        listen(duration: 30)
             .then(getTalkAPIReply)
             .then { reply -> Promise<Void> in
                 self.updateFace(.talking)

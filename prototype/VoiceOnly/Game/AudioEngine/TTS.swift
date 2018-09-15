@@ -21,17 +21,25 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
 
     func say(
         _ text: String,
-        _ name: String,
+        name: String? = nil,
+        language: String? = nil,
         rate: Float = AVSpeechUtteranceDefaultSpeechRate // 0.5, range 0 ~ 1.0
         ) -> Promise<Void> {
         synthesizer.delegate = self
         let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = AVSpeechSynthesisVoice(identifier: name)
+        if let name = name {
+            utterance.voice = AVSpeechSynthesisVoice(identifier: name)
+        } else if let language = language {
+            utterance.voice = AVSpeechSynthesisVoice(language: language)
+        } else {
+            print("Error not specifiy voice name or language code")
+            return fulfilledVoidPromise()
+        }
         utterance.rate = rate
         postEvent(.sayStarted, string: text)
         synthesizer.speak(utterance)
         promise = Promise<Void>.pending()
-        self.name = name
+        self.name = name ?? language ?? "nil"
         return promise
     }
 

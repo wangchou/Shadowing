@@ -69,7 +69,7 @@ class ChatFlow: Game {
 
     private func listenPart() -> Promise<Void> {
         if context.isTargetSentencePlayedByUser {
-            return listen()
+            return listenWrapped()
                 .then(getScore)
                 .then({ () -> Promise<Void> in
 

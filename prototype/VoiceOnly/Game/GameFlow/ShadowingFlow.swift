@@ -23,7 +23,7 @@ class ShadowingFlow: Game {
         startTimer()
         context.loadLearningSentences()
 
-        meijia("每句日文說完後，請跟著說～").always {
+        meijia("我說完後，請跟著我說～").always {
             self.learnNext()
         }
 
@@ -59,7 +59,7 @@ class ShadowingFlow: Game {
     }
 
     private func listenPart() -> Promise<Void> {
-        return listen()
+        return listenWrapped()
             .then(getScore)
             .then(speakScore)
     }

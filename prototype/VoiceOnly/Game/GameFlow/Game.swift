@@ -59,26 +59,31 @@ extension Game {
 
     internal func speakTargetString() -> Promise<Void> {
         context.gameState = .TTSSpeaking
-        switch context.targetSpeaker {
-        case .man1:
-            return hattori(context.targetString)
-        case .man2:
-            return otoya(context.targetString)
-        case .woman1:
-            return oren(context.targetString)
-        case .woman2:
-            return kyoko(context.targetString)
-        case .narrator:
-            return meijia(context.targetString)
-        case .user:
-            return fulfilledVoidPromise()
+        let language = context.targetString.langCode
+        if language == "ja" {
+            switch context.targetSpeaker {
+            case .man1:
+                return hattori(context.targetString)
+            case .man2:
+                return otoya(context.targetString)
+            case .woman1:
+                return oren(context.targetString)
+            case .woman2:
+                return kyoko(context.targetString)
+            case .narrator:
+                return meijia(context.targetString)
+            case .user:
+                return fulfilledVoidPromise()
+            }
         }
+
+        return engine.tts.say(context.targetString, language: language)
     }
 
-    internal func listen() -> Promise<Void> {
+    internal func listenWrapped() -> Promise<Void> {
         context.gameState = .listening
         return context.speakDuration.then({ speakDuration -> Promise<String> in
-            return listenJP(duration: Double(speakDuration + pauseDuration))
+            return listen(duration: Double(speakDuration + pauseDuration))
         })
         .then(saveUserSaidString)
     }

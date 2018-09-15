@@ -200,8 +200,15 @@ extension String {
     var furiganaAttributedString: Promise<NSMutableAttributedString> {
         let promise = Promise<NSMutableAttributedString>.pending()
 
-        getKanaTokenInfos(self).then {
-            promise.fulfill(getFuriganaString(tokenInfos: $0))
+        if let langCode = langCode,
+           langCode == "ja" {
+                getKanaTokenInfos(self).then {
+                    promise.fulfill(getFuriganaString(tokenInfos: $0))
+            }
+        } else {
+            let nms = NSMutableAttributedString()
+            nms.append(rubyAttrStr(self))
+            promise.fulfill(nms)
         }
         return promise
     }
@@ -224,5 +231,9 @@ extension String {
             }
         }
         return hiragana
+    }
+
+    var langCode: String? {
+        return NSLinguisticTagger.dominantLanguage(for: self)
     }
 }

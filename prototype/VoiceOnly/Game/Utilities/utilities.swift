@@ -63,7 +63,7 @@ func getNow() -> Double {
 // separate long text by punctuations
 func getSentences(_ text: String) -> [String] {
     let tagger = NSLinguisticTagger(
-        tagSchemes: NSLinguisticTagger.availableTagSchemes(forLanguage: "ja"),
+        tagSchemes: NSLinguisticTagger.availableTagSchemes(forLanguage: text.langCode ?? "ja"),
         options: 0
     )
 
@@ -76,13 +76,14 @@ func getSentences(_ text: String) -> [String] {
     tagger.enumerateTags(in: range, scheme: .tokenType, options: []) { (tag, tokenRange, _, _) in
         let token = (text as NSString).substring(with: tokenRange)
         if tag?.rawValue == "Punctuation" {
-            curSentences += token
+            //curSentences += token
             sentences.append(curSentences)
             curSentences = ""
         } else {
             curSentences += token
         }
     }
+    sentences.append(curSentences)
     return sentences
 }
 

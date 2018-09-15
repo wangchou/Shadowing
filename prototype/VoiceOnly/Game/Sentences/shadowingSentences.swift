@@ -7,6 +7,23 @@
 //
 
 import Foundation
+
+// MARK: - 多國語言
+private let s0 = """
+How are you?|你好(英文)
+Fine, Thank you and you
+There is a bulding in front of us
+こんにちは|你好(日文)
+お元気ですか
+そうですね
+안녕하세요
+감사합니다
+안녕히 가세요
+잘 지내셨어요?
+만나서 반갑습니다
+괜찮습니다
+"""
+
 // MARK: - 打招呼/日常片語 1
 private let s1 = """
 こんにちは|你好
@@ -352,7 +369,7 @@ private let s12 = """
 """
 
 var translations: [String: String] = [:]
-var shadowingSentences: [[String]] = [ s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12 ].map { paragraph in
+var shadowingSentences: [[String]] = [s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12 ].map { paragraph in
     return paragraph
         .components(separatedBy: "\n")
         .filter { s in return s != ""}

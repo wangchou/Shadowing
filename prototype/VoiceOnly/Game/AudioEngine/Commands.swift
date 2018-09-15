@@ -38,28 +38,29 @@ func stopEngine() {
 
 // MARK: - TTS / Speak Japanese
 func meijia(_ sentence: String, rate: Float = fastRate) -> Promise<Void> {
-    return engine.tts.say(sentence, meijiaSan, rate: rate)
+    return engine.tts.say(sentence, name: meijiaSan, rate: rate)
 }
 
 func oren(_ sentence: String, rate: Float = context.teachingRate) -> Promise<Void> {
-    return engine.tts.say(sentence, orenSan, rate: context.teachingRate)
+    return engine.tts.say(sentence, name: orenSan, rate: context.teachingRate)
 }
 
 func hattori(_ sentence: String, rate: Float = context.teachingRate) -> Promise<Void> {
-    return engine.tts.say(sentence, hattoriSan, rate: rate)
+    return engine.tts.say(sentence, name: hattoriSan, rate: rate)
 }
 
 func otoya(_ sentence: String, rate: Float = context.teachingRate) -> Promise<Void> {
-    return engine.tts.say(sentence, otoyaSan, rate: rate)
+    return engine.tts.say(sentence, name: otoyaSan, rate: rate)
 }
 
 func kyoko(_ sentence: String, rate: Float = context.teachingRate) -> Promise<Void> {
-    return engine.tts.say(sentence, kyokoSan, rate: context.teachingRate)
+    return engine.tts.say(sentence, name: kyokoSan, rate: context.teachingRate)
 }
 
 // MARK: - Voice Recognition
-func listenJP(duration: Double) -> Promise<String> {
-    return engine.speechRecognizer.start(stopAfterSeconds: duration)
+func listen(duration: Double, langCode: String? = nil) -> Promise<String> {
+    let langCode = langCode ?? context.targetString.langCode ?? "ja"
+    return engine.speechRecognizer.start(stopAfterSeconds: duration, localIdentifier: langCode)
 }
 
 func stopListen() {

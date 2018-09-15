@@ -1,6 +1,5 @@
 // execute this file by "xcrun swift ./nlp.swift"
 import Foundation
-
 // random string from internet
 var text = "やってきました夏合宿。かなり荷物は減らしたけど、それでも大きめのキャリーバッグにぎゅうぎゅうに押し込めてきた。我ながらいったい何を持ってきたのだろう。宿泊先は保養所というより完全にホテルで、部屋もツインルームだった。これ、合宿というよりただの旅行だよね？同室になったのは違うクラスの野々瀬ののせ真帆まほちゃん。ほとんどしゃべったこともないけど、仲良くなれるかな？なんだか緊張しているみたいだけど。部屋でしばらく休んだあとは、ホテルの庭でバーベキュー。"
 
@@ -52,3 +51,6 @@ func getSentences(_ text: String) -> [String] {
 }
 
 print(getSentences(text))
+print(NSLinguisticTagger.dominantLanguage(for: "コニチワ")) // optional("ja") (ja-JP)
+print(NSLinguisticTagger.dominantLanguage(for: "조선글")) // optional("ko") (ko-KR)
+print(NSLinguisticTagger.dominantLanguage(for: "how are you today?")) // optional("en") (en-US)
