@@ -9,19 +9,50 @@
 import Foundation
 
 // MARK: - 多國語言
-private let s0 = """
-How are you?|你好(英文)
-Fine, Thank you and you
-There is a building in front of us
-こんにちは|你好(日文)
-お元気ですか
-そうですね
-안녕하세요
-감사합니다
-안녕히 가세요
-잘 지내셨어요?
-만나서 반갑습니다
-괜찮습니다
+private let korean = """
+안녕하세요|你好(敬語)
+괜찮아요|沒關係(敬語)
+아니예요|不客氣
+천만에요|不客氣
+감사합니다|謝謝(敬語)
+고마워요|謝謝(平語)
+죄송합니다|對不起(敬語)
+미안해요|對不起(平語)
+도와주세요|請幫我
+뭐요?|什麼?
+어떻게|怎麼/怎麼辦
+왜그래요?|怎麼回事
+무슨소리야|你說什麼?
+뭐라고요?|你說什麼?
+알았어|知道
+몰라|不知道
+안녕히|再見
+잘자|晚安
+"""
+
+private let germanyFrench = """
+Guten Morgen|早安
+Guten Tag|午安
+Guten Abend|晚上好
+Gute Nacht|晚安
+Freut mich, Sie zu sehen|見到您很高興
+Auf Wiedersehen|再見
+Bis bald|待會兒見
+Bis morgen|明天見
+Wie geht es Ihnen?|您好嗎？
+Wie geht´s?|你好嗎？
+Danke, sehr gut!|謝謝，很好！
+Es geht. Und Ihnen?|還可以。您呢？
+Bonjour|日安
+Salut|你好
+Bonsoir|晚安
+Bonne nuit|晚安（睡前）
+Au revoir|再見
+S'il vous plait|請，麻煩您！
+Merci beaucoup|非常謝謝
+De rien|不客氣，沒什麼
+Je vous en prie|不客氣
+Excusez-moi|抱歉
 """
 
 // MARK: - 打招呼/日常片語 1
@@ -371,7 +402,7 @@ private let s12 = """
 """
 
 var translations: [String: String] = [:]
-var shadowingSentences: [[String]] = [s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12 ].map { paragraph in
+var shadowingSentences: [[String]] = [s1, s2, s3, s4, korean, germanyFrench, s5, s6, s7, s8, s9, s10, s11, s12 ].map { paragraph in
     return paragraph
         .components(separatedBy: "\n")
         .filter { s in return s != ""}
