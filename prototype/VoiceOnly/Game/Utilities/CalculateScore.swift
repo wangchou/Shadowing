@@ -40,7 +40,6 @@ func getKana(_ kanjiString: String) -> Promise<String> {
     if let langCode = kanjiString.langCode,
        langCode != "ja" {
         let stringWithoutPuncuation = getSentences(kanjiString).joined(separator: "")
-        print("a ",kanjiString, "b ", stringWithoutPuncuation)
         promise.fulfill(stringWithoutPuncuation)
         return promise
     }

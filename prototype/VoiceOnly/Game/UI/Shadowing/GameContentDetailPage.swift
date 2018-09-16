@@ -123,6 +123,6 @@ extension GameContentDetailPage: UITableViewDataSource {
 
 extension GameContentDetailPage: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        _ = hattori(context.sentences[indexPath.row].string)
+        _ = Game.speakString(string: context.sentences[indexPath.row].string)
     }
 }

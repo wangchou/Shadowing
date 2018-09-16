@@ -71,7 +71,13 @@ class FuriganaLabel: UILabel {
             var descent = CGFloat()
             var leading = CGFloat()
             CTLineGetTypographicBounds(line, &ascent, &descent, &leading)
-            height += ceil(ascent + leading)
+
+            // fix wired korean font issue
+            if attributed.string.langCode == "ko" {
+                height += ceil(ascent + leading + descent)
+            } else {
+                height += ceil(ascent + leading)
+            }
         }
 
         return height + topShift

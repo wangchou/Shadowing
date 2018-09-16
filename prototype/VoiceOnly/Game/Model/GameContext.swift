@@ -71,13 +71,17 @@ class GameContext {
     var isNarratorSpeaking: Bool {
         return targetSpeaker == .narrator
     }
-    var speakDuration: Promise<Float> {
+    var speakDuration: Float = 0
+
+    // only for Japanese chat mode
+    var calculatedSpeakDuration: Promise<Float> {
         let duration: Promise<Float> = Promise<Float>.pending()
         getKana(targetString).then({ kana in
             duration.fulfill(0.6 + kana.count.f * 0.12 / (0.5 + self.life.f * 0.005))
         })
         return duration
     }
+
     var userSaidString: String {
         get {
             return userSaidSentences[self.targetString] ?? ""

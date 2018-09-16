@@ -59,33 +59,48 @@ extension Game {
 
     internal func speakTargetString() -> Promise<Void> {
         context.gameState = .TTSSpeaking
-        let language = context.targetString.langCode
-        if language == "ja" {
-            switch context.targetSpeaker {
+        return Game.speakString(string: context.targetString, speaker: context.targetSpeaker)
+    }
+
+    static func speakString(string: String, speaker: ChatSpeaker? = nil) -> Promise<Void> {
+        let startTime = getNow()
+        func updateSpeakDuration() -> Promise<Void> {
+            context.speakDuration = Float((getNow() - startTime))
+            return fulfilledVoidPromise()
+        }
+        let language = string.langCode
+        if language == "ja",
+           let speaker = speaker {
+            switch speaker {
             case .man1:
-                return hattori(context.targetString)
+                return hattori(string).then(updateSpeakDuration)
             case .man2:
-                return otoya(context.targetString)
+                return otoya(string).then(updateSpeakDuration)
             case .woman1:
-                return oren(context.targetString)
+                return oren(string).then(updateSpeakDuration)
             case .woman2:
-                return kyoko(context.targetString)
+                return kyoko(string).then(updateSpeakDuration)
             case .narrator:
-                return meijia(context.targetString)
+                return meijia(string).then(updateSpeakDuration)
             case .user:
                 return fulfilledVoidPromise()
             }
         }
 
-        return engine.tts.say(context.targetString, language: language)
+        return engine.tts.say(string, language: language).then(updateSpeakDuration)
     }
 
     internal func listenWrapped() -> Promise<Void> {
         context.gameState = .listening
-        return context.speakDuration.then({ speakDuration -> Promise<String> in
-            return listen(duration: Double(speakDuration + pauseDuration))
-        })
-        .then(saveUserSaidString)
+        if context.gameFlowMode == .chat {
+            return context.calculatedSpeakDuration.then({ speakDuration -> Promise<String> in
+                return listen(duration: Double(speakDuration + pauseDuration))
+            })
+            .then(saveUserSaidString)
+        } else {
+            return listen(duration: Double(context.speakDuration + pauseDuration))
+                .then(saveUserSaidString)
+        }
     }
 
     private func saveUserSaidString(userSaidString: String) -> Promise<Void> {

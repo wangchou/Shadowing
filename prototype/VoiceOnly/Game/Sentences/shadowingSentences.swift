@@ -12,7 +12,7 @@ import Foundation
 private let s0 = """
 How are you?|你好(英文)
 Fine, Thank you and you
-There is a bulding in front of us
+There is a building in front of us
 こんにちは|你好(日文)
 お元気ですか
 そうですね
@@ -123,7 +123,9 @@ private let s2 = """
 // MARK: - 自我介紹
 private let s3 = """
 初めまして|初次見面
-本田、と申します|我叫做本田
+田中と申します|我叫做田中
+佐藤です|我是佐藤
+本田って呼んでください|請以本田稱呼我
 本田さんですね|本田 (確認對方名字)
 台湾じんです|我是台灣人
 台湾から来た留学生です|我是台灣來的留學生
