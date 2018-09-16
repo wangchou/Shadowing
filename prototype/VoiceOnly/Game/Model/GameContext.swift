@@ -50,7 +50,6 @@ class GameContext {
     }
     var isNewRecord = false
     var sentences: [(speaker: ChatSpeaker, string: String)] = []
-    var userSaidSentences: [String: String] = [:]
     var sentenceIndex: Int = 0
     var remainingSentenceCount: Int {
         return sentences.count - sentenceIndex
@@ -118,7 +117,7 @@ class GameContext {
         sentenceIndex += 1
         var sentencesBound = sentences.count
         if isSimulator {
-            sentencesBound = 4
+            sentencesBound = 2
         }
         guard sentenceIndex < sentencesBound else { return false }
         userSaidString = ""

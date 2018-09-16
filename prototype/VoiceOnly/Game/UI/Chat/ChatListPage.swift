@@ -12,9 +12,6 @@ private let context = GameContext.shared
 class ChatListPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        startEngine()
         (view as? ChatListView)?.viewWillAppear()
-        loadGameSetting()
-        loadGameHistory()
     }
 }

@@ -28,6 +28,7 @@
 		BE6ED54A20A1373700553D1A /* Commands.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6ED54920A1373700553D1A /* Commands.swift */; };
 		BE6ED56820A17BB000553D1A /* ShadowingFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6ED56720A17BB000553D1A /* ShadowingFlow.swift */; };
 		BE6F2F162144E049003A56CD /* shadowingSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6F2F152144E049003A56CD /* shadowingSentences.swift */; };
+		BE76F117214ECC6E004E130B /* UserSaidSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE76F116214ECC6E004E130B /* UserSaidSentences.swift */; };
 		BE7725C420A2CBC200DF186A /* sentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725BC20A2CBC100DF186A /* sentences.swift */; };
 		BE7725C520A2CBC200DF186A /* n3.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725BE20A2CBC100DF186A /* n3.swift */; };
 		BE7725C820A2CBC200DF186A /* n4.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725C120A2CBC100DF186A /* n4.swift */; };
@@ -106,6 +107,7 @@
 		BE6ED54920A1373700553D1A /* Commands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commands.swift; sourceTree = "<group>"; };
 		BE6ED56720A17BB000553D1A /* ShadowingFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowingFlow.swift; sourceTree = "<group>"; };
 		BE6F2F152144E049003A56CD /* shadowingSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shadowingSentences.swift; sourceTree = "<group>"; };
+		BE76F116214ECC6E004E130B /* UserSaidSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSaidSentences.swift; sourceTree = "<group>"; };
 		BE7725BC20A2CBC100DF186A /* sentences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sentences.swift; sourceTree = "<group>"; };
 		BE7725BE20A2CBC100DF186A /* n3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n3.swift; sourceTree = "<group>"; };
 		BE7725C120A2CBC100DF186A /* n4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n4.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				BE17FB3D209B19B200D23F22 /* GameContext.swift */,
 				BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */,
 				BED1CC0821452A54004AE397 /* GameSetting.swift */,
+				BE76F116214ECC6E004E130B /* UserSaidSentences.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -438,6 +441,7 @@
 				BE7725C420A2CBC200DF186A /* sentences.swift in Sources */,
 				BE8180C520B3E03E006ABCB3 /* GameFinishedTableCell.swift in Sources */,
 				BE9B476A20AD50520063E0DA /* FuriganaUtils.swift in Sources */,
+				BE76F117214ECC6E004E130B /* UserSaidSentences.swift in Sources */,
 				BED1CC0921452A54004AE397 /* GameSetting.swift in Sources */,
 				BEF28B6320B52BF700385273 /* UI.swift in Sources */,
 				BE6D1D262141122400BC4A0E /* ChatView.swift in Sources */,

@@ -57,13 +57,16 @@ extension GameFinishedPage: UITableViewDataSource {
         guard let finishedCell = cell as? GameFinishedTableCell else { print("detailCell convert error"); return cell }
         let sentence = context.sentences[indexPath.row].string
 
+        finishedCell.sentenceLabel.widthPadding = 4
+        finishedCell.userSaidSentenceLabel.widthPadding = 4
+
         if let tokenInfos = kanaTokenInfosCacheDictionary[sentence] {
             finishedCell.sentenceLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
         } else {
             finishedCell.sentenceLabel.text = sentence
         }
 
-        let userSaidSentence = context.userSaidSentences[sentence] ?? ""
+        let userSaidSentence = userSaidSentences[sentence] ?? ""
         if let tokenInfos = kanaTokenInfosCacheDictionary[userSaidSentence] {
             finishedCell.userSaidSentenceLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
         } else {

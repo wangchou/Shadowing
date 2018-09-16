@@ -4,7 +4,7 @@ import UIKit
 class FuriganaLabel: UILabel {
     private var height: CGFloat = 60
     private let topShift: CGFloat = 6
-    private let widthPadding: CGFloat = 7
+    var widthPadding: CGFloat = 7
 
     override var text: String? {
         willSet {
@@ -87,7 +87,7 @@ class FuriganaLabel: UILabel {
     func widthOfCoreText(attributed: NSAttributedString, maxWidth: CGFloat) -> CGFloat {
         var previousWidth = maxWidth
         var width = maxWidth
-        let resizeWidthStep: CGFloat = 5
+        let resizeWidthStep: CGFloat = 3
         repeat {
             let textDrawRect = CGRect(
                 x: self.frame.origin.x,

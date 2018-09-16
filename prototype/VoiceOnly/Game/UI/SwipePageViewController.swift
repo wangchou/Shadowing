@@ -25,6 +25,12 @@ class SwipePageViewController: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        startEngine()
+        addSentences()
+        loadGameHistory()
+        loadGameSetting()
+        loadUserSaidSentences()
+
         // Do any additional setup after loading the view.
         func addPage(_ storyboardId: String) {
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: storyboardId)

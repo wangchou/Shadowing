@@ -21,10 +21,6 @@ class ShadowingListPage: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        startEngine()
-        addSentences()
-        loadGameHistory()
-        loadGameSetting()
 
         let height = screen.width * 120/320
         topView.frame.size.height = height
