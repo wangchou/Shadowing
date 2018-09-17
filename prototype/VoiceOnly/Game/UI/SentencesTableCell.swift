@@ -18,6 +18,8 @@ class SentencesTableCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        practiceButton.roundBorder(borderWidth: 0.5, cornerRadius: 5, color: UIColor.blue.withAlphaComponent(0.1))
+        practiceButton.backgroundColor = UIColor.blue.withAlphaComponent(0.03)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -30,6 +32,7 @@ class SentencesTableCell: UITableViewCell {
     var targetString: String {
         return sentenceLabel.text ?? " "
     }
+
     var tableView: UITableView? {
         var view = superview
         while let tmpView = view, tmpView.isKind(of: UITableView.self) == false {

@@ -46,7 +46,7 @@
                         </subviews>
                     </stackView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEf-GW-fOX">
-                        <rect key="frame" x="273" y="0.0" width="41" height="55.5"/>
+                        <rect key="frame" x="273" y="5" width="41" height="45.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="41" id="HoC-X5-8Cq"/>
                         </constraints>
@@ -62,9 +62,9 @@
                     <constraint firstAttribute="bottom" secondItem="q6O-Sx-IVO" secondAttribute="bottom" id="3jG-DX-zgZ"/>
                     <constraint firstAttribute="bottom" secondItem="WjY-pm-086" secondAttribute="bottom" id="ByM-G8-jb5"/>
                     <constraint firstItem="q6O-Sx-IVO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="DoB-Ql-oNi"/>
-                    <constraint firstAttribute="bottom" secondItem="jEf-GW-fOX" secondAttribute="bottom" id="FfK-lf-X2D"/>
+                    <constraint firstAttribute="bottom" secondItem="jEf-GW-fOX" secondAttribute="bottom" constant="5" id="FfK-lf-X2D"/>
                     <constraint firstItem="q6O-Sx-IVO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="VDF-bV-Pe5"/>
-                    <constraint firstItem="jEf-GW-fOX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="luo-8p-H2T"/>
+                    <constraint firstItem="jEf-GW-fOX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="luo-8p-H2T"/>
                     <constraint firstItem="WjY-pm-086" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="nob-lV-TTg"/>
                     <constraint firstAttribute="trailing" secondItem="WjY-pm-086" secondAttribute="trailing" constant="51" id="s3i-yI-LCb"/>
                 </constraints>

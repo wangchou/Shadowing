@@ -54,6 +54,8 @@ extension Game {
         context.gameState = .stopped
         timer?.invalidate()
         updateGameHistory()
+        saveGameSetting()
+        saveUserSaidSentencesAndScore()
     }
 
     internal func speakTargetString() -> Promise<Void> {
@@ -106,6 +108,7 @@ extension Game {
     private func saveUserSaidString(userSaidString: String) -> Promise<Void> {
         context.gameState = .stringRecognized
         context.userSaidString = userSaidString
+        userSaidSentences[context.targetString] = userSaidString
         return fulfilledVoidPromise()
     }
 
