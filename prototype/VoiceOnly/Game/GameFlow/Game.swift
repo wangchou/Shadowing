@@ -82,11 +82,12 @@ extension Game {
             case .narrator:
                 return meijia(string).then(updateSpeakDuration)
             case .user:
-                return fulfilledVoidPromise()
+                return fulfilledVoidPromise().then(updateSpeakDuration)
             }
         }
 
-        return engine.tts.say(string, language: language).then(updateSpeakDuration)
+        return engine.tts.say(string, language: language, rate: context.teachingRate)
+                .then(updateSpeakDuration)
     }
 
     internal func listenWrapped() -> Promise<Void> {

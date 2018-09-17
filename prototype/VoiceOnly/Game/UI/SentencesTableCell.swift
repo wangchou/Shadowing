@@ -40,7 +40,11 @@ class SentencesTableCell: UITableViewCell {
 
     @IBAction func practiceButtonTapped(_ sender: Any) {
         prepareForSpeaking()
-        Game.speakString(string: targetString)
+        var speaker: ChatSpeaker? = nil
+        if targetString.langCode == "ja" {
+            speaker = ChatSpeaker.man1
+        }
+        Game.speakString(string: targetString, speaker: speaker)
             .then(listenPart)
             .then(afterListeningCalculateScore)
             .then(updateUIByScore)
@@ -87,7 +91,7 @@ class SentencesTableCell: UITableViewCell {
     private func listenPart() -> Promise<String> {
         let duration = getNow() - startTime + Double(pauseDuration)
         tableView?.beginUpdates()
-        userSaidSentenceLabel.text = " listening..."
+        userSaidSentenceLabel.text = "listening..."
         userSaidSentenceLabel.textColor = UIColor.red
         tableView?.endUpdates()
 
@@ -97,15 +101,7 @@ class SentencesTableCell: UITableViewCell {
     }
 
     private func afterListeningCalculateScore(userSaidSentence: String) -> Promise<Score> {
-        tableView?.beginUpdates()
         userSaidSentences[targetString] = userSaidSentence
-        userSaidSentenceLabel.textColor = UIColor.black
-        if let tokenInfos = kanaTokenInfosCacheDictionary[userSaidSentence] {
-            userSaidSentenceLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
-        } else {
-            userSaidSentenceLabel.text = userSaidSentence
-        }
-        tableView?.endUpdates()
 
         // print("afterListeningCalcScore", userSaidSentence )
 
@@ -114,6 +110,13 @@ class SentencesTableCell: UITableViewCell {
 
     private func updateUIByScore(score: Score) {
         tableView?.beginUpdates()
+        let userSaidSentence = userSaidSentences[targetString] ?? ""
+        userSaidSentenceLabel.textColor = UIColor.black
+        if let tokenInfos = kanaTokenInfosCacheDictionary[userSaidSentence] {
+            userSaidSentenceLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
+        } else {
+            userSaidSentenceLabel.text = userSaidSentence
+        }
         scoreLabel.text = score.valueText
         scoreLabel.textColor = score.color
         userSaidSentenceLabel.backgroundColor = score.color

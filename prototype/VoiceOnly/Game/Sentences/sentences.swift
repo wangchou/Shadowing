@@ -30,7 +30,7 @@ func addSentences() {
     shadowingSentences.forEach { sentences in
         let subSentences: [(speaker: ChatSpeaker, string: String)] = sentences
             .map { s in
-                return (ChatSpeaker.woman1, s)
+                return (ChatSpeaker.man1, s)
         }
         let key = "\(subSentences[0].string)"
         allSentences[key] = subSentences

@@ -12,7 +12,7 @@ import Foundation
 private let korean = """
 안녕하세요|你好(敬語)
 괜찮아요|沒關係(敬語)
-아니예요|不客氣
+아니에요|不客氣
 천만에요|不客氣
 감사합니다|謝謝(敬語)
 고마워요|謝謝(平語)
@@ -37,22 +37,20 @@ Guten Abend|晚上好
 Gute Nacht|晚安
 Freut mich, Sie zu sehen|見到您很高興
 Auf Wiedersehen|再見
-Bis bald|待會兒見
 Bis morgen|明天見
 Wie geht es Ihnen?|您好嗎？
-Wie geht´s?|你好嗎？
+Wie geht's?|你好嗎？
 Danke, sehr gut!|謝謝，很好！
 Es geht. Und Ihnen?|還可以。您呢？
 Bonjour|日安
-Salut|你好
 Bonsoir|晚安
 Bonne nuit|晚安（睡前）
 Au revoir|再見
-S'il vous plait|請，麻煩您！
+S'il vous plaît|請，麻煩您！
 Merci beaucoup|非常謝謝
 De rien|不客氣，沒什麼
 Je vous en prie|不客氣
-Excusez-moi|抱歉
+Excusez moi|抱歉
 """
 
 // MARK: - 打招呼/日常片語 1
@@ -64,7 +62,7 @@ private let s1 = """
 ええ、元気ですよ|是的，我很好
 おかげさまで|承蒙你的...
 今日は、いい天気ですね|今天天氣真好
-おはようこざいます。|早安
+おはようございます。|早安
 こんばんは|晚安
 おやすみなさい|晚安
 お久しぶりです|好久不見

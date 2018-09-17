@@ -142,7 +142,8 @@ func getFuriganaString(tokenInfos: [[String]]) -> NSMutableAttributedString {
                 .filter { $0 != "" }
             let color: UIColor = (tokenInfo[1] == "助詞" &&
                                   (kana == "は" || kana == "が" || kana == "と" ||
-                                   kana == "で" || kana == "に" || kana == "を"))
+                                   kana == "で" || kana == "に" || kana == "を" ||
+                                   kana == "へ" || kana == "て"))
                                     ? myWaterBlue : .black
 
             furiganaAttrStr.append(getFuriganaAttrString(parts, kana, color: color))

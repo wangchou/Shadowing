@@ -115,6 +115,11 @@ extension GameContentDetailPage: UITableViewDataSource {
 
 extension GameContentDetailPage: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        _ = Game.speakString(string: context.sentences[indexPath.row].string)
+        let string = context.sentences[indexPath.row].string
+        if string.langCode == "ja" {
+            _ = hattori(string)
+        } else {
+            _ = Game.speakString(string: string)
+        }
     }
 }

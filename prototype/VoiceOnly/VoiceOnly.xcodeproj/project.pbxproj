@@ -279,9 +279,9 @@
 				BEBDEDC3208EF09F00C18520 /* Main.storyboard */,
 				BE76F11D214F56F6004E130B /* SentencesTableCell.xib */,
 				BE76F11C214F56F6004E130B /* SentencesTableCell.swift */,
-				BE66343A2147869000A9166A /* SwipePageViewController.swift */,
 				BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */,
 				BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */,
+				BE66343A2147869000A9166A /* SwipePageViewController.swift */,
 				BEFA979C20AEAEA400DE3280 /* Shadowing */,
 				BE7DF8B02147E22000D4A780 /* Chat */,
 			);
@@ -305,10 +305,10 @@
 			isa = PBXGroup;
 			children = (
 				BEDEDD3620A46D1B00E7B60B /* ShadowingListPage.swift */,
+				BE7725CD20A4216700DF186A /* ContentCell.swift */,
 				BE500AED20B822CA004E73D1 /* CharacterView.swift */,
 				BEF258B220B57C7F00D0026C /* TimelineView.swift */,
 				BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */,
-				BE7725CD20A4216700DF186A /* ContentCell.swift */,
 				BE1CA957209DC43800086853 /* Messenger.swift */,
 				BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */,
 				BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */,
