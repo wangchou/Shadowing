@@ -29,6 +29,8 @@
 		BE6ED56820A17BB000553D1A /* ShadowingFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6ED56720A17BB000553D1A /* ShadowingFlow.swift */; };
 		BE6F2F162144E049003A56CD /* shadowingSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6F2F152144E049003A56CD /* shadowingSentences.swift */; };
 		BE76F117214ECC6E004E130B /* UserSaidSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE76F116214ECC6E004E130B /* UserSaidSentences.swift */; };
+		BE76F11E214F56F6004E130B /* SentencesTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE76F11C214F56F6004E130B /* SentencesTableCell.swift */; };
+		BE76F11F214F56F6004E130B /* SentencesTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE76F11D214F56F6004E130B /* SentencesTableCell.xib */; };
 		BE7725C420A2CBC200DF186A /* sentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725BC20A2CBC100DF186A /* sentences.swift */; };
 		BE7725C520A2CBC200DF186A /* n3.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725BE20A2CBC100DF186A /* n3.swift */; };
 		BE7725C820A2CBC200DF186A /* n4.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725C120A2CBC100DF186A /* n4.swift */; };
@@ -38,7 +40,6 @@
 		BE7DF8B62147EBE000D4A780 /* ChatAIBotPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7DF8B52147EBE000D4A780 /* ChatAIBotPage.swift */; };
 		BE8180C020B3BEB6006ABCB3 /* MyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180BF20B3BEB6006ABCB3 /* MyText.swift */; };
 		BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */; };
-		BE8180C520B3E03E006ABCB3 /* GameFinishedTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180C420B3E03E006ABCB3 /* GameFinishedTableCell.swift */; };
 		BE8283B42133DAE2008BC875 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8283B32133DAE2008BC875 /* GameEngine.swift */; };
 		BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */; };
 		BE9B476A20AD50520063E0DA /* FuriganaUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476920AD50520063E0DA /* FuriganaUtils.swift */; };
@@ -56,7 +57,6 @@
 		BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */; };
 		BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD8208EF15F00C18520 /* constants.swift */; };
 		BED1CC0921452A54004AE397 /* GameSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1CC0821452A54004AE397 /* GameSetting.swift */; };
-		BEDBCCD820A82AC4001CF11D /* GameDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDBCCD720A82AC4001CF11D /* GameDetailTableCell.swift */; };
 		BEDEDD3720A46D1B00E7B60B /* ShadowingListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3620A46D1B00E7B60B /* ShadowingListPage.swift */; };
 		BEDEDD3920A46FCA00E7B60B /* GameRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */; };
 		BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */; };
@@ -108,6 +108,8 @@
 		BE6ED56720A17BB000553D1A /* ShadowingFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowingFlow.swift; sourceTree = "<group>"; };
 		BE6F2F152144E049003A56CD /* shadowingSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shadowingSentences.swift; sourceTree = "<group>"; };
 		BE76F116214ECC6E004E130B /* UserSaidSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSaidSentences.swift; sourceTree = "<group>"; };
+		BE76F11C214F56F6004E130B /* SentencesTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentencesTableCell.swift; sourceTree = "<group>"; };
+		BE76F11D214F56F6004E130B /* SentencesTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SentencesTableCell.xib; sourceTree = "<group>"; };
 		BE7725BC20A2CBC100DF186A /* sentences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sentences.swift; sourceTree = "<group>"; };
 		BE7725BE20A2CBC100DF186A /* n3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n3.swift; sourceTree = "<group>"; };
 		BE7725C120A2CBC100DF186A /* n4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n4.swift; sourceTree = "<group>"; };
@@ -117,7 +119,6 @@
 		BE7DF8B52147EBE000D4A780 /* ChatAIBotPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAIBotPage.swift; sourceTree = "<group>"; };
 		BE8180BF20B3BEB6006ABCB3 /* MyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyText.swift; sourceTree = "<group>"; };
 		BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFinishedPage.swift; sourceTree = "<group>"; };
-		BE8180C420B3E03E006ABCB3 /* GameFinishedTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFinishedTableCell.swift; sourceTree = "<group>"; };
 		BE8283B32133DAE2008BC875 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaLabel.swift; sourceTree = "<group>"; };
 		BE9B476920AD50520063E0DA /* FuriganaUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaUtils.swift; sourceTree = "<group>"; };
@@ -137,7 +138,6 @@
 		BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculateScore.swift; sourceTree = "<group>"; };
 		BEBDEDD8208EF15F00C18520 /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		BED1CC0821452A54004AE397 /* GameSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetting.swift; sourceTree = "<group>"; };
-		BEDBCCD720A82AC4001CF11D /* GameDetailTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailTableCell.swift; sourceTree = "<group>"; };
 		BEDEDD3620A46D1B00E7B60B /* ShadowingListPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowingListPage.swift; sourceTree = "<group>"; };
 		BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRecord.swift; sourceTree = "<group>"; };
 		BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerEventDelegate.swift; sourceTree = "<group>"; };
@@ -276,6 +276,9 @@
 		BEDEDD4220A5D86500E7B60B /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				BEBDEDC3208EF09F00C18520 /* Main.storyboard */,
+				BE76F11C214F56F6004E130B /* SentencesTableCell.swift */,
+				BE76F11D214F56F6004E130B /* SentencesTableCell.xib */,
 				BE66343A2147869000A9166A /* SwipePageViewController.swift */,
 				BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */,
 				BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */,
@@ -306,11 +309,9 @@
 				BEF258B220B57C7F00D0026C /* TimelineView.swift */,
 				BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */,
 				BE7725CD20A4216700DF186A /* ContentCell.swift */,
-				BEDBCCD720A82AC4001CF11D /* GameDetailTableCell.swift */,
 				BE1CA957209DC43800086853 /* Messenger.swift */,
 				BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */,
 				BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */,
-				BE8180C420B3E03E006ABCB3 /* GameFinishedTableCell.swift */,
 				BE9D243920C8DEE9000515DD /* GameReportView.swift */,
 			);
 			path = Shadowing;
@@ -319,7 +320,6 @@
 		BEFA97A120AEB18700DE3280 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				BEBDEDC3208EF09F00C18520 /* Main.storyboard */,
 				BE6F2F142144DFB5003A56CD /* Sentences */,
 				BE9556EF212D7C130045E578 /* Model */,
 				BE17FB38209B0F5F00D23F22 /* AudioEngine */,
@@ -393,6 +393,7 @@
 				BEBDEDCA208EF0A000C18520 /* LaunchScreen.storyboard in Resources */,
 				BEBDEDC7208EF0A000C18520 /* Assets.xcassets in Resources */,
 				BEBDEDDB208EF15F00C18520 /* drumLoop.caf in Resources */,
+				BE76F11F214F56F6004E130B /* SentencesTableCell.xib in Resources */,
 				BEA2389D21460EBD00548BBC /* sentences.txt in Resources */,
 				BEBDEDC5208EF09F00C18520 /* Main.storyboard in Resources */,
 			);
@@ -439,9 +440,9 @@
 				BEF28B6120B52BB000385273 /* Score.swift in Sources */,
 				BE1CA956209D5D0900086853 /* Game.swift in Sources */,
 				BE7725C420A2CBC200DF186A /* sentences.swift in Sources */,
-				BE8180C520B3E03E006ABCB3 /* GameFinishedTableCell.swift in Sources */,
 				BE9B476A20AD50520063E0DA /* FuriganaUtils.swift in Sources */,
 				BE76F117214ECC6E004E130B /* UserSaidSentences.swift in Sources */,
+				BE76F11E214F56F6004E130B /* SentencesTableCell.swift in Sources */,
 				BED1CC0921452A54004AE397 /* GameSetting.swift in Sources */,
 				BEF28B6320B52BF700385273 /* UI.swift in Sources */,
 				BE6D1D262141122400BC4A0E /* ChatView.swift in Sources */,
@@ -457,7 +458,6 @@
 				BE62CA61213D11C700CF6DD6 /* chatDemo.swift in Sources */,
 				BEDEDD3720A46D1B00E7B60B /* ShadowingListPage.swift in Sources */,
 				BE7725CE20A4216700DF186A /* ContentCell.swift in Sources */,
-				BEDBCCD820A82AC4001CF11D /* GameDetailTableCell.swift in Sources */,
 				BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */,
 				BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */,
 				BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */,

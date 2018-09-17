@@ -27,6 +27,12 @@ class GameContentDetailPage: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        tableView.register(
+            UINib(nibName: "SentencesTableCell", bundle: nil),
+            forCellReuseIdentifier: "ContentTableCell"
+        )
+
         titleLabel.text = context.dataSetKey
         if let gameRecord = findBestRecord(key: context.dataSetKey) {
             rankLabel.text = gameRecord.rank.rawValue
@@ -94,30 +100,19 @@ extension GameContentDetailPage: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SentenceCell", for: indexPath)
-        guard let detailCell = cell as? GameDetailTableCell else { print("detailCell convert error"); return cell }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ContentTableCell", for: indexPath)
+        guard let contentCell = cell as? SentencesTableCell else { print("detailCell convert error"); return cell }
         let sentence = context.sentences[indexPath.row].string
-
-        if let tokenInfos = kanaTokenInfosCacheDictionary[sentence] {
-            detailCell.furiganaLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
+        if let userSaidSentence = userSaidSentences[sentence] {
+            calculateScore(sentence, userSaidSentence)
+                .then { score in
+                    contentCell.update(sentence: sentence, score: score)
+                }
         } else {
-            detailCell.furiganaLabel.text = sentence
+            contentCell.update(sentence: sentence, score: nil)
         }
 
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = myGreen.withAlphaComponent(0.1)
-        cell.selectedBackgroundView = backgroundView
-
-        if let gameRecord = findBestRecord(key: context.dataSetKey),
-           let score = gameRecord.sentencesScore[sentence] {
-            detailCell.miscLabel.text = score.valueText
-            detailCell.miscLabel.textColor = score.color
-        } else {
-            detailCell.miscLabel.text = "無分"
-            detailCell.miscLabel.textColor = .lightGray
-        }
-
-        return detailCell
+        return contentCell
     }
 }
 

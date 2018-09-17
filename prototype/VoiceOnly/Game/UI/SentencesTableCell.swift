@@ -1,20 +1,30 @@
 //
-//  GameFinishedTableCell.swift
+//  SentencesTableCell.swift
 //  VoiceOnly
 //
-//  Created by Wangchou Lu on H30/05/22.
-//  Copyright © 平成30年 Lu, WangChou. All rights reserved.
+//  Created by Wangchou Lu on 9/17/30 H.
+//  Copyright © 30 Heisei Lu, WangChou. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import Promises
 
-class GameFinishedTableCell: UITableViewCell {
+class SentencesTableCell: UITableViewCell {
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var sentenceLabel: FuriganaLabel!
     @IBOutlet weak var userSaidSentenceLabel: FuriganaLabel!
     @IBOutlet weak var practiceButton: UIButton!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        // super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
 
     var startTime: Double = 0
     var targetString: String {
@@ -36,7 +46,7 @@ class GameFinishedTableCell: UITableViewCell {
             .then(updateUIByScore)
     }
 
-    func update(sentence: String, gameRecord: GameRecord?) {
+    func update(sentence: String, score: Score?) {
         sentenceLabel.widthPadding = 4
         userSaidSentenceLabel.widthPadding = 4
 
@@ -53,8 +63,7 @@ class GameFinishedTableCell: UITableViewCell {
             userSaidSentenceLabel.text = userSaidSentence
         }
 
-        if let gameRecord = gameRecord,
-            let score = gameRecord.sentencesScore[sentence] {
+        if let score = score {
             scoreLabel.text = score.valueText
             scoreLabel.textColor = score.color
             userSaidSentenceLabel.backgroundColor = score.color

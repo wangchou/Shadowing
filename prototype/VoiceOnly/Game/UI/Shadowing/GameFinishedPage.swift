@@ -14,6 +14,7 @@ private let context = GameContext.shared
 class GameFinishedPage: UIViewController {
     @IBOutlet weak var reportView: GameReportView!
 
+    @IBOutlet weak var tableView: UITableView!
     @objc func injected() {
         #if DEBUG
         viewWillAppear(false)
@@ -22,6 +23,14 @@ class GameFinishedPage: UIViewController {
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.register(
+            UINib(nibName: "SentencesTableCell", bundle: nil),
+            forCellReuseIdentifier: "FinishedTableCell"
+        )
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -53,11 +62,13 @@ extension GameFinishedPage: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FinishedSentenceCell", for: indexPath)
-        guard let finishedCell = cell as? GameFinishedTableCell else { print("detailCell convert error"); return cell }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FinishedTableCell", for: indexPath)
+        guard let finishedCell = cell as? SentencesTableCell else { print("detailCell convert error"); return cell }
         let sentence = context.sentences[indexPath.row].string
 
-        finishedCell.update(sentence: sentence, gameRecord: context.gameRecord)
+        finishedCell.update(
+            sentence: sentence,
+            score: context.gameRecord?.sentencesScore[sentence])
 
         return finishedCell
     }

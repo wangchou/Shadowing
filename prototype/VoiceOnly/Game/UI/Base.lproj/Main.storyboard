@@ -369,59 +369,14 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SentenceCell" id="Dbt-EG-HLc" customClass="GameDetailTableCell" customModule="VoiceOnly" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ContentTableCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SentenceCell" id="Dbt-EG-HLc" customClass="SentencesTableCell" customModule="VoiceOnly" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="208" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Dbt-EG-HLc" id="KQa-Km-FxO">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="無分" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XRu-Hi-623">
-                                                    <rect key="frame" x="0.0" y="0.0" width="55" height="43.5"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="55" id="Ktm-8N-rvy"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <color key="textColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ただの人間には" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0tn-vE-CDR" customClass="FuriganaLabel" customModule="VoiceOnly" customModuleProvider="target">
-                                                    <rect key="frame" x="55" y="0.0" width="230" height="43.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eSI-ij-KEn">
-                                                    <rect key="frame" x="285" y="2.5" width="30" height="39"/>
-                                                    <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="gTF-9E-BVh"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                                    <state key="normal" title="練習">
-                                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="XRu-Hi-623" firstAttribute="centerY" secondItem="0tn-vE-CDR" secondAttribute="centerY" id="3tj-nm-R1c"/>
-                                                <constraint firstItem="0tn-vE-CDR" firstAttribute="top" secondItem="KQa-Km-FxO" secondAttribute="top" id="9Hk-kj-l54"/>
-                                                <constraint firstItem="XRu-Hi-623" firstAttribute="leading" secondItem="KQa-Km-FxO" secondAttribute="leading" id="KDf-D0-Uud"/>
-                                                <constraint firstItem="eSI-ij-KEn" firstAttribute="leading" secondItem="0tn-vE-CDR" secondAttribute="trailing" id="LQP-xt-V9k"/>
-                                                <constraint firstItem="XRu-Hi-623" firstAttribute="top" secondItem="KQa-Km-FxO" secondAttribute="top" id="MjW-Yp-oEe"/>
-                                                <constraint firstItem="0tn-vE-CDR" firstAttribute="leading" secondItem="XRu-Hi-623" secondAttribute="trailing" id="PvJ-GH-iKU"/>
-                                                <constraint firstItem="XRu-Hi-623" firstAttribute="leading" secondItem="KQa-Km-FxO" secondAttribute="leading" id="j8U-Mf-gb9"/>
-                                                <constraint firstItem="eSI-ij-KEn" firstAttribute="centerY" secondItem="KQa-Km-FxO" secondAttribute="centerY" id="lJK-qd-d1P"/>
-                                                <constraint firstAttribute="bottom" secondItem="XRu-Hi-623" secondAttribute="bottom" id="op5-kd-yNH"/>
-                                                <constraint firstAttribute="trailing" secondItem="eSI-ij-KEn" secondAttribute="trailing" constant="5" id="qS7-aZ-Ave"/>
-                                                <constraint firstAttribute="bottom" secondItem="0tn-vE-CDR" secondAttribute="bottom" id="vQh-LA-khT"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
-                                        <connections>
-                                            <outlet property="furiganaLabel" destination="0tn-vE-CDR" id="Xca-Lv-yBs"/>
-                                            <outlet property="miscLabel" destination="XRu-Hi-623" id="w2p-rM-B10"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -512,73 +467,15 @@
                                     <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="FinishedSentenceCell" rowHeight="63" id="U4Y-kF-8LG" customClass="GameFinishedTableCell" customModule="VoiceOnly" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FinishedTableCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="FinishedSentenceCell" rowHeight="63" id="U4Y-kF-8LG" userLabel="FinishedTableCell" customClass="SentencesTableCell" customModule="VoiceOnly" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="348" width="320" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="U4Y-kF-8LG" id="316-Iq-LBo">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="62.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="無分" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPn-cX-hpI">
-                                                    <rect key="frame" x="0.0" y="19.5" width="55" height="24"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="55" id="mxJ-fC-4bl"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <color key="textColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6mu-3B-LpP" userLabel="Sentence stack">
-                                                    <rect key="frame" x="55" y="0.0" width="214" height="62.5"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="ただの人間にはには" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NB6-xL-cJu" customClass="FuriganaLabel" customModule="VoiceOnly" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="214" height="35"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ただの人間には" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhw-Di-rgQ" customClass="FuriganaLabel" customModule="VoiceOnly" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="35" width="214" height="27.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Hy-Tm-u4Q">
-                                                    <rect key="frame" x="273" y="0.0" width="41" height="62.5"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="41" id="0ng-p1-K1r"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <state key="normal" title="練習"/>
-                                                    <connections>
-                                                        <action selector="practiceButtonTapped:" destination="U4Y-kF-8LG" eventType="touchUpInside" id="cju-uh-vey"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="5Hy-Tm-u4Q" secondAttribute="bottom" id="5cr-CV-9z5"/>
-                                                <constraint firstAttribute="trailing" secondItem="5Hy-Tm-u4Q" secondAttribute="trailing" constant="6" id="FJG-D8-jLU"/>
-                                                <constraint firstItem="PPn-cX-hpI" firstAttribute="leading" secondItem="316-Iq-LBo" secondAttribute="leading" id="S2B-gz-uN1"/>
-                                                <constraint firstAttribute="bottom" secondItem="6mu-3B-LpP" secondAttribute="bottom" id="TQM-x0-2bl"/>
-                                                <constraint firstItem="6mu-3B-LpP" firstAttribute="leading" secondItem="PPn-cX-hpI" secondAttribute="trailing" id="Ufh-mm-lzB"/>
-                                                <constraint firstItem="PPn-cX-hpI" firstAttribute="centerY" secondItem="6mu-3B-LpP" secondAttribute="centerY" id="itQ-J2-hjU"/>
-                                                <constraint firstItem="5Hy-Tm-u4Q" firstAttribute="top" secondItem="316-Iq-LBo" secondAttribute="top" id="q2o-u1-oTY"/>
-                                                <constraint firstItem="6mu-3B-LpP" firstAttribute="top" secondItem="316-Iq-LBo" secondAttribute="top" id="rR6-wp-Gkd"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="6mu-3B-LpP" secondAttribute="trailing" constant="51" id="vaH-ZO-oDc"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="practiceButton" destination="5Hy-Tm-u4Q" id="Vsj-qb-IwF"/>
-                                            <outlet property="scoreLabel" destination="PPn-cX-hpI" id="9Q3-xa-525"/>
-                                            <outlet property="sentenceLabel" destination="NB6-xL-cJu" id="0Ea-NG-b2M"/>
-                                            <outlet property="userSaidSentenceLabel" destination="rhw-Di-rgQ" id="apt-L2-U2l"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -597,6 +494,7 @@
                     </view>
                     <connections>
                         <outlet property="reportView" destination="V2Z-wa-Qsc" id="Uog-II-oKV"/>
+                        <outlet property="tableView" destination="H4W-eR-YuF" id="OS6-km-g4G"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E4x-vU-tSa" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="KGk-i7-Jjw" customClass="SentencesTableCell" customModule="VoiceOnly" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="55.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="無分" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q6O-Sx-IVO">
+                        <rect key="frame" x="0.0" y="0.0" width="55" height="55.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="55" id="wQG-c9-okA"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <color key="textColor" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="WjY-pm-086">
+                        <rect key="frame" x="55" y="0.0" width="214" height="55.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ただの人間にはには" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d2j-Sd-YWt" customClass="FuriganaLabel" customModule="VoiceOnly" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="214" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="ただの人間にはには" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UGH-kP-Qt8" customClass="FuriganaLabel" customModule="VoiceOnly" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="214" height="27.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEf-GW-fOX">
+                        <rect key="frame" x="273" y="0.0" width="41" height="55.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="41" id="HoC-X5-8Cq"/>
+                        </constraints>
+                        <state key="normal" title="練習"/>
+                        <connections>
+                            <action selector="practiceButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="pL8-ij-3dD"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="jEf-GW-fOX" secondAttribute="trailing" constant="6" id="20T-Qw-bdq"/>
+                    <constraint firstItem="WjY-pm-086" firstAttribute="leading" secondItem="q6O-Sx-IVO" secondAttribute="trailing" id="24O-sQ-q3F"/>
+                    <constraint firstAttribute="bottom" secondItem="q6O-Sx-IVO" secondAttribute="bottom" id="3jG-DX-zgZ"/>
+                    <constraint firstAttribute="bottom" secondItem="WjY-pm-086" secondAttribute="bottom" id="ByM-G8-jb5"/>
+                    <constraint firstItem="q6O-Sx-IVO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="DoB-Ql-oNi"/>
+                    <constraint firstAttribute="bottom" secondItem="jEf-GW-fOX" secondAttribute="bottom" id="FfK-lf-X2D"/>
+                    <constraint firstItem="q6O-Sx-IVO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="VDF-bV-Pe5"/>
+                    <constraint firstItem="jEf-GW-fOX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="luo-8p-H2T"/>
+                    <constraint firstItem="WjY-pm-086" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="nob-lV-TTg"/>
+                    <constraint firstAttribute="trailing" secondItem="WjY-pm-086" secondAttribute="trailing" constant="51" id="s3i-yI-LCb"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="practiceButton" destination="jEf-GW-fOX" id="AtH-RR-LSN"/>
+                <outlet property="scoreLabel" destination="q6O-Sx-IVO" id="0ln-bF-CJz"/>
+                <outlet property="sentenceLabel" destination="d2j-Sd-YWt" id="aUy-ul-G0T"/>
+                <outlet property="userSaidSentenceLabel" destination="UGH-kP-Qt8" id="aO4-0m-syM"/>
+            </connections>
+            <point key="canvasLocation" x="34" y="60"/>
+        </tableViewCell>
+    </objects>
+</document>
