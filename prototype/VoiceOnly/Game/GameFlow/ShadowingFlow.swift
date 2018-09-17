@@ -23,7 +23,7 @@ class ShadowingFlow: Game {
         startTimer()
         context.loadLearningSentences()
 
-        meijia("我說一句，你跟著說一句～").always {
+        meijia("我說完後，請跟著我說～").always {
             self.learnNext()
         }
 

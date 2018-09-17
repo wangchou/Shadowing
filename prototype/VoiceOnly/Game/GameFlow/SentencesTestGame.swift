@@ -9,7 +9,6 @@
 import Foundation
 import Promises
 
-private let pauseDuration = 0.2
 private let context = GameContext.shared
 private let engine = GameEngine.shared
 
@@ -39,7 +38,7 @@ class SentencesTestGame: Game {
 
         startTime = getNow()
         hattori(targetString).then({ () -> Promise<String> in
-            let duration = getNow() - self.startTime + pauseDuration
+            let duration = getNow() - self.startTime + Double(pauseDuration)
             let p1 = listen(duration: duration)
             usleep(100000)
             _ = hattori(self.targetString)

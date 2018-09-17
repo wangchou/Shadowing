@@ -57,33 +57,7 @@ extension GameFinishedPage: UITableViewDataSource {
         guard let finishedCell = cell as? GameFinishedTableCell else { print("detailCell convert error"); return cell }
         let sentence = context.sentences[indexPath.row].string
 
-        finishedCell.sentenceLabel.widthPadding = 4
-        finishedCell.userSaidSentenceLabel.widthPadding = 4
-
-        if let tokenInfos = kanaTokenInfosCacheDictionary[sentence] {
-            finishedCell.sentenceLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
-        } else {
-            finishedCell.sentenceLabel.text = sentence
-        }
-
-        let userSaidSentence = userSaidSentences[sentence] ?? ""
-        if let tokenInfos = kanaTokenInfosCacheDictionary[userSaidSentence] {
-            finishedCell.userSaidSentenceLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
-        } else {
-            finishedCell.userSaidSentenceLabel.text = userSaidSentence
-        }
-
-        if let gameRecord = context.gameRecord,
-           let score = gameRecord.sentencesScore[sentence] {
-            finishedCell.scoreLabel.text = score.valueText
-            finishedCell.scoreLabel.textColor = score.color
-            finishedCell.userSaidSentenceLabel.backgroundColor = score.color
-            finishedCell.userSaidSentenceLabel.isHidden = score.type == .perfect ? true : false
-        } else {
-            finishedCell.scoreLabel.text = "無分"
-            finishedCell.scoreLabel.textColor = myGray
-            finishedCell.userSaidSentenceLabel.isHidden = true
-        }
+        finishedCell.update(sentence: sentence, gameRecord: context.gameRecord)
 
         return finishedCell
     }

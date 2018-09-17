@@ -11,7 +11,6 @@ import Promises
 
 private let context = GameContext.shared
 private let engine = GameEngine.shared
-private let pauseDuration: Float = 0.4
 
 enum GameState {
     case stopped
