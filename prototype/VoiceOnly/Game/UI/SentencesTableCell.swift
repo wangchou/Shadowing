@@ -46,7 +46,7 @@ class SentencesTableCell: UITableViewCell {
             .then(updateUIByScore)
     }
 
-    func update(sentence: String, score: Score?) {
+    func update(sentence: String) {
         sentenceLabel.widthPadding = 4
         userSaidSentenceLabel.widthPadding = 4
 
@@ -63,7 +63,7 @@ class SentencesTableCell: UITableViewCell {
             userSaidSentenceLabel.text = userSaidSentence
         }
 
-        if let score = score {
+        if let score = sentenceScores[sentence] {
             scoreLabel.text = score.valueText
             scoreLabel.textColor = score.color
             userSaidSentenceLabel.backgroundColor = score.color
@@ -91,6 +91,8 @@ class SentencesTableCell: UITableViewCell {
         userSaidSentenceLabel.textColor = UIColor.red
         tableView?.endUpdates()
 
+        // print("listenPart", duration, targetString, targetString.langCode)
+
         return listen(duration: duration, langCode: targetString.langCode)
     }
 
@@ -105,6 +107,8 @@ class SentencesTableCell: UITableViewCell {
         }
         tableView?.endUpdates()
 
+        // print("afterListeningCalcScore", userSaidSentence )
+
         return calculateScore(targetString, userSaidSentence)
     }
 
@@ -115,5 +119,11 @@ class SentencesTableCell: UITableViewCell {
         userSaidSentenceLabel.backgroundColor = score.color
         userSaidSentenceLabel.isHidden = score.type == .perfect ? true : false
         tableView?.endUpdates()
+
+        sentenceScores[targetString] = score
+        saveUserSaidSentencesAndScore()
+        // speak feedback
+        _ = oren(score.text, rate: normalRate)
+        // print("updateUIByScore", score.value)
     }
 }

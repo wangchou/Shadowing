@@ -97,7 +97,6 @@ class GameContext {
         sentenceIndex = 0
         guard let selectedDataSet = allSentences[dataSetKey] else { return }
         sentences = isShuffle ? selectedDataSet.shuffled() : selectedDataSet
-        userSaidSentences = [:]
 
         life = isSimulator ? 100 : 40
 
@@ -110,7 +109,6 @@ class GameContext {
     func loadChatDemoSentences() {
         sentenceIndex = 0
         sentences = chatDemo
-        userSaidSentences = [:]
     }
 
     func nextSentence() -> Bool {

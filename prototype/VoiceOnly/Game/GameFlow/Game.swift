@@ -116,6 +116,7 @@ extension Game {
     private func saveScore(score: Score) -> Promise<Void> {
         context.gameState = .scoreCalculated
         context.score = score
+        sentenceScores[context.targetString] = score
         updateGameRecord(score: score)
         return fulfilledVoidPromise()
     }

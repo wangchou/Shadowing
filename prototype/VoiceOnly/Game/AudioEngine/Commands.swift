@@ -42,7 +42,7 @@ func meijia(_ sentence: String, rate: Float = fastRate) -> Promise<Void> {
 }
 
 func oren(_ sentence: String, rate: Float = context.teachingRate) -> Promise<Void> {
-    return engine.tts.say(sentence, name: orenSan, rate: context.teachingRate)
+    return engine.tts.say(sentence, name: orenSan, rate: rate)
 }
 
 func hattori(_ sentence: String, rate: Float = context.teachingRate) -> Promise<Void> {

@@ -61,6 +61,10 @@ class GameContentDetailPage: UIViewController {
         }
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+
     func getProgressAttrText(progress: String) -> NSAttributedString {
         let attrText = NSMutableAttributedString()
         attrText.append(getStrokeText(progress, .black, strokeWidth: -1.5, strokColor: .lightGray, font: UIFont.boldSystemFont(ofSize: 60)))
@@ -103,14 +107,7 @@ extension GameContentDetailPage: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContentTableCell", for: indexPath)
         guard let contentCell = cell as? SentencesTableCell else { print("detailCell convert error"); return cell }
         let sentence = context.sentences[indexPath.row].string
-        if let userSaidSentence = userSaidSentences[sentence] {
-            calculateScore(sentence, userSaidSentence)
-                .then { score in
-                    contentCell.update(sentence: sentence, score: score)
-                }
-        } else {
-            contentCell.update(sentence: sentence, score: nil)
-        }
+        contentCell.update(sentence: sentence)
 
         return contentCell
     }

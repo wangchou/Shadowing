@@ -277,8 +277,8 @@
 			isa = PBXGroup;
 			children = (
 				BEBDEDC3208EF09F00C18520 /* Main.storyboard */,
-				BE76F11C214F56F6004E130B /* SentencesTableCell.swift */,
 				BE76F11D214F56F6004E130B /* SentencesTableCell.xib */,
+				BE76F11C214F56F6004E130B /* SentencesTableCell.swift */,
 				BE66343A2147869000A9166A /* SwipePageViewController.swift */,
 				BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */,
 				BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */,

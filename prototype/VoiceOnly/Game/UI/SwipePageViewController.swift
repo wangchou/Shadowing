@@ -29,7 +29,7 @@ class SwipePageViewController: UIPageViewController {
         addSentences()
         loadGameHistory()
         loadGameSetting()
-        loadUserSaidSentences()
+        loadUserSaidSentencesAndScore()
 
         // Do any additional setup after loading the view.
         func addPage(_ storyboardId: String) {

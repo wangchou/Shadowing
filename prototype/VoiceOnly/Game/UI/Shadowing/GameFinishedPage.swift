@@ -66,9 +66,7 @@ extension GameFinishedPage: UITableViewDataSource {
         guard let finishedCell = cell as? SentencesTableCell else { print("detailCell convert error"); return cell }
         let sentence = context.sentences[indexPath.row].string
 
-        finishedCell.update(
-            sentence: sentence,
-            score: context.gameRecord?.sentencesScore[sentence])
+        finishedCell.update(sentence: sentence)
 
         return finishedCell
     }
