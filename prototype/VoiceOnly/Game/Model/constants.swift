@@ -23,7 +23,6 @@ let meijiaSan = "com.apple.ttsbundle.Mei-Jia-compact"
     let orenSan = "com.apple.ttsbundle.siri_female_ja-JP_compact"
     let hattoriSan = "com.apple.ttsbundle.siri_male_ja-JP_compact"
     let otoyaSan = "com.apple.ttsbundle.Otoya-compact"
-
 #endif
 
 let normalRate = AVSpeechUtteranceDefaultSpeechRate

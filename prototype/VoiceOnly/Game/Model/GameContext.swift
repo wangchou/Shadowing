@@ -106,11 +106,6 @@ class GameContext {
         isNewRecord = false
     }
 
-    func loadChatDemoSentences() {
-        sentenceIndex = 0
-        sentences = chatDemo
-    }
-
     func nextSentence() -> Bool {
         sentenceIndex += 1
         var sentencesBound = sentences.count

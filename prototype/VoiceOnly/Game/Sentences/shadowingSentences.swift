@@ -412,3 +412,12 @@ var shadowingSentences: [[String]] = [s1, s2, s3, s4, korean, germanyFrench, s5,
             return subSentences[0]
         }
 }
+
+enum ChatSpeaker: String {
+    case woman1
+    case woman2
+    case man1
+    case man2
+    case narrator
+    case user
+}

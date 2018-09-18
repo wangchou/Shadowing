@@ -23,6 +23,9 @@ class PauseOverlayViewController: UIViewController {
         super.viewDidLoad()
         finishButton.layer.cornerRadius = 10
         resumeButton.layer.cornerRadius = 10
+
+        let viewTap = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        view.addGestureRecognizer(viewTap)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -55,7 +58,7 @@ class PauseOverlayViewController: UIViewController {
     @IBAction func finishButtonClicked(_ sender: Any) {
         ShadowingFlow.shared.stop()
         if context.gameFlowMode == .shadowing {
-            launchStoryboard(self, "SwipeMainPage")
+            launchStoryboard(self, "ShadowingListPage")
         } else {
             dismiss(animated: false) {
                 UIApplication.getPresentedViewController()?.dismiss(animated: true, completion: nil)
@@ -63,8 +66,13 @@ class PauseOverlayViewController: UIViewController {
         }
     }
 
+    @objc func viewTapped() {
+        dismiss(animated: true, completion: nil)
+        postEvent(.resume)
+    }
+
     @IBAction func resumeButtonClicked(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
         postEvent(.resume)
     }
 }
