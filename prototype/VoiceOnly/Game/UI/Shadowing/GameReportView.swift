@@ -110,15 +110,12 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         backButton.titleLabel?.textColor = myLightText
         backButton.roundBorder(borderWidth: 3, cornerRadius: 15, color: UIColor.white.withAlphaComponent(0.5))
 
-        let backButtonTap = UITapGestureRecognizer(target: self, action: #selector(self.backButtonTapped))
-        backButton.addGestureRecognizer(backButtonTap)
+        backButton.addTapGestureRecognizer {
+            if let vc = UIApplication.getPresentedViewController() {
+                launchStoryboard(vc, "ShadowingListPage", animated: true)
+            }
+        }
         layout(2, 52, 44, 8, backButton)
         addSubview(backButton)
-    }
-
-    @objc func backButtonTapped() {
-        if let vc = UIApplication.getPresentedViewController() {
-            launchStoryboard(vc, "ShadowingListPage", animated: true)
-        }
     }
 }

@@ -24,8 +24,10 @@ class PauseOverlayViewController: UIViewController {
         finishButton.layer.cornerRadius = 10
         resumeButton.layer.cornerRadius = 10
 
-        let viewTap = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
-        view.addGestureRecognizer(viewTap)
+        view.addTapGestureRecognizer(action: viewTapped)
+
+        // prevent events pass to back view
+        ttsSpeedSlider.addTapGestureRecognizer(action: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -55,6 +57,7 @@ class PauseOverlayViewController: UIViewController {
         saveGameSetting()
         viewWillAppear(false)
     }
+
     @IBAction func finishButtonClicked(_ sender: Any) {
         ShadowingFlow.shared.stop()
         if context.gameFlowMode == .shadowing {

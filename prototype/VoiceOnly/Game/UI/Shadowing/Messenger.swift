@@ -43,8 +43,7 @@ class Messenger: UIViewController {
         timeLabel.text = "00:00"
         context.startTime = getNow()
 
-        let scrollViewTap = UITapGestureRecognizer(target: self, action: #selector(scrollViewTapped))
-        scrollView.addGestureRecognizer(scrollViewTap)
+        scrollView.addTapGestureRecognizer(action: scrollViewTapped)
     }
 
     func end() {
@@ -99,7 +98,6 @@ class Messenger: UIViewController {
     }
 
     @objc func scrollViewTapped() {
-        print("scrollViewTapped")
         game.pause()
         launchStoryboard(self, "PauseOverlay", isOverCurrent: true)
     }
