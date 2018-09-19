@@ -229,6 +229,18 @@ func dumpAvaliableVoices() {
     }
 }
 
+func getAvailableVoiceNames(language: String) -> [String] {
+    return AVSpeechSynthesisVoice.speechVoices()
+        .filter { voice in
+            if voice.language == language {
+                return true
+            }
+            return false
+        }.map { voice in
+            return voice.name
+        }
+}
+
 // measure performance
 var startTime: Double = 0
 func setStartTime(_ tag: String = "") {

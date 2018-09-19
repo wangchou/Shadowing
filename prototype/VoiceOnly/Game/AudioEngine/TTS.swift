@@ -27,14 +27,15 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         ) -> Promise<Void> {
         synthesizer.delegate = self
         let utterance = AVSpeechUtterance(string: text)
-        if let name = name {
-            utterance.voice = AVSpeechSynthesisVoice(identifier: name)
-        } else if let language = language {
-            utterance.voice = AVSpeechSynthesisVoice(language: language)
+        if let name = name,
+           let voice = AVSpeechSynthesisVoice(identifier: name) {
+            utterance.voice = voice
+        } else if let voice = AVSpeechSynthesisVoice(language: language) {
+            utterance.voice = voice
         } else {
-            print("Error not specifiy voice name or language code")
-            return fulfilledVoidPromise()
+            utterance.voice = AVSpeechSynthesisVoice(language: "ja")
         }
+
         utterance.rate = rate
         postEvent(.sayStarted, string: text)
         synthesizer.speak(utterance)
