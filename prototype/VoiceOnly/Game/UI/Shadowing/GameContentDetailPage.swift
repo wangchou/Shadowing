@@ -61,9 +61,6 @@ class GameContentDetailPage: UIViewController {
         }
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
 
     func getProgressAttrText(progress: String) -> NSAttributedString {
         let attrText = NSMutableAttributedString()

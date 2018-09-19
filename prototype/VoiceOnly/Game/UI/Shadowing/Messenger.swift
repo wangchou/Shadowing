@@ -28,11 +28,13 @@ class Messenger: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         start()
+        UIApplication.shared.isIdleTimerDisabled = true
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         end()
+        UIApplication.shared.isIdleTimerDisabled = false
     }
 
     func start() {
