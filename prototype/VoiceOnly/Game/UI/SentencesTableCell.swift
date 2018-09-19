@@ -10,6 +10,7 @@ import UIKit
 import Promises
 
 class SentencesTableCell: UITableViewCell {
+    static var isPracticing: Bool = false
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var sentenceLabel: FuriganaLabel!
     @IBOutlet weak var userSaidSentenceLabel: FuriganaLabel!
@@ -20,10 +21,11 @@ class SentencesTableCell: UITableViewCell {
         // Initialization code
         practiceButton.roundBorder(borderWidth: 0.5, cornerRadius: 5, color: UIColor.blue.withAlphaComponent(0.1))
         practiceButton.backgroundColor = UIColor.blue.withAlphaComponent(0.03)
+        self.addTapGestureRecognizer(action: practiceSentence)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        // super.setSelected(selected, animated: animated)
+        super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
@@ -42,6 +44,15 @@ class SentencesTableCell: UITableViewCell {
     }
 
     @IBAction func practiceButtonTapped(_ sender: Any) {
+        practiceSentence()
+    }
+
+    func practiceSentence() {
+        guard SentencesTableCell.isPracticing != true else { return }
+        SentencesTableCell.isPracticing = true
+        self.isUserInteractionEnabled = false
+        practiceButton.isEnabled = false
+
         prepareForSpeaking()
         var speaker: ChatSpeaker? = nil
         if targetString.langCode == "ja" {
@@ -51,6 +62,11 @@ class SentencesTableCell: UITableViewCell {
             .then(listenPart)
             .then(afterListeningCalculateScore)
             .then(updateUIByScore)
+            .always {
+                self.isUserInteractionEnabled = true
+                self.practiceButton.isEnabled = true
+                SentencesTableCell.isPracticing = false
+            }
     }
 
     func update(sentence: String) {
@@ -98,15 +114,11 @@ class SentencesTableCell: UITableViewCell {
         userSaidSentenceLabel.textColor = UIColor.red
         tableView?.endUpdates()
 
-        // print("listenPart", duration, targetString, targetString.langCode)
-
         return listen(duration: duration, langCode: targetString.langCode)
     }
 
     private func afterListeningCalculateScore(userSaidSentence: String) -> Promise<Score> {
         userSaidSentences[targetString] = userSaidSentence
-
-        // print("afterListeningCalcScore", userSaidSentence )
 
         return calculateScore(targetString, userSaidSentence)
     }
@@ -128,8 +140,6 @@ class SentencesTableCell: UITableViewCell {
 
         sentenceScores[targetString] = score
         saveUserSaidSentencesAndScore()
-        // speak feedback
         _ = oren(score.text, rate: normalRate)
-        // print("updateUIByScore", score.value)
     }
 }

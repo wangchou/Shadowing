@@ -74,11 +74,9 @@ extension GameFinishedPage: UITableViewDataSource {
 
 extension GameFinishedPage: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let string = context.sentences[indexPath.row].string
-        if string.langCode == "ja" {
-            _ = hattori(string)
-        } else {
-            _ = Game.speakString(string: string)
+        let cell = tableView.cellForRow(at: indexPath)
+        if let cell = cell as? SentencesTableCell {
+            cell.practiceSentence()
         }
     }
 }

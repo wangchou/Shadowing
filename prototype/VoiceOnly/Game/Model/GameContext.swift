@@ -39,11 +39,11 @@ class GameContext {
         return GameEngine.shared.isEngineRunning
     }
     var startTime: Double = getNow()
-    var life: Int = 40
+    var life: Int = 50
 
     var teachingRate: Float {
         if gameSetting.isAutoSpeed {
-            return AVSpeechUtteranceDefaultSpeechRate * (0.5 + life.f * 0.005)
+            return AVSpeechUtteranceDefaultSpeechRate * (0.4 + life.f * 0.007)
         } else {
             return gameSetting.preferredSpeed
         }
@@ -76,7 +76,11 @@ class GameContext {
     var calculatedSpeakDuration: Promise<Float> {
         let duration: Promise<Float> = Promise<Float>.pending()
         getKana(targetString).then({ kana in
-            duration.fulfill(0.6 + kana.count.f * 0.12 / (0.5 + self.life.f * 0.005))
+            duration.fulfill(
+                0.6 +
+                kana.count.f * 0.12 /
+                (self.teachingRate/AVSpeechUtteranceDefaultSpeechRate)
+            )
         })
         return duration
     }
@@ -98,7 +102,7 @@ class GameContext {
         guard let selectedDataSet = allSentences[dataSetKey] else { return }
         sentences = isShuffle ? selectedDataSet.shuffled() : selectedDataSet
 
-        life = isSimulator ? 100 : 40
+        life = isSimulator ? 100 : 50
 
         let level = allLevels[dataSetKey] ?? .n5a
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level, flowMode: .shadowing)

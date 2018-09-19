@@ -65,21 +65,21 @@ class ShadowingFlow: Game {
     }
 
     // change life will change the teachingSpeed
-    // initial life = 40, speed = 0.7x
-    // life 100 => speed 1.0x
-    // life 0   => speed 0.5x
+    // initial life = 50, speed = 0.7x
+    // life 100 => speed 1.1x
+    // life 0   => speed 0.4x
     private func updateLife(score: Score) {
         var life = context.life
 
         switch score.type {
         case .perfect:
-            life += 5
+            life += 4
         case .great:
             life += 2
         case .good:
-            life += -1
+            life += -3
         case .poor:
-            life += -4
+            life += -5
         }
 
         context.life = max(min(100, life), 0)
