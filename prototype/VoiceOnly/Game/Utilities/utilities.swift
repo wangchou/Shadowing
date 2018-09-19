@@ -33,8 +33,13 @@ func loadCharacterProfile() {
 func configureAudioSession() {
     do {
         let session: AVAudioSession = AVAudioSession.sharedInstance()
-        try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [
-            .mixWithOthers, .allowBluetoothA2DP, .allowBluetooth, .allowAirPlay, .defaultToSpeaker])
+        try session.setCategory(
+            AVAudioSession.Category.playAndRecord,
+            mode: AVAudioSession.Mode.default,
+            options: [
+            .mixWithOthers, .allowBluetoothA2DP, .allowBluetooth, .allowAirPlay, .defaultToSpeaker
+            ]
+        )
 
         // turn the measure mode will crash bluetooh, duckOthers and mixWithOthers
         //try session.setMode(AVAudioSessionModeMeasurement)
