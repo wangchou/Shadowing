@@ -60,35 +60,35 @@ extension Game {
 
     internal func speakTargetString() -> Promise<Void> {
         context.gameState = .TTSSpeaking
-        return Game.speakString(string: context.targetString, speaker: context.targetSpeaker)
+        return Game.speak(text: context.targetString, speaker: context.targetSpeaker)
     }
 
-    static func speakString(string: String, speaker: ChatSpeaker? = nil) -> Promise<Void> {
+    static func speak(text: String, speaker: ChatSpeaker? = nil) -> Promise<Void> {
         let startTime = getNow()
         func updateSpeakDuration() -> Promise<Void> {
             context.speakDuration = Float((getNow() - startTime))
             return fulfilledVoidPromise()
         }
-        let language = string.langCode
+        let language = text.langCode
         if language == "ja",
            let speaker = speaker {
             switch speaker {
             case .man1:
-                return hattori(string).then(updateSpeakDuration)
+                return hattori(text).then(updateSpeakDuration)
             case .man2:
-                return otoya(string).then(updateSpeakDuration)
+                return otoya(text).then(updateSpeakDuration)
             case .woman1:
-                return oren(string).then(updateSpeakDuration)
+                return oren(text).then(updateSpeakDuration)
             case .woman2:
-                return kyoko(string).then(updateSpeakDuration)
+                return kyoko(text).then(updateSpeakDuration)
             case .narrator:
-                return meijia(string).then(updateSpeakDuration)
+                return meijia(text).then(updateSpeakDuration)
             case .user:
                 return fulfilledVoidPromise().then(updateSpeakDuration)
             }
         }
 
-        return engine.tts.say(string, language: language, rate: context.teachingRate)
+        return engine.tts.say(text, language: language, rate: context.teachingRate)
                 .then(updateSpeakDuration)
     }
 

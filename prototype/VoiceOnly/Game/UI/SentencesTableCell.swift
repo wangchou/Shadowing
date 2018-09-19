@@ -58,7 +58,7 @@ class SentencesTableCell: UITableViewCell {
         if targetString.langCode == "ja" {
             speaker = ChatSpeaker.man1
         }
-        Game.speakString(string: targetString, speaker: speaker)
+        Game.speak(text: targetString, speaker: speaker)
             .then(listenPart)
             .then(afterListeningCalculateScore)
             .then(updateUIByScore)
