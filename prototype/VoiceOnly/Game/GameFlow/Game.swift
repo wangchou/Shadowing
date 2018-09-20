@@ -60,20 +60,28 @@ extension Game {
 
     internal func speakTargetString() -> Promise<Void> {
         context.gameState = .TTSSpeaking
+        guard context.gameSetting.isUsingGuideVoice else {
+            postEvent(.sayStarted, string: context.targetString)
+            return fulfilledVoidPromise()
+        }
+
         return engine.speak(text: context.targetString, speaker: context.targetSpeaker)
     }
 
     internal func listenWrapped() -> Promise<Void> {
         context.gameState = .listening
-        if context.gameFlowMode == .chat {
-            return context.calculatedSpeakDuration.then({ speakDuration -> Promise<String> in
+        if context.gameSetting.isUsingGuideVoice {
+            return engine
+                .listen(duration: Double(context.speakDuration + pauseDuration))
+                .then(saveUserSaidString)
+        }
+
+        return context
+            .calculatedSpeakDuration
+            .then({ speakDuration -> Promise<String> in
                 return engine.listen(duration: Double(speakDuration + pauseDuration))
             })
             .then(saveUserSaidString)
-        } else {
-            return engine.listen(duration: Double(context.speakDuration + pauseDuration))
-                .then(saveUserSaidString)
-        }
     }
 
     private func saveUserSaidString(userSaidString: String) -> Promise<Void> {

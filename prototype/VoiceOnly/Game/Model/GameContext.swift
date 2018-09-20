@@ -70,9 +70,11 @@ class GameContext {
     var isNarratorSpeaking: Bool {
         return targetSpeaker == .meijia
     }
+
+    // measure the seconds of tts speaking
     var speakDuration: Float = 0
 
-    // only for Japanese chat mode
+    // calculate when guide voice off mode
     var calculatedSpeakDuration: Promise<Float> {
         let duration: Promise<Float> = Promise<Float>.pending()
         getKana(targetString).then({ kana in

@@ -26,6 +26,7 @@ struct GameSetting: Codable {
     var isAutoSpeed: Bool = true
     var preferredSpeed: Float = AVSpeechUtteranceDefaultSpeechRate
     var isUsingTranslation: Bool = true
+    var isUsingGuideVoice: Bool = false
     var narrator: ChatSpeaker = .meijia
     var teacher: ChatSpeaker = .hattori
     var assisant: ChatSpeaker = .oren

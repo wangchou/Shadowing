@@ -22,8 +22,11 @@ class ShadowingFlow: Game {
         gameSeconds = 0
         startTimer()
         context.loadLearningSentences()
-
-        narratorSay("我說完後，請跟著我說～").always {
+        var narratorString = "我說完後，請跟著我說～"
+        if !context.gameSetting.isUsingGuideVoice {
+            narratorString = "請唸出對應的日文。"
+        }
+        narratorSay(narratorString).always {
             self.learnNext()
         }
 

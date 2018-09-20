@@ -9,6 +9,8 @@
 import UIKit
 import Promises
 
+private let context = GameContext.shared
+
 class SentencesTableCell: UITableViewCell {
     static var isPracticing: Bool = false
     @IBOutlet weak var scoreLabel: UILabel!
@@ -55,19 +57,15 @@ class SentencesTableCell: UITableViewCell {
         practiceButton.isEnabled = false
 
         prepareForSpeaking()
-        var speaker: ChatSpeaker? = nil
-        if targetString.langCode == "ja" {
-            speaker = ChatSpeaker.hattori
-        }
-        SpeechEngine.shared.speak(text: targetString, speaker: speaker)
-              .then(listenPart)
-              .then(afterListeningCalculateScore)
-              .then(updateUIByScore)
-              .always {
-                  self.isUserInteractionEnabled = true
-                  self.practiceButton.isEnabled = true
-                  SentencesTableCell.isPracticing = false
-              }
+        speakPart()
+            .then(listenPart)
+            .then(afterListeningCalculateScore)
+            .then(updateUIByScore)
+            .always {
+                self.isUserInteractionEnabled = true
+                self.practiceButton.isEnabled = true
+                SentencesTableCell.isPracticing = false
+            }
     }
 
     func update(sentence: String, isShowTranslate: Bool = false) {
@@ -113,6 +111,11 @@ class SentencesTableCell: UITableViewCell {
         }
     }
 
+    private func speakPart() -> Promise<Void> {
+        guard context.gameSetting.isUsingGuideVoice else { return fulfilledVoidPromise() }
+        return SpeechEngine.shared.speak(text: targetString, speaker: .hattori)
+    }
+
     private func prepareForSpeaking() {
         tableView?.beginUpdates()
         userSaidSentenceLabel.text = " "
@@ -123,12 +126,22 @@ class SentencesTableCell: UITableViewCell {
     }
 
     private func listenPart() -> Promise<String> {
-        let duration = getNow() - startTime + Double(pauseDuration)
-        tableView?.beginUpdates()
-        userSaidSentenceLabel.text = "listening..."
-        userSaidSentenceLabel.textColor = UIColor.red
-        tableView?.endUpdates()
+        func prepareListening() {
+            tableView?.beginUpdates()
+            userSaidSentenceLabel.text = "listening..."
+            userSaidSentenceLabel.textColor = UIColor.red
+            tableView?.endUpdates()
+        }
 
+        if !context.gameSetting.isUsingGuideVoice {
+            return context.calculatedSpeakDuration.then { duration -> Promise<String> in
+                prepareListening()
+                return SpeechEngine.shared.listen(duration: Double(duration), langCode: self.targetString.langCode)
+            }
+        }
+
+        let duration = getNow() - startTime + Double(pauseDuration)
+        prepareListening()
         return SpeechEngine.shared.listen(duration: duration, langCode: targetString.langCode)
     }
 
