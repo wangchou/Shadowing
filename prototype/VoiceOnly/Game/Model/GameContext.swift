@@ -36,7 +36,7 @@ class GameContext {
     var dataSetKey: String = "" // the sentence set key in current game
     var gameRecord: GameRecord? // of current game
     var isEngineRunning: Bool {
-        return GameEngine.shared.isEngineRunning
+        return SpeechEngine.shared.isEngineRunning
     }
     var startTime: Double = getNow()
     var life: Int = 50
@@ -61,14 +61,14 @@ class GameContext {
         return sentences[sentenceIndex].string
     }
     var targetSpeaker: ChatSpeaker {
-        guard sentenceIndex < sentences.count else { return ChatSpeaker.man1 }
+        guard sentenceIndex < sentences.count else { return ChatSpeaker.hattori }
         return sentences[sentenceIndex].speaker
     }
     var isTargetSentencePlayedByUser: Bool {
         return targetSpeaker == .user
     }
     var isNarratorSpeaking: Bool {
-        return targetSpeaker == .narrator
+        return targetSpeaker == .meijia
     }
     var speakDuration: Float = 0
 

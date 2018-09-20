@@ -10,7 +10,7 @@ import Foundation
 import Promises
 
 private let context = GameContext.shared
-private let engine = GameEngine.shared
+private let engine = SpeechEngine.shared
 
 // 用 iphone 線控耳機、並把耳機放到麥克風旁邊、耳機聲音開到最大
 // 測試 siri 能不能辨識他自己說的日文
@@ -26,9 +26,8 @@ class SentencesTestGame: Game {
     var gameState: GameState = .stopped
 
     override func start() {
-        startEngine()
+        engine.start()
         context.life = 100
-        engine.bgm.node.volume = 0
         testNext()
     }
 
@@ -37,11 +36,11 @@ class SentencesTestGame: Game {
         targetString = sentences[index]
 
         startTime = getNow()
-        hattori(targetString).then({ () -> Promise<String> in
+        teacherSay(targetString).then({ () -> Promise<String> in
             let duration = getNow() - self.startTime + Double(pauseDuration)
-            let p1 = listen(duration: duration)
+            let p1 = engine.listen(duration: duration)
             usleep(100000)
-            _ = hattori(self.targetString)
+            _ = teacherSay(self.targetString)
             return p1
         }).then({ saidString -> Promise<Score> in
             self.saidString = saidString

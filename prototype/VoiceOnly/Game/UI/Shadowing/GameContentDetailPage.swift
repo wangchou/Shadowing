@@ -61,7 +61,6 @@ class GameContentDetailPage: UIViewController {
         }
     }
 
-
     func getProgressAttrText(progress: String) -> NSAttributedString {
         let attrText = NSMutableAttributedString()
         attrText.append(getStrokeText(progress, .black, strokeWidth: -1.5, strokColor: .lightGray, font: UIFont.boldSystemFont(ofSize: 60)))

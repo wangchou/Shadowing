@@ -30,10 +30,9 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         if let name = name,
            let voice = AVSpeechSynthesisVoice(identifier: name) {
             utterance.voice = voice
-        } else if let voice = AVSpeechSynthesisVoice(language: language) {
-            utterance.voice = voice
         } else {
-            utterance.voice = AVSpeechSynthesisVoice(language: "ja")
+            let language = language ?? text.langCode ?? "ja"
+            utterance.voice = AVSpeechSynthesisVoice(language: language)
         }
 
         utterance.rate = rate

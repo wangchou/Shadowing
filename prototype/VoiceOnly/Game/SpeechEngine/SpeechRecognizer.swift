@@ -11,7 +11,7 @@ import Speech
 import Promises
 
 private let context = GameContext.shared
-private let engine = GameEngine.shared
+private let engine = SpeechEngine.shared
 
 enum SpeechRecognitionError: Error {
     case unauthorized

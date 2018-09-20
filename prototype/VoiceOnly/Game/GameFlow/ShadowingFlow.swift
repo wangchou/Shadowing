@@ -23,7 +23,7 @@ class ShadowingFlow: Game {
         startTimer()
         context.loadLearningSentences()
 
-        meijia("我說完後，請跟著我說～").always {
+        narratorSay("我說完後，請跟著我說～").always {
             self.learnNext()
         }
 
@@ -92,6 +92,6 @@ class ShadowingFlow: Game {
         let score = context.score
         updateLife(score: score)
 
-        return oren(score.text, rate: normalRate)
+        return assisantSay(score.text)
     }
 }

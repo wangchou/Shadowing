@@ -9,6 +9,7 @@
 import UIKit
 
 private let context = GameContext.shared
+private let engine = SpeechEngine.shared
 
 class ShadowingListPage: UIViewController {
     @IBOutlet weak var sentencesTableView: UITableView!
@@ -22,7 +23,7 @@ class ShadowingListPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        startEngine()
+        engine.start()
         addSentences()
         loadGameHistory()
         loadGameSetting()

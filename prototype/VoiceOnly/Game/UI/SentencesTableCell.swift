@@ -56,17 +56,17 @@ class SentencesTableCell: UITableViewCell {
         prepareForSpeaking()
         var speaker: ChatSpeaker? = nil
         if targetString.langCode == "ja" {
-            speaker = ChatSpeaker.man1
+            speaker = ChatSpeaker.hattori
         }
-        Game.speak(text: targetString, speaker: speaker)
-            .then(listenPart)
-            .then(afterListeningCalculateScore)
-            .then(updateUIByScore)
-            .always {
-                self.isUserInteractionEnabled = true
-                self.practiceButton.isEnabled = true
-                SentencesTableCell.isPracticing = false
-            }
+        SpeechEngine.shared.speak(text: targetString, speaker: speaker)
+              .then(listenPart)
+              .then(afterListeningCalculateScore)
+              .then(updateUIByScore)
+              .always {
+                  self.isUserInteractionEnabled = true
+                  self.practiceButton.isEnabled = true
+                  SentencesTableCell.isPracticing = false
+              }
     }
 
     func update(sentence: String) {
@@ -114,7 +114,7 @@ class SentencesTableCell: UITableViewCell {
         userSaidSentenceLabel.textColor = UIColor.red
         tableView?.endUpdates()
 
-        return listen(duration: duration, langCode: targetString.langCode)
+        return SpeechEngine.shared.listen(duration: duration, langCode: targetString.langCode)
     }
 
     private func afterListeningCalculateScore(userSaidSentence: String) -> Promise<Score> {
@@ -140,6 +140,6 @@ class SentencesTableCell: UITableViewCell {
 
         sentenceScores[targetString] = score
         saveUserSaidSentencesAndScore()
-        _ = oren(score.text, rate: normalRate)
+        _ = assisantSay(score.text)
     }
 }
