@@ -25,6 +25,8 @@ class GameContentDetailPage: UIViewController {
     @IBOutlet weak var missedCountLabel: UILabel!
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var peekButton: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -84,6 +86,12 @@ class GameContentDetailPage: UIViewController {
         launchGame()
     }
 
+    @IBAction func touchUpPeekButton(_ sender: Any) {
+        context.gameSetting.isUsingTranslation = !context.gameSetting.isUsingTranslation
+        saveGameSetting()
+        tableView.reloadData()
+    }
+
     private func launchGame() {
         launchStoryboard(self, "MessengerGame")
     }
@@ -103,7 +111,7 @@ extension GameContentDetailPage: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContentTableCell", for: indexPath)
         guard let contentCell = cell as? SentencesTableCell else { print("detailCell convert error"); return cell }
         let sentence = context.sentences[indexPath.row].string
-        contentCell.update(sentence: sentence)
+        contentCell.update(sentence: sentence, isShowTranslate: context.gameSetting.isUsingTranslation)
 
         return contentCell
     }

@@ -188,7 +188,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oat-aH-4X8" userLabel="句子列表">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="498"/>
                                 <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
@@ -369,13 +369,30 @@
                                     <outlet property="delegate" destination="bWZ-C3-0jS" id="91u-Js-0wo"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zLA-Lz-17O" userLabel="PeekButton">
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                                <color key="backgroundColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="5j2-46-txA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <state key="normal" title="雙     語">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="touchUpPeekButton:" destination="bWZ-C3-0jS" eventType="touchUpInside" id="ykM-ob-lLa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="zLA-Lz-17O" firstAttribute="leading" secondItem="CUE-KE-Cdw" secondAttribute="leading" id="5Jl-9F-cu2"/>
                             <constraint firstItem="oat-aH-4X8" firstAttribute="leading" secondItem="CUE-KE-Cdw" secondAttribute="leading" id="Ndp-Of-sfa"/>
                             <constraint firstItem="oat-aH-4X8" firstAttribute="top" secondItem="CUE-KE-Cdw" secondAttribute="top" id="ORl-Cp-F7h"/>
+                            <constraint firstItem="CUE-KE-Cdw" firstAttribute="bottom" secondItem="zLA-Lz-17O" secondAttribute="bottom" id="QQo-r7-ARG"/>
                             <constraint firstItem="oat-aH-4X8" firstAttribute="trailing" secondItem="CUE-KE-Cdw" secondAttribute="trailing" id="U0U-SH-s6e"/>
-                            <constraint firstItem="CUE-KE-Cdw" firstAttribute="bottom" secondItem="oat-aH-4X8" secondAttribute="bottom" id="b82-cJ-lSa"/>
+                            <constraint firstItem="zLA-Lz-17O" firstAttribute="top" secondItem="oat-aH-4X8" secondAttribute="bottom" id="fIE-M7-727"/>
+                            <constraint firstItem="CUE-KE-Cdw" firstAttribute="trailing" secondItem="zLA-Lz-17O" secondAttribute="trailing" id="pLu-Pp-eLB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CUE-KE-Cdw"/>
                     </view>
@@ -385,6 +402,7 @@
                         <outlet property="goodCountLabel" destination="m73-i0-fbd" id="Jzb-tl-iHW"/>
                         <outlet property="greatCountLabel" destination="BcR-Lx-X16" id="i0A-du-lsQ"/>
                         <outlet property="missedCountLabel" destination="0dV-zb-TaC" id="UZ9-Mg-0SD"/>
+                        <outlet property="peekButton" destination="zLA-Lz-17O" id="ecA-dw-f8b"/>
                         <outlet property="perfectCountLabel" destination="bMS-Hr-Jw8" id="J0V-IQ-eLI"/>
                         <outlet property="progressLabel" destination="bd1-65-w1n" id="ZBI-WB-USj"/>
                         <outlet property="rankLabel" destination="ZWi-Pi-rbk" id="onR-XK-IFJ"/>

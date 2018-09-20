@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -55,17 +55,27 @@
                             <action selector="practiceButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="pL8-ij-3dD"/>
                         </connections>
                     </button>
+                    <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum dolor sit er elit  " textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVl-sV-xrU" userLabel="TranslationTextView">
+                        <rect key="frame" x="55" y="0.0" width="214" height="28"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="jEf-GW-fOX" secondAttribute="trailing" constant="6" id="20T-Qw-bdq"/>
                     <constraint firstItem="WjY-pm-086" firstAttribute="leading" secondItem="q6O-Sx-IVO" secondAttribute="trailing" id="24O-sQ-q3F"/>
+                    <constraint firstItem="RVl-sV-xrU" firstAttribute="width" secondItem="d2j-Sd-YWt" secondAttribute="width" id="2FE-9f-ryI"/>
                     <constraint firstAttribute="bottom" secondItem="q6O-Sx-IVO" secondAttribute="bottom" id="3jG-DX-zgZ"/>
+                    <constraint firstItem="RVl-sV-xrU" firstAttribute="centerY" secondItem="d2j-Sd-YWt" secondAttribute="centerY" id="4nL-yi-tch"/>
                     <constraint firstAttribute="bottom" secondItem="WjY-pm-086" secondAttribute="bottom" id="ByM-G8-jb5"/>
                     <constraint firstItem="q6O-Sx-IVO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="DoB-Ql-oNi"/>
                     <constraint firstAttribute="bottom" secondItem="jEf-GW-fOX" secondAttribute="bottom" constant="5" id="FfK-lf-X2D"/>
                     <constraint firstItem="q6O-Sx-IVO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="VDF-bV-Pe5"/>
+                    <constraint firstItem="RVl-sV-xrU" firstAttribute="height" secondItem="d2j-Sd-YWt" secondAttribute="height" id="jPp-Lj-ySe"/>
                     <constraint firstItem="jEf-GW-fOX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="luo-8p-H2T"/>
                     <constraint firstItem="WjY-pm-086" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="nob-lV-TTg"/>
+                    <constraint firstItem="RVl-sV-xrU" firstAttribute="centerX" secondItem="d2j-Sd-YWt" secondAttribute="centerX" id="oLM-ad-fpb"/>
                     <constraint firstAttribute="trailing" secondItem="WjY-pm-086" secondAttribute="trailing" constant="51" id="s3i-yI-LCb"/>
                 </constraints>
             </tableViewCellContentView>
@@ -74,6 +84,7 @@
                 <outlet property="practiceButton" destination="jEf-GW-fOX" id="AtH-RR-LSN"/>
                 <outlet property="scoreLabel" destination="q6O-Sx-IVO" id="0ln-bF-CJz"/>
                 <outlet property="sentenceLabel" destination="d2j-Sd-YWt" id="aUy-ul-G0T"/>
+                <outlet property="translationTextView" destination="RVl-sV-xrU" id="0B3-ci-HYo"/>
                 <outlet property="userSaidSentenceLabel" destination="UGH-kP-Qt8" id="aO4-0m-syM"/>
             </connections>
             <point key="canvasLocation" x="34" y="60"/>

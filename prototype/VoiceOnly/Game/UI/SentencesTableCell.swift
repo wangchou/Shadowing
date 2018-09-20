@@ -15,6 +15,7 @@ class SentencesTableCell: UITableViewCell {
     @IBOutlet weak var sentenceLabel: FuriganaLabel!
     @IBOutlet weak var userSaidSentenceLabel: FuriganaLabel!
     @IBOutlet weak var practiceButton: UIButton!
+    @IBOutlet weak var translationTextView: UITextView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -69,7 +70,7 @@ class SentencesTableCell: UITableViewCell {
               }
     }
 
-    func update(sentence: String) {
+    func update(sentence: String, isShowTranslate: Bool = false) {
         sentenceLabel.widthPadding = 4
         userSaidSentenceLabel.widthPadding = 4
 
@@ -77,6 +78,20 @@ class SentencesTableCell: UITableViewCell {
             sentenceLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
         } else {
             sentenceLabel.text = sentence
+        }
+
+        if let translation = translations[sentence] {
+            translationTextView.text = translation
+        } else {
+            translationTextView.text = ""
+        }
+
+        if isShowTranslate, translations[sentence] != nil {
+            sentenceLabel.alpha = 0
+            translationTextView.alpha = 1
+        } else {
+            sentenceLabel.alpha = 1
+            translationTextView.alpha = 0
         }
 
         let userSaidSentence = userSaidSentences[sentence] ?? ""

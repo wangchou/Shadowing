@@ -22,7 +22,7 @@ extension Messenger: GameEventDelegate {
                 addLabel(rubyAttrStr(text))
             }
             if context.gameState == .TTSSpeaking {
-                if context.gameSetting.isUsingTranslationInShadowingMode,
+                if context.gameSetting.isUsingTranslation,
                    let translation = translations[text] {
                    addLabel(rubyAttrStr(translation))
                 } else if let tokenInfos = kanaTokenInfosCacheDictionary[text] {
