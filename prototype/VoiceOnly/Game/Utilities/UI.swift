@@ -211,3 +211,48 @@ extension GridLayout where Self: UIView {
         )
     }
 }
+
+// modified from https://medium.com/zenchef-tech-and-product/how-to-visualize-reusable-xibs-in-storyboards-using-ibdesignable-c0488c7f525d
+
+protocol XibView: class {
+    var nibName: String { get }
+    var contentView: UIView? { get set }
+}
+
+extension XibView where Self: UIView {
+    func xibSetup() {
+        guard let view = loadViewFromNib() else { return }
+        view.frame = bounds
+        view.autoresizingMask =
+            [.flexibleWidth, .flexibleHeight]
+        addSubview(view)
+        contentView = view
+    }
+
+    func loadViewFromNib() -> UIView? {
+        let bundle = Bundle(for: type(of: self))
+        let nib = UINib(nibName: nibName, bundle: bundle)
+        return nib.instantiate(
+            withOwner: self,
+            options: nil).first as? UIView
+    }
+}
+
+// https://stackoverflow.com/questions/47572204/move-pageviewcontroller-with-button
+extension UIPageViewController {
+    func goToNextPage(animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
+        if let currentViewController = viewControllers?[0] {
+            if let nextPage = dataSource?.pageViewController(self, viewControllerAfter: currentViewController) {
+                setViewControllers([nextPage], direction: .forward, animated: animated, completion: completion)
+            }
+        }
+    }
+
+    func goToPreviousPage(animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
+        if let currentViewController = viewControllers?[0] {
+            if let previousPage = dataSource?.pageViewController(self, viewControllerBefore: currentViewController) {
+                setViewControllers([previousPage], direction: .reverse, animated: true, completion: completion)
+            }
+        }
+    }
+}

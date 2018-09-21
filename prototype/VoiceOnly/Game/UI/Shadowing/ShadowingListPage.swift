@@ -13,10 +13,10 @@ private let engine = SpeechEngine.shared
 
 class ShadowingListPage: UIViewController {
     @IBOutlet weak var sentencesTableView: UITableView!
-
     @IBOutlet weak var timeline: TimelineView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var characterView: CharacterView!
+    @IBOutlet weak var topBarView: TopBarView!
 
     var timelineSubviews: [String: UIView] = [:]
 
@@ -28,6 +28,8 @@ class ShadowingListPage: UIViewController {
         loadGameHistory()
         loadGameSetting()
         loadUserSaidSentencesAndScore()
+
+        topBarView.rightButton.isHidden = true
 
         let height = screen.width * 120/320
         topView.frame.size.height = height + 5

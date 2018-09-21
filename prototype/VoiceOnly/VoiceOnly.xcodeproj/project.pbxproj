@@ -47,8 +47,10 @@
 		BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */; };
 		BEDFCDAB20A87AF800736153 /* PauseOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */; };
 		BEE665E220BA634600E4E322 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE665E120BA634600E4E322 /* Colors.swift */; };
-		BEEC7FA72154C5E1001C2EFF /* XibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEC7FA62154C5E1001C2EFF /* XibView.swift */; };
 		BEEC7FA92154C7AC001C2EFF /* TopBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEEC7FA82154C7AC001C2EFF /* TopBarView.xib */; };
+		BEEC7FAB2154FFA4001C2EFF /* MainSwipablePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEC7FAA2154FFA4001C2EFF /* MainSwipablePage.swift */; };
+		BEEC7FAD2155014E001C2EFF /* SettingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEC7FAC2155014E001C2EFF /* SettingPage.swift */; };
+		BEEC7FAF21550818001C2EFF /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEC7FAE21550818001C2EFF /* TopBarView.swift */; };
 		BEEE8E592152199200916433 /* FBLPromises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEEE8E552152199100916433 /* FBLPromises.framework */; };
 		BEEE8E5A2152199200916433 /* FBLPromises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BEEE8E552152199100916433 /* FBLPromises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BEEE8E5B2152199200916433 /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEEE8E562152199200916433 /* Promises.framework */; };
@@ -123,8 +125,10 @@
 		BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerEventDelegate.swift; sourceTree = "<group>"; };
 		BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseOverlayViewController.swift; sourceTree = "<group>"; };
 		BEE665E120BA634600E4E322 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		BEEC7FA62154C5E1001C2EFF /* XibView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XibView.swift; sourceTree = "<group>"; };
 		BEEC7FA82154C7AC001C2EFF /* TopBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopBarView.xib; sourceTree = "<group>"; };
+		BEEC7FAA2154FFA4001C2EFF /* MainSwipablePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSwipablePage.swift; sourceTree = "<group>"; };
+		BEEC7FAC2155014E001C2EFF /* SettingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPage.swift; sourceTree = "<group>"; };
+		BEEC7FAE21550818001C2EFF /* TopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
 		BEEE8E552152199100916433 /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBLPromises.framework; path = Carthage/Build/iOS/FBLPromises.framework; sourceTree = "<group>"; };
 		BEEE8E562152199200916433 /* Promises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Promises.framework; path = Carthage/Build/iOS/Promises.framework; sourceTree = "<group>"; };
 		BEEE8E572152199200916433 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
@@ -221,7 +225,6 @@
 				BEBDEDCB208EF0A000C18520 /* Info.plist */,
 				BEBDEDD3208EF15E00C18520 /* drumLoop.caf */,
 				BEBDEDC8208EF0A000C18520 /* LaunchScreen.storyboard */,
-				BEEC7FA62154C5E1001C2EFF /* XibView.swift */,
 				BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */,
 				BEA2389C21460EBD00548BBC /* sentences.txt */,
 				BEBDEDBD208EF09F00C18520 /* Products */,
@@ -249,7 +252,9 @@
 				BE76F11D214F56F6004E130B /* SentencesTableCell.xib */,
 				BE76F11C214F56F6004E130B /* SentencesTableCell.swift */,
 				BEEC7FA82154C7AC001C2EFF /* TopBarView.xib */,
+				BEEC7FAE21550818001C2EFF /* TopBarView.swift */,
 				BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */,
+				BEEC7FAA2154FFA4001C2EFF /* MainSwipablePage.swift */,
 				BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */,
 				BEFA979C20AEAEA400DE3280 /* Shadowing */,
 			);
@@ -272,6 +277,7 @@
 		BEFA979C20AEAEA400DE3280 /* Shadowing */ = {
 			isa = PBXGroup;
 			children = (
+				BEEC7FAC2155014E001C2EFF /* SettingPage.swift */,
 				BEDEDD3620A46D1B00E7B60B /* ShadowingListPage.swift */,
 				BE7725CD20A4216700DF186A /* ContentCell.swift */,
 				BE500AED20B822CA004E73D1 /* CharacterView.swift */,
@@ -395,12 +401,14 @@
 				BE9D243A20C8DEE9000515DD /* GameReportView.swift in Sources */,
 				BE1CA958209DC43800086853 /* Messenger.swift in Sources */,
 				BEBDEDD9208EF15F00C18520 /* utilities.swift in Sources */,
+				BEEC7FAF21550818001C2EFF /* TopBarView.swift in Sources */,
 				BEE665E220BA634600E4E322 /* Colors.swift in Sources */,
 				BE7725C920A2CBC200DF186A /* n5.swift in Sources */,
 				BE05073720A68515008A29EB /* SentencesTestGame.swift in Sources */,
 				BE7725C820A2CBC200DF186A /* n4.swift in Sources */,
 				BE5D838920A80BD0002031BF /* GameContentDetailPage.swift in Sources */,
 				BE6ED56820A17BB000553D1A /* ShadowingFlow.swift in Sources */,
+				BEEC7FAD2155014E001C2EFF /* SettingPage.swift in Sources */,
 				BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */,
 				BEDFCDAB20A87AF800736153 /* PauseOverlayViewController.swift in Sources */,
 				BEF28B6120B52BB000385273 /* Score.swift in Sources */,
@@ -413,10 +421,10 @@
 				BEF28B6320B52BF700385273 /* UI.swift in Sources */,
 				BE65A939209C6E67006645CA /* GameEventDelegate.swift in Sources */,
 				BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */,
-				BEEC7FA72154C5E1001C2EFF /* XibView.swift in Sources */,
 				BE500AEE20B822CA004E73D1 /* CharacterView.swift in Sources */,
 				BE7725C520A2CBC200DF186A /* n3.swift in Sources */,
 				BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */,
+				BEEC7FAB2154FFA4001C2EFF /* MainSwipablePage.swift in Sources */,
 				BEDEDD3720A46D1B00E7B60B /* ShadowingListPage.swift in Sources */,
 				BE7725CE20A4216700DF186A /* ContentCell.swift in Sources */,
 				BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */,

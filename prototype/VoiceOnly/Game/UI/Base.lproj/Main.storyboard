@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lQ2-QP-0IK">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,13 +10,45 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Page View Controller-->
+        <!--Main Swipable Page-->
         <scene sceneID="TzX-cI-iSf">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="lQ2-QP-0IK" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="MainSwipablePage" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="lQ2-QP-0IK" customClass="MainSwipablePage" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RP1-kY-iV3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="36" y="-1282"/>
+        </scene>
+        <!--Setting Page-->
+        <scene sceneID="7J2-0E-PWV">
+            <objects>
+                <viewController storyboardIdentifier="SettingPage" id="2dl-8Q-Btt" customClass="SettingPage" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SIc-mh-tel">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qAA-jE-d1N" customClass="TopBarView" customModule="VoiceOnly" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="320" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="J0Y-xJ-6cB"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="qAA-jE-d1N" firstAttribute="leading" secondItem="aLz-3k-vTA" secondAttribute="leading" id="6f7-XW-8G3"/>
+                            <constraint firstItem="aLz-3k-vTA" firstAttribute="trailing" secondItem="qAA-jE-d1N" secondAttribute="trailing" id="E2s-3t-69U"/>
+                            <constraint firstItem="qAA-jE-d1N" firstAttribute="top" secondItem="aLz-3k-vTA" secondAttribute="top" id="fbW-8d-K9D"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="aLz-3k-vTA"/>
+                    </view>
+                    <connections>
+                        <outlet property="topBarView" destination="qAA-jE-d1N" id="LMf-GJ-00Q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cdi-Kp-z4E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="975" y="-589"/>
         </scene>
         <!--Shadowing List Page-->
         <scene sceneID="tne-QT-ifu">
@@ -26,15 +58,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IWc-hd-yoz" userLabel="TopBar" customClass="XibView" customModule="VoiceOnly" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IWc-hd-yoz" userLabel="TopBar" customClass="TopBarView" customModule="VoiceOnly" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="20" width="320" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="dNJ-yx-07K"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="lzt-lD-bEE"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="nibName" value="TopBarView"/>
-                                </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9Ar-lL-ket">
                                 <rect key="frame" x="0.0" y="55" width="320" height="513"/>
@@ -196,6 +225,7 @@
                         <outlet property="characterView" destination="mu1-Ft-6RO" id="Gla-o8-Kmc"/>
                         <outlet property="sentencesTableView" destination="9Ar-lL-ket" id="lAY-Dp-77e"/>
                         <outlet property="timeline" destination="ca0-bb-sN7" id="Etn-sX-vff"/>
+                        <outlet property="topBarView" destination="IWc-hd-yoz" id="Jcn-Qo-mDc"/>
                         <outlet property="topView" destination="U0O-4m-O5g" id="3cf-yj-NPp"/>
                     </connections>
                 </viewController>
