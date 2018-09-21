@@ -14,6 +14,7 @@ import UIKit
 private let gridCount = 20
 private let context = GameContext.shared
 
+@IBDesignable
 class CharacterView: UIView, ReloadableView, GridLayout {
     var gridCount: Int = 20
     var axis: GridAxis = .horizontal
@@ -43,5 +44,10 @@ class CharacterView: UIView, ReloadableView, GridLayout {
         let font = UIFont(name: "Menlo", size: h.c * step * 0.7) ??
                      UIFont.systemFont(ofSize: 20)
         addText(x: x, y: y, w: gridCount - x, h: h, text: text, font: font, color: myWhite)
+    }
+
+    override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        viewWillAppear()
     }
 }

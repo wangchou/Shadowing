@@ -36,6 +36,7 @@ struct TimelineBox {
     }
 }
 
+@IBDesignable
 class TimelineView: UIView, ReloadableView, GridLayout {
     var gridCount: Int = 8
     var axis: GridAxis = .vertical
@@ -128,5 +129,10 @@ class TimelineView: UIView, ReloadableView, GridLayout {
         box.frame.size.height = fontSize
         box.layer.cornerRadius = 1.5
         addSubview(box)
+    }
+
+    override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        viewWillAppear()
     }
 }

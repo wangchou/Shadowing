@@ -11,6 +11,7 @@ import UIKit
 
 private let context = GameContext.shared
 
+@IBDesignable
 class GameReportBoxView: UIView, ReloadableView, GridLayout {
     let gridCount = 44
     let axis: GridAxis = .horizontal
@@ -83,8 +84,14 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
     func getFontSize(h: Int) -> CGFloat {
         return h.c * step * 0.7
     }
+
+    override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        viewWillAppear()
+    }
 }
 
+@IBDesignable
 class GameReportView: UIView, ReloadableView, GridLayout {
     let gridCount = 48
     let axis: GridAxis = .horizontal
@@ -117,5 +124,10 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         }
         layout(2, 52, 44, 8, backButton)
         addSubview(backButton)
+    }
+
+    override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        viewWillAppear()
     }
 }
