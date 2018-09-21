@@ -119,7 +119,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
 
         backButton.addTapGestureRecognizer {
             if let vc = UIApplication.getPresentedViewController() {
-                launchStoryboard(vc, "ShadowingListPage", animated: true)
+                launchStoryboard(vc, "MainSwipablePage", animated: true)
             }
         }
         layout(2, 52, 44, 8, backButton)

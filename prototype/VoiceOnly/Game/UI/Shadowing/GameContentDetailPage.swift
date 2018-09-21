@@ -27,9 +27,17 @@ class GameContentDetailPage: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var peekButton: UIButton!
 
+    @IBOutlet weak var topBarView: TopBarView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        topBarView.titleLabel.text = context.dataSetKey
+        topBarView.backgroundColor = UIColor.black.withAlphaComponent(0)
+        topBarView.leftButton.setTitleColor(myWhite, for: .normal)
+        topBarView.rightButton.setTitle("關閉", for: .normal)
+        topBarView.rightButton.setTitleColor(myWhite, for: .normal)
+        topBarView.customOnRightButtonClicked = {
+            self.dismiss(animated: true, completion: nil)
+        }
         tableView.register(
             UINib(nibName: "SentencesTableCell", bundle: nil),
             forCellReuseIdentifier: "ContentTableCell"

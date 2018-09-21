@@ -17,7 +17,8 @@ class TopBarView: UIView, XibView {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
-
+    var customOnleftButtonClicked: (() -> Void)?
+    var customOnRightButtonClicked: (() -> Void)?
     override func awakeFromNib() {
         super.awakeFromNib()
         xibSetup()
@@ -29,9 +30,17 @@ class TopBarView: UIView, XibView {
         contentView?.prepareForInterfaceBuilder()
     }
     @IBAction func leftButtonClicked(_ sender: Any) {
-        (UIApplication.getPresentedViewController() as? UIPageViewController)?.goToPreviousPage()
+        if let onClick = customOnleftButtonClicked {
+            onClick()
+        } else {
+            (UIApplication.getPresentedViewController() as? UIPageViewController)?.goToPreviousPage()
+        }
     }
     @IBAction func rightButtonClicked(_ sender: Any) {
+        if let onClick = customOnRightButtonClicked {
+            onClick()
+        } else {
          (UIApplication.getPresentedViewController() as? UIPageViewController)?.goToNextPage()
+        }
     }
 }

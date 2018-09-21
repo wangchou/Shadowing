@@ -22,18 +22,18 @@
             <rect key="frame" x="0.0" y="0.0" width="334" height="35"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今、話したい" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ycg-sD-eBU">
-                    <rect key="frame" x="107" y="7.5" width="120" height="20"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今、話したい" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ycg-sD-eBU">
+                    <rect key="frame" x="60" y="7.5" width="214" height="20"/>
                     <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="20"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K9f-SW-KBL">
-                    <rect key="frame" x="0.0" y="0.0" width="50" height="35"/>
+                    <rect key="frame" x="0.0" y="0.0" width="60" height="35"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="50" id="SSC-fN-2Iv"/>
+                        <constraint firstAttribute="width" constant="60" id="SSC-fN-2Iv"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <state key="normal" title="設定"/>
                     <connections>
                         <action selector="leftButtonClicked:" destination="-1" eventType="touchUpInside" id="zOM-sS-RxK"/>
@@ -47,11 +47,11 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aju-lD-R1H">
-                    <rect key="frame" x="284" y="0.0" width="50" height="34"/>
+                    <rect key="frame" x="274" y="0.0" width="60" height="34"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="50" id="Yf7-67-XBH"/>
+                        <constraint firstAttribute="width" constant="60" id="Yf7-67-XBH"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <state key="normal" title="Back"/>
                     <connections>
                         <action selector="rightButtonClicked:" destination="-1" eventType="touchUpInside" id="fL4-jf-h5v"/>
@@ -63,6 +63,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="K9f-SW-KBL" secondAttribute="bottom" id="5Yf-nw-p9k"/>
                 <constraint firstItem="aju-lD-R1H" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="5e4-f4-y04"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="aju-lD-R1H" secondAttribute="trailing" id="7Fr-DF-6vC"/>
+                <constraint firstItem="Ycg-sD-eBU" firstAttribute="leading" secondItem="K9f-SW-KBL" secondAttribute="trailing" id="Af8-Vx-cul"/>
                 <constraint firstItem="K9f-SW-KBL" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="F7K-Am-TjW"/>
                 <constraint firstItem="Ycg-sD-eBU" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="JSk-O7-M6Q"/>
                 <constraint firstAttribute="bottom" secondItem="xIV-m3-Eb4" secondAttribute="bottom" id="XwT-Ap-lq9"/>
@@ -71,6 +72,7 @@
                 <constraint firstItem="K9f-SW-KBL" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="lNS-hi-AOM"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="xIV-m3-Eb4" secondAttribute="trailing" id="r7T-Fw-ymw"/>
                 <constraint firstItem="Ycg-sD-eBU" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="sLt-r5-orx"/>
+                <constraint firstItem="aju-lD-R1H" firstAttribute="leading" secondItem="Ycg-sD-eBU" secondAttribute="trailing" id="vnK-U8-dO1"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
