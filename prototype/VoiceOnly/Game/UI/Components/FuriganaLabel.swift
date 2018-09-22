@@ -3,7 +3,9 @@ import UIKit
 
 class FuriganaLabel: UILabel {
     private var height: CGFloat = 60
-    private let topShift: CGFloat = 6
+    private var topShift: CGFloat {
+        return 6 + (text?.jpnType == JpnType.noKanjiAndNumber ? 5 : 0)
+    }
     var widthPadding: CGFloat = 7
 
     override var text: String? {
