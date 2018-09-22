@@ -26,12 +26,16 @@ class TopBarView: UIView, XibView {
         xibSetup()
         leftButton.setIconImage(named: "ic_settings_48pt")
         rightButton.setIconImage(named: "ic_keyboard_arrow_right_48pt")
+        titleLabel.textColor = UIColor(white: 0, alpha: 0.66)
     }
 
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         xibSetup()
         contentView?.prepareForInterfaceBuilder()
+        leftButton.setIconImage(named: "ic_settings_48pt")
+        rightButton.setIconImage(named: "ic_keyboard_arrow_right_48pt")
+        titleLabel.textColor = UIColor(white: 0, alpha: 0.66)
     }
 
     @IBAction func leftButtonClicked(_ sender: Any) {
@@ -52,7 +56,7 @@ class TopBarView: UIView, XibView {
 }
 
 extension UIButton {
-    func setIconImage(named: String, tintColor: UIColor = UIColor(white: 0, alpha: 0.9)) {
+    func setIconImage(named: String, tintColor: UIColor = UIColor(white: 0, alpha: 0.66)) {
         let closeImage = UIImage(named: named)?.withRenderingMode(
             UIImage.RenderingMode.alwaysTemplate)
         self.tintColor = tintColor

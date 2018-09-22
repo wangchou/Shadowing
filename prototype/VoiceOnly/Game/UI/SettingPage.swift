@@ -14,7 +14,7 @@ class SettingPage: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        topBarView.titleLabel.text = "設定"
+        topBarView.titleLabel.text = "設  定"
         topBarView.leftButton.isHidden = true
     }
 }

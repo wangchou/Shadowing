@@ -22,6 +22,7 @@ class GameContentDetailPage: UIViewController {
     @IBOutlet weak var goodCountLabel: UILabel!
     @IBOutlet weak var missedCountLabel: UILabel!
 
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var peekButton: UIButton!
 
@@ -29,6 +30,7 @@ class GameContentDetailPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTopBar()
+        titleLabel.text = context.dataSetKey
         tableView.register(
             UINib(nibName: "SentencesTableCell", bundle: nil),
             forCellReuseIdentifier: "ContentTableCell"
@@ -61,9 +63,8 @@ class GameContentDetailPage: UIViewController {
     }
 
     private func setupTopBar() {
-        topBarView.titleLabel.text = context.dataSetKey
+        topBarView.titleLabel.text = "關  卡"
         topBarView.titleLabel.textColor = myWhite
-        topBarView.titleLabel.font = MyFont.regular(ofSize: 20)
         topBarView.backgroundColor = UIColor.black.withAlphaComponent(0)
         topBarView.leftButton.setIconImage(named: "ic_settings_48pt", tintColor: UIColor(white: 255, alpha: 0.9))
         topBarView.rightButton.setIconImage(named: "ic_close_48pt", tintColor: UIColor(white: 255, alpha: 0.9))
@@ -93,7 +94,6 @@ class GameContentDetailPage: UIViewController {
     }
 
     @IBAction func touchUpPeekButton(_ sender: Any) {
-        peekButton.backgroundColor = rgb(250, 250, 250)
         context.gameSetting.isUsingTranslation = !context.gameSetting.isUsingTranslation
         saveGameSetting()
         tableView.reloadData()
