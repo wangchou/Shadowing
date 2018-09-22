@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class SettingPage: UIViewController {
+class SettingPage: UITableViewController {
     @IBOutlet weak var topBarView: TopBarView!
 
     override func viewDidLoad() {
