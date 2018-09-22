@@ -14,6 +14,7 @@
 		BE500AEE20B822CA004E73D1 /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE500AED20B822CA004E73D1 /* CharacterView.swift */; };
 		BE5D838920A80BD0002031BF /* GameContentDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */; };
 		BE65A939209C6E67006645CA /* GameEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65A938209C6E67006645CA /* GameEventDelegate.swift */; };
+		BE67D2A921561A93007FE420 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE67D2A821561A92007FE420 /* Assets.xcassets */; };
 		BE6ED56820A17BB000553D1A /* ShadowingFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6ED56720A17BB000553D1A /* ShadowingFlow.swift */; };
 		BE6F2F162144E049003A56CD /* shadowingSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6F2F152144E049003A56CD /* shadowingSentences.swift */; };
 		BE76F117214ECC6E004E130B /* UserSaidSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE76F116214ECC6E004E130B /* UserSaidSentences.swift */; };
@@ -33,7 +34,6 @@
 		BEA2389D21460EBD00548BBC /* sentences.txt in Resources */ = {isa = PBXBuildFile; fileRef = BEA2389C21460EBD00548BBC /* sentences.txt */; };
 		BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */; };
 		BEBDEDC5208EF09F00C18520 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEBDEDC3208EF09F00C18520 /* Main.storyboard */; };
-		BEBDEDC7208EF0A000C18520 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEBDEDC6208EF0A000C18520 /* Assets.xcassets */; };
 		BEBDEDCA208EF0A000C18520 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEBDEDC8208EF0A000C18520 /* LaunchScreen.storyboard */; };
 		BEBDEDD9208EF15F00C18520 /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD1208EF15E00C18520 /* utilities.swift */; };
 		BEBDEDDA208EF15F00C18520 /* TTS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD2208EF15E00C18520 /* TTS.swift */; };
@@ -91,6 +91,8 @@
 		BE500AED20B822CA004E73D1 /* CharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
 		BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameContentDetailPage.swift; sourceTree = "<group>"; };
 		BE65A938209C6E67006645CA /* GameEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEventDelegate.swift; sourceTree = "<group>"; };
+		BE67D2A521560A38007FE420 /* SwiftIconFont.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftIconFont.framework; sourceTree = "<group>"; };
+		BE67D2A821561A92007FE420 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE6ED56720A17BB000553D1A /* ShadowingFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowingFlow.swift; sourceTree = "<group>"; };
 		BE6F2F152144E049003A56CD /* shadowingSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shadowingSentences.swift; sourceTree = "<group>"; };
 		BE76F116214ECC6E004E130B /* UserSaidSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSaidSentences.swift; sourceTree = "<group>"; };
@@ -111,7 +113,6 @@
 		BEBDEDBC208EF09F00C18520 /* VoiceOnly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceOnly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEBDEDC4208EF09F00C18520 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		BEBDEDC6208EF0A000C18520 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BEBDEDC9208EF0A000C18520 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BEBDEDCB208EF0A000C18520 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BEBDEDD1208EF15E00C18520 /* utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utilities.swift; sourceTree = "<group>"; };
@@ -274,7 +275,7 @@
 		BEBDEDBE208EF09F00C18520 /* VoiceOnly */ = {
 			isa = PBXGroup;
 			children = (
-				BEBDEDC6208EF0A000C18520 /* Assets.xcassets */,
+				BE67D2A821561A92007FE420 /* Assets.xcassets */,
 				BEBDEDCB208EF0A000C18520 /* Info.plist */,
 				BEBDEDD3208EF15E00C18520 /* drumLoop.caf */,
 				BEBDEDC8208EF0A000C18520 /* LaunchScreen.storyboard */,
@@ -289,6 +290,7 @@
 		BEBDEDE1208EF17100C18520 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE67D2A521560A38007FE420 /* SwiftIconFont.framework */,
 				BEEE8E572152199200916433 /* Alamofire.framework */,
 				BEEE8E552152199100916433 /* FBLPromises.framework */,
 				BEEE8E562152199200916433 /* Promises.framework */,
@@ -400,10 +402,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEBDEDCA208EF0A000C18520 /* LaunchScreen.storyboard in Resources */,
-				BEBDEDC7208EF0A000C18520 /* Assets.xcassets in Resources */,
 				BEBDEDDB208EF15F00C18520 /* drumLoop.caf in Resources */,
 				BE76F11F214F56F6004E130B /* SentencesTableCell.xib in Resources */,
 				BEEC7FA92154C7AC001C2EFF /* TopBarView.xib in Resources */,
+				BE67D2A921561A93007FE420 /* Assets.xcassets in Resources */,
 				BEA2389D21460EBD00548BBC /* sentences.txt in Resources */,
 				BEBDEDC5208EF09F00C18520 /* Main.storyboard in Resources */,
 			);

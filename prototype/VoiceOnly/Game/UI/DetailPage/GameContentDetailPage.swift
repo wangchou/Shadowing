@@ -65,10 +65,8 @@ class GameContentDetailPage: UIViewController {
         topBarView.titleLabel.textColor = myWhite
         topBarView.titleLabel.font = MyFont.regular(ofSize: 20)
         topBarView.backgroundColor = UIColor.black.withAlphaComponent(0)
-        topBarView.leftButton.setTitleColor(myWhite, for: .normal)
-        topBarView.rightButton.setTitle("關閉", for: .normal)
-        topBarView.rightButton.setTitleColor(myWhite, for: .normal)
-        topBarView.rightButton.roundBorder(borderWidth: 0, cornerRadius: 3, color: UIColor.white)
+        topBarView.leftButton.setIconImage(named: "ic_settings_48pt", tintColor: UIColor(white: 255, alpha: 0.9))
+        topBarView.rightButton.setIconImage(named: "ic_close_48pt", tintColor: UIColor(white: 255, alpha: 0.9))
         topBarView.customOnRightButtonClicked = {
             self.dismiss(animated: true, completion: nil)
         }

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftIconFont
 
 @IBDesignable
 class TopBarView: UIView, XibView {
@@ -23,6 +24,8 @@ class TopBarView: UIView, XibView {
     override func awakeFromNib() {
         super.awakeFromNib()
         xibSetup()
+        leftButton.setIconImage(named: "ic_settings_48pt")
+        rightButton.setIconImage(named: "ic_keyboard_arrow_right_48pt")
     }
 
     override func prepareForInterfaceBuilder() {
@@ -30,6 +33,7 @@ class TopBarView: UIView, XibView {
         xibSetup()
         contentView?.prepareForInterfaceBuilder()
     }
+
     @IBAction func leftButtonClicked(_ sender: Any) {
         if let onClick = customOnleftButtonClicked {
             onClick()
@@ -37,11 +41,23 @@ class TopBarView: UIView, XibView {
             (UIApplication.getPresentedViewController() as? UIPageViewController)?.goToPreviousPage()
         }
     }
+
     @IBAction func rightButtonClicked(_ sender: Any) {
         if let onClick = customOnRightButtonClicked {
             onClick()
         } else {
          (UIApplication.getPresentedViewController() as? UIPageViewController)?.goToNextPage()
         }
+    }
+}
+
+extension UIButton {
+    func setIconImage(named: String, tintColor: UIColor = UIColor(white: 0, alpha: 0.9)) {
+        let closeImage = UIImage(named: named)?.withRenderingMode(
+            UIImage.RenderingMode.alwaysTemplate)
+        self.tintColor = tintColor
+        self.setImage(closeImage, for: .normal)
+        self.imageView?.contentMode = .scaleAspectFit
+        self.setTitle("", for: .normal)
     }
 }
