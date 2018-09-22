@@ -37,8 +37,7 @@ class GameContentDetailPage: UIViewController {
         )
 
         if let gameRecord = findBestRecord(key: context.dataSetKey) {
-            rankLabel.text = gameRecord.rank.rawValue
-            rankLabel.textColor = gameRecord.rank.color
+            rankLabel.attributedText = getRankAttrText(rank: gameRecord.rank.rawValue, color: gameRecord.rank.color)
 
             progressLabel.attributedText = getProgressAttrText(progress: gameRecord.progress)
 
@@ -48,6 +47,7 @@ class GameContentDetailPage: UIViewController {
             missedCountLabel.text = (context.sentences.count - gameRecord.perfectCount - gameRecord.greatCount - gameRecord.goodCount).s
         } else {
             rankLabel.text = "?"
+            rankLabel.attributedText = getRankAttrText(rank: "?", color: UIColor.white)
             progressLabel.attributedText = getProgressAttrText(progress: "??")
             perfectCountLabel.text = 0.s
             greatCountLabel.text = 0.s
@@ -76,8 +76,15 @@ class GameContentDetailPage: UIViewController {
 
     func getProgressAttrText(progress: String) -> NSAttributedString {
         let attrText = NSMutableAttributedString()
-        attrText.append(getStrokeText(progress, .black, strokeWidth: -1.5, strokColor: .lightGray, font: UIFont.boldSystemFont(ofSize: 60)))
-        attrText.append(getStrokeText("%", .white, strokeWidth: 0, strokColor: .black, font: UIFont.boldSystemFont(ofSize: 20)))
+        attrText.append(getStrokeText(progress, .black, strokeWidth: -1.5, strokColor: .white, font: UIFont.boldSystemFont(ofSize: 60)))
+        attrText.append(getStrokeText("%", .white, strokeWidth: -1.5, strokColor: .black, font: UIFont.boldSystemFont(ofSize: 20)))
+
+        return attrText
+    }
+
+    func getRankAttrText(rank: String, color: UIColor) -> NSAttributedString {
+        let attrText = NSMutableAttributedString()
+        attrText.append(getStrokeText(rank, color, strokeWidth: -1.5, strokColor: .black, font: UIFont.boldSystemFont(ofSize: 60)))
 
         return attrText
     }
