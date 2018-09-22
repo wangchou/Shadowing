@@ -13,11 +13,9 @@ import Promises
 private let context = GameContext.shared
 
 class GameContentDetailPage: UIViewController {
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var challengeButton: UIButton!
-    @IBOutlet weak var backButton: UIButton!
 
     @IBOutlet weak var perfectCountLabel: UILabel!
     @IBOutlet weak var greatCountLabel: UILabel!
@@ -30,20 +28,12 @@ class GameContentDetailPage: UIViewController {
     @IBOutlet weak var topBarView: TopBarView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        topBarView.titleLabel.text = context.dataSetKey
-        topBarView.backgroundColor = UIColor.black.withAlphaComponent(0)
-        topBarView.leftButton.setTitleColor(myWhite, for: .normal)
-        topBarView.rightButton.setTitle("關閉", for: .normal)
-        topBarView.rightButton.setTitleColor(myWhite, for: .normal)
-        topBarView.customOnRightButtonClicked = {
-            self.dismiss(animated: true, completion: nil)
-        }
+        setupTopBar()
         tableView.register(
             UINib(nibName: "SentencesTableCell", bundle: nil),
             forCellReuseIdentifier: "ContentTableCell"
         )
 
-        titleLabel.text = context.dataSetKey
         if let gameRecord = findBestRecord(key: context.dataSetKey) {
             rankLabel.text = gameRecord.rank.rawValue
             rankLabel.textColor = gameRecord.rank.color
@@ -63,12 +53,26 @@ class GameContentDetailPage: UIViewController {
             missedCountLabel.text = 0.s
         }
         challengeButton.roundBorder(borderWidth: 0, cornerRadius: 3, color: UIColor.black)
-        backButton.roundBorder(borderWidth: 0, cornerRadius: 3, color: UIColor.black)
 
         // load furigana
         all(context.sentences.map {$0.string.furiganaAttributedString}).then {_ in
             self.tableView.reloadData()
         }
+    }
+
+    private func setupTopBar() {
+        topBarView.titleLabel.text = context.dataSetKey
+        topBarView.titleLabel.textColor = myWhite
+        topBarView.titleLabel.font = MyFont.regular(ofSize: 20)
+        topBarView.backgroundColor = UIColor.black.withAlphaComponent(0)
+        topBarView.leftButton.setTitleColor(myWhite, for: .normal)
+        topBarView.rightButton.setTitle("關閉", for: .normal)
+        topBarView.rightButton.setTitleColor(myWhite, for: .normal)
+        topBarView.rightButton.roundBorder(borderWidth: 0, cornerRadius: 3, color: UIColor.white)
+        topBarView.customOnRightButtonClicked = {
+            self.dismiss(animated: true, completion: nil)
+        }
+        topBarView.bottomSeparator.backgroundColor = UIColor.white.withAlphaComponent(0.2)
     }
 
     func getProgressAttrText(progress: String) -> NSAttributedString {
@@ -85,16 +89,13 @@ class GameContentDetailPage: UIViewController {
         #endif
     }
 
-    @IBAction func backButtonClicked(_ sender: Any) {
-        self.dismiss(animated: false, completion: nil)
-    }
-
     @IBAction func challenge(_ sender: Any) {
         context.gameFlowMode = .shadowing
         launchGame()
     }
 
     @IBAction func touchUpPeekButton(_ sender: Any) {
+        peekButton.backgroundColor = rgb(250, 250, 250)
         context.gameSetting.isUsingTranslation = !context.gameSetting.isUsingTranslation
         saveGameSetting()
         tableView.reloadData()

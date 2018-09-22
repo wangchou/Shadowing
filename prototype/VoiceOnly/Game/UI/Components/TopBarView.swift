@@ -14,6 +14,7 @@ class TopBarView: UIView, XibView {
     var contentView: UIView?
     var nibName: String = "TopBarView"
 
+    @IBOutlet weak var bottomSeparator: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!

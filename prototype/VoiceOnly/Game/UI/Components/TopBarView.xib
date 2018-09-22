@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TopBarView" customModule="VoiceOnly" customModuleProvider="target">
             <connections>
+                <outlet property="bottomSeparator" destination="xIV-m3-Eb4" id="Oe8-SD-68R"/>
                 <outlet property="leftButton" destination="K9f-SW-KBL" id="vl3-Oj-a9A"/>
                 <outlet property="rightButton" destination="aju-lD-R1H" id="DhK-XF-PX3"/>
                 <outlet property="titleLabel" destination="Ycg-sD-eBU" id="4QI-pm-Sr1"/>
