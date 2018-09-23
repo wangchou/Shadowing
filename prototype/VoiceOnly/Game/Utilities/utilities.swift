@@ -229,7 +229,7 @@ func dumpAvaliableVoices() {
     }
 }
 
-func getAvailableVoiceNames(language: String) -> [String] {
+func getAvailableVoiceID(language: String) -> [String] {
     return AVSpeechSynthesisVoice.speechVoices()
         .filter { voice in
             if voice.language == language {
@@ -237,7 +237,7 @@ func getAvailableVoiceNames(language: String) -> [String] {
             }
             return false
         }.map { voice in
-            return voice.name
+            return voice.identifier
         }
 }
 

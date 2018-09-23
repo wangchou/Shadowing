@@ -29,7 +29,7 @@
                         <view key="tableHeaderView" contentMode="scaleToFill" id="aep-48-VVi" customClass="TopBarView" customModule="VoiceOnly" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <sections>
                             <tableViewSection headerTitle="語音速度" id="pXQ-i2-L6D">
@@ -49,6 +49,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a07-vG-Faq">
                                                     <rect key="frame" x="261" y="6.5" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="autoSpeedSwitchValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="Pc0-PM-Po4"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -72,8 +75,11 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="O7j-xa-d2C">
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="O7j-xa-d2C">
                                                     <rect key="frame" x="13" y="34.5" width="299" height="31"/>
+                                                    <connections>
+                                                        <action selector="gameSpeedSilderValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="8ka-Bl-QH0"/>
+                                                    </connections>
                                                 </slider>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.9X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJT-xn-z2a">
                                                     <rect key="frame" x="275" y="11.5" width="35" height="21"/>
@@ -101,14 +107,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="74.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="練習速度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4nI-L7-HEK">
-                                                    <rect key="frame" x="16" y="11.5" width="69.5" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="練習語音速度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4nI-L7-HEK">
+                                                    <rect key="frame" x="16" y="11.5" width="104" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="7Bm-n0-0qL">
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.375" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="7Bm-n0-0qL">
                                                     <rect key="frame" x="13" y="34.5" width="299" height="31"/>
+                                                    <connections>
+                                                        <action selector="practiceSpeedSliderValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="5F8-4p-6Xa"/>
+                                                    </connections>
                                                 </slider>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.9X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u7I-o2-fNZ">
                                                     <rect key="frame" x="275" y="11.5" width="35" height="21"/>
@@ -148,6 +157,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nCJ-hb-hPN">
                                                     <rect key="frame" x="261" y="6.5" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="translationSwitchValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="cEF-0W-nCy"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -173,6 +185,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cnL-ja-E8l">
                                                     <rect key="frame" x="261" y="6.5" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="guideVoiceSwitchValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="Z31-Ia-GNR"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -198,6 +213,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="URw-xj-fSm">
                                                     <rect key="frame" x="261" y="6.5" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="narratorSwitchValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="NlI-YU-762"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -233,6 +251,9 @@
                                                         <segment title="Siri (女)"/>
                                                         <segment title="Siri (男)"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="teacherTTSSegmentControlValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="9eM-bF-zQZ"/>
+                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                             <constraints>
@@ -265,6 +286,9 @@
                                                         <segment title="Siri (女)"/>
                                                         <segment title="Siri (男)"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="assistantTTSSegmentControlValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="MSr-2g-tvd"/>
+                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                             <constraints>
@@ -285,7 +309,17 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="assistantTTSSegmentControl" destination="3Ub-tZ-Jqt" id="9fi-5X-zgG"/>
+                        <outlet property="autoSpeedSwitch" destination="a07-vG-Faq" id="VXS-JU-f5K"/>
+                        <outlet property="gameSpeedLabel" destination="XJT-xn-z2a" id="MBY-Cm-7f7"/>
+                        <outlet property="gameSpeedSlider" destination="O7j-xa-d2C" id="vEO-xe-Ssp"/>
+                        <outlet property="guideVoiceSwitch" destination="cnL-ja-E8l" id="paG-uz-arc"/>
+                        <outlet property="narratorSwitch" destination="URw-xj-fSm" id="0X0-bF-unC"/>
+                        <outlet property="practiceSpeedLabel" destination="u7I-o2-fNZ" id="KhD-IC-uCQ"/>
+                        <outlet property="practiceSpeedSlider" destination="7Bm-n0-0qL" id="bJL-pM-izd"/>
+                        <outlet property="teacherTTSSegmentControl" destination="PW3-bc-7sf" id="yK2-9m-L5Y"/>
                         <outlet property="topBarView" destination="aep-48-VVi" id="OXh-gN-rcA"/>
+                        <outlet property="translationSwitch" destination="nCJ-hb-hPN" id="lOx-1j-sun"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZDf-IZ-WMA" userLabel="First Responder" sceneMemberID="firstResponder"/>

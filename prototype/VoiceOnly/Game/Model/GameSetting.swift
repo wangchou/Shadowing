@@ -25,9 +25,11 @@ func loadGameSetting() {
 struct GameSetting: Codable {
     var isAutoSpeed: Bool = true
     var preferredSpeed: Float = AVSpeechUtteranceDefaultSpeechRate
+    var practiceSpeed: Float = AVSpeechUtteranceDefaultSpeechRate * 0.75
     var isUsingTranslation: Bool = true
     var isUsingGuideVoice: Bool = false
+    var isUsingNarrator: Bool = true
     var narrator: ChatSpeaker = .meijia
-    var teacher: ChatSpeaker = .hattori
-    var assisant: ChatSpeaker = .oren
+    var teacher: ChatSpeaker = .kyoko
+    var assisant: ChatSpeaker = .kyoko
 }
