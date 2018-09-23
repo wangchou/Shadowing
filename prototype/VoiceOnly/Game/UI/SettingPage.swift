@@ -14,8 +14,10 @@ private let context = GameContext.shared
 class SettingPage: UITableViewController {
     @IBOutlet weak var topBarView: TopBarView!
     @IBOutlet weak var autoSpeedSwitch: UISwitch!
+    @IBOutlet weak var gameSpeedCell: UITableViewCell!
     @IBOutlet weak var gameSpeedLabel: UILabel!
     @IBOutlet weak var gameSpeedSlider: UISlider!
+    @IBOutlet weak var customGameSpeedLabel: UILabel!
     @IBOutlet weak var practiceSpeedLabel: UILabel!
     @IBOutlet weak var practiceSpeedSlider: UISlider!
     @IBOutlet weak var translationSwitch: UISwitch!
@@ -28,6 +30,8 @@ class SettingPage: UITableViewController {
         super.viewDidLoad()
         topBarView.titleLabel.text = "設  定"
         topBarView.leftButton.isHidden = true
+        gameSpeedSlider.addTapGestureRecognizer(action: nil)
+        practiceSpeedSlider.addTapGestureRecognizer(action: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -37,6 +41,12 @@ class SettingPage: UITableViewController {
         autoSpeedSwitch.isOn = setting.isAutoSpeed
         if setting.isAutoSpeed {
             gameSpeedSlider.isEnabled = false
+            customGameSpeedLabel.textColor = UIColor.lightGray
+            gameSpeedLabel.textColor = UIColor.gray
+        } else {
+            gameSpeedSlider.isEnabled = true
+            customGameSpeedLabel.textColor = UIColor.black
+            gameSpeedLabel.textColor = UIColor.black
         }
         gameSpeedSlider.value = setting.preferredSpeed
         gameSpeedLabel.text = "\(String(format: "%.2f", setting.preferredSpeed*2))X"
@@ -77,37 +87,41 @@ class SettingPage: UITableViewController {
 
     private func showVoiceIsNotAvailableAlert() {
         let alert = UIAlertController(title: "你選的語音還未下載", message: "請於手機的「設定 > 一般 > 輔助使用 > 語音 > 聲音 > 日文」下載相關語音。", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-            //UIApplication.shared.openURL(NSURL(string:UIApplication.openSettingsURLString)! as URL);
-        }))
-        //alert.addAction(UIAlertAction(title: "取消", style: .cancel))
+        alert.addAction(UIAlertAction(title: "知道了", style: .default))
         self.present(alert, animated: true, completion: nil)
     }
 
     @IBAction func autoSpeedSwitchValueChanged(_ sender: Any) {
         context.gameSetting.isAutoSpeed = autoSpeedSwitch.isOn
+        saveGameSetting()
+        viewWillAppear(false)
     }
 
     @IBAction func gameSpeedSilderValueChanged(_ sender: Any) {
         context.gameSetting.preferredSpeed = gameSpeedSlider.value
+        saveGameSetting()
         viewWillAppear(false)
     }
 
     @IBAction func practiceSpeedSliderValueChanged(_ sender: Any) {
         context.gameSetting.practiceSpeed = practiceSpeedSlider.value
+        saveGameSetting()
         viewWillAppear(false)
     }
 
     @IBAction func translationSwitchValueChanged(_ sender: Any) {
         context.gameSetting.isUsingTranslation = translationSwitch.isOn
+        saveGameSetting()
     }
 
     @IBAction func guideVoiceSwitchValueChanged(_ sender: Any) {
         context.gameSetting.isUsingGuideVoice = guideVoiceSwitch.isOn
+        saveGameSetting()
     }
 
     @IBAction func narratorSwitchValueChanged(_ sender: Any) {
         context.gameSetting.isUsingNarrator = narratorSwitch.isOn
+        saveGameSetting()
     }
 
     @IBAction func teacherTTSSegmentControlValueChanged(_ sender: Any) {
@@ -116,24 +130,28 @@ class SettingPage: UITableViewController {
 
         if availableVoices.contains(speaker.rawValue) {
             context.gameSetting.teacher = speaker
+            _ = SpeechEngine.shared.speak(text: "今、話したい。", speaker: speaker, rate: context.gameSetting.preferredSpeed)
         } else {
             // show alert to download it
             teacherTTSSegmentControl.selectedSegmentIndex = getSegmentIndex(speaker: context.gameSetting.teacher)
             showVoiceIsNotAvailableAlert()
         }
+        saveGameSetting()
     }
 
     @IBAction func assistantTTSSegmentControlValueChanged(_ sender: Any) {
-        let speaker = getChatSpeaker(segmentIndex: teacherTTSSegmentControl.selectedSegmentIndex)
+        let speaker = getChatSpeaker(segmentIndex: assistantTTSSegmentControl.selectedSegmentIndex)
         let availableVoices = getAvailableVoiceID(language: "ja-JP")
 
         if availableVoices.contains(speaker.rawValue) {
             context.gameSetting.assisant = speaker
+            _ = SpeechEngine.shared.speak(text: "正解、違います。", speaker: speaker, rate: fastRate)
         } else {
             // show alert to download it
             assistantTTSSegmentControl.selectedSegmentIndex = getSegmentIndex(speaker: context.gameSetting.assisant)
             showVoiceIsNotAvailableAlert()
         }
+        saveGameSetting()
     }
 
 }

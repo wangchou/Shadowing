@@ -22,7 +22,7 @@
         <scene sceneID="OMK-qr-MRE">
             <objects>
                 <tableViewController storyboardIdentifier="SettingPage" id="pxg-jG-gsh" customClass="SettingPage" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cZ9-jp-Wmf">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cZ9-jp-Wmf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
@@ -69,7 +69,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="74.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="遊戲速度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egg-Xw-RbM">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="自訂速度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egg-Xw-RbM">
                                                     <rect key="frame" x="16" y="11.5" width="70" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -230,11 +230,11 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="語音合成" id="vhi-Sd-uwg">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="88" id="VMY-nf-tkP">
-                                        <rect key="frame" x="0.0" y="445" width="320" height="88"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="100" id="VMY-nf-tkP">
+                                        <rect key="frame" x="0.0" y="445" width="320" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VMY-nf-tkP" id="n4V-N7-Q05">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="87.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日文老師" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aRa-5I-OwF">
@@ -244,7 +244,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="PW3-bc-7sf">
-                                                    <rect key="frame" x="25" y="44.5" width="275" height="29"/>
+                                                    <rect key="frame" x="25" y="44.5" width="275" height="41"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="u5c-wV-Lpb"/>
+                                                    </constraints>
                                                     <segments>
                                                         <segment title="Kyoko"/>
                                                         <segment title="Otoya"/>
@@ -265,11 +268,11 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="88" id="TrU-ZD-XJB">
-                                        <rect key="frame" x="0.0" y="533" width="320" height="88"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="100" id="TrU-ZD-XJB">
+                                        <rect key="frame" x="0.0" y="545" width="320" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TrU-ZD-XJB" id="jcO-I4-NRL">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="87.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日文助理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t20-LT-eI1">
@@ -279,7 +282,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3Ub-tZ-Jqt">
-                                                    <rect key="frame" x="25" y="44.5" width="275" height="29"/>
+                                                    <rect key="frame" x="25" y="44.5" width="275" height="41"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="QBU-VQ-uOc"/>
+                                                    </constraints>
                                                     <segments>
                                                         <segment title="Kyoko"/>
                                                         <segment title="Otoya"/>
@@ -311,6 +317,8 @@
                     <connections>
                         <outlet property="assistantTTSSegmentControl" destination="3Ub-tZ-Jqt" id="9fi-5X-zgG"/>
                         <outlet property="autoSpeedSwitch" destination="a07-vG-Faq" id="VXS-JU-f5K"/>
+                        <outlet property="customGameSpeedLabel" destination="egg-Xw-RbM" id="f2V-aI-8nf"/>
+                        <outlet property="gameSpeedCell" destination="Tsd-SC-JNk" id="ra1-Hd-uIU"/>
                         <outlet property="gameSpeedLabel" destination="XJT-xn-z2a" id="MBY-Cm-7f7"/>
                         <outlet property="gameSpeedSlider" destination="O7j-xa-d2C" id="vEO-xe-Ssp"/>
                         <outlet property="guideVoiceSwitch" destination="cnL-ja-E8l" id="paG-uz-arc"/>
