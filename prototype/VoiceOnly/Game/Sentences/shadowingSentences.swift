@@ -369,6 +369,7 @@ var shadowingSentences: [[String]] = [s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s
 }
 
 enum ChatSpeaker: String, Codable {
+    case system = "system default"
     case oren = "com.apple.ttsbundle.siri_female_ja-JP_compact"
     case kyoko = "com.apple.ttsbundle.Kyoko-compact"
     case hattori = "com.apple.ttsbundle.siri_male_ja-JP_compact"

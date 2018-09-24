@@ -30,6 +30,6 @@ struct GameSetting: Codable {
     var isUsingGuideVoice: Bool = false
     var isUsingNarrator: Bool = true
     var narrator: ChatSpeaker = .meijia
-    var teacher: ChatSpeaker = .kyoko
-    var assisant: ChatSpeaker = .kyoko
+    var teacher: ChatSpeaker = .system
+    var assisant: ChatSpeaker = .system
 }

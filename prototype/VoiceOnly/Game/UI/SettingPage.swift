@@ -15,10 +15,9 @@ class SettingPage: UITableViewController {
     @IBOutlet weak var topBarView: TopBarView!
     @IBOutlet weak var autoSpeedSwitch: UISwitch!
     @IBOutlet weak var gameSpeedCell: UITableViewCell!
-    @IBOutlet weak var gameSpeedLabel: UILabel!
     @IBOutlet weak var gameSpeedSlider: UISlider!
-    @IBOutlet weak var customGameSpeedLabel: UILabel!
-    @IBOutlet weak var practiceSpeedLabel: UILabel!
+    @IBOutlet weak var gameSpeedSlowLabel: UILabel!
+    @IBOutlet weak var gameSpeedFastLabel: UILabel!
     @IBOutlet weak var practiceSpeedSlider: UISlider!
     @IBOutlet weak var translationSwitch: UISwitch!
     @IBOutlet weak var guideVoiceSwitch: UISwitch!
@@ -41,18 +40,16 @@ class SettingPage: UITableViewController {
         autoSpeedSwitch.isOn = setting.isAutoSpeed
         if setting.isAutoSpeed {
             gameSpeedSlider.isEnabled = false
-            customGameSpeedLabel.textColor = UIColor.lightGray
-            gameSpeedLabel.textColor = UIColor.gray
+            gameSpeedSlowLabel.textColor = UIColor.lightGray
+            gameSpeedFastLabel.textColor = UIColor.lightGray
         } else {
             gameSpeedSlider.isEnabled = true
-            customGameSpeedLabel.textColor = UIColor.black
-            gameSpeedLabel.textColor = UIColor.black
+            gameSpeedSlowLabel.textColor = UIColor.black
+            gameSpeedFastLabel.textColor = UIColor.black
         }
         gameSpeedSlider.value = setting.preferredSpeed
-        gameSpeedLabel.text = "\(String(format: "%.2f", setting.preferredSpeed*2))X"
 
         practiceSpeedSlider.value = setting.practiceSpeed
-        practiceSpeedLabel.text = "\(String(format: "%.2f", setting.practiceSpeed*2))X"
 
         translationSwitch.isOn = setting.isUsingTranslation
         guideVoiceSwitch.isOn = setting.isUsingGuideVoice
@@ -65,24 +62,25 @@ class SettingPage: UITableViewController {
     private func getSegmentIndex(speaker: ChatSpeaker) -> Int {
         switch speaker {
         case .hattori:
-            return 3
+            return 4
         case .oren:
-            return 2
+            return 3
         case .kyoko:
-            return 0
-        case .otoya:
             return 1
+        case .otoya:
+            return 2
         default:
             return 0
         }
     }
 
     private func getChatSpeaker(segmentIndex: Int) -> ChatSpeaker {
-        if segmentIndex == 0 { return .kyoko }
-        if segmentIndex == 1 { return .otoya }
-        if segmentIndex == 2 { return .oren }
-        if segmentIndex == 3 { return .hattori }
-        return .kyoko
+        if segmentIndex == 0 { return .system }
+        if segmentIndex == 1 { return .kyoko }
+        if segmentIndex == 2 { return .otoya }
+        if segmentIndex == 3 { return .oren }
+        if segmentIndex == 4 { return .hattori }
+        return .system
     }
 
     private func showVoiceIsNotAvailableAlert() {
@@ -128,7 +126,7 @@ class SettingPage: UITableViewController {
         let speaker = getChatSpeaker(segmentIndex: teacherTTSSegmentControl.selectedSegmentIndex)
         let availableVoices = getAvailableVoiceID(language: "ja-JP")
 
-        if availableVoices.contains(speaker.rawValue) {
+        if speaker == .system || availableVoices.contains(speaker.rawValue) {
             context.gameSetting.teacher = speaker
             _ = SpeechEngine.shared.speak(text: "今、話したい。", speaker: speaker, rate: context.gameSetting.preferredSpeed)
         } else {
@@ -143,7 +141,7 @@ class SettingPage: UITableViewController {
         let speaker = getChatSpeaker(segmentIndex: assistantTTSSegmentControl.selectedSegmentIndex)
         let availableVoices = getAvailableVoiceID(language: "ja-JP")
 
-        if availableVoices.contains(speaker.rawValue) {
+        if speaker == .system || availableVoices.contains(speaker.rawValue) {
             context.gameSetting.assisant = speaker
             _ = SpeechEngine.shared.speak(text: "正解、違います。", speaker: speaker, rate: fastRate)
         } else {

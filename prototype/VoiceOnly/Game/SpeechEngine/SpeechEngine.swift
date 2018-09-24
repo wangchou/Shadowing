@@ -81,7 +81,7 @@ class SpeechEngine {
 
         if let speaker = speaker {
             switch speaker {
-            case .hattori, .otoya, .kyoko, .oren, .meijia:
+            case .hattori, .otoya, .kyoko, .oren, .meijia, .system:
                 speakPromise = tts.say(
                     text,
                     name: speaker.rawValue,
