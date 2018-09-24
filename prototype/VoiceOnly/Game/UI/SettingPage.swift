@@ -99,12 +99,16 @@ class SettingPage: UITableViewController {
         context.gameSetting.preferredSpeed = gameSpeedSlider.value
         saveGameSetting()
         viewWillAppear(false)
+        _ = SpeechEngine.shared.speak(text: "今、話したい。", speaker: context.gameSetting.teacher, rate: context.gameSetting.preferredSpeed)
+        print("gameSpeedSlider.value")
     }
 
     @IBAction func practiceSpeedSliderValueChanged(_ sender: Any) {
         context.gameSetting.practiceSpeed = practiceSpeedSlider.value
         saveGameSetting()
         viewWillAppear(false)
+        _ = SpeechEngine.shared.speak(text: "今、話したい。", speaker: context.gameSetting.teacher, rate: context.gameSetting.preferredSpeed)
+        print("gameSpeedSlider.value")
     }
 
     @IBAction func translationSwitchValueChanged(_ sender: Any) {

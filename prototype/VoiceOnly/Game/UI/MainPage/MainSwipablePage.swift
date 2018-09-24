@@ -35,6 +35,13 @@ class MainSwipablePage: UIPageViewController {
         setViewControllers([pages[1]], direction: .forward, animated: true, completion: nil)
 
         dataSource = self
+
+        // https://stackoverflow.com/questions/43416456/using-uislider-inside-uipageviewcontroller
+        for view in self.view.subviews {
+            if view is UIScrollView {
+                (view as? UIScrollView)?.delaysContentTouches = false
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

@@ -22,7 +22,7 @@
         <scene sceneID="OMK-qr-MRE">
             <objects>
                 <tableViewController storyboardIdentifier="SettingPage" id="pxg-jG-gsh" customClass="SettingPage" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="cZ9-jp-Wmf">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="cZ9-jp-Wmf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -69,7 +69,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="O7j-xa-d2C">
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7j-xa-d2C">
                                                     <rect key="frame" x="43" y="7" width="239" height="31"/>
                                                     <connections>
                                                         <action selector="gameSpeedSilderValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="8ka-Bl-QH0"/>
@@ -110,7 +110,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.375" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="7Bm-n0-0qL">
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.375" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Bm-n0-0qL">
                                                     <rect key="frame" x="43" y="7" width="239" height="31"/>
                                                     <connections>
                                                         <action selector="practiceSpeedSliderValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="5F8-4p-6Xa"/>
@@ -924,7 +924,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.80000000000000004" minValue="0.5" maxValue="1.5" translatesAutoresizingMaskIntoConstraints="NO" id="cM8-Gz-KMi">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.80000000000000004" minValue="0.5" maxValue="1.5" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cM8-Gz-KMi">
                                 <rect key="frame" x="58" y="518" width="204" height="31"/>
                                 <connections>
                                     <action selector="onTTSSpeedSliderValueChanged:" destination="xbq-5x-hVH" eventType="valueChanged" id="XR5-Bd-bMO"/>
@@ -974,7 +974,7 @@
                             <constraint firstItem="OGX-jP-5z8" firstAttribute="centerY" secondItem="SSu-uc-Hye" secondAttribute="centerY" id="CST-P1-ehx"/>
                             <constraint firstItem="cM8-Gz-KMi" firstAttribute="leading" secondItem="N3t-I3-Erf" secondAttribute="leading" constant="60" id="Y8F-RC-VcB"/>
                             <constraint firstItem="08G-Eb-JgR" firstAttribute="firstBaseline" secondItem="OGX-jP-5z8" secondAttribute="baseline" constant="36" symbolType="layoutAnchor" id="Yof-7s-0HY"/>
-                            <constraint firstItem="cM8-Gz-KMi" firstAttribute="firstBaseline" secondItem="08G-Eb-JgR" secondAttribute="baseline" constant="18.5" symbolType="layoutAnchor" id="aNS-UM-lCr"/>
+                            <constraint firstItem="cM8-Gz-KMi" firstAttribute="firstBaseline" secondItem="08G-Eb-JgR" secondAttribute="baseline" constant="16" symbolType="layoutAnchor" id="aNS-UM-lCr"/>
                             <constraint firstItem="08G-Eb-JgR" firstAttribute="centerY" secondItem="4P9-61-8fN" secondAttribute="centerY" id="bVg-EA-jUA"/>
                             <constraint firstItem="N3t-I3-Erf" firstAttribute="trailing" secondItem="cM8-Gz-KMi" secondAttribute="trailing" constant="60" id="cEa-gp-2ZL"/>
                             <constraint firstItem="4P9-61-8fN" firstAttribute="top" secondItem="SSu-uc-Hye" secondAttribute="bottom" constant="14" id="oTT-mV-p4g"/>
