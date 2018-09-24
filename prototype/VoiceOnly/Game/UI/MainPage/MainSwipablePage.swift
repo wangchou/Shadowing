@@ -32,6 +32,7 @@ class MainSwipablePage: UIPageViewController {
         }
         addPage("SettingPage")
         addPage("ShadowingListPage")
+        addPage("GameContentDetailPage")
         setViewControllers([pages[1]], direction: .forward, animated: true, completion: nil)
 
         dataSource = self

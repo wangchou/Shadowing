@@ -30,11 +30,14 @@ class GameContentDetailPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTopBar()
-        titleLabel.text = context.dataSetKey
         tableView.register(
             UINib(nibName: "SentencesTableCell", bundle: nil),
             forCellReuseIdentifier: "ContentTableCell"
         )
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        titleLabel.text = context.dataSetKey
 
         if let gameRecord = findBestRecord(key: context.dataSetKey) {
             rankLabel.attributedText = getRankAttrText(rank: gameRecord.rank.rawValue, color: gameRecord.rank.color)
@@ -66,11 +69,8 @@ class GameContentDetailPage: UIViewController {
         topBarView.titleLabel.text = "關  卡"
         topBarView.titleLabel.textColor = myWhite
         topBarView.backgroundColor = UIColor.black.withAlphaComponent(0)
-        topBarView.leftButton.setIconImage(named: "ic_settings_48pt", tintColor: UIColor(white: 255, alpha: 0.9))
-        topBarView.rightButton.setIconImage(named: "ic_close_48pt", tintColor: UIColor(white: 255, alpha: 0.9))
-        topBarView.customOnRightButtonClicked = {
-            self.dismiss(animated: true, completion: nil)
-        }
+        topBarView.leftButton.setIconImage(named: "ic_keyboard_arrow_left_48pt", tintColor: UIColor(white: 255, alpha: 0.9))
+        topBarView.rightButton.isHidden = true
         topBarView.bottomSeparator.backgroundColor = UIColor.white.withAlphaComponent(0.2)
     }
 

@@ -317,15 +317,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZDf-IZ-WMA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="976.875" y="-600"/>
-        </scene>
-        <!--Detail Swipable Page-->
-        <scene sceneID="1y7-mj-kbb">
-            <objects>
-                <pageViewController storyboardIdentifier="DetailSwipablePage" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="1Wk-b9-7BI" customClass="DetailSwipablePage" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ln5-RA-D76" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1335" y="-1952"/>
+            <point key="canvasLocation" x="53" y="-1282"/>
         </scene>
         <!--Shadowing List Page-->
         <scene sceneID="tne-QT-ifu">
