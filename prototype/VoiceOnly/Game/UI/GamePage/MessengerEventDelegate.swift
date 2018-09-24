@@ -87,7 +87,7 @@ extension Messenger: GameEventDelegate {
             attributed.append(rubyAttrStr("聽不清楚"))
         }
 
-        attributed.append(rubyAttrStr(" \(score.valueText) \(score.type == .perfect ? "⭐️": "")"))
+        attributed.append(rubyAttrStr(" \(score.valueText) \(score.type == .perfect ? "💯": "")"))
 
         updateLastLabelText(attributed, isLeft: false)
 
