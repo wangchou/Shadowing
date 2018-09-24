@@ -24,8 +24,8 @@ class TopBarView: UIView, XibView {
     override func awakeFromNib() {
         super.awakeFromNib()
         xibSetup()
-        leftButton.setIconImage(named: "ic_settings_48pt")
-        rightButton.setIconImage(named: "ic_keyboard_arrow_right_48pt")
+        leftButton.setIconImage(named: "outline_settings_black_48pt")
+        rightButton.setIconImage(named: "outline_arrow_forward_ios_black_48pt")
         titleLabel.textColor = UIColor(white: 0, alpha: 0.66)
     }
 
@@ -33,8 +33,8 @@ class TopBarView: UIView, XibView {
         super.prepareForInterfaceBuilder()
         xibSetup()
         contentView?.prepareForInterfaceBuilder()
-        leftButton.setIconImage(named: "ic_settings_48pt")
-        rightButton.setIconImage(named: "ic_keyboard_arrow_right_48pt")
+        leftButton.setIconImage(named: "outline_settings_black_48pt")
+        rightButton.setIconImage(named: "outline_arrow_forward_ios_black_48pt")
         titleLabel.textColor = UIColor(white: 0, alpha: 0.66)
     }
 
