@@ -25,6 +25,19 @@ class SettingPage: UITableViewController {
     @IBOutlet weak var teacherTTSSegmentControl: UISegmentedControl!
     @IBOutlet weak var assistantTTSSegmentControl: UISegmentedControl!
 
+    var testSentence: String {
+        switch context.gameSetting.teacher {
+        case .hattori, .oren:
+            return "こんにちは、私の名前はSiriです。"
+        case .kyoko:
+            return "こんにちは、私の名前はKyokoです。"
+        case .otoya:
+            return "こんにちは、私の名前はOtoyaです。"
+        default:
+            return "今日はいい天気ですね。"
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         topBarView.titleLabel.text = "設  定"
@@ -99,16 +112,14 @@ class SettingPage: UITableViewController {
         context.gameSetting.preferredSpeed = gameSpeedSlider.value
         saveGameSetting()
         viewWillAppear(false)
-        _ = SpeechEngine.shared.speak(text: "今、話したい。", speaker: context.gameSetting.teacher, rate: context.gameSetting.preferredSpeed)
-        print("gameSpeedSlider.value")
+        _ = SpeechEngine.shared.speak(text: testSentence, speaker: context.gameSetting.teacher, rate: context.gameSetting.preferredSpeed)
     }
 
     @IBAction func practiceSpeedSliderValueChanged(_ sender: Any) {
         context.gameSetting.practiceSpeed = practiceSpeedSlider.value
         saveGameSetting()
         viewWillAppear(false)
-        _ = SpeechEngine.shared.speak(text: "今、話したい。", speaker: context.gameSetting.teacher, rate: context.gameSetting.preferredSpeed)
-        print("gameSpeedSlider.value")
+        _ = SpeechEngine.shared.speak(text: testSentence, speaker: context.gameSetting.teacher, rate: context.gameSetting.practiceSpeed)
     }
 
     @IBAction func translationSwitchValueChanged(_ sender: Any) {
@@ -132,7 +143,7 @@ class SettingPage: UITableViewController {
 
         if speaker == .system || availableVoices.contains(speaker.rawValue) {
             context.gameSetting.teacher = speaker
-            _ = SpeechEngine.shared.speak(text: "今、話したい。", speaker: speaker, rate: context.gameSetting.preferredSpeed)
+            _ = SpeechEngine.shared.speak(text: testSentence, speaker: speaker, rate: context.gameSetting.preferredSpeed)
         } else {
             // show alert to download it
             teacherTTSSegmentControl.selectedSegmentIndex = getSegmentIndex(speaker: context.gameSetting.teacher)

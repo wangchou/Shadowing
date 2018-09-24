@@ -113,7 +113,7 @@ class SentencesTableCell: UITableViewCell {
 
     private func speakPart() -> Promise<Void> {
         guard context.gameSetting.isUsingGuideVoice else { return fulfilledVoidPromise() }
-        return SpeechEngine.shared.speak(text: targetString, speaker: .hattori)
+        return teacherSay(targetString)
     }
 
     private func prepareForSpeaking() {
