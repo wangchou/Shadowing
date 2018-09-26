@@ -21,7 +21,7 @@ func getDataFromUrl(url: String, completion: @escaping (Data?, URLResponse?, Err
 }
 
 func loadCharacterProfile() {
-    getDataFromUrl(url: yuiUrl) { data, _, error in
+    getDataFromUrl(url: awanUrl) { data, _, error in
         guard let data = data, error == nil else { return }
         DispatchQueue.main.async {
             GameContext.shared.characterImage = UIImage(data: data)

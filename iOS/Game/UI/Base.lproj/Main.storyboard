@@ -873,10 +873,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fzY-jo-0bH">
-                                <rect key="frame" x="45" y="161" width="230" height="61"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fzY-jo-0bH">
+                                <rect key="frame" x="45" y="162" width="230" height="60"/>
                                 <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Uoi-04-lOf"/>
+                                    <constraint firstAttribute="width" constant="230" id="lKX-dg-aaV"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="結束遊戲">
                                     <color key="titleColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -909,9 +912,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="使用導唸：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="InH-cn-90q">
-                                <rect key="frame" x="30" y="380" width="122" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="使用導唸：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="InH-cn-90q">
+                                <rect key="frame" x="30" y="388" width="122" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -922,10 +924,13 @@
                                     <action selector="onTTSSpeedSliderValueChanged:" destination="xbq-5x-hVH" eventType="valueChanged" id="XR5-Bd-bMO"/>
                                 </connections>
                             </slider>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Px8-Is-Bt1">
-                                <rect key="frame" x="45" y="245" width="230" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Px8-Is-Bt1">
+                                <rect key="frame" x="45" y="254" width="230" height="60"/>
                                 <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="230" id="NQK-CN-tbW"/>
+                                    <constraint firstAttribute="height" constant="60" id="PNf-Oc-x4J"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="繼續">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -934,13 +939,6 @@
                                     <action selector="resumeButtonClicked:" destination="xbq-5x-hVH" eventType="touchUpInside" id="585-2g-u3f"/>
                                 </connections>
                             </button>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xy8-dC-O7c" userLabel="Guide Voice Switch">
-                                <rect key="frame" x="241" y="380" width="49" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="onGuideVoiceSwitchTapped:" destination="xbq-5x-hVH" eventType="valueChanged" id="5IY-NF-42N"/>
-                                </connections>
-                            </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="慢" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zvf-ny-jFJ">
                                 <rect key="frame" x="30" y="518.5" width="24.5" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
@@ -953,6 +951,12 @@
                                 <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xy8-dC-O7c" userLabel="Guide Voice Switch">
+                                <rect key="frame" x="241" y="387" width="49" height="31"/>
+                                <connections>
+                                    <action selector="onGuideVoiceSwitchTapped:" destination="xbq-5x-hVH" eventType="valueChanged" id="5IY-NF-42N"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59990368150684936" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -964,11 +968,19 @@
                             <constraint firstItem="N3t-I3-Erf" firstAttribute="bottom" secondItem="cM8-Gz-KMi" secondAttribute="bottom" constant="20" id="8CG-0t-t1i"/>
                             <constraint firstItem="N3t-I3-Erf" firstAttribute="trailing" secondItem="SSu-uc-Hye" secondAttribute="trailing" constant="30" id="9f4-7P-clt"/>
                             <constraint firstItem="OGX-jP-5z8" firstAttribute="centerY" secondItem="SSu-uc-Hye" secondAttribute="centerY" id="CST-P1-ehx"/>
+                            <constraint firstItem="InH-cn-90q" firstAttribute="leading" secondItem="N3t-I3-Erf" secondAttribute="leading" constant="30" id="DrT-AT-XMI"/>
+                            <constraint firstItem="Px8-Is-Bt1" firstAttribute="centerX" secondItem="IVc-qA-oVM" secondAttribute="centerX" id="Hm4-ob-Cn6"/>
+                            <constraint firstItem="fzY-jo-0bH" firstAttribute="centerX" secondItem="IVc-qA-oVM" secondAttribute="centerX" id="ID3-BQ-04k"/>
+                            <constraint firstItem="Px8-Is-Bt1" firstAttribute="top" secondItem="fzY-jo-0bH" secondAttribute="bottom" constant="32" id="J3X-xy-kYd"/>
+                            <constraint firstItem="Xy8-dC-O7c" firstAttribute="centerY" secondItem="InH-cn-90q" secondAttribute="centerY" id="XPB-7c-efn"/>
                             <constraint firstItem="cM8-Gz-KMi" firstAttribute="leading" secondItem="N3t-I3-Erf" secondAttribute="leading" constant="60" id="Y8F-RC-VcB"/>
-                            <constraint firstItem="08G-Eb-JgR" firstAttribute="firstBaseline" secondItem="OGX-jP-5z8" secondAttribute="baseline" constant="36" symbolType="layoutAnchor" id="Yof-7s-0HY"/>
+                            <constraint firstItem="08G-Eb-JgR" firstAttribute="firstBaseline" secondItem="OGX-jP-5z8" secondAttribute="baseline" constant="32" symbolType="layoutAnchor" id="Yof-7s-0HY"/>
                             <constraint firstItem="cM8-Gz-KMi" firstAttribute="firstBaseline" secondItem="08G-Eb-JgR" secondAttribute="baseline" constant="16" symbolType="layoutAnchor" id="aNS-UM-lCr"/>
                             <constraint firstItem="08G-Eb-JgR" firstAttribute="centerY" secondItem="4P9-61-8fN" secondAttribute="centerY" id="bVg-EA-jUA"/>
                             <constraint firstItem="N3t-I3-Erf" firstAttribute="trailing" secondItem="cM8-Gz-KMi" secondAttribute="trailing" constant="60" id="cEa-gp-2ZL"/>
+                            <constraint firstItem="Px8-Is-Bt1" firstAttribute="centerY" secondItem="IVc-qA-oVM" secondAttribute="centerY" id="dtC-KL-8ly"/>
+                            <constraint firstItem="N3t-I3-Erf" firstAttribute="trailing" secondItem="Xy8-dC-O7c" secondAttribute="trailing" constant="32" id="eLa-Aj-0Pa"/>
+                            <constraint firstItem="OGX-jP-5z8" firstAttribute="top" secondItem="InH-cn-90q" secondAttribute="bottom" constant="4" id="jJW-gU-N1s"/>
                             <constraint firstItem="4P9-61-8fN" firstAttribute="top" secondItem="SSu-uc-Hye" secondAttribute="bottom" constant="14" id="oTT-mV-p4g"/>
                             <constraint firstItem="OGX-jP-5z8" firstAttribute="leading" secondItem="N3t-I3-Erf" secondAttribute="leading" constant="30" id="wb4-Vo-jXr"/>
                             <constraint firstItem="pEm-2K-vVR" firstAttribute="centerY" secondItem="cM8-Gz-KMi" secondAttribute="centerY" id="xaM-0B-wZc"/>
