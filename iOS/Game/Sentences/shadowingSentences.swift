@@ -10,22 +10,36 @@ import Foundation
 
 var translations: [String: String] = [:]
 
+var tags: [String: [String]] = [:]
 var shadowingSentences: [[String]] =
     [dailyOne, dailyTwo, travel, polite, interaction, love, expressive, random]
     .flatMap { (element: [String]) -> [String] in
         return element
     }
     .map { paragraph in
-        return paragraph
+        var currentTags: [String] = []
+        let sentences: [String] = paragraph
         .components(separatedBy: "\n")
-        .filter { s in return s != ""}
-        .map { sentence in
+        .filter {s in
+            if s.contains("#") {
+                s.matches(for: "#[^ ]+")
+                    .forEach {s in currentTags.append(s)}
+                return false
+            }
+            return s != ""
+        }.map { sentence in
             let subSentences = sentence.components(separatedBy: "|")
             if subSentences.count > 1 {
                 translations[subSentences[0]] = subSentences[1]
             }
             return subSentences[0]
         }
+
+        if !sentences.isEmpty {
+            tags[sentences[0]] = currentTags
+        }
+
+        return sentences
     }
 
 enum ChatSpeaker: String, Codable {

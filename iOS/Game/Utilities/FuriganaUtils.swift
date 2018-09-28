@@ -182,6 +182,22 @@ extension String {
         return self.components(separatedBy: pattern).count - 1
     }
 
+    // https://stackoverflow.com/questions/27880650/swift-extract-regex-matches
+    func matches(for regex: String) -> [String] {
+
+        do {
+            let regex = try NSRegularExpression(pattern: regex)
+            let results = regex.matches(in: self,
+                                        range: NSRange(self.startIndex..., in: self))
+            return results.map {
+                String(self[Range($0.range, in: self)!])
+            }
+        } catch let error {
+            print("invalid regex: \(error.localizedDescription)")
+            return []
+        }
+    }
+
     var hiraganaOnly: String {
         let hiragana = self.kataganaToHiragana
         guard let hiraganaRange = hiragana.range(of: "\\p{Hiragana}*\\p{Hiragana}", options: .regularExpression)
