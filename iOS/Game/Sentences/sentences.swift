@@ -38,4 +38,5 @@ func addSentences() {
         allLevels[key] = Level.n5a
     }
     print(tags)
+    print(datasetKeyToTags)
 }

@@ -27,7 +27,8 @@ func rubyAttrStr(
     _ string: String,
     _ ruby: String = "",
     fontSize: CGFloat = 20,
-    color: UIColor = .black
+    color: UIColor = .black,
+    isWithStroke: Bool = false
     ) -> NSAttributedString {
 //    print("main=\(string), ruby=\(ruby)")
     let fontRuby = MyFont.thin(ofSize: fontSize/2)
@@ -40,8 +41,7 @@ func rubyAttrStr(
         [ kCTFontAttributeName: fontRuby ] as CFDictionary
     )
 
-    let isSpecial = color != .black
-    if !isSpecial {
+    if color == .black || !isWithStroke {
         return NSAttributedString(
             string: string,
             attributes: [
@@ -89,8 +89,8 @@ func getFuriganaAttrString(_ parts: [String], _ kana: String, color: UIColor = .
 
     if parts.count == 1 {
         let result = parts[0].jpnType == JpnType.noKanjiAndNumber ?
-            rubyAttrStr(parts[0], color: color) :
-            rubyAttrStr(parts[0], kana, color: color)
+            rubyAttrStr(parts[0], color: color, isWithStroke: color != .black) :
+            rubyAttrStr(parts[0], kana, color: color, isWithStroke: color != .black)
 
         attrStr.append(result)
         return attrStr
@@ -112,7 +112,7 @@ func getFuriganaAttrString(_ parts: [String], _ kana: String, color: UIColor = .
         }
 
         // divider
-        attrStr.append(rubyAttrStr(divider, color: color))
+        attrStr.append(rubyAttrStr(divider, color: color, isWithStroke: color != .black))
 
         // after divider part
         if dividerIndex + 1 < parts.count {

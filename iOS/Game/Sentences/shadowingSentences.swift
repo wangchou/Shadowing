@@ -10,7 +10,8 @@ import Foundation
 
 var translations: [String: String] = [:]
 
-var tags: [String: [String]] = [:]
+var datasetKeyToTags: [String: [String]] = [:]
+var tags: [String] = []
 var shadowingSentences: [[String]] =
     [dailyOne, dailyTwo, travel, polite, interaction, love, expressive, random]
     .flatMap { (element: [String]) -> [String] in
@@ -23,7 +24,12 @@ var shadowingSentences: [[String]] =
         .filter {s in
             if s.contains("#") {
                 s.matches(for: "#[^ ]+")
-                    .forEach {s in currentTags.append(s)}
+                 .forEach { s in
+                    if !tags.contains(s) {
+                        tags.append(s)
+                    }
+                    currentTags.append(s)
+                 }
                 return false
             }
             return s != ""
@@ -36,7 +42,7 @@ var shadowingSentences: [[String]] =
         }
 
         if !sentences.isEmpty {
-            tags[sentences[0]] = currentTags
+            datasetKeyToTags[sentences[0]] = currentTags
         }
 
         return sentences

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 private let context = GameContext.shared
 private let engine = SpeechEngine.shared
@@ -89,8 +90,16 @@ extension ShadowingListPage: UITableViewDataSource {
         guard let contentCell = cell as? ContentCell else { print("convert content cell error"); return cell }
 
         let dataSetKey = allSentencesKeys[indexPath.row]
+        let attrStr = NSMutableAttributedString()
+        attrStr.append(rubyAttrStr(dataSetKey, fontSize: 16))
+        if let tags = datasetKeyToTags[dataSetKey],
+           !tags.isEmpty {
+            attrStr.append(
+                rubyAttrStr("\n"+tags.joined(separator: " "), fontSize: 14, color: hashtagColor, isWithStroke: false)
+            )
+        }
 
-        contentCell.titleLabel.attributedText = rubyAttrStr(dataSetKey, fontSize: 16)
+        contentCell.titleLabel.attributedText = attrStr
         let record = findBestRecord(key: dataSetKey)
         contentCell.strockedProgressText = record?.progress
         contentCell.strockedRankText = record?.rank.rawValue
