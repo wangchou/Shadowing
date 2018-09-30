@@ -343,33 +343,31 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ca0-bb-sN7" customClass="TimelineView" customModule="VoiceOnly" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="3" width="174.5" height="155"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ca0-bb-sN7" customClass="TimelineView" customModule="VoiceOnly" customModuleProvider="target">
+                                            <rect key="frame" x="160" y="10" width="160" height="145"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" secondItem="ca0-bb-sN7" secondAttribute="height" multiplier="9:8" id="GK4-nn-kkh"/>
+                                                <constraint firstAttribute="width" secondItem="ca0-bb-sN7" secondAttribute="height" multiplier="160:145" id="BAD-n6-K8Y"/>
                                             </constraints>
                                         </view>
-                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mu1-Ft-6RO" userLabel="RadarChart" customClass="RadarChartView" customModule="Charts">
-                                            <rect key="frame" x="181" y="0.0" width="139" height="160"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mu1-Ft-6RO" userLabel="RadarChart" customClass="RadarChartView" customModule="Charts">
+                                            <rect key="frame" x="5" y="-8" width="160" height="178"/>
                                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="mu1-Ft-6RO" secondAttribute="height" multiplier="7:8" id="fZn-Jg-Wwh"/>
-                                            </constraints>
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="ca0-bb-sN7" secondAttribute="bottom" constant="5" id="aRe-Ts-hFe"/>
-                                        <constraint firstAttribute="trailing" secondItem="mu1-Ft-6RO" secondAttribute="trailing" id="gWB-sC-3Vl"/>
-                                        <constraint firstAttribute="bottom" secondItem="mu1-Ft-6RO" secondAttribute="bottom" constant="1.5" id="lyj-E7-NZx"/>
-                                        <constraint firstItem="mu1-Ft-6RO" firstAttribute="top" secondItem="U0O-4m-O5g" secondAttribute="top" constant="-10" id="sFR-cq-GuU"/>
-                                        <constraint firstItem="ca0-bb-sN7" firstAttribute="leading" secondItem="U0O-4m-O5g" secondAttribute="leading" id="uvV-pP-0QS"/>
+                                        <constraint firstAttribute="bottom" secondItem="mu1-Ft-6RO" secondAttribute="bottom" constant="-10" id="lyj-E7-NZx"/>
+                                        <constraint firstItem="ca0-bb-sN7" firstAttribute="leading" secondItem="mu1-Ft-6RO" secondAttribute="trailing" constant="-5" id="n3c-u3-RA0"/>
+                                        <constraint firstAttribute="trailing" secondItem="ca0-bb-sN7" secondAttribute="trailing" id="sFP-6F-SlZ"/>
+                                        <constraint firstItem="mu1-Ft-6RO" firstAttribute="top" secondItem="U0O-4m-O5g" secondAttribute="top" constant="-8" id="sFR-cq-GuU"/>
+                                        <constraint firstItem="mu1-Ft-6RO" firstAttribute="leading" secondItem="U0O-4m-O5g" secondAttribute="leading" constant="5" id="vpe-2E-2Bs"/>
                                         <constraint firstItem="ca0-bb-sN7" firstAttribute="top" secondItem="U0O-4m-O5g" secondAttribute="top" constant="10" id="zAQ-9L-KNK"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="SentencesCell" rowHeight="80" id="dBP-pO-iCD" customClass="ContentCell" customModule="VoiceOnly" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="SentencesCell" rowHeight="80" id="dBP-pO-iCD" customClass="ContentCell" customModule="VoiceOnly" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="188" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dBP-pO-iCD" id="u6e-75-GJe">

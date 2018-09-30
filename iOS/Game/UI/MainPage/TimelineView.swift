@@ -43,7 +43,7 @@ class TimelineView: UIView, ReloadableView, GridLayout {
     var spacing: CGFloat = 2
     var yPadding: CGFloat = 2
     var columnCount: Int {
-        return Int(frame.width/stepFloat + 1)
+        return Int(frame.width/step)
     }
 
     let dateFormatter = DateFormatter()
