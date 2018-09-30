@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Charts
 import Foundation
 
 private let context = GameContext.shared
@@ -16,8 +17,8 @@ class ShadowingListPage: UIViewController {
     @IBOutlet weak var sentencesTableView: UITableView!
     @IBOutlet weak var timeline: TimelineView!
     @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var characterView: CharacterView!
     @IBOutlet weak var topBarView: TopBarView!
+    @IBOutlet weak var radarChartView: RadarChartView!
 
     var timelineSubviews: [String: UIView] = [:]
 
@@ -35,7 +36,7 @@ class ShadowingListPage: UIViewController {
         let height = screen.width * 120/320
         topView.frame.size.height = height + 5
         timeline.frame.size.height = height
-        characterView.frame.size.height = height - 10
+        radarChartView.frame.size.height = height - 10
     }
 
     @objc func injected() {
@@ -49,12 +50,13 @@ class ShadowingListPage: UIViewController {
         loadCharacterProfile()
         sentencesTableView.reloadData()
         timeline.viewWillAppear()
-        characterView.viewWillAppear()
+        setChartData()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         addGradientSeparatorLine()
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -113,5 +115,84 @@ extension ShadowingListPage: UITableViewDelegate {
         context.dataSetKey = allSentencesKeys[indexPath.row]
         context.loadLearningSentences(isShuffle: false)
         (UIApplication.getPresentedViewController() as? UIPageViewController)?.goToNextPage()
+    }
+}
+
+extension ShadowingListPage: IAxisValueFormatter {
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        let activities = ["旅遊", "日常一", "日常二", "戀愛", "敬語", "互動", "論述", "雜談"]
+        return activities[Int(value) % activities.count]
+    }
+}
+
+extension ShadowingListPage: ChartViewDelegate {
+    func setChartData() {
+        radarChartView.backgroundColor = .darkGray
+        radarChartView.delegate = self
+
+        radarChartView.chartDescription?.enabled = false
+        radarChartView.webLineWidth = 1
+        radarChartView.innerWebLineWidth = 1
+        radarChartView.webColor = .lightGray
+        radarChartView.innerWebColor = .lightGray
+        radarChartView.webAlpha = 1
+
+        let xAxis = radarChartView.xAxis
+        xAxis.labelFont = .systemFont(ofSize: 9, weight: .light)
+        xAxis.xOffset = 0
+        xAxis.yOffset = 0
+        xAxis.valueFormatter = self
+        xAxis.labelTextColor = .white
+
+        let yAxis = radarChartView.yAxis
+        yAxis.labelFont = .systemFont(ofSize: 9, weight: .light)
+        yAxis.labelCount = 5
+        yAxis.axisMinimum = 0
+        yAxis.axisMaximum = 80
+        yAxis.drawLabelsEnabled = false
+
+        let l = radarChartView.legend
+        l.horizontalAlignment = .center
+        l.verticalAlignment = .top
+        l.orientation = .horizontal
+        l.drawInside = true
+        l.font = .systemFont(ofSize: 10, weight: .light)
+        l.xEntrySpace = 7
+        l.yEntrySpace = 5
+        l.textColor = .white
+
+        radarChartView.animate(xAxisDuration: 1.4, yAxisDuration: 1.4, easingOption: .easeOutBack)
+        let mult: UInt32 = 80
+        let min: UInt32 = 20
+        let cnt = 8
+
+        let block: (Int) -> RadarChartDataEntry = { _ in return RadarChartDataEntry(value: Double(arc4random_uniform(mult) + min))}
+        let entries1 = (0..<cnt).map(block)
+        let entries2 = (0..<cnt).map(block)
+
+        let set1 = RadarChartDataSet(values: entries1, label: "上週")
+        set1.setColor(UIColor(red: 103/255, green: 110/255, blue: 129/255, alpha: 1))
+        set1.fillColor = UIColor(red: 103/255, green: 110/255, blue: 129/255, alpha: 1)
+        set1.drawFilledEnabled = true
+        set1.fillAlpha = 0.7
+        set1.lineWidth = 2
+        set1.drawHighlightCircleEnabled = true
+        set1.setDrawHighlightIndicators(false)
+
+        let set2 = RadarChartDataSet(values: entries2, label: "本週")
+        set2.setColor(UIColor(red: 121/255, green: 162/255, blue: 175/255, alpha: 1))
+        set2.fillColor = UIColor(red: 121/255, green: 162/255, blue: 175/255, alpha: 1)
+        set2.drawFilledEnabled = true
+        set2.fillAlpha = 0.7
+        set2.lineWidth = 2
+        set2.drawHighlightCircleEnabled = true
+        set2.setDrawHighlightIndicators(false)
+
+        let data = RadarChartData(dataSets: [set1, set2])
+        data.setValueFont(.systemFont(ofSize: 8, weight: .light))
+        data.setDrawValues(false)
+        data.setValueTextColor(.white)
+
+        radarChartView.data = data
     }
 }

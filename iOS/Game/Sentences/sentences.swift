@@ -26,6 +26,27 @@ var allSentences: [String: [(speaker: ChatSpeaker, string: String)]] = [:]
 var allSentencesKeys: [String] = []
 var allLevels: [String: Level] = [:]
 
+func getTagScores() -> [String: Int] {
+    var tagScores = [String: Int]()
+    var maxGameProgress = [String: Float]()
+    let games = GameContext.shared.gameHistory
+
+    games.forEach { g in
+        if  maxGameProgress[g.dataSetKey] == nil ||
+            maxGameProgress[g.dataSetKey]! < g.p {
+            maxGameProgress[g.dataSetKey] = g.p
+        }
+    }
+    for (datasetKey, progress) in maxGameProgress {
+        if let tags = datasetKeyToTags[datasetKey] {
+            tags.forEach {tag in
+                tagScores[tag] = (tagScores[tag] ?? 0) + progress.i
+            }
+        }
+    }
+    return tagScores
+}
+
 func addSentences() {
     shadowingSentences.forEach { sentences in
         let subSentences: [(speaker: ChatSpeaker, string: String)] = sentences
@@ -39,4 +60,6 @@ func addSentences() {
     }
     print(tags)
     print(datasetKeyToTags)
+    loadGameHistory()
+    print(getTagScores())
 }
