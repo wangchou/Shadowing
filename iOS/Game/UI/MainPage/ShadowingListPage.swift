@@ -33,10 +33,10 @@ class ShadowingListPage: UIViewController {
 
         topBarView.rightButton.isHidden = true
 
-        let height = screen.width * 120/320
-        topView.frame.size.height = height + 5
-        timeline.frame.size.height = height
-        radarChartView.frame.size.height = height - 10
+        let height = screen.width / 2
+        topView.frame.size.height = height
+        timeline.frame.size.height = height - 20
+        radarChartView.frame.size.height = height + 10
     }
 
     @objc func injected() {
@@ -120,46 +120,45 @@ extension ShadowingListPage: UITableViewDelegate {
 
 extension ShadowingListPage: IAxisValueFormatter {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        let activities = ["旅遊", "日常一", "日常二", "戀愛", "敬語", "互動", "論述", "雜談"]
+        let activities = ["旅遊", "戀愛", "敬語", "互動", "論述", "雜談", "日常一", "日常二"]
         return activities[Int(value) % activities.count]
     }
 }
 
 extension ShadowingListPage: ChartViewDelegate {
     func setChartData() {
-        radarChartView.backgroundColor = .darkGray
         radarChartView.delegate = self
 
         radarChartView.chartDescription?.enabled = false
-        radarChartView.webLineWidth = 1
+        radarChartView.webLineWidth = 0.5
         radarChartView.innerWebLineWidth = 1
-        radarChartView.webColor = .lightGray
+        radarChartView.webColor = .darkGray
         radarChartView.innerWebColor = .lightGray
         radarChartView.webAlpha = 1
 
         let xAxis = radarChartView.xAxis
-        xAxis.labelFont = .systemFont(ofSize: 9, weight: .light)
+        xAxis.labelFont = MyFont.thin(ofSize: 9)
         xAxis.xOffset = 0
         xAxis.yOffset = 0
         xAxis.valueFormatter = self
-        xAxis.labelTextColor = .white
+        xAxis.labelTextColor = .black
 
         let yAxis = radarChartView.yAxis
-        yAxis.labelFont = .systemFont(ofSize: 9, weight: .light)
-        yAxis.labelCount = 5
+        yAxis.labelFont = MyFont.thin(ofSize: 9)
+        yAxis.labelCount = 4
         yAxis.axisMinimum = 0
         yAxis.axisMaximum = 80
         yAxis.drawLabelsEnabled = false
 
         let l = radarChartView.legend
         l.horizontalAlignment = .center
-        l.verticalAlignment = .top
+        l.verticalAlignment = .bottom
         l.orientation = .horizontal
         l.drawInside = true
-        l.font = .systemFont(ofSize: 10, weight: .light)
-        l.xEntrySpace = 7
+        l.font = MyFont.thin(ofSize: 12)
+        l.xEntrySpace = 10
         l.yEntrySpace = 5
-        l.textColor = .white
+        l.textColor = .black
 
         radarChartView.animate(xAxisDuration: 1.4, yAxisDuration: 1.4, easingOption: .easeOutBack)
         let mult: UInt32 = 80
@@ -171,27 +170,27 @@ extension ShadowingListPage: ChartViewDelegate {
         let entries2 = (0..<cnt).map(block)
 
         let set1 = RadarChartDataSet(values: entries1, label: "上週")
-        set1.setColor(UIColor(red: 103/255, green: 110/255, blue: 129/255, alpha: 1))
-        set1.fillColor = UIColor(red: 103/255, green: 110/255, blue: 129/255, alpha: 1)
+        set1.setColor(myOrange)
+        set1.fillColor = myOrange.withAlphaComponent(0.5)
         set1.drawFilledEnabled = true
         set1.fillAlpha = 0.7
-        set1.lineWidth = 2
-        set1.drawHighlightCircleEnabled = true
+        set1.lineWidth = 1.5
+        set1.drawHighlightCircleEnabled = false
         set1.setDrawHighlightIndicators(false)
 
         let set2 = RadarChartDataSet(values: entries2, label: "本週")
-        set2.setColor(UIColor(red: 121/255, green: 162/255, blue: 175/255, alpha: 1))
-        set2.fillColor = UIColor(red: 121/255, green: 162/255, blue: 175/255, alpha: 1)
+        set2.setColor(myRed)
+        set2.fillColor = myRed.withAlphaComponent(0.5)
         set2.drawFilledEnabled = true
         set2.fillAlpha = 0.7
-        set2.lineWidth = 2
+        set2.lineWidth = 1.5
         set2.drawHighlightCircleEnabled = true
-        set2.setDrawHighlightIndicators(false)
+        set2.setDrawHighlightIndicators(true)
 
         let data = RadarChartData(dataSets: [set1, set2])
-        data.setValueFont(.systemFont(ofSize: 8, weight: .light))
+        data.setValueFont(MyFont.thin(ofSize: 8))
         data.setDrawValues(false)
-        data.setValueTextColor(.white)
+        data.setValueTextColor(.black)
 
         radarChartView.data = data
     }

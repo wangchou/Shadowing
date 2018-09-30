@@ -43,13 +43,12 @@ class TimelineView: UIView, ReloadableView, GridLayout {
     var spacing: CGFloat = 2
     var yPadding: CGFloat = 2
     var columnCount: Int {
-        return Int(frame.width/step)
+        return Int(frame.width/stepFloat + 1)
     }
 
     let dateFormatter = DateFormatter()
 
     func viewWillAppear() {
-        print(step)
         dateFormatter.dateFormat = "yyyy MM dd"
 
         removeAllSubviews()
