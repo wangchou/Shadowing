@@ -14,6 +14,7 @@ private let context = GameContext.shared
 private let engine = SpeechEngine.shared
 private let activities = ["旅遊", "日常", "雜談", "戀愛", "論述", "敬語", "互動", "表達"]
 
+private let fontSize = screen.width * 12 / 320
 class ShadowingListPage: UIViewController {
     @IBOutlet weak var sentencesTableView: UITableView!
     @IBOutlet weak var timeline: TimelineView!
@@ -33,11 +34,6 @@ class ShadowingListPage: UIViewController {
         loadUserSaidSentencesAndScore()
 
         topBarView.rightButton.isHidden = true
-
-        let height = screen.width * 0.5
-        topView.frame.size.height = height
-        timeline.frame.size.height = height - 20
-        timeline.frame.size.width = height - 20
     }
 
     @objc func injected() {
@@ -49,6 +45,11 @@ class ShadowingListPage: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadCharacterProfile()
+        let height = screen.width * 130/320
+        topView.frame.size.height = height
+        timeline.frame.size.height = height * 120 / 130
+        timeline.frame.size.width = height * 200 / 130
+
         sentencesTableView.reloadData()
         timeline.viewWillAppear()
         setChartData()
@@ -136,14 +137,14 @@ extension ShadowingListPage: ChartViewDelegate {
         radarChartView.webAlpha = 1
 
         let xAxis = radarChartView.xAxis
-        xAxis.labelFont = MyFont.thin(ofSize: 12)
+        xAxis.labelFont = MyFont.thin(ofSize: fontSize)
         xAxis.xOffset = 0
         xAxis.yOffset = 0
         xAxis.valueFormatter = self
         xAxis.labelTextColor = hashtagColor
 
         let yAxis = radarChartView.yAxis
-        yAxis.labelFont = MyFont.thin(ofSize: 12)
+        yAxis.labelFont = MyFont.thin(ofSize: fontSize)
         yAxis.labelCount = 3
         yAxis.axisMinimum = 0
         yAxis.axisMaximum = 500
@@ -154,7 +155,7 @@ extension ShadowingListPage: ChartViewDelegate {
         l.verticalAlignment = .bottom
         l.orientation = .horizontal
         l.drawInside = true
-        l.font = MyFont.thin(ofSize: 11)
+        l.font = MyFont.thin(ofSize: fontSize)
         l.xEntrySpace = 7
         l.yEntrySpace = 5
         l.textColor = .black
