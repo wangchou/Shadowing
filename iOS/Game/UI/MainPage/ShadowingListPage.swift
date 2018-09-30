@@ -131,20 +131,20 @@ extension ShadowingListPage: ChartViewDelegate {
 
         radarChartView.chartDescription?.enabled = false
         radarChartView.webLineWidth = 0.5
-        radarChartView.innerWebLineWidth = 1
-        radarChartView.webColor = .darkGray
-        radarChartView.innerWebColor = .lightGray
+        radarChartView.innerWebLineWidth = 0.5
+        radarChartView.webColor = myGray
+        radarChartView.innerWebColor = myGray
         radarChartView.webAlpha = 1
 
         let xAxis = radarChartView.xAxis
-        xAxis.labelFont = MyFont.thin(ofSize: 9)
+        xAxis.labelFont = MyFont.thin(ofSize: 10)
         xAxis.xOffset = 0
         xAxis.yOffset = 0
         xAxis.valueFormatter = self
-        xAxis.labelTextColor = .black
+        xAxis.labelTextColor = hashtagColor
 
         let yAxis = radarChartView.yAxis
-        yAxis.labelFont = MyFont.thin(ofSize: 9)
+        yAxis.labelFont = MyFont.thin(ofSize: 10)
         yAxis.labelCount = 4
         yAxis.axisMinimum = 0
         yAxis.axisMaximum = 80
@@ -169,21 +169,21 @@ extension ShadowingListPage: ChartViewDelegate {
         let entries1 = (0..<cnt).map(block)
         let entries2 = (0..<cnt).map(block)
 
-        let set1 = RadarChartDataSet(values: entries1, label: "上週")
+        let set1 = RadarChartDataSet(values: entries1, label: "七天前")
         set1.setColor(myOrange)
         set1.fillColor = myOrange.withAlphaComponent(0.5)
         set1.drawFilledEnabled = true
         set1.fillAlpha = 0.7
-        set1.lineWidth = 1.5
+        set1.lineWidth = 0.5
         set1.drawHighlightCircleEnabled = false
         set1.setDrawHighlightIndicators(false)
 
-        let set2 = RadarChartDataSet(values: entries2, label: "本週")
+        let set2 = RadarChartDataSet(values: entries2, label: "現在")
         set2.setColor(myRed)
         set2.fillColor = myRed.withAlphaComponent(0.5)
         set2.drawFilledEnabled = true
         set2.fillAlpha = 0.7
-        set2.lineWidth = 1.5
+        set2.lineWidth = 0.5
         set2.drawHighlightCircleEnabled = true
         set2.setDrawHighlightIndicators(true)
 
