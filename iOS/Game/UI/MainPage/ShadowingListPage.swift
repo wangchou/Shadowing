@@ -12,6 +12,7 @@ import Foundation
 
 private let context = GameContext.shared
 private let engine = SpeechEngine.shared
+private let activities = ["旅遊", "日常", "雜談", "戀愛", "論述", "敬語", "互動", "表達"]
 
 class ShadowingListPage: UIViewController {
     @IBOutlet weak var sentencesTableView: UITableView!
@@ -119,7 +120,6 @@ extension ShadowingListPage: UITableViewDelegate {
 
 extension ShadowingListPage: IAxisValueFormatter {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        let activities = ["旅遊", "戀愛", "敬語", "日常", "論述", "雜談", "互動", "表達"]
         return activities[Int(value) % activities.count]
     }
 }
@@ -144,9 +144,9 @@ extension ShadowingListPage: ChartViewDelegate {
 
         let yAxis = radarChartView.yAxis
         yAxis.labelFont = MyFont.thin(ofSize: 12)
-        yAxis.labelCount = 4
+        yAxis.labelCount = 3
         yAxis.axisMinimum = 0
-        yAxis.axisMaximum = 80
+        yAxis.axisMaximum = 500
         yAxis.drawLabelsEnabled = false
 
         let l = radarChartView.legend
@@ -161,13 +161,15 @@ extension ShadowingListPage: ChartViewDelegate {
         l.form = .none
 
         radarChartView.animate(xAxisDuration: 1.4, yAxisDuration: 1.4, easingOption: .easeOutBack)
-        let mult: UInt32 = 80
-        let min: UInt32 = 20
-        let cnt = 8
 
-        let block: (Int) -> RadarChartDataEntry = { _ in return RadarChartDataEntry(value: Double(arc4random_uniform(mult) + min))}
-        let entries1 = (0..<cnt).map(block)
-        //let entries2 = (0..<cnt).map(block)
+        let tagScores = getTagScores()
+        let entries1 = activities.map { tag -> RadarChartDataEntry in
+            if let score = tagScores["#\(tag)"],
+               score > 10 {
+                return RadarChartDataEntry(value: Double(score))
+            }
+            return RadarChartDataEntry(value: 40)
+        }
 
         let set1 = RadarChartDataSet(values: entries1, label: "")
         set1.setColor(myOrange)
@@ -177,15 +179,6 @@ extension ShadowingListPage: ChartViewDelegate {
         set1.lineWidth = 1
         set1.drawHighlightCircleEnabled = false
         set1.setDrawHighlightIndicators(false)
-
-//        let set2 = RadarChartDataSet(values: entries2, label: "")
-//        set2.setColor(myRed)
-//        set2.fillColor = myRed.withAlphaComponent(0.3)
-//        set2.drawFilledEnabled = true
-//        set2.fillAlpha = 0.5
-//        set2.lineWidth = 1
-//        set2.drawHighlightCircleEnabled = false
-//        set2.setDrawHighlightIndicators(false)
 
         let data = RadarChartData(dataSets: [set1])
         data.setValueFont(MyFont.thin(ofSize: 8))
