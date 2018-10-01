@@ -102,7 +102,8 @@ extension ShadowingListPage: UITableViewDataSource {
 
         contentCell.titleLabel.attributedText = attrStr
         let record = findBestRecord(key: dataSetKey)
-        contentCell.strockedProgressText = record?.progress
+        contentCell.pointMaxText = "\(getAbilityPointMax(dataSetKey))"
+        contentCell.strockedProgressText = record?.pointText
         contentCell.strockedRankText = record?.rank.rawValue
 
         return contentCell

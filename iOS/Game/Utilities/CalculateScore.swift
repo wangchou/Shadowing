@@ -61,6 +61,22 @@ func getKana(_ kanjiString: String) -> Promise<String> {
     return promise
 }
 
+// check the cache, if not found return empty string
+func getKanaSync(_ kanjiString: String) -> String {
+    guard kanjiString != "" else { return "" }
+
+    if let tokenInfos = kanaTokenInfosCacheDictionary[kanjiString] {
+        let kanaStr = tokenInfos.reduce("", { kanaStr, tokenInfo in
+            guard let kanaPart = tokenInfo.last,
+                tokenInfo[1] != "記号" else { return kanaStr }
+            return kanaStr + kanaPart
+        })
+        return kanaStr
+    }
+
+    return ""
+}
+
 func calculateScore(
     _ sentence1: String,
     _ sentence2: String

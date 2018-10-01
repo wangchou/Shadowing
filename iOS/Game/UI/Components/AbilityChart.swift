@@ -82,11 +82,11 @@ extension AbilityChart: ChartViewDelegate {
 
         radarChartView.animate(xAxisDuration: 1.4, yAxisDuration: 1.4, easingOption: .easeOutBack)
 
-        let tagScores = getTagScores()
+        let tagPoints = getTagPoints()
         let entries1 = abilities.map { tag -> RadarChartDataEntry in
-            if let score = tagScores["#\(tag)"],
-                score > 10 {
-                return RadarChartDataEntry(value: Double(score))
+            if let points = tagPoints["#\(tag)"],
+                points > 10 {
+                return RadarChartDataEntry(value: Double(points))
             }
             return RadarChartDataEntry(value: 40)
         }
