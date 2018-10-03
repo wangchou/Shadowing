@@ -23,7 +23,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
 
         renderTopTitle()
         renderMiddleRecord()
-        renderBottomCharacter()
+        renderBottomAbilityInfo()
     }
 
     func renderTopTitle() {
@@ -49,19 +49,21 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         addText(2, y+11, 3, "正解 \(record.perfectCount) | すごい \(record.greatCount) | いいね \(record.goodCount) | ミス \(record.missedCount)")
     }
 
-    func renderBottomCharacter() {
+    func renderBottomAbilityInfo() {
         let rect = UIView()
         layout(2, 23, 40, 1, rect)
         rect.backgroundColor = .lightGray
         rect.frame.size.height = step/4
-        self.addSubview(rect)
+        addSubview(rect)
 
-        let characterView = CharacterView()
-        layout(2, 25, 19, 19, characterView)
-        addReloadableSubview(characterView)
-
-        // data part
-        characterView.viewWillAppear()
+        let abilityChart = AbilityChart()
+        layout(2, 25, 19, 19, abilityChart)
+        abilityChart.setChartData(
+            wColor: rgb(150, 150, 150),
+            labelColor: .white,
+            labelFont: MyFont.bold(ofSize: screen.width * 12 / 320)
+        )
+        addSubview(abilityChart)
     }
 
     func addRoundRect(_ x: Int, _ y: Int, _ w: Int, _ h: Int,

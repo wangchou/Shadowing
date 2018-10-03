@@ -13,8 +13,7 @@ private let abilities = ["旅遊", "日常", "雜談", "戀愛", "論述", "敬�
 private let fontSize = screen.width * 12 / 320
 
 @IBDesignable
-class AbilityChart: UIView {
-    var radarChartView: RadarChartView!
+class AbilityChart: RadarChartView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         sharedInit()
@@ -30,10 +29,7 @@ class AbilityChart: UIView {
     }
 
     func sharedInit() {
-        radarChartView = RadarChartView()
-        self.backgroundColor = .clear
-        self.addSubview(radarChartView)
-        radarChartView.frame = self.frame
+        backgroundColor = .clear
         setChartData()
     }
 }
@@ -45,42 +41,44 @@ extension AbilityChart: IAxisValueFormatter {
 }
 
 extension AbilityChart: ChartViewDelegate {
-    func setChartData() {
-        radarChartView.delegate = self
+    func setChartData(
+        wColor: UIColor = myGray.withAlphaComponent(0.7),
+        labelColor: UIColor = hashtagColor,
+        labelFont: UIFont = MyFont.thin(ofSize: fontSize)
+        ) {
+        delegate = self
 
-        radarChartView.chartDescription?.enabled = false
-        radarChartView.webLineWidth = 0.5
-        radarChartView.innerWebLineWidth = 0.5
-        radarChartView.webColor = myGray.withAlphaComponent(0.7)
-        radarChartView.innerWebColor = myGray.withAlphaComponent(0.7)
-        radarChartView.webAlpha = 1
+        chartDescription?.enabled = false
+        webLineWidth = 0.5
+        innerWebLineWidth = 0.5
+        webColor = wColor
+        innerWebColor = wColor
+        webAlpha = 1
 
-        let xAxis = radarChartView.xAxis
-        xAxis.labelFont = MyFont.thin(ofSize: fontSize)
+        xAxis.labelFont = labelFont
         xAxis.xOffset = 0
         xAxis.yOffset = 0
         xAxis.valueFormatter = self
-        xAxis.labelTextColor = hashtagColor
+        xAxis.labelTextColor = labelColor
 
-        let yAxis = radarChartView.yAxis
-        yAxis.labelFont = MyFont.thin(ofSize: fontSize)
+        yAxis.labelFont = labelFont
         yAxis.labelCount = 3
         yAxis.axisMinimum = 0
         yAxis.axisMaximum = 500
         yAxis.drawLabelsEnabled = false
 
-        let l = radarChartView.legend
+        let l = self.legend
         l.horizontalAlignment = .center
         l.verticalAlignment = .bottom
         l.orientation = .horizontal
         l.drawInside = true
-        l.font = MyFont.thin(ofSize: fontSize)
+        l.font = labelFont
         l.xEntrySpace = 7
         l.yEntrySpace = 5
         l.textColor = .black
         l.form = .none
 
-        radarChartView.animate(xAxisDuration: 1.4, yAxisDuration: 1.4, easingOption: .easeOutBack)
+        animate(xAxisDuration: 1.4, yAxisDuration: 1.4, easingOption: .easeOutBack)
 
         let tagPoints = getTagPoints()
         let entries1 = abilities.map { tag -> RadarChartDataEntry in
@@ -100,11 +98,9 @@ extension AbilityChart: ChartViewDelegate {
         set1.drawHighlightCircleEnabled = false
         set1.setDrawHighlightIndicators(false)
 
-        let data = RadarChartData(dataSets: [set1])
-        data.setValueFont(MyFont.thin(ofSize: 8))
-        data.setDrawValues(false)
-        data.setValueTextColor(.black)
-
-        radarChartView.data = data
+        data = RadarChartData(dataSets: [set1])
+        data?.setValueFont(MyFont.thin(ofSize: 8))
+        data?.setDrawValues(false)
+        data?.setValueTextColor(.black)
     }
 }
