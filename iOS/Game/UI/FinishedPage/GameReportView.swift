@@ -26,44 +26,55 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         renderBottomAbilityInfo()
     }
 
-    func renderTopTitle() {
+    private func renderTopTitle() {
         guard let record = context.gameRecord else { return }
         roundBorder(cornerRadius: 15, color: myLightText)
         addText(2, 1, 6, record.dataSetKey, color: myLightText, strokeColor: .black)
     }
 
-    func renderMiddleRecord() {
+    private func renderMiddleRecord() {
         guard let record = context.gameRecord else { return }
 
         let y = 7
-        addText(2, y, 2, "達成率")
+        addText(2, y, 3, "達成率")
         let progress = getAttrText([
             ( record.progress.padWidthTo(4), .white, getFontSize(h: 12)),
             ( "%", .lightGray, getFontSize(h: 4))
             ])
         addAttrText(2, y, 12, progress)
 
-        addText(26, y, 2, "Rank")
+        addText(26, y, 3, "Rank")
         addText(26, y, 12, record.rank.rawValue.padWidthTo(3), color: record.rank.color)
 
         addText(2, y+11, 3, "正解 \(record.perfectCount) | すごい \(record.greatCount) | いいね \(record.goodCount) | ミス \(record.missedCount)")
     }
 
-    func renderBottomAbilityInfo() {
+    private func renderBottomAbilityInfo() {
         let rect = UIView()
-        layout(2, 23, 40, 1, rect)
+        layout(0, 22, 44, 1, rect)
         rect.backgroundColor = .lightGray
         rect.frame.size.height = step/4
         addSubview(rect)
 
         let abilityChart = AbilityChart()
-        layout(2, 25, 19, 19, abilityChart)
+        layout(2, 23, 27, 27, abilityChart)
         abilityChart.setChartData(
             wColor: rgb(150, 150, 150),
             labelColor: .white,
-            labelFont: MyFont.bold(ofSize: screen.width * 12 / 320)
+            labelFont: MyFont.regular(ofSize: getFontSize(h: 3))
         )
         addSubview(abilityChart)
+
+        let tagPoints = getTagPoints()
+        for idx in 0...abilities.count-1 {
+            let abStr = abilities[idx]
+            let scoreStr = "\(tagPoints["#"+abStr] ?? 0)"
+            var padStr = ""
+            for _ in 0...(3 - scoreStr.count) {
+                padStr += "  "
+            }
+            addText(30, 24 + 3 * idx, 3, "\(abStr)： \(padStr)\(scoreStr)")
+        }
     }
 
     func addRoundRect(_ x: Int, _ y: Int, _ w: Int, _ h: Int,
@@ -75,7 +86,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         let fontSize = getFontSize(h: h)
         let font = MyFont.bold(ofSize: fontSize)
         addAttrText( x, y, h,
-                     getText(text, color: color, strokeWidth: -1.5, strokeColor: strokeColor, font: font)
+                     getText(text, color: color, strokeWidth: -2, strokeColor: strokeColor, font: font)
         )
     }
 
@@ -102,10 +113,10 @@ class GameReportView: UIView, ReloadableView, GridLayout {
     func viewWillAppear() {
         removeAllSubviews()
         backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.3)
+        frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.4)
 
         let reportBox = GameReportBoxView()
-        layout(2, 4, 44, 46, reportBox)
+        layout(2, 4, 44, 50, reportBox)
         addReloadableSubview(reportBox)
 
         addBackButton()
@@ -124,7 +135,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
                 launchStoryboard(vc, "MainSwipablePage", animated: true)
             }
         }
-        layout(2, 52, 44, 8, backButton)
+        layout(2, 56, 44, 8, backButton)
         addSubview(backButton)
     }
 

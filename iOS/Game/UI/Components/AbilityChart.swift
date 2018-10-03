@@ -9,7 +9,7 @@
 import UIKit
 import Charts
 
-private let abilities = ["旅遊", "日常", "雜談", "戀愛", "論述", "敬語", "互動", "表達"]
+let abilities = ["旅遊", "日常", "雜談", "戀愛", "論述", "敬語", "互動", "表達"]
 private let fontSize = screen.width * 12 / 320
 
 @IBDesignable
@@ -30,6 +30,7 @@ class AbilityChart: RadarChartView {
 
     func sharedInit() {
         backgroundColor = .clear
+        self.isUserInteractionEnabled = false
         setChartData()
     }
 }
@@ -67,16 +68,8 @@ extension AbilityChart: ChartViewDelegate {
         yAxis.axisMaximum = 500
         yAxis.drawLabelsEnabled = false
 
-        let l = self.legend
-        l.horizontalAlignment = .center
-        l.verticalAlignment = .bottom
-        l.orientation = .horizontal
-        l.drawInside = true
-        l.font = labelFont
-        l.xEntrySpace = 7
-        l.yEntrySpace = 5
-        l.textColor = .black
-        l.form = .none
+        legend.drawInside = true
+        legend.form = .none
 
         animate(xAxisDuration: 1.4, yAxisDuration: 1.4, easingOption: .easeOutBack)
 
@@ -99,8 +92,6 @@ extension AbilityChart: ChartViewDelegate {
         set1.setDrawHighlightIndicators(false)
 
         data = RadarChartData(dataSets: [set1])
-        data?.setValueFont(MyFont.thin(ofSize: 8))
         data?.setDrawValues(false)
-        data?.setValueTextColor(.black)
     }
 }

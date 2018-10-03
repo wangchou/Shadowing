@@ -59,8 +59,4 @@ func addSentences() {
         allSentencesKeys.append(key)
         allLevels[key] = Level.n5a
     }
-    print(tags)
-    print(datasetKeyToTags)
-    loadGameHistory()
-    print(getTagPoints())
 }
