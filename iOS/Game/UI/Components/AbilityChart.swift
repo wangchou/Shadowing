@@ -13,7 +13,11 @@ let abilities = ["旅遊", "日常", "雜談", "戀愛", "論述", "敬語", "�
 private let fontSize = screen.width * 12 / 320
 
 @IBDesignable
-class AbilityChart: RadarChartView {
+class AbilityChart: RadarChartView, ChartViewDelegate {
+    var wColor: UIColor = myGray.withAlphaComponent(0.7)
+    var labelColor: UIColor = hashtagColor
+    var labelFont: UIFont = MyFont.thin(ofSize: fontSize)
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         sharedInit()
@@ -28,27 +32,14 @@ class AbilityChart: RadarChartView {
         sharedInit()
     }
 
-    func sharedInit() {
+    private func sharedInit() {
         backgroundColor = .clear
-        self.isUserInteractionEnabled = false
-        setChartData()
-    }
-}
-
-extension AbilityChart: IAxisValueFormatter {
-    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        return abilities[Int(value) % abilities.count]
-    }
-}
-
-extension AbilityChart: ChartViewDelegate {
-    func setChartData(
-        wColor: UIColor = myGray.withAlphaComponent(0.7),
-        labelColor: UIColor = hashtagColor,
-        labelFont: UIFont = MyFont.thin(ofSize: fontSize)
-        ) {
+        isUserInteractionEnabled = false
         delegate = self
+        render()
+    }
 
+    func render() {
         chartDescription?.enabled = false
         webLineWidth = 0.5
         innerWebLineWidth = 0.5
@@ -57,8 +48,6 @@ extension AbilityChart: ChartViewDelegate {
         webAlpha = 1
 
         xAxis.labelFont = labelFont
-        xAxis.xOffset = 0
-        xAxis.yOffset = 0
         xAxis.valueFormatter = self
         xAxis.labelTextColor = labelColor
 
@@ -71,7 +60,7 @@ extension AbilityChart: ChartViewDelegate {
         legend.drawInside = true
         legend.form = .none
 
-        animate(xAxisDuration: 1.4, yAxisDuration: 1.4, easingOption: .easeOutBack)
+        animate(xAxisDuration: 0.5, yAxisDuration: 1.0, easingOption: .easeOutBack)
 
         let tagPoints = getTagPoints()
         let entries1 = abilities.map { tag -> RadarChartDataEntry in
@@ -93,5 +82,17 @@ extension AbilityChart: ChartViewDelegate {
 
         data = RadarChartData(dataSets: [set1])
         data?.setDrawValues(false)
+    }
+}
+
+extension AbilityChart: IAxisValueFormatter {
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        return abilities[Int(value) % abilities.count]
+    }
+}
+
+extension AbilityChart: ReloadableView {
+    func viewWillAppear() {
+        render()
     }
 }

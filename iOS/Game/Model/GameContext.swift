@@ -48,7 +48,10 @@ class GameContext {
             return gameSetting.preferredSpeed
         }
     }
-    var isNewRecord = false
+    var isNewRecord: Bool {
+        return gameRecord?.isNewRecord ?? false
+    }
+    var newRecordIncrease: Int = 0
     var sentences: [(speaker: ChatSpeaker, string: String)] = []
     var sentenceIndex: Int = 0
     var remainingSentenceCount: Int {
@@ -108,8 +111,6 @@ class GameContext {
 
         let level = allLevels[dataSetKey] ?? .n5a
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level, flowMode: .shadowing)
-
-        isNewRecord = false
     }
 
     func nextSentence() -> Bool {

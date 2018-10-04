@@ -50,7 +50,7 @@ class ShadowingListPage: UIViewController {
 
         sentencesTableView.reloadData()
         timeline.viewWillAppear()
-        abilityChart.setChartData()
+        abilityChart.render()
     }
 
     override func viewDidAppear(_ animated: Bool) {

@@ -12,99 +12,6 @@ import UIKit
 private let context = GameContext.shared
 
 @IBDesignable
-class GameReportBoxView: UIView, ReloadableView, GridLayout {
-    let gridCount = 44
-    let axis: GridAxis = .horizontal
-    let spacing: CGFloat = 0
-
-    func viewWillAppear() {
-        removeAllSubviews()
-        backgroundColor = UIColor.black.withAlphaComponent(0.6)
-
-        renderTopTitle()
-        renderMiddleRecord()
-        renderBottomAbilityInfo()
-    }
-
-    private func renderTopTitle() {
-        guard let record = context.gameRecord else { return }
-        roundBorder(cornerRadius: 15, color: myLightText)
-        addText(2, 1, 6, record.dataSetKey, color: myLightText, strokeColor: .black)
-    }
-
-    private func renderMiddleRecord() {
-        guard let record = context.gameRecord else { return }
-
-        let y = 7
-        addText(2, y, 3, "達成率")
-        let progress = getAttrText([
-            ( record.progress.padWidthTo(4), .white, getFontSize(h: 12)),
-            ( "%", .lightGray, getFontSize(h: 4))
-            ])
-        addAttrText(2, y, 12, progress)
-
-        addText(26, y, 3, "Rank")
-        addText(26, y, 12, record.rank.rawValue.padWidthTo(3), color: record.rank.color)
-
-        addText(2, y+11, 3, "正解 \(record.perfectCount) | すごい \(record.greatCount) | いいね \(record.goodCount) | ミス \(record.missedCount)")
-    }
-
-    private func renderBottomAbilityInfo() {
-        let rect = UIView()
-        layout(0, 22, 44, 1, rect)
-        rect.backgroundColor = .lightGray
-        rect.frame.size.height = step/4
-        addSubview(rect)
-
-        let abilityChart = AbilityChart()
-        layout(2, 23, 27, 27, abilityChart)
-        abilityChart.setChartData(
-            wColor: rgb(150, 150, 150),
-            labelColor: .white,
-            labelFont: MyFont.regular(ofSize: getFontSize(h: 3))
-        )
-        addSubview(abilityChart)
-
-        let tagPoints = getTagPoints()
-        for idx in 0...abilities.count-1 {
-            let abStr = abilities[idx]
-            let scoreStr = "\(tagPoints["#"+abStr] ?? 0)"
-            var padStr = ""
-            for _ in 0...(3 - scoreStr.count) {
-                padStr += "  "
-            }
-            addText(30, 24 + 3 * idx, 3, "\(abStr)： \(padStr)\(scoreStr)")
-        }
-    }
-
-    func addRoundRect(_ x: Int, _ y: Int, _ w: Int, _ h: Int,
-                      color: UIColor, radius: CGFloat? = nil, backgroundColor: UIColor? = nil) {
-        addRoundRect(x: x, y: y, w: w, h: h, borderColor: color, radius: radius, backgroundColor: backgroundColor)
-    }
-
-    func addText(_ x: Int, _ y: Int, _ h: Int, _ text: String, color: UIColor = .white, strokeColor: UIColor = .black) {
-        let fontSize = getFontSize(h: h)
-        let font = MyFont.bold(ofSize: fontSize)
-        addAttrText( x, y, h,
-                     getText(text, color: color, strokeWidth: -2, strokeColor: strokeColor, font: font)
-        )
-    }
-
-    func addAttrText(_ x: Int, _ y: Int, _ h: Int, _ attrText: NSAttributedString) {
-        addAttrText(x: x, y: y, w: gridCount - x, h: h, text: attrText)
-    }
-
-    func getFontSize(h: Int) -> CGFloat {
-        return h.c * step * 0.7
-    }
-
-    override func prepareForInterfaceBuilder() {
-        super.prepareForInterfaceBuilder()
-        viewWillAppear()
-    }
-}
-
-@IBDesignable
 class GameReportView: UIView, ReloadableView, GridLayout {
     let gridCount = 48
     let axis: GridAxis = .horizontal
@@ -113,12 +20,16 @@ class GameReportView: UIView, ReloadableView, GridLayout {
     func viewWillAppear() {
         removeAllSubviews()
         backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.4)
-
         let reportBox = GameReportBoxView()
-        layout(2, 4, 44, 50, reportBox)
-        addReloadableSubview(reportBox)
 
+        if context.isNewRecord {
+            frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.6)
+            layout(2, 4, 44, 60, reportBox)
+        } else {
+            frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.03)
+            layout(2, 4, 44, 28, reportBox)
+        }
+        addReloadableSubview(reportBox)
         addBackButton()
     }
 
@@ -135,7 +46,13 @@ class GameReportView: UIView, ReloadableView, GridLayout {
                 launchStoryboard(vc, "MainSwipablePage", animated: true)
             }
         }
-        layout(2, 56, 44, 8, backButton)
+        if context.isNewRecord {
+            layout(2, 66, 44, 8, backButton)
+
+        } else {
+            layout(2, 34, 44, 8, backButton)
+        }
+
         addSubview(backButton)
     }
 

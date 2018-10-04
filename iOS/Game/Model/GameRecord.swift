@@ -37,12 +37,14 @@ func updateGameHistory() {
         if isBetter(record, to: bestRecord) {
             context.gameHistory.insert(record, at: 0)
             context.gameRecord?.isNewRecord = true
+            context.newRecordIncrease = bestRecord.abilityPoint - (context.gameRecord?.abilityPoint ?? 0)
         } else {
             context.gameRecord?.isNewRecord = false
         }
     } else {
         context.gameHistory.append(record)
         context.gameRecord?.isNewRecord = true
+        context.newRecordIncrease = context.gameRecord?.abilityPoint ?? 0
     }
     saveGameHistory()
 }
