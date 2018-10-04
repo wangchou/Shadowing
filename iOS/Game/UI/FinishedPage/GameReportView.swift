@@ -26,7 +26,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
             frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.6)
             layout(2, 4, 44, 60, reportBox)
         } else {
-            frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.03)
+            frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 0.93)
             layout(2, 4, 44, 28, reportBox)
         }
         addReloadableSubview(reportBox)

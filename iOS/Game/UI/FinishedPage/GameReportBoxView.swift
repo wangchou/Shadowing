@@ -107,11 +107,6 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         }
     }
 
-    func addRoundRect(_ x: Int, _ y: Int, _ w: Int, _ h: Int,
-                      color: UIColor, radius: CGFloat? = nil, backgroundColor: UIColor? = nil) {
-        addRoundRect(x: x, y: y, w: w, h: h, borderColor: color, radius: radius, backgroundColor: backgroundColor)
-    }
-
     func addText(
         _ x: Int, _ y: Int, _ h: Int, _ text: String, color: UIColor = .white, strokeColor: UIColor = .black) {
         let fontSize = getFontSize(h: h)

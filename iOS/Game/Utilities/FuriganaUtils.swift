@@ -189,8 +189,8 @@ extension String {
             let regex = try NSRegularExpression(pattern: regex)
             let results = regex.matches(in: self,
                                         range: NSRange(self.startIndex..., in: self))
-            return results.map {
-                String(self[Range($0.range, in: self)!])
+            return results.compactMap {
+                Range($0.range, in: self).map { String(self[$0]) }
             }
         } catch let error {
             print("invalid regex: \(error.localizedDescription)")

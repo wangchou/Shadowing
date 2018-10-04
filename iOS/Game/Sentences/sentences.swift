@@ -33,10 +33,10 @@ func getTagPoints() -> [String: Int] {
 
     games.forEach { g in
         if let score = maxGamePoints[g.dataSetKey],
-           score > g.abilityPoint {
+           score.f > g.p {
             return
         }
-        maxGamePoints[g.dataSetKey] = g.abilityPoint
+        maxGamePoints[g.dataSetKey] = g.p.i
     }
     for (datasetKey, points) in maxGamePoints {
         if let tags = datasetKeyToTags[datasetKey] {

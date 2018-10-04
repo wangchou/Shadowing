@@ -32,11 +32,11 @@ class ContentCell: UITableViewCell {
             let attrText = NSMutableAttributedString()
             if let string = string {
                 attrText.append(getStrokeText(string, .darkGray))
-                attrText.append(getStrokeText("/\(pointMaxText ?? "")", .darkGray, strokeWidth: 0, strokColor: .black, font: UIFont.boldSystemFont(ofSize: 12)))
+                attrText.append(getStrokeText("%", .darkGray, strokeWidth: 0, strokColor: .black, font: UIFont.boldSystemFont(ofSize: 12)))
                 progressLabel.attributedText = attrText
             } else {
                 attrText.append(getStrokeText("??", .lightText))
-                attrText.append(getStrokeText("/\(pointMaxText ?? "")", .darkGray, strokeWidth: 0, strokColor: .black, font: UIFont.boldSystemFont(ofSize: 12)))
+                attrText.append(getStrokeText("%", .darkGray, strokeWidth: 0, strokColor: .black, font: UIFont.boldSystemFont(ofSize: 12)))
                 progressLabel.attributedText = attrText
             }
         }
