@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "start": "node --experimental-modules index.mjs"
+  },
+  "dependencies": {
+    "mecab-async": "^0.1.2"
+  },
+    "engines": {
+    "node": ">=9.0"
+  }
+}
