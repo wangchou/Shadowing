@@ -26,25 +26,26 @@ var allSentences: [String: [(speaker: ChatSpeaker, string: String)]] = [:]
 var allSentencesKeys: [String] = []
 var allLevels: [String: Level] = [:]
 
-func getTagScores() -> [String: Int] {
-    var tagScores = [String: Int]()
-    var maxGameProgress = [String: Float]()
+func getTagPoints() -> [String: Int] {
+    var tagPoints = [String: Int]()
+    var maxGamePoints = [String: Int]()
     let games = GameContext.shared.gameHistory
 
     games.forEach { g in
-        if  maxGameProgress[g.dataSetKey] == nil ||
-            maxGameProgress[g.dataSetKey]! < g.p {
-            maxGameProgress[g.dataSetKey] = g.p
+        if let score = maxGamePoints[g.dataSetKey],
+           score.f > g.p {
+            return
         }
+        maxGamePoints[g.dataSetKey] = g.p.i
     }
-    for (datasetKey, progress) in maxGameProgress {
+    for (datasetKey, points) in maxGamePoints {
         if let tags = datasetKeyToTags[datasetKey] {
             tags.forEach {tag in
-                tagScores[tag] = (tagScores[tag] ?? 0) + progress.i
+                tagPoints[tag] = (tagPoints[tag] ?? 0) + points
             }
         }
     }
-    return tagScores
+    return tagPoints
 }
 
 func addSentences() {
@@ -58,8 +59,4 @@ func addSentences() {
         allSentencesKeys.append(key)
         allLevels[key] = Level.n5a
     }
-    print(tags)
-    print(datasetKeyToTags)
-    loadGameHistory()
-    print(getTagScores())
 }

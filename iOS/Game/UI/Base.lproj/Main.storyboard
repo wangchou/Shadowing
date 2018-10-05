@@ -346,24 +346,24 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LwG-wU-2DZ">
                                             <rect key="frame" x="0.0" y="5" width="320" height="120"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ca0-bb-sN7" customClass="TimelineView" customModule="VoiceOnly" customModuleProvider="target">
-                                                    <rect key="frame" x="115" y="0.0" width="190" height="120"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="ca0-bb-sN7" secondAttribute="height" multiplier="190:120" id="tdd-F9-KyS"/>
-                                                    </constraints>
-                                                </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mu1-Ft-6RO" userLabel="RadarChart" customClass="RadarChartView" customModule="Charts">
-                                                    <rect key="frame" x="3" y="0.0" width="123" height="123"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mu1-Ft-6RO" userLabel="RadarChart" customClass="AbilityChart" customModule="VoiceOnly" customModuleProvider="target">
+                                                    <rect key="frame" x="2" y="0.0" width="123" height="123"/>
                                                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="mu1-Ft-6RO" secondAttribute="height" multiplier="120:120" id="3nP-xT-kPR"/>
                                                     </constraints>
                                                 </view>
+                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ca0-bb-sN7" customClass="TimelineView" customModule="VoiceOnly" customModuleProvider="target">
+                                                    <rect key="frame" x="115" y="1" width="190" height="120"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="ca0-bb-sN7" secondAttribute="height" multiplier="190:120" id="tdd-F9-KyS"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstItem="mu1-Ft-6RO" firstAttribute="leading" secondItem="LwG-wU-2DZ" secondAttribute="leading" constant="3" id="4FV-FC-o7q"/>
+                                                <constraint firstItem="mu1-Ft-6RO" firstAttribute="leading" secondItem="LwG-wU-2DZ" secondAttribute="leading" constant="2" id="4FV-FC-o7q"/>
                                                 <constraint firstAttribute="trailing" secondItem="ca0-bb-sN7" secondAttribute="trailing" constant="15" id="4QP-BB-bCo"/>
                                                 <constraint firstItem="ca0-bb-sN7" firstAttribute="top" secondItem="LwG-wU-2DZ" secondAttribute="top" id="6ku-pE-5iJ"/>
                                                 <constraint firstAttribute="bottom" secondItem="mu1-Ft-6RO" secondAttribute="bottom" constant="-3" id="JOr-zh-iFn"/>
@@ -503,7 +503,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="radarChartView" destination="mu1-Ft-6RO" id="Lrz-n4-nLc"/>
+                        <outlet property="abilityChart" destination="mu1-Ft-6RO" id="aSy-WI-elW"/>
                         <outlet property="sentencesTableView" destination="9Ar-lL-ket" id="lAY-Dp-77e"/>
                         <outlet property="timeline" destination="ca0-bb-sN7" id="Etn-sX-vff"/>
                         <outlet property="topBarView" destination="IWc-hd-yoz" id="Jcn-Qo-mDc"/>
@@ -755,13 +755,13 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="V2Z-wa-Qsc" customClass="GameReportView" customModule="VoiceOnly" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="259"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FinishedTableCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="FinishedSentenceCell" rowHeight="63" id="U4Y-kF-8LG" userLabel="FinishedTableCell" customClass="SentencesTableCell" customModule="VoiceOnly" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="444" width="320" height="63"/>
+                                        <rect key="frame" x="0.0" y="325.60000000000002" width="320" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="U4Y-kF-8LG" id="316-Iq-LBo">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="62.5"/>
@@ -792,7 +792,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E4x-vU-tSa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2663" y="-1276"/>
+            <point key="canvasLocation" x="2662.5" y="-1276.056338028169"/>
         </scene>
         <!--原型8: Messenger-->
         <scene sceneID="bb0-Qa-U6M">

@@ -14,6 +14,8 @@ class ContentCell: UITableViewCell {
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var rankLabel: UILabel!
 
+    var pointMaxText: String? = ""
+
     var strockedRankText: String? = "" {
         willSet(string) {
             if let string = string,

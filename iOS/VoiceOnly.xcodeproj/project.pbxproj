@@ -23,6 +23,7 @@
 		BE5D838920A80BD0002031BF /* GameContentDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */; };
 		BE65A939209C6E67006645CA /* GameEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65A938209C6E67006645CA /* GameEventDelegate.swift */; };
 		BE67D2A921561A93007FE420 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE67D2A821561A92007FE420 /* Assets.xcassets */; };
+		BE6C78542165DD2B0072B1C5 /* GameReportBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6C78532165DD2B0072B1C5 /* GameReportBoxView.swift */; };
 		BE6ED56820A17BB000553D1A /* ShadowingFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6ED56720A17BB000553D1A /* ShadowingFlow.swift */; };
 		BE6F2F162144E049003A56CD /* shadowingSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6F2F152144E049003A56CD /* shadowingSentences.swift */; };
 		BE76F117214ECC6E004E130B /* UserSaidSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE76F116214ECC6E004E130B /* UserSaidSentences.swift */; };
@@ -36,6 +37,7 @@
 		BE8180C020B3BEB6006ABCB3 /* MyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180BF20B3BEB6006ABCB3 /* MyText.swift */; };
 		BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */; };
 		BE8283B42133DAE2008BC875 /* SpeechEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8283B32133DAE2008BC875 /* SpeechEngine.swift */; };
+		BE8DE7B62161E44400812CED /* AbilityChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8DE7B52161E44400812CED /* AbilityChart.swift */; };
 		BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */; };
 		BE9B476A20AD50520063E0DA /* FuriganaUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476920AD50520063E0DA /* FuriganaUtils.swift */; };
 		BE9D243A20C8DEE9000515DD /* GameReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9D243920C8DEE9000515DD /* GameReportView.swift */; };
@@ -111,6 +113,7 @@
 		BE65A938209C6E67006645CA /* GameEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEventDelegate.swift; sourceTree = "<group>"; };
 		BE67D2A521560A38007FE420 /* SwiftIconFont.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftIconFont.framework; sourceTree = "<group>"; };
 		BE67D2A821561A92007FE420 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BE6C78532165DD2B0072B1C5 /* GameReportBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameReportBoxView.swift; sourceTree = "<group>"; };
 		BE6ED56720A17BB000553D1A /* ShadowingFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowingFlow.swift; sourceTree = "<group>"; };
 		BE6F2F152144E049003A56CD /* shadowingSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shadowingSentences.swift; sourceTree = "<group>"; };
 		BE76F116214ECC6E004E130B /* UserSaidSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSaidSentences.swift; sourceTree = "<group>"; };
@@ -124,6 +127,7 @@
 		BE8180BF20B3BEB6006ABCB3 /* MyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyText.swift; sourceTree = "<group>"; };
 		BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFinishedPage.swift; sourceTree = "<group>"; };
 		BE8283B32133DAE2008BC875 /* SpeechEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechEngine.swift; sourceTree = "<group>"; };
+		BE8DE7B52161E44400812CED /* AbilityChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityChart.swift; sourceTree = "<group>"; };
 		BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaLabel.swift; sourceTree = "<group>"; };
 		BE9B476920AD50520063E0DA /* FuriganaUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaUtils.swift; sourceTree = "<group>"; };
 		BE9D243920C8DEE9000515DD /* GameReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameReportView.swift; sourceTree = "<group>"; };
@@ -221,6 +225,7 @@
 			children = (
 				BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */,
 				BE9D243920C8DEE9000515DD /* GameReportView.swift */,
+				BE6C78532165DD2B0072B1C5 /* GameReportBoxView.swift */,
 			);
 			path = FinishedPage;
 			sourceTree = "<group>";
@@ -233,6 +238,7 @@
 				BEEC7FA82154C7AC001C2EFF /* TopBarView.xib */,
 				BEEC7FAE21550818001C2EFF /* TopBarView.swift */,
 				BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */,
+				BE8DE7B52161E44400812CED /* AbilityChart.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -470,6 +476,7 @@
 				BEEC7FAF21550818001C2EFF /* TopBarView.swift in Sources */,
 				BEE665E220BA634600E4E322 /* Colors.swift in Sources */,
 				BE7725C920A2CBC200DF186A /* n5.swift in Sources */,
+				BE8DE7B62161E44400812CED /* AbilityChart.swift in Sources */,
 				BE05073720A68515008A29EB /* SentencesTestGame.swift in Sources */,
 				BE7725C820A2CBC200DF186A /* n4.swift in Sources */,
 				BE5D838920A80BD0002031BF /* GameContentDetailPage.swift in Sources */,
@@ -497,6 +504,7 @@
 				BEDEDD3720A46D1B00E7B60B /* ShadowingListPage.swift in Sources */,
 				BE7725CE20A4216700DF186A /* ContentCell.swift in Sources */,
 				BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */,
+				BE6C78542165DD2B0072B1C5 /* GameReportBoxView.swift in Sources */,
 				BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */,
 				BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */,
 				BE8180C020B3BEB6006ABCB3 /* MyText.swift in Sources */,
