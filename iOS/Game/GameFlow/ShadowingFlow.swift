@@ -53,7 +53,7 @@ class ShadowingFlow: Game {
         .catch { error in print("Promise chain is dead", error)}
         .always {
             context.gameState = .sentenceSessionEnded
-            if context.nextSentence() && context.isEngineRunning {
+            if context.nextSentence() {
                 self.learnNext()
             } else {
                 self.gameOver()
