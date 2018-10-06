@@ -13,7 +13,7 @@ var translations: [String: String] = [:]
 var datasetKeyToTags: [String: [String]] = [:]
 var tags: [String] = []
 var shadowingSentences: [[String]] =
-    [dailyOne, dailyTwo, travel, polite, interaction, love, expressive, random]
+    [dailyOne, expressive, travel, polite, interaction, love, speech, random]
     .flatMap { (element: [String]) -> [String] in
         return element
     }
