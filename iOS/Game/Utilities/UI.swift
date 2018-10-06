@@ -256,3 +256,13 @@ extension UIPageViewController {
         }
     }
 }
+
+func showMessage(_ message: String, seconds: Float = 2) {
+    let alert = UIAlertController(title: message, message: "", preferredStyle: .alert)
+    UIApplication.getPresentedViewController()?.present(alert, animated: true, completion: nil)
+
+    let when = DispatchTime.now() + DispatchTimeInterval.milliseconds(Int(seconds*1000))
+    DispatchQueue.main.asyncAfter(deadline: when) {
+        alert.dismiss(animated: true, completion: nil)
+    }
+}
