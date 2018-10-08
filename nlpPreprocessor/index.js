@@ -1,5 +1,15 @@
 var MeCab = require('mecab-async')
 const fs = require('fs');
+const sqlite3 = require('sqlite3').verbose();
+const { execSync } = require('child_process');
+
+let dbName = "inf_sentences.sqlite"
+let tableName = "sentences"
+let infoTableName = "kanaInfo"
+
+try {
+  execSync(`rm ./${dbName}`)
+} catch (e) {}
 
 //http://ilog4.blogspot.com/2015/09/javascript-convert-full-width-and-half.html
 String.prototype.toHalfWidth = function() {
@@ -11,8 +21,14 @@ String.prototype.toFullWidth = function() {
 
 
 var folderUrl = "/Users/kinda/Documents/sentences"
-var enSentences = fs.readFileSync(`${folderUrl}/en.txt`,'utf8').split('\n')
-var jaSentences = fs.readFileSync(`${folderUrl}/ja.txt`,'utf8').toHalfWidth().split('\n')
+var enSentences = fs.readFileSync(`${folderUrl}/en.txt`,'utf8').split('\n').map(s => s.replace(/\"/g, `\"\"`))
+var jaSentences = fs.readFileSync(`${folderUrl}/ja.txt`,'utf8')
+                    .toHalfWidth()
+                    .replace(/\./g,"。")
+                    .replace(/\!/g,"！")
+                    .replace(/\?/g,"？")
+                    .replace(/,/g,"、")
+                    .split('\n')
 
 var sLimit = jaSentences.length
 var start = Date.now();
@@ -50,18 +66,59 @@ async function runAll() {
   var sortedPairs = pairs.sort((a,b) => (a.c - b.c))
   dumpCounts(sortedPairs)
 
-  var outStr = sortedPairs
-                    .map(obj => `${obj.c}\n${obj.ja}\n${obj.en}\n`)
-                    .join('')
-
-  fs.writeFile(`${folderUrl}/out.txt`, outStr, (err) => {
-    if (err) throw err;
-
-    console.log('File saved!');
+  let db = new sqlite3.Database(`./${dbName}`);
+  db.run(`CREATE TABLE ${tableName} (id integer PRIMARY_KEY, kana_count integer NOT NULL, ja text NOT NULL, en text NOT NULL)`, err => {
+      if (err) {
+        return console.log(err.message);
+      }
+      insertData(sortedPairs)
   });
+
+  db.run(`CREATE TABLE ${infoTableName} (kana_count integer PRIMARY_KEY, start_id integer NOT NULL, sentence_count interger NOT NULL)`, err => {
+      if (err) {
+        return console.log(err.message);
+      }
+      let kanaInfo = {}
+      sortedPairs.forEach((obj, i) => {
+        if(!kanaInfo[obj.c]) {
+          kanaInfo[obj.c] = {}
+          kanaInfo[obj.c].sentence_count = 1
+          kanaInfo[obj.c].start_id = i
+        } else {
+          kanaInfo[obj.c].sentence_count += 1
+        }
+      })
+      insertKanaInfoData(kanaInfo)
+  });
+
+  db.close();
+
+  function insertData(pairs) {
+    let sql = `INSERT INTO ${tableName} VALUES (?, ?, ?, ?)`
+    pairs.forEach( (obj, i) => {
+      let values = [i, obj.c, obj.ja, obj.en]
+      db.run(sql, values, function(err) {
+        if (err) {
+          return console.log(err.message);
+        }
+      });
+    })
+  }
+  function insertKanaInfoData(kanaInfo) {
+    let sql = `INSERT INTO ${infoTableName} VALUES (?, ?, ?)`
+    Object.keys(kanaInfo).forEach( c => {
+      let values = [c, kanaInfo[c].start_id, kanaInfo[c].sentence_count]
+      db.run(sql, values, function(err) {
+        if (err) {
+          return console.log(err.message);
+        }
+      });
+    })
+  }
 }
 
 runAll()
+
 
 function dumpCounts(arr) {
   console.log("-------------")
@@ -83,17 +140,23 @@ function dumpCounts(arr) {
     console.log(`${i}~${j-1}`, rangeCounts, (parseFloat(rangeCounts * 100)/arr.length).toFixed(2)+"%")
   }
 }
+
 function getSentenceKanaCount(sentence) {
   const mecab = new MeCab()
   mecab.command = 'mecab -d /usr/local/lib/mecab/dic/mecab-ipadic-neologd/ -E "<改行>\\n"';
   return new Promise(function(resolve, reject) {
-    const kanaCount = -1
     mecab.parse(sentence, function(err, result) {
+      resolve(getKanaCountFromResult(result))
+    });
+  });
+}
+
+function getKanaCountFromResult(result) {
       // console.log(result)
       var isContainOtherLang = false
       var count = 0
       if(result == undefined) {
-        resolve(-100)
+        return -100
         return
       }
       result.forEach(arr => {
@@ -102,7 +165,7 @@ function getSentenceKanaCount(sentence) {
         if(arr[arr.length-1] == '*') { // for substring is katakana already
           targetStr = arr[0]
           kanaCount = getKanaCount(targetStr)
-          if(kanaCount == 0) { // for substring includes english
+          if(kanaCount == 0) { // for japanese substring includes english
             isContainOtherLang = true
           }
         } else {
@@ -113,19 +176,20 @@ function getSentenceKanaCount(sentence) {
         //console.log(arr[arr.length - 1], kanaCount)
       })
       if(isContainOtherLang) {
-        resolve(-1)
+        return -1
       } else {
-        resolve(count)
+        return count
       }
-    });
-  });
 }
+
 
 function getKanaCount(str) {
   var count = 0;
   str.split("").forEach(c => {
     if(c >= "ア" && c <= "ヿ" ||
-       c >= "あ" && c <= "ゟ") {
+       c >= "あ" && c <= "ゟ" ||
+       c >= "0" && c <="9"
+    ) {
       count++
     }
   })

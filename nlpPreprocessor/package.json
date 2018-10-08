@@ -3,9 +3,10 @@
     "start": "node --experimental-modules index.mjs"
   },
   "dependencies": {
-    "mecab-async": "^0.1.2"
+    "mecab-async": "^0.1.2",
+    "sqlite3": "^4.0.2"
   },
-    "engines": {
+  "engines": {
     "node": ">=9.0"
   }
 }
