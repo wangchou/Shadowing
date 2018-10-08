@@ -15,6 +15,10 @@ enum GameFlowMode: String, Codable {
     case shadowing, chat
 }
 
+enum ContentTab: String, Codable {
+    case topics, infiniteChallenge
+}
+
 class GameContext {
     // MARK: - Singleton
     static let shared = GameContext()
@@ -28,6 +32,7 @@ class GameContext {
 
     // MARK: - Short-term data of a single game
     var gameFlowMode: GameFlowMode = .chat
+    var contentTab: ContentTab = .topics
     var gameState: GameState = .stopped {
         didSet {
             postEvent(.gameStateChanged, gameState: gameState)

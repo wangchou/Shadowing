@@ -19,12 +19,15 @@ struct KanaInfo {
 private var kanaInfos: [Int: KanaInfo] = [:]
 
 class InfiniteChallengePage: UIViewController {
+    @IBOutlet weak var topBarView: TopBarView!
     override func viewDidLoad() {
         super.viewDidLoad()
         loadSentenceDB()
         let sentenceIds = randSentenceIds(minKanaCount: 1, maxKanaCount: 3, numOfSentences: 10)
         let sentences = getSentencesByIds(ids: sentenceIds)
         print(sentences)
+        topBarView.rightButton.isHidden = true
+        topBarView.titleLabel.text = "無限挑戰模式"
     }
 }
 
