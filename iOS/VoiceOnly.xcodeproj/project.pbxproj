@@ -47,10 +47,13 @@
 		BEBDEDCA208EF0A000C18520 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEBDEDC8208EF0A000C18520 /* LaunchScreen.storyboard */; };
 		BEBDEDD9208EF15F00C18520 /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD1208EF15E00C18520 /* utilities.swift */; };
 		BEBDEDDA208EF15F00C18520 /* TTS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD2208EF15E00C18520 /* TTS.swift */; };
-		BEBDEDDB208EF15F00C18520 /* drumLoop.caf in Resources */ = {isa = PBXBuildFile; fileRef = BEBDEDD3208EF15E00C18520 /* drumLoop.caf */; };
 		BEBDEDDD208EF15F00C18520 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */; };
 		BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */; };
 		BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD8208EF15F00C18520 /* constants.swift */; };
+		BECAC3B3216B2869001BBF49 /* infinite_sentences.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BECAC3B2216B2869001BBF49 /* infinite_sentences.sqlite */; };
+		BECAC3B5216B34FA001BBF49 /* InfiniteChanllengePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECAC3B4216B34FA001BBF49 /* InfiniteChanllengePage.swift */; };
+		BECAC3B7216B37E5001BBF49 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BECAC3B6216B37E5001BBF49 /* SQLite.framework */; };
+		BECAC3B8216B37E5001BBF49 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BECAC3B6216B37E5001BBF49 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BED1CC0921452A54004AE397 /* GameSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1CC0821452A54004AE397 /* GameSetting.swift */; };
 		BEDEDD3720A46D1B00E7B60B /* ShadowingListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3620A46D1B00E7B60B /* ShadowingListPage.swift */; };
 		BEDEDD3920A46FCA00E7B60B /* GameRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */; };
@@ -86,6 +89,7 @@
 			files = (
 				BEEE8E602152199200916433 /* SwiftyJSON.framework in Embed Frameworks */,
 				BEEE8E5C2152199200916433 /* Promises.framework in Embed Frameworks */,
+				BECAC3B8216B37E5001BBF49 /* SQLite.framework in Embed Frameworks */,
 				BEFE98B32160911F00D442EE /* Charts.framework in Embed Frameworks */,
 				BEEE8E5E2152199200916433 /* Alamofire.framework in Embed Frameworks */,
 				BEEE8E5A2152199200916433 /* FBLPromises.framework in Embed Frameworks */,
@@ -139,10 +143,12 @@
 		BEBDEDCB208EF0A000C18520 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BEBDEDD1208EF15E00C18520 /* utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utilities.swift; sourceTree = "<group>"; };
 		BEBDEDD2208EF15E00C18520 /* TTS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTS.swift; sourceTree = "<group>"; };
-		BEBDEDD3208EF15E00C18520 /* drumLoop.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = drumLoop.caf; sourceTree = "<group>"; };
 		BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculateScore.swift; sourceTree = "<group>"; };
 		BEBDEDD8208EF15F00C18520 /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
+		BECAC3B2216B2869001BBF49 /* infinite_sentences.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = infinite_sentences.sqlite; sourceTree = "<group>"; };
+		BECAC3B4216B34FA001BBF49 /* InfiniteChanllengePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteChanllengePage.swift; sourceTree = "<group>"; };
+		BECAC3B6216B37E5001BBF49 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SQLite.framework; sourceTree = "<group>"; };
 		BED1CC0821452A54004AE397 /* GameSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetting.swift; sourceTree = "<group>"; };
 		BEDEDD3620A46D1B00E7B60B /* ShadowingListPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowingListPage.swift; sourceTree = "<group>"; };
 		BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRecord.swift; sourceTree = "<group>"; };
@@ -171,6 +177,7 @@
 			files = (
 				BEEE8E5F2152199200916433 /* SwiftyJSON.framework in Frameworks */,
 				BEEE8E5B2152199200916433 /* Promises.framework in Frameworks */,
+				BECAC3B7216B37E5001BBF49 /* SQLite.framework in Frameworks */,
 				BEFE98B22160911F00D442EE /* Charts.framework in Frameworks */,
 				BEEE8E5D2152199200916433 /* Alamofire.framework in Frameworks */,
 				BEEE8E592152199200916433 /* FBLPromises.framework in Frameworks */,
@@ -307,9 +314,9 @@
 		BEBDEDBE208EF09F00C18520 /* VoiceOnly */ = {
 			isa = PBXGroup;
 			children = (
+				BECAC3B2216B2869001BBF49 /* infinite_sentences.sqlite */,
 				BE67D2A821561A92007FE420 /* Assets.xcassets */,
 				BEBDEDCB208EF0A000C18520 /* Info.plist */,
-				BEBDEDD3208EF15E00C18520 /* drumLoop.caf */,
 				BEBDEDC8208EF0A000C18520 /* LaunchScreen.storyboard */,
 				BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */,
 				BEA2389C21460EBD00548BBC /* sentences.txt */,
@@ -322,6 +329,7 @@
 		BEBDEDE1208EF17100C18520 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BECAC3B6216B37E5001BBF49 /* SQLite.framework */,
 				BEFE98B12160911F00D442EE /* Charts.framework */,
 				BE67D2A521560A38007FE420 /* SwiftIconFont.framework */,
 				BEEE8E572152199200916433 /* Alamofire.framework */,
@@ -344,6 +352,7 @@
 				BE2951102155F50E008239F9 /* DetailPage */,
 				BE2951112155F51A008239F9 /* GamePage */,
 				BE2951122155F524008239F9 /* FinishedPage */,
+				BECAC3B4216B34FA001BBF49 /* InfiniteChanllengePage.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -435,11 +444,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEBDEDCA208EF0A000C18520 /* LaunchScreen.storyboard in Resources */,
-				BEBDEDDB208EF15F00C18520 /* drumLoop.caf in Resources */,
 				BE76F11F214F56F6004E130B /* SentencesTableCell.xib in Resources */,
 				BEEC7FA92154C7AC001C2EFF /* TopBarView.xib in Resources */,
 				BE67D2A921561A93007FE420 /* Assets.xcassets in Resources */,
 				BEA2389D21460EBD00548BBC /* sentences.txt in Resources */,
+				BECAC3B3216B2869001BBF49 /* infinite_sentences.sqlite in Resources */,
 				BEBDEDC5208EF09F00C18520 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,6 +487,7 @@
 				BE7725C920A2CBC200DF186A /* n5.swift in Sources */,
 				BE8DE7B62161E44400812CED /* AbilityChart.swift in Sources */,
 				BE05073720A68515008A29EB /* SentencesTestGame.swift in Sources */,
+				BECAC3B5216B34FA001BBF49 /* InfiniteChanllengePage.swift in Sources */,
 				BE7725C820A2CBC200DF186A /* n4.swift in Sources */,
 				BE5D838920A80BD0002031BF /* GameContentDetailPage.swift in Sources */,
 				BE6ED56820A17BB000553D1A /* ShadowingFlow.swift in Sources */,
