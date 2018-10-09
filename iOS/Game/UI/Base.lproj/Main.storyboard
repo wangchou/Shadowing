@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lQ2-QP-0IK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5cw-l4-9yl">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -40,15 +40,42 @@
                                     <constraint firstAttribute="height" constant="35" id="cWb-Q3-4Ml"/>
                                 </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rxy-fc-7RI">
+                                <rect key="frame" x="0.0" y="55" width="320" height="473"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="QkA-mz-bAQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="196"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S3H-hq-wyW" customClass="LineChart" customModule="VoiceOnly" customModuleProvider="target">
+                                            <rect key="frame" x="10" y="10" width="300" height="160"/>
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="160" id="P1I-gf-fL7"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="S3H-hq-wyW" secondAttribute="trailing" constant="10" id="d2a-0V-K2N"/>
+                                        <constraint firstItem="S3H-hq-wyW" firstAttribute="top" secondItem="QkA-mz-bAQ" secondAttribute="top" constant="10" id="lKc-kq-hRd"/>
+                                        <constraint firstItem="S3H-hq-wyW" firstAttribute="leading" secondItem="QkA-mz-bAQ" secondAttribute="leading" constant="10" id="zrN-HT-stH"/>
+                                    </constraints>
+                                </view>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="Rxy-fc-7RI" firstAttribute="leading" secondItem="Xqc-OQ-6uf" secondAttribute="leading" id="JDb-Q7-nOY"/>
                             <constraint firstItem="kM9-FW-PHx" firstAttribute="leading" secondItem="Xqc-OQ-6uf" secondAttribute="leading" id="N2b-6g-b1J"/>
                             <constraint firstItem="Xqc-OQ-6uf" firstAttribute="trailing" secondItem="kM9-FW-PHx" secondAttribute="trailing" id="Y1I-re-jL3"/>
                             <constraint firstItem="Xqc-OQ-6uf" firstAttribute="trailing" secondItem="Ftz-Wt-fWd" secondAttribute="trailing" id="ahR-Je-qFh"/>
                             <constraint firstItem="Xqc-OQ-6uf" firstAttribute="bottom" secondItem="kM9-FW-PHx" secondAttribute="bottom" id="eBQ-ak-keH"/>
                             <constraint firstItem="Ftz-Wt-fWd" firstAttribute="top" secondItem="Xqc-OQ-6uf" secondAttribute="top" id="krK-Qc-j5V"/>
+                            <constraint firstItem="Xqc-OQ-6uf" firstAttribute="trailing" secondItem="Rxy-fc-7RI" secondAttribute="trailing" id="mBE-94-Ryo"/>
+                            <constraint firstItem="Rxy-fc-7RI" firstAttribute="top" secondItem="Ftz-Wt-fWd" secondAttribute="bottom" id="ncT-mA-N3A"/>
                             <constraint firstItem="Ftz-Wt-fWd" firstAttribute="leading" secondItem="Xqc-OQ-6uf" secondAttribute="leading" id="pNy-xH-Xad"/>
+                            <constraint firstItem="kM9-FW-PHx" firstAttribute="top" secondItem="Rxy-fc-7RI" secondAttribute="bottom" id="zXu-6m-2pS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Xqc-OQ-6uf"/>
                     </view>
@@ -58,7 +85,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5b-DK-uDF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="293" y="-615"/>
+            <point key="canvasLocation" x="292.5" y="-615.84507042253517"/>
         </scene>
         <!--Infinite Challenge Swipable Page-->
         <scene sceneID="dx9-ut-S3b">
