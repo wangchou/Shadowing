@@ -62,11 +62,15 @@ extension UIButton {
         self.tintColor = tintColor
         self.setImage(closeImage, for: .normal)
         self.imageView?.contentMode = .scaleAspectFit
+
         self.titleLabel?.font = MyFont.regular(ofSize: 21)
         self.setTitle(title, for: .normal)
+
         if !isIconOnLeft {
             self.semanticContentAttribute = .forceRightToLeft
+            self.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -15)
+        } else {
+            self.titleEdgeInsets = UIEdgeInsets(top: 0, left: -15, bottom: 0, right: 0)
         }
-        self.titleLabel?.textAlignment = .left
     }
 }

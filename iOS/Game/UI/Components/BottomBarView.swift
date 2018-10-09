@@ -23,18 +23,27 @@ class BottomBarView: UIView, XibView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        xibSetup()
         sharedSetup()
     }
 
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
-        xibSetup()
         contentView?.prepareForInterfaceBuilder()
         sharedSetup()
     }
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        sharedSetup()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        sharedSetup()
+    }
+
     func sharedSetup() {
+        xibSetup()
         var leftColor: UIColor = UIColor(white: 0, alpha: 0.66)
         var rightColor: UIColor = UIColor(white: 0, alpha: 0.66)
         switch context.contentTab {

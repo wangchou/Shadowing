@@ -13,8 +13,8 @@
         <!--Main Swipable Page-->
         <scene sceneID="TzX-cI-iSf">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RP1-kY-iV3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <pageViewController storyboardIdentifier="MainSwipablePage" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="lQ2-QP-0IK" customClass="MainSwipablePage" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RP1-kY-iV3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1056" y="-1372"/>
         </scene>
@@ -63,8 +63,8 @@
         <!--Infinite Challenge Swipable Page-->
         <scene sceneID="dx9-ut-S3b">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VFx-Gb-c8K" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <pageViewController storyboardIdentifier="InfiniteChallengeSwipablePage" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="CDZ-8D-otl" customClass="InfiniteChallengeSwipablePage" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VFx-Gb-c8K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1054" y="-718"/>
         </scene>

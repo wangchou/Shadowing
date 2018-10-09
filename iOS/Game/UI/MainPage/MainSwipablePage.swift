@@ -12,6 +12,7 @@ import UIKit
 class MainSwipablePage: UIPageViewController {
 
     var pages = [UIViewController]()
+    
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -24,7 +25,7 @@ class MainSwipablePage: UIPageViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         func addPage(_ storyboardId: String) {
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: storyboardId)
