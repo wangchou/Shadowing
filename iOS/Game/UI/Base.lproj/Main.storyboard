@@ -13,10 +13,10 @@
         <!--Main Swipable Page-->
         <scene sceneID="TzX-cI-iSf">
             <objects>
-                <pageViewController storyboardIdentifier="MainSwipablePage" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="lQ2-QP-0IK" customClass="MainSwipablePage" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RP1-kY-iV3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pageViewController storyboardIdentifier="MainSwipablePage" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="lQ2-QP-0IK" customClass="MainSwipablePage" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController"/>
             </objects>
-            <point key="canvasLocation" x="694" y="-1952"/>
+            <point key="canvasLocation" x="-1056" y="-1372"/>
         </scene>
         <!--Infinite Challenge Page-->
         <scene sceneID="cl5-eM-Nhy">
@@ -28,20 +28,20 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kM9-FW-PHx" customClass="BottomBarView" customModule="VoiceOnly" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="528" width="320" height="40"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Z9W-Dd-yQW"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ftz-Wt-fWd" customClass="TopBarView" customModule="VoiceOnly" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="20" width="320" height="35"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="cWb-Q3-4Ml"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="kM9-FW-PHx" firstAttribute="leading" secondItem="Xqc-OQ-6uf" secondAttribute="leading" id="N2b-6g-b1J"/>
                             <constraint firstItem="Xqc-OQ-6uf" firstAttribute="trailing" secondItem="kM9-FW-PHx" secondAttribute="trailing" id="Y1I-re-jL3"/>
@@ -58,13 +58,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5b-DK-uDF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-231" y="-590"/>
+            <point key="canvasLocation" x="293" y="-615"/>
         </scene>
         <!--Infinite Challenge Swipable Page-->
         <scene sceneID="dx9-ut-S3b">
             <objects>
-                <pageViewController storyboardIdentifier="InfiniteChallengeSwipablePage" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="CDZ-8D-otl" customClass="InfiniteChallengeSwipablePage" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VFx-Gb-c8K" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pageViewController storyboardIdentifier="InfiniteChallengeSwipablePage" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="CDZ-8D-otl" customClass="InfiniteChallengeSwipablePage" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController"/>
             </objects>
             <point key="canvasLocation" x="-1054" y="-718"/>
         </scene>
@@ -367,7 +367,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZDf-IZ-WMA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="-1282"/>
+            <point key="canvasLocation" x="-386" y="-1033"/>
         </scene>
         <!--Shadowing List Page-->
         <scene sceneID="tne-QT-ifu">
@@ -572,7 +572,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="693.75" y="-1282.3943661971832"/>
+            <point key="canvasLocation" x="294" y="-1282"/>
         </scene>
         <!--Game Content Detail Page-->
         <scene sceneID="RaL-3G-WLz">
@@ -582,6 +582,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="myG-Yz-7jK">
+                                <rect key="frame" x="0.0" y="528" width="320" height="40"/>
+                                <color key="backgroundColor" red="0.27058823529411763" green="0.63137254901960782" blue="0.30980392156862746" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="fgF-Cf-9z6"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gbA-Y5-9vB" customClass="TopBarView" customModule="VoiceOnly" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="20" width="320" height="35"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -590,7 +597,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oat-aH-4X8" userLabel="句子列表">
-                                <rect key="frame" x="0.0" y="55" width="320" height="453"/>
+                                <rect key="frame" x="0.0" y="55" width="320" height="473"/>
                                 <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
@@ -755,10 +762,10 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zLA-Lz-17O" userLabel="PeekButton">
-                                <rect key="frame" x="0.0" y="508" width="320" height="60"/>
-                                <color key="backgroundColor" red="0.32086711870000001" green="0.75515545689999997" blue="0.3623621548" alpha="0.69560680649999995" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="528" width="320" height="40"/>
+                                <color key="backgroundColor" red="0.26914371833600714" green="0.63255472715736039" blue="0.30956925411344127" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="5j2-46-txA"/>
+                                    <constraint firstAttribute="height" constant="40" id="5j2-46-txA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="中文 / 日文">
@@ -775,11 +782,14 @@
                             <constraint firstItem="oat-aH-4X8" firstAttribute="leading" secondItem="CUE-KE-Cdw" secondAttribute="leading" id="Ndp-Of-sfa"/>
                             <constraint firstItem="oat-aH-4X8" firstAttribute="top" secondItem="CUE-KE-Cdw" secondAttribute="top" constant="35" id="ORl-Cp-F7h"/>
                             <constraint firstItem="CUE-KE-Cdw" firstAttribute="bottom" secondItem="zLA-Lz-17O" secondAttribute="bottom" id="QQo-r7-ARG"/>
+                            <constraint firstItem="myG-Yz-7jK" firstAttribute="bottom" secondItem="Md9-bi-F96" secondAttribute="bottom" id="QxS-NF-dNv"/>
                             <constraint firstItem="oat-aH-4X8" firstAttribute="trailing" secondItem="CUE-KE-Cdw" secondAttribute="trailing" id="U0U-SH-s6e"/>
                             <constraint firstItem="gbA-Y5-9vB" firstAttribute="leading" secondItem="CUE-KE-Cdw" secondAttribute="leading" id="bRs-AL-LfC"/>
                             <constraint firstItem="gbA-Y5-9vB" firstAttribute="top" secondItem="CUE-KE-Cdw" secondAttribute="top" id="etD-pX-l7M"/>
                             <constraint firstItem="zLA-Lz-17O" firstAttribute="top" secondItem="oat-aH-4X8" secondAttribute="bottom" id="fIE-M7-727"/>
                             <constraint firstItem="CUE-KE-Cdw" firstAttribute="trailing" secondItem="gbA-Y5-9vB" secondAttribute="trailing" id="fyo-eD-Fg8"/>
+                            <constraint firstItem="myG-Yz-7jK" firstAttribute="leading" secondItem="CUE-KE-Cdw" secondAttribute="leading" id="gag-pk-YlW"/>
+                            <constraint firstItem="CUE-KE-Cdw" firstAttribute="trailing" secondItem="myG-Yz-7jK" secondAttribute="trailing" id="ouD-J7-x9v"/>
                             <constraint firstItem="CUE-KE-Cdw" firstAttribute="trailing" secondItem="zLA-Lz-17O" secondAttribute="trailing" id="pLu-Pp-eLB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CUE-KE-Cdw"/>
@@ -800,7 +810,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kMQ-GI-Nh0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1335" y="-1276.056338028169"/>
+            <point key="canvasLocation" x="928" y="-1282"/>
         </scene>
         <!--Game Finished Page-->
         <scene sceneID="DIF-sJ-I4U">
@@ -852,7 +862,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E4x-vU-tSa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2662.5" y="-1276.056338028169"/>
+            <point key="canvasLocation" x="2244" y="-852"/>
         </scene>
         <!--原型8: Messenger-->
         <scene sceneID="bb0-Qa-U6M">
@@ -935,7 +945,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fuu-gS-Dku" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2008" y="-1282"/>
+            <point key="canvasLocation" x="1586" y="-852"/>
         </scene>
         <!--Pause Overlay View Controller-->
         <scene sceneID="WgL-2b-ElE">
@@ -1072,7 +1082,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5zE-yR-MUM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2006" y="-614"/>
+            <point key="canvasLocation" x="1584" y="-190"/>
         </scene>
     </scenes>
 </document>

@@ -31,7 +31,7 @@ class InfiniteChallengeSwipablePage: UIPageViewController {
             pages.append(vc)
         }
         addPage("SettingPage")
-        addPage("InfiniteChallengePage")
+        addLevelPages()
         setViewControllers([pages[1]], direction: .forward, animated: true, completion: nil)
 
         dataSource = self
@@ -39,6 +39,20 @@ class InfiniteChallengeSwipablePage: UIPageViewController {
         // https://stackoverflow.com/questions/43416456/using-uislider-inside-uipageviewcontroller
         for view in self.view.subviews where view is UIScrollView {
             (view as? UIScrollView)?.delaysContentTouches = false
+        }
+    }
+
+    func addLevelPages() {
+        let vcs: [InfiniteChallengePage] = (0...5).map { _ in
+            return UIStoryboard(name: "Main", bundle: nil)
+                .instantiateViewController(withIdentifier: "InfiniteChallengePage") as! InfiniteChallengePage
+        }
+        let pageNames = ["", "入門", "初級", "中級", "上級", "超難問", ""]
+        for i in 0...4 {
+            vcs[i].topBarLeftText = pageNames[i]
+            vcs[i].topBarTitle = pageNames[i+1]
+            vcs[i].topBarRightText = pageNames[i+2]
+            pages.append(vcs[i])
         }
     }
 

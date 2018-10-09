@@ -20,14 +20,31 @@ private var kanaInfos: [Int: KanaInfo] = [:]
 
 class InfiniteChallengePage: UIViewController {
     @IBOutlet weak var topBarView: TopBarView!
+    var topBarTitle: String = "無限挑戰模式"
+    var topBarLeftText: String = ""
+    var topBarRightText: String = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
         loadSentenceDB()
         let sentenceIds = randSentenceIds(minKanaCount: 1, maxKanaCount: 3, numOfSentences: 10)
         let sentences = getSentencesByIds(ids: sentenceIds)
         print(sentences)
-        topBarView.rightButton.isHidden = true
-        topBarView.titleLabel.text = "無限挑戰模式"
+        updateUI()
+    }
+
+    func updateUI() {
+        if topBarRightText == "" {
+            topBarView.rightButton.isHidden = true
+        } else {
+            topBarView.rightButton.setIconImage(named: "round_arrow_forward_ios_black_48pt", title: topBarRightText, isIconOnLeft: false)
+        }
+        if topBarLeftText != "" {
+            topBarView.leftButton.setIconImage(named: "round_arrow_back_ios_black_48pt", title: topBarLeftText)
+        } else {
+            topBarView.leftButton.setIconImage(named: "outline_settings_black_48pt")
+        }
+        topBarView.titleLabel.text = topBarTitle
     }
 }
 
@@ -81,7 +98,7 @@ func randSentenceIds(minKanaCount: Int, maxKanaCount: Int, numOfSentences: Int) 
     let startId = startKanaInfo.startId
     let endId = endKanaInfo.startId + endKanaInfo.sentenceCount - 1
     var randomIds: [Int] = []
-    for i in 0...numOfSentences {
+    for _ in 0...numOfSentences {
         randomIds.append(Int(arc4random_uniform(UInt32(endId - startId))) + startId)
     }
 
