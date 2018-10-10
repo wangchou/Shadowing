@@ -43,24 +43,10 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rxy-fc-7RI">
                                 <rect key="frame" x="0.0" y="55" width="320" height="473"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <view key="tableFooterView" contentMode="scaleToFill" id="QkA-mz-bAQ">
+                                <view key="tableFooterView" contentMode="scaleToFill" id="QkA-mz-bAQ" customClass="ICInfoView" customModule="VoiceOnly" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="196"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S3H-hq-wyW" customClass="LineChart" customModule="VoiceOnly" customModuleProvider="target">
-                                            <rect key="frame" x="10" y="10" width="300" height="160"/>
-                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="160" id="P1I-gf-fL7"/>
-                                            </constraints>
-                                        </view>
-                                    </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="S3H-hq-wyW" secondAttribute="trailing" constant="10" id="d2a-0V-K2N"/>
-                                        <constraint firstItem="S3H-hq-wyW" firstAttribute="top" secondItem="QkA-mz-bAQ" secondAttribute="top" constant="10" id="lKc-kq-hRd"/>
-                                        <constraint firstItem="S3H-hq-wyW" firstAttribute="leading" secondItem="QkA-mz-bAQ" secondAttribute="leading" constant="10" id="zrN-HT-stH"/>
-                                    </constraints>
                                 </view>
                             </tableView>
                         </subviews>

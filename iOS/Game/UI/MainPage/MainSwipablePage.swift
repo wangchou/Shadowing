@@ -12,7 +12,6 @@ import UIKit
 class MainSwipablePage: UIPageViewController {
 
     var pages = [UIViewController]()
-    
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

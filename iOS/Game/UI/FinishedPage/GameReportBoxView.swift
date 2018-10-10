@@ -120,10 +120,6 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         addAttrText(x: x, y: y, w: gridCount - x, h: h, text: attrText)
     }
 
-    func getFontSize(h: Int) -> CGFloat {
-        return h.c * step * 0.7
-    }
-
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         viewWillAppear()

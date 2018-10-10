@@ -25,6 +25,7 @@ class LineChart: LineChartView, ChartViewDelegate {
     }
 
     override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
         sharedInit()
     }
 

@@ -151,21 +151,25 @@ extension GridLayout where Self: UIView {
         return (axisBound - spacing)*2 / gridCount.c / 2
     }
 
-    func addText(x: Int, y: Int, w: Int, h: Int, text: String, font: UIFont, color: UIColor, completion: ((UILabel) -> Void)? = nil) {
+    func getFontSize(h: Int) -> CGFloat {
+        return h.c * step * 0.7
+    }
+
+    func addText(x: Int, y: Int, w: Int? = nil, h: Int, text: String, font: UIFont? = nil, color: UIColor? = nil, completion: ((UILabel) -> Void)? = nil) {
         let label = UILabel()
-        label.font = font
-        label.textColor = color
+        label.font = font ?? MyFont.regular(ofSize: getFontSize(h: h))
+        label.textColor = color ?? .black
         label.text = text
-        layout(x, y, w, h, label)
+        layout(x, y, w ?? (gridCount - x), h, label)
         self.addSubview(label)
 
         completion?(label)
     }
 
-    func addAttrText(x: Int, y: Int, w: Int, h: Int, text: NSAttributedString, completion: ((UIView) -> Void)? = nil) {
+    func addAttrText(x: Int, y: Int, w: Int? = nil, h: Int, text: NSAttributedString, completion: ((UIView) -> Void)? = nil) {
         let label = UILabel()
         label.attributedText = text
-        layout(x, y, w, h, label)
+        layout(x, y, w ?? (gridCount - x), h, label)
         self.addSubview(label)
         completion?(label)
     }
