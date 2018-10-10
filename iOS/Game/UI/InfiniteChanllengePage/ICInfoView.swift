@@ -13,6 +13,20 @@ private enum Texts: String {
     case numOfSentence = "句子數"
 }
 
+private func getLevelDescription(_ level: Level) -> String{
+    switch level {
+    case .lv0:
+        return "入門"
+    case .lv1:
+        return "初級"
+    case .lv2:
+        return "中級"
+    case .lv3:
+        return "上級"
+    case .lv4:
+        return "超難問"
+    }
+}
 class ICInfoView: UIView, GridLayout, ReloadableView {
     // GridLayout
     var gridCount: Int = 48
@@ -21,13 +35,24 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
 
     var spacing: CGFloat = 0
 
-    var line1 = "難度：入門"
-    var line2 = "假名數：1〜10"
-    var line3 = "總句數：50000"
+    var minKanaCount: Int = 1
+    var maxKanaCount: Int = 10
+    var sentencesCount: Int = -1
+    var level: Level = .lv0
 
+    var line1: String {
+        return "難度：" + getLevelDescription(level)
+    }
+    var line2: String {
+        return "假名數：\(minKanaCount)〜\(maxKanaCount)"
+    }
+    var line3: String {
+        return "總句數：\(sentencesCount)"
+    }
     var bestRank: String? = "SS"
     var bestProgress: String? = "100"
-    var progressAttrText: NSAttributedString {
+
+    private var progressAttrText: NSAttributedString {
         let attrText = NSMutableAttributedString()
         let font = MyFont.bold(ofSize: getFontSize(h: 11))
         if let string = bestProgress {
@@ -40,7 +65,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
             return attrText
         }
     }
-    var rankAttrText: NSAttributedString {
+    private var rankAttrText: NSAttributedString {
         let font = MyFont.bold(ofSize: getFontSize(h: 11))
         if  let bestRank = bestRank,
             let rank = Rank(rawValue: bestRank) {
@@ -74,6 +99,12 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
         y += 2
 
         let chart = LineChart()
+        chart.setDataCount(level: level, dataPoints: [
+            (x: 0, y: 0),
+            (x: 20, y:40),
+            (x: 40, y:70),
+            (x: 60, y:80),
+        ])
         layout(1, y, 46, 23, chart)
         addSubview(chart)
         y += 19

@@ -114,7 +114,7 @@ class GameContext {
 
         life = isSimulator ? 100 : 50
 
-        let level = allLevels[dataSetKey] ?? .n5a
+        let level = allLevels[dataSetKey] ?? .lv0
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level, flowMode: .shadowing)
     }
 

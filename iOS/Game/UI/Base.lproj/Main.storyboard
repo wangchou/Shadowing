@@ -66,6 +66,7 @@
                         <viewLayoutGuide key="safeArea" id="Xqc-OQ-6uf"/>
                     </view>
                     <connections>
+                        <outlet property="infoView" destination="QkA-mz-bAQ" id="0mT-UQ-60k"/>
                         <outlet property="topBarView" destination="Ftz-Wt-fWd" id="mhE-Vb-qdg"/>
                     </connections>
                 </viewController>

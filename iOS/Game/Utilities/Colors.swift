@@ -27,12 +27,18 @@ let myWaterBlue = rgb(64, 192, 255)
 
 func getLevelColor(level: Level) -> UIColor {
     switch level {
-    case .n5a, .n5b, .n5c:
-        return myGreen
-    case .n4a, .n4b, .n4c:
-        return myOrange
-    case .n3a, .n3b:
+    case .lv0:
         return myRed
+    case .lv1:
+        return myOrange
+    case .lv2:
+        return myGreen
+    case .lv3:
+        return myBlue
+    case .lv4:
+        return .purple
+    default:
+        return .brown
     }
 }
 

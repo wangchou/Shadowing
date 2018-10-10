@@ -23,14 +23,27 @@ class InfiniteChallengePage: UIViewController {
     var topBarTitle: String = "無限挑戰模式"
     var topBarLeftText: String = ""
     var topBarRightText: String = ""
+    var level: Level = .lv0
+    var minKanaCount = 0
+    var maxKanaCount = 1
+    @IBOutlet weak var infoView: ICInfoView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         loadSentenceDB()
-        let sentenceIds = randSentenceIds(minKanaCount: 1, maxKanaCount: 3, numOfSentences: 10)
+        let sentenceIds = randSentenceIds(minKanaCount: minKanaCount, maxKanaCount: maxKanaCount, numOfSentences: 20)
         let sentences = getSentencesByIds(ids: sentenceIds)
         print(sentences)
         updateUI()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        infoView.level = level
+        infoView.minKanaCount = minKanaCount
+        infoView.maxKanaCount = maxKanaCount
+        infoView.sentencesCount = getSentenceCount(minKanaCount: minKanaCount, maxKanaCount: maxKanaCount)
+        infoView.viewWillAppear()
     }
 
     func updateUI() {
@@ -91,12 +104,23 @@ func getSentencesByIds(ids: [Int]) -> [String] {
     return sentences
 }
 
+func getSentenceCount(minKanaCount: Int, maxKanaCount: Int) -> Int {
+    guard let startKanaInfo = kanaInfos[minKanaCount],
+          let endKanaInfo = kanaInfos[maxKanaCount] else { print("err in getSentenceCount"); return -1}
+
+    let startId = startKanaInfo.startId
+    let endId = endKanaInfo.startId + endKanaInfo.sentenceCount - 1
+
+    return endId - startId
+}
+
 func randSentenceIds(minKanaCount: Int, maxKanaCount: Int, numOfSentences: Int) -> [Int] {
     guard let startKanaInfo = kanaInfos[minKanaCount],
         let endKanaInfo = kanaInfos[maxKanaCount] else { print("err in randSentenceIds"); return []}
 
     let startId = startKanaInfo.startId
     let endId = endKanaInfo.startId + endKanaInfo.sentenceCount - 1
+
     var randomIds: [Int] = []
     for _ in 0...numOfSentences {
         randomIds.append(Int(arc4random_uniform(UInt32(endId - startId))) + startId)

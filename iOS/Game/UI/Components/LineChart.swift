@@ -55,14 +55,12 @@ class LineChart: LineChartView, ChartViewDelegate {
 
         legend.form = .none
 
-        setDataCount(20, range: 50)
-        animate(xAxisDuration: 1.5)
+        animate(xAxisDuration: 0.8)
     }
 
-    func setDataCount(_ count: Int, range: UInt32) {
-        let values = (0..<count).map { (i) -> ChartDataEntry in
-            let val = Double(arc4random_uniform(range) + 3)
-            return ChartDataEntry(x: Double(i * 10), y: val)
+    func setDataCount(level: Level, dataPoints: [(x: Int, y: Int)]) {
+        let values = dataPoints.map { p in
+            return ChartDataEntry(x: Double(p.x), y: Double(p.y))
         }
 
         let set1 = LineChartDataSet(values: values, label: "")
@@ -77,8 +75,7 @@ class LineChart: LineChartView, ChartViewDelegate {
         set1.drawValuesEnabled = false
         set1.drawCircleHoleEnabled = false
 
-        let gradientColors = [ChartColorTemplates.colorFromString("#00ff0000").cgColor,
-                              ChartColorTemplates.colorFromString("#ffff0000").cgColor]
+        let gradientColors = [myWhite.cgColor, getLevelColor(level: level).cgColor]
         let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)!
 
         set1.fillAlpha = 1
