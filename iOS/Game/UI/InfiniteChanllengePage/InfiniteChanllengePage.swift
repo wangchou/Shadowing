@@ -24,17 +24,19 @@ class InfiniteChallengePage: UIViewController {
     var topBarLeftText: String = ""
     var topBarRightText: String = ""
     var level: Level = .lv0
-    var minKanaCount = 0
-    var maxKanaCount = 1
+    var minKanaCount: Int {
+        return level.minKanaCount
+    }
+    var maxKanaCount: Int {
+        return level.maxKanaCount
+    }
     @IBOutlet weak var infoView: ICInfoView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         loadSentenceDB()
-        let sentenceIds = randSentenceIds(minKanaCount: minKanaCount, maxKanaCount: maxKanaCount, numOfSentences: 20)
-        let sentences = getSentencesByIds(ids: sentenceIds)
-        print(sentences)
         updateUI()
+        infoView.viewWillAppear()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -122,7 +124,7 @@ func randSentenceIds(minKanaCount: Int, maxKanaCount: Int, numOfSentences: Int) 
     let endId = endKanaInfo.startId + endKanaInfo.sentenceCount - 1
 
     var randomIds: [Int] = []
-    for _ in 0...numOfSentences {
+    for _ in 0..<numOfSentences {
         randomIds.append(Int(arc4random_uniform(UInt32(endId - startId))) + startId)
     }
 

@@ -8,12 +8,14 @@
 
 import UIKit
 
+private let context = GameContext.shared
+
 private enum Texts: String {
     case precision = "完成率"
     case numOfSentence = "句子數"
 }
 
-private func getLevelDescription(_ level: Level) -> String{
+private func getLevelDescription(_ level: Level) -> String {
     switch level {
     case .lv0:
         return "入門"
@@ -49,8 +51,34 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
     var line3: String {
         return "總句數：\(sentencesCount)"
     }
-    var bestRank: String? = "SS"
-    var bestProgress: String? = "100"
+    var bestRank: String? {
+        return findBestRecord(key: level.dataSetKey)?.rank.rawValue
+    }
+    var bestProgress: String? {
+        return findBestRecord(key: level.dataSetKey)?.progress
+    }
+
+    private var dataPoints: [(x: Int, y: Int)] {
+        var points = [(x: 0, y: 0)]
+        let dataSetKey = level.dataSetKey
+        let gameRecords = context.gameHistory
+            .filter { r in
+                return r.dataSetKey == dataSetKey
+            }
+            .sorted {(r1, r2) in
+                return r1.startedTime < r2.startedTime
+            }
+        guard !gameRecords.isEmpty else {
+            points.append((x: 100, y: 1))
+            return points
+        }
+        var sentenceCount = 0
+        points.append(contentsOf: gameRecords.map { r -> (x: Int, y: Int) in
+                sentenceCount += r.sentencesCount
+                return (x: sentenceCount, y: Int(r.p))
+            })
+        return points
+    }
 
     private var progressAttrText: NSAttributedString {
         let attrText = NSMutableAttributedString()
@@ -60,7 +88,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
             attrText.append(getStrokeText("%", .darkGray, strokeWidth: 0, strokColor: .black, font: UIFont.boldSystemFont(ofSize: 12)))
             return attrText
         } else {
-            attrText.append(getStrokeText("??", .lightText, font: font))
+            attrText.append(getStrokeText(" ??", .lightText, font: font))
             attrText.append(getStrokeText("%", .darkGray, strokeWidth: 0, strokColor: .black, font: UIFont.boldSystemFont(ofSize: 12)))
             return attrText
         }
@@ -71,7 +99,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
             let rank = Rank(rawValue: bestRank) {
             return getStrokeText(bestRank.padWidthTo(2), rank.color, font: font)
         } else {
-            return getStrokeText("?", .lightText, font: font)
+            return getStrokeText(" ?", .lightText, font: font)
         }
     }
 
@@ -99,12 +127,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
         y += 2
 
         let chart = LineChart()
-        chart.setDataCount(level: level, dataPoints: [
-            (x: 0, y: 0),
-            (x: 20, y:40),
-            (x: 40, y:70),
-            (x: 60, y:80),
-        ])
+        chart.setDataCount(level: level, dataPoints: dataPoints)
         layout(1, y, 46, 23, chart)
         addSubview(chart)
         y += 19
@@ -143,6 +166,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
 
         button.addTapGestureRecognizer {
             if let vc = UIApplication.getPresentedViewController() {
+                context.infiniteChallengeLevel = self.level
                 launchStoryboard(vc, "MessengerGame")
             }
         }

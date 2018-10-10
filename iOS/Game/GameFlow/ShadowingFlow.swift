@@ -21,7 +21,11 @@ class ShadowingFlow: Game {
         context.gameRecord?.startedTime = Date()
         gameSeconds = 0
         startTimer()
-        context.loadLearningSentences()
+        if context.contentTab == .topics {
+            context.loadLearningSentences()
+        } else {
+            context.loadInfiniteChallengeLevelSentence(level: context.infiniteChallengeLevel)
+        }
         var narratorString = "我說完後，請跟著我說～"
         if !context.gameSetting.isUsingGuideVoice {
             narratorString = "請唸出對應的日文。"

@@ -21,7 +21,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         removeAllSubviews()
         renderTopTitle()
         renderMiddleRecord()
-        if context.isNewRecord {
+        if context.isNewRecord && context.contentTab == .topics {
             renderBottomAbilityInfo()
         }
     }
@@ -29,8 +29,12 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
     private func renderTopTitle() {
         guard let record = context.gameRecord else { return }
         roundBorder(cornerRadius: 15, color: myLightText)
-        let tags = (datasetKeyToTags[record.dataSetKey] ?? []).joined(separator: " ")
-        let title = "\(record.dataSetKey)"
+        var tags = (datasetKeyToTags[record.dataSetKey] ?? []).joined(separator: " ")
+        var title = "\(record.dataSetKey)"
+        if context.contentTab == .infiniteChallenge {
+            title = "無限挑戰"
+            tags = "#\(record.level.title)"
+        }
         addText(2, 1, 6, title, color: myLightText, strokeColor: .black)
         addText(2, 7, 6, tags, color: myOrange, strokeColor: .black)
     }
@@ -39,7 +43,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         guard let record = context.gameRecord else { return }
 
         let y = 13
-        addText(2, y, 3, "達成率")
+        addText(2, y, 3, "完成率")
         let progress = getAttrText([
             ( record.progress.padWidthTo(4), .white, getFontSize(h: 12)),
             ( "%", .lightGray, getFontSize(h: 4))

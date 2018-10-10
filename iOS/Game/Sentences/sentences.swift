@@ -5,6 +5,25 @@ enum Level: Int, Codable {
     var color: UIColor {
         return getLevelColor(level: self)
     }
+
+    var minKanaCount: Int {
+        let minKanaCounts = [1, 8, 12, 18, 27]
+        return minKanaCounts[self.rawValue]
+    }
+
+    var maxKanaCount: Int {
+        let maxKanaCounts = [10, 15, 23, 33, 50]
+        return maxKanaCounts[self.rawValue]
+    }
+
+    var dataSetKey: String {
+        return "Level DataSet Key \(self.rawValue)"
+    }
+
+    var title: String {
+        let titles = ["入門", "初級", "中級", "上級", "超難問"]
+        return titles[self.rawValue]
+    }
 }
 
 enum Rank: String, Codable {

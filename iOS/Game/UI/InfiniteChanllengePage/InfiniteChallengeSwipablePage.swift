@@ -49,15 +49,12 @@ class InfiniteChallengeSwipablePage: UIPageViewController {
         }
         let pageNames = ["", "入門", "初級", "中級", "上級", "超難問", ""]
         let levels: [Level] = [.lv0, .lv1, .lv2, .lv3, .lv4]
-        let minKanaCounts = [1, 8, 12, 18, 27]
-        let maxKanaCounts = [10, 15, 23, 33, 50]
+
         for i in 0...4 {
             vcs[i].topBarLeftText = pageNames[i]
             vcs[i].topBarTitle = pageNames[i+1]
             vcs[i].topBarRightText = pageNames[i+2]
             vcs[i].level = levels[i]
-            vcs[i].minKanaCount = minKanaCounts[i]
-            vcs[i].maxKanaCount = maxKanaCounts[i]
             pages.append(vcs[i])
         }
     }

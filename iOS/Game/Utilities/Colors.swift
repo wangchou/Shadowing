@@ -37,8 +37,6 @@ func getLevelColor(level: Level) -> UIColor {
         return myBlue
     case .lv4:
         return .purple
-    default:
-        return .brown
     }
 }
 
