@@ -29,6 +29,7 @@ private func getLevelDescription(_ level: Level) -> String {
         return "超難問"
     }
 }
+
 class ICInfoView: UIView, GridLayout, ReloadableView {
     // GridLayout
     var gridCount: Int = 48

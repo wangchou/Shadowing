@@ -12,6 +12,8 @@ import UIKit
 class InfiniteChallengePage: UIViewController {
     @IBOutlet weak var topBarView: TopBarView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var blockView: UIView!
+    @IBOutlet weak var blockInfo: UILabel!
     var topBarTitle: String = "無限挑戰模式"
     var topBarLeftText: String = ""
     var topBarRightText: String = ""
@@ -42,6 +44,20 @@ class InfiniteChallengePage: UIViewController {
         infoView.maxKanaCount = maxKanaCount
         infoView.sentencesCount = getSentenceCount(minKanaCount: minKanaCount, maxKanaCount: maxKanaCount)
         infoView.viewWillAppear()
+
+        // add block screen
+        blockView.isHidden = false
+
+        guard level != .lv0 else { blockView.isHidden = true; return }
+
+        let levels: [Level] = [.lv0, .lv1, .lv2, .lv3, .lv4]
+        let lastLevel = levels[(levels.firstIndex(of: level) ?? 0) - 1]
+        if let lastLevelBestRecord = findBestRecord(key: lastLevel.dataSetKey),
+           lastLevelBestRecord.p >= 90 {
+            blockView.isHidden = true
+        }
+
+        blockInfo.text = "「\(lastLevel.title)」取得 Rank A 後解鎖。"
     }
 
     func updateUI() {

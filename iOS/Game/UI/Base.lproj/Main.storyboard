@@ -63,12 +63,42 @@
                                     <outlet property="delegate" destination="5cw-l4-9yl" id="Slo-Mh-KaW"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EM1-qB-hl8">
+                                <rect key="frame" x="0.0" y="55" width="320" height="473"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="「入門」取得 Rank A 後解鎖。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fxj-Lz-cCb">
+                                        <rect key="frame" x="36.5" y="100" width="247.5" height="17"/>
+                                        <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="outline_lock_black_48pt" translatesAutoresizingMaskIntoConstraints="NO" id="3J9-AM-Bts">
+                                        <rect key="frame" x="136" y="40" width="48" height="48"/>
+                                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="48" id="E9X-z5-gHg"/>
+                                            <constraint firstAttribute="height" constant="48" id="ph0-aT-5fs"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="3J9-AM-Bts" firstAttribute="centerX" secondItem="EM1-qB-hl8" secondAttribute="centerX" id="ONb-jT-Ev1"/>
+                                    <constraint firstItem="3J9-AM-Bts" firstAttribute="top" secondItem="EM1-qB-hl8" secondAttribute="top" constant="40" id="R5R-Kd-YSz"/>
+                                    <constraint firstItem="Fxj-Lz-cCb" firstAttribute="top" secondItem="EM1-qB-hl8" secondAttribute="top" constant="100" id="dJU-Xq-9q1"/>
+                                    <constraint firstItem="Fxj-Lz-cCb" firstAttribute="centerX" secondItem="EM1-qB-hl8" secondAttribute="centerX" id="gSO-Ag-iEO"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="EM1-qB-hl8" firstAttribute="centerY" secondItem="Rxy-fc-7RI" secondAttribute="centerY" id="5bd-oi-xaz"/>
+                            <constraint firstItem="EM1-qB-hl8" firstAttribute="centerX" secondItem="Rxy-fc-7RI" secondAttribute="centerX" id="ACW-hh-jaP"/>
                             <constraint firstItem="Rxy-fc-7RI" firstAttribute="leading" secondItem="Xqc-OQ-6uf" secondAttribute="leading" id="JDb-Q7-nOY"/>
                             <constraint firstItem="kM9-FW-PHx" firstAttribute="leading" secondItem="Xqc-OQ-6uf" secondAttribute="leading" id="N2b-6g-b1J"/>
+                            <constraint firstItem="EM1-qB-hl8" firstAttribute="height" secondItem="Rxy-fc-7RI" secondAttribute="height" id="RHr-13-SsK"/>
                             <constraint firstItem="Xqc-OQ-6uf" firstAttribute="trailing" secondItem="kM9-FW-PHx" secondAttribute="trailing" id="Y1I-re-jL3"/>
+                            <constraint firstItem="EM1-qB-hl8" firstAttribute="width" secondItem="Rxy-fc-7RI" secondAttribute="width" id="Zjs-bk-8Yt"/>
                             <constraint firstItem="Xqc-OQ-6uf" firstAttribute="trailing" secondItem="Ftz-Wt-fWd" secondAttribute="trailing" id="ahR-Je-qFh"/>
                             <constraint firstItem="Xqc-OQ-6uf" firstAttribute="bottom" secondItem="kM9-FW-PHx" secondAttribute="bottom" id="eBQ-ak-keH"/>
                             <constraint firstItem="Ftz-Wt-fWd" firstAttribute="top" secondItem="Xqc-OQ-6uf" secondAttribute="top" id="krK-Qc-j5V"/>
@@ -80,6 +110,8 @@
                         <viewLayoutGuide key="safeArea" id="Xqc-OQ-6uf"/>
                     </view>
                     <connections>
+                        <outlet property="blockInfo" destination="Fxj-Lz-cCb" id="Vj9-0W-oYa"/>
+                        <outlet property="blockView" destination="EM1-qB-hl8" id="aPP-xz-gi0"/>
                         <outlet property="infoView" destination="QkA-mz-bAQ" id="0mT-UQ-60k"/>
                         <outlet property="tableView" destination="Rxy-fc-7RI" id="Vfo-3c-eaA"/>
                         <outlet property="topBarView" destination="Ftz-Wt-fWd" id="mhE-Vb-qdg"/>
@@ -1114,4 +1146,7 @@
             <point key="canvasLocation" x="1584" y="-190"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="outline_lock_black_48pt" width="96" height="96"/>
+    </resources>
 </document>
