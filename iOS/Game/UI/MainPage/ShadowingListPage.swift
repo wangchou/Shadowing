@@ -42,7 +42,6 @@ class ShadowingListPage: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadCharacterProfile()
         let height = screen.width * 130/320
         topView.frame.size.height = height
         timeline.frame.size.height = height * 120 / 130

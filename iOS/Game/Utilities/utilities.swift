@@ -20,15 +20,6 @@ func getDataFromUrl(url: String, completion: @escaping (Data?, URLResponse?, Err
     }.resume()
 }
 
-func loadCharacterProfile() {
-    getDataFromUrl(url: awanUrl) { data, _, error in
-        guard let data = data, error == nil else { return }
-        DispatchQueue.main.async {
-            GameContext.shared.characterImage = UIImage(data: data)
-        }
-    }
-}
-
 // MARK: - Audio Session
 func configureAudioSession() {
     do {
