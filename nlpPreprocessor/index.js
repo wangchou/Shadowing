@@ -63,7 +63,9 @@ async function runAll() {
       "c": c
     })
   }
-  var sortedPairs = pairs.sort((a,b) => (a.c - b.c))
+  var sortedPairs = pairs
+    .filter(obj => isNoTomAndMary(obj.en))
+    .sort((a,b) => (a.c - b.c))
   dumpCounts(sortedPairs)
 
   let db = new sqlite3.Database(`./${dbName}`);
@@ -118,7 +120,6 @@ async function runAll() {
 }
 
 runAll()
-
 
 function dumpCounts(arr) {
   console.log("-------------")
@@ -194,4 +195,38 @@ function getKanaCount(str) {
     }
   })
   return count
+}
+
+function isNoTomAndMary(s) {
+  return s.indexOf("Tom") == -1 && s.indexOf("Mary") == -1
+}
+function getRandomJPName() {
+  let familyNames = [
+    "佐藤",
+    "鈴木",
+    "高橋",
+    "田中",
+    "渡边",
+    "伊藤",
+    "山本",
+    "中村",
+    "小林",
+    "斋藤",
+    "加藤",
+    "吉田",
+    "山田",
+    "佐々木",
+    "山口",
+    "松本",
+    "井上",
+    "木村",
+    "林",
+    "清水"
+  ]
+  return familyNames[getRandomInt(familyNames.length-1)]　+　"さん"
+
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
 }
