@@ -10,7 +10,6 @@ import Foundation
 
 import Foundation
 import UIKit
-import SwiftIconFont
 
 private let context = GameContext.shared
 

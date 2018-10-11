@@ -8,18 +8,10 @@
 
 import Foundation
 import UIKit
-import SQLite
-
-struct KanaInfo {
-    var kanaCount: Int
-    var startId: Int
-    var sentenceCount: Int
-}
-
-private var kanaInfos: [Int: KanaInfo] = [:]
 
 class InfiniteChallengePage: UIViewController {
     @IBOutlet weak var topBarView: TopBarView!
+    @IBOutlet weak var tableView: UITableView!
     var topBarTitle: String = "無限挑戰模式"
     var topBarLeftText: String = ""
     var topBarRightText: String = ""
@@ -37,6 +29,10 @@ class InfiniteChallengePage: UIViewController {
         loadSentenceDB()
         updateUI()
         infoView.viewWillAppear()
+        tableView.register(
+            UINib(nibName: "SentencesTableCell", bundle: nil),
+            forCellReuseIdentifier: "ICContentTableCell"
+        )
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -63,71 +59,36 @@ class InfiniteChallengePage: UIViewController {
     }
 }
 
-func loadSentenceDB() {
-    guard let path = Bundle.main.path(forResource: "infinite_sentences", ofType: "sqlite") else {
-        print("sqlite file not found"); return
+extension InfiniteChallengePage: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
-    do {
-        let db = try Connection(path, readonly: true)
-        let kanaInfoTable = Table("kanaInfo")
-        let kanaCount = Expression<Int>("kana_count")
-        let startId = Expression<Int>("start_id")
-        let sentenceCount = Expression<Int>("sentence_count")
-        for row in try db.prepare(kanaInfoTable) {
-            let kanaInfo = KanaInfo(kanaCount: row[kanaCount], startId: row[startId], sentenceCount: row[sentenceCount])
-            kanaInfos[row[kanaCount]] = kanaInfo
-        }
-    } catch {
-        print("db error")
-    }
-}
 
-func getSentencesByIds(ids: [Int]) -> [String] {
-    var sentences: [String] = []
-    guard let path = Bundle.main.path(forResource: "infinite_sentences", ofType: "sqlite") else {
-        print("sqlite file not found"); return sentences
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let sentences = lastInfiniteChallengeSentences[self.level] {
+            return sentences.count
+        }
+        return 0
     }
-    do {
-        let db = try Connection(path, readonly: true)
-        let sentenceTable = Table("sentences")
-        let dbId = Expression<Int>("id")
-        let dbJa = Expression<String>("ja")
-        try ids.forEach { id throws in
-            let query = sentenceTable.select(dbJa)
-                                     .filter(dbId == id)
-            for s in try db.prepare(query) {
-                sentences.append(s[dbJa])
-            }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ICContentTableCell", for: indexPath)
+        guard let contentCell = cell as? SentencesTableCell else { print("detailCell convert error"); return cell }
+
+        if let sentences = lastInfiniteChallengeSentences[self.level] {
+            contentCell.update(sentence: sentences[indexPath.row], isShowTranslate: false)
         }
 
-    } catch {
-        print("db error")
+        return contentCell
     }
-    return sentences
 }
 
-func getSentenceCount(minKanaCount: Int, maxKanaCount: Int) -> Int {
-    guard let startKanaInfo = kanaInfos[minKanaCount],
-          let endKanaInfo = kanaInfos[maxKanaCount] else { print("err in getSentenceCount"); return -1}
-
-    let startId = startKanaInfo.startId
-    let endId = endKanaInfo.startId + endKanaInfo.sentenceCount - 1
-
-    return endId - startId
-}
-
-func randSentenceIds(minKanaCount: Int, maxKanaCount: Int, numOfSentences: Int) -> [Int] {
-    guard let startKanaInfo = kanaInfos[minKanaCount],
-        let endKanaInfo = kanaInfos[maxKanaCount] else { print("err in randSentenceIds"); return []}
-
-    let startId = startKanaInfo.startId
-    let endId = endKanaInfo.startId + endKanaInfo.sentenceCount - 1
-
-    var randomIds: [Int] = []
-    for _ in 0..<numOfSentences {
-        randomIds.append(Int(arc4random_uniform(UInt32(endId - startId))) + startId)
+extension InfiniteChallengePage: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        if let cell = cell as? SentencesTableCell {
+            cell.practiceSentence()
+        }
     }
-
-    return randomIds
-
 }

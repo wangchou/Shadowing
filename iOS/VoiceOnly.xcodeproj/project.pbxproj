@@ -44,6 +44,7 @@
 		BE9B476A20AD50520063E0DA /* FuriganaUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476920AD50520063E0DA /* FuriganaUtils.swift */; };
 		BE9D243A20C8DEE9000515DD /* GameReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9D243920C8DEE9000515DD /* GameReportView.swift */; };
 		BEA2389D21460EBD00548BBC /* sentences.txt in Resources */ = {isa = PBXBuildFile; fileRef = BEA2389C21460EBD00548BBC /* sentences.txt */; };
+		BEA86115216F264A00AECF13 /* sqliteSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA86114216F264A00AECF13 /* sqliteSentences.swift */; };
 		BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */; };
 		BEBDEDC5208EF09F00C18520 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEBDEDC3208EF09F00C18520 /* Main.storyboard */; };
 		BEBDEDCA208EF0A000C18520 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEBDEDC8208EF0A000C18520 /* LaunchScreen.storyboard */; };
@@ -120,7 +121,6 @@
 		BE596473215A0EF400E4AA0C /* expressive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = expressive.swift; sourceTree = "<group>"; };
 		BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameContentDetailPage.swift; sourceTree = "<group>"; };
 		BE65A938209C6E67006645CA /* GameEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEventDelegate.swift; sourceTree = "<group>"; };
-		BE67D2A521560A38007FE420 /* SwiftIconFont.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftIconFont.framework; sourceTree = "<group>"; };
 		BE67D2A821561A92007FE420 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE6C78532165DD2B0072B1C5 /* GameReportBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameReportBoxView.swift; sourceTree = "<group>"; };
 		BE6ED56720A17BB000553D1A /* ShadowingFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowingFlow.swift; sourceTree = "<group>"; };
@@ -143,6 +143,7 @@
 		BE9B476920AD50520063E0DA /* FuriganaUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaUtils.swift; sourceTree = "<group>"; };
 		BE9D243920C8DEE9000515DD /* GameReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameReportView.swift; sourceTree = "<group>"; };
 		BEA2389C21460EBD00548BBC /* sentences.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = sentences.txt; sourceTree = "<group>"; };
+		BEA86114216F264A00AECF13 /* sqliteSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sqliteSentences.swift; sourceTree = "<group>"; };
 		BEBDEDBC208EF09F00C18520 /* VoiceOnly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceOnly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEBDEDC4208EF09F00C18520 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -344,7 +345,6 @@
 			children = (
 				BECAC3B6216B37E5001BBF49 /* SQLite.framework */,
 				BEFE98B12160911F00D442EE /* Charts.framework */,
-				BE67D2A521560A38007FE420 /* SwiftIconFont.framework */,
 				BEEE8E572152199200916433 /* Alamofire.framework */,
 				BEEE8E552152199100916433 /* FBLPromises.framework */,
 				BEEE8E562152199200916433 /* Promises.framework */,
@@ -389,6 +389,7 @@
 				BEF28B6220B52BF700385273 /* UI.swift */,
 				BEE665E120BA634600E4E322 /* Colors.swift */,
 				BEBDEDD1208EF15E00C18520 /* utilities.swift */,
+				BEA86114216F264A00AECF13 /* sqliteSentences.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -544,6 +545,7 @@
 				BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */,
 				BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */,
 				BE8180C020B3BEB6006ABCB3 /* MyText.swift in Sources */,
+				BEA86115216F264A00AECF13 /* sqliteSentences.swift in Sources */,
 				BECAC3BA216B8FE3001BBF49 /* BottomBarView.swift in Sources */,
 				BE59646E215A0EC300E4AA0C /* love.swift in Sources */,
 				BE955E47216DAB8F00D424FA /* ICInfoView.swift in Sources */,

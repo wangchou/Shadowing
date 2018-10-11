@@ -43,11 +43,25 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rxy-fc-7RI">
                                 <rect key="frame" x="0.0" y="55" width="320" height="473"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <view key="tableFooterView" contentMode="scaleToFill" id="QkA-mz-bAQ" customClass="ICInfoView" customModule="VoiceOnly" customModuleProvider="target">
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="QkA-mz-bAQ" customClass="ICInfoView" customModule="VoiceOnly" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="196"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ICContentTableCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="BeV-1n-e1s" customClass="SentencesTableCell" customModule="VoiceOnly" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="224" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BeV-1n-e1s" id="pWe-a6-ZtM">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="5cw-l4-9yl" id="M63-zl-8pW"/>
+                                    <outlet property="delegate" destination="5cw-l4-9yl" id="Slo-Mh-KaW"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
@@ -67,6 +81,7 @@
                     </view>
                     <connections>
                         <outlet property="infoView" destination="QkA-mz-bAQ" id="0mT-UQ-60k"/>
+                        <outlet property="tableView" destination="Rxy-fc-7RI" id="Vfo-3c-eaA"/>
                         <outlet property="topBarView" destination="Ftz-Wt-fWd" id="mhE-Vb-qdg"/>
                     </connections>
                 </viewController>

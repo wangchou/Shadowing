@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import SwiftIconFont
 
 @IBDesignable
 class TopBarView: UIView, XibView {

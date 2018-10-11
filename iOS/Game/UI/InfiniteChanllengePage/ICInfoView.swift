@@ -119,10 +119,12 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
     }
 
     func viewWillAppear() {
-        frame.size.height = screen.width
+        frame.size.height = screen.width * 54/48
         removeAllSubviews()
 
         var y = 1
+        // line chart
+        addRect(x: 0, y: 0, w: gridCount, h: 25, color: rgb(250, 250, 250))
         addText(x: 1, y: y, h: 2, text: Texts.precision.rawValue)
         y += 2
 
@@ -135,25 +137,46 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
         addText(x: 42, y: y, h: 2, text: Texts.numOfSentence.rawValue)
         y += 3
 
-        addRoundRect(x: 2, y: y, w: 44, h: 11, borderColor: .black, radius: 5, backgroundColor: .clear)
+        // separate Line
+        addRect(x: 0, y: y, w: gridCount, h: 1, color: rgb(240, 240, 240))
+        addSeparateLine(y: y, color: rgb(212, 212, 212))
+        //addRoundRect(x: 2, y: y, w: 44, h: 11, borderColor: .black, radius: 5, backgroundColor: .clear)
         y += 1
-
+        addSeparateLine(y: y, color: rgb(212, 212, 212))
+        y += 1
+        // description
         addAttrText(x: 18, y: y, h: 11, text: progressAttrText)
-        addAttrText(x: 35, y: y, h: 11, text: rankAttrText)
+        addAttrText(x: 36, y: y, h: 11, text: rankAttrText)
 
-        addText(x: 3, y: y, h: 3, text: line1)
-        addText(x: 19, y: y, h: 3, text: "完成率")
+        addText(x: 2, y: y, h: 3, text: line1)
+        addText(x: 18, y: y, h: 3, text: "完成率")
         addText(x: 35, y: y, h: 3, text: "Rank")
 
         y += 3
 
-        addText(x: 3, y: y, h: 3, text: line2)
+        addText(x: 2, y: y, h: 3, text: line2)
         y += 3
 
-        addText(x: 3, y: y, h: 3, text: line3)
+        addText(x: 2, y: y, h: 3, text: line3)
         y += 6
 
+        // challenge button
         addChallengeButton()
+        y += 10
+
+        addRect(x: 0, y: y, w: gridCount, h: 5, color: level.color.withAlphaComponent(0.3))
+
+        addSeparateLine(y: y)
+        addSeparateLine(y: y+5)
+        addText(x: 1, y: y, h: 5, text: "前一次的挑戰")
+    }
+
+    func addSeparateLine(y: Int, color: UIColor = .darkGray) {
+        let separateLine = UIView()
+        layout(0, y, gridCount, 1, separateLine)
+        separateLine.frame.size.height = 0.5
+        separateLine.backgroundColor = color
+        addSubview(separateLine)
     }
 
     func addChallengeButton() {
