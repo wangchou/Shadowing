@@ -15,10 +15,8 @@
 		BE596466215A0DE100E4AA0C /* travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596465215A0DE100E4AA0C /* travel.swift */; };
 		BE596468215A0DF200E4AA0C /* daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596467215A0DF200E4AA0C /* daily.swift */; };
 		BE59646A215A0E4D00E4AA0C /* polite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596469215A0E4D00E4AA0C /* polite.swift */; };
-		BE59646C215A0EA300E4AA0C /* interaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE59646B215A0EA300E4AA0C /* interaction.swift */; };
 		BE59646E215A0EC300E4AA0C /* love.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE59646D215A0EC300E4AA0C /* love.swift */; };
 		BE596470215A0ECE00E4AA0C /* speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE59646F215A0ECE00E4AA0C /* speech.swift */; };
-		BE596472215A0EDB00E4AA0C /* random.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596471215A0EDB00E4AA0C /* random.swift */; };
 		BE596474215A0EF400E4AA0C /* expressive.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596473215A0EF400E4AA0C /* expressive.swift */; };
 		BE5D838920A80BD0002031BF /* GameContentDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */; };
 		BE65A939209C6E67006645CA /* GameEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65A938209C6E67006645CA /* GameEventDelegate.swift */; };
@@ -114,10 +112,8 @@
 		BE596465215A0DE100E4AA0C /* travel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = travel.swift; sourceTree = "<group>"; };
 		BE596467215A0DF200E4AA0C /* daily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = daily.swift; sourceTree = "<group>"; };
 		BE596469215A0E4D00E4AA0C /* polite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = polite.swift; sourceTree = "<group>"; };
-		BE59646B215A0EA300E4AA0C /* interaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = interaction.swift; sourceTree = "<group>"; };
 		BE59646D215A0EC300E4AA0C /* love.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = love.swift; sourceTree = "<group>"; };
 		BE59646F215A0ECE00E4AA0C /* speech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = speech.swift; sourceTree = "<group>"; };
-		BE596471215A0EDB00E4AA0C /* random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = random.swift; sourceTree = "<group>"; };
 		BE596473215A0EF400E4AA0C /* expressive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = expressive.swift; sourceTree = "<group>"; };
 		BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameContentDetailPage.swift; sourceTree = "<group>"; };
 		BE65A938209C6E67006645CA /* GameEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEventDelegate.swift; sourceTree = "<group>"; };
@@ -286,10 +282,8 @@
 				BE596465215A0DE100E4AA0C /* travel.swift */,
 				BE596467215A0DF200E4AA0C /* daily.swift */,
 				BE596469215A0E4D00E4AA0C /* polite.swift */,
-				BE59646B215A0EA300E4AA0C /* interaction.swift */,
 				BE59646D215A0EC300E4AA0C /* love.swift */,
 				BE59646F215A0ECE00E4AA0C /* speech.swift */,
-				BE596471215A0EDB00E4AA0C /* random.swift */,
 				BE596473215A0EF400E4AA0C /* expressive.swift */,
 			);
 			path = Sentences;
@@ -506,7 +500,6 @@
 				BE9D243A20C8DEE9000515DD /* GameReportView.swift in Sources */,
 				BECAC3BF216B9D19001BBF49 /* InfiniteChallengeSwipablePage.swift in Sources */,
 				BE7441B3216CCBE000E53A3D /* LineChart.swift in Sources */,
-				BE59646C215A0EA300E4AA0C /* interaction.swift in Sources */,
 				BE1CA958209DC43800086853 /* Messenger.swift in Sources */,
 				BEBDEDD9208EF15F00C18520 /* utilities.swift in Sources */,
 				BEEC7FAF21550818001C2EFF /* TopBarView.swift in Sources */,
@@ -530,7 +523,6 @@
 				BE76F11E214F56F6004E130B /* SentencesTableCell.swift in Sources */,
 				BED1CC0921452A54004AE397 /* GameSetting.swift in Sources */,
 				BEF28B6320B52BF700385273 /* UI.swift in Sources */,
-				BE596472215A0EDB00E4AA0C /* random.swift in Sources */,
 				BE65A939209C6E67006645CA /* GameEventDelegate.swift in Sources */,
 				BE59646A215A0E4D00E4AA0C /* polite.swift in Sources */,
 				BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */,
