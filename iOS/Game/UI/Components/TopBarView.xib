@@ -20,39 +20,33 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="334" height="35"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="35"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今、話したい" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ycg-sD-eBU">
-                    <rect key="frame" x="50" y="7" width="234" height="21"/>
+                    <rect key="frame" x="97" y="7" width="126" height="21"/>
                     <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="21"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K9f-SW-KBL">
-                    <rect key="frame" x="-10" y="5" width="60" height="25"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="60" id="SSC-fN-2Iv"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K9f-SW-KBL">
+                    <rect key="frame" x="0.0" y="5" width="43" height="25"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
                     <state key="normal" title="設定"/>
                     <connections>
                         <action selector="leftButtonClicked:" destination="-1" eventType="touchUpInside" id="zOM-sS-RxK"/>
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xIV-m3-Eb4" userLabel="Seperate Line">
-                    <rect key="frame" x="0.0" y="34" width="334" height="1"/>
+                    <rect key="frame" x="0.0" y="34.5" width="320" height="0.5"/>
                     <color key="backgroundColor" red="0.83137254901960778" green="0.83137254901960778" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="1" id="b8G-i6-6gP"/>
+                        <constraint firstAttribute="height" constant="0.5" id="b8G-i6-6gP"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aju-lD-R1H">
-                    <rect key="frame" x="284" y="5" width="60" height="25"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="60" id="Yf7-67-XBH"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aju-lD-R1H">
+                    <rect key="frame" x="274" y="5" width="46" height="25"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
                     <state key="normal" title="Back"/>
                     <connections>
                         <action selector="rightButtonClicked:" destination="-1" eventType="touchUpInside" id="fL4-jf-h5v"/>
@@ -63,18 +57,16 @@
                 <constraint firstItem="K9f-SW-KBL" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="3xX-sS-6Wd"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="K9f-SW-KBL" secondAttribute="bottom" constant="5" id="5Yf-nw-p9k"/>
                 <constraint firstItem="aju-lD-R1H" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="5" id="5e4-f4-y04"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="aju-lD-R1H" secondAttribute="trailing" constant="-10" id="7Fr-DF-6vC"/>
-                <constraint firstItem="Ycg-sD-eBU" firstAttribute="leading" secondItem="K9f-SW-KBL" secondAttribute="trailing" id="Af8-Vx-cul"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="aju-lD-R1H" secondAttribute="trailing" id="7Fr-DF-6vC"/>
                 <constraint firstAttribute="bottom" secondItem="aju-lD-R1H" secondAttribute="bottom" constant="5" id="E0m-Cf-C2W"/>
-                <constraint firstItem="K9f-SW-KBL" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="-10" id="F7K-Am-TjW"/>
+                <constraint firstItem="K9f-SW-KBL" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="F7K-Am-TjW"/>
                 <constraint firstItem="Ycg-sD-eBU" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="JSk-O7-M6Q"/>
                 <constraint firstAttribute="bottom" secondItem="xIV-m3-Eb4" secondAttribute="bottom" id="XwT-Ap-lq9"/>
-                <constraint firstItem="xIV-m3-Eb4" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="bottom" constant="-1" id="cZg-te-JBB"/>
+                <constraint firstItem="xIV-m3-Eb4" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="bottom" constant="-0.5" id="cZg-te-JBB"/>
                 <constraint firstItem="xIV-m3-Eb4" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="ddg-Ag-lHr"/>
                 <constraint firstItem="K9f-SW-KBL" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="5" id="lNS-hi-AOM"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="xIV-m3-Eb4" secondAttribute="trailing" id="r7T-Fw-ymw"/>
                 <constraint firstItem="Ycg-sD-eBU" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="sLt-r5-orx"/>
-                <constraint firstItem="aju-lD-R1H" firstAttribute="leading" secondItem="Ycg-sD-eBU" secondAttribute="trailing" id="vnK-U8-dO1"/>
+                <constraint firstAttribute="trailing" secondItem="xIV-m3-Eb4" secondAttribute="trailing" id="zAr-qu-SOX"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

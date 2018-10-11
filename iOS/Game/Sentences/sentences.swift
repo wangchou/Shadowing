@@ -1,9 +1,28 @@
 import UIKit
 
 enum Level: Int, Codable {
-    case n5a=0, n5b=1, n5c=2, n4a=3, n4b=4, n4c=5, n3a=6, n3b=7
+    case lv0=0, lv1=1, lv2=2, lv3=3, lv4=4
     var color: UIColor {
         return getLevelColor(level: self)
+    }
+
+    var minKanaCount: Int {
+        let minKanaCounts = [1, 8, 12, 18, 27]
+        return minKanaCounts[self.rawValue]
+    }
+
+    var maxKanaCount: Int {
+        let maxKanaCounts = [10, 15, 23, 33, 50]
+        return maxKanaCounts[self.rawValue]
+    }
+
+    var dataSetKey: String {
+        return "Level DataSet Key \(self.rawValue)"
+    }
+
+    var title: String {
+        let titles = ["入門", "初級", "中級", "上級", "超難問"]
+        return titles[self.rawValue]
     }
 }
 
@@ -57,6 +76,6 @@ func addSentences() {
         let key = "\(subSentences[0].string)"
         allSentences[key] = subSentences
         allSentencesKeys.append(key)
-        allLevels[key] = Level.n5a
+        allLevels[key] = Level.lv0
     }
 }

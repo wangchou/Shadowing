@@ -52,6 +52,7 @@ class SpeechRecognizer: NSObject {
 
         if !isAuthorized {
             promise.reject(SpeechRecognitionError.unauthorized)
+            showMessage("無法取得語音辨識權限。")
             return promise
         }
 
@@ -70,7 +71,7 @@ class SpeechRecognizer: NSObject {
 
         recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest, resultHandler: resultHandler)
 
-        self.inputNode = engine.audioEngine.inputNode
+        inputNode = engine.audioEngine.inputNode
         let recordingFormat = inputNode.outputFormat(forBus: 0)
 
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in

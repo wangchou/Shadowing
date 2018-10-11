@@ -86,8 +86,6 @@ struct GameRecord: Codable {
             case .poor:
                 scoreSum += kana.count * 0
             }
-
-            //print(sentence, kana, score.value)
         }
         return scoreSum/100
     }

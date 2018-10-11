@@ -70,8 +70,6 @@ app.post('/nlp', cache(864000), (req, res) => {
   });
 })
 
-if(isMac) {
-  app.listen(3000)
-} else {
-  app.listen(80)
-}
+// use reverse proxy or
+// iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
+app.listen(3000)

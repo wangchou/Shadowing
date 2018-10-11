@@ -44,6 +44,7 @@ class SpeechEngine {
         configureAudioSession()
         buildNodeGraph()
         audioEngine.prepare()
+        setupNotifications()
     }
 
     // MARK: - Public Funtions
@@ -121,4 +122,31 @@ class SpeechEngine {
         micVolumeNode.volume = micOutVolume
         bgm.node.volume = 0.5
     }
+
+    private func setupNotifications() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleRouteChange),
+                                               name: AVAudioSession.routeChangeNotification,
+                                               object: AVAudioSession.sharedInstance())
+    }
+
+    @objc func handleRouteChange(_ notification: Notification) {
+        guard let userInfo = notification.userInfo,
+            let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt,
+            let reason = AVAudioSession.RouteChangeReason(rawValue: reasonValue) else {
+                return
+        }
+        switch reason {
+        case .newDeviceAvailable:
+            print("new device available")
+            self.stop()
+            self.start()
+        case .oldDeviceUnavailable:
+            print("old device unavailable")
+            self.stop()
+            self.start()
+        default: ()
+        }
+    }
+
 }

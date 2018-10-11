@@ -15,6 +15,10 @@ enum GameFlowMode: String, Codable {
     case shadowing, chat
 }
 
+enum ContentTab: String, Codable {
+    case topics, infiniteChallenge
+}
+
 class GameContext {
     // MARK: - Singleton
     static let shared = GameContext()
@@ -28,6 +32,8 @@ class GameContext {
 
     // MARK: - Short-term data of a single game
     var gameFlowMode: GameFlowMode = .chat
+    var contentTab: ContentTab = .topics
+    var infiniteChallengeLevel: Level = .lv0
     var gameState: GameState = .stopped {
         didSet {
             postEvent(.gameStateChanged, gameState: gameState)
@@ -109,15 +115,33 @@ class GameContext {
 
         life = isSimulator ? 100 : 50
 
-        let level = allLevels[dataSetKey] ?? .n5a
+        let level = allLevels[dataSetKey] ?? .lv0
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level, flowMode: .shadowing)
+    }
+
+    func loadInfiniteChallengeLevelSentence(level: Level) {
+        sentenceIndex = 0
+        dataSetKey = level.dataSetKey
+        loadSentenceDB()
+        let sentenceIds = randSentenceIds(
+            minKanaCount: level.minKanaCount,
+            maxKanaCount: level.maxKanaCount,
+            numOfSentences: 20
+        )
+        sentences = getSentencesByIds(ids: sentenceIds).map { s in
+            return (speaker: ChatSpeaker.hattori, string: s)
+        }
+        //print(sentences)
+        life = isSimulator ? 100 : 50
+        gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level, flowMode: .shadowing)
+
     }
 
     func nextSentence() -> Bool {
         sentenceIndex += 1
         var sentencesBound = sentences.count
         if isSimulator {
-            sentencesBound = 2
+            sentencesBound = 10
         }
         guard sentenceIndex < sentencesBound else { return false }
         userSaidString = ""

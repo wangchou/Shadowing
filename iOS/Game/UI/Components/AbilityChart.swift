@@ -29,6 +29,7 @@ class AbilityChart: RadarChartView, ChartViewDelegate {
     }
 
     override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
         sharedInit()
     }
 

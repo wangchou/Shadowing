@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import SwiftIconFont
 
 @IBDesignable
 class TopBarView: UIView, XibView {
@@ -25,7 +24,7 @@ class TopBarView: UIView, XibView {
         super.awakeFromNib()
         xibSetup()
         leftButton.setIconImage(named: "outline_settings_black_48pt")
-        rightButton.setIconImage(named: "outline_arrow_forward_ios_black_48pt")
+        rightButton.setIconImage(named: "round_arrow_forward_ios_black_48pt", isIconOnLeft: false)
         titleLabel.textColor = UIColor(white: 0, alpha: 0.66)
     }
 
@@ -34,7 +33,7 @@ class TopBarView: UIView, XibView {
         xibSetup()
         contentView?.prepareForInterfaceBuilder()
         leftButton.setIconImage(named: "outline_settings_black_48pt")
-        rightButton.setIconImage(named: "outline_arrow_forward_ios_black_48pt")
+        rightButton.setIconImage(named: "round_arrow_forward_ios_black_48pt", isIconOnLeft: false)
         titleLabel.textColor = UIColor(white: 0, alpha: 0.66)
     }
 
@@ -56,12 +55,21 @@ class TopBarView: UIView, XibView {
 }
 
 extension UIButton {
-    func setIconImage(named: String, tintColor: UIColor = UIColor(white: 0, alpha: 0.66)) {
+    func setIconImage(named: String, title: String = "", tintColor: UIColor = UIColor(white: 0, alpha: 0.66), isIconOnLeft: Bool = true) {
         let closeImage = UIImage(named: named)?.withRenderingMode(
             UIImage.RenderingMode.alwaysTemplate)
         self.tintColor = tintColor
         self.setImage(closeImage, for: .normal)
         self.imageView?.contentMode = .scaleAspectFit
-        self.setTitle("", for: .normal)
+
+        self.titleLabel?.font = MyFont.regular(ofSize: 21)
+        self.setTitle(title, for: .normal)
+
+        if !isIconOnLeft {
+            self.semanticContentAttribute = .forceRightToLeft
+            self.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -15)
+        } else {
+            self.titleEdgeInsets = UIEdgeInsets(top: 0, left: -15, bottom: 0, right: 0)
+        }
     }
 }
