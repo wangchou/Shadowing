@@ -99,9 +99,13 @@ class SpeechEngine {
     }
 
     // MARK: - Voice Recognition
-    func listen(duration: Double, langCode: String? = nil) -> Promise<String> {
+    private func listen(duration: Double, langCode: String? = nil) -> Promise<String> {
         let langCode = langCode ?? context.targetString.langCode ?? "ja"
         return speechRecognizer.start(stopAfterSeconds: duration, localIdentifier: langCode)
+    }
+
+    func listenJP(duration: Double) -> Promise<String> {
+        return speechRecognizer.start(stopAfterSeconds: duration, localIdentifier: "ja")
     }
 
     func stopListen() {

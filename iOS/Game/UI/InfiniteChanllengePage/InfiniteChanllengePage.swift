@@ -58,6 +58,7 @@ class InfiniteChallengePage: UIViewController {
         }
 
         blockInfo.text = "「\(lastLevel.title)」取得 Rank A 後解鎖。"
+        tableView.reloadData()
     }
 
     func updateUI() {

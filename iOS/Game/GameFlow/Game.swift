@@ -76,14 +76,14 @@ extension Game {
         context.gameState = .listening
         if context.gameSetting.isUsingGuideVoice {
             return engine
-                .listen(duration: Double(context.speakDuration + pauseDuration))
+                .listenJP(duration: Double(context.speakDuration + pauseDuration))
                 .then(saveUserSaidString)
         }
 
         return context
             .calculatedSpeakDuration
             .then({ speakDuration -> Promise<String> in
-                return engine.listen(duration: Double(speakDuration + pauseDuration))
+                return engine.listenJP(duration: Double(speakDuration + pauseDuration))
             })
             .then(saveUserSaidString)
     }

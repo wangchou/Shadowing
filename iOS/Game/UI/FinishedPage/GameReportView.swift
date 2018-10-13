@@ -22,7 +22,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         backgroundColor = UIColor.black.withAlphaComponent(0.6)
         let reportBox = GameReportBoxView()
 
-        if context.isNewRecord {
+        if context.isNewRecord && context.contentTab == .topics {
             frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.6)
             layout(2, 4, 44, 60, reportBox)
         } else {
@@ -43,10 +43,15 @@ class GameReportView: UIView, ReloadableView, GridLayout {
 
         backButton.addTapGestureRecognizer {
             if let vc = UIApplication.getPresentedViewController() {
+                if context.contentTab == .infiniteChallenge {
+                    vc.dismiss(animated: false) {
+                        UIApplication.getPresentedViewController()?.dismiss(animated: true, completion: nil)
+                    }
+                }
                 launchStoryboard(vc, "MainSwipablePage", animated: true)
             }
         }
-        if context.isNewRecord {
+        if context.isNewRecord && context.contentTab == .topics {
             layout(2, 66, 44, 8, backButton)
 
         } else {

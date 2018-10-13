@@ -38,7 +38,7 @@ class SentencesTestGame: Game {
         startTime = getNow()
         teacherSay(targetString).then({ () -> Promise<String> in
             let duration = getNow() - self.startTime + Double(pauseDuration)
-            let p1 = engine.listen(duration: duration)
+            let p1 = engine.listenJP(duration: duration)
             usleep(100000)
             _ = teacherSay(self.targetString)
             return p1

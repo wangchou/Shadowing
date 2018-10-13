@@ -51,7 +51,6 @@
 		BEBDEDDD208EF15F00C18520 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */; };
 		BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */; };
 		BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD8208EF15F00C18520 /* constants.swift */; };
-		BECAC3B3216B2869001BBF49 /* infinite_sentences.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BECAC3B2216B2869001BBF49 /* infinite_sentences.sqlite */; };
 		BECAC3B5216B34FA001BBF49 /* InfiniteChanllengePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECAC3B4216B34FA001BBF49 /* InfiniteChanllengePage.swift */; };
 		BECAC3B7216B37E5001BBF49 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BECAC3B6216B37E5001BBF49 /* SQLite.framework */; };
 		BECAC3B8216B37E5001BBF49 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BECAC3B6216B37E5001BBF49 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -68,6 +67,7 @@
 		BEEC7FAB2154FFA4001C2EFF /* MainSwipablePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEC7FAA2154FFA4001C2EFF /* MainSwipablePage.swift */; };
 		BEEC7FAD2155014E001C2EFF /* SettingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEC7FAC2155014E001C2EFF /* SettingPage.swift */; };
 		BEEC7FAF21550818001C2EFF /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEC7FAE21550818001C2EFF /* TopBarView.swift */; };
+		BEEE4B3121722ABC0032D267 /* drumLoop.caf in Resources */ = {isa = PBXBuildFile; fileRef = BEEE4B3021722ABC0032D267 /* drumLoop.caf */; };
 		BEEE8E592152199200916433 /* FBLPromises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEEE8E552152199100916433 /* FBLPromises.framework */; };
 		BEEE8E5A2152199200916433 /* FBLPromises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BEEE8E552152199100916433 /* FBLPromises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BEEE8E5B2152199200916433 /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEEE8E562152199200916433 /* Promises.framework */; };
@@ -79,6 +79,7 @@
 		BEF258B320B57C7F00D0026C /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF258B220B57C7F00D0026C /* TimelineView.swift */; };
 		BEF28B6120B52BB000385273 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF28B6020B52BB000385273 /* Score.swift */; };
 		BEF28B6320B52BF700385273 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF28B6220B52BF700385273 /* UI.swift */; };
+		BEF9740221723EF20039759D /* inf_sentences.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BEF9740121723EF10039759D /* inf_sentences.sqlite */; };
 		BEFE13DA21539445002873B3 /* BGM.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFE13D921539445002873B3 /* BGM.swift */; };
 		BEFE98B22160911F00D442EE /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFE98B12160911F00D442EE /* Charts.framework */; };
 		BEFE98B32160911F00D442EE /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BEFE98B12160911F00D442EE /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -150,7 +151,6 @@
 		BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculateScore.swift; sourceTree = "<group>"; };
 		BEBDEDD8208EF15F00C18520 /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
-		BECAC3B2216B2869001BBF49 /* infinite_sentences.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = infinite_sentences.sqlite; sourceTree = "<group>"; };
 		BECAC3B4216B34FA001BBF49 /* InfiniteChanllengePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteChanllengePage.swift; sourceTree = "<group>"; };
 		BECAC3B6216B37E5001BBF49 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SQLite.framework; sourceTree = "<group>"; };
 		BECAC3B9216B8FE3001BBF49 /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
@@ -166,6 +166,7 @@
 		BEEC7FAA2154FFA4001C2EFF /* MainSwipablePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSwipablePage.swift; sourceTree = "<group>"; };
 		BEEC7FAC2155014E001C2EFF /* SettingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPage.swift; sourceTree = "<group>"; };
 		BEEC7FAE21550818001C2EFF /* TopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
+		BEEE4B3021722ABC0032D267 /* drumLoop.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = drumLoop.caf; sourceTree = "<group>"; };
 		BEEE8E552152199100916433 /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBLPromises.framework; path = Carthage/Build/iOS/FBLPromises.framework; sourceTree = "<group>"; };
 		BEEE8E562152199200916433 /* Promises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Promises.framework; path = Carthage/Build/iOS/Promises.framework; sourceTree = "<group>"; };
 		BEEE8E572152199200916433 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
@@ -173,6 +174,7 @@
 		BEF258B220B57C7F00D0026C /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		BEF28B6020B52BB000385273 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		BEF28B6220B52BF700385273 /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
+		BEF9740121723EF10039759D /* inf_sentences.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences.sqlite; sourceTree = "<group>"; };
 		BEFE13D921539445002873B3 /* BGM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGM.swift; sourceTree = "<group>"; };
 		BEFE98B12160911F00D442EE /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Charts.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -322,7 +324,8 @@
 		BEBDEDBE208EF09F00C18520 /* VoiceOnly */ = {
 			isa = PBXGroup;
 			children = (
-				BECAC3B2216B2869001BBF49 /* infinite_sentences.sqlite */,
+				BEF9740121723EF10039759D /* inf_sentences.sqlite */,
+				BEEE4B3021722ABC0032D267 /* drumLoop.caf */,
 				BE67D2A821561A92007FE420 /* Assets.xcassets */,
 				BEBDEDCB208EF0A000C18520 /* Info.plist */,
 				BEBDEDC8208EF0A000C18520 /* LaunchScreen.storyboard */,
@@ -466,9 +469,10 @@
 				BEEC7FA92154C7AC001C2EFF /* TopBarView.xib in Resources */,
 				BE67D2A921561A93007FE420 /* Assets.xcassets in Resources */,
 				BEA2389D21460EBD00548BBC /* sentences.txt in Resources */,
-				BECAC3B3216B2869001BBF49 /* infinite_sentences.sqlite in Resources */,
+				BEEE4B3121722ABC0032D267 /* drumLoop.caf in Resources */,
 				BEBDEDC5208EF09F00C18520 /* Main.storyboard in Resources */,
 				BECAC3BC216B904A001BBF49 /* BottomBarView.xib in Resources */,
+				BEF9740221723EF20039759D /* inf_sentences.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
