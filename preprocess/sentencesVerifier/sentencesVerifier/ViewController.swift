@@ -12,23 +12,42 @@ private var fCurSpeechChannel: SpeechChannel? = nil
 private var theErr = OSErr(noErr)
 
 var sentencesIdx = 0
-var sentences: [String] = ["おはよう", "こんにちわ", "わかりました", "いろいろどぞよろしく"]
+var sentenceIds: [Int] = []
+var sentences: [String] = []
+func now() -> TimeInterval { return NSDate().timeIntervalSince1970 }
+var startTime = now()
 
 var vc:ViewController!
 
+// 1. do not use offline enhanced dictation (turn off in setting, because the accuracy is much lower than iOS)
+// 2. set sunflower 2ch as input and output
+// 3. in accessibility make sure the setting of "STT do not mute other audio"
+// run this whole day
+
 class ViewController: NSViewController {
     @IBOutlet weak var scrollView: NSScrollView!
+    @IBOutlet weak var label: NSTextField!
     @IBOutlet var textView: NSTextView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadSentenceDB()
+        createWritableDB()
         prepareSpeak()
         vc = self
-        // Do any additional setup after loading the view.
     }
 
     override func viewDidAppear() {
         super.viewDidAppear()
         scrollView.becomeFirstResponder()
+        sentenceIds = []
+        sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 1, maxKanaCount: 8, numOfSentences: 3000))
+        sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 6, maxKanaCount: 12, numOfSentences: 3000))
+        sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 9, maxKanaCount: 18, numOfSentences: 3000))
+        sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 12, maxKanaCount: 24, numOfSentences: 3000))
+        sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 18, maxKanaCount: 36, numOfSentences: 3000))
+
+        sentences = getSentencesByIds(ids: sentenceIds)
+        print(sentenceIds.count)
         Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
             verifyNextSentence()
         }
@@ -77,26 +96,29 @@ func speak(_ s: String) {
 }
 
 func verifyNextSentence() {
+    let duration = "\(round(now() - startTime))s"
+    let percentage = "\(round(100.0*Double(sentencesIdx)/Double(sentences.count)))%"
+    vc.label.stringValue = "\(percentage) | \(duration) | \(sentencesIdx)/\(sentences.count)"
     print("verify \(sentencesIdx) < \(sentences.count)")
     vc.scrollView.becomeFirstResponder()
     guard sentencesIdx < sentences.count else { return }
     let s = sentences[sentencesIdx]
-    vc.textView.insertText("\n\(s)|")
+    vc.textView.string = ""
     toggleSTT()
-    Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { _ in
+    Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
         speak(s)
     }
     sentencesIdx += 1
 }
 
 func OurSpeechDoneCallBackProc(_ inSpeechChannel: SpeechChannel, _ inRefCon: SRefCon) {
-    print("speech is done1")
     toggleSTT()
-    print("speech is done2")
     DispatchQueue.main.async {
-        print("x")
-        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
-            print("y")
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
+            let s = vc.textView.string
+            let id = sentenceIds[sentencesIdx-1]
+            updateIdWithListened(id: id, siriSaid: s)
+            print("id: \(id), siriSaid: \(s)")
             verifyNextSentence()
         }
     }

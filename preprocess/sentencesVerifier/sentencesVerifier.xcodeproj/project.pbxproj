@@ -8,14 +8,35 @@
 
 /* Begin PBXBuildFile section */
 		BE55B433217348E6006DC271 /* FakeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE55B432217348E6006DC271 /* FakeKey.swift */; };
+		BE55B43721736554006DC271 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE55B43621736553006DC271 /* SQLite.framework */; };
+		BE55B43821736554006DC271 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE55B43621736553006DC271 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BE55B43B217365AC006DC271 /* sqlite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE55B43A217365AC006DC271 /* sqlite.swift */; };
+		BE55B43D21736CC4006DC271 /* inf_sentences.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BE55B43C21736CC4006DC271 /* inf_sentences.sqlite */; };
 		BE9C6814217342D3007A8D83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9C6813217342D3007A8D83 /* AppDelegate.swift */; };
 		BE9C6816217342D3007A8D83 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9C6815217342D3007A8D83 /* ViewController.swift */; };
 		BE9C6818217342D5007A8D83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE9C6817217342D5007A8D83 /* Assets.xcassets */; };
 		BE9C681B217342D5007A8D83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE9C6819217342D5007A8D83 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		BE55B43921736554006DC271 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BE55B43821736554006DC271 /* SQLite.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		BE55B432217348E6006DC271 /* FakeKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeKey.swift; sourceTree = "<group>"; };
+		BE55B43621736553006DC271 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/Mac/SQLite.framework; sourceTree = "<group>"; };
+		BE55B43A217365AC006DC271 /* sqlite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sqlite.swift; sourceTree = "<group>"; };
+		BE55B43C21736CC4006DC271 /* inf_sentences.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences.sqlite; sourceTree = "<group>"; };
 		BE9C6810217342D3007A8D83 /* sentencesVerifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sentencesVerifier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE9C6813217342D3007A8D83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE9C6815217342D3007A8D83 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -30,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE55B43721736554006DC271 /* SQLite.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -39,6 +61,7 @@
 		BE9C6807217342D3007A8D83 = {
 			isa = PBXGroup;
 			children = (
+				BE55B43621736553006DC271 /* SQLite.framework */,
 				BE9C6812217342D3007A8D83 /* sentencesVerifier */,
 				BE9C6811217342D3007A8D83 /* Products */,
 			);
@@ -55,9 +78,11 @@
 		BE9C6812217342D3007A8D83 /* sentencesVerifier */ = {
 			isa = PBXGroup;
 			children = (
+				BE55B43C21736CC4006DC271 /* inf_sentences.sqlite */,
 				BE9C6813217342D3007A8D83 /* AppDelegate.swift */,
 				BE9C6815217342D3007A8D83 /* ViewController.swift */,
 				BE55B432217348E6006DC271 /* FakeKey.swift */,
+				BE55B43A217365AC006DC271 /* sqlite.swift */,
 				BE9C6817217342D5007A8D83 /* Assets.xcassets */,
 				BE9C6819217342D5007A8D83 /* Main.storyboard */,
 				BE9C681C217342D5007A8D83 /* Info.plist */,
@@ -76,6 +101,7 @@
 				BE9C680C217342D3007A8D83 /* Sources */,
 				BE9C680D217342D3007A8D83 /* Frameworks */,
 				BE9C680E217342D3007A8D83 /* Resources */,
+				BE55B43921736554006DC271 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -126,6 +152,7 @@
 			files = (
 				BE9C6818217342D5007A8D83 /* Assets.xcassets in Resources */,
 				BE9C681B217342D5007A8D83 /* Main.storyboard in Resources */,
+				BE55B43D21736CC4006DC271 /* inf_sentences.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE55B433217348E6006DC271 /* FakeKey.swift in Sources */,
+				BE55B43B217365AC006DC271 /* sqlite.swift in Sources */,
 				BE9C6816217342D3007A8D83 /* ViewController.swift in Sources */,
 				BE9C6814217342D3007A8D83 /* AppDelegate.swift in Sources */,
 			);
@@ -279,6 +307,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = ETE87474CU;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = sentencesVerifier/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -298,6 +330,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = ETE87474CU;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = sentencesVerifier/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

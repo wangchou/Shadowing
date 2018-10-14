@@ -706,44 +706,55 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="sentencesVerifier" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQd-cC-F9a">
-                                <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="Had-Sk-bFV">
-                                    <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="nMe-y7-fEe">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="200" height="400"/>
+                                            <size key="minSize" width="200" height="200"/>
                                             <size key="maxSize" width="480" height="10000000"/>
                                             <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         </textView>
                                     </subviews>
                                 </clipView>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="400" id="W7d-ai-CSR"/>
+                                    <constraint firstAttribute="height" constant="200" id="W7d-ai-CSR"/>
                                     <constraint firstAttribute="width" constant="200" id="Z4M-4S-03D"/>
                                 </constraints>
                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="ar2-TK-Nq3">
-                                    <rect key="frame" x="184" y="0.0" width="16" height="400"/>
+                                    <rect key="frame" x="184" y="0.0" width="16" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wZR-9j-odn">
+                                <rect key="frame" x="80" y="0.0" width="40" height="18"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="CV1-T2-Y0b">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="hQd-cC-F9a" secondAttribute="trailing" id="IQf-RT-b7k"/>
+                            <constraint firstItem="wZR-9j-odn" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="Mbx-o1-LbW"/>
                             <constraint firstAttribute="bottom" secondItem="hQd-cC-F9a" secondAttribute="bottom" id="O8l-aA-UWG"/>
+                            <constraint firstAttribute="bottom" secondItem="wZR-9j-odn" secondAttribute="bottom" id="YgR-Zc-nK3"/>
                             <constraint firstItem="hQd-cC-F9a" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="iJo-kB-nSt"/>
                             <constraint firstItem="hQd-cC-F9a" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="vpX-s5-frw"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="label" destination="wZR-9j-odn" id="Kon-fE-Hib"/>
                         <outlet property="scrollView" destination="hQd-cC-F9a" id="UPw-w5-IIc"/>
                         <outlet property="textView" destination="nMe-y7-fEe" id="Pam-Ak-dPL"/>
                     </connections>

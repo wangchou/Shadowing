@@ -69,7 +69,7 @@ async function runAll() {
   dumpCounts(sortedPairs)
 
   let db = new sqlite3.Database(`./${dbName}`);
-  db.run(`CREATE TABLE ${tableName} (id integer PRIMARY_KEY, kana_count integer NOT NULL, ja text NOT NULL, en text NOT NULL)`, err => {
+  db.run(`CREATE TABLE ${tableName} (id integer PRIMARY_KEY, kana_count integer NOT NULL, ja text NOT NULL, en text NOT NULL, siriSaid text)`, err => {
       if (err) {
         return console.log(err.message);
       }
@@ -96,9 +96,9 @@ async function runAll() {
   db.close();
 
   function insertData(pairs) {
-    let sql = `INSERT INTO ${tableName} VALUES (?, ?, ?, ?)`
+    let sql = `INSERT INTO ${tableName} VALUES (?, ?, ?, ?, ?)`
     pairs.forEach( (obj, i) => {
-      let values = [i, obj.c, obj.ja, obj.en]
+      let values = [i, obj.c, obj.ja, obj.en, ""]
       db.run(sql, values, function(err) {
         if (err) {
           return console.log(err.message);
