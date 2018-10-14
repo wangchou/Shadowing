@@ -45,8 +45,9 @@ class ViewController: NSViewController {
         sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 9, maxKanaCount: 18, numOfSentences: 3000))
         sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 12, maxKanaCount: 24, numOfSentences: 3000))
         sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 18, maxKanaCount: 36, numOfSentences: 3000))
-
+        print("a")
         sentences = getSentencesByIds(ids: sentenceIds)
+        print("b")
         print(sentenceIds.count)
         Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
             verifyNextSentence()
@@ -92,14 +93,14 @@ func prepareSpeak() {
 func speak(_ s: String) {
     theErr = SpeakCFString(fCurSpeechChannel!, s as CFString, nil)
     if theErr != OSErr(noErr) { print("error... speak") }
-    print("\(s) is spoken")
+    //print("\(s) is spoken")
 }
 
 func verifyNextSentence() {
     let duration = "\(round(now() - startTime))s"
     let percentage = "\(round(100.0*Double(sentencesIdx)/Double(sentences.count)))%"
     vc.label.stringValue = "\(percentage) | \(duration) | \(sentencesIdx)/\(sentences.count)"
-    print("verify \(sentencesIdx) < \(sentences.count)")
+    // print("verify \(sentencesIdx) < \(sentences.count)")
     vc.scrollView.becomeFirstResponder()
     guard sentencesIdx < sentences.count else { return }
     let s = sentences[sentencesIdx]
@@ -113,12 +114,16 @@ func verifyNextSentence() {
 
 func OurSpeechDoneCallBackProc(_ inSpeechChannel: SpeechChannel, _ inRefCon: SRefCon) {
     toggleSTT()
+    var waitTime:TimeInterval = 1.0
+    if sentencesIdx % 100 == 0 {
+        waitTime = 5.0
+    }
     DispatchQueue.main.async {
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
+        Timer.scheduledTimer(withTimeInterval: waitTime, repeats: false) { _ in
             let s = vc.textView.string
             let id = sentenceIds[sentencesIdx-1]
             updateIdWithListened(id: id, siriSaid: s)
-            print("id: \(id), siriSaid: \(s)")
+            //print("id: \(id), siriSaid: \(s)")
             verifyNextSentence()
         }
     }
