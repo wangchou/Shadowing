@@ -1,0 +1,565 @@
+2018-10-16 00:53:55.036948+0800 sentencesVerifier[28240:1247167] [default] Unable to load Info.plist exceptions (eGPUOverrides)
+set count:  32
+621
+2018-10-16 00:54:12.096350+0800 sentencesVerifier[28240:1247237] TIC Read Status [2:0x60000370b6c0]: 1:57
+2018-10-16 00:54:12.097115+0800 sentencesVerifier[28240:1247237] Task <30DF70B9-5404-4853-8785-EFAB7B99021E>.<7> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 00:54:12.097263+0800 sentencesVerifier[28240:1247211] Task <30DF70B9-5404-4853-8785-EFAB7B99021E>.<7> finished with error - code: -1005
+2018-10-16 00:54:12.099808+0800 sentencesVerifier[28240:1247213] Task <30DF70B9-5404-4853-8785-EFAB7B99021E>.<7> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000c75560 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x60000212a800 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <30DF70B9-5404-4853-8785-EFAB7B99021E>.<7>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <30DF70B9-5404-4853-8785-EFAB7B99021E>.<7>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+2018-10-16 00:54:12.105324+0800 sentencesVerifier[28240:1247211] TIC Read Status [1:0x600003706a00]: 1:57
+2018-10-16 00:54:12.105753+0800 sentencesVerifier[28240:1247211] Task <E6E26D9D-0AA3-49E3-A131-91665FA09A04>.<8> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 00:54:12.105888+0800 sentencesVerifier[28240:1247237] Task <E6E26D9D-0AA3-49E3-A131-91665FA09A04>.<8> finished with error - code: -1005
+2018-10-16 00:54:12.106198+0800 sentencesVerifier[28240:1247237] Task <E6E26D9D-0AA3-49E3-A131-91665FA09A04>.<8> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000c81620 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x60000212aad0 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <E6E26D9D-0AA3-49E3-A131-91665FA09A04>.<8>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <E6E26D9D-0AA3-49E3-A131-91665FA09A04>.<8>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+zero len error on calcScore
+-------
+0
+佐藤さん、最近お元気ですか？
+佐藤さん最近お元気ですか
+-------
+85
+じゃ、お先に
+じゃぁお先に
+-------
+80
+ただいま
+ただいまー
+-------
+80
+じゃ、また。
+じゃあまた
+2018-10-16 00:57:05.102606+0800 sentencesVerifier[28240:1247237] TIC Read Status [5:0x60000371a640]: 1:57
+2018-10-16 00:57:05.102974+0800 sentencesVerifier[28240:1247237] TIC Read Status [6:0x60000371a700]: 1:57
+2018-10-16 00:57:05.103603+0800 sentencesVerifier[28240:1247237] Task <50BF3546-D797-441A-945D-686C0E82001A>.<99> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 00:57:05.103689+0800 sentencesVerifier[28240:1247658] Task <50BF3546-D797-441A-945D-686C0E82001A>.<99> finished with error - code: -1005
+2018-10-16 00:57:05.104049+0800 sentencesVerifier[28240:1247213] Task <50BF3546-D797-441A-945D-686C0E82001A>.<99> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000c88480 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x600002138960 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <50BF3546-D797-441A-945D-686C0E82001A>.<99>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <50BF3546-D797-441A-945D-686C0E82001A>.<99>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+2018-10-16 00:57:05.104116+0800 sentencesVerifier[28240:1247237] Task <1C5C30EF-EE78-4EE7-B188-D0688F01D3EA>.<100> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 00:57:05.109206+0800 sentencesVerifier[28240:1248505] Task <1C5C30EF-EE78-4EE7-B188-D0688F01D3EA>.<100> finished with error - code: -1005
+2018-10-16 00:57:05.109615+0800 sentencesVerifier[28240:1247213] Task <1C5C30EF-EE78-4EE7-B188-D0688F01D3EA>.<100> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000c8c840 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x60000212f9d0 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <1C5C30EF-EE78-4EE7-B188-D0688F01D3EA>.<100>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <1C5C30EF-EE78-4EE7-B188-D0688F01D3EA>.<100>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+zero len error on calcScore
+-------
+0
+台湾で大学に通っています
+台湾で大学に通っています
+-------
+87
+ライン教えて！
+LINEを教えて
+-------
+87
+一緒に映画を観に行かない？
+一緒に映画を見に行かない
+2018-10-16 01:04:42.242617+0800 sentencesVerifier[28240:1253840] TIC Read Status [34:0x60000373b240]: 1:57
+2018-10-16 01:04:42.243142+0800 sentencesVerifier[28240:1253840] TIC Read Status [33:0x60000370ee80]: 1:57
+2018-10-16 01:04:42.244000+0800 sentencesVerifier[28240:1253840] Task <9AD74136-3897-46BE-A31A-1BB1E9B6F4AA>.<313> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:04:42.244139+0800 sentencesVerifier[28240:1254331] Task <9AD74136-3897-46BE-A31A-1BB1E9B6F4AA>.<313> finished with error - code: -1005
+2018-10-16 01:04:42.244696+0800 sentencesVerifier[28240:1254428] Task <9AD74136-3897-46BE-A31A-1BB1E9B6F4AA>.<313> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000c94d50 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x600002132530 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <9AD74136-3897-46BE-A31A-1BB1E9B6F4AA>.<313>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <9AD74136-3897-46BE-A31A-1BB1E9B6F4AA>.<313>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+2018-10-16 01:04:42.244809+0800 sentencesVerifier[28240:1253840] Task <7727E109-E5C4-4CB8-8CEF-8D3FB0AC6234>.<314> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:04:42.250889+0800 sentencesVerifier[28240:1254331] Task <7727E109-E5C4-4CB8-8CEF-8D3FB0AC6234>.<314> finished with error - code: -1005
+2018-10-16 01:04:42.251354+0800 sentencesVerifier[28240:1255000] Task <7727E109-E5C4-4CB8-8CEF-8D3FB0AC6234>.<314> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000c8a400 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x600002133070 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <7727E109-E5C4-4CB8-8CEF-8D3FB0AC6234>.<314>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <7727E109-E5C4-4CB8-8CEF-8D3FB0AC6234>.<314>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+zero len error on calcScore
+-------
+0
+たぶん10分くらい遅れると思う
+多分10分くらい遅れると思う
+2018-10-16 01:05:44.494228+0800 sentencesVerifier[28240:1255000] TIC Read Status [44:0x600003729980]: 1:57
+2018-10-16 01:05:44.494792+0800 sentencesVerifier[28240:1255000] Task <69033E07-2BFF-4100-A34B-217547CE07A3>.<340> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:05:44.494892+0800 sentencesVerifier[28240:1257983] Task <69033E07-2BFF-4100-A34B-217547CE07A3>.<340> finished with error - code: -1005
+2018-10-16 01:05:44.495109+0800 sentencesVerifier[28240:1255000] TIC Read Status [43:0x600003736580]: 1:57
+2018-10-16 01:05:44.495286+0800 sentencesVerifier[28240:1258303] Task <69033E07-2BFF-4100-A34B-217547CE07A3>.<340> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000c74a20 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x600002132300 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <69033E07-2BFF-4100-A34B-217547CE07A3>.<340>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <69033E07-2BFF-4100-A34B-217547CE07A3>.<340>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+2018-10-16 01:05:44.495949+0800 sentencesVerifier[28240:1255000] Task <4615911B-80C5-4BB7-9BAE-17A0A83178E9>.<339> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:05:44.501870+0800 sentencesVerifier[28240:1257983] Task <4615911B-80C5-4BB7-9BAE-17A0A83178E9>.<339> finished with error - code: -1005
+2018-10-16 01:05:44.502252+0800 sentencesVerifier[28240:1258352] Task <4615911B-80C5-4BB7-9BAE-17A0A83178E9>.<339> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000cb5d40 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x60000212bb60 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <4615911B-80C5-4BB7-9BAE-17A0A83178E9>.<339>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <4615911B-80C5-4BB7-9BAE-17A0A83178E9>.<339>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+zero len error on calcScore
+-------
+0
+もう少しゆっくり話してくれませんか？
+もう少しゆっくり話してくれませんか
+2018-10-16 01:08:43.436211+0800 sentencesVerifier[28240:1261100] TIC Read Status [55:0x600003752400]: 1:57
+2018-10-16 01:08:43.436515+0800 sentencesVerifier[28240:1261100] TIC Read Status [56:0x600003752e80]: 1:57
+2018-10-16 01:08:43.437025+0800 sentencesVerifier[28240:1261100] Task <52590C1D-A7D8-4465-A7D0-697F2B627B5B>.<421> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:08:43.437114+0800 sentencesVerifier[28240:1260670] Task <52590C1D-A7D8-4465-A7D0-697F2B627B5B>.<421> finished with error - code: -1005
+2018-10-16 01:08:43.437449+0800 sentencesVerifier[28240:1259931] Task <52590C1D-A7D8-4465-A7D0-697F2B627B5B>.<421> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000c929d0 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x600002139bd0 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <52590C1D-A7D8-4465-A7D0-697F2B627B5B>.<421>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <52590C12018-10-16 01:08:43.437477+0800 sentencesVerifier[28240:1261100] Task <A1E46246-87E6-41CB-9ED6-A46B2263FE30>.<422> HTTP load failed (error code: -1005 [4:-4])
+D-A7D8-4465-A7D0-697F2B627B5B>.<421>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+2018-10-16 01:08:43.443523+0800 sentencesVerifier[28240:1261534] Task <A1E46246-87E6-41CB-9ED6-A46B2263FE30>.<422> finished with error - code: -1005
+2018-10-16 01:08:43.443868+0800 sentencesVerifier[28240:1259931] Task <A1E46246-87E6-41CB-9ED6-A46B2263FE30>.<422> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000c96940 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x6000021323a0 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <A1E46246-87E6-41CB-9ED6-A46B2263FE30>.<422>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <A1E46246-87E6-41CB-9ED6-A46B2263FE30>.<422>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+zero len error on calcScore
+-------
+0
+池袋駅までお願いします
+池袋駅までお願いします
+-------
+76
+トトロはみんなと友達になる
+宗太郎はみんなと友達になる
+2018-10-16 01:11:14.918633+0800 sentencesVerifier[28240:1264040] TIC Read Status [80:0x600003760780]: 1:57
+2018-10-16 01:11:14.919229+0800 sentencesVerifier[28240:1264040] Task <4F059764-D399-4108-B270-F668B8A23DF3>.<484> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:11:14.919366+0800 sentencesVerifier[28240:1264621] Task <4F059764-D399-4108-B270-F668B8A23DF3>.<484> finished with error - code: -1005
+2018-10-16 01:11:14.919718+0800 sentencesVerifier[28240:1264621] Task <4F059764-D399-4108-B270-F668B8A23DF3>.<484> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000cb2040 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x60000213d040 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <4F059764-D399-4108-B270-F668B8A23DF3>.<484>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <4F059764-D399-4108-B270-F668B8A23DF3>.<484>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+-------
+0
+奈良公園には鹿がたくさんいる
+奈良公園には鹿がたくさんいる
+2018-10-16 01:12:42.850601+0800 sentencesVerifier[28240:1264431] TIC Read Status [91:0x600003760000]: 1:57
+2018-10-16 01:12:42.850994+0800 sentencesVerifier[28240:1264431] TIC Read Status [90:0x60000374f840]: 1:57
+2018-10-16 01:12:42.851786+0800 sentencesVerifier[28240:1264431] Task <FF575F03-B0F3-4804-B199-4D112F035CF2>.<522> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:12:42.851892+0800 sentencesVerifier[28240:1264872] Task <FF575F03-B0F3-4804-B199-4D112F035CF2>.<522> finished with error - code: -1005
+2018-10-16 01:12:42.852329+0800 sentencesVerifier[28240:1265352] Task <FF575F03-B0F3-4804-B199-4D112F035CF2>.<522> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000c9e0d0 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x600002135cc0 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <FF575F03-B0F3-4804-B199-4D112F035CF2>.<522>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <FF575F03-B0F3-4804-B199-4D112F035CF2>.<522>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+2018-10-16 01:12:42.852409+0800 sentencesVerifier[28240:1264431] Task <701C0819-0601-4F85-B4E1-E3B64FB9D736>.<521> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:12:42.860085+0800 sentencesVerifier[28240:1264872] Task <701C0819-0601-4F85-B4E1-E3B64FB9D736>.<521> finished with error - code: -1005
+2018-10-16 01:12:42.860527+0800 sentencesVerifier[28240:1265625] Task <701C0819-0601-4F85-B4E1-E3B64FB9D736>.<521> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000c9f3c0 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x600002136a30 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <701C0819-0601-4F85-B4E1-E3B64FB9D736>.<521>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <701C0819-0601-4F85-B4E1-E3B64FB9D736>.<521>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+zero len error on calcScore
+-------
+0
+これを一つとこれを二つください
+これを1つとこれを2つください
+-------
+81
+おはようございます。｜您早。
+おはようございま~すそう
+-------
+95
+課長、あの展覧会もご覧んになりますか。
+課長あの展覧会もご覧になりますか
+2018-10-16 01:19:31.265695+0800 sentencesVerifier[28240:1270253] TIC Read Status [109:0x6000037989c0]: 1:57
+2018-10-16 01:19:31.266113+0800 sentencesVerifier[28240:1270253] TIC Read Status [108:0x6000037a0300]: 1:57
+2018-10-16 01:19:31.266868+0800 sentencesVerifier[28240:1270253] Task <4C05DC36-7394-4123-ADF7-6BFA1C787A94>.<708> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:19:31.267010+0800 sentencesVerifier[28240:1271624] Task <4C05DC36-7394-4123-ADF7-6BFA1C787A94>.<708> finished with error - code: -1005
+2018-10-16 01:19:31.267407+0800 sentencesVerifier[28240:1270253] Task <1C6E2BC2-7264-4D66-8407-0A597E5F3B87>.<707> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:19:31.267436+0800 sentencesVerifier[28240:1272682] Task <4C05DC36-7394-4123-ADF7-6BFA1C787A94>.<708> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000c9a790 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x6000021374d0 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <4C05DC36-7394-4123-ADF7-6BFA1C787A94>.<708>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <4C05DC36-7394-4123-ADF7-6BFA1C787A94>.<708>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+2018-10-16 01:19:31.267500+0800 sentencesVerifier[28240:1271624] Task <1C6E2BC2-7264-4D66-8407-0A597E5F3B87>.<707> finished with error - code: -1005
+2018-10-16 01:19:31.275642+0800 sentencesVerifier[28240:1272961] Task <1C6E2BC2-7264-4D66-8407-0A597E5F3B87>.<707> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000c76610 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x60000213c5f0 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <1C6E2BC2-7264-4D66-8407-0A597E5F3B87>.<707>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <1C6E2BC2-7264-4D66-8407-0A597E5F3B87>.<707>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+zero len error on calcScore
+-------
+0
+私を助けてくださるならうれしい。
+私を助けてくださるならうれしい
+2018-10-16 01:24:00.448238+0800 sentencesVerifier[28240:1272962] TIC Read Status [127:0x6000037b9500]: 1:57
+2018-10-16 01:24:00.448659+0800 sentencesVerifier[28240:1272962] TIC Read Status [128:0x6000037a3d80]: 1:57
+2018-10-16 01:24:00.449341+0800 sentencesVerifier[28240:1272962] Task <419F47B4-9FFD-4440-A63A-03755433B7A5>.<830> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:24:00.449513+0800 sentencesVerifier[28240:1276868] Task <419F47B4-9FFD-4440-A63A-03755433B7A5>.<830> finished with error - code: -1005
+2018-10-16 01:24:00.449890+0800 sentencesVerifier[28240:1277098] Task <419F47B4-9FFD-4440-A63A-03755433B7A5>.<830> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000caaee0 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x60000213a5d0 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <419F47B4-9FFD-4440-A63A-03755433B7A5>.<830>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <419F47B4-9FFD-4440-A63A-03755433B7A5>.<830>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+2018-10-16 01:24:00.450011+0800 sentencesVerifier[28240:1272962] Task <DCD078F6-04FB-460C-9859-E5508E8ECCC9>.<831> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:24:00.455708+0800 sentencesVerifier[28240:1277280] Task <DCD078F6-04FB-460C-9859-E5508E8ECCC9>.<831> finished with error - code: -1005
+2018-10-16 01:24:00.456077+0800 sentencesVerifier[28240:1277098] Task <DCD078F6-04FB-460C-9859-E5508E8ECCC9>.<831> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000ca9b00 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x600002141f40 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <DCD078F6-04FB-460C-9859-E5508E8ECCC9>.<831>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <DCD078F6-04FB-460C-9859-E5508E8ECCC9>.<831>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+zero len error on calcScore
+-------
+0
+ちょっと、悩んだ時期もあったんけど
+ちょっと悩んだ時期もあったんけど
+-------
+94
+皆と会いたい気待ちがなくて、さくらちゃんと会いたい気持ちがあって、ずっと
+みんなと会いたい気持ちがなくてさくらちゃんと会いたい気持ちがあってずっと
+2018-10-16 01:24:53.920673+0800 sentencesVerifier[28240:1277872] TIC Read Status [143:0x6000037b9f80]: 1:57
+2018-10-16 01:24:53.921148+0800 sentencesVerifier[28240:1277872] TIC Read Status [144:0x6000037c12c0]: 1:57
+2018-10-16 01:24:53.921825+0800 sentencesVerifier[28240:1277872] Task <D7FD8435-22FB-4FB8-BDE4-E41BFF69814F>.<848> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:24:53.922006+0800 sentencesVerifier[28240:1277395] Task <D7FD8435-22FB-4FB8-BDE4-E41BFF69814F>.<848> finished with error - code: -1005
+2018-10-16 01:24:53.922558+0800 sentencesVerifier[28240:1277872] Task <C5A94EB5-47AB-4CBA-9A2E-696775B9F009>.<849> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:24:53.922557+0800 sentencesVerifier[28240:1277280] Task <D7FD8435-22FB-4FB8-BDE4-E41BFF69814F>.<848> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000c91fb0 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x60000213f430 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorF2018-10-16 01:24:53.922739+0800 sentencesVerifier[28240:1278613] Task <C5A94EB5-47AB-4CBA-9A2E-696775B9F009>.<849> finished with error - code: -1005
+ailingURLSessionTaskErrorKey=LocalDataTask <D7FD8435-22FB-4FB8-BDE4-E41BFF69814F>.<848>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <D7FD8435-22FB-4FB8-BDE4-E41BFF69814F>.<848>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+2018-10-16 01:24:53.928726+0800 sentencesVerifier[28240:1277872] Task <C5A94EB5-47AB-4CBA-9A2E-696775B9F009>.<849> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000c90d20 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x60000213c410 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <C5A94EB5-47AB-4CBA-9A2E-696775B9F009>.<849>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <C5A94EB5-47AB-4CBA-9A2E-696775B9F009>.<849>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+zero len error on calcScore
+-------
+0
+良かったら、俺と付き合ってほしい。
+よかったら俺と付き合って欲しい
+-------
+95
+えーと、6日間というすごく短い期間だったけど
+えーと6日間と言うすごく短い期間だったけど
+2018-10-16 01:25:16.221002+0800 sentencesVerifier[28240:1278731] TIC Read Status [150:0x6000037c30c0]: 1:57
+2018-10-16 01:25:16.221332+0800 sentencesVerifier[28240:1278731] TIC Read Status [149:0x6000037c2e80]: 1:57
+2018-10-16 01:25:16.221789+0800 sentencesVerifier[28240:1278731] Task <69F20103-5AE6-428F-85DE-284B08CF38EF>.<856> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:25:16.221910+0800 sentencesVerifier[28240:1277395] Task <69F20103-5AE6-428F-85DE-284B08CF38EF>.<856> finished with error - code: -1005
+2018-10-16 01:25:16.222257+0800 sentencesVerifier[28240:1277395] Task <69F20103-5AE6-428F-85DE-284B08CF38EF>.<856> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000caf6f0 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x600002142530 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <69F20103-5AE6-428F-85DE-284B08CF38EF>.<856>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <69F20102018-10-16 01:25:16.222354+0800 sentencesVerifier[28240:1278731] Task <D1723B6F-9283-46C2-802D-9C18515C073B>.<857> HTTP load failed (error code: -1005 [4:-4])
+3-5AE6-428F-85DE-284B08CF38EF>.<856>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+2018-10-16 01:25:16.228340+0800 sentencesVerifier[28240:1278732] Task <D1723B6F-9283-46C2-802D-9C18515C073B>.<857> finished with error - code: -1005
+2018-10-16 01:25:16.228776+0800 sentencesVerifier[28240:1277872] Task <D1723B6F-9283-46C2-802D-9C18515C073B>.<857> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000cad590 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x600002145680 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <D1723B6F-9283-46C2-802D-9C18515C073B>.<857>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <D1723B6F-9283-46C2-802D-9C18515C073B>.<857>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+zero len error on calcScore
+-------
+0
+はい、けど、6日間だけじゃん
+はいけど6日間だけじゃん
+-------
+95
+知れてないことがまだまだたくさんあるので
+知られてないことがまだまだたくさんあるので
+-------
+94
+これから、なんだろう、知れなかったことを
+これからなんだろうきれなかったことを
+-------
+94
+さくらの事をずっと考えている。
+桜のことをずっと考えている
+2018-10-16 01:29:40.596722+0800 sentencesVerifier[28240:1279683] TIC Read Status [164:0x6000037de640]: 1:57
+2018-10-16 01:29:40.597355+0800 sentencesVerifier[28240:1279683] TIC Read Status [163:0x6000037e0e40]: 1:57
+2018-10-16 01:29:40.598197+0800 sentencesVerifier[28240:1279683] Task <E3D25926-913A-4897-86E0-932C7D916E12>.<978> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:29:40.598328+0800 sentencesVerifier[28240:1280828] Task <E3D25926-913A-4897-86E0-932C7D916E12>.<978> finished with error - code: -1005
+2018-10-16 01:29:40.598812+0800 sentencesVerifier[28240:1280663] Task <E3D25926-913A-4897-86E0-932C7D916E12>.<978> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000cab690 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x60000212f7f0 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <E3D25926-913A-4897-86E0-932C7D916E12>.<978>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <E3D25926-913A-4897-86E0-932C7D916E12>.<978>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+2018-10-16 01:29:40.598920+0800 sentencesVerifier[28240:1279683] Task <5362AD5C-F5BE-4ACC-B4BC-DD8DA906B501>.<979> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:29:40.605499+0800 sentencesVerifier[28240:1283423] Task <5362AD5C-F5BE-4ACC-B4BC-DD8DA906B501>.<979> finished with error - code: -1005
+2018-10-16 01:29:40.605985+0800 sentencesVerifier[28240:1280829] Task <5362AD5C-F5BE-4ACC-B4BC-DD8DA906B501>.<979> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000caa460 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x600002140af0 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <5362AD5C-F5BE-4ACC-B4BC-DD8DA906B501>.<979>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <5362AD5C-F5BE-4ACC-B4BC-DD8DA906B501>.<979>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+zero len error on calcScore
+-------
+0
+もう若くないと思うと悲しいです。
+もう若くないと思うと悲しいです
+-------
+91
+我が家ほどいいものはない。
+我が家ほど良いものはない
+2018-10-16 01:30:20.697706+0800 sentencesVerifier[28240:1280829] TIC Read Status [172:0x6000037ece40]: 1:57
+2018-10-16 01:30:20.698128+0800 sentencesVerifier[28240:1280829] TIC Read Status [171:0x6000037ec300]: 1:57
+2018-10-16 01:30:20.698711+0800 sentencesVerifier[28240:1280829] Task <4173E6DB-CB1C-472B-BE32-1F88EE8ADEE1>.<992> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:30:20.698830+0800 sentencesVerifier[28240:1283761] Task <4173E6DB-CB1C-472B-BE32-1F88EE8ADEE1>.<992> finished with error - code: -1005
+2018-10-16 01:30:20.699200+0800 sentencesVerifier[28240:1284088] Task <4173E6DB-CB1C-472B-BE32-1F88EE8ADEE1>.<992> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000ca7330 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x600002141bd0 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <4173E6DB-CB1C-472B-BE32-1F88EE8ADEE1>.<992>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <4173E6DB-CB1C-472B-BE32-1F88EE8ADEE1>.<992>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+2018-10-16 01:30:20.699317+0800 sentencesVerifier[28240:1280829] Task <DAB2BE08-B523-4411-A31F-08C67D22EF04>.<993> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:30:20.705640+0800 sentencesVerifier[28240:1284084] Task <DAB2BE08-B523-4411-A31F-08C67D22EF04>.<993> finished with error - code: -1005
+2018-10-16 01:30:20.706116+0800 sentencesVerifier[28240:1284088] Task <DAB2BE08-B523-4411-A31F-08C67D22EF04>.<993> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000ca5590 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x60000213c050 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <DAB2BE08-B523-4411-A31F-08C67D22EF04>.<993>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <DAB2BE08-B523-4411-A31F-08C67D22EF04>.<993>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+zero len error on calcScore
+-------
+0
+雨はやむどころかいよいよひどくなった。
+雨は止むどころかいよいよひどくなった
+-------
+87
+円はドルに対して高くなった。
+俺はドルに対して高くなった
+-------
+95
+憂いの反面には喜びがあるものだ。
+例の反面には喜びがあるものだ
+-------
+87
+死はよく眠りにたとえられる。
+私はよく眠りに例えられる
+2018-10-16 01:31:20.964541+0800 sentencesVerifier[28240:1284088] TIC Read Status [182:0x6000037e8e40]: 1:57
+2018-10-16 01:31:20.965155+0800 sentencesVerifier[28240:1284088] Task <5E6819C3-3E45-4FC1-887D-2DC7D6C1A8B9>.<1016> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:31:20.965353+0800 sentencesVerifier[28240:1285470] Task <5E6819C3-3E45-4FC1-887D-2DC7D6C1A8B9>.<1016> finished with error - code: -1005
+2018-10-16 01:31:20.965581+0800 sentencesVerifier[28240:1284088] TIC Read Status [181:0x6000037ef180]: 1:57
+2018-10-16 01:31:20.965834+0800 sentencesVerifier[28240:1285034] Task <5E6819C3-3E45-4FC1-887D-2DC7D6C1A8B9>.<1016> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000ca9ec0 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x600002148c80 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <5E6819C3-3E45-4FC1-887D-2DC7D6C1A8B9>.<1016>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <5E6819C3-3E45-4FC1-887D-2DC7D6C1A8B9>.<1016>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+2018-10-16 01:31:20.966534+0800 sentencesVerifier[28240:1284088] Task <3B9AC11A-4808-4A6C-A018-178449B977B7>.<1017> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:31:20.972990+0800 sentencesVerifier[28240:1285470] Task <3B9AC11A-4808-4A6C-A018-178449B977B7>.<1017> finished with error - code: -1005
+2018-10-16 01:31:20.973382+0800 sentencesVerifier[28240:1285229] Task <3B9AC11A-4808-4A6C-A018-178449B977B7>.<1017> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000cac030 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x60000213e9e0 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <3B9AC11A-4808-4A6C-A018-178449B977B7>.<1017>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <3B9AC11A-4808-4A6C-A018-178449B977B7>.<1017>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+zero len error on calcScore
+-------
+0
+そのうわさは事実にもとづかない。
+その噂は事実に基づかない
+-------
+81
+それは実際君の所為である。
+それは実際君の声である
+2018-10-16 01:31:39.666892+0800 sentencesVerifier[28240:1284088] TIC Read Status [183:0x6000037eef40]: 1:57
+2018-10-16 01:31:39.667360+0800 sentencesVerifier[28240:1284088] TIC Read Status [184:0x6000037f70c0]: 1:57
+2018-10-16 01:31:39.668255+0800 sentencesVerifier[28240:1284088] Task <DA2E7F78-3A2D-4BF3-8042-FFCB475E04D1>.<1024> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:31:39.668414+0800 sentencesVerifier[28240:1285229] Task <DA2E7F78-3A2D-4BF3-8042-FFCB475E04D1>.<1024> finished with error - code: -1005
+2018-10-16 01:31:39.668944+0800 sentencesVerifier[28240:1285745] Task <DA2E7F78-3A2D-4BF3-8042-FFCB475E04D1>.<1024> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000ca8f00 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x6000021440f0 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <DA2E7F78-3A2D-4BF3-8042-FFCB475E04D1>.<1024>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <DA2E7F78-3A2D-4BF3-8042-FFCB475E04D1>.<1024>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+2018-10-16 01:31:39.668976+0800 sentencesVerifier[28240:1284088] Task <2BED2C1D-BE60-4978-BCA7-C721A4E1E460>.<1025> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:31:39.676402+0800 sentencesVerifier[28240:1286044] Task <2BED2C1D-BE60-4978-BCA7-C721A4E1E460>.<1025> finished with error - code: -1005
+2018-10-16 01:31:39.676795+0800 sentencesVerifier[28240:1285229] Task <2BED2C1D-BE60-4978-BCA7-C721A4E1E460>.<1025> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000cab720 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x6000021423f0 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <2BED2C1D-BE60-4978-BCA7-C721A4E1E460>.<1025>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <2BED2C1D-BE60-4978-BCA7-C721A4E1E460>.<1025>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+zero len error on calcScore
+-------
+0
+文化は国々によって異なる。
+文化は国々によって異なる
+2018-10-16 01:31:49.896873+0800 sentencesVerifier[28240:1286044] TIC Read Status [186:0x6000037eef40]: 1:57
+2018-10-16 01:31:49.897383+0800 sentencesVerifier[28240:1286044] Task <15EE4FDB-DA57-496B-9022-84999296EDA7>.<1028> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:31:49.897498+0800 sentencesVerifier[28240:1286045] Task <15EE4FDB-DA57-496B-9022-84999296EDA7>.<1028> finished with error - code: -1005
+2018-10-16 01:31:49.897692+0800 sentencesVerifier[28240:1286044] TIC Read Status [185:0x6000037de7c0]: 1:57
+2018-10-16 01:31:49.897825+0800 sentencesVerifier[28240:1285745] Task <15EE4FDB-DA57-496B-9022-84999296EDA7>.<1028> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000cb29a0 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x60000213f200 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <15EE4FDB-DA57-496B-9022-84999296EDA7>.<1028>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <15EE4FDB-DA57-496B-9022-84999296EDA7>.<1028>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+2018-10-16 01:31:49.898369+0800 sentencesVerifier[28240:1286044] Task <7D66F9CD-1810-44A5-8508-65D19E26E4A0>.<1029> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:31:49.902083+0800 sentencesVerifier[28240:1286045] Task <7D66F9CD-1810-44A5-8508-65D19E26E4A0>.<1029> finished with error - code: -1005
+2018-10-16 01:31:49.902456+0800 sentencesVerifier[28240:1286349] Task <7D66F9CD-1810-44A5-8508-65D19E26E4A0>.<1029> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000ca55f0 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x60000213c8c0 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <7D66F9CD-1810-44A5-8508-65D19E26E4A0>.<1029>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <7D66F9CD-1810-44A5-8508-65D19E26E4A0>.<1029>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+zero len error on calcScore
+-------
+0
+嵐によって多くの人が死んだ。
+嵐によって多くの人が死んだ
+-------
+72
+それ以上は望む方が無理ですよ。
+それ以上は望方が無理ですよ
+2018-10-16 01:32:15.159218+0800 sentencesVerifier[28240:1286619] TIC Read Status [188:0x6000037de880]: 1:57
+2018-10-16 01:32:15.159624+0800 sentencesVerifier[28240:1286619] TIC Read Status [187:0x6000037f8240]: 1:57
+2018-10-16 01:32:15.160328+0800 sentencesVerifier[28240:1286619] Task <7ED84639-9521-411E-8FD5-57528DD48F84>.<1039> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:32:15.160470+0800 sentencesVerifier[28240:1286045] Task <7ED84639-9521-411E-8FD5-57528DD48F84>.<1039> finished with error - code: -1005
+2018-10-16 01:32:15.160862+0800 sentencesVerifier[28240:1286349] Task <7ED84639-9521-411E-8FD5-57528DD48F84>.<1039> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000ca5620 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x6000021125d0 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <7ED84639-9521-411E-8FD5-57528DD48F84>.<1039>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <7ED84639-9521-411E-8FD5-57528DD48F84>.<1039>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+2018-10-16 01:32:15.160896+0800 sentencesVerifier[28240:1286619] Task <35BB9366-3C96-48EC-8764-A5B600CD1493>.<1038> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:32:15.167777+0800 sentencesVerifier[28240:1286845] Task <35BB9366-3C96-48EC-8764-A5B600CD1493>.<1038> finished with error - code: -1005
+2018-10-16 01:32:15.168256+0800 sentencesVerifier[28240:1286045] Task <35BB9366-3C96-48EC-8764-A5B600CD1493>.<1038> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000ca4f30 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x6000021487d0 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <35BB9366-3C96-48EC-8764-A5B600CD1493>.<1038>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <35BB9366-3C96-48EC-8764-A5B600CD1493>.<1038>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+zero len error on calcScore
+-------
+0
+彼は日本語を話すことができる。
+彼は日本語を話すことができる
+-------
+94
+木造の建物は火事になりやすい。
+木造の建物は赤字になりやすい
+-------
+92
+彼は若いけれど利口だ。
+彼は若いけれどリコーダー
+2018-10-16 01:32:40.407748+0800 sentencesVerifier[28240:1286845] TIC Read Status [193:0x600003800180]: 1:57
+2018-10-16 01:32:40.408357+0800 sentencesVerifier[28240:1286845] Task <0448B354-94F0-459C-8C94-A1C3192156A1>.<1048> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:32:40.408467+0800 sentencesVerifier[28240:1286349] Task <0448B354-94F0-459C-8C94-A1C3192156A1>.<1048> finished with error - code: -1005
+2018-10-16 01:32:40.408803+0800 sentencesVerifier[28240:1286845] Task <0448B354-94F0-459C-8C94-A1C3192156A1>.<1048> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000ca7060 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x60000213df90 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <0448B354-94F0-459C-8C94-A1C3192156A1>.<1048>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <0448B354-94F0-459C-8C94-A1C3192156A1>.<1048>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+2018-10-16 01:32:40.428230+0800 sentencesVerifier[28240:1286619] TIC Read Status [194:0x6000038006c0]: 1:57
+2018-10-16 01:32:40.429013+0800 sentencesVerifier[28240:1286619] Task <BEB94BAE-94F4-40D3-8105-8D58A980DA19>.<1049> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:32:40.429141+0800 sentencesVerifier[28240:1286845] Task <BEB94BAE-94F4-40D3-8105-8D58A980DA19>.<1049> finished with error - code: -1005
+2018-10-16 01:32:40.429712+0800 sentencesVerifier[28240:1286045] Task <BEB94BAE-94F4-40D3-8105-8D58A980DA19>.<1049> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000ca7540 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x60000213f570 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <BEB94BAE-94F4-40D3-8105-8D58A980DA19>.<1049>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <BEB94BAE-94F4-40D3-8105-8D58A980DA19>.<1049>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+zero len error on calcScore
+-------
+0
+陽は出ていたけれど、寒かった。
+要は出ていたけれど寒かった
+-------
+85
+今出かけるのには遅すぎる。
+今出かけるのにはすぎる
+-------
+87
+今は判断しなくてもいいんだ。
+今は安産しなくてもいいんだ
+2018-10-16 01:33:09.718197+0800 sentencesVerifier[28240:1286045] TIC Read Status [198:0x6000037fe340]: 1:57
+2018-10-16 01:33:09.718534+0800 sentencesVerifier[28240:1286045] TIC Read Status [197:0x6000037fa040]: 1:57
+2018-10-16 01:33:09.719013+0800 sentencesVerifier[28240:1286045] Task <1D283431-1B65-4C4E-8FC5-BE873BD85AD0>.<1060> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:33:09.719132+0800 sentencesVerifier[28240:1286847] Task <1D283431-1B65-4C4E-8FC5-BE873BD85AD0>.<1060> finished with error - code: -1005
+2018-10-16 01:33:09.719496+0800 sentencesVerifier[28240:1286619] Task <1D283431-1B65-4C4E-8FC5-BE873BD85AD0>.<1060> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000c9a760 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x600002148780 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <1D283431-1B65-4C4E-8FC5-BE873BD85AD0>.<1060>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <1D283431-1B65-4C4E-8FC5-BE873BD85AD0>.<1060>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+2018-10-16 01:33:09.719504+0800 sentencesVerifier[28240:1286045] Task <B52BE576-558D-4F8B-8C2A-2733D6BE3397>.<1061> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:33:09.725620+0800 sentencesVerifier[28240:1286349] Task <B52BE576-558D-4F8B-8C2A-2733D6BE3397>.<1061> finished with error - code: -1005
+2018-10-16 01:33:09.726003+0800 sentencesVerifier[28240:1286619] Task <B52BE576-558D-4F8B-8C2A-2733D6BE3397>.<1061> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000cac7e0 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x600002149310 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <B52BE576-558D-4F8B-8C2A-2733D6BE3397>.<1061>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <B52BE576-558D-4F8B-8C2A-2733D6BE3397>.<1061>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+zero len error on calcScore
+-------
+0
+退職して幸福とはいえない。
+退職して幸福とは言えない
+-------
+87
+いずれにしても彼は来るだろう。
+いずれにしても彼は来たるだろう
+-------
+86
+君の指摘、中らずといえども遠からずだね。
+君の指摘渡瀬といえども遠からずだね
+-------
+91
+わかったら手を挙げなさい。
+わかったらてはあげなさい
+-------
+93
+この小屋は倒壊のおそれがある。
+この子家は倒壊の恐れがある
+-------
+92
+事故というのは起こるものだ。
+事故というのが起こるものだ
+-------
+92
+幸福というのは何ですか。
+幸福と言うのは何ですか
+-------
+93
+水というものは不思議なものだ。
+水と言うものは不思議なものだ
+-------
+93
+物には限界というものがある。
+物には限界と言うものがある
+-------
+93
+価格が需要によって変わる。
+価格が重要によって変わる
+2018-10-16 01:35:45.710847+0800 sentencesVerifier[28240:1288690] TIC Read Status [215:0x600003811f80]: 1:57
+2018-10-16 01:35:45.711275+0800 sentencesVerifier[28240:1288690] TIC Read Status [216:0x600003816880]: 1:57
+2018-10-16 01:35:45.711955+0800 sentencesVerifier[28240:1288690] Task <40E172BD-AF32-4695-ABB7-AB3690E1E765>.<1124> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:35:45.712075+0800 sentencesVerifier[28240:1290476] Task <40E172BD-AF32-4695-ABB7-AB3690E1E765>.<1124> finished with error - code: -1005
+2018-10-16 01:35:45.712454+0800 sentencesVerifier[28240:1290476] Task <40E172BD-AF32-4695-ABB7-AB3690E1E765>.<1124> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000c90030 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x60000214caa0 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <40E172BD-AF32-4695-ABB7-AB3690E1E765>.<1124>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <40E172BD-AF32-4695-ABB7-AB3690E1E765>.<1124>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+2018-10-16 01:35:45.712644+0800 sentencesVerifier[28240:1288690] Task <0B706085-D664-4C34-9B96-B27ECA536963>.<1125> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:35:45.719344+0800 sentencesVerifier[28240:1291043] Task <0B706085-D664-4C34-9B96-B27ECA536963>.<1125> finished with error - code: -1005
+2018-10-16 01:35:45.719916+0800 sentencesVerifier[28240:1288693] Task <0B706085-D664-4C34-9B96-B27ECA536963>.<1125> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000c9bb40 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x60000213a260 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <0B706085-D664-4C34-9B96-B27ECA536963>.<1125>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <0B706085-D664-4C34-9B96-B27ECA536963>.<1125>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+zero len error on calcScore
+-------
+0
+天気予報によると明日は晴れです。
+天気予報によると明日は晴れです
+-------
+91
+医者を呼びにやるべきだ。
+医者を呼びにあるべきだ
+-------
+94
+鶏に種を、えさとして与える。
+鶏にタレを餌として与える
+-------
+78
+男同士にしては変に仲がいいね。
+男同士にしては俺に仲が良い子
+-------
+89
+この映画は小説をもとにしている。
+この映画は小説を下にしている
+-------
+85
+非核武装を中心にした話し合い。
+企画物を中心にした話し合い
+-------
+95
+株式市場は長い不振を続けている。
+株式市場は長いくしんを続けている
+-------
+61
+だが君は間違っている。
+長君は間違っている
+-------
+80
+水が不足すると不自由する。
+水が不足するとフリーズする
+2018-10-16 01:39:02.033638+0800 sentencesVerifier[28240:1294961] TIC Read Status [256:0x600003823a80]: 1:57
+2018-10-16 01:39:02.034570+0800 sentencesVerifier[28240:1294961] Task <C52C1E37-1E9D-4C59-8814-EB27AA062271>.<1200> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:39:02.034693+0800 sentencesVerifier[28240:1294387] Task <C52C1E37-1E9D-4C59-8814-EB27AA062271>.<1200> finished with error - code: -1005
+2018-10-16 01:39:02.035217+0800 sentencesVerifier[28240:1294201] Task <C52C1E37-1E9D-4C59-8814-EB27AA062271>.<1200> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000ca1d40 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x600002150410 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <C52C1E37-1E9D-4C59-8814-EB27AA062271>.<1200>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <C52C1E37-1E9D-4C59-8814-EB27AA062271>.<1200>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+2018-10-16 01:39:02.053534+0800 sentencesVerifier[28240:1294201] TIC Read Status [255:0x600003825140]: 1:57
+2018-10-16 01:39:02.054171+0800 sentencesVerifier[28240:1294201] Task <712AAA16-F48A-419F-98B7-716FB5790535>.<1201> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:39:02.054315+0800 sentencesVerifier[28240:1293745] Task <712AAA16-F48A-419F-98B7-716FB5790535>.<1201> finished with error - code: -1005
+2018-10-16 01:39:02.054807+0800 sentencesVerifier[28240:1294201] Task <712AAA16-F48A-419F-98B7-716FB5790535>.<1201> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000ca7030 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x6000021501e0 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <712AAA16-F48A-419F-98B7-716FB5790535>.<1201>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <712AAA16-F48A-419F-98B7-716FB5790535>.<1201>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+zero len error on calcScore
+-------
+0
+それでいつも健康だったんだね。
+それでいつも健康だったんだね
+2018-10-16 01:39:12.333743+0800 sentencesVerifier[28240:1294960] TIC Read Status [257:0x600003835080]: 1:57
+2018-10-16 01:39:12.334252+0800 sentencesVerifier[28240:1294960] TIC Read Status [258:0x600003835680]: 1:57
+2018-10-16 01:39:12.334755+0800 sentencesVerifier[28240:1294960] Task <B018F09D-AB44-456D-9C2E-88323E346E02>.<1205> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:39:12.334861+0800 sentencesVerifier[28240:1294387] Task <B018F09D-AB44-456D-9C2E-88323E346E02>.<1205> finished with error - code: -1005
+2018-10-16 01:39:12.335238+0800 sentencesVerifier[28240:1294961] Task <B018F09D-AB44-456D-9C2E-88323E346E02>.<1205> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000cc2460 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x60000214d090 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <B018F09D-AB44-456D-9C2E-88323E346E02>.<1205>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <B018F09D-AB44-456D-9C2E-88323E346E02>.<1205>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+2018-10-16 01:39:12.335344+0800 sentencesVerifier[28240:1294960] Task <678A96B7-24AA-4573-8EC5-3C0CCA47B2F1>.<1204> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:39:12.339370+0800 sentencesVerifier[28240:1294387] Task <678A96B7-24AA-4573-8EC5-3C0CCA47B2F1>.<1204> finished with error - code: -1005
+2018-10-16 01:39:12.339882+0800 sentencesVerifier[28240:1294201] Task <678A96B7-24AA-4573-8EC5-3C0CCA47B2F1>.<1204> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000cc1110 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x600002150820 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <678A96B7-24AA-4573-8EC5-3C0CCA47B2F1>.<1204>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <678A96B7-24AA-4573-8EC5-3C0CCA47B2F1>.<1204>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+zero len error on calcScore
+-------
+0
+きっと彼はそれに失敗をするさ。
+きっと彼はそれに失敗をするさ
+2018-10-16 01:39:26.514008+0800 sentencesVerifier[28240:1295490] TIC Read Status [260:0x600003833f00]: 1:57
+2018-10-16 01:39:26.514356+0800 sentencesVerifier[28240:1295490] TIC Read Status [259:0x600003831740]: 1:57
+2018-10-16 01:39:26.514971+0800 sentencesVerifier[28240:1295490] Task <E868AAB1-E1FB-4779-AE81-73DABBD4C8D5>.<1210> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:39:26.515104+0800 sentencesVerifier[28240:1294960] Task <E868AAB1-E1FB-4779-AE81-73DABBD4C8D5>.<1210> finished with error - code: -1005
+2018-10-16 01:39:26.515553+0800 sentencesVerifier[28240:1294961] Task <E868AAB1-E1FB-4779-AE81-73DABBD4C8D5>.<1210> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000caf150 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x6000021503c0 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <E868AAB1-E1FB-4779-AE81-73DABBD4C8D5>.<1210>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <E868AAB1-E1FB-4779-AE81-73DABBD4C8D5>.<1210>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+2018-10-16 01:39:26.515602+0800 sentencesVerifier[28240:1295490] Task <92E87CD5-0F47-49F6-ABE2-B3C928F1FC28>.<1211> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:39:26.520035+0800 sentencesVerifier[28240:1294201] Task <92E87CD5-0F47-49F6-ABE2-B3C928F1FC28>.<1211> finished with error - code: -1005
+2018-10-16 01:39:26.520452+0800 sentencesVerifier[28240:1294960] Task <92E87CD5-0F47-49F6-ABE2-B3C928F1FC28>.<1211> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000caccc0 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x6000021485f0 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <92E87CD5-0F47-49F6-ABE2-B3C928F1FC28>.<1211>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <92E87CD5-0F47-49F6-ABE2-B3C928F1FC28>.<1211>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+zero len error on calcScore
+-------
+0
+船は今にも沈みそうであった。
+船は今にも沈みそうであった
+-------
+93
+皆が不正直とは限らない。
+皆が正直とは限らない
+-------
+94
+騒音は徐々に減少した。
+荘厳は徐々に減少した
+2018-10-16 01:39:51.355644+0800 sentencesVerifier[28240:1294960] TIC Read Status [261:0x600003835bc0]: 1:57
+2018-10-16 01:39:51.356377+0800 sentencesVerifier[28240:1294960] Task <82E5C9EB-EC35-41B8-8553-667D03AC6C7C>.<1220> HTTP load failed (error code: -1005 [4:-4])
+2018-10-16 01:39:51.356529+0800 sentencesVerifier[28240:1295776] Task <82E5C9EB-EC35-41B8-8553-667D03AC6C7C>.<1220> finished with error - code: -1005
+2018-10-16 01:39:51.356949+0800 sentencesVerifier[28240:1295490] Task <82E5C9EB-EC35-41B8-8553-667D03AC6C7C>.<1220> load failed with error Error Domain=NSURLErrorDomain Code=-1005 "The network connection was lost." UserInfo={_kCFStreamErrorCodeKey=-4, NSUnderlyingError=0x600000cb5fe0 {Error Domain=kCFErrorDomainCFNetwork Code=-1005 "(null)" UserInfo={NSErrorPeerAddressKey=<CFData 0x600002150280 [0x7fffa19788e0]>{length = 16, capacity = 16, bytes = 0x1002005036fa95a30000000000000000}, _kCFStreamErrorCodeKey=-4, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <82E5C9EB-EC35-41B8-8553-667D03AC6C7C>.<1220>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <82E5C9EB-EC35-41B8-8553-667D03AC6C7C>.<1220>"
+), NSLocalizedDescription=The network connection was lost., NSErrorFailingURLStringKey=http://54.250.149.163/nlp, NSErrorFailingURLKey=http://54.250.149.163/nlp, _kCFStreamErrorDomainKey=4} [-1005]
+-------
+0
+赤字は徐々に減少している。
+赤字は徐々に減少している

@@ -8,7 +8,9 @@
 
 import Foundation
 import AVFoundation
+#if os(iOS)
 import UIKit
+#endif
 import Promises
 
 // MARK: - Utilities
@@ -19,7 +21,7 @@ func getDataFromUrl(url: String, completion: @escaping (Data?, URLResponse?, Err
         completion(data, response, error)
     }.resume()
 }
-
+#if os(iOS)
 // MARK: - Audio Session
 func configureAudioSession() {
     do {
@@ -54,120 +56,6 @@ func configureAudioSession() {
 // MARK: - Misc
 func getNow() -> Double {
     return NSDate().timeIntervalSince1970
-}
-
-// MARK: - NLP
-// separate long text by punctuations
-func getSentences(_ text: String) -> [String] {
-    let tagger = NSLinguisticTagger(
-        tagSchemes: NSLinguisticTagger.availableTagSchemes(forLanguage: text.langCode ?? "ja"),
-        options: 0
-    )
-
-    var sentences: [String] = []
-    var curSentences = ""
-
-    tagger.string = text
-    let range = NSRange(location: 0, length: text.count)
-
-    tagger.enumerateTags(in: range, scheme: .tokenType, options: []) { (tag, tokenRange, _, _) in
-        let token = (text as NSString).substring(with: tokenRange)
-        if tag?.rawValue == "Punctuation" {
-            //curSentences += token
-            sentences.append(curSentences)
-            curSentences = ""
-        } else {
-            curSentences += token
-        }
-    }
-    sentences.append(curSentences)
-    return sentences
-}
-
-// MARK: - Edit Distance
-// EditDistance from https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#Swift
-private func min3(_ a: Int, _ b: Int, _ c: Int) -> Int {
-    return min( min(a, c), min(b, c))
-}
-
-private class Array2D {
-    var cols: Int, rows: Int
-    var matrix: [Int]
-
-    init(cols: Int, rows: Int) {
-        self.cols = cols
-        self.rows = rows
-        matrix = Array(repeating: 0, count: cols*rows)
-    }
-
-    subscript(col: Int, row: Int) -> Int {
-        get {
-            return matrix[cols * row + col]
-        }
-        set {
-            matrix[cols*row+col] = newValue
-        }
-    }
-
-    func colCount() -> Int {
-        return self.cols
-    }
-
-    func rowCount() -> Int {
-        return self.rows
-    }
-}
-
-func distanceBetween(_ aStr: String, _ bStr: String) -> Int {
-    let a = Array(aStr.utf16)
-    let b = Array(bStr.utf16)
-
-    if a.isEmpty || b.isEmpty {
-        return a.count + b.count
-    }
-
-    let dist = Array2D(cols: a.count + 1, rows: b.count + 1)
-
-    for i in 1...a.count {
-        dist[i, 0] = i
-    }
-
-    for j in 1...b.count {
-        dist[0, j] = j
-    }
-
-    for i in 1...a.count {
-        for j in 1...b.count {
-            if a[i-1] == b[j-1] {
-                dist[i, j] = dist[i-1, j-1]  // noop
-            } else {
-                dist[i, j] = min3(
-                    dist[i-1, j] + 1,  // deletion
-                    dist[i, j-1] + 1,  // insertion
-                    dist[i-1, j-1] + 1  // substitution
-                )
-            }
-        }
-    }
-
-    return dist[a.count, b.count]
-}
-
-// MARK: - Array Shuffle for calculate edit distance
-// https://stackoverflow.com/questions/24026510/how-do-i-shuffle-an-array-in-swift?noredirect=1&lq=1
-extension MutableCollection {
-    /// Shuffles the contents of this collection.
-    mutating func shuffle() {
-        let c = count
-        guard c > 1 else { return }
-
-        for (firstUnshuffled, unshuffledCount) in zip(indices, stride(from: c, to: 1, by: -1)) {
-            // Change `Int` in the next line to `IndexDistance` in < Swift 4.1
-            let d: Int = numericCast(arc4random_uniform(numericCast(unshuffledCount)))
-            let i = index(firstUnshuffled, offsetBy: d)
-            swapAt(firstUnshuffled, i)
-        }
-    }
 }
 
 extension Sequence {
@@ -295,4 +183,119 @@ func loadFromUserDefault<T: Codable>(type: T.Type, key: String) -> T? {
     }
     print("load \(key) Failed")
     return nil
+}
+#endif
+
+// MARK: - NLP
+// separate long text by punctuations
+func getSentences(_ text: String) -> [String] {
+    let tagger = NSLinguisticTagger(
+        tagSchemes: NSLinguisticTagger.availableTagSchemes(forLanguage: text.langCode ?? "ja"),
+        options: 0
+    )
+
+    var sentences: [String] = []
+    var curSentences = ""
+
+    tagger.string = text
+    let range = NSRange(location: 0, length: text.count)
+
+    tagger.enumerateTags(in: range, scheme: .tokenType, options: []) { (tag, tokenRange, _, _) in
+        let token = (text as NSString).substring(with: tokenRange)
+        if tag?.rawValue == "Punctuation" {
+            //curSentences += token
+            sentences.append(curSentences)
+            curSentences = ""
+        } else {
+            curSentences += token
+        }
+    }
+    sentences.append(curSentences)
+    return sentences
+}
+
+// MARK: - Edit Distance
+// EditDistance from https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#Swift
+private func min3(_ a: Int, _ b: Int, _ c: Int) -> Int {
+    return min( min(a, c), min(b, c))
+}
+
+private class Array2D {
+    var cols: Int, rows: Int
+    var matrix: [Int]
+
+    init(cols: Int, rows: Int) {
+        self.cols = cols
+        self.rows = rows
+        matrix = Array(repeating: 0, count: cols*rows)
+    }
+
+    subscript(col: Int, row: Int) -> Int {
+        get {
+            return matrix[cols * row + col]
+        }
+        set {
+            matrix[cols*row+col] = newValue
+        }
+    }
+
+    func colCount() -> Int {
+        return self.cols
+    }
+
+    func rowCount() -> Int {
+        return self.rows
+    }
+}
+
+func distanceBetween(_ aStr: String, _ bStr: String) -> Int {
+    let a = Array(aStr.utf16)
+    let b = Array(bStr.utf16)
+
+    if a.isEmpty || b.isEmpty {
+        return a.count + b.count
+    }
+
+    let dist = Array2D(cols: a.count + 1, rows: b.count + 1)
+
+    for i in 1...a.count {
+        dist[i, 0] = i
+    }
+
+    for j in 1...b.count {
+        dist[0, j] = j
+    }
+
+    for i in 1...a.count {
+        for j in 1...b.count {
+            if a[i-1] == b[j-1] {
+                dist[i, j] = dist[i-1, j-1]  // noop
+            } else {
+                dist[i, j] = min3(
+                    dist[i-1, j] + 1,  // deletion
+                    dist[i, j-1] + 1,  // insertion
+                    dist[i-1, j-1] + 1  // substitution
+                )
+            }
+        }
+    }
+
+    return dist[a.count, b.count]
+}
+
+// MARK: - Array Shuffle for calculate edit distance
+// https://stackoverflow.com/questions/24026510/how-do-i-shuffle-an-array-in-swift?noredirect=1&lq=1
+extension MutableCollection {
+    /// Shuffles the contents of this collection.
+    mutating func shuffle() {
+        let c = count
+        guard c > 1 else { return }
+
+        for (firstUnshuffled, unshuffledCount) in zip(indices, stride(from: c, to: 1, by: -1)) {
+            // Change `Int` in the next line to `IndexDistance` in < Swift 4.1
+            let d: Int = numericCast(arc4random_uniform(numericCast(unshuffledCount)))
+            let i = index(firstUnshuffled, offsetBy: d)
+            swapAt(firstUnshuffled, i)
+        }
+    }
 }

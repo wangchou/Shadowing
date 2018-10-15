@@ -19,10 +19,38 @@ var startTime = now()
 
 var vc:ViewController!
 
-// 1. do not use offline enhanced dictation (turn off in setting, because the accuracy is much lower than iOS)
-// 2. set sunflower 2ch as input and output
-// 3. in accessibility make sure the setting of "STT do not mute other audio"
+// 1. set sunflower 2ch as input and output
+// 2. in accessibility make sure the setting of "STT do not mute other audio"
+// 3. let programe say some sentence with offline enhanced dictation then turn it off.
+//    then use online STTlike iOS
 // run this whole day
+
+var isInfiniteChallengePreprocessingMode = false
+
+func prepareSentences() {
+    sentenceIds = []
+    if isInfiniteChallengePreprocessingMode {
+        loadSentenceDB()
+        createWritableDB()
+        sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 1, maxKanaCount: 8, numOfSentences: 3000))
+        sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 6, maxKanaCount: 12, numOfSentences: 3000))
+        sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 9, maxKanaCount: 18, numOfSentences: 3000))
+        sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 12, maxKanaCount: 24, numOfSentences: 3000))
+        sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 18, maxKanaCount: 36, numOfSentences: 3000))
+        sentences = getSentencesByIds(ids: sentenceIds)
+    } else {
+        print("set count: ", shadowingSentences.count)
+        //shadowingSentences.forEach { sArray in sentences.append(contentsOf: sArray) }
+        for i in 0...31 {
+            sentences.append(contentsOf: shadowingSentences[i])
+        }
+        for i in 0...sentences.count {
+            sentenceIds.append(i)
+        }
+    }
+
+    print(sentenceIds.count)
+}
 
 class ViewController: NSViewController {
     @IBOutlet weak var scrollView: NSScrollView!
@@ -30,8 +58,7 @@ class ViewController: NSViewController {
     @IBOutlet var textView: NSTextView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadSentenceDB()
-        createWritableDB()
+        prepareSentences()
         prepareSpeak()
         vc = self
     }
@@ -39,14 +66,6 @@ class ViewController: NSViewController {
     override func viewDidAppear() {
         super.viewDidAppear()
         scrollView.becomeFirstResponder()
-        sentenceIds = []
-        sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 1, maxKanaCount: 8, numOfSentences: 3000))
-        sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 6, maxKanaCount: 12, numOfSentences: 3000))
-        sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 9, maxKanaCount: 18, numOfSentences: 3000))
-        sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 12, maxKanaCount: 24, numOfSentences: 3000))
-        sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 18, maxKanaCount: 36, numOfSentences: 3000))
-        sentences = getSentencesByIds(ids: sentenceIds)
-        print(sentenceIds.count)
         Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
             verifyNextSentence()
         }
@@ -98,7 +117,7 @@ func verifyNextSentence() {
     let duration = "\(round(now() - startTime))s"
     let percentage = "\(round(100.0*Double(sentencesIdx)/Double(sentences.count)))%"
     vc.label.stringValue = "\(percentage) | \(duration) | \(sentencesIdx)/\(sentences.count)"
-    // print("verify \(sentencesIdx) < \(sentences.count)")
+
     vc.scrollView.becomeFirstResponder()
     guard sentencesIdx < sentences.count else { return }
     let s = sentences[sentencesIdx]
@@ -112,7 +131,7 @@ func verifyNextSentence() {
 
 func OurSpeechDoneCallBackProc(_ inSpeechChannel: SpeechChannel, _ inRefCon: SRefCon) {
     toggleSTT()
-    var waitTime:TimeInterval = 1.0
+    var waitTime:TimeInterval = 1.5
     if sentencesIdx % 100 == 0 {
         waitTime = 5.0
     }
@@ -120,8 +139,22 @@ func OurSpeechDoneCallBackProc(_ inSpeechChannel: SpeechChannel, _ inRefCon: SRe
         Timer.scheduledTimer(withTimeInterval: waitTime, repeats: false) { _ in
             let s = vc.textView.string
             let id = sentenceIds[sentencesIdx-1]
-            updateIdWithListened(id: id, siriSaid: s)
-            //print("id: \(id), siriSaid: \(s)")
+            if isInfiniteChallengePreprocessingMode {
+                updateIdWithListened(id: id, siriSaid: s)
+            } else {
+                let s1 = sentences[id]
+                let s2 = s
+                calculateScore(s1, s2).then { score -> Void in
+                    if score.value != 100 {
+                        print("-------")
+                        print(score.value)
+                        print(s1)
+                        print(s2)
+                    }
+                }
+
+            }
+
             verifyNextSentence()
         }
     }

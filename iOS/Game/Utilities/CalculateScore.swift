@@ -22,14 +22,14 @@ func getKanaTokenInfos(_ kanjiString: String) -> Promise<[[String]]> {
             case .success:
                 guard let tokenInfos = response.result.value as? [[String]] else {
                     print("parse tokenInfo response error")
-                    promise.fulfill([[]])
+                    promise.fulfill([])
                     return
                 }
                 kanaTokenInfosCacheDictionary[kanjiString] = tokenInfos
                 promise.fulfill(tokenInfos)
 
             case .failure:
-                promise.fulfill([[]])
+                promise.fulfill([])
             }
     }
     return promise
@@ -37,12 +37,6 @@ func getKanaTokenInfos(_ kanjiString: String) -> Promise<[[String]]> {
 
 func getKana(_ kanjiString: String) -> Promise<String> {
     let promise = Promise<String>.pending()
-    if let langCode = kanjiString.langCode,
-       langCode != "ja" {
-        let stringWithoutPuncuation = getSentences(kanjiString).joined(separator: "")
-        promise.fulfill(stringWithoutPuncuation)
-        return promise
-    }
 
     if kanjiString == "" {
         promise.fulfill("")
@@ -51,8 +45,10 @@ func getKana(_ kanjiString: String) -> Promise<String> {
 
     getKanaTokenInfos(kanjiString).then { tokenInfos in
         let kanaStr = tokenInfos.reduce("", { kanaStr, tokenInfo in
-            guard let kanaPart = tokenInfo.last,
-                  tokenInfo[1] != "記号" else { return kanaStr }
+            if tokenInfo.count < 2 || tokenInfo[1] == "記号" {
+                return kanaStr
+            }
+            let kanaPart = tokenInfo[tokenInfo.count - 2]
             return kanaStr + kanaPart
         })
         promise.fulfill(kanaStr)
@@ -86,8 +82,10 @@ func calculateScore(
     func calcScore(_ str1: String, _ str2: String) -> Int {
         let len = max(str1.count, str2.count)
         guard len > 0 else {
+            #if os(iOS)
             showMessage("連不到主機...")
-            print("zero len error on calcScore")
+            #endif
+            print("zero len error on calcScore", str1, str2)
             return 0
         }
         let score = (len - distanceBetween(str1, str2)) * 100 / len
@@ -100,7 +98,9 @@ func calculateScore(
     ]).then { result in
         guard let kana1 = result.first, let kana2 = result.last else { print("get both kana fail"); return }
         let score = calcScore(kana1, kana2)
+        #if os(iOS)
         postEvent(.scoreCalculated, score: Score(value: score))
+        #endif
         promise.fulfill(Score(value: score))
     }.catch { error in
         promise.reject(error)
