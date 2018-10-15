@@ -333,6 +333,10 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
+levenshtein-edit-distance@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/levenshtein-edit-distance/-/levenshtein-edit-distance-2.0.3.tgz#30b8d8b9ad94eabd4f8a9f5a10e2fd1f28c84bee"
+
 mecab-async@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/mecab-async/-/mecab-async-0.1.2.tgz#69efb838729216709597a57da2df03922f9b593a"

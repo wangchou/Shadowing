@@ -45,9 +45,7 @@ class ViewController: NSViewController {
         sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 9, maxKanaCount: 18, numOfSentences: 3000))
         sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 12, maxKanaCount: 24, numOfSentences: 3000))
         sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 18, maxKanaCount: 36, numOfSentences: 3000))
-        print("a")
         sentences = getSentencesByIds(ids: sentenceIds)
-        print("b")
         print(sentenceIds.count)
         Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
             verifyNextSentence()

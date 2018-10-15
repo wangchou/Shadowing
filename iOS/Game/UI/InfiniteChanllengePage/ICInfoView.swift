@@ -12,7 +12,7 @@ private let context = GameContext.shared
 
 private enum Texts: String {
     case precision = "完成率"
-    case numOfSentence = "句子數"
+    case numOfSentence = "句数"
 }
 
 private func getLevelDescription(_ level: Level) -> String {
@@ -135,7 +135,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
         addSubview(chart)
         y += 19
 
-        addText(x: 42, y: y, h: 2, text: Texts.numOfSentence.rawValue)
+        addText(x: 43, y: y, h: 2, text: Texts.numOfSentence.rawValue)
         y += 3
 
         // separate Line

@@ -36,6 +36,7 @@
 		BE8180C020B3BEB6006ABCB3 /* MyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180BF20B3BEB6006ABCB3 /* MyText.swift */; };
 		BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */; };
 		BE8283B42133DAE2008BC875 /* SpeechEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8283B32133DAE2008BC875 /* SpeechEngine.swift */; };
+		BE88D5EE2174C62F004E1CD0 /* inf_sentences_100points.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BE88D5ED2174C62F004E1CD0 /* inf_sentences_100points.sqlite */; };
 		BE8DE7B62161E44400812CED /* AbilityChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8DE7B52161E44400812CED /* AbilityChart.swift */; };
 		BE955E47216DAB8F00D424FA /* ICInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE955E46216DAB8F00D424FA /* ICInfoView.swift */; };
 		BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */; };
@@ -79,7 +80,6 @@
 		BEF258B320B57C7F00D0026C /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF258B220B57C7F00D0026C /* TimelineView.swift */; };
 		BEF28B6120B52BB000385273 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF28B6020B52BB000385273 /* Score.swift */; };
 		BEF28B6320B52BF700385273 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF28B6220B52BF700385273 /* UI.swift */; };
-		BEF9740221723EF20039759D /* inf_sentences.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BEF9740121723EF10039759D /* inf_sentences.sqlite */; };
 		BEFE13DA21539445002873B3 /* BGM.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFE13D921539445002873B3 /* BGM.swift */; };
 		BEFE98B22160911F00D442EE /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFE98B12160911F00D442EE /* Charts.framework */; };
 		BEFE98B32160911F00D442EE /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BEFE98B12160911F00D442EE /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -134,6 +134,7 @@
 		BE8180BF20B3BEB6006ABCB3 /* MyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyText.swift; sourceTree = "<group>"; };
 		BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFinishedPage.swift; sourceTree = "<group>"; };
 		BE8283B32133DAE2008BC875 /* SpeechEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechEngine.swift; sourceTree = "<group>"; };
+		BE88D5ED2174C62F004E1CD0 /* inf_sentences_100points.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences_100points.sqlite; sourceTree = "<group>"; };
 		BE8DE7B52161E44400812CED /* AbilityChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityChart.swift; sourceTree = "<group>"; };
 		BE955E46216DAB8F00D424FA /* ICInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICInfoView.swift; sourceTree = "<group>"; };
 		BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaLabel.swift; sourceTree = "<group>"; };
@@ -174,7 +175,6 @@
 		BEF258B220B57C7F00D0026C /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		BEF28B6020B52BB000385273 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		BEF28B6220B52BF700385273 /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
-		BEF9740121723EF10039759D /* inf_sentences.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences.sqlite; sourceTree = "<group>"; };
 		BEFE13D921539445002873B3 /* BGM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGM.swift; sourceTree = "<group>"; };
 		BEFE98B12160911F00D442EE /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Charts.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -324,7 +324,7 @@
 		BEBDEDBE208EF09F00C18520 /* VoiceOnly */ = {
 			isa = PBXGroup;
 			children = (
-				BEF9740121723EF10039759D /* inf_sentences.sqlite */,
+				BE88D5ED2174C62F004E1CD0 /* inf_sentences_100points.sqlite */,
 				BEEE4B3021722ABC0032D267 /* drumLoop.caf */,
 				BE67D2A821561A92007FE420 /* Assets.xcassets */,
 				BEBDEDCB208EF0A000C18520 /* Info.plist */,
@@ -469,10 +469,10 @@
 				BEEC7FA92154C7AC001C2EFF /* TopBarView.xib in Resources */,
 				BE67D2A921561A93007FE420 /* Assets.xcassets in Resources */,
 				BEA2389D21460EBD00548BBC /* sentences.txt in Resources */,
+				BE88D5EE2174C62F004E1CD0 /* inf_sentences_100points.sqlite in Resources */,
 				BEEE4B3121722ABC0032D267 /* drumLoop.caf in Resources */,
 				BEBDEDC5208EF09F00C18520 /* Main.storyboard in Resources */,
 				BECAC3BC216B904A001BBF49 /* BottomBarView.xib in Resources */,
-				BEF9740221723EF20039759D /* inf_sentences.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

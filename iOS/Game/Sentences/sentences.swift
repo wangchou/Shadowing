@@ -7,7 +7,7 @@ enum Level: Int, Codable {
     }
 
     var minKanaCount: Int {
-        let minKanaCounts = [1, 6, 9, 12, 18]
+        let minKanaCounts = [2, 6, 9, 12, 18]
         return minKanaCounts[self.rawValue]
     }
 
