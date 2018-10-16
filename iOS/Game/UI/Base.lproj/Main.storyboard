@@ -354,10 +354,8 @@
                                                     <rect key="frame" x="15" y="8" width="295" height="29"/>
                                                     <segments>
                                                         <segment title="預設"/>
-                                                        <segment title="Kyoko"/>
-                                                        <segment title="Otoya"/>
-                                                        <segment title="Siri (女)"/>
-                                                        <segment title="Siri (男)"/>
+                                                        <segment title="Kyoko (高品質)"/>
+                                                        <segment title="Otoya (高品質)"/>
                                                     </segments>
                                                     <connections>
                                                         <action selector="teacherTTSSegmentControlValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="9eM-bF-zQZ"/>
@@ -386,10 +384,8 @@
                                                     <rect key="frame" x="15" y="8" width="295" height="29"/>
                                                     <segments>
                                                         <segment title="預設"/>
-                                                        <segment title="Kyoko"/>
-                                                        <segment title="Otoya"/>
-                                                        <segment title="Siri (女)"/>
-                                                        <segment title="Siri (男)"/>
+                                                        <segment title="Kyoko (高品質)"/>
+                                                        <segment title="Otoya (高品質)"/>
                                                     </segments>
                                                     <connections>
                                                         <action selector="assistantTTSSegmentControlValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="MSr-2g-tvd"/>

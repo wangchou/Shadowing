@@ -81,15 +81,14 @@ class SpeechEngine {
         }
 
         if let speaker = speaker {
-            switch speaker {
-            case .hattori, .otoya, .kyoko, .oren, .meijia, .system:
+            if speaker == .user {
+                speakPromise = fulfilledVoidPromise()
+            } else {
                 speakPromise = tts.say(
                     text,
                     name: speaker.rawValue,
                     rate: rate
                 )
-            case .user:
-                speakPromise = fulfilledVoidPromise()
             }
         } else {
             speakPromise = tts.say(text, rate: rate)

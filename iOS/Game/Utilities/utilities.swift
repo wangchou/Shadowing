@@ -98,6 +98,7 @@ func launchStoryboard(
 
 // MARK: - Misc For Dev Only
 func dumpAvaliableVoices() {
+    print("current locale:", AVSpeechSynthesisVoice.currentLanguageCode())
     for voice in AVSpeechSynthesisVoice.speechVoices() {
         //if ((availableVoice.language == AVSpeechSynthesisVoice.currentLanguageCode()) &&
         //    (availableVoice.quality == AVSpeechSynthesisVoiceQuality.enhanced)) {
@@ -190,7 +191,7 @@ func loadFromUserDefault<T: Codable>(type: T.Type, key: String) -> T? {
 // separate long text by punctuations
 func getSentences(_ text: String) -> [String] {
     let tagger = NSLinguisticTagger(
-        tagSchemes: NSLinguisticTagger.availableTagSchemes(forLanguage: text.langCode ?? "ja"),
+        tagSchemes: NSLinguisticTagger.availableTagSchemes(forLanguage: "ja"),
         options: 0
     )
 

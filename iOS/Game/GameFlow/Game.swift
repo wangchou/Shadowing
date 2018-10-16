@@ -69,7 +69,7 @@ extension Game {
             return fulfilledVoidPromise()
         }
 
-        return engine.speak(text: context.targetString, speaker: context.targetSpeaker)
+        return engine.speak(text: context.targetString, speaker: context.gameSetting.teacher)
     }
 
     internal func listenWrapped() -> Promise<Void> {
