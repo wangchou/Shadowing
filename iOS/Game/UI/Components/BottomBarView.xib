@@ -31,15 +31,18 @@
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="g2q-mR-3pt">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="35"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0li-UV-e2a">
+                        <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0li-UV-e2a">
                             <rect key="frame" x="0.0" y="0.0" width="160" height="35"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <inset key="titleEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="0.0"/>
                             <state key="normal" image="round_list_black_48pt"/>
                             <connections>
                                 <action selector="onLeftButtonClicked:" destination="-1" eventType="touchUpInside" id="1aC-nG-5ZF"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wfS-vz-dnp">
+                        <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wfS-vz-dnp">
                             <rect key="frame" x="160" y="0.0" width="160" height="35"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" image="round_all_inclusive_black_48pt"/>
                             <connections>
                                 <action selector="onRightButtonClicked:" destination="-1" eventType="touchUpInside" id="MPu-x6-JvA"/>
