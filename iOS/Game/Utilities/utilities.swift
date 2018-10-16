@@ -87,7 +87,8 @@ func launchStoryboard(
     _ originVC: UIViewController,
     _ storyboardId: String,
     isOverCurrent: Bool = false,
-    animated: Bool = false
+    animated: Bool = false,
+    completion: ((UIViewController) -> Void)? = nil
     ) {
     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: storyboardId)
     if isOverCurrent {
@@ -95,7 +96,9 @@ func launchStoryboard(
     } else {
         vc.modalTransitionStyle = .crossDissolve
     }
-    originVC.present(vc, animated: animated, completion: nil)
+    originVC.present(vc, animated: animated) {
+        completion?(vc)
+    }
 }
 
 // MARK: - Misc For Dev Only

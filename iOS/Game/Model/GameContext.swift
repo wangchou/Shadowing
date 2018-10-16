@@ -138,10 +138,11 @@ class GameContext {
         sentenceIndex = 0
         dataSetKey = level.dataSetKey
         loadSentenceDB()
+        let numOfSentences = isSimulator ? 3 : 20
         let sentenceIds = randSentenceIds(
             minKanaCount: level.minKanaCount,
             maxKanaCount: level.maxKanaCount,
-            numOfSentences: 20
+            numOfSentences: numOfSentences
         )
         sentences = getSentencesByIds(ids: sentenceIds).map { s in
             _ = s.furiganaAttributedString // load furigana
@@ -156,7 +157,7 @@ class GameContext {
         sentenceIndex += 1
         var sentencesBound = sentences.count
         if isSimulator {
-            sentencesBound = 10
+            sentencesBound = 3
         }
         guard sentenceIndex < sentencesBound else { return false }
         userSaidString = ""

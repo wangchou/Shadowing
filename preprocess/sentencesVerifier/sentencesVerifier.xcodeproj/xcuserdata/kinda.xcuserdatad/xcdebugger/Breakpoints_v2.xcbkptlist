@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../iOS/Game/Utilities/CalculateScore.swift"
-            timestampString = "561331150.030139"
+            timestampString = "561403127.822956"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
             landmarkName = "getKanaTokenInfos(_:)"
             landmarkType = "9">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../iOS/Game/Utilities/CalculateScore.swift"
-            timestampString = "561331150.0305589"
+            timestampString = "561403127.823314"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "getKanaTokenInfos(_:)"
             landmarkType = "9">
          </BreakpointContent>
