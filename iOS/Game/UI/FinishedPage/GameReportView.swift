@@ -44,11 +44,10 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         backButton.addTapGestureRecognizer {
             if let vc = UIApplication.getPresentedViewController() {
                 if context.contentTab == .infiniteChallenge {
-                    vc.dismiss(animated: false) {
-                        UIApplication.getPresentedViewController()?.dismiss(animated: true, completion: nil)
-                    }
+                    launchStoryboard(vc, "InfiniteChallengeSwipablePage", animated: true)
+                } else {
+                    launchStoryboard(vc, "MainSwipablePage", animated: true)
                 }
-                launchStoryboard(vc, "MainSwipablePage", animated: true)
             }
         }
         if context.isNewRecord && context.contentTab == .topics {

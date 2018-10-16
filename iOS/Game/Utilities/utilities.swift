@@ -93,6 +93,7 @@ func launchStoryboard(
     if isOverCurrent {
         vc.modalPresentationStyle = .overCurrentContext
     }
+    vc.modalTransitionStyle = .crossDissolve
     originVC.present(vc, animated: animated, completion: nil)
 }
 
