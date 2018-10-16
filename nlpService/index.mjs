@@ -72,4 +72,5 @@ app.post('/nlp', cache(864000), (req, res) => {
 
 // use reverse proxy or
 // iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
-app.listen(3000)
+var server = app.listen(3000)
+server.keepAliveTimeout = 20000
