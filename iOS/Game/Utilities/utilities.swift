@@ -92,8 +92,9 @@ func launchStoryboard(
     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: storyboardId)
     if isOverCurrent {
         vc.modalPresentationStyle = .overCurrentContext
+    } else {
+        vc.modalTransitionStyle = .crossDissolve
     }
-    vc.modalTransitionStyle = .crossDissolve
     originVC.present(vc, animated: animated, completion: nil)
 }
 

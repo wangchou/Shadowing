@@ -59,12 +59,12 @@ class BottomBarView: UIView, XibView {
         context.contentTab = .topics
         sharedSetup()
         guard let vc = UIApplication.getPresentedViewController() else { return }
-        launchStoryboard(vc, "MainSwipablePage")
+        launchStoryboard(vc, "MainSwipablePage", animated: true)
     }
     @IBAction func onRightButtonClicked(_ sender: Any) {
         context.contentTab = .infiniteChallenge
         sharedSetup()
         guard let vc = UIApplication.getPresentedViewController() else { return }
-        launchStoryboard(vc, "InfiniteChallengeSwipablePage")
+        launchStoryboard(vc, "InfiniteChallengeSwipablePage", animated: true)
     }
 }

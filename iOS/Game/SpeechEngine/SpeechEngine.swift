@@ -49,6 +49,7 @@ class SpeechEngine {
 
     // MARK: - Public Funtions
     func start() {
+        guard !isEngineRunning else { return }
         isEngineRunning = true
 
         guard !isSimulator else { return }

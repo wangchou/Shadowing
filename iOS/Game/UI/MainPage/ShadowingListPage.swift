@@ -21,11 +21,10 @@ class ShadowingListPage: UIViewController {
     @IBOutlet weak var abilityChart: AbilityChart!
 
     var timelineSubviews: [String: UIView] = [:]
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
         engine.start()
+
         addSentences()
         loadGameHistory()
         loadGameSetting()
@@ -50,6 +49,10 @@ class ShadowingListPage: UIViewController {
         sentencesTableView.reloadData()
         timeline.viewWillAppear()
         abilityChart.render()
+        if context.dataSetKey == "" {
+            context.dataSetKey = allSentencesKeys[0]
+            context.loadLearningSentences(isShuffle: false)
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {

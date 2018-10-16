@@ -17,6 +17,7 @@ func saveGameHistory() {
 }
 
 func loadGameHistory() {
+    guard context.gameHistory.isEmpty else { return }
     if let gameHistory = loadFromUserDefault(type: [GameRecord].self, key: gameHistoryKey) {
         context.gameHistory = gameHistory
     }
