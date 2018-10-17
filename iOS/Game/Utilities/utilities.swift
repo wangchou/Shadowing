@@ -305,3 +305,26 @@ extension MutableCollection {
         }
     }
 }
+
+func tokenInfosToString(tokenInfos: [[String]]) -> String {
+    let jsonEncoder = JSONEncoder()
+    do {
+        let jsonData = try jsonEncoder.encode(tokenInfos)
+        return String(data: jsonData, encoding: .utf8) ?? ""
+    } catch {
+        print(error)
+        return ""
+    }
+}
+
+func stringToTokenInfos(jsonString: String) -> [[String]]? {
+    do {
+        // Decode data to object
+        let jsonDecoder = JSONDecoder()
+        guard let jsonData = jsonString.data(using: .utf8) else { return nil }
+        return try jsonDecoder.decode([[String]].self, from: jsonData)
+    } catch {
+        print(error)
+        return nil
+    }
+}

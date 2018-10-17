@@ -1,5 +1,7 @@
 import UIKit
 
+var avgKanaCountDict: [String: Int] = [:]
+
 enum Level: Int, Codable {
     case lv0=0, lv1=1, lv2=2, lv3=3, lv4=4
     var color: UIColor {
@@ -71,13 +73,31 @@ func addSentences() {
     shadowingSentences
         .filter { sentences in return !sentences.isEmpty }
         .forEach { sentences in
-        let subSentences: [(speaker: ChatSpeaker, string: String)] = sentences
-            .map { s in
-                return (ChatSpeaker.hattori, s)
+            let subSentences: [(speaker: ChatSpeaker, string: String)] = sentences
+                .map { s in
+                    return (ChatSpeaker.hattori, s)
+            }
+            let key = "\(subSentences[0].string)"
+            allSentences[key] = subSentences
+            allSentencesKeys.append(key)
+            allLevels[key] = Level.lv0
+
+            let avgKanaCount = subSentences
+                .map { pair -> Int in
+                    return topicSentencesInfos[pair.string]?.kanaCount ?? 0
+                }
+                .reduce(0, { sum, count in
+                    return sum + count
+                })/subSentences.count
+            avgKanaCountDict[key] = avgKanaCount
         }
-        let key = "\(subSentences[0].string)"
-        allSentences[key] = subSentences
-        allSentencesKeys.append(key)
-        allLevels[key] = Level.lv0
+    allSentencesKeys.sort { key1, key2 in
+        if let count1 = avgKanaCountDict[key1],
+           let count2 = avgKanaCountDict[key2] {
+            return count1 < count2
+        }
+        return true
     }
+
+    //allSentencesKeys.forEach {k in print(k, avgKanaCountDict[k]!)}
 }

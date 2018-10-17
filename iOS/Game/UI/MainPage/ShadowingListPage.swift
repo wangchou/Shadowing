@@ -24,7 +24,7 @@ class ShadowingListPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         engine.start()
-
+        loadTopSentencesInfoDB()
         addSentences()
         loadGameHistory()
         loadGameSetting()
@@ -66,7 +66,13 @@ class ShadowingListPage: UIViewController {
     }
 
     func addGradientSeparatorLine() {
-        let lightRGBs = [myRed, myOrange, myGreen, myBlue].map { $0.cgColor }
+        let lightRGBs = [
+            Level.lv0.color,
+            Level.lv1.color,
+            Level.lv2.color,
+            Level.lv3.color,
+            Level.lv4.color
+        ].map { $0.cgColor }
         let layer = CAGradientLayer()
         layer.frame = topView.frame
         layer.frame.origin.y = topView.frame.height - 1.5
