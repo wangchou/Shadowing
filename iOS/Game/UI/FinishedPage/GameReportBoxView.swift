@@ -50,7 +50,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
             ])
         addAttrText(2, y, 12, progress)
 
-        addText(26, y, 3, "Rank")
+        addText(26, y, 3, "判定")
         addText(26, y, 12, record.rank.rawValue.padWidthTo(3), color: record.rank.color)
 
         addText(2, y+11, 3, "正解 \(record.perfectCount) | すごい \(record.greatCount) | いいね \(record.goodCount) | ミス \(record.missedCount)")

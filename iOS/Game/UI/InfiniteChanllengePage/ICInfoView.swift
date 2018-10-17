@@ -151,7 +151,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
 
         addText(x: 2, y: y, h: 3, text: line1)
         addText(x: 18, y: y, h: 3, text: "完成率")
-        addText(x: 35, y: y, h: 3, text: "Rank")
+        addText(x: 35, y: y, h: 3, text: "判定")
 
         y += 3
 

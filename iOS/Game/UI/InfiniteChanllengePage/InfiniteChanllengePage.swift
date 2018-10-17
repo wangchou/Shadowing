@@ -57,7 +57,7 @@ class InfiniteChallengePage: UIViewController {
             blockView.isHidden = true
         }
 
-        blockInfo.text = "「\(lastLevel.title)」取得 Rank B 後解鎖。"
+        blockInfo.text = "「\(lastLevel.title)」B判定以上後解鎖。"
         tableView.reloadData()
     }
 
