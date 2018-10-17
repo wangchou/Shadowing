@@ -12,7 +12,7 @@ private let context = GameContext.shared
 
 private enum Texts: String {
     case precision = "完成率"
-    case numOfSentence = "句子數"
+    case numOfSentence = "句数"
 }
 
 private func getLevelDescription(_ level: Level) -> String {
@@ -44,13 +44,13 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
     var level: Level = .lv0
 
     var line1: String {
-        return "難度：" + getLevelDescription(level)
+        return "難度：" + getLevelDescription(level) + "です"
     }
     var line2: String {
-        return "假名數：\(minKanaCount)〜\(maxKanaCount)"
+        return "仮名数：\(minKanaCount)〜\(maxKanaCount)"
     }
     var line3: String {
-        return "總句數：\(sentencesCount)"
+        return "句数：\(sentencesCount)"
     }
     var bestRank: String? {
         return findBestRecord(key: level.dataSetKey)?.rank.rawValue
@@ -135,7 +135,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
         addSubview(chart)
         y += 19
 
-        addText(x: 42, y: y, h: 2, text: Texts.numOfSentence.rawValue)
+        addText(x: 43, y: y, h: 2, text: Texts.numOfSentence.rawValue)
         y += 3
 
         // separate Line
@@ -169,7 +169,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
 
         addSeparateLine(y: y)
         addSeparateLine(y: y+5)
-        addText(x: 1, y: y, h: 5, text: "前一次的挑戰")
+        addText(x: 1, y: y, h: 5, text: "前回の挑戦")
     }
 
     func addSeparateLine(y: Int, color: UIColor = .darkGray) {
@@ -182,7 +182,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
 
     func addChallengeButton() {
         let button = UIButton()
-        button.setTitle("挑      戰", for: .normal)
+        button.setTitle("挑　　　戦", for: .normal)
         button.backgroundColor = .red
         button.titleLabel?.font = MyFont.regular(ofSize: step * 5)
         button.titleLabel?.textColor = myLightText

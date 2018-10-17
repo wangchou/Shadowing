@@ -16,9 +16,10 @@ struct KanaInfo {
 }
 
 private var kanaInfos: [Int: KanaInfo] = [:]
+private var sqliteFileName = "inf_sentences_100points"
 
 func loadSentenceDB() {
-    guard let path = Bundle.main.path(forResource: "infinite_sentences", ofType: "sqlite") else {
+    guard let path = Bundle.main.path(forResource: sqliteFileName, ofType: "sqlite") else {
         print("sqlite file not found"); return
     }
     do {
@@ -38,7 +39,7 @@ func loadSentenceDB() {
 
 func getSentencesByIds(ids: [Int]) -> [String] {
     var sentences: [String] = []
-    guard let path = Bundle.main.path(forResource: "infinite_sentences", ofType: "sqlite") else {
+    guard let path = Bundle.main.path(forResource: sqliteFileName, ofType: "sqlite") else {
         print("sqlite file not found"); return sentences
     }
     do {

@@ -13,7 +13,7 @@ var translations: [String: String] = [:]
 var datasetKeyToTags: [String: [String]] = [:]
 var tags: [String] = []
 var shadowingSentences: [[String]] =
-    [dailyOne, expressive, travel, polite, interaction, love, speech, random]
+    [dailyOne, expressive, travel, polite, love, speech]
     .flatMap { (element: [String]) -> [String] in
         return element
     }
@@ -52,8 +52,10 @@ enum ChatSpeaker: String, Codable {
     case system = "system default"
     case oren = "com.apple.ttsbundle.siri_female_ja-JP_compact"
     case kyoko = "com.apple.ttsbundle.Kyoko-compact"
+    case kyokoPremium = "com.apple.ttsbundle.Kyoko-premium"
     case hattori = "com.apple.ttsbundle.siri_male_ja-JP_compact"
     case otoya = "com.apple.ttsbundle.Otoya-compact"
+    case otoyaPremium = "com.apple.ttsbundle.Otoya-premium"
     case meijia = "com.apple.ttsbundle.Mei-Jia-compact"
     case user = "user"
 }

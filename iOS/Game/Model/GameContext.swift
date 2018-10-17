@@ -49,6 +49,21 @@ class GameContext {
 
     var teachingRate: Float {
         if gameSetting.isAutoSpeed {
+            if contentTab == .infiniteChallenge,
+               let level = gameRecord?.level {
+                switch level {
+                case .lv0:
+                    return AVSpeechUtteranceDefaultSpeechRate * 0.6
+                case .lv1:
+                    return AVSpeechUtteranceDefaultSpeechRate * 0.7
+                case .lv2:
+                    return AVSpeechUtteranceDefaultSpeechRate * 0.8
+                case .lv3:
+                    return AVSpeechUtteranceDefaultSpeechRate * 0.9
+                case .lv4:
+                    return AVSpeechUtteranceDefaultSpeechRate * 1.0
+                }
+            }
             return AVSpeechUtteranceDefaultSpeechRate * (0.4 + life.f * 0.007)
         } else {
             return gameSetting.preferredSpeed
@@ -123,16 +138,17 @@ class GameContext {
         sentenceIndex = 0
         dataSetKey = level.dataSetKey
         loadSentenceDB()
+        let numOfSentences = isSimulator ? 3 : 20
         let sentenceIds = randSentenceIds(
             minKanaCount: level.minKanaCount,
             maxKanaCount: level.maxKanaCount,
-            numOfSentences: 20
+            numOfSentences: numOfSentences
         )
         sentences = getSentencesByIds(ids: sentenceIds).map { s in
+            _ = s.furiganaAttributedString // load furigana
             return (speaker: ChatSpeaker.hattori, string: s)
         }
-        //print(sentences)
-        life = isSimulator ? 100 : 50
+        if isSimulator { life = 100 }
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level, flowMode: .shadowing)
 
     }
@@ -141,7 +157,7 @@ class GameContext {
         sentenceIndex += 1
         var sentencesBound = sentences.count
         if isSimulator {
-            sentencesBound = 10
+            sentencesBound = 3
         }
         guard sentenceIndex < sentencesBound else { return false }
         userSaidString = ""

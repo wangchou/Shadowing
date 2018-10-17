@@ -9,7 +9,6 @@
 // https://stackoverflow.com/questions/46690337/swift-4-ctrubyannotation-dont-work
 
 import Foundation
-import UIKit
 import Promises
 
 enum JpnType {
@@ -17,6 +16,9 @@ enum JpnType {
     case kanjiAndNumberOnly
     case mixed
 }
+
+#if os(iOS)
+import UIKit
 
 // fonts
 // .HiraKakuInterface-W2
@@ -135,7 +137,7 @@ func getFuriganaString(tokenInfos: [[String]]) -> NSMutableAttributedString {
         }
         if tokenInfo.count == 10 {
             let kanjiStr = tokenInfo[0]
-            let kana = tokenInfo[8].kataganaToHiragana
+            let kana = findKanaFix(kanjiStr) ?? tokenInfo[8].kataganaToHiragana
             let parts = kanjiStr // [わたし、| 気 | になります！]
                 .replace("([\\p{Han}\\d]*[\\p{Han}\\d])", "👻$1👻")
                 .components(separatedBy: "👻")
@@ -154,6 +156,9 @@ func getFuriganaString(tokenInfos: [[String]]) -> NSMutableAttributedString {
 
     return furiganaAttrStr
 }
+#else
+// OSX code
+#endif
 
 extension Substring {
     var s: String { return String(self) }
@@ -213,7 +218,7 @@ extension String {
         }
         return JpnType.mixed
     }
-
+    #if os(iOS)
     var furiganaAttributedString: Promise<NSMutableAttributedString> {
         let promise = Promise<NSMutableAttributedString>.pending()
 
@@ -229,6 +234,7 @@ extension String {
         }
         return promise
     }
+    #endif
 
     // Hiragana: 3040-309F
     // Katakana: 30A0-30FF

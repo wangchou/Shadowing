@@ -34,8 +34,11 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
            let voice = AVSpeechSynthesisVoice(identifier: name) {
             utterance.voice = voice
         } else {
-            let language = language ?? text.langCode ?? "ja"
-            utterance.voice = AVSpeechSynthesisVoice(language: language)
+            // prefer use system default(Siri) than lanuage default
+            if let language = language,
+                language != AVSpeechSynthesisVoice.currentLanguageCode() {
+                utterance.voice = AVSpeechSynthesisVoice(language: language)
+            }
         }
 
         utterance.rate = rate

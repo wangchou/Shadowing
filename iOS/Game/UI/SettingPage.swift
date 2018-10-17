@@ -74,13 +74,9 @@ class SettingPage: UITableViewController {
 
     private func getSegmentIndex(speaker: ChatSpeaker) -> Int {
         switch speaker {
-        case .hattori:
-            return 4
-        case .oren:
-            return 3
-        case .kyoko:
+        case .kyokoPremium:
             return 1
-        case .otoya:
+        case .otoyaPremium:
             return 2
         default:
             return 0
@@ -89,10 +85,8 @@ class SettingPage: UITableViewController {
 
     private func getChatSpeaker(segmentIndex: Int) -> ChatSpeaker {
         if segmentIndex == 0 { return .system }
-        if segmentIndex == 1 { return .kyoko }
-        if segmentIndex == 2 { return .otoya }
-        if segmentIndex == 3 { return .oren }
-        if segmentIndex == 4 { return .hattori }
+        if segmentIndex == 1 { return .kyokoPremium }
+        if segmentIndex == 2 { return .otoyaPremium }
         return .system
     }
 

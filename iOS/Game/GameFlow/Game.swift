@@ -69,21 +69,21 @@ extension Game {
             return fulfilledVoidPromise()
         }
 
-        return engine.speak(text: context.targetString, speaker: context.targetSpeaker)
+        return engine.speak(text: context.targetString, speaker: context.gameSetting.teacher)
     }
 
     internal func listenWrapped() -> Promise<Void> {
         context.gameState = .listening
         if context.gameSetting.isUsingGuideVoice {
             return engine
-                .listen(duration: Double(context.speakDuration + pauseDuration))
+                .listenJP(duration: Double(context.speakDuration + pauseDuration))
                 .then(saveUserSaidString)
         }
 
         return context
             .calculatedSpeakDuration
             .then({ speakDuration -> Promise<String> in
-                return engine.listen(duration: Double(speakDuration + pauseDuration))
+                return engine.listenJP(duration: Double(speakDuration + pauseDuration))
             })
             .then(saveUserSaidString)
     }

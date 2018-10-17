@@ -53,11 +53,12 @@ class InfiniteChallengePage: UIViewController {
         let levels: [Level] = [.lv0, .lv1, .lv2, .lv3, .lv4]
         let lastLevel = levels[(levels.firstIndex(of: level) ?? 0) - 1]
         if let lastLevelBestRecord = findBestRecord(key: lastLevel.dataSetKey),
-           lastLevelBestRecord.p >= 90 {
+           lastLevelBestRecord.p >= 80 {
             blockView.isHidden = true
         }
 
-        blockInfo.text = "「\(lastLevel.title)」取得 Rank A 後解鎖。"
+        blockInfo.text = "「\(lastLevel.title)」取得 Rank B 後解鎖。"
+        tableView.reloadData()
     }
 
     func updateUI() {

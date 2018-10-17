@@ -3,6 +3,7 @@
     "start": "node --experimental-modules index.mjs"
   },
   "dependencies": {
+    "levenshtein-edit-distance": "^2.0.3",
     "mecab-async": "^0.1.2",
     "sqlite3": "^4.0.2"
   },

@@ -17,6 +17,7 @@ func saveGameHistory() {
 }
 
 func loadGameHistory() {
+    guard context.gameHistory.isEmpty else { return }
     if let gameHistory = loadFromUserDefault(type: [GameRecord].self, key: gameHistoryKey) {
         context.gameHistory = gameHistory
     }
@@ -37,14 +38,15 @@ func updateGameHistory() {
         if isBetter(record, to: bestRecord) {
             context.gameHistory.insert(record, at: 0)
             context.gameRecord?.isNewRecord = true
-            context.newRecordIncrease = bestRecord.abilityPoint - (context.gameRecord?.abilityPoint ?? 0)
+            context.newRecordIncrease = (record.p - bestRecord.p).i
         } else {
+            context.gameHistory.append(record)
             context.gameRecord?.isNewRecord = false
         }
     } else {
         context.gameHistory.append(record)
         context.gameRecord?.isNewRecord = true
-        context.newRecordIncrease = context.gameRecord?.abilityPoint ?? 0
+        context.newRecordIncrease = record.p.i
     }
     saveGameHistory()
 }

@@ -21,11 +21,10 @@ class ShadowingListPage: UIViewController {
     @IBOutlet weak var abilityChart: AbilityChart!
 
     var timelineSubviews: [String: UIView] = [:]
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
         engine.start()
+
         addSentences()
         loadGameHistory()
         loadGameSetting()
@@ -42,7 +41,6 @@ class ShadowingListPage: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadCharacterProfile()
         let height = screen.width * 130/320
         topView.frame.size.height = height
         timeline.frame.size.height = height * 120 / 130
@@ -51,6 +49,10 @@ class ShadowingListPage: UIViewController {
         sentencesTableView.reloadData()
         timeline.viewWillAppear()
         abilityChart.render()
+        if context.dataSetKey == "" {
+            context.dataSetKey = allSentencesKeys[0]
+            context.loadLearningSentences(isShuffle: false)
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -102,7 +104,7 @@ extension ShadowingListPage: UITableViewDataSource {
 
         contentCell.titleLabel.attributedText = attrStr
         let record = findBestRecord(key: dataSetKey)
-        contentCell.pointMaxText = "\(getAbilityPointMax(dataSetKey))"
+        //contentCell.pointMaxText = "\(getAbilityPointMax(dataSetKey))"
         contentCell.strockedProgressText = record?.progress
         contentCell.strockedRankText = record?.rank.rawValue
 

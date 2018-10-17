@@ -7,12 +7,12 @@ enum Level: Int, Codable {
     }
 
     var minKanaCount: Int {
-        let minKanaCounts = [1, 8, 12, 18, 27]
+        let minKanaCounts = [2, 6, 9, 12, 18]
         return minKanaCounts[self.rawValue]
     }
 
     var maxKanaCount: Int {
-        let maxKanaCounts = [10, 15, 23, 33, 50]
+        let maxKanaCounts = [8, 12, 18, 24, 36]
         return maxKanaCounts[self.rawValue]
     }
 
@@ -68,7 +68,9 @@ func getTagPoints() -> [String: Int] {
 }
 
 func addSentences() {
-    shadowingSentences.forEach { sentences in
+    shadowingSentences
+        .filter { sentences in return !sentences.isEmpty }
+        .forEach { sentences in
         let subSentences: [(speaker: ChatSpeaker, string: String)] = sentences
             .map { s in
                 return (ChatSpeaker.hattori, s)

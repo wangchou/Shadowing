@@ -7,7 +7,9 @@
 //
 
 import Foundation
+#if os(iOS)
 import UIKit
+#endif
 
 enum ScoreType: String, Codable {
     case perfect
@@ -32,13 +34,15 @@ struct Score: Codable {
         if type == .good { return "いいね"}
         return "違います"
     }
-
+    
+    #if os(iOS)
     var color: UIColor {
         if type == .perfect { return myGreen }
         if type == .great { return myGreen }
         if type == .good { return myOrange}
         return myRed
     }
+    #endif
 
     var valueText: String { return "\(value)点" }
 }

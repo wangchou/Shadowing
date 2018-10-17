@@ -49,6 +49,7 @@ class SpeechEngine {
 
     // MARK: - Public Funtions
     func start() {
+        guard !isEngineRunning else { return }
         isEngineRunning = true
 
         guard !isSimulator else { return }
@@ -81,15 +82,14 @@ class SpeechEngine {
         }
 
         if let speaker = speaker {
-            switch speaker {
-            case .hattori, .otoya, .kyoko, .oren, .meijia, .system:
+            if speaker == .user {
+                speakPromise = fulfilledVoidPromise()
+            } else {
                 speakPromise = tts.say(
                     text,
                     name: speaker.rawValue,
                     rate: rate
                 )
-            case .user:
-                speakPromise = fulfilledVoidPromise()
             }
         } else {
             speakPromise = tts.say(text, rate: rate)
@@ -99,9 +99,13 @@ class SpeechEngine {
     }
 
     // MARK: - Voice Recognition
-    func listen(duration: Double, langCode: String? = nil) -> Promise<String> {
+    private func listen(duration: Double, langCode: String? = nil) -> Promise<String> {
         let langCode = langCode ?? context.targetString.langCode ?? "ja"
         return speechRecognizer.start(stopAfterSeconds: duration, localIdentifier: langCode)
+    }
+
+    func listenJP(duration: Double) -> Promise<String> {
+        return speechRecognizer.start(stopAfterSeconds: duration, localIdentifier: "ja")
     }
 
     func stopListen() {

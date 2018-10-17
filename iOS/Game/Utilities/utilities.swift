@@ -8,7 +8,9 @@
 
 import Foundation
 import AVFoundation
+#if os(iOS)
 import UIKit
+#endif
 import Promises
 
 // MARK: - Utilities
@@ -19,16 +21,7 @@ func getDataFromUrl(url: String, completion: @escaping (Data?, URLResponse?, Err
         completion(data, response, error)
     }.resume()
 }
-
-func loadCharacterProfile() {
-    getDataFromUrl(url: awanUrl) { data, _, error in
-        guard let data = data, error == nil else { return }
-        DispatchQueue.main.async {
-            GameContext.shared.characterImage = UIImage(data: data)
-        }
-    }
-}
-
+#if os(iOS)
 // MARK: - Audio Session
 func configureAudioSession() {
     do {
@@ -65,11 +58,145 @@ func getNow() -> Double {
     return NSDate().timeIntervalSince1970
 }
 
+extension Sequence {
+    /// Returns an array with the contents of this sequence, shuffled.
+    func shuffled() -> [Element] {
+        var result = Array(self)
+        result.shuffle()
+        return result
+    }
+}
+
+extension Int {
+    var f: Float { return Float(self) }
+    var c: CGFloat { return CGFloat(self) }
+    var s: String { return String(self) }
+}
+
+extension Float {
+    var i: Int { return Int(self) }
+    var c: CGFloat { return CGFloat(self) }
+}
+
+extension CGFloat {
+    var f: Float { return Float(self) }
+}
+
+// MARK: - launch storyboard
+func launchStoryboard(
+    _ originVC: UIViewController,
+    _ storyboardId: String,
+    isOverCurrent: Bool = false,
+    animated: Bool = false,
+    completion: ((UIViewController) -> Void)? = nil
+    ) {
+    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: storyboardId)
+    if isOverCurrent {
+        vc.modalPresentationStyle = .overCurrentContext
+    } else {
+        vc.modalTransitionStyle = .crossDissolve
+    }
+    originVC.present(vc, animated: animated) {
+        completion?(vc)
+    }
+}
+
+// MARK: - Misc For Dev Only
+func dumpAvaliableVoices() {
+    print("current locale:", AVSpeechSynthesisVoice.currentLanguageCode())
+    for voice in AVSpeechSynthesisVoice.speechVoices() {
+        //if ((availableVoice.language == AVSpeechSynthesisVoice.currentLanguageCode()) &&
+        //    (availableVoice.quality == AVSpeechSynthesisVoiceQuality.enhanced)) {
+        if voice.language == "ja-JP" || voice.language == "zh-TW" {
+            print("\(voice.name) on \(voice.language) with Quality: \(voice.quality.rawValue) \(voice.identifier)")
+        }
+        //}
+    }
+}
+
+func getAvailableVoiceID(language: String) -> [String] {
+    return AVSpeechSynthesisVoice.speechVoices()
+        .filter { voice in
+            if voice.language == language {
+                return true
+            }
+            return false
+        }.map { voice in
+            return voice.identifier
+        }
+}
+
+// measure performance
+var startTime: Double = 0
+func setStartTime(_ tag: String = "") {
+    startTime = NSDate().timeIntervalSince1970
+    print(tag)
+}
+func printDuration(_ tag: String = "") {
+    print(tag, (NSDate().timeIntervalSince1970 - startTime)*1000, "ms")
+}
+
+// Promise Utilities
+func fulfilledVoidPromise() -> Promise<Void> {
+    let promise = Promise<Void>.pending()
+    promise.fulfill(())
+    return promise
+}
+
+func pausePromise(_ seconds: Double) -> Promise<Void> {
+    let p = Promise<Void>.pending()
+    Timer.scheduledTimer(withTimeInterval: seconds, repeats: false) { _ in
+        p.fulfill(())
+    }
+    return p
+}
+
+extension String {
+    func padWidthTo(_ width: Int, isBothSide: Bool = false) -> String {
+        let padCount = max(width - self.count, 0)
+
+        func getEmptySpaces(_ padCount: Int) -> String {
+            guard padCount > 0 else { return "" }
+            var spaces = ""
+            for _ in 1...padCount { spaces += " " }
+            return spaces
+        }
+
+        if isBothSide {
+            let leftPadCount =  padCount / 2
+            let rightPadCount = padCount - leftPadCount
+            return getEmptySpaces(leftPadCount) + self + getEmptySpaces(rightPadCount)
+        }
+
+        return getEmptySpaces(padCount) + self
+    }
+}
+
+func saveToUserDefault<T: Codable>(object: T, key: String) {
+    let encoder = JSONEncoder()
+    if let encoded = try? encoder.encode(object) {
+        UserDefaults.standard.set(encoded, forKey: key)
+    } else {
+        print("save \(key) Failed")
+    }
+}
+
+func loadFromUserDefault<T: Codable>(type: T.Type, key: String) -> T? {
+    let decoder = JSONDecoder()
+    if let data = UserDefaults.standard.data(forKey: key),
+        let obj = try? decoder.decode(T.self, from: data) {
+        return obj as T
+    }
+    print("load \(key) Failed")
+    return nil
+}
+#endif
+
 // MARK: - NLP
 // separate long text by punctuations
 func getSentences(_ text: String) -> [String] {
     let tagger = NSLinguisticTagger(
-        tagSchemes: NSLinguisticTagger.availableTagSchemes(forLanguage: text.langCode ?? "ja"),
+        tagSchemes: NSLinguisticTagger.availableTagSchemes(forLanguage: "ja"),
         options: 0
     )
 
@@ -177,131 +304,4 @@ extension MutableCollection {
             swapAt(firstUnshuffled, i)
         }
     }
-}
-
-extension Sequence {
-    /// Returns an array with the contents of this sequence, shuffled.
-    func shuffled() -> [Element] {
-        var result = Array(self)
-        result.shuffle()
-        return result
-    }
-}
-
-extension Int {
-    var f: Float { return Float(self) }
-    var c: CGFloat { return CGFloat(self) }
-    var s: String { return String(self) }
-}
-
-extension Float {
-    var i: Int { return Int(self) }
-    var c: CGFloat { return CGFloat(self) }
-}
-
-extension CGFloat {
-    var f: Float { return Float(self) }
-}
-
-// MARK: - launch storyboard
-func launchStoryboard(
-    _ originVC: UIViewController,
-    _ storyboardId: String,
-    isOverCurrent: Bool = false,
-    animated: Bool = false
-    ) {
-    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: storyboardId)
-    if isOverCurrent {
-        vc.modalPresentationStyle = .overCurrentContext
-    }
-    originVC.present(vc, animated: animated, completion: nil)
-}
-
-// MARK: - Misc For Dev Only
-func dumpAvaliableVoices() {
-    for voice in AVSpeechSynthesisVoice.speechVoices() {
-        //if ((availableVoice.language == AVSpeechSynthesisVoice.currentLanguageCode()) &&
-        //    (availableVoice.quality == AVSpeechSynthesisVoiceQuality.enhanced)) {
-        if voice.language == "ja-JP" || voice.language == "zh-TW" {
-            print("\(voice.name) on \(voice.language) with Quality: \(voice.quality.rawValue) \(voice.identifier)")
-        }
-        //}
-    }
-}
-
-func getAvailableVoiceID(language: String) -> [String] {
-    return AVSpeechSynthesisVoice.speechVoices()
-        .filter { voice in
-            if voice.language == language {
-                return true
-            }
-            return false
-        }.map { voice in
-            return voice.identifier
-        }
-}
-
-// measure performance
-var startTime: Double = 0
-func setStartTime(_ tag: String = "") {
-    startTime = NSDate().timeIntervalSince1970
-    print(tag)
-}
-func printDuration(_ tag: String = "") {
-    print(tag, (NSDate().timeIntervalSince1970 - startTime)*1000, "ms")
-}
-
-// Promise Utilities
-func fulfilledVoidPromise() -> Promise<Void> {
-    let promise = Promise<Void>.pending()
-    promise.fulfill(())
-    return promise
-}
-
-func pausePromise(_ seconds: Double) -> Promise<Void> {
-    let p = Promise<Void>.pending()
-    Timer.scheduledTimer(withTimeInterval: seconds, repeats: false) { _ in
-        p.fulfill(())
-    }
-    return p
-}
-
-extension String {
-    func padWidthTo(_ width: Int, isBothSide: Bool = false) -> String {
-        let padCount = max(width - self.count, 0)
-
-        func getEmptySpaces(_ padCount: Int) -> String {
-            guard padCount > 0 else { return "" }
-            var spaces = ""
-            for _ in 1...padCount { spaces += " " }
-            return spaces
-        }
-
-        if isBothSide {
-            let leftPadCount =  padCount / 2
-            let rightPadCount = padCount - leftPadCount
-            return getEmptySpaces(leftPadCount) + self + getEmptySpaces(rightPadCount)
-        }
-
-        return getEmptySpaces(padCount) + self
-    }
-}
-
-func saveToUserDefault<T: Codable>(object: T, key: String) {
-    let encoder = JSONEncoder()
-    if let encoded = try? encoder.encode(object) {
-        UserDefaults.standard.set(encoded, forKey: key)
-    } else {
-        print("save \(key) Failed")
-    }
-}
-
-func loadFromUserDefault<T: Codable>(type: T.Type, key: String) -> T? {
-    let decoder = JSONDecoder()
-    if let data = UserDefaults.standard.data(forKey: key),
-        let obj = try? decoder.decode(T.self, from: data) {
-        return obj as T
-    }
-    print("load \(key) Failed")
-    return nil
 }

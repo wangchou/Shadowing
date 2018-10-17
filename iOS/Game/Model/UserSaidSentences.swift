@@ -26,6 +26,7 @@ func saveUserSaidSentencesAndScore() {
 }
 
 func loadUserSaidSentencesAndScore() {
+    guard userSaidSentences.isEmpty else { return }
     if let loadedSentences = loadFromUserDefault(type: type(of: userSaidSentences), key: userSaidSentencesKey) {
         userSaidSentences = loadedSentences
     } else {

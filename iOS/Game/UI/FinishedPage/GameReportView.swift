@@ -22,7 +22,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         backgroundColor = UIColor.black.withAlphaComponent(0.6)
         let reportBox = GameReportBoxView()
 
-        if context.isNewRecord {
+        if context.isNewRecord && context.contentTab == .topics {
             frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.6)
             layout(2, 4, 44, 60, reportBox)
         } else {
@@ -43,10 +43,22 @@ class GameReportView: UIView, ReloadableView, GridLayout {
 
         backButton.addTapGestureRecognizer {
             if let vc = UIApplication.getPresentedViewController() {
-                launchStoryboard(vc, "MainSwipablePage", animated: true)
+                if context.contentTab == .infiniteChallenge {
+                    launchStoryboard(vc, "InfiniteChallengeSwipablePage") { newVC in
+                        if let icwPage = newVC as? InfiniteChallengeSwipablePage {
+                            guard let level = context.gameRecord?.level else { return }
+                            var pageIdx: Int = level.rawValue + 1
+                            
+                            icwPage.setViewControllers([icwPage.pages[pageIdx]], direction: .forward, animated: false, completion: nil)
+                            (icwPage.pages[pageIdx] as? InfiniteChallengePage)?.tableView.reloadData()
+                        }
+                    }
+                } else {
+                    launchStoryboard(vc, "MainSwipablePage", animated: true)
+                }
             }
         }
-        if context.isNewRecord {
+        if context.isNewRecord && context.contentTab == .topics {
             layout(2, 66, 44, 8, backButton)
 
         } else {
