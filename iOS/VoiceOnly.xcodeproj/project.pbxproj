@@ -38,6 +38,7 @@
 		BE8283B42133DAE2008BC875 /* SpeechEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8283B32133DAE2008BC875 /* SpeechEngine.swift */; };
 		BE88D5EE2174C62F004E1CD0 /* inf_sentences_100points.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BE88D5ED2174C62F004E1CD0 /* inf_sentences_100points.sqlite */; };
 		BE8DE7B62161E44400812CED /* AbilityChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8DE7B52161E44400812CED /* AbilityChart.swift */; };
+		BE8F747F2176E258005546DC /* kanaFix.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8F747E2176E258005546DC /* kanaFix.swift */; };
 		BE955E47216DAB8F00D424FA /* ICInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE955E46216DAB8F00D424FA /* ICInfoView.swift */; };
 		BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */; };
 		BE9B476A20AD50520063E0DA /* FuriganaUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476920AD50520063E0DA /* FuriganaUtils.swift */; };
@@ -136,6 +137,7 @@
 		BE8283B32133DAE2008BC875 /* SpeechEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechEngine.swift; sourceTree = "<group>"; };
 		BE88D5ED2174C62F004E1CD0 /* inf_sentences_100points.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences_100points.sqlite; sourceTree = "<group>"; };
 		BE8DE7B52161E44400812CED /* AbilityChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityChart.swift; sourceTree = "<group>"; };
+		BE8F747E2176E258005546DC /* kanaFix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kanaFix.swift; sourceTree = "<group>"; };
 		BE955E46216DAB8F00D424FA /* ICInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICInfoView.swift; sourceTree = "<group>"; };
 		BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaLabel.swift; sourceTree = "<group>"; };
 		BE9B476920AD50520063E0DA /* FuriganaUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaUtils.swift; sourceTree = "<group>"; };
@@ -381,6 +383,7 @@
 			isa = PBXGroup;
 			children = (
 				BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */,
+				BE8F747E2176E258005546DC /* kanaFix.swift */,
 				BE9B476920AD50520063E0DA /* FuriganaUtils.swift */,
 				BE8180BF20B3BEB6006ABCB3 /* MyText.swift */,
 				BEF28B6220B52BF700385273 /* UI.swift */,
@@ -541,6 +544,7 @@
 				BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */,
 				BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */,
 				BE8180C020B3BEB6006ABCB3 /* MyText.swift in Sources */,
+				BE8F747F2176E258005546DC /* kanaFix.swift in Sources */,
 				BEA86115216F264A00AECF13 /* sqliteSentences.swift in Sources */,
 				BECAC3BA216B8FE3001BBF49 /* BottomBarView.swift in Sources */,
 				BE59646E215A0EC300E4AA0C /* love.swift in Sources */,

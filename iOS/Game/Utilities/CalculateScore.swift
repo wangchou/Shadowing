@@ -48,7 +48,7 @@ func getKana(_ kanjiString: String) -> Promise<String> {
             if tokenInfo.count < 2 || tokenInfo[1] == "記号" {
                 return kanaStr
             }
-            let kanaPart = tokenInfo[tokenInfo.count - 2]
+            let kanaPart = findKanaFix(tokenInfo[0]) ?? tokenInfo[tokenInfo.count - 2]
             return kanaStr + kanaPart
         })
         promise.fulfill(kanaStr)
@@ -63,7 +63,7 @@ func getKanaSync(_ kanjiString: String) -> String {
 
     if let tokenInfos = kanaTokenInfosCacheDictionary[kanjiString] {
         let kanaStr = tokenInfos.reduce("", { kanaStr, tokenInfo in
-            guard let kanaPart = tokenInfo.last,
+            guard let kanaPart = findKanaFix(tokenInfo[0]) ?? tokenInfo.last,
                 tokenInfo[1] != "記号" else { return kanaStr }
             return kanaStr + kanaPart
         })
