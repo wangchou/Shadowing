@@ -16,6 +16,7 @@ private let context = GameContext.shared
 @IBDesignable
 class BottomBarView: UIView, XibView {
     var contentView: UIView?
+    var contentTab: ContentTab = .topics
     var nibName: String = "BottomBarView"
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
@@ -45,7 +46,7 @@ class BottomBarView: UIView, XibView {
         xibSetup()
         var leftColor: UIColor = UIColor(white: 0, alpha: 0.66)
         var rightColor: UIColor = UIColor(white: 0, alpha: 0.66)
-        switch context.contentTab {
+        switch contentTab {
         case .topics:
             leftColor = tintColor
         case .infiniteChallenge:
@@ -58,13 +59,11 @@ class BottomBarView: UIView, XibView {
     @IBAction func onLeftButtonClicked(_ sender: Any) {
         context.contentTab = .topics
         sharedSetup()
-        guard let vc = UIApplication.getPresentedViewController() else { return }
-        launchStoryboard(vc, "MainSwipablePage", animated: true)
+        rootViewController.showMainPage()
     }
     @IBAction func onRightButtonClicked(_ sender: Any) {
         context.contentTab = .infiniteChallenge
         sharedSetup()
-        guard let vc = UIApplication.getPresentedViewController() else { return }
-        launchStoryboard(vc, "InfiniteChallengeSwipablePage", animated: true)
+        rootViewController.showInfiniteChallengePage()
     }
 }

@@ -127,6 +127,6 @@ extension ShadowingListPage: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         context.dataSetKey = allSentencesKeys[indexPath.row]
         context.loadLearningSentences(isShuffle: false)
-        (UIApplication.getPresentedViewController() as? UIPageViewController)?.goToNextPage()
+        rootViewController.current.goToNextPage()
     }
 }

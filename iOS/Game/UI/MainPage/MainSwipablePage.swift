@@ -10,7 +10,7 @@
 import UIKit
 
 class MainSwipablePage: UIPageViewController {
-
+    static let storyboardId = "MainSwipablePage"
     var pages = [UIViewController]()
 
     override func viewDidLayoutSubviews() {

@@ -104,11 +104,6 @@ class Messenger: UIViewController {
         launchStoryboard(self, "PauseOverlay", isOverCurrent: true)
     }
 
-    @objc func finishGame() {
-        end()
-        launchStoryboard(self, "MainSwipablePage")
-    }
-
     @objc func restartGame() {
         y += Int(screen.height)
         scrollView.scrollTo(y)

@@ -53,6 +53,7 @@
 		BEBDEDDD208EF15F00C18520 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */; };
 		BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */; };
 		BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD8208EF15F00C18520 /* constants.swift */; };
+		BEC2E92F217875C30095A65D /* RootContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC2E92E217875C30095A65D /* RootContainerViewController.swift */; };
 		BECAC3B5216B34FA001BBF49 /* InfiniteChanllengePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECAC3B4216B34FA001BBF49 /* InfiniteChanllengePage.swift */; };
 		BECAC3B7216B37E5001BBF49 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BECAC3B6216B37E5001BBF49 /* SQLite.framework */; };
 		BECAC3B8216B37E5001BBF49 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BECAC3B6216B37E5001BBF49 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -154,6 +155,7 @@
 		BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculateScore.swift; sourceTree = "<group>"; };
 		BEBDEDD8208EF15F00C18520 /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
+		BEC2E92E217875C30095A65D /* RootContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerViewController.swift; sourceTree = "<group>"; };
 		BECAC3B4216B34FA001BBF49 /* InfiniteChanllengePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteChanllengePage.swift; sourceTree = "<group>"; };
 		BECAC3B6216B37E5001BBF49 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SQLite.framework; sourceTree = "<group>"; };
 		BECAC3B9216B8FE3001BBF49 /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 				BEBDEDC3208EF09F00C18520 /* Main.storyboard */,
 				BEEC7FAC2155014E001C2EFF /* SettingPage.swift */,
 				BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */,
+				BEC2E92E217875C30095A65D /* RootContainerViewController.swift */,
 				BE2951132155F5D0008239F9 /* Components */,
 				BE29510F2155F4F7008239F9 /* MainPage */,
 				BE2951102155F50E008239F9 /* DetailPage */,
@@ -521,6 +524,7 @@
 				BEEC7FAD2155014E001C2EFF /* SettingPage.swift in Sources */,
 				BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */,
 				BEDFCDAB20A87AF800736153 /* PauseOverlayViewController.swift in Sources */,
+				BEC2E92F217875C30095A65D /* RootContainerViewController.swift in Sources */,
 				BEF28B6120B52BB000385273 /* Score.swift in Sources */,
 				BE1CA956209D5D0900086853 /* Game.swift in Sources */,
 				BE7725C420A2CBC200DF186A /* sentences.swift in Sources */,

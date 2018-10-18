@@ -14,6 +14,7 @@ class InfiniteChallengePage: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var blockView: UIView!
     @IBOutlet weak var blockInfo: UILabel!
+    @IBOutlet weak var bottomBar: BottomBarView!
     var topBarTitle: String = "無限挑戰模式"
     var topBarLeftText: String = ""
     var topBarRightText: String = ""
@@ -35,6 +36,8 @@ class InfiniteChallengePage: UIViewController {
             UINib(nibName: "SentencesTableCell", bundle: nil),
             forCellReuseIdentifier: "ICContentTableCell"
         )
+        bottomBar.contentTab = .infiniteChallenge
+        bottomBar.sharedSetup()
     }
 
     override func viewWillAppear(_ animated: Bool) {

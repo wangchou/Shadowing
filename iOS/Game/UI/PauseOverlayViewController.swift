@@ -75,13 +75,9 @@ class PauseOverlayViewController: UIViewController {
 
     @IBAction func finishButtonClicked(_ sender: Any) {
         ShadowingFlow.shared.stop()
-//        if context.gameFlowMode == .shadowing {
-//            launchStoryboard(self, "MainSwipablePage")
-//        } else {
-            dismiss(animated: false) {
-                UIApplication.getPresentedViewController()?.dismiss(animated: true, completion: nil)
-            }
-//        }
+        dismiss(animated: false) {
+            UIApplication.getPresentedViewController()?.dismiss(animated: true, completion: nil)
+        }
     }
 
     @objc func viewTapped() {
