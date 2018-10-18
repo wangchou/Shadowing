@@ -52,6 +52,7 @@ class SentencesTableCell: UITableViewCell {
 
     func practiceSentence() {
         guard SentencesTableCell.isPracticing != true else { return }
+        GameContentDetailPage.isChallengeButtonDisabled = true
         SentencesTableCell.isPracticing = true
         self.isUserInteractionEnabled = false
         practiceButton.isEnabled = false
@@ -65,6 +66,7 @@ class SentencesTableCell: UITableViewCell {
                 self.isUserInteractionEnabled = true
                 self.practiceButton.isEnabled = true
                 SentencesTableCell.isPracticing = false
+                GameContentDetailPage.isChallengeButtonDisabled = false
             }
     }
 

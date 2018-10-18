@@ -74,10 +74,8 @@ class PauseOverlayViewController: UIViewController {
     }
 
     @IBAction func finishButtonClicked(_ sender: Any) {
-        ShadowingFlow.shared.stop()
-        dismiss(animated: false) {
-            UIApplication.getPresentedViewController()?.dismiss(animated: true, completion: nil)
-        }
+        dismiss(animated: true, completion: nil)
+        postEvent(.forceStopGame)
     }
 
     @objc func viewTapped() {

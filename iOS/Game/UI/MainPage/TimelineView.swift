@@ -50,7 +50,6 @@ class TimelineView: UIView, ReloadableView, GridLayout {
 
     func viewWillAppear() {
         dateFormatter.dateFormat = "yyyy MM dd"
-
         removeAllSubviews()
 
         let today = Date()

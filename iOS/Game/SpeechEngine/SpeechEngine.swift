@@ -100,16 +100,23 @@ class SpeechEngine {
 
     // MARK: - Voice Recognition
     private func listen(duration: Double, langCode: String? = nil) -> Promise<String> {
+        stopListen()
         let langCode = langCode ?? context.targetString.langCode ?? "ja"
         return speechRecognizer.start(stopAfterSeconds: duration, localIdentifier: langCode)
     }
 
     func listenJP(duration: Double) -> Promise<String> {
+        stopListen()
         return speechRecognizer.start(stopAfterSeconds: duration, localIdentifier: "ja")
     }
 
     func stopListen() {
         speechRecognizer.endAudio()
+    }
+
+    func reset() {
+        speechRecognizer.endAudio()
+        tts.stop()
     }
 
     private func buildNodeGraph() {

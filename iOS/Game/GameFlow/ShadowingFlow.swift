@@ -9,13 +9,18 @@
 import Foundation
 import Promises
 
+enum GameError: Error {
+    case forceStop
+}
+
 private let context = GameContext.shared
 
 class ShadowingFlow: Game {
-    static let shared = ShadowingFlow()
+    var isForceStopped = false
 
     // MARK: - Public Functions
     override func start() {
+        isForceStopped = false
         context.gameFlowMode = .shadowing
         context.gameState = .stopped
         context.gameRecord?.startedTime = Date()
@@ -38,6 +43,13 @@ class ShadowingFlow: Game {
         wait.fulfill(())
     }
 
+    func forceStop() {
+        SpeechEngine.shared.reset()
+        isForceStopped = true
+        isPaused = false
+        wait.reject(GameError.forceStop)
+    }
+
     func pause() {
         wait = Promise<Void>.pending()
         isPaused = true
@@ -50,12 +62,14 @@ class ShadowingFlow: Game {
 
     // MARK: - Private Functions
     private func learnNext() {
+        guard !self.isForceStopped else { return }
         speakTargetString()
         .then { self.wait }
         .then( listenPart )
         .then { self.wait }
         .catch { error in print("Promise chain is dead", error)}
         .always {
+            guard !self.isForceStopped else { return }
             context.gameState = .sentenceSessionEnded
             if context.nextSentence() {
                 self.learnNext()

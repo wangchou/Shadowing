@@ -13,6 +13,8 @@ import Promises
 private let context = GameContext.shared
 
 class GameContentDetailPage: UIViewController {
+    static var isChallengeButtonDisabled = false
+
     @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var challengeButton: UIButton!
@@ -96,6 +98,7 @@ class GameContentDetailPage: UIViewController {
     }
 
     @IBAction func challenge(_ sender: Any) {
+        guard !GameContentDetailPage.isChallengeButtonDisabled else { return }
         context.gameFlowMode = .shadowing
         launchGame()
     }

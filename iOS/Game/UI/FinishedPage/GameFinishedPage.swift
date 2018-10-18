@@ -39,6 +39,11 @@ class GameFinishedPage: UIViewController {
         reportView.viewWillAppear()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        SpeechEngine.shared.reset()
+    }
+
     func sortSentenceByScore() {
         context.sentences.sort { chStr1, chStr2 in
             guard let record = context.gameRecord else { return true }

@@ -70,6 +70,10 @@ extension Messenger: GameEventDelegate {
         case .resume:
             game.resume()
 
+        case .forceStopGame:
+            stopEventObserving(self)
+            dismiss(animated: false)
+
         default:
             return
         }

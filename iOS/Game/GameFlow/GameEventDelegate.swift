@@ -25,6 +25,7 @@ enum EventType {
 
     case playTimeUpdate
     case resume
+    case forceStopGame
 }
 
 struct Event {

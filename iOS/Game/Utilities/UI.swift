@@ -161,7 +161,7 @@ extension GridLayout where Self: UIView {
         label.textColor = color ?? .black
         label.text = text
         layout(x, y, w ?? (gridCount - x), h, label)
-        self.addSubview(label)
+        addSubview(label)
 
         completion?(label)
     }
@@ -170,7 +170,7 @@ extension GridLayout where Self: UIView {
         let label = UILabel()
         label.attributedText = text
         layout(x, y, w ?? (gridCount - x), h, label)
-        self.addSubview(label)
+        addSubview(label)
         completion?(label)
     }
 
@@ -183,7 +183,7 @@ extension GridLayout where Self: UIView {
         if let backgroundColor = backgroundColor {
             roundRect.backgroundColor = backgroundColor
         }
-        self.addSubview(roundRect)
+        addSubview(roundRect)
     }
 
     func addRect(x: Int, y: Int, w: Int, h: Int,
@@ -191,7 +191,7 @@ extension GridLayout where Self: UIView {
         let rect = UIView()
         layout(x, y, w, h, rect)
         rect.backgroundColor = color
-        self.addSubview(rect)
+        addSubview(rect)
     }
 
     func layout(_ x: Int, _ y: Int, _ w: Int, _ h: Int, _ view: UIView) {

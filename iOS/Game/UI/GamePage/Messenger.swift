@@ -13,7 +13,7 @@ private let context = GameContext.shared
 
 // Prototype 8: messenger / line interface
 class Messenger: UIViewController {
-    let game = ShadowingFlow.shared
+    var game: ShadowingFlow! = ShadowingFlow()
     var lastLabel: FuriganaLabel = FuriganaLabel()
 
     private var y: Int = 8
@@ -33,12 +33,14 @@ class Messenger: UIViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        scrollView.removeAllSubviews()
         end()
         UIApplication.shared.isIdleTimerDisabled = false
     }
 
     func start() {
         startEventObserving(self)
+        game = ShadowingFlow()
         game.start()
         sentenceCountLabel.text = "還有\(context.sentences.count)句"
         speedLabel.text = String(format: "%.2f 倍速", context.teachingRate * 2)
@@ -50,7 +52,12 @@ class Messenger: UIViewController {
 
     func end() {
         stopEventObserving(self)
-        game.stop()
+        if game.isForceStopped {
+            game.forceStop()
+        } else {
+            game.stop()
+        }
+        game = nil
     }
 
     func addLabel(_ text: NSAttributedString, isLeft: Bool = true) {

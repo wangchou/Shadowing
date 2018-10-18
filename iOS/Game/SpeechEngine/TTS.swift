@@ -52,7 +52,8 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
     func stop() {
         synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
         postEvent(.sayEnded, string: "")
-        promise.reject(TTSError.TTSStop)
+        //promise.reject(TTSError.TTSStop)
+        promise.fulfill(())
     }
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
