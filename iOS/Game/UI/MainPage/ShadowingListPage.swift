@@ -108,9 +108,14 @@ extension ShadowingListPage: UITableViewDataSource {
             )
         }
 
+        if let level = allLevels[dataSetKey] {
+            contentCell.levelLabel.text = level.character
+            contentCell.levelLabel.textColor = level.color
+            contentCell.levelLabel.roundBorder(borderWidth: 1.5, cornerRadius: 20, color: level.color)
+            contentCell.levelLabel.backgroundColor = level.color.withAlphaComponent(0.1)
+        }
         contentCell.titleLabel.attributedText = attrStr
         let record = findBestRecord(key: dataSetKey)
-        //contentCell.pointMaxText = "\(getAbilityPointMax(dataSetKey))"
         contentCell.strockedProgressText = record?.progress
         contentCell.strockedRankText = record?.rank.rawValue
 

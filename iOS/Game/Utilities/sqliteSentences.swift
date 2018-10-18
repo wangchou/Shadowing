@@ -60,6 +60,7 @@ func loadSentenceDB() {
 
 func loadTopSentencesInfoDB() {
     guard topicSentencesInfos.isEmpty else { return }
+    print("<loadTopSentenceInfoDb>")
     guard let path = Bundle.main.path(forResource: sqliteFileName, ofType: "sqlite") else {
         print("sqlite file not found"); return
     }

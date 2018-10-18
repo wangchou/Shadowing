@@ -1,6 +1,16 @@
 import UIKit
 
 var avgKanaCountDict: [String: Int] = [:]
+private let minKanaCounts = [2, 6, 9, 12, 18]
+private let maxKanaCounts = [8, 12, 18, 24, 36]
+
+func getLevel(avgKanaCount: Int) -> Level {
+    if avgKanaCount < maxKanaCounts[0] { return Level.lv0 }
+    if avgKanaCount < maxKanaCounts[1] { return Level.lv1 }
+    if avgKanaCount < maxKanaCounts[2] { return Level.lv2 }
+    if avgKanaCount < maxKanaCounts[3] { return Level.lv3 }
+    return Level.lv4
+}
 
 enum Level: Int, Codable {
     case lv0=0, lv1=1, lv2=2, lv3=3, lv4=4
@@ -9,12 +19,10 @@ enum Level: Int, Codable {
     }
 
     var minKanaCount: Int {
-        let minKanaCounts = [2, 6, 9, 12, 18]
         return minKanaCounts[self.rawValue]
     }
 
     var maxKanaCount: Int {
-        let maxKanaCounts = [8, 12, 18, 24, 36]
         return maxKanaCounts[self.rawValue]
     }
 
@@ -25,6 +33,11 @@ enum Level: Int, Codable {
     var title: String {
         let titles = ["入門", "初級", "中級", "上級", "超難問"]
         return titles[self.rawValue]
+    }
+
+    var character: String {
+        let characters = ["入", "初", "中", "上", "超"]
+        return characters[self.rawValue]
     }
 }
 
@@ -70,6 +83,7 @@ func getTagPoints() -> [String: Int] {
 }
 
 func addSentences() {
+    allSentencesKeys = []
     shadowingSentences
         .filter { sentences in return !sentences.isEmpty }
         .forEach { sentences in
@@ -80,7 +94,6 @@ func addSentences() {
             let key = "\(subSentences[0].string)"
             allSentences[key] = subSentences
             allSentencesKeys.append(key)
-            allLevels[key] = Level.lv0
 
             let avgKanaCount = subSentences
                 .map { pair -> Int in
@@ -90,6 +103,7 @@ func addSentences() {
                     return sum + count
                 })/subSentences.count
             avgKanaCountDict[key] = avgKanaCount
+            allLevels[key] = getLevel(avgKanaCount: avgKanaCount)
         }
     allSentencesKeys.sort { key1, key2 in
         if let count1 = avgKanaCountDict[key1],
