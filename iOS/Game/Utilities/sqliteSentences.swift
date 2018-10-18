@@ -15,7 +15,14 @@ struct KanaInfo {
     var sentenceCount: Int
 }
 
+struct TopicSentenceInfo {
+    var kanaCount: Int
+    var ja: String
+    var tokenInfos: [[String]]?
+}
+
 private var kanaInfos: [Int: KanaInfo] = [:]
+var topicSentencesInfos: [String: TopicSentenceInfo] = [:]
 private var sqliteFileName = "inf_sentences_100points"
 
 func loadSentenceDB() {
@@ -31,6 +38,48 @@ func loadSentenceDB() {
         for row in try db.prepare(kanaInfoTable) {
             let kanaInfo = KanaInfo(kanaCount: row[kanaCount], startId: row[startId], sentenceCount: row[sentenceCount])
             kanaInfos[row[kanaCount]] = kanaInfo
+        }
+        let topicSentencesInfoTable = Table("topicSentencesInfo")
+        let ja = Expression<String>("ja")
+        let tokenInfos = Expression<String>("tokenInfos")
+        for row in try db.prepare(topicSentencesInfoTable) {
+            let topicSentenceInfo = TopicSentenceInfo(
+                kanaCount: row[kanaCount],
+                ja: row[ja],
+                tokenInfos: stringToTokenInfos(jsonString: row[tokenInfos])
+            )
+            topicSentencesInfos[row[ja]] = topicSentenceInfo
+            if let tmpTokenInfos = topicSentenceInfo.tokenInfos {
+                kanaTokenInfosCacheDictionary[row[ja]] = tmpTokenInfos
+            }
+        }
+    } catch {
+        print("db error")
+    }
+}
+
+func loadTopSentencesInfoDB() {
+    guard topicSentencesInfos.isEmpty else { return }
+    print("<loadTopSentenceInfoDb>")
+    guard let path = Bundle.main.path(forResource: sqliteFileName, ofType: "sqlite") else {
+        print("sqlite file not found"); return
+    }
+    do {
+        let db = try Connection(path, readonly: true)
+        let kanaCount = Expression<Int>("kana_count")
+        let ja = Expression<String>("ja")
+        let topicSentencesInfoTable = Table("topicSentencesInfo")
+        let tokenInfos = Expression<String>("tokenInfos")
+        for row in try db.prepare(topicSentencesInfoTable) {
+            let topicSentenceInfo = TopicSentenceInfo(
+                kanaCount: row[kanaCount],
+                ja: row[ja],
+                tokenInfos: stringToTokenInfos(jsonString: row[tokenInfos])
+            )
+            topicSentencesInfos[row[ja]] = topicSentenceInfo
+            if let tmpTokenInfos = topicSentenceInfo.tokenInfos {
+                kanaTokenInfosCacheDictionary[row[ja]] = tmpTokenInfos
+            }
         }
     } catch {
         print("db error")

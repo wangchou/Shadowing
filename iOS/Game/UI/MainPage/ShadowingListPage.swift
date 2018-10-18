@@ -24,7 +24,7 @@ class ShadowingListPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         engine.start()
-
+        loadTopSentencesInfoDB()
         addSentences()
         loadGameHistory()
         loadGameSetting()
@@ -66,7 +66,13 @@ class ShadowingListPage: UIViewController {
     }
 
     func addGradientSeparatorLine() {
-        let lightRGBs = [myRed, myOrange, myGreen, myBlue].map { $0.cgColor }
+        let lightRGBs = [
+            Level.lv0.color,
+            Level.lv1.color,
+            Level.lv2.color,
+            Level.lv3.color,
+            Level.lv4.color
+        ].map { $0.cgColor }
         let layer = CAGradientLayer()
         layer.frame = topView.frame
         layer.frame.origin.y = topView.frame.height - 1.5
@@ -102,9 +108,14 @@ extension ShadowingListPage: UITableViewDataSource {
             )
         }
 
+        if let level = allLevels[dataSetKey] {
+            contentCell.levelLabel.text = level.character
+            contentCell.levelLabel.textColor = level.color
+            contentCell.levelLabel.roundBorder(borderWidth: 1.5, cornerRadius: 20, color: level.color)
+            contentCell.levelLabel.backgroundColor = level.color.withAlphaComponent(0.1)
+        }
         contentCell.titleLabel.attributedText = attrStr
         let record = findBestRecord(key: dataSetKey)
-        //contentCell.pointMaxText = "\(getAbilityPointMax(dataSetKey))"
         contentCell.strockedProgressText = record?.progress
         contentCell.strockedRankText = record?.rank.rawValue
 
