@@ -10,7 +10,7 @@
 import UIKit
 
 class InfiniteChallengeSwipablePage: UIPageViewController {
-
+    static let storyboardId = "InfiniteChallengeSwipablePage"
     var pages = [UIViewController]()
 
     override func viewDidLayoutSubviews() {

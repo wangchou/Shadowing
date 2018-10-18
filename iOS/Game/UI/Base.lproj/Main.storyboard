@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lQ2-QP-0IK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,10 +10,13 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main Swipable Page-->
+        <!--Item-->
         <scene sceneID="TzX-cI-iSf">
             <objects>
-                <pageViewController storyboardIdentifier="MainSwipablePage" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="lQ2-QP-0IK" customClass="MainSwipablePage" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="MainSwipablePage" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="lQ2-QP-0IK" customClass="MainSwipablePage" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="nUx-eL-rmC"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RP1-kY-iV3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1056" y="-1372"/>
@@ -112,6 +115,7 @@
                     <connections>
                         <outlet property="blockInfo" destination="Fxj-Lz-cCb" id="Vj9-0W-oYa"/>
                         <outlet property="blockView" destination="EM1-qB-hl8" id="aPP-xz-gi0"/>
+                        <outlet property="bottomBar" destination="kM9-FW-PHx" id="0OJ-qY-NiV"/>
                         <outlet property="infoView" destination="QkA-mz-bAQ" id="0mT-UQ-60k"/>
                         <outlet property="tableView" destination="Rxy-fc-7RI" id="Vfo-3c-eaA"/>
                         <outlet property="topBarView" destination="Ftz-Wt-fWd" id="mhE-Vb-qdg"/>
@@ -121,13 +125,16 @@
             </objects>
             <point key="canvasLocation" x="292.5" y="-615.84507042253517"/>
         </scene>
-        <!--Infinite Challenge Swipable Page-->
+        <!--Item-->
         <scene sceneID="dx9-ut-S3b">
             <objects>
-                <pageViewController storyboardIdentifier="InfiniteChallengeSwipablePage" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="CDZ-8D-otl" customClass="InfiniteChallengeSwipablePage" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="InfiniteChallengeSwipablePage" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="CDZ-8D-otl" customClass="InfiniteChallengeSwipablePage" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="BSg-iO-gLd"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VFx-Gb-c8K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1054" y="-718"/>
+            <point key="canvasLocation" x="-1058" y="-597"/>
         </scene>
         <!--Setting Page-->
         <scene sceneID="OMK-qr-MRE">

@@ -7,8 +7,8 @@
 //
 
 import UIKit
-//import Fabric
-//import Crashlytics
+
+let rootViewController = AppDelegate.shared.rootViewController
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,10 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if DEBUG
         Bundle(path: "/Applications/InjectionIII.app/Contents/Resources/iOSInjection.bundle")?.load()
         #endif
-//        dumpAvaliableVoices()
-//        if !isSimulator {
-//            Fabric.with([Crashlytics.self])
-//        }
+
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = RootContainerViewController()
+        window?.makeKeyAndVisible()
 
         return true
     }
@@ -51,4 +51,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+}
+
+// https://medium.com/@stasost/ios-root-controller-navigation-3625eedbbff
+extension AppDelegate {
+    static var shared: AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
+    var rootViewController: RootContainerViewController {
+        return window!.rootViewController as! RootContainerViewController
+    }
 }
