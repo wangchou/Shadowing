@@ -120,6 +120,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
     }
 
     func viewWillAppear() {
+        frame.size.width = screen.width
         frame.size.height = screen.width * 54/48
         removeAllSubviews()
 

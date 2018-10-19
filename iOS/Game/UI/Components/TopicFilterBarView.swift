@@ -77,6 +77,7 @@ class TopicFilterBarView: UIView, GridLayout, ReloadableView {
         let line = UIView()
         line.frame = self.frame
         line.frame.origin.y = frame.size.height - 0.5
+        line.frame.size.width = screen.size.width
         line.frame.size.height = 0.5
         line.backgroundColor = .lightGray
         addSubview(line)
