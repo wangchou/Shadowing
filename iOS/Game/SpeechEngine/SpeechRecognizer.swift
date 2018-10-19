@@ -39,6 +39,7 @@ class SpeechRecognizer: NSObject {
         promise = Promise<String>.pending()
 
         speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: localIdentifier))
+        speechRecognizer?.defaultTaskHint = .dictation
         // mocked start for simulator
         guard !isSimulator else {
             return startFaked(stopAfterSeconds: stopAfterSeconds)

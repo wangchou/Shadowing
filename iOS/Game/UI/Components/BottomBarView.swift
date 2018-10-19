@@ -58,12 +58,10 @@ class BottomBarView: UIView, XibView {
     }
     @IBAction func onLeftButtonClicked(_ sender: Any) {
         context.contentTab = .topics
-        sharedSetup()
         rootViewController.showMainPage()
     }
     @IBAction func onRightButtonClicked(_ sender: Any) {
         context.contentTab = .infiniteChallenge
-        sharedSetup()
         rootViewController.showInfiniteChallengePage()
     }
 }

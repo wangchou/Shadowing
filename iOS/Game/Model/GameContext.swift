@@ -103,8 +103,8 @@ class GameContext {
         let duration: Promise<Float> = Promise<Float>.pending()
         getKana(targetString).then({ kana in
             duration.fulfill(
-                0.6 +
-                kana.count.f * 0.12 /
+                1.0 +
+                kana.count.f * 0.13 /
                 (self.teachingRate/AVSpeechUtteranceDefaultSpeechRate)
             )
         })
