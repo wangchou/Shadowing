@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Promises
 
 // https://medium.com/@robnorback/the-secret-to-1-second-compile-times-in-xcode-9de4ec8345a1
 
@@ -261,12 +262,23 @@ extension UIPageViewController {
     }
 }
 
+enum TMPError: Error {
+    case alert
+}
+var isAlerting = fulfilledVoidPromise()
 func showMessage(_ message: String, seconds: Float = 2) {
-    let alert = UIAlertController(title: message, message: "", preferredStyle: .alert)
-    UIApplication.getPresentedViewController()?.present(alert, animated: true, completion: nil)
+    isAlerting.then {
+        isAlerting = Promise<Void>.pending()
+        let alert = UIAlertController(title: message, message: "", preferredStyle: .alert)
+        UIApplication.getPresentedViewController()?.present(alert, animated: true)
 
-    let when = DispatchTime.now() + DispatchTimeInterval.milliseconds(Int(seconds*1000))
-    DispatchQueue.main.asyncAfter(deadline: when) {
-        alert.dismiss(animated: true, completion: nil)
+        let when = DispatchTime.now() + DispatchTimeInterval.milliseconds(Int(seconds*1000))
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            alert.dismiss(animated: true) {
+                isAlerting.reject(TMPError.alert) // discard all other show message
+                isAlerting = fulfilledVoidPromise()
+                print("alert dismissed")
+            }
+        }
     }
 }
