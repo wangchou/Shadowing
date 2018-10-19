@@ -20,6 +20,7 @@ class ShadowingFlow: Game {
 
     // MARK: - Public Functions
     override func start() {
+        SpeechEngine.shared.start()
         isForceStopped = false
         context.gameFlowMode = .shadowing
         context.gameState = .stopped
@@ -44,7 +45,7 @@ class ShadowingFlow: Game {
     }
 
     func forceStop() {
-        SpeechEngine.shared.reset()
+        SpeechEngine.shared.stop()
         isForceStopped = true
         isPaused = false
         wait.reject(GameError.forceStop)

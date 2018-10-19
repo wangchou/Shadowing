@@ -56,7 +56,7 @@ class SentencesTableCell: UITableViewCell {
         SentencesTableCell.isPracticing = true
         self.isUserInteractionEnabled = false
         practiceButton.isEnabled = false
-
+        SpeechEngine.shared.start()
         prepareForSpeaking()
         speakPart()
             .then(listenPart)
@@ -67,6 +67,7 @@ class SentencesTableCell: UITableViewCell {
                 self.practiceButton.isEnabled = true
                 SentencesTableCell.isPracticing = false
                 GameContentDetailPage.isChallengeButtonDisabled = false
+                SpeechEngine.shared.stop()
             }
     }
 
@@ -157,7 +158,7 @@ class SentencesTableCell: UITableViewCell {
         return calculateScore(targetString, userSaidSentence)
     }
 
-    private func updateUIByScore(score: Score) {
+    private func updateUIByScore(score: Score) -> Promise<Void> {
         tableView?.beginUpdates()
         let userSaidSentence = userSaidSentences[targetString] ?? ""
         userSaidSentenceLabel.textColor = UIColor.black
@@ -174,6 +175,6 @@ class SentencesTableCell: UITableViewCell {
 
         sentenceScores[targetString] = score
         saveUserSaidSentencesAndScore()
-        _ = assisantSay(score.text)
+        return assisantSay(score.text)
     }
 }

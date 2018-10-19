@@ -23,7 +23,7 @@ class RootContainerViewController: UIViewController {
             .instantiateViewController(withIdentifier: InfiniteChallengeSwipablePage.storyboardId) as! InfiniteChallengeSwipablePage
         current = mainSwipablePage
         addCurrent()
-        
+
 //        // memory leak test
 //        var repeatTime = 30
 //        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { _ in

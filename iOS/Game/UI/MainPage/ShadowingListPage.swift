@@ -23,7 +23,6 @@ class ShadowingListPage: UIViewController {
     var timelineSubviews: [String: UIView] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
-        engine.start()
         loadTopSentencesInfoDB()
         addSentences()
         loadGameHistory()

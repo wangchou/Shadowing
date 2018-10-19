@@ -150,12 +150,16 @@ class SpeechEngine {
         switch reason {
         case .newDeviceAvailable:
             print("new device available")
-            self.stop()
-            self.start()
+            if self.isEngineRunning {
+                self.stop()
+                self.start()
+            }
         case .oldDeviceUnavailable:
             print("old device unavailable")
-            self.stop()
-            self.start()
+            if self.isEngineRunning {
+                self.stop()
+                self.start()
+            }
         default: ()
         }
     }
