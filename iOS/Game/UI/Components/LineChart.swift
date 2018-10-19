@@ -31,7 +31,7 @@ class LineChart: LineChartView, ChartViewDelegate {
 
     private func sharedInit() {
         backgroundColor = .clear
-        //isUserInteractionEnabled = false
+        isUserInteractionEnabled = false
         delegate = self
         render()
     }
