@@ -13,6 +13,7 @@ private let context = GameContext.shared
 private let userSaidSentencesKey = "user said sentences key"
 private let sentenceScoreKey = "sentence score key"
 private let lastChallengeSenteceKey = "last challenge senteces key"
+private let kanaTokenInfosKey = "kanaTokenInfos key"
 
 // look up table for last said sentence and its score
 var userSaidSentences: [String: String] = [:]
@@ -23,6 +24,7 @@ func saveUserSaidSentencesAndScore() {
     saveToUserDefault(object: userSaidSentences, key: userSaidSentencesKey)
     saveToUserDefault(object: sentenceScores, key: sentenceScoreKey)
     saveToUserDefault(object: lastInfiniteChallengeSentences, key: lastChallengeSenteceKey)
+    saveToUserDefault(object: kanaTokenInfosCacheDictionary, key: kanaTokenInfosKey)
 }
 
 func loadUserSaidSentencesAndScore() {
@@ -41,5 +43,12 @@ func loadUserSaidSentencesAndScore() {
         lastInfiniteChallengeSentences = loadedICSentences
     } else {
         print("error load infinite challenge sentences fail")
+    }
+    if let loadedKanaTokenInfos = loadFromUserDefault(type: type(of: kanaTokenInfosCacheDictionary), key: kanaTokenInfosKey) {
+        loadedKanaTokenInfos.keys.forEach { key in
+            kanaTokenInfosCacheDictionary[key] = loadedKanaTokenInfos[key]
+        }
+    } else {
+        print("error load kanaTokenInfos fail")
     }
 }
