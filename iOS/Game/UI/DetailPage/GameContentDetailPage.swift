@@ -59,7 +59,7 @@ class GameContentDetailPage: UIViewController {
             goodCountLabel.text = 0.s
             missedCountLabel.text = 0.s
         }
-        challengeButton.roundBorder(borderWidth: 0, cornerRadius: 3, color: UIColor.black)
+        challengeButton.roundBorder(borderWidth: 0, cornerRadius: 5, color: .clear)
 
         // load furigana
         all(context.sentences.map {$0.string.furiganaAttributedString}).then {_ in

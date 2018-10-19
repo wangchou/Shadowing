@@ -142,13 +142,13 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
         // separate Line
         addRect(x: 0, y: y, w: gridCount, h: 1, color: rgb(240, 240, 240))
         addSeparateLine(y: y, color: rgb(212, 212, 212))
-        //addRoundRect(x: 2, y: y, w: 44, h: 11, borderColor: .black, radius: 5, backgroundColor: .clear)
         y += 1
         addSeparateLine(y: y, color: rgb(212, 212, 212))
         y += 1
+
         // description
-        addAttrText(x: 18, y: y, h: 11, text: progressAttrText)
-        addAttrText(x: 36, y: y, h: 11, text: rankAttrText)
+        addAttrText(x: 18, y: y+1, h: 10, text: progressAttrText)
+        addAttrText(x: 36, y: y+1, h: 10, text: rankAttrText)
 
         addText(x: 2, y: y, h: 3, text: line1)
         addText(x: 18, y: y, h: 3, text: "完成率")
@@ -164,12 +164,17 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
 
         // challenge button
         addChallengeButton()
-        y += 10
+        y += 9
+
+        // separate Line
+        addRect(x: 0, y: y, w: gridCount, h: 1, color: rgb(240, 240, 240))
+        addSeparateLine(y: y, color: rgb(212, 212, 212))
+        y += 1
 
         addRect(x: 0, y: y, w: gridCount, h: 5, color: level.color.withAlphaComponent(0.3))
 
-        addSeparateLine(y: y)
-        addSeparateLine(y: y+5)
+        addSeparateLine(y: y, color: rgb(180, 180, 180))
+        addSeparateLine(y: y+5, color: rgb(180, 180, 180))
         addText(x: 1, y: y, h: 5, text: "前回の挑戦")
     }
 
@@ -187,7 +192,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
         button.backgroundColor = .red
         button.titleLabel?.font = MyFont.regular(ofSize: step * 5)
         button.titleLabel?.textColor = myLightText
-        button.roundBorder(borderWidth: 1.5, cornerRadius: 5, color: UIColor.white.withAlphaComponent(0.5))
+        button.roundBorder(borderWidth: 1.5, cornerRadius: 5, color: .clear)
 
         button.addTapGestureRecognizer {
             if let vc = UIApplication.getPresentedViewController() {

@@ -38,7 +38,7 @@ class TopicFilterBarView: UIView, GridLayout, ReloadableView {
         button.backgroundColor = .lightGray
         button.titleLabel?.font = MyFont.regular(ofSize: 12)
         button.setTitleColor(.white, for: .normal)
-        button.roundBorder(borderWidth: 0.5, cornerRadius: 20, color: UIColor.white.withAlphaComponent(0.5))
+        button.roundBorder(borderWidth: 0, cornerRadius: 20, color: .clear)
 
         if let isOn = topicFilterFlag[title],
             isOn {

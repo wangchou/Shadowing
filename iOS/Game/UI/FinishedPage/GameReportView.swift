@@ -35,11 +35,11 @@ class GameReportView: UIView, ReloadableView, GridLayout {
 
     func addBackButton() {
         let backButton = UIButton()
-        backButton.setTitle("戻  る", for: .normal)
+        backButton.setTitle("戻   る", for: .normal)
         backButton.backgroundColor = .red
         backButton.titleLabel?.font = MyFont.regular(ofSize: step * 4)
         backButton.titleLabel?.textColor = myLightText
-        backButton.roundBorder(borderWidth: 3, cornerRadius: 15, color: UIColor.white.withAlphaComponent(0.5))
+        backButton.roundBorder(borderWidth: 1, cornerRadius: 5, color: .clear)
 
         backButton.addTapGestureRecognizer {
             if let vc = UIApplication.getPresentedViewController() {

@@ -28,7 +28,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
 
     private func renderTopTitle() {
         guard let record = context.gameRecord else { return }
-        roundBorder(cornerRadius: 15, color: myLightText)
+        roundBorder(cornerRadius: 15, color: .white)
         var tags = (datasetKeyToTags[record.dataSetKey] ?? []).joined(separator: " ")
         var title = "\(record.dataSetKey)"
         if context.contentTab == .infiniteChallenge {
@@ -46,7 +46,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         addText(2, y, 3, "完成率")
         let progress = getAttrText([
             ( record.progress.padWidthTo(4), .white, getFontSize(h: 12)),
-            ( "%", .lightGray, getFontSize(h: 4))
+            ( "%", .white, getFontSize(h: 3))
             ])
         addAttrText(2, y, 12, progress)
 
