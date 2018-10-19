@@ -86,6 +86,14 @@ func addSentences() {
     allSentencesKeys = []
     shadowingSentences
         .filter { sentences in return !sentences.isEmpty }
+        .filter { sentences in
+            guard topicFilterFlag[titleForAll] != true else { return true }
+            let key = sentences[0]
+            guard let topic = datasetKeyToTags[key]?[0].split(separator: "#")[0].s,
+                  let flag = topicFilterFlag[topic]      else { return false }
+
+            return flag
+        }
         .forEach { sentences in
             let subSentences: [(speaker: ChatSpeaker, string: String)] = sentences
                 .map { s in

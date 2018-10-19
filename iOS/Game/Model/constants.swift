@@ -36,3 +36,5 @@ let screen = UIScreen.main.bounds
 
 // listening duration = speakDuration + 0.4 secs
 let pauseDuration: Float = 0.4
+
+let abilities = ["旅遊", "日常", "戀愛", "論述", "敬語", "表達"]

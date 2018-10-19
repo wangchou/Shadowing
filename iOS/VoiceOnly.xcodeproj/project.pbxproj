@@ -54,6 +54,7 @@
 		BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */; };
 		BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD8208EF15F00C18520 /* constants.swift */; };
 		BEC2E92F217875C30095A65D /* RootContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC2E92E217875C30095A65D /* RootContainerViewController.swift */; };
+		BEC2E9312179BD090095A65D /* TopicFilterBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC2E9302179BD090095A65D /* TopicFilterBarView.swift */; };
 		BECAC3B5216B34FA001BBF49 /* InfiniteChanllengePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECAC3B4216B34FA001BBF49 /* InfiniteChanllengePage.swift */; };
 		BECAC3B7216B37E5001BBF49 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BECAC3B6216B37E5001BBF49 /* SQLite.framework */; };
 		BECAC3B8216B37E5001BBF49 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BECAC3B6216B37E5001BBF49 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -156,6 +157,7 @@
 		BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculateScore.swift; sourceTree = "<group>"; };
 		BEBDEDD8208EF15F00C18520 /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		BEC2E92E217875C30095A65D /* RootContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerViewController.swift; sourceTree = "<group>"; };
+		BEC2E9302179BD090095A65D /* TopicFilterBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicFilterBarView.swift; sourceTree = "<group>"; };
 		BECAC3B4216B34FA001BBF49 /* InfiniteChanllengePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteChanllengePage.swift; sourceTree = "<group>"; };
 		BECAC3B6216B37E5001BBF49 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SQLite.framework; sourceTree = "<group>"; };
 		BECAC3B9216B8FE3001BBF49 /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				BECAC3B9216B8FE3001BBF49 /* BottomBarView.swift */,
 				BECAC3BB216B904A001BBF49 /* BottomBarView.xib */,
 				BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */,
+				BEC2E9302179BD090095A65D /* TopicFilterBarView.swift */,
 				BE8DE7B52161E44400812CED /* AbilityChart.swift */,
 				BE7441B2216CCBE000E53A3D /* LineChart.swift */,
 			);
@@ -527,6 +530,7 @@
 				BEC2E92F217875C30095A65D /* RootContainerViewController.swift in Sources */,
 				BEF28B6120B52BB000385273 /* Score.swift in Sources */,
 				BE1CA956209D5D0900086853 /* Game.swift in Sources */,
+				BEC2E9312179BD090095A65D /* TopicFilterBarView.swift in Sources */,
 				BE7725C420A2CBC200DF186A /* sentences.swift in Sources */,
 				BE9B476A20AD50520063E0DA /* FuriganaUtils.swift in Sources */,
 				BE76F117214ECC6E004E130B /* UserSaidSentences.swift in Sources */,

@@ -13,11 +13,17 @@ import Foundation
 private let context = GameContext.shared
 private let engine = SpeechEngine.shared
 
+extension Notification.Name {
+    static let topicFlagChanged = Notification.Name("topicFlagChanged")
+}
+
 class ShadowingListPage: UIViewController {
     @IBOutlet weak var sentencesTableView: UITableView!
     @IBOutlet weak var timeline: TimelineView!
+    @IBOutlet weak var topArea: UIView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var topBarView: TopBarView!
+    @IBOutlet weak var topicFilterBarView: TopicFilterBarView!
     @IBOutlet weak var abilityChart: AbilityChart!
 
     var timelineSubviews: [String: UIView] = [:]
@@ -30,6 +36,11 @@ class ShadowingListPage: UIViewController {
         loadUserSaidSentencesAndScore()
 
         topBarView.rightButton.isHidden = true
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(reloadTopicSentences),
+                                               name: .topicFlagChanged,
+                                               object: nil)
     }
 
     @objc func injected() {
@@ -41,9 +52,9 @@ class ShadowingListPage: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let height = screen.width * 130/320
-        topView.frame.size.height = height
+        topArea.frame.size.height = height + 50
         timeline.frame.size.height = height * 120 / 130
-        timeline.frame.size.width = height * 200 / 130
+        timeline.frame.size.width = height * 170 / 130
 
         sentencesTableView.reloadData()
         timeline.viewWillAppear()
@@ -52,6 +63,7 @@ class ShadowingListPage: UIViewController {
             context.dataSetKey = allSentencesKeys[0]
             context.loadLearningSentences(isShuffle: false)
         }
+        topicFilterBarView.viewWillAppear()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -74,13 +86,18 @@ class ShadowingListPage: UIViewController {
         ].map { $0.cgColor }
         let layer = CAGradientLayer()
         layer.frame = topView.frame
-        layer.frame.origin.y = topView.frame.height - 1.5
+        layer.frame.origin.y = screen.width * 130/320 - 1.5
         layer.frame.size.height = 1.5
         layer.frame.size.width = screen.size.width
         layer.startPoint = CGPoint(x: 0, y: 0)
         layer.endPoint = CGPoint(x: 1.0, y: 0)
         layer.colors = lightRGBs
         topView.layer.insertSublayer(layer, at: 0)
+    }
+
+    @objc func reloadTopicSentences() {
+        addSentences()
+        sentencesTableView.reloadData()
     }
 }
 
@@ -90,7 +107,7 @@ extension ShadowingListPage: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allSentences.count
+        return allSentencesKeys.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

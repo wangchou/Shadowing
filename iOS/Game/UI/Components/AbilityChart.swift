@@ -9,7 +9,6 @@
 import UIKit
 import Charts
 
-let abilities = ["旅遊", "日常", "戀愛", "論述", "敬語", "表達"]
 private let fontSize = screen.width * 12 / 320
 
 @IBDesignable
