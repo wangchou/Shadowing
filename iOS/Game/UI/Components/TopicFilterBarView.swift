@@ -35,16 +35,16 @@ class TopicFilterBarView: UIView, GridLayout, ReloadableView {
     func addButton(title: String, index: Int) {
         let button = UIButton()
         button.setTitle(title, for: .normal)
-        button.backgroundColor = .lightGray
+        button.backgroundColor = rgb(224, 224, 224)
         button.titleLabel?.font = MyFont.regular(ofSize: 12)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(rgb(100, 100, 100), for: .normal)
         button.roundBorder(borderWidth: 0, cornerRadius: 20, color: .clear)
 
         if let isOn = topicFilterFlag[title],
             isOn {
             button.backgroundColor = myBlue.withAlphaComponent(0.5)
-            button.roundBorder(borderWidth: 1.5, cornerRadius: 20, color: myBlue)
-            button.setTitleColor(.black, for: .normal)
+            button.roundBorder(borderWidth: 0, cornerRadius: 20, color: .clear)
+            button.setTitleColor(rgb(40, 40, 40), for: .normal)
         }
 
         button.addTapGestureRecognizer {

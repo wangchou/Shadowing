@@ -13,6 +13,7 @@ private let context = GameContext.shared
 
 class SentencesTableCell: UITableViewCell {
     static var isPracticing: Bool = false
+    var buttonColor = myBlue.withAlphaComponent(0.5)
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var sentenceLabel: FuriganaLabel!
     @IBOutlet weak var userSaidSentenceLabel: FuriganaLabel!
@@ -22,8 +23,11 @@ class SentencesTableCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        practiceButton.roundBorder(borderWidth: 0.5, cornerRadius: 5, color: UIColor.blue.withAlphaComponent(0.1))
-        practiceButton.backgroundColor = UIColor.blue.withAlphaComponent(0.03)
+        practiceButton.roundBorder(borderWidth: 0, cornerRadius: 5, color: .clear)
+        practiceButton.backgroundColor = buttonColor
+        practiceButton.setTitleColor(rgb(50, 50, 50), for: .normal)
+        practiceButton.setTitleColor(.lightGray, for: .disabled)
+
         self.addTapGestureRecognizer(action: practiceSentence)
     }
 
@@ -56,6 +60,7 @@ class SentencesTableCell: UITableViewCell {
         SentencesTableCell.isPracticing = true
         self.isUserInteractionEnabled = false
         practiceButton.isEnabled = false
+        practiceButton.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
         SpeechEngine.shared.start()
         prepareForSpeaking()
         speakPart()
@@ -65,6 +70,7 @@ class SentencesTableCell: UITableViewCell {
             .always {
                 self.isUserInteractionEnabled = true
                 self.practiceButton.isEnabled = true
+                self.practiceButton.backgroundColor = self.buttonColor
                 SentencesTableCell.isPracticing = false
                 GameContentDetailPage.isChallengeButtonDisabled = false
                 SpeechEngine.shared.stop()
