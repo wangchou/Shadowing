@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BE05073720A68515008A29EB /* SentencesTestGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE05073620A68515008A29EB /* SentencesTestGame.swift */; };
 		BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB3D209B19B200D23F22 /* GameContext.swift */; };
 		BE1CA956209D5D0900086853 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA955209D5D0900086853 /* Game.swift */; };
 		BE1CA958209DC43800086853 /* Messenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA957209DC43800086853 /* Messenger.swift */; };
@@ -26,7 +25,7 @@
 		BE6F2F162144E049003A56CD /* shadowingSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6F2F152144E049003A56CD /* shadowingSentences.swift */; };
 		BE6FFB9A21778417000F4EC3 /* inf_sentences_100points.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BE6FFB9921778417000F4EC3 /* inf_sentences_100points.sqlite */; };
 		BE7441B3216CCBE000E53A3D /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7441B2216CCBE000E53A3D /* LineChart.swift */; };
-		BE76F117214ECC6E004E130B /* UserSaidSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE76F116214ECC6E004E130B /* UserSaidSentences.swift */; };
+		BE76F117214ECC6E004E130B /* GameMiscData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE76F116214ECC6E004E130B /* GameMiscData.swift */; };
 		BE76F11E214F56F6004E130B /* SentencesTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE76F11C214F56F6004E130B /* SentencesTableCell.swift */; };
 		BE76F11F214F56F6004E130B /* SentencesTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE76F11D214F56F6004E130B /* SentencesTableCell.xib */; };
 		BE7725C420A2CBC200DF186A /* sentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725BC20A2CBC100DF186A /* sentences.swift */; };
@@ -43,7 +42,6 @@
 		BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */; };
 		BE9B476A20AD50520063E0DA /* FuriganaUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476920AD50520063E0DA /* FuriganaUtils.swift */; };
 		BE9D243A20C8DEE9000515DD /* GameReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9D243920C8DEE9000515DD /* GameReportView.swift */; };
-		BEA2389D21460EBD00548BBC /* sentences.txt in Resources */ = {isa = PBXBuildFile; fileRef = BEA2389C21460EBD00548BBC /* sentences.txt */; };
 		BEA86115216F264A00AECF13 /* sqliteSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA86114216F264A00AECF13 /* sqliteSentences.swift */; };
 		BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */; };
 		BEBDEDC5208EF09F00C18520 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEBDEDC3208EF09F00C18520 /* Main.storyboard */; };
@@ -108,7 +106,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		BE05073620A68515008A29EB /* SentencesTestGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentencesTestGame.swift; sourceTree = "<group>"; };
 		BE17FB3D209B19B200D23F22 /* GameContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameContext.swift; sourceTree = "<group>"; };
 		BE1CA955209D5D0900086853 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		BE1CA957209DC43800086853 /* Messenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messenger.swift; sourceTree = "<group>"; };
@@ -127,7 +124,7 @@
 		BE6F2F152144E049003A56CD /* shadowingSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shadowingSentences.swift; sourceTree = "<group>"; };
 		BE6FFB9921778417000F4EC3 /* inf_sentences_100points.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences_100points.sqlite; sourceTree = "<group>"; };
 		BE7441B2216CCBE000E53A3D /* LineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
-		BE76F116214ECC6E004E130B /* UserSaidSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSaidSentences.swift; sourceTree = "<group>"; };
+		BE76F116214ECC6E004E130B /* GameMiscData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMiscData.swift; sourceTree = "<group>"; };
 		BE76F11C214F56F6004E130B /* SentencesTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentencesTableCell.swift; sourceTree = "<group>"; };
 		BE76F11D214F56F6004E130B /* SentencesTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SentencesTableCell.xib; sourceTree = "<group>"; };
 		BE7725BC20A2CBC100DF186A /* sentences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sentences.swift; sourceTree = "<group>"; };
@@ -144,7 +141,6 @@
 		BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaLabel.swift; sourceTree = "<group>"; };
 		BE9B476920AD50520063E0DA /* FuriganaUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaUtils.swift; sourceTree = "<group>"; };
 		BE9D243920C8DEE9000515DD /* GameReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameReportView.swift; sourceTree = "<group>"; };
-		BEA2389C21460EBD00548BBC /* sentences.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = sentences.txt; sourceTree = "<group>"; };
 		BEA86114216F264A00AECF13 /* sqliteSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sqliteSentences.swift; sourceTree = "<group>"; };
 		BEBDEDBC208EF09F00C18520 /* VoiceOnly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceOnly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -275,7 +271,6 @@
 				BE65A938209C6E67006645CA /* GameEventDelegate.swift */,
 				BE1CA955209D5D0900086853 /* Game.swift */,
 				BE6ED56720A17BB000553D1A /* ShadowingFlow.swift */,
-				BE05073620A68515008A29EB /* SentencesTestGame.swift */,
 			);
 			path = GameFlow;
 			sourceTree = "<group>";
@@ -306,7 +301,7 @@
 				BE17FB3D209B19B200D23F22 /* GameContext.swift */,
 				BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */,
 				BED1CC0821452A54004AE397 /* GameSetting.swift */,
-				BE76F116214ECC6E004E130B /* UserSaidSentences.swift */,
+				BE76F116214ECC6E004E130B /* GameMiscData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -337,7 +332,6 @@
 				BEBDEDCB208EF0A000C18520 /* Info.plist */,
 				BEBDEDC8208EF0A000C18520 /* LaunchScreen.storyboard */,
 				BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */,
-				BEA2389C21460EBD00548BBC /* sentences.txt */,
 				BEBDEDBD208EF09F00C18520 /* Products */,
 				BEBDEDE1208EF17100C18520 /* Frameworks */,
 			);
@@ -477,7 +471,6 @@
 				BE76F11F214F56F6004E130B /* SentencesTableCell.xib in Resources */,
 				BEEC7FA92154C7AC001C2EFF /* TopBarView.xib in Resources */,
 				BE67D2A921561A93007FE420 /* Assets.xcassets in Resources */,
-				BEA2389D21460EBD00548BBC /* sentences.txt in Resources */,
 				BE6FFB9A21778417000F4EC3 /* inf_sentences_100points.sqlite in Resources */,
 				BEEE4B3121722ABC0032D267 /* drumLoop.caf in Resources */,
 				BEBDEDC5208EF09F00C18520 /* Main.storyboard in Resources */,
@@ -519,7 +512,6 @@
 				BEE665E220BA634600E4E322 /* Colors.swift in Sources */,
 				BE7725C920A2CBC200DF186A /* n5.swift in Sources */,
 				BE8DE7B62161E44400812CED /* AbilityChart.swift in Sources */,
-				BE05073720A68515008A29EB /* SentencesTestGame.swift in Sources */,
 				BECAC3B5216B34FA001BBF49 /* InfiniteChanllengePage.swift in Sources */,
 				BE7725C820A2CBC200DF186A /* n4.swift in Sources */,
 				BE5D838920A80BD0002031BF /* GameContentDetailPage.swift in Sources */,
@@ -533,7 +525,7 @@
 				BEC2E9312179BD090095A65D /* TopicFilterBarView.swift in Sources */,
 				BE7725C420A2CBC200DF186A /* sentences.swift in Sources */,
 				BE9B476A20AD50520063E0DA /* FuriganaUtils.swift in Sources */,
-				BE76F117214ECC6E004E130B /* UserSaidSentences.swift in Sources */,
+				BE76F117214ECC6E004E130B /* GameMiscData.swift in Sources */,
 				BE596474215A0EF400E4AA0C /* expressive.swift in Sources */,
 				BE76F11E214F56F6004E130B /* SentencesTableCell.swift in Sources */,
 				BED1CC0921452A54004AE397 /* GameSetting.swift in Sources */,

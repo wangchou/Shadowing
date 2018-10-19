@@ -19,15 +19,16 @@ private let kanaTokenInfosKey = "kanaTokenInfos key"
 var userSaidSentences: [String: String] = [:]
 var sentenceScores: [String: Score] = [:]
 var lastInfiniteChallengeSentences: [Level: [String]] = [:]
+var kanaTokenInfosCacheDictionary: [String: [[String]]] = [:]
 
-func saveUserSaidSentencesAndScore() {
+func saveGameMiscData() {
     saveToUserDefault(object: userSaidSentences, key: userSaidSentencesKey)
     saveToUserDefault(object: sentenceScores, key: sentenceScoreKey)
     saveToUserDefault(object: lastInfiniteChallengeSentences, key: lastChallengeSenteceKey)
     saveToUserDefault(object: kanaTokenInfosCacheDictionary, key: kanaTokenInfosKey)
 }
 
-func loadUserSaidSentencesAndScore() {
+func loadGameMiscData() {
     guard userSaidSentences.isEmpty else { return }
     if let loadedSentences = loadFromUserDefault(type: type(of: userSaidSentences), key: userSaidSentencesKey) {
         userSaidSentences = loadedSentences

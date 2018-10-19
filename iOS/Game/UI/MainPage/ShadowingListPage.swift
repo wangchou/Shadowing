@@ -33,7 +33,7 @@ class ShadowingListPage: UIViewController {
         addSentences()
         loadGameHistory()
         loadGameSetting()
-        loadUserSaidSentencesAndScore()
+        loadGameMiscData()
 
         topBarView.rightButton.isHidden = true
 

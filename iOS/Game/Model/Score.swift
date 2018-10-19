@@ -34,7 +34,7 @@ struct Score: Codable {
         if type == .good { return "いいね"}
         return "違います"
     }
-    
+
     #if os(iOS)
     var color: UIColor {
         if type == .perfect { return myGreen }

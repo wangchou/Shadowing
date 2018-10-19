@@ -174,7 +174,7 @@ class SentencesTableCell: UITableViewCell {
         tableView?.endUpdates()
 
         sentenceScores[targetString] = score
-        saveUserSaidSentencesAndScore()
+        saveGameMiscData()
         return assisantSay(score.text)
     }
 }

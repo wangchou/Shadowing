@@ -43,7 +43,7 @@ extension Game {
            let gr = context.gameRecord {
             lastInfiniteChallengeSentences[gr.level] = context.sentences.map { obj in return obj.string }
         }
-        saveUserSaidSentencesAndScore()
+        saveGameMiscData()
         SpeechEngine.shared.stop()
     }
 
