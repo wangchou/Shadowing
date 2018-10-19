@@ -36,8 +36,12 @@ class ShadowingFlow: Game {
         if !context.gameSetting.isUsingGuideVoice {
             narratorString = "請唸出對應的日文。"
         }
-        narratorSay(narratorString).always {
-            self.learnNext()
+        if context.gameSetting.isUsingNarrator {
+            narratorSay(narratorString).always {
+                self.learnNext()
+            }
+        } else {
+            learnNext()
         }
 
         isPaused = false
