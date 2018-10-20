@@ -1,19 +1,19 @@
 import UIKit
 
 var avgKanaCountDict: [String: Int] = [:]
-private let minKanaCounts = [2, 6, 9, 12, 18]
-private let maxKanaCounts = [8, 12, 18, 24, 36]
+private let minKanaCounts = [2, 7, 9, 12, 15, 17, 19, 22, 27]
+private let maxKanaCounts = [6, 8, 11, 14, 16, 18, 21, 26, 36]
+let allLevels: [Level] = [.lv0, .lv1, .lv2, .lv3, .lv4, .lv5, .lv6, .lv7, .lv8]
 
 func getLevel(avgKanaCount: Int) -> Level {
-    if avgKanaCount < maxKanaCounts[0] { return Level.lv0 }
-    if avgKanaCount < maxKanaCounts[1] { return Level.lv1 }
-    if avgKanaCount < maxKanaCounts[2] { return Level.lv2 }
-    if avgKanaCount < maxKanaCounts[3] { return Level.lv3 }
-    return Level.lv4
+    for i in 0..<allLevels.count {
+        if avgKanaCount <= maxKanaCounts[i] { return allLevels[i] }
+    }
+    return Level.lv8
 }
 
 enum Level: Int, Codable {
-    case lv0=0, lv1=1, lv2=2, lv3=3, lv4=4
+    case lv0=0, lv1=1, lv2=2, lv3=3, lv4=4, lv5=5, lv6=6, lv7=7, lv8=8
     var color: UIColor {
         return getLevelColor(level: self)
     }
@@ -31,13 +31,12 @@ enum Level: Int, Codable {
     }
 
     var title: String {
-        let titles = ["入門", "初級", "中級", "上級", "超難問"]
+        let titles = ["入門一", "入門二", "初級一", "初級二", "中級一", "中級二", "上級一", "上級二", "超難問"]
         return titles[self.rawValue]
     }
 
     var character: String {
-        let characters = ["入", "初", "中", "上", "超"]
-        return characters[self.rawValue]
+        return title.prefix(1).s
     }
 }
 
@@ -58,7 +57,7 @@ enum Rank: String, Codable {
 
 var allSentences: [String: [(speaker: ChatSpeaker, string: String)]] = [:]
 var allSentencesKeys: [String] = []
-var allLevels: [String: Level] = [:]
+var dataKeyToLevels: [String: Level] = [:]
 
 func getTagPoints() -> [String: Int] {
     var tagPoints = [String: Int]()
@@ -111,7 +110,7 @@ func addSentences() {
                     return sum + count
                 })/subSentences.count
             avgKanaCountDict[key] = avgKanaCount
-            allLevels[key] = getLevel(avgKanaCount: avgKanaCount)
+            dataKeyToLevels[key] = getLevel(avgKanaCount: avgKanaCount)
         }
     allSentencesKeys.sort { key1, key2 in
         if let count1 = avgKanaCountDict[key1],

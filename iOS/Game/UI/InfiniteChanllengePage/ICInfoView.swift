@@ -15,21 +15,6 @@ private enum Texts: String {
     case numOfSentence = "句数"
 }
 
-private func getLevelDescription(_ level: Level) -> String {
-    switch level {
-    case .lv0:
-        return "入門"
-    case .lv1:
-        return "初級"
-    case .lv2:
-        return "中級"
-    case .lv3:
-        return "上級"
-    case .lv4:
-        return "超難問"
-    }
-}
-
 class ICInfoView: UIView, GridLayout, ReloadableView {
 
     // GridLayout
@@ -45,7 +30,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
     var level: Level = .lv0
 
     var line1: String {
-        return "難度：" + getLevelDescription(level) + "です"
+        return "難度：" + level.title
     }
     var line2: String {
         return "仮名数：\(minKanaCount)〜\(maxKanaCount)"

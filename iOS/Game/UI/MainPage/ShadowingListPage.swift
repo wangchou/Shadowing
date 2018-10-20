@@ -124,7 +124,7 @@ extension ShadowingListPage: UITableViewDataSource {
             )
         }
 
-        if let level = allLevels[dataSetKey] {
+        if let level = dataKeyToLevels[dataSetKey] {
             contentCell.levelLabel.text = level.character
             contentCell.levelLabel.textColor = level.color
             contentCell.levelLabel.roundBorder(borderWidth: 1.5, cornerRadius: 20, color: level.color)

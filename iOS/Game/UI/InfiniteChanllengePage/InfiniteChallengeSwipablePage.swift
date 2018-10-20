@@ -43,14 +43,16 @@ class InfiniteChallengeSwipablePage: UIPageViewController {
     }
 
     func addLevelPages() {
-        let vcs: [InfiniteChallengePage] = (0...5).map { _ in
+        let levels: [Level] = allLevels
+        let vcs: [InfiniteChallengePage] = (0..<levels.count).map { _ in
             return UIStoryboard(name: "Main", bundle: nil)
                 .instantiateViewController(withIdentifier: "InfiniteChallengePage") as! InfiniteChallengePage
         }
-        let pageNames = ["", "入門", "初級", "中級", "上級", "超難問", ""]
-        let levels: [Level] = [.lv0, .lv1, .lv2, .lv3, .lv4]
 
-        for i in 0...4 {
+        var pageNames = levels.map { level in return level.title }
+        pageNames.insert("", at: 0)
+        pageNames.append("")
+        for i in 0..<levels.count {
             vcs[i].topBarLeftText = pageNames[i]
             vcs[i].topBarTitle = pageNames[i+1]
             vcs[i].topBarRightText = pageNames[i+2]

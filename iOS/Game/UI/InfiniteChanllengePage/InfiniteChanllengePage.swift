@@ -53,8 +53,7 @@ class InfiniteChallengePage: UIViewController {
 
         guard level != .lv0 else { blockView.isHidden = true; return }
 
-        let levels: [Level] = [.lv0, .lv1, .lv2, .lv3, .lv4]
-        let lastLevel = levels[(levels.firstIndex(of: level) ?? 0) - 1]
+        let lastLevel = allLevels[(allLevels.firstIndex(of: level) ?? 0) - 1]
         if let lastLevelBestRecord = findBestRecord(key: lastLevel.dataSetKey),
            lastLevelBestRecord.p >= 80 {
             blockView.isHidden = true

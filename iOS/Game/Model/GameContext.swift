@@ -51,18 +51,8 @@ class GameContext {
         if gameSetting.isAutoSpeed {
             if contentTab == .infiniteChallenge,
                let level = gameRecord?.level {
-                switch level {
-                case .lv0:
-                    return AVSpeechUtteranceDefaultSpeechRate * 0.6
-                case .lv1:
-                    return AVSpeechUtteranceDefaultSpeechRate * 0.7
-                case .lv2:
-                    return AVSpeechUtteranceDefaultSpeechRate * 0.8
-                case .lv3:
-                    return AVSpeechUtteranceDefaultSpeechRate * 0.9
-                case .lv4:
-                    return AVSpeechUtteranceDefaultSpeechRate * 1.0
-                }
+                    return AVSpeechUtteranceDefaultSpeechRate * (0.6 + Float(level.rawValue) * 0.05)
+
             }
             return AVSpeechUtteranceDefaultSpeechRate * (0.4 + life.f * 0.007)
         } else {
@@ -130,7 +120,7 @@ class GameContext {
 
         life = isSimulator ? 100 : 50
 
-        let level = allLevels[dataSetKey] ?? .lv0
+        let level = dataKeyToLevels[dataSetKey] ?? .lv0
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level, flowMode: .shadowing)
     }
 
