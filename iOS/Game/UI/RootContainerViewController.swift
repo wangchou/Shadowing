@@ -41,7 +41,6 @@ class RootContainerViewController: UIViewController {
     }
 
     func showMainPage() {
-        print("showMain")
         guard current != mainSwipablePage else { return }
         removeCurrent()
         current = mainSwipablePage
@@ -49,7 +48,6 @@ class RootContainerViewController: UIViewController {
     }
 
     func showInfiniteChallengePage() {
-        print("showIC")
         guard current != infiniteChallengeSwipablePage else { return }
         removeCurrent()
         current = infiniteChallengeSwipablePage
