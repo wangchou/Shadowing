@@ -454,34 +454,34 @@
                                 <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="U0O-4m-O5g" userLabel="TopArea">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="iwy-K5-RcK">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LwG-wU-2DZ" userLabel="TopView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mu1-Ft-6RO" userLabel="RadarChart" customClass="AbilityChart" customModule="VoiceOnly" customModuleProvider="target">
-                                                            <rect key="frame" x="2" y="0.0" width="133" height="133"/>
+                                                            <rect key="frame" x="2" y="0.0" width="153" height="153"/>
                                                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" secondItem="mu1-Ft-6RO" secondAttribute="height" multiplier="120:120" id="3nP-xT-kPR"/>
+                                                                <constraint firstAttribute="width" secondItem="mu1-Ft-6RO" secondAttribute="height" multiplier="1:1" id="3nP-xT-kPR"/>
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ca0-bb-sN7" customClass="TimelineView" customModule="VoiceOnly" customModuleProvider="target">
-                                                            <rect key="frame" x="135" y="5" width="170" height="120"/>
+                                                            <rect key="frame" x="147" y="5" width="168" height="140"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" secondItem="ca0-bb-sN7" secondAttribute="height" multiplier="170:120" id="tdd-F9-KyS"/>
+                                                                <constraint firstAttribute="width" secondItem="ca0-bb-sN7" secondAttribute="height" multiplier="6:5" id="tdd-F9-KyS"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="mu1-Ft-6RO" firstAttribute="leading" secondItem="LwG-wU-2DZ" secondAttribute="leading" constant="2" id="4FV-FC-o7q"/>
-                                                        <constraint firstAttribute="trailing" secondItem="ca0-bb-sN7" secondAttribute="trailing" constant="15" id="4QP-BB-bCo"/>
+                                                        <constraint firstAttribute="trailing" secondItem="ca0-bb-sN7" secondAttribute="trailing" constant="5" id="4QP-BB-bCo"/>
                                                         <constraint firstAttribute="bottom" secondItem="mu1-Ft-6RO" secondAttribute="bottom" constant="-3" id="JOr-zh-iFn"/>
                                                         <constraint firstAttribute="bottom" secondItem="ca0-bb-sN7" secondAttribute="bottom" constant="5" id="RJd-W0-fNc"/>
                                                         <constraint firstItem="ca0-bb-sN7" firstAttribute="top" secondItem="LwG-wU-2DZ" secondAttribute="top" constant="5" id="Ykh-Vq-1Va"/>
@@ -489,7 +489,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BCi-iY-dna" customClass="TopicFilterBarView" customModule="VoiceOnly" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="130" width="320" height="50"/>
+                                                    <rect key="frame" x="0.0" y="150" width="320" height="50"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="d8T-wI-Vnl"/>
@@ -513,7 +513,7 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="SentencesCell" rowHeight="80" id="dBP-pO-iCD" customClass="ContentCell" customModule="VoiceOnly" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="208" width="320" height="80"/>
+                                        <rect key="frame" x="0.0" y="228" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dBP-pO-iCD" id="u6e-75-GJe">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
