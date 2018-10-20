@@ -1179,8 +1179,76 @@
             </objects>
             <point key="canvasLocation" x="1584" y="-190"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="cK4-cr-NYu">
+            <objects>
+                <viewController storyboardIdentifier="LaunchScreen" id="U1J-oJ-9F7" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="LaunchScreen" id="iE2-do-Zj4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchImage" translatesAutoresizingMaskIntoConstraints="NO" id="riM-4w-3kh">
+                                <rect key="frame" x="0.0" y="67" width="320" height="320"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="1024" id="pcm-Sl-zn8"/>
+                                    <constraint firstAttribute="width" secondItem="riM-4w-3kh" secondAttribute="height" multiplier="1:1" id="tuQ-8O-lxA"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="1024" id="vNk-XZ-4wU"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ggE-TT-rod">
+                                <rect key="frame" x="35" y="316" width="250" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MMP-tc-dVT">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="50"/>
+                                        <color key="textColor" red="0.99607843139999996" green="0.26274509800000001" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="話" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gif-k6-4bN">
+                                        <rect key="frame" x="50" y="0.0" width="50" height="50"/>
+                                        <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="50"/>
+                                        <color key="textColor" red="1" green="0.76470588240000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="し" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3z-OT-Pij">
+                                        <rect key="frame" x="100" y="0.0" width="50" height="50"/>
+                                        <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="50"/>
+                                        <color key="textColor" red="0.58823529409999997" green="0.81176470590000005" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="た" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z78-Vg-uQZ">
+                                        <rect key="frame" x="150" y="0.0" width="50" height="50"/>
+                                        <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="50"/>
+                                        <color key="textColor" red="0.078431372550000003" green="0.6588235294" blue="0.92941176469999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="い" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ei-UQ-CoT">
+                                        <rect key="frame" x="200" y="0.0" width="50" height="50"/>
+                                        <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="50"/>
+                                        <color key="textColor" red="0.57919406890000003" green="0.1280144453" blue="0.57268613580000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="riM-4w-3kh" firstAttribute="centerX" secondItem="iE2-do-Zj4" secondAttribute="centerX" id="0iK-Hq-sI8"/>
+                            <constraint firstItem="riM-4w-3kh" firstAttribute="centerY" secondItem="iE2-do-Zj4" secondAttribute="centerY" multiplier="0.8" id="1fD-qD-Mki"/>
+                            <constraint firstItem="ggE-TT-rod" firstAttribute="centerY" secondItem="iE2-do-Zj4" secondAttribute="centerY" multiplier="1.2" id="MHB-a2-4pj"/>
+                            <constraint firstItem="riM-4w-3kh" firstAttribute="width" secondItem="iE2-do-Zj4" secondAttribute="width" id="UFi-g7-Wwq"/>
+                            <constraint firstItem="ggE-TT-rod" firstAttribute="centerX" secondItem="iE2-do-Zj4" secondAttribute="centerX" id="pMU-fD-apK"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="49f-pm-jyI"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="72U-ci-rWN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1969" y="-975"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="launchImage" width="1024" height="1024"/>
         <image name="outline_lock_black_48pt" width="96" height="96"/>
     </resources>
 </document>

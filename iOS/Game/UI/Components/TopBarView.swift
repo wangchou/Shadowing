@@ -41,7 +41,7 @@ class TopBarView: UIView, XibView {
         if let onClick = customOnleftButtonClicked {
             onClick()
         } else {
-            rootViewController.current.goToPreviousPage()
+            (rootViewController.current as? UIPageViewController)?.goToPreviousPage()
         }
     }
 
@@ -49,7 +49,7 @@ class TopBarView: UIView, XibView {
         if let onClick = customOnRightButtonClicked {
             onClick()
         } else {
-            rootViewController.current.goToNextPage()
+            (rootViewController.current as? UIPageViewController)?.goToNextPage()
         }
     }
 }

@@ -29,12 +29,7 @@ class ShadowingListPage: UIViewController {
     var timelineSubviews: [String: UIView] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadTopSentencesInfoDB()
-        addSentences()
-        loadGameHistory()
-        loadGameSetting()
-        loadGameMiscData()
-
+        
         topBarView.rightButton.isHidden = true
 
         NotificationCenter.default.addObserver(self,
@@ -79,10 +74,10 @@ class ShadowingListPage: UIViewController {
     func addGradientSeparatorLine() {
         let lightRGBs = [
             Level.lv0.color,
-            Level.lv1.color,
             Level.lv2.color,
-            Level.lv3.color,
-            Level.lv4.color
+            Level.lv4.color,
+            Level.lv6.color,
+            Level.lv8.color
         ].map { $0.cgColor }
         let layer = CAGradientLayer()
         layer.frame = topView.frame
@@ -143,6 +138,6 @@ extension ShadowingListPage: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         context.dataSetKey = allSentencesKeys[indexPath.row]
         context.loadLearningSentences(isShuffle: false)
-        rootViewController.current.goToNextPage()
+        (rootViewController.current as? UIPageViewController)?.goToNextPage()
     }
 }

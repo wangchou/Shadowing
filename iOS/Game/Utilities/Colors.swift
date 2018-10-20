@@ -13,10 +13,11 @@ func rgb(_ red: Float, _ green: Float, _ blue: Float, _ alpha: Float = 1.0) -> U
     return UIColor(red: CGFloat(red/255.0), green: CGFloat(green/255.0), blue: CGFloat(blue/255.0), alpha: CGFloat(alpha))
 }
 
-let myBlue = rgb(20, 168, 237)
-let myGreen = rgb(150, 207, 42)
-let myOrange = rgb(255, 195, 0)
 let myRed = rgb(254, 67, 134)
+let myOrange = rgb(255, 195, 0)
+let myGreen = rgb(150, 207, 42)
+let myBlue = rgb(20, 168, 237)
+
 let hashtagColor = rgb(0, 53, 105)
 
 let myWhite = rgb(240, 240, 240)

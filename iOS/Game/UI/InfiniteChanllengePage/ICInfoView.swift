@@ -107,20 +107,20 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
 
     func viewWillAppear() {
         frame.size.width = screen.width
-        frame.size.height = screen.width * 54/48
+        frame.size.height = screen.width * 64/48
         removeAllSubviews()
 
         var y = 1
         // line chart
-        addRect(x: 0, y: 0, w: gridCount, h: 25, color: rgb(250, 250, 250))
+        addRect(x: 0, y: 0, w: gridCount, h: 35, color: rgb(250, 250, 250))
         addText(x: 1, y: y, h: 2, text: Texts.precision.rawValue)
         y += 2
 
         let chart = LineChart()
         chart.setDataCount(level: level, dataPoints: dataPoints)
-        layout(1, y, 46, 23, chart)
+        layout(1, y, 46, 33, chart)
         addSubview(chart)
-        y += 19
+        y += 29
 
         addText(x: 43, y: y, h: 2, text: Texts.numOfSentence.rawValue)
         y += 3
@@ -188,7 +188,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
             }
         }
 
-        layout(2, 38, 44, 8, button)
+        layout(2, 48, 44, 8, button)
 
         addSubview(button)
     }

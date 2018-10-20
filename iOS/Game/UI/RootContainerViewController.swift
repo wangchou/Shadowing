@@ -10,52 +10,57 @@ import Foundation
 import UIKit
 
 class RootContainerViewController: UIViewController {
-    var current: UIPageViewController!
+    var current: UIViewController!
+    var splashScreen: UIViewController!
     var mainSwipablePage: MainSwipablePage!
     var infiniteChallengeSwipablePage: InfiniteChallengeSwipablePage!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainSwipablePage = UIStoryboard(name: "Main", bundle: nil)
-            .instantiateViewController(withIdentifier: MainSwipablePage.storyboardId) as! MainSwipablePage
 
-        infiniteChallengeSwipablePage = UIStoryboard(name: "Main", bundle: nil)
-            .instantiateViewController(withIdentifier: InfiniteChallengeSwipablePage.storyboardId) as! InfiniteChallengeSwipablePage
-        current = mainSwipablePage
-        addCurrent()
+        splashScreen = UIStoryboard(name: "Main", bundle: nil)
+            .instantiateViewController(withIdentifier: "LaunchScreen")
 
-//        // memory leak test
-//        var repeatTime = 30
-//        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { _ in
-//            guard repeatTime > 0 else { return }
-//            repeatTime -= 1
-//            if self.current == self.mainSwipablePage {
-//                self.showInfiniteChallengePage()
-//            } else {
-//                self.showMainPage()
-//            }
-//        }
+        mainSwipablePage = (UIStoryboard(name: "Main", bundle: nil)
+            .instantiateViewController(withIdentifier: MainSwipablePage.storyboardId) as! MainSwipablePage)
+
+        infiniteChallengeSwipablePage = (UIStoryboard(name: "Main", bundle: nil)
+            .instantiateViewController(withIdentifier: InfiniteChallengeSwipablePage.storyboardId) as! InfiniteChallengeSwipablePage)
+        current = splashScreen
+        showVC(splashScreen)
+
+        loadTopSentencesInfoDB()
+        addSentences()
+        loadGameHistory()
+        loadGameSetting()
+        loadGameMiscData()
+
+        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
+            self.showMainPage()
+        }
     }
 
     func showMainPage() {
+        print("showMain")
         guard current != mainSwipablePage else { return }
         removeCurrent()
         current = mainSwipablePage
-        addCurrent()
+        showVC(current)
     }
 
     func showInfiniteChallengePage() {
+        print("showIC")
         guard current != infiniteChallengeSwipablePage else { return }
         removeCurrent()
         current = infiniteChallengeSwipablePage
-        addCurrent()
+        showVC(current)
     }
 
-    private func addCurrent() {
-        addChild(current)
-        current.view.frame = view.bounds
-        view.addSubview(current.view)
-        current.didMove(toParent: self)
+    private func showVC(_ vc: UIViewController) {
+        addChild(vc)
+        vc.view.frame = view.bounds
+        view.addSubview(vc.view)
+        vc.didMove(toParent: self)
     }
 
     private func removeCurrent() {
