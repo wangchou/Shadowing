@@ -125,6 +125,346 @@
             </objects>
             <point key="canvasLocation" x="292.5" y="-615.84507042253517"/>
         </scene>
+        <!--Info Page-->
+        <scene sceneID="3Ae-5k-wsD">
+            <objects>
+                <viewController storyboardIdentifier="InfoPage" id="hdg-2N-A76" customClass="InfoPage" customModule="VoiceOnly" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9c5-ia-4t8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xxo-M8-yBK">
+                                <rect key="frame" x="5" y="20" width="310" height="548"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="scrollIndicatorInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="App介紹">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="24" name="PingFangTC-Semibold"/>
+                                            <font key="NSOriginalFont" size="24" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="24" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+「</string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="今話したい">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Semibold"/>
+                                            <font key="NSOriginalFont" size="18" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">」是個練習日文口說的App。App日文老師先說、你接著複誦。最後用語音辨識的結果，指出你要加強的地方。App的目標是讓你「從會聽，但不會說」到擁有JLPT N3的口說能力。
+
+App有兩個模式：話題模式(600句)與無限挑戰模式(6000句)。 
+
+</string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="話題模式">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Semibold"/>
+                                            <font key="NSOriginalFont" size="18" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">有「日常、表達、戀愛、旅遊、論述、敬語」六個主題。每句都有中、日對照的翻譯。總共六百句。
+
+</string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="無限挑戰">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Semibold"/>
+                                            <font key="NSOriginalFont" size="18" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">模式有從「入門一」到「超難問」九個關卡。每個關卡會逐漸加長句子，闖關提升你的口說能力。總共有六千句。(PS：上級以後，因為語音辨識不穩定，還在實驗中。)
+
+</string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="使用提醒:">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="24" name="PingFangTC-Semibold"/>
+                                            <font key="NSOriginalFont" size="24" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+1. </string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="請安裝高品質語音">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <integer key="NSUnderline" value="1"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">：到設定頁裡選高品質語音。(推薦Otoya先生)。如果把iPhone的語系設成日文，下載Siri Female的語音後，設定頁選擇「預設」後還可以用Siri的聲音。
+
+2. </string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="請保持網路穩定">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <integer key="NSUnderline" value="1"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">：過程中使用的日文語音辨識皆為Apple提供，會需要把聲音傳到 Apple主機去。如果網路不穩會導致辨識結果不正確。
+
+3. Apple 語音辨識有每天1000句的免費上限。超過會辨識失敗。
+
+4. </string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="無限挑戰模式還在">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <integer key="NSUnderline" value="1"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Beta">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Semibold"/>
+                                            <font key="NSOriginalFont" size="18" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <integer key="NSUnderline" value="1"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="中">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <integer key="NSUnderline" value="1"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">，目前正確率只能到9成。(A判定)
+
+</string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="提高正確率的小秘訣：">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="24" name="PingFangTC-Semibold"/>
+                                            <font key="NSOriginalFont" size="24" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+1. 用耳麥(iPhone附的)，收音品質會比手機好。
+
+2. 試著讓咬字清楚、音量不要太小。
+
+3. </string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="は">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Semibold"/>
+                                            <font key="NSOriginalFont" size="18" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="和">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="が">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Semibold"/>
+                                            <font key="NSOriginalFont" size="18" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">或其他助詞之後稍微停一下。
+
+4. 日文老師的重音有時怪怪的。不照著唸、使用正確的重音去唸，會提升辨識率。
+
+5. 保持平常心。有時不是你唸錯，是語音辨識錯誤。
+
+6. 關閉自動朗讀速度調整：自己挑選一個適合自己的速度。
+
+</string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="為什麼要開發這個 App?">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="24" name="PingFangTC-Semibold"/>
+                                            <font key="NSOriginalFont" size="24" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+1. 自學很難練口說。作者過了N1、日文小說看了超過30本，但口說能力還是停留在N4左右。 
+
+2. 2017年在東京碰到很多打工渡假的人。大概有兩成的人，聽得懂日文, 但日文完全不會講。2014年，台灣每年簽證額度加倍到了5000人。因簽證申請通過率變高，而通過很好，但如果一整年在日本卻沒辦法和當地人有深入的交流，真的太可惜了。
+
+希望這個 App 能幫助到需要的人 ：）
+
+</string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="FAQ">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="24" name="PingFangTC-Semibold"/>
+                                            <font key="NSOriginalFont" size="24" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <mutableString key="content">
+Q: JLPT N3又沒有考口說，上面「JLPT N3的口說能力」是什麼意思？
+A: 能說得像N3聽力測驗中一樣的能力。
+
+Q: 有些句子怎麼唸就是達不到100分？句子有錯嗎？
+A: 話題模式中有30句唸不到100分。但都能唸到80分。無限挑戰模式中，每句都有請Siri唸給它自己聽，都有可能唸到100分。請用提高正確率的小秘訣多試試。
+
+Q: 有些句子的假名標錯了！
+A: 抱歉，關於假名標錯的問題。現在免費的「日文自然語言處理」自動標讀音只能達到99%正確。
+
+Q: 有些句子的漢字，日文老師唸錯了？
+A: 抱歉，這個問題來自Apple。舉例來說：Siri和Google Translation都會把「台湾人」唸成「台湾ひと」，目前作者沒有能力解決。
+
+Q: 網路明明很穩定，卻一直跳出「連不到主機」的錯誤訊息？
+A: 抱歉，那代表在「漢字轉假名主機」掛掉了。 
+Q: 有其他問題、指教 or 想請作者吃飯？
+A: 寫信到 imahanashitai@gmail.com</mutableString>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mgY-P7-HmR">
+                                <rect key="frame" x="255" y="503" width="50" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.29783818493150682" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Yuh-OD-h1I"/>
+                                    <constraint firstAttribute="width" constant="50" id="dmH-Gb-SeX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <state key="normal" title="X">
+                                    <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onCloseButtonClicked:" destination="hdg-2N-A76" eventType="touchUpInside" id="O3o-kx-gvO"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="2O6-9K-w0v" firstAttribute="trailing" secondItem="mgY-P7-HmR" secondAttribute="trailing" constant="15" id="5Oe-a4-t37"/>
+                            <constraint firstItem="2O6-9K-w0v" firstAttribute="bottom" secondItem="mgY-P7-HmR" secondAttribute="bottom" constant="15" id="HCS-8L-c9i"/>
+                            <constraint firstItem="2O6-9K-w0v" firstAttribute="bottom" secondItem="xxo-M8-yBK" secondAttribute="bottom" id="Nks-15-FFH"/>
+                            <constraint firstItem="xxo-M8-yBK" firstAttribute="leading" secondItem="2O6-9K-w0v" secondAttribute="leading" constant="5" id="OdD-Ua-71g"/>
+                            <constraint firstItem="2O6-9K-w0v" firstAttribute="trailing" secondItem="xxo-M8-yBK" secondAttribute="trailing" constant="5" id="QIl-vL-TYm"/>
+                            <constraint firstItem="xxo-M8-yBK" firstAttribute="top" secondItem="2O6-9K-w0v" secondAttribute="top" id="apH-vq-AUH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="2O6-9K-w0v"/>
+                    </view>
+                    <connections>
+                        <outlet property="closeButton" destination="mgY-P7-HmR" id="b47-ru-p5c"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v0w-0j-HYO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1935" y="-53"/>
+        </scene>
         <!--Item-->
         <scene sceneID="dx9-ut-S3b">
             <objects>

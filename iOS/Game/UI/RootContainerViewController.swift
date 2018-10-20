@@ -66,5 +66,4 @@ class RootContainerViewController: UIViewController {
         current.view.removeFromSuperview()
         current.removeFromParent()
     }
-
 }

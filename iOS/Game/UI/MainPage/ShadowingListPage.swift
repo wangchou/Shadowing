@@ -29,9 +29,10 @@ class ShadowingListPage: UIViewController {
     var timelineSubviews: [String: UIView] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        topBarView.rightButton.isHidden = true
-
+        topBarView.rightButton.setIconImage(named: "outline_info_black_48pt", isIconOnLeft: false)
+        topBarView.customOnRightButtonClicked = {
+            launchStoryboard(self, "InfoPage")
+        }
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(reloadTopicSentences),
                                                name: .topicFlagChanged,
