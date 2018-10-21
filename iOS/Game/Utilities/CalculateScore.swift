@@ -2,6 +2,11 @@ import Foundation
 import Promises
 import Alamofire
 
+#if os(iOS)
+#else
+var kanaTokenInfosCacheDictionary: [String: [[String]]] = [:]
+#endif
+
 func getKanaTokenInfos(_ kanjiString: String) -> Promise<[[String]]> {
     let promise = Promise<[[String]]>.pending()
     let parameters: Parameters = ["jpnStr": kanjiString]
@@ -46,7 +51,7 @@ func getKana(_ kanjiString: String) -> Promise<String> {
             if tokenInfo.count < 2 || tokenInfo[1] == "記号" {
                 return kanaStr
             }
-            let kanaPart = findKanaFix(tokenInfo[0]) ?? tokenInfo[tokenInfo.count - 2]
+            let kanaPart = findKanaFix(tokenInfo[0]) ?? tokenInfo[tokenInfo.count - 1]
             return kanaStr + kanaPart
         })
         promise.fulfill(kanaStr)

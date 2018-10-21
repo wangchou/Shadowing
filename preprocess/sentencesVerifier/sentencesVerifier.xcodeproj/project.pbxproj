@@ -12,6 +12,7 @@
 		BE55B43821736554006DC271 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE55B43621736553006DC271 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE55B43B217365AC006DC271 /* sqlite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE55B43A217365AC006DC271 /* sqlite.swift */; };
 		BE55B43D21736CC4006DC271 /* inf_sentences.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BE55B43C21736CC4006DC271 /* inf_sentences.sqlite */; };
+		BE5ABACB217B874400A63C5F /* kanaFix.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5ABACA217B874400A63C5F /* kanaFix.swift */; };
 		BE88D6072174D224004E1CD0 /* shadowingSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88D5FF2174D224004E1CD0 /* shadowingSentences.swift */; };
 		BE88D6082174D224004E1CD0 /* expressive.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88D6002174D224004E1CD0 /* expressive.swift */; };
 		BE88D6092174D224004E1CD0 /* travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88D6012174D224004E1CD0 /* travel.swift */; };
@@ -57,6 +58,7 @@
 		BE55B43621736553006DC271 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/Mac/SQLite.framework; sourceTree = "<group>"; };
 		BE55B43A217365AC006DC271 /* sqlite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sqlite.swift; sourceTree = "<group>"; };
 		BE55B43C21736CC4006DC271 /* inf_sentences.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences.sqlite; sourceTree = "<group>"; };
+		BE5ABACA217B874400A63C5F /* kanaFix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = kanaFix.swift; path = ../../../iOS/Game/Utilities/kanaFix.swift; sourceTree = "<group>"; };
 		BE88D5FF2174D224004E1CD0 /* shadowingSentences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = shadowingSentences.swift; path = ../../../iOS/Game/Sentences/shadowingSentences.swift; sourceTree = "<group>"; };
 		BE88D6002174D224004E1CD0 /* expressive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = expressive.swift; path = ../../../iOS/Game/Sentences/expressive.swift; sourceTree = "<group>"; };
 		BE88D6012174D224004E1CD0 /* travel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = travel.swift; path = ../../../iOS/Game/Sentences/travel.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 		BE88D5FE2174D1F2004E1CD0 /* ReferencedFromIOSApp */ = {
 			isa = PBXGroup;
 			children = (
+				BE5ABACA217B874400A63C5F /* kanaFix.swift */,
 				BE88D61E2174D752004E1CD0 /* utilities.swift */,
 				BE88D61C2174D633004E1CD0 /* Score.swift */,
 				BE88D60F2174D2C5004E1CD0 /* FuriganaUtils.swift */,
@@ -246,6 +249,7 @@
 				BE88D60E2174D224004E1CD0 /* polite.swift in Sources */,
 				BE55B43B217365AC006DC271 /* sqlite.swift in Sources */,
 				BE88D60D2174D224004E1CD0 /* CalculateScore.swift in Sources */,
+				BE5ABACB217B874400A63C5F /* kanaFix.swift in Sources */,
 				BE88D60B2174D224004E1CD0 /* speech.swift in Sources */,
 				BE9C6816217342D3007A8D83 /* ViewController.swift in Sources */,
 				BE9C6814217342D3007A8D83 /* AppDelegate.swift in Sources */,

@@ -41,12 +41,13 @@ func prepareSentences() {
     } else {
         print("set count: ", shadowingSentences.count)
         //shadowingSentences.forEach { sArray in sentences.append(contentsOf: sArray) }
-        for i in 0...31 {
+        for i in 0...30 {
             sentences.append(contentsOf: shadowingSentences[i])
         }
         for i in 0...sentences.count {
             sentenceIds.append(i)
         }
+
     }
 
     print(sentenceIds.count)

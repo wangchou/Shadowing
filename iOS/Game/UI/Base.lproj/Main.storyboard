@@ -174,10 +174,66 @@ Cg
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">」是個練習日文口說的App。App日文老師先說、你接著複誦。最後用語音辨識的結果，指出你要加強的地方。App的目標是讓你「從會聽，但不會說」到擁有JLPT N3的口說能力。
+                                        <string key="content">」是個練習日文口說的App。日文語音先說、你接著複誦。最後用辨識的結果，指出要加強的地方。目標是讓你「從會聽，但不會說」到擁有JLPT N3的口說能力。
 
-App有兩個模式：話題模式(600句)與無限挑戰模式(6000句)。 
-
+</string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">App有兩個模式：話題模式(600句)與無限挑戰模式(6000句)。 
+</string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops>
+                                                    <textTab alignment="left" location="28">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="56">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="84">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="112">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="140">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="168">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="196">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="224">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="252">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="280">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="308">
+                                                        <options/>
+                                                    </textTab>
+                                                    <textTab alignment="left" location="336">
+                                                        <options/>
+                                                    </textTab>
+                                                </tabStops>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
 </string>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -203,7 +259,7 @@ App有兩個模式：話題模式(600句)與無限挑戰模式(6000句)。
                                             <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="無限挑戰">
+                                    <fragment content="無限挑戰模式">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="18" name="PingFangTC-Semibold"/>
@@ -212,7 +268,7 @@ App有兩個模式：話題模式(600句)與無限挑戰模式(6000句)。
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">模式有從「入門一」到「超難問」九個關卡。每個關卡會逐漸加長句子，闖關提升你的口說能力。總共有六千句。(PS：上級以後，因為語音辨識不穩定，還在實驗中。)
+                                        <string key="content">有從「入門一」到「超難問」九個關卡。每個關卡逐漸加長句子，透過闖關提升你的口說能力。總共有六千句。(PS：上級以後，因為語音辨識不穩定，還在實驗階段。)
 
 </string>
                                         <attributes>
@@ -247,7 +303,7 @@ App有兩個模式：話題模式(600句)與無限挑戰模式(6000句)。
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">：到設定頁裡選高品質語音。(推薦Otoya先生)。如果把iPhone的語系設成日文，下載Siri Female的語音後，設定頁選擇「預設」後還可以用Siri的聲音。
+                                        <string key="content">：到設定頁裡選高品質語音。(推薦Otoya先生)。另外一提，如果把iPhone的語系設成日文，下載Siri Female的語音後，設定頁選擇「預設」後還可以用Siri的聲音。
 
 2. </string>
                                         <attributes>
@@ -265,9 +321,9 @@ App有兩個模式：話題模式(600句)與無限挑戰模式(6000句)。
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">：過程中使用的日文語音辨識皆為Apple提供，會需要把聲音傳到 Apple主機去。如果網路不穩會導致辨識結果不正確。
+                                        <string key="content">：過程中使用的語音辨識皆為Apple提供，會需要把聲音傳到Apple的主機去。如果網路不穩會導致辨識結果不正確。
 
-3. Apple 語音辨識有每天1000句的免費上限。超過會辨識失敗。
+3. Apple語音辨識有每天1000句的免費上限。超過會辨識失敗。
 
 4. </string>
                                         <attributes>
@@ -383,7 +439,7 @@ App有兩個模式：話題模式(600句)與無限挑戰模式(6000句)。
                                         <string key="content">
 1. 自學很難練口說。作者過了N1、日文小說看了超過30本，但口說能力還是停留在N4左右。 
 
-2. 2017年在東京碰到很多打工渡假的人。大概有兩成的人，聽得懂日文, 但日文完全不會講。2014年，台灣每年簽證額度加倍到了5000人。因簽證申請通過率變高，而通過很好，但如果一整年在日本卻沒辦法和當地人有深入的交流，真的太可惜了。
+2. 2017年在東京碰到很多打工渡假的人。大概有兩成的人聽得懂日文, 但日文完全不會講。如果一整年在日本卻沒辦法和當地人有深入的交流，真的太可惜了。
 
 希望這個 App 能幫助到需要的人 ：）
 
@@ -404,22 +460,71 @@ App有兩個模式：話題模式(600句)與無限挑戰模式(6000句)。
                                     </fragment>
                                     <fragment>
                                         <mutableString key="content">
-Q: JLPT N3又沒有考口說，上面「JLPT N3的口說能力」是什麼意思？
+Q: JLPT N3又沒有考口說，N3的口說能力是什麼意思？
 A: 能說得像N3聽力測驗中一樣的能力。
 
 Q: 有些句子怎麼唸就是達不到100分？句子有錯嗎？
-A: 話題模式中有30句唸不到100分。但都能唸到80分。無限挑戰模式中，每句都有請Siri唸給它自己聽，都有可能唸到100分。請用提高正確率的小秘訣多試試。
+A: 每句都有請Otoya語音唸給它自己聽，都有唸到100分過。請用提高正確率的小秘訣多試試，以作者經驗，通常是網路問題。
 
 Q: 有些句子的假名標錯了！
-A: 抱歉，關於假名標錯的問題。現在免費的「日文自然語言處理」自動標讀音只能達到99%正確。
+A: 抱歉，關於假名標錯的問題。現在「自然語言處理」自動標讀音只能達到99%正確。請回報，作者會盡可能去解決。
 
 Q: 有些句子的漢字，日文老師唸錯了？
-A: 抱歉，這個問題來自Apple。舉例來說：Siri和Google Translation都會把「台湾人」唸成「台湾ひと」，目前作者沒有能力解決。
+A: 抱歉，這個問題來自Apple。舉例來說：Siri和Google Translation都會把「台湾人」唸成「台湾ひと」，目前作者沒有能力解決。不過也請回報，如果無法解決，會把有問題的句子移除。
 
 Q: 網路明明很穩定，卻一直跳出「連不到主機」的錯誤訊息？
 A: 抱歉，那代表在「漢字轉假名主機」掛掉了。 
 Q: 有其他問題、指教 or 想請作者吃飯？
-A: 寫信到 imahanashitai@gmail.com</mutableString>
+A: 寫信到 imahanashitai@gmail.com
+
+</mutableString>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="以下">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="24" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="感謝，曾參與測試">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="24" name="PingFangTC-Semibold"/>
+                                            <font key="NSOriginalFont" size="24" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="、回報問題">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="24" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="的朋友：">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="24" name="PingFangTC-Semibold"/>
+                                            <font key="NSOriginalFont" size="24" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+Eason Chou
+Jennifer Chen
+Satolu
+Sid Weng
+Stella
+Ruth Yuru Chen
+伯豪 &amp; 小乖
+肉鬆
+歐頭</string>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="18" name="PingFangTC-Regular"/>

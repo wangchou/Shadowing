@@ -10,7 +10,9 @@ import Foundation
 
 // fix mecab yomi error
 var kanaFix: [String: String] = [
-    "何時": "なんじ"
+    "何時": "なんじ",
+    "という": "トイウ",
+    "事": "コト",
 ]
 func findKanaFix(_ token: String) -> String? {
     return kanaFix[token]
