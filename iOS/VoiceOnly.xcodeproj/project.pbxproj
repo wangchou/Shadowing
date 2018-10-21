@@ -708,7 +708,7 @@
 				MACH_O_TYPE = mh_execute;
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = YES;
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-Xfrontend -debug-time-function-bodies";
-				PRODUCT_BUNDLE_IDENTIFIER = idv.wcl.VoiceOnly;
+				PRODUCT_BUNDLE_IDENTIFIER = idv.wcl.imahanashitai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -739,7 +739,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
-				PRODUCT_BUNDLE_IDENTIFIER = idv.wcl.VoiceOnly;
+				PRODUCT_BUNDLE_IDENTIFIER = idv.wcl.imahanashitai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 4.2;

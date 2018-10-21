@@ -17,7 +17,7 @@ func getKanaTokenInfos(_ kanjiString: String) -> Promise<[[String]]> {
     }
 
     Alamofire.request(
-        "http://54.250.149.163/nlp",
+        "http://52.194.172.67/nlp",
         method: .post,
         parameters: parameters
         ).responseJSON { response in

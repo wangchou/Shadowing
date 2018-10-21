@@ -28,7 +28,7 @@ if(isMac) {
 // https://medium.com/the-node-js-collection/simple-server-side-cache-for-express-js-with-node-js-45ff296ca0f0
 var cache = (duration) => {
   return (req, res, next) => {
-    if (!req.body || !req.body.jpnStr || req.body.jpnStr.length > 50) return res.sendStatus(400)
+    if (!req.body || !req.body.jpnStr) return res.sendStatus(400)
     let key = req.body.jpnStr
     let cachedBody = mcache.get(key)
     if(cachedBody) {
