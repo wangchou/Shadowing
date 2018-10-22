@@ -1,5 +1,8 @@
 # Shadowing App (今、話したい)
-An app that trains you speaking japanese via Text-To-Speech and Speech Recognition
+「今話したい」是個練習日文口說的App。日文語音先說、你接著複誦。最後用辨識的結果，指出要加強的地方。目標是讓你「從會聽，但不會說」到擁有JLPT N3的口說能力。
+
+# About App Privacy
+This app will only transmit what you said Japanese Text to our server for converting it to furigana anonymously. We also will not keep any other private information from users. 
 
 ## How the iOS app looks like?
 <img src="https://raw.githubusercontent.com/wangchou/Shadowing/master/img/screenshot.jpg" height="300">
