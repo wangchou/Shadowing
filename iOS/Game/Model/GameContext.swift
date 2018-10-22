@@ -146,9 +146,9 @@ class GameContext {
     func nextSentence() -> Bool {
         sentenceIndex += 1
         var sentencesBound = sentences.count
-        if isSimulator {
-            sentencesBound = 3
-        }
+//        if isSimulator {
+//            sentencesBound = 3
+//        }
         guard sentenceIndex < sentencesBound else { return false }
         userSaidString = ""
         return true

@@ -25,18 +25,18 @@ var vc:ViewController!
 //    then use online STTlike iOS
 // run this whole day
 
-var isInfiniteChallengePreprocessingMode = false
+var isInfiniteChallengePreprocessingMode = true
 
 func prepareSentences() {
     sentenceIds = []
     if isInfiniteChallengePreprocessingMode {
         loadSentenceDB()
         createWritableDB()
-        sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 1, maxKanaCount: 8, numOfSentences: 3000))
-        sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 6, maxKanaCount: 12, numOfSentences: 3000))
-        sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 9, maxKanaCount: 18, numOfSentences: 3000))
-        sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 12, maxKanaCount: 24, numOfSentences: 3000))
-        sentenceIds.append(contentsOf: randSentenceIds(minKanaCount: 18, maxKanaCount: 36, numOfSentences: 3000))
+        for id in idToSiriSaid.keys.sorted() {
+            if idToSiriSaid[id] == "" {
+                sentenceIds.append(id)
+            }
+        }
         sentences = getSentencesByIds(ids: sentenceIds)
     } else {
         print("set count: ", shadowingSentences.count)
@@ -47,7 +47,6 @@ func prepareSentences() {
         for i in 0...sentences.count {
             sentenceIds.append(i)
         }
-
     }
 
     print(sentenceIds.count)

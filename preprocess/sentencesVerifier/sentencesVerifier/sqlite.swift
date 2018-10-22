@@ -18,7 +18,8 @@ struct KanaInfo {
 private var kanaInfos: [Int: KanaInfo] = [:]
 private var sqliteFileName = "inf_sentences"
 private var writableDBPath = ""
-private var idToSentences: [Int: String] = [:]
+var idToSentences: [Int: String] = [:]
+var idToSiriSaid: [Int: String] = [:]
 var dbR: Connection!
 var dbW: Connection!
 
@@ -59,6 +60,7 @@ func updateIdWithListened(id: Int, siriSaid: String) {
         let target = sentenceTable.filter(dbId == id)
 
         try dbW.run(target.update(dbSiriSaid <- siriSaid))
+        print(id, siriSaid)
     } catch {
         print("db update error: \(error)")
     }
@@ -106,6 +108,12 @@ func createWritableDB() {
             print("exist")
         }
         dbW = try Connection(writableDBPath, readonly: false)
+        let sentencesTable = Table("sentences")
+        let siriSaid = Expression<String>("siriSaid")
+        let id = Expression<Int>("id")
+        for row in try dbW.prepare(sentencesTable) {
+            idToSiriSaid[row[id]] = row[siriSaid]
+        }
     } catch {
         print("\(error)")
     }
