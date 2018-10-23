@@ -22,7 +22,6 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
     func say(
         _ text: String,
         name: String? = nil,
-        language: String? = nil,
         rate: Float = AVSpeechUtteranceDefaultSpeechRate // 0.5, range 0 ~ 1.0
         ) -> Promise<Void> {
         if synthesizer.isSpeaking {
@@ -35,11 +34,8 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
             utterance.voice = voice
         } else {
             // prefer use system default(Siri) than lanuage default
-            if let language = language,
-                language != AVSpeechSynthesisVoice.currentLanguageCode() {
-                utterance.voice = AVSpeechSynthesisVoice(language: language)
-            } else if language == nil {
-                utterance.voice = AVSpeechSynthesisVoice(language: "ja")
+            if "ja-JP" != AVSpeechSynthesisVoice.currentLanguageCode() {
+                utterance.voice = AVSpeechSynthesisVoice(language: "ja-JP")
             }
         }
 
@@ -47,7 +43,7 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         postEvent(.sayStarted, string: text)
         synthesizer.speak(utterance)
         promise = Promise<Void>.pending()
-        self.name = name ?? language ?? "nil"
+        self.name = name ?? "nil"
         return promise
     }
 
