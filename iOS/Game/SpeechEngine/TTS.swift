@@ -29,7 +29,7 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
             synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
         }
         synthesizer.delegate = self
-        let utterance = AVSpeechUtterance(string: text)
+        let utterance = AVSpeechUtterance(string: getKanaFixedText(text))
         if let name = name,
            let voice = AVSpeechSynthesisVoice(identifier: name) {
             utterance.voice = voice
@@ -38,6 +38,8 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
             if let language = language,
                 language != AVSpeechSynthesisVoice.currentLanguageCode() {
                 utterance.voice = AVSpeechSynthesisVoice(language: language)
+            } else if language == nil {
+                utterance.voice = AVSpeechSynthesisVoice(language: "ja")
             }
         }
 
@@ -71,4 +73,18 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         postEvent(.sayEnded, string: name)
         promise.fulfill(())
     }
+}
+
+private let siriKanaFix: [String: String] = [
+    "明日": "あした",
+    "行って": "いって",
+    "台湾人": "台湾じん"
+]
+
+private func getKanaFixedText(_ text: String) -> String {
+    var fixedText = text
+    siriKanaFix.keys.forEach { kanji in
+        fixedText = fixedText.replace(kanji, siriKanaFix[kanji]!)
+    }
+    return fixedText
 }

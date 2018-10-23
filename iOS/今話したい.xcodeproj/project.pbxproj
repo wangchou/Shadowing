@@ -335,17 +335,8 @@
 				BEBDEDCB208EF0A000C18520 /* Info.plist */,
 				BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */,
 				BEBDEDBD208EF09F00C18520 /* Products */,
-				BEBDEDE1208EF17100C18520 /* Frameworks */,
 			);
 			path = VoiceOnly;
-			sourceTree = "<group>";
-		};
-		BEBDEDE1208EF17100C18520 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			path = ..;
 			sourceTree = "<group>";
 		};
 		BECAC3BD216B9CDF001BBF49 /* InfiniteChanllengePage */ = {
