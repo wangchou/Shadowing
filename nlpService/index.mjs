@@ -61,7 +61,7 @@ app.use(bodyParser.json())
 
 app.post('/nlp', cache(864000), (req, res) => {
   if (!req.body || !req.body.jpnStr) return res.sendStatus(400)
-  console.log(req.body.jpnStr)
+  console.log(new Date().toLocaleString(), req.body.jpnStr)
   mecab.parse(req.body.jpnStr, function(err, result) {
     if (err) {
       return res.status(500).send({ error: 'Something failed!' })
