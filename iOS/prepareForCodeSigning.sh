@@ -9,8 +9,6 @@ lipo -remove x86_64 Carthage/Build/iOS/Promises.framework/Promises -o Carthage/B
 lipo -remove i386 Carthage/Build/iOS/Promises.framework/Promises -o Carthage/Build/iOS/Promises.framework/Promises
 lipo -remove x86_64 Carthage/Build/iOS/SQLite.framework/SQLite -o Carthage/Build/iOS/SQLite.framework/SQLite
 lipo -remove i386 Carthage/Build/iOS/SQLite.framework/SQLite -o Carthage/Build/iOS/SQLite.framework/SQLite
-lipo -remove x86_64 Carthage/Build/iOS/SwiftIconFont.framework/SwiftIconFont -o Carthage/Build/iOS/SwiftIconFont.framework/SwiftIconFont
-lipo -remove i386 Carthage/Build/iOS/SwiftIconFont.framework/SwiftIconFont -o Carthage/Build/iOS/SwiftIconFont.framework/SwiftIconFont
 lipo -remove x86_64 Carthage/Build/iOS/SwiftyJSON.framework/SwiftyJSON -o Carthage/Build/iOS/SwiftyJSON.framework/SwiftyJSON
 lipo -remove i386 Carthage/Build/iOS/SwiftyJSON.framework/SwiftyJSON -o Carthage/Build/iOS/SwiftyJSON.framework/SwiftyJSON
 
