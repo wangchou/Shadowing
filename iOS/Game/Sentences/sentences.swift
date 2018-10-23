@@ -55,7 +55,7 @@ enum Rank: String, Codable {
     }
 }
 
-var allSentences: [String: [(speaker: ChatSpeaker, string: String)]] = [:]
+var allSentences: [String: [String]] = [:]
 var allSentencesKeys: [String] = []
 var dataKeyToLevels: [String: Level] = [:]
 
@@ -94,21 +94,17 @@ func addSentences() {
             return flag
         }
         .forEach { sentences in
-            let subSentences: [(speaker: ChatSpeaker, string: String)] = sentences
-                .map { s in
-                    return (ChatSpeaker.hattori, s)
-            }
-            let key = "\(subSentences[0].string)"
-            allSentences[key] = subSentences
+            let key = sentences[0]
+            allSentences[key] = sentences
             allSentencesKeys.append(key)
 
-            let avgKanaCount = subSentences
-                .map { pair -> Int in
-                    return topicSentencesInfos[pair.string]?.kanaCount ?? 0
+            let avgKanaCount = sentences
+                .map { s -> Int in
+                    return topicSentencesInfos[s]?.kanaCount ?? 0
                 }
                 .reduce(0, { sum, count in
                     return sum + count
-                })/subSentences.count
+                })/sentences.count
             avgKanaCountDict[key] = avgKanaCount
             dataKeyToLevels[key] = getLevel(avgKanaCount: avgKanaCount)
         }

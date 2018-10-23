@@ -62,7 +62,7 @@ class GameContentDetailPage: UIViewController {
         challengeButton.roundBorder(borderWidth: 0, cornerRadius: 5, color: .clear)
 
         // load furigana
-        all(context.sentences.map {$0.string.furiganaAttributedString}).then {_ in
+        all(context.sentences.map {$0.furiganaAttributedString}).then {_ in
             self.tableView.reloadData()
         }
     }
@@ -127,7 +127,7 @@ extension GameContentDetailPage: UITableViewDataSource {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContentTableCell", for: indexPath)
         guard let contentCell = cell as? SentencesTableCell else { print("detailCell convert error"); return cell }
-        let sentence = context.sentences[indexPath.row].string
+        let sentence = context.sentences[indexPath.row]
         contentCell.update(sentence: sentence, isShowTranslate: context.gameSetting.isUsingTranslation)
 
         return contentCell

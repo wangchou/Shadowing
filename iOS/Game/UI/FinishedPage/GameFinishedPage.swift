@@ -47,8 +47,8 @@ class GameFinishedPage: UIViewController {
     func sortSentenceByScore() {
         context.sentences.sort { chStr1, chStr2 in
             guard let record = context.gameRecord else { return true }
-            guard let score1 = record.sentencesScore[chStr1.string] else { return false }
-            guard let score2 = record.sentencesScore[chStr2.string] else { return true }
+            guard let score1 = record.sentencesScore[chStr1] else { return false }
+            guard let score2 = record.sentencesScore[chStr2] else { return true }
 
             return score1.value < score2.value
         }
@@ -69,7 +69,7 @@ extension GameFinishedPage: UITableViewDataSource {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "FinishedTableCell", for: indexPath)
         guard let finishedCell = cell as? SentencesTableCell else { print("detailCell convert error"); return cell }
-        let sentence = context.sentences[indexPath.row].string
+        let sentence = context.sentences[indexPath.row]
 
         finishedCell.update(sentence: sentence)
 

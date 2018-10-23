@@ -41,7 +41,7 @@ extension Game {
         saveGameSetting()
         if context.contentTab == .infiniteChallenge,
            let gr = context.gameRecord {
-            lastInfiniteChallengeSentences[gr.level] = context.sentences.map { obj in return obj.string }
+            lastInfiniteChallengeSentences[gr.level] = context.sentences
         }
         saveGameMiscData()
     }

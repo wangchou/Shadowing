@@ -63,7 +63,7 @@ class GameContext {
         return gameRecord?.isNewRecord ?? false
     }
     var newRecordIncrease: Int = 0
-    var sentences: [(speaker: ChatSpeaker, string: String)] = []
+    var sentences: [String] = []
     var sentenceIndex: Int = 0
     var remainingSentenceCount: Int {
         return sentences.count - sentenceIndex
@@ -72,17 +72,7 @@ class GameContext {
     // MARK: - Short-term data for a single sentence
     var targetString: String {
         guard sentenceIndex < sentences.count else { return ""}
-        return sentences[sentenceIndex].string
-    }
-    var targetSpeaker: ChatSpeaker {
-        guard sentenceIndex < sentences.count else { return ChatSpeaker.hattori }
-        return sentences[sentenceIndex].speaker
-    }
-    var isTargetSentencePlayedByUser: Bool {
-        return targetSpeaker == .user
-    }
-    var isNarratorSpeaking: Bool {
-        return targetSpeaker == .meijia
+        return sentences[sentenceIndex]
     }
 
     // measure the seconds of tts speaking
@@ -134,9 +124,9 @@ class GameContext {
             maxKanaCount: level.maxKanaCount,
             numOfSentences: numOfSentences
         )
-        sentences = getSentencesByIds(ids: sentenceIds).map { s in
+        sentences = getSentencesByIds(ids: sentenceIds)
+        sentences.forEach { s in
             _ = s.furiganaAttributedString // load furigana
-            return (speaker: ChatSpeaker.hattori, string: s)
         }
         if isSimulator { life = 100 }
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level, flowMode: .shadowing)

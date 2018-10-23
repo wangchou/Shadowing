@@ -125,13 +125,3 @@ struct GameRecord: Codable {
         self.gameFlowMode = flowMode
     }
 }
-
-func getAbilityPointMax(_ dataSetKey: String) -> Int {
-    guard let sentences = allSentences[dataSetKey] else { return 0 }
-    var kanaCount: Int = 0
-    for (_, sentence) in sentences {
-        let kana = getKanaSync(sentence)
-        kanaCount += kana.count
-    }
-    return kanaCount
-}
