@@ -52,7 +52,7 @@ func updateGameHistory() {
 }
 
 struct GameRecord: Codable {
-    var gameFlowMode: GameFlowMode = .shadowing
+    var gameFlowMode: GameFlowMode = .shadowing // deprecated, only for conform previous records
     var startedTime: Date
     var playDuration: Int = 0
     let dataSetKey: String
@@ -116,12 +116,11 @@ struct GameRecord: Codable {
         return .f
     }
 
-    init(_ dataSetKey: String, sentencesCount: Int, level: Level, flowMode: GameFlowMode) {
+    init(_ dataSetKey: String, sentencesCount: Int, level: Level) {
         self.dataSetKey = dataSetKey
         self.sentencesCount = sentencesCount
         self.level = level
         self.sentencesScore = [:]
         self.startedTime = Date()
-        self.gameFlowMode = flowMode
     }
 }

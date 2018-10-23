@@ -31,7 +31,6 @@ class GameContext {
     var gameSetting = GameSetting()
 
     // MARK: - Short-term data of a single game
-    var gameFlowMode: GameFlowMode = .chat
     var contentTab: ContentTab = .topics
     var infiniteChallengeLevel: Level = .lv0
     var gameState: GameState = .stopped {
@@ -111,7 +110,7 @@ class GameContext {
         life = isSimulator ? 100 : 50
 
         let level = dataKeyToLevels[dataSetKey] ?? .lv0
-        gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level, flowMode: .shadowing)
+        gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level)
     }
 
     func loadInfiniteChallengeLevelSentence(level: Level) {
@@ -129,7 +128,7 @@ class GameContext {
             _ = s.furiganaAttributedString // load furigana
         }
         if isSimulator { life = 100 }
-        gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level, flowMode: .shadowing)
+        gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level)
 
     }
 

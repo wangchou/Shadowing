@@ -99,7 +99,6 @@ class GameContentDetailPage: UIViewController {
 
     @IBAction func challenge(_ sender: Any) {
         guard !GameContentDetailPage.isChallengeButtonDisabled else { return }
-        context.gameFlowMode = .shadowing
         launchGame()
     }
 

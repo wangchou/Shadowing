@@ -22,7 +22,6 @@ class ShadowingFlow: Game {
     override func start() {
         SpeechEngine.shared.start()
         isForceStopped = false
-        context.gameFlowMode = .shadowing
         context.gameState = .stopped
         context.gameRecord?.startedTime = Date()
         gameSeconds = 0
