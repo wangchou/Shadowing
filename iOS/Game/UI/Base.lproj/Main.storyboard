@@ -425,7 +425,23 @@ Q: JLPT N3又沒有考口說，N3的口說能力是什麼意思？
 A: 能說得像N3聽力測驗中一樣的能力。
 
 Q: 有些句子怎麼唸就是達不到100分？句子有錯嗎？
-A: 每句都有請Otoya語音唸給它自己聽，都有唸到100分過。請用提高正確率的小秘訣多試試，以作者經驗，通常是網路問題。
+A: 每句都有請</string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Otoya語音">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Semibold"/>
+                                            <font key="NSOriginalFont" size="18" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <mutableString key="content">唸給它自己聽，都有唸到100分過。請用提高正確率的小秘訣多試試，以作者經驗，通常是網路問題。
 
 Q: 有些句子的假名標錯了！
 A: 抱歉，關於假名標錯的問題。現在「自然語言處理」自動標讀音只能達到99%正確。請回報，作者會盡可能去解決。
@@ -438,7 +454,7 @@ A: 抱歉，那代表在「漢字轉假名主機」掛掉了。 
 Q: 有其他問題、指教 or 想請作者吃飯？
 A: 寫信到 imahanashitai@gmail.com
 
-</string>
+</mutableString>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="18" name="PingFangTC-Regular"/>
@@ -1332,7 +1348,7 @@ Ruth Yuru Chen
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FinishedTableCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="5" indentationWidth="5" reuseIdentifier="FinishedSentenceCell" rowHeight="63" id="U4Y-kF-8LG" userLabel="FinishedTableCell" customClass="SentencesTableCell" customModule="今話したい" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="325.60000000000002" width="320" height="63"/>
+                                        <rect key="frame" x="0.0" y="287" width="320" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="U4Y-kF-8LG" id="316-Iq-LBo">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="62.5"/>

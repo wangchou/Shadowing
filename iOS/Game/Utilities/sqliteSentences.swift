@@ -128,8 +128,11 @@ func randSentenceIds(minKanaCount: Int, maxKanaCount: Int, numOfSentences: Int) 
     let endId = endKanaInfo.startId + endKanaInfo.sentenceCount - 1
 
     var randomIds: [Int] = []
-    for _ in 0..<numOfSentences {
-        randomIds.append(Int(arc4random_uniform(UInt32(endId - startId))) + startId)
+    while randomIds.count < numOfSentences {
+        let newId = Int(arc4random_uniform(UInt32(endId - startId))) + startId
+        if !randomIds.contains(newId) {
+            randomIds.append(newId)
+        }
     }
 
     return randomIds
