@@ -49,7 +49,6 @@ class ShadowingFlow: Game {
     }
 
     func forceStop() {
-        SpeechEngine.shared.stop()
         isForceStopped = true
         isPaused = false
         wait.reject(GameError.forceStop)

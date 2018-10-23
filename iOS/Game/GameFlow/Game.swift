@@ -44,7 +44,6 @@ extension Game {
             lastInfiniteChallengeSentences[gr.level] = context.sentences.map { obj in return obj.string }
         }
         saveGameMiscData()
-        SpeechEngine.shared.stop()
     }
 
     internal func startTimer() {

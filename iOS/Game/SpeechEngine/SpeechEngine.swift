@@ -41,9 +41,6 @@ class SpeechEngine {
     // MARK: - Lifecycle
     private init() {
         guard !isSimulator else { return }
-        configureAudioSession()
-        buildNodeGraph()
-        audioEngine.prepare()
         setupNotifications()
     }
 
@@ -56,6 +53,8 @@ class SpeechEngine {
 
         do {
             configureAudioSession()
+            buildNodeGraph()
+            audioEngine.prepare()
             try audioEngine.start()
             // engine.bgm.play()
         } catch {
@@ -67,10 +66,10 @@ class SpeechEngine {
         guard isEngineRunning else { return }
         isEngineRunning = false
         tts.stop()
-        guard !isSimulator else { return }
 
+        guard !isSimulator else { return }
         speechRecognizer.stop()
-        audioEngine.stop()
+        closeNodeGraph()
     }
 
     func speak(text: String, speaker: ChatSpeaker? = nil, rate: Float = context.teachingRate) -> Promise<Void> {
@@ -120,6 +119,7 @@ class SpeechEngine {
     }
 
     private func buildNodeGraph() {
+        print("buildNodeGraph")
         let mainMixer = audioEngine.mainMixerNode
         let mic = audioEngine.inputNode // only for real device, simulator will crash
 
@@ -132,6 +132,15 @@ class SpeechEngine {
 
         micVolumeNode.volume = micOutVolume
         bgm.node.volume = 0.5
+    }
+
+    private func closeNodeGraph() {
+        if audioEngine.isRunning {
+            print("closeNodeGraph")
+            audioEngine.stop()
+            audioEngine.detach(bgm.node)
+            audioEngine.detach(micVolumeNode)
+        }
     }
 
     private func setupNotifications() {
@@ -148,20 +157,16 @@ class SpeechEngine {
                 return
         }
         switch reason {
-        case .newDeviceAvailable:
-            print("new device available")
-            if self.isEngineRunning {
-                self.stop()
-                self.start()
-            }
-        case .oldDeviceUnavailable:
-            print("old device unavailable")
+        case .newDeviceAvailable, .oldDeviceUnavailable, .override:
+            print("route change notification:", reason.rawValue)
             if self.isEngineRunning {
                 self.stop()
                 self.start()
             }
         default: ()
+            print("unhandle route change notification:", reason.rawValue)
         }
+
     }
 
 }

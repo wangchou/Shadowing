@@ -56,12 +56,12 @@ class SentencesTableCell: UITableViewCell {
 
     func practiceSentence() {
         guard SentencesTableCell.isPracticing != true else { return }
+        SpeechEngine.shared.start()
         GameContentDetailPage.isChallengeButtonDisabled = true
         SentencesTableCell.isPracticing = true
         self.isUserInteractionEnabled = false
         practiceButton.isEnabled = false
         practiceButton.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
-        SpeechEngine.shared.start()
         prepareForSpeaking()
         speakPart()
             .then(listenPart)
@@ -73,7 +73,6 @@ class SentencesTableCell: UITableViewCell {
                 self.practiceButton.backgroundColor = self.buttonColor
                 SentencesTableCell.isPracticing = false
                 GameContentDetailPage.isChallengeButtonDisabled = false
-                SpeechEngine.shared.stop()
             }
     }
 

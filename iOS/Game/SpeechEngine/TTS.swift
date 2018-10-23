@@ -83,8 +83,8 @@ private let siriKanaFix: [String: String] = [
 
 private func getKanaFixedText(_ text: String) -> String {
     var fixedText = text
-    siriKanaFix.keys.forEach { kanji in
-        fixedText = fixedText.replace(kanji, siriKanaFix[kanji]!)
+    for (kanji, kana) in siriKanaFix {
+        fixedText = fixedText.replace(kanji, kana)
     }
     return fixedText
 }
