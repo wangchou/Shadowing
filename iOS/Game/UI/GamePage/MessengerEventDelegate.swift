@@ -52,7 +52,6 @@ extension Messenger: GameEventDelegate {
 
         case .gameStateChanged:
             if context.gameState == .gameOver {
-                stopEventObserving(self)
                 addLabel(rubyAttrStr("遊戲結束。"))
 
                 // prevent alerting block present
@@ -65,8 +64,11 @@ extension Messenger: GameEventDelegate {
             game.resume()
 
         case .forceStopGame:
-            stopEventObserving(self)
-            dismiss(animated: false)
+            game.isForceStopped = true
+            print("receive forceStopGame message")
+            self.dismiss(animated: false) {
+                print("messenger dismissed")
+            }
 
         default:
             return

@@ -51,13 +51,13 @@ class Messenger: UIViewController {
     }
 
     func end() {
-        stopEventObserving(self)
         if game.isForceStopped {
             game.forceStop()
         } else {
             game.stop()
         }
         game = nil
+        stopEventObserving(self)
     }
 
     func addLabel(_ text: NSAttributedString, isLeft: Bool = true) {

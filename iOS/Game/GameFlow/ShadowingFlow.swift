@@ -48,7 +48,8 @@ class ShadowingFlow: Game {
     }
 
     func forceStop() {
-        isForceStopped = true
+        context.gameState = .stopped
+        timer?.invalidate()
         isPaused = false
         wait.reject(GameError.forceStop)
     }

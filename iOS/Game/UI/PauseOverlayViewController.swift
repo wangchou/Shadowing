@@ -74,7 +74,7 @@ class PauseOverlayViewController: UIViewController {
     }
 
     @IBAction func finishButtonClicked(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
         postEvent(.forceStopGame)
     }
 
