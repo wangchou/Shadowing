@@ -68,30 +68,6 @@ struct GameRecord: Codable {
 
     var sentencesScore: [String: Score]
 
-    // the sentence have 20 kana with 80 score => 20 x 0.80 = 16 ability point
-    // harder game will get higher points
-    var abilityPoint: Int {
-        guard !sentencesScore.isEmpty else { return 0 }
-        var scoreSum: Int = 0
-        for (sentence, score) in sentencesScore {
-            let kana = getKanaSync(sentence)
-            switch score.type {
-            case .perfect:
-                scoreSum += kana.count * 100
-
-            case .great:
-                scoreSum += kana.count * 80
-
-            case .good:
-                scoreSum += kana.count * 50
-
-            case .poor:
-                scoreSum += kana.count * 0
-            }
-        }
-        return scoreSum/100
-    }
-
     var p: Float {
         let sum = perfectCount.f + greatCount.f + goodCount.f * 0.5
         return 100 * sum / sentencesCount.f
@@ -99,10 +75,6 @@ struct GameRecord: Codable {
 
     var progress: String {
         return "\(p.i)"
-    }
-
-    var pointText: String {
-        return "\(abilityPoint)"
     }
 
     var rank: Rank {
