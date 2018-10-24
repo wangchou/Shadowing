@@ -60,11 +60,6 @@ class InfiniteChallengeSwipablePage: UIPageViewController {
             pages.append(vcs[i])
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 }
 
 extension InfiniteChallengeSwipablePage: UIPageViewControllerDataSource {

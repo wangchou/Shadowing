@@ -42,11 +42,6 @@ class MainSwipablePage: UIPageViewController {
             (view as? UIScrollView)?.delaysContentTouches = false
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 }
 
 extension MainSwipablePage: UIPageViewControllerDataSource {

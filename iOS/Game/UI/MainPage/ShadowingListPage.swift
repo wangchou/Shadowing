@@ -67,11 +67,6 @@ class ShadowingListPage: UIViewController {
         addGradientSeparatorLine()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     func addGradientSeparatorLine() {
         let lightRGBs = [
             Level.lv0.color,
