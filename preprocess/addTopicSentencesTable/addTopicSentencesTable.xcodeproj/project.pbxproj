@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE39E09A2180E53A00A34C50 /* rawDataSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE39E0992180E53A00A34C50 /* rawDataSets.swift */; };
+		BE39E0AB2180E72000A34C50 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE39E0A72180E72000A34C50 /* Alamofire.framework */; };
+		BE39E0AC2180E72000A34C50 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE39E0A72180E72000A34C50 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BE39E0AD2180E72000A34C50 /* FBLPromises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE39E0A82180E72000A34C50 /* FBLPromises.framework */; };
+		BE39E0AE2180E72000A34C50 /* FBLPromises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE39E0A82180E72000A34C50 /* FBLPromises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BE39E0AF2180E72000A34C50 /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE39E0A92180E72000A34C50 /* Promises.framework */; };
+		BE39E0B02180E72000A34C50 /* Promises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE39E0A92180E72000A34C50 /* Promises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BE39E0B12180E72100A34C50 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE39E0AA2180E72000A34C50 /* SQLite.framework */; };
+		BE39E0B22180E72100A34C50 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE39E0AA2180E72000A34C50 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE3EA02E217761B300B65F48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA02D217761B300B65F48 /* AppDelegate.swift */; };
 		BE3EA030217761B300B65F48 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA02F217761B300B65F48 /* ViewController.swift */; };
 		BE3EA032217761B400B65F48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE3EA031217761B400B65F48 /* Assets.xcassets */; };
@@ -17,35 +26,26 @@
 		BE3EA04E217761F400B65F48 /* FuriganaUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA041217761F400B65F48 /* FuriganaUtils.swift */; };
 		BE3EA04F217761F400B65F48 /* sqliteSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA042217761F400B65F48 /* sqliteSentences.swift */; };
 		BE3EA050217761F400B65F48 /* daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA043217761F400B65F48 /* daily.swift */; };
-		BE3EA051217761F400B65F48 /* shadowingSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA044217761F400B65F48 /* shadowingSentences.swift */; };
 		BE3EA052217761F400B65F48 /* kanaFix.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA045217761F400B65F48 /* kanaFix.swift */; };
 		BE3EA053217761F400B65F48 /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA046217761F400B65F48 /* utilities.swift */; };
 		BE3EA054217761F400B65F48 /* speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA047217761F400B65F48 /* speech.swift */; };
 		BE3EA055217761F400B65F48 /* expressive.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA048217761F400B65F48 /* expressive.swift */; };
 		BE3EA056217761F400B65F48 /* CalculateScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA049217761F400B65F48 /* CalculateScore.swift */; };
 		BE3EA057217761F400B65F48 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA04A217761F400B65F48 /* Score.swift */; };
-		BE3EA05C217762C400B65F48 /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3EA058217762C400B65F48 /* Promises.framework */; };
-		BE3EA05D217762C400B65F48 /* Promises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE3EA058217762C400B65F48 /* Promises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BE3EA05E217762C400B65F48 /* FBLPromises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3EA059217762C400B65F48 /* FBLPromises.framework */; };
-		BE3EA05F217762C400B65F48 /* FBLPromises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE3EA059217762C400B65F48 /* FBLPromises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BE3EA060217762C400B65F48 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3EA05A217762C400B65F48 /* SQLite.framework */; };
-		BE3EA061217762C400B65F48 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE3EA05A217762C400B65F48 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BE3EA062217762C400B65F48 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3EA05B217762C400B65F48 /* Alamofire.framework */; };
-		BE3EA063217762C400B65F48 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE3EA05B217762C400B65F48 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE3EA0682177642000B65F48 /* inf_sentences_100points.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BE3EA0672177641F00B65F48 /* inf_sentences_100points.sqlite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		BE3EA064217762C400B65F48 /* Embed Frameworks */ = {
+		BE39E0B32180E72100A34C50 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BE3EA05D217762C400B65F48 /* Promises.framework in Embed Frameworks */,
-				BE3EA05F217762C400B65F48 /* FBLPromises.framework in Embed Frameworks */,
-				BE3EA061217762C400B65F48 /* SQLite.framework in Embed Frameworks */,
-				BE3EA063217762C400B65F48 /* Alamofire.framework in Embed Frameworks */,
+				BE39E0B02180E72000A34C50 /* Promises.framework in Embed Frameworks */,
+				BE39E0AC2180E72000A34C50 /* Alamofire.framework in Embed Frameworks */,
+				BE39E0B22180E72100A34C50 /* SQLite.framework in Embed Frameworks */,
+				BE39E0AE2180E72000A34C50 /* FBLPromises.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -53,6 +53,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BE39E0992180E53A00A34C50 /* rawDataSets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = rawDataSets.swift; path = ../../iOS/Game/Sentences/rawDataSets.swift; sourceTree = "<group>"; };
+		BE39E0A72180E72000A34C50 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/Mac/Alamofire.framework; sourceTree = "<group>"; };
+		BE39E0A82180E72000A34C50 /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBLPromises.framework; path = Carthage/Build/Mac/FBLPromises.framework; sourceTree = "<group>"; };
+		BE39E0A92180E72000A34C50 /* Promises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Promises.framework; path = Carthage/Build/Mac/Promises.framework; sourceTree = "<group>"; };
+		BE39E0AA2180E72000A34C50 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/Mac/SQLite.framework; sourceTree = "<group>"; };
 		BE3EA02A217761B300B65F48 /* addTopicSentencesTable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = addTopicSentencesTable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE3EA02D217761B300B65F48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE3EA02F217761B300B65F48 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -66,17 +71,12 @@
 		BE3EA041217761F400B65F48 /* FuriganaUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FuriganaUtils.swift; path = ../../iOS/Game/Utilities/FuriganaUtils.swift; sourceTree = "<group>"; };
 		BE3EA042217761F400B65F48 /* sqliteSentences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = sqliteSentences.swift; path = ../../iOS/Game/Utilities/sqliteSentences.swift; sourceTree = "<group>"; };
 		BE3EA043217761F400B65F48 /* daily.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = daily.swift; path = ../../iOS/Game/Sentences/daily.swift; sourceTree = "<group>"; };
-		BE3EA044217761F400B65F48 /* shadowingSentences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = shadowingSentences.swift; path = ../../iOS/Game/Sentences/shadowingSentences.swift; sourceTree = "<group>"; };
 		BE3EA045217761F400B65F48 /* kanaFix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = kanaFix.swift; path = ../../iOS/Game/Utilities/kanaFix.swift; sourceTree = "<group>"; };
 		BE3EA046217761F400B65F48 /* utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = utilities.swift; path = ../../iOS/Game/Utilities/utilities.swift; sourceTree = "<group>"; };
 		BE3EA047217761F400B65F48 /* speech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = speech.swift; path = ../../iOS/Game/Sentences/speech.swift; sourceTree = "<group>"; };
 		BE3EA048217761F400B65F48 /* expressive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = expressive.swift; path = ../../iOS/Game/Sentences/expressive.swift; sourceTree = "<group>"; };
 		BE3EA049217761F400B65F48 /* CalculateScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalculateScore.swift; path = ../../iOS/Game/Utilities/CalculateScore.swift; sourceTree = "<group>"; };
 		BE3EA04A217761F400B65F48 /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Score.swift; path = ../../iOS/Game/Model/Score.swift; sourceTree = "<group>"; };
-		BE3EA058217762C400B65F48 /* Promises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Promises.framework; path = Carthage/Build/Mac/Promises.framework; sourceTree = "<group>"; };
-		BE3EA059217762C400B65F48 /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBLPromises.framework; path = Carthage/Build/Mac/FBLPromises.framework; sourceTree = "<group>"; };
-		BE3EA05A217762C400B65F48 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/Mac/SQLite.framework; sourceTree = "<group>"; };
-		BE3EA05B217762C400B65F48 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/Mac/Alamofire.framework; sourceTree = "<group>"; };
 		BE3EA0672177641F00B65F48 /* inf_sentences_100points.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences_100points.sqlite; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,10 +85,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE3EA05C217762C400B65F48 /* Promises.framework in Frameworks */,
-				BE3EA05E217762C400B65F48 /* FBLPromises.framework in Frameworks */,
-				BE3EA060217762C400B65F48 /* SQLite.framework in Frameworks */,
-				BE3EA062217762C400B65F48 /* Alamofire.framework in Frameworks */,
+				BE39E0AF2180E72000A34C50 /* Promises.framework in Frameworks */,
+				BE39E0AB2180E72000A34C50 /* Alamofire.framework in Frameworks */,
+				BE39E0B12180E72100A34C50 /* SQLite.framework in Frameworks */,
+				BE39E0AD2180E72000A34C50 /* FBLPromises.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,11 +98,11 @@
 		BE3EA021217761B200B65F48 = {
 			isa = PBXGroup;
 			children = (
+				BE39E0A72180E72000A34C50 /* Alamofire.framework */,
+				BE39E0A82180E72000A34C50 /* FBLPromises.framework */,
+				BE39E0A92180E72000A34C50 /* Promises.framework */,
+				BE39E0AA2180E72000A34C50 /* SQLite.framework */,
 				BE3EA0672177641F00B65F48 /* inf_sentences_100points.sqlite */,
-				BE3EA05B217762C400B65F48 /* Alamofire.framework */,
-				BE3EA059217762C400B65F48 /* FBLPromises.framework */,
-				BE3EA058217762C400B65F48 /* Promises.framework */,
-				BE3EA05A217762C400B65F48 /* SQLite.framework */,
 				BE3EA03D217761C600B65F48 /* reference from iOS project */,
 				BE3EA02C217761B300B65F48 /* addTopicSentencesTable */,
 				BE3EA02B217761B300B65F48 /* Products */,
@@ -133,6 +133,7 @@
 		BE3EA03D217761C600B65F48 /* reference from iOS project */ = {
 			isa = PBXGroup;
 			children = (
+				BE39E0992180E53A00A34C50 /* rawDataSets.swift */,
 				BE3EA049217761F400B65F48 /* CalculateScore.swift */,
 				BE3EA043217761F400B65F48 /* daily.swift */,
 				BE3EA048217761F400B65F48 /* expressive.swift */,
@@ -141,7 +142,6 @@
 				BE3EA03E217761F400B65F48 /* love.swift */,
 				BE3EA03F217761F400B65F48 /* polite.swift */,
 				BE3EA04A217761F400B65F48 /* Score.swift */,
-				BE3EA044217761F400B65F48 /* shadowingSentences.swift */,
 				BE3EA047217761F400B65F48 /* speech.swift */,
 				BE3EA042217761F400B65F48 /* sqliteSentences.swift */,
 				BE3EA040217761F400B65F48 /* travel.swift */,
@@ -160,7 +160,7 @@
 				BE3EA026217761B300B65F48 /* Sources */,
 				BE3EA027217761B300B65F48 /* Frameworks */,
 				BE3EA028217761B300B65F48 /* Resources */,
-				BE3EA064217762C400B65F48 /* Embed Frameworks */,
+				BE39E0B32180E72100A34C50 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -225,6 +225,7 @@
 				BE3EA04F217761F400B65F48 /* sqliteSentences.swift in Sources */,
 				BE3EA050217761F400B65F48 /* daily.swift in Sources */,
 				BE3EA052217761F400B65F48 /* kanaFix.swift in Sources */,
+				BE39E09A2180E53A00A34C50 /* rawDataSets.swift in Sources */,
 				BE3EA04C217761F400B65F48 /* polite.swift in Sources */,
 				BE3EA057217761F400B65F48 /* Score.swift in Sources */,
 				BE3EA030217761B300B65F48 /* ViewController.swift in Sources */,
@@ -233,7 +234,6 @@
 				BE3EA054217761F400B65F48 /* speech.swift in Sources */,
 				BE3EA04B217761F400B65F48 /* love.swift in Sources */,
 				BE3EA04E217761F400B65F48 /* FuriganaUtils.swift in Sources */,
-				BE3EA051217761F400B65F48 /* shadowingSentences.swift in Sources */,
 				BE3EA056217761F400B65F48 /* CalculateScore.swift in Sources */,
 				BE3EA04D217761F400B65F48 /* travel.swift in Sources */,
 				BE3EA055217761F400B65F48 /* expressive.swift in Sources */,
@@ -379,6 +379,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = addTopicSentencesTable/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -401,6 +402,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = addTopicSentencesTable/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

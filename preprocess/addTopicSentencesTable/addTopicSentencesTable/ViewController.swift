@@ -70,7 +70,7 @@ func runAll() {
             t.column(tokenInfos)
         })
         var sentences: [String] = []
-        shadowingSentences.forEach { sArray in
+        rawDataSets.forEach { sArray in
             sentences.append(contentsOf: sArray)
         }
         print(sentences.count)
