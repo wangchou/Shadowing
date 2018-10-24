@@ -35,7 +35,8 @@ class SpeechRecognizer: NSObject {
     }
 
     // MARK: - Public Methods
-    func start(stopAfterSeconds: Double = 5, localIdentifier: String = "ja") -> Promise<String> {
+    func listen(stopAfterSeconds: Double = 5, localIdentifier: String = "ja") -> Promise<String> {
+        endAudio()
         promise = Promise<String>.pending()
 
         speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: localIdentifier))
@@ -107,7 +108,21 @@ class SpeechRecognizer: NSObject {
         postEvent(.listenEnded, string: "")
     }
 
-    // MARK: - Private Methods
+    func endAudio() {
+        guard isRunning, !isSimulator else { return }
+
+        inputNode.removeTap(onBus: 0)
+        recognitionRequest?.endAudio()
+
+        recognitionRequest = nil
+        recognitionTask = nil
+        isRunning = false
+    }
+
+}
+
+// MARK: - Private Methods
+extension SpeechRecognizer {
     private func authorize() {
         SFSpeechRecognizer.requestAuthorization { authStatus in
             switch authStatus {
@@ -142,17 +157,6 @@ class SpeechRecognizer: NSObject {
             self.promise.fulfill(fakeSaidString)
         }
         return promise
-    }
-
-    func endAudio() {
-        guard isRunning, !isSimulator else { return }
-
-        inputNode.removeTap(onBus: 0)
-        recognitionRequest?.endAudio()
-
-        recognitionRequest = nil
-        recognitionTask = nil
-        isRunning = false
     }
 
     private func resultHandler(result: SFSpeechRecognitionResult?, error: Error?) {

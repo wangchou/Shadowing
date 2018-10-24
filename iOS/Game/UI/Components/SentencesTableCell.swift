@@ -144,13 +144,13 @@ class SentencesTableCell: UITableViewCell {
         if !context.gameSetting.isUsingGuideVoice {
             return context.calculatedSpeakDuration.then { duration -> Promise<String> in
                 prepareListening()
-                return SpeechEngine.shared.listenJP(duration: Double(duration))
+                return SpeechEngine.shared.listen(duration: Double(duration))
             }
         }
 
         let duration = getNow() - startTime + Double(pauseDuration)
         prepareListening()
-        return SpeechEngine.shared.listenJP(duration: duration)
+        return SpeechEngine.shared.listen(duration: duration)
     }
 
     private func afterListeningCalculateScore(userSaidSentence: String) -> Promise<Score> {

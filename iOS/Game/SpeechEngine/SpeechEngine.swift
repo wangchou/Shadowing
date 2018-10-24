@@ -70,19 +70,20 @@ class SpeechEngine {
         closeNodeGraph()
     }
 
-    // MARK: - Voice Recognition
-    func listenJP(duration: Double) -> Promise<String> {
-        stopListen()
-        return speechRecognizer.start(stopAfterSeconds: duration, localIdentifier: "ja")
-    }
-
-    private func stopListen() {
-        speechRecognizer.endAudio()
+    func listen(duration: Double, localIdentifier: String = "ja") -> Promise<String> {
+        return speechRecognizer.listen(stopAfterSeconds: duration, localIdentifier: localIdentifier)
     }
 
     func reset() {
         stopListen()
         tts.stop()
+    }
+}
+
+// MARK: - Private
+extension SpeechEngine {
+    private func stopListen() {
+        speechRecognizer.endAudio()
     }
 
     fileprivate func speak(text: String, speaker: ChatSpeaker, rate: Float) -> Promise<Void> {

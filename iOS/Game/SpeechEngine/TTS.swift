@@ -17,11 +17,10 @@ enum TTSError: Error {
 class TTS: NSObject, AVSpeechSynthesizerDelegate {
     var synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
     var promise = Promise<Void>.pending()
-    var name: String = ""
 
     func say(
         _ text: String,
-        name: String? = nil,
+        name: String,
         rate: Float = AVSpeechUtteranceDefaultSpeechRate // 0.5, range 0 ~ 1.0
         ) -> Promise<Void> {
         if synthesizer.isSpeaking {
@@ -29,8 +28,7 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         }
         synthesizer.delegate = self
         let utterance = AVSpeechUtterance(string: getKanaFixedText(text))
-        if let name = name,
-           let voice = AVSpeechSynthesisVoice(identifier: name) {
+        if let voice = AVSpeechSynthesisVoice(identifier: name) {
             utterance.voice = voice
         } else {
             // prefer use system default(Siri) than lanuage default
@@ -43,7 +41,7 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         postEvent(.sayStarted, string: text)
         synthesizer.speak(utterance)
         promise = Promise<Void>.pending()
-        self.name = name ?? "nil"
+
         return promise
     }
 
