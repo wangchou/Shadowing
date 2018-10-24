@@ -11,8 +11,8 @@ import Foundation
 var translations: [String: String] = [:]
 
 var datasetKeyToTags: [String: [String]] = [:]
-var tags: [String] = []
-var shadowingSentences: [[String]] =
+private var tags: [String] = []
+var rawDataSets: [[String]] =
     [dailyOne, expressive, travel, polite, love, speech]
     .flatMap { (element: [String]) -> [String] in
         return element

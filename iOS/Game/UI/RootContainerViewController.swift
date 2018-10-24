@@ -30,7 +30,7 @@ class RootContainerViewController: UIViewController {
         showVC(splashScreen)
 
         loadTopSentencesInfoDB()
-        addSentences()
+        loadDataSets()
         loadGameHistory()
         loadGameSetting()
         loadGameMiscData()

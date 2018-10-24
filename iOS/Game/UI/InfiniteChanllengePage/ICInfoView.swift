@@ -39,15 +39,15 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
         return "句数：\(sentencesCount)"
     }
     var bestRank: String? {
-        return findBestRecord(key: level.dataSetKey)?.rank.rawValue
+        return findBestRecord(key: level.infinteChallengeDatasetKey)?.rank.rawValue
     }
     var bestProgress: String? {
-        return findBestRecord(key: level.dataSetKey)?.progress
+        return findBestRecord(key: level.infinteChallengeDatasetKey)?.progress
     }
 
     private var dataPoints: [(x: Int, y: Int)] {
         var points = [(x: 0, y: 0)]
-        let dataSetKey = level.dataSetKey
+        let dataSetKey = level.infinteChallengeDatasetKey
         let gameRecords = context.gameHistory
             .filter { r in
                 return r.dataSetKey == dataSetKey

@@ -12,7 +12,7 @@ import Foundation
 var kanaFix: [String: String] = [
     "何時": "なんじ",
     "という": "トイウ",
-    "事": "コト",
+    "事": "コト"
 ]
 func findKanaFix(_ token: String) -> String? {
     return kanaFix[token]

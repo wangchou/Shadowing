@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE152048218085120059A7C2 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE152047218085120059A7C2 /* Level.swift */; };
 		BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB3D209B19B200D23F22 /* GameContext.swift */; };
 		BE1CA956209D5D0900086853 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA955209D5D0900086853 /* Game.swift */; };
 		BE1CA958209DC43800086853 /* Messenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA957209DC43800086853 /* Messenger.swift */; };
@@ -34,16 +35,13 @@
 		BE67D2A921561A93007FE420 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE67D2A821561A92007FE420 /* Assets.xcassets */; };
 		BE6C78542165DD2B0072B1C5 /* GameReportBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6C78532165DD2B0072B1C5 /* GameReportBoxView.swift */; };
 		BE6ED56820A17BB000553D1A /* ShadowingFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6ED56720A17BB000553D1A /* ShadowingFlow.swift */; };
-		BE6F2F162144E049003A56CD /* shadowingSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6F2F152144E049003A56CD /* shadowingSentences.swift */; };
+		BE6F2F162144E049003A56CD /* rawDataSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6F2F152144E049003A56CD /* rawDataSets.swift */; };
 		BE6FFB9A21778417000F4EC3 /* inf_sentences_100points.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BE6FFB9921778417000F4EC3 /* inf_sentences_100points.sqlite */; };
 		BE7441B3216CCBE000E53A3D /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7441B2216CCBE000E53A3D /* LineChart.swift */; };
 		BE76F117214ECC6E004E130B /* GameMiscData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE76F116214ECC6E004E130B /* GameMiscData.swift */; };
 		BE76F11E214F56F6004E130B /* SentencesTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE76F11C214F56F6004E130B /* SentencesTableCell.swift */; };
 		BE76F11F214F56F6004E130B /* SentencesTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE76F11D214F56F6004E130B /* SentencesTableCell.xib */; };
-		BE7725C420A2CBC200DF186A /* sentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725BC20A2CBC100DF186A /* sentences.swift */; };
-		BE7725C520A2CBC200DF186A /* n3.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725BE20A2CBC100DF186A /* n3.swift */; };
-		BE7725C820A2CBC200DF186A /* n4.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725C120A2CBC100DF186A /* n4.swift */; };
-		BE7725C920A2CBC200DF186A /* n5.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725C220A2CBC100DF186A /* n5.swift */; };
+		BE7725C420A2CBC200DF186A /* dataSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725BC20A2CBC100DF186A /* dataSets.swift */; };
 		BE7725CE20A4216700DF186A /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725CD20A4216700DF186A /* ContentCell.swift */; };
 		BE8180C020B3BEB6006ABCB3 /* MyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180BF20B3BEB6006ABCB3 /* MyText.swift */; };
 		BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */; };
@@ -82,7 +80,6 @@
 		BEF258B320B57C7F00D0026C /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF258B220B57C7F00D0026C /* TimelineView.swift */; };
 		BEF28B6120B52BB000385273 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF28B6020B52BB000385273 /* Score.swift */; };
 		BEF28B6320B52BF700385273 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF28B6220B52BF700385273 /* UI.swift */; };
-		BEFE13DA21539445002873B3 /* BGM.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFE13D921539445002873B3 /* BGM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -105,6 +102,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BE152047218085120059A7C2 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		BE17FB3D209B19B200D23F22 /* GameContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameContext.swift; sourceTree = "<group>"; };
 		BE1CA955209D5D0900086853 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		BE1CA957209DC43800086853 /* Messenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messenger.swift; sourceTree = "<group>"; };
@@ -126,16 +124,13 @@
 		BE67D2A821561A92007FE420 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE6C78532165DD2B0072B1C5 /* GameReportBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameReportBoxView.swift; sourceTree = "<group>"; };
 		BE6ED56720A17BB000553D1A /* ShadowingFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowingFlow.swift; sourceTree = "<group>"; };
-		BE6F2F152144E049003A56CD /* shadowingSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shadowingSentences.swift; sourceTree = "<group>"; };
+		BE6F2F152144E049003A56CD /* rawDataSets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rawDataSets.swift; sourceTree = "<group>"; };
 		BE6FFB9921778417000F4EC3 /* inf_sentences_100points.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences_100points.sqlite; sourceTree = "<group>"; };
 		BE7441B2216CCBE000E53A3D /* LineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
 		BE76F116214ECC6E004E130B /* GameMiscData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMiscData.swift; sourceTree = "<group>"; };
 		BE76F11C214F56F6004E130B /* SentencesTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentencesTableCell.swift; sourceTree = "<group>"; };
 		BE76F11D214F56F6004E130B /* SentencesTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SentencesTableCell.xib; sourceTree = "<group>"; };
-		BE7725BC20A2CBC100DF186A /* sentences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sentences.swift; sourceTree = "<group>"; };
-		BE7725BE20A2CBC100DF186A /* n3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n3.swift; sourceTree = "<group>"; };
-		BE7725C120A2CBC100DF186A /* n4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n4.swift; sourceTree = "<group>"; };
-		BE7725C220A2CBC100DF186A /* n5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = n5.swift; sourceTree = "<group>"; };
+		BE7725BC20A2CBC100DF186A /* dataSets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataSets.swift; sourceTree = "<group>"; };
 		BE7725CD20A4216700DF186A /* ContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
 		BE8180BF20B3BEB6006ABCB3 /* MyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyText.swift; sourceTree = "<group>"; };
 		BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFinishedPage.swift; sourceTree = "<group>"; };
@@ -176,7 +171,6 @@
 		BEF258B220B57C7F00D0026C /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		BEF28B6020B52BB000385273 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		BEF28B6220B52BF700385273 /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
-		BEFE13D921539445002873B3 /* BGM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,7 +196,6 @@
 				BE8283B32133DAE2008BC875 /* SpeechEngine.swift */,
 				BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */,
 				BEBDEDD2208EF15E00C18520 /* TTS.swift */,
-				BEFE13D921539445002873B3 /* BGM.swift */,
 			);
 			path = SpeechEngine;
 			sourceTree = "<group>";
@@ -275,11 +268,8 @@
 		BE6F2F142144DFB5003A56CD /* Sentences */ = {
 			isa = PBXGroup;
 			children = (
-				BE7725BE20A2CBC100DF186A /* n3.swift */,
-				BE7725C120A2CBC100DF186A /* n4.swift */,
-				BE7725C220A2CBC100DF186A /* n5.swift */,
-				BE7725BC20A2CBC100DF186A /* sentences.swift */,
-				BE6F2F152144E049003A56CD /* shadowingSentences.swift */,
+				BE7725BC20A2CBC100DF186A /* dataSets.swift */,
+				BE6F2F152144E049003A56CD /* rawDataSets.swift */,
 				BE596465215A0DE100E4AA0C /* travel.swift */,
 				BE596467215A0DF200E4AA0C /* daily.swift */,
 				BE596469215A0E4D00E4AA0C /* polite.swift */,
@@ -295,6 +285,7 @@
 			children = (
 				BEBDEDD8208EF15F00C18520 /* constants.swift */,
 				BEF28B6020B52BB000385273 /* Score.swift */,
+				BE152047218085120059A7C2 /* Level.swift */,
 				BE17FB3D209B19B200D23F22 /* GameContext.swift */,
 				BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */,
 				BED1CC0821452A54004AE397 /* GameSetting.swift */,
@@ -497,10 +488,8 @@
 				BEBDEDD9208EF15F00C18520 /* utilities.swift in Sources */,
 				BEEC7FAF21550818001C2EFF /* TopBarView.swift in Sources */,
 				BEE665E220BA634600E4E322 /* Colors.swift in Sources */,
-				BE7725C920A2CBC200DF186A /* n5.swift in Sources */,
 				BE8DE7B62161E44400812CED /* AbilityChart.swift in Sources */,
 				BECAC3B5216B34FA001BBF49 /* InfiniteChanllengePage.swift in Sources */,
-				BE7725C820A2CBC200DF186A /* n4.swift in Sources */,
 				BE5D838920A80BD0002031BF /* GameContentDetailPage.swift in Sources */,
 				BE6ED56820A17BB000553D1A /* ShadowingFlow.swift in Sources */,
 				BEEC7FAD2155014E001C2EFF /* SettingPage.swift in Sources */,
@@ -510,7 +499,7 @@
 				BEF28B6120B52BB000385273 /* Score.swift in Sources */,
 				BE1CA956209D5D0900086853 /* Game.swift in Sources */,
 				BEC2E9312179BD090095A65D /* TopicFilterBarView.swift in Sources */,
-				BE7725C420A2CBC200DF186A /* sentences.swift in Sources */,
+				BE7725C420A2CBC200DF186A /* dataSets.swift in Sources */,
 				BE9B476A20AD50520063E0DA /* FuriganaUtils.swift in Sources */,
 				BE76F117214ECC6E004E130B /* GameMiscData.swift in Sources */,
 				BE596474215A0EF400E4AA0C /* expressive.swift in Sources */,
@@ -518,9 +507,9 @@
 				BED1CC0921452A54004AE397 /* GameSetting.swift in Sources */,
 				BEF28B6320B52BF700385273 /* UI.swift in Sources */,
 				BE65A939209C6E67006645CA /* GameEventDelegate.swift in Sources */,
+				BE152048218085120059A7C2 /* Level.swift in Sources */,
 				BE59646A215A0E4D00E4AA0C /* polite.swift in Sources */,
 				BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */,
-				BE7725C520A2CBC200DF186A /* n3.swift in Sources */,
 				BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */,
 				BEEC7FAB2154FFA4001C2EFF /* MainSwipablePage.swift in Sources */,
 				BEDEDD3720A46D1B00E7B60B /* ShadowingListPage.swift in Sources */,
@@ -542,9 +531,8 @@
 				BE596470215A0ECE00E4AA0C /* speech.swift in Sources */,
 				BEBDEDDD208EF15F00C18520 /* SpeechRecognizer.swift in Sources */,
 				BE5ABAC9217B703500A63C5F /* InfoPage.swift in Sources */,
-				BEFE13DA21539445002873B3 /* BGM.swift in Sources */,
 				BE596468215A0DF200E4AA0C /* daily.swift in Sources */,
-				BE6F2F162144E049003A56CD /* shadowingSentences.swift in Sources */,
+				BE6F2F162144E049003A56CD /* rawDataSets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

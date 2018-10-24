@@ -35,7 +35,6 @@ class SpeechEngine {
 
     private var micVolumeNode = AVAudioMixerNode()
     private var speechRecognizer = SpeechRecognizer()
-    private var bgm = BGM()
     private var tts = TTS()
 
     // MARK: - Lifecycle
@@ -56,7 +55,6 @@ class SpeechEngine {
             buildNodeGraph()
             audioEngine.prepare()
             try audioEngine.start()
-            // engine.bgm.play()
         } catch {
             print("Start Play through failed \(error)")
         }
@@ -123,22 +121,18 @@ class SpeechEngine {
         let mainMixer = audioEngine.mainMixerNode
         let mic = audioEngine.inputNode // only for real device, simulator will crash
 
-        audioEngine.attach(bgm.node)
         audioEngine.attach(micVolumeNode)
 
-        audioEngine.connect(bgm.node, to: mainMixer, format: bgm.buffer.format)
         audioEngine.connect(mic, to: micVolumeNode, format: mic.inputFormat(forBus: 0))
         audioEngine.connect(micVolumeNode, to: mainMixer, format: micVolumeNode.outputFormat(forBus: 0))
 
         micVolumeNode.volume = micOutVolume
-        bgm.node.volume = 0.5
     }
 
     private func closeNodeGraph() {
         if audioEngine.isRunning {
             print("closeNodeGraph")
             audioEngine.stop()
-            audioEngine.detach(bgm.node)
             audioEngine.detach(micVolumeNode)
         }
     }

@@ -47,16 +47,15 @@ class GameContext {
     var life: Int = 50
 
     var teachingRate: Float {
-        if gameSetting.isAutoSpeed {
-            if contentTab == .infiniteChallenge,
-               let level = gameRecord?.level {
-                    return AVSpeechUtteranceDefaultSpeechRate * (0.6 + Float(level.rawValue) * 0.05)
-
-            }
-            return AVSpeechUtteranceDefaultSpeechRate * (0.4 + life.f * 0.007)
-        } else {
+        if !gameSetting.isAutoSpeed {
             return gameSetting.preferredSpeed
         }
+        if contentTab == .infiniteChallenge,
+           let level = gameRecord?.level {
+                return AVSpeechUtteranceDefaultSpeechRate * (0.6 + Float(level.rawValue) * 0.05)
+
+        }
+        return AVSpeechUtteranceDefaultSpeechRate * (0.4 + life.f * 0.007)
     }
     var isNewRecord: Bool {
         return gameRecord?.isNewRecord ?? false
@@ -64,9 +63,6 @@ class GameContext {
     var newRecordIncrease: Int = 0
     var sentences: [String] = []
     var sentenceIndex: Int = 0
-    var remainingSentenceCount: Int {
-        return sentences.count - sentenceIndex
-    }
 
     // MARK: - Short-term data for a single sentence
     var targetString: String {
@@ -74,10 +70,10 @@ class GameContext {
         return sentences[sentenceIndex]
     }
 
-    // measure the seconds of tts speaking
+    // Real duration in seconds of tts speaking
     var speakDuration: Float = 0
 
-    // calculate when guide voice off mode
+    // Calculated duration when guide voice off mode
     var calculatedSpeakDuration: Promise<Float> {
         let duration: Promise<Float> = Promise<Float>.pending()
         getKana(targetString).then({ kana in
@@ -104,7 +100,7 @@ class GameContext {
     // MARK: - functions for a single game
     func loadLearningSentences(isShuffle: Bool = false) {
         sentenceIndex = 0
-        guard let selectedDataSet = allSentences[dataSetKey] else { return }
+        guard let selectedDataSet = dataSets[dataSetKey] else { return }
         sentences = isShuffle ? selectedDataSet.shuffled() : selectedDataSet
 
         life = isSimulator ? 100 : 50
@@ -115,7 +111,7 @@ class GameContext {
 
     func loadInfiniteChallengeLevelSentence(level: Level) {
         sentenceIndex = 0
-        dataSetKey = level.dataSetKey
+        dataSetKey = level.infinteChallengeDatasetKey
         loadSentenceDB()
         let numOfSentences = isSimulator ? 3 : 20
         let sentenceIds = randSentenceIds(
@@ -135,9 +131,9 @@ class GameContext {
     func nextSentence() -> Bool {
         sentenceIndex += 1
         var sentencesBound = sentences.count
-//        if isSimulator {
-//            sentencesBound = 3
-//        }
+        if isSimulator {
+            sentencesBound = 3
+        }
         guard sentenceIndex < sentencesBound else { return false }
         userSaidString = ""
         return true

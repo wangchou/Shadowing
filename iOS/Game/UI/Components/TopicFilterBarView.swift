@@ -8,8 +8,8 @@
 
 import UIKit
 
-var titleForAll = "全部"
-var topicFilterFlag: [String: Bool] = [titleForAll: true]
+var topicForAll = "全部"
+var isTopicOn: [String: Bool] = [topicForAll: true]
 class TopicFilterBarView: UIView, GridLayout, ReloadableView {
     var gridCount: Int = 5
 
@@ -23,7 +23,7 @@ class TopicFilterBarView: UIView, GridLayout, ReloadableView {
         for i in 0...abilities.count {
             var buttonTitle = ""
             if i == 0 {
-                buttonTitle = titleForAll
+                buttonTitle = topicForAll
             } else {
                 buttonTitle = abilities[i-1]
             }
@@ -40,7 +40,7 @@ class TopicFilterBarView: UIView, GridLayout, ReloadableView {
         button.setTitleColor(rgb(100, 100, 100), for: .normal)
         button.roundBorder(borderWidth: 0, cornerRadius: 20, color: .clear)
 
-        if let isOn = topicFilterFlag[title],
+        if let isOn = isTopicOn[title],
             isOn {
             button.backgroundColor = myBlue.withAlphaComponent(0.5)
             button.roundBorder(borderWidth: 0, cornerRadius: 20, color: .clear)
@@ -48,17 +48,17 @@ class TopicFilterBarView: UIView, GridLayout, ReloadableView {
         }
 
         button.addTapGestureRecognizer {
-            if title == titleForAll {
-                topicFilterFlag = [titleForAll: true]
+            if title == topicForAll {
+                isTopicOn = [topicForAll: true]
             } else {
-                topicFilterFlag[titleForAll] = false
-                if topicFilterFlag[title] == true {
-                    topicFilterFlag[title] = false
-                    if !topicFilterFlag.values.contains(true) {
-                        topicFilterFlag[titleForAll] = true
+                isTopicOn[topicForAll] = false
+                if isTopicOn[title] == true {
+                    isTopicOn[title] = false
+                    if !isTopicOn.values.contains(true) {
+                        isTopicOn[topicForAll] = true
                     }
                 } else {
-                    topicFilterFlag[title] = true
+                    isTopicOn[title] = true
                 }
             }
             self.viewWillAppear()

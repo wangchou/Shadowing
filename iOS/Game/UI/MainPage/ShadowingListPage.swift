@@ -56,7 +56,7 @@ class ShadowingListPage: UIViewController {
         timeline.viewWillAppear()
         abilityChart.render()
         if context.dataSetKey == "" {
-            context.dataSetKey = allSentencesKeys[0]
+            context.dataSetKey = dataSetKeys[0]
             context.loadLearningSentences(isShuffle: false)
         }
         topicFilterBarView.viewWillAppear()
@@ -92,7 +92,7 @@ class ShadowingListPage: UIViewController {
     }
 
     @objc func reloadTopicSentences() {
-        addSentences()
+        loadDataSets()
         sentencesTableView.reloadData()
     }
 }
@@ -103,14 +103,14 @@ extension ShadowingListPage: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allSentencesKeys.count
+        return dataSetKeys.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SentencesCell", for: indexPath)
         guard let contentCell = cell as? ContentCell else { print("convert content cell error"); return cell }
 
-        let dataSetKey = allSentencesKeys[indexPath.row]
+        let dataSetKey = dataSetKeys[indexPath.row]
         let attrStr = NSMutableAttributedString()
         attrStr.append(rubyAttrStr(dataSetKey, fontSize: 16))
         if let tags = datasetKeyToTags[dataSetKey],
@@ -137,7 +137,7 @@ extension ShadowingListPage: UITableViewDataSource {
 
 extension ShadowingListPage: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        context.dataSetKey = allSentencesKeys[indexPath.row]
+        context.dataSetKey = dataSetKeys[indexPath.row]
         context.loadLearningSentences(isShuffle: false)
         (rootViewController.current as? UIPageViewController)?.goToNextPage()
     }

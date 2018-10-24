@@ -10,7 +10,11 @@ import Foundation
 import UIKit
 
 func rgb(_ red: Float, _ green: Float, _ blue: Float, _ alpha: Float = 1.0) -> UIColor {
-    return UIColor(red: CGFloat(red/255.0), green: CGFloat(green/255.0), blue: CGFloat(blue/255.0), alpha: CGFloat(alpha))
+    return UIColor(red: CGFloat(red/255.0),
+                   green: CGFloat(green/255.0),
+                   blue: CGFloat(blue/255.0),
+                   alpha: CGFloat(alpha)
+           )
 }
 
 let myRed = rgb(254, 67, 134)
@@ -25,19 +29,3 @@ let myLightText = rgb(224, 224, 224)
 let myGray = rgb(192, 192, 192)
 
 let myWaterBlue = rgb(64, 192, 255)
-
-func getRankColor(rank: Rank?) -> UIColor {
-    guard let rank = rank else { return myLightText }
-    var color: UIColor
-    switch rank {
-    case .s, .ss:
-        color = myBlue
-    case .a:
-        color = myGreen
-    case .b, .c, .d:
-        color = myOrange
-    case .e, .f:
-        color = myRed
-    }
-    return color
-}
