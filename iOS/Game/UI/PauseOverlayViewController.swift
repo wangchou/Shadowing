@@ -35,7 +35,7 @@ class PauseOverlayViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         ttsSpeedSlider.minimumValue = AVSpeechUtteranceMinimumSpeechRate
-        ttsSpeedSlider.maximumValue = AVSpeechUtteranceMaximumSpeechRate
+        ttsSpeedSlider.maximumValue = AVSpeechUtteranceMaximumSpeechRate * 0.75
         guideVoiceSwitch.isOn = context.gameSetting.isUsingGuideVoice
         tranlationSwitch.isOn = context.gameSetting.isUsingTranslation
         autoSpeedSwitch.isOn = context.gameSetting.isAutoSpeed
@@ -69,6 +69,7 @@ class PauseOverlayViewController: UIViewController {
     }
     @IBAction func onTTSSpeedSliderValueChanged(_ sender: Any) {
         context.gameSetting.preferredSpeed = ttsSpeedSlider.value
+        print(ttsSpeedSlider.value)
         saveGameSetting()
         viewWillAppear(false)
     }

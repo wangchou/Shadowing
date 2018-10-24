@@ -49,6 +49,7 @@ extension Messenger: GameEventDelegate {
             }
 
             timeLabel.text = "\(add0((seconds/60).s)):\(add0((seconds%60).s))"
+            speedLabel.text = String(format: "%.2f 倍速", context.teachingRate * 2)
 
         case .gameStateChanged:
             if context.gameState == .gameOver {

@@ -29,6 +29,7 @@ class Messenger: UIViewController {
         super.viewWillAppear(animated)
         start()
         UIApplication.shared.isIdleTimerDisabled = true
+        scrollView.delaysContentTouches = false
     }
 
     override func viewDidDisappear(_ animated: Bool) {
