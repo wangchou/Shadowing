@@ -65,10 +65,7 @@ extension Messenger: GameEventDelegate {
 
         case .forceStopGame:
             game.isForceStopped = true
-            print("receive forceStopGame message")
-            self.dismiss(animated: false) {
-                print("messenger dismissed")
-            }
+            self.dismiss(animated: false)
 
         default:
             return

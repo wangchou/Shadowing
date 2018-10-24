@@ -22,8 +22,8 @@ func assisantSay(_ text: String) -> Promise<Void> {
     return engine.speak(text: text, speaker: context.gameSetting.assisant, rate: normalRate)
 }
 
-func teacherSay(_ text: String) -> Promise<Void> {
-    return engine.speak(text: text, speaker: context.gameSetting.teacher)
+func teacherSay(_ text: String, rate: Float = context.teachingRate) -> Promise<Void> {
+    return engine.speak(text: text, speaker: context.gameSetting.teacher, rate: rate)
 }
 
 class SpeechEngine {
@@ -70,50 +70,33 @@ class SpeechEngine {
         closeNodeGraph()
     }
 
-    func speak(text: String, speaker: ChatSpeaker? = nil, rate: Float = context.teachingRate) -> Promise<Void> {
-        let startTime = getNow()
-        var speakPromise: Promise<Void>
-        func updateSpeakDuration() -> Promise<Void> {
-            context.speakDuration = Float((getNow() - startTime))
-            return fulfilledVoidPromise()
-        }
-
-        if let speaker = speaker {
-            if speaker == .user {
-                speakPromise = fulfilledVoidPromise()
-            } else {
-                speakPromise = tts.say(
-                    text,
-                    name: speaker.rawValue,
-                    rate: rate
-                )
-            }
-        } else {
-            speakPromise = tts.say(text, rate: rate)
-        }
-
-        return speakPromise.then(updateSpeakDuration)
-    }
-
     // MARK: - Voice Recognition
-    private func listen(duration: Double, langCode: String? = nil) -> Promise<String> {
-        stopListen()
-        let langCode = langCode ?? context.targetString.langCode ?? "ja"
-        return speechRecognizer.start(stopAfterSeconds: duration, localIdentifier: langCode)
-    }
-
     func listenJP(duration: Double) -> Promise<String> {
         stopListen()
         return speechRecognizer.start(stopAfterSeconds: duration, localIdentifier: "ja")
     }
 
-    func stopListen() {
+    private func stopListen() {
         speechRecognizer.endAudio()
     }
 
     func reset() {
-        speechRecognizer.endAudio()
+        stopListen()
         tts.stop()
+    }
+
+    fileprivate func speak(text: String, speaker: ChatSpeaker, rate: Float) -> Promise<Void> {
+        let startTime = getNow()
+        func updateSpeakDuration() -> Promise<Void> {
+            context.speakDuration = Float((getNow() - startTime))
+            return fulfilledVoidPromise()
+        }
+
+        return tts.say(
+            text,
+            name: speaker.rawValue,
+            rate: rate
+            ).then(updateSpeakDuration)
     }
 
     private func buildNodeGraph() {

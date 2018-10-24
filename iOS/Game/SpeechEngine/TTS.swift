@@ -49,24 +49,13 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
 
     func stop() {
         synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
-        postEvent(.sayEnded, string: "")
-        //promise.reject(TTSError.TTSStop)
         promise.fulfill(())
-    }
-
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
-                           willSpeakRangeOfSpeechString characterRange: NSRange,
-                           utterance: AVSpeechUtterance) {
-        let speechString = utterance.speechString as NSString
-        let token = speechString.substring(with: characterRange)
-        postEvent(.stringSaid, string: token)
     }
 
     func speechSynthesizer(
         _ synthesizer: AVSpeechSynthesizer,
         didFinish utterance: AVSpeechUtterance
         ) {
-        postEvent(.sayEnded, string: name)
         promise.fulfill(())
     }
 }

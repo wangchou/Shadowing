@@ -110,11 +110,4 @@ class Messenger: UIViewController {
         game.pause()
         launchStoryboard(self, "PauseOverlay", isOverCurrent: true)
     }
-
-    @objc func restartGame() {
-        y += Int(screen.height)
-        scrollView.scrollTo(y)
-        end()
-        start()
-    }
 }

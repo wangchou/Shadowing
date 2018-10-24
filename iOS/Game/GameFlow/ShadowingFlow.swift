@@ -52,6 +52,7 @@ class ShadowingFlow: Game {
         timer?.invalidate()
         isPaused = false
         wait.reject(GameError.forceStop)
+        SpeechEngine.shared.reset()
     }
 
     func pause() {

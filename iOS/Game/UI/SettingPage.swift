@@ -133,7 +133,7 @@ class SettingPage: UITableViewController {
 
         if speaker == .system || availableVoices.contains(speaker.rawValue) {
             context.gameSetting.teacher = speaker
-            _ = SpeechEngine.shared.speak(text: testSentence, speaker: speaker, rate: context.gameSetting.preferredSpeed)
+            _ = teacherSay(testSentence, rate: context.gameSetting.preferredSpeed)
         } else {
             // show alert to download it
             teacherTTSSegmentControl.selectedSegmentIndex = getSegmentIndex(speaker: context.gameSetting.teacher)
@@ -148,7 +148,7 @@ class SettingPage: UITableViewController {
 
         if speaker == .system || availableVoices.contains(speaker.rawValue) {
             context.gameSetting.assisant = speaker
-            _ = SpeechEngine.shared.speak(text: "正解、違います。", speaker: speaker, rate: fastRate)
+            _ = assisantSay("正解、違います。")
         } else {
             // show alert to download it
             assistantTTSSegmentControl.selectedSegmentIndex = getSegmentIndex(speaker: context.gameSetting.assisant)

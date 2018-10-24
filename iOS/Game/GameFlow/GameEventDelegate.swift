@@ -11,8 +11,6 @@ import Foundation
 enum EventType {
     // tts
     case sayStarted
-    case stringSaid
-    case sayEnded
 
     // speech recognition
     case listenStarted
