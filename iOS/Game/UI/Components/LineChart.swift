@@ -75,7 +75,7 @@ class LineChart: LineChartView, ChartViewDelegate {
         set1.drawValuesEnabled = false
         set1.drawCircleHoleEnabled = false
 
-        let gradientColors = [getLevelColor(level: level).withAlphaComponent(0.1).cgColor, getLevelColor(level: level).cgColor]
+        let gradientColors = [level.color.withAlphaComponent(0.1).cgColor, level.color.cgColor]
         let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)!
 
         set1.fillAlpha = 1

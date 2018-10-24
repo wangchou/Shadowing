@@ -26,21 +26,6 @@ let myGray = rgb(192, 192, 192)
 
 let myWaterBlue = rgb(64, 192, 255)
 
-func getLevelColor(level: Level) -> UIColor {
-    switch level {
-    case .lv0, .lv1:
-        return myRed
-    case .lv2, .lv3:
-        return myOrange
-    case .lv4, .lv5:
-        return myGreen
-    case .lv6, .lv7:
-        return myBlue
-    case .lv8:
-        return .purple
-    }
-}
-
 func getRankColor(rank: Rank?) -> UIColor {
     guard let rank = rank else { return myLightText }
     var color: UIColor
