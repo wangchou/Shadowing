@@ -105,11 +105,15 @@ class SettingPage: UITableViewController {
     @IBAction func gameSpeedSilderValueChanged(_ sender: Any) {
         context.gameSetting.preferredSpeed = gameSpeedSlider.value
         saveGameSetting()
+        let speedText = String(format: "%.2f", context.gameSetting.preferredSpeed * 2)
+        _ = teacherSay("速度は\(speedText)です", rate: context.gameSetting.preferredSpeed)
     }
 
     @IBAction func practiceSpeedSliderValueChanged(_ sender: Any) {
         context.gameSetting.practiceSpeed = practiceSpeedSlider.value
         saveGameSetting()
+        let speedText = String(format: "%.2f", context.gameSetting.practiceSpeed * 2)
+        _ = teacherSay("速度は\(speedText)です", rate: context.gameSetting.practiceSpeed)
     }
 
     @IBAction func translationSwitchValueChanged(_ sender: Any) {

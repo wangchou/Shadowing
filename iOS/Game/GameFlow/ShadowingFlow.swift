@@ -36,9 +36,11 @@ class ShadowingFlow: Game {
             narratorString = "請唸出對應的日文。"
         }
         if context.gameSetting.isUsingNarrator {
-            narratorSay(narratorString).always {
-                self.learnNext()
-            }
+            narratorSay(narratorString)
+                .then { self.wait }
+                .always {
+                    self.learnNext()
+                }
         } else {
             learnNext()
         }

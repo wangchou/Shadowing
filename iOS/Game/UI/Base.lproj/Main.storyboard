@@ -513,7 +513,7 @@ Ruth Yuru Chen
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mgY-P7-HmR">
-                                <rect key="frame" x="255" y="503" width="50" height="50"/>
+                                <rect key="frame" x="255" y="25" width="50" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.29783818493150682" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Yuh-OD-h1I"/>
@@ -531,10 +531,10 @@ Ruth Yuru Chen
                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="2O6-9K-w0v" firstAttribute="trailing" secondItem="mgY-P7-HmR" secondAttribute="trailing" constant="15" id="5Oe-a4-t37"/>
-                            <constraint firstItem="2O6-9K-w0v" firstAttribute="bottom" secondItem="mgY-P7-HmR" secondAttribute="bottom" constant="15" id="HCS-8L-c9i"/>
                             <constraint firstItem="2O6-9K-w0v" firstAttribute="bottom" secondItem="xxo-M8-yBK" secondAttribute="bottom" id="Nks-15-FFH"/>
                             <constraint firstItem="xxo-M8-yBK" firstAttribute="leading" secondItem="2O6-9K-w0v" secondAttribute="leading" constant="5" id="OdD-Ua-71g"/>
                             <constraint firstItem="2O6-9K-w0v" firstAttribute="trailing" secondItem="xxo-M8-yBK" secondAttribute="trailing" constant="5" id="QIl-vL-TYm"/>
+                            <constraint firstItem="mgY-P7-HmR" firstAttribute="top" secondItem="2O6-9K-w0v" secondAttribute="top" constant="5" id="Uie-LB-0RO"/>
                             <constraint firstItem="xxo-M8-yBK" firstAttribute="top" secondItem="2O6-9K-w0v" secondAttribute="top" id="apH-vq-AUH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2O6-9K-w0v"/>
@@ -1517,7 +1517,7 @@ Ruth Yuru Chen
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="0.75" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cM8-Gz-KMi">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="cM8-Gz-KMi">
                                 <rect key="frame" x="58" y="518" width="204" height="31"/>
                                 <connections>
                                     <action selector="onTTSSpeedSliderValueChanged:" destination="xbq-5x-hVH" eventType="valueChanged" id="XR5-Bd-bMO"/>
