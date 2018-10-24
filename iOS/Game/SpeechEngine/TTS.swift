@@ -61,7 +61,14 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
 private let siriKanaFix: [String: String] = [
     "明日": "あした",
     "行って": "いって",
-    "台湾人": "台湾じん"
+    "台湾人": "台湾じん",
+    "辛い": "つらい",
+    "何で": "なんで",
+    "高すぎ": "たかすぎ",
+    "後で": "あとで",
+    "次いつ": "つぎいつ",
+    "こちらの方": "こちらのほう",
+    "米は不作": "こめは不作"
 ]
 
 private func getKanaFixedText(_ text: String) -> String {
