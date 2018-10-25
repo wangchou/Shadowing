@@ -19,7 +19,8 @@ private let kanaTokenInfosKey = "kanaTokenInfos key"
 var userSaidSentences: [String: String] = [:]
 var sentenceScores: [String: Score] = [:]
 var lastInfiniteChallengeSentences: [Level: [String]] = [:]
-var kanaTokenInfosCacheDictionary: [String: [[String]]] = [:]
+var kanaTokenInfosCacheDictionary: [String: [[String]]] = [:] //tokenInfo =[kanji, 詞性, furikana, yomikana]
+
 
 func saveGameMiscData() {
     saveToUserDefault(object: userSaidSentences, key: userSaidSentencesKey)

@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE0FA9BE2181D2260076A015 /* inf_sentences_100points.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BE0FA9BD2181D2260076A015 /* inf_sentences_100points.sqlite */; };
 		BE152048218085120059A7C2 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE152047218085120059A7C2 /* Level.swift */; };
 		BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB3D209B19B200D23F22 /* GameContext.swift */; };
 		BE1CA956209D5D0900086853 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA955209D5D0900086853 /* Game.swift */; };
 		BE1CA958209DC43800086853 /* Messenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA957209DC43800086853 /* Messenger.swift */; };
-		BE39E0B52180E7F100A34C50 /* inf_sentences_100points.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BE39E0B42180E7F100A34C50 /* inf_sentences_100points.sqlite */; };
 		BE596466215A0DE100E4AA0C /* travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596465215A0DE100E4AA0C /* travel.swift */; };
 		BE596468215A0DF200E4AA0C /* daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596467215A0DF200E4AA0C /* daily.swift */; };
 		BE59646A215A0E4D00E4AA0C /* polite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596469215A0E4D00E4AA0C /* polite.swift */; };
@@ -101,11 +101,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BE0FA9BD2181D2260076A015 /* inf_sentences_100points.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences_100points.sqlite; sourceTree = "<group>"; };
 		BE152047218085120059A7C2 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		BE17FB3D209B19B200D23F22 /* GameContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameContext.swift; sourceTree = "<group>"; };
 		BE1CA955209D5D0900086853 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		BE1CA957209DC43800086853 /* Messenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messenger.swift; sourceTree = "<group>"; };
-		BE39E0B42180E7F100A34C50 /* inf_sentences_100points.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences_100points.sqlite; sourceTree = "<group>"; };
 		BE596465215A0DE100E4AA0C /* travel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = travel.swift; sourceTree = "<group>"; };
 		BE596467215A0DF200E4AA0C /* daily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = daily.swift; sourceTree = "<group>"; };
 		BE596469215A0E4D00E4AA0C /* polite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = polite.swift; sourceTree = "<group>"; };
@@ -318,7 +318,7 @@
 		BEBDEDBE208EF09F00C18520 /* VoiceOnly */ = {
 			isa = PBXGroup;
 			children = (
-				BE39E0B42180E7F100A34C50 /* inf_sentences_100points.sqlite */,
+				BE0FA9BD2181D2260076A015 /* inf_sentences_100points.sqlite */,
 				BE67D2A821561A92007FE420 /* Assets.xcassets */,
 				BEBDEDCB208EF0A000C18520 /* Info.plist */,
 				BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */,
@@ -448,7 +448,7 @@
 				BE67D2A921561A93007FE420 /* Assets.xcassets in Resources */,
 				BEBDEDC5208EF09F00C18520 /* Main.storyboard in Resources */,
 				BECAC3BC216B904A001BBF49 /* BottomBarView.xib in Resources */,
-				BE39E0B52180E7F100A34C50 /* inf_sentences_100points.sqlite in Resources */,
+				BE0FA9BE2181D2260076A015 /* inf_sentences_100points.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -57,5 +57,4 @@ enum ChatSpeaker: String, Codable {
     case otoya = "com.apple.ttsbundle.Otoya-compact"
     case otoyaPremium = "com.apple.ttsbundle.Otoya-premium"
     case meijia = "com.apple.ttsbundle.Mei-Jia-compact"
-    case user = "user"
 }

@@ -127,7 +127,7 @@ func getFuriganaAttrString(_ parts: [String], _ kana: String, color: UIColor = .
     attrStr.append(rubyAttrStr(parts.joined(), kana, color: color))
     return attrStr
 }
-
+// tokenInfo = [kanji, 詞性, furikana, yomikana]
 func getFuriganaString(tokenInfos: [[String]]) -> NSMutableAttributedString {
     let furiganaAttrStr = NSMutableAttributedString()
     for tokenInfo in tokenInfos {
@@ -150,7 +150,6 @@ func getFuriganaString(tokenInfos: [[String]]) -> NSMutableAttributedString {
             furiganaAttrStr.append(getFuriganaAttrString(parts, kana, color: color))
             continue
         }
-        print("unknown situation with tokenInfo: ", tokenInfo)
     }
 
     return furiganaAttrStr

@@ -64,6 +64,7 @@ func getKana(_ kanjiString: String) -> Promise<String> {
 func getKanaSync(_ kanjiString: String) -> String {
     guard kanjiString != "" else { return "" }
 
+    // tokenInfo = [kanji, 詞性, furikana, yomikana]
     if let tokenInfos = kanaTokenInfosCacheDictionary[kanjiString] {
         let kanaStr = tokenInfos.reduce("", { kanaStr, tokenInfo in
             guard let kanaPart = findKanaFix(tokenInfo[0]) ?? tokenInfo.last,

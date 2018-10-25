@@ -18,7 +18,7 @@ struct KanaInfo {
 struct TopicSentenceInfo {
     var kanaCount: Int
     var ja: String
-    var tokenInfos: [[String]]?
+    var tokenInfos: [[String]]? //tokenInfo =[kanji, 詞性, furikana, yomikana]
 }
 
 private var kanaInfos: [Int: KanaInfo] = [:]
