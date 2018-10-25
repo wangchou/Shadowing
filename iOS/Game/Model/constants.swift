@@ -30,7 +30,7 @@ let fastRate = AVSpeechUtteranceDefaultSpeechRate * 1.1
 
 // it's bad when monitoring at street
 // if in quite place. turn micOutVolume to 3
-let micOutVolume: Float = 0
+let micOutVolume: Float = 3
 
 let screen = UIScreen.main.bounds
 

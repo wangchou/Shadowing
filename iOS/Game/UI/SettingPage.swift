@@ -13,12 +13,20 @@ private let context = GameContext.shared
 
 class SettingPage: UITableViewController {
     @IBOutlet weak var topBarView: TopBarView!
+
     @IBOutlet weak var autoSpeedSwitch: UISwitch!
     @IBOutlet weak var gameSpeedCell: UITableViewCell!
     @IBOutlet weak var gameSpeedSlider: UISlider!
     @IBOutlet weak var gameSpeedSlowLabel: UILabel!
     @IBOutlet weak var gameSpeedFastLabel: UILabel!
+
     @IBOutlet weak var practiceSpeedSlider: UISlider!
+
+    @IBOutlet weak var monitorVolumeSwitch: UISwitch!
+    @IBOutlet weak var monitorVolumeSlider: UISlider!
+    @IBOutlet weak var monitorVolumeLabel: UILabel!
+    @IBOutlet weak var monitorVolumeValueLabel: UILabel!
+
     @IBOutlet weak var translationSwitch: UISwitch!
     @IBOutlet weak var guideVoiceSwitch: UISwitch!
     @IBOutlet weak var narratorSwitch: UISwitch!
@@ -63,6 +71,21 @@ class SettingPage: UITableViewController {
         gameSpeedSlider.value = setting.preferredSpeed
 
         practiceSpeedSlider.value = setting.practiceSpeed
+
+        monitorVolumeSwitch.isOn = setting.isUsingMonitoring
+        if setting.isUsingMonitoring {
+            monitorVolumeSlider.isEnabled = true
+            monitorVolumeLabel.textColor = .black
+            monitorVolumeValueLabel.textColor = .black
+        } else {
+            monitorVolumeSlider.isEnabled = false
+            monitorVolumeLabel.textColor = .lightGray
+            monitorVolumeValueLabel.textColor = .lightGray
+        }
+        monitorVolumeSlider.maximumValue = 1.0
+        monitorVolumeSlider.minimumValue = 0.0
+        monitorVolumeSlider.value = setting.monitorVolume
+        monitorVolumeValueLabel.text = String(format: "%.2f", setting.monitorVolume)
 
         translationSwitch.isOn = setting.isUsingTranslation
         guideVoiceSwitch.isOn = setting.isUsingGuideVoice
@@ -114,6 +137,18 @@ class SettingPage: UITableViewController {
         saveGameSetting()
         let speedText = String(format: "%.2f", context.gameSetting.practiceSpeed * 2)
         _ = teacherSay("速度は\(speedText)です", rate: context.gameSetting.practiceSpeed)
+    }
+
+    @IBAction func monitorVolumeSwitchValueChanged(_ sender: Any) {
+        context.gameSetting.isUsingMonitoring = monitorVolumeSwitch.isOn
+        saveGameSetting()
+        viewWillAppear(false)
+    }
+
+    @IBAction func monitorVolumeSliderValueChanged(_ sender: Any) {
+        context.gameSetting.monitorVolume = monitorVolumeSlider.value
+        monitorVolumeValueLabel.text = String(format: "%.2f", monitorVolumeSlider.value)
+        saveGameSetting()
     }
 
     @IBAction func translationSwitchValueChanged(_ sender: Any) {
