@@ -66,7 +66,8 @@ app.post('/nlp', cache(864000), (req, res) => {
     if (err) {
       return res.status(500).send({ error: 'Something failed!' })
     }
-    res.json(result);
+    let trimedResult = result.map((arr)=> [arr[0], arr[1], arr[arr.length-2], arr[arr.length-1]])
+    res.json(trimedResult);
   });
 })
 

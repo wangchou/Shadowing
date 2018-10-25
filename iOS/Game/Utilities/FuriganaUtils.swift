@@ -131,13 +131,12 @@ func getFuriganaAttrString(_ parts: [String], _ kana: String, color: UIColor = .
 func getFuriganaString(tokenInfos: [[String]]) -> NSMutableAttributedString {
     let furiganaAttrStr = NSMutableAttributedString()
     for tokenInfo in tokenInfos {
-        if tokenInfo.count == 8 { // number strings, ex: “307”号室
+        if tokenInfo.last == "*" { // number strings, ex: “307”号室
             furiganaAttrStr.append(rubyAttrStr(tokenInfo[0]))
             continue
-        }
-        if tokenInfo.count == 10 {
+        } else {
             let kanjiStr = tokenInfo[0]
-            let kana = findKanaFix(kanjiStr) ?? tokenInfo[8].kataganaToHiragana
+            let kana = findKanaFix(kanjiStr) ?? tokenInfo[tokenInfo.count-2].kataganaToHiragana
             let parts = kanjiStr // [わたし、| 気 | になります！]
                 .replace("([\\p{Han}\\d]*[\\p{Han}\\d])", "👻$1👻")
                 .components(separatedBy: "👻")
