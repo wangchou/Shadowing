@@ -13,7 +13,6 @@ import Promises
 
 private let context = GameContext.shared
 private let engine = SpeechEngine.shared
-private let micVolumeMultiplier: Float = 24.0
 
 func narratorSay(_ text: String) -> Promise<Void> {
     return engine.speak(text: text, speaker: context.gameSetting.narrator, rate: fastRate)
@@ -79,15 +78,6 @@ class SpeechEngine {
         stopListen()
         tts.stop()
     }
-
-    func updateMonitorVolume() {
-        guard isEngineRunning else {return}
-        micVolumeNode.volume = context.gameSetting.isUsingMonitoring ? (context.gameSetting.monitorVolume * micVolumeMultiplier) : 0
-    }
-
-    func muteMonitorVolume() {
-        micVolumeNode.volume = 0
-    }
 }
 
 // MARK: - Private
@@ -120,7 +110,7 @@ extension SpeechEngine {
         audioEngine.connect(mic, to: micVolumeNode, format: mic.inputFormat(forBus: 0))
         audioEngine.connect(micVolumeNode, to: mainMixer, format: micVolumeNode.outputFormat(forBus: 0))
 
-        micVolumeNode.volume = context.gameSetting.isUsingMonitoring ? (context.gameSetting.monitorVolume * micVolumeMultiplier) : 0
+        micVolumeNode.volume = 0
     }
 
     private func closeNodeGraph() {

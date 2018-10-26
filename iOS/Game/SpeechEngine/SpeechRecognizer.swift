@@ -71,8 +71,6 @@ class SpeechRecognizer: NSObject {
         recognitionRequest.shouldReportPartialResults = true //false
         recognitionRequest.taskHint = .dictation
 
-        SpeechEngine.shared.updateMonitorVolume()
-
         recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest, resultHandler: resultHandler)
 
         inputNode = engine.audioEngine.inputNode
@@ -99,7 +97,6 @@ class SpeechRecognizer: NSObject {
             isRunning = false
             return
         }
-        SpeechEngine.shared.muteMonitorVolume()
 
         inputNode.removeTap(onBus: 0)
         recognitionRequest?.endAudio()
@@ -113,8 +110,6 @@ class SpeechRecognizer: NSObject {
 
     func endAudio() {
         guard isRunning, !isSimulator else { return }
-
-        SpeechEngine.shared.muteMonitorVolume()
 
         inputNode.removeTap(onBus: 0)
         recognitionRequest?.endAudio()
