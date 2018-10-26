@@ -30,7 +30,7 @@ private let context = GameContext.shared
 private let setting = context.gameSetting
 
 // command will posted by UI
-extension ShadowingFlow: GameCommandDelegate {
+extension GameFlow: GameCommandDelegate {
     @objc func onCommandHappened(_ notification: Notification) {
         guard let command = notification.object as? Command else { print("convert command fail"); return }
 
@@ -45,7 +45,7 @@ extension ShadowingFlow: GameCommandDelegate {
     }
 }
 
-class ShadowingFlow {
+class GameFlow {
     private var isForceStopped = false
     private var timer: Timer?
     private var isPaused: Bool = false
@@ -80,7 +80,7 @@ class ShadowingFlow {
 }
 
 // Private part
-extension ShadowingFlow {
+extension GameFlow {
     private func forceStop() {
         stopCommandObserving(self)
         isForceStopped = true

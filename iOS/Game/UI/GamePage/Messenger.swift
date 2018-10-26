@@ -13,7 +13,7 @@ private let context = GameContext.shared
 
 // Prototype 8: messenger / line interface
 class Messenger: UIViewController {
-    var game: ShadowingFlow?
+    var game: GameFlow?
     var lastLabel: FuriganaLabel = FuriganaLabel()
 
     private var y: Int = 8
@@ -41,7 +41,7 @@ class Messenger: UIViewController {
 
     func start() {
         startEventObserving(self)
-        game = ShadowingFlow()
+        game = GameFlow()
         game?.start()
         sentenceCountLabel.text = "還有\(context.sentences.count)句"
         speedLabel.text = String(format: "%.2f 倍速", context.teachingRate * 2)
