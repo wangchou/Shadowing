@@ -40,6 +40,7 @@ class PauseOverlayViewController: UIViewController {
         tranlationSwitch.isOn = context.gameSetting.isUsingTranslation
         autoSpeedSwitch.isOn = context.gameSetting.isAutoSpeed
         ttsSpeedSlider.value = context.gameSetting.preferredSpeed
+        fastLabel.text = String(format: "%.2fx", context.gameSetting.preferredSpeed*2)
         if context.gameSetting.isAutoSpeed {
             ttsSpeedSlider.isEnabled = false
             fastLabel.textColor = UIColor.lightGray
@@ -69,7 +70,6 @@ class PauseOverlayViewController: UIViewController {
     }
     @IBAction func onTTSSpeedSliderValueChanged(_ sender: Any) {
         context.gameSetting.preferredSpeed = ttsSpeedSlider.value
-        print(ttsSpeedSlider.value)
         saveGameSetting()
         viewWillAppear(false)
     }

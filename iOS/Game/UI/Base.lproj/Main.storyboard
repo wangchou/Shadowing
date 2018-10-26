@@ -1380,7 +1380,7 @@ Ruth Yuru Chen
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FinishedTableCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="5" indentationWidth="5" reuseIdentifier="FinishedSentenceCell" rowHeight="63" id="U4Y-kF-8LG" userLabel="FinishedTableCell" customClass="SentencesTableCell" customModule="今話したい" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="325.60000000000002" width="320" height="63"/>
+                                        <rect key="frame" x="0.0" y="287" width="320" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="U4Y-kF-8LG" id="316-Iq-LBo">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="62.5"/>
@@ -1550,7 +1550,7 @@ Ruth Yuru Chen
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="cM8-Gz-KMi">
-                                <rect key="frame" x="58" y="518" width="204" height="31"/>
+                                <rect key="frame" x="82" y="518" width="146.5" height="31"/>
                                 <connections>
                                     <action selector="onTTSSpeedSliderValueChanged:" destination="xbq-5x-hVH" eventType="valueChanged" id="XR5-Bd-bMO"/>
                                 </connections>
@@ -1570,14 +1570,14 @@ Ruth Yuru Chen
                                     <action selector="resumeButtonClicked:" destination="xbq-5x-hVH" eventType="touchUpInside" id="585-2g-u3f"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="慢" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zvf-ny-jFJ">
-                                <rect key="frame" x="30" y="518.5" width="24.5" height="29"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="速度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zvf-ny-jFJ">
+                                <rect key="frame" x="30" y="518.5" width="49" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="快" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pEm-2K-vVR">
-                                <rect key="frame" x="265.5" y="518.5" width="24.5" height="29"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.00x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pEm-2K-vVR">
+                                <rect key="frame" x="231.5" y="518.5" width="58.5" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1604,14 +1604,14 @@ Ruth Yuru Chen
                             <constraint firstItem="fzY-jo-0bH" firstAttribute="centerX" secondItem="IVc-qA-oVM" secondAttribute="centerX" id="ID3-BQ-04k"/>
                             <constraint firstItem="Px8-Is-Bt1" firstAttribute="top" secondItem="fzY-jo-0bH" secondAttribute="bottom" constant="32" id="J3X-xy-kYd"/>
                             <constraint firstItem="Xy8-dC-O7c" firstAttribute="centerY" secondItem="InH-cn-90q" secondAttribute="centerY" id="XPB-7c-efn"/>
-                            <constraint firstItem="cM8-Gz-KMi" firstAttribute="leading" secondItem="N3t-I3-Erf" secondAttribute="leading" constant="60" id="Y8F-RC-VcB"/>
                             <constraint firstItem="08G-Eb-JgR" firstAttribute="firstBaseline" secondItem="OGX-jP-5z8" secondAttribute="baseline" constant="32" symbolType="layoutAnchor" id="Yof-7s-0HY"/>
                             <constraint firstItem="cM8-Gz-KMi" firstAttribute="firstBaseline" secondItem="08G-Eb-JgR" secondAttribute="baseline" constant="16" symbolType="layoutAnchor" id="aNS-UM-lCr"/>
                             <constraint firstItem="08G-Eb-JgR" firstAttribute="centerY" secondItem="4P9-61-8fN" secondAttribute="centerY" id="bVg-EA-jUA"/>
-                            <constraint firstItem="N3t-I3-Erf" firstAttribute="trailing" secondItem="cM8-Gz-KMi" secondAttribute="trailing" constant="60" id="cEa-gp-2ZL"/>
                             <constraint firstItem="Px8-Is-Bt1" firstAttribute="centerY" secondItem="IVc-qA-oVM" secondAttribute="centerY" id="dtC-KL-8ly"/>
                             <constraint firstItem="N3t-I3-Erf" firstAttribute="trailing" secondItem="Xy8-dC-O7c" secondAttribute="trailing" constant="32" id="eLa-Aj-0Pa"/>
                             <constraint firstItem="OGX-jP-5z8" firstAttribute="top" secondItem="InH-cn-90q" secondAttribute="bottom" constant="4" id="jJW-gU-N1s"/>
+                            <constraint firstItem="cM8-Gz-KMi" firstAttribute="leading" secondItem="Zvf-ny-jFJ" secondAttribute="trailing" constant="5" id="kXP-pA-csX"/>
+                            <constraint firstItem="pEm-2K-vVR" firstAttribute="leading" secondItem="cM8-Gz-KMi" secondAttribute="trailing" constant="5" id="lAg-un-Bt0"/>
                             <constraint firstItem="4P9-61-8fN" firstAttribute="top" secondItem="SSu-uc-Hye" secondAttribute="bottom" constant="14" id="oTT-mV-p4g"/>
                             <constraint firstItem="OGX-jP-5z8" firstAttribute="leading" secondItem="N3t-I3-Erf" secondAttribute="leading" constant="30" id="wb4-Vo-jXr"/>
                             <constraint firstItem="pEm-2K-vVR" firstAttribute="centerY" secondItem="cM8-Gz-KMi" secondAttribute="centerY" id="xaM-0B-wZc"/>
