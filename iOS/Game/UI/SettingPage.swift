@@ -14,17 +14,22 @@ private let context = GameContext.shared
 class SettingPage: UITableViewController {
     @IBOutlet weak var topBarView: TopBarView!
 
+    @IBOutlet weak var autoSpeedLabel: UILabel!
     @IBOutlet weak var autoSpeedSwitch: UISwitch!
     @IBOutlet weak var gameSpeedCell: UITableViewCell!
     @IBOutlet weak var gameSpeedSlider: UISlider!
-    @IBOutlet weak var gameSpeedSlowLabel: UILabel!
     @IBOutlet weak var gameSpeedFastLabel: UILabel!
 
     @IBOutlet weak var practiceSpeedSlider: UISlider!
 
+    @IBOutlet weak var practiceSpeedFastLabel: UILabel!
+    @IBOutlet weak var translationLabel: UILabel!
     @IBOutlet weak var translationSwitch: UISwitch!
+    @IBOutlet weak var guideVoiceLabel: UILabel!
     @IBOutlet weak var guideVoiceSwitch: UISwitch!
+    @IBOutlet weak var narratorLabel: UILabel!
     @IBOutlet weak var narratorSwitch: UISwitch!
+    @IBOutlet weak var gotoIOSSettingButton: UIButton!
     @IBOutlet weak var teacherTTSSegmentControl: UISegmentedControl!
     @IBOutlet weak var assistantTTSSegmentControl: UISegmentedControl!
 
@@ -52,20 +57,30 @@ class SettingPage: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        let isJa = Locale.current.languageCode == "ja"
+        autoSpeedLabel.text = isJa ? "自動速度" : "自動速度"
+        translationLabel.text = isJa ? "中国語翻訳" : "中文翻譯"
+        guideVoiceLabel.text = isJa ? "ガイド音声" : "日文引導朗讀"
+        narratorLabel.text = isJa ? "ゲーム中国語説明" : "遊戲開始中文說明"
+        gotoIOSSettingButton.setTitle(isJa ? "iPhone設定へ" : "前往iPhone設定中心", for: .normal)
+        teacherTTSSegmentControl.setTitle(isJa ? "デフォルト" : "預定", forSegmentAt: 0)
+        assistantTTSSegmentControl.setTitle(isJa ? "デフォルト" : "預定", forSegmentAt: 0)
+
         let setting = context.gameSetting
         autoSpeedSwitch.isOn = setting.isAutoSpeed
+
         if setting.isAutoSpeed {
             gameSpeedSlider.isEnabled = false
-            gameSpeedSlowLabel.textColor = UIColor.lightGray
             gameSpeedFastLabel.textColor = UIColor.lightGray
         } else {
             gameSpeedSlider.isEnabled = true
-            gameSpeedSlowLabel.textColor = UIColor.black
             gameSpeedFastLabel.textColor = UIColor.black
         }
         gameSpeedSlider.value = setting.preferredSpeed
+        gameSpeedFastLabel.text = String(format: "%.2fx", setting.preferredSpeed*2)
 
         practiceSpeedSlider.value = setting.practiceSpeed
+        practiceSpeedFastLabel.text = String(format: "%.2fx", setting.practiceSpeed*2)
 
         translationSwitch.isOn = setting.isUsingTranslation
         guideVoiceSwitch.isOn = setting.isUsingGuideVoice
@@ -94,8 +109,12 @@ class SettingPage: UITableViewController {
     }
 
     private func showVoiceIsNotAvailableAlert() {
-        let alert = UIAlertController(title: "你選的語音還未下載", message: "請於手機的「設定 > 一般 > 輔助使用 > 語音 > 聲音 > 日文」下載相關語音。", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "知道了", style: .default))
+        let isJa = Locale.current.languageCode == "ja"
+        let title = isJa ? "選らんた声はまだダウンロードされていません" : "你選的語音還未下載"
+        let message = isJa ? "iPhoneの「設定 > 一般 > アクセシビリティ > スピーチ > 声 > 日本語」で、ダウンロードしましょう。":"請於手機的「設定 > 一般 > 輔助使用 > 語音 > 聲音 > 日文」下載相關語音。"
+        let okTitle = isJa ? "わかった" : "知道了"
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: okTitle, style: .default))
         self.present(alert, animated: true, completion: nil)
     }
 
@@ -167,4 +186,23 @@ class SettingPage: UITableViewController {
         saveGameSetting()
     }
 
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let isJa = Locale.current.languageCode == "ja"
+        switch section {
+        case 0:
+            return isJa ? "ゲーム時の読み上げ速度": "遊戲時的朗讀速度"
+        case 1:
+            return isJa ? "練習時の読み上げ速度": "練習時的朗讀速度"
+        case 2:
+            return isJa ? "ゲーム設定": "遊戲設定"
+        case 3:
+            return isJa ? "マイクと音声認識のアクセス権限": "麥克風與語音辨識權限"
+        case 4:
+            return isJa ? "日本語先生": "日文老師"
+        case 5:
+            return isJa ? "日本語アシスタント": "日文助理"
+        default:
+            return "Other Devices"
+        }
+    }
 }

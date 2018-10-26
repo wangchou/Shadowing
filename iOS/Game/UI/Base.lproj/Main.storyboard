@@ -610,19 +610,13 @@ Ruth Yuru Chen
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="O7j-xa-d2C">
-                                                    <rect key="frame" x="43" y="7" width="239" height="31"/>
+                                                    <rect key="frame" x="13" y="7" width="249" height="31"/>
                                                     <connections>
                                                         <action selector="gameSpeedSilderValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="8ka-Bl-QH0"/>
                                                     </connections>
                                                 </slider>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="慢" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z2L-fV-hV6">
-                                                    <rect key="frame" x="15" y="11.5" width="17.5" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="快" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kG4-NV-Y6C">
-                                                    <rect key="frame" x="292.5" y="11.5" width="17.5" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.00x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kG4-NV-Y6C">
+                                                    <rect key="frame" x="269.5" y="11.5" width="40.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -630,12 +624,10 @@ Ruth Yuru Chen
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="kG4-NV-Y6C" firstAttribute="centerY" secondItem="mXk-UF-hpO" secondAttribute="centerY" id="C7q-wx-iaa"/>
-                                                <constraint firstItem="z2L-fV-hV6" firstAttribute="centerY" secondItem="mXk-UF-hpO" secondAttribute="centerY" id="Gep-3c-iKS"/>
-                                                <constraint firstItem="O7j-xa-d2C" firstAttribute="leading" secondItem="mXk-UF-hpO" secondAttribute="leading" constant="45" id="JWK-UM-etK"/>
+                                                <constraint firstItem="O7j-xa-d2C" firstAttribute="leading" secondItem="mXk-UF-hpO" secondAttribute="leading" constant="15" id="JWK-UM-etK"/>
                                                 <constraint firstAttribute="trailing" secondItem="kG4-NV-Y6C" secondAttribute="trailing" constant="10" id="KlV-gs-pOI"/>
                                                 <constraint firstItem="O7j-xa-d2C" firstAttribute="centerY" secondItem="mXk-UF-hpO" secondAttribute="centerY" id="Rjz-Hj-hdA"/>
-                                                <constraint firstItem="z2L-fV-hV6" firstAttribute="leading" secondItem="mXk-UF-hpO" secondAttribute="leading" constant="15" id="XqU-3V-Of9"/>
-                                                <constraint firstAttribute="trailing" secondItem="O7j-xa-d2C" secondAttribute="trailing" constant="40" id="eIT-il-qqX"/>
+                                                <constraint firstAttribute="trailing" secondItem="O7j-xa-d2C" secondAttribute="trailing" constant="60" id="eIT-il-qqX"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -651,38 +643,30 @@ Ruth Yuru Chen
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.375" minValue="0.0" maxValue="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="7Bm-n0-0qL">
-                                                    <rect key="frame" x="43" y="7" width="239" height="31"/>
+                                                    <rect key="frame" x="13" y="7" width="249" height="31"/>
                                                     <connections>
                                                         <action selector="practiceSpeedSliderValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="5F8-4p-6Xa"/>
                                                     </connections>
                                                 </slider>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="慢" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LvN-uj-2Kd">
-                                                    <rect key="frame" x="15" y="11.5" width="17.5" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="快" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hja-pv-XQX">
-                                                    <rect key="frame" x="292.5" y="11.5" width="17.5" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.00x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hja-pv-XQX">
+                                                    <rect key="frame" x="269.5" y="11.5" width="40.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="LvN-uj-2Kd" firstAttribute="leading" secondItem="rJY-Zn-kHi" secondAttribute="leading" constant="15" id="W2P-im-cHC"/>
-                                                <constraint firstItem="7Bm-n0-0qL" firstAttribute="leading" secondItem="rJY-Zn-kHi" secondAttribute="leading" constant="45" id="ZpH-lh-wyb"/>
+                                                <constraint firstItem="7Bm-n0-0qL" firstAttribute="leading" secondItem="rJY-Zn-kHi" secondAttribute="leading" constant="15" id="ZpH-lh-wyb"/>
                                                 <constraint firstAttribute="trailing" secondItem="Hja-pv-XQX" secondAttribute="trailing" constant="10" id="dIU-BC-0OH"/>
-                                                <constraint firstItem="LvN-uj-2Kd" firstAttribute="centerY" secondItem="rJY-Zn-kHi" secondAttribute="centerY" id="hn1-30-dAH"/>
                                                 <constraint firstItem="7Bm-n0-0qL" firstAttribute="centerY" secondItem="rJY-Zn-kHi" secondAttribute="centerY" id="kZi-eS-Id7"/>
                                                 <constraint firstItem="Hja-pv-XQX" firstAttribute="centerY" secondItem="rJY-Zn-kHi" secondAttribute="centerY" id="pu3-3s-n8t"/>
-                                                <constraint firstAttribute="trailing" secondItem="7Bm-n0-0qL" secondAttribute="trailing" constant="40" id="upw-0h-riR"/>
+                                                <constraint firstAttribute="trailing" secondItem="7Bm-n0-0qL" secondAttribute="trailing" constant="60" id="upw-0h-riR"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="遊戲設定" id="rPR-SA-ADh" userLabel="遊戲選項 ">
+                            <tableViewSection headerTitle="遊戲設定" id="rPR-SA-ADh" userLabel="Game Options">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Uds-HY-uHO">
                                         <rect key="frame" x="0.0" y="334.5" width="320" height="44"/>
@@ -770,7 +754,7 @@ Ruth Yuru Chen
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="麥克風與語音辨識權限" id="WdS-gh-bvX" userLabel="遊戲選項 ">
+                            <tableViewSection headerTitle="麥克風與語音辨識權限" id="WdS-gh-bvX" userLabel="Go to IOS Setting">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="IVr-hM-UtT">
                                         <rect key="frame" x="0.0" y="522.5" width="320" height="44"/>
@@ -802,7 +786,7 @@ Ruth Yuru Chen
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="日文老師" id="vhi-Sd-uwg">
+                            <tableViewSection headerTitle="日本語先生" id="vhi-Sd-uwg" userLabel="Japanese Teacher">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="VMY-nf-tkP">
                                         <rect key="frame" x="0.0" y="622.5" width="320" height="44"/>
@@ -814,7 +798,7 @@ Ruth Yuru Chen
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="PW3-bc-7sf">
                                                     <rect key="frame" x="15" y="8" width="295" height="29"/>
                                                     <segments>
-                                                        <segment title="預設"/>
+                                                        <segment title="default"/>
                                                         <segment title="Kyoko (高品質)"/>
                                                         <segment title="Otoya (高品質)"/>
                                                     </segments>
@@ -832,7 +816,7 @@ Ruth Yuru Chen
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="日文助理" id="VOV-3U-5jb">
+                            <tableViewSection headerTitle="日本語助理" id="VOV-3U-5jb" userLabel="Japanese Assisant">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="TrU-ZD-XJB">
                                         <rect key="frame" x="0.0" y="722.5" width="320" height="44"/>
@@ -844,7 +828,7 @@ Ruth Yuru Chen
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3Ub-tZ-Jqt">
                                                     <rect key="frame" x="15" y="8" width="295" height="29"/>
                                                     <segments>
-                                                        <segment title="預設"/>
+                                                        <segment title="default"/>
                                                         <segment title="Kyoko (高品質)"/>
                                                         <segment title="Otoya (高品質)"/>
                                                     </segments>
@@ -870,22 +854,27 @@ Ruth Yuru Chen
                     </tableView>
                     <connections>
                         <outlet property="assistantTTSSegmentControl" destination="3Ub-tZ-Jqt" id="9fi-5X-zgG"/>
+                        <outlet property="autoSpeedLabel" destination="hLW-VU-3Ig" id="SM2-Yo-2xR"/>
                         <outlet property="autoSpeedSwitch" destination="a07-vG-Faq" id="VXS-JU-f5K"/>
                         <outlet property="gameSpeedCell" destination="Tsd-SC-JNk" id="ra1-Hd-uIU"/>
                         <outlet property="gameSpeedFastLabel" destination="kG4-NV-Y6C" id="9Cr-bQ-1YS"/>
                         <outlet property="gameSpeedSlider" destination="O7j-xa-d2C" id="vEO-xe-Ssp"/>
-                        <outlet property="gameSpeedSlowLabel" destination="z2L-fV-hV6" id="cQQ-UO-GvX"/>
+                        <outlet property="gotoIOSSettingButton" destination="3U2-5G-XCz" id="5UJ-oO-YJ4"/>
+                        <outlet property="guideVoiceLabel" destination="XVD-gN-tVh" id="sqb-3C-QCq"/>
                         <outlet property="guideVoiceSwitch" destination="cnL-ja-E8l" id="paG-uz-arc"/>
+                        <outlet property="narratorLabel" destination="ifG-qP-E0M" id="9FS-AV-tqq"/>
                         <outlet property="narratorSwitch" destination="URw-xj-fSm" id="0X0-bF-unC"/>
+                        <outlet property="practiceSpeedFastLabel" destination="Hja-pv-XQX" id="aIX-fH-bXV"/>
                         <outlet property="practiceSpeedSlider" destination="7Bm-n0-0qL" id="bJL-pM-izd"/>
                         <outlet property="teacherTTSSegmentControl" destination="PW3-bc-7sf" id="yK2-9m-L5Y"/>
                         <outlet property="topBarView" destination="aep-48-VVi" id="OXh-gN-rcA"/>
+                        <outlet property="translationLabel" destination="eBg-hC-km0" id="Keo-Ay-q6n"/>
                         <outlet property="translationSwitch" destination="nCJ-hb-hPN" id="lOx-1j-sun"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZDf-IZ-WMA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-386" y="-1033"/>
+            <point key="canvasLocation" x="-386.25" y="-1033.0985915492959"/>
         </scene>
         <!--Shadowing List Page-->
         <scene sceneID="tne-QT-ifu">
@@ -1512,7 +1501,7 @@ Ruth Yuru Chen
                                     <constraint firstAttribute="width" constant="230" id="lKX-dg-aaV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="結束遊戲">
+                                <state key="normal" title="ゲームを終る">
                                     <color key="titleColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -1531,20 +1520,20 @@ Ruth Yuru Chen
                                     <action selector="onTranslationSwitchTapped:" destination="xbq-5x-hVH" eventType="valueChanged" id="MnI-Iv-Bog"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="751" text="自動語音速度：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="08G-Eb-JgR">
-                                <rect key="frame" x="30" y="479" width="170.5" height="29"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="751" text="自動速度：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="08G-Eb-JgR">
+                                <rect key="frame" x="30" y="479" width="122" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="使用譯文：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OGX-jP-5z8">
-                                <rect key="frame" x="30" y="421" width="122" height="55"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中国語翻訳：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OGX-jP-5z8">
+                                <rect key="frame" x="30" y="421" width="146" height="55"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="使用導唸：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="InH-cn-90q">
-                                <rect key="frame" x="30" y="388" width="122" height="29"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ガイド音声：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="InH-cn-90q">
+                                <rect key="frame" x="30" y="388" width="146" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -1563,7 +1552,7 @@ Ruth Yuru Chen
                                     <constraint firstAttribute="height" constant="60" id="PNf-Oc-x4J"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="繼續">
+                                <state key="normal" title="つづく">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
