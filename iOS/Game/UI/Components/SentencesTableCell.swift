@@ -67,6 +67,9 @@ class SentencesTableCell: UITableViewCell {
             .then(listenPart)
             .then(afterListeningCalculateScore)
             .then(updateUIByScore)
+            .catch {_ in
+                self.userSaidSentenceLabel.text = ""
+            }
             .always {
                 self.isUserInteractionEnabled = true
                 self.practiceButton.isEnabled = true

@@ -27,13 +27,6 @@ class SpeechRecognizer: NSObject {
     private var inputNode: AVAudioNode!
     private var promise = Promise<String>.pending()
 
-    override init() {
-        super.init()
-        if !isSimulator {
-            authorize()
-        }
-    }
-
     // MARK: - Public Methods
     func listen(stopAfterSeconds: Double = 5, localIdentifier: String = "ja") -> Promise<String> {
         endAudio()
@@ -54,7 +47,7 @@ class SpeechRecognizer: NSObject {
 
         if !isAuthorized {
             promise.reject(SpeechRecognitionError.unauthorized)
-            showMessage("無法取得語音辨識權限。")
+            authorize()
             return promise
         }
 
@@ -132,14 +125,17 @@ extension SpeechRecognizer {
 
             case .denied:
                 self.isAuthorized = false
+                showGotoSettingCenter()
                 print("User denied access to speech recognition")
 
             case .restricted:
                 self.isAuthorized = false
+                showGotoSettingCenter()
                 print("Speech recognition restricted on this device")
 
             case .notDetermined:
                 self.isAuthorized = false
+                showGotoSettingCenter()
                 print("Speech recognition not yet authorized")
             }
         }

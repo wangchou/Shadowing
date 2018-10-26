@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  今話したい
+
+  Created by Wangchou Lu on 10/26/30 H.
+  Copyright © 30 Heisei Lu, WangChou. All rights reserved.
+*/
+"NSMicrophoneUsageDescription" = "「今話したい」は、マイクで音声入力します。";
+"NSSpeechRecognitionUsageDescription" = "「今話したい」は、音声認識で話した日本語を修正します。";

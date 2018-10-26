@@ -133,6 +133,9 @@ class SettingPage: UITableViewController {
         context.gameSetting.isUsingNarrator = narratorSwitch.isOn
         saveGameSetting()
     }
+    @IBAction func goToSettingCenter(_ sender: Any) {
+        goToIOSSettingCenter()
+    }
 
     @IBAction func teacherTTSSegmentControlValueChanged(_ sender: Any) {
         let speaker = getChatSpeaker(segmentIndex: teacherTTSSegmentControl.selectedSegmentIndex)

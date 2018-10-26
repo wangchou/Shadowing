@@ -282,3 +282,49 @@ func showMessage(_ message: String, seconds: Float = 2) {
         }
     }
 }
+
+func showGotoSettingCenter() {
+
+    var title = "Microphone or Speech Recognization permission is not granted. Do you like go to iOS Setting to set it"
+    var okTitle = "Go to iOS Setting"
+    var cancelTitle = "Cancel"
+    switch Locale.current.languageCode {
+    case "ja":
+        title = "マイクと音声認識のアクセス権限がありません。iPhoneの設定へ行きますか？"
+        okTitle = "設定へ行きます"
+        cancelTitle = "キャンセル"
+    case "zh":
+        title = "麥克風或語音辨識的權限不足。前往iPhone設定中心嗎？"
+        okTitle = "前往iPhone設定中心"
+        cancelTitle = "取消"
+
+    default:
+        ()
+    }
+    let alertController = UIAlertController(title: title, message: "", preferredStyle: .alert)
+
+    // Create the actions
+    let okAction = UIAlertAction(title: okTitle, style: UIAlertAction.Style.default) {
+        UIAlertAction in
+        alertController.dismiss(animated: true, completion: nil)
+        goToIOSSettingCenter()
+    }
+    let cancelAction = UIAlertAction(title: cancelTitle, style: UIAlertAction.Style.cancel) {
+        UIAlertAction in
+        alertController.dismiss(animated: true, completion: nil)
+    }
+
+    // Add the actions
+    alertController.addAction(okAction)
+    alertController.addAction(cancelAction)
+
+    UIApplication.getPresentedViewController()?.present(alertController, animated: true)
+
+}
+func goToIOSSettingCenter() {
+    if let url = URL(string: UIApplication.openSettingsURLString) {
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+}

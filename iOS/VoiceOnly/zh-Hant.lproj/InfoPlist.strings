@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  今話したい
+
+  Created by Wangchou Lu on 10/26/30 H.
+  Copyright © 30 Heisei Lu, WangChou. All rights reserved.
+*/
+"NSMicrophoneUsageDescription" = "「今話したい」需要麥克風來辨識你說的日文";
+"NSSpeechRecognitionUsageDescription" = "「今話したい」需要語音辨識來評分你說的日文";

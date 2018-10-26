@@ -87,7 +87,7 @@ func calculateScore(
         let len = max(str1.count, str2.count)
         guard len > 0 else {
             #if os(iOS)
-            showMessage("連不到主機...")
+            showMessage("cannot reach server")
             #endif
             print("zero len error on calcScore", str1, str2)
             return 0

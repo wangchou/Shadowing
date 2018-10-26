@@ -770,10 +770,42 @@ Ruth Yuru Chen
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="麥克風與語音辨識權限" id="WdS-gh-bvX" userLabel="遊戲選項 ">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="IVr-hM-UtT">
+                                        <rect key="frame" x="0.0" y="522.5" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IVr-hM-UtT" id="lal-hd-ERN">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3U2-5G-XCz">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <state key="normal" title="前往 iOS 設定中心">
+                                                        <color key="titleColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="goToSettingCenter:" destination="pxg-jG-gsh" eventType="touchUpInside" id="YIb-KE-PeG"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="3U2-5G-XCz" secondAttribute="bottom" id="3bF-aO-2FX"/>
+                                                <constraint firstItem="3U2-5G-XCz" firstAttribute="centerX" secondItem="lal-hd-ERN" secondAttribute="centerX" id="A9X-yU-HYs"/>
+                                                <constraint firstAttribute="trailing" secondItem="3U2-5G-XCz" secondAttribute="trailing" id="BLM-bW-4UO"/>
+                                                <constraint firstItem="3U2-5G-XCz" firstAttribute="leading" secondItem="lal-hd-ERN" secondAttribute="leading" id="MiT-Lo-i7e"/>
+                                                <constraint firstItem="3U2-5G-XCz" firstAttribute="top" secondItem="lal-hd-ERN" secondAttribute="top" id="Pxe-hj-Fso"/>
+                                                <constraint firstItem="3U2-5G-XCz" firstAttribute="centerY" secondItem="lal-hd-ERN" secondAttribute="centerY" id="gdR-eZ-yvn"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="日文老師" id="vhi-Sd-uwg">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="VMY-nf-tkP">
-                                        <rect key="frame" x="0.0" y="522.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="622.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VMY-nf-tkP" id="n4V-N7-Q05">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -803,7 +835,7 @@ Ruth Yuru Chen
                             <tableViewSection headerTitle="日文助理" id="VOV-3U-5jb">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="TrU-ZD-XJB">
-                                        <rect key="frame" x="0.0" y="622.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="722.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TrU-ZD-XJB" id="jcO-I4-NRL">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>

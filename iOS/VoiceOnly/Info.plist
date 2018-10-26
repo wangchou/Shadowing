@@ -49,9 +49,9 @@
 		</dict>
 	</dict>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>${PRODUCT_NAME} 需要麥克風來辨識你說的日文</string>
+	<string>${PRODUCT_NAME} needs micphone to recognize Japanese you said.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>${PRODUCT_NAME} 需要語音辨識來評分你說的日文</string>
+	<string>${PRODUCT_NAME} needs Speech Recognition for scoring Japanese you said.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>Main</string>
 	<key>UIMainStoryboardFile</key>
