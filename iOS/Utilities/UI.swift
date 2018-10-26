@@ -25,21 +25,21 @@ extension UIView {
     #endif
 
     func roundBorder(borderWidth: CGFloat = 1.5, cornerRadius: CGFloat = 15, color: UIColor = .black) {
-        self.layer.borderWidth = borderWidth
-        self.layer.cornerRadius = cornerRadius
-        self.layer.borderColor = color.cgColor
-        self.clipsToBounds = true
+        layer.borderWidth = borderWidth
+        layer.cornerRadius = cornerRadius
+        layer.borderColor = color.cgColor
+        clipsToBounds = true
     }
 
     func centerIn(_ boundRect: CGRect) {
-        let xPadding = (boundRect.width - self.frame.width)/2
-        let yPadding = (boundRect.height - self.frame.height)/2
-        self.frame.origin.x = boundRect.origin.x + xPadding
-        self.frame.origin.y = boundRect.origin.y + yPadding
+        let xPadding = (boundRect.width - frame.width)/2
+        let yPadding = (boundRect.height - frame.height)/2
+        frame.origin.x = boundRect.origin.x + xPadding
+        frame.origin.y = boundRect.origin.y + yPadding
     }
 
     func removeAllSubviews() {
-        self.subviews.forEach { $0.removeFromSuperview() }
+        subviews.forEach { $0.removeFromSuperview() }
     }
 
     func addReloadableSubview(_ view: UIView) {
@@ -98,11 +98,11 @@ extension UIView {
 
 extension UIScrollView {
     func scrollTo(_ y: Int) {
-        self.contentSize = CGSize(
-            width: self.frame.size.width,
-            height: max(self.frame.size.height, CGFloat(y))
+        contentSize = CGSize(
+            width: frame.size.width,
+            height: max(frame.size.height, CGFloat(y))
         )
-        self.scrollRectToVisible(CGRect(x: 5, y: y-1, width: 1, height: 1), animated: true)
+        scrollRectToVisible(CGRect(x: 5, y: y-1, width: 1, height: 1), animated: true)
     }
 }
 
@@ -145,18 +145,26 @@ extension GridLayout where Self: UIView {
     }
 
     var step: CGFloat { // is multiple of retina pixel width 0.5, ex 18, 19.5...
-        return floor((axisBound - spacing)*2 / gridCount.c)/2
+        return floor((axisBound - spacing) * 2 / gridCount.c)/2
     }
 
     var stepFloat: CGFloat {
-        return (axisBound - spacing)*2 / gridCount.c / 2
+        return (axisBound - spacing) * 2 / gridCount.c / 2
     }
 
     func getFontSize(h: Int) -> CGFloat {
         return h.c * step * 0.7
     }
 
-    func addText(x: Int, y: Int, w: Int? = nil, h: Int, text: String, font: UIFont? = nil, color: UIColor? = nil, completion: ((UILabel) -> Void)? = nil) {
+    func addText(x: Int,
+                 y: Int,
+                 w: Int? = nil,
+                 h: Int,
+                 text: String,
+                 font: UIFont? = nil,
+                 color: UIColor? = nil,
+                 completion: ((UILabel) -> Void)? = nil
+        ) {
         let label = UILabel()
         label.font = font ?? MyFont.regular(ofSize: getFontSize(h: h))
         label.textColor = color ?? .black
@@ -167,7 +175,13 @@ extension GridLayout where Self: UIView {
         completion?(label)
     }
 
-    func addAttrText(x: Int, y: Int, w: Int? = nil, h: Int, text: NSAttributedString, completion: ((UIView) -> Void)? = nil) {
+    func addAttrText(x: Int,
+                     y: Int,
+                     w: Int? = nil,
+                     h: Int,
+                     text: NSAttributedString,
+                     completion: ((UIView) -> Void)? = nil
+        ) {
         let label = UILabel()
         label.attributedText = text
         layout(x, y, w ?? (gridCount - x), h, label)
@@ -176,7 +190,10 @@ extension GridLayout where Self: UIView {
     }
 
     func addRoundRect(x: Int, y: Int, w: Int, h: Int,
-                      borderColor: UIColor, radius: CGFloat? = nil, backgroundColor: UIColor? = nil) {
+                      borderColor: UIColor,
+                      radius: CGFloat? = nil,
+                      backgroundColor: UIColor? = nil
+        ) {
         let roundRect = UIView()
         layout(x, y, w, h, roundRect)
         let radius = radius ?? h.c * step / 2
@@ -282,6 +299,7 @@ func showMessage(_ message: String, seconds: Float = 2) {
         }
     }
 }
+
 private var isShowingGotoSettingCenter = false
 func showGotoSettingCenter() {
     guard !isShowingGotoSettingCenter else { return }

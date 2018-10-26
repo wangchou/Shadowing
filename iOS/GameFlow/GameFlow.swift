@@ -29,7 +29,7 @@ private let engine = SpeechEngine.shared
 private let context = GameContext.shared
 private let setting = context.gameSetting
 
-// command will posted by UI
+// handler for commands posted from UI
 extension GameFlow: GameCommandDelegate {
     @objc func onCommandHappened(_ notification: Notification) {
         guard let command = notification.object as? Command else { print("convert command fail"); return }
@@ -46,9 +46,9 @@ extension GameFlow: GameCommandDelegate {
 }
 
 class GameFlow {
+    private var isPaused: Bool = false
     private var isForceStopped = false
     private var timer: Timer?
-    private var isPaused: Bool = false
     private var wait: Promise<Void> = Promise<Void>.pending()
     private var gameSeconds: Int = 0
 
@@ -68,10 +68,10 @@ class GameFlow {
             narratorSay(narratorString)
                 .then { self.wait }
                 .always {
-                    self.learnNext()
+                    self.learnNextSentence()
                 }
         } else {
-            learnNext()
+            learnNextSentence()
         }
 
         isPaused = false
@@ -79,16 +79,54 @@ class GameFlow {
     }
 }
 
-// Private part
+// MARK: - Private Functions
 extension GameFlow {
+
+    // Main Game Flow keep calling learnNext
+    private func learnNextSentence() {
+        guard !self.isForceStopped else { return }
+        speakTargetString()
+            .then { self.wait }
+            .then( listenPart )
+            .then { self.wait }
+            .catch { error in print("Promise chain is dead", error)}
+            .always {
+                guard !self.isForceStopped else { return }
+                context.gameState = .sentenceSessionEnded
+                if context.nextSentence() {
+                    self.learnNextSentence()
+                } else {
+                    self.gameOver()
+                }
+        }
+    }
+
     private func forceStop() {
         stopCommandObserving(self)
         isForceStopped = true
         context.gameState = .forceStopped
+
         timer?.invalidate()
         isPaused = false
         wait.reject(GameError.forceStop)
         SpeechEngine.shared.reset()
+    }
+
+    private func gameOver() {
+        narratorSay("遊戲結束").then {
+            stopCommandObserving(self)
+            context.gameState = .gameOver
+
+            context.gameRecord?.playDuration = self.gameSeconds
+            self.timer?.invalidate()
+            updateGameHistory()
+            saveGameSetting()
+            if context.contentTab == .infiniteChallenge,
+                let gr = context.gameRecord {
+                lastInfiniteChallengeSentences[gr.level] = context.sentences
+            }
+            saveGameMiscData()
+        }
     }
 
     private func pause() {
@@ -99,25 +137,6 @@ extension GameFlow {
     private func resume() {
         isPaused = false
         wait.fulfill(())
-    }
-
-    // MARK: - Private Functions
-    private func learnNext() {
-        guard !self.isForceStopped else { return }
-        speakTargetString()
-        .then { self.wait }
-        .then( listenPart )
-        .then { self.wait }
-        .catch { error in print("Promise chain is dead", error)}
-        .always {
-            guard !self.isForceStopped else { return }
-            context.gameState = .sentenceSessionEnded
-            if context.nextSentence() {
-                self.learnNext()
-            } else {
-                self.gameOver()
-            }
-        }
     }
 
     private func listenPart() -> Promise<Void> {
@@ -163,22 +182,6 @@ extension GameFlow {
 
             postEvent(.playTimeUpdate, int: self.gameSeconds)
             self.gameSeconds += 1
-        }
-    }
-
-    private func gameOver() {
-        narratorSay("遊戲結束").then {
-            context.gameState = .gameOver
-            stopCommandObserving(self)
-            context.gameRecord?.playDuration = self.gameSeconds
-            self.timer?.invalidate()
-            updateGameHistory()
-            saveGameSetting()
-            if context.contentTab == .infiniteChallenge,
-                let gr = context.gameRecord {
-                lastInfiniteChallengeSentences[gr.level] = context.sentences
-            }
-            saveGameMiscData()
         }
     }
 

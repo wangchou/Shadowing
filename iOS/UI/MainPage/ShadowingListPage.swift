@@ -61,7 +61,7 @@ class ShadowingListPage: UIViewController {
         abilityChart.render()
         if context.dataSetKey == "" {
             context.dataSetKey = dataSetKeys[0]
-            context.loadLearningSentences(isShuffle: false)
+            context.loadLearningSentences()
         }
         topicFilterBarView.viewWillAppear()
     }
@@ -137,7 +137,7 @@ extension ShadowingListPage: UITableViewDataSource {
 extension ShadowingListPage: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         context.dataSetKey = dataSetKeys[indexPath.row]
-        context.loadLearningSentences(isShuffle: false)
+        context.loadLearningSentences()
         (rootViewController.current as? UIPageViewController)?.goToNextPage()
     }
 }

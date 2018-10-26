@@ -87,24 +87,24 @@ class GameContext {
     }
 
     var userSaidString: String {
-        get {
-            return userSaidSentences[self.targetString] ?? ""
-        }
-
-        set {
-            userSaidSentences[self.targetString] = newValue
-        }
+        get { return userSaidSentences[self.targetString] ?? "" }
+        set { userSaidSentences[self.targetString] = newValue }
     }
     var score: Score = Score(value: 100)
 
     // MARK: - functions for a single game
-    func loadLearningSentences(isShuffle: Bool = false) {
-        if contentTab == .infiniteChallenge {
-            return loadInfiniteChallengeLevelSentence()
+    func loadLearningSentences() {
+        if contentTab == .topics {
+            loadTopicSentence()
+        } else {
+            loadInfiniteChallengeLevelSentence()
         }
+    }
+
+    private func loadTopicSentence() {
         sentenceIndex = 0
         guard let selectedDataSet = dataSets[dataSetKey] else { return }
-        sentences = isShuffle ? selectedDataSet.shuffled() : selectedDataSet
+        sentences = selectedDataSet
 
         life = isSimulator ? 100 : 50
 
@@ -134,10 +134,7 @@ class GameContext {
 
     func nextSentence() -> Bool {
         sentenceIndex += 1
-        var sentencesBound = sentences.count
-        if isSimulator {
-            sentencesBound = 3
-        }
+        let sentencesBound = isSimulator ? 3 : sentences.count
         guard sentenceIndex < sentencesBound else { return false }
         userSaidString = ""
         return true

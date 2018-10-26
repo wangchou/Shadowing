@@ -41,7 +41,7 @@ func getKanaTokenInfos(_ kanjiString: String) -> Promise<[[String]]> {
 func getKana(_ kanjiString: String) -> Promise<String> {
     let promise = Promise<String>.pending()
 
-    if kanjiString == "" {
+    if kanjiString.isEmpty {
         promise.fulfill("")
         return promise
     }
@@ -58,23 +58,6 @@ func getKana(_ kanjiString: String) -> Promise<String> {
     }
 
     return promise
-}
-
-// check the cache, if not found return empty string
-func getKanaSync(_ kanjiString: String) -> String {
-    guard kanjiString != "" else { return "" }
-
-    // tokenInfo = [kanji, 詞性, furikana, yomikana]
-    if let tokenInfos = kanaTokenInfosCacheDictionary[kanjiString] {
-        let kanaStr = tokenInfos.reduce("", { kanaStr, tokenInfo in
-            guard let kanaPart = findKanaFix(tokenInfo[0]) ?? tokenInfo.last,
-                tokenInfo[1] != "記号" else { return kanaStr }
-            return kanaStr + kanaPart
-        })
-        return kanaStr
-    }
-
-    return ""
 }
 
 func calculateScore(
@@ -99,9 +82,8 @@ func calculateScore(
     all([
         getKana(sentence1),
         getKana(sentence2)
-    ]).then { result in
-        guard let kana1 = result.first, let kana2 = result.last else { print("get both kana fail"); return }
-        let score = calcScore(kana1, kana2)
+    ]).then { kanas in
+        let score = calcScore(kanas[0], kanas[1])
         #if os(iOS)
         postEvent(.scoreCalculated, score: Score(value: score))
         #endif

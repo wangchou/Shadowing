@@ -43,7 +43,6 @@ class SpeechRecognizer: NSObject {
         }
 
         guard engine.isEngineRunning else {
-            print("Engine is not started error")
             promise.fulfill("SpeechRecognizer: Eninge is not started error")
             return promise
         }
@@ -90,10 +89,10 @@ class SpeechRecognizer: NSObject {
 
     func stop() {
         guard isRunning else { return }
+        isRunning = false
 
         guard !isSimulator else {
             postEvent(.listenEnded, string: "")
-            isRunning = false
             return
         }
 
@@ -103,7 +102,6 @@ class SpeechRecognizer: NSObject {
 
         recognitionRequest = nil
         recognitionTask = nil
-        isRunning = false
         postEvent(.listenEnded, string: "")
     }
 

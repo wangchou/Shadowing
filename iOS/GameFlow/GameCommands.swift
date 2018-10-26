@@ -23,15 +23,14 @@ struct Command {
     let type: CommandType
 }
 
-func postCommand (
-    _ type: CommandType) {
+func postCommand (_ type: CommandType) {
     NotificationCenter.default.post(
         name: .commandHappened,
         object: Command(type: type)
     )
 }
 
-// for Game UI watching events
+// for GameFlow watching commands from UI/User
 @objc protocol GameCommandDelegate {
     @objc func onCommandHappened(_ notification: Notification)
 }

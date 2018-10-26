@@ -99,7 +99,6 @@ extension SpeechEngine {
     }
 
     private func buildNodeGraph() {
-        print("buildNodeGraph")
         let mainMixer = audioEngine.mainMixerNode
         let mic = audioEngine.inputNode // only for real device, simulator will crash
 
@@ -112,11 +111,9 @@ extension SpeechEngine {
     }
 
     private func closeNodeGraph() {
-        if audioEngine.isRunning {
-            print("closeNodeGraph")
-            audioEngine.stop()
-            audioEngine.detach(micVolumeNode)
-        }
+        guard audioEngine.isRunning else { return }
+        audioEngine.stop()
+        audioEngine.detach(micVolumeNode)
     }
 
     private func setupNotifications() {
@@ -128,8 +125,8 @@ extension SpeechEngine {
 
     @objc func handleRouteChange(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
-            let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt,
-            let reason = AVAudioSession.RouteChangeReason(rawValue: reasonValue) else {
+              let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt,
+              let reason = AVAudioSession.RouteChangeReason(rawValue: reasonValue) else {
                 return
         }
         switch reason {

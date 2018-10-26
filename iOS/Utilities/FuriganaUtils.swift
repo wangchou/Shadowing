@@ -32,7 +32,7 @@ func rubyAttrStr(
     color: UIColor = .black,
     isWithStroke: Bool = false
     ) -> NSAttributedString {
-//    print("main=\(string), ruby=\(ruby)")
+
     let fontRuby = MyFont.thin(ofSize: fontSize/2)
     let fontRegular = MyFont.regular(ofSize: fontSize)
     let fontBold = MyFont.bold(ofSize: fontSize)
@@ -66,12 +66,6 @@ func rubyAttrStr(
 
 }
 
-func testGetFurigana() {
-    _ = "本命チョコ、義理チョコ".furiganaAttributedString
-    _ = "男の子女の子".furiganaAttributedString
-    _ = "わたし、気になります！".furiganaAttributedString
-    _ = "逃げるは恥だが役に立つ".furiganaAttributedString
-}
 //    case 1:
 //    parts: [わたし、| 気 | になります！]
 //    kana: わたしきになります
@@ -85,7 +79,9 @@ func testGetFurigana() {
 //    case4:
 //    parts: [男 | の | 子女 | の | 子]
 //    kana: おとこのこおんなのこ
-func getFuriganaAttrString(_ parts: [String], _ kana: String, color: UIColor = .black) -> NSMutableAttributedString {
+func getFuriganaAttrString(_ parts: [String],
+                           _ kana: String,
+                           color: UIColor = .black) -> NSMutableAttributedString {
     let attrStr = NSMutableAttributedString()
     if parts.isEmpty { return attrStr }
 
@@ -101,7 +97,7 @@ func getFuriganaAttrString(_ parts: [String], _ kana: String, color: UIColor = .
     for dividerIndex in 0..<parts.count {
         let divider = parts[dividerIndex]
         guard divider.jpnType == JpnType.noKanjiAndNumber &&
-            kana.patternCount(divider.hiraganaOnly) == (parts.filter {$0.hiraganaOnly == divider.hiraganaOnly}).count
+              kana.patternCount(divider.hiraganaOnly) == (parts.filter {$0.hiraganaOnly == divider.hiraganaOnly}).count
             else {
             continue
         }
@@ -187,7 +183,6 @@ extension String {
 
     // https://stackoverflow.com/questions/27880650/swift-extract-regex-matches
     func matches(for regex: String) -> [String] {
-
         do {
             let regex = try NSRegularExpression(pattern: regex)
             let results = regex.matches(in: self,

@@ -31,8 +31,10 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         if let voice = AVSpeechSynthesisVoice(identifier: name) {
             utterance.voice = voice
         } else {
-            // prefer use system default(Siri) than lanuage default
-            if "ja-JP" != AVSpeechSynthesisVoice.currentLanguageCode() {
+            if "ja-JP" == AVSpeechSynthesisVoice.currentLanguageCode() {
+                // Do nothing, if not set utterance.voice
+                // Siri will say it
+            } else {
                 utterance.voice = AVSpeechSynthesisVoice(language: "ja-JP")
             }
         }
@@ -73,7 +75,7 @@ private let siriKanaFix: [String: String] = [
 
 private func getKanaFixedText(_ text: String) -> String {
     var fixedText = text
-    for (kanji, kana) in siriKanaFix {
+    siriKanaFix.forEach { (kanji, kana) in
         fixedText = fixedText.replace(kanji, kana)
     }
     return fixedText

@@ -61,7 +61,9 @@ func getText(
     return text
 }
 
-func getAttrText(_ parts: [(text: String, color: UIColor, fontSize: CGFloat)]) -> NSAttributedString {
+func getAttrText(_ parts: [(text: String,
+                            color: UIColor,
+                            fontSize: CGFloat)]) -> NSAttributedString {
     let attrText = NSMutableAttributedString()
     parts.forEach { part in
         attrText.append(getText(
@@ -78,7 +80,8 @@ func getStrokeText(
     _ color: UIColor,
     strokeWidth: Float = -1.5,
     strokColor: UIColor = .black,
-    font: UIFont = UIFont.boldSystemFont(ofSize: 32)) -> NSMutableAttributedString {
+    font: UIFont = UIFont.boldSystemFont(ofSize: 32)
+    ) -> NSMutableAttributedString {
     return getText(text, color: color, strokeWidth: strokeWidth, strokeColor: strokColor, font: font)
 }
 

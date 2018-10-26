@@ -28,7 +28,7 @@ enum EventType {
 struct Event {
     let type: EventType
 
-    // only accept three types of data for type safety
+    // only accept four types of data for type safety
     let string: String?
     let int: Int?
     let gameState: GameState?
@@ -51,7 +51,7 @@ func postEvent (
     )
 }
 
-// for Game UI watching events
+// for Game UI watching events from lower layers
 @objc protocol GameEventDelegate {
     @objc func onEventHappened(_ notification: Notification)
 }
