@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 private let context = GameContext.shared
+private let i18n = I18n.shared
 
 class SettingPage: UITableViewController {
     @IBOutlet weak var topBarView: TopBarView!
@@ -57,14 +58,13 @@ class SettingPage: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        let isJa = Locale.current.languageCode == "ja"
-        autoSpeedLabel.text = isJa ? "自動速度" : "自動速度"
-        translationLabel.text = isJa ? "中国語翻訳" : "中文翻譯"
-        guideVoiceLabel.text = isJa ? "ガイド音声" : "日文引導朗讀"
-        narratorLabel.text = isJa ? "ゲーム中国語説明" : "遊戲開始中文說明"
-        gotoIOSSettingButton.setTitle(isJa ? "iPhone設定へ" : "前往iPhone設定中心", for: .normal)
-        teacherTTSSegmentControl.setTitle(isJa ? "デフォルト" : "預定", forSegmentAt: 0)
-        assistantTTSSegmentControl.setTitle(isJa ? "デフォルト" : "預定", forSegmentAt: 0)
+        autoSpeedLabel.text = i18n.autoSpeedLabel
+        translationLabel.text = i18n.translationLabel
+        guideVoiceLabel.text = i18n.guideVoiceLabel
+        narratorLabel.text = i18n.narratorLabel
+        gotoIOSSettingButton.setTitle(i18n.gotoIOSSettingButtonTitle, for: .normal)
+        teacherTTSSegmentControl.setTitle(i18n.defaultText, forSegmentAt: 0)
+        assistantTTSSegmentControl.setTitle(i18n.defaultText, forSegmentAt: 0)
 
         let setting = context.gameSetting
         autoSpeedSwitch.isOn = setting.isAutoSpeed
@@ -109,10 +109,9 @@ class SettingPage: UITableViewController {
     }
 
     private func showVoiceIsNotAvailableAlert() {
-        let isJa = Locale.current.languageCode == "ja"
-        let title = isJa ? "選らんた声はまだダウンロードされていません" : "你選的語音還未下載"
-        let message = isJa ? "iPhoneの「設定 > 一般 > アクセシビリティ > スピーチ > 声 > 日本語」で、ダウンロードしましょう。":"請於手機的「設定 > 一般 > 輔助使用 > 語音 > 聲音 > 日文」下載相關語音。"
-        let okTitle = isJa ? "わかった" : "知道了"
+        let title = i18n.voiceNotAvailableTitle
+        let message = i18n.voiceNotAvailableMessage
+        let okTitle = i18n.voiceNotAvailableOKButton
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: okTitle, style: .default))
         self.present(alert, animated: true, completion: nil)
@@ -187,22 +186,22 @@ class SettingPage: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let isJa = Locale.current.languageCode == "ja"
+        let i18n = I18n.shared
         switch section {
         case 0:
-            return isJa ? "ゲーム時の読み上げ速度": "遊戲時的朗讀速度"
+            return i18n.settingSectionGameSpeed
         case 1:
-            return isJa ? "練習時の読み上げ速度": "練習時的朗讀速度"
+            return i18n.settingSectionPracticeSpeed
         case 2:
-            return isJa ? "ゲーム設定": "遊戲設定"
+            return i18n.gameSetting
         case 3:
-            return isJa ? "マイクと音声認識のアクセス権限": "麥克風與語音辨識權限"
+            return i18n.micAndSpeechPermission
         case 4:
-            return isJa ? "日本語先生": "日文老師"
+            return i18n.japaneseTeacher
         case 5:
-            return isJa ? "日本語アシスタント": "日文助理"
+            return i18n.japaneseAssistant
         default:
-            return "Other Devices"
+            return "Other Setting"
         }
     }
 }

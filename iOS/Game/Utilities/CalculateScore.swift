@@ -87,8 +87,7 @@ func calculateScore(
         let len = max(str1.count, str2.count)
         guard len > 0 else {
             #if os(iOS)
-            let isJa = Locale.current.languageCode == "ja"
-            showMessage(isJa ? "サーバーに接続できません" : "連不到主機")
+            showMessage(I18n.shared.cannotReachServer)
             #endif
             print("zero len error on calcScore", str1, str2)
             return 0
