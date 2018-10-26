@@ -13,7 +13,7 @@ private let context = GameContext.shared
 
 // Prototype 8: messenger / line interface
 class Messenger: UIViewController {
-    var game: ShadowingFlow! = ShadowingFlow()
+    var game: ShadowingFlow?
     var lastLabel: FuriganaLabel = FuriganaLabel()
 
     private var y: Int = 8
@@ -27,7 +27,6 @@ class Messenger: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         start()
         UIApplication.shared.isIdleTimerDisabled = true
         scrollView.delaysContentTouches = false
@@ -41,10 +40,9 @@ class Messenger: UIViewController {
     }
 
     func start() {
-        configureAudioSession()
         startEventObserving(self)
         game = ShadowingFlow()
-        game.start()
+        game?.start()
         sentenceCountLabel.text = "還有\(context.sentences.count)句"
         speedLabel.text = String(format: "%.2f 倍速", context.teachingRate * 2)
         timeLabel.text = "00:00"
@@ -55,11 +53,6 @@ class Messenger: UIViewController {
 
     func end() {
         stopEventObserving(self)
-        if game.isForceStopped {
-            game.forceStop()
-        } else {
-            game.stop()
-        }
         game = nil
     }
 
@@ -110,7 +103,7 @@ class Messenger: UIViewController {
     }
 
     @objc func scrollViewTapped() {
-        game.pause()
+        postCommand(.pause)
         launchStoryboard(self, "PauseOverlay", isOverCurrent: true)
     }
 }

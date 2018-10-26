@@ -37,10 +37,11 @@ func configureAudioSession() {
         // turn the measure mode will crash bluetooh, duckOthers and mixWithOthers
         //try session.setMode(AVAudioSessionModeMeasurement)
 
-        // per ioBufferDuration delay
+        // per ioBufferDuration delay, for live monitoring
         // default  23ms | 1024 frames | <1% CPU (iphone SE)
         // 0.001   0.7ms |   32 frames |  8% CPU
-        try session.setPreferredIOBufferDuration(0.002)
+        // 0.008   5.6ms |  256 frames |  1% CPU
+        // try session.setPreferredIOBufferDuration(0.008)
         // print(session.ioBufferDuration)
 
         session.requestRecordPermission({ (success) in

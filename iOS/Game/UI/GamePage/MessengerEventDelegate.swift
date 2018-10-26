@@ -18,7 +18,7 @@ extension Messenger: GameEventDelegate {
         switch event.type {
         case .sayStarted:
             guard let text = event.string else { return }
-            if context.gameState == .stopped {
+            if context.gameState == .justStarted {
                 addLabel(rubyAttrStr(text))
             }
             if context.gameState == .TTSSpeaking {
@@ -62,12 +62,9 @@ extension Messenger: GameEventDelegate {
                 }
             }
 
-        case .resume:
-            game.resume()
-
-        case .forceStopGame:
-            game.isForceStopped = true
-            self.dismiss(animated: false)
+            if context.gameState == .forceStopped {
+                dismiss(animated: false)
+            }
 
         default:
             return

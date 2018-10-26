@@ -13,29 +13,58 @@ enum GameError: Error {
     case forceStop
 }
 
-private let context = GameContext.shared
+enum GameState {
+    case justStarted
+    case TTSSpeaking
+    case listening
+    case stringRecognized
+    case scoreCalculated
+    case speakingScore
+    case sentenceSessionEnded
+    case gameOver
+    case forceStopped
+}
 
-class ShadowingFlow: Game {
-    var isForceStopped = false
+private let engine = SpeechEngine.shared
+private let context = GameContext.shared
+private let setting = context.gameSetting
+
+// command will posted by UI
+extension ShadowingFlow: GameCommandDelegate {
+    @objc func onCommandHappened(_ notification: Notification) {
+        guard let command = notification.object as? Command else { print("convert command fail"); return }
+
+        switch command.type {
+        case .resume:
+            resume()
+        case .forceStopGame:
+            forceStop()
+        case .pause:
+            pause()
+        }
+    }
+}
+
+class ShadowingFlow {
+    private var isForceStopped = false
+    private var timer: Timer?
+    private var isPaused: Bool = false
+    private var wait: Promise<Void> = Promise<Void>.pending()
+    private var gameSeconds: Int = 0
 
     // MARK: - Public Functions
-    override func start() {
+    func start() {
+        startCommandObserving(self)
         SpeechEngine.shared.start()
-        isForceStopped = false
-        context.gameState = .stopped
+        context.gameState = .justStarted
         context.gameRecord?.startedTime = Date()
-        gameSeconds = 0
+
         startTimer()
-        if context.contentTab == .topics {
-            context.loadLearningSentences()
-        } else {
-            context.loadInfiniteChallengeLevelSentence(level: context.infiniteChallengeLevel)
-        }
-        var narratorString = "我說完後，請跟著我說～"
-        if !context.gameSetting.isUsingGuideVoice {
-            narratorString = "請唸出對應的日文。"
-        }
-        if context.gameSetting.isUsingNarrator {
+
+        context.loadLearningSentences()
+        let narratorString = setting.isUsingGuideVoice ?
+            "我說完後，請跟著我說～" :"請唸出對應的日文。"
+        if setting.isUsingNarrator {
             narratorSay(narratorString)
                 .then { self.wait }
                 .always {
@@ -48,21 +77,26 @@ class ShadowingFlow: Game {
         isPaused = false
         wait.fulfill(())
     }
+}
 
-    func forceStop() {
-        context.gameState = .stopped
+// Private part
+extension ShadowingFlow {
+    private func forceStop() {
+        stopCommandObserving(self)
+        isForceStopped = true
+        context.gameState = .forceStopped
         timer?.invalidate()
         isPaused = false
         wait.reject(GameError.forceStop)
         SpeechEngine.shared.reset()
     }
 
-    func pause() {
+    private func pause() {
         wait = Promise<Void>.pending()
         isPaused = true
     }
 
-    func resume() {
+    private func resume() {
         isPaused = false
         wait.fulfill(())
     }
@@ -121,5 +155,91 @@ class ShadowingFlow: Game {
         updateLife(score: score)
 
         return assisantSay(score.text)
+    }
+
+    private func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            if self.isPaused { return }
+
+            postEvent(.playTimeUpdate, int: self.gameSeconds)
+            self.gameSeconds += 1
+        }
+    }
+
+    private func gameOver() {
+        narratorSay("遊戲結束").then {
+            context.gameState = .gameOver
+            stopCommandObserving(self)
+            context.gameRecord?.playDuration = self.gameSeconds
+            self.timer?.invalidate()
+            updateGameHistory()
+            saveGameSetting()
+            if context.contentTab == .infiniteChallenge,
+                let gr = context.gameRecord {
+                lastInfiniteChallengeSentences[gr.level] = context.sentences
+            }
+            saveGameMiscData()
+        }
+    }
+
+    private func speakTargetString() -> Promise<Void> {
+        context.gameState = .TTSSpeaking
+        guard context.gameSetting.isUsingGuideVoice else {
+            postEvent(.sayStarted, string: context.targetString)
+            return fulfilledVoidPromise()
+        }
+
+        return teacherSay(context.targetString)
+    }
+
+    private func listenWrapped() -> Promise<Void> {
+        context.gameState = .listening
+        if context.gameSetting.isUsingGuideVoice {
+            return engine
+                .listen(duration: Double(context.speakDuration + pauseDuration))
+                .then(saveUserSaidString)
+        }
+
+        return context
+            .calculatedSpeakDuration
+            .then({ speakDuration -> Promise<String> in
+                return engine.listen(duration: Double(speakDuration + pauseDuration))
+            })
+            .then(saveUserSaidString)
+    }
+
+    private func saveUserSaidString(userSaidString: String) -> Promise<Void> {
+        context.gameState = .stringRecognized
+        context.userSaidString = userSaidString
+        userSaidSentences[context.targetString] = userSaidString
+        return fulfilledVoidPromise()
+    }
+
+    private func getScore() -> Promise<Void> {
+        return calculateScore(context.targetString, context.userSaidString)
+            .then(saveScore)
+    }
+
+    private func saveScore(score: Score) -> Promise<Void> {
+        context.gameState = .scoreCalculated
+        context.score = score
+        sentenceScores[context.targetString] = score
+        updateGameRecord(score: score)
+        return fulfilledVoidPromise()
+    }
+
+    private func updateGameRecord(score: Score) {
+        context.gameRecord?.sentencesScore[context.targetString] = score
+
+        switch score.type {
+        case .perfect:
+            context.gameRecord?.perfectCount += 1
+        case .great:
+            context.gameRecord?.greatCount += 1
+        case .good:
+            context.gameRecord?.goodCount += 1
+        default:
+            ()
+        }
     }
 }

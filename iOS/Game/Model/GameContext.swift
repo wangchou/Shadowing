@@ -33,7 +33,7 @@ class GameContext {
     // MARK: - Short-term data of a single game
     var contentTab: ContentTab = .topics
     var infiniteChallengeLevel: Level = .lv0
-    var gameState: GameState = .stopped {
+    var gameState: GameState = .justStarted {
         didSet {
             postEvent(.gameStateChanged, gameState: gameState)
         }
@@ -99,6 +99,9 @@ class GameContext {
 
     // MARK: - functions for a single game
     func loadLearningSentences(isShuffle: Bool = false) {
+        if contentTab == .infiniteChallenge {
+            return loadInfiniteChallengeLevelSentence()
+        }
         sentenceIndex = 0
         guard let selectedDataSet = dataSets[dataSetKey] else { return }
         sentences = isShuffle ? selectedDataSet.shuffled() : selectedDataSet
@@ -109,7 +112,8 @@ class GameContext {
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level)
     }
 
-    func loadInfiniteChallengeLevelSentence(level: Level) {
+    private func loadInfiniteChallengeLevelSentence() {
+        let level = infiniteChallengeLevel
         sentenceIndex = 0
         dataSetKey = level.infinteChallengeDatasetKey
         loadSentenceDB()

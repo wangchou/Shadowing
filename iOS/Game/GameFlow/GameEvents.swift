@@ -8,6 +8,7 @@
 
 import Foundation
 
+// lower layer like tts, speechRecognition, gameFlow will postEvent to UI
 enum EventType {
     // tts
     case sayStarted
@@ -22,8 +23,6 @@ enum EventType {
     case gameStateChanged
 
     case playTimeUpdate
-    case resume
-    case forceStopGame
 }
 
 struct Event {

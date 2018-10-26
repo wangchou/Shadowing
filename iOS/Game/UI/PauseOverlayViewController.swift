@@ -76,16 +76,16 @@ class PauseOverlayViewController: UIViewController {
 
     @IBAction func finishButtonClicked(_ sender: Any) {
         dismiss(animated: true)
-        postEvent(.forceStopGame)
+        postCommand(.forceStopGame)
     }
 
     @objc func viewTapped() {
         dismiss(animated: true, completion: nil)
-        postEvent(.resume)
+        postCommand(.resume)
     }
 
     @IBAction func resumeButtonClicked(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-        postEvent(.resume)
+        postCommand(.resume)
     }
 }
