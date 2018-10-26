@@ -143,11 +143,11 @@
 		BE9B476920AD50520063E0DA /* FuriganaUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaUtils.swift; sourceTree = "<group>"; };
 		BE9D243920C8DEE9000515DD /* GameReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameReportView.swift; sourceTree = "<group>"; };
 		BEA86114216F264A00AECF13 /* sqliteSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sqliteSentences.swift; sourceTree = "<group>"; };
-		BEB6F6C82182B89D0011E1C1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = VoiceOnly/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		BEB6F6CA2182B8AA0011E1C1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = VoiceOnly/ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		BEB6F6CB2182B8B60011E1C1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "VoiceOnly/zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		BEB6F6D02182DBCA0011E1C1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "VoiceOnly/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		BEB6F6D12182DBDA0011E1C1 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "VoiceOnly/zh-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		BEB6F6C82182B89D0011E1C1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Project/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BEB6F6CA2182B8AA0011E1C1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = Project/ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BEB6F6CB2182B8B60011E1C1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "Project/zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		BEB6F6D02182DBCA0011E1C1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "Project/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		BEB6F6D12182DBDA0011E1C1 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "Project/zh-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		BEBDEDBC208EF09F00C18520 /* 今話したい.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "今話したい.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEBDEDC4208EF09F00C18520 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -310,8 +310,13 @@
 				BE5ABACF217C4CCC00A63C5F /* Promises.framework */,
 				BE5ABAD1217C4CCC00A63C5F /* SQLite.framework */,
 				BE5ABAD2217C4CCC00A63C5F /* SwiftyJSON.framework */,
-				BEBDEDBE208EF09F00C18520 /* VoiceOnly */,
-				BEFA97A120AEB18700DE3280 /* Game */,
+				BEBDEDBE208EF09F00C18520 /* Project */,
+				BE6F2F142144DFB5003A56CD /* Sentences */,
+				BE9556EF212D7C130045E578 /* Model */,
+				BE17FB38209B0F5F00D23F22 /* SpeechEngine */,
+				BE6AF37F209C146B00CBDB63 /* GameFlow */,
+				BEDEDD4220A5D86500E7B60B /* UI */,
+				BEF28B5F20B52B7900385273 /* Utilities */,
 			);
 			sourceTree = "<group>";
 		};
@@ -324,7 +329,7 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		BEBDEDBE208EF09F00C18520 /* VoiceOnly */ = {
+		BEBDEDBE208EF09F00C18520 /* Project */ = {
 			isa = PBXGroup;
 			children = (
 				BE0FA9BD2181D2260076A015 /* inf_sentences_100points.sqlite */,
@@ -333,7 +338,7 @@
 				BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */,
 				BEBDEDBD208EF09F00C18520 /* Products */,
 			);
-			path = VoiceOnly;
+			path = Project;
 			sourceTree = "<group>";
 		};
 		BECAC3BD216B9CDF001BBF49 /* InfiniteChanllengePage */ = {
@@ -378,19 +383,6 @@
 				BEA86114216F264A00AECF13 /* sqliteSentences.swift */,
 			);
 			path = Utilities;
-			sourceTree = "<group>";
-		};
-		BEFA97A120AEB18700DE3280 /* Game */ = {
-			isa = PBXGroup;
-			children = (
-				BE6F2F142144DFB5003A56CD /* Sentences */,
-				BE9556EF212D7C130045E578 /* Model */,
-				BE17FB38209B0F5F00D23F22 /* SpeechEngine */,
-				BE6AF37F209C146B00CBDB63 /* GameFlow */,
-				BEDEDD4220A5D86500E7B60B /* UI */,
-				BEF28B5F20B52B7900385273 /* Utilities */,
-			);
-			path = Game;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -706,7 +698,7 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				INFOPLIST_FILE = VoiceOnly/Info.plist;
+				INFOPLIST_FILE = Project/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -741,7 +733,7 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				INFOPLIST_FILE = VoiceOnly/Info.plist;
+				INFOPLIST_FILE = Project/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
