@@ -282,9 +282,10 @@ func showMessage(_ message: String, seconds: Float = 2) {
         }
     }
 }
-
+private var isShowingGotoSettingCenter = false
 func showGotoSettingCenter() {
-
+    guard !isShowingGotoSettingCenter else { return }
+    isShowingGotoSettingCenter = true
     var title = "Microphone or Speech Recognization permission is not granted. Do you like go to iOS Setting to set it"
     var okTitle = "Go to iOS Setting"
     var cancelTitle = "Cancel"
@@ -306,11 +307,13 @@ func showGotoSettingCenter() {
     // Create the actions
     let okAction = UIAlertAction(title: okTitle, style: UIAlertAction.Style.default) {
         UIAlertAction in
+        isShowingGotoSettingCenter = false
         alertController.dismiss(animated: true, completion: nil)
         goToIOSSettingCenter()
     }
     let cancelAction = UIAlertAction(title: cancelTitle, style: UIAlertAction.Style.cancel) {
         UIAlertAction in
+        isShowingGotoSettingCenter = false
         alertController.dismiss(animated: true, completion: nil)
     }
 

@@ -62,6 +62,7 @@ class SentencesTableCell: UITableViewCell {
         self.isUserInteractionEnabled = false
         practiceButton.isEnabled = false
         practiceButton.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
+        configureAudioSession()
         prepareForSpeaking()
         speakPart()
             .then(listenPart)

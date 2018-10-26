@@ -27,6 +27,7 @@ class Messenger: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         start()
         UIApplication.shared.isIdleTimerDisabled = true
         scrollView.delaysContentTouches = false
@@ -40,6 +41,7 @@ class Messenger: UIViewController {
     }
 
     func start() {
+        configureAudioSession()
         startEventObserving(self)
         game = ShadowingFlow()
         game.start()

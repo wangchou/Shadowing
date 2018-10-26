@@ -47,10 +47,9 @@ class SpeechEngine {
     func start() {
         guard !isEngineRunning else { return }
         isEngineRunning = true
-
+        guard !isSimulator else { return }
         do {
             configureAudioSession()
-            guard !isSimulator else { return }
             buildNodeGraph()
             audioEngine.prepare()
             try audioEngine.start()

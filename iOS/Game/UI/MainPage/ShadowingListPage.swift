@@ -30,8 +30,12 @@ class ShadowingListPage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         topBarView.rightButton.setIconImage(named: "outline_info_black_48pt", isIconOnLeft: false)
-        topBarView.customOnRightButtonClicked = {
-            launchStoryboard(self, "InfoPage")
+        if Locale.current.languageCode == "zh" {
+            topBarView.customOnRightButtonClicked = {
+                launchStoryboard(self, "InfoPage")
+            }
+        } else {
+            topBarView.rightButton.isHidden = true
         }
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(reloadTopicSentences),
