@@ -47,7 +47,7 @@ func configureAudioSession() {
         session.requestRecordPermission({ (success) in
             if success { print("Record Permission Granted") } else {
                 print("Record Permission fail")
-                showGotoSettingCenter()
+                showGoToSettingCenterAlert()
             }
         })
     } catch {

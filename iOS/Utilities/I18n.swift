@@ -21,6 +21,10 @@ class I18n {
         return langCode == "ja"
     }
 
+    var isZh: Bool {
+        return langCode == "zh"
+    }
+
     var autoSpeedLabel: String {
         return isJa ? "自動速度" : "自動速度"
     }
@@ -70,5 +74,23 @@ class I18n {
     }
     var cannotReachServer: String {
         return isJa ? "サーバーに接続できません" : "連不到主機"
+    }
+
+    var gotoIOSCenterTitle: String {
+        if isJa { return "マイクと音声認識のアクセス権限がありません。iPhoneの設定へ行きますか？" }
+        if isZh { return "麥克風或語音辨識的權限不足。前往iPhone設定中心嗎？" }
+        return "Microphone or Speech Recognization permission is not granted. Do you like go to iOS Setting to set it"
+    }
+
+    var gotoIOSCenterOKTitle: String {
+        if isJa { return "設定へ行きます" }
+        if isZh { return "前往iPhone設定中心" }
+        return "Go to iOS Setting"
+    }
+
+    var gotoIOSCenterCancelTitle: String {
+        if isJa { return "キャンセル"}
+        if isZh { return "取消" }
+        return "Cancel"
     }
 }

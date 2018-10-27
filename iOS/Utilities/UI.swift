@@ -300,38 +300,23 @@ func showMessage(_ message: String, seconds: Float = 2) {
     }
 }
 
-private var isShowingGotoSettingCenter = false
-func showGotoSettingCenter() {
-    guard !isShowingGotoSettingCenter else { return }
-    isShowingGotoSettingCenter = true
-    var title = "Microphone or Speech Recognization permission is not granted. Do you like go to iOS Setting to set it"
-    var okTitle = "Go to iOS Setting"
-    var cancelTitle = "Cancel"
-    switch Locale.current.languageCode {
-    case "ja":
-        title = "マイクと音声認識のアクセス権限がありません。iPhoneの設定へ行きますか？"
-        okTitle = "設定へ行きます"
-        cancelTitle = "キャンセル"
-    case "zh":
-        title = "麥克風或語音辨識的權限不足。前往iPhone設定中心嗎？"
-        okTitle = "前往iPhone設定中心"
-        cancelTitle = "取消"
-
-    default:
-        ()
-    }
-    let alertController = UIAlertController(title: title, message: "", preferredStyle: .alert)
+private var isShowingGoToSettingCenterAlert = false
+func showGoToSettingCenterAlert() {
+    guard !isShowingGoToSettingCenterAlert else { return }
+    isShowingGoToSettingCenterAlert = true
+    let i18n = I18n.shared
+    let alertController = UIAlertController(title: i18n.gotoIOSCenterTitle, message: "", preferredStyle: .alert)
 
     // Create the actions
-    let okAction = UIAlertAction(title: okTitle, style: UIAlertAction.Style.default) {
+    let okAction = UIAlertAction(title: i18n.gotoIOSCenterOKTitle, style: UIAlertAction.Style.default) {
         UIAlertAction in
-        isShowingGotoSettingCenter = false
+        isShowingGoToSettingCenterAlert = false
         alertController.dismiss(animated: true, completion: nil)
         goToIOSSettingCenter()
     }
-    let cancelAction = UIAlertAction(title: cancelTitle, style: UIAlertAction.Style.cancel) {
+    let cancelAction = UIAlertAction(title: i18n.gotoIOSCenterCancelTitle, style: UIAlertAction.Style.cancel) {
         UIAlertAction in
-        isShowingGotoSettingCenter = false
+        isShowingGoToSettingCenterAlert = false
         alertController.dismiss(animated: true, completion: nil)
     }
 
