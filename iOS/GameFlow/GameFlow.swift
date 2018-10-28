@@ -52,8 +52,16 @@ class GameFlow {
     private var wait: Promise<Void> = Promise<Void>.pending()
     private var gameSeconds: Int = 0
 
+    static let shared = GameFlow()
+
+    private init() {}
+
     // MARK: - Public Functions
     func start() {
+        isPaused = false
+        isForceStopped = false
+        wait = Promise<Void>.pending()
+        gameSeconds = 0
         startCommandObserving(self)
         SpeechEngine.shared.start()
         context.gameState = .justStarted
