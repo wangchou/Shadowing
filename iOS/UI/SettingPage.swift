@@ -77,10 +77,10 @@ class SettingPage: UITableViewController {
             gameSpeedFastLabel.textColor = UIColor.black
         }
         gameSpeedSlider.value = setting.preferredSpeed
-        gameSpeedFastLabel.text = String(format: "%.2fx", setting.preferredSpeed*2)
+        gameSpeedFastLabel.text = String(format: "%.2fx", setting.preferredSpeed * 2)
 
         practiceSpeedSlider.value = setting.practiceSpeed
-        practiceSpeedFastLabel.text = String(format: "%.2fx", setting.practiceSpeed*2)
+        practiceSpeedFastLabel.text = String(format: "%.2fx", setting.practiceSpeed * 2)
 
         translationSwitch.isOn = setting.isUsingTranslation
         guideVoiceSwitch.isOn = setting.isUsingGuideVoice
@@ -126,6 +126,7 @@ class SettingPage: UITableViewController {
     @IBAction func gameSpeedSilderValueChanged(_ sender: Any) {
         context.gameSetting.preferredSpeed = gameSpeedSlider.value
         saveGameSetting()
+        gameSpeedFastLabel.text = String(format: "%.2fx", gameSpeedSlider.value * 2)
         let speedText = String(format: "%.2f", context.gameSetting.preferredSpeed * 2)
         _ = teacherSay("速度は\(speedText)です", rate: context.gameSetting.preferredSpeed)
     }
@@ -133,6 +134,7 @@ class SettingPage: UITableViewController {
     @IBAction func practiceSpeedSliderValueChanged(_ sender: Any) {
         context.gameSetting.practiceSpeed = practiceSpeedSlider.value
         saveGameSetting()
+        practiceSpeedFastLabel.text = String(format: "%.2fx", practiceSpeedSlider.value * 2)
         let speedText = String(format: "%.2f", context.gameSetting.practiceSpeed * 2)
         _ = teacherSay("速度は\(speedText)です", rate: context.gameSetting.practiceSpeed)
     }
