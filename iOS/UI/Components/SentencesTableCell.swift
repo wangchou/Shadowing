@@ -152,7 +152,7 @@ class SentencesTableCell: UITableViewCell {
             }
         }
 
-        let duration = getNow() - startTime + Double(pauseDuration)
+        let duration = getNow() - startTime + Double(practicePauseDuration)
         prepareListening()
         return SpeechEngine.shared.listen(duration: duration)
     }
