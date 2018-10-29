@@ -68,8 +68,8 @@ class SpeechEngine {
         closeNodeGraph()
     }
 
-    func listen(duration: Double, localIdentifier: String = "ja") -> Promise<String> {
-        return speechRecognizer.listen(stopAfterSeconds: duration, localIdentifier: localIdentifier)
+    func listen(duration: Double) -> Promise<String> {
+        return speechRecognizer.listen(stopAfterSeconds: duration)
     }
 
     func reset() {

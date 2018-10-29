@@ -19,7 +19,7 @@ enum SpeechRecognitionError: Error {
 }
 
 class SpeechRecognizer: NSObject {
-    private var speechRecognizer: SFSpeechRecognizer?
+    private let speechRecognizer: SFSpeechRecognizer! = SFSpeechRecognizer(locale: Locale(identifier: "ja"))
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private var isRunning: Bool = false
@@ -34,7 +34,7 @@ class SpeechRecognizer: NSObject {
         }
     }
     // MARK: - Public Methods
-    func listen(stopAfterSeconds: Double = 5, localIdentifier: String = "ja") -> Promise<String> {
+    func listen(stopAfterSeconds: Double = 5) -> Promise<String> {
         endAudio()
         promise = Promise<String>.pending()
         // mocked start for simulator
@@ -53,8 +53,7 @@ class SpeechRecognizer: NSObject {
             return promise
         }
 
-        speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: localIdentifier))
-        speechRecognizer?.defaultTaskHint = .dictation
+        speechRecognizer.defaultTaskHint = .dictation
 
         if let recognitionTask = recognitionTask {
             recognitionTask.cancel()
@@ -69,7 +68,7 @@ class SpeechRecognizer: NSObject {
         recognitionRequest.shouldReportPartialResults = true //false
         recognitionRequest.taskHint = .dictation
 
-        recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest, resultHandler: resultHandler)
+        recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest, resultHandler: resultHandler)
 
         inputNode = engine.audioEngine.inputNode
         let recordingFormat = inputNode.outputFormat(forBus: 0)
