@@ -19,7 +19,7 @@ enum SpeechRecognitionError: Error {
 }
 
 class SpeechRecognizer: NSObject {
-    private let speechRecognizer: SFSpeechRecognizer! = SFSpeechRecognizer(locale: Locale(identifier: "ja"))
+    private let speechRecognizer: SFSpeechRecognizer! = SFSpeechRecognizer(locale: Locale(identifier: "ja_JP"))
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private var isRunning: Bool = false
@@ -79,7 +79,6 @@ class SpeechRecognizer: NSObject {
 
         inputNode = engine.audioEngine.inputNode
         let recordingFormat = inputNode.outputFormat(forBus: 0)
-
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
             self.recognitionRequest?.append(buffer)
         }
@@ -130,13 +129,18 @@ class SpeechRecognizer: NSObject {
                 // Retry means didn't hear anything please say again
                 if desc == "Retry" {
                     promise.fulfill("")
+                } else if desc == "Corrupt" {
+                    promise.fulfill("")
+                    print("\(error)")
                 } else {
                     promise.fulfill("\(I18n.shared.speechErrorMessage). (\(desc))")
                     _ = getKanaTokenInfos("\(error)")
+                    print(error)
                 }
                 return
             }
             _ = getKanaTokenInfos("\(error)")
+            print(error)
             promise.fulfill("")
         }
     }
