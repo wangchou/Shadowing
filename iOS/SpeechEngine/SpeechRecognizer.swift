@@ -33,6 +33,7 @@ class SpeechRecognizer: NSObject {
             authorize()
         }
     }
+
     // MARK: - Public Methods
     func listen(stopAfterSeconds: Double = 5) -> Promise<String> {
         endAudio()
@@ -92,7 +93,9 @@ class SpeechRecognizer: NSObject {
         return promise
     }
 
-    func stop() {
+    // isCanceling is true  => cancel task, discard any said words
+    //                false => listen until now, ask apple to return recognized result
+    func endAudio(isCanceling: Bool = false) {
         guard isRunning else { return }
         isRunning = false
 
@@ -100,21 +103,12 @@ class SpeechRecognizer: NSObject {
 
         inputNode.removeTap(onBus: 0)
         recognitionRequest?.endAudio()
-        recognitionTask?.cancel()
+        if isCanceling {
+            recognitionTask?.cancel()
+        }
 
         recognitionRequest = nil
         recognitionTask = nil
-    }
-
-    func endAudio() {
-        guard isRunning, !isSimulator else { return }
-
-        inputNode.removeTap(onBus: 0)
-        recognitionRequest?.endAudio()
-
-        recognitionRequest = nil
-        recognitionTask = nil
-        isRunning = false
     }
 
     // MARK: - Private Methods
@@ -125,20 +119,20 @@ class SpeechRecognizer: NSObject {
         }
 
         if let result = result {
-            if result.isFinal {
-                context.userSaidString = result.bestTranscription.formattedString
-                promise.fulfill(context.userSaidString)
-            }
+            context.userSaidString = result.bestTranscription.formattedString
+            promise.fulfill(context.userSaidString)
         }
 
         if let error = error {
             context.userSaidString = ""
             if let userInfo = error._userInfo,
                let desc = userInfo["NSLocalizedDescription"] as? String {
+                // Retry means didn't hear anything please say again
                 if desc == "Retry" {
                     promise.fulfill("")
                 } else {
                     promise.fulfill("\(I18n.shared.speechErrorMessage). (\(desc))")
+                    _ = getKanaTokenInfos("\(error)")
                 }
                 return
             }

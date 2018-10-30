@@ -58,16 +58,6 @@ class SpeechEngine {
         }
     }
 
-    func stop() {
-        guard isEngineRunning else { return }
-        isEngineRunning = false
-        tts.stop()
-
-        guard !isSimulator else { return }
-        speechRecognizer.stop()
-        closeNodeGraph()
-    }
-
     func listen(duration: Double) -> Promise<String> {
         return speechRecognizer.listen(stopAfterSeconds: duration)
     }
@@ -80,6 +70,16 @@ class SpeechEngine {
 
 // MARK: - Private
 extension SpeechEngine {
+    private func stop() {
+        guard isEngineRunning else { return }
+        isEngineRunning = false
+        tts.stop()
+
+        guard !isSimulator else { return }
+        speechRecognizer.endAudio(isCanceling: true)
+        closeNodeGraph()
+    }
+
     private func stopListen() {
         speechRecognizer.endAudio()
     }
