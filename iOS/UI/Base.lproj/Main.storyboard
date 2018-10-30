@@ -443,7 +443,80 @@ A: 每句都有請</string>
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <mutableString key="content">唸給它自己聽，都有唸到100分過。請用提高正確率的小秘訣多試試，以作者經驗，通常是網路問題。
+                                        <string key="content">唸給它自己聽，都有唸到100分過。請用提高正確率的小秘訣多試試。但如果還是不行，就放下吧。很有可能Siri的聽力對某些正確腔調，辨識還無法像Otoya腔調一樣正確。(PS: 測試過Siri, Kyoko, Otoya語音，各自都有無法唸到100分的句子。) 請以每句80分為目標。
+
+Q: 挑戰中一直零分、顯示聽不清楚？
+A: 通常有兩種可能，麥克風收音不好。或是聽和說的時間錯開了。每句聽的長度是 </string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Siri說的時間 + 0.4秒反應時間">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Semibold"/>
+                                            <font key="NSOriginalFont" size="18" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">。如果是很短的句子，沒有第一時間反應就會回應聽不清楚。如果以上都不是，請回報，作者會努力去修復。
+
+Q: App 亂聽！辨識出一堆無關的字？
+A: 作者的經驗，通常是</string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="網路或音量">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Semibold"/>
+                                            <font key="NSOriginalFont" size="18" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">的問題。 
+有時候 YouTube HD 看得很順(</string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="下載頻寬">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Semibold"/>
+                                            <font key="NSOriginalFont" size="18" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=")、但跟日本的朋友聊Line聲音就是斷斷續續的。我猜你碰到的情況有點類似。這個App需要用到">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="上傳頻寬">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Semibold"/>
+                                            <font key="NSOriginalFont" size="18" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <mutableString key="content">，來把音訊傳給Apple辨識。
+
+=&gt; 如果到 Apple 的網路不順，他們收到的就是很多雜訊的聲音，就會亂聽。 
+另外，如果是音量的問題用 iPhone 附的有線耳麥會好很多。
 
 Q: 有些句子的假名標錯了！
 A: 抱歉，關於假名標錯的問題。現在「自然語言處理」自動標讀音只能達到99%正確。請回報，作者會盡可能去解決。
@@ -452,7 +525,7 @@ Q: 有些句子的漢字，日文老師唸錯了？
 A: 抱歉，這個問題來自Apple。舉例來說：Siri和Google Translation都會把「台湾人」唸成「台湾ひと」，目前作者沒有能力解決。不過也請回報，如果無法解決，會把有問題的句子移除。
 
 Q: 網路明明很穩定，卻一直跳出「連不到主機」的錯誤訊息？
-A: 抱歉，那代表在「漢字轉假名主機」掛掉了。 
+A: 抱歉，那代表在東京的「漢字轉假名主機」掛掉了。 
 Q: 有其他問題、指教 or 想請作者吃飯？
 A: 寫信到 imahanashitai@gmail.com
 
