@@ -13,7 +13,7 @@ private let context = GameContext.shared
 
 class SentencesTableCell: UITableViewCell {
     static var isPracticing: Bool = false
-    var buttonColor = myBlue.withAlphaComponent(0.5)
+    private var buttonColor = myBlue.withAlphaComponent(0.5)
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var sentenceLabel: FuriganaLabel!
     @IBOutlet weak var userSaidSentenceLabel: FuriganaLabel!
@@ -31,18 +31,12 @@ class SentencesTableCell: UITableViewCell {
         self.addTapGestureRecognizer(action: practiceSentence)
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
-    var startTime: Double = 0
-    var targetString: String {
+    private var startTime: Double = 0
+    private var targetString: String {
         return sentenceLabel.text ?? " "
     }
 
-    var tableView: UITableView? {
+    private var tableView: UITableView? {
         var view = superview
         while let tmpView = view, tmpView.isKind(of: UITableView.self) == false {
             view = tmpView.superview
@@ -56,19 +50,17 @@ class SentencesTableCell: UITableViewCell {
 
     func practiceSentence() {
         guard SentencesTableCell.isPracticing != true else { return }
-        SpeechEngine.shared.start()
-        GameContentDetailPage.isChallengeButtonDisabled = true
         SentencesTableCell.isPracticing = true
-        self.isUserInteractionEnabled = false
+        GameContentDetailPage.isChallengeButtonDisabled = true
+        isUserInteractionEnabled = false
         practiceButton.isEnabled = false
         practiceButton.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
-        configureAudioSession()
-        prepareForSpeaking()
+        SpeechEngine.shared.start()
         speakPart()
             .then(listenPart)
-            .then(afterListeningCalculateScore)
+            .then(calculateScorePart)
             .then(updateUIByScore)
-            .catch {_ in
+            .catch { _ in
                 self.userSaidSentenceLabel.text = ""
             }
             .always {
@@ -122,10 +114,16 @@ class SentencesTableCell: UITableViewCell {
             userSaidSentenceLabel.isHidden = true
         }
     }
+}
 
+// MARK: Private Methods
+extension SentencesTableCell {
     private func speakPart() -> Promise<Void> {
         guard context.gameSetting.isUsingGuideVoice else { return fulfilledVoidPromise() }
-        return teacherSay(targetString, rate: context.gameSetting.practiceSpeed)
+        startTime = getNow()
+        let promise = teacherSay(targetString, rate: context.gameSetting.practiceSpeed)
+        prepareForSpeaking()
+        return promise
     }
 
     private func prepareForSpeaking() {
@@ -133,7 +131,6 @@ class SentencesTableCell: UITableViewCell {
         userSaidSentenceLabel.text = " "
         userSaidSentenceLabel.backgroundColor = UIColor.white
         userSaidSentenceLabel.isHidden = false
-        startTime = getNow()
         tableView?.endUpdates()
     }
 
@@ -157,7 +154,7 @@ class SentencesTableCell: UITableViewCell {
         return SpeechEngine.shared.listen(duration: duration)
     }
 
-    private func afterListeningCalculateScore(userSaidSentence: String) -> Promise<Score> {
+    private func calculateScorePart(userSaidSentence: String) -> Promise<Score> {
         userSaidSentences[targetString] = userSaidSentence
 
         return calculateScore(targetString, userSaidSentence)
