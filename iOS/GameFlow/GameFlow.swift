@@ -17,7 +17,6 @@ enum GameState {
     case justStarted
     case TTSSpeaking
     case listening
-    case stringRecognized
     case scoreCalculated
     case speakingScore
     case sentenceSessionEnded
@@ -220,7 +219,6 @@ extension GameFlow {
     }
 
     private func saveUserSaidString(userSaidString: String) -> Promise<Void> {
-        context.gameState = .stringRecognized
         context.userSaidString = userSaidString
         userSaidSentences[context.targetString] = userSaidString
         return fulfilledVoidPromise()

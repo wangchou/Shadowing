@@ -36,6 +36,6 @@ let screen = UIScreen.main.bounds
 
 // listening duration = speakDuration + 0.4 secs
 let pauseDuration: Float = 0.4
-let practicePauseDuration: Float = 0.6 //longer for waiting table animation
+let practicePauseDuration: Float = 0.6 //longer for waiting table animation in practice
 
 let abilities = ["旅遊", "日常", "戀愛", "論述", "敬語", "表達"]

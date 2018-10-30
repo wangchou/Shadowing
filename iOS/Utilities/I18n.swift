@@ -93,4 +93,10 @@ class I18n {
         if isZh { return "取消" }
         return "Cancel"
     }
+
+    var speechErrorMessage: String {
+        if isJa { return "音声をAppleに送信中にエラーが発生しました。" }
+        if isZh { return "傳送聲音往Apple時，錯誤發生。"}
+        return "An error occurred when transmitting voice to Apple."
+    }
 }

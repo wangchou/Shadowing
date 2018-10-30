@@ -10,13 +10,8 @@ import Foundation
 
 // lower layer like tts, speechRecognition, gameFlow will postEvent to UI
 enum EventType {
-    // tts
     case sayStarted
-
-    // speech recognition
     case listenStarted
-    case stringRecognized
-    case listenEnded
 
     case scoreCalculated
     case lifeChanged
