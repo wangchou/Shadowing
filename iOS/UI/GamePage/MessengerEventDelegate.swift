@@ -36,6 +36,9 @@ extension Messenger: GameEventDelegate {
             addLabel(rubyAttrStr("..."), isLeft: false)
 
         case .scoreCalculated:
+            DispatchQueue.main.async {
+                self.levelMeterValueBar.frame.size.height = 0
+            }
             guard let score = event.score else { return }
             onScore(score)
 
@@ -51,6 +54,14 @@ extension Messenger: GameEventDelegate {
             timeLabel.text = "\(add0((seconds/60).s)):\(add0((seconds%60).s))"
             speedLabel.text = String(format: "%.2f 倍速", context.teachingRate * 2)
 
+        case .levelMeterUpdate:
+            guard let micLevel = event.int else { return }
+            DispatchQueue.main.async {
+                let height = CGFloat(20.0 * micLevel.f / 100.0)
+                self.levelMeterValueBar.frame.size.height = height
+                self.levelMeterValueBar.frame.origin.y = 6 + 20 - height
+            }
+
         case .gameStateChanged:
             if context.gameState == .gameOver {
                 stopEventObserving(self)
@@ -65,9 +76,6 @@ extension Messenger: GameEventDelegate {
             if context.gameState == .forceStopped {
                 dismiss(animated: false)
             }
-
-        default:
-            return
         }
     }
 

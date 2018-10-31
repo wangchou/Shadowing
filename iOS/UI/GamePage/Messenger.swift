@@ -18,6 +18,8 @@ class Messenger: UIViewController {
     private var y: Int = 8
     private var previousY: Int = 0
 
+    @IBOutlet weak var levelMeterView: UIView!
+    @IBOutlet weak var levelMeterValueBar: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var sentenceCountLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -29,6 +31,8 @@ class Messenger: UIViewController {
         start()
         UIApplication.shared.isIdleTimerDisabled = true
         scrollView.delaysContentTouches = false
+        levelMeterValueBar.roundBorder(borderWidth: 0, cornerRadius: 6, color: .clear)
+        levelMeterValueBar.frame.size.height = 0
     }
 
     override func viewDidDisappear(_ animated: Bool) {

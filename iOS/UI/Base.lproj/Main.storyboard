@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -513,7 +513,7 @@ A: 作者的經驗，通常是</string>
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <mutableString key="content">，來把音訊傳給Apple辨識。
+                                        <string key="content">，來把音訊傳給Apple辨識。
 
 =&gt; 如果到 Apple 的網路不順，他們收到的就是很多雜訊的聲音，就會亂聽。 
 另外，如果是音量的問題用 iPhone 附的有線耳麥會好很多。
@@ -529,7 +529,7 @@ A: 抱歉，那代表在東京的「漢字轉假名主機」掛掉了。 
 Q: 有其他問題、指教 or 想請作者吃飯？
 A: 寫信到 imahanashitai@gmail.com
 
-</mutableString>
+</string>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="18" name="PingFangTC-Regular"/>
@@ -1445,7 +1445,7 @@ Ruth Yuru Chen
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FinishedTableCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="5" indentationWidth="5" reuseIdentifier="FinishedSentenceCell" rowHeight="63" id="U4Y-kF-8LG" userLabel="FinishedTableCell" customClass="SentencesTableCell" customModule="今話したい" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="325.60000000000002" width="320" height="63"/>
+                                        <rect key="frame" x="0.0" y="287" width="320" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="U4Y-kF-8LG" id="316-Iq-LBo">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="62.5"/>
@@ -1540,17 +1540,51 @@ Ruth Yuru Chen
                                     <constraint firstItem="WDC-AY-rcB" firstAttribute="leading" secondItem="gcd-vA-OI8" secondAttribute="leading" id="s8m-42-jzz"/>
                                 </constraints>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pro-bo-zMg">
+                                <rect key="frame" x="272" y="370" width="48" height="48"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="round_mic_black_48pt" translatesAutoresizingMaskIntoConstraints="NO" id="rsd-fk-3jC">
+                                        <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                        <color key="tintColor" white="0.0" alpha="0.59647902397260277" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="48" id="chj-bX-xip"/>
+                                            <constraint firstAttribute="height" constant="48" id="xfc-2l-dXa"/>
+                                        </constraints>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Md-Mp-8et">
+                                        <rect key="frame" x="19" y="25" width="10" height="1"/>
+                                        <color key="backgroundColor" white="0.90234375" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="10" id="QXP-yX-CZF"/>
+                                            <constraint firstAttribute="height" constant="1" id="ls0-Cb-PO4"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="8Md-Mp-8et" firstAttribute="centerX" secondItem="pro-bo-zMg" secondAttribute="centerX" id="DBA-LD-M6u"/>
+                                    <constraint firstAttribute="height" constant="48" id="LBA-16-qyg"/>
+                                    <constraint firstItem="rsd-fk-3jC" firstAttribute="centerY" secondItem="pro-bo-zMg" secondAttribute="centerY" id="a3L-Px-f6U"/>
+                                    <constraint firstItem="rsd-fk-3jC" firstAttribute="centerX" secondItem="pro-bo-zMg" secondAttribute="centerX" id="lJ1-en-uuo"/>
+                                    <constraint firstAttribute="bottom" secondItem="8Md-Mp-8et" secondAttribute="bottom" constant="22" id="o0h-sa-DPl"/>
+                                    <constraint firstAttribute="width" constant="48" id="wb9-hQ-3mr"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.73679327449999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="gcd-vA-OI8" firstAttribute="top" secondItem="xOt-Ok-aOS" secondAttribute="top" id="5jP-1N-BOk"/>
                             <constraint firstItem="xOt-Ok-aOS" firstAttribute="trailing" secondItem="gcd-vA-OI8" secondAttribute="trailing" id="Lrf-cX-R8S"/>
                             <constraint firstItem="gcd-vA-OI8" firstAttribute="leading" secondItem="AHw-hF-PFB" secondAttribute="leading" id="McP-J8-Qm1"/>
+                            <constraint firstItem="xOt-Ok-aOS" firstAttribute="trailing" secondItem="pro-bo-zMg" secondAttribute="trailing" id="N33-Wl-x0U"/>
                             <constraint firstItem="xOt-Ok-aOS" firstAttribute="bottom" secondItem="gcd-vA-OI8" secondAttribute="bottom" id="TZM-t0-uiT"/>
+                            <constraint firstItem="xOt-Ok-aOS" firstAttribute="bottom" secondItem="pro-bo-zMg" secondAttribute="bottom" constant="150" id="UgC-kz-6VY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xOt-Ok-aOS"/>
                     </view>
                     <connections>
+                        <outlet property="levelMeterValueBar" destination="8Md-Mp-8et" id="yiy-hW-51l"/>
+                        <outlet property="levelMeterView" destination="pro-bo-zMg" id="041-rQ-Rhf"/>
                         <outlet property="scrollView" destination="WDC-AY-rcB" id="uSd-72-yvh"/>
                         <outlet property="sentenceCountLabel" destination="nvu-8q-Gv8" id="jBW-HY-iQ7"/>
                         <outlet property="speedLabel" destination="qi6-o2-8jt" id="QJi-lG-Xrd"/>
@@ -1769,5 +1803,6 @@ Ruth Yuru Chen
     <resources>
         <image name="launchImage" width="1024" height="1024"/>
         <image name="outline_lock_black_48pt" width="96" height="96"/>
+        <image name="round_mic_black_48pt" width="96" height="96"/>
     </resources>
 </document>
