@@ -111,7 +111,7 @@ class SpeechRecognizer: NSObject {
     }
 
     // MARK: - Private Methods
-    private func resultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
+    func resultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
         guard engine.isEngineRunning else {
             promise.reject(SpeechRecognitionError.engineStopped)
             return
