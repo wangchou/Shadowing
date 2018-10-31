@@ -66,10 +66,8 @@ class SpeechEngine {
         stopListen()
         tts.stop()
     }
-}
 
-// MARK: - Private
-extension SpeechEngine {
+    // MARK: - Private
     private func stop() {
         guard isEngineRunning else { return }
         isEngineRunning = false
@@ -107,7 +105,8 @@ extension SpeechEngine {
         audioEngine.connect(mic, to: micVolumeNode, format: mic.inputFormat(forBus: 0))
         audioEngine.connect(micVolumeNode, to: mainMixer, format: micVolumeNode.outputFormat(forBus: 0))
 
-        micVolumeNode.volume = 0
+        mainMixer.outputVolume = 0
+        micVolumeNode.outputVolume = 0
     }
 
     private func closeNodeGraph() {
