@@ -94,6 +94,7 @@ class SpeechRecognizer: NSObject {
             let avgPower = 20 * log10(rms)
             let meterLevel = self.scaledPower(power: avgPower)
             postEvent(.levelMeterUpdate, int: Int(meterLevel * 100))
+            print(Int(meterLevel * 100))
         }
 
         Timer.scheduledTimer(withTimeInterval: stopAfterSeconds, repeats: false) { _ in

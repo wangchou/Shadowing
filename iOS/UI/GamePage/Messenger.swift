@@ -31,7 +31,7 @@ class Messenger: UIViewController {
         start()
         UIApplication.shared.isIdleTimerDisabled = true
         scrollView.delaysContentTouches = false
-        levelMeterValueBar.roundBorder(borderWidth: 0, cornerRadius: 6, color: .clear)
+        levelMeterValueBar.roundBorder(borderWidth: 0, cornerRadius: 4.5, color: .clear)
         levelMeterValueBar.frame.size.height = 0
     }
 
