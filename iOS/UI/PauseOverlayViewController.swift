@@ -21,6 +21,9 @@ class PauseOverlayViewController: UIViewController {
     @IBOutlet weak var ttsSpeedSlider: UISlider!
     @IBOutlet weak var slowLabel: UILabel!
     @IBOutlet weak var fastLabel: UILabel!
+    @IBOutlet weak var autoSpeedLabel: UILabel!
+    @IBOutlet weak var translationLabel: UILabel!
+    @IBOutlet weak var guideVoiceLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         finishButton.layer.cornerRadius = 10
@@ -34,6 +37,13 @@ class PauseOverlayViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let i18n = I18n.shared
+        finishButton.setTitle(i18n.finishGameButtonTitle, for: .normal)
+        resumeButton.setTitle(i18n.continueGameButtonTitle, for: .normal)
+        autoSpeedLabel.text = i18n.autoSpeedLabel
+        translationLabel.text = i18n.translationLabel
+        guideVoiceLabel.text = i18n.guideVoiceLabel
+
         ttsSpeedSlider.minimumValue = AVSpeechUtteranceMinimumSpeechRate
         ttsSpeedSlider.maximumValue = AVSpeechUtteranceMaximumSpeechRate * 0.75
         guideVoiceSwitch.isOn = context.gameSetting.isUsingGuideVoice

@@ -154,12 +154,8 @@ class SpeechRecognizer: NSObject {
                 // Retry means didn't hear anything please say again
                 if desc == "Retry" {
                     promise.fulfill("")
-                } else if desc == "Corrupt" {
-                    promise.fulfill("\(I18n.shared.speechErrorMessage). (\(desc))")
-                    _ = getKanaTokenInfos("\(error)")
-                    print(error)
                 } else {
-                    promise.fulfill("\(I18n.shared.speechErrorMessage). (\(desc))")
+                    promise.fulfill("")
                     _ = getKanaTokenInfos("\(error)")
                     print(error)
                 }

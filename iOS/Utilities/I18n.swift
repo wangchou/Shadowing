@@ -99,4 +99,16 @@ class I18n {
         if isZh { return "傳送聲音往Apple時，錯誤發生。"}
         return "An error occurred when transmitting voice to Apple."
     }
+
+    var continueGameButtonTitle: String {
+        if isJa { return "つづく" }
+        if isZh { return "回到遊戲"}
+        return "Back to Game"
+    }
+
+    var finishGameButtonTitle: String {
+        if isJa { return "ゲームを終る" }
+        if isZh { return "結束遊戲"}
+        return "Stop Game"
+    }
 }

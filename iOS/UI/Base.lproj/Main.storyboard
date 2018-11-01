@@ -1445,7 +1445,7 @@ Ruth Yuru Chen
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FinishedTableCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="5" indentationWidth="5" reuseIdentifier="FinishedSentenceCell" rowHeight="63" id="U4Y-kF-8LG" userLabel="FinishedTableCell" customClass="SentencesTableCell" customModule="今話したい" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="325.60000000000002" width="320" height="63"/>
+                                        <rect key="frame" x="0.0" y="287" width="320" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="U4Y-kF-8LG" id="316-Iq-LBo">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="62.5"/>
@@ -1718,13 +1718,16 @@ Ruth Yuru Chen
                         <viewLayoutGuide key="safeArea" id="N3t-I3-Erf"/>
                     </view>
                     <connections>
+                        <outlet property="autoSpeedLabel" destination="08G-Eb-JgR" id="8Gn-8X-LNx"/>
                         <outlet property="autoSpeedSwitch" destination="4P9-61-8fN" id="GMW-Jw-mW6"/>
                         <outlet property="fastLabel" destination="pEm-2K-vVR" id="4MA-mc-gCf"/>
                         <outlet property="finishButton" destination="fzY-jo-0bH" id="721-h0-gZj"/>
+                        <outlet property="guideVoiceLabel" destination="InH-cn-90q" id="ruY-6f-B7y"/>
                         <outlet property="guideVoiceSwitch" destination="Xy8-dC-O7c" id="SF0-Q7-iB0"/>
                         <outlet property="resumeButton" destination="Px8-Is-Bt1" id="18r-8U-Zat"/>
                         <outlet property="slowLabel" destination="Zvf-ny-jFJ" id="azH-9V-27x"/>
                         <outlet property="tranlationSwitch" destination="SSu-uc-Hye" id="W13-yL-MsH"/>
+                        <outlet property="translationLabel" destination="OGX-jP-5z8" id="aDy-kH-jGN"/>
                         <outlet property="ttsSpeedSlider" destination="cM8-Gz-KMi" id="KBl-SF-KtG"/>
                     </connections>
                 </viewController>
