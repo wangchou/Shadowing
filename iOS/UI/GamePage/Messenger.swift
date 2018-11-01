@@ -33,6 +33,7 @@ class Messenger: UIViewController {
         scrollView.delaysContentTouches = false
         levelMeterValueBar.roundBorder(borderWidth: 0, cornerRadius: 4.5, color: .clear)
         levelMeterValueBar.frame.size.height = 0
+        levelMeterView.isUserInteractionEnabled = false
     }
 
     override func viewDidDisappear(_ animated: Bool) {
