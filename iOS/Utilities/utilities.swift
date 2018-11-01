@@ -32,7 +32,7 @@ func configureAudioSession() {
             // if set both allowBluetooth and allowBluetoothA2DP here will
             // cause installTap callback not be calling. Not sure why
             options: [
-            .mixWithOthers, .allowBluetoothA2DP, .allowAirPlay, .defaultToSpeaker
+            .mixWithOthers, .allowBluetoothA2DP, .allowAirPlay, .defaultToSpeaker, .allowBluetooth
             ]
         )
 

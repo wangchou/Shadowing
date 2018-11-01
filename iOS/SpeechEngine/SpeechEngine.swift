@@ -100,19 +100,14 @@ class SpeechEngine {
         let mainMixer = audioEngine.mainMixerNode
         let mic = audioEngine.inputNode // only for real device, simulator will crash
 
-        audioEngine.attach(micVolumeNode)
-
-        audioEngine.connect(mic, to: micVolumeNode, format: mic.inputFormat(forBus: 0))
-        audioEngine.connect(micVolumeNode, to: mainMixer, format: micVolumeNode.outputFormat(forBus: 0))
+        audioEngine.connect(mic, to: mainMixer, format: mic.inputFormat(forBus: 0))
 
         mainMixer.outputVolume = 0
-        micVolumeNode.outputVolume = 0
     }
 
     private func closeNodeGraph() {
         guard audioEngine.isRunning else { return }
         audioEngine.stop()
-        audioEngine.detach(micVolumeNode)
     }
 
     private func setupNotifications() {
