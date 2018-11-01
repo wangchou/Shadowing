@@ -22,34 +22,42 @@ var lastInfiniteChallengeSentences: [Level: [String]] = [:]
 var kanaTokenInfosCacheDictionary: [String: [[String]]] = [:] //tokenInfo =[kanji, 詞性, furikana, yomikana]
 
 func saveGameMiscData() {
-    saveToUserDefault(object: userSaidSentences, key: userSaidSentencesKey)
-    saveToUserDefault(object: sentenceScores, key: sentenceScoreKey)
-    saveToUserDefault(object: lastInfiniteChallengeSentences, key: lastChallengeSenteceKey)
-    saveToUserDefault(object: kanaTokenInfosCacheDictionary, key: kanaTokenInfosKey)
+    saveToUserDefault(object: userSaidSentences, key: userSaidSentencesKey + gameLang.rawValue)
+    saveToUserDefault(object: sentenceScores, key: sentenceScoreKey + gameLang.rawValue)
+    saveToUserDefault(object: lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.rawValue)
+
+    guard gameLang == Lang.jp else { return }
+    saveToUserDefault(object: kanaTokenInfosCacheDictionary, key: kanaTokenInfosKey + gameLang.rawValue)
 }
 
 func loadGameMiscData() {
     guard userSaidSentences.isEmpty else { return }
-    if let loadedSentences = loadFromUserDefault(type: type(of: userSaidSentences), key: userSaidSentencesKey) {
+    if let loadedSentences = loadFromUserDefault(type: type(of: userSaidSentences), key: userSaidSentencesKey + gameLang.rawValue) {
         userSaidSentences = loadedSentences
     } else {
-        print("error load userSaidSentences failed")
+        print("[\(gameLang)] create new userSaidSentences")
+        userSaidSentences = [:]
     }
-    if let loadedScores = loadFromUserDefault(type: type(of: sentenceScores), key: sentenceScoreKey) {
+    if let loadedScores = loadFromUserDefault(type: type(of: sentenceScores), key: sentenceScoreKey + gameLang.rawValue) {
         sentenceScores = loadedScores
     } else {
-        print("error load scores fail")
+        print("[\(gameLang)] create new sentencesScores")
+        sentenceScores = [:]
     }
-    if let loadedICSentences = loadFromUserDefault(type: type(of: lastInfiniteChallengeSentences), key: lastChallengeSenteceKey) {
+    if let loadedICSentences = loadFromUserDefault(type: type(of: lastInfiniteChallengeSentences), key: lastChallengeSenteceKey + gameLang.rawValue) {
         lastInfiniteChallengeSentences = loadedICSentences
     } else {
-        print("error load infinite challenge sentences fail")
+        print("[\(gameLang)] create new lastInfiniteChallengeSentences")
+        lastInfiniteChallengeSentences = [:]
     }
-    if let loadedKanaTokenInfos = loadFromUserDefault(type: type(of: kanaTokenInfosCacheDictionary), key: kanaTokenInfosKey) {
+
+    guard gameLang == Lang.jp else { return }
+
+    if let loadedKanaTokenInfos = loadFromUserDefault(type: type(of: kanaTokenInfosCacheDictionary), key: kanaTokenInfosKey + gameLang.rawValue) {
         loadedKanaTokenInfos.keys.forEach { key in
             kanaTokenInfosCacheDictionary[key] = loadedKanaTokenInfos[key]
         }
     } else {
-        print("error load kanaTokenInfos fail")
+        print("create new kanaTokenInfos")
     }
 }

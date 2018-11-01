@@ -13,13 +13,16 @@ private let context = GameContext.shared
 private let gameHistoryKey = "game record array json"
 
 func saveGameHistory() {
-    saveToUserDefault(object: context.gameHistory, key: gameHistoryKey)
+    saveToUserDefault(object: context.gameHistory, key: gameHistoryKey + gameLang.rawValue)
 }
 
 func loadGameHistory() {
     guard context.gameHistory.isEmpty else { return }
-    if let gameHistory = loadFromUserDefault(type: [GameRecord].self, key: gameHistoryKey) {
+    if let gameHistory = loadFromUserDefault(type: [GameRecord].self, key: gameHistoryKey + gameLang.rawValue) {
         context.gameHistory = gameHistory
+    } else {
+        print("[\(gameLang)] create new gameHistory")
+        context.gameHistory = [GameRecord]()
     }
 }
 

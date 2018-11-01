@@ -29,6 +29,12 @@ class RootContainerViewController: UIViewController {
         current = splashScreen
         showVC(splashScreen)
 
+        #if ForeignDev
+            gameLang = Lang.en
+        #else
+            loadGameLang()
+        #endif
+
         loadTopSentencesInfoDB()
         loadDataSets()
         loadGameHistory()
@@ -36,7 +42,11 @@ class RootContainerViewController: UIViewController {
         loadGameMiscData()
 
         Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
-            self.showMainPage()
+            if gameLang.isSupportTopicMode {
+                self.showMainPage()
+            } else {
+                self.showInfiniteChallengePage()
+            }
         }
     }
 

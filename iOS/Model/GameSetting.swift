@@ -13,12 +13,15 @@ private let gameSettingKey = "GameSettingKey"
 private let context = GameContext.shared
 
 func saveGameSetting() {
-   saveToUserDefault(object: context.gameSetting, key: gameSettingKey)
+   saveToUserDefault(object: context.gameSetting, key: gameSettingKey + gameLang.rawValue)
 }
 
 func loadGameSetting() {
-    if let gameSetting = loadFromUserDefault(type: GameSetting.self, key: gameSettingKey) {
+    if let gameSetting = loadFromUserDefault(type: GameSetting.self, key: gameSettingKey + gameLang.rawValue) {
         context.gameSetting = gameSetting
+    } else {
+        print("[\(gameLang)] create new gameSetting")
+        context.gameSetting = GameSetting()
     }
 }
 
