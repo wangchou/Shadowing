@@ -18,12 +18,18 @@ func loadGameLang() {
     }
 }
 
-enum Lang: String, Codable {
-    case jp = ""
-    case en = "en"
+enum Lang: Int, Codable {
+    case jp = 0
+    case en = 1
 
+    var key: String {
+        if self == .jp { return "" }
+        if self == .en { return "en" }
+        return ""
+    }
     var isSupportTopicMode: Bool {
-        return self == Lang.jp ? true : false
+        if self == .jp { return true }
+        return false
     }
 }
 
