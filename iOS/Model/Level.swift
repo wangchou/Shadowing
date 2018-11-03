@@ -9,22 +9,22 @@
 import UIKit
 
 var avgKanaCountDict: [String: Int] = [:]
-private let minKanaCounts = [2, 7, 9, 12, 15, 17, 19, 22, 27]
-private let maxKanaCounts = [6, 8, 11, 14, 16, 18, 21, 26, 36]
-private let colors = [myRed, myRed, myOrange, myOrange, myGreen, myGreen, myBlue, myBlue, .purple]
+private let minKanaCounts = [2, 7, 10, 13, 16, 19, 22, 25, 28, 32]
+private let maxKanaCounts = [6, 9, 12, 15, 18, 21, 24, 27, 31, 40]
+private let colors = [myRed, myRed, myOrange, myOrange, myGreen, myGreen, myBlue, myBlue, .purple, .purple]
 private let titles = ["入門一", "入門二", "初級一", "初級二",
-                      "中級一", "中級二", "上級一", "上級二", "超難問"]
-let allLevels: [Level] = [.lv0, .lv1, .lv2, .lv3, .lv4, .lv5, .lv6, .lv7, .lv8]
+                      "中級一", "中級二", "上級一", "上級二", "超難問一", "超難問二"]
+let allLevels: [Level] = [.lv0, .lv1, .lv2, .lv3, .lv4, .lv5, .lv6, .lv7, .lv8, .lv9]
 
 func getLevel(avgKanaCount: Int) -> Level {
     for i in 0..<allLevels.count where avgKanaCount <= maxKanaCounts[i] {
         return allLevels[i]
     }
-    return Level.lv8
+    return Level.lv9
 }
 
 enum Level: Int, Codable {
-    case lv0=0, lv1=1, lv2=2, lv3=3, lv4=4, lv5=5, lv6=6, lv7=7, lv8=8
+    case lv0=0, lv1=1, lv2=2, lv3=3, lv4=4, lv5=5, lv6=6, lv7=7, lv8=8, lv9=9
     var color: UIColor {
         return colors[self.rawValue]
     }

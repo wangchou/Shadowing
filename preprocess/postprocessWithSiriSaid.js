@@ -213,7 +213,7 @@ function getKanaFromResult(result) {
           kanaCount = getKanaCount(targetStr)
         }
         count += kanaCount
-        kanaStr += targetStr
+        kanaStr += findKanaFix(arr[0]) ? findKanaFix(arr[0]) : targetStr
         //console.log(arr[arr.length - 1], kanaCount)
       })
       if(isContainOtherLang) {
@@ -276,4 +276,18 @@ function getRandomJPName() {
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
+}
+
+
+function findKanaFix(token) {
+  var kanaFix = {
+    "何時": "なんじ",
+    "という": "トイウ",
+    "事": "こと",
+    "1日": "いちにち",
+    "会い": "あい",
+    "次": "つぎ",
+    "米": "こめ"
+  }
+  return kanaFix[token]
 }

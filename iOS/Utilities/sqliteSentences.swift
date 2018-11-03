@@ -23,7 +23,7 @@ struct TopicSentenceInfo {
 
 private var kanaInfos: [Int: KanaInfo] = [:]
 var topicSentencesInfos: [String: TopicSentenceInfo] = [:]
-private var sqliteFileName = "inf_sentences_100points"
+private var sqliteFileName = "inf_sentences_100points_with_topics"
 
 func loadSentenceDB() {
     guard let path = Bundle.main.path(forResource: sqliteFileName, ofType: "sqlite") else {

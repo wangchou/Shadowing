@@ -37,7 +37,7 @@ func createWritableDB() {
     do {
         writableDBPath = try fileManager
             .url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-            .appendingPathComponent("\(sqliteFileName).sqlite")
+            .appendingPathComponent("\(sqliteFileName)_with_topics.sqlite")
             .path
 
         if !fileManager.fileExists(atPath: writableDBPath) {
