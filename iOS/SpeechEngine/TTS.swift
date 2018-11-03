@@ -17,6 +17,14 @@ enum TTSError: Error {
 class TTS: NSObject, AVSpeechSynthesizerDelegate {
     var synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
     var promise = Promise<Void>.pending()
+    var targetLanguage: String {
+        switch gameLang {
+        case .jp:
+            return "ja-JP"
+        case .en:
+            return "en-US"
+        }
+    }
 
     func say(
         _ text: String,
@@ -31,11 +39,11 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         if let voice = AVSpeechSynthesisVoice(identifier: name) {
             utterance.voice = voice
         } else {
-            if "ja-JP" == AVSpeechSynthesisVoice.currentLanguageCode() {
+            if targetLanguage == AVSpeechSynthesisVoice.currentLanguageCode() {
                 // Do nothing, if not set utterance.voice
                 // Siri will say it
             } else {
-                utterance.voice = AVSpeechSynthesisVoice(language: "ja-JP")
+                utterance.voice = AVSpeechSynthesisVoice(language: targetLanguage)
             }
         }
 

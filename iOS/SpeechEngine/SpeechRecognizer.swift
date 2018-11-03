@@ -20,7 +20,17 @@ enum SpeechRecognitionError: Error {
 }
 
 class SpeechRecognizer: NSObject {
-    private let speechRecognizer: SFSpeechRecognizer! = SFSpeechRecognizer(locale: Locale(identifier: "ja_JP"))
+    private let speechRecognizerJP: SFSpeechRecognizer! = SFSpeechRecognizer(locale: Locale(identifier: "ja_JP"))
+    private let speechRecognizerEN: SFSpeechRecognizer! = SFSpeechRecognizer(locale: Locale(identifier: "en"))
+
+    private var speechRecognizer: SFSpeechRecognizer {
+        switch gameLang {
+        case .jp:
+            return speechRecognizerJP
+        case .en:
+            return speechRecognizerEN
+        }
+    }
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private var isRunning: Bool = false
