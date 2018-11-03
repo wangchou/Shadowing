@@ -56,6 +56,7 @@ class SentencesTableCell: UITableViewCell {
         practiceButton.isEnabled = false
         practiceButton.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
         SpeechEngine.shared.start()
+        if context.gameSetting.isMointoring { SpeechEngine.shared.monitoringOn() }
         speakPart()
             .then(listenPart)
             .then(calculateScorePart)
@@ -69,6 +70,7 @@ class SentencesTableCell: UITableViewCell {
                 self.practiceButton.backgroundColor = self.buttonColor
                 SentencesTableCell.isPracticing = false
                 GameContentDetailPage.isChallengeButtonDisabled = false
+                SpeechEngine.shared.monitoringOff()
             }
     }
 

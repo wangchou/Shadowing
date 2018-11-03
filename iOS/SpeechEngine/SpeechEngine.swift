@@ -67,6 +67,15 @@ class SpeechEngine {
         tts.stop()
     }
 
+    func monitoringOn() {
+        guard isHeadphonePlugged() else { return }
+        audioEngine.mainMixerNode.outputVolume = 1
+    }
+
+    func monitoringOff() {
+        audioEngine.mainMixerNode.outputVolume = 0
+    }
+
     // MARK: - Private
     private func stop() {
         guard isEngineRunning else { return }
@@ -99,10 +108,20 @@ class SpeechEngine {
     private func buildNodeGraph() {
         let mainMixer = audioEngine.mainMixerNode
         let mic = audioEngine.inputNode // only for real device, simulator will crash
-
         audioEngine.connect(mic, to: mainMixer, format: mic.inputFormat(forBus: 0))
 
         mainMixer.outputVolume = 0
+    }
+
+    private func isHeadphonePlugged() -> Bool {
+        let currentRoute = AVAudioSession.sharedInstance().currentRoute
+        for description in currentRoute.outputs {
+            if description.portType == AVAudioSession.Port.headphones ||
+               description.portType == AVAudioSession.Port.lineOut {
+                return true
+            }
+        }
+        return false
     }
 
     private func closeNodeGraph() {

@@ -38,6 +38,9 @@ class I18n {
     var narratorLabel: String {
         return isJa ? "ゲーム中国語説明" : "遊戲開始中文說明"
     }
+    var monitoringLabel: String {
+        return isJa ? "モニタリング（有線イヤホンのみ）" : "即時監聽(有線耳機 Only)"
+    }
     var gotoIOSSettingButtonTitle: String {
         return isJa ? "iPhone設定へ" : "前往iPhone設定中心"
     }

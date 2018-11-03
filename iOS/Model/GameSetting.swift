@@ -32,6 +32,7 @@ struct GameSetting: Codable {
     var isUsingTranslation: Bool = true
     var isUsingGuideVoice: Bool = true
     var isUsingNarrator: Bool = true
+    var isMointoring: Bool = false
     var narrator: ChatSpeaker = .meijia
     var teacher: ChatSpeaker = .system
     var assisant: ChatSpeaker = .system

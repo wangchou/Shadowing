@@ -30,6 +30,9 @@ class SettingPage: UITableViewController {
     @IBOutlet weak var guideVoiceSwitch: UISwitch!
     @IBOutlet weak var narratorLabel: UILabel!
     @IBOutlet weak var narratorSwitch: UISwitch!
+    @IBOutlet weak var monitoringLabel: UILabel!
+    @IBOutlet weak var monitoringSwitch: UISwitch!
+
     @IBOutlet weak var gotoIOSSettingButton: UIButton!
     @IBOutlet weak var teacherTTSSegmentControl: UISegmentedControl!
     @IBOutlet weak var assistantTTSSegmentControl: UISegmentedControl!
@@ -62,6 +65,8 @@ class SettingPage: UITableViewController {
         translationLabel.text = i18n.translationLabel
         guideVoiceLabel.text = i18n.guideVoiceLabel
         narratorLabel.text = i18n.narratorLabel
+        monitoringLabel.text = i18n.monitoringLabel
+
         gotoIOSSettingButton.setTitle(i18n.gotoIOSSettingButtonTitle, for: .normal)
         teacherTTSSegmentControl.setTitle(i18n.defaultText, forSegmentAt: 0)
         assistantTTSSegmentControl.setTitle(i18n.defaultText, forSegmentAt: 0)
@@ -85,6 +90,7 @@ class SettingPage: UITableViewController {
         translationSwitch.isOn = setting.isUsingTranslation
         guideVoiceSwitch.isOn = setting.isUsingGuideVoice
         narratorSwitch.isOn = setting.isUsingNarrator
+        monitoringSwitch.isOn = setting.isMointoring
 
         teacherTTSSegmentControl.selectedSegmentIndex = getSegmentIndex(speaker: setting.teacher)
         assistantTTSSegmentControl.selectedSegmentIndex = getSegmentIndex(speaker: setting.assisant)
@@ -151,6 +157,10 @@ class SettingPage: UITableViewController {
 
     @IBAction func narratorSwitchValueChanged(_ sender: Any) {
         context.gameSetting.isUsingNarrator = narratorSwitch.isOn
+        saveGameSetting()
+    }
+    @IBAction func monitoringSwitchValueChanged(_ sender: Any) {
+        context.gameSetting.isMointoring = monitoringSwitch.isOn
         saveGameSetting()
     }
     @IBAction func goToSettingCenter(_ sender: Any) {
