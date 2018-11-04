@@ -39,10 +39,10 @@ func prepareSentences() {
         }
         sentences = getSentencesByIds(ids: sentenceIds)
     } else {
-        print("set count: ", shadowingSentences.count)
+        print("set count: ", rawDataSets.count)
         //shadowingSentences.forEach { sArray in sentences.append(contentsOf: sArray) }
         for i in 0...30 {
-            sentences.append(contentsOf: shadowingSentences[i])
+            sentences.append(contentsOf: rawDataSets[i])
         }
         for i in 0...sentences.count {
             sentenceIds.append(i)
