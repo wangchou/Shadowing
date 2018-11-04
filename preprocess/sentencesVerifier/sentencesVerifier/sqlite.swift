@@ -32,16 +32,23 @@ func loadSentenceDB() {
         let kanaInfoTable = Table("kanaInfo")
         let sentencesTable = Table("sentences")
         let ja = Expression<String>("ja")
+        let en = Expression<String>("en")
         let id = Expression<Int>("id")
         let kanaCount = Expression<Int>("kana_count")
         let startId = Expression<Int>("start_id")
         let sentenceCount = Expression<Int>("sentence_count")
         for row in try dbR.prepare(kanaInfoTable) {
+            guard !isEnglishMode else { continue }
+
             let kanaInfo = KanaInfo(kanaCount: row[kanaCount], startId: row[startId], sentenceCount: row[sentenceCount])
             kanaInfos[row[kanaCount]] = kanaInfo
         }
         for row in try dbR.prepare(sentencesTable) {
-            idToSentences[row[id]] = row[ja]
+            if isEnglishMode {
+                idToSentences[row[id]] = row[en]
+            } else {
+                idToSentences[row[id]] = row[ja]
+            }
         }
     } catch {
         print("db error")
@@ -57,9 +64,13 @@ func updateIdWithListened(id: Int, siriSaid: String) {
         let sentenceTable = Table("sentences")
         let dbId = Expression<Int>("id")
         let dbSiriSaid = Expression<String>("siriSaid")
+        let dbSiriSaidEn = Expression<String>("siriSaidEn")
         let target = sentenceTable.filter(dbId == id)
-
-        try dbW.run(target.update(dbSiriSaid <- siriSaid))
+        if isEnglishMode {
+            try dbW.run(target.update(dbSiriSaidEn <- siriSaid))
+        } else {
+            try dbW.run(target.update(dbSiriSaid <- siriSaid))
+        }
         print(id, siriSaid)
     } catch {
         print("db update error: \(error)")
@@ -78,7 +89,7 @@ func getSentenceCount(minKanaCount: Int, maxKanaCount: Int) -> Int {
 
 func randSentenceIds(minKanaCount: Int, maxKanaCount: Int, numOfSentences: Int) -> [Int] {
     guard let startKanaInfo = kanaInfos[minKanaCount],
-        let endKanaInfo = kanaInfos[maxKanaCount] else { print("err in randSentenceIds"); return []}
+          let endKanaInfo = kanaInfos[maxKanaCount] else { print("err in randSentenceIds"); return []}
 
     let startId = startKanaInfo.startId
     let endId = endKanaInfo.startId + endKanaInfo.sentenceCount - 1
@@ -110,9 +121,14 @@ func createWritableDB() {
         dbW = try Connection(writableDBPath, readonly: false)
         let sentencesTable = Table("sentences")
         let siriSaid = Expression<String>("siriSaid")
+        let siriSaidEn = Expression<String>("siriSaidEn")
         let id = Expression<Int>("id")
         for row in try dbW.prepare(sentencesTable) {
-            idToSiriSaid[row[id]] = row[siriSaid]
+            if isEnglishMode {
+                idToSiriSaid[row[id]] = row[siriSaidEn]
+            } else {
+                idToSiriSaid[row[id]] = row[siriSaid]
+            }
         }
     } catch {
         print("\(error)")

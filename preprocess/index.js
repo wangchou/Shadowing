@@ -69,7 +69,7 @@ async function runAll() {
   dumpCounts(sortedPairs)
 
   let db = new sqlite3.Database(`./${dbName}`);
-  db.run(`CREATE TABLE ${tableName} (id integer PRIMARY_KEY, kana_count integer NOT NULL, ja text NOT NULL, en text NOT NULL, siriSaid text)`, err => {
+  db.run(`CREATE TABLE ${tableName} (id integer PRIMARY_KEY, kana_count integer NOT NULL, ja text NOT NULL, en text NOT NULL, siriSaid text, siriSaidEn)`, err => {
       if (err) {
         return console.log(err.message);
       }

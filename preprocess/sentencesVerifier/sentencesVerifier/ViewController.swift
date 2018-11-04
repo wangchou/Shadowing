@@ -26,6 +26,7 @@ var vc:ViewController!
 // run this whole day
 
 var isInfiniteChallengePreprocessingMode = true
+var isEnglishMode = true
 
 func prepareSentences() {
     sentenceIds = []
@@ -33,6 +34,7 @@ func prepareSentences() {
         loadSentenceDB()
         createWritableDB()
         for id in idToSiriSaid.keys.sorted() {
+            //guard id % 800 == 0 else { continue }
             if idToSiriSaid[id] == "" {
                 sentenceIds.append(id)
             }
@@ -83,9 +85,15 @@ func prepareSpeak() {
     theErr = NewSpeechChannel(nil, &fCurSpeechChannel)
     if theErr != OSErr(noErr) { print("error... 1") }
 
-    // set voice to otoya
-    let fSelectedVoiceID: OSType = 369338093
-    let fSelectedVoiceCreator: OSType = 1886745202
+    // set voice to Otoya
+    var fSelectedVoiceID: OSType = 369338093
+    var fSelectedVoiceCreator: OSType = 1886745202
+
+    // set voice to Alex
+    if isEnglishMode {
+        fSelectedVoiceCreator = 1835364215
+        fSelectedVoiceID = 201
+    }
 
     let voiceDict: NSDictionary = [kSpeechVoiceID: fSelectedVoiceID,
                                    kSpeechVoiceCreator: fSelectedVoiceCreator]
