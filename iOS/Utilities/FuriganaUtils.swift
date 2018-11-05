@@ -177,6 +177,15 @@ extension String {
         }
     }
 
+    func spellOutNumbers() -> String {
+        var tmpText = self
+        let matches = self.matches(for: "[0-9]+")
+        for match in matches {
+            tmpText = tmpText.replace(match, getEnglishNumber(number: Int(match)))
+        }
+        return tmpText
+    }
+
     func patternCount(_ pattern: String) -> Int {
         return self.components(separatedBy: pattern).count - 1
     }

@@ -26,7 +26,77 @@ var vc:ViewController!
 // run this whole day
 
 var isInfiniteChallengePreprocessingMode = true
+var isUpdateDB = true
 var isEnglishMode = true
+
+class ViewController: NSViewController {
+    @IBOutlet weak var scrollView: NSScrollView!
+    @IBOutlet weak var label: NSTextField!
+    @IBOutlet var textView: NSTextView!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        prepareSentences()
+        prepareSpeak()
+        vc = self
+    }
+
+    override var representedObject: Any? {
+        didSet {
+        // Update the view, if already loaded.
+        }
+    }
+
+    @IBAction func jaInfiniteChallengeButtonClicked(_ sender: Any) {
+        isInfiniteChallengePreprocessingMode = true
+        isEnglishMode = false
+        scrollView.becomeFirstResponder()
+        verifyNextSentence()
+    }
+
+    @IBAction func enInifiniteChallengeButtonClicked(_ sender: Any) {
+        isInfiniteChallengePreprocessingMode = true
+        isEnglishMode = true
+        scrollView.becomeFirstResponder()
+        verifyNextSentence()
+    }
+
+    @IBAction func enCalculateScoreButtonClicked(_ sender: Any) {
+        scrollView.becomeFirstResponder()
+        var count = 0
+        var totalCount = 0
+        for id in idToSiriSaid.keys.sorted() {
+            guard let siriSaid = idToSiriSaid[id],
+                  siriSaid != "" else { continue }
+            guard let en = idToSentences[id] else { continue }
+            let score = calculateScoreEn(en, siriSaid)
+            totalCount += 1
+            guard score.value != 100 else { continue }
+            count += 1
+            guard score.value >= 80 else { continue }
+            print("---")
+            print(id, score.value)
+            print(en)
+            print(siriSaid)
+            print(".")
+            print(normalizeEnglishText(en))
+            print(normalizeEnglishText(siriSaid))
+
+//            if count == 500 {
+//                break
+//            }
+        }
+        print("---")
+        print("\(count) / \(totalCount)")
+    }
+
+    @IBAction func topicSentenceButtonClicked(_ sender: Any) {
+        isInfiniteChallengePreprocessingMode = false
+        isEnglishMode = true
+        scrollView.becomeFirstResponder()
+        verifyNextSentence()
+    }
+}
 
 func prepareSentences() {
     sentenceIds = []
@@ -34,7 +104,7 @@ func prepareSentences() {
         loadSentenceDB()
         createWritableDB()
         for id in idToSiriSaid.keys.sorted() {
-            //guard id % 800 == 0 else { continue }
+            //guard id % 30 == 0 else { continue }
             if idToSiriSaid[id] == "" {
                 sentenceIds.append(id)
             }
@@ -52,32 +122,6 @@ func prepareSentences() {
     }
 
     print(sentenceIds.count)
-}
-
-class ViewController: NSViewController {
-    @IBOutlet weak var scrollView: NSScrollView!
-    @IBOutlet weak var label: NSTextField!
-    @IBOutlet var textView: NSTextView!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        prepareSentences()
-        prepareSpeak()
-        vc = self
-    }
-
-    override func viewDidAppear() {
-        super.viewDidAppear()
-        scrollView.becomeFirstResponder()
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
-            verifyNextSentence()
-        }
-    }
-
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
 }
 
 func prepareSpeak() {
@@ -112,7 +156,6 @@ func prepareSpeak() {
            print("gg in setup done call back")
         }
     }
-
 }
 
 func speak(_ s: String) {

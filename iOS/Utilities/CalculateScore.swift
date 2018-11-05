@@ -94,3 +94,70 @@ func calculateScore(
 
     return promise
 }
+
+func calculateScoreEn(
+    _ sentence1: String,
+    _ sentence2: String
+    ) -> Score {
+
+    func calcScore(_ str1: String, _ str2: String) -> Int {
+        let len = max(str1.count, str2.count)
+        guard len > 0 else {
+            #if os(iOS)
+            showMessage(I18n.shared.cannotReachServer)
+            #endif
+            print("zero len error on calcScore", str1, str2)
+            return 0
+        }
+        let score = (len - distanceBetween(str1, str2)) * 100 / len
+        return score
+    }
+
+    let normalizedText1 = normalizeEnglishText(sentence1)
+    let normalizedText2 = normalizeEnglishText(sentence2)
+
+    let score = calcScore(normalizedText1, normalizedText2)
+    return Score(value: score)
+}
+
+// TODO
+// digits mapping => "20" : "twenty"
+// contraction => "it's : "it is"
+// special abbreviations => "mt." : "Mount", "m: meters"
+
+func normalizeEnglishText(_ text: String) -> String {
+    let tagger = NSLinguisticTagger(
+        tagSchemes: NSLinguisticTagger.availableTagSchemes(forLanguage: "en"),
+        options: 0
+    )
+
+    var returnText = ""
+
+    tagger.string = text
+    let range = NSRange(location: 0, length: text.count)
+
+    tagger.enumerateTags(in: range, scheme: .tokenType, options: []) { (tag, tokenRange, _, _) in
+        let token = (text as NSString).substring(with: tokenRange)
+        if tag?.rawValue == "Punctuation" {
+            returnText += ""
+        } else {
+            returnText += "\(token)"
+        }
+    }
+
+    return returnText.lowercased()
+                     .spellOutNumbers()
+                     .replace("where is", "where's")
+                     .replace(" ", "")
+                     .replace("-", "")
+
+}
+
+func getEnglishNumber(number: Int?) -> String {
+    guard let number = number else { return "" }
+    let userLocale = Locale(identifier: "en")
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .spellOut
+    formatter.locale = userLocale
+    return formatter.string(from: NSNumber(value: number)) ?? ""
+}
