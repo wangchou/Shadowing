@@ -5,7 +5,7 @@
 //  Created by Wangchou Lu on 10/14/30 H.
 //  Copyright © 30 Heisei Lu, WangChou. All rights reserved.
 //
-
+import SwiftSyllablesMac
 import Cocoa
 typealias SRefCon = UnsafeRawPointer
 private var fCurSpeechChannel: SpeechChannel? = nil
@@ -75,7 +75,7 @@ class ViewController: NSViewController {
             count += 1
             guard score.value >= 80 else { continue }
             print("---")
-            print(id, score.value)
+            print(id, score.value, SwiftSyllables.getSyllables(en.spellOutNumbers()))
             print(en)
             print(siriSaid)
             print(".")
