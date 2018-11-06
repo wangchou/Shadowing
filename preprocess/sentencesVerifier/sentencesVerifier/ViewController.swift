@@ -61,8 +61,11 @@ class ViewController: NSViewController {
         verifyNextSentence()
     }
 
+    // This is freaking slow, only 30 updates/sec
+    // Not sure why swift sqlite3 library could be so slow
+    // Nodejs runs on 500 updates/sec
     @IBAction func enCalculateScoreButtonClicked(_ sender: Any) {
-        scrollView.becomeFirstResponder()
+        startTime = now()
         var count = 0
         var totalCount = 0
         for id in idToSiriSaid.keys.sorted() {
@@ -70,24 +73,15 @@ class ViewController: NSViewController {
                   siriSaid != "" else { continue }
             guard let en = idToSentences[id] else { continue }
             let score = calculateScoreEn(en, siriSaid)
+            let syllablesCount = SwiftSyllables.getSyllables(en.spellOutNumbers())
+            updateEnScoreAndSyllablesCount(id: id, score: score, syllablesCount: syllablesCount)
             totalCount += 1
-            guard score.value != 100 else { continue }
-            count += 1
-            guard score.value >= 80 else { continue }
-            print("---")
-            print(id, score.value, SwiftSyllables.getSyllables(en.spellOutNumbers()))
-            print(en)
-            print(siriSaid)
-            print(".")
-            print(normalizeEnglishText(en))
-            print(normalizeEnglishText(siriSaid))
-
-//            if count == 500 {
-//                break
-//            }
+            if score.value != 100 { count += 1 }
+            if totalCount % 100 == 0 {
+                print("\(count) / \(totalCount) \(round(now() - startTime))s")
+            }
         }
-        print("---")
-        print("\(count) / \(totalCount)")
+        print("\(count) / \(totalCount) \(round(now() - startTime))s")
     }
 
     @IBAction func topicSentenceButtonClicked(_ sender: Any) {

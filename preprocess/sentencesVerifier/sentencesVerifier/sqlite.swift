@@ -23,6 +23,13 @@ var idToSiriSaid: [Int: String] = [:]
 var dbR: Connection!
 var dbW: Connection!
 
+private let sentenceTable = Table("sentences")
+private let dbId = Expression<Int>("id")
+private let dbEnScore = Expression<Int>("enScore")
+private let dbSyllablesCount = Expression<Int>("syllables_count")
+private let dbSiriSaid = Expression<String>("siriSaid")
+private let dbSiriSaidEn = Expression<String>("siriSaidEn")
+
 func loadSentenceDB() {
     guard let path = Bundle.main.path(forResource: sqliteFileName, ofType: "sqlite") else {
         print("sqlite file not found"); return
@@ -61,10 +68,6 @@ func getSentencesByIds(ids: [Int]) -> [String] {
 
 func updateIdWithListened(id: Int, siriSaid: String) {
     do {
-        let sentenceTable = Table("sentences")
-        let dbId = Expression<Int>("id")
-        let dbSiriSaid = Expression<String>("siriSaid")
-        let dbSiriSaidEn = Expression<String>("siriSaidEn")
         let target = sentenceTable.filter(dbId == id)
         if isEnglishMode {
             try dbW.run(target.update(dbSiriSaidEn <- siriSaid))
@@ -72,6 +75,18 @@ func updateIdWithListened(id: Int, siriSaid: String) {
             try dbW.run(target.update(dbSiriSaid <- siriSaid))
         }
         print(id, siriSaid)
+    } catch {
+        print("db update error: \(error)")
+    }
+}
+
+func updateEnScoreAndSyllablesCount(id: Int, score: Score, syllablesCount: Int) {
+    do {
+        let target = sentenceTable.filter(dbId == id)
+        try dbW.run(target.update(
+            dbEnScore <- score.value,
+            dbSyllablesCount <- syllablesCount
+        ))
     } catch {
         print("db update error: \(error)")
     }
