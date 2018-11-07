@@ -57,7 +57,9 @@ class SentencesTableCell: UITableViewCell {
         practiceButton.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
         SpeechEngine.shared.start()
         if context.gameSetting.isMointoring { SpeechEngine.shared.monitoringOn() }
-        speakPart()
+        prepareForSpeaking()
+        speakTranslation()
+            .then(speakPart)
             .then(listenPart)
             .then(calculateScorePart)
             .then(updateUIByScore)
@@ -120,20 +122,27 @@ class SentencesTableCell: UITableViewCell {
 
 // MARK: Private Methods
 extension SentencesTableCell {
+    private func speakTranslation() -> Promise<Void> {
+        guard let translation = translations[targetString] else { return fulfilledVoidPromise() }
+        let promise = narratorSay(translation)
+        return promise
+    }
+
     private func speakPart() -> Promise<Void> {
         guard context.gameSetting.isUsingGuideVoice else { return fulfilledVoidPromise() }
         startTime = getNow()
         let promise = teacherSay(targetString, rate: context.gameSetting.practiceSpeed)
-        prepareForSpeaking()
         return promise
     }
 
     private func prepareForSpeaking() {
-        tableView?.beginUpdates()
-        userSaidSentenceLabel.text = " "
-        userSaidSentenceLabel.backgroundColor = UIColor.white
-        userSaidSentenceLabel.isHidden = false
-        tableView?.endUpdates()
+        DispatchQueue.main.async {
+            self.tableView?.beginUpdates()
+            self.userSaidSentenceLabel.text = " "
+            self.userSaidSentenceLabel.backgroundColor = UIColor.white
+            self.userSaidSentenceLabel.isHidden = false
+            self.tableView?.endUpdates()
+        }
     }
 
     private func listenPart() -> Promise<String> {

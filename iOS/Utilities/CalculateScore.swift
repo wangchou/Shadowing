@@ -3,8 +3,10 @@ import Promises
 import Alamofire
 
 #if os(iOS)
+    let serverURL = "http://52.194.172.67/nlp"
 #else
-var kanaTokenInfosCacheDictionary: [String: [[String]]] = [:]
+    var kanaTokenInfosCacheDictionary: [String: [[String]]] = [:]
+    let serverURL = "http://localhost:3000/nlp"
 #endif
 
 func getKanaTokenInfos(_ kanjiString: String) -> Promise<[[String]]> {
@@ -17,7 +19,7 @@ func getKanaTokenInfos(_ kanjiString: String) -> Promise<[[String]]> {
     }
 
     Alamofire.request(
-        "http://52.194.172.67/nlp",
+        serverURL,
         method: .post,
         parameters: parameters
         ).responseJSON { response in
@@ -98,8 +100,8 @@ func calculateScore(
 func calculateScoreEn(
     _ sentence1: String,
     _ sentence2: String
-    ) -> Score {
-
+    ) -> Promise<Score> {
+    let promise = Promise<Score>.pending()
     func calcScore(_ str1: String, _ str2: String) -> Int {
         let len = max(str1.count, str2.count)
         guard len > 0 else {
@@ -117,7 +119,8 @@ func calculateScoreEn(
     let normalizedText2 = normalizeEnglishText(sentence2)
 
     let score = calcScore(normalizedText1, normalizedText2)
-    return Score(value: score)
+    promise.fulfill(Score(value: score))
+    return promise
 }
 
 // TODO

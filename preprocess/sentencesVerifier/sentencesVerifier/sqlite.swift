@@ -20,15 +20,13 @@ private var sqliteFileName = "inf_sentences"
 private var writableDBPath = ""
 var idToSentences: [Int: String] = [:]
 var idToSiriSaid: [Int: String] = [:]
+var idToPairedScore: [Int: Int] = [:]
+var idToScore: [Int: Int] = [:]
 var dbR: Connection!
 var dbW: Connection!
 
 private let sentenceTable = Table("sentences")
 private let dbId = Expression<Int>("id")
-private let dbEnScore = Expression<Int>("enScore")
-private let dbSyllablesCount = Expression<Int>("syllables_count")
-private let dbSiriSaid = Expression<String>("siriSaid")
-private let dbSiriSaidEn = Expression<String>("siriSaidEn")
 
 func loadSentenceDB() {
     guard let path = Bundle.main.path(forResource: sqliteFileName, ofType: "sqlite") else {
@@ -45,13 +43,13 @@ func loadSentenceDB() {
         let startId = Expression<Int>("start_id")
         let sentenceCount = Expression<Int>("sentence_count")
         for row in try dbR.prepare(kanaInfoTable) {
-            guard !isEnglishMode else { continue }
+            guard speaker == .otoya || speaker == .kyoko else { continue }
 
             let kanaInfo = KanaInfo(kanaCount: row[kanaCount], startId: row[startId], sentenceCount: row[sentenceCount])
             kanaInfos[row[kanaCount]] = kanaInfo
         }
         for row in try dbR.prepare(sentencesTable) {
-            if isEnglishMode {
+            if speaker == .alex || speaker == .samantha {
                 idToSentences[row[id]] = row[en]
             } else {
                 idToSentences[row[id]] = row[ja]
@@ -66,25 +64,49 @@ func getSentencesByIds(ids: [Int]) -> [String] {
     return ids.map { id in return idToSentences[id] ?? "" }
 }
 
+
 func updateIdWithListened(id: Int, siriSaid: String) {
+    let dbSiriSaid = Expression<String>(speaker.dbField)
     do {
         let target = sentenceTable.filter(dbId == id)
-        if isEnglishMode {
-            try dbW.run(target.update(dbSiriSaidEn <- siriSaid))
-        } else {
-            try dbW.run(target.update(dbSiriSaid <- siriSaid))
-        }
+        try dbW.run(target.update(dbSiriSaid <- siriSaid))
         print(id, siriSaid)
     } catch {
         print("db update error: \(error)")
     }
 }
 
-func updateEnScoreAndSyllablesCount(id: Int, score: Score, syllablesCount: Int) {
+func updateSaidAndScore(id: Int, siriSaid: String, score: Score) {
+    let dbSiriSaid = Expression<String>(speaker.dbField)
+    let dbScore = Expression<Int>(speaker.dbScoreField)
     do {
         let target = sentenceTable.filter(dbId == id)
         try dbW.run(target.update(
-            dbEnScore <- score.value,
+            dbScore <- score.value,
+            dbSiriSaid <- siriSaid
+        ))
+    } catch {
+        print("db update error: \(error)")
+    }
+}
+
+func updateScore(id: Int, score: Score) {
+    let dbScore = Expression<Int>(speaker.dbScoreField)
+    do {
+        let target = sentenceTable.filter(dbId == id)
+        try dbW.run(target.update(
+            dbScore <- score.value
+        ))
+    } catch {
+        print("db update error: \(error)")
+    }
+}
+
+func updateSyllablesCount(id: Int, syllablesCount: Int) {
+    let dbSyllablesCount = Expression<Int>("syllables_count")
+    do {
+        let target = sentenceTable.filter(dbId == id)
+        try dbW.run(target.update(
             dbSyllablesCount <- syllablesCount
         ))
     } catch {
@@ -135,14 +157,21 @@ func createWritableDB() {
         }
         dbW = try Connection(writableDBPath, readonly: false)
         let sentencesTable = Table("sentences")
-        let siriSaid = Expression<String>("siriSaid")
-        let siriSaidEn = Expression<String>("siriSaidEn")
+        let siriSaid = Expression<String>(speaker.dbField)
+        let pairedScore = Expression<Int>(speaker.pairDbScoreField)
+        let score = Expression<Int>(speaker.dbScoreField)
         let id = Expression<Int>("id")
         for row in try dbW.prepare(sentencesTable) {
-            if isEnglishMode {
-                idToSiriSaid[row[id]] = row[siriSaidEn]
-            } else {
-                idToSiriSaid[row[id]] = row[siriSaid]
+            idToSiriSaid[row[id]] = row[siriSaid]
+            do {
+                idToPairedScore[row[id]] = try row.get(pairedScore)
+            } catch {
+                //print(error)
+            }
+            do {
+                idToScore[row[id]] = try row.get(score)
+            } catch {
+                //print(error)
             }
         }
     } catch {

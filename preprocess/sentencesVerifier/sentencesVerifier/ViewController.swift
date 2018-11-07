@@ -7,6 +7,7 @@
 //
 import SwiftSyllablesMac
 import Cocoa
+import Promises
 typealias SRefCon = UnsafeRawPointer
 private var fCurSpeechChannel: SpeechChannel? = nil
 private var theErr = OSErr(noErr)
@@ -16,6 +17,46 @@ var sentenceIds: [Int] = []
 var sentences: [String] = []
 func now() -> TimeInterval { return NSDate().timeIntervalSince1970 }
 var startTime = now()
+
+enum Speaker: String {
+    case otoya="otoya"
+    case kyoko="kyoko"
+    case alex="alex"
+    case samantha="samantha"
+
+    var dbField: String {
+        return self.rawValue
+    }
+    var dbScoreField: String {
+        return self.rawValue + "_score"
+    }
+
+    var pairDbField: String {
+        switch self {
+        case .otoya:
+        return Speaker.kyoko.rawValue
+        case .kyoko:
+            return Speaker.otoya.rawValue
+        case .alex:
+            return Speaker.samantha.rawValue
+        case .samantha:
+            return Speaker.alex.rawValue
+        }
+    }
+
+    var pairDbScoreField: String {
+        switch self {
+        case .otoya:
+            return Speaker.kyoko.dbScoreField
+        case .kyoko:
+            return Speaker.otoya.dbScoreField
+        case .alex:
+            return Speaker.samantha.dbScoreField
+        case .samantha:
+            return Speaker.alex.dbScoreField
+        }
+    }
+}
 
 var vc:ViewController!
 
@@ -27,7 +68,10 @@ var vc:ViewController!
 
 var isInfiniteChallengePreprocessingMode = true
 var isUpdateDB = true
-var isEnglishMode = true
+var speaker: Speaker = .otoya
+var sortedIds: [Int] = []
+var count = 0
+var totalCount = 0
 
 class ViewController: NSViewController {
     @IBOutlet weak var scrollView: NSScrollView!
@@ -36,8 +80,6 @@ class ViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        prepareSentences()
-        prepareSpeak()
         vc = self
     }
 
@@ -47,46 +89,120 @@ class ViewController: NSViewController {
         }
     }
 
-    @IBAction func jaInfiniteChallengeButtonClicked(_ sender: Any) {
+    @IBAction func otoyaInfiniteChallengeButtonClicked(_ sender: Any) {
+        infiniteChallengeButtonClicked(.otoya)
+    }
+
+    @IBAction func kyokoInfiniteChallengeButtonClicked(_ sender: Any) {
+        infiniteChallengeButtonClicked(.kyoko)
+    }
+
+    @IBAction func alexInifiniteChallengeButtonClicked(_ sender: Any) {
+        infiniteChallengeButtonClicked(.alex)
+    }
+
+    @IBAction func samanthaInifiniteChallengeButtonClicked(_ sender: Any) {
+        infiniteChallengeButtonClicked(.samantha)
+    }
+
+    func infiniteChallengeButtonClicked(_ inSpeaker: Speaker) {
         isInfiniteChallengePreprocessingMode = true
-        isEnglishMode = false
+        speaker = inSpeaker
+        prepareSentences()
+        prepareSpeak()
         scrollView.becomeFirstResponder()
         verifyNextSentence()
     }
 
-    @IBAction func enInifiniteChallengeButtonClicked(_ sender: Any) {
-        isInfiniteChallengePreprocessingMode = true
-        isEnglishMode = true
-        scrollView.becomeFirstResponder()
-        verifyNextSentence()
-    }
 
     // This is freaking slow, only 30 updates/sec
     // Not sure why swift sqlite3 library could be so slow
+    // Oh damn, this library even not support connectionPool...
     // Nodejs runs on 500 updates/sec
-    @IBAction func enCalculateScoreButtonClicked(_ sender: Any) {
+    @IBAction func alexCalculateScoreButtonClicked(_ sender: Any) {
+        calculateScoreButtonClicked(.alex)
+    }
+
+    @IBAction func samanthaCalculateScoreButtonClicked(_ sender: Any) {
+        calculateScoreButtonClicked(.samantha)
+    }
+
+    @IBAction func otoyaCalculateScoreButtonClicked(_ sender: Any) {
+        calculateScoreButtonClicked(.otoya)
+    }
+
+    @IBAction func kyokoCalculateScoreButtonClicked(_ sender: Any) {
+        calculateScoreButtonClicked(.kyoko)
+    }
+
+    func calculateScoreButtonClicked(_ inSpeaker: Speaker) {
         startTime = now()
-        var count = 0
-        var totalCount = 0
-        for id in idToSiriSaid.keys.sorted() {
+        speaker = inSpeaker
+        prepareSentences()
+        count = 0
+        totalCount = 0
+        sentencesIdx = 0
+        sortedIds = idToSiriSaid.keys.sorted()
+        calculateNextScores()
+    }
+
+    func calculateNextScores() {
+        var promiseArr: [Promise<Void>] = []
+        let batchSize = 30
+        let endIndex = min(sentencesIdx + batchSize - 1, sortedIds.count - 1)
+        //print(sortedIds[sentencesIdx...endIndex])
+
+        for id in sortedIds[sentencesIdx...endIndex] {
+            let promise = Promise<Void>.pending()
+            guard idToScore[id] == nil || idToScore[id] == 0 else { continue }
             guard let siriSaid = idToSiriSaid[id],
                   siriSaid != "" else { continue }
-            guard let en = idToSentences[id] else { continue }
-            let score = calculateScoreEn(en, siriSaid)
-            let syllablesCount = SwiftSyllables.getSyllables(en.spellOutNumbers())
-            updateEnScoreAndSyllablesCount(id: id, score: score, syllablesCount: syllablesCount)
-            totalCount += 1
-            if score.value != 100 { count += 1 }
-            if totalCount % 100 == 0 {
+            guard let originalText = idToSentences[id] else { continue }
+            promiseArr.append(promise)
+            var calcScoreFn: (String, String) -> Promise<Score>
+            switch speaker {
+            case .alex, .samantha:
+                calcScoreFn = calculateScoreEn
+            case .otoya, .kyoko:
+                calcScoreFn = calculateScore
+            }
+            calcScoreFn(originalText, siriSaid).then { score in
+                updateScore(id: id, score: score)
+                totalCount += 1
+                if score.value != 100 { count += 1 }
+                if totalCount % 100 == 0 {
+                    print("\(count) | \(id) | \(sortedIds.count) \(round(now() - startTime))s")
+                }
+                promise.fulfill(())
+            }
+        }
+        sentencesIdx += batchSize
+        all(promiseArr).always {
+            if sentencesIdx < sortedIds.count {
+                DispatchQueue.global(qos: .userInitiated).async {
+                    self.calculateNextScores()
+                }
+            } else {
                 print("\(count) / \(totalCount) \(round(now() - startTime))s")
             }
         }
-        print("\(count) / \(totalCount) \(round(now() - startTime))s")
+    }
+
+    @IBAction func syllablesCountButtonClicked(_ sender: Any) {
+        startTime = now()
+        speaker = .alex
+        prepareSentences()
+        for id in idToSentences.keys.sorted() {
+            guard let en = idToSentences[id] else { continue }
+            let syllablesCount = SwiftSyllables.getSyllables(en.spellOutNumbers())
+            updateSyllablesCount(id: id, syllablesCount: syllablesCount)
+        }
+        print("Syllables count updated \(round(now() - startTime))s")
     }
 
     @IBAction func topicSentenceButtonClicked(_ sender: Any) {
         isInfiniteChallengePreprocessingMode = false
-        isEnglishMode = true
+        speaker = .otoya
         scrollView.becomeFirstResponder()
         verifyNextSentence()
     }
@@ -99,8 +215,12 @@ func prepareSentences() {
         createWritableDB()
         for id in idToSiriSaid.keys.sorted() {
             //guard id % 30 == 0 else { continue }
-            if idToSiriSaid[id] == "" {
+            guard idToSiriSaid[id] == "" else { continue }
+            let pairedScore = idToPairedScore[id]
+            if pairedScore == nil || pairedScore == 100 {
                 sentenceIds.append(id)
+            } else {
+                print(pairedScore)
             }
         }
         sentences = getSentencesByIds(ids: sentenceIds)
@@ -128,9 +248,19 @@ func prepareSpeak() {
     var fSelectedVoiceCreator: OSType = 1886745202
 
     // set voice to Alex
-    if isEnglishMode {
+    switch speaker {
+    case .alex:
         fSelectedVoiceCreator = 1835364215
         fSelectedVoiceID = 201
+    case .samantha:
+        fSelectedVoiceCreator = 1886745202;
+        fSelectedVoiceID = 184844493;
+    case .otoya:
+        fSelectedVoiceID = 369338093
+        fSelectedVoiceCreator = 1886745202
+    case .kyoko:
+        fSelectedVoiceCreator = 1886745202
+        fSelectedVoiceID = 369275117
     }
 
     let voiceDict: NSDictionary = [kSpeechVoiceID: fSelectedVoiceID,

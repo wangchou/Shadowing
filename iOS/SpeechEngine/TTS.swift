@@ -16,6 +16,8 @@ enum TTSError: Error {
 
 class TTS: NSObject, AVSpeechSynthesizerDelegate {
     var synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
+    var synthesizerLeft: AVSpeechSynthesizer = AVSpeechSynthesizer()
+    var synthesizerRight: AVSpeechSynthesizer = AVSpeechSynthesizer()
     var promise = Promise<Void>.pending()
     var targetLanguage: String {
         switch gameLang {
@@ -31,10 +33,14 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         name: String,
         rate: Float = AVSpeechUtteranceDefaultSpeechRate // 0.5, range 0 ~ 1.0
         ) -> Promise<Void> {
+        if let headphoneChannels = getHeadphoneOutputChannels() {
+            synthesizerLeft.outputChannels = [headphoneChannels[0]]
+            synthesizerRight.outputChannels = [headphoneChannels[1]]
+        }
         if synthesizer.isSpeaking {
             synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
         }
-        synthesizer.delegate = self
+        synthesizerRight.delegate = self
         let utterance = AVSpeechUtterance(string: getKanaFixedText(text))
         if let voice = AVSpeechSynthesisVoice(identifier: name) {
             utterance.voice = voice
@@ -47,9 +53,17 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
             }
         }
 
+        let utteranceLeft = AVSpeechUtterance(string: translations[text] ?? "哈樓")
+        utteranceLeft.voice = AVSpeechSynthesisVoice(language: "zh")
+
         utterance.rate = rate
         postEvent(.sayStarted, string: text)
-        synthesizer.speak(utterance)
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.synthesizerRight.speak(utterance)
+        }
+        DispatchQueue.main.async {
+            self.synthesizerLeft.speak(utteranceLeft)
+        }
         promise = Promise<Void>.pending()
 
         return promise
@@ -87,4 +101,16 @@ private func getKanaFixedText(_ text: String) -> String {
         fixedText = fixedText.replace(kanji, kana)
     }
     return fixedText
+}
+
+// https://stackoverflow.com/questions/39420687/hi-is-there-a-way-for-the-avspeech-synthesizer-to-play-audio-using-either-chann?noredirect=1&lq=1
+func getHeadphoneOutputChannels() -> [AVAudioSessionChannelDescription]? {
+    let currentRoute = AVAudioSession.sharedInstance().currentRoute
+    for description in currentRoute.outputs {
+        if description.portType == AVAudioSession.Port.headphones ||
+            description.portType == AVAudioSession.Port.lineOut {
+            return description.channels
+        }
+    }
+    return nil
 }

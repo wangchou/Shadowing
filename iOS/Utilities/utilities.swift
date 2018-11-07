@@ -112,7 +112,7 @@ func dumpAvaliableVoices() {
     for voice in AVSpeechSynthesisVoice.speechVoices() {
         //if ((availableVoice.language == AVSpeechSynthesisVoice.currentLanguageCode()) &&
         //    (availableVoice.quality == AVSpeechSynthesisVoiceQuality.enhanced)) {
-        if voice.language == "ja-JP" || voice.language == "zh-TW" {
+        if voice.language == "ja-JP" || voice.language == "zh-TW" || voice.language == "en-US" {
             print("\(voice.name) on \(voice.language) with Quality: \(voice.quality.rawValue) \(voice.identifier)")
         }
         //}
@@ -195,6 +195,7 @@ func loadFromUserDefault<T: Codable>(type: T.Type, key: String) -> T? {
     print("load \(key) Failed")
     return nil
 }
+
 #endif
 
 // MARK: - NLP
