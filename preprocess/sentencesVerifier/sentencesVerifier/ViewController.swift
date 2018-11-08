@@ -15,6 +15,12 @@ private var theErr = OSErr(noErr)
 var sentencesIdx = 0
 var sentenceIds: [Int] = []
 var sentences: [String] = []
+// speed up
+var bothPerfectCounts: [Int: Int] = [:] // every kanaCount/SyllablesCount 1000
+var currentVoicePerfectCounts: [Int: Int] = [:] // every kanaCount/SyllablesCount 2000
+var pairedVoicePerfectCounts: [Int: Int] = [:] // every kanaCount/SyllablesCount 2000
+var bothPerfectCountLimit = 1000
+var voicePerfectCountLimit = 2000
 func now() -> TimeInterval { return NSDate().timeIntervalSince1970 }
 var startTime = now()
 
@@ -179,7 +185,7 @@ class ViewController: NSViewController {
         sentencesIdx += batchSize
         all(promiseArr).always {
             if sentencesIdx < sortedIds.count {
-                DispatchQueue.global(qos: .userInitiated).async {
+                DispatchQueue.main.async {
                     self.calculateNextScores()
                 }
             } else {
@@ -211,16 +217,41 @@ class ViewController: NSViewController {
 func prepareSentences() {
     sentenceIds = []
     if isInfiniteChallengePreprocessingMode {
+        switch speaker {
+        case .otoya, .kyoko:
+            bothPerfectCountLimit = 1000
+            voicePerfectCountLimit = 2000
+        case .alex, .samantha:
+            bothPerfectCountLimit = 500
+            voicePerfectCountLimit = 1000
+        }
         loadSentenceDB()
         createWritableDB()
         for id in idToSiriSaid.keys.sorted() {
+            // perfect count filtering
+            guard let syllablesLen = idToSyllablesLen[id] else { continue }
+            let bothPerfectCount = bothPerfectCounts[syllablesLen] ?? 0
+            let pairedVoicePerfectCount = pairedVoicePerfectCounts[syllablesLen] ?? 0
+            let currentVoicePerfectCount = currentVoicePerfectCounts[syllablesLen] ?? 0
+            if pairedVoicePerfectCount >= voicePerfectCountLimit { continue }
+            if bothPerfectCount >= bothPerfectCountLimit { continue }
+            if currentVoicePerfectCount >= voicePerfectCountLimit { continue }
+
+            if idToScore[id] == 100 {
+                currentVoicePerfectCounts[syllablesLen] = currentVoicePerfectCount + 1
+            }
+            if idToPairedScore[id] == 100 {
+                pairedVoicePerfectCounts[syllablesLen] = pairedVoicePerfectCount + 1
+                if idToScore[id] == 100 {
+                    bothPerfectCounts[syllablesLen] = bothPerfectCount + 1
+                }
+            }
+
             //guard id % 30 == 0 else { continue }
             guard idToSiriSaid[id] == "" else { continue }
             let pairedScore = idToPairedScore[id]
             if pairedScore == nil || pairedScore == 100 {
                 sentenceIds.append(id)
-            } else {
-                print(pairedScore)
             }
         }
         sentences = getSentencesByIds(ids: sentenceIds)
@@ -236,6 +267,7 @@ func prepareSentences() {
     }
 
     print(sentenceIds.count)
+    print(bothPerfectCounts)
 }
 
 func prepareSpeak() {
@@ -294,7 +326,15 @@ func verifyNextSentence() {
     vc.label.stringValue = "\(percentage) | \(duration) | \(sentencesIdx)/\(sentences.count)"
 
     vc.scrollView.becomeFirstResponder()
-    guard sentencesIdx < sentences.count else { return }
+    while true {
+        guard sentencesIdx < sentences.count else { return }
+        if isPerfectCountOverLimit(id: sentenceIds[sentencesIdx]){
+            sentencesIdx = sentencesIdx + 1
+        } else {
+            break
+        }
+    }
+
     let s = sentences[sentencesIdx]
     vc.textView.string = ""
     toggleSTT()
@@ -302,6 +342,31 @@ func verifyNextSentence() {
         speak(s)
     }
     sentencesIdx += 1
+}
+
+private func isPerfectCountOverLimit(id: Int) -> Bool {
+    let id = sentenceIds[sentencesIdx]
+    let syllablesLen = idToSyllablesLen[id]!
+    let bothPerfectCount = bothPerfectCounts[syllablesLen] ?? 0
+    let currentVoicePerfectCount = currentVoicePerfectCounts[syllablesLen] ?? 0
+    if bothPerfectCount >= bothPerfectCountLimit ||
+        currentVoicePerfectCount >= voicePerfectCountLimit {
+        return true
+    }
+    return false
+}
+
+
+private func updatePerfectCount(id: Int, score: Score) {
+    if score.value == 100 {
+        let syllablesLen = idToSyllablesLen[id]!
+        let bothPerfectCount = bothPerfectCounts[syllablesLen] ?? 0
+        let currentVoicePerfectCount = currentVoicePerfectCounts[syllablesLen] ?? 0
+        currentVoicePerfectCounts[syllablesLen] = currentVoicePerfectCount + 1
+        if idToPairedScore[id] == 100 {
+            bothPerfectCounts[syllablesLen] = bothPerfectCount + 1
+        }
+    }
 }
 
 func OurSpeechDoneCallBackProc(_ inSpeechChannel: SpeechChannel, _ inRefCon: SRefCon) {
@@ -315,7 +380,11 @@ func OurSpeechDoneCallBackProc(_ inSpeechChannel: SpeechChannel, _ inRefCon: SRe
             let s = vc.textView.string
             let id = sentenceIds[sentencesIdx-1]
             if isInfiniteChallengePreprocessingMode {
-                updateIdWithListened(id: id, siriSaid: s)
+                //updateIdWithListened(id: id, siriSaid: s)
+                calculateScore(idToSentences[id]!, s).then { score in
+                    updatePerfectCount(id: id, score: score)
+                    updateSiriSaidAndScore(id: id, siriSaid: s, score: score)
+                }
             } else {
                 let s1 = sentences[id]
                 let s2 = s

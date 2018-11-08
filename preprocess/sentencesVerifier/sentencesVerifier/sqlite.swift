@@ -5,7 +5,7 @@
 //  Created by Wangchou Lu on 10/14/30 H.
 //  Copyright © 30 Heisei Lu, WangChou. All rights reserved.
 //
-
+import SwiftSyllablesMac
 import Foundation
 import SQLite
 
@@ -22,6 +22,7 @@ var idToSentences: [Int: String] = [:]
 var idToSiriSaid: [Int: String] = [:]
 var idToPairedScore: [Int: Int] = [:]
 var idToScore: [Int: Int] = [:]
+var idToSyllablesLen: [Int: Int] = [:]
 var dbR: Connection!
 var dbW: Connection!
 
@@ -76,7 +77,7 @@ func updateIdWithListened(id: Int, siriSaid: String) {
     }
 }
 
-func updateSaidAndScore(id: Int, siriSaid: String, score: Score) {
+func updateSiriSaidAndScore(id: Int, siriSaid: String, score: Score) {
     let dbSiriSaid = Expression<String>(speaker.dbField)
     let dbScore = Expression<Int>(speaker.dbScoreField)
     do {
@@ -160,6 +161,8 @@ func createWritableDB() {
         let siriSaid = Expression<String>(speaker.dbField)
         let pairedScore = Expression<Int>(speaker.pairDbScoreField)
         let score = Expression<Int>(speaker.dbScoreField)
+        let kanaCount = Expression<Int>("kana_count")
+        let syllablesCount = Expression<Int>("syllables_count")
         let id = Expression<Int>("id")
         for row in try dbW.prepare(sentencesTable) {
             idToSiriSaid[row[id]] = row[siriSaid]
@@ -173,6 +176,20 @@ func createWritableDB() {
             } catch {
                 //print(error)
             }
+            switch speaker {
+            case .otoya, .kyoko:
+                idToSyllablesLen[row[id]] = try row.get(kanaCount)
+            case .alex, .samantha:
+                do {
+                    idToSyllablesLen[row[id]] = try row.get(syllablesCount)
+                } catch {
+                    if let s = idToSentences[row[id]] {
+                        idToSyllablesLen[row[id]] = SwiftSyllables.getSyllables(s)
+                    }
+                }
+            }
+
+
         }
     } catch {
         print("\(error)")
