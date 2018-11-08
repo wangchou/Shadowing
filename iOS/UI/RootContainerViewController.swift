@@ -32,7 +32,7 @@ class RootContainerViewController: UIViewController {
         #if ForeignDev
             gameLang = Lang.en
         #else
-            gameLang = Lang.jp
+            loadGameLang()
         #endif
 
         loadTopSentencesInfoDB()
