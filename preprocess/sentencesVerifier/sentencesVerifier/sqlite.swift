@@ -29,38 +29,6 @@ var dbW: Connection!
 private let sentenceTable = Table("sentences")
 private let dbId = Expression<Int>("id")
 
-func loadSentenceDB() {
-    guard let path = Bundle.main.path(forResource: sqliteFileName, ofType: "sqlite") else {
-        print("sqlite file not found"); return
-    }
-    do {
-        dbR = try Connection(path, readonly: true)
-        let kanaInfoTable = Table("kanaInfo")
-        let sentencesTable = Table("sentences")
-        let ja = Expression<String>("ja")
-        let en = Expression<String>("en")
-        let id = Expression<Int>("id")
-        let kanaCount = Expression<Int>("kana_count")
-        let startId = Expression<Int>("start_id")
-        let sentenceCount = Expression<Int>("sentence_count")
-        for row in try dbR.prepare(kanaInfoTable) {
-            guard speaker == .otoya || speaker == .kyoko else { continue }
-
-            let kanaInfo = KanaInfo(kanaCount: row[kanaCount], startId: row[startId], sentenceCount: row[sentenceCount])
-            kanaInfos[row[kanaCount]] = kanaInfo
-        }
-        for row in try dbR.prepare(sentencesTable) {
-            if speaker == .alex || speaker == .samantha {
-                idToSentences[row[id]] = row[en]
-            } else {
-                idToSentences[row[id]] = row[ja]
-            }
-        }
-    } catch {
-        print("db error")
-    }
-}
-
 func getSentencesByIds(ids: [Int]) -> [String] {
     return ids.map { id in return idToSentences[id] ?? "" }
 }
@@ -141,31 +109,49 @@ func randSentenceIds(minKanaCount: Int, maxKanaCount: Int, numOfSentences: Int) 
     return randomIds
 }
 
-func createWritableDB() {
+func loadWritableDb() {
     let fileManager = FileManager.default
     do {
         writableDBPath = try fileManager
             .url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             .appendingPathComponent("\(sqliteFileName).sqlite")
             .path
+        let syllablesTxtUrl = try fileManager
+            .url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            .appendingPathComponent("syllablesCount.txt")
+
+
+        var syllablesText: String = ""
 
         if !fileManager.fileExists(atPath: writableDBPath) {
             print("not exist")
-            let dbResourcePath = Bundle.main.path(forResource: sqliteFileName, ofType: "sqlite")!
-            try fileManager.copyItem(atPath: dbResourcePath, toPath: writableDBPath)
         } else {
             print("exist")
         }
         dbW = try Connection(writableDBPath, readonly: false)
         let sentencesTable = Table("sentences")
+        let originalText = (speaker == .otoya || speaker == .kyoko) ?
+            Expression<String>("ja") :
+            Expression<String>("en")
         let siriSaid = Expression<String>(speaker.dbField)
         let pairedScore = Expression<Int>(speaker.pairDbScoreField)
         let score = Expression<Int>(speaker.dbScoreField)
         let kanaCount = Expression<Int>("kana_count")
         let syllablesCount = Expression<Int>("syllables_count")
         let id = Expression<Int>("id")
+        var count = 0
+        startTime = now()
         for row in try dbW.prepare(sentencesTable) {
-            idToSiriSaid[row[id]] = row[siriSaid]
+            count += 1
+            if count % 100 == 0 {
+                print(count, "\(now() - startTime)s")
+            }
+            idToSentences[row[id]] = row[originalText]
+            do {
+                idToSiriSaid[row[id]] = try row.get(siriSaid)
+            } catch {
+                //print(error)
+            }
             do {
                 idToPairedScore[row[id]] = try row.get(pairedScore)
             } catch {
@@ -185,11 +171,17 @@ func createWritableDB() {
                 } catch {
                     if let s = idToSentences[row[id]] {
                         idToSyllablesLen[row[id]] = SwiftSyllables.getSyllables(s)
+
                     }
                 }
+                syllablesText = syllablesText + "\(row[id]) \(idToSyllablesLen[row[id]]!)\n"
             }
-
-
+        }
+        print(syllablesText)
+        do {
+            try syllablesText.write(to: syllablesTxtUrl, atomically: false, encoding: .utf8)
+        } catch {
+            print(error)
         }
     } catch {
         print("\(error)")

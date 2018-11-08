@@ -225,8 +225,7 @@ func prepareSentences() {
             bothPerfectCountLimit = 500
             voicePerfectCountLimit = 1000
         }
-        loadSentenceDB()
-        createWritableDB()
+        loadWritableDb()
         for id in idToSiriSaid.keys.sorted() {
             // perfect count filtering
             guard let syllablesLen = idToSyllablesLen[id] else { continue }
@@ -248,7 +247,15 @@ func prepareSentences() {
             }
 
             //guard id % 30 == 0 else { continue }
-            guard idToSiriSaid[id] == "" else { continue }
+            guard idToSiriSaid[id] == "" || idToSiriSaid[id] == nil else {
+                if idToScore[id] == nil {
+                    calculateScore(idToSentences[id]!, idToSiriSaid[id]!).then { score in
+                        updatePerfectCount(id: id, score: score)
+                        updateSiriSaidAndScore(id: id, siriSaid: idToSiriSaid[id]!, score: score)
+                    }
+                }
+                continue
+            }
             let pairedScore = idToPairedScore[id]
             if pairedScore == nil || pairedScore == 100 {
                 sentenceIds.append(id)
@@ -276,8 +283,8 @@ func prepareSpeak() {
     if theErr != OSErr(noErr) { print("error... 1") }
 
     // set voice to Otoya
-    var fSelectedVoiceID: OSType = 369338093
-    var fSelectedVoiceCreator: OSType = 1886745202
+    var fSelectedVoiceID: OSType = 201
+    var fSelectedVoiceCreator: OSType = 1835364215
 
     // set voice to Alex
     switch speaker {
@@ -285,8 +292,8 @@ func prepareSpeak() {
         fSelectedVoiceCreator = 1835364215
         fSelectedVoiceID = 201
     case .samantha:
-        fSelectedVoiceCreator = 1886745202;
-        fSelectedVoiceID = 184844493;
+        fSelectedVoiceCreator = 1886745202
+        fSelectedVoiceID = 184844493
     case .otoya:
         fSelectedVoiceID = 369338093
         fSelectedVoiceCreator = 1886745202
@@ -299,7 +306,12 @@ func prepareSpeak() {
                                    kSpeechVoiceCreator: fSelectedVoiceCreator]
     theErr = SetSpeechProperty(fCurSpeechChannel!, kSpeechCurrentVoiceProperty, voiceDict)
 
-    if theErr != OSErr(noErr) { print("error... 2") }
+    if theErr != OSErr(noErr) {
+        // if see this error go to system tts panel and select the voice
+        print("error... 2", theErr)
+        print(speaker)
+        print(fSelectedVoiceCreator, fSelectedVoiceID)
+    }
 
     if theErr == OSErr(noErr) {
         typealias DoneCallBackType = @convention(c) (SpeechChannel, SRefCon)->Void
