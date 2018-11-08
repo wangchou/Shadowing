@@ -116,12 +116,6 @@ func loadWritableDb() {
             .url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             .appendingPathComponent("\(sqliteFileName).sqlite")
             .path
-        let syllablesTxtUrl = try fileManager
-            .url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-            .appendingPathComponent("syllablesCount.txt")
-
-
-        var syllablesText: String = ""
 
         if !fileManager.fileExists(atPath: writableDBPath) {
             print("not exist")
@@ -139,13 +133,8 @@ func loadWritableDb() {
         let kanaCount = Expression<Int>("kana_count")
         let syllablesCount = Expression<Int>("syllables_count")
         let id = Expression<Int>("id")
-        var count = 0
         startTime = now()
         for row in try dbW.prepare(sentencesTable) {
-            count += 1
-            if count % 100 == 0 {
-                print(count, "\(now() - startTime)s")
-            }
             idToSentences[row[id]] = row[originalText]
             do {
                 idToSiriSaid[row[id]] = try row.get(siriSaid)
@@ -174,14 +163,7 @@ func loadWritableDb() {
 
                     }
                 }
-                syllablesText = syllablesText + "\(row[id]) \(idToSyllablesLen[row[id]]!)\n"
             }
-        }
-        print(syllablesText)
-        do {
-            try syllablesText.write(to: syllablesTxtUrl, atomically: false, encoding: .utf8)
-        } catch {
-            print(error)
         }
     } catch {
         print("\(error)")

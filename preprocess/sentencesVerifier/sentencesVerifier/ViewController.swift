@@ -21,6 +21,7 @@ var currentVoicePerfectCounts: [Int: Int] = [:] // every kanaCount/SyllablesCoun
 var pairedVoicePerfectCounts: [Int: Int] = [:] // every kanaCount/SyllablesCount 2000
 var bothPerfectCountLimit = 1000
 var voicePerfectCountLimit = 2000
+var syllablesLenLimit = 30
 func now() -> TimeInterval { return NSDate().timeIntervalSince1970 }
 var startTime = now()
 
@@ -221,14 +222,18 @@ func prepareSentences() {
         case .otoya, .kyoko:
             bothPerfectCountLimit = 1000
             voicePerfectCountLimit = 2000
+            syllablesLenLimit = 40
         case .alex, .samantha:
             bothPerfectCountLimit = 500
             voicePerfectCountLimit = 1000
+            syllablesLenLimit = 30
         }
         loadWritableDb()
-        for id in idToSiriSaid.keys.sorted() {
+        startTime = now()
+        for id in idToSentences.keys.sorted() {
             // perfect count filtering
             guard let syllablesLen = idToSyllablesLen[id] else { continue }
+            guard syllablesLen <= syllablesLenLimit else { continue }
             let bothPerfectCount = bothPerfectCounts[syllablesLen] ?? 0
             let pairedVoicePerfectCount = pairedVoicePerfectCounts[syllablesLen] ?? 0
             let currentVoicePerfectCount = currentVoicePerfectCounts[syllablesLen] ?? 0
@@ -247,15 +252,8 @@ func prepareSentences() {
             }
 
             //guard id % 30 == 0 else { continue }
-            guard idToSiriSaid[id] == "" || idToSiriSaid[id] == nil else {
-                if idToScore[id] == nil {
-                    calculateScore(idToSentences[id]!, idToSiriSaid[id]!).then { score in
-                        updatePerfectCount(id: id, score: score)
-                        updateSiriSaidAndScore(id: id, siriSaid: idToSiriSaid[id]!, score: score)
-                    }
-                }
-                continue
-            }
+
+            guard idToSiriSaid[id] == "" || idToSiriSaid[id] == nil else { continue }
             let pairedScore = idToPairedScore[id]
             if pairedScore == nil || pairedScore == 100 {
                 sentenceIds.append(id)
@@ -275,6 +273,7 @@ func prepareSentences() {
 
     print(sentenceIds.count)
     print(bothPerfectCounts)
+    print(currentVoicePerfectCounts)
 }
 
 func prepareSpeak() {
