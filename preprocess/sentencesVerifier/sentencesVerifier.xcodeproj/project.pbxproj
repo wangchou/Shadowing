@@ -25,7 +25,6 @@
 		BE869D37218F34F700689755 /* love.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE869D2A218F34F700689755 /* love.swift */; };
 		BE869D38218F34F700689755 /* polite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE869D2B218F34F700689755 /* polite.swift */; };
 		BE869D39218F34F700689755 /* travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE869D2C218F34F700689755 /* travel.swift */; };
-		BE869D3B218F38F000689755 /* inf_sentences.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BE869D3A218F38F000689755 /* inf_sentences.sqlite */; };
 		BE88D6142174D37E004E1CD0 /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D6112174D37D004E1CD0 /* Promises.framework */; };
 		BE88D6152174D37E004E1CD0 /* Promises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D6112174D37D004E1CD0 /* Promises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE88D6162174D37E004E1CD0 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D6122174D37D004E1CD0 /* Alamofire.framework */; };
@@ -73,7 +72,6 @@
 		BE869D2A218F34F700689755 /* love.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = love.swift; path = ../../../iOS/Sentences/love.swift; sourceTree = "<group>"; };
 		BE869D2B218F34F700689755 /* polite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = polite.swift; path = ../../../iOS/Sentences/polite.swift; sourceTree = "<group>"; };
 		BE869D2C218F34F700689755 /* travel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = travel.swift; path = ../../../iOS/Sentences/travel.swift; sourceTree = "<group>"; };
-		BE869D3A218F38F000689755 /* inf_sentences.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences.sqlite; sourceTree = "<group>"; };
 		BE88D6112174D37D004E1CD0 /* Promises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Promises.framework; path = Carthage/Build/Mac/Promises.framework; sourceTree = "<group>"; };
 		BE88D6122174D37D004E1CD0 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/Mac/Alamofire.framework; sourceTree = "<group>"; };
 		BE88D6132174D37D004E1CD0 /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBLPromises.framework; path = Carthage/Build/Mac/FBLPromises.framework; sourceTree = "<group>"; };
@@ -155,7 +153,6 @@
 		BE9C6812217342D3007A8D83 /* sentencesVerifier */ = {
 			isa = PBXGroup;
 			children = (
-				BE869D3A218F38F000689755 /* inf_sentences.sqlite */,
 				BE9C6813217342D3007A8D83 /* AppDelegate.swift */,
 				BE9C6815217342D3007A8D83 /* ViewController.swift */,
 				BE55B432217348E6006DC271 /* FakeKey.swift */,
@@ -234,7 +231,6 @@
 			files = (
 				BE9C6818217342D5007A8D83 /* Assets.xcassets in Resources */,
 				BE9C681B217342D5007A8D83 /* Main.storyboard in Resources */,
-				BE869D3B218F38F000689755 /* inf_sentences.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

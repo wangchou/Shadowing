@@ -382,13 +382,13 @@ private func updatePerfectCount(id: Int, score: Score) {
 
 func OurSpeechDoneCallBackProc(_ inSpeechChannel: SpeechChannel, _ inRefCon: SRefCon) {
     toggleSTT()
-    var waitTime:TimeInterval = 1.5
-    if sentencesIdx % 100 == 0 {
-        waitTime = 5.0
-    }
+    let waitTime:TimeInterval = 1.5
+    var isEmptyString: Bool = false
+
     DispatchQueue.main.async {
         Timer.scheduledTimer(withTimeInterval: waitTime, repeats: false) { _ in
             let s = vc.textView.string
+            isEmptyString = s == ""
             let id = sentenceIds[sentencesIdx-1]
             if isInfiniteChallengePreprocessingMode {
                 //updateIdWithListened(id: id, siriSaid: s)
@@ -410,7 +410,16 @@ func OurSpeechDoneCallBackProc(_ inSpeechChannel: SpeechChannel, _ inRefCon: SRe
 
             }
 
-            verifyNextSentence()
+            // listening and speaking time off => one more double fn-fn
+            if isEmptyString {
+                toggleSTT()
+                Timer.scheduledTimer(withTimeInterval: waitTime, repeats: false) { _ in
+                    verifyNextSentence()
+
+                }
+            } else {
+                verifyNextSentence()
+            }
         }
     }
 }
