@@ -4,7 +4,7 @@ const sqlite3 = require('sqlite3').verbose();
 const { execSync } = require('child_process');
 var levenshtein = require('levenshtein-edit-distance')
 
-let inDbName = "with_siriSaid_inf_sentences.sqlite"
+let inDbName = "inf_sentences_1111.sqlite"
 let outDbName = "inf_sentences_100points.sqlite"
 let tableName = "sentences"
 let infoTableName = "kanaInfo"
@@ -18,26 +18,6 @@ var start = Date.now();
 async function runAll() {
   var sentences = await getSentences()
 
-  let sLimit = sentences.length
-  for(i = 0; i < sLimit; i++) {
-    let batchSize = Math.min(2000, sLimit - i)
-
-    // speed up batch
-    var millis = Date.now() - start;
-    console.log(`${i}/${sLimit}, ${Math.floor(millis/1000)}s`);
-
-    let sentenceScorePromises = []
-    for(let j = i; j < i+batchSize; j++) {
-      sentenceScorePromises.push(getScore(sentences[j].ja, sentences[j].siriSaid))
-    }
-    let sentenceScores = await Promise.all(sentenceScorePromises)
-    sentenceScores.forEach((s, k) => {
-      sentences[i+k].score = s
-    })
-    i += (batchSize - 1)
-  }
-
-  sentences = sentences.filter(o => (o.score == 1))
   console.log(sentences.length)
   dumpCounts(sentences)
   let outDb = new sqlite3.Database(`./${outDbName}`);
@@ -154,7 +134,7 @@ function getYomi(sentence) {
 function getSentences() {
   return new Promise(function(resolve, reject) {
     let inDb = new sqlite3.Database(`./${inDbName}`)
-    inDb.all("SELECT kana_count, ja, siriSaid FROM sentences where siriSaid<>'' ", function(err, rows) {
+    inDb.all("SELECT kana_count, ja FROM sentences where otoya_score=100 and kyoko_score=100 ", function(err, rows) {
         inDb.close();
         resolve([...rows])
     });

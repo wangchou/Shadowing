@@ -31,6 +31,7 @@
 		BE5ABADF217C4CCD00A63C5F /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABAD3217C4CCD00A63C5F /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE5D838920A80BD0002031BF /* GameContentDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */; };
 		BE5E0CCE2183477400832E88 /* I18n.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5E0CCD2183477400832E88 /* I18n.swift */; };
+		BE60F9C82198419500D81EA2 /* inf_sentences_100points_with_topics.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BE60F9C72198419500D81EA2 /* inf_sentences_100points_with_topics.sqlite */; };
 		BE65A939209C6E67006645CA /* GameEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65A938209C6E67006645CA /* GameEvents.swift */; };
 		BE67D2A921561A93007FE420 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE67D2A821561A92007FE420 /* Assets.xcassets */; };
 		BE6C78542165DD2B0072B1C5 /* GameReportBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6C78532165DD2B0072B1C5 /* GameReportBoxView.swift */; };
@@ -47,7 +48,6 @@
 		BE8180C020B3BEB6006ABCB3 /* MyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180BF20B3BEB6006ABCB3 /* MyText.swift */; };
 		BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */; };
 		BE8283B42133DAE2008BC875 /* SpeechEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8283B32133DAE2008BC875 /* SpeechEngine.swift */; };
-		BE869D1F218E15BF00689755 /* inf_sentences_100points_with_topics.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BE869D1E218E15BF00689755 /* inf_sentences_100points_with_topics.sqlite */; };
 		BE8DE7B62161E44400812CED /* AbilityChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8DE7B52161E44400812CED /* AbilityChart.swift */; };
 		BE8F747F2176E258005546DC /* kanaFix.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8F747E2176E258005546DC /* kanaFix.swift */; };
 		BE955E47216DAB8F00D424FA /* ICInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE955E46216DAB8F00D424FA /* ICInfoView.swift */; };
@@ -212,6 +212,7 @@
 		BE5ABAD3217C4CCD00A63C5F /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameContentDetailPage.swift; sourceTree = "<group>"; };
 		BE5E0CCD2183477400832E88 /* I18n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = I18n.swift; sourceTree = "<group>"; };
+		BE60F9C72198419500D81EA2 /* inf_sentences_100points_with_topics.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences_100points_with_topics.sqlite; sourceTree = "<group>"; };
 		BE65A938209C6E67006645CA /* GameEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEvents.swift; sourceTree = "<group>"; };
 		BE67D2A821561A92007FE420 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE6C78532165DD2B0072B1C5 /* GameReportBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameReportBoxView.swift; sourceTree = "<group>"; };
@@ -227,7 +228,6 @@
 		BE8180BF20B3BEB6006ABCB3 /* MyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyText.swift; sourceTree = "<group>"; };
 		BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFinishedPage.swift; sourceTree = "<group>"; };
 		BE8283B32133DAE2008BC875 /* SpeechEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechEngine.swift; sourceTree = "<group>"; };
-		BE869D1E218E15BF00689755 /* inf_sentences_100points_with_topics.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences_100points_with_topics.sqlite; sourceTree = "<group>"; };
 		BE8DE7B52161E44400812CED /* AbilityChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityChart.swift; sourceTree = "<group>"; };
 		BE8F747E2176E258005546DC /* kanaFix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kanaFix.swift; sourceTree = "<group>"; };
 		BE955E46216DAB8F00D424FA /* ICInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICInfoView.swift; sourceTree = "<group>"; };
@@ -440,7 +440,7 @@
 		BEBDEDBE208EF09F00C18520 /* Project */ = {
 			isa = PBXGroup;
 			children = (
-				BE869D1E218E15BF00689755 /* inf_sentences_100points_with_topics.sqlite */,
+				BE60F9C72198419500D81EA2 /* inf_sentences_100points_with_topics.sqlite */,
 				BE67D2A821561A92007FE420 /* Assets.xcassets */,
 				BEBDEDCB208EF0A000C18520 /* Info.plist */,
 				BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */,
@@ -581,7 +581,7 @@
 				BEB6F6C92182B89D0011E1C1 /* InfoPlist.strings in Resources */,
 				BEEC7FA92154C7AC001C2EFF /* TopBarView.xib in Resources */,
 				BE67D2A921561A93007FE420 /* Assets.xcassets in Resources */,
-				BE869D1F218E15BF00689755 /* inf_sentences_100points_with_topics.sqlite in Resources */,
+				BE60F9C82198419500D81EA2 /* inf_sentences_100points_with_topics.sqlite in Resources */,
 				BEBDEDC5208EF09F00C18520 /* Main.storyboard in Resources */,
 				BECAC3BC216B904A001BBF49 /* BottomBarView.xib in Resources */,
 			);

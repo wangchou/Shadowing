@@ -19,6 +19,7 @@
 		BE3EA030217761B300B65F48 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA02F217761B300B65F48 /* ViewController.swift */; };
 		BE3EA032217761B400B65F48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE3EA031217761B400B65F48 /* Assets.xcassets */; };
 		BE3EA035217761B400B65F48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE3EA033217761B400B65F48 /* Main.storyboard */; };
+		BE60F9C62198400C00D81EA2 /* inf_sentences_100points.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BE60F9C52198400C00D81EA2 /* inf_sentences_100points.sqlite */; };
 		BE869D0B218E110000689755 /* rawDataSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE869D00218E110000689755 /* rawDataSets.swift */; };
 		BE869D0C218E110000689755 /* sqliteSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE869D01218E110000689755 /* sqliteSentences.swift */; };
 		BE869D0D218E110000689755 /* daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE869D02218E110000689755 /* daily.swift */; };
@@ -32,7 +33,6 @@
 		BE869D17218E113400689755 /* CalculateScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE869D16218E113400689755 /* CalculateScore.swift */; };
 		BE869D19218E115800689755 /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE869D18218E115800689755 /* utilities.swift */; };
 		BE869D1B218E120C00689755 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE869D1A218E120C00689755 /* Score.swift */; };
-		BE869D1D218E142900689755 /* inf_sentences_100points.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BE869D1C218E142900689755 /* inf_sentences_100points.sqlite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -64,6 +64,7 @@
 		BE3EA034217761B400B65F48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BE3EA036217761B400B65F48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE3EA037217761B400B65F48 /* addTopicSentencesTable.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = addTopicSentencesTable.entitlements; sourceTree = "<group>"; };
+		BE60F9C52198400C00D81EA2 /* inf_sentences_100points.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences_100points.sqlite; sourceTree = "<group>"; };
 		BE869D00218E110000689755 /* rawDataSets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = rawDataSets.swift; path = ../../iOS/Sentences/rawDataSets.swift; sourceTree = "<group>"; };
 		BE869D01218E110000689755 /* sqliteSentences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = sqliteSentences.swift; path = ../../iOS/Utilities/sqliteSentences.swift; sourceTree = "<group>"; };
 		BE869D02218E110000689755 /* daily.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = daily.swift; path = ../../iOS/Sentences/daily.swift; sourceTree = "<group>"; };
@@ -77,7 +78,6 @@
 		BE869D16218E113400689755 /* CalculateScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalculateScore.swift; path = ../../iOS/Utilities/CalculateScore.swift; sourceTree = "<group>"; };
 		BE869D18218E115800689755 /* utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = utilities.swift; path = ../../iOS/Utilities/utilities.swift; sourceTree = "<group>"; };
 		BE869D1A218E120C00689755 /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Score.swift; path = ../../iOS/Model/Score.swift; sourceTree = "<group>"; };
-		BE869D1C218E142900689755 /* inf_sentences_100points.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences_100points.sqlite; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +98,7 @@
 		BE3EA021217761B200B65F48 = {
 			isa = PBXGroup;
 			children = (
-				BE869D1C218E142900689755 /* inf_sentences_100points.sqlite */,
+				BE60F9C52198400C00D81EA2 /* inf_sentences_100points.sqlite */,
 				BE39E0A72180E72000A34C50 /* Alamofire.framework */,
 				BE39E0A82180E72000A34C50 /* FBLPromises.framework */,
 				BE39E0A92180E72000A34C50 /* Promises.framework */,
@@ -211,7 +211,7 @@
 			files = (
 				BE3EA032217761B400B65F48 /* Assets.xcassets in Resources */,
 				BE3EA035217761B400B65F48 /* Main.storyboard in Resources */,
-				BE869D1D218E142900689755 /* inf_sentences_100points.sqlite in Resources */,
+				BE60F9C62198400C00D81EA2 /* inf_sentences_100points.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
