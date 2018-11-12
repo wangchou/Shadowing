@@ -3,10 +3,9 @@ const fs = require('fs');
 const sqlite3 = require('sqlite3').verbose();
 const { execSync } = require('child_process');
 
-let inAlexDbName = "inf_sentences_1108_alex.sqlite"
-let inKyokoDbName = "inf_sentences_1108_kyoko.sqlite"
-let syllablesCountFName = "syllablesCount.txt"
-let outDbName = "inf_sentences_1108_merged.sqlite"
+let inAlexDbName = "inf_sentences_1112_alex.sqlite"
+let inKyokoDbName = "inf_sentences_1112_kyoko.sqlite"
+let outDbName = "inf_sentences_1112_merged.sqlite"
 let tableName = "sentences"
 var outDb
 try {
@@ -14,11 +13,13 @@ try {
 } catch (e) {}
 
 var idToAlex = {}
+var idToAlexScore = {}
 async function runAll() {
   var alexRows = await getAlexSaid()
   var kyokoRows = await getKyokoSaid()
   alexRows.forEach(row => {
-    idToAlex[`${row.id}`] = row.siriSaidEn
+    idToAlex[`${row.id}`] = row.alex
+    idToAlexScore[`${row.id}`] = row.alex_score
   })
   console.log("alex", alexRows.length)
   console.log("kyoko", kyokoRows.length)
@@ -38,8 +39,8 @@ function insertData(objs) {
     let values = [obj.id,
       obj.ja, obj.kana_count,
       obj.otoya, obj.otoya_score, obj.kyoko, obj.kyoko_score,
-      obj.en, idToSyllablesCount[`${obj.id}`],
-      idToAlex[`${obj.id}`], obj.alex_score, obj.samantha, obj.samantha_score
+      obj.en, obj.syllables_count,
+      idToAlex[`${obj.id}`], idToAlexScore[`${obj.id}`], obj.samantha, obj.samantha_score
     ]
 
     outDb.run(sql, values, function(err) {
@@ -60,7 +61,7 @@ runAll()
 function getAlexSaid() {
   return new Promise(function(resolve, reject) {
     let inDb = new sqlite3.Database(`./${inAlexDbName}`)
-    inDb.all("SELECT id, siriSaidEn FROM sentences where siriSaidEn<>'' ", function(err, rows) {
+    inDb.all("SELECT * FROM sentences", function(err, rows) {
         inDb.close();
         resolve([...rows])
     });

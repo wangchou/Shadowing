@@ -15,6 +15,7 @@ private var theErr = OSErr(noErr)
 var sentencesIdx = 0
 var sentenceIds: [Int] = []
 var sentences: [String] = []
+
 // speed up
 var bothPerfectCounts: [Int: Int] = [:] // every kanaCount/SyllablesCount 1000
 var currentVoicePerfectCounts: [Int: Int] = [:] // every kanaCount/SyllablesCount 2000
@@ -392,7 +393,14 @@ func OurSpeechDoneCallBackProc(_ inSpeechChannel: SpeechChannel, _ inRefCon: SRe
             let id = sentenceIds[sentencesIdx-1]
             if isInfiniteChallengePreprocessingMode {
                 //updateIdWithListened(id: id, siriSaid: s)
-                calculateScore(idToSentences[id]!, s).then { score in
+                var calcScoreFn: (String, String) -> Promise<Score>
+                switch speaker {
+                case .alex, .samantha:
+                    calcScoreFn = calculateScoreEn
+                case .otoya, .kyoko:
+                    calcScoreFn = calculateScore
+                }
+                calcScoreFn(idToSentences[id]!, s).then { score in
                     updatePerfectCount(id: id, score: score)
                     updateSiriSaidAndScore(id: id, siriSaid: s, score: score)
                 }

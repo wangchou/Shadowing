@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sentencesVerifier/ViewController.swift"
-            timestampString = "563625394.2315969"
+            timestampString = "563682411.671115"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "256"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
             landmarkName = "prepareSentences()"
             landmarkType = "9">
          </BreakpointContent>
