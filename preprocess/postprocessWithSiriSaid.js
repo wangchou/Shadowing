@@ -4,10 +4,11 @@ const sqlite3 = require('sqlite3').verbose();
 const { execSync } = require('child_process');
 var levenshtein = require('levenshtein-edit-distance')
 
-let inDbName = "inf_sentences_1111.sqlite"
-let outDbName = "inf_sentences_100points.sqlite"
+let inDbName = "inf_sentences_1112.sqlite"
+let outDbName = "inf_sentences_100points_duolingo.sqlite"
 let tableName = "sentences"
-let infoTableName = "kanaInfo"
+let kanaTableName = "kanaInfo"
+let syllablesTableName = "syllablesInfo"
 
 try {
   execSync(`rm ./${outDbName}`)
@@ -21,36 +22,59 @@ async function runAll() {
   console.log(sentences.length)
   dumpCounts(sentences)
   let outDb = new sqlite3.Database(`./${outDbName}`);
-  outDb.run(`CREATE TABLE ${tableName} (id integer PRIMARY_KEY, kana_count integer NOT NULL, ja text NOT NULL)`, err => {
+  outDb.run(`CREATE TABLE ${tableName} (id integer PRIMARY_KEY, kana_count integer NOT NULL, ja text NOT NULL, syllables_count integer NOT NULL, en text NOT NULL)`, err => {
       if (err) {
         return console.log(err.message);
       }
       insertData(sentences)
   });
 
-  outDb.run(`CREATE TABLE ${infoTableName} (kana_count integer PRIMARY_KEY, start_id integer NOT NULL, sentence_count interger NOT NULL)`, err => {
+  outDb.run(`CREATE TABLE ${kanaTableName} (kana_count integer PRIMARY_KEY, ids text NOT NULL, sentence_count interger NOT NULL)`, err => {
       if (err) {
         return console.log(err.message);
       }
-      let kanaInfo = {}
+      let info = {}
       sentences.forEach((obj, i) => {
-        if(!kanaInfo[obj.kana_count]) {
-          kanaInfo[obj.kana_count] = {}
-          kanaInfo[obj.kana_count].sentence_count = 1
-          kanaInfo[obj.kana_count].start_id = i
+        if(obj.otoya_score != 100 || obj.kyoko_score != 100) { return }
+        if(!info[obj.kana_count]) {
+          info[obj.kana_count] = {
+            sentence_count: 0,
+            ids: []
+          }
         } else {
-          kanaInfo[obj.kana_count].sentence_count += 1
+          info[obj.kana_count].sentence_count += 1
+          info[obj.kana_count].ids.push(obj.id)
         }
       })
-      insertKanaInfoData(kanaInfo)
+      insertInfoData(kanaTableName, info)
+  });
+
+  outDb.run(`CREATE TABLE ${syllablesTableName} (syllables_count integer PRIMARY_KEY, ids text NOT NULL, sentence_count interger NOT NULL)`, err => {
+      if (err) {
+        return console.log(err.message);
+      }
+      let info = {}
+      sentences.forEach((obj, i) => {
+        if(obj.alex_score != 100) { return }
+        if(!info[obj.syllables_count]) {
+          info[obj.syllables_count] = {
+            sentence_count: 0,
+            ids: []
+          }
+        } else {
+          info[obj.syllables_count].sentence_count += 1
+          info[obj.syllables_count].ids.push(obj.id)
+        }
+      })
+      insertInfoData(syllablesTableName, info)
   });
 
   outDb.close();
 
   function insertData(objs) {
-    let sql = `INSERT INTO ${tableName} VALUES (?, ?, ?)`
-    objs.forEach( (obj, i) => {
-      let values = [i, obj.kana_count, obj.ja]
+    let sql = `INSERT INTO ${tableName} VALUES (?, ?, ?, ?, ?)`
+    objs.forEach( obj => {
+      let values = [obj.id, obj.kana_count, obj.ja, obj.syllables_count, obj.en]
       outDb.run(sql, values, function(err) {
         if (err) {
           return console.log(err.message);
@@ -58,10 +82,11 @@ async function runAll() {
       });
     })
   }
-  function insertKanaInfoData(kanaInfo) {
+
+  function insertInfoData(infoTableName, info) {
     let sql = `INSERT INTO ${infoTableName} VALUES (?, ?, ?)`
-    Object.keys(kanaInfo).forEach( c => {
-      let values = [c, kanaInfo[c].start_id, kanaInfo[c].sentence_count]
+    Object.keys(info).forEach( c => {
+      let values = [c, info[c].ids.join(","), info[c].sentence_count]
       outDb.run(sql, values, function(err) {
         if (err) {
           return console.log(err.message);
@@ -69,6 +94,7 @@ async function runAll() {
       });
     })
   }
+
 }
 
 runAll()
@@ -99,175 +125,12 @@ function dumpCounts(arr) {
   }
 }
 
-function getSentenceKanaCount(sentence) {
-  const mecab = new MeCab()
-  mecab.command = 'mecab -d /usr/local/lib/mecab/dic/mecab-ipadic-neologd/ -E "<改行>\\n"';
-  return new Promise(function(resolve, reject) {
-    mecab.parse(sentence, function(err, result) {
-      resolve(getKanaCountFromResult(result))
-    });
-  });
-}
-
-async function getScore(s1, s2) {
-  let kana1 = await getYomi(s1)
-  let kana2 = await getYomi(s2)
-  let dist = levenshtein(kana1, kana2)
-  let len = Math.max(kana1.length, kana2.length)
-  let score = (len - dist)/parseFloat(len)
-  // console.log(kana1)
-  // console.log(kana2)
-  // console.log(score)
-  return score
-}
-
-function getYomi(sentence) {
-  const mecab = new MeCab()
-  mecab.command = 'mecab -d /usr/local/lib/mecab/dic/mecab-ipadic-neologd/ -E "<改行>\\n"';
-  return new Promise(function(resolve, reject) {
-    mecab.parse(sentence, function(err, result) {
-      resolve(getKanaFromResult(result))
-    });
-  });
-}
-
 function getSentences() {
   return new Promise(function(resolve, reject) {
     let inDb = new sqlite3.Database(`./${inDbName}`)
-    inDb.all("SELECT kana_count, ja FROM sentences where otoya_score=100 and kyoko_score=100 ", function(err, rows) {
+    inDb.all("SELECT id, kana_count, ja, otoya_score, kyoko_score, syllables_count, en, alex_score FROM sentences where (otoya_score=100 and kyoko_score=100) or alex_score=100 ", function(err, rows) {
         inDb.close();
         resolve([...rows])
     });
   })
-}
-
-function getKanaCountFromResult(result) {
-      // console.log(result)
-      var isContainOtherLang = false
-      var count = 0
-      if(result == undefined) {
-        return -100
-        return
-      }
-      result.forEach(arr => {
-        var targetStr
-        var kanaCount
-        if(arr[arr.length-1] == '*') { // for substring is katakana already
-          targetStr = arr[0]
-          kanaCount = getKanaCount(targetStr)
-          if(kanaCount == 0) { // for japanese substring includes english
-            isContainOtherLang = true
-          }
-        } else {
-          targetStr = arr[arr.length - 1]
-          kanaCount = getKanaCount(targetStr)
-        }
-        count += kanaCount
-        //console.log(arr[arr.length - 1], kanaCount)
-      })
-      if(isContainOtherLang) {
-        return -1
-      } else {
-        return count
-      }
-}
-
-function getKanaFromResult(result) {
-      var isContainOtherLang = false
-      var count = 0
-      var kanaStr = ""
-      if(result == undefined) {
-        return ""
-      }
-      result.forEach(arr => {
-        var targetStr
-        var kanaCount
-        if(arr[arr.length-1] == '*') { // for substring is katakana already
-          targetStr = arr[0]
-          kanaCount = getKanaCount(targetStr)
-          if(kanaCount == 0) { // for japanese substring includes english
-            isContainOtherLang = true
-          }
-        } else {
-          targetStr = arr[arr.length - 1]
-          kanaCount = getKanaCount(targetStr)
-        }
-        count += kanaCount
-        kanaStr += findKanaFix(arr[0]) ? findKanaFix(arr[0]) : targetStr
-        //console.log(arr[arr.length - 1], kanaCount)
-      })
-      if(isContainOtherLang) {
-        return ""
-      } else {
-        return kanaStr.split("").filter(c => isKana(c)).join("")
-      }
-}
-
-
-function getKanaCount(str) {
-  var count = 0;
-  str.split("").forEach(c => {
-    if(isKana(c)) {
-      count++
-    }
-  })
-  return count
-}
-
-function isKana(c) {
-  if(c >= "ア" && c <= "ヿ" ||
-     c >= "あ" && c <= "ゟ" ||
-     c >= "0" && c <="9"
-  ){
-    return true
-  }
-  return false
-}
-
-function isNoTomAndMary(s) {
-  return s.indexOf("Tom") == -1 && s.indexOf("Mary") == -1
-}
-function getRandomJPName() {
-  let familyNames = [
-    "佐藤",
-    "鈴木",
-    "高橋",
-    "田中",
-    "渡边",
-    "伊藤",
-    "山本",
-    "中村",
-    "小林",
-    "斋藤",
-    "加藤",
-    "吉田",
-    "山田",
-    "佐々木",
-    "山口",
-    "松本",
-    "井上",
-    "木村",
-    "林",
-    "清水"
-  ]
-  return familyNames[getRandomInt(familyNames.length-1)]　+　"さん"
-
-}
-
-function getRandomInt(max) {
-  return Math.floor(Math.random() * Math.floor(max));
-}
-
-
-function findKanaFix(token) {
-  var kanaFix = {
-    "何時": "なんじ",
-    "という": "トイウ",
-    "事": "こと",
-    "1日": "いちにち",
-    "会い": "あい",
-    "次": "つぎ",
-    "米": "こめ"
-  }
-  return kanaFix[token]
 }
