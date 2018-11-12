@@ -38,7 +38,7 @@ enum Level: Int, Codable {
     }
 
     var infinteChallengeDatasetKey: String {
-        return "Level DataSet Key \(self.rawValue)"
+        return "Level DataSet Key \(self.rawValue)\(gameLang.key)"
     }
 
     var title: String {

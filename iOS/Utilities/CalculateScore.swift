@@ -66,6 +66,8 @@ func calculateScore(
     _ sentence1: String,
     _ sentence2: String
 ) -> Promise<Score> {
+    if gameLang == .en { return calculateScoreEn(sentence1, sentence2) }
+
     let promise = Promise<Score>.pending()
 
     func calcScore(_ str1: String, _ str2: String) -> Int {
@@ -119,6 +121,9 @@ func calculateScoreEn(
     let normalizedText2 = normalizeEnglishText(sentence2)
 
     let score = calcScore(normalizedText1, normalizedText2)
+    #if os(iOS)
+    postEvent(.scoreCalculated, score: Score(value: score))
+    #endif
     promise.fulfill(Score(value: score))
     return promise
 }

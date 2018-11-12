@@ -28,7 +28,7 @@ class ViewController: NSViewController {
 }
 
 private var topicTableName = "topicSentencesInfo"
-private var sqliteFileName = "inf_sentences_100points"
+private var sqliteFileName = "inf_sentences_100points_duolingo"
 private var writableDBPath = ""
 var dbW: Connection!
 

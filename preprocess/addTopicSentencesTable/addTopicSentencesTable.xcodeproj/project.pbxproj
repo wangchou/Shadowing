@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE23B27B2199B1C0007ABF49 /* inf_sentences_100points_duolingo.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BE23B27A2199B1C0007ABF49 /* inf_sentences_100points_duolingo.sqlite */; };
 		BE39E0AB2180E72000A34C50 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE39E0A72180E72000A34C50 /* Alamofire.framework */; };
 		BE39E0AC2180E72000A34C50 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE39E0A72180E72000A34C50 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE39E0AD2180E72000A34C50 /* FBLPromises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE39E0A82180E72000A34C50 /* FBLPromises.framework */; };
@@ -19,7 +20,6 @@
 		BE3EA030217761B300B65F48 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA02F217761B300B65F48 /* ViewController.swift */; };
 		BE3EA032217761B400B65F48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE3EA031217761B400B65F48 /* Assets.xcassets */; };
 		BE3EA035217761B400B65F48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE3EA033217761B400B65F48 /* Main.storyboard */; };
-		BE60F9C62198400C00D81EA2 /* inf_sentences_100points.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BE60F9C52198400C00D81EA2 /* inf_sentences_100points.sqlite */; };
 		BE869D0B218E110000689755 /* rawDataSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE869D00218E110000689755 /* rawDataSets.swift */; };
 		BE869D0C218E110000689755 /* sqliteSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE869D01218E110000689755 /* sqliteSentences.swift */; };
 		BE869D0D218E110000689755 /* daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE869D02218E110000689755 /* daily.swift */; };
@@ -53,6 +53,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BE23B27A2199B1C0007ABF49 /* inf_sentences_100points_duolingo.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences_100points_duolingo.sqlite; sourceTree = "<group>"; };
 		BE39E0A72180E72000A34C50 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/Mac/Alamofire.framework; sourceTree = "<group>"; };
 		BE39E0A82180E72000A34C50 /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBLPromises.framework; path = Carthage/Build/Mac/FBLPromises.framework; sourceTree = "<group>"; };
 		BE39E0A92180E72000A34C50 /* Promises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Promises.framework; path = Carthage/Build/Mac/Promises.framework; sourceTree = "<group>"; };
@@ -64,7 +65,6 @@
 		BE3EA034217761B400B65F48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BE3EA036217761B400B65F48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE3EA037217761B400B65F48 /* addTopicSentencesTable.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = addTopicSentencesTable.entitlements; sourceTree = "<group>"; };
-		BE60F9C52198400C00D81EA2 /* inf_sentences_100points.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences_100points.sqlite; sourceTree = "<group>"; };
 		BE869D00218E110000689755 /* rawDataSets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = rawDataSets.swift; path = ../../iOS/Sentences/rawDataSets.swift; sourceTree = "<group>"; };
 		BE869D01218E110000689755 /* sqliteSentences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = sqliteSentences.swift; path = ../../iOS/Utilities/sqliteSentences.swift; sourceTree = "<group>"; };
 		BE869D02218E110000689755 /* daily.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = daily.swift; path = ../../iOS/Sentences/daily.swift; sourceTree = "<group>"; };
@@ -98,7 +98,7 @@
 		BE3EA021217761B200B65F48 = {
 			isa = PBXGroup;
 			children = (
-				BE60F9C52198400C00D81EA2 /* inf_sentences_100points.sqlite */,
+				BE23B27A2199B1C0007ABF49 /* inf_sentences_100points_duolingo.sqlite */,
 				BE39E0A72180E72000A34C50 /* Alamofire.framework */,
 				BE39E0A82180E72000A34C50 /* FBLPromises.framework */,
 				BE39E0A92180E72000A34C50 /* Promises.framework */,
@@ -211,7 +211,7 @@
 			files = (
 				BE3EA032217761B400B65F48 /* Assets.xcassets in Resources */,
 				BE3EA035217761B400B65F48 /* Main.storyboard in Resources */,
-				BE60F9C62198400C00D81EA2 /* inf_sentences_100points.sqlite in Resources */,
+				BE23B27B2199B1C0007ABF49 /* inf_sentences_100points_duolingo.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

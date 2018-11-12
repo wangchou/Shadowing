@@ -81,11 +81,14 @@ extension Messenger: GameEventDelegate {
 
     private func onScore(_ score: Score) {
         let attributed = NSMutableAttributedString()
-        if let tokenInfos = kanaTokenInfosCacheDictionary[context.userSaidString] {
+        if let tokenInfos = kanaTokenInfosCacheDictionary[context.userSaidString],
+           gameLang == .jp {
             attributed.append(getFuriganaString(tokenInfos: tokenInfos))
         } else {
             attributed.append(rubyAttrStr(context.userSaidString))
         }
+
+        print(context.userSaidString)
 
         if attributed.string == "" {
             attributed.append(rubyAttrStr("聽不清楚"))

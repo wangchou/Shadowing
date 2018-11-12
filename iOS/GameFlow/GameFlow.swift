@@ -176,7 +176,6 @@ extension GameFlow {
     }
 
     private func speakScore() -> Promise<Void> {
-        context.gameState = .scoreCalculated
         let score = context.score
         updateLife(score: score)
 
@@ -232,7 +231,6 @@ extension GameFlow {
     }
 
     private func saveScore(score: Score) -> Promise<Void> {
-        context.gameState = .scoreCalculated
         context.score = score
         sentenceScores[context.targetString] = score
         updateGameRecord(score: score)

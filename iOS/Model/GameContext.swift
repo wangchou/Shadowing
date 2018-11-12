@@ -123,9 +123,13 @@ class GameContext {
             maxKanaCount: level.maxKanaCount,
             numOfSentences: numOfSentences
         )
+
         sentences = getSentencesByIds(ids: sentenceIds)
-        sentences.forEach { s in
-            _ = s.furiganaAttributedString // load furigana
+
+        if gameLang == .jp {
+            sentences.forEach { s in
+                _ = s.furiganaAttributedString // load furigana
+            }
         }
         if isSimulator { life = 100 }
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level)

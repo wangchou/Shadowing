@@ -18,6 +18,9 @@ func loadGameLang() {
     }
 }
 
+var jaSentenceInfos: [Int: SentenceInfo] = [:]
+var enSentenceInfos: [Int: SentenceInfo] = [:]
+
 enum Lang: Int, Codable {
     case jp = 0
     case en = 1
@@ -30,6 +33,15 @@ enum Lang: Int, Codable {
     var isSupportTopicMode: Bool {
         if self == .jp { return true }
         return false
+    }
+
+    var sentenceInfos: [Int: SentenceInfo] {
+        switch self {
+        case .jp:
+            return jaSentenceInfos
+        case .en:
+            return enSentenceInfos
+        }
     }
 }
 

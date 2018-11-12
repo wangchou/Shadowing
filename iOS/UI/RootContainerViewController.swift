@@ -29,11 +29,12 @@ class RootContainerViewController: UIViewController {
         current = splashScreen
         showVC(splashScreen)
 
-        #if ForeignDev
+//        #if ForeignDev
             gameLang = Lang.en
-        #else
-            loadGameLang()
-        #endif
+            GameContext.shared.contentTab = .infiniteChallenge
+//        #else
+//            loadGameLang()
+//        #endif
 
         loadTopSentencesInfoDB()
         loadDataSets()

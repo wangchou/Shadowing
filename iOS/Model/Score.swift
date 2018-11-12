@@ -29,10 +29,10 @@ struct Score: Codable {
     }
 
     var text: String {
-        if type == .perfect { return "正解"}
-        if type == .great { return "すごい"}
-        if type == .good { return "いいね"}
-        return "違います"
+        if type == .perfect { return gameLang == .jp ? "正解" : "Perfect" }
+        if type == .great { return gameLang == .jp ? "すごい" : "Excellent" }
+        if type == .good { return gameLang == .jp ? "いいね" : "Good" }
+        return gameLang == .jp ? "違います" : "Wrong"
     }
 
     #if os(iOS)
