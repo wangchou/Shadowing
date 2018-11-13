@@ -28,6 +28,7 @@ struct Score: Codable {
         return .poor
     }
 
+    #if os(iOS)
     var text: String {
         if type == .perfect { return gameLang == .jp ? "正解" : "Perfect" }
         if type == .great { return gameLang == .jp ? "すごい" : "Excellent" }
@@ -35,7 +36,6 @@ struct Score: Codable {
         return gameLang == .jp ? "違います" : "Wrong"
     }
 
-    #if os(iOS)
     var color: UIColor {
         if type == .perfect { return myGreen }
         if type == .great { return myGreen }

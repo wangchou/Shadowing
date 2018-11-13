@@ -20,10 +20,10 @@ class InfiniteChallengePage: UIViewController {
     var topBarRightText: String = ""
     var level: Level = .lv0
     var minKanaCount: Int {
-        return level.minKanaCount
+        return level.minSyllablesCount
     }
     var maxKanaCount: Int {
-        return level.maxKanaCount
+        return level.maxSyllablesCount
     }
     @IBOutlet weak var infoView: ICInfoView!
 

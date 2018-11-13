@@ -23,7 +23,7 @@ struct TopicSentenceInfo {
 
 var topicSentencesInfos: [String: TopicSentenceInfo] = [:]
 private var sqliteFileName = "inf_sentences_100points_duolingo_with_topics"
-
+#if os(iOS)
 func loadSentenceDB() {
     guard let path = Bundle.main.path(forResource: sqliteFileName, ofType: "sqlite") else {
         print("sqlite file not found"); return
@@ -72,6 +72,7 @@ func loadSentenceDB() {
         print("db error")
     }
 }
+#endif
 
 func loadTopSentencesInfoDB() {
     guard topicSentencesInfos.isEmpty else { return }

@@ -3,9 +3,9 @@ const fs = require('fs');
 const sqlite3 = require('sqlite3').verbose();
 const { execSync } = require('child_process');
 
-let inAlexDbName = "inf_sentences_1112_alex.sqlite"
-let inKyokoDbName = "inf_sentences_1112_kyoko.sqlite"
-let outDbName = "inf_sentences_1112_merged.sqlite"
+let inSamanthaDbName = "inf_sentences_1113_samantha.sqlite"
+let inKyokoDbName = "inf_sentences_1113_kyoko.sqlite"
+let outDbName = "inf_sentences_1113_merged.sqlite"
 let tableName = "sentences"
 var outDb
 try {
@@ -14,14 +14,18 @@ try {
 
 var idToAlex = {}
 var idToAlexScore = {}
+var idToSamantha = {}
+var idToSamanthaScore = {}
 async function runAll() {
-  var alexRows = await getAlexSaid()
+  var samanthaRows = await getSamanthaSaid()
   var kyokoRows = await getKyokoSaid()
-  alexRows.forEach(row => {
+  samanthaRows.forEach(row => {
     idToAlex[`${row.id}`] = row.alex
     idToAlexScore[`${row.id}`] = row.alex_score
+    idToSamantha[`${row.id}`] = row.samantha
+    idToSamanthaScore[`${row.id}`] = row.samantha_score
   })
-  console.log("alex", alexRows.length)
+  console.log("samantha", samanthaRows.length)
   console.log("kyoko", kyokoRows.length)
   outDb = new sqlite3.Database(`./${outDbName}`);
   outDb.run(`CREATE TABLE ${tableName} (id integer PRIMARY_KEY, ja text NOT NULL, kana_count integer NOT NULL, otoya text, otoya_score integer, kyoko text, kyoko_score integer, en text NOT NULL, syllables_count integer, alex text, alex_score integer, samantha text, samantha_score integer)`, err => {
@@ -40,7 +44,8 @@ function insertData(objs) {
       obj.ja, obj.kana_count,
       obj.otoya, obj.otoya_score, obj.kyoko, obj.kyoko_score,
       obj.en, obj.syllables_count,
-      idToAlex[`${obj.id}`], idToAlexScore[`${obj.id}`], obj.samantha, obj.samantha_score
+      idToAlex[`${obj.id}`], idToAlexScore[`${obj.id}`],
+      idToSamantha[`${obj.id}`], idToSamanthaScore[`${obj.id}`],
     ]
 
     outDb.run(sql, values, function(err) {
@@ -58,9 +63,9 @@ function insertData(objs) {
 
 runAll()
 
-function getAlexSaid() {
+function getSamanthaSaid() {
   return new Promise(function(resolve, reject) {
-    let inDb = new sqlite3.Database(`./${inAlexDbName}`)
+    let inDb = new sqlite3.Database(`./${inSamanthaDbName}`)
     inDb.all("SELECT * FROM sentences", function(err, rows) {
         inDb.close();
         resolve([...rows])

@@ -23,8 +23,6 @@ class ViewController: NSViewController {
         // Update the view, if already loaded.
         }
     }
-
-
 }
 
 private var topicTableName = "topicSentencesInfo"
@@ -40,12 +38,14 @@ func createWritableDB() {
             .appendingPathComponent("\(sqliteFileName)_with_topics.sqlite")
             .path
 
+        let dbResourcePath = Bundle.main.path(forResource: sqliteFileName, ofType: "sqlite")!
         if !fileManager.fileExists(atPath: writableDBPath) {
             print("not exist")
-            let dbResourcePath = Bundle.main.path(forResource: sqliteFileName, ofType: "sqlite")!
             try fileManager.copyItem(atPath: dbResourcePath, toPath: writableDBPath)
         } else {
             print("exist")
+            try fileManager.removeItem(atPath: writableDBPath)
+            try fileManager.copyItem(atPath: dbResourcePath, toPath: writableDBPath)
         }
         dbW = try Connection(writableDBPath, readonly: false)
     } catch {

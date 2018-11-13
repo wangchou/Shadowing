@@ -119,8 +119,8 @@ class GameContext {
         loadSentenceDB()
         let numOfSentences = isSimulator ? 3 : 20
         let sentenceIds = randSentenceIds(
-            minKanaCount: level.minKanaCount,
-            maxKanaCount: level.maxKanaCount,
+            minKanaCount: level.minSyllablesCount,
+            maxKanaCount: level.maxSyllablesCount,
             numOfSentences: numOfSentences
         )
 
