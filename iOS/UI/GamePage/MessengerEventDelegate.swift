@@ -22,8 +22,10 @@ extension Messenger: GameEventDelegate {
                 addLabel(rubyAttrStr(text))
             }
             if context.gameState == .TTSSpeaking {
+                var translationsDict = (gameLang == .jp && context.contentTab == .topics) ?
+                    chTranslations : translations
                 if context.gameSetting.isUsingTranslation,
-                   let translation = translations[text] {
+                   let translation = translationsDict[text] {
                    addLabel(rubyAttrStr(translation))
                 } else if let tokenInfos = kanaTokenInfosCacheDictionary[text] {
                     addLabel(getFuriganaString(tokenInfos: tokenInfos))

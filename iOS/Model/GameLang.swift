@@ -8,13 +8,22 @@
 
 private let gameLangKey = "GameLangKey"
 
+// https://stackoverflow.com/questions/44580719/how-do-i-make-an-enum-decodable-in-swift-4
+private struct LangForEncode: Codable {
+    var lang: Lang
+}
+
 func saveGameLang() {
-    saveToUserDefault(object: gameLang, key: gameLangKey)
+    let lang: LangForEncode = LangForEncode(lang: gameLang)
+    saveToUserDefault(object: lang, key: gameLangKey)
 }
 
 func loadGameLang() {
-    if let loadedGameLang = loadFromUserDefault(type: Lang.self, key: gameLangKey) {
-        gameLang = loadedGameLang
+    if let loadedGameLang = loadFromUserDefault(type: LangForEncode.self, key: gameLangKey) {
+        gameLang = loadedGameLang.lang
+        if gameLang != .jp {
+            GameContext.shared.contentTab = .infiniteChallenge
+        }
     }
 }
 
@@ -22,8 +31,7 @@ var jaSentenceInfos: [Int: SentenceInfo] = [:]
 var enSentenceInfos: [Int: SentenceInfo] = [:]
 
 enum Lang: Int, Codable {
-    case jp = 0
-    case en = 1
+    case jp, en
 
     var key: String {
         if self == .jp { return "" }

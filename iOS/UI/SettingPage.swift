@@ -14,10 +14,10 @@ private let i18n = I18n.shared
 
 class SettingPage: UITableViewController {
     @IBOutlet weak var topBarView: TopBarView!
+    @IBOutlet weak var gameLangSegmentControl: UISegmentedControl!
 
     @IBOutlet weak var autoSpeedLabel: UILabel!
     @IBOutlet weak var autoSpeedSwitch: UISwitch!
-    @IBOutlet weak var gameSpeedCell: UITableViewCell!
     @IBOutlet weak var gameSpeedSlider: UISlider!
     @IBOutlet weak var gameSpeedFastLabel: UILabel!
 
@@ -52,7 +52,7 @@ class SettingPage: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        topBarView.titleLabel.text = "設  定"
+
         topBarView.leftButton.isHidden = true
         gameSpeedSlider.addTapGestureRecognizer(action: nil)
         practiceSpeedSlider.addTapGestureRecognizer(action: nil)
@@ -60,12 +60,16 @@ class SettingPage: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        gameLangSegmentControl.setTitle(i18n.english, forSegmentAt: 0)
+        gameLangSegmentControl.setTitle(i18n.japanese, forSegmentAt: 1)
+        topBarView.titleLabel.text = i18n.setting
         autoSpeedLabel.text = i18n.autoSpeedLabel
         translationLabel.text = i18n.translationLabel
         guideVoiceLabel.text = i18n.guideVoiceLabel
         narratorLabel.text = i18n.narratorLabel
         monitoringLabel.text = i18n.monitoringLabel
+
+        gameLangSegmentControl.selectedSegmentIndex = gameLang == .jp ? 1 : 0
 
         gotoIOSSettingButton.setTitle(i18n.gotoIOSSettingButtonTitle, for: .normal)
         teacherTTSSegmentControl.setTitle(i18n.defaultText, forSegmentAt: 0)
@@ -182,6 +186,25 @@ class SettingPage: UITableViewController {
         saveGameSetting()
     }
 
+    @IBAction func gameLangSegmentControlValueChanged(_ sender: Any) {
+        if gameLangSegmentControl.selectedSegmentIndex == 1 {
+            gameLang = .jp
+        } else {
+            gameLang = .en
+        }
+
+        saveGameLang()
+        loadGameHistory()
+        loadGameSetting()
+        loadGameMiscData()
+        viewWillAppear(false)
+
+        if gameLang == .en {
+            rootViewController.showInfiniteChallengePage(isShowSetting: true)
+            context.contentTab = .infiniteChallenge
+        }
+    }
+
     @IBAction func assistantTTSSegmentControlValueChanged(_ sender: Any) {
         let speaker = getChatSpeaker(segmentIndex: assistantTTSSegmentControl.selectedSegmentIndex)
         let availableVoices = getAvailableVoiceID(language: "ja-JP")
@@ -201,16 +224,18 @@ class SettingPage: UITableViewController {
         let i18n = I18n.shared
         switch section {
         case 0:
-            return i18n.settingSectionGameSpeed
+            return i18n.settingTitle
         case 1:
-            return i18n.settingSectionPracticeSpeed
+            return i18n.settingSectionGameSpeed
         case 2:
-            return i18n.gameSetting
+            return i18n.settingSectionPracticeSpeed
         case 3:
-            return i18n.micAndSpeechPermission
+            return i18n.gameSetting
         case 4:
-            return i18n.japaneseTeacher
+            return i18n.micAndSpeechPermission
         case 5:
+            return i18n.japaneseTeacher
+        case 6:
             return i18n.japaneseAssistant
         default:
             return "Other Setting"

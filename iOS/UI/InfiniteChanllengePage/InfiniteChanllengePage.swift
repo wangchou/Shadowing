@@ -9,12 +9,14 @@
 import Foundation
 import UIKit
 
+private let context = GameContext.shared
+
 class InfiniteChallengePage: UIViewController {
     @IBOutlet weak var topBarView: TopBarView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var blockView: UIView!
     @IBOutlet weak var blockInfo: UILabel!
-    @IBOutlet weak var bottomBar: BottomBarView!
+    @IBOutlet weak var translationButton: UIButton!
     var topBarTitle: String = "無限挑戰模式"
     var topBarLeftText: String = ""
     var topBarRightText: String = ""
@@ -36,8 +38,8 @@ class InfiniteChallengePage: UIViewController {
             UINib(nibName: "SentencesTableCell", bundle: nil),
             forCellReuseIdentifier: "ICContentTableCell"
         )
-        bottomBar.contentTab = .infiniteChallenge
-        bottomBar.sharedSetup()
+//        bottomBar.contentTab = .infiniteChallenge
+//        bottomBar.sharedSetup()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -76,6 +78,11 @@ class InfiniteChallengePage: UIViewController {
         }
         topBarView.titleLabel.text = topBarTitle
     }
+    @IBAction func onTranslationButtonClicked(_ sender: Any) {
+        context.gameSetting.isUsingTranslation = !context.gameSetting.isUsingTranslation
+        saveGameSetting()
+        tableView.reloadData()
+    }
 }
 
 extension InfiniteChallengePage: UITableViewDataSource {
@@ -96,7 +103,7 @@ extension InfiniteChallengePage: UITableViewDataSource {
         guard let contentCell = cell as? SentencesTableCell else { print("detailCell convert error"); return cell }
 
         if let sentences = lastInfiniteChallengeSentences[self.level] {
-            contentCell.update(sentence: sentences[indexPath.row], isShowTranslate: false)
+            contentCell.update(sentence: sentences[indexPath.row], isShowTranslate: context.gameSetting.isUsingTranslation)
         }
 
         return contentCell

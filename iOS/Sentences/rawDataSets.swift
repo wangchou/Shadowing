@@ -8,7 +8,7 @@
 
 import Foundation
 
-var translations: [String: String] = [:]
+var chTranslations: [String: String] = [:]
 
 var datasetKeyToTags: [String: [String]] = [:]
 private var tags: [String] = []
@@ -36,7 +36,7 @@ var rawDataSets: [[String]] =
         }.map { sentence in
             let subSentences = sentence.components(separatedBy: "|")
             if subSentences.count > 1 {
-                translations[subSentences[0]] = subSentences[1]
+                chTranslations[subSentences[0]] = subSentences[1]
             }
             return subSentences[0]
         }
