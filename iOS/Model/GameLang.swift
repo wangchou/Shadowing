@@ -51,6 +51,15 @@ enum Lang: Int, Codable {
             return enSentenceInfos
         }
     }
+
+    var prefix: String {
+        switch self {
+        case .jp:
+            return "ja"
+        case .en:
+            return "en"
+        }
+    }
 }
 
 var gameLang: Lang = Lang.jp

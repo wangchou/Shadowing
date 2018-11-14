@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AVFoundation
 import UIKit
 
 private let context = GameContext.shared
@@ -33,21 +34,27 @@ class SettingPage: UITableViewController {
     @IBOutlet weak var monitoringLabel: UILabel!
     @IBOutlet weak var monitoringSwitch: UISwitch!
 
+    @IBOutlet weak var teacherLabel: UILabel!
+    @IBOutlet weak var teacherNameLabel: UILabel!
+    @IBOutlet weak var assisantLabel: UILabel!
+    @IBOutlet weak var assistantNameLabel: UILabel!
     @IBOutlet weak var gotoIOSSettingButton: UIButton!
-    @IBOutlet weak var teacherTTSSegmentControl: UISegmentedControl!
-    @IBOutlet weak var assistantTTSSegmentControl: UISegmentedControl!
 
     var testSentence: String {
-        switch context.gameSetting.teacher {
-        case .hattori, .oren:
-            return "こんにちは、私の名前はSiriです。"
-        case .kyoko:
-            return "こんにちは、私の名前はKyokoです。"
-        case .otoya:
-            return "こんにちは、私の名前はOtoyaです。"
-        default:
-            return "今日はいい天気ですね。"
+        if let voice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher) {
+            if gameLang == .jp {
+                return "こんにちは、私の名前は\(voice.name)です。"
+            } else {
+                return "Hello. My name is \(voice.name)."
+            }
         }
+
+        if gameLang == .jp {
+            return "今日はいい天気ですね。"
+        } else {
+            return "It's nice to meet you."
+        }
+
     }
 
     override func viewDidLoad() {
@@ -69,11 +76,20 @@ class SettingPage: UITableViewController {
         narratorLabel.text = i18n.narratorLabel
         monitoringLabel.text = i18n.monitoringLabel
 
+        teacherLabel.text = i18n.teacherLabel
+        assisantLabel.text = i18n.assistantLabel
+
+        if let teacher = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher) {
+            teacherNameLabel.text = teacher.detailName
+        }
+
+        if let assisant = AVSpeechSynthesisVoice(identifier: context.gameSetting.assisant) {
+            assistantNameLabel.text = assisant.detailName
+        }
+
         gameLangSegmentControl.selectedSegmentIndex = gameLang == .jp ? 1 : 0
 
         gotoIOSSettingButton.setTitle(i18n.gotoIOSSettingButtonTitle, for: .normal)
-        teacherTTSSegmentControl.setTitle(i18n.defaultText, forSegmentAt: 0)
-        assistantTTSSegmentControl.setTitle(i18n.defaultText, forSegmentAt: 0)
 
         let setting = context.gameSetting
         autoSpeedSwitch.isOn = setting.isAutoSpeed
@@ -95,27 +111,6 @@ class SettingPage: UITableViewController {
         guideVoiceSwitch.isOn = setting.isUsingGuideVoice
         narratorSwitch.isOn = setting.isUsingNarrator
         monitoringSwitch.isOn = setting.isMointoring
-
-        teacherTTSSegmentControl.selectedSegmentIndex = getSegmentIndex(speaker: setting.teacher)
-        assistantTTSSegmentControl.selectedSegmentIndex = getSegmentIndex(speaker: setting.assisant)
-    }
-
-    private func getSegmentIndex(speaker: ChatSpeaker) -> Int {
-        switch speaker {
-        case .kyokoPremium:
-            return 1
-        case .otoyaPremium:
-            return 2
-        default:
-            return 0
-        }
-    }
-
-    private func getChatSpeaker(segmentIndex: Int) -> ChatSpeaker {
-        if segmentIndex == 0 { return .system }
-        if segmentIndex == 1 { return .kyokoPremium }
-        if segmentIndex == 2 { return .otoyaPremium }
-        return .system
     }
 
     private func showVoiceIsNotAvailableAlert() {
@@ -171,21 +166,6 @@ class SettingPage: UITableViewController {
         goToIOSSettingCenter()
     }
 
-    @IBAction func teacherTTSSegmentControlValueChanged(_ sender: Any) {
-        let speaker = getChatSpeaker(segmentIndex: teacherTTSSegmentControl.selectedSegmentIndex)
-        let availableVoices = getAvailableVoiceID(language: "ja-JP")
-
-        if speaker == .system || availableVoices.contains(speaker.rawValue) {
-            context.gameSetting.teacher = speaker
-            _ = teacherSay(testSentence, rate: context.gameSetting.preferredSpeed)
-        } else {
-            // show alert to download it
-            teacherTTSSegmentControl.selectedSegmentIndex = getSegmentIndex(speaker: context.gameSetting.teacher)
-            showVoiceIsNotAvailableAlert()
-        }
-        saveGameSetting()
-    }
-
     @IBAction func gameLangSegmentControlValueChanged(_ sender: Any) {
         if gameLangSegmentControl.selectedSegmentIndex == 1 {
             gameLang = .jp
@@ -205,21 +185,6 @@ class SettingPage: UITableViewController {
         }
     }
 
-    @IBAction func assistantTTSSegmentControlValueChanged(_ sender: Any) {
-        let speaker = getChatSpeaker(segmentIndex: assistantTTSSegmentControl.selectedSegmentIndex)
-        let availableVoices = getAvailableVoiceID(language: "ja-JP")
-
-        if speaker == .system || availableVoices.contains(speaker.rawValue) {
-            context.gameSetting.assisant = speaker
-            _ = assisantSay("正解、違います。")
-        } else {
-            // show alert to download it
-            assistantTTSSegmentControl.selectedSegmentIndex = getSegmentIndex(speaker: context.gameSetting.assisant)
-            showVoiceIsNotAvailableAlert()
-        }
-        saveGameSetting()
-    }
-
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let i18n = I18n.shared
         switch section {
@@ -230,15 +195,50 @@ class SettingPage: UITableViewController {
         case 2:
             return i18n.settingSectionPracticeSpeed
         case 3:
-            return i18n.gameSetting
+            return i18n.textToSpeech
         case 4:
-            return i18n.micAndSpeechPermission
+            return i18n.gameSetting
         case 5:
-            return i18n.japaneseTeacher
-        case 6:
-            return i18n.japaneseAssistant
+            return i18n.micAndSpeechPermission
+
         default:
             return "Other Setting"
         }
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 3 {
+            VoiceSelectionViewController.voices = getAvailableVoice(prefix: gameLang.prefix)
+
+            if indexPath.row == 0 { // teacher voice
+                VoiceSelectionViewController.fromSettingPage = self
+                VoiceSelectionViewController.selectingVoiceFor = .teacher
+                VoiceSelectionViewController.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher)
+            }
+            if indexPath.row == 1 { // assistant voice
+                VoiceSelectionViewController.fromSettingPage = self
+                VoiceSelectionViewController.selectingVoiceFor = .assisant
+                VoiceSelectionViewController.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.assisant)
+            }
+            launchStoryboard(self, "VoiceSelectionViewController", isOverCurrent: true, animated: true)
+        }
+    }
+}
+
+extension AVSpeechSynthesisVoice {
+    var detailName: String {
+        let pureName = self.name.replace("（.*）", "")
+        return "\(pureName) \(self.quality == .enhanced ? i18n.enhancedVoice : "")"
+    }
+    var detailLocale: String {
+        var langName: String = self.language
+        if self.language.hasPrefix("en-") {
+           langName = langName.replace("en-", "\(i18n.english) (")
+           langName += ")"
+        }
+        if self.language.hasPrefix("ja") {
+            langName = i18n.japanese
+        }
+        return langName
     }
 }

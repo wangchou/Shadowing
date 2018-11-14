@@ -29,13 +29,7 @@ class RootContainerViewController: UIViewController {
         current = splashScreen
         showVC(splashScreen)
 
-//        #if ForeignDev
-//            gameLang = Lang.en
-//            GameContext.shared.contentTab = .infiniteChallenge
-//        #else
-            loadGameLang()
-//        #endif
-
+        loadGameLang()
         loadTopSentencesInfoDB()
         loadDataSets()
         loadGameHistory()
@@ -62,7 +56,8 @@ class RootContainerViewController: UIViewController {
         guard current != infiniteChallengeSwipablePage else { return }
         removeCurrent()
         current = infiniteChallengeSwipablePage
-        if isShowSetting {
+        if isShowSetting &&
+           !infiniteChallengeSwipablePage.pages.isEmpty {
             infiniteChallengeSwipablePage.setViewControllers([infiniteChallengeSwipablePage.pages[0]], direction: .reverse, animated: false, completion: nil)
         }
 

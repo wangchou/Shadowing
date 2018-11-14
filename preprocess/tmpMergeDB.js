@@ -3,9 +3,9 @@ const fs = require('fs');
 const sqlite3 = require('sqlite3').verbose();
 const { execSync } = require('child_process');
 
-let inSamanthaDbName = "inf_sentences_1113_samantha.sqlite"
+let inSamanthaDbName = "inf_sentences_1114_samantha.sqlite"
 let inKyokoDbName = "inf_sentences_1113_kyoko.sqlite"
-let outDbName = "inf_sentences_1113_merged.sqlite"
+let outDbName = "inf_sentences_1114_merged.sqlite"
 let tableName = "sentences"
 var outDb
 try {

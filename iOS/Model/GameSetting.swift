@@ -22,6 +22,14 @@ func loadGameSetting() {
     } else {
         print("[\(gameLang)] create new gameSetting")
         context.gameSetting = GameSetting()
+        let currentLocale = AVSpeechSynthesisVoice.currentLanguageCode()
+        context.gameSetting.narrator = AVSpeechSynthesisVoice(language: currentLocale)?.identifier ?? "unknown"
+        let langCode = gameLang == .jp ? "ja-JP" : "en-US"
+
+        context.gameSetting.teacher = AVSpeechSynthesisVoice(language: langCode)?.identifier ?? "unknown"
+        context.gameSetting.assisant = context.gameSetting.teacher
+
+        print(context.gameSetting.narrator, context.gameSetting.teacher)
     }
 }
 
@@ -33,7 +41,7 @@ struct GameSetting: Codable {
     var isUsingGuideVoice: Bool = true
     var isUsingNarrator: Bool = true
     var isMointoring: Bool = false
-    var narrator: ChatSpeaker = .meijia
-    var teacher: ChatSpeaker = .system
-    var assisant: ChatSpeaker = .system
+    var narrator: String = "unknown"
+    var teacher: String = "unknown"
+    var assisant: String = "unknown"
 }

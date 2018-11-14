@@ -28,7 +28,7 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
 
     func say(
         _ text: String,
-        name: String,
+        voiceId: String,
         rate: Float = AVSpeechUtteranceDefaultSpeechRate // 0.5, range 0 ~ 1.0
         ) -> Promise<Void> {
         if synthesizer.isSpeaking {
@@ -36,7 +36,7 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         }
         synthesizer.delegate = self
         let utterance = AVSpeechUtterance(string: getKanaFixedText(text))
-        if let voice = AVSpeechSynthesisVoice(identifier: name) {
+        if let voice = AVSpeechSynthesisVoice(identifier: voiceId) {
             utterance.voice = voice
         } else {
             if targetLanguage == AVSpeechSynthesisVoice.currentLanguageCode() {

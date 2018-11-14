@@ -119,16 +119,24 @@ func dumpAvaliableVoices() {
     }
 }
 
-func getAvailableVoiceID(language: String) -> [String] {
+func getAvailableVoice(language: String) -> [AVSpeechSynthesisVoice] {
     return AVSpeechSynthesisVoice.speechVoices()
         .filter { voice in
             if voice.language == language {
                 return true
             }
             return false
-        }.map { voice in
-            return voice.identifier
         }
+}
+
+func getAvailableVoice(prefix: String) -> [AVSpeechSynthesisVoice] {
+    return AVSpeechSynthesisVoice.speechVoices()
+        .filter { voice in
+            if voice.language.hasPrefix(prefix) {
+                return true
+            }
+            return false
+    }
 }
 
 // measure performance

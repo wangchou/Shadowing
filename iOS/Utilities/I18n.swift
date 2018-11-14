@@ -64,9 +64,10 @@ class I18n {
         return isJa ? "選らんた声はまだダウンロードされていません" : "你選的語音還未下載"
     }
     var voiceNotAvailableMessage: String {
-        if isJa { return "iPhoneの「設定 > 一般 > アクセシビリティ > スピーチ > 声 > 日本語」で、ダウンロードしましょう。" }
-        if isZh { return "請於手機的「設定 > 一般 > 輔助使用 > 語音 > 聲音 > 日文」下載相關語音。" }
-        return "Download new voice via Settings > General > Accessibility > Speech > Voice > Japanese"
+        let lang = gameLang == .jp ? japanese : english
+        if isJa { return "iPhoneの「設定 > 一般 > アクセシビリティ > スピーチ > 声 > \(lang)」で、ダウンロードしましょう。" }
+        if isZh { return "請於手機的「設定 > 一般 > 輔助使用 > 語音 > 聲音 > \(lang)」下載相關語音。" }
+        return "Download new voice via Settings > General > Accessibility > Speech > Voice > \(lang)"
     }
     var voiceNotAvailableOKButton: String {
         return isJa ? "わかった" : "知道了"
@@ -92,15 +93,36 @@ class I18n {
         if isZh { return "麥克風與語音辨識權限" }
         return "Mic and Recognition Permissions"
     }
-    var japaneseTeacher: String {
-        if isJa { return "日本語先生" }
-        if isZh { return "日文老師" }
-        return "Japanese Teacher"
+    var textToSpeech: String {
+        if isJa { return "音声合成" }
+        if isZh { return "語音合成" }
+        return "Text to Speech"
     }
-    var japaneseAssistant: String {
-        if isJa { return "日本語アシスタント" }
-        if isZh { return "日文助理" }
-        return "Japanese Assisant"
+    var teacherLabel: String {
+        if gameLang == .jp {
+            if isJa { return "日本語先生" }
+            if isZh { return "日文老師" }
+            return "Japanese Teacher"
+        }
+
+        if isJa { return "英語先生" }
+        if isZh { return "英文老師" }
+        return "English Teacher"
+    }
+    var assistantLabel: String {
+        if gameLang == .jp {
+            if isJa { return "日本語アシスタント" }
+            if isZh { return "日文助理" }
+            return "Japanese Assisant"
+        }
+        if isJa { return "英語アシスタント" }
+        if isZh { return "英文助理" }
+        return "English Assisant"
+    }
+    var enhancedVoice: String {
+        if isJa { return "(拡張)" }
+        if isZh { return "(高品質)" }
+        return "(Enhanced)"
     }
     var cannotReachServer: String {
         return isJa ? "サーバーに接続できません" : "連不到主機"
@@ -151,6 +173,18 @@ class I18n {
         }
     }
 
+    var cancel: String {
+        if isJa { return "キャンセル" }
+        if isZh { return "取消" }
+        return "Cancel"
+    }
+
+    var done: String {
+        if isJa { return "完了" }
+        if isZh { return "完成" }
+        return "Done"
+    }
+
     var settingTitle: String {
         if isJa { return "今話したいのは..." }
         if isZh { return "我現在想說..." }
@@ -163,12 +197,14 @@ class I18n {
     }
 
     var japanese: String {
-        if isJa || isZh { return "日本語" }
+        if isJa { return "日本語" }
+        if isZh { return "日文" }
         return "Japanese"
     }
 
     var english: String {
-        if isJa || isZh { return "英語" }
+        if isJa { return "英語" }
+        if isZh { return "英文" }
         return "English"
     }
 }

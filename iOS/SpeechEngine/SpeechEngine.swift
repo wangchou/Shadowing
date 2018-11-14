@@ -26,6 +26,10 @@ func teacherSay(_ text: String, rate: Float = context.teachingRate) -> Promise<V
     return engine.speak(text: text, speaker: context.gameSetting.teacher, rate: rate)
 }
 
+func ttsSay(_ text: String, speaker: String, rate: Float = context.teachingRate) -> Promise<Void> {
+    return engine.speak(text: text, speaker: speaker, rate: rate)
+}
+
 class SpeechEngine {
     // Singleton
     static let shared = SpeechEngine()
@@ -91,7 +95,7 @@ class SpeechEngine {
         speechRecognizer.endAudio()
     }
 
-    fileprivate func speak(text: String, speaker: ChatSpeaker, rate: Float) -> Promise<Void> {
+    fileprivate func speak(text: String, speaker: String, rate: Float) -> Promise<Void> {
         let startTime = getNow()
         func updateSpeakDuration() -> Promise<Void> {
             context.speakDuration = Float((getNow() - startTime))
@@ -100,7 +104,7 @@ class SpeechEngine {
 
         return tts.say(
             text,
-            name: speaker.rawValue,
+            voiceId: speaker,
             rate: rate
             ).then(updateSpeakDuration)
     }
