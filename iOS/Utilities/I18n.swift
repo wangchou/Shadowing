@@ -235,7 +235,7 @@ class I18n {
     var gb: String {
         if isJa { return "英国" }
         if isZh { return "英國" }
-        return "UK"
+        return "United Kingdom"
     }
 
     var au: String {
@@ -252,5 +252,34 @@ class I18n {
         if isJa { return "南アフリカ" }
         if isZh { return "南非" }
         return "South Africa"
+    }
+
+    var syllablesCount: String {
+        if isZh { return gameLang == .jp ? "假名數" : "音節數" }
+        return gameLang == .jp ? "仮名数" : "音節数"
+    }
+
+    var sentencesCount: String {
+        if isZh { return "句數"}
+        return "句数"
+    }
+
+    var topicPageTitile: String {
+        return "\(languageInJa) - 話題"
+    }
+
+    var infiniteChallengeTitle: String {
+        return "\(languageInJa) - 無限挑戦"
+    }
+
+    var languageInJa: String {
+        return gameLang == .jp ? "日本語" : "英語"
+    }
+
+    var language: String {
+        if gameLang == .jp {
+            return japanese
+        }
+        return english
     }
 }

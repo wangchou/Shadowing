@@ -31,7 +31,8 @@ class InfiniteChallengeSwipablePage: UIPageViewController {
             pages.append(vc)
         }
         addPage("SettingPage")
-        addLevelPages()
+        addPage("InfiniteChallengeListPage")
+        addPage("InfiniteChallengePage")
         setViewControllers([pages[1]], direction: .forward, animated: true, completion: nil)
 
         dataSource = self
@@ -41,29 +42,9 @@ class InfiniteChallengeSwipablePage: UIPageViewController {
             (view as? UIScrollView)?.delaysContentTouches = false
         }
     }
-
-    func addLevelPages() {
-        let levels: [Level] = allLevels
-        let vcs: [InfiniteChallengePage] = (0..<levels.count).map { _ in
-            return UIStoryboard(name: "Main", bundle: nil)
-                .instantiateViewController(withIdentifier: "InfiniteChallengePage") as! InfiniteChallengePage
-        }
-
-        var pageNames = levels.map { level in return level.title }
-        pageNames.insert("", at: 0)
-        pageNames.append("")
-        for i in 0..<levels.count {
-            vcs[i].topBarLeftText = pageNames[i]
-            vcs[i].topBarTitle = pageNames[i+1]
-            vcs[i].topBarRightText = pageNames[i+2]
-            vcs[i].level = levels[i]
-            pages.append(vcs[i])
-        }
-    }
 }
 
 extension InfiniteChallengeSwipablePage: UIPageViewControllerDataSource {
-
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         if let index = pages.index(of: viewController),
             index + 1 < pages.count {

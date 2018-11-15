@@ -51,6 +51,7 @@ class ShadowingListPage: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        topBarView.titleLabel.text = I18n.shared.topicPageTitile
         let height = screen.width * 150/320
         topArea.frame.size.height = height + 50
         timeline.frame.size.height = height * 140 / 150

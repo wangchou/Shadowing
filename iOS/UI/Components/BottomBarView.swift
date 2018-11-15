@@ -16,7 +16,11 @@ private let context = GameContext.shared
 @IBDesignable
 class BottomBarView: UIView, XibView {
     var contentView: UIView?
-    var contentTab: ContentTab = .topics
+    var contentTab: ContentTab = .topics {
+        didSet {
+            updateContentTab()
+        }
+    }
     var nibName: String = "BottomBarView"
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
@@ -35,6 +39,10 @@ class BottomBarView: UIView, XibView {
     func sharedSetup() {
         xibSetup()
         contentView?.backgroundColor = rgb(250, 250, 250)
+        updateContentTab()
+        backgroundColor = rgb(250, 250, 250)
+    }
+    private func updateContentTab() {
         var leftColor: UIColor = UIColor(white: 0, alpha: 0.66)
         var rightColor: UIColor = UIColor(white: 0, alpha: 0.66)
         var leftImgName: String = "outline_featured_play_list_black_48pt"
@@ -47,7 +55,6 @@ class BottomBarView: UIView, XibView {
         }
         leftButton.setIconImage(named: leftImgName, tintColor: leftColor)
         rightButton.setIconImage(named: "outline_timeline_black_48pt", tintColor: rightColor)
-        backgroundColor = rgb(250, 250, 250)
     }
     @IBAction func onLeftButtonClicked(_ sender: Any) {
         context.contentTab = .topics

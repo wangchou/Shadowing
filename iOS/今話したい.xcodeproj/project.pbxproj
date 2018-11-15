@@ -68,6 +68,8 @@
 		BECAC3BA216B8FE3001BBF49 /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECAC3B9216B8FE3001BBF49 /* BottomBarView.swift */; };
 		BECAC3BC216B904A001BBF49 /* BottomBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BECAC3BB216B904A001BBF49 /* BottomBarView.xib */; };
 		BECAC3BF216B9D19001BBF49 /* InfiniteChallengeSwipablePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECAC3BE216B9D19001BBF49 /* InfiniteChallengeSwipablePage.swift */; };
+		BECD9077219D279C00400FD3 /* InfiniteChallengeListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD9076219D279C00400FD3 /* InfiniteChallengeListPage.swift */; };
+		BECD907B219D294100400FD3 /* InfiniteChallengeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD907A219D294100400FD3 /* InfiniteChallengeTableCell.swift */; };
 		BED1CC0921452A54004AE397 /* GameSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1CC0821452A54004AE397 /* GameSetting.swift */; };
 		BEDEDD3720A46D1B00E7B60B /* ShadowingListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3620A46D1B00E7B60B /* ShadowingListPage.swift */; };
 		BEDEDD3920A46FCA00E7B60B /* GameRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */; };
@@ -82,7 +84,7 @@
 		BEF258B320B57C7F00D0026C /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF258B220B57C7F00D0026C /* TimelineView.swift */; };
 		BEF28B6120B52BB000385273 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF28B6020B52BB000385273 /* Score.swift */; };
 		BEF28B6320B52BF700385273 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF28B6220B52BF700385273 /* UI.swift */; };
-		BEF4B14F219C093800B8E45E /* VoiceSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF4B14E219C093800B8E45E /* VoiceSelectionViewController.swift */; };
+		BEF4B14F219C093800B8E45E /* VoiceSelectionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF4B14E219C093800B8E45E /* VoiceSelectionPage.swift */; };
 		BEF4B151219C0E3B00B8E45E /* VoiceTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF4B150219C0E3B00B8E45E /* VoiceTableCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -167,6 +169,8 @@
 		BECAC3B9216B8FE3001BBF49 /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
 		BECAC3BB216B904A001BBF49 /* BottomBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomBarView.xib; sourceTree = "<group>"; };
 		BECAC3BE216B9D19001BBF49 /* InfiniteChallengeSwipablePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteChallengeSwipablePage.swift; sourceTree = "<group>"; };
+		BECD9076219D279C00400FD3 /* InfiniteChallengeListPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteChallengeListPage.swift; sourceTree = "<group>"; };
+		BECD907A219D294100400FD3 /* InfiniteChallengeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteChallengeTableCell.swift; sourceTree = "<group>"; };
 		BED1CC0821452A54004AE397 /* GameSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetting.swift; sourceTree = "<group>"; };
 		BEDEDD3620A46D1B00E7B60B /* ShadowingListPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowingListPage.swift; sourceTree = "<group>"; };
 		BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRecord.swift; sourceTree = "<group>"; };
@@ -181,7 +185,7 @@
 		BEF258B220B57C7F00D0026C /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		BEF28B6020B52BB000385273 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		BEF28B6220B52BF700385273 /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
-		BEF4B14E219C093800B8E45E /* VoiceSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceSelectionViewController.swift; sourceTree = "<group>"; };
+		BEF4B14E219C093800B8E45E /* VoiceSelectionPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceSelectionPage.swift; sourceTree = "<group>"; };
 		BEF4B150219C0E3B00B8E45E /* VoiceTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceTableCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -212,23 +216,16 @@
 			path = SpeechEngine;
 			sourceTree = "<group>";
 		};
-		BE29510F2155F4F7008239F9 /* MainPage */ = {
+		BE29510F2155F4F7008239F9 /* TopicMode */ = {
 			isa = PBXGroup;
 			children = (
 				BEEC7FAA2154FFA4001C2EFF /* MainSwipablePage.swift */,
 				BEDEDD3620A46D1B00E7B60B /* ShadowingListPage.swift */,
 				BE7725CD20A4216700DF186A /* ContentCell.swift */,
 				BEF258B220B57C7F00D0026C /* TimelineView.swift */,
-			);
-			path = MainPage;
-			sourceTree = "<group>";
-		};
-		BE2951102155F50E008239F9 /* DetailPage */ = {
-			isa = PBXGroup;
-			children = (
 				BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */,
 			);
-			path = DetailPage;
+			path = TopicMode;
 			sourceTree = "<group>";
 		};
 		BE2951112155F51A008239F9 /* GamePage */ = {
@@ -253,7 +250,6 @@
 		BE2951132155F5D0008239F9 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				BEF4B150219C0E3B00B8E45E /* VoiceTableCell.swift */,
 				BE76F11D214F56F6004E130B /* SentencesTableCell.xib */,
 				BE76F11C214F56F6004E130B /* SentencesTableCell.swift */,
 				BEEC7FA82154C7AC001C2EFF /* TopBarView.xib */,
@@ -349,31 +345,41 @@
 			path = Project;
 			sourceTree = "<group>";
 		};
-		BECAC3BD216B9CDF001BBF49 /* InfiniteChanllengePage */ = {
+		BECAC3BD216B9CDF001BBF49 /* InfiniteChanllengeMode */ = {
 			isa = PBXGroup;
 			children = (
-				BE955E46216DAB8F00D424FA /* ICInfoView.swift */,
-				BECAC3B4216B34FA001BBF49 /* InfiniteChanllengePage.swift */,
 				BECAC3BE216B9D19001BBF49 /* InfiniteChallengeSwipablePage.swift */,
+				BECD9076219D279C00400FD3 /* InfiniteChallengeListPage.swift */,
+				BECD907A219D294100400FD3 /* InfiniteChallengeTableCell.swift */,
+				BECAC3B4216B34FA001BBF49 /* InfiniteChanllengePage.swift */,
+				BE955E46216DAB8F00D424FA /* ICInfoView.swift */,
 			);
-			path = InfiniteChanllengePage;
+			path = InfiniteChanllengeMode;
+			sourceTree = "<group>";
+		};
+		BECD9079219D28C300400FD3 /* SettingPage */ = {
+			isa = PBXGroup;
+			children = (
+				BEF4B14E219C093800B8E45E /* VoiceSelectionPage.swift */,
+				BEF4B150219C0E3B00B8E45E /* VoiceTableCell.swift */,
+				BEEC7FAC2155014E001C2EFF /* SettingPage.swift */,
+				BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */,
+			);
+			name = SettingPage;
 			sourceTree = "<group>";
 		};
 		BEDEDD4220A5D86500E7B60B /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				BEBDEDC3208EF09F00C18520 /* Main.storyboard */,
-				BEF4B14E219C093800B8E45E /* VoiceSelectionViewController.swift */,
-				BEEC7FAC2155014E001C2EFF /* SettingPage.swift */,
-				BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */,
 				BE5ABAC8217B703500A63C5F /* InfoPage.swift */,
 				BEC2E92E217875C30095A65D /* RootContainerViewController.swift */,
 				BE2951132155F5D0008239F9 /* Components */,
-				BE29510F2155F4F7008239F9 /* MainPage */,
-				BE2951102155F50E008239F9 /* DetailPage */,
+				BECD9079219D28C300400FD3 /* SettingPage */,
+				BE29510F2155F4F7008239F9 /* TopicMode */,
+				BECAC3BD216B9CDF001BBF49 /* InfiniteChanllengeMode */,
 				BE2951112155F51A008239F9 /* GamePage */,
 				BE2951122155F524008239F9 /* FinishedPage */,
-				BECAC3BD216B9CDF001BBF49 /* InfiniteChanllengePage */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -500,7 +506,7 @@
 				BE1CA958209DC43800086853 /* Messenger.swift in Sources */,
 				BEBDEDD9208EF15F00C18520 /* utilities.swift in Sources */,
 				BEEC7FAF21550818001C2EFF /* TopBarView.swift in Sources */,
-				BEF4B14F219C093800B8E45E /* VoiceSelectionViewController.swift in Sources */,
+				BEF4B14F219C093800B8E45E /* VoiceSelectionPage.swift in Sources */,
 				BEE665E220BA634600E4E322 /* Colors.swift in Sources */,
 				BE8DE7B62161E44400812CED /* AbilityChart.swift in Sources */,
 				BECAC3B5216B34FA001BBF49 /* InfiniteChanllengePage.swift in Sources */,
@@ -530,6 +536,7 @@
 				BEEC7FAB2154FFA4001C2EFF /* MainSwipablePage.swift in Sources */,
 				BEDEDD3720A46D1B00E7B60B /* ShadowingListPage.swift in Sources */,
 				BE7725CE20A4216700DF186A /* ContentCell.swift in Sources */,
+				BECD9077219D279C00400FD3 /* InfiniteChallengeListPage.swift in Sources */,
 				BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */,
 				BE6C78542165DD2B0072B1C5 /* GameReportBoxView.swift in Sources */,
 				BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */,
@@ -546,6 +553,7 @@
 				BEF258B320B57C7F00D0026C /* TimelineView.swift in Sources */,
 				BE596470215A0ECE00E4AA0C /* speech.swift in Sources */,
 				BEBDEDDD208EF15F00C18520 /* SpeechRecognizer.swift in Sources */,
+				BECD907B219D294100400FD3 /* InfiniteChallengeTableCell.swift in Sources */,
 				BE5ABAC9217B703500A63C5F /* InfoPage.swift in Sources */,
 				BE596468215A0DF200E4AA0C /* daily.swift in Sources */,
 				BE6F2F162144E049003A56CD /* rawDataSets.swift in Sources */,

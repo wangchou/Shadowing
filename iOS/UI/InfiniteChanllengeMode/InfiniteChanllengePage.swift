@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 private let context = GameContext.shared
+private let i18n = I18n.shared
 
 class InfiniteChallengePage: UIViewController {
     @IBOutlet weak var topBarView: TopBarView!
@@ -17,7 +18,9 @@ class InfiniteChallengePage: UIViewController {
     @IBOutlet weak var blockView: UIView!
     @IBOutlet weak var blockInfo: UILabel!
     @IBOutlet weak var translationButton: UIButton!
-    var topBarTitle: String = "無限挑戰模式"
+    var topBarTitle: String {
+        return i18n.languageInJa + " - " + level.title
+    }
     var topBarLeftText: String = ""
     var topBarRightText: String = ""
     var level: Level = .lv0
@@ -32,18 +35,15 @@ class InfiniteChallengePage: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadSentenceDB()
-        updateUI()
-        infoView.viewWillAppear()
         tableView.register(
             UINib(nibName: "SentencesTableCell", bundle: nil),
             forCellReuseIdentifier: "ICContentTableCell"
         )
-//        bottomBar.contentTab = .infiniteChallenge
-//        bottomBar.sharedSetup()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateUI()
         infoView.level = level
         infoView.minKanaCount = minKanaCount
         infoView.maxKanaCount = maxKanaCount
@@ -71,11 +71,9 @@ class InfiniteChallengePage: UIViewController {
         } else {
             topBarView.rightButton.setIconImage(named: "round_arrow_forward_ios_black_48pt", title: topBarRightText, isIconOnLeft: false)
         }
-        if topBarLeftText != "" {
-            topBarView.leftButton.setIconImage(named: "round_arrow_back_ios_black_48pt", title: topBarLeftText)
-        } else {
-            topBarView.leftButton.setIconImage(named: "outline_settings_black_48pt")
-        }
+
+        topBarView.leftButton.setIconImage(named: "round_arrow_back_ios_black_48pt", title: topBarLeftText)
+
         topBarView.titleLabel.text = topBarTitle
     }
     @IBAction func onTranslationButtonClicked(_ sender: Any) {

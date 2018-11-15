@@ -15,24 +15,24 @@ enum SelectingVoiceFor {
     case teacher, assisant
 }
 
-class VoiceSelectionViewController: UIViewController {
+class VoiceSelectionPage: UIViewController {
     static var fromSettingPage: SettingPage?
     static var selectingVoiceFor: SelectingVoiceFor = .teacher
     static var voices: [AVSpeechSynthesisVoice] = []
     static var selectedVoice: AVSpeechSynthesisVoice?
 
     var selectingVoiceFor: SelectingVoiceFor {
-        return VoiceSelectionViewController.selectingVoiceFor
+        return VoiceSelectionPage.selectingVoiceFor
     }
     var voices: [AVSpeechSynthesisVoice] {
-        return VoiceSelectionViewController.voices
+        return VoiceSelectionPage.voices
     }
     var selectedVoice: AVSpeechSynthesisVoice? {
         set {
-            VoiceSelectionViewController.selectedVoice = newValue
+            VoiceSelectionPage.selectedVoice = newValue
         }
         get {
-            return VoiceSelectionViewController.selectedVoice
+            return VoiceSelectionPage.selectedVoice
         }
     }
 
@@ -82,12 +82,12 @@ class VoiceSelectionViewController: UIViewController {
         } else {
             context.gameSetting.assisant = selectedVoice?.identifier ?? "unknown"
         }
-        VoiceSelectionViewController.fromSettingPage?.viewWillAppear(false)
+        VoiceSelectionPage.fromSettingPage?.viewWillAppear(false)
         saveGameSetting()
     }
 }
 
-extension VoiceSelectionViewController: UITableViewDataSource {
+extension VoiceSelectionPage: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -111,7 +111,7 @@ extension VoiceSelectionViewController: UITableViewDataSource {
     }
 }
 
-extension VoiceSelectionViewController: UITableViewDelegate {
+extension VoiceSelectionPage: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedVoice = voices[indexPath.row]
         let originalVoiceId = selectingVoiceFor == .teacher ?

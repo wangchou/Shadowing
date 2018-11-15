@@ -53,6 +53,13 @@ enum Level: Int, Codable {
     var character: String {
         return title.prefix(1).s
     }
+
+    var bestInfinteChallengeRank: String? {
+        return findBestRecord(key: self.infinteChallengeDatasetKey)?.rank.rawValue
+    }
+    var bestInfinteChallengeProgress: String? {
+        return findBestRecord(key: self.infinteChallengeDatasetKey)?.progress
+    }
 }
 
 enum Rank: String, Codable {

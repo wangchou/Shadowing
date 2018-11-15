@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Speech
 
 class RootContainerViewController: UIViewController {
     var current: UIViewController!
@@ -17,6 +18,8 @@ class RootContainerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        //print(SFSpeechRecognizer.supportedLocales())
 
         splashScreen = UIStoryboard(name: "Main", bundle: nil)
             .instantiateViewController(withIdentifier: "LaunchScreen")
@@ -56,12 +59,19 @@ class RootContainerViewController: UIViewController {
         guard current != infiniteChallengeSwipablePage else { return }
         removeCurrent()
         current = infiniteChallengeSwipablePage
-        if isShowSetting &&
-           !infiniteChallengeSwipablePage.pages.isEmpty {
-            infiniteChallengeSwipablePage.setViewControllers([infiniteChallengeSwipablePage.pages[0]], direction: .reverse, animated: false, completion: nil)
+        let sp: InfiniteChallengeSwipablePage! = infiniteChallengeSwipablePage
+        if isShowSetting && !sp.pages.isEmpty {
+            sp.setViewControllers([sp.pages[0]], direction: .reverse, animated: false, completion: nil)
         }
 
         showVC(current)
+    }
+
+    func reloadInfiniteChallengeData() {
+        let sp: InfiniteChallengeSwipablePage! = infiniteChallengeSwipablePage
+        if let listPage = (sp.pages[1] as? InfiniteChallengeListPage) {
+            listPage.tableView.reloadData()
+        }
     }
 
     private func showVC(_ vc: UIViewController) {

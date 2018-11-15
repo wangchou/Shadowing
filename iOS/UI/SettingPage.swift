@@ -183,6 +183,7 @@ class SettingPage: UITableViewController {
             rootViewController.showInfiniteChallengePage(isShowSetting: true)
             context.contentTab = .infiniteChallenge
         }
+        rootViewController.reloadInfiniteChallengeData()
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -208,17 +209,17 @@ class SettingPage: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 3 {
-            VoiceSelectionViewController.voices = getAvailableVoice(prefix: gameLang.prefix)
+            VoiceSelectionPage.voices = getAvailableVoice(prefix: gameLang.prefix)
 
             if indexPath.row == 0 { // teacher voice
-                VoiceSelectionViewController.fromSettingPage = self
-                VoiceSelectionViewController.selectingVoiceFor = .teacher
-                VoiceSelectionViewController.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher)
+                VoiceSelectionPage.fromSettingPage = self
+                VoiceSelectionPage.selectingVoiceFor = .teacher
+                VoiceSelectionPage.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher)
             }
             if indexPath.row == 1 { // assistant voice
-                VoiceSelectionViewController.fromSettingPage = self
-                VoiceSelectionViewController.selectingVoiceFor = .assisant
-                VoiceSelectionViewController.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.assisant)
+                VoiceSelectionPage.fromSettingPage = self
+                VoiceSelectionPage.selectingVoiceFor = .assisant
+                VoiceSelectionPage.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.assisant)
             }
             launchStoryboard(self, "VoiceSelectionViewController", isOverCurrent: true, animated: true)
         }
