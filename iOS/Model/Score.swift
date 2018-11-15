@@ -33,7 +33,7 @@ struct Score: Codable {
         if type == .perfect { return gameLang == .jp ? "正解" : "Perfect" }
         if type == .great { return gameLang == .jp ? "すごい" : "Excellent" }
         if type == .good { return gameLang == .jp ? "いいね" : "Good" }
-        return gameLang == .jp ? "違います" : "Wrong"
+        return gameLang == .jp ? "違います" : "Poor"
     }
 
     var color: UIColor {

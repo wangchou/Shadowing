@@ -230,15 +230,4 @@ extension AVSpeechSynthesisVoice {
         let pureName = self.name.replace("（.*）", "")
         return "\(pureName) \(self.quality == .enhanced ? i18n.enhancedVoice : "")"
     }
-    var detailLocale: String {
-        var langName: String = self.language
-        if self.language.hasPrefix("en-") {
-           langName = langName.replace("en-", "\(i18n.english) (")
-           langName += ")"
-        }
-        if self.language.hasPrefix("ja") {
-            langName = i18n.japanese
-        }
-        return langName
-    }
 }

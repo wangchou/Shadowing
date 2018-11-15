@@ -101,7 +101,7 @@ extension VoiceSelectionViewController: UITableViewDataSource {
         guard let voiceCell = cell as? VoiceTableCell else { print("voiceCell convert error"); return cell }
         let voice = voices[indexPath.row]
         voiceCell.nameLabel.text = voice.detailName
-        voiceCell.localeLabel.text = voice.detailLocale
+        voiceCell.localeLabel.text = i18n.getLangDescription(langAndRegion: voice.language)
         if voice == selectedVoice {
             voiceCell.accessoryType = .checkmark
         } else {

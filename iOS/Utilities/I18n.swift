@@ -207,4 +207,50 @@ class I18n {
         if isZh { return "英文" }
         return "English"
     }
+
+    func getLangDescription(langAndRegion: String) -> String {
+        let pairs = langAndRegion.split(separator: "-")
+                                 .map { substring in substring.s}
+        let lang = pairs[0] == "ja" ? japanese : english
+        let region = getRegion(region: pairs[1])
+        if region == "" { return lang }
+        return "\(lang) (\(region))"
+    }
+
+    func getRegion(region: String) -> String {
+        if region == "US" { return us }
+        if region == "GB" { return gb }
+        if region == "IE" { return ie }
+        if region == "AU" { return au }
+        if region == "ZA" { return za }
+        return ""
+    }
+
+    var us: String {
+        if isJa { return "アメリカ" }
+        if isZh { return "美國" }
+        return "American"
+    }
+
+    var gb: String {
+        if isJa { return "英国" }
+        if isZh { return "英國" }
+        return "UK"
+    }
+
+    var au: String {
+        if isJa { return "アオースラリア" }
+        if isZh { return "澳洲" }
+        return "Australia"
+    }
+    var ie: String {
+        if isJa { return "アイルランド" }
+        if isZh { return "愛爾蘭" }
+        return "Ireland"
+    }
+    var za: String {
+        if isJa { return "南アフリカ" }
+        if isZh { return "南非" }
+        return "South Africa"
+    }
 }
