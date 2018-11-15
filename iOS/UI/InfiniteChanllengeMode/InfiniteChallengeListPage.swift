@@ -16,6 +16,7 @@ class InfiniteChallengeListPage: UIViewController {
     @IBOutlet weak var bottomBarView: BottomBarView!
     @IBOutlet weak var tableBottomConstraint: NSLayoutConstraint!
 
+    @IBOutlet weak var icListTopView: ICListTopView!
     override func viewDidLoad() {
         super.viewDidLoad()
         topBarView.rightButton.isHidden = true
@@ -32,11 +33,13 @@ class InfiniteChallengeListPage: UIViewController {
             tableBottomConstraint.constant = 0
         }
     }
+
     override func viewWillAppear(_ animated: Bool) {
         viewWillLayoutSubviews()
         super.viewWillAppear(animated)
         bottomBarView.contentTab = .infiniteChallenge
         topBarView.titleLabel.text = i18n.infiniteChallengeTitle
+        icListTopView.frame.size.height = screen.width * 54/48
     }
 }
 

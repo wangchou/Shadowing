@@ -46,7 +46,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2bA-bq-aiE">
                                 <rect key="frame" x="0.0" y="55" width="320" height="463"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" id="smg-bV-pXs">
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="smg-bV-pXs" customClass="ICListTopView" customModule="今話したい" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="204"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -143,6 +143,7 @@
                     </view>
                     <connections>
                         <outlet property="bottomBarView" destination="7mf-gl-Jii" id="JIc-of-bcw"/>
+                        <outlet property="icListTopView" destination="smg-bV-pXs" id="vn0-xn-BO6"/>
                         <outlet property="tableBottomConstraint" destination="BLU-46-joS" id="cM3-1n-5az"/>
                         <outlet property="tableView" destination="2bA-bq-aiE" id="XLb-4t-Iri"/>
                         <outlet property="topBarView" destination="iJd-EC-Y2v" id="yiG-75-7Nb"/>
@@ -150,7 +151,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Mf-ua-m7y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-354.375" y="-1282.3943661971832"/>
+            <point key="canvasLocation" x="293" y="-570"/>
         </scene>
         <!--Infinite Challenge Page-->
         <scene sceneID="cl5-eM-Nhy">
@@ -896,7 +897,7 @@ Ruth Yuru Chen
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6h5-lK-YIB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-264.375" y="61.267605633802816"/>
+            <point key="canvasLocation" x="-354" y="-169"/>
         </scene>
         <!--Item-->
         <scene sceneID="dx9-ut-S3b">
@@ -1286,7 +1287,7 @@ Ruth Yuru Chen
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZDf-IZ-WMA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1802" y="-1853"/>
+            <point key="canvasLocation" x="-354" y="-852"/>
         </scene>
         <!--Shadowing List Page-->
         <scene sceneID="tne-QT-ifu">
