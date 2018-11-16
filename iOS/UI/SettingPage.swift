@@ -183,7 +183,7 @@ class SettingPage: UITableViewController {
             rootViewController.showInfiniteChallengePage(isShowSetting: true)
             context.contentTab = .infiniteChallenge
         }
-        rootViewController.reloadInfiniteChallengeData()
+        rootViewController.reloadTableData()
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

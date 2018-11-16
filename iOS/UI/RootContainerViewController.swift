@@ -67,9 +67,13 @@ class RootContainerViewController: UIViewController {
         showVC(current)
     }
 
-    func reloadInfiniteChallengeData() {
-        let sp: InfiniteChallengeSwipablePage! = infiniteChallengeSwipablePage
-        if let listPage = (sp.pages[1] as? InfiniteChallengeListPage) {
+    func reloadTableData() {
+        let sp0: MainSwipablePage! = mainSwipablePage
+        if let listPage = (sp0.pages[1] as? ShadowingListPage) {
+            listPage.sentencesTableView.reloadData()
+        }
+        let sp1: InfiniteChallengeSwipablePage! = infiniteChallengeSwipablePage
+        if let listPage = (sp1.pages[1] as? InfiniteChallengeListPage) {
             listPage.tableView.reloadData()
         }
     }
