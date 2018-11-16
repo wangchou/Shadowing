@@ -42,39 +42,29 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
 
         //var y = 1
 
-        let topCircle = addRect(x: 6, y: 3, w: 30, h: 30, color: .white)
-        topCircle.roundBorder(borderWidth: 2, cornerRadius: topCircle.frame.width/2, color: c)
-        topCircle.centerX(getFrame(0, 3, gridCount, 30))
+        let topCircle = addRect(x: 6, y: 2, w: 24, h: 24, color: .clear)
+        topCircle.roundBorder(borderWidth: stepFloat,
+                              cornerRadius: topCircle.frame.width/2,
+                              color: .lightGray)
+        topCircle.centerX(getFrame(0, 2, gridCount, 24))
 
-        let dayLabel = addText(x: 14, y: 6, w: 30, h: 20, text: "10")
-        dayLabel.textAlignment = .center
-        dayLabel.centerIn(getFrame(0, 2, gridCount, 30))
+        let percentLabel = addText(x: 14, y: 4, w: 30, h: 9,
+                                   text: "10.5%",
+                                   font: MyFont.bold(ofSize: getFontSize(h: 9)))
+        percentLabel.textAlignment = .center
+        percentLabel.centerIn(getFrame(0, 2, gridCount, 24))
 
-        let y = 25
-        var dot: UIView
-        let colors = [myRed, myOrange, myGreen, myBlue, .purple]
-        for i in 0...4 {
-            dot = addRect(x: 14, y: y, w: 3, h: 3, color: colors[i] == c ? colors[i] : .white)
-            dot.roundBorder(borderWidth: 0.5, cornerRadius: dot.frame.width/2, color: colors[i])
-            dot.centerX(frame, xShift: 4 * (i.c - 2) * step)
-        }
+        let streaksLabel = addText(x: 14, y: 20, w: 30, h: 5,
+                                   text: "7",
+                                   font: MyFont.bold(ofSize: getFontSize(h: 5)),
+                                   color: .lightGray)
+        streaksLabel.textAlignment = .center
+        streaksLabel.centerX(frame)
 
-        let strengthLabel = addText(x: 14, y: 28, w: 20, h: 4, text: "最低強度", color: c)
-        strengthLabel.textAlignment = .center
-        strengthLabel.centerX(frame)
-
-        let timeLabel = addText(x: 14, y: 5, w: 20, h: 4, text: "連續天數", color: .darkGray)
-        timeLabel.textAlignment = .center
-        timeLabel.centerX(frame)
-
-        addText(x: 3, y: 35, w: 25, h: 4, text: "本次衝刺")
-        addText(x: 3, y: 39, w: 25, h: 4, text: "句數：15302句")
-        addText(x: 3, y: 43, w: 25, h: 4, text: "時間：30天")
-        addText(x: 3, y: 47, w: 25, h: 4, text: "強度：15句/天")
-
-        addText(x: 27, y: 35, w: 25, h: 4, text: "最佳紀錄")
-        addText(x: 27, y: 39, w: 25, h: 4, text: "句數：15302句")
-        addText(x: 27, y: 43, w: 25, h: 4, text: "時間：23天")
-        addText(x: 27, y: 47, w: 25, h: 4, text: "強度：199句/天")
+        let goalLabel = addText(x: 14, y: 27, w: 30, h: 5,
+                                text: "唸對50句日文",
+                                font: MyFont.bold(ofSize: getFontSize(h: 5)))
+        goalLabel.textAlignment = .center
+        goalLabel.centerX(frame)
     }
 }
