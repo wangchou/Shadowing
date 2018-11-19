@@ -39,7 +39,8 @@ class InfiniteChallengeListPage: UIViewController {
         super.viewWillAppear(animated)
         bottomBarView.contentTab = .infiniteChallenge
         topBarView.titleLabel.text = i18n.infiniteChallengeTitle
-        icListTopView.frame.size.height = screen.width * 22/32
+        icListTopView.frame.size.height = screen.width * 34/48
+        icListTopView.viewWillAppear()
     }
 }
 

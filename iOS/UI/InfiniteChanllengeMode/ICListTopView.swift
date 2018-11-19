@@ -19,8 +19,11 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
 
     var spacing: CGFloat = 0
 
+    var percent: Float {
+        return 0.575
+    }
     var percentageText: String {
-        return "57.5%"
+        return String(format: "%.1f", percent * 100) + "%"
     }
 
     var goalText: String {
@@ -74,25 +77,31 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
 
         backgroundColor = rgb(255, 240, 182)
 
-        //var y = 1
-        let topCircle = addRect(x: 6, y: 3, w: 24, h: 24, color: .clear)
-        topCircle.roundBorder(borderWidth: stepFloat*1.3,
-                              cornerRadius: topCircle.frame.width/2,
-                              color: rgb(155, 155, 155))
-        topCircle.centerX(getFrame(0, 2, gridCount-2, 24))
+        let circleFrame = getFrame(11, 3, 24, 24)
+
+        let backCircle = CircleView(frame: circleFrame)
+        backCircle.lineWidth = stepFloat * 1.3
+        backCircle.color = rgb(155, 155, 155)
+        addSubview(backCircle)
+
+        let frontCircle = CircleView(frame: circleFrame)
+        frontCircle.lineWidth = stepFloat * 1.3
+        frontCircle.percent = percent.c
+        addSubview(frontCircle)
+        frontCircle.animateCircle(duration: 0.6)
 
         let percentLabel = addText(x: 14, y: 6, w: 30, h: 8,
                                    text: percentageText,
                                    font: MyFont.bold(ofSize: getFontSize(h: 8)),
                                    color: .black)
         percentLabel.textAlignment = .center
-        percentLabel.centerIn(topCircle.frame)
+        percentLabel.centerIn(circleFrame)
 
         let goalLabel = addText(x: 14, y: 28, w: 30, h: 4,
                                 text: goalText,
                                 font: MyFont.bold(ofSize: getFontSize(h: 4)))
         goalLabel.textAlignment = .center
-        goalLabel.centerX(getFrame(0, 2, gridCount-2, 24))
+        goalLabel.centerX(circleFrame)
 
         addSideBar()
     }

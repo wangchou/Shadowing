@@ -10,6 +10,7 @@
 		BE152048218085120059A7C2 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE152047218085120059A7C2 /* Level.swift */; };
 		BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB3D209B19B200D23F22 /* GameContext.swift */; };
 		BE1CA958209DC43800086853 /* Messenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA957209DC43800086853 /* Messenger.swift */; };
+		BE221AA121A2A76D0009B23B /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE221AA021A2A76D0009B23B /* CircleView.swift */; };
 		BE596466215A0DE100E4AA0C /* travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596465215A0DE100E4AA0C /* travel.swift */; };
 		BE596468215A0DF200E4AA0C /* daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596467215A0DF200E4AA0C /* daily.swift */; };
 		BE59646A215A0E4D00E4AA0C /* polite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596469215A0E4D00E4AA0C /* polite.swift */; };
@@ -112,6 +113,7 @@
 		BE152047218085120059A7C2 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		BE17FB3D209B19B200D23F22 /* GameContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameContext.swift; sourceTree = "<group>"; };
 		BE1CA957209DC43800086853 /* Messenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messenger.swift; sourceTree = "<group>"; };
+		BE221AA021A2A76D0009B23B /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		BE596465215A0DE100E4AA0C /* travel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = travel.swift; sourceTree = "<group>"; };
 		BE596467215A0DF200E4AA0C /* daily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = daily.swift; sourceTree = "<group>"; };
 		BE596469215A0E4D00E4AA0C /* polite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = polite.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 				BEC2E9302179BD090095A65D /* TopicFilterBarView.swift */,
 				BE8DE7B52161E44400812CED /* AbilityChart.swift */,
 				BE7441B2216CCBE000E53A3D /* LineChart.swift */,
+				BE221AA021A2A76D0009B23B /* CircleView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -544,6 +547,7 @@
 				BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */,
 				BE6C78542165DD2B0072B1C5 /* GameReportBoxView.swift in Sources */,
 				BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */,
+				BE221AA121A2A76D0009B23B /* CircleView.swift in Sources */,
 				BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */,
 				BE8180C020B3BEB6006ABCB3 /* MyText.swift in Sources */,
 				BE8F747F2176E258005546DC /* kanaFix.swift in Sources */,
