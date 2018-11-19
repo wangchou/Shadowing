@@ -46,6 +46,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2bA-bq-aiE">
                                 <rect key="frame" x="0.0" y="55" width="320" height="463"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="smg-bV-pXs" customClass="ICListTopView" customModule="今話したい" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="204"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -60,7 +61,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="入門一" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0qv-GT-CPs">
-                                                    <rect key="frame" x="15" y="21" width="96" height="32"/>
+                                                    <rect key="frame" x="20" y="16" width="96" height="42"/>
                                                     <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="32"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -93,10 +94,11 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="zFb-1j-IQc" secondAttribute="trailing" constant="25" id="1GT-aP-S90"/>
                                                 <constraint firstItem="5Y4-e0-FMA" firstAttribute="top" secondItem="6Nv-y5-1rR" secondAttribute="top" id="1tj-gE-hrf"/>
-                                                <constraint firstItem="0qv-GT-CPs" firstAttribute="centerY" secondItem="Vhr-PX-c2D" secondAttribute="centerY" id="36c-z7-Z30"/>
+                                                <constraint firstItem="0qv-GT-CPs" firstAttribute="top" secondItem="Vhr-PX-c2D" secondAttribute="topMargin" constant="5" id="3eZ-jJ-v1q"/>
+                                                <constraint firstItem="0qv-GT-CPs" firstAttribute="leading" secondItem="Vhr-PX-c2D" secondAttribute="leadingMargin" constant="5" id="EnN-xN-OGS"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="0qv-GT-CPs" secondAttribute="bottom" constant="5" id="G33-3b-gDM"/>
                                                 <constraint firstItem="6Nv-y5-1rR" firstAttribute="top" secondItem="Mzz-qW-JcI" secondAttribute="bottom" id="VLc-39-KGu"/>
                                                 <constraint firstItem="Mzz-qW-JcI" firstAttribute="top" secondItem="zFb-1j-IQc" secondAttribute="top" id="VXv-eT-SuM"/>
-                                                <constraint firstItem="0qv-GT-CPs" firstAttribute="leading" secondItem="Vhr-PX-c2D" secondAttribute="leadingMargin" id="XQT-tc-dAL"/>
                                                 <constraint firstItem="5Y4-e0-FMA" firstAttribute="leading" secondItem="zFb-1j-IQc" secondAttribute="leading" id="Yfi-dV-7tx"/>
                                                 <constraint firstItem="zFb-1j-IQc" firstAttribute="leading" secondItem="Mzz-qW-JcI" secondAttribute="trailing" constant="50" id="aS3-7Z-PfS"/>
                                                 <constraint firstItem="6Nv-y5-1rR" firstAttribute="leading" secondItem="Mzz-qW-JcI" secondAttribute="leading" id="f8p-Tf-vZF"/>
@@ -1298,7 +1300,7 @@ Ruth Yuru Chen
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9Ar-lL-ket">
                                 <rect key="frame" x="0.0" y="55" width="320" height="463"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="U0O-4m-O5g" userLabel="TopArea">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
@@ -1311,14 +1313,14 @@ Ruth Yuru Chen
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mu1-Ft-6RO" userLabel="RadarChart" customClass="AbilityChart" customModule="今話したい" customModuleProvider="target">
-                                                            <rect key="frame" x="2" y="0.0" width="153" height="153"/>
+                                                            <rect key="frame" x="2" y="10" width="133" height="133"/>
                                                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="mu1-Ft-6RO" secondAttribute="height" multiplier="1:1" id="3nP-xT-kPR"/>
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ca0-bb-sN7" customClass="TimelineView" customModule="今話したい" customModuleProvider="target">
-                                                            <rect key="frame" x="147" y="5" width="168" height="140"/>
+                                                            <rect key="frame" x="166" y="15" width="144" height="120"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="ca0-bb-sN7" secondAttribute="height" multiplier="6:5" id="tdd-F9-KyS"/>
@@ -1328,11 +1330,11 @@ Ruth Yuru Chen
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="mu1-Ft-6RO" firstAttribute="leading" secondItem="LwG-wU-2DZ" secondAttribute="leading" constant="2" id="4FV-FC-o7q"/>
-                                                        <constraint firstAttribute="trailing" secondItem="ca0-bb-sN7" secondAttribute="trailing" constant="5" id="4QP-BB-bCo"/>
-                                                        <constraint firstAttribute="bottom" secondItem="mu1-Ft-6RO" secondAttribute="bottom" constant="-3" id="JOr-zh-iFn"/>
-                                                        <constraint firstAttribute="bottom" secondItem="ca0-bb-sN7" secondAttribute="bottom" constant="5" id="RJd-W0-fNc"/>
-                                                        <constraint firstItem="ca0-bb-sN7" firstAttribute="top" secondItem="LwG-wU-2DZ" secondAttribute="top" constant="5" id="Ykh-Vq-1Va"/>
-                                                        <constraint firstItem="mu1-Ft-6RO" firstAttribute="top" secondItem="LwG-wU-2DZ" secondAttribute="top" id="jhz-ZZ-sHq"/>
+                                                        <constraint firstAttribute="trailing" secondItem="ca0-bb-sN7" secondAttribute="trailing" constant="10" id="4QP-BB-bCo"/>
+                                                        <constraint firstAttribute="bottom" secondItem="mu1-Ft-6RO" secondAttribute="bottom" constant="7" id="JOr-zh-iFn"/>
+                                                        <constraint firstAttribute="bottom" secondItem="ca0-bb-sN7" secondAttribute="bottom" constant="15" id="RJd-W0-fNc"/>
+                                                        <constraint firstItem="ca0-bb-sN7" firstAttribute="top" secondItem="LwG-wU-2DZ" secondAttribute="top" constant="15" id="Ykh-Vq-1Va"/>
+                                                        <constraint firstItem="mu1-Ft-6RO" firstAttribute="top" secondItem="LwG-wU-2DZ" secondAttribute="top" constant="10" id="jhz-ZZ-sHq"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BCi-iY-dna" customClass="TopicFilterBarView" customModule="今話したい" customModuleProvider="target">

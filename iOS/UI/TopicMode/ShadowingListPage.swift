@@ -52,10 +52,10 @@ class ShadowingListPage: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         topBarView.titleLabel.text = I18n.shared.topicPageTitile
-        let height = screen.width * 150/320
+        let height = screen.width * 170/320
         topArea.frame.size.height = height + 50
-        timeline.frame.size.height = height * 140 / 150
-        timeline.frame.size.width = height * 21 / 20
+        timeline.frame.size.height = height * 140 / 170
+        timeline.frame.size.width = height * 21 / 23
 
         sentencesTableView.reloadData()
         timeline.viewWillAppear()
@@ -82,7 +82,7 @@ class ShadowingListPage: UIViewController {
         ].map { $0.cgColor }
         let layer = CAGradientLayer()
         layer.frame = topView.frame
-        layer.frame.origin.y = screen.width * 150/320 - 1.5
+        layer.frame.origin.y = screen.width * 170/320 - 1.5
         layer.frame.size.height = 1.5
         layer.frame.size.width = screen.size.width
         layer.startPoint = CGPoint(x: 0, y: 0)

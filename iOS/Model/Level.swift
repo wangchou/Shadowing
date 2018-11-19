@@ -16,7 +16,7 @@ private let maxKanaCounts = [6, 9, 11, 13, 15, 18, 22, 26, 31, 40]
 private let minSyllablesCounts = [1, 4, 6, 8, 10, 12, 14, 17, 20, 24]
 private let maxSyllablesCounts = [3, 5, 7, 9, 11, 13, 16, 19, 23, 30]
 
-private let colors = [myRed, myRed, myOrange, myOrange, myGreen, myGreen, myBlue, myBlue, .purple, .purple]
+private let colors = [myRed, myRed, myOrange, myOrange, myGreen, myGreen, myBlue, myBlue, myPurple, myPurple]
 private let titles = ["入門一", "入門二", "初級一", "初級二",
                       "中級一", "中級二", "上級一", "上級二", "超難問一", "超難問二"]
 let allLevels: [Level] = [.lv0, .lv1, .lv2, .lv3, .lv4, .lv5, .lv6, .lv7, .lv8, .lv9]
