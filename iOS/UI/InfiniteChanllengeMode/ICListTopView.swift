@@ -19,10 +19,14 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
 
     var spacing: CGFloat = 0
 
+    let animationSecs: TimeInterval = 0.5
+
     var percent: Float {
         return 0.575
     }
     var percentageText: String {
+        if percent >= 1.0 { return "完成" }
+
         return String(format: "%.1f", percent * 100) + "%"
     }
 
@@ -75,7 +79,7 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
     func viewWillAppear() {
         removeAllSubviews()
 
-        backgroundColor = rgb(255, 240, 182)
+        updateBGColor()
 
         let circleFrame = getFrame(11, 3, 24, 24)
 
@@ -88,7 +92,7 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
         frontCircle.lineWidth = stepFloat * 1.3
         frontCircle.percent = percent.c
         addSubview(frontCircle)
-        frontCircle.animateCircle(duration: 0.6)
+        //frontCircle.animate(duration: animationSecs)
 
         let percentLabel = addText(x: 14, y: 6, w: 30, h: 8,
                                    text: percentageText,
@@ -104,6 +108,34 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
         goalLabel.centerX(circleFrame)
 
         addSideBar()
+    }
+
+    func updateBGColor(animated: Bool = false) {
+        let lightGray238 = rgb(238, 238, 238)
+        guard percent > 0 else {
+            backgroundColor = rgb(238, 238, 238)
+            return
+        }
+
+        // 0%   = rgb(238, 238, 238)
+        // 100% = rgb(255, 204, 0)
+        let targetBGColor = rgb(255,
+                                255 - (51 * percent),
+                                255 * (1 - percent))
+
+        if !animated {
+            backgroundColor = targetBGColor
+            return
+        }
+
+        let animation = CABasicAnimation(keyPath: "backgroundColor")
+        animation.fromValue = lightGray238.cgColor
+        animation.toValue = targetBGColor.cgColor
+
+        animation.duration = animationSecs
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        layer.add(animation, forKey: "bgColor")
+        layer.backgroundColor = targetBGColor.cgColor
     }
 
     func addSideBar() {

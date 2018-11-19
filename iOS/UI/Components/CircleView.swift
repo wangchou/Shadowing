@@ -21,7 +21,11 @@ class CircleView: UIView {
             circleLayer.lineWidth = newValue
         }
     }
-    var percent: CGFloat = 0.75
+    var percent: CGFloat = 1.0 {
+        willSet {
+            circleLayer.strokeEnd = newValue
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,7 +48,7 @@ class CircleView: UIView {
         circleLayer.lineWidth = lineWidth
 
         // Don't draw the circle initially
-        circleLayer.strokeEnd = 1.0
+        circleLayer.strokeEnd = percent
 
         // Add the circleLayer to the view's layer's sublayers
         layer.addSublayer(circleLayer)
@@ -54,7 +58,7 @@ class CircleView: UIView {
         super.init(coder: aDecoder)
     }
 
-    func animateCircle(duration: TimeInterval) {
+    func animate(duration: TimeInterval) {
         // We want to animate the strokeEnd property of the circleLayer
         let animation = CABasicAnimation(keyPath: "strokeEnd")
 
@@ -66,7 +70,7 @@ class CircleView: UIView {
         animation.toValue = percent
 
         // Do a linear animation (i.e. the speed of the animation stays the same)
-        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
 
         // Set the circleLayer's strokeEnd property to 1.0 now so that it's the
         // right value when the animation ends.
