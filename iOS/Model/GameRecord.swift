@@ -17,7 +17,6 @@ func saveGameHistory() {
 }
 
 func loadGameHistory() {
-    guard context.gameHistory.isEmpty else { return }
     if let gameHistory = loadFromUserDefault(type: [GameRecord].self, key: gameHistoryKey + gameLang.key) {
         context.gameHistory = gameHistory
     } else {
@@ -67,6 +66,9 @@ struct GameRecord: Codable {
     var goodCount = 0
     var missedCount: Int {
         return sentencesCount - perfectCount - greatCount - goodCount
+    }
+    var correctCount: Int {
+        return perfectCount + greatCount
     }
 
     var sentencesScore: [String: Score]

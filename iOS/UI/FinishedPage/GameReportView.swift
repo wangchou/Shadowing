@@ -50,9 +50,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
                     }
 
                     if let icwPage = rootViewController.current as? InfiniteChallengeSwipablePage {
-                        guard let level = context.gameRecord?.level else { return }
-                        let pageIdx = level.rawValue + 1
-                        (icwPage.pages[pageIdx] as? InfiniteChallengePage)?.tableView.reloadData()
+                        (icwPage.pages[2] as? InfiniteChallengePage)?.tableView.reloadData()
                     }
                 } else {
                     vc.dismiss(animated: false) {

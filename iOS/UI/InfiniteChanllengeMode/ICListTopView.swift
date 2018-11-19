@@ -21,33 +21,34 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
 
     let animationSecs: TimeInterval = 0.5
 
-    var percent: Float {
-        return 0.575
-    }
+    var percent: Float = 0
+
     var percentageText: String {
-        if percent >= 1.0 { return "完成" }
+        if percent >= 1.0 { return "完 成" }
 
         return String(format: "%.1f", percent * 100) + "%"
     }
 
     var goalText: String {
-        return "每天說50句"
+        return "每天說\(context.gameSetting.dailySentenceGoal)句"
     }
 
     var sprintText: String {
         return "衝刺"
     }
 
+    var continues: Int = 0
     var continuesText: String {
-        return "6"
+        return "\(continues)"
     }
 
     var dayText: String {
         return "天"
     }
 
+    var continueSentenceCount: Int = 0
     var sentencesCountText: String {
-        return "1800"
+        return "\(continueSentenceCount)"
     }
 
     var sentenceText: String {
@@ -57,8 +58,9 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
     var bestText: String {
         return "最佳"
     }
+    var bestCount: Int = 0
     var bestCountText: String {
-        return "7"
+        return "\(bestCount)"
     }
 
     override init(frame: CGRect) {
@@ -78,7 +80,7 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
 
     func viewWillAppear() {
         removeAllSubviews()
-
+        updateByRecords()
         updateBGColor()
 
         let circleFrame = getFrame(11, 3, 24, 24)
@@ -108,6 +110,42 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
         goalLabel.centerX(circleFrame)
 
         addSideBar()
+    }
+
+    func updateByRecords() {
+        let sentenceCounts = getSentenceCountsByDays()
+        percent = min(sentenceCounts[0].f / context.gameSetting.dailySentenceGoal.f, 1.0)
+
+        continueSentenceCount = sentenceCounts[0]
+        for i in 1..<sentenceCounts.count {
+            if sentenceCounts[i] >= context.gameSetting.dailySentenceGoal {
+                continueSentenceCount += sentenceCounts[i]
+            } else {
+                break
+            }
+        }
+
+        continues = 0
+        for i in 0..<sentenceCounts.count {
+            if sentenceCounts[i] >= context.gameSetting.dailySentenceGoal {
+                continues += 1
+            } else if i > 0 { // skip today
+                break
+            }
+        }
+
+        bestCount = 0
+        var currentBest = 0
+        sentenceCounts.forEach { c in
+            if c >= context.gameSetting.dailySentenceGoal {
+                currentBest += 1
+            } else {
+                currentBest = 0
+            }
+            if currentBest > bestCount {
+                bestCount = currentBest
+            }
+        }
     }
 
     func updateBGColor(animated: Bool = false) {

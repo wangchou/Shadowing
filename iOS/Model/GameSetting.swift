@@ -44,4 +44,5 @@ struct GameSetting: Codable {
     var narrator: String = "unknown"
     var teacher: String = "unknown"
     var assisant: String = "unknown"
+    var dailySentenceGoal: Int = 50
 }
