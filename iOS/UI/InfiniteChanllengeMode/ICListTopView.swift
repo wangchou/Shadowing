@@ -19,6 +19,41 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
 
     var spacing: CGFloat = 0
 
+    var percentageText: String {
+        return "57.5%"
+    }
+
+    var goalText: String {
+        return "每天說50句"
+    }
+
+    var sprintText: String {
+        return "衝刺"
+    }
+
+    var continuesText: String {
+        return "6"
+    }
+
+    var dayText: String {
+        return "天"
+    }
+
+    var sentencesCountText: String {
+        return "1800"
+    }
+
+    var sentenceText: String {
+        return "句"
+    }
+
+    var bestText: String {
+        return "最佳"
+    }
+    var bestCountText: String {
+        return "7"
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         viewWillAppear()
@@ -36,35 +71,77 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
 
     func viewWillAppear() {
         removeAllSubviews()
-        let c = myBlue
 
-        backgroundColor = c.withAlphaComponent(0.07)
+        backgroundColor = rgb(255, 240, 182)
 
         //var y = 1
-
-        let topCircle = addRect(x: 6, y: 2, w: 24, h: 24, color: .clear)
-        topCircle.roundBorder(borderWidth: stepFloat,
+        let topCircle = addRect(x: 6, y: 3, w: 24, h: 24, color: .clear)
+        topCircle.roundBorder(borderWidth: stepFloat*1.3,
                               cornerRadius: topCircle.frame.width/2,
-                              color: .lightGray)
-        topCircle.centerX(getFrame(0, 2, gridCount, 24))
+                              color: rgb(155, 155, 155))
+        topCircle.centerX(getFrame(0, 2, gridCount-2, 24))
 
-        let percentLabel = addText(x: 14, y: 4, w: 30, h: 9,
-                                   text: "10.5%",
-                                   font: MyFont.bold(ofSize: getFontSize(h: 9)))
+        let percentLabel = addText(x: 14, y: 6, w: 30, h: 8,
+                                   text: percentageText,
+                                   font: MyFont.bold(ofSize: getFontSize(h: 8)),
+                                   color: .black)
         percentLabel.textAlignment = .center
-        percentLabel.centerIn(getFrame(0, 2, gridCount, 24))
+        percentLabel.centerIn(topCircle.frame)
 
-        let streaksLabel = addText(x: 14, y: 20, w: 30, h: 5,
-                                   text: "7",
-                                   font: MyFont.bold(ofSize: getFontSize(h: 5)),
-                                   color: .lightGray)
-        streaksLabel.textAlignment = .center
-        streaksLabel.centerX(frame)
-
-        let goalLabel = addText(x: 14, y: 27, w: 30, h: 5,
-                                text: "唸對50句日文",
-                                font: MyFont.bold(ofSize: getFontSize(h: 5)))
+        let goalLabel = addText(x: 14, y: 28, w: 30, h: 4,
+                                text: goalText,
+                                font: MyFont.bold(ofSize: getFontSize(h: 4)))
         goalLabel.textAlignment = .center
-        goalLabel.centerX(frame)
+        goalLabel.centerX(getFrame(0, 2, gridCount-2, 24))
+
+        addSideBar()
+    }
+
+    func addSideBar() {
+        let topRect = addRect(x: 38, y: 3, w: 8, h: 20, color: .white)
+        topRect.roundBorder(borderWidth: 0,
+                            cornerRadius: 5,
+                            color: .clear)
+
+        let xFrame = topRect.frame
+        addSideBarText(sprintText, y: 4, boundFrame: xFrame, color: .darkGray)
+        addSideBarText(continuesText, y: 8, isBold: true, boundFrame: xFrame)
+        addSideBarText(dayText, y: 11, boundFrame: topRect.frame, color: .darkGray)
+        addSideBarText(sentencesCountText, y: 16, isBold: true, boundFrame: xFrame)
+        addSideBarText(sentenceText, y: 19, boundFrame: xFrame, color: .darkGray)
+
+        let bottomRect = addRect(x: 38, y: 24, w: 8, h: 8, color: .white)
+        bottomRect.roundBorder(borderWidth: 0,
+                               cornerRadius: 5,
+                               color: .clear)
+        addSideBarText(bestText, y: 25, boundFrame: xFrame, color: .darkGray)
+        addSideBarText(bestCountText, y: 28, isBold: true, boundFrame: xFrame)
+
+        addSeparateLine(y: 7, boundFrame: getFrame(38, 3, 8, 9))
+        addSeparateLine(y: 15, boundFrame: getFrame(38, 14, 8, 2))
+    }
+
+    func addSideBarText(_ text: String,
+                        y: Int,
+                        isBold: Bool = false,
+                        boundFrame: CGRect,
+                        color: UIColor = .black) {
+        let font = isBold ? MyFont.bold(ofSize: getFontSize(h: 3)) :
+                            MyFont.regular(ofSize: getFontSize(h: 3))
+        let sprintLabel = addText(x: 14, y: y, w: 8, h: 3,
+                                  text: text,
+                                  font: font,
+                                  color: color)
+        sprintLabel.textAlignment = .center
+        sprintLabel.centerX(boundFrame)
+    }
+
+    func addSeparateLine(y: Int, boundFrame: CGRect) {
+        let separateLine = UIView()
+        layout(0, y, 6, 1, separateLine)
+        separateLine.frame.size.height = 0.5
+        separateLine.backgroundColor = rgb(200, 200, 200)
+        addSubview(separateLine)
+        separateLine.centerIn(boundFrame)
     }
 }
