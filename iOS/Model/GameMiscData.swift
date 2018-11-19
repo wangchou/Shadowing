@@ -35,7 +35,6 @@ func saveGameMiscData() {
 }
 
 func loadGameMiscData() {
-    guard userSaidSentences.isEmpty else { return }
     if let loadedSentences = loadFromUserDefault(type: type(of: userSaidSentences), key: userSaidSentencesKey + gameLang.key) {
         userSaidSentences = loadedSentences
     } else {
