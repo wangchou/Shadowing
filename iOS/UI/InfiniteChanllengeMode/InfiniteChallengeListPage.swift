@@ -41,6 +41,7 @@ class InfiniteChallengeListPage: UIViewController {
         topBarView.titleLabel.text = i18n.infiniteChallengeTitle
         icListTopView.frame.size.height = screen.width * 34/48
         icListTopView.viewWillAppear()
+        tableView.reloadData()
     }
 }
 
