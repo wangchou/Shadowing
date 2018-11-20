@@ -21,6 +21,7 @@ class VoiceSelectionPage: UIViewController {
     static var voices: [AVSpeechSynthesisVoice] = []
     static var selectedVoice: AVSpeechSynthesisVoice?
 
+    @IBOutlet weak var downloadVoiceTextView: UITextView!
     var selectingVoiceFor: SelectingVoiceFor {
         return VoiceSelectionPage.selectingVoiceFor
     }
@@ -88,6 +89,7 @@ class VoiceSelectionPage: UIViewController {
         titleLabel.text = selectingVoiceFor == .teacher ? i18n.teacherLabel : i18n.assistantLabel
         doneButton.setTitle(i18n.done, for: .normal)
         cancelButton.setTitle(i18n.cancel, for: .normal)
+        downloadVoiceTextView.text = i18n.voiceNotAvailableMessage
     }
 
     @IBAction func onCancelButtonClicked(_ sender: Any) {

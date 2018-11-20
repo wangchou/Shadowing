@@ -65,9 +65,9 @@ class I18n {
     }
     var voiceNotAvailableMessage: String {
         let lang = gameLang == .jp ? japanese : english
-        if isJa { return "iPhoneの「設定 > 一般 > アクセシビリティ > スピーチ > 声 > \(lang)」で、ダウンロードしましょう。" }
-        if isZh { return "請於手機的「設定 > 一般 > 輔助使用 > 語音 > 聲音 > \(lang)」下載相關語音。" }
-        return "Download new voice via Settings > General > Accessibility > Speech > Voice > \(lang)"
+        if isJa { return "もっと声をダウンロードしましょう\n「設定」>「一般」>「アクセシビリティ」>「スピーチ」 >「声」>「\(lang)」の順に選択します。" }
+        if isZh { return "更多語音選項: \n 請前往手機的「設定 > 一般 > 輔助使用 > 語音 > 聲音 > \(lang)」下載" }
+        return "Download more voices:\nGo to Settings > General > Accessibility > Speech > Voice > \(lang)"
     }
     var voiceNotAvailableOKButton: String {
         return isJa ? "わかった" : "知道了"
