@@ -211,6 +211,7 @@ extension GridLayout where Self: UIView {
         addSubview(roundRect)
     }
 
+    @discardableResult
     func addRect(x: Int, y: Int, w: Int, h: Int,
                  color: UIColor = myBlue) -> UIView {
         let rect = UIView()
@@ -355,17 +356,17 @@ extension UIView {
     }
 
     var safeLeftAnchor: NSLayoutXAxisAnchor {
-        if #available(iOS 11.0, *){
+        if #available(iOS 11.0, *) {
             return self.safeAreaLayoutGuide.leftAnchor
-        }else {
+        } else {
             return self.leftAnchor
         }
     }
 
     var safeRightAnchor: NSLayoutXAxisAnchor {
-        if #available(iOS 11.0, *){
+        if #available(iOS 11.0, *) {
             return self.safeAreaLayoutGuide.rightAnchor
-        }else {
+        } else {
             return self.rightAnchor
         }
     }

@@ -191,7 +191,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ICContentTableCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="BeV-1n-e1s" customClass="SentencesTableCell" customModule="今話したい" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ICContentTableCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ICContentTableCell" id="BeV-1n-e1s" customClass="SentencesTableCell" customModule="今話したい" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="224" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BeV-1n-e1s" id="pWe-a6-ZtM">
@@ -2002,8 +2002,8 @@ Ruth Yuru Chen
                                 <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xy8-dC-O7c" userLabel="Guide Voice Switch">
-                                <rect key="frame" x="241" y="387" width="49" height="31"/>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xy8-dC-O7c" userLabel="Guide Voice Switch">
+                                <rect key="frame" x="241" y="387" width="51" height="31"/>
                                 <connections>
                                     <action selector="onGuideVoiceSwitchTapped:" destination="xbq-5x-hVH" eventType="valueChanged" id="5IY-NF-42N"/>
                                 </connections>
@@ -2028,7 +2028,7 @@ Ruth Yuru Chen
                             <constraint firstItem="cM8-Gz-KMi" firstAttribute="firstBaseline" secondItem="08G-Eb-JgR" secondAttribute="baseline" constant="16" symbolType="layoutAnchor" id="aNS-UM-lCr"/>
                             <constraint firstItem="08G-Eb-JgR" firstAttribute="centerY" secondItem="4P9-61-8fN" secondAttribute="centerY" id="bVg-EA-jUA"/>
                             <constraint firstItem="Px8-Is-Bt1" firstAttribute="centerY" secondItem="IVc-qA-oVM" secondAttribute="centerY" id="dtC-KL-8ly"/>
-                            <constraint firstItem="N3t-I3-Erf" firstAttribute="trailing" secondItem="Xy8-dC-O7c" secondAttribute="trailing" constant="32" id="eLa-Aj-0Pa"/>
+                            <constraint firstItem="N3t-I3-Erf" firstAttribute="trailing" secondItem="Xy8-dC-O7c" secondAttribute="trailing" constant="30" id="eLa-Aj-0Pa"/>
                             <constraint firstItem="OGX-jP-5z8" firstAttribute="top" secondItem="InH-cn-90q" secondAttribute="bottom" constant="4" id="jJW-gU-N1s"/>
                             <constraint firstItem="cM8-Gz-KMi" firstAttribute="leading" secondItem="Zvf-ny-jFJ" secondAttribute="trailing" constant="5" id="kXP-pA-csX"/>
                             <constraint firstItem="pEm-2K-vVR" firstAttribute="leading" secondItem="cM8-Gz-KMi" secondAttribute="trailing" constant="5" id="lAg-un-Bt0"/>

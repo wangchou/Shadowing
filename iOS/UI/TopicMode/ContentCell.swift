@@ -49,4 +49,3 @@ func getProgressText(string: String?) -> NSAttributedString {
         return attrText
     }
 }
-

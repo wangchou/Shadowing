@@ -131,7 +131,7 @@ class GameContext {
                 _ = s.furiganaAttributedString // load furigana
             }
         }
-        
+
         if isSimulator { life = 100 }
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level)
 
