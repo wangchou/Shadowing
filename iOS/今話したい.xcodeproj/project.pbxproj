@@ -11,6 +11,7 @@
 		BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB3D209B19B200D23F22 /* GameContext.swift */; };
 		BE1CA958209DC43800086853 /* Messenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA957209DC43800086853 /* Messenger.swift */; };
 		BE221AA121A2A76D0009B23B /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE221AA021A2A76D0009B23B /* CircleView.swift */; };
+		BE28B2C221A3EAB600088214 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE28B2C121A3EAB500088214 /* Main.storyboard */; };
 		BE596466215A0DE100E4AA0C /* travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596465215A0DE100E4AA0C /* travel.swift */; };
 		BE596468215A0DF200E4AA0C /* daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596467215A0DF200E4AA0C /* daily.swift */; };
 		BE59646A215A0E4D00E4AA0C /* polite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596469215A0E4D00E4AA0C /* polite.swift */; };
@@ -57,7 +58,6 @@
 		BEA86115216F264A00AECF13 /* sqliteSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA86114216F264A00AECF13 /* sqliteSentences.swift */; };
 		BEB6F6C92182B89D0011E1C1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEB6F6C72182B89D0011E1C1 /* InfoPlist.strings */; };
 		BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */; };
-		BEBDEDC5208EF09F00C18520 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEBDEDC3208EF09F00C18520 /* Main.storyboard */; };
 		BEBDEDD9208EF15F00C18520 /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD1208EF15E00C18520 /* utilities.swift */; };
 		BEBDEDDA208EF15F00C18520 /* TTS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD2208EF15E00C18520 /* TTS.swift */; };
 		BEBDEDDD208EF15F00C18520 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */; };
@@ -114,6 +114,7 @@
 		BE17FB3D209B19B200D23F22 /* GameContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameContext.swift; sourceTree = "<group>"; };
 		BE1CA957209DC43800086853 /* Messenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messenger.swift; sourceTree = "<group>"; };
 		BE221AA021A2A76D0009B23B /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		BE28B2C121A3EAB500088214 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		BE596465215A0DE100E4AA0C /* travel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = travel.swift; sourceTree = "<group>"; };
 		BE596467215A0DF200E4AA0C /* daily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = daily.swift; sourceTree = "<group>"; };
 		BE596469215A0E4D00E4AA0C /* polite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = polite.swift; sourceTree = "<group>"; };
@@ -159,7 +160,6 @@
 		BEB6F6D12182DBDA0011E1C1 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "Project/zh-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		BEBDEDBC208EF09F00C18520 /* 今話したい.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "今話したい.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BEBDEDC4208EF09F00C18520 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BEBDEDCB208EF0A000C18520 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BEBDEDD1208EF15E00C18520 /* utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utilities.swift; sourceTree = "<group>"; };
 		BEBDEDD2208EF15E00C18520 /* TTS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTS.swift; sourceTree = "<group>"; };
@@ -377,7 +377,7 @@
 		BEDEDD4220A5D86500E7B60B /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				BEBDEDC3208EF09F00C18520 /* Main.storyboard */,
+				BE28B2C121A3EAB500088214 /* Main.storyboard */,
 				BE5ABAC8217B703500A63C5F /* InfoPage.swift */,
 				BEC2E92E217875C30095A65D /* RootContainerViewController.swift */,
 				BE2951132155F5D0008239F9 /* Components */,
@@ -470,12 +470,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE28B2C221A3EAB600088214 /* Main.storyboard in Resources */,
 				BE76F11F214F56F6004E130B /* SentencesTableCell.xib in Resources */,
 				BEB6F6C92182B89D0011E1C1 /* InfoPlist.strings in Resources */,
 				BEEC7FA92154C7AC001C2EFF /* TopBarView.xib in Resources */,
 				BE67D2A921561A93007FE420 /* Assets.xcassets in Resources */,
 				BE6FFA27219BB9FF0094DC42 /* inf_sentences_100points_duolingo_with_topics.sqlite in Resources */,
-				BEBDEDC5208EF09F00C18520 /* Main.storyboard in Resources */,
 				BECAC3BC216B904A001BBF49 /* BottomBarView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -581,14 +581,6 @@
 				BEB6F6D12182DBDA0011E1C1 /* zh-HK */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		BEBDEDC3208EF09F00C18520 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BEBDEDC4208EF09F00C18520 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
