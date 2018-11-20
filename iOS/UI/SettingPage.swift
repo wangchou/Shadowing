@@ -12,6 +12,7 @@ import UIKit
 
 private let context = GameContext.shared
 private let i18n = I18n.shared
+private let dailyGoals: [Int] = [20, 50, 100, 200, 500]
 
 class SettingPage: UITableViewController {
     @IBOutlet weak var topBarView: TopBarView!
@@ -39,6 +40,7 @@ class SettingPage: UITableViewController {
     @IBOutlet weak var assisantLabel: UILabel!
     @IBOutlet weak var assistantNameLabel: UILabel!
     @IBOutlet weak var gotoIOSSettingButton: UIButton!
+    @IBOutlet weak var dailyGoalSegmentedControl: UISegmentedControl!
 
     var testSentence: String {
         if let voice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher) {
@@ -69,6 +71,10 @@ class SettingPage: UITableViewController {
         super.viewWillAppear(animated)
         gameLangSegmentControl.setTitle(i18n.english, forSegmentAt: 0)
         gameLangSegmentControl.setTitle(i18n.japanese, forSegmentAt: 1)
+
+        for i in 0..<dailyGoals.count {
+            dailyGoalSegmentedControl.setTitle("\(dailyGoals[i])\(i18n.sentenceUnit)", forSegmentAt: i)
+        }
         topBarView.titleLabel.text = i18n.setting
         autoSpeedLabel.text = i18n.autoSpeedLabel
         translationLabel.text = i18n.translationLabel
@@ -88,6 +94,7 @@ class SettingPage: UITableViewController {
         }
 
         gameLangSegmentControl.selectedSegmentIndex = gameLang == .jp ? 1 : 0
+        dailyGoalSegmentedControl.selectedSegmentIndex = dailyGoals.firstIndex(of: context.gameSetting.dailySentenceGoal) ?? 1
 
         gotoIOSSettingButton.setTitle(i18n.gotoIOSSettingButtonTitle, for: .normal)
 
@@ -186,6 +193,16 @@ class SettingPage: UITableViewController {
         rootViewController.reloadTableData()
     }
 
+    @IBAction func dailyGoalSegmentedControlValueChanged(_ sender: Any) {
+        switch dailyGoalSegmentedControl.selectedSegmentIndex {
+        case 1, 2, 3, 4, 5:
+            context.gameSetting.dailySentenceGoal = dailyGoals[dailyGoalSegmentedControl.selectedSegmentIndex]
+        default:
+            context.gameSetting.dailySentenceGoal = 50
+        }
+        saveGameSetting()
+    }
+
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let i18n = I18n.shared
         switch section {
@@ -200,6 +217,8 @@ class SettingPage: UITableViewController {
         case 4:
             return i18n.gameSetting
         case 5:
+            return i18n.dailyGoal
+        case 6:
             return i18n.micAndSpeechPermission
 
         default:

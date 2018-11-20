@@ -93,6 +93,19 @@ class I18n {
         if isZh { return "麥克風與語音辨識權限" }
         return "Mic and Recognition Permissions"
     }
+
+    var dailyGoal: String {
+        if isJa { return "毎日の目標" }
+        if isZh { return "每天的目標" }
+        return "Daily Sentences Goal"
+    }
+
+    var sentenceUnit: String {
+        if isJa { return "文" }
+        if isZh { return "句" }
+        return ""
+    }
+
     var textToSpeech: String {
         if isJa { return "音声合成" }
         if isZh { return "語音合成" }
