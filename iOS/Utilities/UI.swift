@@ -182,18 +182,20 @@ extension GridLayout where Self: UIView {
         return label
     }
 
+    @discardableResult
     func addAttrText(x: Int,
                      y: Int,
                      w: Int? = nil,
                      h: Int,
                      text: NSAttributedString,
                      completion: ((UIView) -> Void)? = nil
-        ) {
+        ) -> UILabel {
         let label = UILabel()
         label.attributedText = text
         layout(x, y, w ?? (gridCount - x), h, label)
         addSubview(label)
         completion?(label)
+        return label
     }
 
     func addRoundRect(x: Int, y: Int, w: Int, h: Int,

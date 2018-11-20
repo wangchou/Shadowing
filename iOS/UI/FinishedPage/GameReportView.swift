@@ -23,11 +23,11 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         let reportBox = GameReportBoxView()
 
         if context.isNewRecord && context.contentTab == .topics {
-            frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.6)
-            layout(2, 4, 44, 60, reportBox)
+            frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.73)
+            layout(2, 4, 44, 67, reportBox)
         } else {
-            frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 0.93)
-            layout(2, 4, 44, 28, reportBox)
+            frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.06)
+            layout(2, 4, 44, 35, reportBox)
         }
         addReloadableSubview(reportBox)
         addBackButton()
@@ -60,10 +60,9 @@ class GameReportView: UIView, ReloadableView, GridLayout {
             }
         }
         if context.isNewRecord && context.contentTab == .topics {
-            layout(2, 66, 44, 8, backButton)
-
+            layout(2, 73, 44, 8, backButton)
         } else {
-            layout(2, 34, 44, 8, backButton)
+            layout(2, 41, 44, 8, backButton)
         }
 
         addSubview(backButton)

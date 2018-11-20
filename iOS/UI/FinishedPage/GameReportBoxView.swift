@@ -21,6 +21,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         removeAllSubviews()
         renderTopTitle()
         renderMiddleRecord()
+        renderMiddleGoalBar()
         if context.isNewRecord && context.contentTab == .topics {
             renderBottomAbilityInfo()
         }
@@ -56,8 +57,23 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         addText(2, y+11, 3, "正解 \(record.perfectCount) | すごい \(record.greatCount) | いいね \(record.goodCount) | ミス \(record.missedCount)")
     }
 
+    private func renderMiddleGoalBar() {
+        guard let record = context.gameRecord else { return }
+
+        let y = 28
+        addText(2, y, 3, "今日の目標")
+        let goalProgressLabel = addText(31, y, 3, "200/\(context.gameSetting.dailySentenceGoal)")
+        goalProgressLabel.frame = getFrame(22, y, 20, 3)
+        goalProgressLabel.textAlignment = .right
+
+        let barBox = addRect(x: 2, y: y + 3, w: 40, h: 2, color: .clear)
+        barBox.roundBorder(borderWidth: 1, cornerRadius: 0, color: .lightGray)
+
+        addRect(x: 2, y: y + 3, w: 30, h: 2)
+    }
+
     private func renderBottomAbilityInfo() {
-        let y = 30
+        let y = 36
 
         let lineLeft = UIView()
         let lineRight = UIView()
@@ -111,17 +127,20 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         }
     }
 
+    @discardableResult
     func addText(
-        _ x: Int, _ y: Int, _ h: Int, _ text: String, color: UIColor = .white, strokeColor: UIColor = .black) {
+        _ x: Int, _ y: Int, _ h: Int, _ text: String,
+        color: UIColor = .white, strokeColor: UIColor = .black) -> UILabel {
         let fontSize = getFontSize(h: h)
         let font = MyFont.bold(ofSize: fontSize)
-        addAttrText( x, y, h,
+        return addAttrText( x, y, h,
                      getText(text, color: color, strokeWidth: -2, strokeColor: strokeColor, font: font)
         )
     }
 
-    func addAttrText(_ x: Int, _ y: Int, _ h: Int, _ attrText: NSAttributedString) {
-        addAttrText(x: x, y: y, w: gridCount - x, h: h, text: attrText)
+    @discardableResult
+    func addAttrText(_ x: Int, _ y: Int, _ h: Int, _ attrText: NSAttributedString) -> UILabel {
+        return addAttrText(x: x, y: y, w: gridCount - x, h: h, text: attrText)
     }
 
     override func prepareForInterfaceBuilder() {
