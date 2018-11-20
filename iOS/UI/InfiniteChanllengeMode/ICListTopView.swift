@@ -42,6 +42,24 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
         return "\(continues)"
     }
 
+    var allSentenceCount: Int = 0
+
+    var longTermGoalColor: UIColor {
+        if allSentenceCount < 1000 {
+            return Level.lv0.color
+        }
+
+        if allSentenceCount < 3000 {
+            return Level.lv2.color
+        }
+
+        if allSentenceCount < 6000 {
+            return Level.lv4.color
+        }
+
+        return Level.lv6.color
+    }
+
     var dayText: String {
         return "天"
     }
@@ -135,8 +153,10 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
         }
 
         bestCount = 0
+        allSentenceCount = 0
         var currentBest = 0
         sentenceCounts.forEach { c in
+            allSentenceCount += c
             if c >= context.gameSetting.dailySentenceGoal {
                 currentBest += 1
             } else {
@@ -149,17 +169,10 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
     }
 
     func updateBGColor(animated: Bool = false) {
-        let lightGray238 = rgb(238, 238, 238)
-        guard percent > 0 else {
-            backgroundColor = rgb(238, 238, 238)
-            return
-        }
-
         // 0%   = rgb(238, 238, 238)
         // 100% = rgb(255, 204, 0)
-        let targetBGColor = rgb(255,
-                                255 - (51 * percent),
-                                255 * (1 - percent))
+        let lightGray238 = rgb(238, 238, 238)
+        let targetBGColor = percent > 0 ? longTermGoalColor.withSaturation(percent.c) : lightGray238
 
         if !animated {
             backgroundColor = targetBGColor
@@ -167,7 +180,7 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
         }
 
         let animation = CABasicAnimation(keyPath: "backgroundColor")
-        animation.fromValue = lightGray238.cgColor
+        animation.fromValue = longTermGoalColor.withSaturation(0)
         animation.toValue = targetBGColor.cgColor
 
         animation.duration = animationSecs
@@ -222,5 +235,20 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
         separateLine.backgroundColor = rgb(200, 200, 200)
         addSubview(separateLine)
         separateLine.centerIn(boundFrame)
+    }
+}
+
+extension UIColor {
+    func withSaturation(_ newS: CGFloat) -> UIColor {
+        var h: CGFloat = 0
+        var s: CGFloat = 0
+        var b: CGFloat = 0
+        var a: CGFloat = 0
+        if self.getHue(&h, saturation: &s, brightness: &b, alpha: &a) {
+            return UIColor.init(hue: h, saturation: newS, brightness: b, alpha: a)
+        }
+
+        print("withSaturation getHue fail")
+        return self
     }
 }

@@ -57,6 +57,7 @@ enum Level: Int, Codable {
     var bestInfinteChallengeRank: String? {
         return findBestRecord(key: self.infinteChallengeDatasetKey)?.rank.rawValue
     }
+
     var bestInfinteChallengeProgress: String? {
         return findBestRecord(key: self.infinteChallengeDatasetKey)?.progress
     }
