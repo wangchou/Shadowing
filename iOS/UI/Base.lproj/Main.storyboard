@@ -825,40 +825,31 @@ Ruth Yuru Chen
                                     <constraint firstAttribute="bottom" secondItem="X1Y-Iv-oa2" secondAttribute="bottom" id="wOt-oR-MzZ"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UU5-y4-gbW">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="UU5-y4-gbW">
                                 <rect key="frame" x="0.0" y="70" width="320" height="498"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="VoiceTableCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VoiceTableCell" rowHeight="70" id="kKJ-Eq-1Da" customClass="VoiceTableCell" customModule="今話したい" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="70"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="VoiceTableCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VoiceTableCell" rowHeight="45" id="kKJ-Eq-1Da" customClass="VoiceTableCell" customModule="今話したい" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55.5" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kKJ-Eq-1Da" id="jv7-eq-Mvs">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="69.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alex (Enhanced)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d5n-qf-R6u">
-                                                    <rect key="frame" x="15" y="5" width="125.5" height="20.5"/>
+                                                    <rect key="frame" x="15" y="12" width="125.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="English (US)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rix-ub-4aD">
-                                                    <rect key="frame" x="15" y="51" width="65" height="13.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="d5n-qf-R6u" firstAttribute="leading" secondItem="jv7-eq-Mvs" secondAttribute="leading" constant="15" id="AaS-Xm-dBu"/>
-                                                <constraint firstAttribute="bottom" secondItem="rix-ub-4aD" secondAttribute="bottom" constant="5" id="FwF-kq-2GL"/>
-                                                <constraint firstItem="rix-ub-4aD" firstAttribute="leading" secondItem="jv7-eq-Mvs" secondAttribute="leading" constant="15" id="JqM-kg-MjW"/>
-                                                <constraint firstItem="d5n-qf-R6u" firstAttribute="top" secondItem="jv7-eq-Mvs" secondAttribute="top" constant="5" id="sKZ-Xz-a4H"/>
+                                                <constraint firstItem="d5n-qf-R6u" firstAttribute="centerY" secondItem="jv7-eq-Mvs" secondAttribute="centerY" id="cI7-d7-Pah"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
-                                            <outlet property="localeLabel" destination="rix-ub-4aD" id="PLz-Bj-Ooz"/>
                                             <outlet property="nameLabel" destination="d5n-qf-R6u" id="UPl-gD-n1U"/>
                                         </connections>
                                     </tableViewCell>
@@ -890,7 +881,7 @@ Ruth Yuru Chen
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6h5-lK-YIB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-354" y="-169"/>
+            <point key="canvasLocation" x="-354.375" y="-169.01408450704224"/>
         </scene>
         <!--Item-->
         <scene sceneID="dx9-ut-S3b">

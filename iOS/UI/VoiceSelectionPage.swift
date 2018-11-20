@@ -27,6 +27,25 @@ class VoiceSelectionPage: UIViewController {
     var voices: [AVSpeechSynthesisVoice] {
         return VoiceSelectionPage.voices
     }
+    var voicesGrouped: [[AVSpeechSynthesisVoice]] {
+        var voiceDictByLanguage: [String: [AVSpeechSynthesisVoice]] = [:]
+        voices.forEach { v in
+            if voiceDictByLanguage[v.language] != nil {
+                voiceDictByLanguage[v.language]?.append(v)
+            } else {
+                voiceDictByLanguage[v.language] = [v]
+            }
+        }
+        var voicesGrouped: [[AVSpeechSynthesisVoice]] = []
+        for key in voiceDictByLanguage.keys.sorted() {
+            voicesGrouped.append(
+                voiceDictByLanguage[key]!.sorted {
+                    return $0.name < $1.name
+                }
+            )
+        }
+        return voicesGrouped
+    }
     var selectedVoice: AVSpeechSynthesisVoice? {
         set {
             VoiceSelectionPage.selectedVoice = newValue
@@ -89,19 +108,18 @@ class VoiceSelectionPage: UIViewController {
 
 extension VoiceSelectionPage: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return voicesGrouped.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return voices.count
+        return voicesGrouped[section].count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "VoiceTableCell", for: indexPath)
         guard let voiceCell = cell as? VoiceTableCell else { print("voiceCell convert error"); return cell }
-        let voice = voices[indexPath.row]
+        let voice = voicesGrouped[indexPath.section][indexPath.row]
         voiceCell.nameLabel.text = voice.detailName
-        voiceCell.localeLabel.text = i18n.getLangDescription(langAndRegion: voice.language)
         if voice == selectedVoice {
             voiceCell.accessoryType = .checkmark
         } else {
@@ -109,11 +127,15 @@ extension VoiceSelectionPage: UITableViewDataSource {
         }
         return voiceCell
     }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return i18n.getLangDescription(langAndRegion: voicesGrouped[section][0].language)
+    }
 }
 
 extension VoiceSelectionPage: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedVoice = voices[indexPath.row]
+        selectedVoice = voicesGrouped[indexPath.section][indexPath.row]
         let originalVoiceId = selectingVoiceFor == .teacher ?
             context.gameSetting.teacher : context.gameSetting.assisant
         if originalVoiceId == selectedVoice?.identifier {
