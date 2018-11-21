@@ -165,9 +165,9 @@ extension GameFlow {
         case .great:
             life += 2
         case .good:
-            life += -3
+            life += -4
         case .poor:
-            life += -5
+            life += -6
         }
 
         context.life = max(min(100, life), 0)
