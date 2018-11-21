@@ -50,18 +50,33 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
 
     var longTermGoalColor: UIColor {
         if allSentenceCount < 1000 {
-            return Level.lv0.color
+            return Level.lv0.color.withSaturation(1.0)
         }
 
         if allSentenceCount < 3000 {
-            return Level.lv2.color
+            return Level.lv2.color.withSaturation(1.0)
         }
 
         if allSentenceCount < 6000 {
-            return Level.lv4.color
+            return Level.lv4.color.withSaturation(1.0)
         }
 
-        return Level.lv6.color
+        return Level.lv6.color.withSaturation(1.0)
+    }
+    var longTermGoalText: String {
+        if allSentenceCount < 1000 {
+            return "1000文"
+        }
+
+        if allSentenceCount < 3000 {
+            return "3000文"
+        }
+
+        if allSentenceCount < 6000 {
+            return "6000文"
+        }
+
+        return "10000文"
     }
 
     var dayText: String {
@@ -357,22 +372,66 @@ extension ICListTopView {
 // LongTermGoalMode
 extension ICListTopView {
     func renderLongTermGoalMode() {
-        gridCount = 48
+        gridCount = 50
         backgroundColor = rgb(28, 28, 28)
+
+        let currentLvlColor = longTermGoalColor
+
+        let goalLabel = addText(x: 5, y: 7, w: 50, h: 14, text: longTermGoalText, color: currentLvlColor)
+        goalLabel.textAlignment = .center
+        goalLabel.centerX(frame)
+
+        addLongTermGoalDesc()
+        addLongTermGoalBottomBar()
     }
-}
 
-extension UIColor {
-    func withSaturation(_ newS: CGFloat) -> UIColor {
-        var h: CGFloat = 0
-        var s: CGFloat = 0
-        var b: CGFloat = 0
-        var a: CGFloat = 0
-        if self.getHue(&h, saturation: &s, brightness: &b, alpha: &a) {
-            return UIColor.init(hue: h, saturation: newS, brightness: b, alpha: a)
+    func addLongTermGoalBottomBar() {
+        let lvlColors = [Level.lv0.color.withSaturation(1.0),
+                         Level.lv2.color.withSaturation(1.0),
+                         Level.lv4.color.withSaturation(1.0),
+                         Level.lv6.color.withSaturation(1.0)]
+        //        let lv5Color = Level.lv8.color.withSaturation(1.0)
+        var levelSentenceCounts = [1000, 2000, 3000, 4000]
+        var wPoints = [0, 5, 15, 30, 50]
+        var t: UILabel
+        var bar: UIView
+        for i in 0..<levelSentenceCounts.count {
+            let w = wPoints[i+1] - wPoints[i]
+            let c = lvlColors[i]
+            bar = addRect(x: wPoints[i], y: 30, w: w, h: 1, color: c)
+            bar.moveToBottom(frame)
+            t = addText(x: 0, y: 20, w: 8, h: 3, text: "\(levelSentenceCounts[i])", color: c)
+            t.textAlignment = .right
+            t.moveToRight(bar.frame)
+            t.moveToBottom(frame, yShift: -1 * stepFloat)
         }
+    }
 
-        print("withSaturation getHue fail")
-        return self
+    func addLongTermGoalDesc() {
+        let gray = rgb(155, 155, 155)
+        let descAttrText = NSMutableAttributedString()
+        descAttrText.append(getText(
+            "23.2 ",
+            color: .white,
+            font: MyFont.bold(ofSize: stepFloat * 2.5)
+        ))
+        descAttrText.append(getText(
+            "% 話した、完了まで",
+            color: gray,
+            font: MyFont.regular(ofSize: stepFloat * 2.5)
+        ))
+        descAttrText.append(getText(
+            " 22 ",
+            color: .white,
+            font: MyFont.bold(ofSize: stepFloat * 2.5)
+        ))
+        descAttrText.append(getText(
+            "天",
+            color: gray,
+            font: MyFont.regular(ofSize: stepFloat * 2.5)
+        ))
+        let descLabel = addAttrText(x: 5, y: 23, h: 5, text: descAttrText)
+        descLabel.textAlignment = .center
+        descLabel.centerX(frame)
     }
 }

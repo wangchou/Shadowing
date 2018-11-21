@@ -43,6 +43,14 @@ extension UIView {
         frame.origin.x = boundRect.origin.x + xPadding + xShift
     }
 
+    func moveToBottom(_ boundRect: CGRect, yShift: CGFloat = 0) {
+        frame.origin.y = boundRect.origin.y + boundRect.height - frame.size.height + yShift
+    }
+
+    func moveToRight(_ boundRect: CGRect, xShift: CGFloat = 0) {
+        frame.origin.x = boundRect.origin.x + boundRect.width - frame.size.width + xShift
+    }
+
     func removeAllSubviews() {
         subviews.forEach { $0.removeFromSuperview() }
     }

@@ -54,7 +54,11 @@ class InfiniteChallengeListPage: UIViewController {
         bottomBarView.contentTab = .infiniteChallenge
         topBarView.titleLabel.text = i18n.infiniteChallengeTitle
         icListTopView.frame.size.height = screen.width * 34/48
-        icListTopView.viewWillAppear()
+        do {
+            try icListTopView.viewWillAppear() // icListTopView may not be available yet
+        } catch {
+            print(error)
+        }
         tableView.reloadData()
     }
 }
