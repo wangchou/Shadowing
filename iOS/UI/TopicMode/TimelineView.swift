@@ -46,10 +46,7 @@ class TimelineView: UIView, ReloadableView, GridLayout {
         return Int(frame.width/step)
     }
 
-    let dateFormatter = DateFormatter()
-
     func viewWillAppear() {
-        dateFormatter.dateFormat = "yyyy MM dd"
         removeAllSubviews()
 
         let today = Date()
@@ -57,7 +54,7 @@ class TimelineView: UIView, ReloadableView, GridLayout {
         var timelineBox = TimelineBox(date: today, row: weekday, column: 1)
         let recordsByDate = getRecordsByDate()
         while timelineBox.column < columnCount {
-            let dateString = dateFormatter.string(from: timelineBox.date)
+            let dateString = getDateKey(date: timelineBox.date)
             let color = getColorFrom(records: recordsByDate[dateString])
             addBox(row: timelineBox.row, column: timelineBox.column, color: color)
             timelineBox.toYesterday()
@@ -93,19 +90,6 @@ class TimelineView: UIView, ReloadableView, GridLayout {
         if records.count >= 3 { sumAlpha = 0.66 }
         if records.count >= 7 { sumAlpha = 1.0 }
         return rgb(sumRed.f, sumGreen.f, sumBlue.f, sumAlpha.f)
-    }
-
-    func getRecordsByDate() -> [String: [GameRecord]] {
-        var recordsByDate: [String: [GameRecord]] = [:]
-        context.gameHistory.forEach {
-            let dateString = dateFormatter.string(from: $0.startedTime)
-            if recordsByDate[dateString] != nil {
-                recordsByDate[dateString]?.append($0)
-            } else {
-                recordsByDate[dateString] = [$0]
-            }
-        }
-        return recordsByDate
     }
 
     func addTextLabel(row: Int, column: Int, text: String) {

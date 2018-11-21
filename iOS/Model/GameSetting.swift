@@ -45,4 +45,11 @@ struct GameSetting: Codable {
     var teacher: String = "unknown"
     var assisant: String = "unknown"
     var dailySentenceGoal: Int = 50
+    var icTopViewMode: ICTopViewMode = .dailyGoal
+}
+
+enum ICTopViewMode: Int, Codable {
+    case dailyGoal
+    case timeline
+    case longTermGoal
 }

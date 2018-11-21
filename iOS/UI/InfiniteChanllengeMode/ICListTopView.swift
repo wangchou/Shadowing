@@ -34,7 +34,7 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
     }
 
     var sprintText: String {
-        return "衝刺"
+        return "連続"
     }
 
     var continues: Int = 0
@@ -99,35 +99,15 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
     func viewWillAppear() {
         removeAllSubviews()
         updateByRecords()
-        updateBGColor()
 
-        let circleFrame = getFrame(11, 3, 24, 24)
-
-        let backCircle = CircleView(frame: circleFrame)
-        backCircle.lineWidth = stepFloat * 1.3
-        backCircle.color = rgb(155, 155, 155)
-        addSubview(backCircle)
-
-        let frontCircle = CircleView(frame: circleFrame)
-        frontCircle.lineWidth = stepFloat * 1.3
-        frontCircle.percent = percent.c
-        addSubview(frontCircle)
-        //frontCircle.animate(duration: animationSecs)
-
-        let percentLabel = addText(x: 14, y: 6, w: 30, h: 8,
-                                   text: percentageText,
-                                   font: MyFont.bold(ofSize: getFontSize(h: 8)),
-                                   color: .black)
-        percentLabel.textAlignment = .center
-        percentLabel.centerIn(circleFrame)
-
-        let goalLabel = addText(x: 14, y: 28, w: 30, h: 4,
-                                text: goalText,
-                                font: MyFont.bold(ofSize: getFontSize(h: 4)))
-        goalLabel.textAlignment = .center
-        goalLabel.centerX(circleFrame)
-
-        addSideBar()
+        switch GameContext.shared.gameSetting.icTopViewMode {
+        case .dailyGoal:
+            renderDailyGoalMode()
+        case .timeline:
+            renderTimelineMode()
+        case .longTermGoal:
+            renderLongTermGoalMode()
+        }
     }
 
     func updateByRecords() {
@@ -167,57 +147,80 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
             }
         }
     }
+}
 
-    func updateBGColor(animated: Bool = false) {
+// Daily Goal Mode
+extension ICListTopView {
+    func renderDailyGoalMode() {
+        updateDailyViewBGColor()
+
+        let circleFrame = getFrame(11, 3, 24, 24)
+
+        let backCircle = CircleView(frame: circleFrame)
+        backCircle.lineWidth = stepFloat * 1.3
+        backCircle.color = rgb(155, 155, 155)
+        addSubview(backCircle)
+
+        let frontCircle = CircleView(frame: circleFrame)
+        frontCircle.lineWidth = stepFloat * 1.3
+        frontCircle.percent = percent.c
+        addSubview(frontCircle)
+        //frontCircle.animate(duration: animationSecs)
+
+        let percentLabel = addText(x: 14, y: 6, w: 30, h: 8,
+                                   text: percentageText,
+                                   font: MyFont.bold(ofSize: getFontSize(h: 8)),
+                                   color: .black)
+        percentLabel.textAlignment = .center
+        percentLabel.centerIn(circleFrame)
+
+        let goalLabel = addText(x: 14, y: 28, w: 30, h: 4,
+                                text: goalText,
+                                font: MyFont.bold(ofSize: getFontSize(h: 4)))
+        goalLabel.textAlignment = .center
+        goalLabel.centerX(circleFrame)
+
+        addDailySideBar()
+    }
+
+    func updateDailyViewBGColor() {
         // 0%   = rgb(238, 238, 238)
         // 100% = rgb(255, 204, 0)
         let lightGray238 = rgb(238, 238, 238)
         let targetBGColor = percent > 0 ? longTermGoalColor.withSaturation(percent.c) : lightGray238
 
-        if !animated {
-            backgroundColor = targetBGColor
-            return
-        }
-
-        let animation = CABasicAnimation(keyPath: "backgroundColor")
-        animation.fromValue = longTermGoalColor.withSaturation(0)
-        animation.toValue = targetBGColor.cgColor
-
-        animation.duration = animationSecs
-        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-        layer.add(animation, forKey: "bgColor")
-        layer.backgroundColor = targetBGColor.cgColor
+        backgroundColor = targetBGColor
     }
 
-    func addSideBar() {
+    func addDailySideBar() {
         let topRect = addRect(x: 38, y: 3, w: 8, h: 20, color: .white)
         topRect.roundBorder(borderWidth: 0,
                             cornerRadius: 5,
                             color: .clear)
 
         let xFrame = topRect.frame
-        addSideBarText(sprintText, y: 4, boundFrame: xFrame, color: .darkGray)
-        addSideBarText(continuesText, y: 8, isBold: true, boundFrame: xFrame)
-        addSideBarText(dayText, y: 11, boundFrame: topRect.frame, color: .darkGray)
-        addSideBarText(sentencesCountText, y: 16, isBold: true, boundFrame: xFrame)
-        addSideBarText(sentenceText, y: 19, boundFrame: xFrame, color: .darkGray)
+        addDailySideBarText(sprintText, y: 4, boundFrame: xFrame, color: .darkGray)
+        addDailySideBarText(continuesText, y: 8, isBold: true, boundFrame: xFrame)
+        addDailySideBarText(dayText, y: 11, boundFrame: topRect.frame, color: .darkGray)
+        addDailySideBarText(sentencesCountText, y: 16, isBold: true, boundFrame: xFrame)
+        addDailySideBarText(sentenceText, y: 19, boundFrame: xFrame, color: .darkGray)
 
         let bottomRect = addRect(x: 38, y: 24, w: 8, h: 8, color: .white)
         bottomRect.roundBorder(borderWidth: 0,
                                cornerRadius: 5,
                                color: .clear)
-        addSideBarText(bestText, y: 25, boundFrame: xFrame, color: .darkGray)
-        addSideBarText(bestCountText, y: 28, isBold: true, boundFrame: xFrame)
+        addDailySideBarText(bestText, y: 25, boundFrame: xFrame, color: .darkGray)
+        addDailySideBarText(bestCountText, y: 28, isBold: true, boundFrame: xFrame)
 
-        addSeparateLine(y: 7, boundFrame: getFrame(38, 3, 8, 9))
-        addSeparateLine(y: 15, boundFrame: getFrame(38, 14, 8, 2))
+        addDailySideBarSeparateLine(y: 7, boundFrame: getFrame(38, 3, 8, 9))
+        addDailySideBarSeparateLine(y: 15, boundFrame: getFrame(38, 14, 8, 2))
     }
 
-    func addSideBarText(_ text: String,
-                        y: Int,
-                        isBold: Bool = false,
-                        boundFrame: CGRect,
-                        color: UIColor = .black) {
+    func addDailySideBarText(_ text: String,
+                             y: Int,
+                             isBold: Bool = false,
+                             boundFrame: CGRect,
+                             color: UIColor = .black) {
         let font = isBold ? MyFont.bold(ofSize: getFontSize(h: 3)) :
                             MyFont.regular(ofSize: getFontSize(h: 3))
         let sprintLabel = addText(x: 14, y: y, w: 8, h: 3,
@@ -228,13 +231,27 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
         sprintLabel.centerX(boundFrame)
     }
 
-    func addSeparateLine(y: Int, boundFrame: CGRect) {
+    func addDailySideBarSeparateLine(y: Int, boundFrame: CGRect) {
         let separateLine = UIView()
         layout(0, y, 6, 1, separateLine)
         separateLine.frame.size.height = 0.5
         separateLine.backgroundColor = rgb(200, 200, 200)
         addSubview(separateLine)
         separateLine.centerIn(boundFrame)
+    }
+}
+
+// Timeline Mode
+extension ICListTopView {
+    func renderTimelineMode() {
+        backgroundColor = longTermGoalColor.withSaturation(0.3)
+    }
+}
+
+// LongTermGoalMode
+extension ICListTopView {
+    func renderLongTermGoalMode() {
+        backgroundColor = rgb(28, 28, 28)
     }
 }
 

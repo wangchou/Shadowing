@@ -10,6 +10,8 @@ import UIKit
 
 private let i18n = I18n.shared
 
+private let context = GameContext.shared
+
 class InfiniteChallengeListPage: UIViewController {
     @IBOutlet weak var topBarView: TopBarView!
     @IBOutlet weak var tableView: UITableView!
@@ -21,6 +23,18 @@ class InfiniteChallengeListPage: UIViewController {
         super.viewDidLoad()
         topBarView.rightButton.isHidden = true
         bottomBarView.contentTab = .infiniteChallenge
+        icListTopView.addTapGestureRecognizer {
+            switch context.gameSetting.icTopViewMode {
+            case .dailyGoal:
+                context.gameSetting.icTopViewMode = .timeline
+            case .timeline:
+                context.gameSetting.icTopViewMode = .longTermGoal
+            case .longTermGoal:
+                context.gameSetting.icTopViewMode = .dailyGoal
+            }
+            saveGameSetting()
+            self.icListTopView.viewWillAppear()
+        }
     }
 
     override func viewWillLayoutSubviews() {

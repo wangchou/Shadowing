@@ -70,6 +70,9 @@ struct GameRecord: Codable {
     var correctCount: Int {
         return perfectCount + greatCount
     }
+    var dateKey: String {
+        return getDateKey(date: startedTime)
+    }
 
     var sentencesScore: [String: Score]
 
