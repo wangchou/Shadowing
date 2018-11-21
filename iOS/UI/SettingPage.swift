@@ -195,7 +195,7 @@ class SettingPage: UITableViewController {
 
     @IBAction func dailyGoalSegmentedControlValueChanged(_ sender: Any) {
         switch dailyGoalSegmentedControl.selectedSegmentIndex {
-        case 1, 2, 3, 4, 5:
+        case 0, 1, 2, 3, 4:
             context.gameSetting.dailySentenceGoal = dailyGoals[dailyGoalSegmentedControl.selectedSegmentIndex]
         default:
             context.gameSetting.dailySentenceGoal = 50
