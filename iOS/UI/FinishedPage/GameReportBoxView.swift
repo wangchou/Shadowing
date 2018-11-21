@@ -58,18 +58,20 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
     }
 
     private func renderMiddleGoalBar() {
-        guard let record = context.gameRecord else { return }
-
         let y = 28
+        let todaySentenceCount = getTodaySentenceCount()
+        let dailyGoal = context.gameSetting.dailySentenceGoal
         addText(2, y, 3, "今日の目標")
-        let goalProgressLabel = addText(31, y, 3, "200/\(context.gameSetting.dailySentenceGoal)")
+        let goalProgressLabel = addText(31, y, 3, "\(todaySentenceCount)/\(dailyGoal)")
         goalProgressLabel.frame = getFrame(22, y, 20, 3)
         goalProgressLabel.textAlignment = .right
 
         let barBox = addRect(x: 2, y: y + 3, w: 40, h: 2, color: .clear)
         barBox.roundBorder(borderWidth: 1, cornerRadius: 0, color: .lightGray)
 
-        addRect(x: 2, y: y + 3, w: 30, h: 2)
+        let progress = min(1.0, (todaySentenceCount.f/dailyGoal.f))
+        addRect(x: 2, y: y + 3, w: (40 * progress).i, h: 2)
+
     }
 
     private func renderBottomAbilityInfo() {
