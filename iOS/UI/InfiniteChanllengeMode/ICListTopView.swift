@@ -50,6 +50,11 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
 
     var sevenDaysCount: Int = 0
     var thirtyDaysCount: Int = 0
+    var isGameClear: Bool {
+        return allSentenceCount >= 10000
+    }
+    var clearDurationInDays: Int = 0
+    var clearDate: Date = Date()
 
     var longTermGoalColor: UIColor {
         if allSentenceCount < 1000 {
@@ -180,6 +185,21 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
                 bestCount = currentBest
             }
             index += 1
+        }
+
+        clearDurationInDays = 0
+        if isGameClear {
+            var sCount = 0
+            for i in stride(from: sentenceCounts.count - 1, through: 0, by: -1) {
+                sCount += sentenceCounts[i]
+                clearDurationInDays += 1
+                if sCount >= 10000 {
+                    var dateComponent = DateComponents()
+                    dateComponent.day = -1 * i
+                    clearDate = Calendar.current.date(byAdding: dateComponent, to: Date()) ?? Date()
+                    break
+                }
+            }
         }
     }
 }
@@ -394,16 +414,34 @@ extension ICListTopView {
         gridCount = 50
         backgroundColor = rgb(28, 28, 28)
 
-        let currentLvlColor = longTermGoalColor
-
-        let goalLabel = addText(x: 5, y: 7, w: 50, h: 14, text: longTermGoalText, color: currentLvlColor)
-        goalLabel.textAlignment = .center
-        goalLabel.centerX(frame)
-
+        addLongTermTitle()
         addLongTermGoalDesc()
         addLongTermGoalBottomBar()
     }
 
+    func addLongTermTitle() {
+        if isGameClear {
+            var descAttrText = NSMutableAttributedString()
+            func addWord(_ word: String, _ level: Level) {
+                descAttrText.append(getText(word,
+                                            color: level.color.withSaturation(1.0),
+                                            font: MyFont.bold(ofSize: stepFloat * 8)))
+            }
+            addWord("今", Level.lv0)
+            addWord("話", Level.lv2)
+            addWord("し", Level.lv4)
+            addWord("た", Level.lv6)
+            addWord("い", Level.lv8)
+            let gameClearLabel = addAttrText(x: 5, y: 7, h: 14, text: descAttrText)
+            gameClearLabel.textAlignment = .center
+            gameClearLabel.centerX(frame)
+        } else {
+            let currentLvlColor = longTermGoalColor
+            let goalLabel = addText(x: 5, y: 7, w: 50, h: 14, text: longTermGoalText, color: currentLvlColor)
+            goalLabel.textAlignment = .center
+            goalLabel.centerX(frame)
+        }
+    }
     func addLongTermGoalBottomBar() {
         let lvlColors = [Level.lv0.color.withSaturation(1.0),
                          Level.lv2.color.withSaturation(1.0),
@@ -430,29 +468,49 @@ extension ICListTopView {
         let percentText = String(format: "%.1f", 100 * allSentenceCount.f/longTermGoal.f)
         let remainingDays = String(format: "%.1f", max(0, longTermGoal - allSentenceCount).f/context.gameSetting.dailySentenceGoal.f)
         let gray = rgb(155, 155, 155)
-        let descAttrText = NSMutableAttributedString()
-        descAttrText.append(getText(
-            "\(percentText) ",
-            color: .white,
-            font: MyFont.bold(ofSize: stepFloat * 2.5)
-        ))
-        descAttrText.append(getText(
-            "% 話した、完了まで",
-            color: gray,
-            font: MyFont.regular(ofSize: stepFloat * 2.5)
-        ))
-        descAttrText.append(getText(
-            " \(remainingDays) ",
-            color: .white,
-            font: MyFont.bold(ofSize: stepFloat * 2.5)
-        ))
-        descAttrText.append(getText(
-            "天",
-            color: gray,
-            font: MyFont.regular(ofSize: stepFloat * 2.5)
-        ))
-        let descLabel = addAttrText(x: 5, y: 23, h: 5, text: descAttrText)
+        var descAttrText = NSMutableAttributedString()
+        func addWhiteText(_ text: String) {
+            descAttrText.append(getText(text, color: .white,
+                font: MyFont.bold(ofSize: stepFloat * 2.5)
+            ))
+        }
+        func addGrayText(_ text: String) {
+            descAttrText.append(getText(text, color: gray,
+                                        font: MyFont.regular(ofSize: stepFloat * 2.5)
+            ))
+        }
+        func addBoldGrayText(_ text: String) {
+            descAttrText.append(getText(text, color: gray,
+                                        font: MyFont.bold(ofSize: stepFloat * 2.5)
+            ))
+        }
+        if isGameClear {
+            addWhiteText("100 ")
+            addGrayText("% 話した、")
+            addWhiteText("\(clearDurationInDays) ")
+            addGrayText("日間で。")
+        } else {
+            addWhiteText("\(percentText) ")
+            addGrayText("% 話した、完了まで")
+            addWhiteText(" \(remainingDays) ")
+            addGrayText("日")
+        }
+
+        let y = isGameClear ? 20 : 23
+        var descLabel = addAttrText(x: 5, y: y, h: 5, text: descAttrText)
         descLabel.textAlignment = .center
         descLabel.centerX(frame)
+
+        if isGameClear {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            dateFormatter.timeStyle = .none
+            dateFormatter.locale = Locale(identifier: Locale.current.identifier)
+            descAttrText = NSMutableAttributedString()
+            addBoldGrayText(dateFormatter.string(from: clearDate))
+            descLabel = addAttrText(x: 5, y: 25, h: 5, text: descAttrText)
+            descLabel.textAlignment = .center
+            descLabel.centerX(frame)
+        }
     }
 }
