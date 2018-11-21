@@ -48,6 +48,9 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
 
     var allSentenceCount: Int = 0
 
+    var sevenDaysCount: Int = 0
+    var thirtyDaysCount: Int = 0
+
     var longTermGoalColor: UIColor {
         if allSentenceCount < 1000 {
             return Level.lv0.color.withSaturation(1.0)
@@ -63,20 +66,23 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
 
         return Level.lv6.color.withSaturation(1.0)
     }
-    var longTermGoalText: String {
+    var longTermGoal: Int {
         if allSentenceCount < 1000 {
-            return "1000文"
+            return 1000
         }
 
         if allSentenceCount < 3000 {
-            return "3000文"
+            return 3000
         }
 
         if allSentenceCount < 6000 {
-            return "6000文"
+            return 6000
         }
+        return 10000
+    }
 
-        return "10000文"
+    var longTermGoalText: String {
+        return "\(longTermGoal)文"
     }
 
     var dayText: String {
@@ -153,17 +159,27 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
 
         bestCount = 0
         allSentenceCount = 0
+        sevenDaysCount = 0
+        thirtyDaysCount = 0
         var currentBest = 0
+        var index = 0
         sentenceCounts.forEach { c in
             allSentenceCount += c
             if c >= context.gameSetting.dailySentenceGoal {
                 currentBest += 1
+                if index < 7 {
+                    sevenDaysCount += 1
+                }
+                if index < 30 {
+                    thirtyDaysCount += 1
+                }
             } else {
                 currentBest = 0
             }
             if currentBest > bestCount {
                 bestCount = currentBest
             }
+            index += 1
         }
     }
 }
@@ -300,7 +316,10 @@ extension ICListTopView {
     }
 
     func addTimelineBottomBar() {
-        let topTexts = ["\(continues)", "\(bestCount)", "24%", "54%", "3211"]
+        let sevenDaysPercentText = String(format: "%d", (100 * sevenDaysCount.f / 7).i)
+        let thirtyDaysPercentText = String(format: "%d", (100 * thirtyDaysCount.f / 30).i)
+
+        let topTexts = ["\(continues)", "\(bestCount)", "\(sevenDaysPercentText)%", "\(thirtyDaysPercentText)%", "\(allSentenceCount)"]
         let bottomTexts = ["連続", "ベスト", "過去7日間", "過去30日間", "文"]
         for boxIndex in 0..<5 {
             let box = addRect(x: 1 + boxIndex * 3, y: 8, w: 3, h: 2)
@@ -329,7 +348,7 @@ extension ICListTopView {
             )
             bottomText.textAlignment = .center
             bottomText.centerX(box.frame)
-            bottomText.frame.origin.y += stepFloat * 0.2
+            bottomText.frame.origin.y += stepFloat * 0.25
         }
     }
 
@@ -390,8 +409,8 @@ extension ICListTopView {
                          Level.lv2.color.withSaturation(1.0),
                          Level.lv4.color.withSaturation(1.0),
                          Level.lv6.color.withSaturation(1.0)]
-        //        let lv5Color = Level.lv8.color.withSaturation(1.0)
-        var levelSentenceCounts = [1000, 2000, 3000, 4000]
+
+        var levelSentenceCounts = [1000, 3000, 6000, 10000]
         var wPoints = [0, 5, 15, 30, 50]
         var t: UILabel
         var bar: UIView
@@ -408,10 +427,12 @@ extension ICListTopView {
     }
 
     func addLongTermGoalDesc() {
+        let percentText = String(format: "%.1f", 100 * allSentenceCount.f/longTermGoal.f)
+        let remainingDays = String(format: "%.1f", max(0, longTermGoal - allSentenceCount).f/context.gameSetting.dailySentenceGoal.f)
         let gray = rgb(155, 155, 155)
         let descAttrText = NSMutableAttributedString()
         descAttrText.append(getText(
-            "23.2 ",
+            "\(percentText) ",
             color: .white,
             font: MyFont.bold(ofSize: stepFloat * 2.5)
         ))
@@ -421,7 +442,7 @@ extension ICListTopView {
             font: MyFont.regular(ofSize: stepFloat * 2.5)
         ))
         descAttrText.append(getText(
-            " 22 ",
+            " \(remainingDays) ",
             color: .white,
             font: MyFont.bold(ofSize: stepFloat * 2.5)
         ))

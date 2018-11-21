@@ -49,16 +49,13 @@ class InfiniteChallengeListPage: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        viewWillLayoutSubviews()
+        //viewWillLayoutSubviews()
         super.viewWillAppear(animated)
         bottomBarView.contentTab = .infiniteChallenge
         topBarView.titleLabel.text = i18n.infiniteChallengeTitle
         icListTopView.frame.size.height = screen.width * 34/48
-        do {
-            try icListTopView.viewWillAppear() // icListTopView may not be available yet
-        } catch {
-            print(error)
-        }
+        icListTopView.viewWillAppear() // icListTopView may not be available yet
+
         tableView.reloadData()
     }
 }
