@@ -31,19 +31,19 @@ class I18n {
     }
 
     var translationLabel: String {
-        if isJa { return "中国語翻訳" }
-        if isZh { return "中文翻譯" }
-        return "Chinese Translation"
+        if isJa { return "翻訳の表示" }
+        if isZh { return "顯示翻譯" }
+        return "Show Translation"
     }
     var guideVoiceLabel: String {
         if isJa { return "ガイド音声" }
-        if isZh { return "日文引導朗讀" }
+        if isZh { return "引導朗讀" }
         return "Guide Voice"
     }
     var narratorLabel: String {
-        if isJa { return "ゲーム中国語説明" }
-        if isZh { return "遊戲開始中文說明" }
-        return "Chinese Descriptions"
+        if isJa { return "はじめの説明" }
+        if isZh { return "開始語音說明" }
+        return "Initial Descriptions"
     }
     var monitoringLabel: String {
         if isJa { return "モニタリング（有線イヤホンのみ）"}
@@ -198,10 +198,10 @@ class I18n {
         return "Done"
     }
 
-    var settingTitle: String {
-        if isJa { return "今話したいのは..." }
-        if isZh { return "我現在想說..." }
-        return "I like to speak..."
+    var wantToSayLabel: String {
+        if isJa { return "今話したいのは" }
+        if isZh { return "我現在想說" }
+        return "I want to say "
     }
 
     var setting: String {

@@ -18,6 +18,7 @@ class SettingPage: UITableViewController {
     @IBOutlet weak var topBarView: TopBarView!
     @IBOutlet weak var gameLangSegmentControl: UISegmentedControl!
 
+    @IBOutlet weak var wantToSayLabel: UILabel!
     @IBOutlet weak var autoSpeedLabel: UILabel!
     @IBOutlet weak var autoSpeedSwitch: UISwitch!
     @IBOutlet weak var gameSpeedSlider: UISlider!
@@ -81,6 +82,7 @@ class SettingPage: UITableViewController {
         guideVoiceLabel.text = i18n.guideVoiceLabel
         narratorLabel.text = i18n.narratorLabel
         monitoringLabel.text = i18n.monitoringLabel
+        wantToSayLabel.text = i18n.wantToSayLabel
 
         teacherLabel.text = i18n.teacherLabel
         assisantLabel.text = i18n.assistantLabel
@@ -207,15 +209,15 @@ class SettingPage: UITableViewController {
         let i18n = I18n.shared
         switch section {
         case 0:
-            return i18n.settingTitle
+            return ""
         case 1:
             return i18n.settingSectionGameSpeed
         case 2:
             return i18n.settingSectionPracticeSpeed
         case 3:
-            return i18n.textToSpeech
-        case 4:
             return i18n.gameSetting
+        case 4:
+            return i18n.textToSpeech
         case 5:
             return i18n.dailyGoal
         case 6:
