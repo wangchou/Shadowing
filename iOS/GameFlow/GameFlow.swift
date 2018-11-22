@@ -27,6 +27,7 @@ enum GameState {
 private let engine = SpeechEngine.shared
 private let context = GameContext.shared
 private let setting = context.gameSetting
+private let i18n = I18n.shared
 
 // handler for commands posted from UI
 extension GameFlow: GameCommandDelegate {
@@ -70,7 +71,7 @@ class GameFlow {
 
         context.loadLearningSentences()
         let narratorString = setting.isUsingGuideVoice ?
-            "我說完後，請跟著我說～" :"請唸出對應的日文。"
+            i18n.gameStartedWithGuideVoice : i18n.gameStartedWithoutGuideVoice
         if setting.isUsingNarrator {
             narratorSay(narratorString)
                 .then { self.wait }
@@ -120,7 +121,7 @@ extension GameFlow {
     }
 
     private func gameOver() {
-        narratorSay("遊戲結束").then {
+        narratorSay(i18n.gameOver).then {
             stopCommandObserving(self)
             context.gameState = .gameOver
 

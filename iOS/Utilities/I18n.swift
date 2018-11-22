@@ -94,6 +94,29 @@ class I18n {
         return "Mic and Recognition Permissions"
     }
 
+    var gameOver: String {
+        if isJa { return "ゲーム終了" }
+        if isZh { return "遊戲結束" }
+        return "Game Over"
+    }
+
+    var gameStartedWithGuideVoice: String {
+        if isJa { return "私のあとに繰り返してください。" }
+        if isZh { return "我說完\(langToSpeak)後，請跟著說～" }
+        return "Please repeat after me."
+    }
+
+    var reachDailyGoal: String {
+        if gameLang == .jp { return "おめでとう。あなたは今日素晴らしい仕事をしました。" }
+        return "Congratulations. You did a great job today."
+    }
+
+    var gameStartedWithoutGuideVoice: String {
+        if isJa { return "\(langToSpeak)の文を読んていってください。" }
+        if isZh { return "請唸出對應的\(langToSpeak)。" }
+        return "Please speak showed sentences."
+    }
+
     var dailyGoal: String {
         if isJa { return "毎日の目標" }
         if isZh { return "每天的目標" }

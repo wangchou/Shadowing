@@ -15,7 +15,21 @@ private let context = GameContext.shared
 private let engine = SpeechEngine.shared
 
 func narratorSay(_ text: String) -> Promise<Void> {
-    return engine.speak(text: text, speaker: context.gameSetting.narrator, rate: fastRate)
+    let currentLocale = AVSpeechSynthesisVoice.currentLanguageCode()
+    var voiceId = "unknown"
+    var rate = normalRate
+    if currentLocale.hasPrefix("ja") {
+        voiceId = getDefaultVoiceId(language: "ja-JP")
+    } else if currentLocale.hasPrefix("zh") {
+        voiceId = getDefaultVoiceId(language: "zh-TW")
+        rate = fastRate
+    } else if currentLocale.hasPrefix("en") {
+        voiceId = getDefaultVoiceId(language: currentLocale)
+    } else {
+        voiceId = getDefaultVoiceId(language: "en-US")
+    }
+    print(voiceId)
+    return engine.speak(text: text, speaker: voiceId, rate: rate)
 }
 
 func assisantSay(_ text: String) -> Promise<Void> {

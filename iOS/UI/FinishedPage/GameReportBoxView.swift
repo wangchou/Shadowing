@@ -9,6 +9,7 @@
 import UIKit
 
 private let context = GameContext.shared
+private let i18n = I18n.shared
 
 @IBDesignable
 class GameReportBoxView: UIView, ReloadableView, GridLayout {
@@ -100,6 +101,9 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
             print("\(todaySentenceCount + (record.correctCount.f * ratio).i)/\(dailyGoal)")
             if repeatCount >= targetRepeatCount {
                 self.animateTimer?.invalidate()
+                if startProgress < 1.0 && endProgress == 1.0 {
+                    _ = teacherSay(i18n.reachDailyGoal, rate: normalRate)
+                }
             }
             repeatCount += 1
         }

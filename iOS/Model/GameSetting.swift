@@ -22,15 +22,41 @@ func loadGameSetting() {
     } else {
         print("[\(gameLang)] create new gameSetting")
         context.gameSetting = GameSetting()
-        let currentLocale = AVSpeechSynthesisVoice.currentLanguageCode()
-        context.gameSetting.narrator = AVSpeechSynthesisVoice(language: currentLocale)?.identifier ?? "unknown"
         let langCode = gameLang == .jp ? "ja-JP" : "en-US"
 
-        context.gameSetting.teacher = AVSpeechSynthesisVoice(language: langCode)?.identifier ?? "unknown"
+        context.gameSetting.teacher = getDefaultVoiceId(language: langCode)
         context.gameSetting.assisant = context.gameSetting.teacher
-
-        print(context.gameSetting.narrator, context.gameSetting.teacher)
     }
+}
+
+func getDefaultVoiceId(language: String) -> String {
+    var bestVoiceId = ""
+    if language == "ja-JP" {
+        let voices = getAvailableVoice(prefix: "ja").sorted { v1, v2 in
+            if v2.identifier.range(of: "siri_male") != nil { return true}
+            if v1.identifier.range(of: "siri_male") != nil { return false}
+            if v2.identifier.range(of: "siri") != nil { return true}
+            if v1.identifier.range(of: "siri") != nil { return false}
+            if v2.quality == .enhanced { return true}
+            if v2.quality == .enhanced { return false}
+            return v1.identifier < v2.identifier
+        }
+
+        bestVoiceId = voices.last!.identifier
+    } else {
+        let voices = getAvailableVoice(language: language).sorted { v1, v2 in
+            if v2.identifier.range(of: "siri_female") != nil { return true}
+            if v1.identifier.range(of: "siri_female") != nil { return false}
+            if v2.identifier.range(of: "siri") != nil { return true}
+            if v1.identifier.range(of: "siri") != nil { return false}
+            if v2.quality == .enhanced { return true}
+            if v2.quality == .enhanced { return false}
+            return v1.identifier < v2.identifier
+        }
+        guard !voices.isEmpty else { return AVSpeechSynthesisVoice(language: "en-US")!.identifier }
+        bestVoiceId = voices.last!.identifier
+    }
+    return bestVoiceId
 }
 
 struct GameSetting: Codable {
@@ -41,7 +67,6 @@ struct GameSetting: Codable {
     var isUsingGuideVoice: Bool = true
     var isUsingNarrator: Bool = true
     var isMointoring: Bool = false
-    var narrator: String = "unknown"
     var teacher: String = "unknown"
     var assisant: String = "unknown"
     var dailySentenceGoal: Int = 50
