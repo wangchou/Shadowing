@@ -89,11 +89,11 @@ class SettingPage: UITableViewController {
         assisantLabel.text = i18n.assistantLabel
 
         if let teacher = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher) {
-            teacherNameLabel.text = teacher.detailName
+            teacherNameLabel.text = teacher.name
         }
 
         if let assisant = AVSpeechSynthesisVoice(identifier: context.gameSetting.assisant) {
-            assistantNameLabel.text = assisant.detailName
+            assistantNameLabel.text = assisant.name
         }
 
         gameLangSegmentControl.selectedSegmentIndex = gameLang == .jp ? 1 : 0
@@ -121,15 +121,6 @@ class SettingPage: UITableViewController {
         guideVoiceSwitch.isOn = setting.isUsingGuideVoice
         narratorSwitch.isOn = setting.isUsingNarrator
         monitoringSwitch.isOn = setting.isMointoring
-    }
-
-    private func showVoiceIsNotAvailableAlert() {
-        let title = i18n.voiceNotAvailableTitle
-        let message = i18n.voiceNotAvailableMessage
-        let okTitle = i18n.voiceNotAvailableOKButton
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: okTitle, style: .default))
-        self.present(alert, animated: true, completion: nil)
     }
 
     @IBAction func autoSpeedSwitchValueChanged(_ sender: Any) {
@@ -230,7 +221,7 @@ class SettingPage: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 3 {
+        if indexPath.section == 4 {
             VoiceSelectionPage.voices = getAvailableVoice(prefix: gameLang.prefix)
 
             if indexPath.row == 0 { // teacher voice
@@ -245,12 +236,5 @@ class SettingPage: UITableViewController {
             }
             launchStoryboard(self, "VoiceSelectionViewController", isOverCurrent: true, animated: true)
         }
-    }
-}
-
-extension AVSpeechSynthesisVoice {
-    var detailName: String {
-        let pureName = self.name.replace("（.*）", "")
-        return "\(pureName) \(self.quality == .enhanced ? i18n.enhancedVoice : "")"
     }
 }

@@ -121,7 +121,7 @@ extension VoiceSelectionPage: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "VoiceTableCell", for: indexPath)
         guard let voiceCell = cell as? VoiceTableCell else { print("voiceCell convert error"); return cell }
         let voice = voicesGrouped[indexPath.section][indexPath.row]
-        voiceCell.nameLabel.text = voice.detailName
+        voiceCell.nameLabel.text = voice.name
         if voice == selectedVoice {
             voiceCell.accessoryType = .checkmark
         } else {

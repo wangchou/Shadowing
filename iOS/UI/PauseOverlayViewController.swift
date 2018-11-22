@@ -19,11 +19,11 @@ class PauseOverlayViewController: UIViewController {
     @IBOutlet weak var tranlationSwitch: UISwitch!
     @IBOutlet weak var autoSpeedSwitch: UISwitch!
     @IBOutlet weak var ttsSpeedSlider: UISlider!
-    @IBOutlet weak var slowLabel: UILabel!
     @IBOutlet weak var fastLabel: UILabel!
     @IBOutlet weak var autoSpeedLabel: UILabel!
     @IBOutlet weak var translationLabel: UILabel!
     @IBOutlet weak var guideVoiceLabel: UILabel!
+    @IBOutlet weak var speedLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         finishButton.layer.cornerRadius = 10
@@ -43,6 +43,7 @@ class PauseOverlayViewController: UIViewController {
         autoSpeedLabel.text = i18n.autoSpeedLabel
         translationLabel.text = i18n.translationLabel
         guideVoiceLabel.text = i18n.guideVoiceLabel
+        speedLabel.text = i18n.speed
 
         ttsSpeedSlider.minimumValue = AVSpeechUtteranceMinimumSpeechRate
         ttsSpeedSlider.maximumValue = AVSpeechUtteranceMaximumSpeechRate * 0.75
@@ -54,11 +55,11 @@ class PauseOverlayViewController: UIViewController {
         if context.gameSetting.isAutoSpeed {
             ttsSpeedSlider.isEnabled = false
             fastLabel.textColor = UIColor.lightGray
-            slowLabel.textColor = UIColor.gray
+            speedLabel.textColor = UIColor.gray
         } else {
             ttsSpeedSlider.isEnabled = true
             fastLabel.textColor = UIColor.white
-            slowLabel.textColor = UIColor.white
+            speedLabel.textColor = UIColor.white
         }
     }
 

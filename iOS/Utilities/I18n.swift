@@ -30,6 +30,11 @@ class I18n {
         return "Auto Speed"
     }
 
+    var speed: String {
+        if isJa || isZh { return "速度" }
+        return "Speed"
+    }
+
     var translationLabel: String {
         if isJa { return "翻訳の表示" }
         if isZh { return "顯示翻譯" }
@@ -66,7 +71,7 @@ class I18n {
     var voiceNotAvailableMessage: String {
         let lang = gameLang == .jp ? japanese : english
         if isJa { return "もっと声をダウンロードしましょう\n「設定」>「一般」>「アクセシビリティ」>「スピーチ」 >「声」>「\(lang)」の順に選択します。" }
-        if isZh { return "更多語音選項: \n 請前往手機的「設定 > 一般 > 輔助使用 > 語音 > 聲音 > \(lang)」下載" }
+        if isZh { return "更多語音選項: \n請前往手機的「設定 > 一般 > 輔助使用 > 語音 > 聲音 > \(lang)」下載" }
         return "Download more voices:\nGo to Settings > General > Accessibility > Speech > Voice > \(lang)"
     }
     var voiceNotAvailableOKButton: String {
@@ -138,12 +143,12 @@ class I18n {
         if gameLang == .jp {
             if isJa { return "日本語先生" }
             if isZh { return "日文老師" }
-            return "Japanese Teacher"
+            return "Teacher"
         }
 
         if isJa { return "英語先生" }
         if isZh { return "英文老師" }
-        return "English Teacher"
+        return "Teacher"
     }
     var assistantLabel: String {
         if gameLang == .jp {
