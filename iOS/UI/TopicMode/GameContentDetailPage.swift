@@ -11,6 +11,7 @@ import UIKit
 import Promises
 
 private let context = GameContext.shared
+private let i18n = I18n.shared
 
 class GameContentDetailPage: UIViewController {
     static var isChallengeButtonDisabled = false
@@ -40,6 +41,7 @@ class GameContentDetailPage: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         titleLabel.text = context.dataSetKey
+        peekButton.setTitle(i18n.chineseOrJapanese, for: .normal)
 
         if let gameRecord = findBestRecord(key: context.dataSetKey) {
             rankLabel.attributedText = getRankAttrText(rank: gameRecord.rank.rawValue, color: gameRecord.rank.color)

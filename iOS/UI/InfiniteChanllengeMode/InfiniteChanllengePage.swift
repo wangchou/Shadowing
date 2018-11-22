@@ -66,6 +66,7 @@ class InfiniteChallengePage: UIViewController {
     }
 
     func updateUI() {
+        translationButton.setTitle(i18n.englishOrJapanese, for: .normal)
         if topBarRightText == "" {
             topBarView.rightButton.isHidden = true
         } else {

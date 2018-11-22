@@ -1940,11 +1940,11 @@ Ruth Yuru Chen
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Md-Mp-8et">
-                                        <rect key="frame" x="19.5" y="25" width="9" height="1"/>
+                                        <rect key="frame" x="19.5" y="26" width="9" height="0.0"/>
                                         <color key="backgroundColor" white="0.90234375" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="9" id="QXP-yX-CZF"/>
-                                            <constraint firstAttribute="height" constant="1" id="ls0-Cb-PO4"/>
+                                            <constraint firstAttribute="height" id="ls0-Cb-PO4"/>
                                         </constraints>
                                     </view>
                                 </subviews>

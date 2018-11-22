@@ -70,6 +70,7 @@ class SettingPage: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         gameLangSegmentControl.setTitle(i18n.english, forSegmentAt: 0)
         gameLangSegmentControl.setTitle(i18n.japanese, forSegmentAt: 1)
 

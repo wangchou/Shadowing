@@ -201,12 +201,18 @@ class I18n {
     var wantToSayLabel: String {
         if isJa { return "今話したいのは" }
         if isZh { return "我現在想說" }
-        return "I want to say "
+        return "It's time to speak "
     }
 
     var setting: String {
         if isJa || isZh { return "設  定"}
         return "Setting"
+    }
+
+    var chinese: String {
+        if isJa { return "中国語" }
+        if isZh { return "中文" }
+        return "Chinese"
     }
 
     var japanese: String {
@@ -219,6 +225,14 @@ class I18n {
         if isJa { return "英語" }
         if isZh { return "英文" }
         return "English"
+    }
+
+    var englishOrJapanese: String {
+        return "\(english) / \(japanese)"
+    }
+
+    var chineseOrJapanese: String {
+        return "\(chinese) / \(japanese)"
     }
 
     func getLangDescription(langAndRegion: String) -> String {
