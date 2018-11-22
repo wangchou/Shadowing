@@ -92,7 +92,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         animateTimer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) { _ in
             let ratio: Float = 0.02 * repeatCount.f
             progressBar.frame.size.width = fullProgressWidth * (startProgress * (1 - ratio) + endProgress * ratio).c
-            let text = "\(todaySentenceCount + (record.correctCount.f * ratio).i)/\(dailyGoal)"
+            let text = "\(todaySentenceCount - record.correctCount + (record.correctCount.f * ratio).i)/\(dailyGoal)"
             goalProgressLabel.attributedText = getText(text,
                                                        color: myLightText,
                                                        strokeWidth: -2,

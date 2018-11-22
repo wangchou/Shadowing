@@ -486,12 +486,12 @@ extension ICListTopView {
         }
         if isGameClear {
             addWhiteText("100 ")
-            addGrayText("% 話した、")
+            addGrayText("% を話した、")
             addWhiteText("\(clearDurationInDays) ")
             addGrayText("日間で。")
         } else {
             addWhiteText("\(percentText) ")
-            addGrayText("% 話した、完了まで")
+            addGrayText("% を話した、完了まで")
             addWhiteText(" \(remainingDays) ")
             addGrayText("日")
         }
