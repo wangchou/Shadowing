@@ -24,38 +24,32 @@ func loadGameSetting() {
         context.gameSetting = GameSetting()
         let langCode = gameLang == .jp ? "ja-JP" : "en-US"
 
-        context.gameSetting.teacher = getDefaultVoiceId(language: langCode)
-        context.gameSetting.assisant = context.gameSetting.teacher
+        if gameLang == .jp {
+            context.gameSetting.teacher = getDefaultVoiceId(language: langCode)
+            context.gameSetting.assisant = getDefaultVoiceId(language: langCode, isPreferMaleSiri: false)
+        } else {
+            context.gameSetting.teacher = getDefaultVoiceId(language: langCode, isPreferMaleSiri: false)
+            context.gameSetting.assisant = getDefaultVoiceId(language: langCode)
+        }
+        print(context.gameSetting.teacher, context.gameSetting.assisant)
     }
 }
 
-func getDefaultVoiceId(language: String) -> String {
+func getDefaultVoiceId(language: String, isPreferMaleSiri: Bool = true, isPreferEnhanced: Bool = true) -> String {
     var bestVoiceId = ""
-    if language == "ja-JP" {
-        let voices = getAvailableVoice(prefix: "ja").sorted { v1, v2 in
-            if v2.identifier.range(of: "siri_male") != nil { return true}
-            if v1.identifier.range(of: "siri_male") != nil { return false}
-            if v2.identifier.range(of: "siri") != nil { return true}
-            if v1.identifier.range(of: "siri") != nil { return false}
-            if v2.quality == .enhanced { return true}
-            if v2.quality == .enhanced { return false}
-            return v1.identifier < v2.identifier
-        }
 
-        bestVoiceId = voices.last!.identifier
-    } else {
-        let voices = getAvailableVoice(language: language).sorted { v1, v2 in
-            if v2.identifier.range(of: "siri_female") != nil { return true}
-            if v1.identifier.range(of: "siri_female") != nil { return false}
-            if v2.identifier.range(of: "siri") != nil { return true}
-            if v1.identifier.range(of: "siri") != nil { return false}
-            if v2.quality == .enhanced { return true}
-            if v2.quality == .enhanced { return false}
-            return v1.identifier < v2.identifier
-        }
-        guard !voices.isEmpty else { return AVSpeechSynthesisVoice(language: "en-US")!.identifier }
-        bestVoiceId = voices.last!.identifier
+    let voices = getAvailableVoice(language: language).sorted { v1, v2 in
+        if v2.identifier.range(of: isPreferMaleSiri ? "siri_male" : "siri_female") != nil { return true}
+        if v1.identifier.range(of: isPreferMaleSiri ? "siri_male" : "siri_female") != nil { return false}
+        if v2.identifier.range(of: "siri") != nil { return true}
+        if v1.identifier.range(of: "siri") != nil { return false}
+        if v2.quality == .enhanced { return isPreferEnhanced ? true : false}
+        if v1.quality == .enhanced { return isPreferEnhanced ? false : true}
+        return v1.identifier < v2.identifier
     }
+    guard !voices.isEmpty else { return AVSpeechSynthesisVoice(language: language)!.identifier }
+    bestVoiceId = voices.last!.identifier
+
     return bestVoiceId
 }
 

@@ -101,8 +101,8 @@ class I18n {
     }
 
     var reachDailyGoal: String {
-        if gameLang == .jp { return "おめでとう。あなたは今日素晴らしい仕事をしました。" }
-        return "Congratulations. You did a great job today."
+        if gameLang == .jp { return "よくやった！お疲れ様。" }
+        return "You did it. Good Job!"
     }
 
     var gameStartedWithoutGuideVoice: String {

@@ -98,7 +98,6 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
                                                        color: myLightText,
                                                        strokeWidth: -2,
                                                        strokeColor: .black, font: font)
-            print("\(todaySentenceCount + (record.correctCount.f * ratio).i)/\(dailyGoal)")
             if repeatCount >= targetRepeatCount {
                 self.animateTimer?.invalidate()
                 if startProgress < 1.0 && endProgress == 1.0 {

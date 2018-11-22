@@ -21,7 +21,7 @@ func narratorSay(_ text: String) -> Promise<Void> {
     if currentLocale.hasPrefix("ja") {
         voiceId = getDefaultVoiceId(language: "ja-JP")
     } else if currentLocale.hasPrefix("zh") {
-        voiceId = getDefaultVoiceId(language: "zh-TW")
+        voiceId = getDefaultVoiceId(language: "zh-TW", isPreferEnhanced: false)
         rate = fastRate
     } else if currentLocale.hasPrefix("en") {
         voiceId = getDefaultVoiceId(language: currentLocale)
