@@ -15,6 +15,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
     let gridCount = 44
     let axis: GridAxis = .horizontal
     let spacing: CGFloat = 0
+    var animateTimer: Timer?
 
     func viewWillAppear() {
         backgroundColor = UIColor.black.withAlphaComponent(0.6)
@@ -58,36 +59,67 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
     }
 
     private func renderMiddleGoalBar() {
+        guard let record = context.gameRecord else { return }
         let y = 28
+        let line = UIView()
+        layout(0, y, 44, 1, line)
+        line.backgroundColor = .darkGray
+        line.frame.size.height = 1.5
+        addSubview(line)
+
         let todaySentenceCount = getTodaySentenceCount()
         let dailyGoal = context.gameSetting.dailySentenceGoal
-        addText(2, y, 3, "今日の目標")
-        let goalProgressLabel = addText(31, y, 3, "\(todaySentenceCount)/\(dailyGoal)")
-        goalProgressLabel.frame = getFrame(22, y, 20, 3)
+        addText(2, y + 1, 6, "今日の目標", color: myLightText)
+        let goalProgressLabel = addText(31, y + 1, 6, "\(todaySentenceCount - record.correctCount)/\(dailyGoal)", color: myLightText)
+        goalProgressLabel.frame = getFrame(12, y + 1, 30, 6)
         goalProgressLabel.textAlignment = .right
+        let fontSize = getFontSize(h: 6)
+        let font = MyFont.bold(ofSize: fontSize)
 
-        let barBox = addRect(x: 2, y: y + 3, w: 40, h: 2, color: .clear)
+        let barBox = addRect(x: 2, y: y + 7, w: 40, h: 4, color: .clear)
         barBox.roundBorder(borderWidth: 1, cornerRadius: 0, color: .lightGray)
 
-        let progress = min(1.0, (todaySentenceCount.f/dailyGoal.f))
-        addRect(x: 2, y: y + 3, w: (40 * progress).i, h: 2)
+        // animate progress bar for one second
+        let startProgress = min(1.0, ((todaySentenceCount - record.correctCount).f/dailyGoal.f))
+        let endProgress = min(1.0, (todaySentenceCount.f/dailyGoal.f))
+        let fullProgressWidth = getFrame(0, 0, 40, 4).width
+        let progressBar = addRect(x: 2, y: y + 7, w: 1, h: 4)
+        progressBar.frame.size.width = fullProgressWidth * startProgress.c
+        progressBar.roundBorder(borderWidth: 1, cornerRadius: 0, color: .clear)
+
+        var repeatCount = 0
+        let targetRepeatCount = 50
+        animateTimer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) { _ in
+            let ratio: Float = 0.02 * repeatCount.f
+            progressBar.frame.size.width = fullProgressWidth * (startProgress * (1 - ratio) + endProgress * ratio).c
+            let text = "\(todaySentenceCount + (record.correctCount.f * ratio).i)/\(dailyGoal)"
+            goalProgressLabel.attributedText = getText(text,
+                                                       color: myLightText,
+                                                       strokeWidth: -2,
+                                                       strokeColor: .black, font: font)
+            print("\(todaySentenceCount + (record.correctCount.f * ratio).i)/\(dailyGoal)")
+            if repeatCount >= targetRepeatCount {
+                self.animateTimer?.invalidate()
+            }
+            repeatCount += 1
+        }
 
     }
 
     private func renderBottomAbilityInfo() {
-        let y = 36
+        let y = 42
 
         let lineLeft = UIView()
         let lineRight = UIView()
 
         layout(0, y, 15, 1, lineLeft)
-        lineLeft.backgroundColor = .lightGray
-        lineLeft.frame.size.height = step/4
+        lineLeft.backgroundColor = .darkGray
+        lineLeft.frame.size.height = 1.5
         addSubview(lineLeft)
 
         layout(29, y, 15, 1, lineRight)
-        lineRight.backgroundColor = .lightGray
-        lineRight.frame.size.height = step/4
+        lineRight.backgroundColor = .darkGray
+        lineRight.frame.size.height = 1.5
         addSubview(lineRight)
 
         addText(16, y-3, 6, "新紀錄", color: myLightText)
