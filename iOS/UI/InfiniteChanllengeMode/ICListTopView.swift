@@ -34,11 +34,11 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
     }
 
     var goalText: String {
-        return "每天說\(context.gameSetting.dailySentenceGoal)句"
+        return "\(i18n.goalPrefix)\(context.gameSetting.dailySentenceGoal)\(i18n.goalSuffix)"
     }
 
     var sprintText: String {
-        return "連続"
+        return i18n.continues
     }
 
     var continues: Int = 0
@@ -87,11 +87,11 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
     }
 
     var longTermGoalText: String {
-        return "\(longTermGoal)文"
+        return "\(longTermGoal)\(i18n.sentence)"
     }
 
     var dayText: String {
-        return "天"
+        return i18n.day
     }
 
     var continueSentenceCount: Int = 0
@@ -100,11 +100,11 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
     }
 
     var sentenceText: String {
-        return "句"
+        return i18n.sentence
     }
 
     var bestText: String {
-        return "最佳"
+        return i18n.best
     }
     var bestCount: Int = 0
     var bestCountText: String {
@@ -340,7 +340,7 @@ extension ICListTopView {
         let thirtyDaysPercentText = String(format: "%d", (100 * thirtyDaysCount.f / 30).i)
 
         let topTexts = ["\(continues)", "\(bestCount)", "\(sevenDaysPercentText)%", "\(thirtyDaysPercentText)%", "\(allSentenceCount)"]
-        let bottomTexts = ["連続", "ベスト", "過去7日間", "過去30日間", "文"]
+        let bottomTexts = [i18n.continues, i18n.best, i18n.last7Days, i18n.last30Days, i18n.sentence]
         for boxIndex in 0..<5 {
             let box = addRect(x: 1 + boxIndex * 3, y: 8, w: 3, h: 2)
             addTimelinePadding(box)
@@ -491,9 +491,9 @@ extension ICListTopView {
             addGrayText("日間で。")
         } else {
             addWhiteText("\(percentText) ")
-            addGrayText("% を話した、完了まで")
+            addGrayText(i18n.longTermGoalMiddleText)
             addWhiteText(" \(remainingDays) ")
-            addGrayText("日")
+            addGrayText("\(i18n.day)。")
         }
 
         let y = isGameClear ? 20 : 23

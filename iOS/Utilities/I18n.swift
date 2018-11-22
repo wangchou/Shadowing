@@ -60,22 +60,11 @@ class I18n {
         if isZh { return "前往iPhone設定中心" }
         return "Go to iPhone Setting Center"
     }
-    var defaultText: String {
-        if isJa { return "デフォルト" }
-        if isZh { return "預設" }
-        return "Default"
-    }
-    var voiceNotAvailableTitle: String {
-        return isJa ? "選らんた声はまだダウンロードされていません" : "你選的語音還未下載"
-    }
     var voiceNotAvailableMessage: String {
         let lang = gameLang == .jp ? japanese : english
         if isJa { return "もっと声をダウンロードしましょう\n「設定」>「一般」>「アクセシビリティ」>「スピーチ」 >「声」>「\(lang)」の順に選択します。" }
         if isZh { return "更多語音選項: \n請前往手機的「設定 > 一般 > 輔助使用 > 語音 > 聲音 > \(lang)」下載" }
         return "Download more voices:\nGo to Settings > General > Accessibility > Speech > Voice > \(lang)"
-    }
-    var voiceNotAvailableOKButton: String {
-        return isJa ? "わかった" : "知道了"
     }
 
     var settingSectionGameSpeed: String {
@@ -256,11 +245,13 @@ class I18n {
     }
 
     var englishOrJapanese: String {
-        return "\(english) / \(japanese)"
+        if isZh || isJa { return "\(english) / \(japanese)" }
+        return "英語 / 日本語"
     }
 
     var chineseOrJapanese: String {
-        return "\(chinese) / \(japanese)"
+        if isZh || isJa { return "\(chinese) / \(japanese)" }
+        return "中国語 / 日本語"
     }
 
     func getLangDescription(langAndRegion: String) -> String {
@@ -336,5 +327,42 @@ class I18n {
             return japanese
         }
         return english
+    }
+    var continues: String {
+        if isZh { return "連續" }
+        return "連続"
+    }
+    var best: String {
+        if isZh { return "最佳" }
+        return "ベスト"
+    }
+    var last7Days: String {
+        if isZh { return "過去7天" }
+        return "過去7日間"
+    }
+
+    var last30Days: String {
+        if isZh { return "過去30天" }
+        return "過去30日間"
+    }
+    var sentence: String {
+        if isZh { return "句" }
+        return "文"
+    }
+    var goalPrefix: String {
+        if isZh { return "每天說對" }
+        return "毎日"
+    }
+    var goalSuffix: String {
+        if isZh { return "句" }
+        return "文を正しく話す"
+    }
+    var day: String {
+        if isZh { return "天"}
+        return "日間"
+    }
+    var longTermGoalMiddleText: String {
+        if isZh { return "% 已說，離完成"}
+        return "% を話した、完了まで"
     }
 }
