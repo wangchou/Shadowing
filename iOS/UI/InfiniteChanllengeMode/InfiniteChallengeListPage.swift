@@ -23,6 +23,7 @@ class InfiniteChallengeListPage: UIViewController {
         super.viewDidLoad()
         topBarView.rightButton.isHidden = true
         bottomBarView.contentTab = .infiniteChallenge
+
         icListTopView.addTapGestureRecognizer {
             switch context.gameSetting.icTopViewMode {
             case .dailyGoal:
@@ -53,6 +54,7 @@ class InfiniteChallengeListPage: UIViewController {
         super.viewWillAppear(animated)
         bottomBarView.contentTab = .infiniteChallenge
         topBarView.titleLabel.text = i18n.infiniteChallengeTitle
+        icListTopView.frame.size.width = screen.width
         icListTopView.frame.size.height = screen.width * 34/48
         icListTopView.viewWillAppear() // icListTopView may not be available yet
 
