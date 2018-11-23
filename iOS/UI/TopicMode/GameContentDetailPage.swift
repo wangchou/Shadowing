@@ -11,6 +11,7 @@ import UIKit
 import Promises
 
 private let context = GameContext.shared
+private let i18n = I18n.shared
 
 class GameContentDetailPage: UIViewController {
     static var isChallengeButtonDisabled = false
@@ -40,6 +41,7 @@ class GameContentDetailPage: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         titleLabel.text = context.dataSetKey
+        peekButton.setTitle(i18n.chineseOrJapanese, for: .normal)
 
         if let gameRecord = findBestRecord(key: context.dataSetKey) {
             rankLabel.attributedText = getRankAttrText(rank: gameRecord.rank.rawValue, color: gameRecord.rank.color)
@@ -103,7 +105,7 @@ class GameContentDetailPage: UIViewController {
     }
 
     @IBAction func touchUpPeekButton(_ sender: Any) {
-        context.gameSetting.isUsingTranslation = !context.gameSetting.isUsingTranslation
+        context.gameSetting.isShowTranslationInPractice = !context.gameSetting.isShowTranslationInPractice
         saveGameSetting()
         tableView.reloadData()
     }
@@ -127,7 +129,7 @@ extension GameContentDetailPage: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContentTableCell", for: indexPath)
         guard let contentCell = cell as? SentencesTableCell else { print("detailCell convert error"); return cell }
         let sentence = context.sentences[indexPath.row]
-        contentCell.update(sentence: sentence, isShowTranslate: context.gameSetting.isUsingTranslation)
+        contentCell.update(sentence: sentence, isShowTranslate: context.gameSetting.isShowTranslationInPractice)
 
         return contentCell
     }

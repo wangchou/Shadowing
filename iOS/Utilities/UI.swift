@@ -38,6 +38,19 @@ extension UIView {
         frame.origin.y = boundRect.origin.y + yPadding
     }
 
+    func centerX(_ boundRect: CGRect, xShift: CGFloat = 0) {
+        let xPadding = (boundRect.width - frame.width)/2
+        frame.origin.x = boundRect.origin.x + xPadding + xShift
+    }
+
+    func moveToBottom(_ boundRect: CGRect, yShift: CGFloat = 0) {
+        frame.origin.y = boundRect.origin.y + boundRect.height - frame.size.height + yShift
+    }
+
+    func moveToRight(_ boundRect: CGRect, xShift: CGFloat = 0) {
+        frame.origin.x = boundRect.origin.x + boundRect.width - frame.size.width + xShift
+    }
+
     func removeAllSubviews() {
         subviews.forEach { $0.removeFromSuperview() }
     }
@@ -156,6 +169,7 @@ extension GridLayout where Self: UIView {
         return h.c * step * 0.7
     }
 
+    @discardableResult
     func addText(x: Int,
                  y: Int,
                  w: Int? = nil,
@@ -164,7 +178,7 @@ extension GridLayout where Self: UIView {
                  font: UIFont? = nil,
                  color: UIColor? = nil,
                  completion: ((UILabel) -> Void)? = nil
-        ) {
+        ) -> UILabel {
         let label = UILabel()
         label.font = font ?? MyFont.regular(ofSize: getFontSize(h: h))
         label.textColor = color ?? .black
@@ -173,20 +187,23 @@ extension GridLayout where Self: UIView {
         addSubview(label)
 
         completion?(label)
+        return label
     }
 
+    @discardableResult
     func addAttrText(x: Int,
                      y: Int,
                      w: Int? = nil,
                      h: Int,
                      text: NSAttributedString,
                      completion: ((UIView) -> Void)? = nil
-        ) {
+        ) -> UILabel {
         let label = UILabel()
         label.attributedText = text
         layout(x, y, w ?? (gridCount - x), h, label)
         addSubview(label)
         completion?(label)
+        return label
     }
 
     func addRoundRect(x: Int, y: Int, w: Int, h: Int,
@@ -204,12 +221,14 @@ extension GridLayout where Self: UIView {
         addSubview(roundRect)
     }
 
+    @discardableResult
     func addRect(x: Int, y: Int, w: Int, h: Int,
-                 color: UIColor = myBlue) {
+                 color: UIColor = myBlue) -> UIView {
         let rect = UIView()
         layout(x, y, w, h, rect)
         rect.backgroundColor = color
         addSubview(rect)
+        return rect
     }
 
     func layout(_ x: Int, _ y: Int, _ w: Int, _ h: Int, _ view: UIView) {
@@ -331,6 +350,42 @@ func goToIOSSettingCenter() {
     if let url = URL(string: UIApplication.openSettingsURLString) {
         if UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+}
+
+//https://stackoverflow.com/questions/46317061/use-safe-area-layout-programmatically
+extension UIView {
+
+    var safeTopAnchor: NSLayoutYAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return self.safeAreaLayoutGuide.topAnchor
+        } else {
+            return self.topAnchor
+        }
+    }
+
+    var safeLeftAnchor: NSLayoutXAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return self.safeAreaLayoutGuide.leftAnchor
+        } else {
+            return self.leftAnchor
+        }
+    }
+
+    var safeRightAnchor: NSLayoutXAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return self.safeAreaLayoutGuide.rightAnchor
+        } else {
+            return self.rightAnchor
+        }
+    }
+
+    var safeBottomAnchor: NSLayoutYAxisAnchor {
+        if #available(iOS 11.0, *) {
+            return self.safeAreaLayoutGuide.bottomAnchor
+        } else {
+            return self.bottomAnchor
         }
     }
 }

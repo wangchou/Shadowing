@@ -26,12 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = RootContainerViewController()
         window?.makeKeyAndVisible()
 
-        #if ForeignDev
-            print("== 多國語言開發版 ==")
-        #else
-            print("== 日本語版 ==")
-        #endif
-
         return true
     }
 

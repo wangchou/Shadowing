@@ -21,16 +21,6 @@ extension Messenger: GameEventDelegate {
             if context.gameState == .justStarted {
                 addLabel(rubyAttrStr(text))
             }
-            if context.gameState == .TTSSpeaking {
-                if context.gameSetting.isUsingTranslation,
-                   let translation = translations[text] {
-                   addLabel(rubyAttrStr(translation))
-                } else if let tokenInfos = kanaTokenInfosCacheDictionary[text] {
-                    addLabel(getFuriganaString(tokenInfos: tokenInfos))
-                } else {
-                    addLabel(rubyAttrStr(text))
-                }
-            }
 
         case .listenStarted:
             addLabel(rubyAttrStr("..."), isLeft: false)
@@ -70,6 +60,20 @@ extension Messenger: GameEventDelegate {
                 // prevent alerting block present
                 isAlerting.always {
                     launchStoryboard(self, "GameFinishedPage", isOverCurrent: true, animated: true)
+                }
+            }
+
+            if context.gameState == .TTSSpeaking {
+                let text = context.targetString
+                var translationsDict = (gameLang == .jp && context.contentTab == .topics) ?
+                    chTranslations : translations
+                if context.gameSetting.isShowTranslation,
+                    let translation = translationsDict[text] {
+                    addLabel(rubyAttrStr(translation))
+                } else if let tokenInfos = kanaTokenInfosCacheDictionary[text] {
+                    addLabel(getFuriganaString(tokenInfos: tokenInfos))
+                } else {
+                    addLabel(rubyAttrStr(text))
                 }
             }
 

@@ -119,12 +119,15 @@ func getSentencesByIds(ids: [Int]) -> [String] {
             for s in try db.prepare(query) {
                 if gameLang == .jp {
                     sentences.append(s[dbJa])
+                    translations[s[dbJa]]=s[dbEn]
                 }
                 if gameLang == .en {
                     sentences.append(s[dbEn])
+                    translations[s[dbEn]]=s[dbJa]
                 }
             }
         }
+        saveGameMiscData()
 
     } catch {
         print("db error")

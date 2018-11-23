@@ -27,6 +27,7 @@ enum GameState {
 private let engine = SpeechEngine.shared
 private let context = GameContext.shared
 private let setting = context.gameSetting
+private let i18n = I18n.shared
 
 // handler for commands posted from UI
 extension GameFlow: GameCommandDelegate {
@@ -69,8 +70,9 @@ class GameFlow {
         startTimer()
 
         context.loadLearningSentences()
-        let narratorString = setting.isUsingGuideVoice ?
-            "我說完後，請跟著我說～" :"請唸出對應的日文。"
+        let narratorString = setting.learningMode == .interpretation ?
+            i18n.gameStartedWithoutGuideVoice :
+            i18n.gameStartedWithGuideVoice
         if setting.isUsingNarrator {
             narratorSay(narratorString)
                 .then { self.wait }
@@ -92,7 +94,8 @@ extension GameFlow {
     // Main Game Flow keep calling learnNext
     private func learnNextSentence() {
         guard !self.isForceStopped else { return }
-        speakTargetString()
+        speakTranslation()
+            .then( speakTargetString )
             .then { self.wait }
             .then( listenPart )
             .then { self.wait }
@@ -120,7 +123,7 @@ extension GameFlow {
     }
 
     private func gameOver() {
-        narratorSay("遊戲結束").then {
+        narratorSay(i18n.gameOver).then {
             stopCommandObserving(self)
             context.gameState = .gameOver
 
@@ -165,9 +168,9 @@ extension GameFlow {
         case .great:
             life += 2
         case .good:
-            life += -3
+            life += -4
         case .poor:
-            life += -5
+            life += -6
         }
 
         context.life = max(min(100, life), 0)
@@ -191,8 +194,23 @@ extension GameFlow {
         }
     }
 
-    private func speakTargetString() -> Promise<Void> {
+    private func speakTranslation() -> Promise<Void> {
         context.gameState = .TTSSpeaking
+        guard context.gameSetting.isSpeakTranslation else {
+            return fulfilledVoidPromise()
+        }
+        var translationsDict = (gameLang == .jp && context.contentTab == .topics) ?
+            chTranslations : translations
+        var translation = translationsDict[context.targetString] ?? ""
+
+        // only speak the first meaning when multiple meanings are available
+        if translation.range(of: "/") != nil {
+            translation = translation.split(separator: "/")[0].s
+        }
+        return translatorSay(translation)
+    }
+
+    private func speakTargetString() -> Promise<Void> {
         guard context.gameSetting.isUsingGuideVoice else {
             postEvent(.sayStarted, string: context.targetString)
             return fulfilledVoidPromise()

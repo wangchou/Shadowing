@@ -23,11 +23,11 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         let reportBox = GameReportBoxView()
 
         if context.isNewRecord && context.contentTab == .topics {
-            frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.6)
-            layout(2, 4, 44, 60, reportBox)
+            frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.83)
+            layout(2, 3, 44, 73, reportBox)
         } else {
-            frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 0.93)
-            layout(2, 4, 44, 28, reportBox)
+            frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.16)
+            layout(2, 3, 44, 41, reportBox)
         }
         addReloadableSubview(reportBox)
         addBackButton()
@@ -50,9 +50,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
                     }
 
                     if let icwPage = rootViewController.current as? InfiniteChallengeSwipablePage {
-                        guard let level = context.gameRecord?.level else { return }
-                        let pageIdx = level.rawValue + 1
-                        (icwPage.pages[pageIdx] as? InfiniteChallengePage)?.tableView.reloadData()
+                        (icwPage.pages[2] as? InfiniteChallengePage)?.tableView.reloadData()
                     }
                 } else {
                     vc.dismiss(animated: false) {
@@ -62,10 +60,9 @@ class GameReportView: UIView, ReloadableView, GridLayout {
             }
         }
         if context.isNewRecord && context.contentTab == .topics {
-            layout(2, 66, 44, 8, backButton)
-
+            layout(2, 78, 44, 8, backButton)
         } else {
-            layout(2, 34, 44, 8, backButton)
+            layout(2, 46, 44, 8, backButton)
         }
 
         addSubview(backButton)

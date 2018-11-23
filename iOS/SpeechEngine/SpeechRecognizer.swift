@@ -21,13 +21,17 @@ enum SpeechRecognitionError: Error {
 
 class SpeechRecognizer: NSObject {
     private let speechRecognizerJP: SFSpeechRecognizer! = SFSpeechRecognizer(locale: Locale(identifier: "ja_JP"))
-    private let speechRecognizerEN: SFSpeechRecognizer! = SFSpeechRecognizer(locale: Locale(identifier: "en"))
+    private let speechRecognizerEN: SFSpeechRecognizer! = SFSpeechRecognizer(locale: Locale(identifier: "en_US"))
 
     private var speechRecognizer: SFSpeechRecognizer {
         switch gameLang {
         case .jp:
             return speechRecognizerJP
         case .en:
+            if  let voice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher),
+                let recognizer = SFSpeechRecognizer(locale: Locale(identifier: voice.language.replace("-", "_"))) {
+                return recognizer
+            }
             return speechRecognizerEN
         }
     }

@@ -119,16 +119,24 @@ func dumpAvaliableVoices() {
     }
 }
 
-func getAvailableVoiceID(language: String) -> [String] {
+func getAvailableVoice(language: String) -> [AVSpeechSynthesisVoice] {
     return AVSpeechSynthesisVoice.speechVoices()
         .filter { voice in
             if voice.language == language {
                 return true
             }
             return false
-        }.map { voice in
-            return voice.identifier
         }
+}
+
+func getAvailableVoice(prefix: String) -> [AVSpeechSynthesisVoice] {
+    return AVSpeechSynthesisVoice.speechVoices()
+        .filter { voice in
+            if voice.language.hasPrefix(prefix) {
+                return true
+            }
+            return false
+    }
 }
 
 // measure performance
@@ -333,4 +341,72 @@ func stringToTokenInfos(jsonString: String) -> [[String]]? {
         print(error)
         return nil
     }
+}
+
+// daily Records
+func getDateKey(date: Date) -> String {
+    return Calendar.current.dateComponents([.year, .month, .day], from: date).description
+}
+
+func getRecordsByDate() -> [String: [GameRecord]] {
+    var recordsByDate: [String: [GameRecord]] = [:]
+    GameContext.shared.gameHistory.forEach {
+        let key = $0.dateKey
+        if recordsByDate[key] != nil {
+            recordsByDate[key]?.append($0)
+        } else {
+            recordsByDate[key] = [$0]
+        }
+    }
+    return recordsByDate
+}
+
+// [Today's correct sentence count, Yesterday's, ...]
+func getSentenceCountsByDays() -> [Int] {
+    let calendar = Calendar.current
+    var recordsByDate = getRecordsByDate()
+
+    guard !GameContext.shared.gameHistory.isEmpty else { return [0] }
+    var firstRecordDate = Date()
+    GameContext.shared.gameHistory.forEach { r in
+        let date = r.startedTime
+        if date < firstRecordDate {
+            firstRecordDate = date
+        }
+    }
+
+    var minusOneDay = DateComponents()
+    minusOneDay.day = -1
+    let dateBound = calendar.date(byAdding: minusOneDay, to: firstRecordDate) ?? firstRecordDate
+    var date = Date()
+    var sentenceCounts: [Int] = []
+    while date > dateBound {
+        let key = getDateKey(date: date)
+        if let records = recordsByDate[key],
+            !records.isEmpty {
+            var continueSentenceCount = 0
+            for r in records {
+                continueSentenceCount += r.correctCount
+            }
+            sentenceCounts.append(continueSentenceCount)
+        } else {
+            sentenceCounts.append(0)
+        }
+        date = calendar.date(byAdding: minusOneDay, to: date) ?? date
+    }
+
+    return sentenceCounts
+}
+
+func getTodaySentenceCount() -> Int {
+    guard !GameContext.shared.gameHistory.isEmpty else { return 0 }
+
+    let todayKey = getDateKey(date: Date())
+    var sentenceCount: Int = 0
+    for r in GameContext.shared.gameHistory {
+        if todayKey == getDateKey(date: r.startedTime) {
+            sentenceCount += r.correctCount
+        }
+    }
+    return sentenceCount
 }

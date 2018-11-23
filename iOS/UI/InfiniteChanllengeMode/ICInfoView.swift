@@ -9,10 +9,10 @@
 import UIKit
 
 private let context = GameContext.shared
+private let i18n = I18n.shared
 
 private enum Texts: String {
     case precision = "完成率"
-    case numOfSentence = "句数"
 }
 
 class ICInfoView: UIView, GridLayout, ReloadableView {
@@ -30,19 +30,19 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
     var level: Level = .lv0
 
     var line1: String {
-        return "難度：" + level.title
+        return level.title
     }
     var line2: String {
-        return "仮名数：\(minKanaCount)〜\(maxKanaCount)"
+        return "\(i18n.syllablesCount)：\(minKanaCount)〜\(maxKanaCount)"
     }
     var line3: String {
-        return "句数：\(sentencesCount)"
+        return "\(i18n.sentencesCount)：\(sentencesCount)"
     }
     var bestRank: String? {
-        return findBestRecord(key: level.infinteChallengeDatasetKey)?.rank.rawValue
+        return level.bestInfinteChallengeRank
     }
     var bestProgress: String? {
-        return findBestRecord(key: level.infinteChallengeDatasetKey)?.progress
+        return level.bestInfinteChallengeProgress
     }
 
     private var dataPoints: [(x: Int, y: Int)] {
@@ -122,7 +122,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
         addSubview(chart)
         y += 29
 
-        addText(x: 43, y: y, h: 2, text: Texts.numOfSentence.rawValue)
+        addText(x: 43, y: y, h: 2, text: i18n.sentencesCount)
         y += 3
 
         // separate Line

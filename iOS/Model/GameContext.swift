@@ -55,7 +55,7 @@ class GameContext {
                 return AVSpeechUtteranceDefaultSpeechRate * (0.6 + Float(level.rawValue) * 0.05)
 
         }
-        return AVSpeechUtteranceDefaultSpeechRate * (0.4 + life.f * 0.007)
+        return AVSpeechUtteranceDefaultSpeechRate * (0.5 + life.f * 0.006)
     }
     var isNewRecord: Bool {
         return gameRecord?.isNewRecord ?? false
@@ -76,13 +76,22 @@ class GameContext {
     // Calculated duration when guide voice off mode
     var calculatedSpeakDuration: Promise<Float> {
         let duration: Promise<Float> = Promise<Float>.pending()
-        getKana(targetString).then({ kana in
+        if gameLang == .jp {
+            getKana(targetString).then({ kana in
+                duration.fulfill(
+                    1.0 +
+                    kana.count.f * 0.13 /
+                    (self.teachingRate/AVSpeechUtteranceDefaultSpeechRate)
+                )
+            })
+        } else {
+            let level = gameRecord?.level ?? Level.lv4
             duration.fulfill(
-                1.0 +
-                kana.count.f * 0.13 /
-                (self.teachingRate/AVSpeechUtteranceDefaultSpeechRate)
+                    1.0 +
+                    level.maxSyllablesCount.f * 0.13 /
+                    (self.teachingRate/AVSpeechUtteranceDefaultSpeechRate)
             )
-        })
+        }
         return duration
     }
 
@@ -106,7 +115,7 @@ class GameContext {
         guard let selectedDataSet = dataSets[dataSetKey] else { return }
         sentences = selectedDataSet
 
-        life = isSimulator ? 100 : 50
+        life = isSimulator ? 100 : 40
 
         let level = dataKeyToLevels[dataSetKey] ?? .lv0
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level)
@@ -117,7 +126,7 @@ class GameContext {
         sentenceIndex = 0
         dataSetKey = level.infinteChallengeDatasetKey
         loadSentenceDB()
-        let numOfSentences = isSimulator ? 3 : 20
+        let numOfSentences = isSimulator ? 20 : 20
         let sentenceIds = randSentenceIds(
             minKanaCount: level.minSyllablesCount,
             maxKanaCount: level.maxSyllablesCount,
@@ -131,15 +140,15 @@ class GameContext {
                 _ = s.furiganaAttributedString // load furigana
             }
         }
-        if isSimulator { life = 100 }
+
+        life = isSimulator ? 100 : 40
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level)
 
     }
 
     func nextSentence() -> Bool {
         sentenceIndex += 1
-        let sentencesBound = isSimulator ? 3 : sentences.count
-        guard sentenceIndex < sentencesBound else { return false }
+        guard sentenceIndex < sentences.count else { return false }
         userSaidString = ""
         return true
     }

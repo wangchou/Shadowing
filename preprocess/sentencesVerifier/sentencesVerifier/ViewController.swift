@@ -225,8 +225,8 @@ func prepareSentences() {
             voicePerfectCountLimit = 2000
             syllablesLenLimit = 40
         case .alex, .samantha:
-            bothPerfectCountLimit = 1000
-            voicePerfectCountLimit = 1500
+            bothPerfectCountLimit = 1500
+            voicePerfectCountLimit = 2000
             syllablesLenLimit = 30
         }
         loadWritableDb()

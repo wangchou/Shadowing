@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Speech
 
 class RootContainerViewController: UIViewController {
     var current: UIViewController!
@@ -17,6 +18,8 @@ class RootContainerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        //print(SFSpeechRecognizer.supportedLocales())
 
         splashScreen = UIStoryboard(name: "Main", bundle: nil)
             .instantiateViewController(withIdentifier: "LaunchScreen")
@@ -29,13 +32,7 @@ class RootContainerViewController: UIViewController {
         current = splashScreen
         showVC(splashScreen)
 
-//        #if ForeignDev
-            gameLang = Lang.en
-            GameContext.shared.contentTab = .infiniteChallenge
-//        #else
-//            loadGameLang()
-//        #endif
-
+        loadGameLang()
         loadTopSentencesInfoDB()
         loadDataSets()
         loadGameHistory()
@@ -58,11 +55,28 @@ class RootContainerViewController: UIViewController {
         showVC(current)
     }
 
-    func showInfiniteChallengePage() {
+    func showInfiniteChallengePage(isShowSetting: Bool = false) {
         guard current != infiniteChallengeSwipablePage else { return }
         removeCurrent()
         current = infiniteChallengeSwipablePage
+        let sp: InfiniteChallengeSwipablePage! = infiniteChallengeSwipablePage
+        if isShowSetting && !sp.pages.isEmpty {
+            sp.setViewControllers([sp.pages[0]], direction: .reverse, animated: false, completion: nil)
+        }
+
         showVC(current)
+    }
+
+    func reloadTableData() {
+        let sp0: MainSwipablePage! = mainSwipablePage
+        if !sp0.pages.isEmpty,
+           let listPage = (sp0.pages[1] as? ShadowingListPage) {
+            listPage.sentencesTableView.reloadData()
+        }
+        let sp1: InfiniteChallengeSwipablePage! = infiniteChallengeSwipablePage
+        if let listPage = (sp1.pages[1] as? InfiniteChallengeListPage) {
+            listPage.tableView.reloadData()
+        }
     }
 
     private func showVC(_ vc: UIViewController) {

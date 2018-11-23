@@ -15,7 +15,41 @@ private let context = GameContext.shared
 private let engine = SpeechEngine.shared
 
 func narratorSay(_ text: String) -> Promise<Void> {
-    return engine.speak(text: text, speaker: context.gameSetting.narrator, rate: fastRate)
+    let currentLocale = AVSpeechSynthesisVoice.currentLanguageCode()
+    var voiceId = "unknown"
+    var rate = normalRate
+    if currentLocale.hasPrefix("ja") {
+        voiceId = getDefaultVoiceId(language: "ja-JP")
+    } else if currentLocale.hasPrefix("zh") {
+        voiceId = getDefaultVoiceId(language: "zh-TW", isPreferEnhanced: false)
+        rate = fastRate
+    } else if currentLocale.hasPrefix("en") {
+        voiceId = getDefaultVoiceId(language: currentLocale)
+    } else {
+        voiceId = getDefaultVoiceId(language: "en-US")
+    }
+    //print("narrator", voiceId)
+    return engine.speak(text: text, speaker: voiceId, rate: rate)
+}
+
+func translatorSay(_ text: String) -> Promise<Void> {
+    var translationLocale = "en-US"
+    if gameLang == .jp && context.contentTab == .topics {
+        translationLocale = "zh-TW"
+    }
+    if gameLang == .en {
+        translationLocale = "ja-JP"
+    }
+    var voiceId = "unknown"
+    var rate = normalRate
+    if translationLocale.hasPrefix("zh") {
+        voiceId = getDefaultVoiceId(language: "zh-TW", isPreferEnhanced: false)
+        rate = fastRate
+    } else {
+        voiceId = getDefaultVoiceId(language: translationLocale)
+    }
+    print("translator:", voiceId, text, rate)
+    return engine.speak(text: text, speaker: voiceId, rate: rate)
 }
 
 func assisantSay(_ text: String) -> Promise<Void> {
@@ -24,6 +58,10 @@ func assisantSay(_ text: String) -> Promise<Void> {
 
 func teacherSay(_ text: String, rate: Float = context.teachingRate) -> Promise<Void> {
     return engine.speak(text: text, speaker: context.gameSetting.teacher, rate: rate)
+}
+
+func ttsSay(_ text: String, speaker: String, rate: Float = context.teachingRate) -> Promise<Void> {
+    return engine.speak(text: text, speaker: speaker, rate: rate)
 }
 
 class SpeechEngine {
@@ -91,7 +129,7 @@ class SpeechEngine {
         speechRecognizer.endAudio()
     }
 
-    fileprivate func speak(text: String, speaker: ChatSpeaker, rate: Float) -> Promise<Void> {
+    fileprivate func speak(text: String, speaker: String, rate: Float) -> Promise<Void> {
         let startTime = getNow()
         func updateSpeakDuration() -> Promise<Void> {
             context.speakDuration = Float((getNow() - startTime))
@@ -100,7 +138,7 @@ class SpeechEngine {
 
         return tts.say(
             text,
-            name: speaker.rawValue,
+            voiceId: speaker,
             rate: rate
             ).then(updateSpeakDuration)
     }

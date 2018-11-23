@@ -84,13 +84,16 @@ class SentencesTableCell: UITableViewCell {
             sentenceLabel.text = sentence
         }
 
-        if let translation = translations[sentence] {
+        var translationsDict = (gameLang == .jp && context.contentTab == .topics) ?
+                            chTranslations : translations
+
+        if let translation = translationsDict[sentence] {
             translationTextView.text = translation
         } else {
             translationTextView.text = ""
         }
 
-        if isShowTranslate, translations[sentence] != nil {
+        if isShowTranslate, translationsDict[sentence] != nil {
             sentenceLabel.alpha = 0
             translationTextView.alpha = 1
         } else {
@@ -121,7 +124,6 @@ class SentencesTableCell: UITableViewCell {
 // MARK: Private Methods
 extension SentencesTableCell {
     private func speakPart() -> Promise<Void> {
-        guard context.gameSetting.isUsingGuideVoice else { return fulfilledVoidPromise() }
         startTime = getNow()
         let promise = teacherSay(targetString, rate: context.gameSetting.practiceSpeed)
         prepareForSpeaking()
@@ -142,13 +144,6 @@ extension SentencesTableCell {
             userSaidSentenceLabel.text = "listening..."
             userSaidSentenceLabel.textColor = UIColor.red
             tableView?.endUpdates()
-        }
-
-        if !context.gameSetting.isUsingGuideVoice {
-            return context.calculatedSpeakDuration.then { duration -> Promise<String> in
-                prepareListening()
-                return SpeechEngine.shared.listen(duration: Double(duration))
-            }
         }
 
         let duration = getNow() - startTime + Double(practicePauseDuration)

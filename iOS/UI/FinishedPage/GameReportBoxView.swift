@@ -9,18 +9,21 @@
 import UIKit
 
 private let context = GameContext.shared
+private let i18n = I18n.shared
 
 @IBDesignable
 class GameReportBoxView: UIView, ReloadableView, GridLayout {
     let gridCount = 44
     let axis: GridAxis = .horizontal
     let spacing: CGFloat = 0
+    var animateTimer: Timer?
 
     func viewWillAppear() {
         backgroundColor = UIColor.black.withAlphaComponent(0.6)
         removeAllSubviews()
         renderTopTitle()
         renderMiddleRecord()
+        renderMiddleGoalBar()
         if context.isNewRecord && context.contentTab == .topics {
             renderBottomAbilityInfo()
         }
@@ -56,20 +59,75 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         addText(2, y+11, 3, "正解 \(record.perfectCount) | すごい \(record.greatCount) | いいね \(record.goodCount) | ミス \(record.missedCount)")
     }
 
+    private func renderMiddleGoalBar() {
+        guard let record = context.gameRecord else { return }
+        let y = 28
+        let line = UIView()
+        layout(0, y, 44, 1, line)
+        line.backgroundColor = .lightGray
+        line.frame.size.height = 1.5
+        addSubview(line)
+
+        let todaySentenceCount = getTodaySentenceCount()
+        let dailyGoal = context.gameSetting.dailySentenceGoal
+        addText(2, y + 1, 6, "今日の目標", color: myLightText)
+        let goalProgressLabel = addText(31, y + 1, 6, "\(todaySentenceCount - record.correctCount)/\(dailyGoal)", color: myLightText)
+        goalProgressLabel.frame = getFrame(12, y + 1, 30, 6)
+        goalProgressLabel.textAlignment = .right
+        let fontSize = getFontSize(h: 6)
+        let font = MyFont.bold(ofSize: fontSize)
+
+        let barBox = addRect(x: 2, y: y + 7, w: 40, h: 4, color: .clear)
+        barBox.roundBorder(borderWidth: 1, cornerRadius: 0, color: .lightGray)
+
+        // animate progress bar for one second
+        let startProgress = min(1.0, ((todaySentenceCount - record.correctCount).f/dailyGoal.f))
+        let endProgress = min(1.0, (todaySentenceCount.f/dailyGoal.f))
+        let fullProgressWidth = getFrame(0, 0, 40, 4).width
+        let progressBar = addRect(x: 2, y: y + 7, w: 1, h: 4)
+        progressBar.frame.size.width = fullProgressWidth * startProgress.c
+        progressBar.roundBorder(borderWidth: 1, cornerRadius: 0, color: .clear)
+
+        var repeatCount = 0
+        let targetRepeatCount = 50
+        let delayCount = 25
+        animateTimer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) { _ in
+            guard repeatCount >= delayCount else {
+                repeatCount += 1
+                return
+            }
+            let ratio: Float = 0.02 * (repeatCount.f - delayCount.f)
+            progressBar.frame.size.width = fullProgressWidth * (startProgress * (1 - ratio) + endProgress * ratio).c
+            let text = "\(todaySentenceCount - record.correctCount + (record.correctCount.f * ratio).i)/\(dailyGoal)"
+            goalProgressLabel.attributedText = getText(text,
+                                                       color: myLightText,
+                                                       strokeWidth: -2,
+                                                       strokeColor: .black, font: font)
+            if repeatCount >= targetRepeatCount + delayCount {
+                self.animateTimer?.invalidate()
+                if startProgress < 1.0 && endProgress == 1.0 {
+                    _ = teacherSay(i18n.reachDailyGoal, rate: normalRate)
+                }
+            }
+            repeatCount += 1
+        }
+
+    }
+
     private func renderBottomAbilityInfo() {
-        let y = 30
+        let y = 42
 
         let lineLeft = UIView()
         let lineRight = UIView()
 
         layout(0, y, 15, 1, lineLeft)
         lineLeft.backgroundColor = .lightGray
-        lineLeft.frame.size.height = step/4
+        lineLeft.frame.size.height = 1.5
         addSubview(lineLeft)
 
         layout(29, y, 15, 1, lineRight)
         lineRight.backgroundColor = .lightGray
-        lineRight.frame.size.height = step/4
+        lineRight.frame.size.height = 1.5
         addSubview(lineRight)
 
         addText(16, y-3, 6, "新紀錄", color: myLightText)
@@ -102,7 +160,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
                 let a = abStr
                 let b = padStr
                 let c = scoreStr
-                Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
+                Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { _ in
                     self.addText(30, ty, 3, "\(a)： \(b)\(c)", color: myOrange)
                     self.addText(30, ty + 2, 3, "(+\(context.newRecordIncrease))", color: myOrange)
                 }
@@ -111,17 +169,20 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         }
     }
 
+    @discardableResult
     func addText(
-        _ x: Int, _ y: Int, _ h: Int, _ text: String, color: UIColor = .white, strokeColor: UIColor = .black) {
+        _ x: Int, _ y: Int, _ h: Int, _ text: String,
+        color: UIColor = .white, strokeColor: UIColor = .black) -> UILabel {
         let fontSize = getFontSize(h: h)
         let font = MyFont.bold(ofSize: fontSize)
-        addAttrText( x, y, h,
+        return addAttrText( x, y, h,
                      getText(text, color: color, strokeWidth: -2, strokeColor: strokeColor, font: font)
         )
     }
 
-    func addAttrText(_ x: Int, _ y: Int, _ h: Int, _ attrText: NSAttributedString) {
-        addAttrText(x: x, y: y, w: gridCount - x, h: h, text: attrText)
+    @discardableResult
+    func addAttrText(_ x: Int, _ y: Int, _ h: Int, _ attrText: NSAttributedString) -> UILabel {
+        return addAttrText(x: x, y: y, w: gridCount - x, h: h, text: attrText)
     }
 
     override func prepareForInterfaceBuilder() {
