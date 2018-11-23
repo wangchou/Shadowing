@@ -192,16 +192,18 @@ class SettingPage: UITableViewController {
         let i18n = I18n.shared
         switch section {
         case 0:
-            return ""
+            return " "
         case 1:
-            return i18n.gameSetting
+            return " "
         case 2:
-            return i18n.settingSectionPracticeSpeed
+            return i18n.settingSectionGameSpeed
         case 3:
-            return i18n.textToSpeech
+            return i18n.settingSectionPracticeSpeed
         case 4:
-            return i18n.dailyGoal
+            return i18n.textToSpeech
         case 5:
+            return i18n.dailyGoal
+        case 6:
             return i18n.micAndSpeechPermission
 
         default:
@@ -210,7 +212,7 @@ class SettingPage: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 3 {
+        if indexPath.section == 4 {
             VoiceSelectionPage.voices = getAvailableVoice(prefix: gameLang.prefix)
 
             if indexPath.row == 0 { // teacher voice

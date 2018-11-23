@@ -35,31 +35,14 @@ class I18n {
         return "Speed"
     }
 
-    var translationLabel: String {
-        if isJa { return "翻訳の表示" }
-        if isZh { return "顯示翻譯" }
-        return "Show Translation"
-    }
-
-    var speakTranslationLabel: String {
-        if isJa { return "翻訳を話す" }
-        if isZh { return "唸翻譯" }
-        return "Speak Translation"
-    }
-
-    var guideVoiceLabel: String {
-        if isJa { return "ガイド音声" }
-        if isZh { return "引導朗讀" }
-        return "Guide Voice"
-    }
     var narratorLabel: String {
-        if isJa { return "はじめの説明" }
+        if isJa { return "挑戦の説明" }
         if isZh { return "開始語音說明" }
         return "Initial Descriptions"
     }
     var monitoringLabel: String {
         if isJa { return "モニタリング（有線イヤホンのみ）"}
-        if isZh { return "即時監聽(有線耳機 Only)" }
+        if isZh { return "即時監聽 (有線耳機 Only)" }
         return "Wired Monitoring"
     }
     var gotoIOSSettingButtonTitle: String {
@@ -75,14 +58,14 @@ class I18n {
     }
 
     var settingSectionGameSpeed: String {
-        if isJa { return "ゲーム時の読み上げ速度"}
-        if isZh { return "遊戲時的朗讀速度" }
-        return "Speaking Speed (in Game)"
+        if isJa { return "挑戦中"}
+        if isZh { return "遊戲時" }
+        return "Game Speed"
     }
     var settingSectionPracticeSpeed: String {
-        if isJa { return  "練習時の読み上げ速度" }
-        if isZh { return "練習時的朗讀速度" }
-        return "Speaking Speed (in Practice)"
+        if isJa { return  "練習の速度" }
+        if isZh { return "練習的速度" }
+        return "Practice Speed"
     }
     var gameSetting: String {
         if isJa { return "ゲーム設定" }
@@ -90,7 +73,7 @@ class I18n {
         return "Game Settings"
     }
     var micAndSpeechPermission: String {
-        if isJa { return "マイクと音声認識のアクセス権限" }
+        if isJa { return "マイク と 音声認識の権限" }
         if isZh { return "麥克風與語音辨識權限" }
         return "Mic and Recognition Permissions"
     }
