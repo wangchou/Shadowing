@@ -1857,7 +1857,7 @@ Ruth Yuru Chen
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FinishedTableCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="5" indentationWidth="5" reuseIdentifier="FinishedSentenceCell" rowHeight="63" id="U4Y-kF-8LG" userLabel="FinishedTableCell" customClass="SentencesTableCell" customModule="今話したい" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="399.19999999999999" width="320" height="63"/>
+                                        <rect key="frame" x="0.0" y="408.79999999999995" width="320" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="U4Y-kF-8LG" id="316-Iq-LBo">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="62.5"/>

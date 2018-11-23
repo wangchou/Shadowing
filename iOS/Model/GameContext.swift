@@ -126,7 +126,7 @@ class GameContext {
         sentenceIndex = 0
         dataSetKey = level.infinteChallengeDatasetKey
         loadSentenceDB()
-        let numOfSentences = isSimulator ? 20 : 20
+        let numOfSentences = isSimulator ? 3 : 20
         let sentenceIds = randSentenceIds(
             minKanaCount: level.minSyllablesCount,
             maxKanaCount: level.maxSyllablesCount,

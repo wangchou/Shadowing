@@ -174,7 +174,7 @@ class I18n {
 
     var continueGameButtonTitle: String {
         if isJa { return "つづく" }
-        if isZh { return "回到遊戲"}
+        if isZh { return "繼續遊戲"}
         return "Back to Game"
     }
 
