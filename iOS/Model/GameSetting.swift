@@ -57,9 +57,10 @@ struct GameSetting: Codable {
     var isAutoSpeed: Bool = true
     var preferredSpeed: Float = AVSpeechUtteranceDefaultSpeechRate
     var practiceSpeed: Float = AVSpeechUtteranceDefaultSpeechRate * 0.75
-    var isUsingTranslation: Bool = true
+    var isShowingTranslation: Bool = true
     var isUsingGuideVoice: Bool = true
     var isUsingNarrator: Bool = true
+    var isSpeakTranslation: Bool = true
     var isMointoring: Bool = false
     var teacher: String = "unknown"
     var assisant: String = "unknown"

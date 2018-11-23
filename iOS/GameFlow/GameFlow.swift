@@ -93,7 +93,8 @@ extension GameFlow {
     // Main Game Flow keep calling learnNext
     private func learnNextSentence() {
         guard !self.isForceStopped else { return }
-        speakTargetString()
+        speakTranslation()
+            .then( speakTargetString )
             .then { self.wait }
             .then( listenPart )
             .then { self.wait }
@@ -192,8 +193,16 @@ extension GameFlow {
         }
     }
 
-    private func speakTargetString() -> Promise<Void> {
+    private func speakTranslation() -> Promise<Void> {
         context.gameState = .TTSSpeaking
+        guard context.gameSetting.isSpeakTranslation else {
+            return fulfilledVoidPromise()
+        }
+
+        return translatorSay(translations[context.targetString] ?? "")
+    }
+
+    private func speakTargetString() -> Promise<Void> {
         guard context.gameSetting.isUsingGuideVoice else {
             postEvent(.sayStarted, string: context.targetString)
             return fulfilledVoidPromise()

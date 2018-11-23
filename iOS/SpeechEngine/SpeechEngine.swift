@@ -28,7 +28,31 @@ func narratorSay(_ text: String) -> Promise<Void> {
     } else {
         voiceId = getDefaultVoiceId(language: "en-US")
     }
-    print(voiceId)
+    print("narrator", voiceId)
+    return engine.speak(text: text, speaker: voiceId, rate: rate)
+}
+
+func translatorSay(_ text: String) -> Promise<Void> {
+    var translationLocale = "en-US"
+    if gameLang == .jp && context.contentTab == .topics {
+        translationLocale = "zh-TW"
+    }
+    if gameLang == .en {
+        translationLocale = "ja-JP"
+    }
+    var voiceId = "unknown"
+    var rate = normalRate
+    if translationLocale.hasPrefix("ja") {
+        voiceId = getDefaultVoiceId(language: "ja-JP")
+    } else if translationLocale.hasPrefix("zh") {
+        voiceId = getDefaultVoiceId(language: "zh-TW", isPreferEnhanced: false)
+        rate = fastRate
+    } else if translationLocale.hasPrefix("en") {
+        voiceId = getDefaultVoiceId(language: translationLocale)
+    } else {
+        voiceId = getDefaultVoiceId(language: "en-US")
+    }
+    print("translator", voiceId)
     return engine.speak(text: text, speaker: voiceId, rate: rate)
 }
 

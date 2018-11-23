@@ -117,7 +117,7 @@ class SettingPage: UITableViewController {
         practiceSpeedSlider.value = setting.practiceSpeed
         practiceSpeedFastLabel.text = String(format: "%.2fx", setting.practiceSpeed * 2)
 
-        translationSwitch.isOn = setting.isUsingTranslation
+        translationSwitch.isOn = setting.isShowingTranslation
         guideVoiceSwitch.isOn = setting.isUsingGuideVoice
         narratorSwitch.isOn = setting.isUsingNarrator
         monitoringSwitch.isOn = setting.isMointoring
@@ -146,7 +146,7 @@ class SettingPage: UITableViewController {
     }
 
     @IBAction func translationSwitchValueChanged(_ sender: Any) {
-        context.gameSetting.isUsingTranslation = translationSwitch.isOn
+        context.gameSetting.isShowingTranslation = translationSwitch.isOn
         saveGameSetting()
     }
 

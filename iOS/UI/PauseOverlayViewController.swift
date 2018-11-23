@@ -48,7 +48,7 @@ class PauseOverlayViewController: UIViewController {
         ttsSpeedSlider.minimumValue = AVSpeechUtteranceMinimumSpeechRate
         ttsSpeedSlider.maximumValue = AVSpeechUtteranceMaximumSpeechRate * 0.75
         guideVoiceSwitch.isOn = context.gameSetting.isUsingGuideVoice
-        tranlationSwitch.isOn = context.gameSetting.isUsingTranslation
+        tranlationSwitch.isOn = context.gameSetting.isShowingTranslation
         autoSpeedSwitch.isOn = context.gameSetting.isAutoSpeed
         ttsSpeedSlider.value = context.gameSetting.preferredSpeed
         fastLabel.text = String(format: "%.2fx", context.gameSetting.preferredSpeed*2)
@@ -69,7 +69,7 @@ class PauseOverlayViewController: UIViewController {
         viewWillAppear(false)
     }
     @IBAction func onTranslationSwitchTapped(_ sender: Any) {
-        context.gameSetting.isUsingTranslation = tranlationSwitch.isOn
+        context.gameSetting.isShowingTranslation = tranlationSwitch.isOn
         saveGameSetting()
         viewWillAppear(false)
     }
