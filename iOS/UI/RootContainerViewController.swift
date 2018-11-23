@@ -13,6 +13,7 @@ import Speech
 class RootContainerViewController: UIViewController {
     var current: UIViewController!
     var splashScreen: UIViewController!
+    var languageSelectionScreen: UIViewController!
     var mainSwipablePage: MainSwipablePage!
     var infiniteChallengeSwipablePage: InfiniteChallengeSwipablePage!
 
@@ -40,6 +41,13 @@ class RootContainerViewController: UIViewController {
         loadGameMiscData()
 
         Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
+            if gameLang == .unset {
+                self.languageSelectionScreen = UIStoryboard(name: "Main", bundle: nil)
+                    .instantiateViewController(withIdentifier: "InitialLanguageSelectionScreen")
+                self.showVC(self.languageSelectionScreen)
+                return
+            }
+
             if gameLang.isSupportTopicMode {
                 self.showMainPage()
             } else {
@@ -74,7 +82,8 @@ class RootContainerViewController: UIViewController {
             listPage.sentencesTableView.reloadData()
         }
         let sp1: InfiniteChallengeSwipablePage! = infiniteChallengeSwipablePage
-        if let listPage = (sp1.pages[1] as? InfiniteChallengeListPage) {
+        if !sp1.pages.isEmpty,
+            let listPage = (sp1.pages[1] as? InfiniteChallengeListPage) {
             listPage.tableView.reloadData()
         }
     }

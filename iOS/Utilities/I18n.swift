@@ -207,6 +207,8 @@ class I18n {
             return japanese
         case .en:
             return english
+        default:
+            return english
         }
     }
 
@@ -405,5 +407,10 @@ class I18n {
             return "速度は"
         }
         return "Speed is "
+    }
+    var canChangeItLaterInSetting: String {
+        if isJa { return "後で、設定ページから変更することができます。" }
+        if isZh { return "之後可從設定頁面更改。" }
+        return "It could be changed from the settings page later."
     }
 }

@@ -6,7 +6,7 @@
 //  Copyright © 30 Heisei Lu, WangChou. All rights reserved.
 //
 
-private let gameLangKey = "GameLangKey"
+private let gameLangKey = "GameLangKey 2018/11/23"
 
 // https://stackoverflow.com/questions/44580719/how-do-i-make-an-enum-decodable-in-swift-4
 private struct LangForEncode: Codable {
@@ -31,12 +31,12 @@ var jaSentenceInfos: [Int: SentenceInfo] = [:]
 var enSentenceInfos: [Int: SentenceInfo] = [:]
 
 enum Lang: Int, Codable {
-    case jp, en
+    case jp, en, unset
 
     var key: String {
         if self == .jp { return "" }
         if self == .en { return "en" }
-        return ""
+        return "unset"
     }
     var isSupportTopicMode: Bool {
         if self == .jp { return true }
@@ -49,6 +49,8 @@ enum Lang: Int, Codable {
             return jaSentenceInfos
         case .en:
             return enSentenceInfos
+        case .unset:
+            return [:]
         }
     }
 
@@ -58,8 +60,10 @@ enum Lang: Int, Codable {
             return "ja"
         case .en:
             return "en"
+        case .unset:
+            return "unset"
         }
     }
 }
 
-var gameLang: Lang = Lang.jp
+var gameLang: Lang = Lang.unset

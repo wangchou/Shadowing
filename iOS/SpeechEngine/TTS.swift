@@ -21,8 +21,9 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         switch gameLang {
         case .jp:
             return "ja-JP"
-        case .en:
+        default:
             return "en-US"
+
         }
     }
 

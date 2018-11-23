@@ -70,6 +70,7 @@
 		BECAC3BA216B8FE3001BBF49 /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECAC3B9216B8FE3001BBF49 /* BottomBarView.swift */; };
 		BECAC3BC216B904A001BBF49 /* BottomBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BECAC3BB216B904A001BBF49 /* BottomBarView.xib */; };
 		BECAC3BF216B9D19001BBF49 /* InfiniteChallengeSwipablePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECAC3BE216B9D19001BBF49 /* InfiniteChallengeSwipablePage.swift */; };
+		BECD8B2F21A817D000FF44A2 /* LanguageSelectionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD8B2E21A817D000FF44A2 /* LanguageSelectionPage.swift */; };
 		BECD9077219D279C00400FD3 /* InfiniteChallengeListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD9076219D279C00400FD3 /* InfiniteChallengeListPage.swift */; };
 		BECD907B219D294100400FD3 /* InfiniteChallengeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD907A219D294100400FD3 /* InfiniteChallengeTableCell.swift */; };
 		BED1CC0921452A54004AE397 /* GameSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1CC0821452A54004AE397 /* GameSetting.swift */; };
@@ -173,6 +174,7 @@
 		BECAC3B9216B8FE3001BBF49 /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
 		BECAC3BB216B904A001BBF49 /* BottomBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomBarView.xib; sourceTree = "<group>"; };
 		BECAC3BE216B9D19001BBF49 /* InfiniteChallengeSwipablePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteChallengeSwipablePage.swift; sourceTree = "<group>"; };
+		BECD8B2E21A817D000FF44A2 /* LanguageSelectionPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectionPage.swift; sourceTree = "<group>"; };
 		BECD9076219D279C00400FD3 /* InfiniteChallengeListPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteChallengeListPage.swift; sourceTree = "<group>"; };
 		BECD907A219D294100400FD3 /* InfiniteChallengeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteChallengeTableCell.swift; sourceTree = "<group>"; };
 		BED1CC0821452A54004AE397 /* GameSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetting.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 		BEBDEDB3208EF09F00C18520 = {
 			isa = PBXGroup;
 			children = (
+				BECD8B2E21A817D000FF44A2 /* LanguageSelectionPage.swift */,
 				BEB6F6C72182B89D0011E1C1 /* InfoPlist.strings */,
 				BE5ABAD3217C4CCD00A63C5F /* Alamofire.framework */,
 				BE5ABACE217C4CCC00A63C5F /* Charts.framework */,
@@ -517,6 +520,7 @@
 				BE8DE7B62161E44400812CED /* AbilityChart.swift in Sources */,
 				BECAC3B5216B34FA001BBF49 /* InfiniteChanllengePage.swift in Sources */,
 				BE5D838920A80BD0002031BF /* GameContentDetailPage.swift in Sources */,
+				BECD8B2F21A817D000FF44A2 /* LanguageSelectionPage.swift in Sources */,
 				BE6ED56820A17BB000553D1A /* GameFlow.swift in Sources */,
 				BEEC7FAD2155014E001C2EFF /* SettingPage.swift in Sources */,
 				BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */,

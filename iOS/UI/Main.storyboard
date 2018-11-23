@@ -250,7 +250,7 @@
                             <constraint firstItem="Ftz-Wt-fWd" firstAttribute="leading" secondItem="Xqc-OQ-6uf" secondAttribute="leading" id="pNy-xH-Xad"/>
                             <constraint firstItem="Xqc-OQ-6uf" firstAttribute="trailing" secondItem="MS2-Wa-4bv" secondAttribute="trailing" id="pRe-Bo-wVV"/>
                             <constraint firstItem="9e0-HF-izB" firstAttribute="bottom" secondItem="Xqc-OQ-6uf" secondAttribute="bottom" id="pds-LY-YPQ"/>
-                            <constraint firstItem="Xqc-OQ-6uf" firstAttribute="bottom" secondItem="EM1-qB-hl8" secondAttribute="bottom" id="ysH-Fm-4Xc"/>
+                            <constraint firstAttribute="bottom" secondItem="EM1-qB-hl8" secondAttribute="bottom" id="ysH-Fm-4Xc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Xqc-OQ-6uf"/>
                     </view>
@@ -2148,7 +2148,104 @@ Ruth Yuru Chen
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="72U-ci-rWN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1935" y="-852"/>
+            <point key="canvasLocation" x="-2631" y="-852"/>
+        </scene>
+        <!--Language Selection Page-->
+        <scene sceneID="8hn-D2-K4g">
+            <objects>
+                <tableViewController storyboardIdentifier="InitialLanguageSelectionScreen" id="Bwm-0l-jqb" customClass="LanguageSelectionPage" customModule="今話したい" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="S2r-D3-7a7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="Chr-fP-oIM">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今話したいのは" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E1a-T0-RFe">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                                    <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="30"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="E1a-T0-RFe" firstAttribute="leading" secondItem="Chr-fP-oIM" secondAttribute="leading" id="Dq2-uL-a4h"/>
+                                <constraint firstAttribute="bottom" secondItem="E1a-T0-RFe" secondAttribute="bottom" id="EEh-Ws-jr0"/>
+                                <constraint firstAttribute="trailing" secondItem="E1a-T0-RFe" secondAttribute="trailing" id="mIB-So-nKY"/>
+                                <constraint firstItem="E1a-T0-RFe" firstAttribute="top" secondItem="Chr-fP-oIM" secondAttribute="top" id="wYJ-UR-n1P"/>
+                            </constraints>
+                        </view>
+                        <sections>
+                            <tableViewSection footerTitle="之後可從設定中更改。" id="817-ae-PD8">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationLevel="2" indentationWidth="10" id="Mbk-x0-TWx">
+                                        <rect key="frame" x="0.0" y="80" width="320" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mbk-x0-TWx" id="5Tb-0r-pi8">
+                                            <rect key="frame" x="0.0" y="0.0" width="286" height="59.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="英語" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cIr-9f-Vn2">
+                                                    <rect key="frame" x="16" y="10" width="262" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="45Q-KD-vob"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="cIr-9f-Vn2" firstAttribute="leading" secondItem="5Tb-0r-pi8" secondAttribute="leadingMargin" id="0Em-69-D0p"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="cIr-9f-Vn2" secondAttribute="trailing" id="lMs-lK-Qf1"/>
+                                                <constraint firstItem="cIr-9f-Vn2" firstAttribute="centerY" secondItem="5Tb-0r-pi8" secondAttribute="centerY" id="ss0-ZR-LSj"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="AMu-UC-9CL">
+                                        <rect key="frame" x="0.0" y="140" width="320" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AMu-UC-9CL" id="OPU-Th-R9d">
+                                            <rect key="frame" x="0.0" y="0.0" width="286" height="59.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日本語" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aO3-vG-zRs">
+                                                    <rect key="frame" x="16" y="10" width="262" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="T7T-Wh-lug"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="aO3-vG-zRs" firstAttribute="centerY" secondItem="OPU-Th-R9d" secondAttribute="centerY" id="RBC-iM-b6d"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="aO3-vG-zRs" secondAttribute="trailing" id="a5Q-Aq-6vO"/>
+                                                <constraint firstItem="aO3-vG-zRs" firstAttribute="leading" secondItem="OPU-Th-R9d" secondAttribute="leadingMargin" id="daU-X4-67g"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="Bwm-0l-jqb" id="trH-tG-M0D"/>
+                            <outlet property="delegate" destination="Bwm-0l-jqb" id="8pX-rw-qVW"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="englishLabel" destination="cIr-9f-Vn2" id="rFO-ff-AxT"/>
+                        <outlet property="japaneseLabel" destination="aO3-vG-zRs" id="JDn-2H-4xH"/>
+                        <outlet property="tableView" destination="S2r-D3-7a7" id="jpQ-I9-Xc8"/>
+                        <outlet property="titleLabel" destination="E1a-T0-RFe" id="Jj4-wF-NRL"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gVU-Di-2pA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1987.5" y="-1040.4929577464789"/>
         </scene>
     </scenes>
     <resources>
