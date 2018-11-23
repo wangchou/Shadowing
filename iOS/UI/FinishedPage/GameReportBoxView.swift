@@ -64,7 +64,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         let y = 28
         let line = UIView()
         layout(0, y, 44, 1, line)
-        line.backgroundColor = .darkGray
+        line.backgroundColor = .lightGray
         line.frame.size.height = 1.5
         addSubview(line)
 
@@ -90,15 +90,20 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
 
         var repeatCount = 0
         let targetRepeatCount = 50
+        let delayCount = 25
         animateTimer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) { _ in
-            let ratio: Float = 0.02 * repeatCount.f
+            guard repeatCount >= delayCount else {
+                repeatCount += 1
+                return
+            }
+            let ratio: Float = 0.02 * (repeatCount.f - delayCount.f)
             progressBar.frame.size.width = fullProgressWidth * (startProgress * (1 - ratio) + endProgress * ratio).c
             let text = "\(todaySentenceCount - record.correctCount + (record.correctCount.f * ratio).i)/\(dailyGoal)"
             goalProgressLabel.attributedText = getText(text,
                                                        color: myLightText,
                                                        strokeWidth: -2,
                                                        strokeColor: .black, font: font)
-            if repeatCount >= targetRepeatCount {
+            if repeatCount >= targetRepeatCount + delayCount {
                 self.animateTimer?.invalidate()
                 if startProgress < 1.0 && endProgress == 1.0 {
                     _ = teacherSay(i18n.reachDailyGoal, rate: normalRate)
@@ -116,12 +121,12 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         let lineRight = UIView()
 
         layout(0, y, 15, 1, lineLeft)
-        lineLeft.backgroundColor = .darkGray
+        lineLeft.backgroundColor = .lightGray
         lineLeft.frame.size.height = 1.5
         addSubview(lineLeft)
 
         layout(29, y, 15, 1, lineRight)
-        lineRight.backgroundColor = .darkGray
+        lineRight.backgroundColor = .lightGray
         lineRight.frame.size.height = 1.5
         addSubview(lineRight)
 
@@ -155,7 +160,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
                 let a = abStr
                 let b = padStr
                 let c = scoreStr
-                Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
+                Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { _ in
                     self.addText(30, ty, 3, "\(a)： \(b)\(c)", color: myOrange)
                     self.addText(30, ty + 2, 3, "(+\(context.newRecordIncrease))", color: myOrange)
                 }
