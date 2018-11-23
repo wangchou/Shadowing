@@ -347,7 +347,7 @@ class I18n {
     }
     var goalSuffix: String {
         if isZh { return "句" }
-        return "文を正しく話す"
+        return "文"//を正しく話す"
     }
     var day: String {
         if isZh { return "天"}

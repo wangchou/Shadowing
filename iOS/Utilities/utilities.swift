@@ -366,7 +366,7 @@ func getSentenceCountsByDays() -> [Int] {
     let calendar = Calendar.current
     var recordsByDate = getRecordsByDate()
 
-    guard !GameContext.shared.gameHistory.isEmpty else { return [0] }
+    guard !GameContext.shared.gameHistory.isEmpty || isSimulator else { return [0] }
     var firstRecordDate = Date()
     GameContext.shared.gameHistory.forEach { r in
         let date = r.startedTime
@@ -395,6 +395,15 @@ func getSentenceCountsByDays() -> [Int] {
         date = calendar.date(byAdding: minusOneDay, to: date) ?? date
     }
 
+    if isSimulator {
+        for _ in 1...30 {
+            sentenceCounts.append(0)
+        }
+        for i in 0..<sentenceCounts.count {
+            sentenceCounts[i] += Int(arc4random_uniform(UInt32(100)))
+        }
+    }
+    print(sentenceCounts)
     return sentenceCounts
 }
 
