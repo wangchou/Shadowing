@@ -316,7 +316,67 @@ Cg
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">」是個練習日文口說的App。日文語音先說、你接著複誦。最後用辨識的結果，指出要加強的地方。目標是讓你「從會聽，但不會說」到擁有JLPT N3的口說能力。
+                                        <string key="content">」是個練習日文與英文口說的App。語音先說、你跟著複誦。最後用辨識的結果評分。透過和AI語音的快速訓練，讓你能不怕犯錯、大量練習口說。
+
+目標是讓你「從會聽，但不會說」到擁有日常的口說能力。(JLPT N3 or 英檢中高級)
+
+</string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="目標追蹤：">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="24" name="PingFangTC-Semibold"/>
+                                            <font key="NSOriginalFont" size="18" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="1. ">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <font key="NSOriginalFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">每日追蹤你是否有達成當日目標、連續幾天達成目標。 (例如: 連續三天唸對50句)
+2. 追蹤離最終目標有多遠、最近一週的進度、還要幾天能完成。(例如: 1000句、3000句、10000句)
+
+</string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="多種學習模式：">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="24" name="PingFangTC-Semibold"/>
+                                            <font key="NSOriginalFont" size="24" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+1. 學習意義和發音：語音先唸翻譯、再唸原文。最後你再跟著唸，確實地把語音和意義連結再一起。
+2. 只學習發音：語音唸原文，你接著唸。專心在原文的世界裡練習發音。
+3. 練習口譯：語音唸翻譯與顯示原文。你接著把原文唸出來。
 
 </string>
                                         <attributes>
@@ -326,7 +386,7 @@ Cg
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">App有兩個模式：話題模式(600句)與無限挑戰模式(60000句)。 
+                                        <string key="content">App句子有兩種內容：話題句組(600句)與無限挑戰句組(30000句)。 
 </string>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -344,7 +404,7 @@ Cg
                                             <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="話題模式">
+                                    <fragment content="話題">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="18" name="PingFangTC-Semibold"/>
@@ -352,8 +412,15 @@ Cg
                                             <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
+                                    <fragment content="句組">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
                                     <fragment>
-                                        <string key="content">有「日常、表達、戀愛、旅遊、論述、敬語」六個主題。每句都有中、日對照的翻譯。總共六百句。
+                                        <string key="content">有「日常、表達、戀愛、旅遊、論述、敬語」六個主題。每句都有中、日對照的翻譯。總共六百句。(僅日文有)
 
 </string>
                                         <attributes>
@@ -362,11 +429,18 @@ Cg
                                             <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="無限挑戰模式">
+                                    <fragment content="無限挑戰">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="18" name="PingFangTC-Semibold"/>
                                             <font key="NSOriginalFont" size="18" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="句組">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Semibold"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -385,7 +459,7 @@ Cg
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">個關卡。每個關卡逐漸加長句子，透過闖關提升你的口說能力。總共有六萬句。(PS：上級以後，因為語音辨識不穩定，還在實驗階段。)
+                                        <string key="content">個關卡。每個關卡逐漸加長句子，透過闖關提升你的口說能力。每句都有英、日對照的翻譯，總共有三萬句。
 
 </string>
                                         <attributes>
@@ -411,7 +485,7 @@ Cg
                                             <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="請安裝高品質語音">
+                                    <fragment content="請選擇語音">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="18" name="PingFangTC-Regular"/>
@@ -420,7 +494,7 @@ Cg
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">：到設定頁裡選高品質語音。(推薦Otoya先生)。另外一提，如果把iPhone的語系設成日文，下載Siri Female的語音後，設定頁選擇「預設」後還可以用Siri的聲音。
+                                        <string key="content">：到設定頁裡選擇各種腔調的語音，如美國腔或英國腔，更可找指示去下載高品質語音。(日文推薦：Otoya老師；英文推薦：Samantha老師)
 
 2. </string>
                                         <attributes>
@@ -441,41 +515,6 @@ Cg
                                         <string key="content">：過程中使用的語音辨識皆為Apple提供，會需要把聲音傳到Apple的主機去。如果網路不穩會導致辨識結果不正確。
 
 3. Apple語音辨識有每天1000句的免費上限。超過會辨識失敗。
-
-4. </string>
-                                        <attributes>
-                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="無限挑戰模式還在">
-                                        <attributes>
-                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            <integer key="NSUnderline" value="1"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="Beta">
-                                        <attributes>
-                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="18" name="PingFangTC-Semibold"/>
-                                            <font key="NSOriginalFont" size="18" name="PingFangTC-Semibold"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            <integer key="NSUnderline" value="1"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="中">
-                                        <attributes>
-                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            <integer key="NSUnderline" value="1"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">，目前正確率只能到9成。(A判定)
 
 </string>
                                         <attributes>
@@ -498,7 +537,7 @@ Cg
 
 2. 試著讓咬字清楚、音量不要太小。
 
-3. </string>
+3. 助詞之後稍微停一下。(如日文中的</string>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="18" name="PingFangTC-Regular"/>
@@ -509,7 +548,6 @@ Cg
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="18" name="PingFangTC-Semibold"/>
-                                            <font key="NSOriginalFont" size="18" name="PingFangTC-Semibold"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -524,20 +562,19 @@ Cg
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="18" name="PingFangTC-Semibold"/>
-                                            <font key="NSOriginalFont" size="18" name="PingFangTC-Semibold"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">或其他助詞之後稍微停一下。
+                                        <string key="content">)
 
-4. 日文老師的重音有時怪怪的。不照著唸、使用正確的重音去唸，會提升辨識率。
+4. 語音老師的重音有時怪怪的。不照著唸、使用正確的重音去唸，會提升辨識率。
 
-5. 保持平常心。有時不是你唸錯，是語音辨識錯誤。
+5. 保持平常心。有時不是你唸錯，真的是語音辨識錯誤。
 
-6. 關閉自動朗讀速度調整：自己挑選一個適合自己的速度。
+6. 關閉自動速度調整：自己挑選一個適合自己的速度。
 
-7. 練習時等出現 Listening... 字樣、挑戰時等出現灰色框框再唸，有時是時間差的問題。
+7. 練習時等出現 Listening... 字樣；挑戰時等出現灰色框框再唸，有時是時間差的問題。
 
 </string>
                                         <attributes>
@@ -590,7 +627,22 @@ A: 每句都有請</string>
                                             <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="Otoya語音">
+                                    <fragment content="Otoya">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Semibold"/>
+                                            <font key="NSOriginalFont" size="18" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="/Samantha">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="語音">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="18" name="PingFangTC-Semibold"/>
@@ -599,7 +651,7 @@ A: 每句都有請</string>
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">唸給它自己聽，都有唸到100分過。請用提高正確率的小秘訣多試試。但如果還是不行，就放下吧。很有可能Siri的聽力對某些正確腔調，辨識還無法像Otoya腔調一樣正確。(PS: 測試過Siri, Kyoko, Otoya語音，各自都有無法唸到100分的句子。) 請以每句80分為目標。
+                                        <string key="content">唸給它自己聽，都有唸到100分過。請用提高正確率的小秘訣多試試。但如果還是不行，就放下吧。很有可能Siri的聽力對某些正確腔調，辨識還無法像Otoya/Samantha腔調一樣正確。(PS: 測試過Siri, Kyoko, Otoya語音，各自都有無法唸到100分的句子。) 請以每句80分為目標。
 
 Q: 挑戰中一直零分、顯示聽不清楚？
 A: 通常有兩種可能，麥克風收音不好。或是聽和說的時間錯開了。每句聽的長度是 </string>
@@ -669,23 +721,21 @@ A: 作者的經驗，通常是</string>
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">，來把音訊傳給Apple辨識。
+                                        <mutableString key="content">，來把音訊傳給Apple辨識。
 
 =&gt; 如果到 Apple 的網路不順，他們收到的就是很多雜訊的聲音，就會亂聽。 
 另外，如果是音量的問題用 iPhone 附的有線耳麥會好很多。
 
-Q: 有些句子的假名標錯了！
+Q: 有些日文句子的假名標錯了！
 A: 抱歉，關於假名標錯的問題。現在「自然語言處理」自動標讀音只能達到99%正確。請回報，作者會盡可能去解決。
 
-Q: 有些句子的漢字，日文老師唸錯了？
+Q: 有些日文句子的漢字，日文老師唸錯了？
 A: 抱歉，這個問題來自Apple。舉例來說：Siri和Google Translation都會把「台湾人」唸成「台湾ひと」，目前作者沒有能力解決。不過也請回報，如果無法解決，會把有問題的句子移除。
 
 Q: 網路明明很穩定，卻一直跳出「連不到主機」的錯誤訊息？
-A: 抱歉，那代表在東京的「漢字轉假名主機」掛掉了。 
-Q: 有其他問題、指教 or 想請作者吃飯？
-A: 寫信到 imahanashitai@gmail.com
+A: 抱歉，那代表在東京的「漢字轉假名主機」掛掉了。
 
-</string>
+</mutableString>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="18" name="PingFangTC-Regular"/>
@@ -970,11 +1020,11 @@ Ruth Yuru Chen
                             </tableViewSection>
                             <tableViewSection headerTitle="遊戲設定" id="IQn-mK-qV8" userLabel="Game Options">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="78" id="bIj-os-8U8">
-                                        <rect key="frame" x="0.0" y="190.5" width="320" height="78"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="83" id="bIj-os-8U8">
+                                        <rect key="frame" x="0.0" y="190.5" width="320" height="83"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bIj-os-8U8" id="Nfg-Q8-yZF">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="77.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="82.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="學習模式" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VM1-q9-0NV">
@@ -984,7 +1034,7 @@ Ruth Yuru Chen
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Jsc-nM-Doz">
-                                                    <rect key="frame" x="15" y="38" width="295" height="29"/>
+                                                    <rect key="frame" x="15" y="43" width="295" height="29"/>
                                                     <segments>
                                                         <segment title="意義與發音"/>
                                                         <segment title="發音"/>
@@ -1005,7 +1055,7 @@ Ruth Yuru Chen
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="SVo-zW-z9X">
-                                        <rect key="frame" x="0.0" y="268.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="273.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SVo-zW-z9X" id="SjJ-7J-luo">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -1033,7 +1083,7 @@ Ruth Yuru Chen
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="87W-7q-tDT">
-                                        <rect key="frame" x="0.0" y="312.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="317.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="87W-7q-tDT" id="8St-tg-vh9">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -1065,7 +1115,7 @@ Ruth Yuru Chen
                             <tableViewSection headerTitle="遊戲設定" id="ixw-cC-pmi" userLabel="Game Options">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="24q-ZW-YhS">
-                                        <rect key="frame" x="0.0" y="412.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="417.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="24q-ZW-YhS" id="X2A-an-8Be">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -1093,7 +1143,7 @@ Ruth Yuru Chen
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="D0Q-yv-0vq">
-                                        <rect key="frame" x="0.0" y="456.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="461.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="D0Q-yv-0vq" id="kJc-iW-iCX">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -1126,7 +1176,7 @@ Ruth Yuru Chen
                             <tableViewSection headerTitle="練習時的朗讀速度" id="QOz-ta-82S">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="N1B-8V-GC1">
-                                        <rect key="frame" x="0.0" y="556.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="561.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="N1B-8V-GC1" id="rJY-Zn-kHi">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -1159,7 +1209,7 @@ Ruth Yuru Chen
                             <tableViewSection headerTitle="語音合成" id="vhi-Sd-uwg" userLabel="Japanese Teacher">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" id="VMY-nf-tkP">
-                                        <rect key="frame" x="0.0" y="656.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="661.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VMY-nf-tkP" id="n4V-N7-Q05">
                                             <rect key="frame" x="0.0" y="0.0" width="294" height="43.5"/>
@@ -1187,7 +1237,7 @@ Ruth Yuru Chen
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" id="PZB-LK-yN0">
-                                        <rect key="frame" x="0.0" y="700.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="705.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PZB-LK-yN0" id="e7j-9m-oVm">
                                             <rect key="frame" x="0.0" y="0.0" width="294" height="43.5"/>
@@ -1219,7 +1269,7 @@ Ruth Yuru Chen
                             <tableViewSection headerTitle="每天目標" id="ZE7-Qj-n8R" userLabel="dailyGoal">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="nFl-pK-cOK">
-                                        <rect key="frame" x="0.0" y="800.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="805.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nFl-pK-cOK" id="SK2-te-SXm">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -1251,7 +1301,7 @@ Ruth Yuru Chen
                             <tableViewSection headerTitle="麥克風與語音辨識權限" id="WdS-gh-bvX" userLabel="Go to IOS Setting">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="IVr-hM-UtT">
-                                        <rect key="frame" x="0.0" y="900.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="905.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IVr-hM-UtT" id="lal-hd-ERN">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>

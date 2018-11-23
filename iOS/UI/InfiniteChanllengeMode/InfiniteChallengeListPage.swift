@@ -21,8 +21,17 @@ class InfiniteChallengeListPage: UIViewController {
     @IBOutlet weak var icListTopView: ICListTopView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        topBarView.rightButton.isHidden = true
+
         bottomBarView.contentTab = .infiniteChallenge
+
+        topBarView.rightButton.setIconImage(named: "outline_info_black_48pt", isIconOnLeft: false)
+        if Locale.current.languageCode == "zh" {
+            topBarView.customOnRightButtonClicked = {
+                launchStoryboard(self, "InfoPage")
+            }
+        } else {
+            topBarView.rightButton.isHidden = true
+        }
 
         icListTopView.addTapGestureRecognizer {
             switch context.gameSetting.icTopViewMode {
