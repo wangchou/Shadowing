@@ -493,7 +493,7 @@ extension ICListTopView {
             addWhiteText("\(percentText) ")
             addGrayText(i18n.longTermGoalMiddleText)
             addWhiteText(" \(remainingDays) ")
-            addGrayText("\(i18n.day)。")
+            addGrayText("\(i18n.dayRange)。")
         }
 
         let y = isGameClear ? 20 : 23

@@ -102,9 +102,9 @@ class I18n {
     }
 
     var gameStartedWithGuideVoice: String {
-        if isJa { return "私のあとに繰り返してください。" }
-        if isZh { return "我說完\(langToSpeak)後，請跟著說～" }
-        return "Please repeat after me."
+        if isJa { return "私のあとに\(langToSpeak)を繰り返してください。" }
+        if isZh { return "當我說完\(langToSpeak)後，請跟著說～" }
+        return "Please repeat \"\(langToSpeak) Sentences\" after me."
     }
 
     var reachDailyGoal: String {
@@ -115,7 +115,7 @@ class I18n {
     var gameStartedWithoutGuideVoice: String {
         if isJa { return "\(langToSpeak)の文を読んていってください。" }
         if isZh { return "請唸出對應的\(langToSpeak)。" }
-        return "Please speak showed sentences."
+        return "Please speak displayed \"\(langToSpeak) Sentences\"."
     }
 
     var dailyGoal: String {
@@ -365,6 +365,10 @@ class I18n {
         return "文を正しく話す"
     }
     var day: String {
+        if isZh { return "天"}
+        return "日"
+    }
+    var dayRange: String {
         if isZh { return "天"}
         return "日間"
     }
