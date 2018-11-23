@@ -124,7 +124,6 @@ class SentencesTableCell: UITableViewCell {
 // MARK: Private Methods
 extension SentencesTableCell {
     private func speakPart() -> Promise<Void> {
-        guard context.gameSetting.isUsingGuideVoice else { return fulfilledVoidPromise() }
         startTime = getNow()
         let promise = teacherSay(targetString, rate: context.gameSetting.practiceSpeed)
         prepareForSpeaking()
@@ -145,13 +144,6 @@ extension SentencesTableCell {
             userSaidSentenceLabel.text = "listening..."
             userSaidSentenceLabel.textColor = UIColor.red
             tableView?.endUpdates()
-        }
-
-        if !context.gameSetting.isUsingGuideVoice {
-            return context.calculatedSpeakDuration.then { duration -> Promise<String> in
-                prepareListening()
-                return SpeechEngine.shared.listen(duration: Double(duration))
-            }
         }
 
         let duration = getNow() - startTime + Double(practicePauseDuration)

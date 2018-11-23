@@ -107,15 +107,15 @@ class I18n {
         return "Please repeat \"\(langToSpeak) Sentences\" after me."
     }
 
-    var reachDailyGoal: String {
-        if gameLang == .jp { return "よくやった！お疲れ様。" }
-        return "You did it. Good Job!"
-    }
-
     var gameStartedWithoutGuideVoice: String {
         if isJa { return "\(langToSpeak)の文を読んていってください。" }
         if isZh { return "請唸出對應的\(langToSpeak)。" }
         return "Please speak displayed \"\(langToSpeak) Sentences\"."
+    }
+
+    var reachDailyGoal: String {
+        if gameLang == .jp { return "よくやった！お疲れ様。" }
+        return "You did it. Good Job!"
     }
 
     var dailyGoal: String {
@@ -133,7 +133,7 @@ class I18n {
     var textToSpeech: String {
         if isJa { return "音声合成" }
         if isZh { return "語音合成" }
-        return "Text to Speech"
+        return "Text to Speech (\(langToSpeak))"
     }
     var teacherLabel: String {
         if gameLang == .jp {
@@ -150,11 +150,11 @@ class I18n {
         if gameLang == .jp {
             if isJa { return "日本語アシスタント" }
             if isZh { return "日文助理" }
-            return "Japanese Assisant"
+            return "Assisant"
         }
         if isJa { return "英語アシスタント" }
         if isZh { return "英文助理" }
-        return "English Assisant"
+        return "Assisant"
     }
     var enhancedVoice: String {
         if isJa { return "(拡張)" }
@@ -375,5 +375,35 @@ class I18n {
     var longTermGoalMiddleText: String {
         if isZh { return "% 已說，離完成"}
         return "% を話した、完了まで"
+    }
+
+    var learningMode: String {
+        if isJa { return "学習モード" }
+        if isZh { return "學習模式" }
+        return "Learning Mode"
+    }
+
+    var meaningAndSpeaking: String {
+        if isJa { return "意味と発音" }
+        if isZh { return "意義與發音" }
+        return "meaning"
+    }
+
+    var speakingOnly: String {
+        if isJa { return "発音のみ" }
+        if isZh { return "發音" }
+        return "pronunciation"
+    }
+
+    var interpretation: String {
+        if isJa { return "通訳" }
+        if isZh { return "口譯" }
+        return "interpretation"
+    }
+    var speedIs: String {
+        if gameLang == .jp {
+            return "速度は"
+        }
+        return "Speed is "
     }
 }

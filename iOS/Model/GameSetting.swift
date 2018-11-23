@@ -57,9 +57,15 @@ struct GameSetting: Codable {
     var isAutoSpeed: Bool = true
     var preferredSpeed: Float = AVSpeechUtteranceDefaultSpeechRate
     var practiceSpeed: Float = AVSpeechUtteranceDefaultSpeechRate * 0.75
+    var isShowTranslationInPractice: Bool = false
+
+    // learning mode started
+    var learningMode: LearningMode = .meaningAndSpeaking
     var isShowTranslation: Bool = false
     var isSpeakTranslation: Bool = true
     var isUsingGuideVoice: Bool = true
+    // learning mode ended
+
     var isUsingNarrator: Bool = true
     var isMointoring: Bool = false
     var teacher: String = "unknown"
@@ -72,4 +78,10 @@ enum ICTopViewMode: Int, Codable {
     case dailyGoal
     case timeline
     case longTermGoal
+}
+
+enum LearningMode: Int, Codable {
+    case meaningAndSpeaking = 0
+    case speakingOnly = 1
+    case interpretation = 2
 }

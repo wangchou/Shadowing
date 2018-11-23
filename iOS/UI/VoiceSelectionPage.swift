@@ -58,6 +58,10 @@ class VoiceSelectionPage: UIViewController {
 
     var testSentence: String {
         if let voice = selectedVoice {
+            if selectingVoiceFor == .assisant {
+                return "\(Score(value: 100).text), \(Score(value: 80).text), \(Score(value: 60).text), \(Score(value: 0).text) "
+            }
+
             if gameLang == .jp {
                 return "こんにちは、私の名前は\(voice.name)です。"
             } else {

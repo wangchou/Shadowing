@@ -25,18 +25,14 @@ class SettingPage: UITableViewController {
     @IBOutlet weak var gameSpeedFastLabel: UILabel!
 
     @IBOutlet weak var practiceSpeedSlider: UISlider!
+    @IBOutlet weak var learningModeLabel: UILabel!
 
+    @IBOutlet weak var learningModeSegmentControl: UISegmentedControl!
     @IBOutlet weak var practiceSpeedFastLabel: UILabel!
-    @IBOutlet weak var translationLabel: UILabel!
-    @IBOutlet weak var translationSwitch: UISwitch!
-    @IBOutlet weak var guideVoiceLabel: UILabel!
-    @IBOutlet weak var guideVoiceSwitch: UISwitch!
     @IBOutlet weak var narratorLabel: UILabel!
     @IBOutlet weak var narratorSwitch: UISwitch!
     @IBOutlet weak var monitoringLabel: UILabel!
     @IBOutlet weak var monitoringSwitch: UISwitch!
-    @IBOutlet weak var speakTranslationLabel: UILabel!
-    @IBOutlet weak var speakTranslationSwitch: UISwitch!
 
     @IBOutlet weak var teacherLabel: UILabel!
     @IBOutlet weak var teacherNameLabel: UILabel!
@@ -81,9 +77,6 @@ class SettingPage: UITableViewController {
         }
         topBarView.titleLabel.text = i18n.setting
         autoSpeedLabel.text = i18n.autoSpeedLabel
-        translationLabel.text = i18n.translationLabel
-        speakTranslationLabel.text = i18n.speakTranslationLabel
-        guideVoiceLabel.text = i18n.guideVoiceLabel
         narratorLabel.text = i18n.narratorLabel
         monitoringLabel.text = i18n.monitoringLabel
         wantToSayLabel.text = i18n.wantToSayLabel
@@ -120,11 +113,10 @@ class SettingPage: UITableViewController {
         practiceSpeedSlider.value = setting.practiceSpeed
         practiceSpeedFastLabel.text = String(format: "%.2fx", setting.practiceSpeed * 2)
 
-        translationSwitch.isOn = setting.isShowTranslation
-        guideVoiceSwitch.isOn = setting.isUsingGuideVoice
         narratorSwitch.isOn = setting.isUsingNarrator
         monitoringSwitch.isOn = setting.isMointoring
-        speakTranslationSwitch.isOn = setting.isSpeakTranslation
+
+        initLearningModeSegmentControl(label: learningModeLabel, control: learningModeSegmentControl)
     }
 
     @IBAction func autoSpeedSwitchValueChanged(_ sender: Any) {
@@ -138,7 +130,7 @@ class SettingPage: UITableViewController {
         saveGameSetting()
         gameSpeedFastLabel.text = String(format: "%.2fx", gameSpeedSlider.value * 2)
         let speedText = String(format: "%.2f", context.gameSetting.preferredSpeed * 2)
-        _ = teacherSay("速度は\(speedText)です", rate: context.gameSetting.preferredSpeed)
+        _ = teacherSay("\(i18n.speedIs)\(speedText)です", rate: context.gameSetting.preferredSpeed)
     }
 
     @IBAction func practiceSpeedSliderValueChanged(_ sender: Any) {
@@ -146,25 +138,13 @@ class SettingPage: UITableViewController {
         saveGameSetting()
         practiceSpeedFastLabel.text = String(format: "%.2fx", practiceSpeedSlider.value * 2)
         let speedText = String(format: "%.2f", context.gameSetting.practiceSpeed * 2)
-        _ = teacherSay("速度は\(speedText)です", rate: context.gameSetting.practiceSpeed)
+        _ = teacherSay("\(i18n.speedIs)\(speedText)です", rate: context.gameSetting.practiceSpeed)
     }
 
     // game option group
-    @IBAction func translationSwitchValueChanged(_ sender: Any) {
-        context.gameSetting.isShowTranslation = translationSwitch.isOn
-        saveGameSetting()
+    @IBAction func learningModeSegmentControlValueChanged(_ sender: Any) {
+        actOnLearningModeSegmentControlValueChanged(control: learningModeSegmentControl)
     }
-
-    @IBAction func speakTranslationSwitchValueChanged(_ sender: Any) {
-        context.gameSetting.isSpeakTranslation = speakTranslationSwitch.isOn
-        saveGameSetting()
-    }
-
-    @IBAction func guideVoiceSwitchValueChanged(_ sender: Any) {
-        context.gameSetting.isUsingGuideVoice = guideVoiceSwitch.isOn
-        saveGameSetting()
-    }
-
     @IBAction func narratorSwitchValueChanged(_ sender: Any) {
         context.gameSetting.isUsingNarrator = narratorSwitch.isOn
         saveGameSetting()
@@ -214,16 +194,14 @@ class SettingPage: UITableViewController {
         case 0:
             return ""
         case 1:
-            return i18n.settingSectionGameSpeed
+            return i18n.gameSetting
         case 2:
             return i18n.settingSectionPracticeSpeed
         case 3:
-            return i18n.gameSetting
-        case 4:
             return i18n.textToSpeech
-        case 5:
+        case 4:
             return i18n.dailyGoal
-        case 6:
+        case 5:
             return i18n.micAndSpeechPermission
 
         default:
@@ -232,7 +210,7 @@ class SettingPage: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 4 {
+        if indexPath.section == 3 {
             VoiceSelectionPage.voices = getAvailableVoice(prefix: gameLang.prefix)
 
             if indexPath.row == 0 { // teacher voice
@@ -248,4 +226,29 @@ class SettingPage: UITableViewController {
             launchStoryboard(self, "VoiceSelectionViewController", isOverCurrent: true, animated: true)
         }
     }
+}
+
+func actOnLearningModeSegmentControlValueChanged(control: UISegmentedControl) {
+    context.gameSetting.learningMode = LearningMode(rawValue: control.selectedSegmentIndex) ?? .meaningAndSpeaking
+
+    switch context.gameSetting.learningMode {
+    case .meaningAndSpeaking:
+        context.gameSetting.isSpeakTranslation = true
+        context.gameSetting.isUsingGuideVoice = true
+    case .speakingOnly:
+        context.gameSetting.isSpeakTranslation = false
+        context.gameSetting.isUsingGuideVoice = true
+    case .interpretation:
+        context.gameSetting.isSpeakTranslation = true
+        context.gameSetting.isUsingGuideVoice = false
+    }
+    saveGameSetting()
+}
+
+func initLearningModeSegmentControl(label: UILabel, control: UISegmentedControl) {
+    label.text = i18n.learningMode
+    control.selectedSegmentIndex = context.gameSetting.learningMode.rawValue
+    control.setTitle(i18n.meaningAndSpeaking, forSegmentAt: 0)
+    control.setTitle(i18n.speakingOnly, forSegmentAt: 1)
+    control.setTitle(i18n.interpretation, forSegmentAt: 2)
 }

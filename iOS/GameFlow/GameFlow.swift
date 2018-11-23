@@ -70,8 +70,9 @@ class GameFlow {
         startTimer()
 
         context.loadLearningSentences()
-        let narratorString = setting.isUsingGuideVoice ?
-            i18n.gameStartedWithGuideVoice : i18n.gameStartedWithoutGuideVoice
+        let narratorString = setting.learningMode == .interpretation ?
+            i18n.gameStartedWithoutGuideVoice :
+            i18n.gameStartedWithGuideVoice
         if setting.isUsingNarrator {
             narratorSay(narratorString)
                 .then { self.wait }
