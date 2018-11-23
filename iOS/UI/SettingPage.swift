@@ -35,6 +35,8 @@ class SettingPage: UITableViewController {
     @IBOutlet weak var narratorSwitch: UISwitch!
     @IBOutlet weak var monitoringLabel: UILabel!
     @IBOutlet weak var monitoringSwitch: UISwitch!
+    @IBOutlet weak var speakTranslationLabel: UILabel!
+    @IBOutlet weak var speakTranslationSwitch: UISwitch!
 
     @IBOutlet weak var teacherLabel: UILabel!
     @IBOutlet weak var teacherNameLabel: UILabel!
@@ -80,6 +82,7 @@ class SettingPage: UITableViewController {
         topBarView.titleLabel.text = i18n.setting
         autoSpeedLabel.text = i18n.autoSpeedLabel
         translationLabel.text = i18n.translationLabel
+        speakTranslationLabel.text = i18n.speakTranslationLabel
         guideVoiceLabel.text = i18n.guideVoiceLabel
         narratorLabel.text = i18n.narratorLabel
         monitoringLabel.text = i18n.monitoringLabel
@@ -117,10 +120,11 @@ class SettingPage: UITableViewController {
         practiceSpeedSlider.value = setting.practiceSpeed
         practiceSpeedFastLabel.text = String(format: "%.2fx", setting.practiceSpeed * 2)
 
-        translationSwitch.isOn = setting.isShowingTranslation
+        translationSwitch.isOn = setting.isShowTranslation
         guideVoiceSwitch.isOn = setting.isUsingGuideVoice
         narratorSwitch.isOn = setting.isUsingNarrator
         monitoringSwitch.isOn = setting.isMointoring
+        speakTranslationSwitch.isOn = setting.isSpeakTranslation
     }
 
     @IBAction func autoSpeedSwitchValueChanged(_ sender: Any) {
@@ -145,8 +149,14 @@ class SettingPage: UITableViewController {
         _ = teacherSay("速度は\(speedText)です", rate: context.gameSetting.practiceSpeed)
     }
 
+    // game option group
     @IBAction func translationSwitchValueChanged(_ sender: Any) {
-        context.gameSetting.isShowingTranslation = translationSwitch.isOn
+        context.gameSetting.isShowTranslation = translationSwitch.isOn
+        saveGameSetting()
+    }
+
+    @IBAction func speakTranslationSwitchValueChanged(_ sender: Any) {
+        context.gameSetting.isSpeakTranslation = speakTranslationSwitch.isOn
         saveGameSetting()
     }
 
@@ -163,6 +173,7 @@ class SettingPage: UITableViewController {
         context.gameSetting.isMointoring = monitoringSwitch.isOn
         saveGameSetting()
     }
+
     @IBAction func goToSettingCenter(_ sender: Any) {
         goToIOSSettingCenter()
     }

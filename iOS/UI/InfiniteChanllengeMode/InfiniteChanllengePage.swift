@@ -78,7 +78,7 @@ class InfiniteChallengePage: UIViewController {
         topBarView.titleLabel.text = topBarTitle
     }
     @IBAction func onTranslationButtonClicked(_ sender: Any) {
-        context.gameSetting.isShowingTranslation = !context.gameSetting.isShowingTranslation
+        context.gameSetting.isShowTranslation = !context.gameSetting.isShowTranslation
         saveGameSetting()
         tableView.reloadData()
     }
@@ -102,7 +102,7 @@ extension InfiniteChallengePage: UITableViewDataSource {
         guard let contentCell = cell as? SentencesTableCell else { print("detailCell convert error"); return cell }
 
         if let sentences = lastInfiniteChallengeSentences[self.level] {
-            contentCell.update(sentence: sentences[indexPath.row], isShowTranslate: context.gameSetting.isShowingTranslation)
+            contentCell.update(sentence: sentences[indexPath.row], isShowTranslate: context.gameSetting.isShowTranslation)
         }
 
         return contentCell

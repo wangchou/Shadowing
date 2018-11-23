@@ -105,7 +105,7 @@ class GameContentDetailPage: UIViewController {
     }
 
     @IBAction func touchUpPeekButton(_ sender: Any) {
-        context.gameSetting.isShowingTranslation = !context.gameSetting.isShowingTranslation
+        context.gameSetting.isShowTranslation = !context.gameSetting.isShowTranslation
         saveGameSetting()
         tableView.reloadData()
     }
@@ -129,7 +129,7 @@ extension GameContentDetailPage: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContentTableCell", for: indexPath)
         guard let contentCell = cell as? SentencesTableCell else { print("detailCell convert error"); return cell }
         let sentence = context.sentences[indexPath.row]
-        contentCell.update(sentence: sentence, isShowTranslate: context.gameSetting.isShowingTranslation)
+        contentCell.update(sentence: sentence, isShowTranslate: context.gameSetting.isShowTranslation)
 
         return contentCell
     }

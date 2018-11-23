@@ -67,7 +67,7 @@ extension Messenger: GameEventDelegate {
                 let text = context.targetString
                 var translationsDict = (gameLang == .jp && context.contentTab == .topics) ?
                     chTranslations : translations
-                if context.gameSetting.isShowingTranslation,
+                if context.gameSetting.isShowTranslation,
                     let translation = translationsDict[text] {
                     addLabel(rubyAttrStr(translation))
                 } else if let tokenInfos = kanaTokenInfosCacheDictionary[text] {

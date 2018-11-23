@@ -40,6 +40,13 @@ class I18n {
         if isZh { return "顯示翻譯" }
         return "Show Translation"
     }
+
+    var speakTranslationLabel: String {
+        if isJa { return "翻訳を話す" }
+        if isZh { return "唸翻譯" }
+        return "Speak Translation"
+    }
+
     var guideVoiceLabel: String {
         if isJa { return "ガイド音声" }
         if isZh { return "引導朗讀" }

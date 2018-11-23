@@ -198,8 +198,15 @@ extension GameFlow {
         guard context.gameSetting.isSpeakTranslation else {
             return fulfilledVoidPromise()
         }
+        var translationsDict = (gameLang == .jp && context.contentTab == .topics) ?
+            chTranslations : translations
+        var translation = translationsDict[context.targetString] ?? ""
 
-        return translatorSay(translations[context.targetString] ?? "")
+        // only speak the first meaning when multiple meanings are available
+        if translation.range(of: "/") != nil {
+            translation = translation.split(separator: "/")[0].s
+        }
+        return translatorSay(translation)
     }
 
     private func speakTargetString() -> Promise<Void> {

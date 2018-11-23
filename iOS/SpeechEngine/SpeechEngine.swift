@@ -28,7 +28,7 @@ func narratorSay(_ text: String) -> Promise<Void> {
     } else {
         voiceId = getDefaultVoiceId(language: "en-US")
     }
-    print("narrator", voiceId)
+    //print("narrator", voiceId)
     return engine.speak(text: text, speaker: voiceId, rate: rate)
 }
 
@@ -42,17 +42,13 @@ func translatorSay(_ text: String) -> Promise<Void> {
     }
     var voiceId = "unknown"
     var rate = normalRate
-    if translationLocale.hasPrefix("ja") {
-        voiceId = getDefaultVoiceId(language: "ja-JP")
-    } else if translationLocale.hasPrefix("zh") {
+    if translationLocale.hasPrefix("zh") {
         voiceId = getDefaultVoiceId(language: "zh-TW", isPreferEnhanced: false)
         rate = fastRate
-    } else if translationLocale.hasPrefix("en") {
-        voiceId = getDefaultVoiceId(language: translationLocale)
     } else {
-        voiceId = getDefaultVoiceId(language: "en-US")
+        voiceId = getDefaultVoiceId(language: translationLocale)
     }
-    print("translator", voiceId)
+    print("translator:", voiceId, text, rate)
     return engine.speak(text: text, speaker: voiceId, rate: rate)
 }
 

@@ -17,6 +17,7 @@ class PauseOverlayViewController: UIViewController {
     @IBOutlet weak var resumeButton: UIButton!
     @IBOutlet weak var guideVoiceSwitch: UISwitch!
     @IBOutlet weak var tranlationSwitch: UISwitch!
+    @IBOutlet weak var speakTranslationSwitch: UISwitch!
     @IBOutlet weak var autoSpeedSwitch: UISwitch!
     @IBOutlet weak var ttsSpeedSlider: UISlider!
     @IBOutlet weak var fastLabel: UILabel!
@@ -24,6 +25,7 @@ class PauseOverlayViewController: UIViewController {
     @IBOutlet weak var translationLabel: UILabel!
     @IBOutlet weak var guideVoiceLabel: UILabel!
     @IBOutlet weak var speedLabel: UILabel!
+    @IBOutlet weak var speakTranslationLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         finishButton.layer.cornerRadius = 10
@@ -42,13 +44,15 @@ class PauseOverlayViewController: UIViewController {
         resumeButton.setTitle(i18n.continueGameButtonTitle, for: .normal)
         autoSpeedLabel.text = i18n.autoSpeedLabel
         translationLabel.text = i18n.translationLabel
+        speakTranslationLabel.text = i18n.speakTranslationLabel
         guideVoiceLabel.text = i18n.guideVoiceLabel
         speedLabel.text = i18n.speed
 
         ttsSpeedSlider.minimumValue = AVSpeechUtteranceMinimumSpeechRate
         ttsSpeedSlider.maximumValue = AVSpeechUtteranceMaximumSpeechRate * 0.75
         guideVoiceSwitch.isOn = context.gameSetting.isUsingGuideVoice
-        tranlationSwitch.isOn = context.gameSetting.isShowingTranslation
+        tranlationSwitch.isOn = context.gameSetting.isShowTranslation
+        speakTranslationSwitch.isOn = context.gameSetting.isSpeakTranslation
         autoSpeedSwitch.isOn = context.gameSetting.isAutoSpeed
         ttsSpeedSlider.value = context.gameSetting.preferredSpeed
         fastLabel.text = String(format: "%.2fx", context.gameSetting.preferredSpeed*2)
@@ -68,8 +72,13 @@ class PauseOverlayViewController: UIViewController {
         saveGameSetting()
         viewWillAppear(false)
     }
+    @IBAction func onSpeakTranslationSwitchTapped(_ sender: Any) {
+        context.gameSetting.isSpeakTranslation = speakTranslationSwitch.isOn
+        saveGameSetting()
+        viewWillAppear(false)
+    }
     @IBAction func onTranslationSwitchTapped(_ sender: Any) {
-        context.gameSetting.isShowingTranslation = tranlationSwitch.isOn
+        context.gameSetting.isShowTranslation = tranlationSwitch.isOn
         saveGameSetting()
         viewWillAppear(false)
     }
