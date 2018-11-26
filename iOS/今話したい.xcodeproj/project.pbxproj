@@ -46,6 +46,7 @@
 		BE76F11F214F56F6004E130B /* SentencesTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE76F11D214F56F6004E130B /* SentencesTableCell.xib */; };
 		BE7725C420A2CBC200DF186A /* dataSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725BC20A2CBC100DF186A /* dataSets.swift */; };
 		BE7725CE20A4216700DF186A /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725CD20A4216700DF186A /* ContentCell.swift */; };
+		BE7E88B921AA768800B9355E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7E88B821AA768800B9355E /* StoreKit.framework */; };
 		BE8180C020B3BEB6006ABCB3 /* MyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180BF20B3BEB6006ABCB3 /* MyText.swift */; };
 		BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */; };
 		BE8283B42133DAE2008BC875 /* SpeechEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8283B32133DAE2008BC875 /* SpeechEngine.swift */; };
@@ -74,6 +75,7 @@
 		BECD9077219D279C00400FD3 /* InfiniteChallengeListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD9076219D279C00400FD3 /* InfiniteChallengeListPage.swift */; };
 		BECD907B219D294100400FD3 /* InfiniteChallengeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD907A219D294100400FD3 /* InfiniteChallengeTableCell.swift */; };
 		BED1CC0921452A54004AE397 /* GameSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1CC0821452A54004AE397 /* GameSetting.swift */; };
+		BEDE674521ABD04A00DF78AD /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDE674421ABD04A00DF78AD /* IAPHelper.swift */; };
 		BEDEDD3720A46D1B00E7B60B /* ShadowingListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3620A46D1B00E7B60B /* ShadowingListPage.swift */; };
 		BEDEDD3920A46FCA00E7B60B /* GameRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */; };
 		BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */; };
@@ -144,6 +146,7 @@
 		BE76F11D214F56F6004E130B /* SentencesTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SentencesTableCell.xib; sourceTree = "<group>"; };
 		BE7725BC20A2CBC100DF186A /* dataSets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataSets.swift; sourceTree = "<group>"; };
 		BE7725CD20A4216700DF186A /* ContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
+		BE7E88B821AA768800B9355E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		BE8180BF20B3BEB6006ABCB3 /* MyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyText.swift; sourceTree = "<group>"; };
 		BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFinishedPage.swift; sourceTree = "<group>"; };
 		BE8283B32133DAE2008BC875 /* SpeechEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechEngine.swift; sourceTree = "<group>"; };
@@ -178,6 +181,7 @@
 		BECD9076219D279C00400FD3 /* InfiniteChallengeListPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteChallengeListPage.swift; sourceTree = "<group>"; };
 		BECD907A219D294100400FD3 /* InfiniteChallengeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteChallengeTableCell.swift; sourceTree = "<group>"; };
 		BED1CC0821452A54004AE397 /* GameSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetting.swift; sourceTree = "<group>"; };
+		BEDE674421ABD04A00DF78AD /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		BEDEDD3620A46D1B00E7B60B /* ShadowingListPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowingListPage.swift; sourceTree = "<group>"; };
 		BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRecord.swift; sourceTree = "<group>"; };
 		BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerEventDelegate.swift; sourceTree = "<group>"; };
@@ -201,6 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE5ABAD8217C4CCD00A63C5F /* FBLPromises.framework in Frameworks */,
+				BE7E88B921AA768800B9355E /* StoreKit.framework in Frameworks */,
 				BE5ABADE217C4CCD00A63C5F /* Alamofire.framework in Frameworks */,
 				BE5ABAD6217C4CCD00A63C5F /* Promises.framework in Frameworks */,
 				BE5ABADA217C4CCD00A63C5F /* SQLite.framework in Frameworks */,
@@ -296,6 +301,14 @@
 			path = Sentences;
 			sourceTree = "<group>";
 		};
+		BE7E88B721AA768800B9355E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BE7E88B821AA768800B9355E /* StoreKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BE9556EF212D7C130045E578 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -329,6 +342,7 @@
 				BE6AF37F209C146B00CBDB63 /* GameFlow */,
 				BEDEDD4220A5D86500E7B60B /* UI */,
 				BEF28B5F20B52B7900385273 /* Utilities */,
+				BE7E88B721AA768800B9355E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -405,6 +419,7 @@
 				BEE665E120BA634600E4E322 /* Colors.swift */,
 				BEBDEDD1208EF15E00C18520 /* utilities.swift */,
 				BEA86114216F264A00AECF13 /* sqliteSentences.swift */,
+				BEDE674421ABD04A00DF78AD /* IAPHelper.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -443,6 +458,11 @@
 				TargetAttributes = {
 					BEBDEDBB208EF09F00C18520 = {
 						CreatedOnToolsVersion = 9.3;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -542,6 +562,7 @@
 				BE6EA1FD218B6BB4004749F5 /* GameLang.swift in Sources */,
 				BE152048218085120059A7C2 /* Level.swift in Sources */,
 				BE59646A215A0E4D00E4AA0C /* polite.swift in Sources */,
+				BEDE674521ABD04A00DF78AD /* IAPHelper.swift in Sources */,
 				BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */,
 				BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */,
 				BEEC7FAB2154FFA4001C2EFF /* MainSwipablePage.swift in Sources */,

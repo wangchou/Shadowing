@@ -20,6 +20,8 @@ class RootContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        IAPHelper.shared.requsestProducts()
+
         //print(SFSpeechRecognizer.supportedLocales())
 
         splashScreen = UIStoryboard(name: "Main", bundle: nil)
