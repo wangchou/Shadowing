@@ -16,21 +16,26 @@ class GameReportView: UIView, ReloadableView, GridLayout {
     let gridCount = 48
     let axis: GridAxis = .horizontal
     let spacing: CGFloat = 0
+    var reportBox: GameReportBoxView?
 
     func viewWillAppear() {
         removeAllSubviews()
         backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        let reportBox = GameReportBoxView()
+        reportBox = GameReportBoxView()
 
         if context.isNewRecord && context.contentTab == .topics {
             frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.87)
-            layout(2, 4, 44, 73, reportBox)
+            layout(2, 4, 44, 73, reportBox!)
         } else {
             frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.19)
-            layout(2, 4, 44, 41, reportBox)
+            layout(2, 4, 44, 41, reportBox!)
         }
-        addReloadableSubview(reportBox)
+        addReloadableSubview(reportBox!)
         addBackButton()
+    }
+
+    func viewDidAppear() {
+        reportBox?.animateProgressBar()
     }
 
     func addBackButton() {

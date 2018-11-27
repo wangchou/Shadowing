@@ -21,6 +21,7 @@ class RootContainerViewController: UIViewController {
         super.viewDidLoad()
 
         IAPHelper.shared.requsestProducts()
+        showReceipt()
 
         //print(SFSpeechRecognizer.supportedLocales())
 
