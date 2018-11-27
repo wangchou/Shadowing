@@ -25,8 +25,11 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
     private var endProgress: Float = 0
     private var fullProgressWidth: CGFloat = 0
 
+    private var showAbilityTargetLabelFunc: (() -> Void)?
+
     func viewWillAppear() {
         backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        showAbilityTargetLabelFunc = nil
         removeAllSubviews()
         renderTopTitle()
         renderMiddleRecord()
@@ -131,6 +134,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
                                                        strokeWidth: -2,
                                                        strokeColor: .black, font: font)
             if repeatCount >= targetRepeatCount + delayCount {
+                self.showAbilityTargetLabelFunc?()
                 self.animateTimer?.invalidate()
                 if self.startProgress < 1.0 && self.endProgress == 1.0 {
                     _ = teacherSay(i18n.reachDailyGoal, rate: normalRate)
@@ -159,7 +163,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         addText(16, y-3, 6, "新紀錄", color: myLightText)
 
         let chart = AbilityChart()
-        layout(1, y+3, 27, 27, chart)
+        layout(1, y+2, 26, 25, chart)
         chart.wColor = rgb(150, 150, 150)
         chart.labelColor = .white
         chart.labelFont = MyFont.regular(ofSize: getFontSize(h: 3))
@@ -169,28 +173,30 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         let tagPoints = getTagPoints()
         var yShift = 3
         for idx in 0...abilities.count-1 {
-            let abStr = abilities[idx]
+            let abilityStr = abilities[idx]
             let gameTag = datasetKeyToTags[context.dataSetKey]?[0]
-            let isTargetTag = gameTag == "#\(abStr)"
+            let isTargetTag = gameTag == "#\(abilityStr)"
             let textColor: UIColor = isTargetTag ? myOrange : myLightText
-            let scoreStr = "\(tagPoints["#"+abStr] ?? 0)"
+            let scoreStr = "\(tagPoints["#"+abilityStr] ?? 0)"
             var padStr = ""
             for _ in 0...(3 - scoreStr.count) {
                 padStr += "  "
             }
             if !isTargetTag {
-                addText(30, y + yShift, 3, "\(abStr)： \(padStr)\(scoreStr)", color: textColor)
+                addText(30, y + yShift, 3, "\(abilityStr)： \(padStr)\(scoreStr)", color: textColor)
                 yShift += 3
             } else {
-                let ty = y + yShift
-                let a = abStr
-                let b = padStr
-                let c = scoreStr
-                Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { _ in
-                    self.addText(30, ty, 3, "\(a)： \(b)\(c)", color: myOrange)
-                    self.addText(30, ty + 2, 3, "(+\(context.newRecordIncrease))", color: myOrange)
+                showAbilityTargetLabelFunc = { [weak self] in
+                    let ty = y + yShift
+                    let a = abilityStr
+                    let b = padStr
+                    let c = scoreStr
+                    Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
+                        self?.addText(30, ty, 3, "\(a)： \(b)\(c)", color: myOrange)
+                        self?.addText(30, ty + 2, 3, "(+\(context.newRecordIncrease))", color: myOrange)
+                    }
+                    yShift += 5
                 }
-                yShift += 5
             }
         }
     }
