@@ -44,6 +44,7 @@ class InfiniteChallengeListPage: UIViewController {
             }
             saveGameSetting()
             self.icListTopView.viewWillAppear()
+            self.icListTopView.animateProgress()
         }
     }
 
@@ -68,6 +69,11 @@ class InfiniteChallengeListPage: UIViewController {
         icListTopView.viewWillAppear() // icListTopView may not be available yet
 
         tableView.reloadData()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        icListTopView.animateProgress()
     }
 }
 

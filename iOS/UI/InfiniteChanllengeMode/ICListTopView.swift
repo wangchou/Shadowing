@@ -19,6 +19,12 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
 
     var spacing: CGFloat = 0
 
+    // animateProgress
+    var timer: Timer?
+    var frontCircle: CircleView?
+    var percentLabel: UILabel?
+    var circleFrame: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
+
     var timelineColumnCount: Int  = 15
     var timelineYPadding: CGFloat = 0.3
     var timelineXPadding: CGFloat = -0.35
@@ -210,25 +216,24 @@ extension ICListTopView {
         gridCount = 48
         updateDailyViewBGColor()
 
-        let circleFrame = getFrame(11, 3, 24, 24)
+        circleFrame = getFrame(11, 3, 24, 24)
 
         let backCircle = CircleView(frame: circleFrame)
         backCircle.lineWidth = stepFloat * 1.3
         backCircle.color = rgb(155, 155, 155)
         addSubview(backCircle)
 
-        let frontCircle = CircleView(frame: circleFrame)
-        frontCircle.lineWidth = stepFloat * 1.3
-        frontCircle.percent = percent.c
-        addSubview(frontCircle)
-        //frontCircle.animate(duration: animationSecs)
+        frontCircle = CircleView(frame: circleFrame)
+        frontCircle!.lineWidth = stepFloat * 1.3
+        frontCircle!.percent = percent >= 1.0 ? percent.c : 0
+        addSubview(frontCircle!)
 
-        let percentLabel = addText(x: 14, y: 6, w: 30, h: 8,
-                                   text: percentageText,
+        percentLabel = addText(x: 14, y: 6, w: 30, h: 8,
+                                   text: percent >= 1.0 ? percentageText : "0.0%",
                                    font: MyFont.bold(ofSize: getFontSize(h: 8)),
                                    color: .black)
-        percentLabel.textAlignment = .center
-        percentLabel.centerIn(circleFrame)
+        percentLabel?.textAlignment = .center
+        percentLabel?.centerIn(circleFrame)
 
         let goalLabel = addText(x: 14, y: 28, w: 30, h: 4,
                                 text: goalText,
@@ -239,13 +244,60 @@ extension ICListTopView {
         addDailySideBar()
     }
 
+    func animateProgress() {
+        guard context.gameSetting.icTopViewMode == .dailyGoal,
+              percent > 0,
+              percent < 1.0 else { return }
+
+        // background
+        let animation = CABasicAnimation(keyPath: "backgroundColor")
+
+        animation.duration = 0.5
+
+        animation.fromValue = longTermGoalColor.withSaturation(0).cgColor
+        animation.toValue = longTermGoalColor.withSaturation(percent.c).cgColor
+
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+
+        layer.backgroundColor = longTermGoalColor.withSaturation(percent.c).cgColor
+        layer.add(animation, forKey: "animateBackground")
+
+        // percentLabel
+        guard let percentLabel = percentLabel else { return }
+        var repeatCount = 0
+        let targetCount = 25
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) { _ in
+            guard repeatCount <= 25 else {
+                self.timer?.invalidate()
+                return
+            }
+            let currentPercent = self.percent * repeatCount.f/targetCount.f
+            percentLabel.text = String(format: "%.1f", currentPercent * 100) + "%"
+            percentLabel.centerIn(self.circleFrame)
+            repeatCount += 1
+        }
+
+        // circle
+        guard let circleView = frontCircle else { return }
+        circleView.percent = percent.c
+        circleView.animate(duration: 0.5)
+    }
+
     func updateDailyViewBGColor() {
         // 0%   = rgb(238, 238, 238)
         // 100% = rgb(255, 204, 0)
-        let lightGray238 = rgb(238, 238, 238)
-        let targetBGColor = percent > 0 ? longTermGoalColor.withSaturation(percent.c) : lightGray238
+        guard percent < 1.0 else {
+            backgroundColor = longTermGoalColor.withSaturation(1.0)
+            return
+        }
 
-        backgroundColor = targetBGColor
+        guard percent > 0 else {
+            backgroundColor = rgb(238, 238, 238)
+            return
+        }
+
+        backgroundColor = longTermGoalColor.withSaturation(0)
     }
 
     func addDailySideBar() {
