@@ -56,6 +56,7 @@
 		BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */; };
 		BE9B476A20AD50520063E0DA /* FuriganaUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476920AD50520063E0DA /* FuriganaUtils.swift */; };
 		BE9D243A20C8DEE9000515DD /* GameReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9D243920C8DEE9000515DD /* GameReportView.swift */; };
+		BEA4E71E21AE604400CE6E63 /* secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA4E71D21AE604400CE6E63 /* secret.swift */; };
 		BEA86115216F264A00AECF13 /* sqliteSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA86114216F264A00AECF13 /* sqliteSentences.swift */; };
 		BEB6F6C92182B89D0011E1C1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEB6F6C72182B89D0011E1C1 /* InfoPlist.strings */; };
 		BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */; };
@@ -156,6 +157,7 @@
 		BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaLabel.swift; sourceTree = "<group>"; };
 		BE9B476920AD50520063E0DA /* FuriganaUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaUtils.swift; sourceTree = "<group>"; };
 		BE9D243920C8DEE9000515DD /* GameReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameReportView.swift; sourceTree = "<group>"; };
+		BEA4E71D21AE604400CE6E63 /* secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secret.swift; sourceTree = "<group>"; };
 		BEA86114216F264A00AECF13 /* sqliteSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sqliteSentences.swift; sourceTree = "<group>"; };
 		BEB6F6C82182B89D0011E1C1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Project/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BEB6F6CA2182B8AA0011E1C1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = Project/ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 				BEBDEDD1208EF15E00C18520 /* utilities.swift */,
 				BEA86114216F264A00AECF13 /* sqliteSentences.swift */,
 				BEDE674421ABD04A00DF78AD /* IAPHelper.swift */,
+				BEA4E71D21AE604400CE6E63 /* secret.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				BEC2E92F217875C30095A65D /* RootContainerViewController.swift in Sources */,
 				BEF28B6120B52BB000385273 /* Score.swift in Sources */,
 				BEC2E9312179BD090095A65D /* TopicFilterBarView.swift in Sources */,
+				BEA4E71E21AE604400CE6E63 /* secret.swift in Sources */,
 				BEF4B151219C0E3B00B8E45E /* VoiceTableCell.swift in Sources */,
 				BEC4CF0E219D727B00E1A54C /* ICListTopView.swift in Sources */,
 				BE7725C420A2CBC200DF186A /* dataSets.swift in Sources */,
