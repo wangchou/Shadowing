@@ -21,9 +21,20 @@ enum RequestURL: String {
     case sandbox = "https://sandbox.itunes.apple.com/verifyReceipt"
 }
 
+enum GetExpirationError: Error {
+    case noReceiptToSumit
+    case networkError
+    case otherError
+}
+
 class IAPHelper: NSObject {
 
     static let shared = IAPHelper()
+    var products: [SKProduct] = []
+
+    public func startListening() {
+        SKPaymentQueue.default().add(self)
+    }
 
     func requsestProducts() {
         let productsRequest = SKProductsRequest(productIdentifiers: productIds)
@@ -34,8 +45,11 @@ class IAPHelper: NSObject {
     func buy(_ product: SKProduct) {
         print("Buying \(product.productIdentifier)...")
         if SKPaymentQueue.canMakePayments() {
+            print("can make payments")
             let payment = SKPayment(product: product)
             SKPaymentQueue.default().add(payment)
+        } else {
+            print("X cannot make payments")
         }
     }
 
@@ -43,6 +57,57 @@ class IAPHelper: NSObject {
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
 
+}
+
+extension IAPHelper: SKProductsRequestDelegate {
+    public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        print("Start to list products:")
+        for p in response.products {
+            print("Found product: \(p.productIdentifier) \(p.isDownloadable) \(p.localizedTitle) \(p.price.floatValue) \(p.priceLocale)")
+            products = response.products
+        }
+        buy(products[1])
+    }
+
+    public func request(_ request: SKRequest, didFailWithError error: Error) {
+        print("Error: \(error.localizedDescription)")
+    }
+
+    public func requestDidFinish(_ request: SKRequest) {
+        if let r = request as? SKReceiptRefreshRequest {
+            print("refresh request finished")
+        }
+    }
+}
+
+extension IAPHelper: SKPaymentTransactionObserver {
+    public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        var shouldProcessReceipt = false
+        for transaction in transactions {
+            switch transaction.transactionState {
+            case .purchased:
+                print("purchased")
+                shouldProcessReceipt = true
+                SKPaymentQueue.default().finishTransaction(transaction)
+            case .failed:
+                print("purchase failed", transaction.error as Any)
+                SKPaymentQueue.default().finishTransaction(transaction)
+            case .restored:
+                print("purchase restored")
+                shouldProcessReceipt = true
+                SKPaymentQueue.default().finishTransaction(transaction)
+            default:
+                NSLog("do nothing")
+            }
+        }
+        if shouldProcessReceipt {
+            processReceipt()
+        }
+    }
+}
+
+// validate receipt
+extension IAPHelper {
     func processReceipt() {
         if let receiptURL = Bundle.main.appStoreReceiptURL,
             FileManager.default.fileExists(atPath: receiptURL.path) {
@@ -50,7 +115,7 @@ class IAPHelper: NSObject {
             expirationDateFromProd(completion: { (date, sandbox, error) in
                 if error != nil {
                     //self.completionBlock?(false, "The purchase failed.", error)
-                    print("purchase fail \(error)")
+                    print("purchase fail \(String(describing: error))")
                 } else if let date = date, Date().compare(date) == .orderedAscending {
                     //self.completionBlock?(true, self.productIdentifier, nil)
                     print("purchase success with dat = \(date) \(sandbox)")
@@ -65,7 +130,7 @@ class IAPHelper: NSObject {
 
     func expirationDateFromProd(completion: @escaping (Date?, Bool, Error?) -> Void) {
         if let requestURL = URL(string: RequestURL.production.rawValue) {
-            expirationDate(requestURL) { (expiration, status, error) in
+            getExpirationDate(requestURL).then { (expiration, status, error) in
                 if status == 21007 {
                     self.expirationDateFromSandbox(completion: completion)
                 } else {
@@ -77,145 +142,51 @@ class IAPHelper: NSObject {
 
     func expirationDateFromSandbox(completion: @escaping (Date?, Bool, Error?) -> Void) {
         if let requestURL = URL(string: RequestURL.sandbox.rawValue) {
-            expirationDate(requestURL) { (expiration, status, error) in
+            getExpirationDate(requestURL).then { (expiration, status, error) in
                 completion(expiration, true, error)
             }
         }
     }
 
-    func getExpirationDate(_ kanjiString: String) -> Promise<Date?> {
-        let promise = Promise<Date?>.pending()
-        let receiptURL = Bundle.main.appStoreReceiptURL!
-        do {
-        let receiptData : Data = try Data(contentsOf:receiptURL)
-        let parameters: Parameters =  ["receipt-data": receiptData.base64EncodedString(),
-                                       "password" : sharedSecret]
-
-        Alamofire.request(
-            receiptURL,
-            method: .post,
-            parameters: parameters
-            ).responseJSON { response in
-                switch response.result {
-                case .success:
-                    guard let date = response.result.value as? Date else {
-                        print("parse date response error")
-                        promise.fulfill(nil)
-                        return
-                    }
-                    promise.fulfill(date)
-
-                case .failure:
-                    promise.fulfill(nil)
-                }
+    func getExpirationDate(_ requestURL: URL) -> Promise<(Date?, Int?, Error?)> {
+        let promise = Promise<(Date?, Int?, Error?)>.pending()
+        guard let receiptURL = Bundle.main.appStoreReceiptURL, FileManager.default.fileExists(atPath: receiptURL.path) else {
+            NSLog("No receipt available to submit")
+            promise.fulfill((nil, nil, GetExpirationError.noReceiptToSumit))
+            return promise
         }
+
+        do {
+            let receipt: Data = try Data(contentsOf: receiptURL)
+            let parameters: Parameters =  [
+                "receipt-data": receipt.base64EncodedString(),
+                "password": sharedSecret
+            ]
+            Alamofire.request(
+                requestURL,
+                method: .post,
+                parameters: parameters,
+                encoding: JSONEncoding.default
+                ).responseJSON { response in
+                    switch response.result {
+                    case .success:
+                        if let value = response.result.value as? NSDictionary {
+                            let status = value["status"] as? Int
+                            print(status, value["receipt"])
+                            promise.fulfill((nil, status, nil))
+                        } else {
+                            print("Receiving receipt from App Store failed: \(response.result)")
+                            promise.fulfill((nil, nil, nil))
+                        }
+                    case .failure:
+                        promise.fulfill((nil, nil, GetExpirationError.networkError))
+                    }
+            }
         } catch {
             print("Error occurs in getExpirationDate")
-            promise.fulfill(nil)
+            promise.fulfill((nil, nil, GetExpirationError.otherError))
             return promise
         }
         return promise
-    }
-
-
-    func expirationDate(_ requestURL: URL, completion: @escaping (Date?, Int?, Error?) -> Void) {
-        guard let receiptURL = Bundle.main.appStoreReceiptURL, FileManager.default.fileExists(atPath: receiptURL.path) else {
-            NSLog("No receipt available to submit")
-            completion(nil, nil, nil)
-            return;
-        }
-
-        do {
-            let request = try receiptValidationRequest(for: requestURL)
-
-            URLSession.shared.dataTask(with: request) { (data, response, error) in
-                var code : Int = -1
-                var date : Date?
-
-                if error != nil {
-                    if let httpR = response as? HTTPURLResponse {
-                        code = httpR.statusCode
-                    }
-                } else if let data = data {
-                    (code, date) = self.extractValues(from: data)
-                } else {
-                    NSLog("No response!")
-                }
-                completion(date, code, error)
-                }.resume()
-        } catch let error {
-            completion(nil, -1, error)
-        }
-    }
-
-    func receiptValidationRequest(for requestURL: URL) throws -> URLRequest {
-        let receiptURL = Bundle.main.appStoreReceiptURL!
-        let receiptData : Data = try Data(contentsOf:receiptURL)
-        let payload = ["receipt-data": receiptData.base64EncodedString().toJSON(),
-                       "password" : sharedSecret.toJSON()]
-        let serializedPayload = try JSON.dictionary(payload).serialize()
-
-        var request = URLRequest(url: requestURL)
-        request.httpMethod = "POST"
-        request.httpBody = serializedPayload
-
-        return request
-    }
-
-    func extractValues(from data: Data) -> (Int, Date?) {
-        var date : Date?
-        var statusCode : Int = -1
-
-        do {
-            let jsonData = try JSON(data: data)
-            statusCode = try jsonData.getInt(at: "status")
-
-            let receiptInfo = try jsonData.getArray(at: "latest_receipt_info")
-            if let lastReceipt = receiptInfo.last {
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy-MM-dd HH:mm:ss VV"
-                date = formatter.date(from: try lastReceipt.getString(at: "expires_date"))
-            }
-        } catch {
-        }
-
-        return (statusCode, date)
-    }
-}
-
-extension IAPHelper: SKProductsRequestDelegate {
-    public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        print("Start to list products:")
-        for p in response.products {
-            print("Found product: \(p.productIdentifier) \(p.isDownloadable) \(p.localizedTitle) \(p.price.floatValue) \(p.priceLocale)")
-        }
-    }
-
-    public func request(_ request: SKRequest, didFailWithError error: Error) {
-        print("Error: \(error.localizedDescription)")
-    }
-}
-
-extension IAPHelper: SKPaymentTransactionObserver {
-
-    public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        var shouldProcessReceipt = false
-        for transaction in transactions {
-            switch (transaction.transactionState) {
-            case .purchased:
-                shouldProcessReceipt = true
-                SKPaymentQueue.default().finishTransaction(transaction)
-            case .failed:
-                SKPaymentQueue.default().finishTransaction(transaction)
-            case .restored:
-                shouldProcessReceipt = true
-                SKPaymentQueue.default().finishTransaction(transaction)
-            default:
-                NSLog("do nothing")
-            }
-        }
-        if(shouldProcessReceipt) {
-            processReceipt()
-        }
     }
 }
