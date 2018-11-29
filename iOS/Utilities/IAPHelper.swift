@@ -74,8 +74,9 @@ extension IAPHelper: SKProductsRequestDelegate {
     }
 
     public func requestDidFinish(_ request: SKRequest) {
-        if let r = request as? SKReceiptRefreshRequest {
+        if let _ = request as? SKReceiptRefreshRequest {
             print("refresh request finished")
+            processReceipt()
         }
     }
 }
@@ -170,9 +171,19 @@ extension IAPHelper {
                 ).responseJSON { response in
                     switch response.result {
                     case .success:
-                        if let value = response.result.value as? NSDictionary {
-                            let status = value["status"] as? Int
-                            print(status, value["receipt"])
+                        if let value = response.result.value as? [String: Any] {
+                            let status = value["status"] as? Int ?? -1
+                            if status != 0 {
+                                print(status, value)
+                            } else {
+                                let receipt = value["receipt"] as! [String: Any]
+                                let originalAppVerison = receipt["original_application_version"] ?? "0.0"
+                                let inApp = (receipt["in_app"] as? [[String: Any]]) ?? []
+                                let keyInfoInApp = inApp.map { dict -> (String, Int) in
+                                    return (dict["product_id"] as? String ?? "unknown", Int(dict["purchase_date_ms"] as? String ?? "") ?? 0)
+                                }
+                                debugPrint(status, originalAppVerison, keyInfoInApp)
+                            }
                             promise.fulfill((nil, status, nil))
                         } else {
                             print("Receiving receipt from App Store failed: \(response.result)")
@@ -190,3 +201,70 @@ extension IAPHelper {
         return promise
     }
 }
+
+/*
+ KEY INFOS from Example Receipt from sandbox
+ {
+     "in_app" =     (
+         {
+         "original_purchase_date_ms" = 1543388813000;
+         "product_id" = unlimitedOneMonth;
+         },
+         {
+         "original_purchase_date_ms" = 1543388982000;
+         "product_id" = unlimitedOneMonth;
+         }
+     );
+     "original_application_version" = "1.0";
+ }
+
+ Full Example Receipt from sandbox
+ {
+     "adam_id" = 0;
+     "app_item_id" = 0;
+     "application_version" = 1;
+     "bundle_id" = "idv.wcl.imahanashitai";
+     "download_id" = 0;
+     "in_app" =     (
+         {
+         "is_trial_period" = false;
+         "original_purchase_date" = "2018-11-28 07:06:53 Etc/GMT";
+         "original_purchase_date_ms" = 1543388813000;
+         "original_purchase_date_pst" = "2018-11-27 23:06:53 America/Los_Angeles";
+         "original_transaction_id" = 1000000479095355;
+         "product_id" = unlimitedOneMonth;
+         "purchase_date" = "2018-11-28 07:06:53 Etc/GMT";
+         "purchase_date_ms" = 1543388813000;
+         "purchase_date_pst" = "2018-11-27 23:06:53 America/Los_Angeles";
+         quantity = 1;
+         "transaction_id" = 1000000479095355;
+         },
+         {
+         "is_trial_period" = false;
+         "original_purchase_date" = "2018-11-28 07:09:42 Etc/GMT";
+         "original_purchase_date_ms" = 1543388982000;
+
+         "original_purchase_date_pst" = "2018-11-27 23:09:42 America/Los_Angeles";
+         "original_transaction_id" = 1000000479096895;
+         "product_id" = unlimitedOneMonth;
+         "purchase_date" = "2018-11-28 07:09:42 Etc/GMT";
+         "purchase_date_ms" = 1543388982000;
+         "purchase_date_pst" = "2018-11-27 23:09:42 America/Los_Angeles";
+         quantity = 1;
+         "transaction_id" = 1000000479096895;
+         }
+      );
+     "original_application_version" = "1.0";
+     "original_purchase_date" = "2013-08-01 07:00:00 Etc/GMT";
+     "original_purchase_date_ms" = 1375340400000;
+     "original_purchase_date_pst" = "2013-08-01 00:00:00 America/Los_Angeles";
+     "receipt_creation_date" = "2018-11-28 12:45:16 Etc/GMT";
+     "receipt_creation_date_ms" = 1543409116000;
+     "receipt_creation_date_pst" = "2018-11-28 04:45:16 America/Los_Angeles";
+     "receipt_type" = ProductionSandbox;
+     "request_date" = "2018-11-29 03:30:34 Etc/GMT";
+     "request_date_ms" = 1543462234332;
+     "request_date_pst" = "2018-11-28 19:30:34 America/Los_Angeles";
+     "version_external_identifier" = 0;
+ }
+*/
