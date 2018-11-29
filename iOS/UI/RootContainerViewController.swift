@@ -41,6 +41,7 @@ class RootContainerViewController: UIViewController {
         loadGameHistory()
         loadGameSetting()
         loadGameMiscData()
+        loadGameExpirationDate()
 
         Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
             if gameLang == .unset {

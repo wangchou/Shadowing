@@ -10,15 +10,25 @@ import StoreKit
 import Alamofire
 import Promises
 
+enum IAPProduct: String {
+    case unlimitedForever
+    case unlimitedOneMonth
+    case unlimitedThreeMonths
+}
+
 let productIds: Set<String> = [
-    "unlimitedForever",
-    "unlimitedOneMonth",
-    "unlimitedThreeMonths"
+    IAPProduct.unlimitedForever.rawValue,
+    IAPProduct.unlimitedOneMonth.rawValue,
+    IAPProduct.unlimitedThreeMonths.rawValue
 ]
 
 enum RequestURL: String {
     case production = "https://buy.itunes.apple.com/verifyReceipt"
     case sandbox = "https://sandbox.itunes.apple.com/verifyReceipt"
+
+    var url: URL {
+        return URL(string: self.rawValue)!
+    }
 }
 
 enum GetExpirationError: Error {
@@ -72,9 +82,11 @@ extension IAPHelper: SKProductsRequestDelegate {
     public func request(_ request: SKRequest, didFailWithError error: Error) {
         print("Error: \(error.localizedDescription)")
     }
+}
 
+extension IAPHelper: SKRequestDelegate {
     public func requestDidFinish(_ request: SKRequest) {
-        if let _ = request as? SKReceiptRefreshRequest {
+        if request is SKReceiptRefreshRequest {
             print("refresh request finished")
             processReceipt()
         }
@@ -83,26 +95,28 @@ extension IAPHelper: SKProductsRequestDelegate {
 
 extension IAPHelper: SKPaymentTransactionObserver {
     public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        var shouldProcessReceipt = false
         for transaction in transactions {
             switch transaction.transactionState {
             case .purchased:
-                print("purchased")
-                shouldProcessReceipt = true
+                print("=== Purchased Transation ===")
+                updateExpirationDateByProduct(
+                    productId: transaction.payment.productIdentifier,
+                    purchaseDateInMS: transaction.transactionDate?.millisecondsSince1970 ?? Date().millisecondsSince1970)
                 SKPaymentQueue.default().finishTransaction(transaction)
             case .failed:
                 print("purchase failed", transaction.error as Any)
                 SKPaymentQueue.default().finishTransaction(transaction)
             case .restored:
-                print("purchase restored")
-                shouldProcessReceipt = true
+                print("=== Restore Transation ===")
+
+                // https://stackoverflow.com/questions/14328374/skpaymenttransaction-what-is-transactiondate-exactly
+                updateExpirationDateByProduct(
+                    productId: transaction.payment.productIdentifier,
+                    purchaseDateInMS: transaction.original?.transactionDate?.millisecondsSince1970 ?? Date().millisecondsSince1970)
                 SKPaymentQueue.default().finishTransaction(transaction)
             default:
                 NSLog("do nothing")
             }
-        }
-        if shouldProcessReceipt {
-            processReceipt()
         }
     }
 }
@@ -112,16 +126,7 @@ extension IAPHelper {
     func processReceipt() {
         if let receiptURL = Bundle.main.appStoreReceiptURL,
             FileManager.default.fileExists(atPath: receiptURL.path) {
-
-            expirationDateFromProd(completion: { (date, sandbox, error) in
-                if error != nil {
-                    //self.completionBlock?(false, "The purchase failed.", error)
-                    print("purchase fail \(String(describing: error))")
-                } else if let date = date, Date().compare(date) == .orderedAscending {
-                    //self.completionBlock?(true, self.productIdentifier, nil)
-                    print("purchase success with dat = \(date) \(sandbox)")
-                }
-            })
+            validateReceiptBySendingTo(RequestURL.production.url)
         } else {
             let request = SKReceiptRefreshRequest(receiptProperties: nil)
             request.delegate = self
@@ -129,32 +134,11 @@ extension IAPHelper {
         }
     }
 
-    func expirationDateFromProd(completion: @escaping (Date?, Bool, Error?) -> Void) {
-        if let requestURL = URL(string: RequestURL.production.rawValue) {
-            getExpirationDate(requestURL).then { (expiration, status, error) in
-                if status == 21007 {
-                    self.expirationDateFromSandbox(completion: completion)
-                } else {
-                    completion(expiration, false, error)
-                }
-            }
-        }
-    }
-
-    func expirationDateFromSandbox(completion: @escaping (Date?, Bool, Error?) -> Void) {
-        if let requestURL = URL(string: RequestURL.sandbox.rawValue) {
-            getExpirationDate(requestURL).then { (expiration, status, error) in
-                completion(expiration, true, error)
-            }
-        }
-    }
-
-    func getExpirationDate(_ requestURL: URL) -> Promise<(Date?, Int?, Error?)> {
-        let promise = Promise<(Date?, Int?, Error?)>.pending()
-        guard let receiptURL = Bundle.main.appStoreReceiptURL, FileManager.default.fileExists(atPath: receiptURL.path) else {
+    func validateReceiptBySendingTo(_ requestURL: URL) {
+        guard let receiptURL = Bundle.main.appStoreReceiptURL,
+            FileManager.default.fileExists(atPath: receiptURL.path) else {
             NSLog("No receipt available to submit")
-            promise.fulfill((nil, nil, GetExpirationError.noReceiptToSumit))
-            return promise
+            return
         }
 
         do {
@@ -173,32 +157,51 @@ extension IAPHelper {
                     case .success:
                         if let value = response.result.value as? [String: Any] {
                             let status = value["status"] as? Int ?? -1
-                            if status != 0 {
-                                print(status, value)
-                            } else {
+                            switch status {
+                            case 0:
                                 let receipt = value["receipt"] as! [String: Any]
-                                let originalAppVerison = receipt["original_application_version"] ?? "0.0"
-                                let inApp = (receipt["in_app"] as? [[String: Any]]) ?? []
-                                let keyInfoInApp = inApp.map { dict -> (String, Int) in
-                                    return (dict["product_id"] as? String ?? "unknown", Int(dict["purchase_date_ms"] as? String ?? "") ?? 0)
-                                }
-                                debugPrint(status, originalAppVerison, keyInfoInApp)
+                                self.updateExpirationDateByReceipt(receipt)
+
+                            case 21007:  // special code for sandbox from Apple
+                                self.validateReceiptBySendingTo(RequestURL.sandbox.url)
+
+                            default:
+                                print("something wrong with error code:", status)
                             }
-                            promise.fulfill((nil, status, nil))
                         } else {
                             print("Receiving receipt from App Store failed: \(response.result)")
-                            promise.fulfill((nil, nil, nil))
+
                         }
                     case .failure:
-                        promise.fulfill((nil, nil, GetExpirationError.networkError))
+                        print("Network Error")
                     }
             }
         } catch {
             print("Error occurs in getExpirationDate")
-            promise.fulfill((nil, nil, GetExpirationError.otherError))
-            return promise
         }
-        return promise
+    }
+
+    private func updateExpirationDateByReceipt(_ receipt: [String: Any]) {
+        let receiptType = receipt["receipt_type"] as? String ?? ""
+        let isSandbox = receiptType.range(of: "andbox") != nil //sandbox
+        let originalAppVerison = receipt["original_application_version"] as? String ?? "0.0"
+        let inApp = (receipt["in_app"] as? [[String: Any]]) ?? []
+        let keyInfoInApp = inApp.map { dict -> (String, Int64) in
+            return (
+                dict["product_id"] as? String ?? "unknown",
+                Int64(dict["purchase_date_ms"] as? String ?? "") ?? 0
+            )
+        }
+        debugPrint(originalAppVerison, keyInfoInApp)
+        if !isSandbox {
+            updateExpirationDateByOriginalAppVersion(appVersion: originalAppVerison)
+        }
+        print("=== Receipt Validation ===")
+
+        keyInfoInApp.forEach {(arg) in
+            let (productId, dateInMS) = arg
+            updateExpirationDateByProduct(productId: productId, purchaseDateInMS: dateInMS)
+        }
     }
 }
 
