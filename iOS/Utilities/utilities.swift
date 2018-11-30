@@ -420,6 +420,30 @@ func getTodaySentenceCount() -> Int {
     return sentenceCount
 }
 
+func getAllLanguageTodaySentenceCount() -> (said: Int, correct: Int) {
+
+    let todayKey = getDateKey(date: Date())
+    var saidSentenceCount: Int = 0
+    var correctSentenceCount: Int = 0
+    for r in getAllGameHistory() {
+        if todayKey == getDateKey(date: r.startedTime) {
+            saidSentenceCount += r.sentencesCount
+            correctSentenceCount += r.correctCount
+        }
+    }
+    return (saidSentenceCount, correctSentenceCount)
+}
+
+func isUnderDailySentenceLimit() -> Bool {
+    if Date() < gameExpirationDate { return true }
+    let (said, correct) = getAllLanguageTodaySentenceCount()
+    print(said, correct, said)
+    if said < dailyFreeLimit { return true }
+
+    IAPHelper.shared.showPurchaseView(saidSentenceCount: said, correctSentenceCount: correct)
+    return false
+}
+
 extension Date {
     var ms: Int64 {
         return Int64((self.timeIntervalSince1970 * 1000.0).rounded())

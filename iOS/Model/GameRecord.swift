@@ -25,6 +25,16 @@ func loadGameHistory() {
     }
 }
 
+func getAllGameHistory() -> [GameRecord] {
+    var records: [GameRecord] = []
+    [Lang.en, Lang.jp].forEach { lang in
+        if let loadedRecords = loadFromUserDefault(type: [GameRecord].self, key: gameHistoryKey + lang.key) {
+            records.append(contentsOf: loadedRecords)
+        }
+    }
+    return records
+}
+
 func isBetter(_ record: GameRecord, to bestRecord: GameRecord) -> Bool {
     return record.p > bestRecord.p || record.rank == .ss
 }

@@ -64,6 +64,11 @@ class IAPHelper: NSObject {
     func restorePurchases() {
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
+
+    func showPurchaseView(saidSentenceCount: Int, correctSentenceCount: Int) {
+        print("show purchase view", saidSentenceCount, correctSentenceCount)
+        // TODO
+    }
 }
 
 // MARK: - SKProductsRequestDelegate

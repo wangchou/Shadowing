@@ -111,7 +111,9 @@ class GameContentDetailPage: UIViewController {
     }
 
     private func launchGame() {
-        launchStoryboard(self, "MessengerGame")
+        if isUnderDailySentenceLimit() {
+            launchStoryboard(self, "MessengerGame")
+        }
     }
 }
 

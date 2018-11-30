@@ -184,7 +184,9 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
             guard !GameContentDetailPage.isChallengeButtonDisabled else { return }
             if let vc = UIApplication.getPresentedViewController() {
                 context.infiniteChallengeLevel = self.level
-                launchStoryboard(vc, "MessengerGame")
+                if isUnderDailySentenceLimit() {
+                    launchStoryboard(vc, "MessengerGame")
+                }
             }
         }
 
