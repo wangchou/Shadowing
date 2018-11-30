@@ -8,22 +8,27 @@
 import Foundation
 private let gameExpirationDateKey = "gameExpirationDateKey"
 
-private struct DateForEncode: Codable {
+private struct ExpirationDateForEncode: Codable {
     var date: Date
+    var isEverReceiptProcessed: Bool
 }
 
 var gameExpirationDate: Date = Date()
+var isEverReceiptProcessed: Bool = false
 func saveGameExpirationDate() {
-    let date: DateForEncode = DateForEncode(date: gameExpirationDate)
+    let date: ExpirationDateForEncode = ExpirationDateForEncode(date: gameExpirationDate,
+                                                                isEverReceiptProcessed: isEverReceiptProcessed)
     saveToUserDefault(object: date, key: gameExpirationDateKey)
 }
 
 func loadGameExpirationDate() {
-    if let loadedDate = loadFromUserDefault(type: DateForEncode.self, key: gameExpirationDateKey) {
-        gameExpirationDate = loadedDate.date
+    if let loaded = loadFromUserDefault(type: ExpirationDateForEncode.self, key: gameExpirationDateKey) {
+        gameExpirationDate = loaded.date
+        isEverReceiptProcessed = loaded.isEverReceiptProcessed
     } else {
-        print("[\(gameLang)] create new gameExpirationDate")
+        print("create new gameExpirationDate")
         gameExpirationDate = Date()
+        isEverReceiptProcessed = false
     }
 }
 
@@ -35,7 +40,7 @@ private let threeMonthsInMS: Int64 = 3 * 31 * 86400 * 1000
 // previous paided version
 private let unlimitedVersions = ["1.0", "1.0.0", "1.0.1", "1.0.2", "1.0.3", "1.0.4", "1.1", "1.1.0"]
 
-func updateExpirationDateByProduct(productId: String, purchaseDateInMS: Int64) {
+func updateExpirationDate(productId: String, purchaseDateInMS: Int64) {
     var newExpirationDateInMS: Int64 = purchaseDateInMS
     switch productId {
     case IAPProduct.unlimitedForever.rawValue:
@@ -45,9 +50,10 @@ func updateExpirationDateByProduct(productId: String, purchaseDateInMS: Int64) {
     case IAPProduct.unlimitedThreeMonths.rawValue:
         newExpirationDateInMS += threeMonthsInMS // three months
     default:
-        ()
+        print("Unknown product: \(productId)")
+        return
     }
-    let newExpirationDate = Date(milliseconds: newExpirationDateInMS)
+    let newExpirationDate = Date(ms: newExpirationDateInMS)
 
     if newExpirationDate > gameExpirationDate {
         print("old:", gameExpirationDate, ",\n new:", newExpirationDate)
@@ -58,11 +64,11 @@ func updateExpirationDateByProduct(productId: String, purchaseDateInMS: Int64) {
     }
 }
 
-func updateExpirationDateByOriginalAppVersion(appVersion: String) {
+func updateExpirationDate(appVersion: String) {
     var newExpirationDate = Date()
 
     if unlimitedVersions.contains(appVersion) {
-        newExpirationDate = Date(milliseconds: newExpirationDate.millisecondsSince1970 + oneHundredYearsInMS)
+        newExpirationDate = Date(ms: newExpirationDate.ms + oneHundredYearsInMS)
     }
 
     if newExpirationDate > gameExpirationDate {

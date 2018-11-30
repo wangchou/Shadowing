@@ -20,10 +20,6 @@ class RootContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //IAPHelper.shared.startListening()
-        //IAPHelper.shared.requsestProducts()
-        IAPHelper.shared.processReceipt()
-
         splashScreen = UIStoryboard(name: "Main", bundle: nil)
             .instantiateViewController(withIdentifier: "LaunchScreen")
 
@@ -41,7 +37,6 @@ class RootContainerViewController: UIViewController {
         loadGameHistory()
         loadGameSetting()
         loadGameMiscData()
-        loadGameExpirationDate()
 
         Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
             if gameLang == .unset {

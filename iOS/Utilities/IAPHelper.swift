@@ -42,7 +42,7 @@ class IAPHelper: NSObject {
     static let shared = IAPHelper()
     var products: [SKProduct] = []
 
-    public func startListening() {
+    func startListening() {
         SKPaymentQueue.default().add(self)
     }
 
@@ -53,9 +53,7 @@ class IAPHelper: NSObject {
     }
 
     func buy(_ product: SKProduct) {
-        print("Buying \(product.productIdentifier)...")
         if SKPaymentQueue.canMakePayments() {
-            print("can make payments")
             let payment = SKPayment(product: product)
             SKPaymentQueue.default().add(payment)
         } else {
@@ -66,75 +64,83 @@ class IAPHelper: NSObject {
     func restorePurchases() {
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
-
 }
 
+// MARK: - SKProductsRequestDelegate
 extension IAPHelper: SKProductsRequestDelegate {
-    public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        print("Start to list products:")
-        for p in response.products {
-            print("Found product: \(p.productIdentifier) \(p.isDownloadable) \(p.localizedTitle) \(p.price.floatValue) \(p.priceLocale)")
-            products = response.products
-        }
-        buy(products[1])
+    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        products = response.products
     }
 
-    public func request(_ request: SKRequest, didFailWithError error: Error) {
+    func request(_ request: SKRequest, didFailWithError error: Error) {
         print("Error: \(error.localizedDescription)")
     }
-}
 
-extension IAPHelper: SKRequestDelegate {
-    public func requestDidFinish(_ request: SKRequest) {
+    func requestDidFinish(_ request: SKRequest) {
         if request is SKReceiptRefreshRequest {
-            print("refresh request finished")
             processReceipt()
         }
     }
 }
 
+// MARK: - SKPaymentTransactionObserver
 extension IAPHelper: SKPaymentTransactionObserver {
-    public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        var shouldProcessReceipt = false
         for transaction in transactions {
             switch transaction.transactionState {
             case .purchased:
-                print("=== Purchased Transation ===")
-                updateExpirationDateByProduct(
+                print("=== Purchased Transaction ===")
+                shouldProcessReceipt = true
+                updateExpirationDate(
                     productId: transaction.payment.productIdentifier,
-                    purchaseDateInMS: transaction.transactionDate?.millisecondsSince1970 ?? Date().millisecondsSince1970)
+                    purchaseDateInMS: transaction.transactionDate?.ms ?? Date().ms)
                 SKPaymentQueue.default().finishTransaction(transaction)
+
             case .failed:
                 print("purchase failed", transaction.error as Any)
                 SKPaymentQueue.default().finishTransaction(transaction)
-            case .restored:
-                print("=== Restore Transation ===")
 
-                // https://stackoverflow.com/questions/14328374/skpaymenttransaction-what-is-transactiondate-exactly
-                updateExpirationDateByProduct(
+            case .restored:
+                print("=== Restore Transaction ===")
+                shouldProcessReceipt = true
+                updateExpirationDate(
                     productId: transaction.payment.productIdentifier,
-                    purchaseDateInMS: transaction.original?.transactionDate?.millisecondsSince1970 ?? Date().millisecondsSince1970)
+                    purchaseDateInMS: transaction.original?.transactionDate?.ms ?? Date().ms)
                 SKPaymentQueue.default().finishTransaction(transaction)
+
             default:
                 NSLog("do nothing")
             }
         }
+
+        if shouldProcessReceipt {
+            processReceipt()
+        }
     }
 }
 
-// validate receipt
+// MARK: - validate receipt
 extension IAPHelper {
+    // https://stackoverflow.com/questions/43146453/ios-receipt-not-found
+    // There is no receipt on debug mode / testflight / sandbox mode
+    // until make first IAP purchase or SKReceiptRefreshRequest
+
     func processReceipt() {
         if let receiptURL = Bundle.main.appStoreReceiptURL,
             FileManager.default.fileExists(atPath: receiptURL.path) {
             validateReceiptBySendingTo(RequestURL.production.url)
-        } else {
-            let request = SKReceiptRefreshRequest(receiptProperties: nil)
-            request.delegate = self
-            request.start()
         }
     }
 
-    func validateReceiptBySendingTo(_ requestURL: URL) {
+    // make SKReceiptRefreshRequest will popup an Apple Id login box
+    func refreshReceipt() {
+        let request = SKReceiptRefreshRequest(receiptProperties: nil)
+        request.delegate = self
+        request.start()
+    }
+
+    private func validateReceiptBySendingTo(_ requestURL: URL) {
         guard let receiptURL = Bundle.main.appStoreReceiptURL,
             FileManager.default.fileExists(atPath: receiptURL.path) else {
             NSLog("No receipt available to submit")
@@ -159,8 +165,9 @@ extension IAPHelper {
                             let status = value["status"] as? Int ?? -1
                             switch status {
                             case 0:
-                                let receipt = value["receipt"] as! [String: Any]
-                                self.updateExpirationDateByReceipt(receipt)
+                                if let receipt = value["receipt"] as? [String: Any] {
+                                    self.updateExpirationDateByReceipt(receipt)
+                                }
 
                             case 21007:  // special code for sandbox from Apple
                                 self.validateReceiptBySendingTo(RequestURL.sandbox.url)
@@ -182,11 +189,14 @@ extension IAPHelper {
     }
 
     private func updateExpirationDateByReceipt(_ receipt: [String: Any]) {
+        gameExpirationDate = Date()
         let receiptType = receipt["receipt_type"] as? String ?? ""
         let isSandbox = receiptType.range(of: "andbox") != nil //sandbox
         let originalAppVerison = receipt["original_application_version"] as? String ?? "0.0"
+
         let inApp = (receipt["in_app"] as? [[String: Any]]) ?? []
         let keyInfoInApp = inApp.map { dict -> (String, Int64) in
+            guard dict["cancellation_date"] == nil else { return ("cancelled", 0)}
             return (
                 dict["product_id"] as? String ?? "unknown",
                 Int64(dict["purchase_date_ms"] as? String ?? "") ?? 0
@@ -194,14 +204,17 @@ extension IAPHelper {
         }
         debugPrint(originalAppVerison, keyInfoInApp)
         if !isSandbox {
-            updateExpirationDateByOriginalAppVersion(appVersion: originalAppVerison)
+            updateExpirationDate(appVersion: originalAppVerison)
         }
         print("=== Receipt Validation ===")
 
         keyInfoInApp.forEach {(arg) in
             let (productId, dateInMS) = arg
-            updateExpirationDateByProduct(productId: productId, purchaseDateInMS: dateInMS)
+            updateExpirationDate(productId: productId, purchaseDateInMS: dateInMS)
         }
+
+        isEverReceiptProcessed = true
+        saveGameExpirationDate()
     }
 }
 
