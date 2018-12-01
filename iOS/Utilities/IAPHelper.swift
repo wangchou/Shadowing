@@ -45,6 +45,7 @@ class IAPHelper: NSObject {
     static let shared = IAPHelper()
     var products: [SKProduct] = []
     var timer: Timer?
+    var processingAlertView: UIAlertController?
     func startListening() {
         SKPaymentQueue.default().add(self)
     }
@@ -60,7 +61,7 @@ class IAPHelper: NSObject {
             let payment = SKPayment(product: product)
             SKPaymentQueue.default().add(payment)
         } else {
-            print("X cannot make payments")
+            showOkAlert(title: i18n.cannotMakePayment)
         }
     }
 
@@ -70,8 +71,10 @@ class IAPHelper: NSObject {
 
     func showPurchaseView(saidSentenceCount: Int, correctSentenceCount: Int) {
         let actionSheet = UIAlertController(
-            title: "[免費版] 每日\(dailyFreeLimit)句挑戰限制",
-            message: "今天已挑戰：\(saidSentenceCount)句。唸對(80分以上)：\(correctSentenceCount)句。\n請購買付費版以繼續挑戰。",
+            title: i18n.purchaseViewTitle,
+            message: i18n.purchaseViewMessage(
+                said: saidSentenceCount,
+                correct: correctSentenceCount),
             preferredStyle: .actionSheet)
 
         // Create the actions
@@ -96,13 +99,13 @@ class IAPHelper: NSObject {
             actionSheet.addAction(buyAction)
         }
         if !isEverReceiptProcessed {
-            let restoreAction = UIAlertAction(title: "恢復過去購買紀錄", style: .destructive) { _ in
+            let restoreAction = UIAlertAction(title: i18n.restorePreviousPurchase, style: .destructive) { _ in
                 actionSheet.dismiss(animated: true, completion: nil)
                 self.refreshReceipt()
             }
             actionSheet.addAction(restoreAction)
         }
-        let cancelAction = UIAlertAction(title: "明天再挑戰", style: .destructive) { _ in
+        let cancelAction = UIAlertAction(title: i18n.challengeItTomorrow, style: .destructive) { _ in
             actionSheet.dismiss(animated: true, completion: nil)
         }
 
@@ -120,7 +123,10 @@ extension IAPHelper: SKProductsRequestDelegate {
     }
 
     func request(_ request: SKRequest, didFailWithError error: Error) {
-        print("Error: \(error.localizedDescription)")
+        if request is SKReceiptRefreshRequest {
+            processingAlertView?.dismiss(animated: false) { self.processingAlertView = nil }
+            showOkAlert(title: error.localizedDescription)
+        }
     }
 
     func requestDidFinish(_ request: SKRequest) {
@@ -130,15 +136,10 @@ extension IAPHelper: SKProductsRequestDelegate {
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                 if isEverReceiptProcessed {
                     self.timer?.invalidate()
-                    let alert = UIAlertController(
-                        title: "已恢復購買項目",
-                        message: "列表",
-                        preferredStyle: .alert)
-                    let okAction = UIAlertAction(title: "我知道了", style: .default) { _ in
-                        alert.dismiss(animated: true, completion: nil)
+                    self.processingAlertView?.dismiss(animated: false) {
+                        self.processingAlertView = nil
+                        showOkAlert(title: i18n.previousPurchaseRestored)
                     }
-                    alert.addAction(okAction)
-                    UIApplication.getPresentedViewController()?.present(alert, animated: true)
                 }
             }
         }
@@ -160,6 +161,8 @@ extension IAPHelper: SKPaymentTransactionObserver {
                 SKPaymentQueue.default().finishTransaction(transaction)
 
             case .failed:
+                processingAlertView?.dismiss(animated: false) { self.processingAlertView = nil }
+                showOkAlert(title: transaction.error?.localizedDescription)
                 print("purchase failed", transaction.error as Any)
                 SKPaymentQueue.default().finishTransaction(transaction)
 
@@ -171,12 +174,17 @@ extension IAPHelper: SKPaymentTransactionObserver {
                     purchaseDateInMS: transaction.original?.transactionDate?.ms ?? Date().ms)
                 SKPaymentQueue.default().finishTransaction(transaction)
 
+            case .purchasing:
+                processingAlertView = showProcessingAlert()
+
             default:
                 NSLog("do nothing")
             }
         }
 
         if shouldProcessReceipt {
+            processingAlertView?.dismiss(animated: false) { self.processingAlertView = nil }
+            showOkAlert(title: i18n.previousPurchaseRestored)
             processReceipt()
         }
     }
@@ -200,6 +208,7 @@ extension IAPHelper {
         let request = SKReceiptRefreshRequest(receiptProperties: nil)
         request.delegate = self
         request.start()
+        processingAlertView = showProcessingAlert()
     }
 
     private func validateReceiptBySendingTo(_ requestURL: URL) {

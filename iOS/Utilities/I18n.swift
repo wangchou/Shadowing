@@ -396,4 +396,44 @@ class I18n {
         if isZh { return "之後可從設定頁面更改。" }
         return "It could be changed from the settings page later."
     }
+    var restorePreviousPurchase: String {
+        if isJa { return "購入記録を復元する" }
+        if isZh { return "恢復過去購買紀錄" }
+        return "Restore past purchase records"
+    }
+    var challengeItTomorrow: String {
+        if isJa { return "明日挑戦する" }
+        if isZh { return "明天再挑戰"}
+        return "Challenge it tomorrow"
+    }
+    var purchaseViewTitle: String {
+        if isJa { return "[無料版] 毎日\(dailyFreeLimit)文の挑戦制限" }
+        if isZh { return "[免費版] 每日\(dailyFreeLimit)句挑戰限制" }
+        return "[Free version] Daily \(dailyFreeLimit) sentences challenge limit"
+    }
+    func purchaseViewMessage(said: Int, correct: Int) -> String {
+        if isJa { return "今日\(said)文を話しました、その中で\(correct)文が正しいです。(80点以上)\n挑戦を続けるのために有料版を購入してください。" }
+        if isZh { return "今天已挑戰：\(said)句。唸對(80分以上)：\(correct)句。\n請購買付費版以繼續挑戰。" }
+        return "\(said) sentences are challenged today. \(correct) sentences are said correctly.(more than 80 points). Please buy paid version for keep challenging."
+    }
+    var previousPurchaseRestored: String {
+        if isJa { return "購入記録を復元しました" }
+        if isZh { return "已恢復過去購買紀錄" }
+        return "Past purchase records are restored"
+    }
+    var iGotIt: String {
+        if isJa { return "わかりました" }
+        if isZh { return "我知道了" }
+        return "Ok"
+    }
+    var processing: String {
+        if isJa { return "処理しています。" }
+        if isZh { return "處理中" }
+        return "processing"
+    }
+    var cannotMakePayment: String {
+        if isJa { return "iTunes Store や App Store で購入できない (ペアレンタルコントロールを使いますか？)" }
+        if isZh { return "本機器沒有辦法付款 (家長保護控制開啟中?)" }
+        return "This device is not able or allowed to make payments. (Is Parental controls on?)"
+    }
 }
