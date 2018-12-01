@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 
         IAPHelper.shared.startListening()
+        IAPHelper.shared.requsestProducts()
         loadGameExpirationDate()
         if !isEverReceiptProcessed {
             IAPHelper.shared.processReceipt()
