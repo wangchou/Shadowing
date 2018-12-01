@@ -16,10 +16,20 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
     let gridCount = 44
     let axis: GridAxis = .horizontal
     let spacing: CGFloat = 0
-    var animateTimer: Timer?
+
+    // for animate progress bar at viewDidAppear
+    private var animateTimer: Timer?
+    private var progressBar: UIView?
+    private var goalProgressLabel: UILabel?
+    private var startProgress: Float = 0
+    private var endProgress: Float = 0
+    private var fullProgressWidth: CGFloat = 0
+
+    private var showAbilityTargetLabelFunc: (() -> Void)?
 
     func viewWillAppear() {
         backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        showAbilityTargetLabelFunc = nil
         removeAllSubviews()
         renderTopTitle()
         renderMiddleRecord()
@@ -71,9 +81,9 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         let todaySentenceCount = getTodaySentenceCount()
         let dailyGoal = context.gameSetting.dailySentenceGoal
         addText(2, y + 1, 6, "今日の目標", color: myLightText)
-        let goalProgressLabel = addText(31, y + 1, 6, "\(todaySentenceCount - record.correctCount)/\(dailyGoal)", color: myLightText)
-        goalProgressLabel.frame = getFrame(12, y + 1, 30, 6)
-        goalProgressLabel.textAlignment = .right
+        goalProgressLabel = addText(31, y + 1, 6, "\(todaySentenceCount - record.correctCount)/\(dailyGoal)", color: myLightText)
+        goalProgressLabel?.frame = getFrame(12, y + 1, 30, 6)
+        goalProgressLabel?.textAlignment = .right
         let fontSize = getFontSize(h: 6)
         let font = MyFont.bold(ofSize: fontSize)
 
@@ -81,37 +91,57 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         barBox.roundBorder(borderWidth: 1, cornerRadius: 0, color: .lightGray)
 
         // animate progress bar for one second
-        let startProgress = min(1.0, ((todaySentenceCount - record.correctCount).f/dailyGoal.f))
-        let endProgress = min(1.0, (todaySentenceCount.f/dailyGoal.f))
-        let fullProgressWidth = getFrame(0, 0, 40, 4).width
-        let progressBar = addRect(x: 2, y: y + 7, w: 1, h: 4)
+        startProgress = min(1.0, ((todaySentenceCount - record.correctCount).f/dailyGoal.f))
+        endProgress = min(1.0, (todaySentenceCount.f/dailyGoal.f))
+        fullProgressWidth = getFrame(0, 0, 40, 4).width
+        progressBar = addRect(x: 2, y: y + 7, w: 1, h: 4)
+        guard let progressBar = progressBar else { return }
         progressBar.frame.size.width = fullProgressWidth * startProgress.c
         progressBar.roundBorder(borderWidth: 1, cornerRadius: 0, color: .clear)
 
+        let text = "\(todaySentenceCount - record.correctCount)/\(dailyGoal)"
+        goalProgressLabel?.attributedText = getText(text,
+                                                   color: myLightText,
+                                                   strokeWidth: -2,
+                                                   strokeColor: .black, font: font)
+    }
+
+    func animateProgressBar() {
+        guard let record = context.gameRecord,
+              let progressBar = progressBar,
+              let goalProgressLabel = goalProgressLabel else { return }
+
+        let todaySentenceCount = getTodaySentenceCount()
+        let dailyGoal = context.gameSetting.dailySentenceGoal
+        let fontSize = getFontSize(h: 6)
+        let font = MyFont.bold(ofSize: fontSize)
+
         var repeatCount = 0
         let targetRepeatCount = 50
-        let delayCount = 25
-        animateTimer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) { _ in
+        let delayCount = 5
+        let interval: TimeInterval = 0.02
+
+        animateTimer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { _ in
             guard repeatCount >= delayCount else {
                 repeatCount += 1
                 return
             }
             let ratio: Float = 0.02 * (repeatCount.f - delayCount.f)
-            progressBar.frame.size.width = fullProgressWidth * (startProgress * (1 - ratio) + endProgress * ratio).c
+            progressBar.frame.size.width = self.fullProgressWidth * (self.startProgress * (1 - ratio) + self.endProgress * ratio).c
             let text = "\(todaySentenceCount - record.correctCount + (record.correctCount.f * ratio).i)/\(dailyGoal)"
             goalProgressLabel.attributedText = getText(text,
                                                        color: myLightText,
                                                        strokeWidth: -2,
                                                        strokeColor: .black, font: font)
             if repeatCount >= targetRepeatCount + delayCount {
+                self.showAbilityTargetLabelFunc?()
                 self.animateTimer?.invalidate()
-                if startProgress < 1.0 && endProgress == 1.0 {
+                if self.startProgress < 1.0 && self.endProgress == 1.0 {
                     _ = teacherSay(i18n.reachDailyGoal, rate: normalRate)
                 }
             }
             repeatCount += 1
         }
-
     }
 
     private func renderBottomAbilityInfo() {
@@ -133,7 +163,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         addText(16, y-3, 6, "新紀錄", color: myLightText)
 
         let chart = AbilityChart()
-        layout(1, y+3, 27, 27, chart)
+        layout(1, y+2, 26, 25, chart)
         chart.wColor = rgb(150, 150, 150)
         chart.labelColor = .white
         chart.labelFont = MyFont.regular(ofSize: getFontSize(h: 3))
@@ -143,28 +173,30 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         let tagPoints = getTagPoints()
         var yShift = 3
         for idx in 0...abilities.count-1 {
-            let abStr = abilities[idx]
+            let abilityStr = abilities[idx]
             let gameTag = datasetKeyToTags[context.dataSetKey]?[0]
-            let isTargetTag = gameTag == "#\(abStr)"
+            let isTargetTag = gameTag == "#\(abilityStr)"
             let textColor: UIColor = isTargetTag ? myOrange : myLightText
-            let scoreStr = "\(tagPoints["#"+abStr] ?? 0)"
+            let scoreStr = "\(tagPoints["#"+abilityStr] ?? 0)"
             var padStr = ""
             for _ in 0...(3 - scoreStr.count) {
                 padStr += "  "
             }
             if !isTargetTag {
-                addText(30, y + yShift, 3, "\(abStr)： \(padStr)\(scoreStr)", color: textColor)
+                addText(30, y + yShift, 3, "\(abilityStr)： \(padStr)\(scoreStr)", color: textColor)
                 yShift += 3
             } else {
-                let ty = y + yShift
-                let a = abStr
-                let b = padStr
-                let c = scoreStr
-                Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { _ in
-                    self.addText(30, ty, 3, "\(a)： \(b)\(c)", color: myOrange)
-                    self.addText(30, ty + 2, 3, "(+\(context.newRecordIncrease))", color: myOrange)
+                showAbilityTargetLabelFunc = { [weak self] in
+                    let ty = y + yShift
+                    let a = abilityStr
+                    let b = padStr
+                    let c = scoreStr
+                    Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
+                        self?.addText(30, ty, 3, "\(a)： \(b)\(c)", color: myOrange)
+                        self?.addText(30, ty + 2, 3, "(+\(context.newRecordIncrease))", color: myOrange)
+                    }
+                    yShift += 5
                 }
-                yShift += 5
             }
         }
     }

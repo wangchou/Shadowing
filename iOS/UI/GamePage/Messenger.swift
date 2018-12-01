@@ -26,6 +26,16 @@ class Messenger: UIViewController {
     @IBOutlet weak var speedLabel: UILabel!
     let spacing = 15
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        print("\nisEverReceiptProcessed:", isEverReceiptProcessed, "\n")
+        // in case there is no network for VerifyReceipt when app launch.
+        if !isEverReceiptProcessed {
+            IAPHelper.shared.processReceipt()
+        }
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         start()

@@ -354,6 +354,27 @@ func goToIOSSettingCenter() {
     }
 }
 
+func showOkAlert(title: String?, message: String? = nil, okTitle: String = I18n.shared.iGotIt) {
+    let alert = UIAlertController(
+        title: title,
+        message: message,
+        preferredStyle: .alert)
+    let okAction = UIAlertAction(title: okTitle, style: .default) { _ in
+        alert.dismiss(animated: true, completion: nil)
+    }
+    alert.addAction(okAction)
+    UIApplication.getPresentedViewController()?.present(alert, animated: true)
+}
+
+func showProcessingAlert() -> UIAlertController {
+    let alert = UIAlertController(
+        title: I18n.shared.processing,
+        message: "",
+        preferredStyle: .alert)
+    UIApplication.getPresentedViewController()?.present(alert, animated: true)
+    return alert
+}
+
 //https://stackoverflow.com/questions/46317061/use-safe-area-layout-programmatically
 extension UIView {
 

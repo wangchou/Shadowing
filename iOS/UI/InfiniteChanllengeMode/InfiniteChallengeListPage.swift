@@ -44,6 +44,7 @@ class InfiniteChallengeListPage: UIViewController {
             }
             saveGameSetting()
             self.icListTopView.viewWillAppear()
+            self.icListTopView.animateProgress()
         }
     }
 
@@ -61,6 +62,9 @@ class InfiniteChallengeListPage: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         //viewWillLayoutSubviews()
         super.viewWillAppear(animated)
+        if IAPHelper.shared.products.isEmpty {
+            IAPHelper.shared.requsestProducts()
+        }
         bottomBarView.contentTab = .infiniteChallenge
         topBarView.titleLabel.text = i18n.infiniteChallengeTitle
         icListTopView.frame.size.width = screen.width
@@ -68,6 +72,11 @@ class InfiniteChallengeListPage: UIViewController {
         icListTopView.viewWillAppear() // icListTopView may not be available yet
 
         tableView.reloadData()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        icListTopView.animateProgress()
     }
 }
 

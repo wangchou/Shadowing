@@ -396,4 +396,44 @@ class I18n {
         if isZh { return "之後可從設定頁面更改。" }
         return "It could be changed from the settings page later."
     }
+    var restorePreviousPurchase: String {
+        if isJa { return "購入記録を復元する" }
+        if isZh { return "恢復購買紀錄" }
+        return "Restore purchase records"
+    }
+    var challengeItTomorrow: String {
+        if isJa { return "明日挑戦する" }
+        if isZh { return "我明天再挑戰"}
+        return "Challenge it tomorrow"
+    }
+    var purchaseViewTitle: String {
+        if isJa { return "[無料版] 毎日\(dailyFreeLimit)文の挑戦制限" }
+        if isZh { return "[免費版] 每日\(dailyFreeLimit)句挑戰限制" }
+        return "[Free version] Daily \(dailyFreeLimit) sentences limit"
+    }
+    var purchaseViewMessage: String {
+        if isJa { return "有料版を購入して挑戦を続けてください。" }
+        if isZh { return "請購買付費版以繼續挑戰。" }
+        return "Please buy paid version for keep on challenging."
+    }
+    var previousPurchaseRestored: String {
+        if isJa { return "購入記録を復元しました" }
+        if isZh { return "已恢復過去購買紀錄" }
+        return "Past purchase records are restored"
+    }
+    var iGotIt: String {
+        if isJa { return "わかりました" }
+        if isZh { return "我知道了" }
+        return "Ok"
+    }
+    var processing: String {
+        if isJa { return "処理しています。" }
+        if isZh { return "處理中" }
+        return "processing"
+    }
+    var cannotMakePayment: String {
+        if isJa { return "iTunes Store や App Store で購入できない (ペアレンタルコントロールを使いますか？)" }
+        if isZh { return "本機器沒有辦法付款 (家長保護控制開啟中?)" }
+        return "This device is not able or allowed to make payments. (Is Parental controls on?)"
+    }
 }

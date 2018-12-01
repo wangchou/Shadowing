@@ -347,6 +347,7 @@ func stringToTokenInfos(jsonString: String) -> [[String]]? {
 func getDateKey(date: Date) -> String {
     return Calendar.current.dateComponents([.year, .month, .day], from: date).description
 }
+#if os(iOS)
 
 func getRecordsByDate() -> [String: [GameRecord]] {
     var recordsByDate: [String: [GameRecord]] = [:]
@@ -403,7 +404,7 @@ func getSentenceCountsByDays() -> [Int] {
             sentenceCounts[i] += Int(arc4random_uniform(UInt32(100)))
         }
     }
-    print(sentenceCounts)
+    //print(sentenceCounts)
     return sentenceCounts
 }
 
@@ -418,4 +419,39 @@ func getTodaySentenceCount() -> Int {
         }
     }
     return sentenceCount
+}
+
+func getAllLanguageTodaySentenceCount() -> (said: Int, correct: Int) {
+
+    let todayKey = getDateKey(date: Date())
+    var saidSentenceCount: Int = 0
+    var correctSentenceCount: Int = 0
+    for r in getAllGameHistory() {
+        if todayKey == getDateKey(date: r.startedTime) {
+            saidSentenceCount += r.sentencesCount
+            correctSentenceCount += r.correctCount
+        }
+    }
+    return (saidSentenceCount, correctSentenceCount)
+}
+
+func isUnderDailySentenceLimit() -> Bool {
+    if Date() < gameExpirationDate { return true }
+    let (said, _) = getAllLanguageTodaySentenceCount()
+    if said < dailyFreeLimit { return true }
+
+    IAPHelper.shared.showPurchaseView()
+    return false
+}
+#endif
+
+extension Date {
+    var ms: Int64 {
+        return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
+        //RESOLVED CRASH HERE
+    }
+
+    init(ms: Int64) {
+        self = Date(timeIntervalSince1970: TimeInterval(ms / 1000))
+    }
 }

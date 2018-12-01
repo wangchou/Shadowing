@@ -4,7 +4,7 @@ const sqlite3 = require('sqlite3').verbose();
 const { execSync } = require('child_process');
 var levenshtein = require('levenshtein-edit-distance')
 
-let inDbName = "inf_sentences_1114_merged.sqlite"
+let inDbName = "inf_sentences_1202_samantha.sqlite"
 let outDbName = "inf_sentences_100points_duolingo.sqlite"
 let tableName = "sentences"
 let kanaTableName = "kanaInfo"
