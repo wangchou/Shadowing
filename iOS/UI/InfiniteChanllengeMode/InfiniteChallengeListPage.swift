@@ -62,6 +62,9 @@ class InfiniteChallengeListPage: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         //viewWillLayoutSubviews()
         super.viewWillAppear(animated)
+        if IAPHelper.shared.products.isEmpty {
+            IAPHelper.shared.requsestProducts()
+        }
         bottomBarView.contentTab = .infiniteChallenge
         topBarView.titleLabel.text = i18n.infiniteChallengeTitle
         icListTopView.frame.size.width = screen.width

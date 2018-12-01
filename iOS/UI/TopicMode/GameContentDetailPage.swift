@@ -40,6 +40,9 @@ class GameContentDetailPage: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if IAPHelper.shared.products.isEmpty {
+            IAPHelper.shared.requsestProducts()
+        }
         titleLabel.text = context.dataSetKey
         peekButton.setTitle(i18n.chineseOrJapanese, for: .normal)
 
