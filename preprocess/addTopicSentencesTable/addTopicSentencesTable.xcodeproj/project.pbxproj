@@ -31,7 +31,7 @@
 		BE869D17218E113400689755 /* CalculateScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE869D16218E113400689755 /* CalculateScore.swift */; };
 		BE869D19218E115800689755 /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE869D18218E115800689755 /* utilities.swift */; };
 		BE869D1B218E120C00689755 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE869D1A218E120C00689755 /* Score.swift */; };
-		BEBF9797219BB90100092FAC /* inf_sentences_100points_duolingo.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BEBF9796219BB90100092FAC /* inf_sentences_100points_duolingo.sqlite */; };
+		BE9964E821B2EDDE0034D587 /* inf_sentences_100points_duolingo.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BE9964E721B2EDDE0034D587 /* inf_sentences_100points_duolingo.sqlite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -75,7 +75,7 @@
 		BE869D16218E113400689755 /* CalculateScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalculateScore.swift; path = ../../iOS/Utilities/CalculateScore.swift; sourceTree = "<group>"; };
 		BE869D18218E115800689755 /* utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = utilities.swift; path = ../../iOS/Utilities/utilities.swift; sourceTree = "<group>"; };
 		BE869D1A218E120C00689755 /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Score.swift; path = ../../iOS/Model/Score.swift; sourceTree = "<group>"; };
-		BEBF9796219BB90100092FAC /* inf_sentences_100points_duolingo.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences_100points_duolingo.sqlite; sourceTree = "<group>"; };
+		BE9964E721B2EDDE0034D587 /* inf_sentences_100points_duolingo.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences_100points_duolingo.sqlite; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +96,7 @@
 		BE3EA021217761B200B65F48 = {
 			isa = PBXGroup;
 			children = (
-				BEBF9796219BB90100092FAC /* inf_sentences_100points_duolingo.sqlite */,
+				BE9964E721B2EDDE0034D587 /* inf_sentences_100points_duolingo.sqlite */,
 				BE39E0A72180E72000A34C50 /* Alamofire.framework */,
 				BE39E0A82180E72000A34C50 /* FBLPromises.framework */,
 				BE39E0A92180E72000A34C50 /* Promises.framework */,
@@ -208,7 +208,7 @@
 			files = (
 				BE3EA032217761B400B65F48 /* Assets.xcassets in Resources */,
 				BE3EA035217761B400B65F48 /* Main.storyboard in Resources */,
-				BEBF9797219BB90100092FAC /* inf_sentences_100points_duolingo.sqlite in Resources */,
+				BE9964E821B2EDDE0034D587 /* inf_sentences_100points_duolingo.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

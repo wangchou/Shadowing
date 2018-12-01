@@ -347,6 +347,7 @@ func stringToTokenInfos(jsonString: String) -> [[String]]? {
 func getDateKey(date: Date) -> String {
     return Calendar.current.dateComponents([.year, .month, .day], from: date).description
 }
+#if os(iOS)
 
 func getRecordsByDate() -> [String: [GameRecord]] {
     var recordsByDate: [String: [GameRecord]] = [:]
@@ -442,6 +443,7 @@ func isUnderDailySentenceLimit() -> Bool {
     IAPHelper.shared.showPurchaseView()
     return false
 }
+#endif
 
 extension Date {
     var ms: Int64 {
