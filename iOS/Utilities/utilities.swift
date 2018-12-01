@@ -436,10 +436,10 @@ func getAllLanguageTodaySentenceCount() -> (said: Int, correct: Int) {
 
 func isUnderDailySentenceLimit() -> Bool {
     if Date() < gameExpirationDate { return true }
-    let (said, correct) = getAllLanguageTodaySentenceCount()
+    let (said, _) = getAllLanguageTodaySentenceCount()
     if said < dailyFreeLimit { return true }
 
-    IAPHelper.shared.showPurchaseView(saidSentenceCount: said, correctSentenceCount: correct)
+    IAPHelper.shared.showPurchaseView()
     return false
 }
 

@@ -69,12 +69,10 @@ class IAPHelper: NSObject {
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
 
-    func showPurchaseView(saidSentenceCount: Int, correctSentenceCount: Int) {
+    func showPurchaseView() {
         let actionSheet = UIAlertController(
             title: i18n.purchaseViewTitle,
-            message: i18n.purchaseViewMessage(
-                said: saidSentenceCount,
-                correct: correctSentenceCount),
+            message: i18n.purchaseViewMessage,
             preferredStyle: .actionSheet)
 
         // Create the actions
