@@ -96,14 +96,14 @@ class IAPHelper: NSObject {
             }
             actionSheet.addAction(buyAction)
         }
-        if !isEverReceiptProcessed {
-            let restoreAction = UIAlertAction(title: i18n.restorePreviousPurchase, style: .destructive) { _ in
-                actionSheet.dismiss(animated: true, completion: nil)
-                self.refreshReceipt()
-            }
-            actionSheet.addAction(restoreAction)
+
+        let restoreAction = UIAlertAction(title: i18n.restorePreviousPurchase, style: .destructive) { _ in
+            actionSheet.dismiss(animated: true, completion: nil)
+            self.refreshReceipt()
         }
-        let cancelAction = UIAlertAction(title: i18n.challengeItTomorrow, style: .destructive) { _ in
+        actionSheet.addAction(restoreAction)
+
+        let cancelAction = UIAlertAction(title: i18n.challengeItTomorrow, style: .cancel) { _ in
             actionSheet.dismiss(animated: true, completion: nil)
         }
 
