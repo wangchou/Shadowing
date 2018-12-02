@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 private let context = GameContext.shared
+private let i18n = I18n.shared
 
 extension Messenger: GameEventDelegate {
     @objc func onEventHappened(_ notification: Notification) {
@@ -95,7 +96,7 @@ extension Messenger: GameEventDelegate {
         print(context.userSaidString)
 
         if attributed.string == "" {
-            attributed.append(rubyAttrStr("聽不清楚"))
+            attributed.append(rubyAttrStr(i18n.iCannotHearYou))
         }
 
         attributed.append(rubyAttrStr(" \(score.valueText) \(score.type == .perfect ? "💯": "")"))
@@ -103,6 +104,6 @@ extension Messenger: GameEventDelegate {
         updateLastLabelText(attributed, isLeft: false)
 
         lastLabel.backgroundColor = score.color
-        sentenceCountLabel.text = "還有\(context.sentences.count - context.sentenceIndex - 1)句"
+        sentenceCountLabel.text = "\(i18n.remaining)\(context.sentences.count - context.sentenceIndex - 1)\(i18n.sentenceUnit)"
     }
 }

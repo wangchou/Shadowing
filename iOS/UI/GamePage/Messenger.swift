@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 private let context = GameContext.shared
+private let i18n = I18n.shared
 
 // Prototype 8: messenger / line interface
 class Messenger: UIViewController {
@@ -56,7 +57,7 @@ class Messenger: UIViewController {
     func start() {
         startEventObserving(self)
         GameFlow.shared.start()
-        sentenceCountLabel.text = "還有\(context.sentences.count)句"
+        sentenceCountLabel.text = "\(i18n.remaining)\(context.sentences.count)\(i18n.sentenceUnit)"
         speedLabel.text = String(format: "%.2f 倍速", context.teachingRate * 2)
         timeLabel.text = "00:00"
         context.startTime = getNow()
@@ -96,7 +97,7 @@ class Messenger: UIViewController {
             myLabel.frame.origin.x = CGFloat(Int(screen.width) - 5 - Int(myLabel.frame.width))
             if text.string == "..." {
                 myLabel.backgroundColor = .gray
-            } else if text.string == "聽不清楚" {
+            } else if text.string == i18n.iCannotHearYou {
                 myLabel.backgroundColor = myRed
             } else {
                 myLabel.backgroundColor = myGreen

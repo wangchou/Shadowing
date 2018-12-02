@@ -436,4 +436,14 @@ class I18n {
         if isZh { return "本機器沒有辦法付款 (家長保護控制開啟中?)" }
         return "This device is not able or allowed to make payments. (Is Parental controls on?)"
     }
+    var iCannotHearYou: String {
+        if isJa { return "聞こえない" }
+        if isZh { return "聽不清楚"}
+        return "I cannot hear you"
+    }
+    var remaining: String {
+        if isJa { return "まだ" }
+        if isZh { return "還有"}
+        return "まだ"
+    }
 }
