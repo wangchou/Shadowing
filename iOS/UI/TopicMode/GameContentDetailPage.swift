@@ -65,6 +65,7 @@ class GameContentDetailPage: UIViewController {
             missedCountLabel.text = 0.s
         }
         challengeButton.roundBorder(borderWidth: 0, cornerRadius: 5, color: .clear)
+        challengeButton.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .highlighted)
 
         // load furigana
         all(context.sentences.map {$0.furiganaAttributedString}).then {_ in

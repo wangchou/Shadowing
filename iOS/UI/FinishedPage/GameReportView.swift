@@ -41,6 +41,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
     func addBackButton() {
         let backButton = UIButton()
         backButton.setTitle("戻   る", for: .normal)
+        backButton.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .highlighted)
         backButton.backgroundColor = .red
         backButton.titleLabel?.font = MyFont.regular(ofSize: step * 4)
         backButton.titleLabel?.textColor = myLightText

@@ -103,6 +103,9 @@ extension InfiniteChallengeListPage: UITableViewDelegate {
             let infiniteChallengePage = infiniteChallengeSwipablePage.pages[2] as? InfiniteChallengePage {
             infiniteChallengePage.level = allLevels[indexPath.row]
         }
-        (rootViewController.current as? UIPageViewController)?.goToNextPage()
+        (rootViewController.current as? UIPageViewController)?.goToNextPage { _ in
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: "InfiniteChallengeTableCell", for: indexPath)
+            cell.isSelected = false
+        }
     }
 }
