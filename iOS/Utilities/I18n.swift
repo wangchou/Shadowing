@@ -90,6 +90,12 @@ class I18n {
         return "Please repeat \"\(langToSpeak) Sentences\" after me."
     }
 
+    var gameStartedWithEchoMethod: String {
+        if isJa { return "\(langToSpeak)の文を聞いて、回想して、繰り返してください。" }
+        if isZh { return "聽我說\(langToSpeak)後，在心中回放一次、在之後跟著說～" }
+        return "Please replay my voice in mind, then speak it"
+    }
+
     var gameStartedWithoutGuideVoice: String {
         if isJa { return "\(langToSpeak)の文を読んていってください。" }
         if isZh { return "請唸出對應的\(langToSpeak)。" }
@@ -376,14 +382,14 @@ class I18n {
 
     var speakingOnly: String {
         if isJa { return "発音のみ" }
-        if isZh { return "發音" }
-        return "pronunciation"
+        if isZh { return "跟讀" }
+        return "shadowing"
     }
 
     var interpretation: String {
         if isJa { return "通訳" }
         if isZh { return "口譯" }
-        return "interpretation"
+        return "interpreter"
     }
     var speedIs: String {
         if gameLang == .jp {
@@ -445,5 +451,15 @@ class I18n {
         if isJa { return "まだ" }
         if isZh { return "還有"}
         return "まだ"
+    }
+    var echoMethod: String {
+        if isJa { return "エコー法"}
+        if isZh { return "回音法" }
+        return "mind echo"
+    }
+    var listenToEcho: String {
+        if isJa { return "心のエコーを聞いて" }
+        if isZh { return "聽心中回音" }
+        return "Listen to echo in mind."
     }
 }

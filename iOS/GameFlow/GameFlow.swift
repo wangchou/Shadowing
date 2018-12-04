@@ -16,6 +16,7 @@ enum GameError: Error {
 enum GameState {
     case justStarted
     case TTSSpeaking
+    case echoMethod
     case listening
     case scoreCalculated
     case speakingScore
@@ -70,9 +71,17 @@ class GameFlow {
         startTimer()
 
         context.loadLearningSentences()
-        let narratorString = setting.learningMode == .interpretation ?
-            i18n.gameStartedWithoutGuideVoice :
-            i18n.gameStartedWithGuideVoice
+        var narratorString = ""
+
+        switch setting.learningMode {
+        case .meaningAndSpeaking, .speakingOnly:
+            narratorString = i18n.gameStartedWithGuideVoice
+        case .echoMethod:
+            narratorString = i18n.gameStartedWithEchoMethod
+        case .interpretation:
+            narratorString = i18n.gameStartedWithoutGuideVoice
+        }
+        print(setting.learningMode, narratorString)
         if setting.isUsingNarrator {
             narratorSay(narratorString)
                 .then { self.wait }
@@ -96,6 +105,8 @@ extension GameFlow {
         guard !self.isForceStopped else { return }
         speakTranslation()
             .then( speakTargetString )
+            .then { self.wait }
+            .then ( echoMethod )
             .then { self.wait }
             .then( listenPart )
             .then { self.wait }
@@ -217,6 +228,14 @@ extension GameFlow {
         }
 
         return teacherSay(context.targetString)
+    }
+
+    private func echoMethod() -> Promise<Void> {
+        if context.gameSetting.learningMode == .echoMethod {
+            context.gameState = .echoMethod
+            return pausePromise(Double(context.speakDuration))
+        }
+        return fulfilledVoidPromise()
     }
 
     private func listenWrapped() -> Promise<Void> {

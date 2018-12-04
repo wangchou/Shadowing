@@ -24,7 +24,7 @@ extension Messenger: GameEventDelegate {
             }
 
         case .listenStarted:
-            addLabel(rubyAttrStr("..."), isLeft: false)
+            addLabel(rubyAttrStr("..."), pos: .right)
 
         case .scoreCalculated:
             DispatchQueue.main.async {
@@ -81,6 +81,10 @@ extension Messenger: GameEventDelegate {
             if context.gameState == .forceStopped {
                 dismiss(animated: false)
             }
+
+            if context.gameState == .echoMethod {
+                addLabel(rubyAttrStr(i18n.listenToEcho), pos: .center)
+            }
         }
     }
 
@@ -101,7 +105,7 @@ extension Messenger: GameEventDelegate {
 
         attributed.append(rubyAttrStr(" \(score.valueText) \(score.type == .perfect ? "💯": "")"))
 
-        updateLastLabelText(attributed, isLeft: false)
+        updateLastLabelText(attributed, pos: .right)
 
         lastLabel.backgroundColor = score.color
         sentenceCountLabel.text = "\(i18n.remaining)\(context.sentences.count - context.sentenceIndex - 1)\(i18n.sentenceUnit)"

@@ -1039,6 +1039,7 @@ Ruth Yuru Chen
                                                         <segment title="意義與發音"/>
                                                         <segment title="發音"/>
                                                         <segment title="口譯"/>
+                                                        <segment title="口譯"/>
                                                     </segments>
                                                     <connections>
                                                         <action selector="learningModeSegmentControlValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="wY5-E3-eGQ"/>
@@ -2086,6 +2087,7 @@ Ruth Yuru Chen
                                 <segments>
                                     <segment title="意義與發音"/>
                                     <segment title="發音"/>
+                                    <segment title="回音法"/>
                                     <segment title="口譯"/>
                                 </segments>
                                 <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -60,7 +60,7 @@ struct GameSetting: Codable {
     var isShowTranslationInPractice: Bool = false
 
     // learning mode started
-    var learningMode: LearningMode = .meaningAndSpeaking
+    var learningMode: LearningMode = .speakingOnly
     var isShowTranslation: Bool = false
     var isSpeakTranslation: Bool = true
     var isUsingGuideVoice: Bool = true
@@ -83,5 +83,6 @@ enum ICTopViewMode: Int, Codable {
 enum LearningMode: Int, Codable {
     case meaningAndSpeaking = 0
     case speakingOnly = 1
-    case interpretation = 2
+    case echoMethod = 2
+    case interpretation = 3
 }
