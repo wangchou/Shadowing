@@ -27,7 +27,6 @@ enum GameState {
 
 private let engine = SpeechEngine.shared
 private let context = GameContext.shared
-private let setting = context.gameSetting
 private let i18n = I18n.shared
 
 // handler for commands posted from UI
@@ -73,7 +72,7 @@ class GameFlow {
         context.loadLearningSentences()
         var narratorString = ""
 
-        switch setting.learningMode {
+        switch context.gameSetting.learningMode {
         case .meaningAndSpeaking, .speakingOnly:
             narratorString = i18n.gameStartedWithGuideVoice
         case .echoMethod:
@@ -81,8 +80,8 @@ class GameFlow {
         case .interpretation:
             narratorString = i18n.gameStartedWithoutGuideVoice
         }
-        print(setting.learningMode, narratorString)
-        if setting.isUsingNarrator {
+        print(context.gameSetting.learningMode, narratorString)
+        if context.gameSetting.isUsingNarrator {
             narratorSay(narratorString)
                 .then { self.wait }
                 .always {

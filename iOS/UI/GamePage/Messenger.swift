@@ -75,10 +75,33 @@ class Messenger: UIViewController {
         stopEventObserving(self)
     }
 
-    func addLabel(_ text: NSAttributedString, pos: LabelPosition = .left) {
+    func prescrolling(_ text: NSAttributedString, pos: LabelPosition = .left) {
+        let originalPreviousY = previousY
+        let originalY = y
+        let originalLastLabel = lastLabel
+
+        addLabel(text, isAddSubview: false)
+
+        // center echo text
+        if context.gameSetting.learningMode == .echoMethod {
+            let echoText = rubyAttrStr(i18n.listenToEcho)
+            addLabel(echoText, pos: .center, isAddSubview: false)
+        }
+
+        // right text
+        let dotText = rubyAttrStr("...")
+        addLabel(dotText, pos: .right, isAddSubview: false)
+        previousY = originalPreviousY
+        y = originalY
+        lastLabel = originalLastLabel
+    }
+
+    func addLabel(_ text: NSAttributedString, pos: LabelPosition = .left, isAddSubview: Bool = true) {
         let myLabel = FuriganaLabel()
         updateLabel(myLabel, text: text, pos: pos)
-        scrollView.addSubview(myLabel)
+        if isAddSubview {
+            scrollView.addSubview(myLabel)
+        }
         lastLabel = myLabel
     }
 
@@ -118,7 +141,9 @@ class Messenger: UIViewController {
         previousY = y
         y += Int(myLabel.frame.height) + spacing
 
-        scrollView.scrollTo(y)
+        if pos == .right {
+            scrollView.scrollTo(y)
+        }
     }
 
     func updateLastLabelText(_ text: NSAttributedString, pos: LabelPosition = .left) {

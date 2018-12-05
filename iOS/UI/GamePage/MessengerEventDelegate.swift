@@ -68,14 +68,17 @@ extension Messenger: GameEventDelegate {
                 let text = context.targetString
                 var translationsDict = (gameLang == .jp && context.contentTab == .topics) ?
                     chTranslations : translations
+                var attrText: NSAttributedString
                 if context.gameSetting.isShowTranslation,
                     let translation = translationsDict[text] {
-                    addLabel(rubyAttrStr(translation))
+                    attrText = rubyAttrStr(translation)
                 } else if let tokenInfos = kanaTokenInfosCacheDictionary[text] {
-                    addLabel(getFuriganaString(tokenInfos: tokenInfos))
+                    attrText = getFuriganaString(tokenInfos: tokenInfos)
                 } else {
-                    addLabel(rubyAttrStr(text))
+                    attrText = rubyAttrStr(text)
                 }
+                prescrolling(attrText)
+                addLabel(attrText)
             }
 
             if context.gameState == .forceStopped {
