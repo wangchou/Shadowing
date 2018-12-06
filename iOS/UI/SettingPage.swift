@@ -237,7 +237,7 @@ func actOnLearningModeSegmentControlValueChanged(control: UISegmentedControl) {
     case .meaningAndSpeaking:
         context.gameSetting.isSpeakTranslation = true
         context.gameSetting.isUsingGuideVoice = true
-    case .speakingOnly:
+    case .speakingOnly, .echoMethod:
         context.gameSetting.isSpeakTranslation = false
         context.gameSetting.isUsingGuideVoice = true
     case .interpretation:
@@ -252,5 +252,6 @@ func initLearningModeSegmentControl(label: UILabel, control: UISegmentedControl)
     control.selectedSegmentIndex = context.gameSetting.learningMode.rawValue
     control.setTitle(i18n.meaningAndSpeaking, forSegmentAt: 0)
     control.setTitle(i18n.speakingOnly, forSegmentAt: 1)
-    control.setTitle(i18n.interpretation, forSegmentAt: 2)
+    control.setTitle(i18n.echoMethod, forSegmentAt: 2)
+    control.setTitle(i18n.interpretation, forSegmentAt: 3)
 }

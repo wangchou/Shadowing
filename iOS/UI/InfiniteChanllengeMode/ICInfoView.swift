@@ -175,6 +175,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
     func addChallengeButton() {
         let button = UIButton()
         button.setTitle("挑　　　戦", for: .normal)
+        button.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .highlighted)
         button.backgroundColor = .red
         button.titleLabel?.font = MyFont.regular(ofSize: step * 5)
         button.titleLabel?.textColor = .white

@@ -24,7 +24,7 @@ extension Messenger: GameEventDelegate {
             }
 
         case .listenStarted:
-            addLabel(rubyAttrStr("..."), isLeft: false)
+            addLabel(rubyAttrStr("..."), pos: .right)
 
         case .scoreCalculated:
             DispatchQueue.main.async {
@@ -68,18 +68,25 @@ extension Messenger: GameEventDelegate {
                 let text = context.targetString
                 var translationsDict = (gameLang == .jp && context.contentTab == .topics) ?
                     chTranslations : translations
+                var attrText: NSAttributedString
                 if context.gameSetting.isShowTranslation,
                     let translation = translationsDict[text] {
-                    addLabel(rubyAttrStr(translation))
+                    attrText = rubyAttrStr(translation)
                 } else if let tokenInfos = kanaTokenInfosCacheDictionary[text] {
-                    addLabel(getFuriganaString(tokenInfos: tokenInfos))
+                    attrText = getFuriganaString(tokenInfos: tokenInfos)
                 } else {
-                    addLabel(rubyAttrStr(text))
+                    attrText = rubyAttrStr(text)
                 }
+                prescrolling(attrText)
+                addLabel(attrText)
             }
 
             if context.gameState == .forceStopped {
                 dismiss(animated: false)
+            }
+
+            if context.gameState == .echoMethod {
+                addLabel(rubyAttrStr(i18n.listenToEcho), pos: .center)
             }
         }
     }
@@ -101,7 +108,7 @@ extension Messenger: GameEventDelegate {
 
         attributed.append(rubyAttrStr(" \(score.valueText) \(score.type == .perfect ? "💯": "")"))
 
-        updateLastLabelText(attributed, isLeft: false)
+        updateLastLabelText(attributed, pos: .right)
 
         lastLabel.backgroundColor = score.color
         sentenceCountLabel.text = "\(i18n.remaining)\(context.sentences.count - context.sentenceIndex - 1)\(i18n.sentenceUnit)"

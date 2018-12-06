@@ -117,7 +117,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         let font = MyFont.bold(ofSize: fontSize)
 
         var repeatCount = 0
-        let targetRepeatCount = 50
+        let targetRepeatCount = 30
         let delayCount = 5
         let interval: TimeInterval = 0.02
 
@@ -126,7 +126,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
                 repeatCount += 1
                 return
             }
-            let ratio: Float = 0.02 * (repeatCount.f - delayCount.f)
+            let ratio: Float = (repeatCount.f - delayCount.f) / targetRepeatCount.f
             progressBar.frame.size.width = self.fullProgressWidth * (self.startProgress * (1 - ratio) + self.endProgress * ratio).c
             let text = "\(todaySentenceCount - record.correctCount + (record.correctCount.f * ratio).i)/\(dailyGoal)"
             goalProgressLabel.attributedText = getText(text,

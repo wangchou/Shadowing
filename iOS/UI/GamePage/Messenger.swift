@@ -12,6 +12,12 @@ import UIKit
 private let context = GameContext.shared
 private let i18n = I18n.shared
 
+enum LabelPosition {
+    case left
+    case center
+    case right
+}
+
 // Prototype 8: messenger / line interface
 class Messenger: UIViewController {
     var lastLabel: FuriganaLabel = FuriganaLabel()
@@ -69,14 +75,37 @@ class Messenger: UIViewController {
         stopEventObserving(self)
     }
 
-    func addLabel(_ text: NSAttributedString, isLeft: Bool = true) {
+    func prescrolling(_ text: NSAttributedString, pos: LabelPosition = .left) {
+        let originalPreviousY = previousY
+        let originalY = y
+        let originalLastLabel = lastLabel
+
+        addLabel(text, isAddSubview: false)
+
+        // center echo text
+        if context.gameSetting.learningMode == .echoMethod {
+            let echoText = rubyAttrStr(i18n.listenToEcho)
+            addLabel(echoText, pos: .center, isAddSubview: false)
+        }
+
+        // right text
+        let dotText = rubyAttrStr("...")
+        addLabel(dotText, pos: .right, isAddSubview: false)
+        previousY = originalPreviousY
+        y = originalY
+        lastLabel = originalLastLabel
+    }
+
+    func addLabel(_ text: NSAttributedString, pos: LabelPosition = .left, isAddSubview: Bool = true) {
         let myLabel = FuriganaLabel()
-        updateLabel(myLabel, text: text, isLeft: isLeft)
-        scrollView.addSubview(myLabel)
+        updateLabel(myLabel, text: text, pos: pos)
+        if isAddSubview {
+            scrollView.addSubview(myLabel)
+        }
         lastLabel = myLabel
     }
 
-    func updateLabel(_ myLabel: FuriganaLabel, text: NSAttributedString, isLeft: Bool = true) {
+    func updateLabel(_ myLabel: FuriganaLabel, text: NSAttributedString, pos: LabelPosition) {
         let maxLabelWidth: Int = Int(screen.width*3/4)
 
         var height = 30
@@ -91,9 +120,10 @@ class Messenger: UIViewController {
 
         myLabel.roundBorder()
 
-        if isLeft {
+        switch pos {
+        case .left:
             myLabel.backgroundColor = myWhite
-        } else {
+        case .right:
             myLabel.frame.origin.x = CGFloat(Int(screen.width) - 5 - Int(myLabel.frame.width))
             if text.string == "..." {
                 myLabel.backgroundColor = .gray
@@ -102,17 +132,23 @@ class Messenger: UIViewController {
             } else {
                 myLabel.backgroundColor = myGreen
             }
+        case .center:
+            myLabel.backgroundColor = .clear
+            myLabel.centerX(scrollView.frame)
+            myLabel.alpha = 0.5
         }
 
         previousY = y
         y += Int(myLabel.frame.height) + spacing
 
-        scrollView.scrollTo(y)
+        if pos == .right {
+            scrollView.scrollTo(y)
+        }
     }
 
-    func updateLastLabelText(_ text: NSAttributedString, isLeft: Bool = true) {
+    func updateLastLabelText(_ text: NSAttributedString, pos: LabelPosition = .left) {
         y = previousY
-        updateLabel(lastLabel, text: text, isLeft: isLeft)
+        updateLabel(lastLabel, text: text, pos: pos)
     }
 
     @objc func scrollViewTapped() {

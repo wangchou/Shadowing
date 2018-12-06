@@ -53,7 +53,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="InfiniteChallengeTableCell" rowHeight="74" id="rTP-UD-iCK" customClass="InfiniteChallengeTableCell" customModule="今話したい" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="InfiniteChallengeTableCell" rowHeight="74" id="rTP-UD-iCK" customClass="InfiniteChallengeTableCell" customModule="今話したい" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="232" width="320" height="74"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rTP-UD-iCK" id="Vhr-PX-c2D">
@@ -721,7 +721,7 @@ A: 作者的經驗，通常是</string>
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <mutableString key="content">，來把音訊傳給Apple辨識。
+                                        <string key="content">，來把音訊傳給Apple辨識。
 
 =&gt; 如果到 Apple 的網路不順，他們收到的就是很多雜訊的聲音，就會亂聽。 
 另外，如果是音量的問題用 iPhone 附的有線耳麥會好很多。
@@ -735,7 +735,7 @@ A: 抱歉，這個問題來自Apple。舉例來說：Siri和Google Translation�
 Q: 網路明明很穩定，卻一直跳出「連不到主機」的錯誤訊息？
 A: 抱歉，那代表在東京的「漢字轉假名主機」掛掉了。
 
-</mutableString>
+</string>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="18" name="PingFangTC-Regular"/>
@@ -1038,6 +1038,7 @@ Ruth Yuru Chen
                                                     <segments>
                                                         <segment title="意義與發音"/>
                                                         <segment title="發音"/>
+                                                        <segment title="口譯"/>
                                                         <segment title="口譯"/>
                                                     </segments>
                                                     <connections>
@@ -1443,7 +1444,7 @@ Ruth Yuru Chen
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="SentencesCell" rowHeight="80" id="dBP-pO-iCD" customClass="ContentCell" customModule="今話したい" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="SentencesCell" rowHeight="80" id="dBP-pO-iCD" customClass="ContentCell" customModule="今話したい" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="228" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dBP-pO-iCD" id="u6e-75-GJe">
@@ -2086,6 +2087,7 @@ Ruth Yuru Chen
                                 <segments>
                                     <segment title="意義與發音"/>
                                     <segment title="發音"/>
+                                    <segment title="回音法"/>
                                     <segment title="口譯"/>
                                 </segments>
                                 <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
