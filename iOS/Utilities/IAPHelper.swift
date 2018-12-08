@@ -12,6 +12,7 @@ import Promises
 import UIKit
 
 private let i18n = I18n.shared
+private var isSandbox = false
 
 enum IAPProduct: String {
     case unlimitedForever
@@ -239,6 +240,7 @@ extension IAPHelper {
                                 }
 
                             case 21007:  // special code for sandbox from Apple
+                                isSandbox = true
                                 self.validateReceiptBySendingTo(RequestURL.sandbox.url)
 
                             default:
@@ -259,8 +261,8 @@ extension IAPHelper {
 
     private func updateExpirationDateByReceipt(_ receipt: [String: Any]) {
         gameExpirationDate = Date(ms: 0)
-        let receiptType = receipt["receipt_type"] as? String ?? ""
-        let isSandbox = receiptType.range(of: "andbox") != nil //sandbox
+        //let receiptType = receipt["receipt_type"] as? String ?? ""
+        //let isSandbox = receiptType.range(of: "andbox") != nil //sandbox
         let originalAppVerison = receipt["original_application_version"] as? String ?? "0.0"
 
         let inApp = (receipt["in_app"] as? [[String: Any]]) ?? []
