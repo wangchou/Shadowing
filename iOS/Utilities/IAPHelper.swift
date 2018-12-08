@@ -258,13 +258,13 @@ extension IAPHelper {
     }
 
     private func updateExpirationDateByReceipt(_ receipt: [String: Any]) {
-        gameExpirationDate = Date()
+        gameExpirationDate = Date(ms: 0)
         let receiptType = receipt["receipt_type"] as? String ?? ""
         let isSandbox = receiptType.range(of: "andbox") != nil //sandbox
         let originalAppVerison = receipt["original_application_version"] as? String ?? "0.0"
 
         let inApp = (receipt["in_app"] as? [[String: Any]]) ?? []
-        let keyInfoInApp = inApp.map { dict -> (String, Int64) in
+        let keyInfoInApp = inApp.map { dict -> (productId: String, ms: Int64) in
             guard dict["cancellation_date"] == nil else { return ("cancelled", 0)}
             return (
                 dict["product_id"] as? String ?? "unknown",
@@ -277,10 +277,14 @@ extension IAPHelper {
         }
         print("=== Receipt Validation ===")
 
-        keyInfoInApp.forEach {(arg) in
-            let (productId, dateInMS) = arg
-            updateExpirationDate(productId: productId, purchaseDateInMS: dateInMS)
-        }
+        keyInfoInApp
+            .sorted {
+                return $0.ms < $1.ms
+            }
+            .forEach { (arg) in
+                let (productId, dateInMS) = arg
+                updateExpirationDate(productId: productId, purchaseDateInMS: dateInMS)
+            }
 
         isEverReceiptProcessed = true
         saveGameExpirationDate()
