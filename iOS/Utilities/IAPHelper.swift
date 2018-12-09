@@ -263,7 +263,7 @@ extension IAPHelper {
         gameExpirationDate = Date(ms: 0)
         //let receiptType = receipt["receipt_type"] as? String ?? ""
         //let isSandbox = receiptType.range(of: "andbox") != nil //sandbox
-        let originalAppVerison = receipt["original_application_version"] as? String ?? "0.0"
+        let originalPurchaseDateMS = Int64(receipt["original_purchase_date_ms"] as? String ?? "0") ?? 0
 
         let inApp = (receipt["in_app"] as? [[String: Any]]) ?? []
         let keyInfoInApp = inApp.map { dict -> (productId: String, ms: Int64) in
@@ -273,9 +273,9 @@ extension IAPHelper {
                 Int64(dict["purchase_date_ms"] as? String ?? "") ?? 0
             )
         }
-        debugPrint(originalAppVerison, keyInfoInApp)
+
         if !isSandbox {
-            updateExpirationDate(appVersion: originalAppVerison)
+            updateExpirationDate(originalPurchaseDateMS: originalPurchaseDateMS)
         }
         print("=== Receipt Validation ===")
 

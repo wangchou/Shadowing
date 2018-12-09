@@ -38,7 +38,7 @@ private let oneMonthInMS: Int64 = 31 * 86400 * 1000
 private let threeMonthsInMS: Int64 = 3 * 31 * 86400 * 1000
 
 // previous paided version
-private let unlimitedVersions = ["1.0", "1.0.0", "1.0.1", "1.0.2", "1.0.3", "1.0.4", "1.1", "1.1.0"]
+private let paidToFreeDateMS: Int64 = 1544298312000
 
 func updateExpirationDate(productId: String, purchaseDateInMS: Int64) {
     var addtionInMS: Int64 = 0
@@ -62,8 +62,9 @@ func updateExpirationDate(productId: String, purchaseDateInMS: Int64) {
     saveGameExpirationDate()
 }
 
-func updateExpirationDate(appVersion: String) {
-    if unlimitedVersions.contains(appVersion) {
+func updateExpirationDate(originalPurchaseDateMS: Int64) {
+    print(originalPurchaseDateMS, paidToFreeDateMS)
+    if originalPurchaseDateMS < paidToFreeDateMS {
         gameExpirationDate = Date(ms: oneHundredYearsInMS)
         print("unlimited from original app version")
         saveGameExpirationDate()
