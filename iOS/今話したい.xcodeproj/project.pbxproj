@@ -12,6 +12,8 @@
 		BE1CA958209DC43800086853 /* Messenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA957209DC43800086853 /* Messenger.swift */; };
 		BE221AA121A2A76D0009B23B /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE221AA021A2A76D0009B23B /* CircleView.swift */; };
 		BE28B2C221A3EAB600088214 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE28B2C121A3EAB500088214 /* Main.storyboard */; };
+		BE3260C821BF912D00A13C94 /* vocabulary1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260C721BF912D00A13C94 /* vocabulary1.swift */; };
+		BE3260CA21BFCF5E00A13C94 /* vocabulary2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260C921BFCF5E00A13C94 /* vocabulary2.swift */; };
 		BE596466215A0DE100E4AA0C /* travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596465215A0DE100E4AA0C /* travel.swift */; };
 		BE596468215A0DF200E4AA0C /* daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596467215A0DF200E4AA0C /* daily.swift */; };
 		BE59646A215A0E4D00E4AA0C /* polite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596469215A0E4D00E4AA0C /* polite.swift */; };
@@ -120,6 +122,8 @@
 		BE1CA957209DC43800086853 /* Messenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messenger.swift; sourceTree = "<group>"; };
 		BE221AA021A2A76D0009B23B /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		BE28B2C121A3EAB500088214 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		BE3260C721BF912D00A13C94 /* vocabulary1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vocabulary1.swift; sourceTree = "<group>"; };
+		BE3260C921BFCF5E00A13C94 /* vocabulary2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vocabulary2.swift; sourceTree = "<group>"; };
 		BE596465215A0DE100E4AA0C /* travel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = travel.swift; sourceTree = "<group>"; };
 		BE596467215A0DF200E4AA0C /* daily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = daily.swift; sourceTree = "<group>"; };
 		BE596469215A0E4D00E4AA0C /* polite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = polite.swift; sourceTree = "<group>"; };
@@ -300,6 +304,8 @@
 				BE596469215A0E4D00E4AA0C /* polite.swift */,
 				BE59646D215A0EC300E4AA0C /* love.swift */,
 				BE59646F215A0ECE00E4AA0C /* speech.swift */,
+				BE3260C721BF912D00A13C94 /* vocabulary1.swift */,
+				BE3260C921BFCF5E00A13C94 /* vocabulary2.swift */,
 				BE596473215A0EF400E4AA0C /* expressive.swift */,
 			);
 			path = Sentences;
@@ -546,6 +552,7 @@
 				BE8DE7B62161E44400812CED /* AbilityChart.swift in Sources */,
 				BECAC3B5216B34FA001BBF49 /* InfiniteChanllengePage.swift in Sources */,
 				BE5D838920A80BD0002031BF /* GameContentDetailPage.swift in Sources */,
+				BE3260CA21BFCF5E00A13C94 /* vocabulary2.swift in Sources */,
 				BECD8B2F21A817D000FF44A2 /* LanguageSelectionPage.swift in Sources */,
 				BE6ED56820A17BB000553D1A /* GameFlow.swift in Sources */,
 				BEEC7FAD2155014E001C2EFF /* SettingPage.swift in Sources */,
@@ -589,6 +596,7 @@
 				BE59646E215A0EC300E4AA0C /* love.swift in Sources */,
 				BE955E47216DAB8F00D424FA /* ICInfoView.swift in Sources */,
 				BE8283B42133DAE2008BC875 /* SpeechEngine.swift in Sources */,
+				BE3260C821BF912D00A13C94 /* vocabulary1.swift in Sources */,
 				BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */,
 				BEBDEDDA208EF15F00C18520 /* TTS.swift in Sources */,
 				BEF258B320B57C7F00D0026C /* TimelineView.swift in Sources */,
