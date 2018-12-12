@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE3260CD21C0F1BD00A13C94 /* vocabulary1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260CB21C0F1BD00A13C94 /* vocabulary1.swift */; };
+		BE3260CE21C0F1BD00A13C94 /* vocabulary2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260CC21C0F1BD00A13C94 /* vocabulary2.swift */; };
+		BE3260D021C0FD0B00A13C94 /* TTS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260CF21C0FD0B00A13C94 /* TTS.swift */; };
 		BE55B433217348E6006DC271 /* FakeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE55B432217348E6006DC271 /* FakeKey.swift */; };
 		BE55B43721736554006DC271 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE55B43621736553006DC271 /* SQLite.framework */; };
 		BE55B43821736554006DC271 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE55B43621736553006DC271 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -56,6 +59,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BE3260CB21C0F1BD00A13C94 /* vocabulary1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = vocabulary1.swift; path = ../../../iOS/Sentences/vocabulary1.swift; sourceTree = "<group>"; };
+		BE3260CC21C0F1BD00A13C94 /* vocabulary2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = vocabulary2.swift; path = ../../../iOS/Sentences/vocabulary2.swift; sourceTree = "<group>"; };
+		BE3260CF21C0FD0B00A13C94 /* TTS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TTS.swift; path = ../../../iOS/SpeechEngine/TTS.swift; sourceTree = "<group>"; };
 		BE55B432217348E6006DC271 /* FakeKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeKey.swift; sourceTree = "<group>"; };
 		BE55B43621736553006DC271 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/Mac/SQLite.framework; sourceTree = "<group>"; };
 		BE55B43A217365AC006DC271 /* sqlite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sqlite.swift; sourceTree = "<group>"; };
@@ -103,6 +109,9 @@
 		BE88D5FE2174D1F2004E1CD0 /* ReferencedFromIOSApp */ = {
 			isa = PBXGroup;
 			children = (
+				BE3260CF21C0FD0B00A13C94 /* TTS.swift */,
+				BE3260CB21C0F1BD00A13C94 /* vocabulary1.swift */,
+				BE3260CC21C0F1BD00A13C94 /* vocabulary2.swift */,
 				BE869D21218F34F700689755 /* CalculateScore.swift */,
 				BE869D25218F34F700689755 /* daily.swift */,
 				BE869D28218F34F700689755 /* expressive.swift */,
@@ -245,11 +254,14 @@
 				BE869D30218F34F700689755 /* FuriganaUtils.swift in Sources */,
 				BE869D39218F34F700689755 /* travel.swift in Sources */,
 				BE869D34218F34F700689755 /* speech.swift in Sources */,
+				BE3260CD21C0F1BD00A13C94 /* vocabulary1.swift in Sources */,
 				BE55B43B217365AC006DC271 /* sqlite.swift in Sources */,
 				BE869D35218F34F700689755 /* expressive.swift in Sources */,
 				BE869D38218F34F700689755 /* polite.swift in Sources */,
 				BE869D2D218F34F700689755 /* kanaFix.swift in Sources */,
+				BE3260D021C0FD0B00A13C94 /* TTS.swift in Sources */,
 				BE869D33218F34F700689755 /* utilities.swift in Sources */,
+				BE3260CE21C0F1BD00A13C94 /* vocabulary2.swift in Sources */,
 				BE869D2E218F34F700689755 /* CalculateScore.swift in Sources */,
 				BE869D32218F34F700689755 /* daily.swift in Sources */,
 				BE869D36218F34F700689755 /* rawDataSets.swift in Sources */,

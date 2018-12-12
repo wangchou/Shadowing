@@ -10,7 +10,7 @@ import UIKit
 
 var topicForAll = "全部"
 var isTopicOn: [String: Bool] = [topicForAll: true]
-class TopicFilterBarView: UIView, GridLayout, ReloadableView {
+class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
     var gridCount: Int = 5
 
     var axis: GridAxis = .vertical
@@ -29,6 +29,7 @@ class TopicFilterBarView: UIView, GridLayout, ReloadableView {
             }
             addButton(title: buttonTitle, index: i)
         }
+
         addSeparateLine()
     }
 

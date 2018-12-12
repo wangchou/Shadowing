@@ -7,6 +7,7 @@
 //
 
 import Foundation
+#if os(iOS)
 import AVFoundation
 import Promises
 
@@ -68,8 +69,9 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         promise.fulfill(())
     }
 }
+#endif
 
-private let siriKanaFix: [String: String] = [
+let siriKanaFix: [String: String] = [
     "明日": "あした",
     "行って": "いって",
     "台湾人": "台湾じん",
@@ -79,10 +81,18 @@ private let siriKanaFix: [String: String] = [
     "後で": "あとで",
     "次いつ": "つぎいつ",
     "こちらの方": "こちらのほう",
-    "米は不作": "こめは不作"
+    "米は不作": "こめは不作",
+    "星野源": "ほしのげん",
+    "宮城": "みやぎ",
+    "原宿": "はぁらじゅく",
+    "米、": "こめ、",
+    "霞ケ関": "霞が関",
+    "鶏肉": "とりにく",
+    "欅坂46、乃木坂46": "欅坂フォーティーシックス、乃木坂フォーティーシックス",
+    "二宮和也": "二宮かずなり"
 ]
 
-private func getKanaFixedText(_ text: String) -> String {
+func getKanaFixedText(_ text: String) -> String {
     var fixedText = text
     siriKanaFix.forEach { (kanji, kana) in
         fixedText = fixedText.replace(kanji, kana)

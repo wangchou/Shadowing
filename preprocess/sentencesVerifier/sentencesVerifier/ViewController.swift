@@ -210,6 +210,8 @@ class ViewController: NSViewController {
 
     @IBAction func topicSentenceButtonClicked(_ sender: Any) {
         isInfiniteChallengePreprocessingMode = false
+        prepareSentences()
+        prepareSpeak()
         speaker = .otoya
         scrollView.becomeFirstResponder()
         verifyNextSentence()
@@ -264,7 +266,7 @@ func prepareSentences() {
     } else {
         print("set count: ", rawDataSets.count)
         //shadowingSentences.forEach { sArray in sentences.append(contentsOf: sArray) }
-        for i in 0...30 {
+        for i in 4..<rawDataSets.count {
             sentences.append(contentsOf: rawDataSets[i])
         }
         for i in 0...sentences.count {
@@ -327,7 +329,7 @@ func prepareSpeak() {
 }
 
 func speak(_ s: String) {
-    theErr = SpeakCFString(fCurSpeechChannel!, s as CFString, nil)
+    theErr = SpeakCFString(fCurSpeechChannel!, getKanaFixedText(s) as CFString, nil)
     if theErr != OSErr(noErr) { print("error... speak") }
     //print("\(s) is spoken")
 }
@@ -338,8 +340,10 @@ func verifyNextSentence() {
     vc.label.stringValue = "\(percentage) | \(duration) | \(sentencesIdx)/\(sentences.count)"
 
     vc.scrollView.becomeFirstResponder()
+    
     while true {
         guard sentencesIdx < sentences.count else { return }
+        guard isInfiniteChallengePreprocessingMode else { break }
         if isPerfectCountOverLimit(id: sentenceIds[sentencesIdx]){
             sentencesIdx = sentencesIdx + 1
         } else {
@@ -357,7 +361,7 @@ func verifyNextSentence() {
 }
 
 private func isPerfectCountOverLimit(id: Int) -> Bool {
-    let id = sentenceIds[sentencesIdx]
+    //let id = sentenceIds[sentencesIdx]
     let syllablesLen = idToSyllablesLen[id]!
     let bothPerfectCount = bothPerfectCounts[syllablesLen] ?? 0
     let currentVoicePerfectCount = currentVoicePerfectCounts[syllablesLen] ?? 0
@@ -409,7 +413,6 @@ func OurSpeechDoneCallBackProc(_ inSpeechChannel: SpeechChannel, _ inRefCon: SRe
                 let s2 = s
                 calculateScore(s1, s2).then { score -> Void in
                     if score.value != 100 {
-                        print("-------")
                         print(score.value)
                         print(s1)
                         print(s2)
