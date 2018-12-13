@@ -1,7 +1,7 @@
 # Shadowing App (今、話したい)
 「今話したい」是個練習日文、英文口說的App。App語音先說、你接著複誦。最後用辨識的結果，指出要加強的地方。目標是讓你「從會聽，但不會說」到擁有JLPT N3的口說能力。(or 英檢中高級)
 
-iOS App Store : https://itunes.apple.com/app/id1439727086 (2018.12.12 台灣教育 App排名 - 第55名)
+iOS App Store : https://itunes.apple.com/app/id1439727086
 
 demo videos: https://youtu.be/wetrfwJ2sFo
 
