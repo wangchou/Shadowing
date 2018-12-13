@@ -26,7 +26,9 @@ var kanaFix: [String: String] = [
     "湖": "みずうみ",
     "鶏肉": "とりにく",
     "欅坂46": "けやきざかフォーティーシックス",
-    "乃木坂46": "のぎざかフォーティーシックス"
+    "乃木坂46": "のぎざかフォーティーシックス",
+    "隆盛": "たかもり",
+    "深緑": "ふかみどり"
 ]
 func findKanaFix(_ token: String) -> String? {
     return kanaFix[token]

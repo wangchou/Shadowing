@@ -14,7 +14,7 @@
 		BE28B2C221A3EAB600088214 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE28B2C121A3EAB500088214 /* Main.storyboard */; };
 		BE3260C821BF912D00A13C94 /* vocabulary1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260C721BF912D00A13C94 /* vocabulary1.swift */; };
 		BE3260CA21BFCF5E00A13C94 /* vocabulary2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260C921BFCF5E00A13C94 /* vocabulary2.swift */; };
-		BE3260E021C1FA2A00A13C94 /* inf_sentences_100points_duolingo_with_topics.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BE3260DF21C1FA2A00A13C94 /* inf_sentences_100points_duolingo_with_topics.sqlite */; };
+		BE3260E221C2D11E00A13C94 /* inf_sentences_100points_duolingo_with_topics.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BE3260E121C2D11E00A13C94 /* inf_sentences_100points_duolingo_with_topics.sqlite */; };
 		BE596466215A0DE100E4AA0C /* travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596465215A0DE100E4AA0C /* travel.swift */; };
 		BE596468215A0DF200E4AA0C /* daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596467215A0DF200E4AA0C /* daily.swift */; };
 		BE59646A215A0E4D00E4AA0C /* polite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596469215A0E4D00E4AA0C /* polite.swift */; };
@@ -124,7 +124,7 @@
 		BE28B2C121A3EAB500088214 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		BE3260C721BF912D00A13C94 /* vocabulary1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vocabulary1.swift; sourceTree = "<group>"; };
 		BE3260C921BFCF5E00A13C94 /* vocabulary2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vocabulary2.swift; sourceTree = "<group>"; };
-		BE3260DF21C1FA2A00A13C94 /* inf_sentences_100points_duolingo_with_topics.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences_100points_duolingo_with_topics.sqlite; sourceTree = "<group>"; };
+		BE3260E121C2D11E00A13C94 /* inf_sentences_100points_duolingo_with_topics.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences_100points_duolingo_with_topics.sqlite; sourceTree = "<group>"; };
 		BE596465215A0DE100E4AA0C /* travel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = travel.swift; sourceTree = "<group>"; };
 		BE596467215A0DF200E4AA0C /* daily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = daily.swift; sourceTree = "<group>"; };
 		BE596469215A0E4D00E4AA0C /* polite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = polite.swift; sourceTree = "<group>"; };
@@ -369,7 +369,7 @@
 		BEBDEDBE208EF09F00C18520 /* Project */ = {
 			isa = PBXGroup;
 			children = (
-				BE3260DF21C1FA2A00A13C94 /* inf_sentences_100points_duolingo_with_topics.sqlite */,
+				BE3260E121C2D11E00A13C94 /* inf_sentences_100points_duolingo_with_topics.sqlite */,
 				BE67D2A821561A92007FE420 /* Assets.xcassets */,
 				BEBDEDCB208EF0A000C18520 /* Info.plist */,
 				BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */,
@@ -509,7 +509,7 @@
 				BE76F11F214F56F6004E130B /* SentencesTableCell.xib in Resources */,
 				BEB6F6C92182B89D0011E1C1 /* InfoPlist.strings in Resources */,
 				BEEC7FA92154C7AC001C2EFF /* TopBarView.xib in Resources */,
-				BE3260E021C1FA2A00A13C94 /* inf_sentences_100points_duolingo_with_topics.sqlite in Resources */,
+				BE3260E221C2D11E00A13C94 /* inf_sentences_100points_duolingo_with_topics.sqlite in Resources */,
 				BE67D2A921561A93007FE420 /* Assets.xcassets in Resources */,
 				BECAC3BC216B904A001BBF49 /* BottomBarView.xib in Resources */,
 			);
