@@ -1213,7 +1213,7 @@ Ruth Yuru Chen
                                         <rect key="frame" x="0.0" y="661.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VMY-nf-tkP" id="n4V-N7-Q05">
-                                            <rect key="frame" x="0.0" y="0.0" width="294" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="286" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日文老師" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qFa-JW-PaT">
@@ -1241,7 +1241,7 @@ Ruth Yuru Chen
                                         <rect key="frame" x="0.0" y="705.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PZB-LK-yN0" id="e7j-9m-oVm">
-                                            <rect key="frame" x="0.0" y="0.0" width="294" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="286" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日文助理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mX5-nJ-lM6">
@@ -1331,6 +1331,38 @@ Ruth Yuru Chen
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="您的回饋是 App 成長的原動力" id="YWv-0Z-c84" userLabel="Go to IOS Setting">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="nvf-m6-gIi">
+                                        <rect key="frame" x="0.0" y="1005.5" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nvf-m6-gIi" id="DtM-XQ-AHb">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cgn-Cn-7aR">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <state key="normal" title="前往 App Store 留言">
+                                                        <color key="titleColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="gotoAppStore:" destination="pxg-jG-gsh" eventType="touchUpInside" id="oVB-TF-UiI"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Cgn-Cn-7aR" firstAttribute="centerX" secondItem="DtM-XQ-AHb" secondAttribute="centerX" id="4tO-5c-xDb"/>
+                                                <constraint firstItem="Cgn-Cn-7aR" firstAttribute="leading" secondItem="DtM-XQ-AHb" secondAttribute="leading" id="L1A-gF-nYd"/>
+                                                <constraint firstItem="Cgn-Cn-7aR" firstAttribute="centerY" secondItem="DtM-XQ-AHb" secondAttribute="centerY" id="Tiu-Mv-ewe"/>
+                                                <constraint firstAttribute="trailing" secondItem="Cgn-Cn-7aR" secondAttribute="trailing" id="XU5-B3-GWz"/>
+                                                <constraint firstAttribute="bottom" secondItem="Cgn-Cn-7aR" secondAttribute="bottom" id="Zte-IY-yd7"/>
+                                                <constraint firstItem="Cgn-Cn-7aR" firstAttribute="top" secondItem="DtM-XQ-AHb" secondAttribute="top" id="btx-zT-7H8"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="pxg-jG-gsh" id="jbC-Ns-0Yf"/>
@@ -1346,6 +1378,7 @@ Ruth Yuru Chen
                         <outlet property="gameLangSegmentControl" destination="cZC-Zx-nez" id="un1-mf-nip"/>
                         <outlet property="gameSpeedFastLabel" destination="Igd-ll-31p" id="xFI-YR-zz7"/>
                         <outlet property="gameSpeedSlider" destination="W34-8M-0SC" id="FbG-6Z-PjZ"/>
+                        <outlet property="gotoAppStoreButton" destination="Cgn-Cn-7aR" id="LRi-or-IFH"/>
                         <outlet property="gotoIOSSettingButton" destination="3U2-5G-XCz" id="5UJ-oO-YJ4"/>
                         <outlet property="learningModeLabel" destination="VM1-q9-0NV" id="ZAc-Ij-TF8"/>
                         <outlet property="learningModeSegmentControl" destination="Jsc-nM-Doz" id="kdi-X6-s6Y"/>
