@@ -184,7 +184,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
             let textColor: UIColor = isTargetTag ? myOrange : myLightText
             let scoreStr = "\(tagPoints["#"+abilityStr] ?? 0)"
             var padStr = ""
-            for _ in 0...(5 - scoreStr.count - abilityStr.count) {
+            for _ in 0..<(6 - scoreStr.count - abilityStr.count) {
                 padStr += "  "
             }
             if !isTargetTag {
