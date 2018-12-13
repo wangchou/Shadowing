@@ -12,6 +12,7 @@ import Promises
 import UIKit
 
 private let i18n = I18n.shared
+private var isSandbox = false
 
 enum IAPProduct: String {
     case unlimitedForever
@@ -239,6 +240,7 @@ extension IAPHelper {
                                 }
 
                             case 21007:  // special code for sandbox from Apple
+                                isSandbox = true
                                 self.validateReceiptBySendingTo(RequestURL.sandbox.url)
 
                             default:
@@ -258,29 +260,33 @@ extension IAPHelper {
     }
 
     private func updateExpirationDateByReceipt(_ receipt: [String: Any]) {
-        gameExpirationDate = Date()
-        let receiptType = receipt["receipt_type"] as? String ?? ""
-        let isSandbox = receiptType.range(of: "andbox") != nil //sandbox
-        let originalAppVerison = receipt["original_application_version"] as? String ?? "0.0"
+        gameExpirationDate = Date(ms: 0)
+        //let receiptType = receipt["receipt_type"] as? String ?? ""
+        //let isSandbox = receiptType.range(of: "andbox") != nil //sandbox
+        let originalPurchaseDateMS = Int64(receipt["original_purchase_date_ms"] as? String ?? "0") ?? 0
 
         let inApp = (receipt["in_app"] as? [[String: Any]]) ?? []
-        let keyInfoInApp = inApp.map { dict -> (String, Int64) in
+        let keyInfoInApp = inApp.map { dict -> (productId: String, ms: Int64) in
             guard dict["cancellation_date"] == nil else { return ("cancelled", 0)}
             return (
                 dict["product_id"] as? String ?? "unknown",
                 Int64(dict["purchase_date_ms"] as? String ?? "") ?? 0
             )
         }
-        debugPrint(originalAppVerison, keyInfoInApp)
+
         if !isSandbox {
-            updateExpirationDate(appVersion: originalAppVerison)
+            updateExpirationDate(originalPurchaseDateMS: originalPurchaseDateMS)
         }
         print("=== Receipt Validation ===")
 
-        keyInfoInApp.forEach {(arg) in
-            let (productId, dateInMS) = arg
-            updateExpirationDate(productId: productId, purchaseDateInMS: dateInMS)
-        }
+        keyInfoInApp
+            .sorted {
+                return $0.ms < $1.ms
+            }
+            .forEach { (arg) in
+                let (productId, dateInMS) = arg
+                updateExpirationDate(productId: productId, purchaseDateInMS: dateInMS)
+            }
 
         isEverReceiptProcessed = true
         saveGameExpirationDate()

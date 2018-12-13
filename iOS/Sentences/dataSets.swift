@@ -33,12 +33,13 @@ func loadDataSets() {
         .filter( isDataSetTopicOn )
         .forEach { sentences in
             let key = sentences[0]
+            let vocabularyPlus = datasetKeyToTags[key]?[0].range(of: "單字") != nil ? 8 : 0
             dataSets[key] = sentences
             dataSetKeys.append(key)
 
             let avgKanaCount = sentences
                 .map { s -> Int in
-                    return topicSentencesInfos[s]?.kanaCount ?? 0
+                    return (topicSentencesInfos[s]?.kanaCount ?? 0) + vocabularyPlus
                 }
                 .reduce(0, { sum, count in
                     return sum + count

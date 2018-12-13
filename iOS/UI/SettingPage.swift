@@ -40,6 +40,7 @@ class SettingPage: UITableViewController {
     @IBOutlet weak var assistantNameLabel: UILabel!
     @IBOutlet weak var gotoIOSSettingButton: UIButton!
     @IBOutlet weak var dailyGoalSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var gotoAppStoreButton: UIButton!
 
     var testSentence: String {
         if let voice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher) {
@@ -96,6 +97,7 @@ class SettingPage: UITableViewController {
         dailyGoalSegmentedControl.selectedSegmentIndex = dailyGoals.firstIndex(of: context.gameSetting.dailySentenceGoal) ?? 1
 
         gotoIOSSettingButton.setTitle(i18n.gotoIOSSettingButtonTitle, for: .normal)
+        gotoAppStoreButton.setTitle(i18n.gotoAppStore, for: .normal)
 
         let setting = context.gameSetting
         autoSpeedSwitch.isOn = setting.isAutoSpeed
@@ -158,6 +160,14 @@ class SettingPage: UITableViewController {
         goToIOSSettingCenter()
     }
 
+    @IBAction func gotoAppStore(_ sender: Any) {
+        if let url = URL(string: "https://itunes.apple.com/app/id1439727086") {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+    }
+
     @IBAction func gameLangSegmentControlValueChanged(_ sender: Any) {
         if gameLangSegmentControl.selectedSegmentIndex == 1 {
             gameLang = .jp
@@ -205,6 +215,8 @@ class SettingPage: UITableViewController {
             return i18n.dailyGoal
         case 6:
             return i18n.micAndSpeechPermission
+        case 7:
+            return i18n.yourFeedbackMakeAppBetter
 
         default:
             return "Other Setting"

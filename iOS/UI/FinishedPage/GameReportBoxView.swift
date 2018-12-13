@@ -57,14 +57,19 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
 
         let y = 13
         addText(2, y, 3, "完成率")
-        let progress = getAttrText([
-            ( record.progress.padWidthTo(4), .white, getFontSize(h: 12)),
-            ( "%", .white, getFontSize(h: 3))
-            ])
-        addAttrText(2, y, 12, progress)
+        Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { _ in
+            let progress = getAttrText([
+                ( record.progress.padWidthTo(4), .white, self.getFontSize(h: 12)),
+                ( "%", .white, self.getFontSize(h: 3))
+                ])
+
+            self.addAttrText(2, y, 12, progress)
+        }
 
         addText(26, y, 3, "判定")
-        addText(26, y, 12, record.rank.rawValue.padWidthTo(3), color: record.rank.color)
+        Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { _ in
+            self.addText(26, y, 12, record.rank.rawValue.padWidthTo(3), color: record.rank.color)
+        }
 
         addText(2, y+11, 3, "正解 \(record.perfectCount) | すごい \(record.greatCount) | いいね \(record.goodCount) | ミス \(record.missedCount)")
     }
@@ -118,7 +123,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
 
         var repeatCount = 0
         let targetRepeatCount = 30
-        let delayCount = 5
+        let delayCount = 20
         let interval: TimeInterval = 0.02
 
         animateTimer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { _ in
@@ -163,7 +168,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         addText(16, y-3, 6, "新紀錄", color: myLightText)
 
         let chart = AbilityChart()
-        layout(1, y+2, 26, 25, chart)
+        layout(1, y+2, 28, 27, chart)
         chart.wColor = rgb(150, 150, 150)
         chart.labelColor = .white
         chart.labelFont = MyFont.regular(ofSize: getFontSize(h: 3))
@@ -172,31 +177,31 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
 
         let tagPoints = getTagPoints()
         var yShift = 3
-        for idx in 0...abilities.count-1 {
+        for idx in 0..<abilities.count {
             let abilityStr = abilities[idx]
             let gameTag = datasetKeyToTags[context.dataSetKey]?[0]
             let isTargetTag = gameTag == "#\(abilityStr)"
             let textColor: UIColor = isTargetTag ? myOrange : myLightText
             let scoreStr = "\(tagPoints["#"+abilityStr] ?? 0)"
             var padStr = ""
-            for _ in 0...(3 - scoreStr.count) {
+            for _ in 0...(5 - scoreStr.count - abilityStr.count) {
                 padStr += "  "
             }
             if !isTargetTag {
-                addText(30, y + yShift, 3, "\(abilityStr)： \(padStr)\(scoreStr)", color: textColor)
+                addText(30, y + yShift - 1, 3, "\(abilityStr)： \(padStr)\(scoreStr)", color: textColor)
                 yShift += 3
             } else {
+                let ty = y + yShift - 1
+                let a = abilityStr
+                let b = padStr
+                let c = scoreStr
                 showAbilityTargetLabelFunc = { [weak self] in
-                    let ty = y + yShift
-                    let a = abilityStr
-                    let b = padStr
-                    let c = scoreStr
                     Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
                         self?.addText(30, ty, 3, "\(a)： \(b)\(c)", color: myOrange)
                         self?.addText(30, ty + 2, 3, "(+\(context.newRecordIncrease))", color: myOrange)
                     }
-                    yShift += 5
                 }
+                yShift += 5
             }
         }
     }

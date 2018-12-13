@@ -46,8 +46,8 @@ class I18n {
         return "Wired Monitoring"
     }
     var gotoIOSSettingButtonTitle: String {
-        if isJa { return "iPhone設定へ" }
-        if isZh { return "前往iPhone設定中心" }
+        if isJa { return "iPhone 設定へ" }
+        if isZh { return "前往 iPhone 設定中心" }
         return "Go to iPhone Setting Center"
     }
     var voiceNotAvailableMessage: String {
@@ -461,5 +461,15 @@ class I18n {
         if isJa { return "心のエコーを聞いて" }
         if isZh { return "聽心中回音" }
         return "Listen to echo in mind."
+    }
+    var yourFeedbackMakeAppBetter: String {
+        if isJa { return "あなたの声はAppの成長の原動力です" }
+        if isZh { return "您的回饋是 App 成長的原動力"}
+        return "Your feedback makes app better."
+    }
+    var gotoAppStore: String {
+        if isJa { return "App Store へ" }
+        if isZh { return "前往 App Store"}
+        return "Go to App Store"
     }
 }

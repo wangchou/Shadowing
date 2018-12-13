@@ -11,7 +11,7 @@ import AVFoundation
 
 #if targetEnvironment(simulator)
     let isSimulator = true
-    let dailyFreeLimit = 50
+    let dailyFreeLimit = 500
 #else
     let isSimulator = false
     let dailyFreeLimit = 100
@@ -30,4 +30,4 @@ let screen = UIScreen.main.bounds
 let pauseDuration: Float = 0.4
 let practicePauseDuration: Float = 0.6 //longer for waiting table animation in practice
 
-let abilities = ["旅遊", "日常", "戀愛", "論述", "敬語", "表達"]
+let abilities = ["旅遊", "日常", "戀愛", "論述", "敬語", "表達", "單字1", "單字2"]
