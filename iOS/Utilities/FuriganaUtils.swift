@@ -83,6 +83,7 @@ func getFuriganaAttrString(_ parts: [String],
                            _ kana: String,
                            color: UIColor = .black) -> NSMutableAttributedString {
     let attrStr = NSMutableAttributedString()
+
     if parts.isEmpty { return attrStr }
 
     if parts.count == 1 {
@@ -207,7 +208,7 @@ extension String {
 
     var hiraganaOnly: String {
         let hiragana = self.kataganaToHiragana
-        guard let hiraganaRange = hiragana.range(of: "\\p{Hiragana}*\\p{Hiragana}", options: .regularExpression)
+        guard let hiraganaRange = hiragana.range(of: "[\\p{Hiragana}ー]*[\\p{Hiragana}ー]", options: .regularExpression)
             else { return "" }
         return String(hiragana[hiraganaRange])
     }
@@ -239,7 +240,8 @@ extension String {
         for ch in self {
             let scalars = ch.unicodeScalars
             let chValue = scalars[scalars.startIndex].value
-            if chValue >= 0x30A0 && chValue <= 0x30FF {
+            // 30FC is 長音（ー）there is no match in hiragana
+            if chValue >= 0x30A0 && chValue <= 0x30FB {
                 if let newScalar = UnicodeScalar( chValue - 0x60) {
                     hiragana.append(Character(newScalar))
                 } else {
