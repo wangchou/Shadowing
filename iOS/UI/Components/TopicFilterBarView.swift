@@ -17,6 +17,10 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
 
     var spacing: CGFloat = 0
 
+    var barWidth: CGFloat {
+        return max(screen.width, 10 + abilities.count.c * 50)
+    }
+
     func viewWillAppear() {
         removeAllSubviews()
 
@@ -29,8 +33,14 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
             }
             addButton(title: buttonTitle, index: i)
         }
-
+        contentSize = CGSize(width: barWidth, height: 40)
+        delaysContentTouches = true
+        canCancelContentTouches = true
         addSeparateLine()
+    }
+
+    override func touchesShouldCancel(in view: UIView) -> Bool {
+        return true
     }
 
     func addButton(title: String, index: Int) {
@@ -78,7 +88,7 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
         let line = UIView()
         line.frame = self.frame
         line.frame.origin.y = frame.size.height - 0.5
-        line.frame.size.width = screen.size.width
+        line.frame.size.width = barWidth
         line.frame.size.height = 0.5
         line.backgroundColor = .lightGray
         addSubview(line)
