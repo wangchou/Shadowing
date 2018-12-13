@@ -82,10 +82,10 @@ func calculateScore(
             return 0
         }
         let score = (len - distanceBetween(str1, str2)) * 100 / len
-        if score != 100 {
-            print("-------")
-            print(str1, str2, score)
-        }
+//        if score != 100 {
+//            print("-------")
+//            print(str1, str2, score)
+//        }
         return score
     }
 
