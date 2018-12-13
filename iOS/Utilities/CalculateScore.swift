@@ -54,7 +54,7 @@ func getKana(_ kanjiString: String) -> Promise<String> {
                 return kanaStr
             }
             let kanaPart = findKanaFix(tokenInfo[0]) ??
-                tokenInfo[tokenInfo.count - 1] == "*" ? tokenInfo[0] : tokenInfo[tokenInfo.count - 1]
+                (tokenInfo[tokenInfo.count - 1] == "*" ? tokenInfo[0] : tokenInfo[tokenInfo.count - 1])
             return kanaStr + kanaPart
         })
         promise.fulfill(kanaStr)
