@@ -66,7 +66,15 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         _ synthesizer: AVSpeechSynthesizer,
         didFinish utterance: AVSpeechUtterance
         ) {
+        postEvent(.speakEnded)
         promise.fulfill(())
+    }
+
+    func speechSynthesizer(
+        _ synthesizer: AVSpeechSynthesizer,
+        willSpeakRangeOfSpeechString characterRange: NSRange,
+        utterance: AVSpeechUtterance) {
+        postEvent(.willSpeakRange, range: characterRange)
     }
 }
 #endif

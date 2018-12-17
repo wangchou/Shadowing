@@ -30,7 +30,8 @@ func rubyAttrStr(
     _ ruby: String = "",
     fontSize: CGFloat = 20,
     color: UIColor = .black,
-    isWithStroke: Bool = false
+    isWithStroke: Bool = false,
+    backgroundColor: UIColor = .clear
     ) -> NSAttributedString {
 
     let fontRuby = MyFont.thin(ofSize: fontSize/2)
@@ -49,6 +50,7 @@ func rubyAttrStr(
             attributes: [
                 .font: fontRegular,
                 .foregroundColor: color,
+                .backgroundColor: backgroundColor,
                 kCTRubyAnnotationAttributeName as NSAttributedString.Key: annotation
             ]
         )
@@ -58,6 +60,7 @@ func rubyAttrStr(
             attributes: [
                 .font: fontBold,
                 .foregroundColor: color,
+                .backgroundColor: backgroundColor,
                 .strokeColor: UIColor.black,
                 .strokeWidth: -1.5,
                 kCTRubyAnnotationAttributeName as NSAttributedString.Key: annotation
@@ -81,15 +84,31 @@ func rubyAttrStr(
 //    kana: おとこのこおんなのこ
 func getFuriganaAttrString(_ parts: [String],
                            _ kana: String,
-                           color: UIColor = .black) -> NSMutableAttributedString {
+                           color: UIColor = .black,
+                           highlightRange: NSRange? = nil
+                           ) -> NSMutableAttributedString {
+    var currentIndex = 0
+    func isInRange() -> Bool {
+        guard let r = highlightRange else { return false }
+        return r.contains(currentIndex)
+    }
+    func getBackgroundColor() -> UIColor {
+        return isInRange() ? highlightColor : .clear
+    }
+    func getNewRange() -> NSRange? {
+        return isInRange() ?
+            NSRange(location: 0, length: highlightRange!.upperBound - currentIndex) :
+            nil
+    }
     let attrStr = NSMutableAttributedString()
 
     if parts.isEmpty { return attrStr }
 
     if parts.count == 1 {
+        let backgroundColor = getBackgroundColor()
         let result = parts[0].jpnType == JpnType.noKanjiAndNumber ?
-            rubyAttrStr(parts[0], color: color, isWithStroke: color != .black) :
-            rubyAttrStr(parts[0], kana, color: color, isWithStroke: color != .black)
+            rubyAttrStr(parts[0], color: color, isWithStroke: color != .black, backgroundColor: backgroundColor ) :
+            rubyAttrStr(parts[0], kana, color: color, isWithStroke: color != .black, backgroundColor: backgroundColor)
 
         attrStr.append(result)
         return attrStr
@@ -100,6 +119,7 @@ func getFuriganaAttrString(_ parts: [String],
         guard divider.jpnType == JpnType.noKanjiAndNumber &&
               kana.patternCount(divider.hiraganaOnly) == (parts.filter {$0.hiraganaOnly == divider.hiraganaOnly}).count
             else {
+            currentIndex += parts[dividerIndex].count
             continue
         }
 
@@ -107,15 +127,23 @@ func getFuriganaAttrString(_ parts: [String],
 
         // before divider part
         if dividerIndex > 0 {
-            attrStr.append(getFuriganaAttrString(parts[..<dividerIndex].a, kana[..<range.lowerBound].s))
+            attrStr.append(getFuriganaAttrString(
+                parts[..<dividerIndex].a,
+                kana[..<range.lowerBound].s,
+                highlightRange: getNewRange()
+            ))
         }
 
         // divider
-        attrStr.append(rubyAttrStr(divider, color: color, isWithStroke: color != .black))
+        attrStr.append(rubyAttrStr(divider, color: color, isWithStroke: color != .black, backgroundColor: getBackgroundColor()))
+        currentIndex += parts[dividerIndex].count
 
         // after divider part
         if dividerIndex + 1 < parts.count {
-            attrStr.append(getFuriganaAttrString(parts[(dividerIndex+1)...].a, kana[range.upperBound...].s))
+            attrStr.append(getFuriganaAttrString(
+                parts[(dividerIndex+1)...].a,
+                kana[range.upperBound...].s,
+                highlightRange: getNewRange()))
         }
 
         return attrStr
@@ -125,12 +153,17 @@ func getFuriganaAttrString(_ parts: [String],
     return attrStr
 }
 // tokenInfo = [kanji, 詞性, furikana, yomikana]
-func getFuriganaString(tokenInfos: [[String]]) -> NSMutableAttributedString {
+func getFuriganaString(tokenInfos: [[String]], highlightRange: NSRange? = nil) -> NSMutableAttributedString {
     let furiganaAttrStr = NSMutableAttributedString()
+    var currentIndex = 0
+    func isInRange() -> Bool {
+        guard let r = highlightRange else { return false }
+        return r.contains(currentIndex)
+    }
     for tokenInfo in tokenInfos {
         if tokenInfo.last == "*" { // number strings, ex: “307”号室
-            furiganaAttrStr.append(rubyAttrStr(tokenInfo[0]))
-            continue
+            furiganaAttrStr.append(rubyAttrStr(tokenInfo[0], backgroundColor: isInRange() ? highlightColor : .clear))
+            currentIndex += tokenInfo[0].count
         } else {
             let kanjiStr = tokenInfo[0]
             let kana = getFixedFuriganaForScore(kanjiStr) ?? tokenInfo[tokenInfo.count-2].kataganaToHiragana
@@ -144,9 +177,13 @@ func getFuriganaString(tokenInfos: [[String]]) -> NSMutableAttributedString {
                                    kana == "へ" || kana == "て"))
                                     ? myWaterBlue : .black
 
-            furiganaAttrStr.append(getFuriganaAttrString(parts, kana, color: color))
-            continue
+            var newRange: NSRange? = nil
+            if isInRange() {
+                newRange = NSRange(location: 0, length: highlightRange!.upperBound - currentIndex)
+            }
+            furiganaAttrStr.append(getFuriganaAttrString(parts, kana, color: color, highlightRange: newRange))
         }
+        currentIndex += tokenInfo[0].count
     }
 
     return furiganaAttrStr
@@ -252,5 +289,11 @@ extension String {
             }
         }
         return hiragana
+    }
+
+
+    func substring(with nsrange: NSRange) -> Substring? {
+        guard let range = Range(nsrange, in: self) else { return nil }
+        return self[range]
     }
 }

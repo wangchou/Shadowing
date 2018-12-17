@@ -11,6 +11,7 @@ import UIKit
 
 private let context = GameContext.shared
 private let i18n = I18n.shared
+private var tmpRangeQueue: [NSRange] = []
 
 extension Messenger: GameEventDelegate {
     @objc func onEventHappened(_ notification: Notification) {
@@ -23,6 +24,38 @@ extension Messenger: GameEventDelegate {
                 addLabel(rubyAttrStr(text))
             }
 
+        case .willSpeakRange:
+            guard let newRange = event.range else { return }
+            if !context.gameSetting.isShowTranslation,
+               context.gameState == .TTSSpeaking {
+                tmpRangeQueue.append(newRange)
+                Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
+                    if !tmpRangeQueue.isEmpty {
+                        tmpRangeQueue.removeFirst()
+                    }
+                }
+                let allRange: NSRange = tmpRangeQueue.reduce(tmpRangeQueue[0], {allR, curR in
+                    return allR.union(curR)
+                })
+
+                var attrText = NSMutableAttributedString()
+                if let tokenInfos = kanaTokenInfosCacheDictionary[context.targetString] {
+                    attrText = getFuriganaString(tokenInfos: tokenInfos, highlightRange: allRange)
+                } else {
+                    attrText.append(rubyAttrStr(context.targetString))
+                    attrText.addAttribute(.backgroundColor, value: myOrange.withAlphaComponent(0.6), range: allRange)
+                    var whiteRange = NSRange(location: allRange.upperBound, length: context.targetString.count - allRange.upperBound)
+                    attrText.addAttribute(.backgroundColor, value: UIColor.clear, range: whiteRange)
+
+                }
+                lastLabel.attributedText = attrText
+            }
+
+        case .speakEnded:
+            if !context.gameSetting.isShowTranslation,
+                context.gameState == .TTSSpeaking {
+                lastLabel.attributedText = context.targetAttrString
+            }
         case .listenStarted:
             addLabel(rubyAttrStr("..."), pos: .right)
 
@@ -65,6 +98,7 @@ extension Messenger: GameEventDelegate {
             }
 
             if context.gameState == .TTSSpeaking {
+                tmpRangeQueue = []
                 let text = context.targetString
                 var translationsDict = (gameLang == .jp && context.contentTab == .topics) ?
                     chTranslations : translations
@@ -72,10 +106,8 @@ extension Messenger: GameEventDelegate {
                 if context.gameSetting.isShowTranslation,
                     let translation = translationsDict[text] {
                     attrText = rubyAttrStr(translation)
-                } else if let tokenInfos = kanaTokenInfosCacheDictionary[text] {
-                    attrText = getFuriganaString(tokenInfos: tokenInfos)
                 } else {
-                    attrText = rubyAttrStr(text)
+                    attrText = context.targetAttrString
                 }
                 prescrolling(attrText)
                 addLabel(attrText)

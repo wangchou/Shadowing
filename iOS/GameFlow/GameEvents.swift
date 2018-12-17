@@ -11,6 +11,8 @@ import Foundation
 // lower layer like tts, speechRecognition, gameFlow will postEvent to UI
 enum EventType {
     case sayStarted
+    case willSpeakRange
+    case speakEnded
     case listenStarted
 
     case scoreCalculated
@@ -29,6 +31,7 @@ struct Event {
     let int: Int?
     let gameState: GameState?
     let score: Score?
+    let range: NSRange?
 }
 
 extension Notification.Name {
@@ -40,10 +43,11 @@ func postEvent (
     string: String? = nil,
     int: Int? = nil,
     gameState: GameState? = nil,
-    score: Score? = nil) {
+    score: Score? = nil,
+    range: NSRange? = nil) {
     NotificationCenter.default.post(
         name: .eventHappened,
-        object: Event(type: type, string: string, int: int, gameState: gameState, score: score)
+        object: Event(type: type, string: string, int: int, gameState: gameState, score: score, range: range)
     )
 }
 
