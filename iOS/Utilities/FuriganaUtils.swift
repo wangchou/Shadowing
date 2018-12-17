@@ -87,6 +87,7 @@ func getFuriganaAttrString(_ parts: [String],
                            color: UIColor = .black,
                            highlightRange: NSRange? = nil
                            ) -> NSMutableAttributedString {
+
     var currentIndex = 0
     func isInRange() -> Bool {
         guard let r = highlightRange else { return false }
@@ -95,11 +96,7 @@ func getFuriganaAttrString(_ parts: [String],
     func getBackgroundColor() -> UIColor {
         return isInRange() ? highlightColor : .clear
     }
-    func getNewRange() -> NSRange? {
-        return isInRange() ?
-            NSRange(location: 0, length: highlightRange!.upperBound - currentIndex) :
-            nil
-    }
+
     let attrStr = NSMutableAttributedString()
 
     if parts.isEmpty { return attrStr }
@@ -114,12 +111,12 @@ func getFuriganaAttrString(_ parts: [String],
         return attrStr
     }
 
+    // divider is first "kanji or number part" in parts
     for dividerIndex in 0..<parts.count {
         let divider = parts[dividerIndex]
         guard divider.jpnType == JpnType.noKanjiAndNumber &&
               kana.patternCount(divider.hiraganaOnly) == (parts.filter {$0.hiraganaOnly == divider.hiraganaOnly}).count
             else {
-            currentIndex += parts[dividerIndex].count
             continue
         }
 
@@ -130,8 +127,11 @@ func getFuriganaAttrString(_ parts: [String],
             attrStr.append(getFuriganaAttrString(
                 parts[..<dividerIndex].a,
                 kana[..<range.lowerBound].s,
-                highlightRange: getNewRange()
+                highlightRange: highlightRange?.subRange(startIndex: currentIndex)
             ))
+            currentIndex += parts[..<dividerIndex].a.reduce(0, { result, part in
+                return result + part.count
+            })
         }
 
         // divider
@@ -143,7 +143,7 @@ func getFuriganaAttrString(_ parts: [String],
             attrStr.append(getFuriganaAttrString(
                 parts[(dividerIndex+1)...].a,
                 kana[range.upperBound...].s,
-                highlightRange: getNewRange()))
+                highlightRange: highlightRange?.subRange(startIndex: currentIndex)))
         }
 
         return attrStr
@@ -152,6 +152,18 @@ func getFuriganaAttrString(_ parts: [String],
     attrStr.append(rubyAttrStr(parts.joined(), kana, color: color))
     return attrStr
 }
+
+extension NSRange {
+    // subRange from startIndex of old string
+    func subRange(startIndex: Int) -> NSRange? {
+        guard startIndex < self.upperBound else { return nil }
+
+        return NSRange(
+            location: max(self.lowerBound - startIndex, 0),
+            length: self.upperBound - startIndex)
+    }
+}
+
 // tokenInfo = [kanji, 詞性, furikana, yomikana]
 func getFuriganaString(tokenInfos: [[String]], highlightRange: NSRange? = nil) -> NSMutableAttributedString {
     let furiganaAttrStr = NSMutableAttributedString()
@@ -163,7 +175,6 @@ func getFuriganaString(tokenInfos: [[String]], highlightRange: NSRange? = nil) -
     for tokenInfo in tokenInfos {
         if tokenInfo.last == "*" { // number strings, ex: “307”号室
             furiganaAttrStr.append(rubyAttrStr(tokenInfo[0], backgroundColor: isInRange() ? highlightColor : .clear))
-            currentIndex += tokenInfo[0].count
         } else {
             let kanjiStr = tokenInfo[0]
             let kana = getFixedFuriganaForScore(kanjiStr) ?? tokenInfo[tokenInfo.count-2].kataganaToHiragana
@@ -177,11 +188,11 @@ func getFuriganaString(tokenInfos: [[String]], highlightRange: NSRange? = nil) -
                                    kana == "へ" || kana == "て"))
                                     ? myWaterBlue : .black
 
-            var newRange: NSRange? = nil
-            if isInRange() {
-                newRange = NSRange(location: 0, length: highlightRange!.upperBound - currentIndex)
-            }
-            furiganaAttrStr.append(getFuriganaAttrString(parts, kana, color: color, highlightRange: newRange))
+            furiganaAttrStr.append(getFuriganaAttrString(
+                parts,
+                kana,
+                color: color,
+                highlightRange: highlightRange?.subRange(startIndex: currentIndex)))
         }
         currentIndex += tokenInfo[0].count
     }

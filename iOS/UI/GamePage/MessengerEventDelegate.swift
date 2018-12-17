@@ -98,6 +98,7 @@ extension Messenger: GameEventDelegate {
             }
 
             if context.gameState == .TTSSpeaking {
+                print("---")
                 tmpRangeQueue = []
                 let text = context.targetString
                 var translationsDict = (gameLang == .jp && context.contentTab == .topics) ?
