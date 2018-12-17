@@ -133,7 +133,7 @@ func getFuriganaString(tokenInfos: [[String]]) -> NSMutableAttributedString {
             continue
         } else {
             let kanjiStr = tokenInfo[0]
-            let kana = findKanaFix(kanjiStr) ?? tokenInfo[tokenInfo.count-2].kataganaToHiragana
+            let kana = getFixedFuriganaForScore(kanjiStr) ?? tokenInfo[tokenInfo.count-2].kataganaToHiragana
             let parts = kanjiStr // [わたし、| 気 | になります！]
                 .replace("([\\p{Han}\\d]*[\\p{Han}\\d])", "👻$1👻")
                 .components(separatedBy: "👻")

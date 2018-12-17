@@ -8,8 +8,41 @@
 
 import Foundation
 
-// fix mecab yomi error
-var kanaFix: [String: String] = [
+// MARK: Fix apple tts pronounciation Error
+let ttsKanaFix: [String: String] = [
+    "明日": "あした",
+    "行って": "いって",
+    "台湾人": "台湾じん",
+    "辛い": "つらい",
+    "何で": "なんで",
+    "高すぎ": "たかすぎ",
+    "後で": "あとで",
+    "次いつ": "つぎいつ",
+    "こちらの方": "こちらのほう",
+    "米は不作": "こめは不作",
+    "星野源": "ほしのげん",
+    "宮城": "みやぎ",
+    "原宿": "はぁらじゅく",
+    "米、": "こめ、",
+    "霞ケ関": "霞が関",
+    "鶏肉": "とりにく",
+    "欅坂46、乃木坂46": "欅坂フォーティーシックス、乃木坂フォーティーシックス",
+    "二宮和也": "二宮かずなり",
+    "隆盛": "たかもり",
+    "博士": "はかせ",
+    "私立学校": "しりつ学校"
+]
+
+func getFixedKanaForTTS(_ text: String) -> String {
+    var fixedText = text
+    ttsKanaFix.forEach { (kanji, kana) in
+        fixedText = fixedText.replace(kanji, kana)
+    }
+    return fixedText
+}
+
+// MARK: Fix mecab kanji to furigana error
+var furiganaFix: [String: String] = [
     "何時": "なんじ",
     "という": "トイウ",
     "事": "こと",
@@ -30,6 +63,6 @@ var kanaFix: [String: String] = [
     "隆盛": "たかもり",
     "深緑": "ふかみどり"
 ]
-func findKanaFix(_ token: String) -> String? {
-    return kanaFix[token]
+func getFixedFuriganaForScore(_ token: String) -> String? {
+    return furiganaFix[token]
 }
