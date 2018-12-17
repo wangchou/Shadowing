@@ -53,7 +53,7 @@ func getKana(_ kanjiString: String) -> Promise<String> {
             if tokenInfo.count < 2 || tokenInfo[1] == "記号" {
                 return kanaStr
             }
-            let kanaPart = findKanaFix(tokenInfo[0]) ??
+            let kanaPart = getFixedFuriganaForScore(tokenInfo[0]) ??
                 (tokenInfo[tokenInfo.count - 1] == "*" ? tokenInfo[0] : tokenInfo[tokenInfo.count - 1])
             return kanaStr + kanaPart
         })
@@ -93,8 +93,6 @@ func calculateScore(
         getKana(sentence1),
         getKana(sentence2)
     ]).then { kanas in
-        print(sentence1)
-        print(kanas)
         let score = calcScore(kanas[0].kataganaToHiragana, kanas[1].kataganaToHiragana)
         #if os(iOS)
         postEvent(.scoreCalculated, score: Score(value: score))

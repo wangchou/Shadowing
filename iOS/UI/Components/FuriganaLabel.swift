@@ -19,8 +19,7 @@ class FuriganaLabel: UILabel {
     override var attributedText: NSAttributedString? {
         willSet {
             if  let newValue = newValue,
-                let attributedText = self.attributedText,
-                newValue != attributedText {
+                newValue != self.attributedText {
                 height = heightOfCoreText(attributed: newValue, width: self.frame.width)
             }
         }

@@ -157,7 +157,7 @@
 		BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFinishedPage.swift; sourceTree = "<group>"; };
 		BE8283B32133DAE2008BC875 /* SpeechEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechEngine.swift; sourceTree = "<group>"; };
 		BE8DE7B52161E44400812CED /* AbilityChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityChart.swift; sourceTree = "<group>"; };
-		BE8F747E2176E258005546DC /* kanaFix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kanaFix.swift; sourceTree = "<group>"; };
+		BE8F747E2176E258005546DC /* kanaFix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = kanaFix.swift; path = ../Utilities/kanaFix.swift; sourceTree = "<group>"; };
 		BE955E46216DAB8F00D424FA /* ICInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICInfoView.swift; sourceTree = "<group>"; };
 		BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaLabel.swift; sourceTree = "<group>"; };
 		BE9B476920AD50520063E0DA /* FuriganaUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaUtils.swift; sourceTree = "<group>"; };
@@ -229,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				BE8283B32133DAE2008BC875 /* SpeechEngine.swift */,
+				BE8F747E2176E258005546DC /* kanaFix.swift */,
 				BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */,
 				BEBDEDD2208EF15E00C18520 /* TTS.swift */,
 			);
@@ -423,7 +424,6 @@
 			children = (
 				BE5E0CCD2183477400832E88 /* I18n.swift */,
 				BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */,
-				BE8F747E2176E258005546DC /* kanaFix.swift */,
 				BE9B476920AD50520063E0DA /* FuriganaUtils.swift */,
 				BE8180BF20B3BEB6006ABCB3 /* MyText.swift */,
 				BEF28B6220B52BF700385273 /* UI.swift */,

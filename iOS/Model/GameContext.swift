@@ -70,6 +70,16 @@ class GameContext {
         return sentences[sentenceIndex]
     }
 
+    var targetAttrString: NSMutableAttributedString {
+        var attrText = NSMutableAttributedString()
+        if let tokenInfos = kanaTokenInfosCacheDictionary[targetString] {
+            attrText = getFuriganaString(tokenInfos: tokenInfos)
+        } else {
+            attrText.append(rubyAttrStr(targetString))
+        }
+        return attrText
+    }
+
     // Real duration in seconds of tts speaking
     var speakDuration: Float = 0
 

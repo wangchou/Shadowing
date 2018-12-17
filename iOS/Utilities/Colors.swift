@@ -19,7 +19,7 @@ func rgb(_ red: Float, _ green: Float, _ blue: Float, _ alpha: Float = 1.0) -> U
 
 let myRed = rgb(254, 67, 134)
 let myOrange = rgb(255, 195, 0)
-//let myOrange = rgb(245, 166, 35)
+let highlightColor = myOrange.withAlphaComponent(0.4)
 let myGreen = rgb(150, 207, 42)
 let myBlue = rgb(20, 168, 237)
 let myPurple = UIColor.purple
