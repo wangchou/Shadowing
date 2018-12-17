@@ -172,6 +172,7 @@ func getFuriganaString(tokenInfos: [[String]], highlightRange: NSRange? = nil) -
         guard let r = highlightRange else { return false }
         return r.contains(currentIndex)
     }
+
     for tokenInfo in tokenInfos {
         if tokenInfo.last == "*" { // number strings, ex: “307”号室
             furiganaAttrStr.append(rubyAttrStr(tokenInfo[0], backgroundColor: isInRange() ? highlightColor : .clear))
@@ -301,7 +302,6 @@ extension String {
         }
         return hiragana
     }
-
 
     func substring(with nsrange: NSRange) -> Substring? {
         guard let range = Range(nsrange, in: self) else { return nil }

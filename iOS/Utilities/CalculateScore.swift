@@ -93,8 +93,6 @@ func calculateScore(
         getKana(sentence1),
         getKana(sentence2)
     ]).then { kanas in
-        print(sentence1)
-        print(kanas)
         let score = calcScore(kanas[0].kataganaToHiragana, kanas[1].kataganaToHiragana)
         #if os(iOS)
         postEvent(.scoreCalculated, score: Score(value: score))

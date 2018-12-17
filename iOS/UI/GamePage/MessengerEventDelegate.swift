@@ -29,7 +29,9 @@ extension Messenger: GameEventDelegate {
             if !context.gameSetting.isShowTranslation,
                context.gameState == .TTSSpeaking {
                 tmpRangeQueue.append(newRange)
-                Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
+                let duration = Double(0.15 / (2 * context.teachingRate))
+
+                Timer.scheduledTimer(withTimeInterval: duration, repeats: false) { _ in
                     if !tmpRangeQueue.isEmpty {
                         tmpRangeQueue.removeFirst()
                     }
@@ -39,8 +41,11 @@ extension Messenger: GameEventDelegate {
                 })
 
                 var attrText = NSMutableAttributedString()
-                if let tokenInfos = kanaTokenInfosCacheDictionary[context.targetString] {
-                    attrText = getFuriganaString(tokenInfos: tokenInfos, highlightRange: allRange)
+
+                if context.targetString.jpnType != .noKanjiAndNumber,
+                    let tokenInfos = kanaTokenInfosCacheDictionary[context.targetString] {
+                    let fixedRange = getRangeWithParticleFix(tokenInfos: tokenInfos, allRange: allRange)
+                    attrText = getFuriganaString(tokenInfos: tokenInfos, highlightRange: fixedRange)
                 } else {
                     attrText.append(rubyAttrStr(context.targetString))
                     attrText.addAttribute(.backgroundColor, value: myOrange.withAlphaComponent(0.6), range: allRange)
@@ -98,7 +103,6 @@ extension Messenger: GameEventDelegate {
             }
 
             if context.gameState == .TTSSpeaking {
-                print("---")
                 tmpRangeQueue = []
                 let text = context.targetString
                 var translationsDict = (gameLang == .jp && context.contentTab == .topics) ?
@@ -122,6 +126,52 @@ extension Messenger: GameEventDelegate {
                 addLabel(rubyAttrStr(i18n.listenToEcho), pos: .center)
             }
         }
+    }
+
+    // The iOS tts speak japanese always report willSpeak before particle or mark
+    // ex: when speaking 鴨川沿いには遊歩道があります
+    // the tts spoke "鴨川沿いには", but the delegate always report "鴨川沿い"
+    // then it reports "には遊歩道"
+    // so this function will remove prefix particle range and extend suffix particle range
+    func getRangeWithParticleFix(tokenInfos: [[String]], allRange: NSRange?) -> NSRange? {
+
+        guard let r = allRange else { return nil }
+        var lowerBound = r.lowerBound
+        var upperBound = r.upperBound
+        var currentIndex = 0
+        var isParticlePrefixRemoved = false
+        var isParticleSuffixExtended = false
+
+        for i in 0..<tokenInfos.count {
+            let part = tokenInfos[i]
+            let partLen = part[0].count
+            let isParticle = part[1] == "助詞" || part[1] == "記号"
+
+            // prefix particle remove
+            if !isParticlePrefixRemoved,
+                currentIndex <= lowerBound,
+                currentIndex + partLen > lowerBound {
+                if isParticle {
+                    lowerBound = currentIndex + partLen
+                } else {
+                    isParticlePrefixRemoved = true
+                }
+            }
+
+            // suffix particle extend
+            if !isParticleSuffixExtended, currentIndex >= upperBound {
+                if isParticle {
+                    upperBound = currentIndex + partLen
+                } else {
+                    isParticleSuffixExtended = true
+                }
+            }
+
+            currentIndex += partLen
+        }
+
+        guard upperBound >= lowerBound else { return nil }
+        return NSRange(location: lowerBound, length: upperBound - lowerBound)
     }
 
     private func onScore(_ score: Score) {

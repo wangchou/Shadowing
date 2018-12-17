@@ -74,7 +74,6 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         _ synthesizer: AVSpeechSynthesizer,
         willSpeakRangeOfSpeechString characterRange: NSRange,
         utterance: AVSpeechUtterance) {
-        print(Date().timeIntervalSince1970, utterance.speechString.substring(with: characterRange)?.s)
         postEvent(.willSpeakRange, range: characterRange)
     }
 }
