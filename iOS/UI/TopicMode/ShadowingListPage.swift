@@ -19,13 +19,10 @@ extension Notification.Name {
 
 class ShadowingListPage: UIViewController {
     @IBOutlet weak var sentencesTableView: UITableView!
-    @IBOutlet weak var timeline: TimelineView!
     @IBOutlet weak var topArea: UIView!
-    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var topChartView: TopChartView!
     @IBOutlet weak var topBarView: TopBarView!
     @IBOutlet weak var topicFilterBarView: TopicFilterBarView!
-    @IBOutlet weak var abilityChart: AbilityChart!
-
     var timelineSubviews: [String: UIView] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,14 +49,12 @@ class ShadowingListPage: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         topBarView.titleLabel.text = I18n.shared.topicPageTitile
-        let height = screen.width * 170/320
+        let height = screen.width * 34/48
         topArea.frame.size.height = height + 50
-        timeline.frame.size.height = height * 140 / 170
-        timeline.frame.size.width = height * 21 / 23
 
         sentencesTableView.reloadData()
-        timeline.viewWillAppear()
-        abilityChart.render()
+        topChartView.viewWillAppear()
+
         if context.dataSetKey == "" {
             context.dataSetKey = dataSetKeys[0]
             context.loadLearningSentences()
@@ -69,26 +64,7 @@ class ShadowingListPage: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        addGradientSeparatorLine()
-    }
-
-    func addGradientSeparatorLine() {
-        let lightRGBs = [
-            Level.lv0.color,
-            Level.lv2.color,
-            Level.lv4.color,
-            Level.lv6.color,
-            Level.lv8.color
-        ].map { $0.cgColor }
-        let layer = CAGradientLayer()
-        layer.frame = topView.frame
-        layer.frame.origin.y = screen.width * 170/320 - 1.5
-        layer.frame.size.height = 1.5
-        layer.frame.size.width = screen.size.width
-        layer.startPoint = CGPoint(x: 0, y: 0)
-        layer.endPoint = CGPoint(x: 1.0, y: 0)
-        layer.colors = lightRGBs
-        topView.layer.insertSublayer(layer, at: 0)
+        topChartView.animateProgress()
     }
 
     @objc func reloadTopicSentences() {
@@ -139,7 +115,7 @@ extension ShadowingListPage: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         context.dataSetKey = dataSetKeys[indexPath.row]
         context.loadLearningSentences()
-        (rootViewController.current as? UIPageViewController)?.goToNextPage{ _ in
+        (rootViewController.current as? UIPageViewController)?.goToNextPage { _ in
             let cell = tableView.dequeueReusableCell(withIdentifier: "SentencesCell", for: indexPath)
             cell.isSelected = false
         }

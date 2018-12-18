@@ -34,9 +34,6 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         renderTopTitle()
         renderMiddleRecord()
         renderMiddleGoalBar()
-        if context.isNewRecord && context.contentTab == .topics {
-            renderBottomAbilityInfo()
-        }
     }
 
     private func renderTopTitle() {
@@ -146,63 +143,6 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
                 }
             }
             repeatCount += 1
-        }
-    }
-
-    private func renderBottomAbilityInfo() {
-        let y = 42
-
-        let lineLeft = UIView()
-        let lineRight = UIView()
-
-        layout(0, y, 15, 1, lineLeft)
-        lineLeft.backgroundColor = .lightGray
-        lineLeft.frame.size.height = 1.5
-        addSubview(lineLeft)
-
-        layout(29, y, 15, 1, lineRight)
-        lineRight.backgroundColor = .lightGray
-        lineRight.frame.size.height = 1.5
-        addSubview(lineRight)
-
-        addText(16, y-3, 6, "新紀錄", color: myLightText)
-
-        let chart = AbilityChart()
-        layout(1, y+2, 28, 27, chart)
-        chart.wColor = rgb(150, 150, 150)
-        chart.labelColor = .white
-        chart.labelFont = MyFont.regular(ofSize: getFontSize(h: 3))
-        chart.render()
-        addSubview(chart)
-
-        let tagPoints = getTagPoints()
-        var yShift = 3
-        for idx in 0..<abilities.count {
-            let abilityStr = abilities[idx]
-            let gameTag = datasetKeyToTags[context.dataSetKey]?[0]
-            let isTargetTag = gameTag == "#\(abilityStr)"
-            let textColor: UIColor = isTargetTag ? myOrange : myLightText
-            let scoreStr = "\(tagPoints["#"+abilityStr] ?? 0)"
-            var padStr = ""
-            for _ in 0..<(6 - scoreStr.count - abilityStr.count) {
-                padStr += "  "
-            }
-            if !isTargetTag {
-                addText(30, y + yShift - 1, 3, "\(abilityStr)： \(padStr)\(scoreStr)", color: textColor)
-                yShift += 3
-            } else {
-                let ty = y + yShift - 1
-                let a = abilityStr
-                let b = padStr
-                let c = scoreStr
-                showAbilityTargetLabelFunc = { [weak self] in
-                    Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
-                        self?.addText(30, ty, 3, "\(a)： \(b)\(c)", color: myOrange)
-                        self?.addText(30, ty + 2, 3, "(+\(context.newRecordIncrease))", color: myOrange)
-                    }
-                }
-                yShift += 5
-            }
         }
     }
 

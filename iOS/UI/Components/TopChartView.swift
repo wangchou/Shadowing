@@ -11,7 +11,7 @@ import UIKit
 private let context = GameContext.shared
 private let i18n = I18n.shared
 
-class ICListTopView: UIView, GridLayout, ReloadableView {
+class TopChartView: UIView, GridLayout, ReloadableView {
     // GridLayout
     var gridCount: Int = 48
 
@@ -119,11 +119,13 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        addOnClickHandler()
         viewWillAppear()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        addOnClickHandler()
         viewWillAppear()
     }
 
@@ -132,7 +134,25 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
         viewWillAppear()
     }
 
+    func addOnClickHandler() {
+        addTapGestureRecognizer {
+            switch context.gameSetting.icTopViewMode {
+            case .dailyGoal:
+                context.gameSetting.icTopViewMode = .timeline
+            case .timeline:
+                context.gameSetting.icTopViewMode = .longTermGoal
+            case .longTermGoal:
+                context.gameSetting.icTopViewMode = .dailyGoal
+            }
+            saveGameSetting()
+            self.viewWillAppear()
+            self.animateProgress()
+        }
+    }
+
     func viewWillAppear() {
+        frame.size.width = screen.width
+        frame.size.height = screen.width * 34/48
         removeAllSubviews()
         updateByRecords()
 
@@ -211,7 +231,7 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
 }
 
 // MARK: Daily Goal Mode
-extension ICListTopView {
+extension TopChartView {
     func renderDailyGoalMode() {
         gridCount = 48
         updateDailyViewBGColor()
@@ -368,7 +388,7 @@ extension ICListTopView {
 }
 
 // MARK: Timeline Mode
-extension ICListTopView {
+extension TopChartView {
     func renderTimelineMode() {
         gridCount = 16
         backgroundColor = longTermGoalColor.withSaturation(0.3)
@@ -479,7 +499,7 @@ extension ICListTopView {
 }
 
 // MARK: LongTermGoalMode
-extension ICListTopView {
+extension TopChartView {
     func renderLongTermGoalMode() {
         gridCount = 50
         backgroundColor = rgb(28, 28, 28)
@@ -581,6 +601,31 @@ extension ICListTopView {
             descLabel = addAttrText(x: 5, y: 25, h: 5, text: descAttrText)
             descLabel.textAlignment = .center
             descLabel.centerX(frame)
+        }
+    }
+}
+
+struct TimelineBox {
+    var date: Date
+    var row: Int
+    var column: Int // right to left
+    var day: Int {
+        return Calendar.current.component(.day, from: date)
+    }
+    var month: Int {
+        return Calendar.current.component(.month, from: date)
+    }
+
+    mutating func toYesterday() {
+        row -= 1
+        if row == 0 {
+            row = 7
+            column += 1
+        }
+        var dateComponent = DateComponents()
+        dateComponent.day = -1
+        if let newDate = Calendar.current.date(byAdding: dateComponent, to: date) {
+            date = newDate
         }
     }
 }
