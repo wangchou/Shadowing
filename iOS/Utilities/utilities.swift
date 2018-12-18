@@ -435,8 +435,12 @@ func getAllLanguageTodaySentenceCount() -> (said: Int, correct: Int) {
     return (saidSentenceCount, correctSentenceCount)
 }
 
+func isFreeVersion() -> Bool {
+    return Date() > gameExpirationDate
+}
+
 func isUnderDailySentenceLimit() -> Bool {
-    if Date() < gameExpirationDate { return true }
+    guard isFreeVersion() else { return true }
     let (said, _) = getAllLanguageTodaySentenceCount()
     if said < dailyFreeLimit { return true }
 

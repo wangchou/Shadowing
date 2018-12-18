@@ -70,9 +70,9 @@ class IAPHelper: NSObject {
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
 
-    func showPurchaseView() {
+    func showPurchaseView(isChanllenge: Bool = true) {
         let actionSheet = UIAlertController(
-            title: i18n.purchaseViewTitle,
+            title: isChanllenge ? i18n.purchaseViewTitle : i18n.itIsfreeVersion,
             message: i18n.purchaseViewMessage,
             preferredStyle: .actionSheet)
 
@@ -82,6 +82,7 @@ class IAPHelper: NSObject {
         }
         for product in sortedProducts {
             var priceString = ""
+            var localizedTitle = ""
 
             switch product.priceLocale.currencyCode {
             case "JPY":
@@ -90,7 +91,18 @@ class IAPHelper: NSObject {
                 priceString = "\(product.priceLocale.currencySymbol ?? "")\(product.price) \(product.priceLocale.currencyCode ?? "")"
             }
 
-            let title = "\(product.localizedTitle) \(priceString)"
+            switch product.productIdentifier {
+            case IAPProduct.unlimitedOneMonth.rawValue:
+                localizedTitle = i18n.buyOneMonth
+            case IAPProduct.unlimitedThreeMonths.rawValue:
+                localizedTitle = i18n.buyThreeMonths
+            case IAPProduct.unlimitedForever.rawValue:
+                localizedTitle = i18n.buyForever
+            default:
+                ()
+            }
+
+            let title = "\(localizedTitle) \(priceString)"
             let buyAction = UIAlertAction(title: title, style: .default) { _ in
                 actionSheet.dismiss(animated: true, completion: nil)
                 self.buy(product)
@@ -104,8 +116,13 @@ class IAPHelper: NSObject {
         }
         actionSheet.addAction(restoreAction)
 
-        let cancelAction = UIAlertAction(title: i18n.challengeItTomorrow, style: .cancel) { _ in
-            actionSheet.dismiss(animated: true, completion: nil)
+        let cancelTitle = isChanllenge ? i18n.startChallenge : i18n.close
+
+        let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel) { _ in
+            if isChanllenge,
+               let vc = UIApplication.getPresentedViewController() {
+                launchStoryboard(vc, "MessengerGame")
+            }
         }
 
         // Add the actions
@@ -138,6 +155,7 @@ extension IAPHelper: SKProductsRequestDelegate {
                     self.processingAlertView?.dismiss(animated: false) {
                         self.processingAlertView = nil
                         showOkAlert(title: i18n.previousPurchaseRestored)
+                        rootViewController.rerenderTopView()
                     }
                 }
             }
@@ -184,6 +202,7 @@ extension IAPHelper: SKPaymentTransactionObserver {
         if shouldProcessReceipt {
             processingAlertView?.dismiss(animated: false) { self.processingAlertView = nil }
             showOkAlert(title: i18n.previousPurchaseRestored)
+            rootViewController.rerenderTopView()
             processReceipt()
         }
     }
