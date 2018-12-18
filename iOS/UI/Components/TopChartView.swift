@@ -604,3 +604,28 @@ extension TopChartView {
         }
     }
 }
+
+struct TimelineBox {
+    var date: Date
+    var row: Int
+    var column: Int // right to left
+    var day: Int {
+        return Calendar.current.component(.day, from: date)
+    }
+    var month: Int {
+        return Calendar.current.component(.month, from: date)
+    }
+
+    mutating func toYesterday() {
+        row -= 1
+        if row == 0 {
+            row = 7
+            column += 1
+        }
+        var dateComponent = DateComponents()
+        dateComponent.day = -1
+        if let newDate = Calendar.current.date(byAdding: dateComponent, to: date) {
+            date = newDate
+        }
+    }
+}

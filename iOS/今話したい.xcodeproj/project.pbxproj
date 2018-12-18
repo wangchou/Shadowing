@@ -52,7 +52,6 @@
 		BE8180C020B3BEB6006ABCB3 /* MyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180BF20B3BEB6006ABCB3 /* MyText.swift */; };
 		BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */; };
 		BE8283B42133DAE2008BC875 /* SpeechEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8283B32133DAE2008BC875 /* SpeechEngine.swift */; };
-		BE8DE7B62161E44400812CED /* AbilityChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8DE7B52161E44400812CED /* AbilityChart.swift */; };
 		BE8F747F2176E258005546DC /* kanaFix.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8F747E2176E258005546DC /* kanaFix.swift */; };
 		BE955E47216DAB8F00D424FA /* ICInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE955E46216DAB8F00D424FA /* ICInfoView.swift */; };
 		BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */; };
@@ -90,7 +89,6 @@
 		BEEC7FAB2154FFA4001C2EFF /* MainSwipablePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEC7FAA2154FFA4001C2EFF /* MainSwipablePage.swift */; };
 		BEEC7FAD2155014E001C2EFF /* SettingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEC7FAC2155014E001C2EFF /* SettingPage.swift */; };
 		BEEC7FAF21550818001C2EFF /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEC7FAE21550818001C2EFF /* TopBarView.swift */; };
-		BEF258B320B57C7F00D0026C /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF258B220B57C7F00D0026C /* TimelineView.swift */; };
 		BEF28B6120B52BB000385273 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF28B6020B52BB000385273 /* Score.swift */; };
 		BEF28B6320B52BF700385273 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF28B6220B52BF700385273 /* UI.swift */; };
 		BEF4B14F219C093800B8E45E /* VoiceSelectionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF4B14E219C093800B8E45E /* VoiceSelectionPage.swift */; };
@@ -156,7 +154,6 @@
 		BE8180BF20B3BEB6006ABCB3 /* MyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyText.swift; sourceTree = "<group>"; };
 		BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFinishedPage.swift; sourceTree = "<group>"; };
 		BE8283B32133DAE2008BC875 /* SpeechEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechEngine.swift; sourceTree = "<group>"; };
-		BE8DE7B52161E44400812CED /* AbilityChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbilityChart.swift; sourceTree = "<group>"; };
 		BE8F747E2176E258005546DC /* kanaFix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = kanaFix.swift; path = ../Utilities/kanaFix.swift; sourceTree = "<group>"; };
 		BE955E46216DAB8F00D424FA /* ICInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICInfoView.swift; sourceTree = "<group>"; };
 		BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaLabel.swift; sourceTree = "<group>"; };
@@ -200,7 +197,6 @@
 		BEEC7FAA2154FFA4001C2EFF /* MainSwipablePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSwipablePage.swift; sourceTree = "<group>"; };
 		BEEC7FAC2155014E001C2EFF /* SettingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPage.swift; sourceTree = "<group>"; };
 		BEEC7FAE21550818001C2EFF /* TopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
-		BEF258B220B57C7F00D0026C /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		BEF28B6020B52BB000385273 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		BEF28B6220B52BF700385273 /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 		BEF4B14E219C093800B8E45E /* VoiceSelectionPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceSelectionPage.swift; sourceTree = "<group>"; };
@@ -242,7 +238,6 @@
 				BEEC7FAA2154FFA4001C2EFF /* MainSwipablePage.swift */,
 				BEDEDD3620A46D1B00E7B60B /* ShadowingListPage.swift */,
 				BE7725CD20A4216700DF186A /* ContentCell.swift */,
-				BEF258B220B57C7F00D0026C /* TimelineView.swift */,
 				BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */,
 			);
 			path = TopicMode;
@@ -278,9 +273,9 @@
 				BECAC3BB216B904A001BBF49 /* BottomBarView.xib */,
 				BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */,
 				BEC2E9302179BD090095A65D /* TopicFilterBarView.swift */,
-				BE8DE7B52161E44400812CED /* AbilityChart.swift */,
 				BE7441B2216CCBE000E53A3D /* LineChart.swift */,
 				BE221AA021A2A76D0009B23B /* CircleView.swift */,
+				BEC4CF0D219D727B00E1A54C /* TopChartView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -384,7 +379,6 @@
 			children = (
 				BECAC3BE216B9D19001BBF49 /* InfiniteChallengeSwipablePage.swift */,
 				BECD9076219D279C00400FD3 /* InfiniteChallengeListPage.swift */,
-				BEC4CF0D219D727B00E1A54C /* TopChartView.swift */,
 				BECD907A219D294100400FD3 /* InfiniteChallengeTableCell.swift */,
 				BECAC3B4216B34FA001BBF49 /* InfiniteChanllengePage.swift */,
 				BE955E46216DAB8F00D424FA /* ICInfoView.swift */,
@@ -549,7 +543,6 @@
 				BEEC7FAF21550818001C2EFF /* TopBarView.swift in Sources */,
 				BEF4B14F219C093800B8E45E /* VoiceSelectionPage.swift in Sources */,
 				BEE665E220BA634600E4E322 /* Colors.swift in Sources */,
-				BE8DE7B62161E44400812CED /* AbilityChart.swift in Sources */,
 				BECAC3B5216B34FA001BBF49 /* InfiniteChanllengePage.swift in Sources */,
 				BE5D838920A80BD0002031BF /* GameContentDetailPage.swift in Sources */,
 				BE3260CA21BFCF5E00A13C94 /* vocabulary2.swift in Sources */,
@@ -599,7 +592,6 @@
 				BE3260C821BF912D00A13C94 /* vocabulary1.swift in Sources */,
 				BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */,
 				BEBDEDDA208EF15F00C18520 /* TTS.swift in Sources */,
-				BEF258B320B57C7F00D0026C /* TimelineView.swift in Sources */,
 				BE596470215A0ECE00E4AA0C /* speech.swift in Sources */,
 				BEBDEDDD208EF15F00C18520 /* SpeechRecognizer.swift in Sources */,
 				BECD907B219D294100400FD3 /* InfiniteChallengeTableCell.swift in Sources */,

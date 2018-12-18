@@ -90,7 +90,7 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
         line.frame.origin.y = frame.size.height - 0.5
         line.frame.size.width = barWidth
         line.frame.size.height = 0.5
-        line.backgroundColor = .lightGray
+        line.backgroundColor = rgb(240, 240, 240)
         addSubview(line)
     }
 }
