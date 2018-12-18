@@ -70,9 +70,9 @@ class IAPHelper: NSObject {
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
 
-    func showPurchaseView() {
+    func showPurchaseView(isChanllenge: Bool = true) {
         let actionSheet = UIAlertController(
-            title: i18n.purchaseViewTitle,
+            title: isChanllenge ? i18n.purchaseViewTitle : i18n.itIsfreeVersion,
             message: i18n.purchaseViewMessage,
             preferredStyle: .actionSheet)
 
@@ -116,8 +116,11 @@ class IAPHelper: NSObject {
         }
         actionSheet.addAction(restoreAction)
 
-        let cancelAction = UIAlertAction(title: i18n.startChallenge, style: .cancel) { _ in
-            if let vc = UIApplication.getPresentedViewController() {
+        let cancelTitle = isChanllenge ? i18n.startChallenge : i18n.close
+
+        let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel) { _ in
+            if isChanllenge,
+               let vc = UIApplication.getPresentedViewController() {
                 launchStoryboard(vc, "MessengerGame")
             }
         }
@@ -152,6 +155,7 @@ extension IAPHelper: SKProductsRequestDelegate {
                     self.processingAlertView?.dismiss(animated: false) {
                         self.processingAlertView = nil
                         showOkAlert(title: i18n.previousPurchaseRestored)
+                        rootViewController.rerenderTopView()
                     }
                 }
             }
@@ -198,6 +202,7 @@ extension IAPHelper: SKPaymentTransactionObserver {
         if shouldProcessReceipt {
             processingAlertView?.dismiss(animated: false) { self.processingAlertView = nil }
             showOkAlert(title: i18n.previousPurchaseRestored)
+            rootViewController.rerenderTopView()
             processReceipt()
         }
     }

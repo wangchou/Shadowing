@@ -487,4 +487,18 @@ class I18n {
         if isZh { return "前往 App Store"}
         return "Go to App Store"
     }
+    var freeVersion: String {
+        if isZh { return "免費版" }
+        return "無料版"
+    }
+    var itIsfreeVersion: String {
+        if isJa { return "現在のバージョンは無料版です" }
+        if isZh { return "目前的版本為免費版"}
+        return "You are using Free Version"
+    }
+    var close: String {
+        if isJa { return "閉じる" }
+        if isZh { return "關閉"}
+        return "Close"
+    }
 }

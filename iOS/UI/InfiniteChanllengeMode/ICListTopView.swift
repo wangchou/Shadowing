@@ -210,7 +210,7 @@ class ICListTopView: UIView, GridLayout, ReloadableView {
     }
 }
 
-// Daily Goal Mode
+// MARK: Daily Goal Mode
 extension ICListTopView {
     func renderDailyGoalMode() {
         gridCount = 48
@@ -242,6 +242,7 @@ extension ICListTopView {
         goalLabel.centerX(circleFrame)
 
         addDailySideBar()
+        addFreeVersionButton()
     }
 
     func animateProgress() {
@@ -347,9 +348,26 @@ extension ICListTopView {
         addSubview(separateLine)
         separateLine.centerIn(boundFrame)
     }
+
+    func addFreeVersionButton() {
+        guard isFreeVersion() else { return }
+        let freeRect = addRect(x: 2, y: 27, w: 8, h: 5, color: .clear)
+        freeRect.roundBorder(borderWidth: 1.5,
+                               cornerRadius: 5,
+                               color: .white)
+        let freeLabel = addText(x: 14, y: 26, w: 8, h: 3,
+                                  text: i18n.freeVersion,
+                                  font: MyFont.bold(ofSize: getFontSize(h: 3)),
+                                  color: .white)
+        freeLabel.textAlignment = .center
+        freeLabel.centerIn(freeRect.frame)
+        freeRect.addTapGestureRecognizer {
+            IAPHelper.shared.showPurchaseView(isChanllenge: false)
+        }
+    }
 }
 
-// Timeline Mode
+// MARK: Timeline Mode
 extension ICListTopView {
     func renderTimelineMode() {
         gridCount = 16
@@ -460,7 +478,7 @@ extension ICListTopView {
     }
 }
 
-// LongTermGoalMode
+// MARK: LongTermGoalMode
 extension ICListTopView {
     func renderLongTermGoalMode() {
         gridCount = 50
