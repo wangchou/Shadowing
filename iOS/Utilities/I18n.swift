@@ -407,10 +407,10 @@ class I18n {
         if isZh { return "恢復購買紀錄" }
         return "Restore purchase records"
     }
-    var challengeItTomorrow: String {
-        if isJa { return "明日挑戦する" }
-        if isZh { return "我明天再挑戰"}
-        return "Challenge it tomorrow"
+    var startChallenge: String {
+        if isJa { return "挑戦を続ける" }
+        if isZh { return "繼續挑戰"}
+        return "Continue to challenge"
     }
     var purchaseViewTitle: String {
         if isJa { return "[無料版] 毎日\(dailyFreeLimit)文の挑戦制限" }
@@ -418,9 +418,9 @@ class I18n {
         return "[Free version] Daily \(dailyFreeLimit) sentences limit"
     }
     var purchaseViewMessage: String {
-        if isJa { return "有料版を購入して挑戦を続けてください。" }
-        if isZh { return "請購買付費版以繼續挑戰。" }
-        return "Please buy paid version for keep on challenging."
+        if isJa { return "\nアイテムは自動的に更新されませんので、\nお気軽に購入してください。\n\n〜 スタジオ大草原不可避 〜" }
+        if isZh { return "\n所有項目皆不會自動續約、請安心購買。\n\n〜 大草原不可避工作室 〜" }
+        return "\nPurchased item will not auto-renew. \nPlease feel free to buy it.\n\n〜 大草原不可避 Studio 〜"
     }
     var previousPurchaseRestored: String {
         if isJa { return "購入記録を復元しました" }
@@ -436,6 +436,21 @@ class I18n {
         if isJa { return "処理しています。" }
         if isZh { return "處理中" }
         return "processing"
+    }
+    var buyOneMonth: String {
+        if isJa { return "1ヶ月有料版" }
+        if isZh { return "付費版一個月" }
+        return "Paid Version (1 Month)"
+    }
+    var buyThreeMonths: String {
+        if isJa { return "3ヶ月有料版" }
+        if isZh { return "付費版三個月" }
+        return "Paid Version (3 Months)"
+    }
+    var buyForever: String {
+        if isJa { return "永久有料版" }
+        if isZh { return "永久付費版" }
+        return "Paid Version (Forever)"
     }
     var cannotMakePayment: String {
         if isJa { return "iTunes Store や App Store で購入できない (ペアレンタルコントロールを使いますか？)" }
