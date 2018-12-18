@@ -18,7 +18,7 @@ class InfiniteChallengeListPage: UIViewController {
     @IBOutlet weak var bottomBarView: BottomBarView!
     @IBOutlet weak var tableBottomConstraint: NSLayoutConstraint!
 
-    @IBOutlet weak var icListTopView: ICListTopView!
+    @IBOutlet weak var topChartView: TopChartView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,20 +31,6 @@ class InfiniteChallengeListPage: UIViewController {
             }
         } else {
             topBarView.rightButton.isHidden = true
-        }
-
-        icListTopView.addTapGestureRecognizer {
-            switch context.gameSetting.icTopViewMode {
-            case .dailyGoal:
-                context.gameSetting.icTopViewMode = .timeline
-            case .timeline:
-                context.gameSetting.icTopViewMode = .longTermGoal
-            case .longTermGoal:
-                context.gameSetting.icTopViewMode = .dailyGoal
-            }
-            saveGameSetting()
-            self.icListTopView.viewWillAppear()
-            self.icListTopView.animateProgress()
         }
     }
 
@@ -67,16 +53,13 @@ class InfiniteChallengeListPage: UIViewController {
         }
         bottomBarView.contentTab = .infiniteChallenge
         topBarView.titleLabel.text = i18n.infiniteChallengeTitle
-        icListTopView.frame.size.width = screen.width
-        icListTopView.frame.size.height = screen.width * 34/48
-        icListTopView.viewWillAppear() // icListTopView may not be available yet
-
+        topChartView.viewWillAppear() // icListTopView may not be available yet
         tableView.reloadData()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        icListTopView.animateProgress()
+        topChartView.animateProgress()
     }
 }
 

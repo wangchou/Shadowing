@@ -95,7 +95,7 @@ class RootContainerViewController: UIViewController {
         let sp1: InfiniteChallengeSwipablePage! = infiniteChallengeSwipablePage
         if !sp1.pages.isEmpty,
             let listPage = (sp1.pages[1] as? InfiniteChallengeListPage) {
-            listPage.icListTopView.viewWillAppear()
+            listPage.topChartView.viewWillAppear()
         }
     }
 
