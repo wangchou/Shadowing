@@ -27,7 +27,7 @@ extension Messenger: GameEventDelegate {
         case .willSpeakRange:
             guard let newRange = event.range else { return }
             if !context.gameSetting.isShowTranslation,
-               context.gameState == .TTSSpeaking {
+               context.gameState == .speakingTargetString {
                 tmpRangeQueue.append(newRange)
                 let duration = Double(0.15 / (2 * context.teachingRate))
 
@@ -58,7 +58,7 @@ extension Messenger: GameEventDelegate {
 
         case .speakEnded:
             if !context.gameSetting.isShowTranslation,
-                context.gameState == .TTSSpeaking {
+                context.gameState == .speakingTargetString {
                 lastLabel.attributedText = context.targetAttrString
             }
         case .listenStarted:
@@ -102,7 +102,7 @@ extension Messenger: GameEventDelegate {
                 }
             }
 
-            if context.gameState == .TTSSpeaking {
+            if context.gameState == .speakingTranslation {
                 tmpRangeQueue = []
                 let text = context.targetString
                 var translationsDict = (gameLang == .jp && context.contentTab == .topics) ?
