@@ -49,7 +49,6 @@
 		BE7725C420A2CBC200DF186A /* dataSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725BC20A2CBC100DF186A /* dataSets.swift */; };
 		BE7725CE20A4216700DF186A /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725CD20A4216700DF186A /* ContentCell.swift */; };
 		BE7AFA9C21C9F85A00C41BF4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE7AFA9B21C9F85A00C41BF4 /* GoogleService-Info.plist */; };
-		BE7AFADC21CA00EC00C41BF4 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAD321CA00EB00C41BF4 /* Firebase.framework */; };
 		BE7AFADD21CA00EC00C41BF4 /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAD421CA00EB00C41BF4 /* nanopb.framework */; };
 		BE7AFADE21CA00EC00C41BF4 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAD521CA00EB00C41BF4 /* GoogleUtilities.framework */; };
 		BE7AFADF21CA00EC00C41BF4 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAD621CA00EB00C41BF4 /* GoogleAppMeasurement.framework */; };
@@ -228,7 +227,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE7AFADC21CA00EC00C41BF4 /* Firebase.framework in Frameworks */,
 				BE7AFADD21CA00EC00C41BF4 /* nanopb.framework in Frameworks */,
 				BE7AFADE21CA00EC00C41BF4 /* GoogleUtilities.framework in Frameworks */,
 				BE7AFADF21CA00EC00C41BF4 /* GoogleAppMeasurement.framework in Frameworks */,

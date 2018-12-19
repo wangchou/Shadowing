@@ -309,11 +309,11 @@ class I18n {
     }
 
     var topicPageTitile: String {
-        return "\(languageInJa) - 話題"
+        return "話題 (\(languageInJa))"
     }
 
     var infiniteChallengeTitle: String {
-        return "\(languageInJa) - 無限挑戦"
+        return "無限挑戦 (\(languageInJa))"
     }
 
     var languageInJa: String {

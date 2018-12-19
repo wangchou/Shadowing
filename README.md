@@ -6,7 +6,7 @@ iOS App Store : https://itunes.apple.com/app/id1439727086
 demo videos: https://youtu.be/wetrfwJ2sFo
 
 # About App Privacy
-This app will only transmit what you said Japanese Text to our server for converting it to furigana anonymously. We also will not keep any other private information from users.
+This app will only transmit what you said Japanese Text and Navigation Flow to our server anonymously for converting it to furigana. We also will not keep any other private/personal information from users.
 
 ## How the iOS app looks like?
 <img src="https://raw.githubusercontent.com/wangchou/Shadowing/master/img/screenshot201812.jpg" height="300">
