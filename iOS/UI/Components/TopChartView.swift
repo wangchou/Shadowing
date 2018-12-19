@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAnalytics
 
 private let context = GameContext.shared
 private let i18n = I18n.shared
@@ -144,6 +145,7 @@ class TopChartView: UIView, GridLayout, ReloadableView {
             case .longTermGoal:
                 context.gameSetting.icTopViewMode = .dailyGoal
             }
+            Analytics.logEvent("TopChartView Clicked", parameters: nil)
             saveGameSetting()
             self.viewWillAppear()
             self.animateProgress()

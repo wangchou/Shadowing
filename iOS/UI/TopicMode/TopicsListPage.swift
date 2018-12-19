@@ -17,7 +17,7 @@ extension Notification.Name {
     static let topicFlagChanged = Notification.Name("topicFlagChanged")
 }
 
-class ShadowingListPage: UIViewController {
+class TopicsListPage: UIViewController {
     @IBOutlet weak var sentencesTableView: UITableView!
     @IBOutlet weak var topArea: UIView!
     @IBOutlet weak var topChartView: TopChartView!
@@ -73,7 +73,7 @@ class ShadowingListPage: UIViewController {
     }
 }
 
-extension ShadowingListPage: UITableViewDataSource {
+extension TopicsListPage: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -111,7 +111,7 @@ extension ShadowingListPage: UITableViewDataSource {
     }
 }
 
-extension ShadowingListPage: UITableViewDelegate {
+extension TopicsListPage: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         context.dataSetKey = dataSetKeys[indexPath.row]
         context.loadLearningSentences()

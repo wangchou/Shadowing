@@ -10,6 +10,7 @@ import StoreKit
 import Alamofire
 import Promises
 import UIKit
+import FirebaseAnalytics
 
 private let i18n = I18n.shared
 private var isSandbox = false
@@ -71,6 +72,8 @@ class IAPHelper: NSObject {
     }
 
     func showPurchaseView(isChanllenge: Bool = true) {
+        let eventName = "iap_view_\(isChanllenge ? "challenge_button" : "free_button")"
+        Analytics.logEvent("\(eventName)_show", parameters: nil)
         let actionSheet = UIAlertController(
             title: isChanllenge ? i18n.purchaseViewTitle : i18n.itIsfreeVersion,
             message: i18n.purchaseViewMessage,
@@ -106,6 +109,9 @@ class IAPHelper: NSObject {
             let buyAction = UIAlertAction(title: title, style: .default) { _ in
                 actionSheet.dismiss(animated: true, completion: nil)
                 self.buy(product)
+
+                Analytics.logEvent("\(eventName)_buy",
+                                   parameters: [AnalyticsParameterItemID: product.productIdentifier])
             }
             actionSheet.addAction(buyAction)
         }
