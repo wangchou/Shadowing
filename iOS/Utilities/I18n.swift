@@ -420,7 +420,7 @@ class I18n {
     var purchaseViewMessage: String {
         if isJa { return "\nアイテムは自動的に更新されませんので、\nお気軽に購入してください。\n\n〜 スタジオ大草原不可避 〜" }
         if isZh { return "\n所有項目皆不會自動續約、請安心購買。\n\n〜 大草原不可避工作室 〜" }
-        return "\nPurchased item will not auto-renew. \nPlease feel free to buy it.\n\n〜 大草原不可避 Studio 〜"
+        return "\nPurchased item will not auto-renew. \nPlease feel free to buy it.\n\n〜 Studio 大草原不可避 〜"
     }
     var previousPurchaseRestored: String {
         if isJa { return "購入記録を復元しました" }
