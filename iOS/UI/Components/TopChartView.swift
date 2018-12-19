@@ -512,6 +512,7 @@ extension TopChartView {
     }
 
     func addLongTermTitle() {
+        let boxFrame = getFrame(0, 0, gridCount, 20)
         if isGameClear {
             var descAttrText = NSMutableAttributedString()
             func addWord(_ word: String, _ level: Level) {
@@ -526,12 +527,12 @@ extension TopChartView {
             addWord("い", Level.lv8)
             let gameClearLabel = addAttrText(x: 5, y: 7, h: 14, text: descAttrText)
             gameClearLabel.textAlignment = .center
-            gameClearLabel.centerX(frame)
+            gameClearLabel.centerX(boxFrame)
         } else {
             let currentLvlColor = longTermGoalColor
             let goalLabel = addText(x: 5, y: 7, w: 50, h: 14, text: longTermGoalText, color: currentLvlColor)
             goalLabel.textAlignment = .center
-            goalLabel.centerX(frame)
+            goalLabel.centerX(boxFrame)
         }
     }
     func addLongTermGoalBottomBar() {
@@ -557,6 +558,7 @@ extension TopChartView {
     }
 
     func addLongTermGoalDesc() {
+        let boxFrame = getFrame(0, 0, gridCount, 20)
         let percentText = String(format: "%.1f", 100 * allSentenceCount.f/longTermGoal.f)
         let remainingDays = String(format: "%.1f", max(0, longTermGoal - allSentenceCount).f/context.gameSetting.dailySentenceGoal.f)
         let gray = rgb(155, 155, 155)
@@ -591,7 +593,7 @@ extension TopChartView {
         let y = isGameClear ? 20 : 23
         var descLabel = addAttrText(x: 5, y: y, h: 5, text: descAttrText)
         descLabel.textAlignment = .center
-        descLabel.centerX(frame)
+        descLabel.centerX(boxFrame)
 
         if isGameClear {
             let dateFormatter = DateFormatter()
@@ -602,7 +604,7 @@ extension TopChartView {
             addBoldGrayText(dateFormatter.string(from: clearDate))
             descLabel = addAttrText(x: 5, y: 25, h: 5, text: descAttrText)
             descLabel.textAlignment = .center
-            descLabel.centerX(frame)
+            descLabel.centerX(boxFrame)
         }
     }
 }

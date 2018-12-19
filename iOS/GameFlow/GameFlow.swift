@@ -15,7 +15,8 @@ enum GameError: Error {
 
 enum GameState {
     case justStarted
-    case TTSSpeaking
+    case speakingTranslation
+    case speakingTargetString
     case echoMethod
     case listening
     case scoreCalculated
@@ -205,7 +206,7 @@ extension GameFlow {
     }
 
     private func speakTranslation() -> Promise<Void> {
-        context.gameState = .TTSSpeaking
+        context.gameState = .speakingTranslation
         guard context.gameSetting.isSpeakTranslation else {
             return fulfilledVoidPromise()
         }
@@ -221,6 +222,7 @@ extension GameFlow {
     }
 
     private func speakTargetString() -> Promise<Void> {
+        context.gameState = .speakingTargetString
         guard context.gameSetting.isUsingGuideVoice else {
             postEvent(.sayStarted, string: context.targetString)
             return fulfilledVoidPromise()

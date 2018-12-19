@@ -49,15 +49,14 @@
 		BE7725C420A2CBC200DF186A /* dataSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725BC20A2CBC100DF186A /* dataSets.swift */; };
 		BE7725CE20A4216700DF186A /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725CD20A4216700DF186A /* ContentCell.swift */; };
 		BE7AFA9C21C9F85A00C41BF4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE7AFA9B21C9F85A00C41BF4 /* GoogleService-Info.plist */; };
-		BE7AFADC21CA00EC00C41BF4 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAD321CA00EB00C41BF4 /* Firebase.framework */; };
-		BE7AFADD21CA00EC00C41BF4 /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAD421CA00EB00C41BF4 /* nanopb.framework */; };
-		BE7AFADE21CA00EC00C41BF4 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAD521CA00EB00C41BF4 /* GoogleUtilities.framework */; };
-		BE7AFADF21CA00EC00C41BF4 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAD621CA00EB00C41BF4 /* GoogleAppMeasurement.framework */; };
-		BE7AFAE021CA00EC00C41BF4 /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAD721CA00EB00C41BF4 /* FirebaseCore.framework */; };
-		BE7AFAE121CA00EC00C41BF4 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAD821CA00EB00C41BF4 /* FirebaseAnalytics.framework */; };
-		BE7AFAE221CA00EC00C41BF4 /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAD921CA00EC00C41BF4 /* FirebaseCoreDiagnostics.framework */; };
-		BE7AFAE321CA00EC00C41BF4 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFADA21CA00EC00C41BF4 /* FIRAnalyticsConnector.framework */; };
-		BE7AFAE421CA00EC00C41BF4 /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFADB21CA00EC00C41BF4 /* FirebaseInstanceID.framework */; };
+		BE7AFAF721CA2DC900C41BF4 /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAEE21CA2DC800C41BF4 /* FirebaseCoreDiagnostics.framework */; };
+		BE7AFAF821CA2DC900C41BF4 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAEF21CA2DC800C41BF4 /* GoogleUtilities.framework */; };
+		BE7AFAF921CA2DC900C41BF4 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAF021CA2DC800C41BF4 /* GoogleAppMeasurement.framework */; };
+		BE7AFAFA21CA2DC900C41BF4 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAF121CA2DC800C41BF4 /* FirebaseAnalytics.framework */; };
+		BE7AFAFB21CA2DC900C41BF4 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAF221CA2DC900C41BF4 /* FIRAnalyticsConnector.framework */; };
+		BE7AFAFD21CA2DC900C41BF4 /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAF421CA2DC900C41BF4 /* FirebaseCore.framework */; };
+		BE7AFAFE21CA2DC900C41BF4 /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAF521CA2DC900C41BF4 /* nanopb.framework */; };
+		BE7AFAFF21CA2DC900C41BF4 /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAF621CA2DC900C41BF4 /* FirebaseInstanceID.framework */; };
 		BE7E88B921AA768800B9355E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7E88B821AA768800B9355E /* StoreKit.framework */; };
 		BE8180C020B3BEB6006ABCB3 /* MyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180BF20B3BEB6006ABCB3 /* MyText.swift */; };
 		BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */; };
@@ -170,6 +169,15 @@
 		BE7AFAD921CA00EC00C41BF4 /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCoreDiagnostics.framework; path = Carthage/Build/iOS/FirebaseCoreDiagnostics.framework; sourceTree = "<group>"; };
 		BE7AFADA21CA00EC00C41BF4 /* FIRAnalyticsConnector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FIRAnalyticsConnector.framework; path = Carthage/Build/iOS/FIRAnalyticsConnector.framework; sourceTree = "<group>"; };
 		BE7AFADB21CA00EC00C41BF4 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = Carthage/Build/iOS/FirebaseInstanceID.framework; sourceTree = "<group>"; };
+		BE7AFAEE21CA2DC800C41BF4 /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCoreDiagnostics.framework; path = Project/FirebaseCoreDiagnostics.framework; sourceTree = "<group>"; };
+		BE7AFAEF21CA2DC800C41BF4 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = Project/GoogleUtilities.framework; sourceTree = "<group>"; };
+		BE7AFAF021CA2DC800C41BF4 /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAppMeasurement.framework; path = Project/GoogleAppMeasurement.framework; sourceTree = "<group>"; };
+		BE7AFAF121CA2DC800C41BF4 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAnalytics.framework; path = Project/FirebaseAnalytics.framework; sourceTree = "<group>"; };
+		BE7AFAF221CA2DC900C41BF4 /* FIRAnalyticsConnector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FIRAnalyticsConnector.framework; path = Project/FIRAnalyticsConnector.framework; sourceTree = "<group>"; };
+		BE7AFAF321CA2DC900C41BF4 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Firebase.framework; path = Project/Firebase.framework; sourceTree = "<group>"; };
+		BE7AFAF421CA2DC900C41BF4 /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = Project/FirebaseCore.framework; sourceTree = "<group>"; };
+		BE7AFAF521CA2DC900C41BF4 /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = nanopb.framework; path = Project/nanopb.framework; sourceTree = "<group>"; };
+		BE7AFAF621CA2DC900C41BF4 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = Project/FirebaseInstanceID.framework; sourceTree = "<group>"; };
 		BE7E88B821AA768800B9355E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		BE8180BF20B3BEB6006ABCB3 /* MyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyText.swift; sourceTree = "<group>"; };
 		BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFinishedPage.swift; sourceTree = "<group>"; };
@@ -228,15 +236,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE7AFADC21CA00EC00C41BF4 /* Firebase.framework in Frameworks */,
-				BE7AFADD21CA00EC00C41BF4 /* nanopb.framework in Frameworks */,
-				BE7AFADE21CA00EC00C41BF4 /* GoogleUtilities.framework in Frameworks */,
-				BE7AFADF21CA00EC00C41BF4 /* GoogleAppMeasurement.framework in Frameworks */,
-				BE7AFAE021CA00EC00C41BF4 /* FirebaseCore.framework in Frameworks */,
-				BE7AFAE121CA00EC00C41BF4 /* FirebaseAnalytics.framework in Frameworks */,
-				BE7AFAE221CA00EC00C41BF4 /* FirebaseCoreDiagnostics.framework in Frameworks */,
-				BE7AFAE321CA00EC00C41BF4 /* FIRAnalyticsConnector.framework in Frameworks */,
-				BE7AFAE421CA00EC00C41BF4 /* FirebaseInstanceID.framework in Frameworks */,
+				BE7AFAF721CA2DC900C41BF4 /* FirebaseCoreDiagnostics.framework in Frameworks */,
+				BE7AFAF821CA2DC900C41BF4 /* GoogleUtilities.framework in Frameworks */,
+				BE7AFAF921CA2DC900C41BF4 /* GoogleAppMeasurement.framework in Frameworks */,
+				BE7AFAFA21CA2DC900C41BF4 /* FirebaseAnalytics.framework in Frameworks */,
+				BE7AFAFB21CA2DC900C41BF4 /* FIRAnalyticsConnector.framework in Frameworks */,
+				BE7AFAFD21CA2DC900C41BF4 /* FirebaseCore.framework in Frameworks */,
+				BE7AFAFE21CA2DC900C41BF4 /* nanopb.framework in Frameworks */,
+				BE7AFAFF21CA2DC900C41BF4 /* FirebaseInstanceID.framework in Frameworks */,
 				BE5ABAD8217C4CCD00A63C5F /* FBLPromises.framework in Frameworks */,
 				BE7E88B921AA768800B9355E /* StoreKit.framework in Frameworks */,
 				BE5ABADE217C4CCD00A63C5F /* Alamofire.framework in Frameworks */,
@@ -341,13 +348,22 @@
 			children = (
 				BE7AFADA21CA00EC00C41BF4 /* FIRAnalyticsConnector.framework */,
 				BE7AFAD321CA00EB00C41BF4 /* Firebase.framework */,
+				BE7AFAF221CA2DC900C41BF4 /* FIRAnalyticsConnector.framework */,
+				BE7AFAF321CA2DC900C41BF4 /* Firebase.framework */,
 				BE7AFAD821CA00EB00C41BF4 /* FirebaseAnalytics.framework */,
 				BE7AFAD721CA00EB00C41BF4 /* FirebaseCore.framework */,
+				BE7AFAF121CA2DC800C41BF4 /* FirebaseAnalytics.framework */,
+				BE7AFAF421CA2DC900C41BF4 /* FirebaseCore.framework */,
 				BE7AFAD921CA00EC00C41BF4 /* FirebaseCoreDiagnostics.framework */,
 				BE7AFADB21CA00EC00C41BF4 /* FirebaseInstanceID.framework */,
+				BE7AFAF621CA2DC900C41BF4 /* FirebaseInstanceID.framework */,
 				BE7AFAD621CA00EB00C41BF4 /* GoogleAppMeasurement.framework */,
+				BE7AFAF021CA2DC800C41BF4 /* GoogleAppMeasurement.framework */,
 				BE7AFAD521CA00EB00C41BF4 /* GoogleUtilities.framework */,
 				BE7AFAD421CA00EB00C41BF4 /* nanopb.framework */,
+				BE7AFAEE21CA2DC800C41BF4 /* FirebaseCoreDiagnostics.framework */,
+				BE7AFAEF21CA2DC800C41BF4 /* GoogleUtilities.framework */,
+				BE7AFAF521CA2DC900C41BF4 /* nanopb.framework */,
 				BE7E88B821AA768800B9355E /* StoreKit.framework */,
 			);
 			name = Frameworks;
@@ -789,6 +805,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Project",
 				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				INFOPLIST_FILE = Project/Info.plist;
@@ -825,6 +842,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Project",
 				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				INFOPLIST_FILE = Project/Info.plist;

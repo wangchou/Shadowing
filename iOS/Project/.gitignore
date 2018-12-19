@@ -1,1 +1,3 @@
 *.sqlite
+GoogleService-Info.plist
+*.framework
