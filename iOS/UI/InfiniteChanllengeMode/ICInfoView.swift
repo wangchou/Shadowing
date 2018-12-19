@@ -182,7 +182,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
         button.roundBorder(borderWidth: 1.5, cornerRadius: 5, color: .clear)
 
         button.addTapGestureRecognizer {
-            guard !GameContentDetailPage.isChallengeButtonDisabled else { return }
+            guard !TopicDetailPage.isChallengeButtonDisabled else { return }
             if let vc = UIApplication.getPresentedViewController() {
                 context.infiniteChallengeLevel = self.level
                 if isUnderDailySentenceLimit() {

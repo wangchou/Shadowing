@@ -1603,10 +1603,10 @@ Ruth Yuru Chen
             </objects>
             <point key="canvasLocation" x="292.5" y="-1282.3943661971832"/>
         </scene>
-        <!--Game Content Detail Page-->
+        <!--Topic Detail Page-->
         <scene sceneID="RaL-3G-WLz">
             <objects>
-                <viewController storyboardIdentifier="GameContentDetailPage" id="bWZ-C3-0jS" customClass="GameContentDetailPage" customModule="今話したい" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GameContentDetailPage" id="bWZ-C3-0jS" customClass="TopicDetailPage" customModule="今話したい" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Md9-bi-F96">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -145,7 +145,7 @@ class TopChartView: UIView, GridLayout, ReloadableView {
             case .longTermGoal:
                 context.gameSetting.icTopViewMode = .dailyGoal
             }
-            Analytics.logEvent("TopChartView Clicked", parameters: nil)
+            Analytics.logEvent("top_chart_view_clicked", parameters: nil)
             saveGameSetting()
             self.viewWillAppear()
             self.animateProgress()

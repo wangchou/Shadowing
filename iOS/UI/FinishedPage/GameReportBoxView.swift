@@ -39,11 +39,10 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
     private func renderTopTitle() {
         guard let record = context.gameRecord else { return }
         roundBorder(cornerRadius: 15, color: .white)
-        var tags = (datasetKeyToTags[record.dataSetKey] ?? []).joined(separator: " ")
-        var title = "\(record.dataSetKey)"
+        let tags = "#\(record.level.title)"
+        var title = getDataSetTitle(dataSetKey: record.dataSetKey)
         if context.contentTab == .infiniteChallenge {
             title = "無限挑戰"
-            tags = "#\(record.level.title)"
         }
         addText(2, 1, 6, title, color: myLightText, strokeColor: .black)
         addText(2, 7, 6, tags, color: myOrange, strokeColor: .black)
