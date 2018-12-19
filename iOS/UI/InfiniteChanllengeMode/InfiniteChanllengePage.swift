@@ -1,5 +1,5 @@
 //
-//  InfiniteChanllengePage.swift
+//  InfiniteChallengePage.swift
 //  VoiceOnly
 //
 //  Created by Wangchou Lu on 10/8/30 H.

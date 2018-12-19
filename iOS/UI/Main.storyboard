@@ -386,7 +386,7 @@ Cg
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">App句子有兩種內容：話題句組(600句)與無限挑戰句組(30000句)。 
+                                        <string key="content">App句子有兩種內容：話題句組(800句)與無限挑戰句組(30000句)。 
 </string>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -420,7 +420,7 @@ Cg
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">有「日常、表達、戀愛、旅遊、論述、敬語」六個主題。每句都有中、日對照的翻譯。總共六百句。(僅日文有)
+                                        <string key="content">有「日常、旅遊、敬語、戀愛、論述、單字」六個主題。每句都有中、日對照的翻譯。總共八百句。(僅日文有)
 
 </string>
                                         <attributes>
@@ -721,7 +721,7 @@ A: 作者的經驗，通常是</string>
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">，來把音訊傳給Apple辨識。
+                                        <mutableString key="content">，來把音訊傳給Apple辨識。
 
 =&gt; 如果到 Apple 的網路不順，他們收到的就是很多雜訊的聲音，就會亂聽。 
 另外，如果是音量的問題用 iPhone 附的有線耳麥會好很多。
@@ -735,7 +735,7 @@ A: 抱歉，這個問題來自Apple。舉例來說：Siri和Google Translation�
 Q: 網路明明很穩定，卻一直跳出「連不到主機」的錯誤訊息？
 A: 抱歉，那代表在東京的「漢字轉假名主機」掛掉了。
 
-</string>
+</mutableString>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="18" name="PingFangTC-Regular"/>
@@ -1398,10 +1398,10 @@ Ruth Yuru Chen
             </objects>
             <point key="canvasLocation" x="-354.375" y="-852.46478873239437"/>
         </scene>
-        <!--Shadowing List Page-->
+        <!--Topics List Page-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ShadowingListPage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ShadowingListPage" customModule="今話したい" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShadowingListPage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="TopicsListPage" customModule="今話したい" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1423,14 +1423,14 @@ Ruth Yuru Chen
                                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LwG-wU-2DZ" userLabel="TopView" customClass="TopChartView" customModule="今話したい" customModuleProvider="target">
-                                            <rect key="frame" x="35" y="0.0" width="250" height="177"/>
+                                            <rect key="frame" x="175" y="0.0" width="250" height="177"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="LwG-wU-2DZ" secondAttribute="height" multiplier="48:34" id="sVp-sc-cxF"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BCi-iY-dna" customClass="TopicFilterBarView" customModule="今話したい" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="177" width="320" height="50"/>
+                                            <rect key="frame" x="0.0" y="177" width="600" height="50"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="d8T-wI-Vnl"/>
@@ -1603,10 +1603,10 @@ Ruth Yuru Chen
             </objects>
             <point key="canvasLocation" x="292.5" y="-1282.3943661971832"/>
         </scene>
-        <!--Game Content Detail Page-->
+        <!--Topic Detail Page-->
         <scene sceneID="RaL-3G-WLz">
             <objects>
-                <viewController storyboardIdentifier="GameContentDetailPage" id="bWZ-C3-0jS" customClass="GameContentDetailPage" customModule="今話したい" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GameContentDetailPage" id="bWZ-C3-0jS" customClass="TopicDetailPage" customModule="今話したい" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Md9-bi-F96">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

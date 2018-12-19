@@ -13,7 +13,7 @@ import Promises
 private let context = GameContext.shared
 private let i18n = I18n.shared
 
-class GameContentDetailPage: UIViewController {
+class TopicDetailPage: UIViewController {
     static var isChallengeButtonDisabled = false
 
     @IBOutlet weak var rankLabel: UILabel!
@@ -43,7 +43,7 @@ class GameContentDetailPage: UIViewController {
         if IAPHelper.shared.products.isEmpty {
             IAPHelper.shared.requsestProducts()
         }
-        titleLabel.text = context.dataSetKey
+        titleLabel.text = getDataSetTitle(dataSetKey: context.dataSetKey)
         peekButton.setTitle(i18n.chineseOrJapanese, for: .normal)
 
         if let gameRecord = findBestRecord(key: context.dataSetKey) {
@@ -104,7 +104,7 @@ class GameContentDetailPage: UIViewController {
     }
 
     @IBAction func challenge(_ sender: Any) {
-        guard !GameContentDetailPage.isChallengeButtonDisabled else { return }
+        guard !TopicDetailPage.isChallengeButtonDisabled else { return }
         launchGame()
     }
 
@@ -121,7 +121,7 @@ class GameContentDetailPage: UIViewController {
     }
 }
 
-extension GameContentDetailPage: UITableViewDataSource {
+extension TopicDetailPage: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -141,7 +141,7 @@ extension GameContentDetailPage: UITableViewDataSource {
     }
 }
 
-extension GameContentDetailPage: UITableViewDelegate {
+extension TopicDetailPage: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         if let cell = cell as? SentencesTableCell {

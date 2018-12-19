@@ -76,7 +76,7 @@ class RootContainerViewController: UIViewController {
     func reloadTableData() {
         let sp0: MainSwipablePage! = mainSwipablePage
         if !sp0.pages.isEmpty,
-           let listPage = (sp0.pages[1] as? ShadowingListPage) {
+           let listPage = (sp0.pages[1] as? TopicsListPage) {
             listPage.sentencesTableView.reloadData()
         }
         let sp1: InfiniteChallengeSwipablePage! = infiniteChallengeSwipablePage
@@ -89,7 +89,7 @@ class RootContainerViewController: UIViewController {
     func rerenderTopView() {
         let sp0: MainSwipablePage! = mainSwipablePage
         if !sp0.pages.isEmpty,
-            let listPage = (sp0.pages[1] as? ShadowingListPage) {
+            let listPage = (sp0.pages[1] as? TopicsListPage) {
             listPage.topChartView.viewWillAppear()
         }
         let sp1: InfiniteChallengeSwipablePage! = infiniteChallengeSwipablePage

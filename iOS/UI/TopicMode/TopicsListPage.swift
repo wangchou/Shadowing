@@ -17,7 +17,7 @@ extension Notification.Name {
     static let topicFlagChanged = Notification.Name("topicFlagChanged")
 }
 
-class ShadowingListPage: UIViewController {
+class TopicsListPage: UIViewController {
     @IBOutlet weak var sentencesTableView: UITableView!
     @IBOutlet weak var topArea: UIView!
     @IBOutlet weak var topChartView: TopChartView!
@@ -73,7 +73,7 @@ class ShadowingListPage: UIViewController {
     }
 }
 
-extension ShadowingListPage: UITableViewDataSource {
+extension TopicsListPage: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -88,13 +88,16 @@ extension ShadowingListPage: UITableViewDataSource {
 
         let dataSetKey = dataSetKeys[indexPath.row]
         let attrStr = NSMutableAttributedString()
-        attrStr.append(rubyAttrStr(dataSetKey, fontSize: 16))
-        if let tags = datasetKeyToTags[dataSetKey],
-           !tags.isEmpty {
-            attrStr.append(
-                rubyAttrStr("\n"+tags.joined(separator: " "), fontSize: 14, color: hashtagColor, isWithStroke: false)
-            )
-        }
+        let dataSetTitle = getDataSetTitle(dataSetKey: dataSetKey)
+
+        attrStr.append(rubyAttrStr(
+            dataSetTitle,
+            fontSize: 16))
+
+        attrStr.append(rubyAttrStr(
+            "\n\(dataSetKey)",
+            fontSize: 14,
+            color: hashtagColor, isWithStroke: false))
 
         if let level = dataKeyToLevels[dataSetKey] {
             contentCell.levelLabel.text = level.character
@@ -111,7 +114,7 @@ extension ShadowingListPage: UITableViewDataSource {
     }
 }
 
-extension ShadowingListPage: UITableViewDelegate {
+extension TopicsListPage: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         context.dataSetKey = dataSetKeys[indexPath.row]
         context.loadLearningSentences()
@@ -120,4 +123,14 @@ extension ShadowingListPage: UITableViewDelegate {
             cell.isSelected = false
         }
     }
+}
+
+func getDataSetTitle(dataSetKey: String) -> String {
+    if let tags = datasetKeyToTags[dataSetKey],
+        !tags.isEmpty {
+        let tagsWithoutSharp = tags.map { t in return t.replace("#", "")}
+        return "[\(tagsWithoutSharp[0])] " + tagsWithoutSharp[1...].joined(separator: "、")
+    }
+
+    return ""
 }

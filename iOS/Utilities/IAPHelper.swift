@@ -10,6 +10,7 @@ import StoreKit
 import Alamofire
 import Promises
 import UIKit
+import FirebaseAnalytics
 
 private let i18n = I18n.shared
 private var isSandbox = false
@@ -70,9 +71,11 @@ class IAPHelper: NSObject {
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
 
-    func showPurchaseView(isChanllenge: Bool = true) {
+    func showPurchaseView(isChallenge: Bool = true) {
+        let eventName = "iap_view_\(isChallenge ? "challenge_button" : "free_button")"
+        Analytics.logEvent("\(eventName)_show", parameters: nil)
         let actionSheet = UIAlertController(
-            title: isChanllenge ? i18n.purchaseViewTitle : i18n.itIsfreeVersion,
+            title: isChallenge ? i18n.purchaseViewTitle : i18n.itIsfreeVersion,
             message: i18n.purchaseViewMessage,
             preferredStyle: .actionSheet)
 
@@ -106,6 +109,9 @@ class IAPHelper: NSObject {
             let buyAction = UIAlertAction(title: title, style: .default) { _ in
                 actionSheet.dismiss(animated: true, completion: nil)
                 self.buy(product)
+
+                Analytics.logEvent("\(eventName)_buy",
+                                   parameters: [AnalyticsParameterItemID: product.productIdentifier])
             }
             actionSheet.addAction(buyAction)
         }
@@ -116,10 +122,10 @@ class IAPHelper: NSObject {
         }
         actionSheet.addAction(restoreAction)
 
-        let cancelTitle = isChanllenge ? i18n.startChallenge : i18n.close
+        let cancelTitle = isChallenge ? i18n.startChallenge : i18n.close
 
         let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel) { _ in
-            if isChanllenge,
+            if isChallenge,
                let vc = UIApplication.getPresentedViewController() {
                 launchStoryboard(vc, "MessengerGame")
             }

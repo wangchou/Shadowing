@@ -51,7 +51,7 @@ class SentencesTableCell: UITableViewCell {
     func practiceSentence() {
         guard SentencesTableCell.isPracticing != true else { return }
         SentencesTableCell.isPracticing = true
-        GameContentDetailPage.isChallengeButtonDisabled = true
+        TopicDetailPage.isChallengeButtonDisabled = true
         isUserInteractionEnabled = false
         practiceButton.isEnabled = false
         practiceButton.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
@@ -69,7 +69,7 @@ class SentencesTableCell: UITableViewCell {
                 self.practiceButton.isEnabled = true
                 self.practiceButton.backgroundColor = self.buttonColor
                 SentencesTableCell.isPracticing = false
-                GameContentDetailPage.isChallengeButtonDisabled = false
+                TopicDetailPage.isChallengeButtonDisabled = false
                 SpeechEngine.shared.monitoringOff()
             }
     }

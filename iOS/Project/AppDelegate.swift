@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 let rootViewController = AppDelegate.shared.rootViewController
 
@@ -33,6 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = RootContainerViewController()
         window?.makeKeyAndVisible()
 
+        FirebaseApp.configure()
+        AnalyticsConfiguration.shared().setAnalyticsCollectionEnabled(true)
+        
         return true
     }
 

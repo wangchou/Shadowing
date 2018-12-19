@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAnalytics
 
 private let context = GameContext.shared
 private let i18n = I18n.shared
@@ -144,6 +145,7 @@ class TopChartView: UIView, GridLayout, ReloadableView {
             case .longTermGoal:
                 context.gameSetting.icTopViewMode = .dailyGoal
             }
+            Analytics.logEvent("top_chart_view_clicked", parameters: nil)
             saveGameSetting()
             self.viewWillAppear()
             self.animateProgress()
@@ -382,7 +384,7 @@ extension TopChartView {
         freeLabel.textAlignment = .center
         freeLabel.centerIn(freeRect.frame)
         freeRect.addTapGestureRecognizer {
-            IAPHelper.shared.showPurchaseView(isChanllenge: false)
+            IAPHelper.shared.showPurchaseView(isChallenge: false)
         }
     }
 }

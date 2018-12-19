@@ -34,7 +34,7 @@
 		BE5ABADD217C4CCD00A63C5F /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABAD2217C4CCC00A63C5F /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE5ABADE217C4CCD00A63C5F /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABAD3217C4CCD00A63C5F /* Alamofire.framework */; };
 		BE5ABADF217C4CCD00A63C5F /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABAD3217C4CCD00A63C5F /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BE5D838920A80BD0002031BF /* GameContentDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */; };
+		BE5D838920A80BD0002031BF /* TopicDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5D838820A80BD0002031BF /* TopicDetailPage.swift */; };
 		BE5E0CCE2183477400832E88 /* I18n.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5E0CCD2183477400832E88 /* I18n.swift */; };
 		BE65A939209C6E67006645CA /* GameEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65A938209C6E67006645CA /* GameEvents.swift */; };
 		BE67D2A921561A93007FE420 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE67D2A821561A92007FE420 /* Assets.xcassets */; };
@@ -48,6 +48,16 @@
 		BE76F11F214F56F6004E130B /* SentencesTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE76F11D214F56F6004E130B /* SentencesTableCell.xib */; };
 		BE7725C420A2CBC200DF186A /* dataSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725BC20A2CBC100DF186A /* dataSets.swift */; };
 		BE7725CE20A4216700DF186A /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725CD20A4216700DF186A /* ContentCell.swift */; };
+		BE7AFA9C21C9F85A00C41BF4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE7AFA9B21C9F85A00C41BF4 /* GoogleService-Info.plist */; };
+		BE7AFADC21CA00EC00C41BF4 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAD321CA00EB00C41BF4 /* Firebase.framework */; };
+		BE7AFADD21CA00EC00C41BF4 /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAD421CA00EB00C41BF4 /* nanopb.framework */; };
+		BE7AFADE21CA00EC00C41BF4 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAD521CA00EB00C41BF4 /* GoogleUtilities.framework */; };
+		BE7AFADF21CA00EC00C41BF4 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAD621CA00EB00C41BF4 /* GoogleAppMeasurement.framework */; };
+		BE7AFAE021CA00EC00C41BF4 /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAD721CA00EB00C41BF4 /* FirebaseCore.framework */; };
+		BE7AFAE121CA00EC00C41BF4 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAD821CA00EB00C41BF4 /* FirebaseAnalytics.framework */; };
+		BE7AFAE221CA00EC00C41BF4 /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAD921CA00EC00C41BF4 /* FirebaseCoreDiagnostics.framework */; };
+		BE7AFAE321CA00EC00C41BF4 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFADA21CA00EC00C41BF4 /* FIRAnalyticsConnector.framework */; };
+		BE7AFAE421CA00EC00C41BF4 /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFADB21CA00EC00C41BF4 /* FirebaseInstanceID.framework */; };
 		BE7E88B921AA768800B9355E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7E88B821AA768800B9355E /* StoreKit.framework */; };
 		BE8180C020B3BEB6006ABCB3 /* MyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180BF20B3BEB6006ABCB3 /* MyText.swift */; };
 		BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */; };
@@ -79,7 +89,7 @@
 		BECD907B219D294100400FD3 /* InfiniteChallengeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD907A219D294100400FD3 /* InfiniteChallengeTableCell.swift */; };
 		BED1CC0921452A54004AE397 /* GameSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1CC0821452A54004AE397 /* GameSetting.swift */; };
 		BEDE674521ABD04A00DF78AD /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDE674421ABD04A00DF78AD /* IAPHelper.swift */; };
-		BEDEDD3720A46D1B00E7B60B /* ShadowingListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3620A46D1B00E7B60B /* ShadowingListPage.swift */; };
+		BEDEDD3720A46D1B00E7B60B /* TopicsListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3620A46D1B00E7B60B /* TopicsListPage.swift */; };
 		BEDEDD3920A46FCA00E7B60B /* GameRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */; };
 		BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */; };
 		BEDFCDAB20A87AF800736153 /* PauseOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */; };
@@ -136,7 +146,7 @@
 		BE5ABAD1217C4CCC00A63C5F /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
 		BE5ABAD2217C4CCC00A63C5F /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		BE5ABAD3217C4CCD00A63C5F /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameContentDetailPage.swift; sourceTree = "<group>"; };
+		BE5D838820A80BD0002031BF /* TopicDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailPage.swift; sourceTree = "<group>"; };
 		BE5E0CCD2183477400832E88 /* I18n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = I18n.swift; sourceTree = "<group>"; };
 		BE65A938209C6E67006645CA /* GameEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEvents.swift; sourceTree = "<group>"; };
 		BE67D2A821561A92007FE420 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -150,6 +160,16 @@
 		BE76F11D214F56F6004E130B /* SentencesTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SentencesTableCell.xib; sourceTree = "<group>"; };
 		BE7725BC20A2CBC100DF186A /* dataSets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataSets.swift; sourceTree = "<group>"; };
 		BE7725CD20A4216700DF186A /* ContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
+		BE7AFA9B21C9F85A00C41BF4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BE7AFAD321CA00EB00C41BF4 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Firebase.framework; path = Carthage/Build/iOS/Firebase.framework; sourceTree = "<group>"; };
+		BE7AFAD421CA00EB00C41BF4 /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = nanopb.framework; path = Carthage/Build/iOS/nanopb.framework; sourceTree = "<group>"; };
+		BE7AFAD521CA00EB00C41BF4 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleUtilities.framework; path = Carthage/Build/iOS/GoogleUtilities.framework; sourceTree = "<group>"; };
+		BE7AFAD621CA00EB00C41BF4 /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAppMeasurement.framework; path = Carthage/Build/iOS/GoogleAppMeasurement.framework; sourceTree = "<group>"; };
+		BE7AFAD721CA00EB00C41BF4 /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = Carthage/Build/iOS/FirebaseCore.framework; sourceTree = "<group>"; };
+		BE7AFAD821CA00EB00C41BF4 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAnalytics.framework; path = Carthage/Build/iOS/FirebaseAnalytics.framework; sourceTree = "<group>"; };
+		BE7AFAD921CA00EC00C41BF4 /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCoreDiagnostics.framework; path = Carthage/Build/iOS/FirebaseCoreDiagnostics.framework; sourceTree = "<group>"; };
+		BE7AFADA21CA00EC00C41BF4 /* FIRAnalyticsConnector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FIRAnalyticsConnector.framework; path = Carthage/Build/iOS/FIRAnalyticsConnector.framework; sourceTree = "<group>"; };
+		BE7AFADB21CA00EC00C41BF4 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = Carthage/Build/iOS/FirebaseInstanceID.framework; sourceTree = "<group>"; };
 		BE7E88B821AA768800B9355E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		BE8180BF20B3BEB6006ABCB3 /* MyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyText.swift; sourceTree = "<group>"; };
 		BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFinishedPage.swift; sourceTree = "<group>"; };
@@ -187,7 +207,7 @@
 		BECD907A219D294100400FD3 /* InfiniteChallengeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteChallengeTableCell.swift; sourceTree = "<group>"; };
 		BED1CC0821452A54004AE397 /* GameSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetting.swift; sourceTree = "<group>"; };
 		BEDE674421ABD04A00DF78AD /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
-		BEDEDD3620A46D1B00E7B60B /* ShadowingListPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowingListPage.swift; sourceTree = "<group>"; };
+		BEDEDD3620A46D1B00E7B60B /* TopicsListPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicsListPage.swift; sourceTree = "<group>"; };
 		BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRecord.swift; sourceTree = "<group>"; };
 		BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerEventDelegate.swift; sourceTree = "<group>"; };
 		BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseOverlayViewController.swift; sourceTree = "<group>"; };
@@ -208,6 +228,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE7AFADC21CA00EC00C41BF4 /* Firebase.framework in Frameworks */,
+				BE7AFADD21CA00EC00C41BF4 /* nanopb.framework in Frameworks */,
+				BE7AFADE21CA00EC00C41BF4 /* GoogleUtilities.framework in Frameworks */,
+				BE7AFADF21CA00EC00C41BF4 /* GoogleAppMeasurement.framework in Frameworks */,
+				BE7AFAE021CA00EC00C41BF4 /* FirebaseCore.framework in Frameworks */,
+				BE7AFAE121CA00EC00C41BF4 /* FirebaseAnalytics.framework in Frameworks */,
+				BE7AFAE221CA00EC00C41BF4 /* FirebaseCoreDiagnostics.framework in Frameworks */,
+				BE7AFAE321CA00EC00C41BF4 /* FIRAnalyticsConnector.framework in Frameworks */,
+				BE7AFAE421CA00EC00C41BF4 /* FirebaseInstanceID.framework in Frameworks */,
 				BE5ABAD8217C4CCD00A63C5F /* FBLPromises.framework in Frameworks */,
 				BE7E88B921AA768800B9355E /* StoreKit.framework in Frameworks */,
 				BE5ABADE217C4CCD00A63C5F /* Alamofire.framework in Frameworks */,
@@ -236,9 +265,9 @@
 			isa = PBXGroup;
 			children = (
 				BEEC7FAA2154FFA4001C2EFF /* MainSwipablePage.swift */,
-				BEDEDD3620A46D1B00E7B60B /* ShadowingListPage.swift */,
+				BEDEDD3620A46D1B00E7B60B /* TopicsListPage.swift */,
 				BE7725CD20A4216700DF186A /* ContentCell.swift */,
-				BE5D838820A80BD0002031BF /* GameContentDetailPage.swift */,
+				BE5D838820A80BD0002031BF /* TopicDetailPage.swift */,
 			);
 			path = TopicMode;
 			sourceTree = "<group>";
@@ -310,6 +339,15 @@
 		BE7E88B721AA768800B9355E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE7AFADA21CA00EC00C41BF4 /* FIRAnalyticsConnector.framework */,
+				BE7AFAD321CA00EB00C41BF4 /* Firebase.framework */,
+				BE7AFAD821CA00EB00C41BF4 /* FirebaseAnalytics.framework */,
+				BE7AFAD721CA00EB00C41BF4 /* FirebaseCore.framework */,
+				BE7AFAD921CA00EC00C41BF4 /* FirebaseCoreDiagnostics.framework */,
+				BE7AFADB21CA00EC00C41BF4 /* FirebaseInstanceID.framework */,
+				BE7AFAD621CA00EB00C41BF4 /* GoogleAppMeasurement.framework */,
+				BE7AFAD521CA00EB00C41BF4 /* GoogleUtilities.framework */,
+				BE7AFAD421CA00EB00C41BF4 /* nanopb.framework */,
 				BE7E88B821AA768800B9355E /* StoreKit.framework */,
 			);
 			name = Frameworks;
@@ -334,7 +372,6 @@
 		BEBDEDB3208EF09F00C18520 = {
 			isa = PBXGroup;
 			children = (
-				BECD8B2E21A817D000FF44A2 /* LanguageSelectionPage.swift */,
 				BEB6F6C72182B89D0011E1C1 /* InfoPlist.strings */,
 				BE5ABAD3217C4CCD00A63C5F /* Alamofire.framework */,
 				BE5ABACE217C4CCC00A63C5F /* Charts.framework */,
@@ -369,6 +406,7 @@
 				BE67D2A821561A92007FE420 /* Assets.xcassets */,
 				BEBDEDCB208EF0A000C18520 /* Info.plist */,
 				BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */,
+				BE7AFA9B21C9F85A00C41BF4 /* GoogleService-Info.plist */,
 				BEBDEDBD208EF09F00C18520 /* Products */,
 			);
 			path = Project;
@@ -403,6 +441,7 @@
 				BE28B2C121A3EAB500088214 /* Main.storyboard */,
 				BE5ABAC8217B703500A63C5F /* InfoPage.swift */,
 				BEC2E92E217875C30095A65D /* RootContainerViewController.swift */,
+				BECD8B2E21A817D000FF44A2 /* LanguageSelectionPage.swift */,
 				BE2951132155F5D0008239F9 /* Components */,
 				BECD9079219D28C300400FD3 /* SettingPage */,
 				BE29510F2155F4F7008239F9 /* TopicMode */,
@@ -500,6 +539,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE28B2C221A3EAB600088214 /* Main.storyboard in Resources */,
+				BE7AFA9C21C9F85A00C41BF4 /* GoogleService-Info.plist in Resources */,
 				BE76F11F214F56F6004E130B /* SentencesTableCell.xib in Resources */,
 				BEB6F6C92182B89D0011E1C1 /* InfoPlist.strings in Resources */,
 				BEEC7FA92154C7AC001C2EFF /* TopBarView.xib in Resources */,
@@ -544,7 +584,7 @@
 				BEF4B14F219C093800B8E45E /* VoiceSelectionPage.swift in Sources */,
 				BEE665E220BA634600E4E322 /* Colors.swift in Sources */,
 				BECAC3B5216B34FA001BBF49 /* InfiniteChanllengePage.swift in Sources */,
-				BE5D838920A80BD0002031BF /* GameContentDetailPage.swift in Sources */,
+				BE5D838920A80BD0002031BF /* TopicDetailPage.swift in Sources */,
 				BE3260CA21BFCF5E00A13C94 /* vocabulary2.swift in Sources */,
 				BECD8B2F21A817D000FF44A2 /* LanguageSelectionPage.swift in Sources */,
 				BE6ED56820A17BB000553D1A /* GameFlow.swift in Sources */,
@@ -574,7 +614,7 @@
 				BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */,
 				BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */,
 				BEEC7FAB2154FFA4001C2EFF /* MainSwipablePage.swift in Sources */,
-				BEDEDD3720A46D1B00E7B60B /* ShadowingListPage.swift in Sources */,
+				BEDEDD3720A46D1B00E7B60B /* TopicsListPage.swift in Sources */,
 				BE7725CE20A4216700DF186A /* ContentCell.swift in Sources */,
 				BECD9077219D279C00400FD3 /* InfiniteChallengeListPage.swift in Sources */,
 				BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */,
@@ -759,6 +799,7 @@
 				);
 				MACH_O_TYPE = mh_execute;
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = idv.wcl.imahanashitai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -793,6 +834,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = idv.wcl.imahanashitai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
