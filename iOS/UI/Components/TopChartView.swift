@@ -384,7 +384,7 @@ extension TopChartView {
         freeLabel.textAlignment = .center
         freeLabel.centerIn(freeRect.frame)
         freeRect.addTapGestureRecognizer {
-            IAPHelper.shared.showPurchaseView(isChanllenge: false)
+            IAPHelper.shared.showPurchaseView(isChallenge: false)
         }
     }
 }
