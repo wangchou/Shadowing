@@ -176,6 +176,8 @@ func getFuriganaString(tokenInfos: [[String]], highlightRange: NSRange? = nil) -
     for tokenInfo in tokenInfos {
         if tokenInfo.last == "*" { // number strings, ex: “307”号室
             furiganaAttrStr.append(rubyAttrStr(tokenInfo[0], backgroundColor: isInRange() ? highlightColor : .clear))
+        } else if tokenInfo[1] == "記号" {
+            furiganaAttrStr.append(rubyAttrStr(tokenInfo[0], backgroundColor: .clear))
         } else {
             let kanjiStr = tokenInfo[0]
             let kana = getFixedFuriganaForScore(kanjiStr) ?? tokenInfo[tokenInfo.count-2].kataganaToHiragana
@@ -188,12 +190,19 @@ func getFuriganaString(tokenInfos: [[String]], highlightRange: NSRange? = nil) -
                                    kana == "で" || kana == "に" || kana == "を" ||
                                    kana == "へ" || kana == "て"))
                                     ? myWaterBlue : .black
+            var subHighlightRange = highlightRange?.subRange(startIndex: currentIndex)
+
+            // "動詞" is not dividable, ex: "降り"そう, bgColor of "降" & "り" should be the same
+            if tokenInfo[1] == "動詞" || tokenInfo[1] == "形容詞",
+               isInRange() {
+                subHighlightRange = kanjiStr.fullRange
+            }
 
             furiganaAttrStr.append(getFuriganaAttrString(
                 parts,
                 kana,
                 color: color,
-                highlightRange: highlightRange?.subRange(startIndex: currentIndex)))
+                highlightRange: subHighlightRange))
         }
         currentIndex += tokenInfo[0].count
     }
@@ -306,5 +315,9 @@ extension String {
     func substring(with nsrange: NSRange) -> Substring? {
         guard let range = Range(nsrange, in: self) else { return nil }
         return self[range]
+    }
+
+    var fullRange: NSRange {
+        return NSRange(location: 0, length: self.count)
     }
 }

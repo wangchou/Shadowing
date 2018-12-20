@@ -28,6 +28,7 @@ extension Messenger: GameEventDelegate {
             guard let newRange = event.range else { return }
             if !context.gameSetting.isShowTranslation,
                context.gameState == .speakingTargetString {
+//                print(Date().timeIntervalSince1970, context.targetString, context.targetString.substring(with: newRange)?.s)
                 tmpRangeQueue.append(newRange)
                 let duration = Double(0.15 / (2 * context.teachingRate))
 
@@ -39,12 +40,16 @@ extension Messenger: GameEventDelegate {
                 let allRange: NSRange = tmpRangeQueue.reduce(tmpRangeQueue[0], {allR, curR in
                     return allR.union(curR)
                 })
+//                print("\tallRange:", context.targetString.substring(with: allRange)?.s)
 
                 var attrText = NSMutableAttributedString()
 
                 if context.targetString.jpnType != .noKanjiAndNumber,
                     let tokenInfos = kanaTokenInfosCacheDictionary[context.targetString] {
                     let fixedRange = getRangeWithParticleFix(tokenInfos: tokenInfos, allRange: allRange)
+//                    if let fixedRange = fixedRange {
+//                        print("\tfixedRange:", context.targetString.substring(with: fixedRange)?.s)
+//                    }
                     attrText = getFuriganaString(tokenInfos: tokenInfos, highlightRange: fixedRange)
                 } else {
                     attrText.append(rubyAttrStr(context.targetString))
@@ -133,33 +138,66 @@ extension Messenger: GameEventDelegate {
     // the tts spoke "鴨川沿いには", but the delegate always report "鴨川沿い"
     // then it reports "には遊歩道"
     // so this function will remove prefix particle range and extend suffix particle range
+    //
+    // known unfixable bug:
+    //      pass to tts:  あした、晴れるかな
+    //      targetString: 明日、晴れるかな
+    //      ttsKanaFix will sometimes make the range is wrong
     func getRangeWithParticleFix(tokenInfos: [[String]], allRange: NSRange?) -> NSRange? {
 
         guard let r = allRange else { return nil }
         var lowerBound = r.lowerBound
-        var upperBound = r.upperBound
+        var upperBound = min(r.upperBound, context.targetString.count)
         var currentIndex = 0
-        var isParticlePrefixRemoved = false
+        var isPrefixParticleRemoved = false
+        var isPrefixSubVerbRemoved = false
         var isParticleSuffixExtended = false
 
         for i in 0..<tokenInfos.count {
             let part = tokenInfos[i]
             let partLen = part[0].count
             let isParticle = part[1] == "助詞" || part[1] == "記号" || part[1] == "助動詞"
+            let isVerbLike = part[1] == "動詞" || part[1] == "形容詞"
 
             // prefix particle remove
-            if !isParticlePrefixRemoved,
-                currentIndex <= lowerBound,
-                currentIndex + partLen > lowerBound {
-                if isParticle {
-                    lowerBound = currentIndex + partLen
-                } else {
-                    isParticlePrefixRemoved = true
+            // ex: "が降りそう" の　"が"
+            func trimPrefixParticle() {
+                if !isPrefixParticleRemoved,
+                    currentIndex <= lowerBound,
+                    currentIndex + partLen > lowerBound,
+                    currentIndex + partLen < upperBound {
+                    if isParticle {
+                        lowerBound = currentIndex + partLen
+                    } else {
+                        isPrefixParticleRemoved = true
+                    }
                 }
             }
 
+            // prefix subVerb remove
+            // ex: "が降りそう" の　"り"
+            func trimPrefixSubVerb() {
+                if !isPrefixSubVerbRemoved,
+                    currentIndex < lowerBound,
+                    currentIndex + partLen >= lowerBound,
+                    currentIndex + partLen < upperBound {
+                    if isVerbLike {
+                        lowerBound = currentIndex + partLen
+                    } else {
+                        isPrefixSubVerbRemoved = true
+                    }
+                }
+
+            }
+
+            // for "っています" subVerb + Particle + others
+            trimPrefixSubVerb()
+            trimPrefixParticle()
+            trimPrefixSubVerb()
+
             // suffix particle extend
-            if !isParticleSuffixExtended, currentIndex >= upperBound {
+            if !isParticleSuffixExtended,
+                currentIndex >= upperBound {
                 if isParticle {
                     upperBound = currentIndex + partLen
                 } else {
