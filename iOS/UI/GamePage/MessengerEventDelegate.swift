@@ -48,7 +48,7 @@ extension Messenger: GameEventDelegate {
                     attrText = getFuriganaString(tokenInfos: tokenInfos, highlightRange: fixedRange)
                 } else {
                     attrText.append(rubyAttrStr(context.targetString))
-                    attrText.addAttribute(.backgroundColor, value: myOrange.withAlphaComponent(0.6), range: allRange)
+                    attrText.addAttribute(.backgroundColor, value: highlightColor, range: allRange)
                     var whiteRange = NSRange(location: allRange.upperBound, length: context.targetString.count - allRange.upperBound)
                     attrText.addAttribute(.backgroundColor, value: UIColor.clear, range: whiteRange)
 
@@ -145,7 +145,7 @@ extension Messenger: GameEventDelegate {
         for i in 0..<tokenInfos.count {
             let part = tokenInfos[i]
             let partLen = part[0].count
-            let isParticle = part[1] == "助詞" || part[1] == "記号"
+            let isParticle = part[1] == "助詞" || part[1] == "記号" || part[1] == "助動詞"
 
             // prefix particle remove
             if !isParticlePrefixRemoved,
