@@ -24,7 +24,6 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
             return "ja-JP"
         default:
             return "en-US"
-
         }
     }
 
@@ -74,6 +73,8 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         _ synthesizer: AVSpeechSynthesizer,
         willSpeakRangeOfSpeechString characterRange: NSRange,
         utterance: AVSpeechUtterance) {
+        //print(Date().timeIntervalSince1970, characterRange, utterance.speechString, utterance.speechString.substring(with: characterRange)?.s)
+
         postEvent(.willSpeakRange, range: characterRange)
     }
 }
