@@ -73,6 +73,8 @@ class IAPHelper: NSObject {
 
     func showPurchaseView(isChallenge: Bool = true) {
         let eventName = "iap_view_\(isChallenge ? "challenge_button" : "free_button")"
+        var timer: Timer?
+        var countDownSeconds = 3
         Analytics.logEvent("\(eventName)_show", parameters: nil)
         let actionSheet = UIAlertController(
             title: isChallenge ? i18n.purchaseViewTitle : i18n.itIsfreeVersion,
@@ -128,6 +130,21 @@ class IAPHelper: NSObject {
             if isChallenge,
                let vc = UIApplication.getPresentedViewController() {
                 launchStoryboard(vc, "MessengerGame")
+            }
+        }
+
+        if isChallenge {
+            countDownSeconds = 3
+            cancelAction.isEnabled = false
+            actionSheet.message = i18n.purchaseViewMessage + "\n\n\(countDownSeconds)"
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+                countDownSeconds -= 1
+                actionSheet.message = i18n.purchaseViewMessage + "\n\n\(countDownSeconds)"
+                if countDownSeconds <= 0 {
+                    cancelAction.isEnabled = true
+                    actionSheet.message = i18n.purchaseViewMessage
+                    timer?.invalidate()
+                }
             }
         }
 
