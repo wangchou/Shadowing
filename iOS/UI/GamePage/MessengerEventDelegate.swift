@@ -159,6 +159,19 @@ extension Messenger: GameEventDelegate {
             let isParticle = part[1] == "助詞" || part[1] == "記号" || part[1] == "助動詞"
             let isVerbLike = part[1] == "動詞" || part[1] == "形容詞"
 
+            // fix: "お掛けに" なりませんか
+            if part[1] == "接頭詞",
+               currentIndex >= lowerBound,
+               currentIndex + partLen == upperBound,
+               i < tokenInfos.count - 1 {
+                upperBound += tokenInfos[i+1][0].count
+            }
+            if  i > 0,
+                tokenInfos[i-1][1] == "接頭詞",
+                currentIndex == lowerBound {
+                lowerBound -= tokenInfos[i-1][0].count
+            }
+
             // prefix particle remove
             // ex: "が降りそう" の　"が"
             func trimPrefixParticle() {
