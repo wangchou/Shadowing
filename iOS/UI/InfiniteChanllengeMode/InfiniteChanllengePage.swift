@@ -113,6 +113,7 @@ extension InfiniteChallengePage: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         if let cell = cell as? SentencesTableCell {
+            cell.isSelected = false
             cell.practiceSentence()
         }
     }
