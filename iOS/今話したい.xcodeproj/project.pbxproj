@@ -61,6 +61,9 @@
 		BE8180C020B3BEB6006ABCB3 /* MyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180BF20B3BEB6006ABCB3 /* MyText.swift */; };
 		BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */; };
 		BE8283B42133DAE2008BC875 /* SpeechEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8283B32133DAE2008BC875 /* SpeechEngine.swift */; };
+		BE8E51DB21CF76CF007D29E6 /* TopChartView+DailyChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8E51DA21CF76CF007D29E6 /* TopChartView+DailyChart.swift */; };
+		BE8E51DD21CF7718007D29E6 /* TopChartView+Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8E51DC21CF7718007D29E6 /* TopChartView+Timeline.swift */; };
+		BE8E51DF21CF7754007D29E6 /* TopChartView+LongTermGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8E51DE21CF7754007D29E6 /* TopChartView+LongTermGoal.swift */; };
 		BE8F747F2176E258005546DC /* kanaFix.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8F747E2176E258005546DC /* kanaFix.swift */; };
 		BE955E47216DAB8F00D424FA /* ICInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE955E46216DAB8F00D424FA /* ICInfoView.swift */; };
 		BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */; };
@@ -182,6 +185,9 @@
 		BE8180BF20B3BEB6006ABCB3 /* MyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyText.swift; sourceTree = "<group>"; };
 		BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFinishedPage.swift; sourceTree = "<group>"; };
 		BE8283B32133DAE2008BC875 /* SpeechEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechEngine.swift; sourceTree = "<group>"; };
+		BE8E51DA21CF76CF007D29E6 /* TopChartView+DailyChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TopChartView+DailyChart.swift"; sourceTree = "<group>"; };
+		BE8E51DC21CF7718007D29E6 /* TopChartView+Timeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TopChartView+Timeline.swift"; sourceTree = "<group>"; };
+		BE8E51DE21CF7754007D29E6 /* TopChartView+LongTermGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TopChartView+LongTermGoal.swift"; sourceTree = "<group>"; };
 		BE8F747E2176E258005546DC /* kanaFix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = kanaFix.swift; path = ../Utilities/kanaFix.swift; sourceTree = "<group>"; };
 		BE955E46216DAB8F00D424FA /* ICInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICInfoView.swift; sourceTree = "<group>"; };
 		BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaLabel.swift; sourceTree = "<group>"; };
@@ -312,6 +318,9 @@
 				BE7441B2216CCBE000E53A3D /* LineChart.swift */,
 				BE221AA021A2A76D0009B23B /* CircleView.swift */,
 				BEC4CF0D219D727B00E1A54C /* TopChartView.swift */,
+				BE8E51DE21CF7754007D29E6 /* TopChartView+LongTermGoal.swift */,
+				BE8E51DA21CF76CF007D29E6 /* TopChartView+DailyChart.swift */,
+				BE8E51DC21CF7718007D29E6 /* TopChartView+Timeline.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -609,6 +618,7 @@
 				BEDFCDAB20A87AF800736153 /* PauseOverlayViewController.swift in Sources */,
 				BEC2E92F217875C30095A65D /* RootContainerViewController.swift in Sources */,
 				BEF28B6120B52BB000385273 /* Score.swift in Sources */,
+				BE8E51DF21CF7754007D29E6 /* TopChartView+LongTermGoal.swift in Sources */,
 				BEC2E9312179BD090095A65D /* TopicFilterBarView.swift in Sources */,
 				BEA4E71E21AE604400CE6E63 /* secret.swift in Sources */,
 				BEA4E72021AFB8B800CE6E63 /* GameExpirationDateInMS.swift in Sources */,
@@ -628,6 +638,7 @@
 				BE59646A215A0E4D00E4AA0C /* polite.swift in Sources */,
 				BEDE674521ABD04A00DF78AD /* IAPHelper.swift in Sources */,
 				BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */,
+				BE8E51DD21CF7718007D29E6 /* TopChartView+Timeline.swift in Sources */,
 				BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */,
 				BEEC7FAB2154FFA4001C2EFF /* MainSwipablePage.swift in Sources */,
 				BEDEDD3720A46D1B00E7B60B /* TopicsListPage.swift in Sources */,
@@ -654,6 +665,7 @@
 				BE5ABAC9217B703500A63C5F /* InfoPage.swift in Sources */,
 				BE596468215A0DF200E4AA0C /* daily.swift in Sources */,
 				BE6F2F162144E049003A56CD /* rawDataSets.swift in Sources */,
+				BE8E51DB21CF76CF007D29E6 /* TopChartView+DailyChart.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
