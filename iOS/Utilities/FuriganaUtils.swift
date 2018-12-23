@@ -127,6 +127,7 @@ func getFuriganaAttrString(_ parts: [String],
             attrStr.append(getFuriganaAttrString(
                 parts[..<dividerIndex].a,
                 kana[..<range.lowerBound].s,
+                color: color,
                 highlightRange: highlightRange?.subRange(startIndex: currentIndex)
             ))
             currentIndex += parts[..<dividerIndex].a.reduce(0, { result, part in
@@ -143,6 +144,7 @@ func getFuriganaAttrString(_ parts: [String],
             attrStr.append(getFuriganaAttrString(
                 parts[(dividerIndex+1)...].a,
                 kana[range.upperBound...].s,
+                color: color,
                 highlightRange: highlightRange?.subRange(startIndex: currentIndex)))
         }
 
@@ -162,6 +164,28 @@ extension NSRange {
             location: max(self.lowerBound - startIndex, 0),
             length: self.upperBound - startIndex)
     }
+}
+
+// https://ja.wikipedia.org/wiki/助詞
+private func isImportantParticle(kana: String) -> Bool {
+
+    // 係助詞
+    let particleGroup0 = ["は", "も", "ぞ", "なむ", "や", "か", "こそ", "によって", "にとって"]
+    // 格助詞
+    let particleGroup1 = ["が", "の", "を", "に", "へ", "と", "より", "から", "にて", "して", "ので", "たり", "けど"]
+    // 接續助詞
+    let particleGroup2 = ["ば", "とも", "ど", "ども", "が", "に", "を", "て", "して", "で", "つつ", "ながら", "ものの", "ものを", "ものから"]
+    // 副助詞
+    let particleGroup3 = ["だけ", "まで", "のみ", "しか", "でも", "ばかり", "くらい", "など", "ほど", "さえ", "こそ", "きり"]
+
+    if  particleGroup0.contains(kana) ||
+        particleGroup1.contains(kana) ||
+        particleGroup2.contains(kana) ||
+        particleGroup3.contains(kana) {
+        return true
+    }
+
+    return false
 }
 
 // tokenInfo = [kanji, 詞性, furikana, yomikana]
@@ -185,11 +209,10 @@ func getFuriganaString(tokenInfos: [[String]], highlightRange: NSRange? = nil) -
                 .replace("([\\p{Han}\\d]*[\\p{Han}\\d])", "👻$1👻")
                 .components(separatedBy: "👻")
                 .filter { $0 != "" }
-            let color: UIColor = (tokenInfo[1] == "助詞" &&
-                                  (kana == "は" || kana == "が" || kana == "と" ||
-                                   kana == "で" || kana == "に" || kana == "を" ||
-                                   kana == "へ" || kana == "て"))
+
+            let color: UIColor = (tokenInfo[1] == "助詞" && isImportantParticle(kana: kana))
                                     ? myWaterBlue : .black
+
             var subHighlightRange = highlightRange?.subRange(startIndex: currentIndex)
 
             // "動詞" is not dividable, ex: "降り"そう, bgColor of "降" & "り" should be the same
