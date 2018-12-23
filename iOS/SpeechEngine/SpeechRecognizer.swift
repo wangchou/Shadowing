@@ -65,7 +65,7 @@ class SpeechRecognizer: NSObject {
 
         if !isAuthorized {
             promise.reject(SpeechRecognitionError.unauthorized)
-            showGoToSettingCenterAlert()
+            showGoToPermissionSettingAlert()
             return promise
         }
 

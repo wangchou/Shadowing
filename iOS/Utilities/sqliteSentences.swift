@@ -23,6 +23,7 @@ struct TopicSentenceInfo {
 
 var topicSentencesInfos: [String: TopicSentenceInfo] = [:]
 private var sqliteFileName = "inf_sentences_100points_duolingo_with_topics"
+
 #if os(iOS)
 func loadSentenceDB() {
     guard let path = Bundle.main.path(forResource: sqliteFileName, ofType: "sqlite") else {
