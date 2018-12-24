@@ -61,10 +61,9 @@ extension UIView {
             view.viewWillAppear()
         }
     }
-}
 
-// from https://medium.com/@sdrzn/adding-gesture-recognizers-with-closures-instead-of-selectors-9fb3e09a8f0b
-extension UIView {
+    // MARK: Add onClick event
+    // from https://medium.com/@sdrzn/adding-gesture-recognizers-with-closures-instead-of-selectors-9fb3e09a8f0b
 
     // In order to create computed properties for extensions, we need a key to
     // store and access the stored property
@@ -130,129 +129,7 @@ extension UIApplication {
     }
 }
 
-enum GridAxis {
-    case horizontal
-    case vertical
-}
-
-let emptyCGRect = CGRect(x: 0, y: 0, width: 5, height: 5)
-
-protocol GridLayout: class {
-    var gridCount: Int { get }
-    var axis: GridAxis { get }
-    var spacing: CGFloat { get }
-}
-
-extension GridLayout where Self: UIView {
-    var axisBound: CGFloat {
-        return axis == GridAxis.horizontal ? frame.width : frame.height
-    }
-
-    var anotherAxisGridCount: CGFloat {
-        return (axis == GridAxis.horizontal ? frame.height : frame.width) /
-               (axisBound / gridCount.c)
-    }
-
-    var fontSize: CGFloat {
-        return step - spacing
-    }
-
-    var step: CGFloat { // is multiple of retina pixel width 0.5, ex 18, 19.5...
-        return floor((axisBound - spacing) * 2 / gridCount.c)/2
-    }
-
-    var stepFloat: CGFloat {
-        return (axisBound - spacing) * 2 / gridCount.c / 2
-    }
-
-    func getFontSize(h: Int) -> CGFloat {
-        return h.c * step * 0.7
-    }
-
-    @discardableResult
-    func addText(x: Int,
-                 y: Int,
-                 w: Int? = nil,
-                 h: Int,
-                 text: String,
-                 font: UIFont? = nil,
-                 color: UIColor? = nil,
-                 completion: ((UILabel) -> Void)? = nil
-        ) -> UILabel {
-        let label = UILabel()
-        label.font = font ?? MyFont.regular(ofSize: getFontSize(h: h))
-        label.textColor = color ?? .black
-        label.text = text
-        layout(x, y, w ?? (gridCount - x), h, label)
-        addSubview(label)
-
-        completion?(label)
-        return label
-    }
-
-    @discardableResult
-    func addAttrText(x: Int,
-                     y: Int,
-                     w: Int? = nil,
-                     h: Int,
-                     text: NSAttributedString,
-                     completion: ((UIView) -> Void)? = nil
-        ) -> UILabel {
-        let label = UILabel()
-        label.attributedText = text
-        layout(x, y, w ?? (gridCount - x), h, label)
-        addSubview(label)
-        completion?(label)
-        return label
-    }
-
-    func addRoundRect(x: Int, y: Int, w: Int, h: Int,
-                      borderColor: UIColor,
-                      radius: CGFloat? = nil,
-                      backgroundColor: UIColor? = nil
-        ) {
-        let roundRect = UIView()
-        layout(x, y, w, h, roundRect)
-        let radius = radius ?? h.c * step / 2
-        roundRect.roundBorder(borderWidth: 1.5, cornerRadius: radius, color: borderColor)
-        if let backgroundColor = backgroundColor {
-            roundRect.backgroundColor = backgroundColor
-        }
-        addSubview(roundRect)
-    }
-
-    @discardableResult
-    func addRect(x: Int, y: Int, w: Int, h: Int,
-                 color: UIColor = myBlue) -> UIView {
-        let rect = UIView()
-        layout(x, y, w, h, rect)
-        rect.backgroundColor = color
-        addSubview(rect)
-        return rect
-    }
-
-    func layout(_ x: Int, _ y: Int, _ w: Int, _ h: Int, _ view: UIView) {
-        view.frame = getFrame(x, y, w, h)
-    }
-
-    func getFrame(_ x: Int, _ y: Int, _ w: Int, _ h: Int) -> CGRect {
-        var x = x
-        var y = y
-        if axis == GridAxis.horizontal {
-            x = (x + gridCount) % gridCount
-        } else {
-            y = (y + gridCount) % gridCount
-        }
-
-        return CGRect(
-            x: x.c * stepFloat,
-            y: y.c * stepFloat,
-            width: w.c * stepFloat,
-            height: h.c * stepFloat
-        )
-    }
-}
-
+// MARK: XibView
 // modified from https://medium.com/zenchef-tech-and-product/how-to-visualize-reusable-xibs-in-storyboards-using-ibdesignable-c0488c7f525d
 
 protocol XibView: class {
@@ -298,6 +175,7 @@ extension UIPageViewController {
     }
 }
 
+// MARK: Alerts
 enum TMPError: Error {
     case alert
 }
@@ -319,23 +197,24 @@ func showMessage(_ message: String, seconds: Float = 2) {
     }
 }
 
-private var isShowingGoToSettingCenterAlert = false
-func showGoToSettingCenterAlert() {
-    guard !isShowingGoToSettingCenterAlert else { return }
-    isShowingGoToSettingCenterAlert = true
+private var isShowingGoToPermissionSettingAlert = false
+
+func showGoToPermissionSettingAlert() {
+    guard !isShowingGoToPermissionSettingAlert else { return }
+    isShowingGoToPermissionSettingAlert = true
     let i18n = I18n.shared
     let alertController = UIAlertController(title: i18n.gotoIOSCenterTitle, message: "", preferredStyle: .alert)
 
     // Create the actions
     let okAction = UIAlertAction(title: i18n.gotoIOSCenterOKTitle, style: UIAlertAction.Style.default) {
         UIAlertAction in
-        isShowingGoToSettingCenterAlert = false
+        isShowingGoToPermissionSettingAlert = false
         alertController.dismiss(animated: true, completion: nil)
         goToIOSSettingCenter()
     }
     let cancelAction = UIAlertAction(title: i18n.gotoIOSCenterCancelTitle, style: UIAlertAction.Style.cancel) {
         UIAlertAction in
-        isShowingGoToSettingCenterAlert = false
+        isShowingGoToPermissionSettingAlert = false
         alertController.dismiss(animated: true, completion: nil)
     }
 
@@ -345,13 +224,6 @@ func showGoToSettingCenterAlert() {
 
     UIApplication.getPresentedViewController()?.present(alertController, animated: true)
 
-}
-func goToIOSSettingCenter() {
-    if let url = URL(string: UIApplication.openSettingsURLString) {
-        if UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        }
-    }
 }
 
 func showOkAlert(title: String?, message: String? = nil, okTitle: String = I18n.shared.iGotIt) {
@@ -375,38 +247,30 @@ func showProcessingAlert() -> UIAlertController {
     return alert
 }
 
-//https://stackoverflow.com/questions/46317061/use-safe-area-layout-programmatically
-extension UIView {
-
-    var safeTopAnchor: NSLayoutYAxisAnchor {
-        if #available(iOS 11.0, *) {
-            return self.safeAreaLayoutGuide.topAnchor
-        } else {
-            return self.topAnchor
-        }
+// MARK: - launch storyboard
+func launchStoryboard(
+    _ originVC: UIViewController,
+    _ storyboardId: String,
+    isOverCurrent: Bool = false,
+    animated: Bool = false,
+    completion: ((UIViewController) -> Void)? = nil
+    ) {
+    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: storyboardId)
+    if isOverCurrent {
+        vc.modalPresentationStyle = .overCurrentContext
+    } else {
+        vc.modalTransitionStyle = .crossDissolve
     }
 
-    var safeLeftAnchor: NSLayoutXAxisAnchor {
-        if #available(iOS 11.0, *) {
-            return self.safeAreaLayoutGuide.leftAnchor
-        } else {
-            return self.leftAnchor
-        }
+    originVC.present(vc, animated: animated) {
+        completion?(vc)
     }
+}
 
-    var safeRightAnchor: NSLayoutXAxisAnchor {
-        if #available(iOS 11.0, *) {
-            return self.safeAreaLayoutGuide.rightAnchor
-        } else {
-            return self.rightAnchor
-        }
-    }
-
-    var safeBottomAnchor: NSLayoutYAxisAnchor {
-        if #available(iOS 11.0, *) {
-            return self.safeAreaLayoutGuide.bottomAnchor
-        } else {
-            return self.bottomAnchor
+func goToIOSSettingCenter() {
+    if let url = URL(string: UIApplication.openSettingsURLString) {
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
 }

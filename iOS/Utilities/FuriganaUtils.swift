@@ -11,12 +11,6 @@
 import Foundation
 import Promises
 
-enum JpnType {
-    case noKanjiAndNumber
-    case kanjiAndNumberOnly
-    case mixed
-}
-
 #if os(iOS)
 import UIKit
 
@@ -127,6 +121,7 @@ func getFuriganaAttrString(_ parts: [String],
             attrStr.append(getFuriganaAttrString(
                 parts[..<dividerIndex].a,
                 kana[..<range.lowerBound].s,
+                color: color,
                 highlightRange: highlightRange?.subRange(startIndex: currentIndex)
             ))
             currentIndex += parts[..<dividerIndex].a.reduce(0, { result, part in
@@ -143,6 +138,7 @@ func getFuriganaAttrString(_ parts: [String],
             attrStr.append(getFuriganaAttrString(
                 parts[(dividerIndex+1)...].a,
                 kana[range.upperBound...].s,
+                color: color,
                 highlightRange: highlightRange?.subRange(startIndex: currentIndex)))
         }
 
@@ -185,11 +181,10 @@ func getFuriganaString(tokenInfos: [[String]], highlightRange: NSRange? = nil) -
                 .replace("([\\p{Han}\\d]*[\\p{Han}\\d])", "👻$1👻")
                 .components(separatedBy: "👻")
                 .filter { $0 != "" }
-            let color: UIColor = (tokenInfo[1] == "助詞" &&
-                                  (kana == "は" || kana == "が" || kana == "と" ||
-                                   kana == "で" || kana == "に" || kana == "を" ||
-                                   kana == "へ" || kana == "て"))
+
+            let color: UIColor = (tokenInfo[1] == "助詞" && kana.isImportantParticle)
                                     ? myWaterBlue : .black
+
             var subHighlightRange = highlightRange?.subRange(startIndex: currentIndex)
 
             // "動詞" is not dividable, ex: "降り"そう, bgColor of "降" & "り" should be the same
@@ -212,112 +207,3 @@ func getFuriganaString(tokenInfos: [[String]], highlightRange: NSRange? = nil) -
 #else
 // OSX code
 #endif
-
-extension Substring {
-    var s: String { return String(self) }
-}
-
-extension ArraySlice {
-    var a: [Element] { return Array(self) }
-}
-
-extension String {
-
-    func replace(_ pattern: String, _ template: String) -> String {
-        do {
-            let re = try NSRegularExpression(pattern: pattern, options: [])
-            return re.stringByReplacingMatches(
-                in: self,
-                options: [],
-                range: NSRange(location: 0, length: self.utf16.count),
-                withTemplate: template)
-        } catch {
-            return self
-        }
-    }
-
-    func spellOutNumbers() -> String {
-        var tmpText = self
-        let matches = self.matches(for: "[0-9]+")
-        for match in matches {
-            tmpText = tmpText.replace(match, getEnglishNumber(number: Int(match)))
-        }
-        return tmpText
-    }
-
-    func patternCount(_ pattern: String) -> Int {
-        return self.components(separatedBy: pattern).count - 1
-    }
-
-    // https://stackoverflow.com/questions/27880650/swift-extract-regex-matches
-    func matches(for regex: String) -> [String] {
-        do {
-            let regex = try NSRegularExpression(pattern: regex)
-            let results = regex.matches(in: self,
-                                        range: NSRange(self.startIndex..., in: self))
-            return results.compactMap {
-                Range($0.range, in: self).map { String(self[$0]) }
-            }
-        } catch let error {
-            print("invalid regex: \(error.localizedDescription)")
-            return []
-        }
-    }
-
-    var hiraganaOnly: String {
-        let hiragana = self.kataganaToHiragana
-        guard let hiraganaRange = hiragana.range(of: "[\\p{Hiragana}ー]*[\\p{Hiragana}ー]", options: .regularExpression)
-            else { return "" }
-        return String(hiragana[hiraganaRange])
-    }
-
-    var jpnType: JpnType {
-        guard let kanjiRange = self.range(of: "[\\p{Han}\\d]*[\\p{Han}\\d]", options: .regularExpression) else { return JpnType.noKanjiAndNumber }
-
-        if String(self[kanjiRange]).count == self.count {
-            return JpnType.kanjiAndNumberOnly
-        }
-        return JpnType.mixed
-    }
-    #if os(iOS)
-    var furiganaAttributedString: Promise<NSMutableAttributedString> {
-        let promise = Promise<NSMutableAttributedString>.pending()
-
-        getKanaTokenInfos(self).then {
-            promise.fulfill(getFuriganaString(tokenInfos: $0))
-        }
-
-        return promise
-    }
-    #endif
-
-    // Hiragana: 3040-309F
-    // Katakana: 30A0-30FF
-    var kataganaToHiragana: String {
-        var hiragana = ""
-        for ch in self {
-            let scalars = ch.unicodeScalars
-            let chValue = scalars[scalars.startIndex].value
-            // 30FC is 長音（ー）there is no match in hiragana
-            if chValue >= 0x30A0 && chValue <= 0x30FB {
-                if let newScalar = UnicodeScalar( chValue - 0x60) {
-                    hiragana.append(Character(newScalar))
-                } else {
-                    print("kataganaToHiragana fail")
-                }
-            } else {
-                hiragana.append(ch)
-            }
-        }
-        return hiragana
-    }
-
-    func substring(with nsrange: NSRange) -> Substring? {
-        guard let range = Range(nsrange, in: self) else { return nil }
-        return self[range]
-    }
-
-    var fullRange: NSRange {
-        return NSRange(location: 0, length: self.count)
-    }
-}

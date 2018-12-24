@@ -329,7 +329,7 @@ func prepareSpeak() {
 }
 
 func speak(_ s: String) {
-    theErr = SpeakCFString(fCurSpeechChannel!, getKanaFixedText(s) as CFString, nil)
+    theErr = SpeakCFString(fCurSpeechChannel!, getFixedKanaForTTS(s) as CFString, nil)
     if theErr != OSErr(noErr) { print("error... speak") }
     //print("\(s) is spoken")
 }

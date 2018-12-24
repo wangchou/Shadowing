@@ -30,6 +30,8 @@ let myLightText = rgb(224, 224, 224)
 let myGray = rgb(192, 192, 192)
 
 let myWaterBlue = rgb(64, 192, 255)
+let myLightGreen = rgb(181, 226, 75)
+let myLightRed = rgb(255, 130, 173)
 
 extension UIColor {
     func withSaturation(_ newS: CGFloat) -> UIColor {

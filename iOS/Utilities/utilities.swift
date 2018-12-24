@@ -13,14 +13,6 @@ import UIKit
 #endif
 import Promises
 
-// MARK: - Utilities
-// https://stackovercmd.com/questions/24231680/loading-downloading-image-from-url-on-swift
-func getDataFromUrl(url: String, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
-    guard let url = URL(string: url) else { print("invalid url"); return }
-    URLSession.shared.dataTask(with: url) { data, response, error in
-        completion(data, response, error)
-    }.resume()
-}
 #if os(iOS)
 // MARK: - Audio Session
 func configureAudioSession() {
@@ -49,7 +41,7 @@ func configureAudioSession() {
         session.requestRecordPermission({ (success) in
             if success { print("Record Permission Granted") } else {
                 print("Record Permission fail")
-                showGoToSettingCenterAlert()
+                showGoToPermissionSettingAlert()
             }
         })
     } catch {
@@ -68,41 +60,6 @@ extension Sequence {
         var result = Array(self)
         result.shuffle()
         return result
-    }
-}
-
-extension Int {
-    var f: Float { return Float(self) }
-    var c: CGFloat { return CGFloat(self) }
-    var s: String { return String(self) }
-}
-
-extension Float {
-    var i: Int { return Int(self) }
-    var c: CGFloat { return CGFloat(self) }
-}
-
-extension CGFloat {
-    var f: Float { return Float(self) }
-}
-
-// MARK: - launch storyboard
-func launchStoryboard(
-    _ originVC: UIViewController,
-    _ storyboardId: String,
-    isOverCurrent: Bool = false,
-    animated: Bool = false,
-    completion: ((UIViewController) -> Void)? = nil
-    ) {
-    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: storyboardId)
-    if isOverCurrent {
-        vc.modalPresentationStyle = .overCurrentContext
-    } else {
-        vc.modalTransitionStyle = .crossDissolve
-    }
-
-    originVC.present(vc, animated: animated) {
-        completion?(vc)
     }
 }
 
@@ -164,27 +121,7 @@ func pausePromise(_ seconds: Double) -> Promise<Void> {
     return p
 }
 
-extension String {
-    func padWidthTo(_ width: Int, isBothSide: Bool = false) -> String {
-        let padCount = max(width - self.count, 0)
-
-        func getEmptySpaces(_ padCount: Int) -> String {
-            guard padCount > 0 else { return "" }
-            var spaces = ""
-            for _ in 1...padCount { spaces += " " }
-            return spaces
-        }
-
-        if isBothSide {
-            let leftPadCount =  padCount / 2
-            let rightPadCount = padCount - leftPadCount
-            return getEmptySpaces(leftPadCount) + self + getEmptySpaces(rightPadCount)
-        }
-
-        return getEmptySpaces(padCount) + self
-    }
-}
-
+// Local Persist
 func saveToUserDefault<T: Codable>(object: T, key: String) {
     let encoder = JSONEncoder()
     if let encoded = try? encoder.encode(object) {
@@ -448,14 +385,3 @@ func isUnderDailySentenceLimit() -> Bool {
     return false
 }
 #endif
-
-extension Date {
-    var ms: Int64 {
-        return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
-        //RESOLVED CRASH HERE
-    }
-
-    init(ms: Int64) {
-        self = Date(timeIntervalSince1970: TimeInterval(ms / 1000))
-    }
-}

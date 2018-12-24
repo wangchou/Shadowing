@@ -166,12 +166,3 @@ func normalizeEnglishText(_ text: String) -> String {
                      .replace("-", "")
 
 }
-
-func getEnglishNumber(number: Int?) -> String {
-    guard let number = number else { return "" }
-    let userLocale = Locale(identifier: "en")
-    let formatter = NumberFormatter()
-    formatter.numberStyle = .spellOut
-    formatter.locale = userLocale
-    return formatter.string(from: NSNumber(value: number)) ?? ""
-}
