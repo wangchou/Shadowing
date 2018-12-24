@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 extension Int {
     var f: Float { return Float(self) }

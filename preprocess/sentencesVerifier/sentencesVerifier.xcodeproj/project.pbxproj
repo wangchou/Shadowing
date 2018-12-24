@@ -34,6 +34,8 @@
 		BE88D6172174D37E004E1CD0 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D6122174D37D004E1CD0 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE88D6182174D37E004E1CD0 /* FBLPromises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D6132174D37D004E1CD0 /* FBLPromises.framework */; };
 		BE88D6192174D37E004E1CD0 /* FBLPromises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D6132174D37D004E1CD0 /* FBLPromises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BE8E51EA21D0E414007D29E6 /* String+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8E51E821D0E414007D29E6 /* String+Utilities.swift */; };
+		BE8E51EB21D0E414007D29E6 /* Type+Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8E51E921D0E414007D29E6 /* Type+Conversion.swift */; };
 		BE9C6814217342D3007A8D83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9C6813217342D3007A8D83 /* AppDelegate.swift */; };
 		BE9C6816217342D3007A8D83 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9C6815217342D3007A8D83 /* ViewController.swift */; };
 		BE9C6818217342D5007A8D83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE9C6817217342D5007A8D83 /* Assets.xcassets */; };
@@ -81,6 +83,8 @@
 		BE88D6112174D37D004E1CD0 /* Promises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Promises.framework; path = Carthage/Build/Mac/Promises.framework; sourceTree = "<group>"; };
 		BE88D6122174D37D004E1CD0 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/Mac/Alamofire.framework; sourceTree = "<group>"; };
 		BE88D6132174D37D004E1CD0 /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBLPromises.framework; path = Carthage/Build/Mac/FBLPromises.framework; sourceTree = "<group>"; };
+		BE8E51E821D0E414007D29E6 /* String+Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+Utilities.swift"; path = "../../../iOS/Utilities/String+Utilities.swift"; sourceTree = "<group>"; };
+		BE8E51E921D0E414007D29E6 /* Type+Conversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Type+Conversion.swift"; path = "../../../iOS/Utilities/Type+Conversion.swift"; sourceTree = "<group>"; };
 		BE9C6810217342D3007A8D83 /* sentencesVerifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sentencesVerifier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE9C6813217342D3007A8D83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE9C6815217342D3007A8D83 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +113,8 @@
 		BE88D5FE2174D1F2004E1CD0 /* ReferencedFromIOSApp */ = {
 			isa = PBXGroup;
 			children = (
+				BE8E51E821D0E414007D29E6 /* String+Utilities.swift */,
+				BE8E51E921D0E414007D29E6 /* Type+Conversion.swift */,
 				BE3260CF21C0FD0B00A13C94 /* TTS.swift */,
 				BE3260CB21C0F1BD00A13C94 /* vocabulary1.swift */,
 				BE3260CC21C0F1BD00A13C94 /* vocabulary2.swift */,
@@ -265,10 +271,12 @@
 				BE869D2E218F34F700689755 /* CalculateScore.swift in Sources */,
 				BE869D32218F34F700689755 /* daily.swift in Sources */,
 				BE869D36218F34F700689755 /* rawDataSets.swift in Sources */,
+				BE8E51EA21D0E414007D29E6 /* String+Utilities.swift in Sources */,
 				BE869D2F218F34F700689755 /* Score.swift in Sources */,
 				BE9C6816217342D3007A8D83 /* ViewController.swift in Sources */,
 				BE9C6814217342D3007A8D83 /* AppDelegate.swift in Sources */,
 				BE869D37218F34F700689755 /* love.swift in Sources */,
+				BE8E51EB21D0E414007D29E6 /* Type+Conversion.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
