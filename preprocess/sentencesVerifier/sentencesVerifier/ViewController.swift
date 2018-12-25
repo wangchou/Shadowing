@@ -266,7 +266,7 @@ func prepareSentences() {
     } else {
         print("set count: ", rawDataSets.count)
         //shadowingSentences.forEach { sArray in sentences.append(contentsOf: sArray) }
-        for i in 4..<rawDataSets.count {
+        for i in 0..<rawDataSets.count {
             sentences.append(contentsOf: rawDataSets[i])
         }
         for i in 0...sentences.count {

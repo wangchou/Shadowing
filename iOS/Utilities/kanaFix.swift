@@ -31,7 +31,8 @@ let ttsKanaFix: [String: String] = [
     "隆盛": "たかもり",
     "博士": "はかせ",
     "私立学校": "しりつ学校",
-    "強すぎ": "つよすぎ"
+    "強すぎ": "つよすぎ",
+    "何と": "なんと"
 ]
 
 func getFixedKanaForTTS(_ text: String) -> String {
@@ -62,7 +63,15 @@ var furiganaFix: [String: String] = [
     "欅坂46": "けやきざかフォーティーシックス",
     "乃木坂46": "のぎざかフォーティーシックス",
     "隆盛": "たかもり",
-    "深緑": "ふかみどり"
+    "深緑": "ふかみどり",
+    "妹": "いもうと",
+    "きょうは": "きょーわ", // 今日は vs 教派
+    "弾き": "ひき", // 弾き: ひき vs はじき
+    "後": "あと", // vs のち
+    "昨夜": "ゆうべ", // vs さくや
+    "ゆうべ": "ゆうべ",
+    "誕生日": "たんじょうび", //vs たんじょーび
+    "冷蔵庫": "れいぞうこ"
 ]
 func getFixedFuriganaForScore(_ token: String) -> String? {
     return furiganaFix[token]

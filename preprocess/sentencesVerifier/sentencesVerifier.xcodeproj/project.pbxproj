@@ -36,6 +36,7 @@
 		BE88D6192174D37E004E1CD0 /* FBLPromises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE88D6132174D37D004E1CD0 /* FBLPromises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE8E51EA21D0E414007D29E6 /* String+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8E51E821D0E414007D29E6 /* String+Utilities.swift */; };
 		BE8E51EB21D0E414007D29E6 /* Type+Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8E51E921D0E414007D29E6 /* Type+Conversion.swift */; };
+		BE8E51F121D0E7D4007D29E6 /* grammar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8E51F021D0E7D4007D29E6 /* grammar.swift */; };
 		BE9C6814217342D3007A8D83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9C6813217342D3007A8D83 /* AppDelegate.swift */; };
 		BE9C6816217342D3007A8D83 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9C6815217342D3007A8D83 /* ViewController.swift */; };
 		BE9C6818217342D5007A8D83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE9C6817217342D5007A8D83 /* Assets.xcassets */; };
@@ -85,6 +86,7 @@
 		BE88D6132174D37D004E1CD0 /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBLPromises.framework; path = Carthage/Build/Mac/FBLPromises.framework; sourceTree = "<group>"; };
 		BE8E51E821D0E414007D29E6 /* String+Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+Utilities.swift"; path = "../../../iOS/Utilities/String+Utilities.swift"; sourceTree = "<group>"; };
 		BE8E51E921D0E414007D29E6 /* Type+Conversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Type+Conversion.swift"; path = "../../../iOS/Utilities/Type+Conversion.swift"; sourceTree = "<group>"; };
+		BE8E51F021D0E7D4007D29E6 /* grammar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = grammar.swift; path = ../../../iOS/Sentences/grammar.swift; sourceTree = "<group>"; };
 		BE9C6810217342D3007A8D83 /* sentencesVerifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sentencesVerifier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE9C6813217342D3007A8D83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE9C6815217342D3007A8D83 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				BE869D2C218F34F700689755 /* travel.swift */,
 				BE869D2A218F34F700689755 /* love.swift */,
 				BE869D2B218F34F700689755 /* polite.swift */,
+				BE8E51F021D0E7D4007D29E6 /* grammar.swift */,
 				BE869D29218F34F700689755 /* rawDataSets.swift */,
 				BE869D20218F34F700689755 /* kanaFix.swift */,
 				BE869D22218F34F700689755 /* Score.swift */,
@@ -275,6 +278,7 @@
 				BE869D2F218F34F700689755 /* Score.swift in Sources */,
 				BE9C6816217342D3007A8D83 /* ViewController.swift in Sources */,
 				BE9C6814217342D3007A8D83 /* AppDelegate.swift in Sources */,
+				BE8E51F121D0E7D4007D29E6 /* grammar.swift in Sources */,
 				BE869D37218F34F700689755 /* love.swift in Sources */,
 				BE8E51EB21D0E414007D29E6 /* Type+Conversion.swift in Sources */,
 			);

@@ -13,7 +13,8 @@ var chTranslations: [String: String] = [:]
 var datasetKeyToTags: [String: [String]] = [:]
 private var tags: [String] = []
 var rawDataSets: [[String]] =
-    [dailyOne, expressive, travel, polite, love, speech, vocabulary1, vocabulary2]
+    //[dailyOne, expressive, travel, polite, love, speech, vocabulary1, vocabulary2]
+    [inWork]
     .flatMap { (element: [String]) -> [String] in
         return element
     }
