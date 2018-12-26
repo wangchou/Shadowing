@@ -28,7 +28,7 @@ extension Messenger: GameEventDelegate {
             guard let newRange = event.range else { return }
             if !context.gameSetting.isShowTranslation,
                context.gameState == .speakingTargetString {
-//                print(Date().timeIntervalSince1970, context.targetString, context.targetString.substring(with: newRange)?.s)
+                //print(Date().timeIntervalSince1970, context.targetString, context.targetString.substring(with: newRange)?.s)
                 tmpRangeQueue.append(newRange)
                 let duration = Double(0.15 / (2 * context.teachingRate))
 
@@ -44,8 +44,7 @@ extension Messenger: GameEventDelegate {
 
                 var attrText = NSMutableAttributedString()
 
-                if context.targetString.jpnType != .noKanjiAndNumber,
-                    let tokenInfos = kanaTokenInfosCacheDictionary[context.targetString] {
+                if let tokenInfos = kanaTokenInfosCacheDictionary[context.targetString] {
                     let fixedRange = getRangeWithParticleFix(tokenInfos: tokenInfos, allRange: allRange)
 //                    if let fixedRange = fixedRange {
 //                        print("\tfixedRange:", context.targetString.substring(with: fixedRange)?.s)
