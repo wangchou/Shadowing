@@ -40,20 +40,30 @@ func verifyNextTopicSentence() {
 
     vc.scrollView.becomeFirstResponder()
 
-    guard sentencesIdx < sentences.count else { return }
-
-    let s = sentences[sentencesIdx]
-
-    if s == "" {
+    func appendGroupText(isLast: Bool = false) {
         var groupText = ""
-        for i in groupStartIdx...sentencesIdx {
+        for i in groupStartIdx..<sentencesIdx {
             groupText.append(sentences[i]+"\n")
+        }
+        if !isLast {
+            groupText.append("\n")
         }
         if isGroupCorrect {
             vc.rightTextView.string += groupText
         } else {
             vc.wrongTextView.string += groupText
         }
+    }
+
+    guard sentencesIdx < sentences.count else {
+        appendGroupText(isLast: true)
+        return
+    }
+
+    let s = sentences[sentencesIdx]
+
+    if s == "" {
+        appendGroupText()
         isGroupCorrect = true
         sentencesIdx += 1
         groupStartIdx = sentencesIdx
