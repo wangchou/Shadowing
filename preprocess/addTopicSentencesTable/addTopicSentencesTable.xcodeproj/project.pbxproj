@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE2142AF21D3707400FA2925 /* grammarN5.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2142AE21D3707400FA2925 /* grammarN5.swift */; };
 		BE3260D321C18EA200A13C94 /* vocabulary1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260D121C18EA200A13C94 /* vocabulary1.swift */; };
 		BE3260D421C18EA200A13C94 /* vocabulary2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260D221C18EA200A13C94 /* vocabulary2.swift */; };
 		BE3260DE21C1F9E600A13C94 /* inf_sentences_100points_duolingo.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BE3260DD21C1F9E600A13C94 /* inf_sentences_100points_duolingo.sqlite */; };
@@ -56,6 +57,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BE2142AE21D3707400FA2925 /* grammarN5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = grammarN5.swift; path = ../../iOS/Sentences/grammarN5.swift; sourceTree = "<group>"; };
 		BE3260D121C18EA200A13C94 /* vocabulary1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = vocabulary1.swift; path = ../../iOS/Sentences/vocabulary1.swift; sourceTree = "<group>"; };
 		BE3260D221C18EA200A13C94 /* vocabulary2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = vocabulary2.swift; path = ../../iOS/Sentences/vocabulary2.swift; sourceTree = "<group>"; };
 		BE3260DD21C1F9E600A13C94 /* inf_sentences_100points_duolingo.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences_100points_duolingo.sqlite; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 		BE3EA03D217761C600B65F48 /* reference from iOS project */ = {
 			isa = PBXGroup;
 			children = (
+				BE2142AE21D3707400FA2925 /* grammarN5.swift */,
 				BE8E51EC21D0E57D007D29E6 /* String+Utilities.swift */,
 				BE8E51ED21D0E57D007D29E6 /* Type+Conversion.swift */,
 				BE3260D121C18EA200A13C94 /* vocabulary1.swift */,
@@ -243,6 +246,7 @@
 				BE3EA02E217761B300B65F48 /* AppDelegate.swift in Sources */,
 				BE3260D321C18EA200A13C94 /* vocabulary1.swift in Sources */,
 				BE869D19218E115800689755 /* utilities.swift in Sources */,
+				BE2142AF21D3707400FA2925 /* grammarN5.swift in Sources */,
 				BE869D11218E110000689755 /* kanaFix.swift in Sources */,
 				BE869D0F218E110000689755 /* love.swift in Sources */,
 				BE869D14218E110000689755 /* speech.swift in Sources */,

@@ -10,6 +10,19 @@ import Foundation
 import Cocoa
 import Promises
 
+import Foundation
+// SOP => 1~6 50句 大概花一小時
+// 1. 找句子 > 20句
+// 2. 整批看 otoya 能不能念出來
+// 3. 移除/修正不能唸的
+// 4. 拆成短句組
+// 5. 整批看 otoya 能不能念出來
+// 6. 移除/修正不能唸的
+// 7. 全部弄完後，累積超過 500句。再加上中文翻譯
+let inWork =
+"""
+"""
+
 var groupStartIdx = 0
 var isGroupCorrect = true
 extension ViewController {

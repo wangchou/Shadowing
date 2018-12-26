@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if os(iOS)
+import UIKit
+#endif
+
 extension Int {
     var f: Float { return Float(self) }
     var c: CGFloat { return CGFloat(self) }
