@@ -23,7 +23,25 @@ func getTagPoints() -> [String: Int] {
             }
         }
     }
+    var sum = 0
+    tagPoints.values.forEach { p in sum += p }
+    tagPoints["#" + topicForAll] = sum
     return tagPoints
+}
+
+func getTagMaxPoints() -> [String: Int] {
+    var tagMaxPoints: [String: Int] = [:]
+    datasetKeyToTags.keys.forEach { key in
+        if let tags = datasetKeyToTags[key],
+            !tags.isEmpty {
+            let tag = tags[0]
+            tagMaxPoints[tag] = (tagMaxPoints[tag] ?? 0) + 100
+        }
+    }
+    var sum = 0
+    tagMaxPoints.values.forEach { p in sum += p }
+    tagMaxPoints["#" + topicForAll] = sum
+    return tagMaxPoints
 }
 
 func loadDataSets() {

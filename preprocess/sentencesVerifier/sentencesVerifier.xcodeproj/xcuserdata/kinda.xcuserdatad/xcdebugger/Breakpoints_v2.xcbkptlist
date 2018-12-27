@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../iOS/Utilities/CalculateScore.swift"
-            timestampString = "566332964.790785"
+            timestampString = "567343373.4597861"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "29"
@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sentencesVerifier/ViewController.swift"
-            timestampString = "566359953.0379339"
+            timestampString = "567502361.137639"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "259"
-            endingLineNumber = "259"
-            landmarkName = "prepareSentences()"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
+            landmarkName = "isPerfectCountOverLimit(id:)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-var topicForAll = "全部"
+let topicForAll = "全部"
 var isTopicOn: [String: Bool] = [topicForAll: true]
 class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
     var gridCount: Int = 5
@@ -24,6 +24,9 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
     func viewWillAppear() {
         removeAllSubviews()
 
+        let tagPoints = getTagPoints()
+        let tagMaxPoints = getTagMaxPoints()
+
         for i in 0...abilities.count {
             var buttonTitle = ""
             if i == 0 {
@@ -31,7 +34,11 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
             } else {
                 buttonTitle = abilities[i-1]
             }
-            addButton(title: buttonTitle, index: i)
+            addButton(title: buttonTitle,
+                      index: i,
+                      percent: (tagPoints["#" + buttonTitle] ?? 0).c /
+                               (tagMaxPoints["#"+buttonTitle] ?? 100).c
+            )
         }
         contentSize = CGSize(width: barWidth, height: 40)
         delaysContentTouches = true
@@ -43,19 +50,33 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
         return true
     }
 
-    func addButton(title: String, index: Int) {
-        let button = UIButton()
-        button.setTitle(title, for: .normal)
-        button.backgroundColor = rgb(224, 224, 224)
-        button.titleLabel?.font = MyFont.regular(ofSize: 12)
-        button.setTitleColor(rgb(100, 100, 100), for: .normal)
-        button.roundBorder(borderWidth: 0, cornerRadius: 20, color: .clear)
+    func addButton(title: String, index: Int, percent: CGFloat) {
+        let buttonFrame = CGRect(x: 8 + index * 45, y: 8, width: 35, height: 35)
+
+        let backCircle = CircleView(frame: buttonFrame)
+        backCircle.lineWidth = 3
+        backCircle.lineColor = rgb(240, 240, 240)
+        backCircle.fillColor = rgb(224, 224, 224)
+        addSubview(backCircle)
+
+        let titleLabel = addText(x: 0, y: 0, w: 5, h: 1,
+                                 text: title,
+                                 font: MyFont.regular(ofSize: 12),
+                                 color: rgb(40, 40, 40))
+        titleLabel.textAlignment = .center
+        titleLabel.centerIn(buttonFrame)
+
+        let button = CircleView(frame: buttonFrame)
+        button.lineWidth = 3
+        button.lineColor = rgb(100, 100, 100)
+        button.percent = percent
 
         if let isOn = isTopicOn[title],
             isOn {
-            button.backgroundColor = myBlue.withAlphaComponent(0.5)
-            button.roundBorder(borderWidth: 0, cornerRadius: 20, color: .clear)
-            button.setTitleColor(rgb(40, 40, 40), for: .normal)
+            backCircle.lineColor = rgb(224, 224, 224)
+            backCircle.fillColor = myBlue.withAlphaComponent(0.5)
+            button.lineColor = .black
+            titleLabel.textColor = .black
         }
 
         button.addTapGestureRecognizer {
@@ -78,8 +99,6 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
                 object: nil
             )
         }
-
-        button.frame = CGRect(x: 5 + index * 45, y: 5, width: 40, height: 40)
 
         addSubview(button)
     }

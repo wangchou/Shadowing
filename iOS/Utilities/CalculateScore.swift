@@ -73,7 +73,9 @@ func calculateScore(
     let promise = Promise<Score>.pending()
 
     func calcScore(_ str1: String, _ str2: String) -> Int {
-        let len = max(str1.count, str2.count)
+        let trimedS1 = str1.replace(" ", "")
+        let trimedS2 = str2.replace(" ", "")
+        let len = max(trimedS1.count, trimedS2.count)
         guard len > 0 else {
             #if os(iOS)
             showMessage(I18n.shared.cannotReachServer)
@@ -81,11 +83,12 @@ func calculateScore(
             print("zero len error on calcScore", str1, str2)
             return 0
         }
-        let score = (len - distanceBetween(str1, str2)) * 100 / len
-//        if score != 100 {
-//            print("-------")
-//            print(str1, str2, score)
-//        }
+        let score = (len - distanceBetween(trimedS1, trimedS2)) * 100 / len
+        if score != 100 {
+            print("-------")
+            print("1>" ,str1)
+            print("2>", str2, score)
+        }
         return score
     }
 
