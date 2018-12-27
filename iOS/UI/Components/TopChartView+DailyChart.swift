@@ -20,9 +20,17 @@ extension TopChartView {
 
         circleFrame = getFrame(11, 3, 24, 24)
 
+        // padding 5
+        circleFrame = CGRect(
+            x: circleFrame.origin.x + 5,
+            y: circleFrame.origin.y + 5,
+            width: circleFrame.size.width - 10,
+            height: circleFrame.size.height - 10
+        )
+
         let backCircle = CircleView(frame: circleFrame)
         backCircle.lineWidth = stepFloat * 1.3
-        backCircle.color = rgb(155, 155, 155)
+        backCircle.lineColor = rgb(155, 155, 155)
         addSubview(backCircle)
 
         frontCircle = CircleView(frame: circleFrame)
