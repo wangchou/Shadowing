@@ -18,7 +18,7 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
     var spacing: CGFloat = 0
 
     var barWidth: CGFloat {
-        return max(screen.width, 10 + abilities.count.c * 50)
+        return max(screen.width, 15 + abilities.count.c * 50)
     }
 
     func viewWillAppear() {
