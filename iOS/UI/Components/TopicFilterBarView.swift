@@ -18,7 +18,7 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
     var spacing: CGFloat = 0
 
     var barWidth: CGFloat {
-        return max(screen.width, 15 + abilities.count.c * 50)
+        return max(screen.width, 15 + abilities.count.c * 55)
     }
 
     func viewWillAppear() {
@@ -41,7 +41,7 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
                                (tagMaxPoints["#"+buttonTitle] ?? 100).c
             )
         }
-        contentSize = CGSize(width: barWidth, height: 40)
+        contentSize = CGSize(width: barWidth, height: 50)
         delaysContentTouches = true
         canCancelContentTouches = true
         addSeparateLine()
@@ -52,20 +52,20 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
     }
 
     func addButton(title: String, index: Int, percent: CGFloat) {
-        let buttonFrame = CGRect(x: 8 + index * 45, y: 8, width: 35, height: 35)
+        let buttonFrame = CGRect(x: 6 + index * 50, y: 8, width: 40, height: 40)
 
         let backCircle = CircleView(frame: buttonFrame)
-        backCircle.lineWidth = 1.5
+        backCircle.lineWidth = 2
 
         addSubview(backCircle)
         let titleLabel = addText(x: 0, y: 0, w: 5, h: 1,
                                  text: title,
-                                 font: MyFont.regular(ofSize: 12))
+                                 font: MyFont.regular(ofSize: 14))
         titleLabel.textAlignment = .center
         titleLabel.centerIn(buttonFrame)
 
         let button = CircleView(frame: buttonFrame)
-        button.lineWidth = 1.5
+        button.lineWidth = 2
         button.percent = percent
 
         if let isOn = isTopicOn[title],
