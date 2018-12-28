@@ -40,7 +40,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         backButton.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .highlighted)
         backButton.backgroundColor = .red
         backButton.titleLabel?.font = MyFont.regular(ofSize: step * 4)
-        backButton.titleLabel?.textColor = myLightText
+        backButton.titleLabel?.textColor = myLightGray
         backButton.roundBorder(borderWidth: 1, cornerRadius: 5, color: .clear)
 
         backButton.addTapGestureRecognizer {

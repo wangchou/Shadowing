@@ -44,7 +44,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         if context.contentTab == .infiniteChallenge {
             title = "無限挑戰"
         }
-        addText(2, 1, 6, title, color: myLightText, strokeColor: .black)
+        addText(2, 1, 6, title, color: myLightGray, strokeColor: .black)
         addText(2, 7, 6, tags, color: myOrange, strokeColor: .black)
     }
 
@@ -81,8 +81,8 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
 
         let todaySentenceCount = getTodaySentenceCount()
         let dailyGoal = context.gameSetting.dailySentenceGoal
-        addText(2, y + 1, 6, "今日の目標", color: myLightText)
-        goalProgressLabel = addText(31, y + 1, 6, "\(todaySentenceCount - record.correctCount)/\(dailyGoal)", color: myLightText)
+        addText(2, y + 1, 6, "今日の目標", color: myLightGray)
+        goalProgressLabel = addText(31, y + 1, 6, "\(todaySentenceCount - record.correctCount)/\(dailyGoal)", color: myLightGray)
         goalProgressLabel?.frame = getFrame(12, y + 1, 30, 6)
         goalProgressLabel?.textAlignment = .right
         let fontSize = getFontSize(h: 6)
@@ -102,7 +102,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
 
         let text = "\(todaySentenceCount - record.correctCount)/\(dailyGoal)"
         goalProgressLabel?.attributedText = getText(text,
-                                                   color: myLightText,
+                                                   color: myLightGray,
                                                    strokeWidth: -2,
                                                    strokeColor: .black, font: font)
     }
@@ -131,7 +131,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
             progressBar.frame.size.width = self.fullProgressWidth * (self.startProgress * (1 - ratio) + self.endProgress * ratio).c
             let text = "\(todaySentenceCount - record.correctCount + (record.correctCount.f * ratio).i)/\(dailyGoal)"
             goalProgressLabel.attributedText = getText(text,
-                                                       color: myLightText,
+                                                       color: myLightGray,
                                                        strokeWidth: -2,
                                                        strokeColor: .black, font: font)
             if repeatCount >= targetRepeatCount + delayCount {

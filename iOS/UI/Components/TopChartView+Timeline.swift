@@ -112,7 +112,7 @@ extension TopChartView {
         }
     }
 
-    func addTimelineBox(row: Int, column: Int, color: UIColor = myLightText) {
+    func addTimelineBox(row: Int, column: Int, color: UIColor = myLightGray) {
         let width = stepFloat * 0.7
         let box = UIView()
         box.backgroundColor = color

@@ -26,12 +26,14 @@ let hashtagColor = rgb(0, 53, 105)
 let highlightColor = myOrange.withAlphaComponent(0.3)
 
 let myWhite = rgb(240, 240, 240)
-let myLightText = rgb(224, 224, 224)
+let myLightGray = rgb(224, 224, 224)
 let myGray = rgb(192, 192, 192)
 
 let myWaterBlue = rgb(64, 192, 255)
 let myLightGreen = rgb(181, 226, 75)
 let myLightRed = rgb(255, 130, 173)
+
+let lightestGray = rgb(250, 250, 250)
 
 extension UIColor {
     func withSaturation(_ newS: CGFloat) -> UIColor {
