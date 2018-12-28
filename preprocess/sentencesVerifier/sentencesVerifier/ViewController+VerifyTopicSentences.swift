@@ -13,29 +13,38 @@ import Promises
 import Foundation
 // SOP => 1~6 50句 大概花一小時
 // 1. 找句子 > 20句
-// 2. 整批看 otoya 能不能念出來
+// 2. 整批看 otoya & kyoko 單句能不能念出來
 // 3. 移除/修正不能唸的
 // 4. 拆成短句組
-// 5. 整批看 otoya 能不能念出來
+// 5. 整批看 otoya & kyoko 能不能念出來
 // 6. 移除/修正不能唸的
 // 7. 全部弄完後，累積超過 500句。再加上中文翻譯
 let inWork =
 """
 """
-
+var isGroupMode = false
 var groupStartIdx = 0
 var isGroupCorrect = true
 extension ViewController {
     func verifyAllTopicSentences() {
         isInfiniteChallengePreprocessingMode = false
-        sentences = inWork.components(separatedBy: "\n")
+        sentences = grammarN5.joined(separator: "\n")
+                             .components(separatedBy: "\n")
+                             .filter {s in
+                                return !s.hasPrefix("#") && (isGroupMode || s != "" )
+                             }
+                             .map {s in
+                                let subStrings = s.components(separatedBy: "|")
+                                return subStrings[0]
+                             }
 
         for i in 0...sentences.count {
             sentenceIds.append(i)
         }
 
         prepareSpeak()
-        speaker = .otoya
+        //speaker = .otoya
+        speaker = .kyoko
         scrollView.becomeFirstResponder()
         verifyNextSentence = verifyNextTopicSentence
 
@@ -58,7 +67,7 @@ func verifyNextTopicSentence() {
         for i in groupStartIdx..<sentencesIdx {
             groupText.append(sentences[i]+"\n")
         }
-        if !isLast {
+        if !isLast && isGroupMode {
             groupText.append("\n")
         }
         if isGroupCorrect {
@@ -66,6 +75,12 @@ func verifyNextTopicSentence() {
         } else {
             vc.wrongTextView.string += groupText
         }
+    }
+
+    if !isGroupMode {
+        appendGroupText()
+        isGroupCorrect = true
+        groupStartIdx = sentencesIdx
     }
 
     guard sentencesIdx < sentences.count else {
