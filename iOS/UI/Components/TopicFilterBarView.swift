@@ -22,6 +22,7 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
     }
 
     func viewWillAppear() {
+//        backgroundColor = lightestGray
         removeAllSubviews()
 
         let tagPoints = getTagPoints()
@@ -54,29 +55,30 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
         let buttonFrame = CGRect(x: 8 + index * 45, y: 8, width: 35, height: 35)
 
         let backCircle = CircleView(frame: buttonFrame)
-        backCircle.lineWidth = 3
-        backCircle.lineColor = rgb(240, 240, 240)
-        backCircle.fillColor = rgb(224, 224, 224)
-        addSubview(backCircle)
+        backCircle.lineWidth = 1.5
 
+        addSubview(backCircle)
         let titleLabel = addText(x: 0, y: 0, w: 5, h: 1,
                                  text: title,
-                                 font: MyFont.regular(ofSize: 12),
-                                 color: rgb(40, 40, 40))
+                                 font: MyFont.regular(ofSize: 12))
         titleLabel.textAlignment = .center
         titleLabel.centerIn(buttonFrame)
 
         let button = CircleView(frame: buttonFrame)
-        button.lineWidth = 3
-        button.lineColor = rgb(100, 100, 100)
+        button.lineWidth = 1.5
         button.percent = percent
 
         if let isOn = isTopicOn[title],
             isOn {
-            backCircle.lineColor = rgb(224, 224, 224)
-            backCircle.fillColor = myBlue.withAlphaComponent(0.5)
+            backCircle.lineColor = myGray
+            backCircle.fillColor = myBlue.withAlphaComponent(0.3)
             button.lineColor = .black
             titleLabel.textColor = .black
+        } else {
+            backCircle.lineColor = myLightGray
+            backCircle.fillColor = lightestGray
+            button.lineColor = rgb(100, 100, 100)
+            titleLabel.textColor = rgb(60, 60, 60)
         }
 
         button.addTapGestureRecognizer {
