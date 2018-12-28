@@ -84,11 +84,11 @@ func calculateScore(
             return 0
         }
         let score = (len - distanceBetween(trimedS1, trimedS2)) * 100 / len
-        if score != 100 {
-            print("-------")
-            print("1>" ,str1)
-            print("2>", str2, score)
-        }
+//        if score != 100 {
+//            print("-------")
+//            print("1>" ,str1)
+//            print("2>", str2, score)
+//        }
         return score
     }
 
