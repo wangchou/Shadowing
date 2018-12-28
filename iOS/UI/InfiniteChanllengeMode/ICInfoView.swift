@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 private let context = GameContext.shared
 private let i18n = I18n.shared
@@ -186,6 +187,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
             if let vc = UIApplication.getPresentedViewController() {
                 context.infiniteChallengeLevel = self.level
                 if isUnderDailySentenceLimit() {
+                    Analytics.logEvent("challenge_infinite_\(gameLang.prefix)", parameters: nil)
                     launchStoryboard(vc, "MessengerGame")
                 }
             }
