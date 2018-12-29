@@ -13,6 +13,21 @@ private let i18n = I18n.shared
 
 typealias AnimateBarContext = (progress: UILabel, bar: UIView, from: Int, to: Int, max: Int)
 
+private func getProgressColor(percent: Float) -> UIColor {
+    if percent < 0.4 {
+        return myRed
+    }
+    if percent < 0.7 {
+        return myOrange
+    }
+
+    if percent < 1 {
+        return myGreen
+    }
+
+    return myBlue
+}
+
 @IBDesignable
 class GameReportBoxView: UIView, ReloadableView, GridLayout {
     let gridCount = 44
@@ -130,7 +145,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         let fromPercent = min(1.0, (fromNumber.f/maxNumber.f))
         fullProgressWidth = getFrame(0, 0, 40, lineHeight).width
 
-        let bar = addRect(x: 2, y: y + 6, w: 1, h: lineHeight)
+        let bar = addRect(x: 2, y: y + 6, w: 1, h: lineHeight, color: getProgressColor(percent: fromPercent))
         bar.frame.size.width = fullProgressWidth * fromPercent.c
         bar.roundBorder(borderWidth: 1, cornerRadius: 0, color: .clear)
 
@@ -160,7 +175,9 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
                 return
             }
             let ratio: Float = (repeatCount.f - delayCount.f) / targetRepeatCount.f
-            bar.frame.size.width = self.fullProgressWidth * (startProgress * (1 - ratio) + endProgress * ratio).c
+            let currentProgress = (startProgress * (1 - ratio) + endProgress * ratio)
+            bar.backgroundColor = getProgressColor(percent: currentProgress)
+            bar.frame.size.width = self.fullProgressWidth * currentProgress.c
             let text = "\((fromCount.f * (1 - ratio) + toCount.f * ratio).i)/\(maxCount)"
             label.attributedText = getText(text,
                                            color: myLightGray,
