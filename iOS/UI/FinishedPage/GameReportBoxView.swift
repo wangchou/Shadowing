@@ -11,6 +11,8 @@ import UIKit
 private let context = GameContext.shared
 private let i18n = I18n.shared
 
+typealias AnimateBarContext = (progress: UILabel, bar: UIView, from: Int, to: Int, max: Int)
+
 @IBDesignable
 class GameReportBoxView: UIView, ReloadableView, GridLayout {
     let gridCount = 44
@@ -18,11 +20,9 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
     let spacing: CGFloat = 0
 
     // for animate progress bar at viewDidAppear
-    private var animateTimer: Timer?
-    private var progressBar: UIView?
-    private var goalProgressLabel: UILabel?
-    private var startProgress: Float = 0
-    private var endProgress: Float = 0
+    private var timers: [String: Timer] = [:]
+    private var animateGoalBarContext: AnimateBarContext?
+    private var animateTopicBarContext: AnimateBarContext?
     private var fullProgressWidth: CGFloat = 0
 
     private var showAbilityTargetLabelFunc: (() -> Void)?
@@ -79,65 +79,98 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         line.frame.size.height = 1.5
         addSubview(line)
 
+        // sentence numbers
         let todaySentenceCount = getTodaySentenceCount()
         let dailyGoal = context.gameSetting.dailySentenceGoal
-        addText(2, y + 1, 6, "今日の目標", color: myLightGray)
-        goalProgressLabel = addText(31, y + 1, 6, "\(todaySentenceCount - record.correctCount)/\(dailyGoal)", color: myLightGray)
-        goalProgressLabel?.frame = getFrame(12, y + 1, 30, 6)
-        goalProgressLabel?.textAlignment = .right
-        let fontSize = getFontSize(h: 6)
-        let font = MyFont.bold(ofSize: fontSize)
+        animateGoalBarContext = addProgressBar(y: y,
+                                               title: "今日の目標",
+                                               fromNumber: todaySentenceCount - record.correctCount,
+                                               endNumber: todaySentenceCount,
+                                               maxNumber: dailyGoal)
 
-        let barBox = addRect(x: 2, y: y + 7, w: 40, h: 4, color: .clear)
+        if context.contentTab == .topics {
+            let topic = getDataSetTopic(dataSetKey: record.dataSetKey)
+            let tagPointsWithoutLast = getTagPoints(isWithoutLast: true)
+            let fromTagPoint = tagPointsWithoutLast["#" + topic] ?? 0
+            let tagPoints = getTagPoints()
+            let toTagPoint = tagPoints["#" + topic] ?? 0
+            let tagMaxPoints = getTagMaxPoints()
+            let maxTagPoint = tagMaxPoints["#" + topic] ?? 1
+            animateTopicBarContext = addProgressBar(y: y + 10,
+                                                    title: topic,
+                                                    fromNumber: fromTagPoint,
+                                                    endNumber: toTagPoint,
+                                                    maxNumber: maxTagPoint)
+        }
+    }
+
+    private func addProgressBar(y: Int,
+                                title: String,
+                                fromNumber: Int,
+                                endNumber: Int,
+                                maxNumber: Int) -> AnimateBarContext {
+        let lineHeight = 4
+        addText(2, y + 1, lineHeight + 1, title, color: myLightGray)
+
+        let text = "\(fromNumber)/\(maxNumber)"
+        let progressLabel = addText(31, y + 1, lineHeight+1, text, color: myLightGray)
+        progressLabel.frame = getFrame(12, y + 1, 30, lineHeight+1)
+        progressLabel.textAlignment = .right
+        let fontSize = getFontSize(h: lineHeight + 1)
+        let font = MyFont.bold(ofSize: fontSize)
+        progressLabel.attributedText = getText(text,
+                                               color: myLightGray,
+                                               strokeWidth: -2,
+                                               strokeColor: .black, font: font)
+
+        let barBox = addRect(x: 2, y: y + 6, w: 40, h: lineHeight, color: .clear)
         barBox.roundBorder(borderWidth: 1, cornerRadius: 0, color: .lightGray)
 
         // animate progress bar for one second
-        startProgress = min(1.0, ((todaySentenceCount - record.correctCount).f/dailyGoal.f))
-        endProgress = min(1.0, (todaySentenceCount.f/dailyGoal.f))
-        fullProgressWidth = getFrame(0, 0, 40, 4).width
-        progressBar = addRect(x: 2, y: y + 7, w: 1, h: 4)
-        guard let progressBar = progressBar else { return }
-        progressBar.frame.size.width = fullProgressWidth * startProgress.c
-        progressBar.roundBorder(borderWidth: 1, cornerRadius: 0, color: .clear)
+        let fromPercent = min(1.0, (fromNumber.f/maxNumber.f))
+        fullProgressWidth = getFrame(0, 0, 40, lineHeight).width
 
-        let text = "\(todaySentenceCount - record.correctCount)/\(dailyGoal)"
-        goalProgressLabel?.attributedText = getText(text,
-                                                   color: myLightGray,
-                                                   strokeWidth: -2,
-                                                   strokeColor: .black, font: font)
+        let bar = addRect(x: 2, y: y + 6, w: 1, h: lineHeight)
+        bar.frame.size.width = fullProgressWidth * fromPercent.c
+        bar.roundBorder(borderWidth: 1, cornerRadius: 0, color: .clear)
+
+        return (progressLabel, bar, fromNumber, endNumber, maxNumber)
     }
 
     func animateProgressBar() {
-        guard let record = context.gameRecord,
-              let progressBar = progressBar,
-              let goalProgressLabel = goalProgressLabel else { return }
+        animateBarContext(context: animateGoalBarContext, key: "goal")
+        animateBarContext(context: animateTopicBarContext, key: "topic" )
+    }
 
-        let todaySentenceCount = getTodaySentenceCount()
-        let dailyGoal = context.gameSetting.dailySentenceGoal
-        let fontSize = getFontSize(h: 6)
+    private func animateBarContext(context: AnimateBarContext?, key: String) {
+        guard let (label, bar, fromCount, toCount, maxCount) = context else { return }
+        let fontSize = getFontSize(h: 5)
         let font = MyFont.bold(ofSize: fontSize)
 
         var repeatCount = 0
         let targetRepeatCount = 30
         let delayCount = 20
         let interval: TimeInterval = 0.02
+        let startProgress: Float = min(fromCount.f/maxCount.f, 1.0)
+        let endProgress: Float = min(toCount.f/maxCount.f, 1.0)
 
-        animateTimer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { _ in
+        timers[key] = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { _ in
             guard repeatCount >= delayCount else {
                 repeatCount += 1
                 return
             }
             let ratio: Float = (repeatCount.f - delayCount.f) / targetRepeatCount.f
-            progressBar.frame.size.width = self.fullProgressWidth * (self.startProgress * (1 - ratio) + self.endProgress * ratio).c
-            let text = "\(todaySentenceCount - record.correctCount + (record.correctCount.f * ratio).i)/\(dailyGoal)"
-            goalProgressLabel.attributedText = getText(text,
-                                                       color: myLightGray,
-                                                       strokeWidth: -2,
-                                                       strokeColor: .black, font: font)
+            bar.frame.size.width = self.fullProgressWidth * (startProgress * (1 - ratio) + endProgress * ratio).c
+            let text = "\((fromCount.f * (1 - ratio) + toCount.f * ratio).i)/\(maxCount)"
+            label.attributedText = getText(text,
+                                           color: myLightGray,
+                                           strokeWidth: -2,
+                                           strokeColor: .black, font: font)
             if repeatCount >= targetRepeatCount + delayCount {
                 self.showAbilityTargetLabelFunc?()
-                self.animateTimer?.invalidate()
-                if self.startProgress < 1.0 && self.endProgress == 1.0 {
+                self.timers[key]?.invalidate()
+                self.timers[key] = nil
+                if startProgress < 1.0 && endProgress == 1.0 {
                     _ = teacherSay(i18n.reachDailyGoal, rate: normalRate)
                 }
             }
