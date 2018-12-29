@@ -4,10 +4,14 @@ var dataSetKeys: [String] = []
 var dataSets: [String: [String]] = [:]
 var dataKeyToLevels: [String: Level] = [:]
 
-func getTagPoints() -> [String: Int] {
+func getTagPoints(isWithoutLast: Bool = false) -> [String: Int] {
     var tagPoints = [String: Int]()
     var maxGamePoints = [String: Int]()
-    let games = GameContext.shared.gameHistory
+    var games = GameContext.shared.gameHistory
+
+    if isWithoutLast {
+        games.removeLast()
+    }
 
     games.forEach { g in
         if let score = maxGamePoints[g.dataSetKey],

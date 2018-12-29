@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Promises
+import Firebase
 
 private let context = GameContext.shared
 private let i18n = I18n.shared
@@ -116,6 +117,7 @@ class TopicDetailPage: UIViewController {
 
     private func launchGame() {
         if isUnderDailySentenceLimit() {
+            Analytics.logEvent("challenge_topic_\(gameLang.prefix)", parameters: nil)
             launchStoryboard(self, "MessengerGame")
         }
     }

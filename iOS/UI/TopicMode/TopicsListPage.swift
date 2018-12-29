@@ -134,3 +134,13 @@ func getDataSetTitle(dataSetKey: String) -> String {
 
     return ""
 }
+
+func getDataSetTopic(dataSetKey: String) -> String {
+    if let tags = datasetKeyToTags[dataSetKey],
+        !tags.isEmpty {
+        let tagsWithoutSharp = tags.map { t in return t.replace("#", "")}
+        return tagsWithoutSharp[0]
+    }
+
+    return ""
+}

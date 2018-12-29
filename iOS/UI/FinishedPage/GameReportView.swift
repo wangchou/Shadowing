@@ -23,8 +23,13 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         backgroundColor = UIColor.black.withAlphaComponent(0.6)
         reportBox = GameReportBoxView()
 
-        frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.19)
-        layout(2, 4, 44, 41, reportBox!)
+        if context.contentTab == .topics {
+            frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.38)
+            layout(2, 4, 44, 50, reportBox!)
+        } else {
+            frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.17)
+            layout(2, 4, 44, 40, reportBox!)
+        }
 
         addReloadableSubview(reportBox!)
         addBackButton()
@@ -62,7 +67,11 @@ class GameReportView: UIView, ReloadableView, GridLayout {
             }
         }
 
-        layout(2, 47, 44, 8, backButton)
+        if context.contentTab == .topics {
+            layout(2, 56, 44, 8, backButton)
+        } else {
+            layout(2, 47, 44, 8, backButton)
+        }
 
         addSubview(backButton)
     }

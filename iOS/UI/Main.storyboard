@@ -2019,11 +2019,10 @@ Ruth Yuru Chen
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fzY-jo-0bH">
-                                <rect key="frame" x="45" y="162" width="230" height="60"/>
-                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="15" y="256" width="290" height="60"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.14901960784313725" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Uoi-04-lOf"/>
-                                    <constraint firstAttribute="width" constant="230" id="lKX-dg-aaV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="ゲームを終る">
@@ -2058,10 +2057,9 @@ Ruth Yuru Chen
                                 </connections>
                             </slider>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Px8-Is-Bt1">
-                                <rect key="frame" x="45" y="254" width="230" height="60"/>
+                                <rect key="frame" x="15" y="330" width="290" height="60"/>
                                 <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="230" id="NQK-CN-tbW"/>
                                     <constraint firstAttribute="height" constant="60" id="PNf-Oc-x4J"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
@@ -2107,18 +2105,22 @@ Ruth Yuru Chen
                             <constraint firstItem="Zvf-ny-jFJ" firstAttribute="centerY" secondItem="cM8-Gz-KMi" secondAttribute="centerY" id="6RT-6v-jlT"/>
                             <constraint firstItem="Zvf-ny-jFJ" firstAttribute="leading" secondItem="N3t-I3-Erf" secondAttribute="leading" constant="15" id="6Yf-Mt-Tgl"/>
                             <constraint firstItem="N3t-I3-Erf" firstAttribute="bottom" secondItem="cM8-Gz-KMi" secondAttribute="bottom" constant="20" id="8CG-0t-t1i"/>
+                            <constraint firstItem="rHV-aK-krE" firstAttribute="top" secondItem="Px8-Is-Bt1" secondAttribute="bottom" constant="14" id="Cke-2y-7CU"/>
                             <constraint firstItem="9Fh-fw-3gB" firstAttribute="top" secondItem="rHV-aK-krE" secondAttribute="bottom" constant="4" id="FWI-Lv-FR7"/>
+                            <constraint firstItem="Px8-Is-Bt1" firstAttribute="leading" secondItem="N3t-I3-Erf" secondAttribute="leading" constant="15" id="HJx-kO-GnK"/>
                             <constraint firstItem="rHV-aK-krE" firstAttribute="leading" secondItem="N3t-I3-Erf" secondAttribute="leading" constant="15" id="HeP-FX-I6K"/>
                             <constraint firstItem="Px8-Is-Bt1" firstAttribute="centerX" secondItem="IVc-qA-oVM" secondAttribute="centerX" id="Hm4-ob-Cn6"/>
                             <constraint firstItem="fzY-jo-0bH" firstAttribute="centerX" secondItem="IVc-qA-oVM" secondAttribute="centerX" id="ID3-BQ-04k"/>
-                            <constraint firstItem="Px8-Is-Bt1" firstAttribute="top" secondItem="fzY-jo-0bH" secondAttribute="bottom" constant="32" id="J3X-xy-kYd"/>
+                            <constraint firstItem="Px8-Is-Bt1" firstAttribute="top" secondItem="fzY-jo-0bH" secondAttribute="bottom" constant="14" id="J3X-xy-kYd"/>
+                            <constraint firstItem="N3t-I3-Erf" firstAttribute="trailing" secondItem="Px8-Is-Bt1" secondAttribute="trailing" constant="15" id="MN7-xa-x6l"/>
                             <constraint firstItem="cM8-Gz-KMi" firstAttribute="firstBaseline" secondItem="08G-Eb-JgR" secondAttribute="baseline" constant="16" symbolType="layoutAnchor" id="aNS-UM-lCr"/>
                             <constraint firstItem="08G-Eb-JgR" firstAttribute="centerY" secondItem="4P9-61-8fN" secondAttribute="centerY" id="bVg-EA-jUA"/>
-                            <constraint firstItem="Px8-Is-Bt1" firstAttribute="centerY" secondItem="IVc-qA-oVM" secondAttribute="centerY" id="dtC-KL-8ly"/>
                             <constraint firstItem="9Fh-fw-3gB" firstAttribute="leading" secondItem="N3t-I3-Erf" secondAttribute="leading" constant="15" id="fsL-r7-7Tp"/>
+                            <constraint firstItem="N3t-I3-Erf" firstAttribute="trailing" secondItem="fzY-jo-0bH" secondAttribute="trailing" constant="15" id="h0f-gn-1vg"/>
                             <constraint firstItem="08G-Eb-JgR" firstAttribute="top" secondItem="9Fh-fw-3gB" secondAttribute="bottom" constant="14" id="hyW-JW-ZvH"/>
                             <constraint firstItem="cM8-Gz-KMi" firstAttribute="leading" secondItem="Zvf-ny-jFJ" secondAttribute="trailing" constant="5" id="kXP-pA-csX"/>
                             <constraint firstItem="pEm-2K-vVR" firstAttribute="leading" secondItem="cM8-Gz-KMi" secondAttribute="trailing" constant="5" id="lAg-un-Bt0"/>
+                            <constraint firstItem="fzY-jo-0bH" firstAttribute="leading" secondItem="N3t-I3-Erf" secondAttribute="leading" constant="15" id="owV-fp-KUN"/>
                             <constraint firstItem="pEm-2K-vVR" firstAttribute="centerY" secondItem="cM8-Gz-KMi" secondAttribute="centerY" id="xaM-0B-wZc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="N3t-I3-Erf"/>
