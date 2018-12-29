@@ -8,7 +8,7 @@
 
 import UIKit
 
-var avgKanaCountDict: [String: Int] = [:]
+var avgKanaCountDict: [String: Float] = [:]
 // for ja
 private let minKanaCounts = [2, 7, 10, 12, 14, 16, 19, 23, 27, 32]
 private let maxKanaCounts = [6, 9, 11, 13, 15, 18, 22, 26, 31, 40]
@@ -21,8 +21,8 @@ private let titles = ["入門一", "入門二", "初級一", "初級二",
                       "中級一", "中級二", "上級一", "上級二", "超難問一", "超難問二"]
 let allLevels: [Level] = [.lv0, .lv1, .lv2, .lv3, .lv4, .lv5, .lv6, .lv7, .lv8, .lv9]
 
-func getLevel(avgSyllablesCount: Int) -> Level {
-    for i in 0..<allLevels.count where avgSyllablesCount <= allLevels[i].maxSyllablesCount {
+func getLevel(avgSyllablesCount: Float) -> Level {
+    for i in 0..<allLevels.count where avgSyllablesCount < (allLevels[i].maxSyllablesCount.f + 1) {
         return allLevels[i]
     }
     return Level.lv9

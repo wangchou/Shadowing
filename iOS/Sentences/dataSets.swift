@@ -59,13 +59,13 @@ func loadDataSets() {
             dataSets[key] = sentences
             dataSetKeys.append(key)
 
-            let avgKanaCount = sentences
+            let avgKanaCount: Float = sentences
                 .map { s -> Int in
                     return (topicSentencesInfos[s]?.kanaCount ?? 0) + vocabularyPlus
                 }
                 .reduce(0, { sum, count in
                     return sum + count
-                })/sentences.count
+                }).f/sentences.count.f
             avgKanaCountDict[key] = avgKanaCount
             dataKeyToLevels[key] = getLevel(avgSyllablesCount: avgKanaCount)
         }
