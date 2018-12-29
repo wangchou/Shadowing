@@ -25,8 +25,8 @@ class PauseOverlayViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        finishButton.layer.cornerRadius = 10
-        resumeButton.layer.cornerRadius = 10
+        finishButton.layer.cornerRadius = 5
+        resumeButton.layer.cornerRadius = 5
 
         view.addTapGestureRecognizer(action: viewTapped)
 
