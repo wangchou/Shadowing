@@ -72,7 +72,8 @@ var furiganaFix: [String: String] = [
     "ゆうべ": "ゆうべ",
     "誕生日": "たんじょうび", //vs たんじょーび
     "冷蔵庫": "れいぞうこ",
-    "山": "やま" // vs さん
+    "山": "やま", // vs さん
+    "にんぎょう": "にんぎょー"
 ]
 func getFixedFuriganaForScore(_ token: String) -> String? {
     return furiganaFix[token]

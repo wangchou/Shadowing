@@ -132,6 +132,7 @@ func OurSpeechDoneCallBackProc(_ inSpeechChannel: SpeechChannel, _ inRefCon: SRe
                 calcScoreFn(idToSentences[id]!, s).then { score in
                     updatePerfectCount(id: id, score: score)
                     updateSiriSaidAndScore(id: id, siriSaid: s, score: score)
+                    nextSentence(isEmptyString: isEmptyString)
                 }
             } else {
                 let s1 = sentences[id]
@@ -143,20 +144,23 @@ func OurSpeechDoneCallBackProc(_ inSpeechChannel: SpeechChannel, _ inRefCon: SRe
                         print(s2)
                         isGroupCorrect = false
                     }
+                    nextSentence(isEmptyString: isEmptyString)
                 }
-
-            }
-
-            // listening and speaking time off => one more double fn-fn
-            if isEmptyString {
-                toggleSTT()
-                Timer.scheduledTimer(withTimeInterval: waitTime, repeats: false) { _ in
-                    verifyNextSentence()
-                }
-            } else {
-                verifyNextSentence()
             }
         }
+    }
+}
+
+func nextSentence(isEmptyString: Bool) {
+    let waitTime:TimeInterval = 1.5
+    // listening and speaking time off => one more double fn-fn
+    if isEmptyString {
+        toggleSTT()
+        Timer.scheduledTimer(withTimeInterval: waitTime, repeats: false) { _ in
+            verifyNextSentence()
+        }
+    } else {
+        verifyNextSentence()
     }
 }
 
