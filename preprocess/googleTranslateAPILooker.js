@@ -3,7 +3,7 @@ var request = require('request')
 const fs = require('fs');
 
 var folderUrl = "/Users/kinda/projects/Shadowing/iOS/Sentences"
-var sentences = fs.readFileSync(`${folderUrl}/grammarN5.swift`,'utf8').split('\n')
+var sentences = fs.readFileSync(`${folderUrl}/grammarN4.swift`,'utf8').split('\n')
 
 
 // turn off the google ip setting before use it

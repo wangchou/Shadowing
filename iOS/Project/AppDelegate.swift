@@ -65,6 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 // https://medium.com/@stasost/ios-root-controller-navigation-3625eedbbff
+// swiftlint:disable force_cast
 extension AppDelegate {
     static var shared: AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
@@ -73,3 +74,4 @@ extension AppDelegate {
         return window!.rootViewController as! RootContainerViewController
     }
 }
+// swiftlint:enable force_cast

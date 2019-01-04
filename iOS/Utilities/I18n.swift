@@ -5,7 +5,7 @@
 //  Created by Wangchou Lu on 10/26/30 H.
 //  Copyright © 30 Heisei Lu, WangChou. All rights reserved.
 //
-
+// swiftlint:disable file_length type_body_length
 import Foundation
 
 class I18n {
@@ -502,3 +502,4 @@ class I18n {
         return "Close"
     }
 }
+// swiftlint:enable file_length  type_body_length

@@ -23,12 +23,14 @@ class RootContainerViewController: UIViewController {
         splashScreen = UIStoryboard(name: "Main", bundle: nil)
             .instantiateViewController(withIdentifier: "LaunchScreen")
 
+        // swiftlint:disable force_cast
         mainSwipablePage = (UIStoryboard(name: "Main", bundle: nil)
             .instantiateViewController(withIdentifier: MainSwipablePage.storyboardId) as! MainSwipablePage)
 
         infiniteChallengeSwipablePage = (UIStoryboard(name: "Main", bundle: nil)
             .instantiateViewController(withIdentifier: InfiniteChallengeSwipablePage.storyboardId) as! InfiniteChallengeSwipablePage)
         current = splashScreen
+        // swiftlint:enable force_cast
         showVC(splashScreen)
 
         loadGameLang()

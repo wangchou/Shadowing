@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		BE2142A921D3553200FA2925 /* ViewController+VerifyTopicSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2142A821D3553200FA2925 /* ViewController+VerifyTopicSentences.swift */; };
 		BE2142AB21D3562C00FA2925 /* ViewContoller+Speak.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2142AA21D3562C00FA2925 /* ViewContoller+Speak.swift */; };
-		BE2142AD21D36F2B00FA2925 /* grammarN4.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2142AC21D36F2B00FA2925 /* grammarN4.swift */; };
 		BE3260CD21C0F1BD00A13C94 /* vocabulary1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260CB21C0F1BD00A13C94 /* vocabulary1.swift */; };
 		BE3260CE21C0F1BD00A13C94 /* vocabulary2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260CC21C0F1BD00A13C94 /* vocabulary2.swift */; };
 		BE3260D021C0FD0B00A13C94 /* TTS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260CF21C0FD0B00A13C94 /* TTS.swift */; };
+		BE439C6521DF3B3600C0BE14 /* grammarN4.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE439C6421DF3B3600C0BE14 /* grammarN4.swift */; };
 		BE55B433217348E6006DC271 /* FakeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE55B432217348E6006DC271 /* FakeKey.swift */; };
 		BE55B43721736554006DC271 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE55B43621736553006DC271 /* SQLite.framework */; };
 		BE55B43821736554006DC271 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE55B43621736553006DC271 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -67,10 +67,10 @@
 /* Begin PBXFileReference section */
 		BE2142A821D3553200FA2925 /* ViewController+VerifyTopicSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+VerifyTopicSentences.swift"; sourceTree = "<group>"; };
 		BE2142AA21D3562C00FA2925 /* ViewContoller+Speak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewContoller+Speak.swift"; sourceTree = "<group>"; };
-		BE2142AC21D36F2B00FA2925 /* grammarN4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = grammarN4.swift; sourceTree = "<group>"; };
 		BE3260CB21C0F1BD00A13C94 /* vocabulary1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = vocabulary1.swift; path = ../../../iOS/Sentences/vocabulary1.swift; sourceTree = "<group>"; };
 		BE3260CC21C0F1BD00A13C94 /* vocabulary2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = vocabulary2.swift; path = ../../../iOS/Sentences/vocabulary2.swift; sourceTree = "<group>"; };
 		BE3260CF21C0FD0B00A13C94 /* TTS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TTS.swift; path = ../../../iOS/SpeechEngine/TTS.swift; sourceTree = "<group>"; };
+		BE439C6421DF3B3600C0BE14 /* grammarN4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = grammarN4.swift; path = ../../../iOS/Sentences/grammarN4.swift; sourceTree = "<group>"; };
 		BE55B432217348E6006DC271 /* FakeKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeKey.swift; sourceTree = "<group>"; };
 		BE55B43621736553006DC271 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/Mac/SQLite.framework; sourceTree = "<group>"; };
 		BE55B43A217365AC006DC271 /* sqlite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sqlite.swift; sourceTree = "<group>"; };
@@ -121,6 +121,7 @@
 		BE88D5FE2174D1F2004E1CD0 /* ReferencedFromIOSApp */ = {
 			isa = PBXGroup;
 			children = (
+				BE439C6421DF3B3600C0BE14 /* grammarN4.swift */,
 				BE8E51E821D0E414007D29E6 /* String+Utilities.swift */,
 				BE8E51E921D0E414007D29E6 /* Type+Conversion.swift */,
 				BE3260CF21C0FD0B00A13C94 /* TTS.swift */,
@@ -135,7 +136,6 @@
 				BE869D2A218F34F700689755 /* love.swift */,
 				BE869D2B218F34F700689755 /* polite.swift */,
 				BE8E51F021D0E7D4007D29E6 /* grammarN5.swift */,
-				BE2142AC21D36F2B00FA2925 /* grammarN4.swift */,
 				BE869D29218F34F700689755 /* rawDataSets.swift */,
 				BE869D20218F34F700689755 /* kanaFix.swift */,
 				BE869D22218F34F700689755 /* Score.swift */,
@@ -276,7 +276,7 @@
 				BE3260CD21C0F1BD00A13C94 /* vocabulary1.swift in Sources */,
 				BE55B43B217365AC006DC271 /* sqlite.swift in Sources */,
 				BE869D35218F34F700689755 /* expressive.swift in Sources */,
-				BE2142AD21D36F2B00FA2925 /* grammarN4.swift in Sources */,
+				BE439C6521DF3B3600C0BE14 /* grammarN4.swift in Sources */,
 				BE869D38218F34F700689755 /* polite.swift in Sources */,
 				BE869D2D218F34F700689755 /* kanaFix.swift in Sources */,
 				BE3260D021C0FD0B00A13C94 /* TTS.swift in Sources */,
