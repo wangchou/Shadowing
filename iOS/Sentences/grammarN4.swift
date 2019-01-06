@@ -557,5 +557,3 @@ let grammarN4 = [
 たぶん あしたも かぜが 強いだろう。|大概明天風也會很強。
 """
 ]
-// swiftlint:enable file_length
-

@@ -658,4 +658,3 @@ let grammarN5 = [
 バナナを 半分にして いっしょに 食べましょう。|把香蕉分成兩半，一起吃吧。
 """
 ]
-// swiftlint:enable file_length
