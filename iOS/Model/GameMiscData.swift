@@ -35,31 +35,19 @@ func saveGameMiscData() {
 }
 
 func loadGameMiscData() {
-    if let loadedSentences = loadFromUserDefault(type: type(of: userSaidSentences), key: userSaidSentencesKey + gameLang.key) {
-        userSaidSentences = loadedSentences
-    } else {
-        print("[\(gameLang)] create new userSaidSentences")
-        userSaidSentences = [:]
-    }
-    if let loadedScores = loadFromUserDefault(type: type(of: sentenceScores), key: sentenceScoreKey + gameLang.key) {
-        sentenceScores = loadedScores
-    } else {
-        print("[\(gameLang)] create new sentencesScores")
-        sentenceScores = [:]
-    }
-    if let loadedICSentences = loadFromUserDefault(type: type(of: lastInfiniteChallengeSentences), key: lastChallengeSenteceKey + gameLang.key) {
-        lastInfiniteChallengeSentences = loadedICSentences
-    } else {
-        print("[\(gameLang)] create new lastInfiniteChallengeSentences")
-        lastInfiniteChallengeSentences = [:]
+    func easyLoad<T: Codable>(object: inout T, key: String) {
+        if let loaded = loadFromUserDefault(type: type(of: object), key: key) {
+            object = loaded
+        } else {
+            print("[\(gameLang)] create new object")
+            object = [:] as! T
+        }
     }
 
-    if let loadedTranslations = loadFromUserDefault(type: type(of: translations), key: translationsKey + gameLang.key) {
-        translations = loadedTranslations
-    } else {
-        print("[\(gameLang)] create new translations")
-        translations = [:]
-    }
+    easyLoad(object: &userSaidSentences, key: userSaidSentencesKey + gameLang.key)
+    easyLoad(object: &sentenceScores, key: sentenceScoreKey  + gameLang.key)
+    easyLoad(object: &lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)
+    easyLoad(object: &translations, key: translationsKey + gameLang.key)
 
     guard gameLang == Lang.jp else { return }
 
