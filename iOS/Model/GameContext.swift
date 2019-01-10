@@ -62,7 +62,6 @@ class GameContext {
         return AVSpeechUtteranceDefaultSpeechRate * (0.5 + life.f * 0.006)
     }
 
-
     var sentences: [String] = []
     var sentenceIndex: Int = 0
 

@@ -12,8 +12,6 @@ import Promises
 import UIKit
 import FirebaseAnalytics
 
-private let i18n = I18n.shared
-
 enum IAPProduct: String {
     case unlimitedForever
     case unlimitedOneMonth

@@ -28,7 +28,6 @@ enum GameState {
 
 private let engine = SpeechEngine.shared
 private let context = GameContext.shared
-private let i18n = I18n.shared
 
 // handler for commands posted from UI
 extension GameFlow: GameCommandDelegate {

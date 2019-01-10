@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 private let context = GameContext.shared
-private let i18n = I18n.shared
 private var tmpRangeQueue: [NSRange] = []
 
 extension Messenger: GameEventDelegate {

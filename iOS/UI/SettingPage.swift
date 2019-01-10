@@ -11,7 +11,7 @@ import AVFoundation
 import UIKit
 
 private let context = GameContext.shared
-private let i18n = I18n.shared
+
 private let dailyGoals: [Int] = [20, 50, 100, 200, 500]
 
 class SettingPage: UITableViewController {

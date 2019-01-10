@@ -8,6 +8,8 @@
 // swiftlint:disable file_length type_body_length
 import Foundation
 
+let i18n = I18n.shared
+
 class I18n {
     static let shared = I18n()
 

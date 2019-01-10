@@ -9,7 +9,6 @@
 import UIKit
 
 private let context = GameContext.shared
-private let i18n = I18n.shared
 
 typealias AnimateBarContext = (progress: UILabel, bar: UIView, from: Int, to: Int, max: Int)
 

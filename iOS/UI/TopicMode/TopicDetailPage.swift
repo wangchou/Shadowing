@@ -12,7 +12,6 @@ import Promises
 import Firebase
 
 private let context = GameContext.shared
-private let i18n = I18n.shared
 
 class TopicDetailPage: UIViewController {
     static var isChallengeButtonDisabled = false

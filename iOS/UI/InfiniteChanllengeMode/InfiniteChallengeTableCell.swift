@@ -8,8 +8,6 @@
 
 import UIKit
 
-private let i18n = I18n.shared
-
 class InfiniteChallengeTableCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var finishedRateLabel: UILabel!

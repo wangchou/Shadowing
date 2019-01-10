@@ -35,6 +35,7 @@ func saveGameMiscData() {
 }
 
 func loadGameMiscData() {
+    // swiftlint:disable force_cast
     func easyLoad<T: Codable>(object: inout T, key: String) {
         if let loaded = loadFromUserDefault(type: type(of: object), key: key) {
             object = loaded
@@ -43,6 +44,7 @@ func loadGameMiscData() {
             object = [:] as! T
         }
     }
+    // swiftlint:enable force_cast
 
     easyLoad(object: &userSaidSentences, key: userSaidSentencesKey + gameLang.key)
     easyLoad(object: &sentenceScores, key: sentenceScoreKey  + gameLang.key)

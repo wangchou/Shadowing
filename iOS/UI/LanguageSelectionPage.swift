@@ -9,7 +9,6 @@
 import UIKit
 
 private let context = GameContext.shared
-private let i18n = I18n.shared
 
 class LanguageSelectionPage: UITableViewController {
     @IBOutlet weak var titleLabel: UILabel!

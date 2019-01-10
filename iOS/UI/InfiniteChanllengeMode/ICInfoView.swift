@@ -10,7 +10,6 @@ import UIKit
 import Firebase
 
 private let context = GameContext.shared
-private let i18n = I18n.shared
 
 private enum Texts: String {
     case precision = "完成率"

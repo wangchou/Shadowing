@@ -8,8 +8,6 @@
 
 import UIKit
 
-private let i18n = I18n.shared
-
 private let context = GameContext.shared
 
 class InfiniteChallengeListPage: UIViewController {
