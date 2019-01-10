@@ -27,10 +27,9 @@ class GameContext {
 
     // MARK: - Long-term data will be kept in UserDefault
     var gameHistory = [GameRecord]()
-    var characterImage: UIImage?
     var gameSetting = GameSetting()
 
-    // MARK: - Short-term data of a single game
+    // MARK: - Medium-term data of a single game, will be discarded after each game
     var contentTab: ContentTab = .topics
     var infiniteChallengeLevel: Level = .lv0
     var gameState: GameState = .justStarted {
@@ -40,6 +39,11 @@ class GameContext {
     }
     var dataSetKey: String = "" // the sentence set key in current game
     var gameRecord: GameRecord? // of current game
+    var isNewRecord: Bool {
+        return gameRecord?.isNewRecord ?? false
+    }
+    var newRecordIncrease: Int = 0
+
     var isEngineRunning: Bool {
         return SpeechEngine.shared.isEngineRunning
     }
@@ -57,14 +61,12 @@ class GameContext {
         }
         return AVSpeechUtteranceDefaultSpeechRate * (0.5 + life.f * 0.006)
     }
-    var isNewRecord: Bool {
-        return gameRecord?.isNewRecord ?? false
-    }
-    var newRecordIncrease: Int = 0
+
+
     var sentences: [String] = []
     var sentenceIndex: Int = 0
 
-    // MARK: - Short-term data for a single sentence
+    // MARK: - Short-term data for a single sentence, will be discarded after each sentence played
     var targetString: String {
         guard sentenceIndex < sentences.count else { return ""}
         return sentences[sentenceIndex]
