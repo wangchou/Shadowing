@@ -297,13 +297,14 @@
 			path = TopicMode;
 			sourceTree = "<group>";
 		};
-		BE2951112155F51A008239F9 /* GamePage */ = {
+		BE2951112155F51A008239F9 /* GameUI */ = {
 			isa = PBXGroup;
 			children = (
 				BE1CA957209DC43800086853 /* Messenger.swift */,
 				BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */,
+				BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */,
 			);
-			path = GamePage;
+			path = GameUI;
 			sourceTree = "<group>";
 		};
 		BE2951122155F524008239F9 /* FinishedPage */ = {
@@ -469,7 +470,6 @@
 				BEF4B14E219C093800B8E45E /* VoiceSelectionPage.swift */,
 				BEF4B150219C0E3B00B8E45E /* VoiceTableCell.swift */,
 				BEEC7FAC2155014E001C2EFF /* SettingPage.swift */,
-				BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */,
 			);
 			name = SettingPage;
 			sourceTree = "<group>";
@@ -477,6 +477,7 @@
 		BEDEDD4220A5D86500E7B60B /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				BE2951112155F51A008239F9 /* GameUI */,
 				BE28B2C121A3EAB500088214 /* Main.storyboard */,
 				BE5ABAC8217B703500A63C5F /* InfoPage.swift */,
 				BEC2E92E217875C30095A65D /* RootContainerViewController.swift */,
@@ -485,7 +486,6 @@
 				BECD9079219D28C300400FD3 /* SettingPage */,
 				BE29510F2155F4F7008239F9 /* TopicMode */,
 				BECAC3BD216B9CDF001BBF49 /* InfiniteChanllengeMode */,
-				BE2951112155F51A008239F9 /* GamePage */,
 				BE2951122155F524008239F9 /* FinishedPage */,
 			);
 			path = UI;
