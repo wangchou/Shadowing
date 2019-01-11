@@ -111,8 +111,11 @@ class GameContext {
         set { userSaidSentences[self.targetString] = newValue }
     }
     var score: Score = Score(value: 100)
+}
 
-    // MARK: - functions for a single game
+// MARK: - functions for a single game
+extension GameContext {
+
     func loadLearningSentences() {
         if contentTab == .topics {
             loadTopicSentence()
