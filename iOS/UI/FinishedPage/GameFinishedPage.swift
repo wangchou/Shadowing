@@ -46,7 +46,7 @@ class GameFinishedPage: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        SpeechEngine.shared.reset()
+        SpeechEngine.shared.stopListeningAndSpeaking()
     }
 
     func sortSentenceByScore() {

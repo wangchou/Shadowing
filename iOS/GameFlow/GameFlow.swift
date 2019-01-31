@@ -129,7 +129,7 @@ extension GameFlow {
         timer?.invalidate()
         isPaused = false
         wait.reject(GameError.forceStop)
-        SpeechEngine.shared.reset()
+        SpeechEngine.shared.stopListeningAndSpeaking()
     }
 
     private func gameOver() {
