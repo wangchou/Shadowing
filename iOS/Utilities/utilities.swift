@@ -8,12 +8,11 @@
 
 import Foundation
 import AVFoundation
-#if os(iOS)
-import UIKit
-#endif
 import Promises
 
 #if os(iOS)
+import UIKit
+
 // MARK: - Audio Session
 func configureAudioSession() {
     do {
