@@ -105,8 +105,8 @@ class I18n {
     }
 
     var reachDailyGoal: String {
-        if gameLang == .jp { return "よくやった！お疲れ様。" }
-        return "You did it. Good Job!"
+        if gameLang == .jp { return "今日の目標を完成しました。" }
+        return "Daily goal is completed. Good Job!"
     }
 
     var dailyGoal: String {
@@ -502,6 +502,11 @@ class I18n {
         if isJa { return "閉じる" }
         if isZh { return "關閉"}
         return "Close"
+    }
+
+    func getSpeakingStatus(percent: String, rank: String) -> String {
+        if gameLang == .jp { return "完成率：\(percent)%、判定：\(rank)" }
+        return "\(percent)% completed. Rank \(rank)."
     }
 }
 // swiftlint:enable file_length  type_body_length

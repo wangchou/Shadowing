@@ -157,13 +157,12 @@ extension GameContext {
 
         life = isSimulator ? 100 : 40
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level)
-
     }
 
     func nextSentence() -> Bool {
         sentenceIndex += 1
         if isSimulator {
-            guard sentenceIndex < 5 else { return false }
+            guard sentenceIndex < 3 else { return false }
         }
         guard sentenceIndex < sentences.count else { return false }
 

@@ -11,7 +11,7 @@ import AVFoundation
 
 #if targetEnvironment(simulator)
     let isSimulator = true
-    let dailyFreeLimit = 500
+    let dailyFreeLimit = 1000
 #else
     let isSimulator = false
     let dailyFreeLimit = 100

@@ -76,7 +76,7 @@ class PauseOverlayViewController: UIViewController {
     }
 
     @IBAction func finishButtonClicked(_ sender: Any) {
-        dismiss(animated: true)
+        dismissTwoVC(animated: true)
         postCommand(.forceStopGame)
     }
 

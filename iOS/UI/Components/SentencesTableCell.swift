@@ -49,6 +49,7 @@ class SentencesTableCell: UITableViewCell {
     }
 
     func practiceSentence() {
+        stopCountDown()
         guard SentencesTableCell.isPracticing != true else { return }
         SentencesTableCell.isPracticing = true
         TopicDetailPage.isChallengeButtonDisabled = true
