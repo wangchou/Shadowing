@@ -49,20 +49,10 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         backButton.roundBorder(borderWidth: 1, cornerRadius: 5, color: .clear)
 
         backButton.addTapGestureRecognizer {
-            if let vc = UIApplication.getPresentedViewController() {
-                if context.contentTab == .infiniteChallenge {
-
-                    vc.dismiss(animated: false) {
-                        UIApplication.getPresentedViewController()?.dismiss(animated: true, completion: nil)
-                    }
-
-                    if let icwPage = rootViewController.current as? InfiniteChallengeSwipablePage {
-                        (icwPage.pages[2] as? InfiniteChallengePage)?.tableView.reloadData()
-                    }
-                } else {
-                    vc.dismiss(animated: false) {
-                        UIApplication.getPresentedViewController()?.dismiss(animated: true, completion: nil)
-                    }
+            dismissTwoVC()
+            if context.contentTab == .infiniteChallenge {
+                if let icwPage = rootViewController.current as? InfiniteChallengeSwipablePage {
+                    (icwPage.pages[2] as? InfiniteChallengePage)?.tableView.reloadData()
                 }
             }
         }

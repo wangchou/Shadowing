@@ -162,9 +162,9 @@ extension GameContext {
 
     func nextSentence() -> Bool {
         sentenceIndex += 1
-//        if isSimulator {
-//            guard sentenceIndex < 5 else { return false }
-//        }
+        if isSimulator {
+            guard sentenceIndex < 5 else { return false }
+        }
         guard sentenceIndex < sentences.count else { return false }
 
         userSaidString = ""
