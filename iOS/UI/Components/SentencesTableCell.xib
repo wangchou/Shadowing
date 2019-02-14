@@ -45,13 +45,13 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEf-GW-fOX">
+                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEf-GW-fOX">
                         <rect key="frame" x="272" y="5" width="41" height="53.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="41" id="HoC-X5-8Cq"/>
                         </constraints>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <state key="normal" image="round_arrow_right_black_48pt"/>
+                        <state key="normal" image="baseline_play_arrow_black_24pt"/>
                         <connections>
                             <action selector="practiceButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="pL8-ij-3dD"/>
                         </connections>
@@ -92,6 +92,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="round_arrow_right_black_48pt" width="96" height="96"/>
+        <image name="baseline_play_arrow_black_24pt" width="48" height="48"/>
     </resources>
 </document>

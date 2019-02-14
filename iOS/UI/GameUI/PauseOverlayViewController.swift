@@ -37,7 +37,7 @@ class PauseOverlayViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let i18n = I18n.shared
-        
+
         autoSpeedLabel.text = i18n.autoSpeedLabel
         speedLabel.text = i18n.speed
 
