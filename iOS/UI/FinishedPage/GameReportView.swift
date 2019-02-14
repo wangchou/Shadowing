@@ -12,12 +12,14 @@ import UIKit
 private let context = GameContext.shared
 
 var countDownTimer: Timer?
-var nextGameButton: UIButton?
+var pauseOrPlayButton: UIButton?
+private var isPauseMode: Bool = true
 
 func stopCountDown() {
     countDownTimer?.invalidate()
-    nextGameButton?.setTitle("次の挑戦", for: .normal)
-    nextGameButton = nil
+    pauseOrPlayButton?.setIconImage(named: "baseline_play_arrow_black_48pt", title: "", tintColor: .white, isIconOnLeft: false)
+    pauseOrPlayButton = nil
+    isPauseMode = false
 }
 
 @IBDesignable
@@ -41,7 +43,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         }
 
         addReloadableSubview(reportBox!)
-        nextGameButton = addNextGameButton()
+        pauseOrPlayButton = addNextGameButton()
         addBackButton()
     }
 
@@ -51,7 +53,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
 
     func viewDidDisappear() {
         countDownTimer?.invalidate()
-        nextGameButton = nil
+        pauseOrPlayButton = nil
     }
 
     func createButton(title: String, bgColor: UIColor) -> UIButton {
@@ -66,27 +68,30 @@ class GameReportView: UIView, ReloadableView, GridLayout {
     }
 
     func addNextGameButton() -> UIButton {
-        let nextGameButton = createButton(title: "次の挑戦 ( 5 秒)", bgColor: .red)
-
-        nextGameButton.addTapGestureRecognizer {
-            stopCountDown()
-            dismissTwoVC(animated: false) {
-                launchNextGame()
+        isPauseMode = true
+        let button = createButton(title: "", bgColor: .red)
+        button.setIconImage(named: "baseline_pause_black_48pt", title: " 次の挑戦 (5秒)", tintColor: .white, isIconOnLeft: true)
+        button.addTapGestureRecognizer {
+            if isPauseMode {
+                stopCountDown()
+            } else {
+                dismissTwoVC(animated: false) {
+                    launchNextGame()
+                }
             }
         }
 
         if context.contentTab == .topics {
-            layout(2, 56, 44, 8, nextGameButton)
+            layout(2, 66, 44, 8, button)
         } else {
-            layout(2, 46, 44, 8, nextGameButton)
+            layout(2, 56, 44, 8, button)
         }
 
-        addSubview(nextGameButton)
+        addSubview(button)
         var leftSeconds = 5
         countDownTimer = Timer.scheduledTimer(withTimeInterval: 1.00, repeats: true) { _ in
             leftSeconds -= 1
-            nextGameButton.setTitle("次の挑戦 ( \(leftSeconds) 秒)", for: .normal)
-
+            pauseOrPlayButton?.setTitle(" 次の挑戦 (\(leftSeconds)秒)", for: .normal)
             guard leftSeconds > 0 else {
                 countDownTimer?.invalidate()
                 dismissTwoVC(animated: false) {
@@ -96,11 +101,12 @@ class GameReportView: UIView, ReloadableView, GridLayout {
             }
         }
 
-        return nextGameButton
+        return button
     }
 
     func addBackButton() {
-        let backButton = createButton(title: "戻   る", bgColor: .darkGray)
+        let backButton = createButton(title: "", bgColor: .lightGray)
+        backButton.setIconImage(named: "baseline_exit_to_app_black_48pt", title: "", tintColor: .white, isIconOnLeft: false)
 
         backButton.addTapGestureRecognizer {
             stopCountDown()
@@ -113,9 +119,9 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         }
 
         if context.contentTab == .topics {
-            layout(2, 66, 44, 8, backButton)
-        } else {
             layout(2, 56, 44, 8, backButton)
+        } else {
+            layout(2, 46, 44, 8, backButton)
         }
 
         addSubview(backButton)
