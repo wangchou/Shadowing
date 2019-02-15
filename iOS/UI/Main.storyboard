@@ -1647,19 +1647,19 @@ Ruth Yuru Chen
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Uc9-B5-RQL">
-                                                    <rect key="frame" x="0.0" y="25" width="240" height="76.5"/>
+                                                    <rect key="frame" x="0.0" y="25" width="240" height="28"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="TRn-h5-8ZG">
-                                                            <rect key="frame" x="0.0" y="0.0" width="240" height="76.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="240" height="28"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bd1-65-w1n">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="159.5" height="76.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="159.5" height="28"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="64"/>
                                                                     <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWi-Pi-rbk">
-                                                                    <rect key="frame" x="159.5" y="0.0" width="80.5" height="76.5"/>
+                                                                    <rect key="frame" x="159.5" y="0.0" width="80.5" height="28"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="64"/>
                                                                     <color key="textColor" red="1" green="0.56961647959999995" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -1673,24 +1673,45 @@ Ruth Yuru Chen
                                                         <constraint firstAttribute="bottom" secondItem="TRn-h5-8ZG" secondAttribute="bottom" id="xYH-xr-0kI"/>
                                                     </constraints>
                                                 </stackView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XEk-Ip-cgT" userLabel="challenge button">
-                                                    <rect key="frame" x="0.0" y="101.5" width="240" height="47.5"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="XEk-Ip-cgT" userLabel="challenge button">
+                                                    <rect key="frame" x="0.0" y="53" width="240" height="96"/>
                                                     <subviews>
-                                                        <button opaque="NO" alpha="0.84999999999999998" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qDS-dW-Rf8">
-                                                            <rect key="frame" x="0.0" y="0.0" width="240" height="47.5"/>
-                                                            <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <color key="tintColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                            <inset key="contentEdgeInsets" minX="18" minY="8" maxX="18" maxY="8"/>
-                                                            <state key="normal" image="baseline_play_arrow_black_48pt">
-                                                                <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6UR-Kh-FRQ" userLabel="Skip Previous Button">
+                                                            <rect key="frame" x="0.0" y="0.0" width="73.5" height="96"/>
+                                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="tintColor" red="0.98039215690000003" green="0.98039215690000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <state key="normal" image="baseline_skip_previous_black_48pt">
+                                                                <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="onSkipPreviousButtonClicked:" destination="bWZ-C3-0jS" eventType="touchUpInside" id="2Tl-1e-z27"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qDS-dW-Rf8">
+                                                            <rect key="frame" x="83.5" y="0.0" width="73" height="96"/>
+                                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="tintColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            <state key="normal" image="baseline_play_arrow_black_48pt"/>
                                                             <connections>
                                                                 <action selector="challenge:" destination="bWZ-C3-0jS" eventType="touchUpInside" id="4dB-sc-cdi"/>
                                                             </connections>
                                                         </button>
+                                                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lzl-Ke-SZ9" userLabel="Skip Next Button">
+                                                            <rect key="frame" x="166.5" y="0.0" width="73.5" height="96"/>
+                                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <state key="normal" image="baseline_skip_next_black_48pt"/>
+                                                            <connections>
+                                                                <action selector="onSkipNextButtonClicked:" destination="bWZ-C3-0jS" eventType="touchUpInside" id="KgR-2P-Sv5"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="6UR-Kh-FRQ" secondAttribute="bottom" id="06h-x1-kIZ"/>
+                                                        <constraint firstItem="lzl-Ke-SZ9" firstAttribute="top" secondItem="XEk-Ip-cgT" secondAttribute="top" id="BSi-Gi-7MC"/>
+                                                        <constraint firstAttribute="bottom" secondItem="lzl-Ke-SZ9" secondAttribute="bottom" id="dTH-e9-PZa"/>
                                                         <constraint firstAttribute="bottom" secondItem="qDS-dW-Rf8" secondAttribute="bottom" id="ej6-TX-fyY"/>
+                                                        <constraint firstItem="6UR-Kh-FRQ" firstAttribute="top" secondItem="XEk-Ip-cgT" secondAttribute="top" id="yXJ-js-ww3"/>
                                                     </constraints>
                                                 </stackView>
                                             </subviews>
@@ -1832,6 +1853,8 @@ Ruth Yuru Chen
                         <outlet property="perfectCountLabel" destination="bMS-Hr-Jw8" id="J0V-IQ-eLI"/>
                         <outlet property="progressLabel" destination="bd1-65-w1n" id="ZBI-WB-USj"/>
                         <outlet property="rankLabel" destination="ZWi-Pi-rbk" id="onR-XK-IFJ"/>
+                        <outlet property="skipNextButton" destination="lzl-Ke-SZ9" id="jD0-8t-Ta0"/>
+                        <outlet property="skipPreviousButton" destination="6UR-Kh-FRQ" id="sWR-X4-bvB"/>
                         <outlet property="tableView" destination="oat-aH-4X8" id="bvx-0Y-ruE"/>
                         <outlet property="titleLabel" destination="GX6-Zg-Cjy" id="Nva-eM-eWR"/>
                         <outlet property="topBarView" destination="gbA-Y5-9vB" id="Yze-Ft-fGz"/>
@@ -2309,6 +2332,8 @@ Ruth Yuru Chen
     <resources>
         <image name="baseline_exit_to_app_black_48pt" width="96" height="96"/>
         <image name="baseline_play_arrow_black_48pt" width="96" height="96"/>
+        <image name="baseline_skip_next_black_48pt" width="96" height="96"/>
+        <image name="baseline_skip_previous_black_48pt" width="96" height="96"/>
         <image name="launchImage" width="1024" height="1024"/>
         <image name="outline_lock_black_48pt" width="96" height="96"/>
         <image name="round_mic_black_48pt" width="96" height="96"/>

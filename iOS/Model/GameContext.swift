@@ -38,6 +38,7 @@ class GameContext {
         }
     }
     var dataSetKey: String = "" // the sentence set key in current game
+
     var gameRecord: GameRecord? // of current game
     var isNewRecord: Bool {
         return gameRecord?.isNewRecord ?? false
@@ -168,5 +169,27 @@ extension GameContext {
 
         userSaidString = ""
         return true
+    }
+
+    func loadNextChallenge() {
+        if contentTab == .topics {
+            if let currentIdx = dataSetKeys.lastIndex(of: dataSetKey) {
+                dataSetKey = dataSetKeys[(currentIdx + 1) % dataSetKeys.count]
+            }
+        } else {
+            infiniteChallengeLevel = infiniteChallengeLevel.next
+        }
+        loadLearningSentences()
+    }
+
+    func loadPrevousChallenge() {
+        if contentTab == .topics {
+            if let currentIdx = dataSetKeys.lastIndex(of: dataSetKey) {
+                dataSetKey = dataSetKeys[(currentIdx + dataSetKeys.count - 1) % dataSetKeys.count]
+            }
+        } else {
+            infiniteChallengeLevel = infiniteChallengeLevel.previous
+        }
+        loadLearningSentences()
     }
 }

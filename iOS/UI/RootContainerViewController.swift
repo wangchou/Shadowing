@@ -31,6 +31,7 @@ class RootContainerViewController: UIViewController {
             .instantiateViewController(withIdentifier: InfiniteChallengeSwipablePage.storyboardId) as! InfiniteChallengeSwipablePage)
         current = splashScreen
         // swiftlint:enable force_cast
+
         showVC(splashScreen)
 
         loadGameLang()
@@ -41,18 +42,22 @@ class RootContainerViewController: UIViewController {
         loadGameMiscData()
 
         Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
-            if gameLang == .unset {
-                self.languageSelectionScreen = UIStoryboard(name: "Main", bundle: nil)
-                    .instantiateViewController(withIdentifier: "InitialLanguageSelectionScreen")
-                self.showVC(self.languageSelectionScreen)
-                return
-            }
+            self.showInitialPage()
+        }
+    }
 
-            if gameLang.isSupportTopicMode {
-                self.showMainPage()
-            } else {
-                self.showInfiniteChallengePage()
-            }
+    private func showInitialPage() {
+        if gameLang == .unset {
+            languageSelectionScreen = UIStoryboard(name: "Main", bundle: nil)
+                .instantiateViewController(withIdentifier: "InitialLanguageSelectionScreen")
+            showVC(self.languageSelectionScreen)
+            return
+        }
+
+        if gameLang.isSupportTopicMode {
+            showMainPage()
+        } else {
+            showInfiniteChallengePage()
         }
     }
 

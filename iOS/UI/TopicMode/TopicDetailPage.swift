@@ -18,7 +18,9 @@ class TopicDetailPage: UIViewController {
 
     @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
+    @IBOutlet weak var skipPreviousButton: UIButton!
     @IBOutlet weak var challengeButton: UIButton!
+    @IBOutlet weak var skipNextButton: UIButton!
 
     @IBOutlet weak var perfectCountLabel: UILabel!
     @IBOutlet weak var greatCountLabel: UILabel!
@@ -43,6 +45,10 @@ class TopicDetailPage: UIViewController {
         if IAPHelper.shared.products.isEmpty {
             IAPHelper.shared.requsestProducts()
         }
+        render()
+    }
+
+    private func render() {
         titleLabel.text = getDataSetTitle(dataSetKey: context.dataSetKey)
         peekButton.setTitle(i18n.chineseOrJapanese, for: .normal)
 
@@ -65,7 +71,10 @@ class TopicDetailPage: UIViewController {
             missedCountLabel.text = 0.s
         }
         challengeButton.roundBorder(borderWidth: 0, cornerRadius: 5, color: .clear)
-        challengeButton.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .highlighted)
+        skipPreviousButton.roundBorder(borderWidth: 0, cornerRadius: 5, color: .clear)
+        skipNextButton.roundBorder(borderWidth: 0, cornerRadius: 5, color: .clear)
+
+        //challengeButton.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .highlighted)
 
         // load furigana
         all(context.sentences.map {$0.furiganaAttributedString}).then {_ in
@@ -106,6 +115,15 @@ class TopicDetailPage: UIViewController {
     @IBAction func challenge(_ sender: Any) {
         guard !TopicDetailPage.isChallengeButtonDisabled else { return }
         launchGame()
+    }
+
+    @IBAction func onSkipPreviousButtonClicked(_ sender: Any) {
+        context.loadPrevousChallenge()
+        render()
+    }
+    @IBAction func onSkipNextButtonClicked(_ sender: Any) {
+        context.loadNextChallenge()
+        render()
     }
 
     @IBAction func touchUpPeekButton(_ sender: Any) {
