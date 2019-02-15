@@ -23,6 +23,7 @@ class InfiniteChallengePage: UIViewController {
     var topBarLeftText: String = ""
     var topBarRightText: String = ""
     var level: Level = .lv0
+
     var minKanaCount: Int {
         return level.minSyllablesCount
     }
@@ -56,11 +57,11 @@ class InfiniteChallengePage: UIViewController {
 
         let lastLevel = allLevels[(allLevels.firstIndex(of: level) ?? 0) - 1]
         if let lastLevelBestRecord = findBestRecord(key: lastLevel.infinteChallengeDatasetKey),
-           lastLevelBestRecord.p >= 80 {
+           lastLevelBestRecord.p >= lastLevel.lockPercentage {
             blockView.isHidden = true
         }
 
-        blockInfo.text = "「\(lastLevel.title)」B判定以上解鎖。"
+        blockInfo.text = "「\(lastLevel.title)」< \(lastLevel.lockPercentage.i)%"
         tableView.reloadData()
     }
 

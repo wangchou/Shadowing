@@ -43,6 +43,18 @@ enum Level: Int, Codable {
         return colors[self.rawValue]
     }
 
+    var lockPercentage: Float {
+        if self.rawValue == 0 {
+            return 75
+        }
+
+        if self.rawValue == 1 {
+            return 80
+        }
+
+        return 85
+    }
+
     var minSyllablesCount: Int {
         return gameLang == .jp ? minKanaCounts[self.rawValue] : minSyllablesCounts[self.rawValue]
     }
