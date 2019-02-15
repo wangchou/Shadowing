@@ -81,19 +81,24 @@ class GameFlow {
             narratorString = i18n.gameStartedWithoutGuideVoice
         }
         print(context.gameSetting.learningMode, narratorString)
+
         if context.gameSetting.isUsingNarrator {
-            narratorSay(narratorString)
-                .then { self.wait }
-                .always {
-                    self.learnNextSentence()
-                }
+            speakJapaneseTitle(title: context.gameTitle).then { _ -> Promise<Void> in
+                return narratorSay(narratorString)
+            }.then { self.wait }
+            .always {
+                self.learnNextSentence()
+            }
         } else {
-            learnNextSentence()
+            speakJapaneseTitle(title: context.gameTitle).always {
+                self.learnNextSentence()
+            }
         }
 
         isPaused = false
         wait.fulfill(())
     }
+
 }
 
 // MARK: - Private Functions

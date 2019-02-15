@@ -67,6 +67,11 @@ class GameContext {
     var sentenceIndex: Int = 0
 
     // MARK: - Short-term data for a single sentence, will be discarded after each sentence played
+    var gameTitle: String {
+        return contentTab == .topics ?
+                getDataSetTitle(dataSetKey: dataSetKey) :
+                "[無限挑戦] \(infiniteChallengeLevel.title)"
+    }
     var targetString: String {
         guard sentenceIndex < sentences.count else { return ""}
         return sentences[sentenceIndex]
