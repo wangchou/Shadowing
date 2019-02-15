@@ -44,15 +44,16 @@ enum Level: Int, Codable {
     }
 
     var lockPercentage: Float {
-        if self.rawValue == 0 {
+        switch self {
+        case .lv0:
             return 75
-        }
-
-        if self.rawValue == 1 {
+        case .lv1:
             return 80
+        case .lv2:
+            return 85
+        default:
+            return 90
         }
-
-        return 85
     }
 
     var minSyllablesCount: Int {
