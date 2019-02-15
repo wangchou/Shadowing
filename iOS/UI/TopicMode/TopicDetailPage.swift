@@ -48,7 +48,7 @@ class TopicDetailPage: UIViewController {
         render()
     }
 
-    private func render() {
+    func render() {
         titleLabel.text = getDataSetTitle(dataSetKey: context.dataSetKey)
         peekButton.setTitle(i18n.chineseOrJapanese, for: .normal)
 

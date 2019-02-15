@@ -134,6 +134,14 @@ class GameReportView: UIView, ReloadableView, GridLayout {
 }
 
 private func launchNextGame() {
+    if context.contentTab == .topics {
+        context.loadNextChallenge()
+        let pages = rootViewController.mainSwipablePage.pages
+        if pages.count > 2,
+            let topicDetailPage = pages[2] as? TopicDetailPage {
+            topicDetailPage.render()
+        }
+    }
     if isUnderDailySentenceLimit() {
         guard let vc = UIApplication.getPresentedViewController() else { return }
         launchStoryboard(vc, "MessengerGame")
