@@ -35,10 +35,10 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         reportBox = GameReportBoxView()
 
         if context.contentTab == .topics {
-            frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.58)
+            frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.38)
             layout(2, 4, 44, 50, reportBox!)
         } else {
-            frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.37)
+            frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.17)
             layout(2, 4, 44, 40, reportBox!)
         }
 
@@ -82,9 +82,9 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         }
 
         if context.contentTab == .topics {
-            layout(2, 66, 44, 8, button)
+            layout(2, 56, 28, 8, button)
         } else {
-            layout(2, 56, 44, 8, button)
+            layout(2, 46, 28, 8, button)
         }
 
         addSubview(button)
@@ -119,9 +119,9 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         }
 
         if context.contentTab == .topics {
-            layout(2, 56, 44, 8, backButton)
+            layout(32, 56, 14, 8, backButton)
         } else {
-            layout(2, 46, 44, 8, backButton)
+            layout(32, 46, 14, 8, backButton)
         }
 
         addSubview(backButton)
