@@ -137,7 +137,12 @@ extension SpeechEngine {
             ).then(updateSpeakDuration)
     }
 }
-func speakJapaneseTitle(title: String) -> Promise<Void> {
+func speakTitle(title: String) -> Promise<Void> {
+    if context.contentTab == .topics {
+        let voiceId = getDefaultVoiceId(language: "zh-TW")
+        return engine.speak(text: title, speaker: voiceId, rate: normalRate)
+    }
+
     if gameLang == .jp {
         return teacherSay(title, rate: normalRate)
     } else {

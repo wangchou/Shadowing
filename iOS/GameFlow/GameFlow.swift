@@ -83,14 +83,14 @@ class GameFlow {
         print(context.gameSetting.learningMode, narratorString)
 
         if context.gameSetting.isUsingNarrator {
-            speakJapaneseTitle(title: context.gameTitle).then { _ -> Promise<Void> in
+            speakTitle(title: context.gameTitle).then { _ -> Promise<Void> in
                 return narratorSay(narratorString)
             }.then { self.wait }
             .always {
                 self.learnNextSentence()
             }
         } else {
-            speakJapaneseTitle(title: context.gameTitle).always {
+            speakTitle(title: context.gameTitle).always {
                 self.learnNextSentence()
             }
         }
