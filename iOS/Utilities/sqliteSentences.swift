@@ -38,8 +38,8 @@ func loadSentenceDB() {
         let sentenceCount = Expression<Int>("sentence_count")
         for row in try db.prepare(kanaInfoTable) {
             let ids: Set<Int> = Set(row[ids].split(separator: ",")
-                                     .map { return Int($0.s) ?? -1 }
-                                     .filter { return $0 != -1}
+                                     .map { Int($0.s) ?? -1 }
+                                     .filter { $0 != -1}
                                 )
             jaSentenceInfos[row[kanaCount]] = SentenceInfo(syllablesCount: row[kanaCount], ids: ids, sentenceCount: row[sentenceCount])
         }
@@ -49,8 +49,8 @@ func loadSentenceDB() {
         let syllablesCount = Expression<Int>("syllables_count")
         for row in try db.prepare(syllablesInfoTable) {
             let ids: Set<Int> = Set(row[ids].split(separator: ",")
-                .map { return Int($0.s) ?? -1 }
-                .filter { return $0 != -1}
+                .map { Int($0.s) ?? -1 }
+                .filter { $0 != -1}
             )
             enSentenceInfos[row[syllablesCount]] = SentenceInfo(syllablesCount: row[syllablesCount], ids: ids, sentenceCount: row[sentenceCount])
         }
