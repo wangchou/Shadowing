@@ -20,6 +20,8 @@ enum EventType {
 
     case playTimeUpdate
     case levelMeterUpdate
+
+    case gameResume
 }
 
 struct Event {

@@ -161,6 +161,7 @@ extension GameFlow {
 
     private func resume() {
         isPaused = false
+        postEvent(.gameResume)
         wait.fulfill(())
     }
 

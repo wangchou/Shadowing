@@ -49,6 +49,8 @@ class Messenger: UIViewController {
         levelMeterValueBar.roundBorder(borderWidth: 0, cornerRadius: 4.5, color: .clear)
         levelMeterValueBar.frame.size.height = 0
         levelMeterView.isUserInteractionEnabled = false
+        messengerBar.viewWillAppear()
+        messengerBar.initData()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -63,7 +65,8 @@ class Messenger: UIViewController {
         GameFlow.shared.start()
         context.startTime = getNow()
 
-        scrollView.addTapGestureRecognizer(action: scrollViewTapped)
+        scrollView.addTapGestureRecognizer(action: pauseGame)
+        messengerBar.addTapGestureRecognizer(action: pauseGame)
     }
 
     func end() {
@@ -146,7 +149,9 @@ class Messenger: UIViewController {
         updateLabel(lastLabel, text: text, pos: pos)
     }
 
-    @objc func scrollViewTapped() {
+    @objc func pauseGame() {
+        messengerBar.isGameStopped = true
+        messengerBar.viewWillAppear()
         postCommand(.pause)
         launchStoryboard(self, "PauseOverlay", isOverCurrent: true)
     }

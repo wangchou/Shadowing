@@ -14,7 +14,6 @@ private let context = GameContext.shared
 
 class PauseOverlayViewController: UIViewController {
     @IBOutlet weak var finishButton: UIButton!
-    @IBOutlet weak var resumeButton: UIButton!
     @IBOutlet weak var autoSpeedSwitch: UISwitch!
     @IBOutlet weak var ttsSpeedSlider: UISlider!
     @IBOutlet weak var fastLabel: UILabel!
@@ -26,7 +25,6 @@ class PauseOverlayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         finishButton.layer.cornerRadius = 5
-        resumeButton.layer.cornerRadius = 5
 
         view.addTapGestureRecognizer(action: viewTapped)
 
@@ -80,12 +78,7 @@ class PauseOverlayViewController: UIViewController {
     }
 
     @objc func viewTapped() {
-        dismiss(animated: true, completion: nil)
-        postCommand(.resume)
-    }
-
-    @IBAction func resumeButtonClicked(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: false, completion: nil)
         postCommand(.resume)
     }
 }

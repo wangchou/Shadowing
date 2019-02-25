@@ -89,6 +89,10 @@ extension Messenger: GameEventDelegate {
                 self.levelMeterValueBar.frame.origin.y = 6 + 20 - height
             }
 
+        case .gameResume:
+            messengerBar.isGameStopped = false
+            messengerBar.viewWillAppear()
+
         case .gameStateChanged:
             if context.gameState == .gameOver {
                 stopEventObserving(self)

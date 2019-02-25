@@ -2019,23 +2019,15 @@ Ruth Yuru Chen
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="xeu-7M-2kM">
-                                <rect key="frame" x="15" y="423" width="290" height="45"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NIW-59-Zxy">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Px8-Is-Bt1">
-                                        <rect key="frame" x="0.0" y="0.0" width="139" height="45"/>
-                                        <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="baseline_play_arrow_black_48pt">
-                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="resumeButtonClicked:" destination="xbq-5x-hVH" eventType="touchUpInside" id="585-2g-u3f"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fzY-jo-0bH">
-                                        <rect key="frame" x="151" y="0.0" width="139" height="45"/>
+                                        <rect key="frame" x="15" y="302" width="290" height="50"/>
                                         <color key="backgroundColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="lKq-oo-vp8"/>
+                                        </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="baseline_exit_to_app_black_48pt">
                                             <color key="titleColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2045,48 +2037,50 @@ Ruth Yuru Chen
                                         </connections>
                                     </button>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.59725492294520544" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="UJN-09-6ra"/>
+                                    <constraint firstItem="fzY-jo-0bH" firstAttribute="leading" secondItem="NIW-59-Zxy" secondAttribute="leading" constant="15" id="8g0-lH-M4I"/>
+                                    <constraint firstAttribute="trailing" secondItem="fzY-jo-0bH" secondAttribute="trailing" constant="15" id="pNe-m3-QGO"/>
                                 </constraints>
-                            </stackView>
+                            </view>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4P9-61-8fN">
-                                <rect key="frame" x="256" y="337.5" width="51" height="31"/>
+                                <rect key="frame" x="256" y="438.5" width="51" height="31"/>
                                 <connections>
                                     <action selector="onAutoSpeedSwitchTapped:" destination="xbq-5x-hVH" eventType="valueChanged" id="AVr-tB-9y7"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="751" text="自動速度：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="08G-Eb-JgR">
-                                <rect key="frame" x="15" y="338.5" width="122" height="29"/>
+                                <rect key="frame" x="15" y="439.5" width="122" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="751" text="學習模式：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHV-aK-krE">
-                                <rect key="frame" x="15" y="263.5" width="122" height="29"/>
+                                <rect key="frame" x="15" y="364.5" width="122" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="cM8-Gz-KMi">
-                                <rect key="frame" x="67" y="377.5" width="176.5" height="31"/>
+                                <rect key="frame" x="67" y="478.5" width="176.5" height="31"/>
                                 <connections>
                                     <action selector="onTTSSpeedSliderValueChanged:" destination="xbq-5x-hVH" eventType="valueChanged" id="XR5-Bd-bMO"/>
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="速度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zvf-ny-jFJ">
-                                <rect key="frame" x="15" y="378" width="49" height="29"/>
+                                <rect key="frame" x="15" y="479" width="49" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.00x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pEm-2K-vVR">
-                                <rect key="frame" x="246.5" y="378" width="58.5" height="29"/>
+                                <rect key="frame" x="246.5" y="479" width="58.5" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9Fh-fw-3gB">
-                                <rect key="frame" x="15" y="296.5" width="290" height="29"/>
+                                <rect key="frame" x="15" y="397.5" width="290" height="29"/>
                                 <segments>
                                     <segment title="意義與發音"/>
                                     <segment title="發音"/>
@@ -2099,7 +2093,7 @@ Ruth Yuru Chen
                                 </connections>
                             </segmentedControl>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59990368150684936" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="N3t-I3-Erf" firstAttribute="trailing" secondItem="9Fh-fw-3gB" secondAttribute="trailing" constant="15" id="03r-fx-5BA"/>
                             <constraint firstItem="N3t-I3-Erf" firstAttribute="trailing" secondItem="4P9-61-8fN" secondAttribute="trailing" constant="15" id="0bo-Kt-PN9"/>
@@ -2107,18 +2101,20 @@ Ruth Yuru Chen
                             <constraint firstItem="08G-Eb-JgR" firstAttribute="leading" secondItem="N3t-I3-Erf" secondAttribute="leading" constant="15" id="63p-Nv-jhg"/>
                             <constraint firstItem="Zvf-ny-jFJ" firstAttribute="centerY" secondItem="cM8-Gz-KMi" secondAttribute="centerY" id="6RT-6v-jlT"/>
                             <constraint firstItem="Zvf-ny-jFJ" firstAttribute="leading" secondItem="N3t-I3-Erf" secondAttribute="leading" constant="15" id="6Yf-Mt-Tgl"/>
-                            <constraint firstItem="xeu-7M-2kM" firstAttribute="top" secondItem="Zvf-ny-jFJ" secondAttribute="bottom" constant="16" id="9M3-cS-qpu"/>
+                            <constraint firstItem="NIW-59-Zxy" firstAttribute="leading" secondItem="N3t-I3-Erf" secondAttribute="leading" id="7Ra-QF-paa"/>
+                            <constraint firstItem="rHV-aK-krE" firstAttribute="top" secondItem="fzY-jo-0bH" secondAttribute="bottom" constant="12.5" id="E3g-o3-y3P"/>
                             <constraint firstItem="9Fh-fw-3gB" firstAttribute="top" secondItem="rHV-aK-krE" secondAttribute="bottom" constant="4" id="FWI-Lv-FR7"/>
-                            <constraint firstItem="xeu-7M-2kM" firstAttribute="leading" secondItem="N3t-I3-Erf" secondAttribute="leading" constant="15" id="Gzi-2o-I8j"/>
                             <constraint firstItem="rHV-aK-krE" firstAttribute="leading" secondItem="N3t-I3-Erf" secondAttribute="leading" constant="15" id="HeP-FX-I6K"/>
+                            <constraint firstItem="N3t-I3-Erf" firstAttribute="trailing" secondItem="NIW-59-Zxy" secondAttribute="trailing" id="R2q-3E-WKu"/>
+                            <constraint firstItem="N3t-I3-Erf" firstAttribute="bottom" secondItem="Zvf-ny-jFJ" secondAttribute="bottom" constant="60" id="SlG-yL-WRq"/>
+                            <constraint firstItem="NIW-59-Zxy" firstAttribute="top" secondItem="IVc-qA-oVM" secondAttribute="top" id="V2R-bl-Z3B"/>
                             <constraint firstItem="cM8-Gz-KMi" firstAttribute="firstBaseline" secondItem="08G-Eb-JgR" secondAttribute="baseline" constant="16" symbolType="layoutAnchor" id="aNS-UM-lCr"/>
                             <constraint firstItem="08G-Eb-JgR" firstAttribute="centerY" secondItem="4P9-61-8fN" secondAttribute="centerY" id="bVg-EA-jUA"/>
+                            <constraint firstItem="N3t-I3-Erf" firstAttribute="bottom" secondItem="NIW-59-Zxy" secondAttribute="bottom" constant="50" id="cWe-hq-cmZ"/>
                             <constraint firstItem="9Fh-fw-3gB" firstAttribute="leading" secondItem="N3t-I3-Erf" secondAttribute="leading" constant="15" id="fsL-r7-7Tp"/>
                             <constraint firstItem="08G-Eb-JgR" firstAttribute="top" secondItem="9Fh-fw-3gB" secondAttribute="bottom" constant="14" id="hyW-JW-ZvH"/>
-                            <constraint firstItem="N3t-I3-Erf" firstAttribute="bottom" secondItem="xeu-7M-2kM" secondAttribute="bottom" constant="100" id="k68-NT-v2i"/>
                             <constraint firstItem="cM8-Gz-KMi" firstAttribute="leading" secondItem="Zvf-ny-jFJ" secondAttribute="trailing" constant="5" id="kXP-pA-csX"/>
                             <constraint firstItem="pEm-2K-vVR" firstAttribute="leading" secondItem="cM8-Gz-KMi" secondAttribute="trailing" constant="5" id="lAg-un-Bt0"/>
-                            <constraint firstItem="N3t-I3-Erf" firstAttribute="trailing" secondItem="xeu-7M-2kM" secondAttribute="trailing" constant="15" id="xQJ-YS-i9A"/>
                             <constraint firstItem="pEm-2K-vVR" firstAttribute="centerY" secondItem="cM8-Gz-KMi" secondAttribute="centerY" id="xaM-0B-wZc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="N3t-I3-Erf"/>
@@ -2130,7 +2126,6 @@ Ruth Yuru Chen
                         <outlet property="finishButton" destination="fzY-jo-0bH" id="721-h0-gZj"/>
                         <outlet property="learningModeLabel" destination="rHV-aK-krE" id="Teg-QZ-HKn"/>
                         <outlet property="learningModeSegmentControl" destination="9Fh-fw-3gB" id="AqQ-W5-sOn"/>
-                        <outlet property="resumeButton" destination="Px8-Is-Bt1" id="18r-8U-Zat"/>
                         <outlet property="speedLabel" destination="Zvf-ny-jFJ" id="h4P-z8-jzc"/>
                         <outlet property="ttsSpeedSlider" destination="cM8-Gz-KMi" id="KBl-SF-KtG"/>
                     </connections>

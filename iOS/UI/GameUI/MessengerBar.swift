@@ -76,6 +76,10 @@ class MessengerBar: UIView, ReloadableView {
         pauseCountinueButton.frame = CGRect(x: screen.width - 55, y: 0, width: 50, height: 50)
         addSubview(pauseCountinueButton)
         viewWillAppear()
+        initData()
+    }
+
+    func initData() {
         topicProgressLabel.text = "0/\(context.sentences.count)"
         progressBarFront.frame = CGRect(x: 60, y: 35, width: 0, height: 5)
     }
@@ -92,13 +96,13 @@ class MessengerBar: UIView, ReloadableView {
             levelLabel.backgroundColor = level.color.withAlphaComponent(0.1)
         }
 
-        topicTitleLabel.text = "\(getDataSetTitle(dataSetKey: key))"
+        topicTitleLabel.text = context.gameTitle
         topicProgressLabel.text = "\(context.sentenceIndex + 1)/\(context.sentences.count)"
 
         let progressPercent: CGFloat = (context.sentenceIndex.c + 1)/context.sentences.count.c
         progressBarFront.frame = CGRect(x: 60, y: 35, width: (barWidth * progressPercent).f.i, height: 5)
 
-        let imageName = isGameStopped ? "baseline_play_black_48pt" : "baseline_pause_black_48pt"
+        let imageName = isGameStopped ? "baseline_play_arrow_black_48pt" : "baseline_pause_black_48pt"
         pauseCountinueButton.setIconImage(named: imageName, title: "", tintColor: .black, isIconOnLeft: false)
     }
 }
