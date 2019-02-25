@@ -67,6 +67,7 @@ class Messenger: UIViewController {
 
         scrollView.addTapGestureRecognizer(action: pauseGame)
         messengerBar.addTapGestureRecognizer(action: pauseGame)
+        messengerBar.pauseCountinueButton.addTapGestureRecognizer(action: pauseGame)
     }
 
     func end() {
