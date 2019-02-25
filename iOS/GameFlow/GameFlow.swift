@@ -189,8 +189,6 @@ extension GameFlow {
         }
 
         context.life = max(min(100, life), 0)
-
-        postEvent(.lifeChanged, int: context.life)
     }
 
     private func speakScore() -> Promise<Void> {

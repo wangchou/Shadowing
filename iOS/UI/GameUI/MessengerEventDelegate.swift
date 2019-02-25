@@ -73,18 +73,13 @@ extension Messenger: GameEventDelegate {
             }
             guard let score = event.score else { return }
             onScore(score)
-
-        case .lifeChanged:
-            speedLabel.text = String(format: "%.2f 倍速", context.teachingRate * 2)
+            messengerBar.viewWillAppear()
 
         case .playTimeUpdate:
             guard let seconds = event.int else { return }
             func add0(_ s: String) -> String {
                 return s.count == 1 ? "0" + s : s
             }
-
-            timeLabel.text = "\(add0((seconds/60).s)):\(add0((seconds%60).s))"
-            speedLabel.text = String(format: "%.2f 倍速", context.teachingRate * 2)
 
         case .levelMeterUpdate:
             guard let micLevel = event.int else { return }
@@ -243,6 +238,6 @@ extension Messenger: GameEventDelegate {
         updateLastLabelText(attributed, pos: .right)
 
         lastLabel.backgroundColor = score.color
-        sentenceCountLabel.text = "\(i18n.remaining)\(context.sentences.count - context.sentenceIndex - 1)\(i18n.sentenceUnit)"
+//        sentenceCountLabel.text = "\(i18n.remaining)\(context.sentences.count - context.sentenceIndex - 1)\(i18n.sentenceUnit)"
     }
 }
