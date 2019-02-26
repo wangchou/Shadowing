@@ -2024,7 +2024,7 @@ Ruth Yuru Chen
                                 <subviews>
                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fzY-jo-0bH">
                                         <rect key="frame" x="205" y="283" width="100" height="50"/>
-                                        <color key="backgroundColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="lKq-oo-vp8"/>
                                             <constraint firstAttribute="width" constant="100" id="m4h-jx-jUA"/>
@@ -2037,9 +2037,22 @@ Ruth Yuru Chen
                                             <action selector="finishButtonClicked:" destination="xbq-5x-hVH" eventType="touchUpInside" id="7MY-XQ-icA"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EHN-qx-bv5">
+                                        <rect key="frame" x="18" y="283" width="50" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="SLi-ZH-xoF"/>
+                                            <constraint firstAttribute="width" constant="50" id="lsg-6A-3Bb"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="tintColor" red="0.93725490196078431" green="0.93725490196078431" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="baseline_repeat_one_black_36pt"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.59725492294520544" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="EHN-qx-bv5" firstAttribute="centerY" secondItem="fzY-jo-0bH" secondAttribute="centerY" id="iQ8-hI-cuQ"/>
+                                    <constraint firstItem="EHN-qx-bv5" firstAttribute="leading" secondItem="NIW-59-Zxy" secondAttribute="leading" constant="18" id="jjO-67-SBD"/>
                                     <constraint firstAttribute="trailing" secondItem="fzY-jo-0bH" secondAttribute="trailing" constant="15" id="pNe-m3-QGO"/>
                                 </constraints>
                             </view>
@@ -2127,6 +2140,7 @@ Ruth Yuru Chen
                         <outlet property="finishButton" destination="fzY-jo-0bH" id="721-h0-gZj"/>
                         <outlet property="learningModeLabel" destination="rHV-aK-krE" id="Teg-QZ-HKn"/>
                         <outlet property="learningModeSegmentControl" destination="9Fh-fw-3gB" id="AqQ-W5-sOn"/>
+                        <outlet property="repeatOneSwitchButton" destination="EHN-qx-bv5" id="y3F-3p-P3L"/>
                         <outlet property="speedLabel" destination="Zvf-ny-jFJ" id="h4P-z8-jzc"/>
                         <outlet property="ttsSpeedSlider" destination="cM8-Gz-KMi" id="KBl-SF-KtG"/>
                     </connections>
@@ -2303,6 +2317,7 @@ Ruth Yuru Chen
     <resources>
         <image name="baseline_exit_to_app_black_48pt" width="96" height="96"/>
         <image name="baseline_play_arrow_black_48pt" width="96" height="96"/>
+        <image name="baseline_repeat_one_black_36pt" width="72" height="72"/>
         <image name="baseline_skip_next_black_48pt" width="96" height="96"/>
         <image name="baseline_skip_previous_black_48pt" width="96" height="96"/>
         <image name="launchImage" width="1024" height="1024"/>

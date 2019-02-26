@@ -21,6 +21,7 @@ class PauseOverlayViewController: UIViewController {
     @IBOutlet weak var speedLabel: UILabel!
     @IBOutlet weak var learningModeLabel: UILabel!
     @IBOutlet weak var learningModeSegmentControl: UISegmentedControl!
+    @IBOutlet weak var repeatOneSwitchButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +55,8 @@ class PauseOverlayViewController: UIViewController {
             fastLabel.textColor = UIColor.white
             speedLabel.textColor = UIColor.white
         }
+
+        repeatOneSwitchButton.roundBorder(cornerRadius: 25, color: .white)
 
         initLearningModeSegmentControl(label: learningModeLabel, control: learningModeSegmentControl)
     }
