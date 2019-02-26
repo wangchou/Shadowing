@@ -1419,21 +1419,28 @@ Ruth Yuru Chen
                                 <color key="separatorColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="U0O-4m-O5g" userLabel="TopArea">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="227"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="325"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LwG-wU-2DZ" userLabel="TopView" customClass="TopChartView" customModule="今話したい" customModuleProvider="target">
-                                            <rect key="frame" x="38.5" y="0.0" width="243" height="172"/>
+                                            <rect key="frame" x="26" y="0.0" width="268" height="190"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="LwG-wU-2DZ" secondAttribute="height" multiplier="48:34" id="sVp-sc-cxF"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BCi-iY-dna" customClass="TopicFilterBarView" customModule="今話したい" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="172" width="320" height="55"/>
+                                            <rect key="frame" x="0.0" y="270" width="320" height="55"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="55" id="d8T-wI-Vnl"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VmV-51-bgf" customClass="TopicButtonAreaView" customModule="今話したい" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="190" width="320" height="80"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="VmV-51-bgf" secondAttribute="height" multiplier="48:12" id="gjL-rC-XSQ"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -1442,14 +1449,17 @@ Ruth Yuru Chen
                                         <constraint firstAttribute="bottom" secondItem="BCi-iY-dna" secondAttribute="bottom" id="4xz-31-th7"/>
                                         <constraint firstItem="LwG-wU-2DZ" firstAttribute="centerX" secondItem="U0O-4m-O5g" secondAttribute="centerX" id="9Kd-JP-Xx5"/>
                                         <constraint firstItem="LwG-wU-2DZ" firstAttribute="top" secondItem="U0O-4m-O5g" secondAttribute="top" id="Hn6-cz-QGv"/>
+                                        <constraint firstAttribute="trailing" secondItem="VmV-51-bgf" secondAttribute="trailing" id="W67-va-vsr"/>
                                         <constraint firstItem="BCi-iY-dna" firstAttribute="width" secondItem="U0O-4m-O5g" secondAttribute="width" id="Wq1-9y-81D"/>
                                         <constraint firstItem="BCi-iY-dna" firstAttribute="centerX" secondItem="U0O-4m-O5g" secondAttribute="centerX" id="Y8A-y5-NXb"/>
-                                        <constraint firstItem="LwG-wU-2DZ" firstAttribute="bottom" secondItem="BCi-iY-dna" secondAttribute="top" id="l7O-24-A6x"/>
+                                        <constraint firstItem="VmV-51-bgf" firstAttribute="top" secondItem="LwG-wU-2DZ" secondAttribute="bottom" id="a17-W7-xiO"/>
+                                        <constraint firstItem="BCi-iY-dna" firstAttribute="top" secondItem="VmV-51-bgf" secondAttribute="bottom" id="b8y-14-MQH"/>
+                                        <constraint firstItem="VmV-51-bgf" firstAttribute="leading" secondItem="U0O-4m-O5g" secondAttribute="leading" id="d5b-uZ-Hca"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="SentencesCell" rowHeight="80" id="dBP-pO-iCD" customClass="ContentCell" customModule="今話したい" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="255" width="320" height="80"/>
+                                        <rect key="frame" x="0.0" y="353" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dBP-pO-iCD" id="u6e-75-GJe">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
