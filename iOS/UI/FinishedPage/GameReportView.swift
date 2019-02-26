@@ -70,7 +70,14 @@ class GameReportView: UIView, ReloadableView, GridLayout {
     func addNextGameButton() -> UIButton {
         isPauseMode = true
         let button = createButton(title: "", bgColor: .red)
-        let countDownSecs = context.isNewRecord ? 7 : 5
+        let todaySentenceCount = getTodaySentenceCount()
+        let dailyGoal = context.gameSetting.dailySentenceGoal
+        var isReachDailyByThisGame = false
+        if let record = context.gameRecord {
+            isReachDailyByThisGame = todaySentenceCount >= dailyGoal &&
+                                     todaySentenceCount - record.correctCount < dailyGoal
+        }
+        let countDownSecs = isReachDailyByThisGame ? 7 : 5
         button.setIconImage(named: "baseline_pause_black_48pt", title: " 次の挑戦 (\(countDownSecs)秒)", tintColor: .white, isIconOnLeft: true)
         button.addTapGestureRecognizer {
             if isPauseMode {
