@@ -70,7 +70,8 @@ class GameReportView: UIView, ReloadableView, GridLayout {
     func addNextGameButton() -> UIButton {
         isPauseMode = true
         let button = createButton(title: "", bgColor: .red)
-        button.setIconImage(named: "baseline_pause_black_48pt", title: " 次の挑戦 (5秒)", tintColor: .white, isIconOnLeft: true)
+        let countDownSecs = context.isNewRecord ? 7 : 5
+        button.setIconImage(named: "baseline_pause_black_48pt", title: " 次の挑戦 (\(countDownSecs)秒)", tintColor: .white, isIconOnLeft: true)
         button.addTapGestureRecognizer {
             if isPauseMode {
                 stopCountDown()
@@ -88,7 +89,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         }
 
         addSubview(button)
-        var leftSeconds = 5
+        var leftSeconds = countDownSecs
         countDownTimer = Timer.scheduledTimer(withTimeInterval: 1.00, repeats: true) { _ in
             leftSeconds -= 1
             pauseOrPlayButton?.setTitle(" 次の挑戦 (\(leftSeconds)秒)", for: .normal)
