@@ -15,6 +15,7 @@ private let context = GameContext.shared
 
 class TopicDetailPage: UIViewController {
     static var isChallengeButtonDisabled = false
+    var isViewReady = false
 
     @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
@@ -42,6 +43,7 @@ class TopicDetailPage: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        isViewReady = true
         if IAPHelper.shared.products.isEmpty {
             IAPHelper.shared.requsestProducts()
         }
@@ -49,6 +51,7 @@ class TopicDetailPage: UIViewController {
     }
 
     func render() {
+        guard isViewReady else { return }
         titleLabel.text = getDataSetTitle(dataSetKey: context.dataSetKey)
         peekButton.setTitle(i18n.chineseOrJapanese, for: .normal)
 
