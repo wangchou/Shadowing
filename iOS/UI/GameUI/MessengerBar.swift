@@ -107,7 +107,9 @@ class MessengerBar: UIView, ReloadableView {
         topicTitleLabel.text = context.gameTitle
         topicProgressLabel.text = "\(context.sentenceIndex + 1)/\(context.sentences.count)"
 
-        let progressPercent: CGFloat = (context.sentenceIndex.c + 1)/context.sentences.count.c
+        let progressPercent: CGFloat = context.sentences.isEmpty ? 0 :
+            (context.sentenceIndex.c + 1)/context.sentences.count.c
+
         progressBarFront.frame = CGRect(x: 60, y: 33, width: (barWidth * progressPercent).f.i, height: 7)
         progressBarFront.roundBorder(borderWidth: 0.5, cornerRadius: 3.5, color: .clear)
 

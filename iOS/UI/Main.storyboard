@@ -1883,7 +1883,7 @@ Ruth Yuru Chen
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FinishedTableCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="5" indentationWidth="5" reuseIdentifier="FinishedSentenceCell" rowHeight="63" id="U4Y-kF-8LG" userLabel="FinishedTableCell" customClass="SentencesTableCell" customModule="今話したい" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="287" width="320" height="63"/>
+                                        <rect key="frame" x="0.0" y="469.59999999999997" width="320" height="62.999999999999943"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="U4Y-kF-8LG" id="316-Iq-LBo">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="62.5"/>
@@ -2037,7 +2037,7 @@ Ruth Yuru Chen
                                             <action selector="finishButtonClicked:" destination="xbq-5x-hVH" eventType="touchUpInside" id="7MY-XQ-icA"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EHN-qx-bv5">
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EHN-qx-bv5">
                                         <rect key="frame" x="18" y="283" width="50" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -2047,6 +2047,9 @@ Ruth Yuru Chen
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="tintColor" red="0.93725490196078431" green="0.93725490196078431" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" image="baseline_repeat_one_black_36pt"/>
+                                        <connections>
+                                            <action selector="repeatOneSwitchButtonClicked:" destination="xbq-5x-hVH" eventType="touchUpInside" id="fnn-SB-or2"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.59725492294520544" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

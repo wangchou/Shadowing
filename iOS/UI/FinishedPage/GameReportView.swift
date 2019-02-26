@@ -135,7 +135,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
 }
 
 private func launchNextGame() {
-    if context.contentTab == .topics {
+    if context.contentTab == .topics && !context.gameSetting.isRepeatOne {
         context.loadNextChallenge()
         let pages = rootViewController.mainSwipablePage.pages
         if pages.count > 2,

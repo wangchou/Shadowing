@@ -56,7 +56,21 @@ class PauseOverlayViewController: UIViewController {
             speedLabel.textColor = UIColor.white
         }
 
-        repeatOneSwitchButton.roundBorder(cornerRadius: 25, color: .white)
+        if context.contentTab == .topics {
+            repeatOneSwitchButton.isHidden = false
+        } else {
+            repeatOneSwitchButton.isHidden = true
+        }
+
+        repeatOneSwitchButton.roundBorder(borderWidth: 0, cornerRadius: 25, color: .clear)
+
+        if context.gameSetting.isRepeatOne {
+            repeatOneSwitchButton.tintColor = UIColor.white
+            repeatOneSwitchButton.backgroundColor = myOrange.withSaturation(1)
+        } else {
+            repeatOneSwitchButton.tintColor = UIColor.white.withBrightness(0.7)
+            repeatOneSwitchButton.backgroundColor = UIColor.white.withBrightness(0.5)
+        }
 
         initLearningModeSegmentControl(label: learningModeLabel, control: learningModeSegmentControl)
     }
@@ -75,6 +89,11 @@ class PauseOverlayViewController: UIViewController {
         viewWillAppear(false)
     }
 
+    @IBAction func repeatOneSwitchButtonClicked(_ sender: Any) {
+        context.gameSetting.isRepeatOne = !context.gameSetting.isRepeatOne
+        saveGameSetting()
+        viewWillAppear(false)
+    }
     @IBAction func finishButtonClicked(_ sender: Any) {
         dismissTwoVC(animated: true)
         postCommand(.forceStopGame)

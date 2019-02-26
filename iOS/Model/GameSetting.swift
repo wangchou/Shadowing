@@ -14,6 +14,7 @@ private let context = GameContext.shared
 
 func saveGameSetting() {
    saveToUserDefault(object: context.gameSetting, key: gameSettingKey + gameLang.key)
+   saveIsRepeatOne()
 }
 
 func loadGameSetting() {
@@ -33,6 +34,7 @@ func loadGameSetting() {
         }
         print(context.gameSetting.teacher, context.gameSetting.assisant)
     }
+    loadIsRepeatOne()
 }
 
 func getDefaultVoiceId(language: String, isPreferMaleSiri: Bool = true, isPreferEnhanced: Bool = true) -> String {
@@ -72,6 +74,14 @@ struct GameSetting: Codable {
     var assisant: String = "unknown"
     var dailySentenceGoal: Int = 50
     var icTopViewMode: ICTopViewMode = .dailyGoal
+    var isRepeatOne: Bool {
+        get {
+            return globalIsRepeatOne
+        }
+        set {
+            globalIsRepeatOne = newValue
+        }
+    }
 }
 
 enum ICTopViewMode: Int, Codable {
@@ -85,4 +95,25 @@ enum LearningMode: Int, Codable {
     case speakingOnly = 1
     case echoMethod = 2
     case interpretation = 3
+}
+
+
+// MARK:- New Dynamic Settings
+private let isRepeatOneKey = "RepeatOneKey"
+private var globalIsRepeatOne: Bool = false
+
+// https://stackoverflow.com/questions/44580719/how-do-i-make-an-enum-decodable-in-swift-4
+private struct IsRepeatOneForEncode: Codable {
+    var isRepeatOne: Bool
+}
+
+func saveIsRepeatOne() {
+    let tmpObj: IsRepeatOneForEncode = IsRepeatOneForEncode(isRepeatOne: globalIsRepeatOne)
+    saveToUserDefault(object: tmpObj, key: isRepeatOneKey)
+}
+
+func loadIsRepeatOne() {
+    if let loadedObj = loadFromUserDefault(type: IsRepeatOneForEncode.self, key: isRepeatOneKey) {
+        globalIsRepeatOne = loadedObj.isRepeatOne
+    }
 }
