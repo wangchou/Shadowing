@@ -1945,13 +1945,13 @@ Ruth Yuru Chen
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WDC-AY-rcB">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="498"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="488"/>
                                     </scrollView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3SU-Up-VtH" userLabel="messenger bar" customClass="MessengerBar" customModule="今話したい" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="498" width="320" height="50"/>
+                                        <rect key="frame" x="0.0" y="488" width="320" height="60"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="rEI-dc-kAr"/>
+                                            <constraint firstAttribute="height" constant="60" id="rEI-dc-kAr"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -2030,10 +2030,10 @@ Ruth Yuru Chen
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NIW-59-Zxy">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="508"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fzY-jo-0bH">
-                                        <rect key="frame" x="205" y="283" width="100" height="50"/>
+                                        <rect key="frame" x="205" y="273" width="100" height="50"/>
                                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="lKq-oo-vp8"/>
@@ -2048,7 +2048,7 @@ Ruth Yuru Chen
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EHN-qx-bv5">
-                                        <rect key="frame" x="18" y="283" width="50" height="50"/>
+                                        <rect key="frame" x="18" y="273" width="50" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="SLi-ZH-xoF"/>
@@ -2070,44 +2070,44 @@ Ruth Yuru Chen
                                 </constraints>
                             </view>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4P9-61-8fN">
-                                <rect key="frame" x="256" y="429" width="51" height="31"/>
+                                <rect key="frame" x="256" y="419" width="51" height="31"/>
                                 <connections>
                                     <action selector="onAutoSpeedSwitchTapped:" destination="xbq-5x-hVH" eventType="valueChanged" id="AVr-tB-9y7"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="751" text="自動速度：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="08G-Eb-JgR">
-                                <rect key="frame" x="15" y="430" width="122" height="29"/>
+                                <rect key="frame" x="15" y="420" width="122" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="751" text="學習模式：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHV-aK-krE">
-                                <rect key="frame" x="15" y="348" width="122" height="29"/>
+                                <rect key="frame" x="15" y="338" width="122" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="cM8-Gz-KMi">
-                                <rect key="frame" x="67" y="473.5" width="176.5" height="31"/>
+                                <rect key="frame" x="67" y="463.5" width="176.5" height="31"/>
                                 <color key="tintColor" red="0.12549019607843137" green="0.74117647058823533" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="onTTSSpeedSliderValueChanged:" destination="xbq-5x-hVH" eventType="valueChanged" id="XR5-Bd-bMO"/>
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="速度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zvf-ny-jFJ">
-                                <rect key="frame" x="15" y="474" width="49" height="29"/>
+                                <rect key="frame" x="15" y="464" width="49" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.00x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pEm-2K-vVR">
-                                <rect key="frame" x="246.5" y="474" width="58.5" height="29"/>
+                                <rect key="frame" x="246.5" y="464" width="58.5" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9Fh-fw-3gB">
-                                <rect key="frame" x="15" y="387" width="290" height="29"/>
+                                <rect key="frame" x="15" y="377" width="290" height="29"/>
                                 <segments>
                                     <segment title="意義與發音"/>
                                     <segment title="發音"/>
@@ -2134,10 +2134,10 @@ Ruth Yuru Chen
                             <constraint firstItem="rHV-aK-krE" firstAttribute="leading" secondItem="N3t-I3-Erf" secondAttribute="leading" constant="15" id="HeP-FX-I6K"/>
                             <constraint firstItem="Zvf-ny-jFJ" firstAttribute="top" secondItem="08G-Eb-JgR" secondAttribute="bottom" constant="15" id="Lc4-ys-50W"/>
                             <constraint firstItem="N3t-I3-Erf" firstAttribute="trailing" secondItem="NIW-59-Zxy" secondAttribute="trailing" id="R2q-3E-WKu"/>
-                            <constraint firstItem="N3t-I3-Erf" firstAttribute="bottom" secondItem="Zvf-ny-jFJ" secondAttribute="bottom" constant="65" id="SlG-yL-WRq"/>
+                            <constraint firstItem="N3t-I3-Erf" firstAttribute="bottom" secondItem="Zvf-ny-jFJ" secondAttribute="bottom" constant="75" id="SlG-yL-WRq"/>
                             <constraint firstItem="NIW-59-Zxy" firstAttribute="top" secondItem="IVc-qA-oVM" secondAttribute="top" id="V2R-bl-Z3B"/>
                             <constraint firstItem="08G-Eb-JgR" firstAttribute="centerY" secondItem="4P9-61-8fN" secondAttribute="centerY" id="bVg-EA-jUA"/>
-                            <constraint firstItem="N3t-I3-Erf" firstAttribute="bottom" secondItem="NIW-59-Zxy" secondAttribute="bottom" constant="50" id="cWe-hq-cmZ"/>
+                            <constraint firstItem="N3t-I3-Erf" firstAttribute="bottom" secondItem="NIW-59-Zxy" secondAttribute="bottom" constant="60" id="cWe-hq-cmZ"/>
                             <constraint firstItem="9Fh-fw-3gB" firstAttribute="leading" secondItem="N3t-I3-Erf" secondAttribute="leading" constant="15" id="fsL-r7-7Tp"/>
                             <constraint firstItem="08G-Eb-JgR" firstAttribute="top" secondItem="9Fh-fw-3gB" secondAttribute="bottom" constant="15" id="hyW-JW-ZvH"/>
                             <constraint firstItem="cM8-Gz-KMi" firstAttribute="leading" secondItem="Zvf-ny-jFJ" secondAttribute="trailing" constant="5" id="kXP-pA-csX"/>
