@@ -37,7 +37,18 @@ class GameContext {
             postEvent(.gameStateChanged, gameState: gameState)
         }
     }
-    var dataSetKey: String = "" // the sentence set key in current game
+
+    var topicDataSetKey: String = ""
+
+    var dataSetKey: String {
+        get {
+            return contentTab == .topics ? topicDataSetKey : infiniteChallengeLevel.infinteChallengeDatasetKey
+        }
+
+        set {
+            topicDataSetKey = newValue
+        }
+    }
 
     var gameRecord: GameRecord? // of current game
     var isNewRecord: Bool {
@@ -144,7 +155,6 @@ extension GameContext {
     private func loadInfiniteChallengeLevelSentence() {
         let level = infiniteChallengeLevel
         sentenceIndex = 0
-        dataSetKey = level.infinteChallengeDatasetKey
         loadSentenceDB()
         let numOfSentences = isSimulator ? 3 : 10
         let sentenceIds = randSentenceIds(
