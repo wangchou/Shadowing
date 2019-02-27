@@ -10,6 +10,8 @@ import UIKit
 
 private let context = GameContext.shared
 
+let backGray = rgb(248, 248, 252)
+
 @IBDesignable
 class TopicButtonAreaView: UIView, GridLayout, ReloadableView {
 
@@ -40,33 +42,36 @@ class TopicButtonAreaView: UIView, GridLayout, ReloadableView {
     }
 
     private func sharedInit() {
+
+        let separateLine = UIView()
+        separateLine.backgroundColor = rgb(220, 220, 220)
+        separateLine.frame = CGRect(x: 0, y: 0, width: screen.width, height: 0.5)
+        addSubview(separateLine)
+
         playButton = UIButton()
         playButton.addTarget(self, action: #selector(onPlayButtonClicked), for: .touchUpInside)
         playButton.roundBorder(borderWidth: 0, cornerRadius: 5, color: .clear)
-        playButton.backgroundColor = .red
-        playButton.setIconImage(named: "baseline_play_arrow_black_48pt", title: "", tintColor: .black, isIconOnLeft: false)
-        playButton.tintColor = .white
-        playButton.showsTouchWhenHighlighted = true
-        layout(12, 2, 23, 8, playButton)
+        playButton.backgroundColor = backGray
+        playButton.setIconImage(named: "baseline_play_arrow_black_24pt", title: "", tintColor: .black, isIconOnLeft: false)
+        playButton.tintColor = myRed.withSaturation(1)
+        layout(12, 2, 24, 8, playButton)
         addSubview(playButton)
 
         topViewSwitchButton = UIButton()
         topViewSwitchButton.addTarget(self, action: #selector(onSwitchButtonClicked), for: .touchUpInside)
         topViewSwitchButton.roundBorder(borderWidth: 0, cornerRadius: 5, color: .clear)
-        topViewSwitchButton.backgroundColor = rgb(130, 130, 130)
-        topViewSwitchButton.setIconImage(named: "baseline_style_black_36pt", title: "", tintColor: .black, isIconOnLeft: false)
-        topViewSwitchButton.tintColor = .white
-        topViewSwitchButton.showsTouchWhenHighlighted = true
+        topViewSwitchButton.backgroundColor = backGray
+        topViewSwitchButton.setIconImage(named: "baseline_style_black_24pt", title: "", tintColor: .black, isIconOnLeft: false)
+        topViewSwitchButton.tintColor = myGreen.withSaturation(1)
         layout(2, 2, 8, 8, topViewSwitchButton)
         addSubview(topViewSwitchButton)
 
         repeatOneSwitchButton = UIButton()
-        repeatOneSwitchButton.showsTouchWhenHighlighted = true
         repeatOneSwitchButton.addTarget(self, action: #selector(onRepeatOneButtonClicked), for: .touchUpInside)
         layout(38, 2, 8, 8, repeatOneSwitchButton)
 
         repeatOneSwitchButton.roundBorder(borderWidth: 0, cornerRadius: repeatOneSwitchButton.frame.width/2, color: .clear)
-        repeatOneSwitchButton.setIconImage(named: "baseline_repeat_one_black_36pt", title: "", tintColor: .white, isIconOnLeft: false)
+        repeatOneSwitchButton.setIconImage(named: "baseline_repeat_one_black_24pt", title: "", tintColor: .white, isIconOnLeft: false)
         addSubview(repeatOneSwitchButton)
 
         addSeparationLine(y: 12)
@@ -78,8 +83,8 @@ class TopicButtonAreaView: UIView, GridLayout, ReloadableView {
             repeatOneSwitchButton.tintColor = UIColor.white
             repeatOneSwitchButton.backgroundColor = myOrange.withSaturation(1)
         } else {
-            repeatOneSwitchButton.tintColor = .white
-            repeatOneSwitchButton.backgroundColor = UIColor.white.withBrightness(0.9)
+            repeatOneSwitchButton.tintColor = myOrange.withSaturation(1)
+            repeatOneSwitchButton.backgroundColor = backGray
         }
     }
 
