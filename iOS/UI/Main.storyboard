@@ -1643,11 +1643,11 @@ Ruth Yuru Chen
                                 <color key="separatorColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="6KU-15-nrj" userLabel="最佳成績區">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="164"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="184"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="SAO-9L-ImD" userLabel="left part">
-                                            <rect key="frame" x="10" y="5" width="240" height="149"/>
+                                            <rect key="frame" x="10" y="5" width="240" height="169"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="こんにちは〜！" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GX6-Zg-Cjy">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="25"/>
@@ -1659,19 +1659,19 @@ Ruth Yuru Chen
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Uc9-B5-RQL">
-                                                    <rect key="frame" x="0.0" y="25" width="240" height="28"/>
+                                                    <rect key="frame" x="0.0" y="25" width="240" height="48"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="TRn-h5-8ZG">
-                                                            <rect key="frame" x="0.0" y="0.0" width="240" height="28"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="240" height="48"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bd1-65-w1n">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="159.5" height="28"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="159.5" height="48"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="64"/>
                                                                     <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWi-Pi-rbk">
-                                                                    <rect key="frame" x="159.5" y="0.0" width="80.5" height="28"/>
+                                                                    <rect key="frame" x="159.5" y="0.0" width="80.5" height="48"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="64"/>
                                                                     <color key="textColor" red="1" green="0.56961647959999995" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -1686,7 +1686,7 @@ Ruth Yuru Chen
                                                     </constraints>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="XEk-Ip-cgT" userLabel="challenge button">
-                                                    <rect key="frame" x="0.0" y="53" width="240" height="96"/>
+                                                    <rect key="frame" x="0.0" y="73" width="240" height="96"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6UR-Kh-FRQ" userLabel="Skip Previous Button">
                                                             <rect key="frame" x="0.0" y="0.0" width="73.5" height="96"/>
@@ -1739,8 +1739,8 @@ Ruth Yuru Chen
                                                 <constraint firstItem="GX6-Zg-Cjy" firstAttribute="leading" secondItem="SAO-9L-ImD" secondAttribute="leading" id="yuO-aE-z7q"/>
                                             </constraints>
                                         </stackView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="yr3-fd-Cu0" userLabel="Perfect/Miss Count">
-                                            <rect key="frame" x="260" y="5" width="50" height="153.5"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="yr3-fd-Cu0" userLabel="Perfect/Miss Count">
+                                            <rect key="frame" x="260" y="5" width="50" height="173.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="正解" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcl-7d-eHE">
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="14.5"/>
@@ -1749,43 +1749,43 @@ Ruth Yuru Chen
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bMS-Hr-Jw8">
-                                                    <rect key="frame" x="0.0" y="14.5" width="50" height="24"/>
+                                                    <rect key="frame" x="0.0" y="18.5" width="50" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="すごい" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ruA-1W-TKL">
-                                                    <rect key="frame" x="0.0" y="38.5" width="50" height="14.5"/>
+                                                    <rect key="frame" x="0.0" y="46.5" width="50" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BcR-Lx-X16">
-                                                    <rect key="frame" x="0.0" y="53" width="50" height="24"/>
+                                                    <rect key="frame" x="0.0" y="65" width="50" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="いいね" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hko-we-4Q6">
-                                                    <rect key="frame" x="0.0" y="77" width="50" height="14.5"/>
+                                                    <rect key="frame" x="0.0" y="93" width="50" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m73-i0-fbd">
-                                                    <rect key="frame" x="0.0" y="91.5" width="50" height="24"/>
+                                                    <rect key="frame" x="0.0" y="111.5" width="50" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="違うよ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s2y-E9-uGR">
-                                                    <rect key="frame" x="0.0" y="115.5" width="50" height="14"/>
+                                                    <rect key="frame" x="0.0" y="139.5" width="50" height="6"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0dV-zb-TaC">
-                                                    <rect key="frame" x="0.0" y="129.5" width="50" height="24"/>
+                                                    <rect key="frame" x="0.0" y="149.5" width="50" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1809,7 +1809,7 @@ Ruth Yuru Chen
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ContentTableCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="SentenceCell" id="Dbt-EG-HLc" customClass="SentencesTableCell" customModule="今話したい" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="192" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="212" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Dbt-EG-HLc" id="KQa-Km-FxO">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -1874,7 +1874,7 @@ Ruth Yuru Chen
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kMQ-GI-Nh0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="928" y="-1282"/>
+            <point key="canvasLocation" x="926.25" y="-1282.3943661971832"/>
         </scene>
         <!--Game Finished Page-->
         <scene sceneID="DIF-sJ-I4U">
