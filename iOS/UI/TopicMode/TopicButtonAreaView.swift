@@ -22,6 +22,7 @@ class TopicButtonAreaView: UIView, GridLayout, ReloadableView {
 
     var playButton: UIButton!
     var repeatOneSwitchButton: UIButton!
+    var topViewSwitchButton: UIButton!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,10 +46,22 @@ class TopicButtonAreaView: UIView, GridLayout, ReloadableView {
         playButton.backgroundColor = .red
         playButton.setIconImage(named: "baseline_play_arrow_black_48pt", title: "", tintColor: .black, isIconOnLeft: false)
         playButton.tintColor = .white
-        layout(2, 2, 33, 8, playButton)
+        playButton.showsTouchWhenHighlighted = true
+        layout(12, 2, 23, 8, playButton)
         addSubview(playButton)
 
+        topViewSwitchButton = UIButton()
+        topViewSwitchButton.addTarget(self, action: #selector(onSwitchButtonClicked), for: .touchUpInside)
+        topViewSwitchButton.roundBorder(borderWidth: 0, cornerRadius: 5, color: .clear)
+        topViewSwitchButton.backgroundColor = rgb(130, 130, 130)
+        topViewSwitchButton.setIconImage(named: "baseline_style_black_36pt", title: "", tintColor: .black, isIconOnLeft: false)
+        topViewSwitchButton.tintColor = .white
+        topViewSwitchButton.showsTouchWhenHighlighted = true
+        layout(2, 2, 8, 8, topViewSwitchButton)
+        addSubview(topViewSwitchButton)
+
         repeatOneSwitchButton = UIButton()
+        repeatOneSwitchButton.showsTouchWhenHighlighted = true
         repeatOneSwitchButton.addTarget(self, action: #selector(onRepeatOneButtonClicked), for: .touchUpInside)
         layout(38, 2, 8, 8, repeatOneSwitchButton)
 
@@ -83,6 +96,11 @@ class TopicButtonAreaView: UIView, GridLayout, ReloadableView {
             guard let vc = UIApplication.getPresentedViewController() else { return }
             launchStoryboard(vc, "MessengerGame")
         }
+    }
+
+    @objc func onSwitchButtonClicked() {
+        switchToNextTopViewMode()
+        rootViewController.rerenderTopView()
     }
 
     @objc func onRepeatOneButtonClicked() {
