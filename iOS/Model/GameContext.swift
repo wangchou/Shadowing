@@ -38,6 +38,7 @@ class GameContext {
         }
     }
     var dataSetKey: String = "" // the sentence set key in current game
+
     var gameRecord: GameRecord? // of current game
     var isNewRecord: Bool {
         return gameRecord?.isNewRecord ?? false
@@ -66,6 +67,11 @@ class GameContext {
     var sentenceIndex: Int = 0
 
     // MARK: - Short-term data for a single sentence, will be discarded after each sentence played
+    var gameTitle: String {
+        return contentTab == .topics ?
+                getDataSetTitle(dataSetKey: dataSetKey) :
+                "[無限挑戦] \(infiniteChallengeLevel.title)"
+    }
     var targetString: String {
         guard sentenceIndex < sentences.count else { return ""}
         return sentences[sentenceIndex]
@@ -140,7 +146,7 @@ extension GameContext {
         sentenceIndex = 0
         dataSetKey = level.infinteChallengeDatasetKey
         loadSentenceDB()
-        let numOfSentences = isSimulator ? 3 : 20
+        let numOfSentences = isSimulator ? 3 : 10
         let sentenceIds = randSentenceIds(
             minKanaCount: level.minSyllablesCount,
             maxKanaCount: level.maxSyllablesCount,
@@ -157,17 +163,38 @@ extension GameContext {
 
         life = isSimulator ? 100 : 40
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level)
-
     }
 
     func nextSentence() -> Bool {
         sentenceIndex += 1
-//        if isSimulator {
-//            guard sentenceIndex < 5 else { return false }
-//        }
+        if isSimulator {
+            guard sentenceIndex < 3 else { return false }
+        }
         guard sentenceIndex < sentences.count else { return false }
 
         userSaidString = ""
         return true
+    }
+
+    func loadNextChallenge() {
+        if contentTab == .topics {
+            if let currentIdx = dataSetKeys.lastIndex(of: dataSetKey) {
+                dataSetKey = dataSetKeys[(currentIdx + 1) % dataSetKeys.count]
+            }
+        } else {
+            infiniteChallengeLevel = infiniteChallengeLevel.next
+        }
+        loadLearningSentences()
+    }
+
+    func loadPrevousChallenge() {
+        if contentTab == .topics {
+            if let currentIdx = dataSetKeys.lastIndex(of: dataSetKey) {
+                dataSetKey = dataSetKeys[(currentIdx + dataSetKeys.count - 1) % dataSetKeys.count]
+            }
+        } else {
+            infiniteChallengeLevel = infiniteChallengeLevel.previous
+        }
+        loadLearningSentences()
     }
 }

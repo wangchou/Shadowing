@@ -13,7 +13,7 @@ private let context = GameContext.shared
 
 class SentencesTableCell: UITableViewCell {
     static var isPracticing: Bool = false
-    private var buttonColor = myBlue.withAlphaComponent(0.5)
+    private var buttonColor = rgb(42, 163, 239)
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var sentenceLabel: FuriganaLabel!
     @IBOutlet weak var userSaidSentenceLabel: FuriganaLabel!
@@ -49,6 +49,7 @@ class SentencesTableCell: UITableViewCell {
     }
 
     func practiceSentence() {
+        stopCountDown()
         guard SentencesTableCell.isPracticing != true else { return }
         SentencesTableCell.isPracticing = true
         TopicDetailPage.isChallengeButtonDisabled = true

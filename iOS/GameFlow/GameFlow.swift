@@ -81,19 +81,24 @@ class GameFlow {
             narratorString = i18n.gameStartedWithoutGuideVoice
         }
         print(context.gameSetting.learningMode, narratorString)
+
         if context.gameSetting.isUsingNarrator {
-            narratorSay(narratorString)
-                .then { self.wait }
-                .always {
-                    self.learnNextSentence()
-                }
+            speakTitle(title: context.gameTitle).then { _ -> Promise<Void> in
+                return narratorSay(narratorString)
+            }.then { self.wait }
+            .always {
+                self.learnNextSentence()
+            }
         } else {
-            learnNextSentence()
+            speakTitle(title: context.gameTitle).always {
+                self.learnNextSentence()
+            }
         }
 
         isPaused = false
         wait.fulfill(())
     }
+
 }
 
 // MARK: - Private Functions
@@ -156,6 +161,7 @@ extension GameFlow {
 
     private func resume() {
         isPaused = false
+        postEvent(.gameResume)
         wait.fulfill(())
     }
 
@@ -184,8 +190,6 @@ extension GameFlow {
         }
 
         context.life = max(min(100, life), 0)
-
-        postEvent(.lifeChanged, int: context.life)
     }
 
     private func speakScore() -> Promise<Void> {

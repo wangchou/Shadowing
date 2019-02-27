@@ -146,6 +146,23 @@ extension UIApplication {
     }
 }
 
+// dismiss presented vc
+func dismissVC(animated: Bool = true, completion: (() -> Void)? = nil) {
+    guard let vc = UIApplication.getPresentedViewController() else { return }
+    vc.dismiss(animated: animated) {
+        completion?()
+    }
+}
+
+// dismiss two layer of presented vc
+func dismissTwoVC(animated: Bool = true, completion: (() -> Void)? = nil) {
+    dismissVC(animated: false) {
+        dismissVC(animated: animated) {
+            completion?()
+        }
+    }
+}
+
 // MARK: XibView
 // modified from https://medium.com/zenchef-tech-and-product/how-to-visualize-reusable-xibs-in-storyboards-using-ibdesignable-c0488c7f525d
 

@@ -31,6 +31,12 @@ class GameFinishedPage: UIViewController {
             UINib(nibName: "SentencesTableCell", bundle: nil),
             forCellReuseIdentifier: "FinishedTableCell"
         )
+        view.addTapGestureRecognizer {
+            stopCountDown()
+        }
+        tableView.addTapGestureRecognizer {
+            stopCountDown()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +53,7 @@ class GameFinishedPage: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         SpeechEngine.shared.stopListeningAndSpeaking()
+        reportView.viewDidDisappear()
     }
 
     func sortSentenceByScore() {
@@ -89,6 +96,9 @@ extension GameFinishedPage: UITableViewDelegate {
             cell.isSelected = false
             cell.practiceSentence()
         }
+    }
 
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        stopCountDown()
     }
 }

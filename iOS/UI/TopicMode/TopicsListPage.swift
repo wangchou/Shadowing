@@ -49,7 +49,7 @@ class TopicsListPage: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         topBarView.titleLabel.text = I18n.shared.topicPageTitile
-        let height = screen.width * 34/48
+        let height = screen.width * 46/48
         topArea.frame.size.height = height + 55
 
         sentencesTableView.reloadData()
@@ -70,6 +70,10 @@ class TopicsListPage: UIViewController {
     @objc func reloadTopicSentences() {
         loadDataSets()
         sentencesTableView.reloadData()
+
+        if !dataSetKeys.contains(context.dataSetKey) {
+            context.dataSetKey = dataSetKeys[0]
+        }
     }
 }
 

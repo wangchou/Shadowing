@@ -27,9 +27,8 @@ class Messenger: UIViewController {
     @IBOutlet weak var levelMeterView: UIView!
     @IBOutlet weak var levelMeterValueBar: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var sentenceCountLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var speedLabel: UILabel!
+
+    @IBOutlet weak var messengerBar: MessengerBar!
     let spacing = 15
 
     override func viewDidLoad() {
@@ -50,6 +49,8 @@ class Messenger: UIViewController {
         levelMeterValueBar.roundBorder(borderWidth: 0, cornerRadius: 4.5, color: .clear)
         levelMeterValueBar.frame.size.height = 0
         levelMeterView.isUserInteractionEnabled = false
+        messengerBar.viewWillAppear()
+        messengerBar.initData()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -62,12 +63,11 @@ class Messenger: UIViewController {
     func start() {
         startEventObserving(self)
         GameFlow.shared.start()
-        sentenceCountLabel.text = "\(i18n.remaining)\(context.sentences.count)\(i18n.sentenceUnit)"
-        speedLabel.text = String(format: "%.2f 倍速", context.teachingRate * 2)
-        timeLabel.text = "00:00"
         context.startTime = getNow()
 
-        scrollView.addTapGestureRecognizer(action: scrollViewTapped)
+        scrollView.addTapGestureRecognizer(action: pauseGame)
+        messengerBar.addTapGestureRecognizer(action: pauseGame)
+        messengerBar.pauseCountinueButton.addTapGestureRecognizer(action: pauseGame)
     }
 
     func end() {
@@ -150,7 +150,9 @@ class Messenger: UIViewController {
         updateLabel(lastLabel, text: text, pos: pos)
     }
 
-    @objc func scrollViewTapped() {
+    @objc func pauseGame() {
+        messengerBar.isGameStopped = true
+        messengerBar.viewWillAppear()
         postCommand(.pause)
         launchStoryboard(self, "PauseOverlay", isOverCurrent: true)
     }

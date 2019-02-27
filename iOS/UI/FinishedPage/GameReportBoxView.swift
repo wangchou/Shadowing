@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Promises
 
 private let context = GameContext.shared
 
@@ -40,6 +41,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
     private var fullProgressWidth: CGFloat = 0
 
     private var showAbilityTargetLabelFunc: (() -> Void)?
+    private var statusSpeakingPromise: Promise<Void> = fulfilledVoidPromise()
 
     func viewWillAppear() {
         backgroundColor = UIColor.black.withAlphaComponent(0.6)
@@ -60,6 +62,9 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         }
         addText(2, 1, 6, title, color: myLightGray, strokeColor: .black)
         addText(2, 7, 6, tags, color: myOrange, strokeColor: .black)
+
+        let statusText = i18n.getSpeakingStatus(percent: record.progress, rank: record.rank.rawValue)
+        statusSpeakingPromise = teacherSay(statusText, rate: fastRate)
     }
 
     private func renderMiddleRecord() {
@@ -187,7 +192,9 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
                 self.timers[key]?.invalidate()
                 self.timers[key] = nil
                 if startProgress < 1.0 && endProgress == 1.0 {
-                    _ = teacherSay(i18n.reachDailyGoal, rate: normalRate)
+                    _ = self.statusSpeakingPromise.then {
+                        teacherSay(i18n.reachDailyGoal, rate: fastRate)
+                    }
                 }
             }
             repeatCount += 1

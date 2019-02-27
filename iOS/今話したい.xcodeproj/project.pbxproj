@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE050B7E22227530007017C5 /* MessengerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE050B7D22227530007017C5 /* MessengerBar.swift */; };
 		BE152048218085120059A7C2 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE152047218085120059A7C2 /* Level.swift */; };
 		BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB3D209B19B200D23F22 /* GameContext.swift */; };
 		BE1CA958209DC43800086853 /* Messenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA957209DC43800086853 /* Messenger.swift */; };
@@ -40,6 +41,7 @@
 		BE5E0CCE2183477400832E88 /* I18n.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5E0CCD2183477400832E88 /* I18n.swift */; };
 		BE65A939209C6E67006645CA /* GameEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65A938209C6E67006645CA /* GameEvents.swift */; };
 		BE67D2A921561A93007FE420 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE67D2A821561A92007FE420 /* Assets.xcassets */; };
+		BE6BB6012225286C00BE3CAC /* TopicButtonAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6BB6002225286C00BE3CAC /* TopicButtonAreaView.swift */; };
 		BE6C78542165DD2B0072B1C5 /* GameReportBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6C78532165DD2B0072B1C5 /* GameReportBoxView.swift */; };
 		BE6EA1FD218B6BB4004749F5 /* GameLang.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6EA1FC218B6BB4004749F5 /* GameLang.swift */; };
 		BE6ED56820A17BB000553D1A /* GameFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6ED56720A17BB000553D1A /* GameFlow.swift */; };
@@ -133,6 +135,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BE050B7D22227530007017C5 /* MessengerBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerBar.swift; sourceTree = "<group>"; };
 		BE152047218085120059A7C2 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		BE17FB3D209B19B200D23F22 /* GameContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameContext.swift; sourceTree = "<group>"; };
 		BE1CA957209DC43800086853 /* Messenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messenger.swift; sourceTree = "<group>"; };
@@ -160,6 +163,7 @@
 		BE5E0CCD2183477400832E88 /* I18n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = I18n.swift; sourceTree = "<group>"; };
 		BE65A938209C6E67006645CA /* GameEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEvents.swift; sourceTree = "<group>"; };
 		BE67D2A821561A92007FE420 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BE6BB6002225286C00BE3CAC /* TopicButtonAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicButtonAreaView.swift; sourceTree = "<group>"; };
 		BE6C78532165DD2B0072B1C5 /* GameReportBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameReportBoxView.swift; sourceTree = "<group>"; };
 		BE6EA1FC218B6BB4004749F5 /* GameLang.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLang.swift; sourceTree = "<group>"; };
 		BE6ED56720A17BB000553D1A /* GameFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameFlow.swift; sourceTree = "<group>"; };
@@ -293,6 +297,7 @@
 				BEDEDD3620A46D1B00E7B60B /* TopicsListPage.swift */,
 				BE7725CD20A4216700DF186A /* ContentCell.swift */,
 				BE5D838820A80BD0002031BF /* TopicDetailPage.swift */,
+				BE6BB6002225286C00BE3CAC /* TopicButtonAreaView.swift */,
 			);
 			path = TopicMode;
 			sourceTree = "<group>";
@@ -301,6 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				BE1CA957209DC43800086853 /* Messenger.swift */,
+				BE050B7D22227530007017C5 /* MessengerBar.swift */,
 				BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */,
 				BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */,
 			);
@@ -662,6 +668,7 @@
 				BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */,
 				BE8E51DD21CF7718007D29E6 /* TopChartView+Timeline.swift in Sources */,
 				BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */,
+				BE050B7E22227530007017C5 /* MessengerBar.swift in Sources */,
 				BEEC7FAB2154FFA4001C2EFF /* MainSwipablePage.swift in Sources */,
 				BEDEDD3720A46D1B00E7B60B /* TopicsListPage.swift in Sources */,
 				BE7725CE20A4216700DF186A /* ContentCell.swift in Sources */,
@@ -681,6 +688,7 @@
 				BE8E51E721CF7F3F007D29E6 /* IAPHelper+Receipt.swift in Sources */,
 				BE3260C821BF912D00A13C94 /* vocabulary1.swift in Sources */,
 				BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */,
+				BE6BB6012225286C00BE3CAC /* TopicButtonAreaView.swift in Sources */,
 				BEBDEDDA208EF15F00C18520 /* TTS.swift in Sources */,
 				BE596470215A0ECE00E4AA0C /* speech.swift in Sources */,
 				BEBDEDDD208EF15F00C18520 /* SpeechRecognizer.swift in Sources */,
@@ -853,7 +861,7 @@
 				MACH_O_TYPE = mh_execute;
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				"OTHER_SWIFT_FLAGS[arch=*]" = "-Xfrontend -debug-time-function-bodies";
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-Xfrontend -debug-time-function-bodies -Xfrontend -warn-long-expression-type-checking=300 -Xfrontend -warn-long-function-bodies=300";
 				PRODUCT_BUNDLE_IDENTIFIER = idv.wcl.imahanashitai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

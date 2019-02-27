@@ -48,4 +48,18 @@ extension UIColor {
         print("withSaturation getHue fail")
         return self
     }
+
+    func withBrightness(_ newB: CGFloat) -> UIColor {
+        var h: CGFloat = 0
+        var s: CGFloat = 0
+        var b: CGFloat = 0
+        var a: CGFloat = 0
+        if self.getHue(&h, saturation: &s, brightness: &b, alpha: &a) {
+            return UIColor.init(hue: h, saturation: s, brightness: newB, alpha: a)
+        }
+
+        print("withBrightness getHue fail")
+        return self
+    }
+
 }

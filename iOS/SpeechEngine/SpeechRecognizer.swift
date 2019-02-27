@@ -104,7 +104,10 @@ class SpeechRecognizer: NSObject {
             let channelDataValueArray = stride(from: 0,
                                                to: Int(buffer.frameLength),
                                                by: buffer.stride).map { channelDataValue[$0] }
-            let rms = sqrt(channelDataValueArray.map { $0 * $0 }.reduce(0, +) / Float(buffer.frameLength))
+
+            let rms = sqrt(channelDataValueArray
+                            .reduce(0) {$0 + $1*$1 } / Float(buffer.frameLength)
+                      )
             let avgPower = 20 * log10(rms)
             let meterLevel = self.scaledPower(power: avgPower)
             postEvent(.levelMeterUpdate, int: Int(meterLevel * 100))

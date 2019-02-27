@@ -16,11 +16,12 @@ enum EventType {
     case listenStarted
 
     case scoreCalculated
-    case lifeChanged
     case gameStateChanged
 
     case playTimeUpdate
     case levelMeterUpdate
+
+    case gameResume
 }
 
 struct Event {

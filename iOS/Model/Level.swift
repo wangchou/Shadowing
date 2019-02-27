@@ -30,8 +30,30 @@ func getLevel(avgSyllablesCount: Float) -> Level {
 
 enum Level: Int, Codable {
     case lv0=0, lv1=1, lv2=2, lv3=3, lv4=4, lv5=5, lv6=6, lv7=7, lv8=8, lv9=9
+
+    var next: Level {
+        return Level(rawValue: (self.rawValue + 1) % 10)!
+    }
+
+    var previous: Level {
+        return Level(rawValue: (self.rawValue + 9) % 10)!
+    }
+
     var color: UIColor {
         return colors[self.rawValue]
+    }
+
+    var lockPercentage: Float {
+        switch self {
+        case .lv0:
+            return 75
+        case .lv1:
+            return 80
+        case .lv2:
+            return 85
+        default:
+            return 90
+        }
     }
 
     var minSyllablesCount: Int {

@@ -1,4 +1,4 @@
-github "google/promises"
+github "google/promises" == 1.2.5
 github "Alamofire/Alamofire" ~> 4.7
 github "SwiftyJSON/SwiftyJSON" ~> 4.0
 github "danielgindi/Charts" ~> 3.2.0
