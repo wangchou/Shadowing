@@ -133,6 +133,7 @@ extension SentencesTableCell {
 
     private func prepareForSpeaking() {
         tableView?.beginUpdates()
+        scoreLabel.text = ""
         userSaidSentenceLabel.text = " "
         userSaidSentenceLabel.backgroundColor = UIColor.white
         userSaidSentenceLabel.isHidden = false

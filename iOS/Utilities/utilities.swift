@@ -337,7 +337,7 @@ func getSentenceCountsByDays() -> [Int] {
             sentenceCounts.append(0)
         }
         for i in 0..<sentenceCounts.count {
-            sentenceCounts[i] += Int(arc4random_uniform(UInt32(100)))
+            sentenceCounts[i] += Int(arc4random_uniform(UInt32(60)))
         }
     }
     //print(sentenceCounts)

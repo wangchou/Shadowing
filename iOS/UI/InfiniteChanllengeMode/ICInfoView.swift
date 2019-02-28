@@ -180,20 +180,22 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
         button.titleLabel?.font = MyFont.regular(ofSize: step * 5)
         button.titleLabel?.textColor = .white
         button.roundBorder(borderWidth: 1.5, cornerRadius: 5, color: .clear)
-
-        button.addTapGestureRecognizer {
-            guard !TopicDetailPage.isChallengeButtonDisabled else { return }
-            if let vc = UIApplication.getPresentedViewController() {
-                context.infiniteChallengeLevel = self.level
-                if isUnderDailySentenceLimit() {
-                    Analytics.logEvent("challenge_infinite_\(gameLang.prefix)", parameters: nil)
-                    launchStoryboard(vc, "MessengerGame")
-                }
-            }
-        }
+        button.showsTouchWhenHighlighted = true
+        button.addTarget(self, action: #selector(onChallengeButtonClicked), for: .touchUpInside)
 
         layout(2, 48, 44, 8, button)
 
         addSubview(button)
+    }
+
+    @objc func onChallengeButtonClicked() {
+        guard !TopicDetailPage.isChallengeButtonDisabled else { return }
+        if let vc = UIApplication.getPresentedViewController() {
+            context.infiniteChallengeLevel = self.level
+            if isUnderDailySentenceLimit() {
+                Analytics.logEvent("challenge_infinite_\(gameLang.prefix)", parameters: nil)
+                launchStoryboard(vc, "MessengerGame")
+            }
+        }
     }
 }

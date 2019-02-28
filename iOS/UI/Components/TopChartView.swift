@@ -136,16 +136,8 @@ class TopChartView: UIView, GridLayout, ReloadableView {
 
     func addOnClickHandler() {
         addTapGestureRecognizer {
-            switch context.gameSetting.icTopViewMode {
-            case .dailyGoal:
-                context.gameSetting.icTopViewMode = .timeline
-            case .timeline:
-                context.gameSetting.icTopViewMode = .longTermGoal
-            case .longTermGoal:
-                context.gameSetting.icTopViewMode = .dailyGoal
-            }
+            switchToNextTopViewMode()
             Analytics.logEvent("top_chart_view_clicked", parameters: nil)
-            saveGameSetting()
             self.viewWillAppear()
             self.animateProgress()
         }
@@ -229,4 +221,16 @@ class TopChartView: UIView, GridLayout, ReloadableView {
             }
         }
     }
+}
+
+func switchToNextTopViewMode() {
+    switch context.gameSetting.icTopViewMode {
+    case .dailyGoal:
+        context.gameSetting.icTopViewMode = .timeline
+    case .timeline:
+        context.gameSetting.icTopViewMode = .longTermGoal
+    case .longTermGoal:
+        context.gameSetting.icTopViewMode = .dailyGoal
+    }
+    saveGameSetting()
 }

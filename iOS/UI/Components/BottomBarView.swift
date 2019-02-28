@@ -50,7 +50,6 @@ class BottomBarView: UIView, XibView {
         switch contentTab {
         case .topics:
             leftColor = tintColor
-            leftImgName = "baseline_featured_play_list_black_48pt"
         case .infiniteChallenge:
             rightColor = tintColor
             rightImgName = "baseline_all_inclusive_black_48pt"

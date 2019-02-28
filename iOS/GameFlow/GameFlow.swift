@@ -261,7 +261,6 @@ extension GameFlow {
 
     private func saveUserSaidString(userSaidString: String) -> Promise<Void> {
         engine.monitoringOff()
-        context.userSaidString = userSaidString
         userSaidSentences[context.targetString] = userSaidString
         return fulfilledVoidPromise()
     }
