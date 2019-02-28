@@ -1441,9 +1441,6 @@ Ruth Yuru Chen
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VmV-51-bgf" customClass="TopicButtonAreaView" customModule="今話したい" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="190" width="320" height="80"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="VmV-51-bgf" secondAttribute="height" multiplier="48:12" id="gjL-rC-XSQ"/>
-                                            </constraints>
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1454,6 +1451,7 @@ Ruth Yuru Chen
                                         <constraint firstAttribute="trailing" secondItem="VmV-51-bgf" secondAttribute="trailing" id="W67-va-vsr"/>
                                         <constraint firstItem="BCi-iY-dna" firstAttribute="width" secondItem="U0O-4m-O5g" secondAttribute="width" id="Wq1-9y-81D"/>
                                         <constraint firstItem="BCi-iY-dna" firstAttribute="centerX" secondItem="U0O-4m-O5g" secondAttribute="centerX" id="Y8A-y5-NXb"/>
+                                        <constraint firstAttribute="width" secondItem="VmV-51-bgf" secondAttribute="height" multiplier="4:1" id="ZRO-gU-N3F"/>
                                         <constraint firstItem="VmV-51-bgf" firstAttribute="top" secondItem="LwG-wU-2DZ" secondAttribute="bottom" id="a17-W7-xiO"/>
                                         <constraint firstItem="BCi-iY-dna" firstAttribute="top" secondItem="VmV-51-bgf" secondAttribute="bottom" id="b8y-14-MQH"/>
                                         <constraint firstItem="VmV-51-bgf" firstAttribute="leading" secondItem="U0O-4m-O5g" secondAttribute="leading" id="d5b-uZ-Hca"/>

@@ -23,6 +23,7 @@ class TopicsListPage: UIViewController {
     @IBOutlet weak var topChartView: TopChartView!
     @IBOutlet weak var topBarView: TopBarView!
     @IBOutlet weak var topicFilterBarView: TopicFilterBarView!
+
     var timelineSubviews: [String: UIView] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
