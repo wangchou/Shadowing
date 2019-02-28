@@ -153,7 +153,6 @@ extension TopicDetailPage: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContentTableCell", for: indexPath)
         guard let contentCell = cell as? SentencesTableCell else { print("detailCell convert error"); return cell }
         let sentence = context.sentences[indexPath.row]

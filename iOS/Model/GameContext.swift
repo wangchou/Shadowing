@@ -125,7 +125,6 @@ class GameContext {
 
     var userSaidString: String {
         get { return userSaidSentences[self.targetString] ?? "" }
-        set { userSaidSentences[self.targetString] = newValue }
     }
     var score: Score = Score(value: 100)
 }
@@ -182,7 +181,7 @@ extension GameContext {
         }
         guard sentenceIndex < sentences.count else { return false }
 
-        userSaidString = ""
+        userSaidSentences[targetString] = ""
         return true
     }
 

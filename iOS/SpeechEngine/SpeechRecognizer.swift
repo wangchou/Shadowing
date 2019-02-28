@@ -160,12 +160,10 @@ class SpeechRecognizer: NSObject {
         }
 
         if let result = result {
-            context.userSaidString = result.bestTranscription.formattedString
-            promise.fulfill(context.userSaidString)
+            promise.fulfill( result.bestTranscription.formattedString)
         }
 
         if let error = error {
-            context.userSaidString = ""
             if let userInfo = error._userInfo,
                let desc = userInfo["NSLocalizedDescription"] as? String {
                 // Retry means didn't hear anything please say again
@@ -176,6 +174,7 @@ class SpeechRecognizer: NSObject {
                     _ = getKanaTokenInfos("\(error)")
                     print(error)
                 }
+                promise.fulfill("")
                 return
             }
             _ = getKanaTokenInfos("\(error)")
@@ -212,7 +211,6 @@ class SpeechRecognizer: NSObject {
         Timer.scheduledTimer(withTimeInterval: stopAfterSeconds, repeats: false) {_ in
             let fakeSuffix = ["", "", "西宮", "はは"]
             let fakeSaidString = context.targetString + fakeSuffix[Int(arc4random_uniform(UInt32(fakeSuffix.count)))]
-            context.userSaidString = fakeSaidString
 
             self.promise.fulfill(fakeSaidString)
         }
