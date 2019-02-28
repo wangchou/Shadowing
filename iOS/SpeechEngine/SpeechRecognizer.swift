@@ -12,7 +12,7 @@ import Promises
 
 private let context = GameContext.shared
 private let engine = SpeechEngine.shared
-private let minDb: Float = -60
+private let minDb: Float = -55
 
 enum SpeechRecognitionError: Error {
     case unauthorized
