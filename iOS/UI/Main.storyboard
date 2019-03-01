@@ -1700,7 +1700,7 @@ Ruth Yuru Chen
                                                         <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qDS-dW-Rf8">
                                                             <rect key="frame" x="83.5" y="0.0" width="73" height="96"/>
                                                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <color key="tintColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <state key="normal" image="baseline_play_arrow_black_48pt"/>
                                                             <connections>
                                                                 <action selector="challenge:" destination="bWZ-C3-0jS" eventType="touchUpInside" id="4dB-sc-cdi"/>

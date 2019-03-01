@@ -97,8 +97,7 @@ enum LearningMode: Int, Codable {
     case interpretation = 3
 }
 
-
-// MARK:- New Dynamic Settings
+// MARK: New Dynamic Settings
 private let isRepeatOneKey = "RepeatOneKey"
 private var globalIsRepeatOne: Bool = false
 

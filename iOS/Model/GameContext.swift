@@ -124,7 +124,7 @@ class GameContext {
     }
 
     var userSaidString: String {
-        get { return userSaidSentences[self.targetString] ?? "" }
+        return userSaidSentences[self.targetString] ?? ""
     }
     var score: Score = Score(value: 100)
 }
