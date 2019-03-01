@@ -52,7 +52,7 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
     }
 
     func addButton(title: String, index: Int, percent: CGFloat) {
-        let buttonFrame = CGRect(x: 6 + index * 50, y: 8, width: 40, height: 40)
+        let buttonFrame = CGRect(x: 6 + index * 50, y: 11, width: 40, height: 40)
 
         let backCircle = CircleView(frame: buttonFrame)
         backCircle.lineWidth = 2

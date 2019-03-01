@@ -51,7 +51,7 @@ class TopicsListPage: UIViewController {
         super.viewWillAppear(animated)
         topBarView.titleLabel.text = I18n.shared.topicPageTitile
         let height = screen.width * 46/48
-        topArea.frame.size.height = height + 55
+        topArea.frame.size.height = height + 61
 
         sentencesTableView.reloadData()
         topChartView.viewWillAppear()

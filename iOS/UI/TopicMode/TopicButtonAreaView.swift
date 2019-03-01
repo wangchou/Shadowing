@@ -51,24 +51,23 @@ class TopicButtonAreaView: UIView, GridLayout, ReloadableView {
         playButton = UIButton()
         playButton.addTarget(self, action: #selector(onPlayButtonClicked), for: .touchUpInside)
         playButton.roundBorder(borderWidth: 0, cornerRadius: 5, color: .clear)
-        playButton.backgroundColor = backGray
-        playButton.setIconImage(named: "baseline_play_arrow_black_24pt", title: "", tintColor: .black, isIconOnLeft: false)
+        playButton.setIconImage(named: "baseline_play_arrow_black_48pt", title: "", tintColor: .black, isIconOnLeft: false)
         playButton.tintColor = myRed.withSaturation(1)
-        layout(12, 2, 24, 8, playButton)
+
+        layout(18, 2, 12, 8, playButton)
         addSubview(playButton)
 
         topViewSwitchButton = UIButton()
         topViewSwitchButton.addTarget(self, action: #selector(onSwitchButtonClicked), for: .touchUpInside)
         topViewSwitchButton.roundBorder(borderWidth: 0, cornerRadius: 5, color: .clear)
-        topViewSwitchButton.backgroundColor = backGray
-        topViewSwitchButton.setIconImage(named: "baseline_style_black_24pt", title: "", tintColor: .black, isIconOnLeft: false)
+        topViewSwitchButton.setIconImage(named: "baseline_style_black_36pt", title: "", tintColor: .black, isIconOnLeft: false)
         topViewSwitchButton.tintColor = myGreen.withSaturation(1)
-        layout(2, 2, 8, 8, topViewSwitchButton)
+        layout(3, 2, 12, 8, topViewSwitchButton)
         addSubview(topViewSwitchButton)
 
         repeatOneSwitchButton = UIButton()
         repeatOneSwitchButton.addTarget(self, action: #selector(onRepeatOneButtonClicked), for: .touchUpInside)
-        layout(38, 2, 8, 8, repeatOneSwitchButton)
+        layout(35, 2, 8, 8, repeatOneSwitchButton)
 
         repeatOneSwitchButton.roundBorder(borderWidth: 0, cornerRadius: repeatOneSwitchButton.frame.width/2, color: .clear)
         repeatOneSwitchButton.setIconImage(named: "baseline_repeat_one_black_24pt", title: "", tintColor: .white, isIconOnLeft: false)
