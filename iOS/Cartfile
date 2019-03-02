@@ -1,6 +1,5 @@
-github "google/promises" == 1.2.5
+github "google/promises" ~> 1.2.7
 github "Alamofire/Alamofire" ~> 4.7
-github "SwiftyJSON/SwiftyJSON" ~> 4.0
-github "danielgindi/Charts" ~> 3.2.0
+github "danielgindi/Charts" == 3.2.1
 github "stephencelis/SQLite.swift" ~> 0.11.5
 binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAnalyticsBinary.json"

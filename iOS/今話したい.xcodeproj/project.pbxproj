@@ -33,8 +33,6 @@
 		BE5ABAD9217C4CCD00A63C5F /* FBLPromises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABAD0217C4CCC00A63C5F /* FBLPromises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE5ABADA217C4CCD00A63C5F /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABAD1217C4CCC00A63C5F /* SQLite.framework */; };
 		BE5ABADB217C4CCD00A63C5F /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABAD1217C4CCC00A63C5F /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BE5ABADC217C4CCD00A63C5F /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABAD2217C4CCC00A63C5F /* SwiftyJSON.framework */; };
-		BE5ABADD217C4CCD00A63C5F /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABAD2217C4CCC00A63C5F /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE5ABADE217C4CCD00A63C5F /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABAD3217C4CCD00A63C5F /* Alamofire.framework */; };
 		BE5ABADF217C4CCD00A63C5F /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABAD3217C4CCD00A63C5F /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE5D838920A80BD0002031BF /* TopicDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5D838820A80BD0002031BF /* TopicDetailPage.swift */; };
@@ -127,7 +125,6 @@
 				BE5ABAD7217C4CCD00A63C5F /* Promises.framework in Embed Frameworks */,
 				BE5ABADB217C4CCD00A63C5F /* SQLite.framework in Embed Frameworks */,
 				BE5ABAD5217C4CCD00A63C5F /* Charts.framework in Embed Frameworks */,
-				BE5ABADD217C4CCD00A63C5F /* SwiftyJSON.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -157,7 +154,6 @@
 		BE5ABACF217C4CCC00A63C5F /* Promises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Promises.framework; path = Carthage/Build/iOS/Promises.framework; sourceTree = "<group>"; };
 		BE5ABAD0217C4CCC00A63C5F /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBLPromises.framework; path = Carthage/Build/iOS/FBLPromises.framework; sourceTree = "<group>"; };
 		BE5ABAD1217C4CCC00A63C5F /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
-		BE5ABAD2217C4CCC00A63C5F /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		BE5ABAD3217C4CCD00A63C5F /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		BE5D838820A80BD0002031BF /* TopicDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailPage.swift; sourceTree = "<group>"; };
 		BE5E0CCD2183477400832E88 /* I18n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = I18n.swift; sourceTree = "<group>"; };
@@ -272,7 +268,6 @@
 				BE5ABAD6217C4CCD00A63C5F /* Promises.framework in Frameworks */,
 				BE5ABADA217C4CCD00A63C5F /* SQLite.framework in Frameworks */,
 				BE5ABAD4217C4CCD00A63C5F /* Charts.framework in Frameworks */,
-				BE5ABADC217C4CCD00A63C5F /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,7 +419,6 @@
 				BE5ABAD0217C4CCC00A63C5F /* FBLPromises.framework */,
 				BE5ABACF217C4CCC00A63C5F /* Promises.framework */,
 				BE5ABAD1217C4CCC00A63C5F /* SQLite.framework */,
-				BE5ABAD2217C4CCC00A63C5F /* SwiftyJSON.framework */,
 				BEBDEDBE208EF09F00C18520 /* Project */,
 				BE6F2F142144DFB5003A56CD /* Sentences */,
 				BE9556EF212D7C130045E578 /* Model */,

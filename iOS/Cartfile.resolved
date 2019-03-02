@@ -1,6 +1,5 @@
 binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAnalyticsBinary.json" "5.17.0"
 github "Alamofire/Alamofire" "4.8.1"
-github "SwiftyJSON/SwiftyJSON" "4.2.0"
-github "danielgindi/Charts" "v3.2.2"
-github "google/promises" "1.2.5"
+github "danielgindi/Charts" "v3.2.1"
+github "google/promises" "1.2.7"
 github "stephencelis/SQLite.swift" "0.11.5"
