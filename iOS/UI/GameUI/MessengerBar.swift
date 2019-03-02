@@ -28,7 +28,7 @@ class MessengerBar: UIView, ReloadableView {
     var skipNextButton: UIButton!
 
     private let circleWidth = 36
-    private let barWidth = screen.width - 165
+    private let barWidth = screen.width - 160
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -79,12 +79,13 @@ class MessengerBar: UIView, ReloadableView {
         // pause/continue button
         pauseCountinueButton = UIButton()
         pauseCountinueButton.setIconImage(named: "baseline_pause_black_48pt", title: "", tintColor: .black, isIconOnLeft: false)
-        pauseCountinueButton.frame = CGRect(x: screen.width - 96, y: 5, width: 48, height: 48)
+        pauseCountinueButton.frame = CGRect(x: screen.width - 95, y: 5, width: 48, height: 48)
         addSubview(pauseCountinueButton)
 
         // skipNextButton
         skipNextButton = UIButton()
-        skipNextButton.setIconImage(named: "baseline_skip_next_black_48pt", title: "", tintColor: .black, isIconOnLeft: false)
+        let iconName = context.contentTab == .topics ? "baseline_skip_next_black_48pt" : "baseline_replay_black_36pt"
+        skipNextButton.setIconImage(named: iconName, tintColor: .black, isIconOnLeft: false)
         skipNextButton.frame = CGRect(x: screen.width - 50, y: 5, width: 48, height: 48)
         addSubview(skipNextButton)
 

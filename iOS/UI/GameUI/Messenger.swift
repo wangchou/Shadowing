@@ -46,7 +46,6 @@ class Messenger: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print("\nisEverReceiptProcessed:", isEverReceiptProcessed, "\n")
         // in case there is no network for VerifyReceipt when app launch.
         if !isEverReceiptProcessed {
             IAPHelper.shared.processReceipt()
@@ -227,6 +226,7 @@ class Messenger: UIViewController {
     @objc func skipNext() {
         // TODO check next level is accessible for infiniteChallenge Mode
 
+        postCommand(.forceStopGame)
         self.dismiss(animated: true) {
             if context.contentTab == .topics {
                 context.loadNextChallenge()

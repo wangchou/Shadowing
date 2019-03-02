@@ -112,6 +112,12 @@ func fulfilledVoidPromise() -> Promise<Void> {
     return promise
 }
 
+func rejectedVoidPromise() -> Promise<Void> {
+    let promise = Promise<Void>.pending()
+    promise.reject(GameError.forceStop)
+    return promise
+}
+
 func pausePromise(_ seconds: Double) -> Promise<Void> {
     let p = Promise<Void>.pending()
     Timer.scheduledTimer(withTimeInterval: seconds, repeats: false) { _ in
