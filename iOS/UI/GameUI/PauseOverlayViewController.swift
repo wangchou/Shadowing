@@ -22,15 +22,16 @@ class PauseOverlayViewController: UIViewController {
     @IBOutlet weak var learningModeLabel: UILabel!
     @IBOutlet weak var learningModeSegmentControl: UISegmentedControl!
     @IBOutlet weak var repeatOneSwitchButton: UIButton!
+    @IBOutlet weak var blackView: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         finishButton.layer.cornerRadius = 5
 
-        view.addTapGestureRecognizer(action: viewTapped)
-
         // prevent events pass to back view
         ttsSpeedSlider.addTapGestureRecognizer(action: nil)
+
+        view.addTapGestureRecognizer(action: viewTapped)
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -25,9 +25,10 @@ class MessengerBar: UIView, ReloadableView {
     var progressBarBack: UIView!
     var progressBarFront: UIView!
     var pauseCountinueButton: UIButton!
+    var skipNextButton: UIButton!
 
     private let circleWidth = 36
-    private let barWidth = screen.width - 115
+    private let barWidth = screen.width - 165
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,7 +46,6 @@ class MessengerBar: UIView, ReloadableView {
     }
 
     private func sharedInit() {
-
         // level icon
         levelLabel = UILabel()
         levelLabel.textAlignment = .center
@@ -79,15 +79,20 @@ class MessengerBar: UIView, ReloadableView {
         // pause/continue button
         pauseCountinueButton = UIButton()
         pauseCountinueButton.setIconImage(named: "baseline_pause_black_48pt", title: "", tintColor: .black, isIconOnLeft: false)
-        pauseCountinueButton.frame = CGRect(x: screen.width - 50, y: 5, width: 50, height: 50)
+        pauseCountinueButton.frame = CGRect(x: screen.width - 96, y: 5, width: 48, height: 48)
         addSubview(pauseCountinueButton)
+
+        // skipNextButton
+        skipNextButton = UIButton()
+        skipNextButton.setIconImage(named: "baseline_skip_next_black_48pt", title: "", tintColor: .black, isIconOnLeft: false)
+        skipNextButton.frame = CGRect(x: screen.width - 50, y: 5, width: 48, height: 48)
+        addSubview(skipNextButton)
 
         let separatedLine = UIView()
         separatedLine.backgroundColor = .darkGray
         separatedLine.frame = CGRect(x: 0, y: 0, width: screen.width, height: 0.5)
         addSubview(separatedLine)
 
-        viewWillAppear()
         initData()
     }
 

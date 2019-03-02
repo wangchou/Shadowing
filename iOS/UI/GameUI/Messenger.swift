@@ -67,7 +67,8 @@ class Messenger: UIViewController {
 
         scrollView.addTapGestureRecognizer(action: pauseGame)
         messengerBar.addTapGestureRecognizer(action: pauseGame)
-        messengerBar.pauseCountinueButton.addTapGestureRecognizer(action: pauseGame)
+        messengerBar.pauseCountinueButton.addTarget(self, action: #selector(pauseGame), for: .touchUpInside)
+        messengerBar.skipNextButton.addTarget(self, action: #selector(skipNext), for: .touchUpInside)
     }
 
     func end() {
@@ -155,5 +156,22 @@ class Messenger: UIViewController {
         messengerBar.viewWillAppear()
         postCommand(.pause)
         launchStoryboard(self, "PauseOverlay", isOverCurrent: true)
+    }
+
+    @objc func skipNext() {
+        // TODO check next level is accessible for infiniteChallenge Mode
+
+        self.dismiss(animated: true) {
+            if context.contentTab == .topics {
+                context.loadNextChallenge()
+                let pages = rootViewController.mainSwipablePage.pages
+                if pages.count > 2,
+                    let topicDetailPage = pages[2] as? TopicDetailPage {
+                    topicDetailPage.render()
+                }
+            }
+            guard let vc = UIApplication.getPresentedViewController() else { return }
+            launchStoryboard(vc, "MessengerGame")
+        }
     }
 }
