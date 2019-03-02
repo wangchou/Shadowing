@@ -22,6 +22,7 @@ class TopicsListPage: UIViewController {
     @IBOutlet weak var topArea: UIView!
     @IBOutlet weak var topChartView: TopChartView!
     @IBOutlet weak var topBarView: TopBarView!
+    @IBOutlet weak var topicButtonAreaView: TopicButtonAreaView!
     @IBOutlet weak var topicFilterBarView: TopicFilterBarView!
 
     var timelineSubviews: [String: UIView] = [:]
@@ -61,6 +62,7 @@ class TopicsListPage: UIViewController {
             context.loadLearningSentences()
         }
         topicFilterBarView.viewWillAppear()
+        topicButtonAreaView.viewWillAppear()
     }
 
     override func viewDidAppear(_ animated: Bool) {

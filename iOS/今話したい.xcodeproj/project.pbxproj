@@ -100,7 +100,6 @@
 		BEDEDD3720A46D1B00E7B60B /* TopicsListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3620A46D1B00E7B60B /* TopicsListPage.swift */; };
 		BEDEDD3920A46FCA00E7B60B /* GameRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */; };
 		BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */; };
-		BEDFCDAB20A87AF800736153 /* PauseOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */; };
 		BEE3069021835230007C679F /* GameCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE3068F21835230007C679F /* GameCommands.swift */; };
 		BEE665E220BA634600E4E322 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE665E120BA634600E4E322 /* Colors.swift */; };
 		BEEC7FA92154C7AC001C2EFF /* TopBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEEC7FA82154C7AC001C2EFF /* TopBarView.xib */; };
@@ -236,7 +235,6 @@
 		BEDEDD3620A46D1B00E7B60B /* TopicsListPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicsListPage.swift; sourceTree = "<group>"; };
 		BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRecord.swift; sourceTree = "<group>"; };
 		BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerEventDelegate.swift; sourceTree = "<group>"; };
-		BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseOverlayViewController.swift; sourceTree = "<group>"; };
 		BEE3068F21835230007C679F /* GameCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCommands.swift; sourceTree = "<group>"; };
 		BEE665E120BA634600E4E322 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		BEEC7FA82154C7AC001C2EFF /* TopBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopBarView.xib; sourceTree = "<group>"; };
@@ -303,7 +301,6 @@
 				BE1CA957209DC43800086853 /* Messenger.swift */,
 				BE050B7D22227530007017C5 /* MessengerBar.swift */,
 				BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */,
-				BEDFCDAA20A87AF800736153 /* PauseOverlayViewController.swift */,
 			);
 			path = GameUI;
 			sourceTree = "<group>";
@@ -635,7 +632,6 @@
 				BE6ED56820A17BB000553D1A /* GameFlow.swift in Sources */,
 				BEEC7FAD2155014E001C2EFF /* SettingPage.swift in Sources */,
 				BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */,
-				BEDFCDAB20A87AF800736153 /* PauseOverlayViewController.swift in Sources */,
 				BE2142B121D370B900FA2925 /* grammarN5.swift in Sources */,
 				BEC2E92F217875C30095A65D /* RootContainerViewController.swift in Sources */,
 				BEF28B6120B52BB000385273 /* Score.swift in Sources */,
