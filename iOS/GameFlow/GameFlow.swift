@@ -21,7 +21,6 @@ enum GameState {
     case listening
     case scoreCalculated
     case speakingScore
-    case sentenceSessionEnded
     case gameOver
     case forceStopped
 }
@@ -47,7 +46,7 @@ extension GameFlow: GameCommandDelegate {
 
 class GameFlow {
     private var isPaused: Bool = false
-    private var isForceStopped = false
+    private var isNeedToStopPromiseChain = false
     private var timer: Timer?
     private var wait: Promise<Void> = Promise<Void>.pending()
     private var gameSeconds: Int = 0
@@ -56,12 +55,12 @@ class GameFlow {
 
     private init() {}
 
-    // MARK: - Public Functions
+    // MARK: - Key GameFlow
     func start() {
         isPaused = false
 
-        wait = Promise<Void>.pending()
-        gameSeconds = 0
+        wait = fulfilledVoidPromise()
+
         startCommandObserving(self)
         SpeechEngine.shared.start()
         context.gameState = .justStarted
@@ -70,47 +69,25 @@ class GameFlow {
         startTimer()
 
         context.loadLearningSentences()
-        var narratorString = ""
 
-        switch context.gameSetting.learningMode {
-        case .meaningAndSpeaking, .speakingOnly:
-            narratorString = i18n.gameStartedWithGuideVoice
-        case .echoMethod:
-            narratorString = i18n.gameStartedWithEchoMethod
-        case .interpretation:
-            narratorString = i18n.gameStartedWithoutGuideVoice
-        }
-        print(context.gameSetting.learningMode, narratorString)
-
-        if context.gameSetting.isUsingNarrator {
-            speakTitle(title: context.gameTitle).then { _ -> Promise<Void> in
-                return narratorSay(narratorString)
-            }.then { self.wait }
+        speakTitle(title: context.gameTitle)
+            .then { self.wait }
+            .then ( speakNarratorString )
+            .then { self.wait }
             .always {
                 self.learnNextSentence()
             }
-        } else {
-            speakTitle(title: context.gameTitle).always {
-                self.learnNextSentence()
-            }
-        }
-
-        isPaused = false
-        wait.fulfill(())
     }
 
-}
-
-// MARK: - Private Functions
-extension GameFlow {
-
-    // Main Game Flow keep calling learnNext
+    // Flow for learn a sentence
     private func learnNextSentence() {
-        guard !self.isForceStopped else {
-            isForceStopped = false
+        // Click skipNext  => stop previous game's promise chain
+        if self.isNeedToStopPromiseChain {
+            isNeedToStopPromiseChain = false
             return
         }
         speakTranslation()
+            .then { self.wait }
             .then( speakTargetString )
             .then { self.wait }
             .then ( echoMethod )
@@ -121,22 +98,42 @@ extension GameFlow {
                 print("Promise chain is dead", error)
             }
             .always {
-                guard !self.isForceStopped else {
-                    self.isForceStopped = false
+                // Click skipNext  => stop previous game's promise chain
+                if self.isNeedToStopPromiseChain {
+                    self.isNeedToStopPromiseChain = false
                     return
                 }
-                context.gameState = .sentenceSessionEnded
+
                 if context.nextSentence() {
                     self.learnNextSentence()
                 } else {
                     self.gameOver()
                 }
+            }
+    }
+}
+
+// MARK: - Flow Steps
+extension GameFlow {
+    private var narratorString: String {
+        switch context.gameSetting.learningMode {
+        case .meaningAndSpeaking, .speakingOnly:
+            return i18n.gameStartedWithGuideVoice
+        case .echoMethod:
+            return i18n.gameStartedWithEchoMethod
+        case .interpretation:
+            return i18n.gameStartedWithoutGuideVoice
         }
+    }
+
+    private func speakNarratorString() -> Promise<Void> {
+        if !context.gameSetting.isUsingNarrator { return fulfilledVoidPromise() }
+        return narratorSay(self.narratorString)
     }
 
     private func forceStop() {
         stopCommandObserving(self)
-        isForceStopped = true
+        isNeedToStopPromiseChain = true
         context.gameState = .forceStopped
 
         timer?.invalidate()
@@ -146,6 +143,8 @@ extension GameFlow {
     }
 
     private func gameOver() {
+        isNeedToStopPromiseChain = false
+
         narratorSay(i18n.gameOver).then {
             stopCommandObserving(self)
             context.gameState = .gameOver
@@ -195,6 +194,7 @@ extension GameFlow {
     }
 
     private func startTimer() {
+        gameSeconds = 0
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             if self.isPaused { return }
 
@@ -204,7 +204,7 @@ extension GameFlow {
     }
 
     private func speakTranslation() -> Promise<Void> {
-        guard !self.isForceStopped else { return rejectedVoidPromise()}
+        guard !self.isNeedToStopPromiseChain else { return rejectedVoidPromise()}
         context.gameState = .speakingTranslation
         guard context.gameSetting.isSpeakTranslation else {
             return fulfilledVoidPromise()
@@ -221,7 +221,7 @@ extension GameFlow {
     }
 
     private func speakTargetString() -> Promise<Void> {
-        guard !self.isForceStopped else { return rejectedVoidPromise()}
+        guard !self.isNeedToStopPromiseChain else { return rejectedVoidPromise()}
         context.gameState = .speakingTargetString
         guard context.gameSetting.isUsingGuideVoice else {
             postEvent(.sayStarted, string: context.targetString)
@@ -232,7 +232,7 @@ extension GameFlow {
     }
 
     private func echoMethod() -> Promise<Void> {
-        guard !self.isForceStopped else { return rejectedVoidPromise()}
+        guard !self.isNeedToStopPromiseChain else { return rejectedVoidPromise()}
         if context.gameSetting.learningMode == .echoMethod {
             context.gameState = .echoMethod
             return pausePromise(Double(context.speakDuration))
@@ -241,14 +241,14 @@ extension GameFlow {
     }
 
     private func listenPart() -> Promise<Void> {
-        guard !self.isForceStopped else { return rejectedVoidPromise()}
+        guard !self.isNeedToStopPromiseChain else { return rejectedVoidPromise()}
         return listenWrapped()
             .then(getScore)
             .then(speakScore)
     }
 
     private func listenWrapped() -> Promise<Void> {
-        guard !self.isForceStopped else { return rejectedVoidPromise()}
+        guard !self.isNeedToStopPromiseChain else { return rejectedVoidPromise()}
         context.gameState = .listening
         if context.gameSetting.isMointoring { engine.monitoringOn() }
         if context.gameSetting.isUsingGuideVoice {
@@ -266,14 +266,14 @@ extension GameFlow {
     }
 
     private func saveUserSaidString(userSaidString: String) -> Promise<Void> {
-        guard !self.isForceStopped else { return rejectedVoidPromise()}
+        guard !self.isNeedToStopPromiseChain else { return rejectedVoidPromise()}
         engine.monitoringOff()
         userSaidSentences[context.targetString] = userSaidString
         return fulfilledVoidPromise()
     }
 
     private func getScore() -> Promise<Void> {
-        guard !self.isForceStopped else { return rejectedVoidPromise()}
+        guard !self.isNeedToStopPromiseChain else { return rejectedVoidPromise()}
         return calculateScore(context.targetString, context.userSaidString)
             .then(saveScore)
     }
@@ -286,7 +286,7 @@ extension GameFlow {
     }
 
     private func speakScore() -> Promise<Void> {
-        guard !self.isForceStopped else { return rejectedVoidPromise() }
+        guard !self.isNeedToStopPromiseChain else { return rejectedVoidPromise() }
         let score = context.score
         updateLife(score: score)
 
