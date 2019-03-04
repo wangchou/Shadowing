@@ -120,10 +120,6 @@ extension Messenger: GameEventDelegate {
                 addLabel(attrText)
             }
 
-            if context.gameState == .forceStopped {
-                dismiss(animated: false)
-            }
-
             if context.gameState == .echoMethod {
                 addLabel(rubyAttrStr(i18n.listenToEcho), pos: .center)
             }
