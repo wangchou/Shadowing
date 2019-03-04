@@ -32,13 +32,12 @@ class GameContext {
     // MARK: - Medium-term data of a single game, will be discarded after each game
     var contentTab: ContentTab = .topics
     var infiniteChallengeLevel: Level = .lv0
+    var topicDataSetKey: String = ""
     var gameState: GameState = .justStarted {
         didSet {
             postEvent(.gameStateChanged, gameState: gameState)
         }
     }
-
-    var topicDataSetKey: String = ""
 
     var dataSetKey: String {
         get {
@@ -51,21 +50,16 @@ class GameContext {
     }
 
     var gameRecord: GameRecord? // of current game
-    var isNewRecord: Bool {
-        return gameRecord?.isNewRecord ?? false
-    }
-    var newRecordIncrease: Int = 0
 
     var isEngineRunning: Bool {
         return SpeechEngine.shared.isEngineRunning
     }
-    var startTime: Double = getNow()
+
     var life: Int = 50
 
     var teachingRate: Float {
-        if !gameSetting.isAutoSpeed {
-            return gameSetting.preferredSpeed
-        }
+        guard gameSetting.isAutoSpeed else { return gameSetting.preferredSpeed }
+
         if contentTab == .infiniteChallenge,
            let level = gameRecord?.level {
                 return AVSpeechUtteranceDefaultSpeechRate * (0.6 + Float(level.rawValue) * 0.05)
@@ -77,12 +71,13 @@ class GameContext {
     var sentences: [String] = []
     var sentenceIndex: Int = 0
 
-    // MARK: - Short-term data for a single sentence, will be discarded after each sentence played
     var gameTitle: String {
         return contentTab == .topics ?
-                getDataSetTitle(dataSetKey: dataSetKey) :
-                "[無限挑戦] \(infiniteChallengeLevel.title)"
+            getDataSetTitle(dataSetKey: dataSetKey) :
+        "[無限挑戦] \(infiniteChallengeLevel.title)"
     }
+
+    // MARK: - Short-term data for a single sentence, will be discarded after each sentence played
     var targetString: String {
         guard sentenceIndex < sentences.count else { return ""}
         return sentences[sentenceIndex]

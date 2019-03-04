@@ -82,7 +82,6 @@ class Messenger: UIViewController {
     func start() {
         startEventObserving(self)
         GameFlow.shared.start()
-        context.startTime = getNow()
 
         scrollView.addTapGestureRecognizer(action: pauseContinueGame)
         messengerBar.addTapGestureRecognizer(action: pauseContinueGame)
