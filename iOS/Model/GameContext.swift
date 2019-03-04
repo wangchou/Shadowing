@@ -155,7 +155,7 @@ extension GameContext {
         let level = infiniteChallengeLevel
         sentenceIndex = 0
         loadSentenceDB()
-        let numOfSentences = isSimulator ? 3 : 10
+        let numOfSentences = isSimulator ? 10 : 10
         let sentenceIds = randSentenceIds(
             minKanaCount: level.minSyllablesCount,
             maxKanaCount: level.maxSyllablesCount,
@@ -176,9 +176,9 @@ extension GameContext {
 
     func nextSentence() -> Bool {
         sentenceIndex += 1
-        if isSimulator {
-            guard sentenceIndex < 3 else { return false }
-        }
+//        if isSimulator {
+//            guard sentenceIndex < 3 else { return false }
+//        }
         guard sentenceIndex < sentences.count else { return false }
 
         userSaidSentences[targetString] = ""
