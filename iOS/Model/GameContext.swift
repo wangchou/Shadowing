@@ -29,7 +29,11 @@ class GameContext {
     var gameHistory = [GameRecord]()
     var gameSetting = GameSetting()
 
-    // MARK: - Medium-term data of a single game, will be discarded after each game
+    // MARK: - Medium-term context of current game
+    var gameRecord: GameRecord?
+    var sentenceIndex: Int = 0
+    var sentences: [String] = []
+
     var contentTab: ContentTab = .topics
     var infiniteChallengeLevel: Level = .lv0
     var topicDataSetKey: String = ""
@@ -49,19 +53,10 @@ class GameContext {
         }
     }
 
-    var gameRecord: GameRecord? // of current game
-
-    var isEngineRunning: Bool {
-        return SpeechEngine.shared.isEngineRunning
-    }
-
     var teachingRate: Float {
         guard gameSetting.isAutoSpeed else { return gameSetting.preferredSpeed }
         return gameRecord?.level.autoSpeed ?? AVSpeechUtteranceDefaultSpeechRate * 0.8
     }
-
-    var sentences: [String] = []
-    var sentenceIndex: Int = 0
 
     var gameTitle: String {
         return contentTab == .topics ?
@@ -69,7 +64,7 @@ class GameContext {
         "[無限挑戦] \(infiniteChallengeLevel.title)"
     }
 
-    // MARK: - Short-term data for a single sentence, will be discarded after each sentence played
+    // MARK: - Short-term context for a sentence, will be discarded after each sentence played
     var targetString: String {
         guard sentenceIndex < sentences.count else { return ""}
         return sentences[sentenceIndex]
@@ -84,6 +79,12 @@ class GameContext {
         }
         return attrText
     }
+
+    var userSaidString: String {
+        return userSaidSentences[self.targetString] ?? ""
+    }
+
+    var score: Score = Score(value: 100)
 
     // Real duration in seconds of tts speaking
     var speakDuration: Float = 0
@@ -109,11 +110,6 @@ class GameContext {
         }
         return duration
     }
-
-    var userSaidString: String {
-        return userSaidSentences[self.targetString] ?? ""
-    }
-    var score: Score = Score(value: 100)
 }
 
 // MARK: - functions for a single game

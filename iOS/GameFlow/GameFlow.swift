@@ -15,14 +15,17 @@ enum GameError: Error {
 
 enum GameState {
     case justStarted
+
     case speakingTranslation
+
     case speakingTargetString
+
     case echoMethod
+
     case listening
     case scoreCalculated
-    case speakingScore
+
     case gameOver
-    case forceStopped
 }
 
 private let engine = SpeechEngine.shared
@@ -128,13 +131,13 @@ extension GameFlow {
 
     private func speakNarratorString() -> Promise<Void> {
         if !context.gameSetting.isUsingNarrator { return fulfilledVoidPromise() }
+
         return narratorSay(self.narratorString)
     }
 
     private func forceStop() {
         stopCommandObserving(self)
         isNeedToStopPromiseChain = true
-        context.gameState = .forceStopped
 
         timer?.invalidate()
         isPaused = false
@@ -183,7 +186,8 @@ extension GameFlow {
     }
 
     private func speakTranslation() -> Promise<Void> {
-        guard !self.isNeedToStopPromiseChain else { return rejectedVoidPromise()}
+        if isNeedToStopPromiseChain { return rejectedVoidPromise() }
+
         context.gameState = .speakingTranslation
         guard context.gameSetting.isSpeakTranslation else {
             return fulfilledVoidPromise()
@@ -200,7 +204,8 @@ extension GameFlow {
     }
 
     private func speakTargetString() -> Promise<Void> {
-        guard !self.isNeedToStopPromiseChain else { return rejectedVoidPromise()}
+        if isNeedToStopPromiseChain { return rejectedVoidPromise() }
+
         context.gameState = .speakingTargetString
         guard context.gameSetting.isUsingGuideVoice else {
             postEvent(.sayStarted, string: context.targetString)
@@ -211,29 +216,29 @@ extension GameFlow {
     }
 
     private func echoMethod() -> Promise<Void> {
-        guard !self.isNeedToStopPromiseChain else { return rejectedVoidPromise()}
+        if isNeedToStopPromiseChain { return rejectedVoidPromise() }
+
         if context.gameSetting.learningMode == .echoMethod {
-            context.gameState = .echoMethod
             return pausePromise(Double(context.speakDuration))
         }
         return fulfilledVoidPromise()
     }
 
     private func listenPart() -> Promise<Void> {
-        guard !self.isNeedToStopPromiseChain else { return rejectedVoidPromise()}
+        if isNeedToStopPromiseChain { return rejectedVoidPromise() }
+
         return listenWrapped()
+            .then(saveUserSaidString)
             .then(getScore)
             .then(speakScore)
     }
 
-    private func listenWrapped() -> Promise<Void> {
-        guard !self.isNeedToStopPromiseChain else { return rejectedVoidPromise()}
+    private func listenWrapped() -> Promise<String> {
         context.gameState = .listening
         if context.gameSetting.isMointoring { engine.monitoringOn() }
         if context.gameSetting.isUsingGuideVoice {
             return engine
                 .listen(duration: Double(context.speakDuration + pauseDuration))
-                .then(saveUserSaidString)
         }
 
         return context
@@ -241,18 +246,17 @@ extension GameFlow {
             .then({ speakDuration -> Promise<String> in
                 return engine.listen(duration: Double(speakDuration + pauseDuration))
             })
-            .then(saveUserSaidString)
     }
 
     private func saveUserSaidString(userSaidString: String) -> Promise<Void> {
-        guard !self.isNeedToStopPromiseChain else { return rejectedVoidPromise()}
+        if isNeedToStopPromiseChain { return rejectedVoidPromise() }
         engine.monitoringOff()
         userSaidSentences[context.targetString] = userSaidString
         return fulfilledVoidPromise()
     }
 
     private func getScore() -> Promise<Void> {
-        guard !self.isNeedToStopPromiseChain else { return rejectedVoidPromise()}
+        if isNeedToStopPromiseChain { return rejectedVoidPromise() }
         return calculateScore(context.targetString, context.userSaidString)
             .then(saveScore)
     }
@@ -265,8 +269,7 @@ extension GameFlow {
     }
 
     private func speakScore() -> Promise<Void> {
-        guard !self.isNeedToStopPromiseChain else { return rejectedVoidPromise() }
-
+        if isNeedToStopPromiseChain { return rejectedVoidPromise() }
         return assisantSay(context.score.text)
     }
 

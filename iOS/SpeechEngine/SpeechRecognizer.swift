@@ -54,8 +54,8 @@ class SpeechRecognizer: NSObject {
         endAudio()
         promise = Promise<String>.pending()
         // mocked start for simulator
-        guard !isSimulator else {
-            return startFaked(stopAfterSeconds: stopAfterSeconds)
+        if isSimulator {
+            return fakeListening(stopAfterSeconds: stopAfterSeconds)
         }
 
         guard engine.isEngineRunning else {
@@ -106,8 +106,8 @@ class SpeechRecognizer: NSObject {
                                                by: buffer.stride).map { channelDataValue[$0] }
 
             let rms = sqrt(channelDataValueArray
-                            .reduce(0) {$0 + $1*$1 } / Float(buffer.frameLength)
-                      )
+                .reduce(0) { (sum: Float, v: Float) in sum + v*v } / Float(buffer.frameLength)
+            )
             let avgPower = 20 * log10(rms)
             let meterLevel = self.scaledPower(power: avgPower)
             postEvent(.levelMeterUpdate, int: Int(meterLevel * 100))
@@ -205,7 +205,7 @@ class SpeechRecognizer: NSObject {
         }
     }
 
-    private func startFaked(stopAfterSeconds: Double = 5) -> Promise<String> {
+    private func fakeListening(stopAfterSeconds: Double = 5) -> Promise<String> {
         isRunning = true
         postEvent(.listenStarted, string: "")
         Timer.scheduledTimer(withTimeInterval: stopAfterSeconds, repeats: false) {_ in

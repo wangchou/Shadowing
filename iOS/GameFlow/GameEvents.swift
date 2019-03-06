@@ -8,7 +8,7 @@
 
 import Foundation
 
-// lower layer like tts, speechRecognition, gameFlow will postEvent to UI
+// lower layer like tts, speechRecognition, gameFlow will postEvent to GameUI(Messenger)
 enum EventType {
     case sayStarted
     case willSpeakRange
