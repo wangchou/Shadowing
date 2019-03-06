@@ -55,17 +55,9 @@ class GameContext {
         return SpeechEngine.shared.isEngineRunning
     }
 
-    var life: Int = 50
-
     var teachingRate: Float {
         guard gameSetting.isAutoSpeed else { return gameSetting.preferredSpeed }
-
-        if contentTab == .infiniteChallenge,
-           let level = gameRecord?.level {
-                return AVSpeechUtteranceDefaultSpeechRate * (0.6 + Float(level.rawValue) * 0.05)
-
-        }
-        return AVSpeechUtteranceDefaultSpeechRate * (0.5 + life.f * 0.006)
+        return gameRecord?.level.autoSpeed ?? AVSpeechUtteranceDefaultSpeechRate * 0.8
     }
 
     var sentences: [String] = []
@@ -140,8 +132,6 @@ extension GameContext {
         guard let selectedDataSet = dataSets[dataSetKey] else { return }
         sentences = selectedDataSet
 
-        life = isSimulator ? 100 : 40
-
         let level = dataKeyToLevels[dataSetKey] ?? .lv0
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level)
     }
@@ -165,7 +155,6 @@ extension GameContext {
             }
         }
 
-        life = isSimulator ? 100 : 40
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level)
     }
 

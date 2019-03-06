@@ -172,27 +172,6 @@ extension GameFlow {
         wait.fulfill(())
     }
 
-    // change life will change the teachingSpeed
-    // initial life = 50, speed = 0.7x
-    // life 100 => speed 1.1x
-    // life 0   => speed 0.4x
-    private func updateLife(score: Score) {
-        var life = context.life
-
-        switch score.type {
-        case .perfect:
-            life += 4
-        case .great:
-            life += 2
-        case .good:
-            life += -4
-        case .poor:
-            life += -6
-        }
-
-        context.life = max(min(100, life), 0)
-    }
-
     private func startTimer() {
         gameSeconds = 0
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
@@ -287,10 +266,8 @@ extension GameFlow {
 
     private func speakScore() -> Promise<Void> {
         guard !self.isNeedToStopPromiseChain else { return rejectedVoidPromise() }
-        let score = context.score
-        updateLife(score: score)
 
-        return assisantSay(score.text)
+        return assisantSay(context.score.text)
     }
 
     private func updateGameRecord(score: Score) {
