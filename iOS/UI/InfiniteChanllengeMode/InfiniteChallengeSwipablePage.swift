@@ -27,13 +27,13 @@ class InfiniteChallengeSwipablePage: UIPageViewController {
 
         // Do any additional setup after loading the view.
         func addPage(_ storyboardId: String) {
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: storyboardId)
-            pages.append(vc)
+            pages.append(getVC(storyboardId))
         }
         addPage("SettingPage")
         addPage("InfiniteChallengeListPage")
         addPage("InfiniteChallengePage")
-        setViewControllers([pages[1]], direction: .forward, animated: true, completion: nil)
+        let idx = RootContainerViewController.isShowSetting ? 0 : 1
+        setViewControllers([pages[idx]], direction: .forward, animated: true, completion: nil)
 
         dataSource = self
 

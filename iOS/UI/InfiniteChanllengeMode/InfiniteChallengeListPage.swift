@@ -17,6 +17,8 @@ class InfiniteChallengeListPage: UIViewController {
     @IBOutlet weak var tableBottomConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var topChartView: TopChartView!
+
+    var isLoaded = false
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,6 +32,7 @@ class InfiniteChallengeListPage: UIViewController {
         } else {
             topBarView.rightButton.isHidden = true
         }
+        isLoaded = true
     }
 
     override func viewWillLayoutSubviews() {

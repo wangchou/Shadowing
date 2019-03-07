@@ -181,9 +181,10 @@ class SettingPage: UITableViewController {
         loadGameMiscData()
         viewWillAppear(false)
 
+        RootContainerViewController.isShowSetting = true
         if gameLang == .en {
-            rootViewController.showInfiniteChallengePage(isShowSetting: true)
             context.contentTab = .infiniteChallenge
+            rootViewController.showInfiniteChallengePage(isShowSetting: true)
         }
         rootViewController.reloadTableData()
     }

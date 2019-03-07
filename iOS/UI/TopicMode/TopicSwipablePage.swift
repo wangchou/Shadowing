@@ -9,7 +9,7 @@
 
 import UIKit
 
-class MainSwipablePage: UIPageViewController {
+class TopicSwipablePage: UIPageViewController {
     static let storyboardId = "MainSwipablePage"
     var pages = [UIViewController]()
 
@@ -27,13 +27,13 @@ class MainSwipablePage: UIPageViewController {
 
         // Do any additional setup after loading the view.
         func addPage(_ storyboardId: String) {
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: storyboardId)
-            pages.append(vc)
+            pages.append(getVC(storyboardId))
         }
         addPage("SettingPage")
         addPage("ShadowingListPage")
         addPage("GameContentDetailPage")
-        setViewControllers([pages[1]], direction: .forward, animated: true, completion: nil)
+        let idx = RootContainerViewController.isShowSetting ? 0 : 1
+        setViewControllers([pages[idx]], direction: .forward, animated: true, completion: nil)
 
         dataSource = self
 
@@ -44,7 +44,7 @@ class MainSwipablePage: UIPageViewController {
     }
 }
 
-extension MainSwipablePage: UIPageViewControllerDataSource {
+extension TopicSwipablePage: UIPageViewControllerDataSource {
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         if let index = pages.index(of: viewController),

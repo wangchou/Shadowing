@@ -279,6 +279,11 @@ func showProcessingAlert() -> UIAlertController {
 }
 
 // MARK: - launch storyboard
+func getVC(_ name: String) -> UIViewController {
+    return UIStoryboard(name: "Main", bundle: nil)
+        .instantiateViewController(withIdentifier: name)
+}
+
 func launchStoryboard(
     _ originVC: UIViewController,
     _ storyboardId: String,
@@ -286,7 +291,7 @@ func launchStoryboard(
     animated: Bool = false,
     completion: ((UIViewController) -> Void)? = nil
     ) {
-    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: storyboardId)
+    let vc = getVC(storyboardId)
     if isOverCurrent {
         vc.modalPresentationStyle = .overCurrentContext
     } else {

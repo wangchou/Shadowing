@@ -26,6 +26,7 @@ class TopicsListPage: UIViewController {
     @IBOutlet weak var topicFilterBarView: TopicFilterBarView!
 
     var timelineSubviews: [String: UIView] = [:]
+    var isLoaded = false
     override func viewDidLoad() {
         super.viewDidLoad()
         topBarView.rightButton.setIconImage(named: "outline_info_black_48pt", isIconOnLeft: false)
@@ -40,6 +41,7 @@ class TopicsListPage: UIViewController {
                                                selector: #selector(reloadTopicSentences),
                                                name: .topicFlagChanged,
                                                object: nil)
+        isLoaded = true
     }
 
     @objc func injected() {
