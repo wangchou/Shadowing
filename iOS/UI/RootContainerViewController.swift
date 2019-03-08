@@ -87,13 +87,13 @@ class RootContainerViewController: UIViewController {
         let sp0 = topicSwipablePage!
         if !sp0.pages.isEmpty,
            let listPage = (sp0.pages[1] as? TopicsListPage),
-            listPage.isLoaded {
+            listPage.sentencesTableView != nil {
             listPage.sentencesTableView.reloadData()
         }
         let sp1 = infiniteChallengeSwipablePage!
         if !sp1.pages.isEmpty,
             let listPage = (sp1.pages[1] as? InfiniteChallengeListPage),
-            listPage.isLoaded {
+            listPage.tableView != nil {
             listPage.tableView.reloadData()
         }
     }
