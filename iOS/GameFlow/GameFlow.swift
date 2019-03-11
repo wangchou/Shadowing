@@ -219,6 +219,7 @@ extension GameFlow {
         if isNeedToStopPromiseChain { return rejectedVoidPromise() }
 
         if context.gameSetting.learningMode == .echoMethod {
+            context.gameState = .echoMethod
             return pausePromise(Double(context.speakDuration))
         }
         return fulfilledVoidPromise()

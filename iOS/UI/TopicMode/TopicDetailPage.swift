@@ -77,8 +77,6 @@ class TopicDetailPage: UIViewController {
         skipPreviousButton.roundBorder(borderWidth: 0, cornerRadius: 5, color: .clear)
         skipNextButton.roundBorder(borderWidth: 0, cornerRadius: 5, color: .clear)
 
-        //challengeButton.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .highlighted)
-
         // load furigana
         all(context.sentences.map {$0.furiganaAttributedString}).then {_ in
             self.tableView.reloadData()
