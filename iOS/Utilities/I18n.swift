@@ -273,31 +273,31 @@ class I18n {
     }
 
     var us: String {
-        if isJa { return "アメリカ" }
-        if isZh { return "美國" }
-        return "American"
+        if isJa { return "アメリカ 🇺🇸" }
+        if isZh { return "美國 🇺🇸" }
+        return "American 🇺🇸"
     }
 
     var gb: String {
-        if isJa { return "英国" }
-        if isZh { return "英國" }
-        return "United Kingdom"
+        if isJa { return "英国 🇬🇧" }
+        if isZh { return "英國 🇬🇧" }
+        return "United Kingdom 🇬🇧"
     }
 
     var au: String {
-        if isJa { return "アオースラリア" }
-        if isZh { return "澳洲" }
-        return "Australia"
+        if isJa { return "アオースラリア 🇦🇺" }
+        if isZh { return "澳洲 🇦🇺" }
+        return "Australia 🇦🇺"
     }
     var ie: String {
-        if isJa { return "アイルランド" }
-        if isZh { return "愛爾蘭" }
-        return "Ireland"
+        if isJa { return "アイルランド 🇨🇮" }
+        if isZh { return "愛爾蘭 🇨🇮" }
+        return "Ireland 🇨🇮"
     }
     var za: String {
-        if isJa { return "南アフリカ" }
-        if isZh { return "南非" }
-        return "South Africa"
+        if isJa { return "南アフリカ 🇿🇦" }
+        if isZh { return "南非 🇿🇦" }
+        return "South Africa 🇿🇦"
     }
 
     var syllablesCount: String {
