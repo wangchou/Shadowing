@@ -20,6 +20,7 @@ func getTagPoints(isWithoutLast: Bool = false) -> [String: Int] {
         }
         maxGamePoints[g.dataSetKey] = g.p.i
     }
+
     for (datasetKey, points) in maxGamePoints {
         if let tags = datasetKeyToTags[datasetKey] {
             tags.forEach {tag in
@@ -27,8 +28,14 @@ func getTagPoints(isWithoutLast: Bool = false) -> [String: Int] {
             }
         }
     }
+
     var sum = 0
-    tagPoints.values.forEach { p in sum += p }
+    let mainTags = abilities.map { "#\($0)" }
+    for (key, value) in tagPoints {
+        if mainTags.contains(key) {
+            sum += value
+        }
+    }
     tagPoints["#" + topicForAll] = sum
     return tagPoints
 }

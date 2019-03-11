@@ -82,7 +82,6 @@ class Messenger: UIViewController {
     func start() {
         startEventObserving(self)
         GameFlow.shared.start()
-        context.startTime = getNow()
 
         scrollView.addTapGestureRecognizer(action: pauseContinueGame)
         messengerBar.addTapGestureRecognizer(action: pauseContinueGame)
@@ -230,7 +229,7 @@ class Messenger: UIViewController {
         self.dismiss(animated: true) {
             if context.contentTab == .topics {
                 context.loadNextChallenge()
-                let pages = rootViewController.mainSwipablePage.pages
+                let pages = rootViewController.topicSwipablePage.pages
                 if pages.count > 2,
                     let topicDetailPage = pages[2] as? TopicDetailPage {
                     topicDetailPage.render()

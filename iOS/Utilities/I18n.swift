@@ -273,31 +273,31 @@ class I18n {
     }
 
     var us: String {
-        if isJa { return "アメリカ" }
-        if isZh { return "美國" }
-        return "American"
+        if isJa { return "アメリカ 🇺🇸" }
+        if isZh { return "美國 🇺🇸" }
+        return "American 🇺🇸"
     }
 
     var gb: String {
-        if isJa { return "英国" }
-        if isZh { return "英國" }
-        return "United Kingdom"
+        if isJa { return "英国 🇬🇧" }
+        if isZh { return "英國 🇬🇧" }
+        return "United Kingdom 🇬🇧"
     }
 
     var au: String {
-        if isJa { return "アオースラリア" }
-        if isZh { return "澳洲" }
-        return "Australia"
+        if isJa { return "アオースラリア 🇦🇺" }
+        if isZh { return "澳洲 🇦🇺" }
+        return "Australia 🇦🇺"
     }
     var ie: String {
-        if isJa { return "アイルランド" }
-        if isZh { return "愛爾蘭" }
-        return "Ireland"
+        if isJa { return "アイルランド 🇨🇮" }
+        if isZh { return "愛爾蘭 🇨🇮" }
+        return "Ireland 🇨🇮"
     }
     var za: String {
-        if isJa { return "南アフリカ" }
-        if isZh { return "南非" }
-        return "South Africa"
+        if isJa { return "南アフリカ 🇿🇦" }
+        if isZh { return "南非 🇿🇦" }
+        return "South Africa 🇿🇦"
     }
 
     var syllablesCount: String {
@@ -423,6 +423,11 @@ class I18n {
         if isJa { return "\nアイテムは自動的に更新されませんので、\nお気軽に購入してください。\n\n〜 スタジオ大草原不可避 〜" }
         if isZh { return "\n所有項目皆不會自動續約、請安心購買。\n\n〜 大草原不可避工作室 〜" }
         return "\nPurchased item will not auto-renew. \nPlease feel free to buy it.\n\n〜 Studio 大草原不可避 〜"
+    }
+    var freeButtonPurchaseMessage: String {
+        if isJa { return "\n[無料版制限] 1日に100文を話すと広告が表示されます。アイテムは自動的に更新されませんので、お気軽に購入してください。\n\n〜 スタジオ大草原不可避 〜" }
+        if isZh { return "\n[免費版限制] 一天唸超過一百句後、會顯示廣告。以下項目皆不會自動續約、請安心購買。\n\n〜 大草原不可避工作室 〜" }
+        return "\n[Free version constraint] Ads will be displayed after speaking more than 100 sentences a day. Purchased item will not auto-renew. \nPlease feel free to buy it.\n\n〜 Studio 大草原不可避 〜"
     }
     var previousPurchaseRestored: String {
         if isJa { return "購入記録を復元しました" }

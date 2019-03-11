@@ -17,6 +17,7 @@ class InfiniteChallengeListPage: UIViewController {
     @IBOutlet weak var tableBottomConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var topChartView: TopChartView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

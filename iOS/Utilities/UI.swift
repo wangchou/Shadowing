@@ -240,14 +240,12 @@ func showGoToPermissionSettingAlert() {
     let alertController = UIAlertController(title: i18n.gotoIOSCenterTitle, message: "", preferredStyle: .alert)
 
     // Create the actions
-    let okAction = UIAlertAction(title: i18n.gotoIOSCenterOKTitle, style: UIAlertAction.Style.default) {
-        UIAlertAction in
+    let okAction = UIAlertAction(title: i18n.gotoIOSCenterOKTitle, style: .default) { _ in
         isShowingGoToPermissionSettingAlert = false
         alertController.dismiss(animated: true, completion: nil)
         goToIOSSettingCenter()
     }
-    let cancelAction = UIAlertAction(title: i18n.gotoIOSCenterCancelTitle, style: UIAlertAction.Style.cancel) {
-        UIAlertAction in
+    let cancelAction = UIAlertAction(title: i18n.gotoIOSCenterCancelTitle, style: .cancel) { _ in
         isShowingGoToPermissionSettingAlert = false
         alertController.dismiss(animated: true, completion: nil)
     }
@@ -257,7 +255,6 @@ func showGoToPermissionSettingAlert() {
     alertController.addAction(cancelAction)
 
     UIApplication.getPresentedViewController()?.present(alertController, animated: true)
-
 }
 
 func showOkAlert(title: String?, message: String? = nil, okTitle: String = I18n.shared.iGotIt) {
@@ -282,6 +279,11 @@ func showProcessingAlert() -> UIAlertController {
 }
 
 // MARK: - launch storyboard
+func getVC(_ name: String) -> UIViewController {
+    return UIStoryboard(name: "Main", bundle: nil)
+        .instantiateViewController(withIdentifier: name)
+}
+
 func launchStoryboard(
     _ originVC: UIViewController,
     _ storyboardId: String,
@@ -289,7 +291,7 @@ func launchStoryboard(
     animated: Bool = false,
     completion: ((UIViewController) -> Void)? = nil
     ) {
-    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: storyboardId)
+    let vc = getVC(storyboardId)
     if isOverCurrent {
         vc.modalPresentationStyle = .overCurrentContext
     } else {

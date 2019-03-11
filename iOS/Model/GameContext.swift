@@ -29,16 +29,19 @@ class GameContext {
     var gameHistory = [GameRecord]()
     var gameSetting = GameSetting()
 
-    // MARK: - Medium-term data of a single game, will be discarded after each game
+    // MARK: - Medium-term context of current game
+    var gameRecord: GameRecord?
+    var sentenceIndex: Int = 0
+    var sentences: [String] = []
+
     var contentTab: ContentTab = .topics
     var infiniteChallengeLevel: Level = .lv0
+    var topicDataSetKey: String = ""
     var gameState: GameState = .justStarted {
         didSet {
             postEvent(.gameStateChanged, gameState: gameState)
         }
     }
-
-    var topicDataSetKey: String = ""
 
     var dataSetKey: String {
         get {
@@ -50,39 +53,18 @@ class GameContext {
         }
     }
 
-    var gameRecord: GameRecord? // of current game
-    var isNewRecord: Bool {
-        return gameRecord?.isNewRecord ?? false
-    }
-    var newRecordIncrease: Int = 0
-
-    var isEngineRunning: Bool {
-        return SpeechEngine.shared.isEngineRunning
-    }
-    var startTime: Double = getNow()
-    var life: Int = 50
-
     var teachingRate: Float {
-        if !gameSetting.isAutoSpeed {
-            return gameSetting.preferredSpeed
-        }
-        if contentTab == .infiniteChallenge,
-           let level = gameRecord?.level {
-                return AVSpeechUtteranceDefaultSpeechRate * (0.6 + Float(level.rawValue) * 0.05)
-
-        }
-        return AVSpeechUtteranceDefaultSpeechRate * (0.5 + life.f * 0.006)
+        guard gameSetting.isAutoSpeed else { return gameSetting.preferredSpeed }
+        return gameRecord?.level.autoSpeed ?? AVSpeechUtteranceDefaultSpeechRate * 0.8
     }
 
-    var sentences: [String] = []
-    var sentenceIndex: Int = 0
-
-    // MARK: - Short-term data for a single sentence, will be discarded after each sentence played
     var gameTitle: String {
         return contentTab == .topics ?
-                getDataSetTitle(dataSetKey: dataSetKey) :
-                "[無限挑戦] \(infiniteChallengeLevel.title)"
+            getDataSetTitle(dataSetKey: dataSetKey) :
+        "[無限挑戦] \(infiniteChallengeLevel.title)"
     }
+
+    // MARK: - Short-term context for a sentence, will be discarded after each sentence played
     var targetString: String {
         guard sentenceIndex < sentences.count else { return ""}
         return sentences[sentenceIndex]
@@ -97,6 +79,12 @@ class GameContext {
         }
         return attrText
     }
+
+    var userSaidString: String {
+        return userSaidSentences[self.targetString] ?? ""
+    }
+
+    var score: Score = Score(value: 100)
 
     // Real duration in seconds of tts speaking
     var speakDuration: Float = 0
@@ -122,11 +110,6 @@ class GameContext {
         }
         return duration
     }
-
-    var userSaidString: String {
-        return userSaidSentences[self.targetString] ?? ""
-    }
-    var score: Score = Score(value: 100)
 }
 
 // MARK: - functions for a single game
@@ -145,8 +128,6 @@ extension GameContext {
         guard let selectedDataSet = dataSets[dataSetKey] else { return }
         sentences = selectedDataSet
 
-        life = isSimulator ? 100 : 40
-
         let level = dataKeyToLevels[dataSetKey] ?? .lv0
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level)
     }
@@ -155,7 +136,7 @@ extension GameContext {
         let level = infiniteChallengeLevel
         sentenceIndex = 0
         loadSentenceDB()
-        let numOfSentences = isSimulator ? 10 : 10
+        let numOfSentences = isSimulator ? 3 : 10
         let sentenceIds = randSentenceIds(
             minKanaCount: level.minSyllablesCount,
             maxKanaCount: level.maxSyllablesCount,
@@ -170,15 +151,14 @@ extension GameContext {
             }
         }
 
-        life = isSimulator ? 100 : 40
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level)
     }
 
     func nextSentence() -> Bool {
         sentenceIndex += 1
-//        if isSimulator {
-//            guard sentenceIndex < 3 else { return false }
-//        }
+        if isSimulator {
+            guard sentenceIndex < 3 else { return false }
+        }
         guard sentenceIndex < sentences.count else { return false }
 
         userSaidSentences[targetString] = ""

@@ -11,26 +11,24 @@ import UIKit
 import Speech
 
 class RootContainerViewController: UIViewController {
+    static var isShowSetting = false
+
     var current: UIViewController!
     var splashScreen: UIViewController!
     var languageSelectionScreen: UIViewController!
-    var mainSwipablePage: MainSwipablePage!
+    var topicSwipablePage: TopicSwipablePage!
     var infiniteChallengeSwipablePage: InfiniteChallengeSwipablePage!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        splashScreen = UIStoryboard(name: "Main", bundle: nil)
-            .instantiateViewController(withIdentifier: "LaunchScreen")
+        splashScreen = getVC("LaunchScreen")
 
         // swiftlint:disable force_cast
-        mainSwipablePage = (UIStoryboard(name: "Main", bundle: nil)
-            .instantiateViewController(withIdentifier: MainSwipablePage.storyboardId) as! MainSwipablePage)
-
-        infiniteChallengeSwipablePage = (UIStoryboard(name: "Main", bundle: nil)
-            .instantiateViewController(withIdentifier: InfiniteChallengeSwipablePage.storyboardId) as! InfiniteChallengeSwipablePage)
-        current = splashScreen
+        topicSwipablePage = (getVC(TopicSwipablePage.storyboardId) as! TopicSwipablePage)
+        infiniteChallengeSwipablePage = (getVC(InfiniteChallengeSwipablePage.storyboardId) as! InfiniteChallengeSwipablePage)
         // swiftlint:enable force_cast
+
+        current = splashScreen
 
         showVC(splashScreen)
 
@@ -48,9 +46,8 @@ class RootContainerViewController: UIViewController {
 
     private func showInitialPage() {
         if gameLang == .unset {
-            languageSelectionScreen = UIStoryboard(name: "Main", bundle: nil)
-                .instantiateViewController(withIdentifier: "InitialLanguageSelectionScreen")
-            showVC(self.languageSelectionScreen)
+            languageSelectionScreen = getVC("InitialLanguageSelectionScreen")
+            showVC(languageSelectionScreen)
             return
         }
 
@@ -61,10 +58,15 @@ class RootContainerViewController: UIViewController {
         }
     }
 
-    func showMainPage() {
-        guard current != mainSwipablePage else { return }
+    func showMainPage(isShowSetting: Bool = false) {
+        guard current != topicSwipablePage else { return }
         removeCurrent()
-        current = mainSwipablePage
+        current = topicSwipablePage
+        let sp: TopicSwipablePage! = topicSwipablePage
+        if !sp.pages.isEmpty {
+            let idx = isShowSetting ? 0 : 1
+            sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
+        }
         showVC(current)
     }
 
@@ -73,28 +75,31 @@ class RootContainerViewController: UIViewController {
         removeCurrent()
         current = infiniteChallengeSwipablePage
         let sp: InfiniteChallengeSwipablePage! = infiniteChallengeSwipablePage
-        if isShowSetting && !sp.pages.isEmpty {
-            sp.setViewControllers([sp.pages[0]], direction: .reverse, animated: false, completion: nil)
+        if !sp.pages.isEmpty {
+            let idx = isShowSetting ? 0 : 1
+            sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
         }
 
         showVC(current)
     }
 
     func reloadTableData() {
-        let sp0: MainSwipablePage! = mainSwipablePage
+        let sp0 = topicSwipablePage!
         if !sp0.pages.isEmpty,
-           let listPage = (sp0.pages[1] as? TopicsListPage) {
+           let listPage = (sp0.pages[1] as? TopicsListPage),
+            listPage.sentencesTableView != nil {
             listPage.sentencesTableView.reloadData()
         }
-        let sp1: InfiniteChallengeSwipablePage! = infiniteChallengeSwipablePage
+        let sp1 = infiniteChallengeSwipablePage!
         if !sp1.pages.isEmpty,
-            let listPage = (sp1.pages[1] as? InfiniteChallengeListPage) {
+            let listPage = (sp1.pages[1] as? InfiniteChallengeListPage),
+            listPage.tableView != nil {
             listPage.tableView.reloadData()
         }
     }
 
     func rerenderTopView() {
-        let sp0: MainSwipablePage! = mainSwipablePage
+        let sp0: TopicSwipablePage! = topicSwipablePage
         if !sp0.pages.isEmpty,
             let listPage = (sp0.pages[1] as? TopicsListPage) {
             listPage.topChartView.viewWillAppear()

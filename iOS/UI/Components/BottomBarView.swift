@@ -7,8 +7,6 @@
 //
 
 import Foundation
-
-import Foundation
 import UIKit
 
 private let context = GameContext.shared
@@ -58,10 +56,12 @@ class BottomBarView: UIView, XibView {
         rightButton.setIconImage(named: rightImgName, tintColor: rightColor)
     }
     @IBAction func onLeftButtonClicked(_ sender: Any) {
+        RootContainerViewController.isShowSetting = false
         context.contentTab = .topics
         rootViewController.showMainPage()
     }
     @IBAction func onRightButtonClicked(_ sender: Any) {
+        RootContainerViewController.isShowSetting = false
         context.contentTab = .infiniteChallenge
         rootViewController.showInfiniteChallengePage()
     }

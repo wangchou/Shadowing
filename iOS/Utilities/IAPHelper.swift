@@ -76,7 +76,7 @@ class IAPHelper: NSObject {
         Analytics.logEvent("\(eventName)_show", parameters: nil)
         let actionSheet = UIAlertController(
             title: isChallenge ? i18n.purchaseViewTitle : i18n.itIsfreeVersion,
-            message: i18n.purchaseViewMessage,
+            message: isChallenge ? i18n.purchaseViewMessage : i18n.freeButtonPurchaseMessage,
             preferredStyle: .actionSheet)
 
         // Create the actions

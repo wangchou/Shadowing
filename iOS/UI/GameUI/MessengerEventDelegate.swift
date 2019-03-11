@@ -27,7 +27,7 @@ extension Messenger: GameEventDelegate {
             guard let newRange = event.range else { return }
             if !context.gameSetting.isShowTranslation,
                context.gameState == .speakingTargetString {
-                //print(Date().timeIntervalSince1970, context.targetString, context.targetString.substring(with: newRange)?.s)
+
                 tmpRangeQueue.append(newRange)
                 let duration = Double(0.15 / (2 * context.teachingRate))
 
@@ -39,15 +39,11 @@ extension Messenger: GameEventDelegate {
                 let allRange: NSRange = tmpRangeQueue.reduce(tmpRangeQueue[0], {allR, curR in
                     return allR.union(curR)
                 })
-//                print("\tallRange:", context.targetString.substring(with: allRange)?.s)
 
                 var attrText = NSMutableAttributedString()
 
                 if let tokenInfos = kanaTokenInfosCacheDictionary[context.targetString] {
                     let fixedRange = getRangeWithParticleFix(tokenInfos: tokenInfos, allRange: allRange)
-//                    if let fixedRange = fixedRange {
-//                        print("\tfixedRange:", context.targetString.substring(with: fixedRange)?.s)
-//                    }
                     attrText = getFuriganaString(tokenInfos: tokenInfos, highlightRange: fixedRange)
                 } else {
                     attrText.append(rubyAttrStr(context.targetString))

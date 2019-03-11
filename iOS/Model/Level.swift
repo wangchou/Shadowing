@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 var avgKanaCountDict: [String: Float] = [:]
 // for ja
@@ -82,6 +83,10 @@ enum Level: Int, Codable {
 
     var bestInfinteChallengeProgress: String? {
         return findBestRecord(key: self.infinteChallengeDatasetKey)?.progress
+    }
+
+    var autoSpeed: Float {
+        return AVSpeechUtteranceDefaultSpeechRate * min(1.1, (0.5 + Float(self.rawValue) * 0.07))
     }
 }
 
