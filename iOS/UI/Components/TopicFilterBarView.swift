@@ -22,7 +22,6 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
     }
 
     func viewWillAppear() {
-//        backgroundColor = lightestGray
         removeAllSubviews()
 
         let tagPoints = getTagPoints()
