@@ -135,11 +135,11 @@ class TopChartView: UIView, GridLayout, ReloadableView {
     }
 
     func addOnClickHandler() {
-        addTapGestureRecognizer {
+        addTapGestureRecognizer { [weak self] in
             switchToNextTopViewMode()
             Analytics.logEvent("top_chart_view_clicked", parameters: nil)
-            self.viewWillAppear()
-            self.animateProgress()
+            self?.viewWillAppear()
+            self?.animateProgress()
         }
     }
 

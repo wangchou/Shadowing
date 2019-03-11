@@ -106,9 +106,9 @@ class IAPHelper: NSObject {
             }
 
             let title = "\(localizedTitle) \(priceString)"
-            let buyAction = UIAlertAction(title: title, style: .default) { _ in
+            let buyAction = UIAlertAction(title: title, style: .default) { [weak self] _ in
                 actionSheet.dismiss(animated: true, completion: nil)
-                self.buy(product)
+                self?.buy(product)
 
                 Analytics.logEvent("\(eventName)_buy",
                                    parameters: [AnalyticsParameterItemID: product.productIdentifier])
@@ -116,9 +116,9 @@ class IAPHelper: NSObject {
             actionSheet.addAction(buyAction)
         }
 
-        let restoreAction = UIAlertAction(title: i18n.restorePreviousPurchase, style: .destructive) { _ in
+        let restoreAction = UIAlertAction(title: i18n.restorePreviousPurchase, style: .destructive) { [weak self] _ in
             actionSheet.dismiss(animated: true, completion: nil)
-            self.refreshReceipt()
+            self?.refreshReceipt()
         }
         actionSheet.addAction(restoreAction)
 
@@ -170,11 +170,11 @@ extension IAPHelper: SKProductsRequestDelegate {
         if request is SKReceiptRefreshRequest {
             processReceipt()
 
-            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
                 if isEverReceiptProcessed {
-                    self.timer?.invalidate()
-                    self.processingAlertView?.dismiss(animated: false) {
-                        self.processingAlertView = nil
+                    self?.timer?.invalidate()
+                    self?.processingAlertView?.dismiss(animated: false) { [weak self] in
+                        self?.processingAlertView = nil
                         showOkAlert(title: i18n.previousPurchaseRestored)
                         rootViewController.rerenderTopView()
                     }

@@ -72,7 +72,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
 
         let y = 13
         addText(2, y, 3, "完成率")
-        Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { _ in
+        Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) {_ in
             let progress = getAttrText([
                 ( record.progress.padWidthTo(4), .white, self.getFontSize(h: 12)),
                 ( "%", .white, self.getFontSize(h: 3))
@@ -173,7 +173,8 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         let startProgress: Float = min(fromCount.f/maxCount.f, 1.0)
         let endProgress: Float = min(toCount.f/maxCount.f, 1.0)
 
-        timers[key] = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { _ in
+        timers[key] = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
             guard repeatCount >= delayCount else {
                 repeatCount += 1
                 return

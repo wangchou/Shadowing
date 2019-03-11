@@ -80,7 +80,7 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
             titleLabel.textColor = rgb(60, 60, 60)
         }
 
-        button.addTapGestureRecognizer {
+        button.addTapGestureRecognizer { [weak self] in
             if title == topicForAll {
                 isTopicOn = [topicForAll: true]
             } else {
@@ -94,7 +94,7 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
                     isTopicOn[title] = true
                 }
             }
-            self.viewWillAppear()
+            self?.viewWillAppear()
             NotificationCenter.default.post(
                 name: .topicFlagChanged,
                 object: nil

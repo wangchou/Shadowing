@@ -74,9 +74,9 @@ class GameFlow {
         context.loadLearningSentences()
 
         speakTitle(title: context.gameTitle)
-            .then { self.wait }
-            .then ( speakNarratorString )
-            .then { self.wait }
+            .then( tryWait )
+            .then( speakNarratorString )
+            .then( tryWait )
             .always {
                 self.learnNextSentence()
             }
@@ -90,13 +90,13 @@ class GameFlow {
             return
         }
         speakTranslation()
-            .then { self.wait }
+            .then( tryWait )
             .then( speakTargetString )
-            .then { self.wait }
-            .then ( echoMethod )
-            .then { self.wait }
+            .then( tryWait )
+            .then( echoMethod )
+            .then( tryWait )
             .then( listenPart )
-            .then { self.wait }
+            .then( tryWait )
             .catch { error in
                 print("Promise chain is dead", error)
             }
@@ -133,6 +133,10 @@ extension GameFlow {
         if !context.gameSetting.isUsingNarrator { return fulfilledVoidPromise() }
 
         return narratorSay(self.narratorString)
+    }
+
+    private func tryWait() -> Promise<Void> {
+        return wait
     }
 
     private func forceStop() {
@@ -177,7 +181,8 @@ extension GameFlow {
 
     private func startTimer() {
         gameSeconds = 0
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
             if self.isPaused { return }
 
             postEvent(.playTimeUpdate, int: self.gameSeconds)

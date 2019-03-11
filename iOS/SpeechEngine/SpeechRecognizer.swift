@@ -71,10 +71,8 @@ class SpeechRecognizer: NSObject {
 
         speechRecognizer.defaultTaskHint = .dictation
 
-        if let recognitionTask = recognitionTask {
-            recognitionTask.cancel()
-            self.recognitionTask = nil
-        }
+        recognitionTask?.cancel()
+        recognitionTask = nil
 
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         guard let recognitionRequest = recognitionRequest else {
@@ -94,7 +92,8 @@ class SpeechRecognizer: NSObject {
 
         inputNode = engine.audioEngine.inputNode
         //let recordingFormat = inputNode.outputFormat(forBus: 0)
-        inputNode.installTap(onBus: 0, bufferSize: 1024, format: nil) { buffer, _ in
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: nil) { [weak self] buffer, _ in
+            guard let self = self else { return }
             self.recognitionRequest?.append(buffer)
 
             // calculate mic volume
@@ -117,7 +116,7 @@ class SpeechRecognizer: NSObject {
             self.endAudio()
         }
 
-        self.isRunning = true
+        isRunning = true
         postEvent(.listenStarted, string: "")
         return promise
     }
@@ -208,11 +207,11 @@ class SpeechRecognizer: NSObject {
     private func fakeListening(stopAfterSeconds: Double = 5) -> Promise<String> {
         isRunning = true
         postEvent(.listenStarted, string: "")
-        Timer.scheduledTimer(withTimeInterval: stopAfterSeconds, repeats: false) {_ in
+        Timer.scheduledTimer(withTimeInterval: stopAfterSeconds, repeats: false) { [weak self] _ in
             let fakeSuffix = ["", "", "西宮", "はは"]
             let fakeSaidString = context.targetString + fakeSuffix[Int(arc4random_uniform(UInt32(fakeSuffix.count)))]
 
-            self.promise.fulfill(fakeSaidString)
+            self?.promise.fulfill(fakeSaidString)
         }
         return promise
     }

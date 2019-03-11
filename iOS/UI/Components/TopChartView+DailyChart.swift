@@ -77,11 +77,12 @@ extension TopChartView {
         var repeatCount = 0
         let targetCount = 25
         timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) { _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) { [weak self] _ in
             guard repeatCount <= 25 else {
-                self.timer?.invalidate()
+                self?.timer?.invalidate()
                 return
             }
+            guard let self = self else { return }
             let currentPercent = self.percent * repeatCount.f/targetCount.f
             percentLabel.text = String(format: "%.1f", currentPercent * 100) + "%"
             percentLabel.centerIn(self.circleFrame)

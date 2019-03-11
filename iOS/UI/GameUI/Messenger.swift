@@ -90,6 +90,7 @@ class Messenger: UIViewController {
     }
 
     func end() {
+        view.removeAllSubviews()
         stopEventObserving(self)
     }
 

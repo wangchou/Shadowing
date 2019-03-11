@@ -42,7 +42,7 @@ class TopicButtonAreaView: UIView, GridLayout, ReloadableView {
     }
 
     private func sharedInit() {
-        self.frame.size.width = screen.width
+        frame.size.width = screen.width
         let separateLine = UIView()
         separateLine.backgroundColor = rgb(220, 220, 220)
         separateLine.frame = CGRect(x: 0, y: 0, width: screen.width, height: 0.5)

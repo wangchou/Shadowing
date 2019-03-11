@@ -93,7 +93,7 @@ class GameContext {
     var calculatedSpeakDuration: Promise<Float> {
         let duration: Promise<Float> = Promise<Float>.pending()
         if gameLang == .jp {
-            getKana(targetString).then({ kana in
+            getKana(targetString).then({ [unowned self] kana in
                 duration.fulfill(
                     1.0 +
                     kana.count.f * 0.13 /

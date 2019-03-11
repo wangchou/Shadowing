@@ -78,7 +78,7 @@ class TopicDetailPage: UIViewController {
         skipNextButton.roundBorder(borderWidth: 0, cornerRadius: 5, color: .clear)
 
         // load furigana
-        all(context.sentences.map {$0.furiganaAttributedString}).then {_ in
+        all(context.sentences.map {$0.furiganaAttributedString}).then { _ in
             self.tableView.reloadData()
         }
     }
