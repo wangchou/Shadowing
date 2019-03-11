@@ -134,7 +134,9 @@ extension SentencesTableCell {
     private func prepareForSpeaking() {
         tableView?.beginUpdates()
         scoreLabel.text = ""
-        userSaidSentenceLabel.text = " "
+        userSaidSentenceLabel.text = ""
+        userSaidSentences[targetString] = ""
+        sentenceScores[targetString] = nil
         userSaidSentenceLabel.backgroundColor = UIColor.white
         userSaidSentenceLabel.isHidden = false
         tableView?.endUpdates()
