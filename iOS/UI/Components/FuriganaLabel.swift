@@ -83,6 +83,7 @@ class FuriganaLabel: UILabel {
         var previousWidth = maxWidth
         var width = maxWidth
         let resizeWidthStep: CGFloat = 3
+        let framesetter = CTFramesetterCreateWithAttributedString(attributed)
         repeat {
             let textDrawRect = CGRect(
                 x: self.frame.origin.x,
@@ -92,7 +93,6 @@ class FuriganaLabel: UILabel {
             )
 
             let path = CGPath(rect: textDrawRect, transform: nil)
-            let framesetter = CTFramesetterCreateWithAttributedString(attributed)
             let frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, attributed.length), path, nil)
 
             if let lines = CTFrameGetLines(frame) as? [CTLine] {
