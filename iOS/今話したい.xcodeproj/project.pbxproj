@@ -75,6 +75,7 @@
 		BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */; };
 		BE9B476A20AD50520063E0DA /* FuriganaUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B476920AD50520063E0DA /* FuriganaUtils.swift */; };
 		BE9D243A20C8DEE9000515DD /* GameReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9D243920C8DEE9000515DD /* GameReportView.swift */; };
+		BE9DF58A223E22BE00DFEE1D /* calculateMicLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9DF589223E22BE00DFEE1D /* calculateMicLevel.swift */; };
 		BEA4E71E21AE604400CE6E63 /* secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA4E71D21AE604400CE6E63 /* secret.swift */; };
 		BEA4E72021AFB8B800CE6E63 /* GameExpirationDateInMS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA4E71F21AFB8B800CE6E63 /* GameExpirationDateInMS.swift */; };
 		BEA86115216F264A00AECF13 /* sqliteSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA86114216F264A00AECF13 /* sqliteSentences.swift */; };
@@ -204,6 +205,7 @@
 		BE9B476720AD4E570063E0DA /* FuriganaLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaLabel.swift; sourceTree = "<group>"; };
 		BE9B476920AD50520063E0DA /* FuriganaUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuriganaUtils.swift; sourceTree = "<group>"; };
 		BE9D243920C8DEE9000515DD /* GameReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameReportView.swift; sourceTree = "<group>"; };
+		BE9DF589223E22BE00DFEE1D /* calculateMicLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calculateMicLevel.swift; sourceTree = "<group>"; };
 		BEA4E71D21AE604400CE6E63 /* secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secret.swift; sourceTree = "<group>"; };
 		BEA4E71F21AFB8B800CE6E63 /* GameExpirationDateInMS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameExpirationDateInMS.swift; sourceTree = "<group>"; };
 		BEA86114216F264A00AECF13 /* sqliteSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sqliteSentences.swift; sourceTree = "<group>"; };
@@ -493,6 +495,7 @@
 			children = (
 				BE5E0CCD2183477400832E88 /* I18n.swift */,
 				BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */,
+				BE9DF589223E22BE00DFEE1D /* calculateMicLevel.swift */,
 				BE9B476920AD50520063E0DA /* FuriganaUtils.swift */,
 				BE8180BF20B3BEB6006ABCB3 /* MyText.swift */,
 				BEF28B6220B52BF700385273 /* UI.swift */,
@@ -613,6 +616,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEDEDD3920A46FCA00E7B60B /* GameRecord.swift in Sources */,
+				BE9DF58A223E22BE00DFEE1D /* calculateMicLevel.swift in Sources */,
 				BE596466215A0DE100E4AA0C /* travel.swift in Sources */,
 				BE9D243A20C8DEE9000515DD /* GameReportView.swift in Sources */,
 				BECAC3BF216B9D19001BBF49 /* InfiniteChallengeSwipablePage.swift in Sources */,

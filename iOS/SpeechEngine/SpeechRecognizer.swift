@@ -12,7 +12,6 @@ import Promises
 
 private let context = GameContext.shared
 private let engine = SpeechEngine.shared
-private let minDb: Float = -55
 
 enum SpeechRecognitionError: Error {
     case unauthorized
@@ -96,20 +95,7 @@ class SpeechRecognizer: NSObject {
             guard let self = self else { return }
             self.recognitionRequest?.append(buffer)
 
-            // calculate mic volume
-            // https://www.raywenderlich.com/5154-avaudioengine-tutorial-for-ios-getting-started
-            guard let channelData = buffer.floatChannelData else { return }
-            let channelDataValue = channelData.pointee
-            let channelDataValueArray = stride(from: 0,
-                                               to: Int(buffer.frameLength),
-                                               by: buffer.stride).map { channelDataValue[$0] }
-
-            let rms = sqrt(channelDataValueArray
-                .reduce(0) { (sum: Float, v: Float) in sum + v*v } / Float(buffer.frameLength)
-            )
-            let avgPower = 20 * log10(rms)
-            let meterLevel = self.scaledPower(power: avgPower)
-            postEvent(.levelMeterUpdate, int: Int(meterLevel * 100))
+            calculateMicLevel(buffer: buffer)
         }
 
         Timer.scheduledTimer(withTimeInterval: stopAfterSeconds, repeats: false) { _ in
@@ -119,18 +105,6 @@ class SpeechRecognizer: NSObject {
         isRunning = true
         postEvent(.listenStarted, string: "")
         return promise
-    }
-
-    func scaledPower(power: Float) -> Float {
-        guard power.isFinite else { return 0.0 }
-
-        if power < minDb {
-            return 0.0
-        } else if power >= 1.0 {
-            return 1.0
-        } else {
-            return (abs(minDb) - abs(power)) / abs(minDb)
-        }
     }
 
     // isCanceling is true  => cancel task, discard any said words
