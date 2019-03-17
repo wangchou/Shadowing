@@ -54,6 +54,8 @@ class GameReportView: UIView, ReloadableView, GridLayout {
     func viewDidDisappear() {
         countDownTimer?.invalidate()
         pauseOrPlayButton = nil
+        reportBox?.removeAllSubviews()
+        removeAllSubviews()
     }
 
     func createButton(title: String, bgColor: UIColor) -> UIButton {
