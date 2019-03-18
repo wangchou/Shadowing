@@ -17,6 +17,17 @@ enum JpnType {
     case mixed
 }
 
+private let importantParticles: Set = [
+    // 係助詞
+    "は", "も", "ぞ", "なむ", "や", "か", "こそ", "によって", "にとって",
+    // 格助詞
+    "が", "の", "を", "に", "へ", "と", "より", "から", "にて", "して", "ので", "たり", "けど", "とか",
+    // 接續助詞
+    "ば", "とも", "ど", "ども", "が", "に", "を", "て", "して", "で", "つつ", "ながら", "ものの", "ものを", "ものから", "し", "のに",
+    // 副助詞
+    "だけ", "まで", "のみ", "しか", "でも", "ばかり", "くらい", "など", "ほど", "さえ", "こそ", "きり"
+]
+
 extension String {
     var hiraganaOnly: String {
         let hiragana = self.kataganaToHiragana
@@ -68,23 +79,7 @@ extension String {
 
     // https://ja.wikipedia.org/wiki/助詞
     var isImportantParticle: Bool {
-        // 係助詞
-        let particleGroup0 = ["は", "も", "ぞ", "なむ", "や", "か", "こそ", "によって", "にとって"]
-        // 格助詞
-        let particleGroup1 = ["が", "の", "を", "に", "へ", "と", "より", "から", "にて", "して", "ので", "たり", "けど", "とか"]
-        // 接續助詞
-        let particleGroup2 = ["ば", "とも", "ど", "ども", "が", "に", "を", "て", "して", "で", "つつ", "ながら", "ものの", "ものを", "ものから", "し", "のに"]
-        // 副助詞
-        let particleGroup3 = ["だけ", "まで", "のみ", "しか", "でも", "ばかり", "くらい", "など", "ほど", "さえ", "こそ", "きり"]
-
-        if  particleGroup0.contains(self) ||
-            particleGroup1.contains(self) ||
-            particleGroup2.contains(self) ||
-            particleGroup3.contains(self) {
-            return true
-        }
-
-        return false
+        return importantParticles.contains(self)
     }
 }
 
