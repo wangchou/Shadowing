@@ -60,6 +60,7 @@ extension TopChartView {
             percent < 1.0 else { return }
 
         // background
+        layer.removeAllAnimations()
         let animation = CABasicAnimation(keyPath: "backgroundColor")
 
         animation.duration = 0.5

@@ -65,6 +65,7 @@ class CircleView: UIView {
     }
 
     func animate(duration: TimeInterval) {
+        circleLayer.removeAllAnimations()
         // We want to animate the strokeEnd property of the circleLayer
         let animation = CABasicAnimation(keyPath: "strokeEnd")
 
