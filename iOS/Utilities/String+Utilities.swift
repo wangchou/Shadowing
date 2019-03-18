@@ -103,7 +103,7 @@ extension String {
         var tmpText = self
         let matches = self.matches(for: "[0-9]+")
         for match in matches {
-            tmpText = tmpText.replace(match, getEnglishNumber(number: Int(match)))
+            tmpText = tmpText.replacingOccurrences(of: match, with: getEnglishNumber(number: Int(match)))
         }
         return tmpText
     }
@@ -111,7 +111,7 @@ extension String {
 
 // MARK: general operation
 extension String {
-    func replace(_ pattern: String, _ template: String) -> String {
+    func replaceRegex(_ pattern: String, _ template: String) -> String {
         do {
             let re = try NSRegularExpression(pattern: pattern, options: [])
             return re.stringByReplacingMatches(

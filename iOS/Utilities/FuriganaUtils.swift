@@ -178,7 +178,7 @@ func getFuriganaString(tokenInfos: [[String]], highlightRange: NSRange? = nil) -
             let kanjiStr = tokenInfo[0]
             let kana = getFixedFuriganaForScore(kanjiStr) ?? tokenInfo[tokenInfo.count-2].kataganaToHiragana
             let parts = kanjiStr // [わたし、| 気 | になります！]
-                .replace("([\\p{Han}\\d]*[\\p{Han}\\d])", "👻$1👻")
+                .replaceRegex("([\\p{Han}\\d]*[\\p{Han}\\d])", "👻$1👻")
                 .components(separatedBy: "👻")
                 .filter { $0 != "" }
 

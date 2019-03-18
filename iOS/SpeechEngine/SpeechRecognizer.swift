@@ -28,7 +28,7 @@ class SpeechRecognizer: NSObject {
             return speechRecognizerJP
         default:
             if  let voice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher),
-                let recognizer = SFSpeechRecognizer(locale: Locale(identifier: voice.language.replace("-", "_"))) {
+                let recognizer = SFSpeechRecognizer(locale: Locale(identifier: voice.language.replacingOccurrences(of: "-", with: "_"))) {
                 return recognizer
             }
             return speechRecognizerEN

@@ -73,8 +73,8 @@ func calculateScore(
     let promise = Promise<Score>.pending()
 
     func calcScore(_ str1: String, _ str2: String) -> Int {
-        let trimedS1 = str1.replace(" ", "")
-        let trimedS2 = str2.replace(" ", "")
+        let trimedS1 = str1.replacingOccurrences(of: " ", with: "")
+        let trimedS2 = str2.replacingOccurrences(of: " ", with: "")
         let len = max(trimedS1.count, trimedS2.count)
         guard len > 0 else {
             #if os(iOS)
@@ -164,8 +164,7 @@ func normalizeEnglishText(_ text: String) -> String {
 
     return returnText.lowercased()
                      .spellOutNumbers()
-                     .replace("where is", "where's")
-                     .replace(" ", "")
-                     .replace("-", "")
-
+                     .replacingOccurrences(of: "where is", with: "where's")
+                     .replacingOccurrences(of: " ", with: "")
+                     .replacingOccurrences(of: "-", with: "")
 }

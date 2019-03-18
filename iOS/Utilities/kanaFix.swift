@@ -38,9 +38,7 @@ let ttsKanaFix: [String: String] = [
 func getFixedKanaForTTS(_ text: String) -> String {
     var fixedText = text
     ttsKanaFix.forEach { (kanji, kana) in
-        if fixedText.contains(kanji) {
-            fixedText = fixedText.replace(kanji, kana)
-        }
+        fixedText = fixedText.replacingOccurrences(of: kanji, with: kana)
     }
     return fixedText
 }
