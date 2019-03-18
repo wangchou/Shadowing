@@ -99,6 +99,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
 
         addSubview(button)
         var leftSeconds = countDownSecs
+        countDownTimer?.invalidate()
         countDownTimer = Timer.scheduledTimer(withTimeInterval: 1.00, repeats: true) { _ in
             leftSeconds -= 1
             pauseOrPlayButton?.setTitle(" 次の挑戦 (\(leftSeconds)秒)", for: .normal)

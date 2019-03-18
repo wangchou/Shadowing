@@ -173,6 +173,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         let startProgress: Float = min(fromCount.f/maxCount.f, 1.0)
         let endProgress: Float = min(toCount.f/maxCount.f, 1.0)
 
+        timers[key]?.invalidate()
         timers[key] = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] _ in
             guard let self = self else { return }
             guard repeatCount >= delayCount else {

@@ -135,6 +135,7 @@ class IAPHelper: NSObject {
             countDownSeconds = 3
             cancelAction.isEnabled = false
             actionSheet.message = i18n.purchaseViewMessage + "\n\n\(countDownSeconds)"
+            timer?.invalidate()
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                 countDownSeconds -= 1
                 actionSheet.message = i18n.purchaseViewMessage + "\n\n\(countDownSeconds)"
@@ -169,7 +170,7 @@ extension IAPHelper: SKProductsRequestDelegate {
     func requestDidFinish(_ request: SKRequest) {
         if request is SKReceiptRefreshRequest {
             processReceipt()
-
+            timer?.invalidate()
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
                 if isEverReceiptProcessed {
                     self?.timer?.invalidate()
