@@ -41,6 +41,7 @@ class Messenger: UIViewController {
     @IBOutlet weak var autoSpeedLabel: UILabel!
 
     @IBOutlet weak var messengerBar: MessengerBar!
+
     let spacing = 15
 
     override func viewDidLoad() {
@@ -51,47 +52,39 @@ class Messenger: UIViewController {
             IAPHelper.shared.processReceipt()
         }
 
-        // OverlayView
+        // UI Settings
         overlayView.isHidden = true
         exitButton.layer.cornerRadius = 5
-        // prevent events pass to back view
+        levelMeterView.isUserInteractionEnabled = false
+        levelMeterValueBar.roundBorder(borderWidth: 0, cornerRadius: 4.5, color: .clear)
+        scrollView.delaysContentTouches = false
+
+        // actions
         speedSlider.addTapGestureRecognizer(action: nil)
         overlayView.addTapGestureRecognizer(action: continueGame)
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        start()
-        UIApplication.shared.isIdleTimerDisabled = true
-        scrollView.delaysContentTouches = false
-        levelMeterValueBar.roundBorder(borderWidth: 0, cornerRadius: 4.5, color: .clear)
-        levelMeterValueBar.frame.size.height = 0
-        levelMeterView.isUserInteractionEnabled = false
-        messengerBar.viewWillAppear()
-        messengerBar.initData()
-        renderOverlayView()
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        scrollView.removeAllSubviews()
-        end()
-        UIApplication.shared.isIdleTimerDisabled = false
-    }
-
-    func start() {
-        startEventObserving(self)
-        GameFlow.shared.start()
-
         scrollView.addTapGestureRecognizer(action: pauseContinueGame)
         messengerBar.addTapGestureRecognizer(action: pauseContinueGame)
         messengerBar.pauseCountinueButton.addTarget(self, action: #selector(pauseContinueGame), for: .touchUpInside)
         messengerBar.skipNextButton.addTarget(self, action: #selector(skipNext), for: .touchUpInside)
     }
 
-    func end() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        startEventObserving(self)
+        GameFlow.shared.start()
+        UIApplication.shared.isIdleTimerDisabled = true
+
+        messengerBar.viewWillAppear()
+        renderOverlayView()
+        levelMeterValueBar.frame.size.height = 0
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        scrollView.removeAllSubviews()
         view.removeAllSubviews()
         stopEventObserving(self)
+        UIApplication.shared.isIdleTimerDisabled = false
     }
 
     func renderOverlayView() {
