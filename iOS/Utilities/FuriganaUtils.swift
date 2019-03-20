@@ -19,6 +19,7 @@ import UIKit
 // HiraKakuProN-W3
 // HiraginoSans-W3
 // HiraMinProN-W6
+let rubyAnnotationKey = kCTRubyAnnotationAttributeName as NSAttributedString.Key
 func rubyAttrStr(
     _ string: String,
     _ ruby: String = "",
@@ -28,39 +29,38 @@ func rubyAttrStr(
     backgroundColor: UIColor = .clear
     ) -> NSAttributedString {
 
-    let fontRuby = MyFont.thin(ofSize: fontSize/2)
     let fontRegular = MyFont.regular(ofSize: fontSize)
     let fontBold = MyFont.bold(ofSize: fontSize)
+    let isSimple = color == .black || !isWithStroke
 
-    let alignMode: CTRubyAlignment = ruby.count >= string.count * 2 ? .center : .auto
-    let annotation = CTRubyAnnotationCreateWithAttributes(
-        alignMode, .auto, .before, ruby as CFString,
-        [ kCTFontAttributeName: fontRuby ] as CFDictionary
-    )
+    var attributes: [NSAttributedString.Key: Any] = [
+        .font: isSimple ? fontRegular : fontBold,
+        .backgroundColor: backgroundColor
+    ]
 
-    if color == .black || !isWithStroke {
-        return NSAttributedString(
-            string: string,
-            attributes: [
-                .font: fontRegular,
-                .foregroundColor: color,
-                .backgroundColor: backgroundColor,
-                kCTRubyAnnotationAttributeName as NSAttributedString.Key: annotation
-            ]
-        )
-    } else {
-        return NSAttributedString(
-            string: string,
-            attributes: [
-                .font: fontBold,
-                .foregroundColor: color,
-                .backgroundColor: backgroundColor,
-                .strokeColor: UIColor.black,
-                .strokeWidth: -1.5,
-                kCTRubyAnnotationAttributeName as NSAttributedString.Key: annotation
-        ])
+    if color != .black {
+        attributes[.foregroundColor] = color
     }
 
+    if !isSimple {
+        attributes[.strokeColor] = UIColor.black
+        attributes[.strokeWidth] = -1.5
+    }
+
+    if ruby != "" {
+        let fontRuby = MyFont.thin(ofSize: fontSize/2)
+        let alignMode: CTRubyAlignment = ruby.count >= string.count * 2 ? .center : .auto
+        let annotation = CTRubyAnnotationCreateWithAttributes(
+            alignMode, .auto, .before, ruby as CFString,
+            [ kCTFontAttributeName: fontRuby ] as CFDictionary
+        )
+        attributes[rubyAnnotationKey] = annotation
+    }
+
+    return NSAttributedString(
+        string: string,
+        attributes: attributes
+    )
 }
 
 //    case 1:
