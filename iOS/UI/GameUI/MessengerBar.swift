@@ -93,6 +93,7 @@ class MessengerBar: UIView, ReloadableView {
         separatedLine.backgroundColor = .darkGray
         separatedLine.frame = CGRect(x: 0, y: 0, width: screen.width, height: 0.5)
         addSubview(separatedLine)
+        initData()
     }
 
     private func initData() {
@@ -125,7 +126,5 @@ class MessengerBar: UIView, ReloadableView {
 
         let imageName = isGameStopped ? "baseline_play_arrow_black_48pt" : "baseline_pause_black_48pt"
         pauseCountinueButton.setIconImage(named: imageName, title: "", tintColor: .black, isIconOnLeft: false)
-
-        initData()
     }
 }
