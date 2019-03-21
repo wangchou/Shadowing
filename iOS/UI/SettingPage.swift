@@ -69,7 +69,10 @@ class SettingPage: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        render()
+    }
 
+    func render() {
         gameLangSegmentControl.setTitle(i18n.english, forSegmentAt: 0)
         gameLangSegmentControl.setTitle(i18n.japanese, forSegmentAt: 1)
 
@@ -176,10 +179,12 @@ class SettingPage: UITableViewController {
         }
 
         saveGameLang()
-        loadGameHistory()
         loadGameSetting()
-        loadGameMiscData()
-        viewWillAppear(false)
+        render()
+        loadGameHistory()
+        DispatchQueue.global().async {
+            loadGameMiscData()
+        }
 
         RootContainerViewController.isShowSetting = true
         if gameLang == .en {

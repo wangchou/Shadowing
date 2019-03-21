@@ -45,7 +45,6 @@ func loadGameMiscData() {
         }
     }
     // swiftlint:enable force_cast
-
     easyLoad(object: &userSaidSentences, key: userSaidSentencesKey + gameLang.key)
     easyLoad(object: &sentenceScores, key: sentenceScoreKey  + gameLang.key)
     easyLoad(object: &lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)
@@ -54,10 +53,15 @@ func loadGameMiscData() {
     guard gameLang == Lang.jp else { return }
 
     if let loadedKanaTokenInfos = loadFromUserDefault(type: type(of: kanaTokenInfosCacheDictionary), key: kanaTokenInfosKey + gameLang.key) {
-        loadedKanaTokenInfos.keys.forEach { key in
-            kanaTokenInfosCacheDictionary[key] = loadedKanaTokenInfos[key]
+        let validSentenceSet: Set<String> = Set(userSaidSentences.values).union(Set(userSaidSentences.keys))
+        print("\t\t key count: \(validSentenceSet.count) / \(loadedKanaTokenInfos.keys.count)")
+        for key in validSentenceSet {
+            if let value = loadedKanaTokenInfos[key] {
+                kanaTokenInfosCacheDictionary[key] = value
+            }
         }
     } else {
         print("create new kanaTokenInfos")
     }
+
 }

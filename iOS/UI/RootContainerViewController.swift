@@ -34,6 +34,7 @@ class RootContainerViewController: UIViewController {
 
         loadGameLang()
         loadTopSentencesInfoDB()
+        loadSentenceDB()
         loadDataSets()
         loadGameHistory()
         loadGameSetting()

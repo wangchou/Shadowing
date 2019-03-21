@@ -135,7 +135,6 @@ extension GameContext {
     private func loadInfiniteChallengeLevelSentence() {
         let level = infiniteChallengeLevel
         sentenceIndex = 0
-        loadSentenceDB()
         let numOfSentences = isSimulator ? 3 : 10
         let sentenceIds = randSentenceIds(
             minKanaCount: level.minSyllablesCount,
