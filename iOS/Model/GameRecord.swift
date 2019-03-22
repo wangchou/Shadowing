@@ -94,9 +94,19 @@ struct GameRecord: Codable {
     }
 
     var rank: Rank {
-        if p == 100 && perfectCount.f * 1.2 >=  sentencesCount.f { return .ss }
+        return getRank(isDetail: false)
+    }
+
+    var detailRank: Rank {
+        return getRank(isDetail: true)
+    }
+
+    private func getRank(isDetail: Bool = false) -> Rank {
+        if p == 100 && perfectCount.f * 1.3 >=  sentencesCount.f { return .ss }
         if p == 100 { return .s }
+        if p >= 95 && isDetail { return .aP }
         if p >= 90 { return .a }
+        if p >= 85 && isDetail { return .bP }
         if p >= 80 { return .b }
         if p >= 70 { return .c }
         if p >= 60 { return .d }

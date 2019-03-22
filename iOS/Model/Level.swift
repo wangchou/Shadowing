@@ -93,7 +93,9 @@ enum Level: Int, Codable {
 enum Rank: String, Codable {
     case ss = "SS"
     case s = "S"
+    case aP = "A+"
     case a = "A"
+    case bP = "B+"
     case b = "B"
     case c = "C"
     case d = "D"
@@ -104,7 +106,7 @@ enum Rank: String, Codable {
         switch self {
         case .s, .ss:
             return myBlue
-        case .a:
+        case .aP, .a, .bP :
             return myGreen
         case .b, .c, .d:
             return myOrange

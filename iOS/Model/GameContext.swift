@@ -28,6 +28,7 @@ class GameContext {
     // MARK: - Long-term data will be kept in UserDefault
     var gameHistory = [GameRecord]()
     var gameSetting = GameSetting()
+    var gameTrophy = GameTrophy()
 
     // MARK: - Medium-term context of current game
     var gameRecord: GameRecord?

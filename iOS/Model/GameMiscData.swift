@@ -34,17 +34,18 @@ func saveGameMiscData() {
     saveToUserDefault(object: kanaTokenInfosCacheDictionary, key: kanaTokenInfosKey + gameLang.key)
 }
 
-func loadGameMiscData() {
+func easyLoad<T: Codable>(object: inout T, key: String) {
     // swiftlint:disable force_cast
-    func easyLoad<T: Codable>(object: inout T, key: String) {
-        if let loaded = loadFromUserDefault(type: type(of: object), key: key) {
-            object = loaded
-        } else {
-            print("[\(gameLang)] create new object")
-            object = [:] as! T
-        }
+    if let loaded = loadFromUserDefault(type: type(of: object), key: key) {
+        object = loaded
+    } else {
+        print("[\(gameLang)] create new object")
+        object = [:] as! T
     }
     // swiftlint:enable force_cast
+}
+
+func loadGameMiscData() {
     easyLoad(object: &userSaidSentences, key: userSaidSentencesKey + gameLang.key)
     easyLoad(object: &sentenceScores, key: sentenceScoreKey  + gameLang.key)
     easyLoad(object: &lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)
