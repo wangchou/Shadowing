@@ -84,7 +84,7 @@ class MessengerBar: UIView, ReloadableView {
 
         // skipNextButton
         skipNextButton = UIButton()
-        let iconName = context.contentTab == .topics ? "baseline_skip_next_black_48pt" : "baseline_replay_black_36pt"
+        let iconName = context.gameMode == .topicMode ? "baseline_skip_next_black_48pt" : "baseline_replay_black_36pt"
         skipNextButton.setIconImage(named: iconName, tintColor: .black, isIconOnLeft: false)
         skipNextButton.frame = CGRect(x: screen.width - 50, y: 5, width: 48, height: 48)
         addSubview(skipNextButton)
@@ -105,7 +105,7 @@ class MessengerBar: UIView, ReloadableView {
     func viewWillAppear() {
         let key = context.dataSetKey
 
-        let level: Level? = context.contentTab == .topics ?
+        let level: Level? = context.gameMode == .topicMode ?
             dataKeyToLevels[key] : context.infiniteChallengeLevel
 
         if let level = level {

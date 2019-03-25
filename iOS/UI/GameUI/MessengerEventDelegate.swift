@@ -103,7 +103,7 @@ extension Messenger: GameEventDelegate {
             if context.gameState == .speakingTranslation {
                 tmpRangeQueue = []
                 let text = context.targetString
-                var translationsDict = (gameLang == .jp && context.contentTab == .topics) ?
+                var translationsDict = (gameLang == .jp && context.gameMode == .topicMode) ?
                     chTranslations : translations
                 var attrText: NSAttributedString
                 if context.gameSetting.isShowTranslation,

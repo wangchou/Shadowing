@@ -34,7 +34,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         backgroundColor = UIColor.black.withAlphaComponent(0.6)
         reportBox = GameReportBoxView()
 
-        if context.contentTab == .topics {
+        if context.gameMode == .topicMode {
             frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.38)
             layout(2, 4, 44, 50, reportBox!)
         } else {
@@ -91,7 +91,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
             }
         }
 
-        if context.contentTab == .topics {
+        if context.gameMode == .topicMode {
             layout(2, 56, 28, 8, button)
         } else {
             layout(2, 46, 28, 8, button)
@@ -122,14 +122,14 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         backButton.addTapGestureRecognizer {
             stopCountDown()
             dismissTwoVC()
-            if context.contentTab == .infiniteChallenge {
+            if context.gameMode == .infiniteChallengeMode {
                 if let icwPage = rootViewController.current as? InfiniteChallengeSwipablePage {
                     (icwPage.pages[2] as? InfiniteChallengePage)?.tableView.reloadData()
                 }
             }
         }
 
-        if context.contentTab == .topics {
+        if context.gameMode == .topicMode {
             layout(32, 56, 14, 8, backButton)
         } else {
             layout(32, 46, 14, 8, backButton)
@@ -145,7 +145,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
 }
 
 private func launchNextGame() {
-    if context.contentTab == .topics && !context.gameSetting.isRepeatOne {
+    if context.gameMode == .topicMode && !context.gameSetting.isRepeatOne {
         context.loadNextChallenge()
         let pages = rootViewController.topicSwipablePage.pages
         if pages.count > 2,

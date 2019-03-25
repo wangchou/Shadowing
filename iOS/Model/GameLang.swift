@@ -22,7 +22,7 @@ func loadGameLang() {
     if let loadedGameLang = loadFromUserDefault(type: LangForEncode.self, key: gameLangKey) {
         gameLang = loadedGameLang.lang
         if gameLang != .jp {
-            GameContext.shared.contentTab = .infiniteChallenge
+            GameContext.shared.bottomTab = .infiniteChallenge
         }
     }
 }

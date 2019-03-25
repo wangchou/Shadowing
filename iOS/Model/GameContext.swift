@@ -15,8 +15,12 @@ enum GameFlowMode: String, Codable {
     case shadowing, chat
 }
 
-enum ContentTab: String, Codable {
+enum UITab {
     case topics, infiniteChallenge
+}
+
+enum GameMode {
+    case topicMode, infiniteChallengeMode, trophyMode
 }
 
 class GameContext {
@@ -29,13 +33,14 @@ class GameContext {
     var gameHistory = [GameRecord]()
     var gameSetting = GameSetting()
     var gameTrophy = GameTrophy()
+    var bottomTab: UITab = .topics
 
     // MARK: - Medium-term context of current game
     var gameRecord: GameRecord?
     var sentenceIndex: Int = 0
     var sentences: [String] = []
 
-    var contentTab: ContentTab = .topics
+    var gameMode: GameMode = .topicMode
     var infiniteChallengeLevel: Level = .lv0
     var topicDataSetKey: String = ""
     var gameState: GameState = .justStarted {
@@ -46,7 +51,14 @@ class GameContext {
 
     var dataSetKey: String {
         get {
-            return contentTab == .topics ? topicDataSetKey : infiniteChallengeLevel.infinteChallengeDatasetKey
+            switch gameMode {
+            case .topicMode:
+                return topicDataSetKey
+            case .infiniteChallengeMode:
+                return infiniteChallengeLevel.infinteChallengeDatasetKey
+            case .trophyMode:
+                return trophyModeKey
+            }
         }
 
         set {
@@ -60,9 +72,14 @@ class GameContext {
     }
 
     var gameTitle: String {
-        return contentTab == .topics ?
-            getDataSetTitle(dataSetKey: dataSetKey) :
-        "[無限挑戦] \(infiniteChallengeLevel.title)"
+        switch gameMode {
+        case .topicMode:
+            return getDataSetTitle(dataSetKey: dataSetKey)
+        case .infiniteChallengeMode:
+            return "[無限挑戦] \(infiniteChallengeLevel.title)"
+        case .trophyMode:
+            return "Trophy Mode"
+        }
     }
 
     // MARK: - Short-term context for a sentence, will be discarded after each sentence played
@@ -117,10 +134,13 @@ class GameContext {
 extension GameContext {
 
     func loadLearningSentences() {
-        if contentTab == .topics {
+        switch gameMode {
+        case .topicMode:
             loadTopicSentence()
-        } else {
+        case .infiniteChallengeMode:
             loadInfiniteChallengeLevelSentence()
+        case .trophyMode:
+            loadTrophyGameSentence()
         }
     }
 
@@ -152,6 +172,10 @@ extension GameContext {
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level)
     }
 
+    private func loadTrophyGameSentence() {
+
+    }
+
     func nextSentence() -> Bool {
         sentenceIndex += 1
         if isSimulator {
@@ -164,22 +188,24 @@ extension GameContext {
     }
 
     func loadNextChallenge() {
-        if contentTab == .topics {
+        if gameMode == .topicMode {
             if let currentIdx = dataSetKeys.lastIndex(of: dataSetKey) {
                 dataSetKey = dataSetKeys[(currentIdx + 1) % dataSetKeys.count]
             }
-        } else {
+        }
+        if gameMode == .infiniteChallengeMode {
             infiniteChallengeLevel = infiniteChallengeLevel.next
         }
         loadLearningSentences()
     }
 
     func loadPrevousChallenge() {
-        if contentTab == .topics {
+        if gameMode == .topicMode {
             if let currentIdx = dataSetKeys.lastIndex(of: dataSetKey) {
                 dataSetKey = dataSetKeys[(currentIdx + dataSetKeys.count - 1) % dataSetKeys.count]
             }
-        } else {
+        }
+        if gameMode == .infiniteChallengeMode {
             infiniteChallengeLevel = infiniteChallengeLevel.previous
         }
         loadLearningSentences()

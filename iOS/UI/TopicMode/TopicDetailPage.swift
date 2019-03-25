@@ -134,6 +134,7 @@ class TopicDetailPage: UIViewController {
     }
 
     private func launchGame() {
+        context.gameMode = .topicMode
         if isUnderDailySentenceLimit() {
             Analytics.logEvent("challenge_topic_\(gameLang.prefix)", parameters: nil)
             launchStoryboard(self, "MessengerGame")

@@ -57,7 +57,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         roundBorder(cornerRadius: 15, color: .white)
         let tags = "#\(record.level.title)"
         var title = getDataSetTitle(dataSetKey: record.dataSetKey)
-        if context.contentTab == .infiniteChallenge {
+        if context.gameMode == .infiniteChallengeMode {
             title = "無限挑戰"
         }
         addText(2, 1, 6, title, color: myLightGray, strokeColor: .black)
@@ -107,7 +107,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
                                                endNumber: todaySentenceCount,
                                                maxNumber: dailyGoal)
 
-        if context.contentTab == .topics {
+        if context.gameMode == .topicMode {
             let topic = getDataSetTopic(dataSetKey: record.dataSetKey)
             let tagPointsWithoutLast = getTagPoints(isWithoutLast: true)
             let fromTagPoint = tagPointsWithoutLast["#" + topic] ?? 0

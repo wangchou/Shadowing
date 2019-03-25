@@ -160,7 +160,7 @@ extension GameFlow {
             self.timer?.invalidate()
             updateGameHistory()
             saveGameSetting()
-            if context.contentTab == .infiniteChallenge,
+            if context.gameMode == .infiniteChallengeMode,
                 let gr = context.gameRecord {
                 lastInfiniteChallengeSentences[gr.level] = context.sentences
             }
@@ -198,7 +198,7 @@ extension GameFlow {
         guard context.gameSetting.isSpeakTranslation else {
             return fulfilledVoidPromise()
         }
-        var translationsDict = (gameLang == .jp && context.contentTab == .topics) ?
+        var translationsDict = (gameLang == .jp && context.gameMode == .topicMode) ?
             chTranslations : translations
         var translation = translationsDict[context.targetString] ?? ""
 

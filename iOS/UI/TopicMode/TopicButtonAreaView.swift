@@ -96,6 +96,7 @@ class TopicButtonAreaView: UIView, GridLayout, ReloadableView {
     }
 
     @objc func onPlayButtonClicked() {
+        context.gameMode = .topicMode
         if isUnderDailySentenceLimit() {
             guard let vc = UIApplication.getPresentedViewController() else { return }
             launchStoryboard(vc, "MessengerGame")

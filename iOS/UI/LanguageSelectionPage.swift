@@ -38,7 +38,7 @@ class LanguageSelectionPage: UITableViewController {
 
             if gameLang == .en {
                 rootViewController.showInfiniteChallengePage()
-                context.contentTab = .infiniteChallenge
+                context.bottomTab = .infiniteChallenge
             } else {
                 rootViewController.showMainPage()
             }

@@ -109,7 +109,7 @@ class Messenger: UIViewController {
             speedLabel.textColor = UIColor.white
         }
 
-        if context.contentTab == .topics {
+        if context.gameMode == .topicMode {
             repeatOneSwitchButton.isHidden = false
         } else {
             repeatOneSwitchButton.isHidden = true
@@ -221,7 +221,7 @@ class Messenger: UIViewController {
 
         postCommand(.forceStopGame)
         self.dismiss(animated: true) {
-            if context.contentTab == .topics {
+            if context.gameMode == .topicMode {
                 context.loadNextChallenge()
                 let pages = rootViewController.topicSwipablePage.pages
                 if pages.count > 2,
