@@ -105,7 +105,7 @@ class I18n {
     }
 
     var reachDailyGoal: String {
-        if gameLang == .jp { return "今日の目標を完成しました。" }
+        if gameLang == .jp { return "今日の目標を完成しました。よくやった！" }
         return "Daily goal is completed. Good Job!"
     }
 
