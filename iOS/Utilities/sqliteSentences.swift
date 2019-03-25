@@ -103,10 +103,9 @@ func loadTopSentencesInfoDB() {
     }
 }
 
-func getSentencesByIds(ids: [Int]) -> [String] {
-    var sentences: [String] = []
+private func getSentencesById(id: Int) -> String {
     guard let path = Bundle.main.path(forResource: sqliteFileName, ofType: "sqlite") else {
-        print("sqlite file not found"); return sentences
+        print("sqlite file not found"); return "Not Found"
     }
     do {
         let db = try Connection(path, readonly: true)
@@ -114,26 +113,24 @@ func getSentencesByIds(ids: [Int]) -> [String] {
         let dbId = Expression<Int>("id")
         let dbJa = Expression<String>("ja")
         let dbEn = Expression<String>("en")
-        try ids.forEach { id throws in
-            let query = sentenceTable.select(dbJa, dbEn)
-                .filter(dbId == id)
-            for s in try db.prepare(query) {
-                if gameLang == .jp {
-                    sentences.append(s[dbJa])
-                    translations[s[dbJa]]=s[dbEn]
-                }
-                if gameLang == .en {
-                    sentences.append(s[dbEn])
-                    translations[s[dbEn]]=s[dbJa]
-                }
+
+        let query = sentenceTable.select(dbJa, dbEn)
+            .filter(dbId == id)
+        for s in try db.prepare(query) {
+            if gameLang == .jp {
+                translations[s[dbJa]]=s[dbEn]
+                return s[dbJa]
+            }
+            if gameLang == .en {
+                translations[s[dbEn]]=s[dbJa]
+                return s[dbEn]
             }
         }
-        saveGameMiscData()
 
     } catch {
         print("db error")
     }
-    return sentences
+    return ""
 }
 
 func getSentenceCount(minKanaCount: Int, maxKanaCount: Int) -> Int {
@@ -147,7 +144,7 @@ func getSentenceCount(minKanaCount: Int, maxKanaCount: Int) -> Int {
     return sentenceCount
 }
 
-func randSentenceIds(minKanaCount: Int, maxKanaCount: Int, numOfSentences: Int) -> [Int] {
+func getRandSentences(minKanaCount: Int, maxKanaCount: Int, numOfSentences: Int) -> [String] {
     var combinedIds: Set<Int> = []
     for kanaCount in minKanaCount...maxKanaCount {
         if let ids = gameLang.sentenceInfos[kanaCount]?.ids {
@@ -155,13 +152,15 @@ func randSentenceIds(minKanaCount: Int, maxKanaCount: Int, numOfSentences: Int) 
         }
     }
 
-    var randomIds: [Int] = []
-    while randomIds.count < numOfSentences {
-        if let newId = combinedIds.randomElement(),
-           !randomIds.contains(newId) {
-            randomIds.append(newId)
+    var randomSentences: [String] = []
+    while randomSentences.count < numOfSentences {
+        if let newId = combinedIds.randomElement() {
+            let str = getSentencesById(id: newId)
+            if !randomSentences.contains(str) {
+                randomSentences.append(str)
+            }
         }
     }
 
-    return randomIds
+    return randomSentences
 }

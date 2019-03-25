@@ -137,13 +137,11 @@ extension GameContext {
         let level = infiniteChallengeLevel
         sentenceIndex = 0
         let numOfSentences = isSimulator ? 3 : 10
-        let sentenceIds = randSentenceIds(
+        sentences = getRandSentences(
             minKanaCount: level.minSyllablesCount,
             maxKanaCount: level.maxSyllablesCount,
             numOfSentences: numOfSentences
         )
-
-        sentences = getSentencesByIds(ids: sentenceIds)
 
         if gameLang == .jp {
             sentences.forEach { s in
