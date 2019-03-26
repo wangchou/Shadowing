@@ -144,7 +144,9 @@ func getSentenceCount(minKanaCount: Int, maxKanaCount: Int) -> Int {
     return sentenceCount
 }
 
-func getRandSentences(minKanaCount: Int, maxKanaCount: Int, numOfSentences: Int) -> [String] {
+func getRandSentences(level: Level, numOfSentences: Int) -> [String] {
+    let minKanaCount = level.minSyllablesCount
+    let maxKanaCount = level.maxSyllablesCount
     var combinedIds: Set<Int> = []
     for kanaCount in minKanaCount...maxKanaCount {
         if let ids = gameLang.sentenceInfos[kanaCount]?.ids {

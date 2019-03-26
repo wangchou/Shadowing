@@ -158,8 +158,7 @@ extension GameContext {
         sentenceIndex = 0
         let numOfSentences = isSimulator ? 3 : 10
         sentences = getRandSentences(
-            minKanaCount: level.minSyllablesCount,
-            maxKanaCount: level.maxSyllablesCount,
+            level: level,
             numOfSentences: numOfSentences
         )
 
@@ -173,7 +172,26 @@ extension GameContext {
     }
 
     private func loadTrophyGameSentence() {
+        sentenceIndex = 0
+        let numOfSentences = isSimulator ? 5 : 10
+        let lowLevelNumOfSentence = Int(Double(numOfSentences) * gameTrophy.lowPercent)
+        sentences = getRandSentences(
+            level: gameTrophy.lowLevel,
+            numOfSentences: lowLevelNumOfSentence
+        )
+        sentences += getRandSentences(
+            level: gameTrophy.highLevel,
+            numOfSentences: numOfSentences - lowLevelNumOfSentence
+        )
+        sentences.shuffle()
 
+        if gameLang == .jp {
+            sentences.forEach { s in
+                _ = s.furiganaAttributedString // load furigana
+            }
+        }
+
+        gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: gameTrophy.lowLevel)
     }
 
     func nextSentence() -> Bool {

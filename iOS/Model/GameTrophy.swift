@@ -20,6 +20,8 @@ func loadTrophyCount() {
 }
 
 struct GameTrophy {
+    let trophiesPerLevel = 50
+
     private(set) var en: Int {
         get {
             return trophyCount[Lang.en] ?? 0
@@ -43,7 +45,7 @@ struct GameTrophy {
     }
 
     func getTrophyLevel(trophyCount: Int) -> Int {
-        return trophyCount / 50
+        return trophyCount / trophiesPerLevel
     }
 
     func updateTrophies(record: GameRecord, lang: Lang) {
@@ -55,6 +57,23 @@ struct GameTrophy {
             shift = trophyUpdateByLevelAndRank[10][record.detailRank]! - (record.p < 90 ? (9 - lvl) : 0)
         }
         trophyCount[lang] = max(0, (trophyCount[lang] ?? 0) + shift)
+    }
+
+    var count: Int {
+        return trophyCount[gameLang] ?? 0
+    }
+
+    var lowLevel: Level {
+        let lvl = getTrophyLevel(trophyCount: count)
+        return Level(rawValue: lvl) ?? Level.lv9
+    }
+    var highLevel: Level {
+        let lvl = getTrophyLevel(trophyCount: count + 50)
+        return Level(rawValue: lvl) ?? Level.lv9
+    }
+
+    var lowPercent: Double {
+        return Double(count % trophiesPerLevel) / Double(trophiesPerLevel)
     }
 }
 
