@@ -47,7 +47,7 @@ class TopicSwipablePage: UIPageViewController {
 extension TopicSwipablePage: UIPageViewControllerDataSource {
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        if let index = pages.index(of: viewController),
+        if let index = pages.firstIndex(of: viewController),
            index + 1 < pages.count {
             return pages[index + 1]
         }
@@ -55,7 +55,7 @@ extension TopicSwipablePage: UIPageViewControllerDataSource {
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        if let index = pages.index(of: viewController),
+        if let index = pages.firstIndex(of: viewController),
             index - 1 >= 0 {
             return pages[index - 1]
         }

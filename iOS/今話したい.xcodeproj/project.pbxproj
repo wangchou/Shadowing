@@ -25,16 +25,6 @@
 		BE596470215A0ECE00E4AA0C /* speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE59646F215A0ECE00E4AA0C /* speech.swift */; };
 		BE596474215A0EF400E4AA0C /* expressive.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596473215A0EF400E4AA0C /* expressive.swift */; };
 		BE5ABAC9217B703500A63C5F /* InfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5ABAC8217B703500A63C5F /* InfoPage.swift */; };
-		BE5ABAD4217C4CCD00A63C5F /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABACE217C4CCC00A63C5F /* Charts.framework */; };
-		BE5ABAD5217C4CCD00A63C5F /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABACE217C4CCC00A63C5F /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BE5ABAD6217C4CCD00A63C5F /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABACF217C4CCC00A63C5F /* Promises.framework */; };
-		BE5ABAD7217C4CCD00A63C5F /* Promises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABACF217C4CCC00A63C5F /* Promises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BE5ABAD8217C4CCD00A63C5F /* FBLPromises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABAD0217C4CCC00A63C5F /* FBLPromises.framework */; };
-		BE5ABAD9217C4CCD00A63C5F /* FBLPromises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABAD0217C4CCC00A63C5F /* FBLPromises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BE5ABADA217C4CCD00A63C5F /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABAD1217C4CCC00A63C5F /* SQLite.framework */; };
-		BE5ABADB217C4CCD00A63C5F /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABAD1217C4CCC00A63C5F /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BE5ABADE217C4CCD00A63C5F /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABAD3217C4CCD00A63C5F /* Alamofire.framework */; };
-		BE5ABADF217C4CCD00A63C5F /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABAD3217C4CCD00A63C5F /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE5D838920A80BD0002031BF /* TopicDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5D838820A80BD0002031BF /* TopicDetailPage.swift */; };
 		BE5E0CCE2183477400832E88 /* I18n.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5E0CCD2183477400832E88 /* I18n.swift */; };
 		BE65A939209C6E67006645CA /* GameEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65A938209C6E67006645CA /* GameEvents.swift */; };
@@ -96,6 +86,16 @@
 		BECD8B2F21A817D000FF44A2 /* LanguageSelectionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD8B2E21A817D000FF44A2 /* LanguageSelectionPage.swift */; };
 		BECD9077219D279C00400FD3 /* InfiniteChallengeListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD9076219D279C00400FD3 /* InfiniteChallengeListPage.swift */; };
 		BECD907B219D294100400FD3 /* InfiniteChallengeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD907A219D294100400FD3 /* InfiniteChallengeTableCell.swift */; };
+		BED1BA462249FD6A009B68B6 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA412249FD6A009B68B6 /* Charts.framework */; };
+		BED1BA472249FD6A009B68B6 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA412249FD6A009B68B6 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BED1BA482249FD6A009B68B6 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA422249FD6A009B68B6 /* SQLite.framework */; };
+		BED1BA492249FD6A009B68B6 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA422249FD6A009B68B6 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BED1BA4A2249FD6A009B68B6 /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA432249FD6A009B68B6 /* Promises.framework */; };
+		BED1BA4B2249FD6A009B68B6 /* Promises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA432249FD6A009B68B6 /* Promises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BED1BA4C2249FD6A009B68B6 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA442249FD6A009B68B6 /* Alamofire.framework */; };
+		BED1BA4D2249FD6A009B68B6 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA442249FD6A009B68B6 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BED1BA4E2249FD6A009B68B6 /* FBLPromises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA452249FD6A009B68B6 /* FBLPromises.framework */; };
+		BED1BA4F2249FD6A009B68B6 /* FBLPromises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA452249FD6A009B68B6 /* FBLPromises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BED1CC0921452A54004AE397 /* GameSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1CC0821452A54004AE397 /* GameSetting.swift */; };
 		BEDD9A4B2244D00A00CF3E77 /* GameTrophy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDD9A4A2244D00A00CF3E77 /* GameTrophy.swift */; };
 		BEDE674521ABD04A00DF78AD /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDE674421ABD04A00DF78AD /* IAPHelper.swift */; };
@@ -121,11 +121,11 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BE5ABAD9217C4CCD00A63C5F /* FBLPromises.framework in Embed Frameworks */,
-				BE5ABADF217C4CCD00A63C5F /* Alamofire.framework in Embed Frameworks */,
-				BE5ABAD7217C4CCD00A63C5F /* Promises.framework in Embed Frameworks */,
-				BE5ABADB217C4CCD00A63C5F /* SQLite.framework in Embed Frameworks */,
-				BE5ABAD5217C4CCD00A63C5F /* Charts.framework in Embed Frameworks */,
+				BED1BA4B2249FD6A009B68B6 /* Promises.framework in Embed Frameworks */,
+				BED1BA492249FD6A009B68B6 /* SQLite.framework in Embed Frameworks */,
+				BED1BA472249FD6A009B68B6 /* Charts.framework in Embed Frameworks */,
+				BED1BA4D2249FD6A009B68B6 /* Alamofire.framework in Embed Frameworks */,
+				BED1BA4F2249FD6A009B68B6 /* FBLPromises.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,11 +151,6 @@
 		BE59646F215A0ECE00E4AA0C /* speech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = speech.swift; sourceTree = "<group>"; };
 		BE596473215A0EF400E4AA0C /* expressive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = expressive.swift; sourceTree = "<group>"; };
 		BE5ABAC8217B703500A63C5F /* InfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPage.swift; sourceTree = "<group>"; };
-		BE5ABACE217C4CCC00A63C5F /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
-		BE5ABACF217C4CCC00A63C5F /* Promises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Promises.framework; path = Carthage/Build/iOS/Promises.framework; sourceTree = "<group>"; };
-		BE5ABAD0217C4CCC00A63C5F /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBLPromises.framework; path = Carthage/Build/iOS/FBLPromises.framework; sourceTree = "<group>"; };
-		BE5ABAD1217C4CCC00A63C5F /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
-		BE5ABAD3217C4CCD00A63C5F /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		BE5D838820A80BD0002031BF /* TopicDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailPage.swift; sourceTree = "<group>"; };
 		BE5E0CCD2183477400832E88 /* I18n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = I18n.swift; sourceTree = "<group>"; };
 		BE65A938209C6E67006645CA /* GameEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEvents.swift; sourceTree = "<group>"; };
@@ -233,6 +228,11 @@
 		BECD8B2E21A817D000FF44A2 /* LanguageSelectionPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectionPage.swift; sourceTree = "<group>"; };
 		BECD9076219D279C00400FD3 /* InfiniteChallengeListPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteChallengeListPage.swift; sourceTree = "<group>"; };
 		BECD907A219D294100400FD3 /* InfiniteChallengeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteChallengeTableCell.swift; sourceTree = "<group>"; };
+		BED1BA412249FD6A009B68B6 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
+		BED1BA422249FD6A009B68B6 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
+		BED1BA432249FD6A009B68B6 /* Promises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Promises.framework; path = Carthage/Build/iOS/Promises.framework; sourceTree = "<group>"; };
+		BED1BA442249FD6A009B68B6 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		BED1BA452249FD6A009B68B6 /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBLPromises.framework; path = Carthage/Build/iOS/FBLPromises.framework; sourceTree = "<group>"; };
 		BED1CC0821452A54004AE397 /* GameSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetting.swift; sourceTree = "<group>"; };
 		BEDD9A4A2244D00A00CF3E77 /* GameTrophy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTrophy.swift; sourceTree = "<group>"; };
 		BEDE674421ABD04A00DF78AD /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
@@ -256,20 +256,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BED1BA4A2249FD6A009B68B6 /* Promises.framework in Frameworks */,
 				BE7AFAF721CA2DC900C41BF4 /* FirebaseCoreDiagnostics.framework in Frameworks */,
+				BED1BA4C2249FD6A009B68B6 /* Alamofire.framework in Frameworks */,
+				BED1BA482249FD6A009B68B6 /* SQLite.framework in Frameworks */,
 				BE7AFAF821CA2DC900C41BF4 /* GoogleUtilities.framework in Frameworks */,
+				BED1BA4E2249FD6A009B68B6 /* FBLPromises.framework in Frameworks */,
 				BE7AFAF921CA2DC900C41BF4 /* GoogleAppMeasurement.framework in Frameworks */,
 				BE7AFAFA21CA2DC900C41BF4 /* FirebaseAnalytics.framework in Frameworks */,
 				BE7AFAFB21CA2DC900C41BF4 /* FIRAnalyticsConnector.framework in Frameworks */,
 				BE7AFAFD21CA2DC900C41BF4 /* FirebaseCore.framework in Frameworks */,
 				BE7AFAFE21CA2DC900C41BF4 /* nanopb.framework in Frameworks */,
+				BED1BA462249FD6A009B68B6 /* Charts.framework in Frameworks */,
 				BE7AFAFF21CA2DC900C41BF4 /* FirebaseInstanceID.framework in Frameworks */,
-				BE5ABAD8217C4CCD00A63C5F /* FBLPromises.framework in Frameworks */,
 				BE7E88B921AA768800B9355E /* StoreKit.framework in Frameworks */,
-				BE5ABADE217C4CCD00A63C5F /* Alamofire.framework in Frameworks */,
-				BE5ABAD6217C4CCD00A63C5F /* Promises.framework in Frameworks */,
-				BE5ABADA217C4CCD00A63C5F /* SQLite.framework in Frameworks */,
-				BE5ABAD4217C4CCD00A63C5F /* Charts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,12 +415,12 @@
 		BEBDEDB3208EF09F00C18520 = {
 			isa = PBXGroup;
 			children = (
+				BED1BA442249FD6A009B68B6 /* Alamofire.framework */,
+				BED1BA412249FD6A009B68B6 /* Charts.framework */,
+				BED1BA452249FD6A009B68B6 /* FBLPromises.framework */,
+				BED1BA432249FD6A009B68B6 /* Promises.framework */,
+				BED1BA422249FD6A009B68B6 /* SQLite.framework */,
 				BEB6F6C72182B89D0011E1C1 /* InfoPlist.strings */,
-				BE5ABAD3217C4CCD00A63C5F /* Alamofire.framework */,
-				BE5ABACE217C4CCC00A63C5F /* Charts.framework */,
-				BE5ABAD0217C4CCC00A63C5F /* FBLPromises.framework */,
-				BE5ABACF217C4CCC00A63C5F /* Promises.framework */,
-				BE5ABAD1217C4CCC00A63C5F /* SQLite.framework */,
 				BEBDEDBE208EF09F00C18520 /* Project */,
 				BE6F2F142144DFB5003A56CD /* Sentences */,
 				BE9556EF212D7C130045E578 /* Model */,
@@ -865,7 +865,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
@@ -899,7 +899,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

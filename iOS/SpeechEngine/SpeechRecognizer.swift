@@ -174,6 +174,8 @@ class SpeechRecognizer: NSObject {
             case .notDetermined:
                 self.isAuthorized = false
                 print("Speech recognition not yet authorized")
+            @unknown default:
+                print("\n#### requestAuthorization unknown default ####\n")
             }
         }
     }
