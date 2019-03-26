@@ -9,6 +9,9 @@ import UIKit
 import Foundation
 import AVFoundation
 
+let IDIOM = UI_USER_INTERFACE_IDIOM()
+let isIPad = IDIOM == UIUserInterfaceIdiom.pad
+
 #if targetEnvironment(simulator)
     let isSimulator = true
     let dailyFreeLimit = 1000

@@ -30,7 +30,7 @@ func calculateMicLevel(buffer: AVAudioPCMBuffer) {
         let channelDataValue = channelData.pointee
         let channelDataValueArray = stride(from: 0,
                                            to: Int(buffer.frameLength),
-                                           by: buffer.stride).map { channelDataValue[$0] }
+                                           by: buffer.stride).map { (i: Int) in channelDataValue[i] }
 
         let rms = sqrt(channelDataValueArray
             .reduce(0) { (sum: Float, v: Float) in sum + v*v } / Float(buffer.frameLength)
