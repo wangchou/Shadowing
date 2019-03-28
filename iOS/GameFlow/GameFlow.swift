@@ -164,7 +164,9 @@ extension GameFlow {
                 let gr = context.gameRecord {
                 lastInfiniteChallengeSentences[gr.level] = context.sentences
             }
-            saveGameMiscData()
+            DispatchQueue.global().async {
+                saveGameMiscData()
+            }
         }
     }
 
