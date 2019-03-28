@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-//private let context = GameContext.shared
+private let context = GameContext.shared
 
 @IBDesignable
 class TrophyPageView: UIView, ReloadableView, GridLayout {
@@ -48,11 +48,40 @@ class TrophyPageView: UIView, ReloadableView, GridLayout {
     }
 
     private func addAnimatedBackgroundText() {
-        let label = addText(x: 3, y: 3, h: 6, text: "今話したい", color: rgb(70, 70, 70))
-        label.transform = CGAffineTransform.identity.rotated(by: 0.1)
+
+        let num = Int(sqrt(pow(screen.width, 2) + pow(screen.height, 2)) / stepFloat)/8
+        let level = Level.lv9
+        let sentences = getRandSentences(level: level, numOfSentences: num * 2)
+        func randPad(_ string: String) -> String {
+            var res = string
+            let prefixCount = Int.random(in: 0 ... 30)
+            let suffixCount = Int.random(in: 2 ... 8)
+            for _ in 0 ..< prefixCount {
+                res = " " + res
+            }
+            for _ in 0 ..< suffixCount {
+                res += " "
+            }
+            return res
+        }
+        for i in 0 ..< num {
+            let x = 1
+            let y = i * 9
+            let sentence = randPad(sentences[i]) + sentences[i+num]
+            let label = addText(x: x, y: y, h: 6, text: sentence, color: rgb(90, 90, 90))
+            label.sizeToFit()
+            label.centerX(frame)
+            //label.backgroundColor = .white
+            label.textAlignment = .left
+
+            label.transform = CGAffineTransform.identity
+                .translatedBy(x: 0, y: -1 * screen.width/5)
+                .rotated(by: -1 * .pi/8)
+        }
     }
 
     private func addLangInfo(y: Int) {
+
         let languageRect = addRect(x: 3, y: y, w: 42, h: 42, color: .lightGray)
         languageRect.roundBorder(borderWidth: 2.5, cornerRadius: stepFloat * 3, color: .white)
 
@@ -92,6 +121,7 @@ class TrophyPageView: UIView, ReloadableView, GridLayout {
         progressBarFront.roundBorder(borderWidth: 1.5, cornerRadius: stepFloat/2, color: .clear)
         layout(6, y + 37, 32, 1, progressBarFront)
         addSubview(progressBarFront)
+
     }
 
 }
