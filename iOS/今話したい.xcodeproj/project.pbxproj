@@ -96,6 +96,8 @@
 		BED1BA4D2249FD6A009B68B6 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA442249FD6A009B68B6 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BED1BA4E2249FD6A009B68B6 /* FBLPromises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA452249FD6A009B68B6 /* FBLPromises.framework */; };
 		BED1BA4F2249FD6A009B68B6 /* FBLPromises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA452249FD6A009B68B6 /* FBLPromises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BED1BA51224A3455009B68B6 /* TrophyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1BA50224A3455009B68B6 /* TrophyPageView.swift */; };
+		BED1BA53224A35FF009B68B6 /* TrophyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1BA52224A35FF009B68B6 /* TrophyPage.swift */; };
 		BED1CC0921452A54004AE397 /* GameSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1CC0821452A54004AE397 /* GameSetting.swift */; };
 		BEDD9A4B2244D00A00CF3E77 /* GameTrophy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDD9A4A2244D00A00CF3E77 /* GameTrophy.swift */; };
 		BEDE674521ABD04A00DF78AD /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDE674421ABD04A00DF78AD /* IAPHelper.swift */; };
@@ -233,6 +235,8 @@
 		BED1BA432249FD6A009B68B6 /* Promises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Promises.framework; path = Carthage/Build/iOS/Promises.framework; sourceTree = "<group>"; };
 		BED1BA442249FD6A009B68B6 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		BED1BA452249FD6A009B68B6 /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBLPromises.framework; path = Carthage/Build/iOS/FBLPromises.framework; sourceTree = "<group>"; };
+		BED1BA50224A3455009B68B6 /* TrophyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrophyPageView.swift; sourceTree = "<group>"; };
+		BED1BA52224A35FF009B68B6 /* TrophyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrophyPage.swift; sourceTree = "<group>"; };
 		BED1CC0821452A54004AE397 /* GameSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetting.swift; sourceTree = "<group>"; };
 		BEDD9A4A2244D00A00CF3E77 /* GameTrophy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTrophy.swift; sourceTree = "<group>"; };
 		BEDE674421ABD04A00DF78AD /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
@@ -481,6 +485,8 @@
 			children = (
 				BE2951112155F51A008239F9 /* GameUI */,
 				BE28B2C121A3EAB500088214 /* Main.storyboard */,
+				BED1BA52224A35FF009B68B6 /* TrophyPage.swift */,
+				BED1BA50224A3455009B68B6 /* TrophyPageView.swift */,
 				BE5ABAC8217B703500A63C5F /* InfoPage.swift */,
 				BEC2E92E217875C30095A65D /* RootContainerViewController.swift */,
 				BECD8B2E21A817D000FF44A2 /* LanguageSelectionPage.swift */,
@@ -649,6 +655,7 @@
 				BEA4E71E21AE604400CE6E63 /* secret.swift in Sources */,
 				BEA4E72021AFB8B800CE6E63 /* GameExpirationDateInMS.swift in Sources */,
 				BEF4B151219C0E3B00B8E45E /* VoiceTableCell.swift in Sources */,
+				BED1BA53224A35FF009B68B6 /* TrophyPage.swift in Sources */,
 				BEC4CF0E219D727B00E1A54C /* TopChartView.swift in Sources */,
 				BE7725C420A2CBC200DF186A /* dataSets.swift in Sources */,
 				BE9B476A20AD50520063E0DA /* FuriganaUtils.swift in Sources */,
@@ -663,6 +670,7 @@
 				BE152048218085120059A7C2 /* Level.swift in Sources */,
 				BE59646A215A0E4D00E4AA0C /* polite.swift in Sources */,
 				BEDE674521ABD04A00DF78AD /* IAPHelper.swift in Sources */,
+				BED1BA51224A3455009B68B6 /* TrophyPageView.swift in Sources */,
 				BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */,
 				BE8E51DD21CF7718007D29E6 /* TopChartView+Timeline.swift in Sources */,
 				BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */,
@@ -866,7 +874,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
@@ -900,7 +908,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

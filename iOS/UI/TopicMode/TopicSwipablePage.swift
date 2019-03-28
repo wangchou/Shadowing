@@ -30,6 +30,7 @@ class TopicSwipablePage: UIPageViewController {
             pages.append(getVC(storyboardId))
         }
         addPage("SettingPage")
+        addPage("TrophyPage")
         addPage("ShadowingListPage")
         addPage("GameContentDetailPage")
         let idx = RootContainerViewController.isShowSetting ? 0 : 1
