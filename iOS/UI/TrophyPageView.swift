@@ -35,20 +35,21 @@ class TrophyPageView: UIView, ReloadableView, GridLayout {
     }
 
     func sharedInit() {
+        self.clipsToBounds = true
         backgroundColor = .orange
         self.frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.height)
     }
 
     func viewWillAppear() {
         removeAllSubviews()
-        backgroundColor = rgb(50, 50, 50)
 
-        addAnimatedBackgroundText()
+        drawBackground()
         addLangInfo(y: 10)
+        addGoButton()
     }
 
-    private func addAnimatedBackgroundText() {
-
+    private func drawBackground() {
+        backgroundColor = rgb(50, 50, 50)
         let num = Int(sqrt(pow(screen.width, 2) + pow(screen.height, 2)) / stepFloat)/8
         let level = Level.lv9
         let sentences = getRandSentences(level: level, numOfSentences: num * 2)
@@ -81,47 +82,75 @@ class TrophyPageView: UIView, ReloadableView, GridLayout {
     }
 
     private func addLangInfo(y: Int) {
+        let trophy = context.gameTrophy
 
-        let languageRect = addRect(x: 3, y: y, w: 42, h: 42, color: .lightGray)
-        languageRect.roundBorder(borderWidth: 2.5, cornerRadius: stepFloat * 3, color: .white)
+        // info background
+        let languageRect = addRect(x: 3, y: y, w: 42, h: 42, color: rgb(255, 255, 255).withAlphaComponent(0.7))
+        languageRect.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat * 3, color: rgb(150, 150, 150))
 
         let topBarRect = UIView()
         topBarRect.backgroundColor = .darkGray
         layout(0, 0, 42, 12, topBarRect)
         languageRect.addSubview(topBarRect)
 
-        let trophyCountStr = "25".padWidthTo(3)
+        let trophyCountStr = "\(trophy.count)".padWidthTo(3)
         let starStr = "⭐️ \(trophyCountStr)"
         let starAttrStr = getStrokeText(starStr, myOrange, strokeWidth: -2.5, font: MyFont.bold(ofSize: 8*fontSize))
         var label = addAttrText(x: 3, y: y + 1, h: 10, text: starAttrStr)
         label.centerX(languageRect.frame)
         label.textAlignment = .center
 
-        let langTitle = "日本語"
+        // language name
+        let langTitle = gameLang == .jp ? "日本語" : "英語"
         let attrTitle = getStrokeText(langTitle, .white, strokeWidth: -2.5, font: MyFont.bold(ofSize: 10*fontSize))
 
         label = addAttrText(x: 3, y: y+16, h: 10, text: attrTitle)
         label.centerX(languageRect.frame)
         label.textAlignment = .center
 
-        let currentLevelTitle = "超難問一   150/210"
-        label = addText(x: 3, y: y + 30, h: 6, text: currentLevelTitle)
-        label.centerX(languageRect.frame)
-        label.textAlignment = .center
-
         // progress bar
+        label = addText(x: 6, y: y + 31, h: 6, text: trophy.lowLevel.title)
+        label.textAlignment = .left
+
+        let nextLevelBound = trophy.highLevel.rawValue * 50
+        label = addText(x: 6, y: y + 31, h: 6, text: "\(trophy.count)/\(nextLevelBound)")
+        layout(22, y + 31, 20, 6, label)
+        label.textAlignment = .right
+
         let progressBarBack = UIView()
-        progressBarBack.backgroundColor = rgb(220, 220, 220)
+        progressBarBack.backgroundColor = .white
         layout(6, y + 37, 36, 1, progressBarBack)
         progressBarBack.roundBorder(borderWidth: 1.5, cornerRadius: stepFloat/2, color: .clear)
         addSubview(progressBarBack)
 
         let progressBarFront = UIView()
-        progressBarFront.backgroundColor = rgb(100, 100, 100)
+        progressBarFront.backgroundColor = trophy.lowLevel.color
         progressBarFront.roundBorder(borderWidth: 1.5, cornerRadius: stepFloat/2, color: .clear)
         layout(6, y + 37, 32, 1, progressBarFront)
+        var percentage: CGFloat = 0.0
+        if trophy.lowLevel == Level.lv9 {
+            percentage = 1.0
+        } else {
+            percentage = CGFloat(trophy.count % 50)/50.0
+        }
+        progressBarFront.frame.size.width = progressBarBack.frame.width * (percentage + 0.01)
         addSubview(progressBarFront)
+    }
 
+    private func addGoButton() {
+        let yMax = Int(screen.height / stepFloat)
+
+        let rect = addRect(x: 3, y: yMax - 18, w: 42, h: 12, color: .red)
+        rect.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat * 3, color: UIColor.red.withSaturation(0.4))
+
+        let attrText = getStrokeText(
+            "GO!",
+            .white,
+            font: MyFont.bold(ofSize: 8 * stepFloat)
+        )
+        let label = addAttrText(x: 3, y: 3, h: 12, text: attrText)
+        label.sizeToFit()
+        label.centerIn(rect.frame)
     }
 
 }
