@@ -14,16 +14,9 @@ private let context = GameContext.shared
 typealias AnimateBarContext = (progress: UILabel, bar: UIView, from: Int, to: Int, max: Int)
 
 private func getProgressColor(percent: Float) -> UIColor {
-    if percent < 0.4 {
-        return myRed
-    }
-    if percent < 0.7 {
-        return myOrange
-    }
-
-    if percent < 1 {
-        return myGreen
-    }
+    if percent < 0.4 { return myRed }
+    if percent < 0.7 { return myOrange }
+    if percent < 1.0 { return myGreen }
 
     return myBlue
 }

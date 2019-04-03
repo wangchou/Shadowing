@@ -173,7 +173,7 @@ extension GameContext {
 
     private func loadTrophyGameSentence() {
         sentenceIndex = 0
-        let numOfSentences = isSimulator ? 5 : 10
+        let numOfSentences = isSimulator ? 3 : 10
         let lowLevelNumOfSentence = Int(Double(numOfSentences) * gameTrophy.lowPercent)
         sentences = getRandSentences(
             level: gameTrophy.lowLevel,

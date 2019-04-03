@@ -158,18 +158,18 @@ extension GameFlow {
 
             context.gameRecord?.playDuration = self.gameSeconds
             self.timer?.invalidate()
-            updateGameHistory()
-            saveGameSetting()
             if let gr = context.gameRecord {
                 if context.gameMode == .infiniteChallengeMode {
                     lastInfiniteChallengeSentences[gr.level] = context.sentences
                 }
                 if context.gameMode == .trophyMode {
-                    context.gameTrophy.updateTrophies(record: gr, lang: gameLang)
+                    context.gameTrophy.updateTrophies(record: &context.gameRecord!)
                     saveTrophyCount()
                 }
 
             }
+            updateGameHistory()
+            saveGameSetting()
             DispatchQueue.global().async {
                 saveGameMiscData()
             }
