@@ -160,9 +160,15 @@ extension GameFlow {
             self.timer?.invalidate()
             updateGameHistory()
             saveGameSetting()
-            if context.gameMode == .infiniteChallengeMode,
-                let gr = context.gameRecord {
-                lastInfiniteChallengeSentences[gr.level] = context.sentences
+            if let gr = context.gameRecord {
+                if context.gameMode == .infiniteChallengeMode {
+                    lastInfiniteChallengeSentences[gr.level] = context.sentences
+                }
+                if context.gameMode == .trophyMode {
+                    context.gameTrophy.updateTrophies(record: gr, lang: gameLang)
+                    saveTrophyCount()
+                }
+
             }
             DispatchQueue.global().async {
                 saveGameMiscData()

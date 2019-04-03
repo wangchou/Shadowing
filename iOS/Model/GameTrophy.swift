@@ -51,10 +51,13 @@ struct GameTrophy {
     func updateTrophies(record: GameRecord, lang: Lang) {
         let lvl = getTrophyLevel(trophyCount: trophyCount[lang] ?? 0)
         var shift: Int
-        if lvl <= 9 {
+        switch lvl {
+        case 0 ... 4:
+            shift = trophyUpdateByLevelAndRank[lvl][record.rank]!
+        case 5 ... 9:
             shift = trophyUpdateByLevelAndRank[lvl][record.detailRank]!
-        } else {
-            shift = trophyUpdateByLevelAndRank[10][record.detailRank]! - (record.p < 90 ? (9 - lvl) : 0)
+        default:
+            shift = trophyUpdateByLevelAndRank[9][record.detailRank]! - (record.p < 90 ? (9 - lvl) : 0)
         }
         trophyCount[lang] = max(0, (trophyCount[lang] ?? 0) + shift)
     }

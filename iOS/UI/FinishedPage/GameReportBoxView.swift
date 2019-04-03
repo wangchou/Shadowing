@@ -56,9 +56,14 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         guard let record = context.gameRecord else { return }
         roundBorder(cornerRadius: 15, color: .white)
         let tags = "#\(record.level.title)"
-        var title = getDataSetTitle(dataSetKey: record.dataSetKey)
-        if context.gameMode == .infiniteChallengeMode {
-            title = "無限挑戰"
+        var title = ""
+        switch context.gameMode {
+        case .topicMode:
+            title = getDataSetTitle(dataSetKey: record.dataSetKey)
+        case .infiniteChallengeMode:
+            title = "無限挑戦"
+        case .trophyMode:
+            title = "追星模式"
         }
         addText(2, 1, 6, title, color: myLightGray, strokeColor: .black)
         addText(2, 7, 6, tags, color: myOrange, strokeColor: .black)

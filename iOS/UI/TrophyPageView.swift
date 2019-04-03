@@ -86,7 +86,7 @@ class TrophyPageView: UIView, ReloadableView, GridLayout {
 
         // info background
         let languageRect = addRect(x: 3, y: y, w: 42, h: 42, color: rgb(255, 255, 255).withAlphaComponent(0.7))
-        languageRect.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat * 3, color: rgb(150, 150, 150))
+        languageRect.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat * 4, color: rgb(150, 150, 150))
 
         let topBarRect = UIView()
         topBarRect.backgroundColor = .darkGray
@@ -140,17 +140,32 @@ class TrophyPageView: UIView, ReloadableView, GridLayout {
     private func addGoButton() {
         let yMax = Int(screen.height / stepFloat)
 
-        let rect = addRect(x: 3, y: yMax - 18, w: 42, h: 12, color: .red)
-        rect.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat * 3, color: UIColor.red.withSaturation(0.4))
-
+        let button = UIButton()
+        button.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .highlighted)
+        button.backgroundColor = .red
         let attrText = getStrokeText(
             "GO!",
             .white,
             font: MyFont.bold(ofSize: 8 * stepFloat)
         )
-        let label = addAttrText(x: 3, y: 3, h: 12, text: attrText)
-        label.sizeToFit()
-        label.centerIn(rect.frame)
+        button.setAttributedTitle(attrText, for: .normal)
+        button.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat * 4, color: UIColor.red.withSaturation(0.4))
+        button.showsTouchWhenHighlighted = true
+        button.addTarget(self, action: #selector(onGoButtonClicked), for: .touchUpInside)
+
+        layout(3, yMax - 18, 42, 12, button)
+        addSubview(button)
+
+    }
+
+    @objc func onGoButtonClicked() {
+        context.gameMode = .trophyMode
+        guard !TopicDetailPage.isChallengeButtonDisabled else { return }
+        if let vc = UIApplication.getPresentedViewController() {
+            if isUnderDailySentenceLimit() {
+                launchStoryboard(vc, "MessengerGame")
+            }
+        }
     }
 
 }
