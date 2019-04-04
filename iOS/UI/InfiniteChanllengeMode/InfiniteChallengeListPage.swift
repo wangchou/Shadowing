@@ -26,7 +26,7 @@ class InfiniteChallengeListPage: UIViewController {
         topBarView.rightButton.setIconImage(named: "outline_info_black_48pt", isIconOnLeft: false)
         if Locale.current.languageCode == "zh" {
             topBarView.customOnRightButtonClicked = {
-                launchStoryboard(self, "InfoPage")
+                launchVC(self, "InfoPage")
             }
         } else {
             topBarView.rightButton.isHidden = true

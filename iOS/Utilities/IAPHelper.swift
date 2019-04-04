@@ -127,7 +127,7 @@ class IAPHelper: NSObject {
         let cancelAction = UIAlertAction(title: cancelTitle, style: isIPad ? .default : .cancel) { _ in
             if isChallenge,
                let vc = UIApplication.getPresentedViewController() {
-                launchStoryboard(vc, "MessengerGame")
+                launchVC(vc, "MessengerGame")
             }
         }
 

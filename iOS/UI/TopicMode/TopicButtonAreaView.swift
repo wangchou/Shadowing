@@ -99,7 +99,7 @@ class TopicButtonAreaView: UIView, GridLayout, ReloadableView {
         context.gameMode = .topicMode
         if isUnderDailySentenceLimit() {
             guard let vc = UIApplication.getPresentedViewController() else { return }
-            launchStoryboard(vc, "MessengerGame")
+            launchVC(vc, "MessengerGame")
         }
     }
 

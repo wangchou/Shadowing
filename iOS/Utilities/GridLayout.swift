@@ -108,11 +108,11 @@ extension GridLayout where Self: UIView {
         return rect
     }
 
-    func layout(_ x: Int, _ y: Int, _ w: Int, _ h: Int, _ view: UIView) {
-        view.frame = getFrame(x, y, w, h)
+    func layout(anchor: CGPoint = CGPoint(x: 0, y: 0), _ x: Int, _ y: Int, _ w: Int, _ h: Int, _ view: UIView) {
+        view.frame = getFrame(anchor: anchor, x, y, w, h)
     }
 
-    func getFrame(_ x: Int, _ y: Int, _ w: Int, _ h: Int) -> CGRect {
+    func getFrame(anchor: CGPoint = CGPoint(x: 0, y: 0), _ x: Int, _ y: Int, _ w: Int, _ h: Int) -> CGRect {
         var x = x
         var y = y
         if axis == GridAxis.horizontal {
@@ -122,8 +122,8 @@ extension GridLayout where Self: UIView {
         }
 
         return CGRect(
-            x: x.c * stepFloat,
-            y: y.c * stepFloat,
+            x: anchor.x + x.c * stepFloat,
+            y: anchor.y + y.c * stepFloat,
             width: w.c * stepFloat,
             height: h.c * stepFloat
         )

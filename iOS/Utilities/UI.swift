@@ -280,18 +280,23 @@ func showProcessingAlert() -> UIAlertController {
 
 // MARK: - launch storyboard
 func getVC(_ name: String) -> UIViewController {
-    return UIStoryboard(name: "Main", bundle: nil)
-        .instantiateViewController(withIdentifier: name)
+    switch name {
+    case MedalGameFinishedPage.vcName:
+        return MedalGameFinishedPage()
+    default:
+        return UIStoryboard(name: "Main", bundle: nil)
+            .instantiateViewController(withIdentifier: name)
+    }
 }
 
-func launchStoryboard(
+func launchVC(
     _ originVC: UIViewController,
-    _ storyboardId: String,
+    _ vcName: String,
     isOverCurrent: Bool = false,
     animated: Bool = false,
     completion: ((UIViewController) -> Void)? = nil
     ) {
-    let vc = getVC(storyboardId)
+    let vc = getVC(vcName)
     if isOverCurrent {
         vc.modalPresentationStyle = .overCurrentContext
     } else {

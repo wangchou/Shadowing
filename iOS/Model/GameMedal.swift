@@ -54,6 +54,10 @@ struct GameMedal {
         return Double(count % medalsPerLevel) / Double(medalsPerLevel)
     }
 
+    var usingDetailRank: Bool {
+        return getMedalLevel(medalCount: medalCount[gameLang] ?? 0) >= 5
+    }
+
     private func getMedalRewards(record: GameRecord) -> Int {
         let lvl = getMedalLevel(medalCount: medalCount[gameLang] ?? 0)
         switch lvl {

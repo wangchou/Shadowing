@@ -19,6 +19,10 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
     var spacing: CGFloat = 0
 
+    var yMax: Int {
+        return Int(screen.height / stepFloat)
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         sharedInit()
@@ -36,14 +40,13 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
     func sharedInit() {
         self.clipsToBounds = true
-        backgroundColor = .orange
         self.frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.height)
     }
 
     func viewWillAppear() {
         removeAllSubviews()
         drawTextBackground(bgColor: rgb(50, 50, 50), textColor: rgb(90, 90, 90))
-        addLangInfo(y: 10)
+        addLangInfo(y: (yMax - 18)/2 - 21)
         addGoButton()
     }
 
@@ -73,38 +76,10 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         label = addAttrText(x: 3, y: y+16, h: 10, text: attrTitle)
         label.centerX(languageRect.frame)
         label.textAlignment = .center
-
-        // progress bar
-        label = addText(x: 6, y: y + 31, h: 6, text: medal.lowLevel.title)
-        label.textAlignment = .left
-
-        let nextLevelBound = medal.highLevel.rawValue * 50
-        label = addText(x: 6, y: y + 31, h: 6, text: "\(medal.count)/\(nextLevelBound)")
-        layout(22, y + 31, 20, 6, label)
-        label.textAlignment = .right
-
-        let progressBarBack = UIView()
-        progressBarBack.backgroundColor = .white
-        layout(6, y + 37, 36, 1, progressBarBack)
-        progressBarBack.roundBorder(borderWidth: 1.5, cornerRadius: stepFloat/2, color: .clear)
-        addSubview(progressBarBack)
-
-        let progressBarFront = UIView()
-        progressBarFront.backgroundColor = medal.lowLevel.color
-        progressBarFront.roundBorder(borderWidth: 1.5, cornerRadius: stepFloat/2, color: .clear)
-        layout(6, y + 37, 32, 1, progressBarFront)
-        var percentage: CGFloat = 0.0
-        if medal.lowLevel == Level.lv9 {
-            percentage = 1.0
-        } else {
-            percentage = CGFloat(medal.count % 50)/50.0
-        }
-        progressBarFront.frame.size.width = progressBarBack.frame.width * percentage
-        addSubview(progressBarFront)
+        addMedalProgressBar(y: y + 31, medal: medal)
     }
 
     private func addGoButton() {
-        let yMax = Int(screen.height / stepFloat)
 
         let button = UIButton()
         button.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .highlighted)
@@ -120,7 +95,6 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         button.addTarget(self, action: #selector(onGoButtonClicked), for: .touchUpInside)
 
         layout(3, yMax - 18, 42, 12, button)
-        //button.frame.origin.y -= getBottomPadding()
         addSubview(button)
 
     }
@@ -130,7 +104,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         guard !TopicDetailPage.isChallengeButtonDisabled else { return }
         if let vc = UIApplication.getPresentedViewController() {
             if isUnderDailySentenceLimit() {
-                launchStoryboard(vc, "MessengerGame")
+                launchVC(vc, "MessengerGame")
             }
         }
     }
@@ -169,5 +143,35 @@ extension GridLayout where Self: UIView {
                 .translatedBy(x: 0, y: -1 * screen.width/5)
                 .rotated(by: -1 * .pi/8)
         }
+    }
+
+    func addMedalProgressBar(y: Int, medal: GameMedal) {
+        // progress bar
+        var label = addText(x: 6, y: y, h: 6, text: medal.lowLevel.title)
+        label.textAlignment = .left
+
+        let nextLevelBound = medal.highLevel.rawValue * 50
+        label = addText(x: 6, y: y, h: 6, text: "\(medal.count)/\(nextLevelBound)")
+        layout(22, y, 20, 6, label)
+        label.textAlignment = .right
+
+        let progressBarBack = UIView()
+        progressBarBack.backgroundColor = .white
+        layout(6, y + 6, 36, 1, progressBarBack)
+        progressBarBack.roundBorder(borderWidth: 1.5, cornerRadius: stepFloat/2, color: .clear)
+        addSubview(progressBarBack)
+
+        let progressBarFront = UIView()
+        progressBarFront.backgroundColor = medal.lowLevel.color
+        progressBarFront.roundBorder(borderWidth: 1.5, cornerRadius: stepFloat/2, color: .clear)
+        layout(6, y + 6, 32, 1, progressBarFront)
+        var percentage: CGFloat = 0.0
+        if medal.lowLevel == Level.lv9 {
+            percentage = 1.0
+        } else {
+            percentage = CGFloat(medal.count % 50)/50.0
+        }
+        progressBarFront.frame.size.width = progressBarBack.frame.width * percentage
+        addSubview(progressBarFront)
     }
 }

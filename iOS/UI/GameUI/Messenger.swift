@@ -230,7 +230,7 @@ class Messenger: UIViewController {
                 }
             }
             guard let vc = UIApplication.getPresentedViewController() else { return }
-            launchStoryboard(vc, "MessengerGame")
+            launchVC(vc, "MessengerGame")
         }
     }
 

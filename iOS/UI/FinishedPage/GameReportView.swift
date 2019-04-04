@@ -11,8 +11,8 @@ import UIKit
 
 private let context = GameContext.shared
 
-var countDownTimer: Timer?
-var pauseOrPlayButton: UIButton?
+private var countDownTimer: Timer?
+private var pauseOrPlayButton: UIButton?
 private var isPauseMode: Bool = true
 
 func stopCountDown() {
@@ -56,17 +56,6 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         pauseOrPlayButton = nil
         reportBox?.removeAllSubviews()
         removeAllSubviews()
-    }
-
-    func createButton(title: String, bgColor: UIColor) -> UIButton {
-        let button = UIButton()
-        button.setTitle(title, for: .normal)
-        button.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .highlighted)
-        button.backgroundColor = bgColor
-        button.titleLabel?.font = MyFont.regular(ofSize: step * 4)
-        button.titleLabel?.textColor = myLightGray
-        button.roundBorder(borderWidth: 1, cornerRadius: 5, color: .clear)
-        return button
     }
 
     func addNextGameButton() -> UIButton {
@@ -144,7 +133,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
     }
 }
 
-private func launchNextGame() {
+func launchNextGame() {
     if context.gameMode == .topicMode && !context.gameSetting.isRepeatOne {
         context.loadNextChallenge()
         let pages = rootViewController.topicSwipablePage.pages
@@ -155,6 +144,19 @@ private func launchNextGame() {
     }
     if isUnderDailySentenceLimit() {
         guard let vc = UIApplication.getPresentedViewController() else { return }
-        launchStoryboard(vc, "MessengerGame")
+        launchVC(vc, "MessengerGame")
+    }
+}
+
+extension GridLayout where Self: UIView {
+    func createButton(title: String, bgColor: UIColor) -> UIButton {
+        let button = UIButton()
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .highlighted)
+        button.backgroundColor = bgColor
+        button.titleLabel?.font = MyFont.regular(ofSize: step * 4)
+        button.titleLabel?.textColor = myLightGray
+        button.roundBorder(borderWidth: 1, cornerRadius: 5, color: .clear)
+        return button
     }
 }
