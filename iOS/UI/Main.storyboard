@@ -840,7 +840,7 @@ Ruth Yuru Chen
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IK6-jy-fI3" customClass="MedalPageView" customModule="今話したい" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
@@ -848,8 +848,8 @@ Ruth Yuru Chen
                         <constraints>
                             <constraint firstItem="IK6-jy-fI3" firstAttribute="leading" secondItem="nsK-mH-Qlx" secondAttribute="leading" id="OUX-E9-hjH"/>
                             <constraint firstItem="nsK-mH-Qlx" firstAttribute="trailing" secondItem="IK6-jy-fI3" secondAttribute="trailing" id="RaV-n6-eyp"/>
-                            <constraint firstItem="nsK-mH-Qlx" firstAttribute="bottom" secondItem="IK6-jy-fI3" secondAttribute="bottom" id="eef-wh-Ob3"/>
-                            <constraint firstItem="IK6-jy-fI3" firstAttribute="top" secondItem="nsK-mH-Qlx" secondAttribute="top" id="tPD-iF-gJz"/>
+                            <constraint firstAttribute="bottom" secondItem="IK6-jy-fI3" secondAttribute="bottom" id="eef-wh-Ob3"/>
+                            <constraint firstItem="IK6-jy-fI3" firstAttribute="top" secondItem="7Qg-Fz-iom" secondAttribute="top" id="tPD-iF-gJz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nsK-mH-Qlx"/>
                     </view>
@@ -1337,7 +1337,7 @@ Ruth Yuru Chen
                                         <rect key="frame" x="0.0" y="905.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IVr-hM-UtT" id="lal-hd-ERN">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3U2-5G-XCz">
@@ -1369,7 +1369,7 @@ Ruth Yuru Chen
                                         <rect key="frame" x="0.0" y="1005.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nvf-m6-gIi" id="DtM-XQ-AHb">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cgn-Cn-7aR">

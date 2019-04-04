@@ -163,7 +163,7 @@ extension GameFlow {
                     lastInfiniteChallengeSentences[gr.level] = context.sentences
                 }
                 if context.gameMode == .medalMode {
-                    context.gameMedal.updateTrophies(record: &context.gameRecord!)
+                    context.gameMedal.updateMedals(record: &context.gameRecord!)
                     saveMedalCount()
                 }
 

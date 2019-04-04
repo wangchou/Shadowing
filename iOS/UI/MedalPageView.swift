@@ -120,6 +120,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         button.addTarget(self, action: #selector(onGoButtonClicked), for: .touchUpInside)
 
         layout(3, yMax - 18, 42, 12, button)
+        //button.frame.origin.y -= getBottomPadding()
         addSubview(button)
 
     }

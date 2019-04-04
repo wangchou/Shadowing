@@ -20,35 +20,18 @@ func loadMedalCount() {
 }
 
 struct GameMedal {
-    let trophiesPerLevel = 50
+    let medalsPerLevel = 50
 
-    private(set) var en: Int {
-        get {
-            return medalCount[Lang.en] ?? 0
-        }
-        set {
-            medalCount[Lang.en] = newValue
-        }
-    }
-
-    private(set) var jp: Int {
-        get {
-            return medalCount[Lang.jp] ?? 0
-        }
-        set {
-            medalCount[Lang.jp] = newValue
-        }
-    }
-
-    var all: Int {
-        return en + jp
+    var totalCount: Int {
+        return (medalCount[.jp] ?? 0) +
+               (medalCount[.en] ?? 0)
     }
 
     func getMedalLevel(medalCount: Int) -> Int {
-        return medalCount / trophiesPerLevel
+        return medalCount / medalsPerLevel
     }
 
-    func updateTrophies(record: inout GameRecord) {
+    func updateMedals(record: inout GameRecord) {
         let reward = getMedalRewards(record: record)
         record.medalReward = reward
         medalCount[gameLang] = max(0, (medalCount[gameLang] ?? 0) + reward)
@@ -60,15 +43,15 @@ struct GameMedal {
 
     var lowLevel: Level {
         let lvl = getMedalLevel(medalCount: count)
-        return Level(rawValue: lvl) ?? Level.lv9
+        return Level(rawValue: lvl) ?? .lv9
     }
     var highLevel: Level {
         let lvl = getMedalLevel(medalCount: count + 50)
-        return Level(rawValue: lvl) ?? Level.lv9
+        return Level(rawValue: lvl) ?? .lv9
     }
 
     var lowPercent: Double {
-        return Double(count % trophiesPerLevel) / Double(trophiesPerLevel)
+        return Double(count % medalsPerLevel) / Double(medalsPerLevel)
     }
 
     private func getMedalRewards(record: GameRecord) -> Int {
