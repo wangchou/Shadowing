@@ -509,9 +509,18 @@ class I18n {
         return "Close"
     }
 
-    func getSpeakingStatus(percent: String, rank: String) -> String {
-        if gameLang == .jp { return "完成率：\(percent)%、判定：\(rank)" }
-        return "\(percent)% completed. Rank \(rank)."
+    func getSpeakingStatus(percent: String, rank: String, reward: Int?) -> String {
+        let context = GameContext.shared
+        switch context.gameMode {
+        case .medalMode:
+            guard let reward = reward else { return ""}
+            let rewardText = reward >= 0 ? "+ \(reward)": "\(reward)"
+            if gameLang == .jp { return "判定：\(rank)、メダル：\(rewardText)" }
+            return "Rank \(rank). Medal \(rewardText)."
+        default:
+            if gameLang == .jp { return "完成率：\(percent)%、判定：\(rank)" }
+            return "\(percent)% completed. Rank \(rank)."
+        }
     }
 }
 // swiftlint:enable file_length  type_body_length

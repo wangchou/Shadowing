@@ -1,5 +1,5 @@
 //
-//  TrophyPage.swift
+//  MedalPage.swift
 //  今話したい
 //
 //  Created by Wangchou Lu on 3/26/31 H.
@@ -9,11 +9,11 @@
 import Foundation
 import UIKit
 
-class TrophyPage: UIViewController {
+class MedalPage: UIViewController {
 
-    @IBOutlet weak var trophyPageView: TrophyPageView!
+    @IBOutlet weak var medalPageView: MedalPageView!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        trophyPageView.viewWillAppear()
+        medalPageView.viewWillAppear()
     }
 }

@@ -55,13 +55,13 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
             title = getDataSetTitle(dataSetKey: record.dataSetKey)
         case .infiniteChallengeMode:
             title = "無限挑戦"
-        case .trophyMode:
+        case .medalMode:
             title = "追星模式"
         }
         addText(2, 1, 6, title, color: myLightGray, strokeColor: .black)
         addText(2, 7, 6, tags, color: myOrange, strokeColor: .black)
 
-        let statusText = i18n.getSpeakingStatus(percent: record.progress, rank: record.rank.rawValue)
+        let statusText = i18n.getSpeakingStatus(percent: record.progress, rank: record.rank.rawValue, reward: record.medalReward)
         statusSpeakingPromise = teacherSay(statusText, rate: fastRate)
     }
 

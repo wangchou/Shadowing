@@ -1,5 +1,5 @@
 //
-//  TrophyGamePage.swift
+//  MedalGamePage.swift
 //  今話したい
 //
 //  Created by Wangchou Lu on 3/26/31 H.
@@ -12,7 +12,7 @@ import UIKit
 private let context = GameContext.shared
 
 @IBDesignable
-class TrophyPageView: UIView, ReloadableView, GridLayout {
+class MedalPageView: UIView, ReloadableView, GridLayout {
     var gridCount: Int = 48
 
     var axis: GridAxis = .horizontal
@@ -82,7 +82,7 @@ class TrophyPageView: UIView, ReloadableView, GridLayout {
     }
 
     private func addLangInfo(y: Int) {
-        let trophy = context.gameTrophy
+        let medal = context.gameMedal
 
         // info background
         let languageRect = addRect(x: 3, y: y, w: 42, h: 42, color: rgb(255, 255, 255).withAlphaComponent(0.7))
@@ -93,8 +93,8 @@ class TrophyPageView: UIView, ReloadableView, GridLayout {
         layout(0, 0, 42, 12, topBarRect)
         languageRect.addSubview(topBarRect)
 
-        let trophyCountStr = "\(trophy.count)".padWidthTo(3)
-        let starStr = "⭐️ \(trophyCountStr)"
+        let medalCountStr = "\(medal.count)".padWidthTo(3)
+        let starStr = "⭐️ \(medalCountStr)"
         let starAttrStr = getStrokeText(starStr, myOrange, strokeWidth: -2.5, font: MyFont.bold(ofSize: 8*fontSize))
         var label = addAttrText(x: 3, y: y + 1, h: 10, text: starAttrStr)
         label.centerX(languageRect.frame)
@@ -109,11 +109,11 @@ class TrophyPageView: UIView, ReloadableView, GridLayout {
         label.textAlignment = .center
 
         // progress bar
-        label = addText(x: 6, y: y + 31, h: 6, text: trophy.lowLevel.title)
+        label = addText(x: 6, y: y + 31, h: 6, text: medal.lowLevel.title)
         label.textAlignment = .left
 
-        let nextLevelBound = trophy.highLevel.rawValue * 50
-        label = addText(x: 6, y: y + 31, h: 6, text: "\(trophy.count)/\(nextLevelBound)")
+        let nextLevelBound = medal.highLevel.rawValue * 50
+        label = addText(x: 6, y: y + 31, h: 6, text: "\(medal.count)/\(nextLevelBound)")
         layout(22, y + 31, 20, 6, label)
         label.textAlignment = .right
 
@@ -124,14 +124,14 @@ class TrophyPageView: UIView, ReloadableView, GridLayout {
         addSubview(progressBarBack)
 
         let progressBarFront = UIView()
-        progressBarFront.backgroundColor = trophy.lowLevel.color
+        progressBarFront.backgroundColor = medal.lowLevel.color
         progressBarFront.roundBorder(borderWidth: 1.5, cornerRadius: stepFloat/2, color: .clear)
         layout(6, y + 37, 32, 1, progressBarFront)
         var percentage: CGFloat = 0.0
-        if trophy.lowLevel == Level.lv9 {
+        if medal.lowLevel == Level.lv9 {
             percentage = 1.0
         } else {
-            percentage = CGFloat(trophy.count % 50)/50.0
+            percentage = CGFloat(medal.count % 50)/50.0
         }
         progressBarFront.frame.size.width = progressBarBack.frame.width * (percentage + 0.01)
         addSubview(progressBarFront)
@@ -159,7 +159,7 @@ class TrophyPageView: UIView, ReloadableView, GridLayout {
     }
 
     @objc func onGoButtonClicked() {
-        context.gameMode = .trophyMode
+        context.gameMode = .medalMode
         guard !TopicDetailPage.isChallengeButtonDisabled else { return }
         if let vc = UIApplication.getPresentedViewController() {
             if isUnderDailySentenceLimit() {

@@ -30,7 +30,7 @@ class InfiniteChallengeSwipablePage: UIPageViewController {
             pages.append(getVC(storyboardId))
         }
         addPage("SettingPage")
-        addPage("TrophyPage")
+        addPage("MedalPage")
         addPage("InfiniteChallengeListPage")
         addPage("InfiniteChallengePage")
         let idx = RootContainerViewController.isShowSetting ? 0 : 1

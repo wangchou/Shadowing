@@ -69,7 +69,7 @@ struct GameRecord: Codable {
     let sentencesCount: Int
     let level: Level
     var isNewRecord = false
-    var trophyReward: Int?
+    var medalReward: Int?
     var perfectCount = 0
     var greatCount = 0
     var goodCount = 0

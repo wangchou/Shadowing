@@ -35,4 +35,4 @@ let practicePauseDuration: Float = 0.6 //longer for waiting table animation in p
 
 let abilities = ["日常", "旅遊", "N5", "N4", "敬語", "戀愛", "論述", "單字"]
 
-let trophyModeKey = "Trophy Mode Key"
+let medalModeKey = "Medal Mode Key"

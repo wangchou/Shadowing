@@ -76,6 +76,7 @@
 		BEBDEDDD208EF15F00C18520 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */; };
 		BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */; };
 		BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD8208EF15F00C18520 /* constants.swift */; };
+		BEBF5D1C2255D9F60069C34F /* GameMedal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBF5D1B2255D9F60069C34F /* GameMedal.swift */; };
 		BEC2E92F217875C30095A65D /* RootContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC2E92E217875C30095A65D /* RootContainerViewController.swift */; };
 		BEC2E9312179BD090095A65D /* TopicFilterBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC2E9302179BD090095A65D /* TopicFilterBarView.swift */; };
 		BEC4CF0E219D727B00E1A54C /* TopChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC4CF0D219D727B00E1A54C /* TopChartView.swift */; };
@@ -96,10 +97,9 @@
 		BED1BA4D2249FD6A009B68B6 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA442249FD6A009B68B6 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BED1BA4E2249FD6A009B68B6 /* FBLPromises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA452249FD6A009B68B6 /* FBLPromises.framework */; };
 		BED1BA4F2249FD6A009B68B6 /* FBLPromises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA452249FD6A009B68B6 /* FBLPromises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BED1BA51224A3455009B68B6 /* TrophyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1BA50224A3455009B68B6 /* TrophyPageView.swift */; };
-		BED1BA53224A35FF009B68B6 /* TrophyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1BA52224A35FF009B68B6 /* TrophyPage.swift */; };
+		BED1BA51224A3455009B68B6 /* MedalPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1BA50224A3455009B68B6 /* MedalPageView.swift */; };
+		BED1BA53224A35FF009B68B6 /* MedalPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1BA52224A35FF009B68B6 /* MedalPage.swift */; };
 		BED1CC0921452A54004AE397 /* GameSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1CC0821452A54004AE397 /* GameSetting.swift */; };
-		BEDD9A4B2244D00A00CF3E77 /* GameTrophy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDD9A4A2244D00A00CF3E77 /* GameTrophy.swift */; };
 		BEDE674521ABD04A00DF78AD /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDE674421ABD04A00DF78AD /* IAPHelper.swift */; };
 		BEDEDD3720A46D1B00E7B60B /* TopicsListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3620A46D1B00E7B60B /* TopicsListPage.swift */; };
 		BEDEDD3920A46FCA00E7B60B /* GameRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */; };
@@ -220,6 +220,7 @@
 		BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculateScore.swift; sourceTree = "<group>"; };
 		BEBDEDD8208EF15F00C18520 /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
+		BEBF5D1B2255D9F60069C34F /* GameMedal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMedal.swift; sourceTree = "<group>"; };
 		BEC2E92E217875C30095A65D /* RootContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerViewController.swift; sourceTree = "<group>"; };
 		BEC2E9302179BD090095A65D /* TopicFilterBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicFilterBarView.swift; sourceTree = "<group>"; };
 		BEC4CF0D219D727B00E1A54C /* TopChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopChartView.swift; sourceTree = "<group>"; };
@@ -235,10 +236,9 @@
 		BED1BA432249FD6A009B68B6 /* Promises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Promises.framework; path = Carthage/Build/iOS/Promises.framework; sourceTree = "<group>"; };
 		BED1BA442249FD6A009B68B6 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		BED1BA452249FD6A009B68B6 /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBLPromises.framework; path = Carthage/Build/iOS/FBLPromises.framework; sourceTree = "<group>"; };
-		BED1BA50224A3455009B68B6 /* TrophyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrophyPageView.swift; sourceTree = "<group>"; };
-		BED1BA52224A35FF009B68B6 /* TrophyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrophyPage.swift; sourceTree = "<group>"; };
+		BED1BA50224A3455009B68B6 /* MedalPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalPageView.swift; sourceTree = "<group>"; };
+		BED1BA52224A35FF009B68B6 /* MedalPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalPage.swift; sourceTree = "<group>"; };
 		BED1CC0821452A54004AE397 /* GameSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetting.swift; sourceTree = "<group>"; };
-		BEDD9A4A2244D00A00CF3E77 /* GameTrophy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTrophy.swift; sourceTree = "<group>"; };
 		BEDE674421ABD04A00DF78AD /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		BEDEDD3620A46D1B00E7B60B /* TopicsListPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicsListPage.swift; sourceTree = "<group>"; };
 		BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRecord.swift; sourceTree = "<group>"; };
@@ -402,13 +402,13 @@
 		BE9556EF212D7C130045E578 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BEBF5D1B2255D9F60069C34F /* GameMedal.swift */,
 				BEBDEDD8208EF15F00C18520 /* constants.swift */,
 				BEF28B6020B52BB000385273 /* Score.swift */,
 				BE152047218085120059A7C2 /* Level.swift */,
 				BE17FB3D209B19B200D23F22 /* GameContext.swift */,
 				BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */,
 				BED1CC0821452A54004AE397 /* GameSetting.swift */,
-				BEDD9A4A2244D00A00CF3E77 /* GameTrophy.swift */,
 				BE6EA1FC218B6BB4004749F5 /* GameLang.swift */,
 				BE76F116214ECC6E004E130B /* GameMiscData.swift */,
 				BEA4E71F21AFB8B800CE6E63 /* GameExpirationDateInMS.swift */,
@@ -485,8 +485,8 @@
 			children = (
 				BE2951112155F51A008239F9 /* GameUI */,
 				BE28B2C121A3EAB500088214 /* Main.storyboard */,
-				BED1BA52224A35FF009B68B6 /* TrophyPage.swift */,
-				BED1BA50224A3455009B68B6 /* TrophyPageView.swift */,
+				BED1BA52224A35FF009B68B6 /* MedalPage.swift */,
+				BED1BA50224A3455009B68B6 /* MedalPageView.swift */,
 				BE5ABAC8217B703500A63C5F /* InfoPage.swift */,
 				BEC2E92E217875C30095A65D /* RootContainerViewController.swift */,
 				BECD8B2E21A817D000FF44A2 /* LanguageSelectionPage.swift */,
@@ -652,10 +652,11 @@
 				BE8E51E321CF7A3B007D29E6 /* Type+Conversion.swift in Sources */,
 				BE8E51DF21CF7754007D29E6 /* TopChartView+LongTermGoal.swift in Sources */,
 				BEC2E9312179BD090095A65D /* TopicFilterBarView.swift in Sources */,
+				BEBF5D1C2255D9F60069C34F /* GameMedal.swift in Sources */,
 				BEA4E71E21AE604400CE6E63 /* secret.swift in Sources */,
 				BEA4E72021AFB8B800CE6E63 /* GameExpirationDateInMS.swift in Sources */,
 				BEF4B151219C0E3B00B8E45E /* VoiceTableCell.swift in Sources */,
-				BED1BA53224A35FF009B68B6 /* TrophyPage.swift in Sources */,
+				BED1BA53224A35FF009B68B6 /* MedalPage.swift in Sources */,
 				BEC4CF0E219D727B00E1A54C /* TopChartView.swift in Sources */,
 				BE7725C420A2CBC200DF186A /* dataSets.swift in Sources */,
 				BE9B476A20AD50520063E0DA /* FuriganaUtils.swift in Sources */,
@@ -670,7 +671,7 @@
 				BE152048218085120059A7C2 /* Level.swift in Sources */,
 				BE59646A215A0E4D00E4AA0C /* polite.swift in Sources */,
 				BEDE674521ABD04A00DF78AD /* IAPHelper.swift in Sources */,
-				BED1BA51224A3455009B68B6 /* TrophyPageView.swift in Sources */,
+				BED1BA51224A3455009B68B6 /* MedalPageView.swift in Sources */,
 				BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */,
 				BE8E51DD21CF7718007D29E6 /* TopChartView+Timeline.swift in Sources */,
 				BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */,
@@ -678,7 +679,6 @@
 				BEEC7FAB2154FFA4001C2EFF /* TopicSwipablePage.swift in Sources */,
 				BEDEDD3720A46D1B00E7B60B /* TopicsListPage.swift in Sources */,
 				BE7725CE20A4216700DF186A /* ContentCell.swift in Sources */,
-				BEDD9A4B2244D00A00CF3E77 /* GameTrophy.swift in Sources */,
 				BECD9077219D279C00400FD3 /* InfiniteChallengeListPage.swift in Sources */,
 				BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */,
 				BE6C78542165DD2B0072B1C5 /* GameReportBoxView.swift in Sources */,

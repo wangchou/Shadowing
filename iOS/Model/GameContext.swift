@@ -20,7 +20,7 @@ enum UITab {
 }
 
 enum GameMode {
-    case topicMode, infiniteChallengeMode, trophyMode
+    case topicMode, infiniteChallengeMode, medalMode
 }
 
 class GameContext {
@@ -32,7 +32,7 @@ class GameContext {
     // MARK: - Long-term data will be kept in UserDefault
     var gameHistory = [GameRecord]()
     var gameSetting = GameSetting()
-    var gameTrophy = GameTrophy()
+    var gameMedal = GameMedal()
     var bottomTab: UITab = .topics
 
     // MARK: - Medium-term context of current game
@@ -56,8 +56,8 @@ class GameContext {
                 return topicDataSetKey
             case .infiniteChallengeMode:
                 return infiniteChallengeLevel.infinteChallengeDatasetKey
-            case .trophyMode:
-                return trophyModeKey
+            case .medalMode:
+                return medalModeKey
             }
         }
 
@@ -77,8 +77,8 @@ class GameContext {
             return getDataSetTitle(dataSetKey: dataSetKey)
         case .infiniteChallengeMode:
             return "[無限挑戦] \(infiniteChallengeLevel.title)"
-        case .trophyMode:
-            return "Trophy Mode"
+        case .medalMode:
+            return "Medal Mode"
         }
     }
 
@@ -139,8 +139,8 @@ extension GameContext {
             loadTopicSentence()
         case .infiniteChallengeMode:
             loadInfiniteChallengeLevelSentence()
-        case .trophyMode:
-            loadTrophyGameSentence()
+        case .medalMode:
+            loadMedalGameSentence()
         }
     }
 
@@ -171,16 +171,16 @@ extension GameContext {
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level)
     }
 
-    private func loadTrophyGameSentence() {
+    private func loadMedalGameSentence() {
         sentenceIndex = 0
         let numOfSentences = isSimulator ? 3 : 10
-        let lowLevelNumOfSentence = Int(Double(numOfSentences) * gameTrophy.lowPercent)
+        let lowLevelNumOfSentence = Int(Double(numOfSentences) * gameMedal.lowPercent)
         sentences = getRandSentences(
-            level: gameTrophy.lowLevel,
+            level: gameMedal.lowLevel,
             numOfSentences: lowLevelNumOfSentence
         )
         sentences += getRandSentences(
-            level: gameTrophy.highLevel,
+            level: gameMedal.highLevel,
             numOfSentences: numOfSentences - lowLevelNumOfSentence
         )
         sentences.shuffle()
@@ -191,7 +191,7 @@ extension GameContext {
             }
         }
 
-        gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: gameTrophy.lowLevel)
+        gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: gameMedal.lowLevel)
     }
 
     func nextSentence() -> Bool {

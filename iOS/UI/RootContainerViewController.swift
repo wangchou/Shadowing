@@ -36,7 +36,7 @@ class RootContainerViewController: UIViewController {
         loadTopSentencesInfoDB()
         loadSentenceDB()
         loadDataSets()
-        loadTrophyCount()
+        loadMedalCount()
         loadGameHistory()
         loadGameSetting()
         loadGameMiscData()

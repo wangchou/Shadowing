@@ -1,5 +1,5 @@
 //
-//  GameTrophy.swift
+//  GameMedal.swift
 //  今話したい
 //
 //  Created by Wangchou Lu on 3/22/31 H.
@@ -8,35 +8,35 @@
 
 import Foundation
 
-private let trophyCountKey = "trophy Count key"
-private var trophyCount: [Lang: Int] = [:]
+private let medalCountKey = "medal Count key"
+private var medalCount: [Lang: Int] = [:]
 
-func saveTrophyCount() {
-    saveToUserDefault(object: trophyCount, key: trophyCountKey)
+func saveMedalCount() {
+    saveToUserDefault(object: medalCount, key: medalCountKey)
 }
 
-func loadTrophyCount() {
-    easyLoad(object: &trophyCount, key: trophyCountKey)
+func loadMedalCount() {
+    easyLoad(object: &medalCount, key: medalCountKey)
 }
 
-struct GameTrophy {
+struct GameMedal {
     let trophiesPerLevel = 50
 
     private(set) var en: Int {
         get {
-            return trophyCount[Lang.en] ?? 0
+            return medalCount[Lang.en] ?? 0
         }
         set {
-            trophyCount[Lang.en] = newValue
+            medalCount[Lang.en] = newValue
         }
     }
 
     private(set) var jp: Int {
         get {
-            return trophyCount[Lang.jp] ?? 0
+            return medalCount[Lang.jp] ?? 0
         }
         set {
-            trophyCount[Lang.jp] = newValue
+            medalCount[Lang.jp] = newValue
         }
     }
 
@@ -44,26 +44,26 @@ struct GameTrophy {
         return en + jp
     }
 
-    func getTrophyLevel(trophyCount: Int) -> Int {
-        return trophyCount / trophiesPerLevel
+    func getMedalLevel(medalCount: Int) -> Int {
+        return medalCount / trophiesPerLevel
     }
 
     func updateTrophies(record: inout GameRecord) {
-        let reward = getTrophyRewards(record: record)
-        record.trophyReward = reward
-        trophyCount[gameLang] = max(0, (trophyCount[gameLang] ?? 0) + reward)
+        let reward = getMedalRewards(record: record)
+        record.medalReward = reward
+        medalCount[gameLang] = max(0, (medalCount[gameLang] ?? 0) + reward)
     }
 
     var count: Int {
-        return trophyCount[gameLang] ?? 0
+        return medalCount[gameLang] ?? 0
     }
 
     var lowLevel: Level {
-        let lvl = getTrophyLevel(trophyCount: count)
+        let lvl = getMedalLevel(medalCount: count)
         return Level(rawValue: lvl) ?? Level.lv9
     }
     var highLevel: Level {
-        let lvl = getTrophyLevel(trophyCount: count + 50)
+        let lvl = getMedalLevel(medalCount: count + 50)
         return Level(rawValue: lvl) ?? Level.lv9
     }
 
@@ -71,21 +71,21 @@ struct GameTrophy {
         return Double(count % trophiesPerLevel) / Double(trophiesPerLevel)
     }
 
-    private func getTrophyRewards(record: GameRecord) -> Int {
-        let lvl = getTrophyLevel(trophyCount: trophyCount[gameLang] ?? 0)
+    private func getMedalRewards(record: GameRecord) -> Int {
+        let lvl = getMedalLevel(medalCount: medalCount[gameLang] ?? 0)
         switch lvl {
         case 0 ... 4:
-            return trophyUpdateByLevelAndRank[lvl][record.rank]!
+            return medalUpdateByLevelAndRank[lvl][record.rank]!
         case 5 ... 9:
-            return trophyUpdateByLevelAndRank[lvl][record.detailRank]!
+            return medalUpdateByLevelAndRank[lvl][record.detailRank]!
         default:
-            return trophyUpdateByLevelAndRank[9][record.detailRank]! - (record.p < 90 ? (9 - lvl) : 0)
+            return medalUpdateByLevelAndRank[9][record.detailRank]! - (record.p < 90 ? (9 - lvl) : 0)
         }
     }
 }
 
 // swiftlint:disable colon
-private let trophyUpdateByLevelAndRank: [[Rank: Int]] = [
+private let medalUpdateByLevelAndRank: [[Rank: Int]] = [
     [.ss:  15, .s:  10, .aP:  7, .a:  5, .bP:  4, .b:  4, .c:  3, .d:  1, .e:  -1, .f:  -3], // lv1
     [.ss:  15, .s:  10, .aP:  7, .a:  5, .bP:  3, .b:  3, .c:  1, .d: -1, .e:  -3, .f:  -5], // lv2
     [.ss:  15, .s:  10, .aP:  7, .a:  5, .bP:  2, .b:  2, .c:  0, .d: -2, .e:  -4, .f:  -6], // lv3
