@@ -15,7 +15,6 @@ class RootContainerViewController: UIViewController {
 
     var current: UIViewController!
     var splashScreen: UIViewController!
-    var languageSelectionScreen: UIViewController!
     var topicSwipablePage: TopicSwipablePage!
     var infiniteChallengeSwipablePage: InfiniteChallengeSwipablePage!
 
@@ -47,12 +46,6 @@ class RootContainerViewController: UIViewController {
     }
 
     private func showInitialPage() {
-        if gameLang == .unset {
-            languageSelectionScreen = getVC("InitialLanguageSelectionScreen")
-            showVC(languageSelectionScreen)
-            return
-        }
-
         if gameLang.isSupportTopicMode {
             showMainPage(idx: 1)
         } else {

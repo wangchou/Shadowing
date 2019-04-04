@@ -66,4 +66,4 @@ enum Lang: Int, Codable {
     }
 }
 
-var gameLang: Lang = Lang.unset
+var gameLang: Lang = Lang.jp
