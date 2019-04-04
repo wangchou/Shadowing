@@ -11,6 +11,7 @@ import UIKit
 
 class TopicSwipablePage: UIPageViewController {
     static let storyboardId = "MainSwipablePage"
+    static var initialIdx = 1
     var pages = [UIViewController]()
 
     override func viewDidLayoutSubviews() {
@@ -33,7 +34,7 @@ class TopicSwipablePage: UIPageViewController {
         addPage("MedalPage")
         addPage("ShadowingListPage")
         addPage("GameContentDetailPage")
-        let idx = RootContainerViewController.isShowSetting ? 0 : 1
+        let idx = RootContainerViewController.isShowSetting ? 0 : TopicSwipablePage.initialIdx
         setViewControllers([pages[idx]], direction: .forward, animated: true, completion: nil)
 
         dataSource = self

@@ -11,6 +11,7 @@ import UIKit
 
 class InfiniteChallengeSwipablePage: UIPageViewController {
     static let storyboardId = "InfiniteChallengeSwipablePage"
+    static var initialIdx = 1
     var pages = [UIViewController]()
 
     override func viewDidLayoutSubviews() {
@@ -33,7 +34,7 @@ class InfiniteChallengeSwipablePage: UIPageViewController {
         addPage("MedalPage")
         addPage("InfiniteChallengeListPage")
         addPage("InfiniteChallengePage")
-        let idx = RootContainerViewController.isShowSetting ? 0 : 1
+        let idx = RootContainerViewController.isShowSetting ? 0 : InfiniteChallengeSwipablePage.initialIdx
         setViewControllers([pages[idx]], direction: .forward, animated: true, completion: nil)
 
         dataSource = self

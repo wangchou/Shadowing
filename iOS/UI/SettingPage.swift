@@ -189,7 +189,7 @@ class SettingPage: UITableViewController {
         RootContainerViewController.isShowSetting = true
         if gameLang == .en {
             context.bottomTab = .infiniteChallenge
-            rootViewController.showInfiniteChallengePage(isShowSetting: true)
+            rootViewController.showInfiniteChallengePage(idx: 1)
         }
         rootViewController.reloadTableData()
     }

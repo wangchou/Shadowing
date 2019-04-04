@@ -37,10 +37,10 @@ class LanguageSelectionPage: UITableViewController {
             loadGameMiscData()
 
             if gameLang == .en {
-                rootViewController.showInfiniteChallengePage()
+                rootViewController.showInfiniteChallengePage(idx: 2)
                 context.bottomTab = .infiniteChallenge
             } else {
-                rootViewController.showMainPage()
+                rootViewController.showMainPage(idx: 2)
             }
             rootViewController.reloadTableData()
         }

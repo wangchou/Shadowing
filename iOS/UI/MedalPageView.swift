@@ -42,43 +42,9 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
     func viewWillAppear() {
         removeAllSubviews()
-
-        drawBackground()
+        drawTextBackground(bgColor: rgb(50, 50, 50), textColor: rgb(90, 90, 90))
         addLangInfo(y: 10)
         addGoButton()
-    }
-
-    private func drawBackground() {
-        backgroundColor = rgb(50, 50, 50)
-        let num = Int(sqrt(pow(screen.width, 2) + pow(screen.height, 2)) / stepFloat)/8
-        let level = Level.lv9
-        let sentences = getRandSentences(level: level, numOfSentences: num * 2)
-        func randPad(_ string: String) -> String {
-            var res = string
-            let prefixCount = Int.random(in: 0 ... 30)
-            let suffixCount = Int.random(in: 2 ... 8)
-            for _ in 0 ..< prefixCount {
-                res = " " + res
-            }
-            for _ in 0 ..< suffixCount {
-                res += " "
-            }
-            return res
-        }
-        for i in 0 ..< num {
-            let x = 1
-            let y = i * 9
-            let sentence = randPad(sentences[i]) + sentences[i+num]
-            let label = addText(x: x, y: y, h: 6, text: sentence, color: rgb(90, 90, 90))
-            label.sizeToFit()
-            label.centerX(frame)
-            //label.backgroundColor = .white
-            label.textAlignment = .left
-
-            label.transform = CGAffineTransform.identity
-                .translatedBy(x: 0, y: -1 * screen.width/5)
-                .rotated(by: -1 * .pi/8)
-        }
     }
 
     private func addLangInfo(y: Int) {
@@ -89,7 +55,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         languageRect.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat * 4, color: rgb(150, 150, 150))
 
         let topBarRect = UIView()
-        topBarRect.backgroundColor = .darkGray
+        topBarRect.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         layout(0, 0, 42, 12, topBarRect)
         languageRect.addSubview(topBarRect)
 
@@ -168,4 +134,39 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         }
     }
 
+}
+
+extension GridLayout where Self: UIView {
+    func drawTextBackground(bgColor: UIColor, textColor: UIColor) {
+        backgroundColor = bgColor
+        let num = Int(sqrt(pow(screen.width, 2) + pow(screen.height, 2)) / stepFloat)/8
+        let level = context.gameMedal.lowLevel
+        let sentences = getRandSentences(level: level, numOfSentences: num * 2)
+        func randPad(_ string: String) -> String {
+            var res = string
+            let prefixCount = Int.random(in: 0 ... 10 + level.rawValue * 3)
+            let suffixCount = Int.random(in: 2 ... 8)
+            for _ in 0 ..< prefixCount {
+                res = " " + res
+            }
+            for _ in 0 ..< suffixCount {
+                res += " "
+            }
+            return res
+        }
+        for i in 0 ..< num {
+            let x = 1
+            let y = i * 9
+            let sentence = randPad(sentences[i]) + sentences[i+num]
+            let label = addText(x: x, y: y, h: 6 - level.rawValue/3, text: sentence, color: textColor)
+            label.sizeToFit()
+            label.centerX(frame)
+            //label.backgroundColor = .white
+            label.textAlignment = .left
+
+            label.transform = CGAffineTransform.identity
+                .translatedBy(x: 0, y: -1 * screen.width/5)
+                .rotated(by: -1 * .pi/8)
+        }
+    }
 }

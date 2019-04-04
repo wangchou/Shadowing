@@ -54,32 +54,34 @@ class RootContainerViewController: UIViewController {
         }
 
         if gameLang.isSupportTopicMode {
-            showMainPage()
+            showMainPage(idx: 1)
         } else {
-            showInfiniteChallengePage()
+            showInfiniteChallengePage(idx: 1)
         }
     }
 
-    func showMainPage(isShowSetting: Bool = false) {
+    func showMainPage(idx: Int) {
         guard current != topicSwipablePage else { return }
         removeCurrent()
         current = topicSwipablePage
         let sp: TopicSwipablePage! = topicSwipablePage
         if !sp.pages.isEmpty {
-            let idx = isShowSetting ? 0 : 1
             sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
+        } else {
+            TopicSwipablePage.initialIdx = idx
         }
         showVC(current)
     }
 
-    func showInfiniteChallengePage(isShowSetting: Bool = false) {
+    func showInfiniteChallengePage(idx: Int) {
         guard current != infiniteChallengeSwipablePage else { return }
         removeCurrent()
         current = infiniteChallengeSwipablePage
         let sp: InfiniteChallengeSwipablePage! = infiniteChallengeSwipablePage
         if !sp.pages.isEmpty {
-            let idx = isShowSetting ? 0 : 1
             sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
+        } else {
+            InfiniteChallengeSwipablePage.initialIdx = idx
         }
 
         showVC(current)
