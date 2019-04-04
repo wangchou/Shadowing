@@ -115,7 +115,7 @@ class MessengerBar: UIView, ReloadableView {
             levelLabel.backgroundColor = level.color.withAlphaComponent(0.1)
         }
 
-        topicTitleLabel.text = context.gameTitle
+        topicTitleLabel.text = context.gameSimpleTitle
         topicProgressLabel.text = "\(context.sentenceIndex + 1)/\(context.sentences.count)"
 
         let progressPercent: CGFloat = context.sentences.isEmpty ? 0 :

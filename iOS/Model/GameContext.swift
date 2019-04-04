@@ -78,7 +78,18 @@ class GameContext {
         case .infiniteChallengeMode:
             return "[無限挑戦] \(infiniteChallengeLevel.title)"
         case .medalMode:
-            return "Medal Mode"
+            return "[🏅メダルモード] \(gameMedal.lowLevel.title)"
+        }
+    }
+
+    var gameSimpleTitle: String {
+        switch gameMode {
+        case .topicMode:
+            return getDataSetTitle(dataSetKey: dataSetKey)
+        case .infiniteChallengeMode:
+            return "[♾] \(infiniteChallengeLevel.title)"
+        case .medalMode:
+            return "[🏅] \(gameMedal.lowLevel.title)"
         }
     }
 

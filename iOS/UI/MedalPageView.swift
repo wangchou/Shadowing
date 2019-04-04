@@ -133,7 +133,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         } else {
             percentage = CGFloat(medal.count % 50)/50.0
         }
-        progressBarFront.frame.size.width = progressBarBack.frame.width * (percentage + 0.01)
+        progressBarFront.frame.size.width = progressBarBack.frame.width * percentage
         addSubview(progressBarFront)
     }
 

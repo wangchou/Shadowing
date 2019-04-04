@@ -514,7 +514,7 @@ class I18n {
         switch context.gameMode {
         case .medalMode:
             guard let reward = reward else { return ""}
-            let rewardText = reward >= 0 ? "+ \(reward)": "\(reward)"
+            let rewardText = reward >= 0 ? "plus \(reward)": "\(reward)"
             if gameLang == .jp { return "判定：\(rank)、メダル：\(rewardText)" }
             return "Rank \(rank). Medal \(rewardText)."
         default:
