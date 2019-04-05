@@ -14,6 +14,21 @@ class TopicSwipablePage: UIPageViewController {
     static var initialIdx = 1
     var pages = [UIViewController]()
 
+    var isPagesReady: Bool { return pages.count >= 4}
+
+    var settingPage: SettingPage? {
+        return !isPagesReady ? nil : pages[0] as? SettingPage
+    }
+    var medalPage: MedalPage? {
+        return !isPagesReady ? nil : pages[1] as? MedalPage
+    }
+    var listPage: TopicsListPage? {
+        return !isPagesReady ? nil : pages[2] as? TopicsListPage
+    }
+    var detailPage: TopicDetailPage? {
+        return !isPagesReady ? nil : pages[3] as? TopicDetailPage
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 

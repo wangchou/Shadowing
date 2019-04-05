@@ -113,7 +113,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
             dismissTwoVC()
             if context.gameMode == .infiniteChallengeMode {
                 if let icwPage = rootViewController.current as? InfiniteChallengeSwipablePage {
-                    (icwPage.pages[2] as? InfiniteChallengePage)?.tableView.reloadData()
+                    icwPage.detailPage?.tableView.reloadData()
                 }
             }
         }
@@ -136,11 +136,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
 func launchNextGame() {
     if context.gameMode == .topicMode && !context.gameSetting.isRepeatOne {
         context.loadNextChallenge()
-        let pages = rootViewController.topicSwipablePage.pages
-        if pages.count > 2,
-            let topicDetailPage = pages[2] as? TopicDetailPage {
-            topicDetailPage.render()
-        }
+        rootViewController.topicSwipablePage.detailPage?.render()
     }
     if isUnderDailySentenceLimit() {
         guard let vc = UIApplication.getPresentedViewController() else { return }

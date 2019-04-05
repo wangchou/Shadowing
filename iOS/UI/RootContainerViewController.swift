@@ -58,8 +58,8 @@ class RootContainerViewController: UIViewController {
         removeCurrent()
         current = topicSwipablePage
         let sp: TopicSwipablePage! = topicSwipablePage
-        if !sp.pages.isEmpty {
-            sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
+        if sp.isPagesReady {
+           sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
         } else {
             TopicSwipablePage.initialIdx = idx
         }
@@ -71,8 +71,8 @@ class RootContainerViewController: UIViewController {
         removeCurrent()
         current = infiniteChallengeSwipablePage
         let sp: InfiniteChallengeSwipablePage! = infiniteChallengeSwipablePage
-        if !sp.pages.isEmpty {
-            sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
+        if sp.isPagesReady {
+           sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
         } else {
             InfiniteChallengeSwipablePage.initialIdx = idx
         }
@@ -81,30 +81,22 @@ class RootContainerViewController: UIViewController {
     }
 
     func reloadTableData() {
-        let sp0 = topicSwipablePage!
-        if !sp0.pages.isEmpty,
-           let listPage = (sp0.pages[1] as? TopicsListPage),
+        if let listPage = topicSwipablePage.listPage,
             listPage.sentencesTableView != nil {
             listPage.sentencesTableView.reloadData()
         }
-        let sp1 = infiniteChallengeSwipablePage!
-        if !sp1.pages.isEmpty,
-            let listPage = (sp1.pages[1] as? InfiniteChallengeListPage),
+        if let listPage = infiniteChallengeSwipablePage.listPage,
             listPage.tableView != nil {
             listPage.tableView.reloadData()
         }
     }
 
     func rerenderTopView() {
-        let sp0: TopicSwipablePage! = topicSwipablePage
-        if !sp0.pages.isEmpty,
-            let listPage = (sp0.pages[1] as? TopicsListPage) {
+        if let listPage = topicSwipablePage.listPage {
             listPage.topChartView.viewWillAppear()
             listPage.topChartView.animateProgress()
         }
-        let sp1: InfiniteChallengeSwipablePage! = infiniteChallengeSwipablePage
-        if !sp1.pages.isEmpty,
-            let listPage = (sp1.pages[1] as? InfiniteChallengeListPage) {
+        if let listPage = infiniteChallengeSwipablePage.listPage {
             listPage.topChartView.viewWillAppear()
         }
     }

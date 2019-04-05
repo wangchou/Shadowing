@@ -223,11 +223,7 @@ class Messenger: UIViewController {
         self.dismiss(animated: true) {
             if context.gameMode == .topicMode {
                 context.loadNextChallenge()
-                let pages = rootViewController.topicSwipablePage.pages
-                if pages.count > 2,
-                    let topicDetailPage = pages[2] as? TopicDetailPage {
-                    topicDetailPage.render()
-                }
+                rootViewController.topicSwipablePage.detailPage?.render()
             }
             guard let vc = UIApplication.getPresentedViewController() else { return }
             launchVC(vc, "MessengerGame")

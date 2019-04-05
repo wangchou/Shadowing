@@ -14,6 +14,21 @@ class InfiniteChallengeSwipablePage: UIPageViewController {
     static var initialIdx = 1
     var pages = [UIViewController]()
 
+    var isPagesReady: Bool { return pages.count >= 4}
+
+    var settingPage: SettingPage? {
+        return !isPagesReady ? nil : pages[0] as? SettingPage
+    }
+    var medalPage: MedalPage? {
+        return !isPagesReady ? nil : pages[1] as? MedalPage
+    }
+    var listPage: InfiniteChallengeListPage? {
+        return !isPagesReady ? nil : pages[2] as? InfiniteChallengeListPage
+    }
+    var detailPage: InfiniteChallengePage? {
+        return !isPagesReady ? nil : pages[3] as? InfiniteChallengePage
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
