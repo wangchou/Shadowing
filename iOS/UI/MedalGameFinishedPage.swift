@@ -70,10 +70,9 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         let medal = context.gameMedal
 
         // info background
-        let rect = addRect(x: 3, y: y, w: 42, h: 42, color: rgb(255, 255, 255).withAlphaComponent(0.03))
+        addRect(x: 3, y: y, w: 42, h: 42, color: rgb(255, 255, 255).withAlphaComponent(0.03))
 
         addMedalProgressBar(y: y + 1, medal: medal)
-
 
         guard let gr = context.gameRecord else { return }
 
@@ -90,6 +89,11 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         attrText = getStrokeText("🏅: \(medalText)", reward >= 0 ? myOrange : myRed, strokeWidth: -2.5, font: MyFont.bold(ofSize: 8*fontSize))
 
         label = addAttrText(x: 5, y: y+30, h: 8, text: attrText)
+
+        let medalView = MedalView()
+        layout(3, y + 10, 40, 40, medalView)
+        addSubview(medalView)
+        medalView.viewWillAppear()
     }
 
     private func addActionButtons() {
@@ -106,7 +110,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         layout(3, yMax - 18, 42, 12, button)
         addSubview(button)
         playButton = button
-
+/*
         var leftSeconds = countDownSecs
         countDownTimer?.invalidate()
         countDownTimer = Timer.scheduledTimer(withTimeInterval: 1.00, repeats: true) { _ in
@@ -119,7 +123,6 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                 }
                 return
             }
-        }
+        }*/
     }
-
 }

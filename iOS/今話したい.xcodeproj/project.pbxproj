@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BE050B7E22227530007017C5 /* MessengerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE050B7D22227530007017C5 /* MessengerBar.swift */; };
+		BE11DEC92257110500373586 /* MedalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE11DEC82257110500373586 /* MedalView.swift */; };
 		BE152048218085120059A7C2 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE152047218085120059A7C2 /* Level.swift */; };
 		BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB3D209B19B200D23F22 /* GameContext.swift */; };
 		BE1CA958209DC43800086853 /* Messenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA957209DC43800086853 /* Messenger.swift */; };
@@ -137,6 +138,7 @@
 
 /* Begin PBXFileReference section */
 		BE050B7D22227530007017C5 /* MessengerBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerBar.swift; sourceTree = "<group>"; };
+		BE11DEC82257110500373586 /* MedalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalView.swift; sourceTree = "<group>"; };
 		BE152047218085120059A7C2 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		BE17FB3D209B19B200D23F22 /* GameContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameContext.swift; sourceTree = "<group>"; };
 		BE1CA957209DC43800086853 /* Messenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messenger.swift; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 				BEC2E9302179BD090095A65D /* TopicFilterBarView.swift */,
 				BE7441B2216CCBE000E53A3D /* LineChart.swift */,
 				BE221AA021A2A76D0009B23B /* CircleView.swift */,
+				BE11DEC82257110500373586 /* MedalView.swift */,
 				BEC4CF0D219D727B00E1A54C /* TopChartView.swift */,
 				BE8E51DE21CF7754007D29E6 /* TopChartView+LongTermGoal.swift */,
 				BE8E51DA21CF76CF007D29E6 /* TopChartView+DailyChart.swift */,
@@ -636,6 +639,7 @@
 				BE5E0CCE2183477400832E88 /* I18n.swift in Sources */,
 				BE7441B3216CCBE000E53A3D /* LineChart.swift in Sources */,
 				BE1CA958209DC43800086853 /* Messenger.swift in Sources */,
+				BE11DEC92257110500373586 /* MedalView.swift in Sources */,
 				BEBDEDD9208EF15F00C18520 /* utilities.swift in Sources */,
 				BE439C6321DF3AF100C0BE14 /* grammarN4.swift in Sources */,
 				BEEC7FAF21550818001C2EFF /* TopBarView.swift in Sources */,
