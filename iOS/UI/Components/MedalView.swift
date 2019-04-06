@@ -30,12 +30,51 @@ class MedalView: UIView, ReloadableView {
         let brassDark = rgb(148, 97, 33)
         let goldLight = rgb(255, 223, 55)
         let goldDark = rgb(179, 111, 29)
+        let w = bounds.width
 
         drawGradientCircle(rect: bounds, padding: 0, startColor: brassLight, endColor: brassDark)
-        drawGradientCircle(rect: bounds, padding: 3, startColor: goldLight, endColor: goldDark)
-        drawGradientCircle(rect: bounds, padding: 10, startColor: goldDark, endColor: goldLight)
-        drawGradientCircle(rect: bounds, padding: 13, startColor: goldLight, endColor: goldDark)
+        drawGradientCircle(rect: bounds, padding: w * 0.015, startColor: goldLight, endColor: goldDark)
+        drawGradientCircle(rect: bounds, padding: w * 0.055, startColor: goldDark, endColor: goldLight)
+        drawGradientCircle(rect: bounds, padding: w * 0.065, startColor: goldLight, endColor: goldDark)
 
+        drawStar()
+    }
+
+    private func drawStar() {
+
+        let goldMiddle = rgb(198, 139, 33)
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.startPoint = CGPoint(x: 1, y: 0.2)
+        gradientLayer.endPoint = CGPoint(x: 0.2, y: 1)
+        gradientLayer.frame = bounds
+        gradientLayer.colors = [
+            goldMiddle.cgColor, UIColor.black.cgColor
+        ]
+
+        let path = UIBezierPath()
+        let r = bounds.width * 0.30
+        let o = CGPoint(x: bounds.width/2, y: bounds.width/2)
+
+        func getP(_ idx: CGFloat) -> CGPoint {
+            return CGPoint(x: o.x + r * sin(.pi * idx * 0.4), y: o.y - r * cos(.pi * idx * 0.4))
+        }
+
+        path.move(to: getP(0))
+        path.addLine(to: getP(3))
+        path.addLine(to: getP(1))
+        path.addLine(to: getP(4))
+        path.addLine(to: getP(2))
+        path.close()
+
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.strokeColor = UIColor.white.cgColor
+        shapeLayer.fillColor = UIColor.white.cgColor
+        shapeLayer.lineWidth = bounds.width/30
+        shapeLayer.lineCap = .round
+        shapeLayer.lineJoin = .round
+        shapeLayer.path = path.cgPath
+        gradientLayer.mask = shapeLayer
+        layer.addSublayer(gradientLayer)
     }
 
     private func drawGradientCircle(rect: CGRect, padding: CGFloat = 0, startColor: UIColor, endColor: UIColor) {

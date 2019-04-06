@@ -70,8 +70,6 @@
 		BEA4E71E21AE604400CE6E63 /* secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA4E71D21AE604400CE6E63 /* secret.swift */; };
 		BEA4E72021AFB8B800CE6E63 /* GameExpirationDateInMS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA4E71F21AFB8B800CE6E63 /* GameExpirationDateInMS.swift */; };
 		BEA86115216F264A00AECF13 /* sqliteSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA86114216F264A00AECF13 /* sqliteSentences.swift */; };
-		BEB10C8D2257891200636EDD /* SwiftSVG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEB10C8C2257891200636EDD /* SwiftSVG.framework */; };
-		BEB10C8E2257891200636EDD /* SwiftSVG.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BEB10C8C2257891200636EDD /* SwiftSVG.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BEB6F6C92182B89D0011E1C1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEB6F6C72182B89D0011E1C1 /* InfoPlist.strings */; };
 		BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */; };
 		BEBDEDD9208EF15F00C18520 /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD1208EF15E00C18520 /* utilities.swift */; };
@@ -129,7 +127,6 @@
 				BED1BA4B2249FD6A009B68B6 /* Promises.framework in Embed Frameworks */,
 				BED1BA492249FD6A009B68B6 /* SQLite.framework in Embed Frameworks */,
 				BED1BA472249FD6A009B68B6 /* Charts.framework in Embed Frameworks */,
-				BEB10C8E2257891200636EDD /* SwiftSVG.framework in Embed Frameworks */,
 				BED1BA4D2249FD6A009B68B6 /* Alamofire.framework in Embed Frameworks */,
 				BED1BA4F2249FD6A009B68B6 /* FBLPromises.framework in Embed Frameworks */,
 			);
@@ -212,7 +209,6 @@
 		BEA4E71D21AE604400CE6E63 /* secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secret.swift; sourceTree = "<group>"; };
 		BEA4E71F21AFB8B800CE6E63 /* GameExpirationDateInMS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameExpirationDateInMS.swift; sourceTree = "<group>"; };
 		BEA86114216F264A00AECF13 /* sqliteSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sqliteSentences.swift; sourceTree = "<group>"; };
-		BEB10C8C2257891200636EDD /* SwiftSVG.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSVG.framework; path = Carthage/Build/iOS/SwiftSVG.framework; sourceTree = "<group>"; };
 		BEB6F6C82182B89D0011E1C1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Project/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BEB6F6CA2182B8AA0011E1C1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = Project/ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BEB6F6CB2182B8B60011E1C1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "Project/zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -269,7 +265,6 @@
 				BED1BA4A2249FD6A009B68B6 /* Promises.framework in Frameworks */,
 				BE7AFAF721CA2DC900C41BF4 /* FirebaseCoreDiagnostics.framework in Frameworks */,
 				BED1BA4C2249FD6A009B68B6 /* Alamofire.framework in Frameworks */,
-				BEB10C8D2257891200636EDD /* SwiftSVG.framework in Frameworks */,
 				BED1BA482249FD6A009B68B6 /* SQLite.framework in Frameworks */,
 				BE7AFAF821CA2DC900C41BF4 /* GoogleUtilities.framework in Frameworks */,
 				BED1BA4E2249FD6A009B68B6 /* FBLPromises.framework in Frameworks */,
@@ -427,7 +422,6 @@
 		BEBDEDB3208EF09F00C18520 = {
 			isa = PBXGroup;
 			children = (
-				BEB10C8C2257891200636EDD /* SwiftSVG.framework */,
 				BED1BA442249FD6A009B68B6 /* Alamofire.framework */,
 				BED1BA412249FD6A009B68B6 /* Charts.framework */,
 				BED1BA452249FD6A009B68B6 /* FBLPromises.framework */,
