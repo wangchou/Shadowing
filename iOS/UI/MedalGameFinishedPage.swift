@@ -72,13 +72,13 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         // info background
         addRect(x: 3, y: y, w: 42, h: 42, color: rgb(255, 255, 255).withAlphaComponent(0.03))
 
-        addMedalProgressBar(y: y + 1, medal: medal)
+        addMedalProgressBar(y: y + 1, medal: medal, textColor: .white, strokeColor: .black)
 
         guard let gr = context.gameRecord else { return }
 
         // rank
-        let rankText = context.gameMedal.usingDetailRank ? gr.detailRank : gr.rank
-        var attrText = getStrokeText("Rank: \(rankText)", .white, strokeWidth: -2.5, font: MyFont.bold(ofSize: 8*fontSize))
+        let rankText = context.gameMedal.usingDetailRank ? gr.detailRank.rawValue : gr.rank.rawValue
+        var attrText = getStrokeText("Rank \(rankText)", .white, strokeWidth: -2.5, font: MyFont.bold(ofSize: 8 * fontSize))
 
         var label = addAttrText(x: 5, y: y+16, h: 8, text: attrText)
         label.textAlignment = .left
@@ -86,12 +86,13 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         // medal
         guard let reward = gr.medalReward else { return }
         let medalText = "\(reward >= 0 ? "+" : "")\(reward)"
-        attrText = getStrokeText("🏅: \(medalText)", reward >= 0 ? myOrange : myRed, strokeWidth: -2.5, font: MyFont.bold(ofSize: 8*fontSize))
+        attrText = getStrokeText("\(medalText)", reward >= 0 ? .white : myRed, strokeWidth: -2.5, font: MyFont.bold(ofSize: 8 * fontSize))
 
-        label = addAttrText(x: 5, y: y+30, h: 8, text: attrText)
+        label = addAttrText(x: 22, y: y+30, w: 20, h: 8, text: attrText)
+        label.textAlignment = .right
 
         let medalView = MedalView()
-        layout(3, y + 10, 40, 40, medalView)
+        layout(6, y + 29, 10, 10, medalView)
         addSubview(medalView)
         medalView.viewWillAppear()
     }

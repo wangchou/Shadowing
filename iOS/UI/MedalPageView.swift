@@ -58,16 +58,20 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         languageRect.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat * 4, color: rgb(150, 150, 150))
 
         let topBarRect = UIView()
-        topBarRect.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        topBarRect.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         layout(0, 0, 42, 12, topBarRect)
         languageRect.addSubview(topBarRect)
 
+        let medalView = MedalView()
+        layout(6, y+2, 8, 8, medalView)
+        addSubview(medalView)
+        medalView.viewWillAppear()
+
         let medalCountStr = "\(medal.count)".padWidthTo(3)
-        let starStr = "⭐️ \(medalCountStr)"
-        let starAttrStr = getStrokeText(starStr, myOrange, strokeWidth: -2.5, font: MyFont.bold(ofSize: 8*fontSize))
-        var label = addAttrText(x: 3, y: y + 1, h: 10, text: starAttrStr)
-        label.centerX(languageRect.frame)
-        label.textAlignment = .center
+        let starStr = "\(medalCountStr)"
+        let starAttrStr = getStrokeText(starStr, .white, strokeWidth: -0.5, font: MyFont.bold(ofSize: 8*fontSize))
+        var label = addAttrText(x: 24, y: y + 1, w: 18, h: 10, text: starAttrStr)
+        label.textAlignment = .right
 
         // language name
         let langTitle = gameLang == .jp ? "日本語" : "英語"
@@ -145,16 +149,34 @@ extension GridLayout where Self: UIView {
         }
     }
 
-    func addMedalProgressBar(y: Int, medal: GameMedal) {
-        // progress bar
-        var label = addText(x: 6, y: y, h: 6, text: medal.lowLevel.title)
+    func addMedalProgressBar(
+        y: Int,
+        medal: GameMedal,
+        textColor: UIColor = .black,
+        strokeColor: UIColor = .white
+    ) {
+
+        // lvl text
+        let font = MyFont.bold(ofSize: 4 * fontSize)
+        var attrTitle = getStrokeText(medal.lowLevel.title,
+                                      textColor,
+                                      strokeWidth: Float(-0.6 * fontSize), strokColor: strokeColor,
+                                      font: font)
+        var label = addAttrText(x: 6, y: y, h: 6, text: attrTitle)
         label.textAlignment = .left
 
-        let nextLevelBound = medal.highLevel.rawValue * 50
-        label = addText(x: 6, y: y, h: 6, text: "\(medal.count)/\(nextLevelBound)")
+        // medal count
+        let nextLevelBound = medal.highLevel.rawValue * medal.medalsPerLevel
+        attrTitle = getStrokeText(
+            "\(medal.count)/\(nextLevelBound)",
+            textColor,
+            strokeWidth: Float(-0.6 * fontSize), strokColor: strokeColor,
+            font: font)
+        label = addAttrText(x: 6, y: y, h: 6, text: attrTitle)
         layout(22, y, 20, 6, label)
         label.textAlignment = .right
 
+        // bar
         let progressBarBack = UIView()
         progressBarBack.backgroundColor = .white
         layout(6, y + 6, 36, 1, progressBarBack)

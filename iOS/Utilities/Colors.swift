@@ -25,6 +25,12 @@ let myPurple = UIColor.purple
 let hashtagColor = rgb(0, 53, 105)
 let highlightColor = myOrange.withAlphaComponent(0.3)
 
+let brassLight = rgb(196, 177, 71)
+let brassDark = rgb(148, 97, 33)
+let goldLight = rgb(255, 223, 55)
+let goldMiddle = rgb(198, 139, 33)
+let goldDark = rgb(179, 111, 29)
+
 let myWhite = rgb(240, 240, 240)
 let myLightGray = rgb(224, 224, 224)
 let myGray = rgb(192, 192, 192)

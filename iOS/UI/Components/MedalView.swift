@@ -26,10 +26,6 @@ class MedalView: UIView, ReloadableView {
 
         layer.sublayers?.forEach { $0.removeFromSuperlayer() }
 
-        let brassLight = rgb(196, 177, 71)
-        let brassDark = rgb(148, 97, 33)
-        let goldLight = rgb(255, 223, 55)
-        let goldDark = rgb(179, 111, 29)
         let w = bounds.width
 
         drawGradientCircle(rect: bounds, padding: 0, startColor: brassLight, endColor: brassDark)
@@ -41,8 +37,6 @@ class MedalView: UIView, ReloadableView {
     }
 
     private func drawStar() {
-
-        let goldMiddle = rgb(198, 139, 33)
         let gradientLayer = CAGradientLayer()
         gradientLayer.startPoint = CGPoint(x: 1, y: 0.2)
         gradientLayer.endPoint = CGPoint(x: 0.2, y: 1)

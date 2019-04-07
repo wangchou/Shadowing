@@ -23,7 +23,7 @@ class MyFont {
         let key = "thin-\(fontSize)"
         if let font = fontCache[key] { return font }
         fontCache[key] = UIFont(name: ".HiraKakuInterface-W2", size: fontSize) ??
-                         UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.thin)
+                         UIFont.systemFont(ofSize: fontSize, weight: .thin)
         return fontCache[key]!
     }
 
@@ -31,7 +31,7 @@ class MyFont {
         let key = "regular-\(fontSize)"
         if let font = fontCache[key] { return font }
         fontCache[key] = UIFont(name: ".HiraKakuInterface-W3", size: fontSize) ??
-                         UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.regular)
+                         UIFont.systemFont(ofSize: fontSize, weight: .regular)
         return fontCache[key]!
     }
 
@@ -39,7 +39,7 @@ class MyFont {
         let key = "bold-\(fontSize)"
         if let font = fontCache[key] { return font }
         fontCache[key] = UIFont(name: ".HiraKakuInterface-W6", size: fontSize) ??
-                         UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.bold)
+                         UIFont.systemFont(ofSize: fontSize, weight: .bold)
         return fontCache[key]!
     }
 }
