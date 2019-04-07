@@ -45,9 +45,53 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
     func viewWillAppear() {
         removeAllSubviews()
-        drawTextBackground(bgColor: rgb(50, 50, 50), textColor: rgb(90, 90, 90))
-        addLangInfo(y: (yMax - 18)/2 - 21)
+        drawTextBackground(bgColor: rgb(60, 60, 60), textColor: rgb(100, 100, 100))
+        addTopBar(y: 5)
+        addLangInfo(y: (yMax - 18)/2 - 21 + 7)
         addGoButton()
+    }
+
+    private func addTopBar(y: Int) {
+        func addButton(iconName: String) -> UIButton {
+            let button = createButton(title: "", bgColor: myOrange)
+            button.setIconImage(named: iconName, tintColor: .black, isIconOnLeft: false)
+            button.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat,
+                               color: rgb(35, 35, 35))
+            addSubview(button)
+            return button
+        }
+
+        let leftButton = addButton(iconName: "outline_settings_black_24pt")
+        layout(3, y, 7, 7, leftButton)
+        leftButton.addTapGestureRecognizer {
+            (rootViewController.current as? UIPageViewController)?.goToPreviousPage()
+        }
+
+        let rightButton = addButton(iconName: "outline_all_inclusive_black_24pt")
+        layout(38, y, 7, 7, rightButton)
+
+        rightButton.addTapGestureRecognizer {
+            (rootViewController.current as? UIPageViewController)?.goToNextPage()
+        }
+
+        // total medal counts
+        let outerRect = addRect(x: 13, y: y, w: 22, h: 7,
+                                color: UIColor.white.withAlphaComponent(0.2))
+        outerRect.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat,
+                              color: UIColor.black.withAlphaComponent(0.8))
+
+        let medalView = MedalView()
+        layout(15, y + 2, 4, 4, medalView)
+        medalView.centerY(outerRect.frame)
+        medalView.viewWillAppear()
+        addSubview(medalView)
+
+        let starAttrStr = getStrokeText("\(context.gameMedal.totalCount)".padWidthTo(4),
+                                        myOrange,
+                                        strokeWidth: Float(stepFloat * -3/5),
+                                        font: MyFont.heavyDigit(ofSize: 5 * fontSize))
+        let label = addAttrText(x: 19, y: y - 1, w: 14, h: 9, text: starAttrStr)
+        label.textAlignment = .center
     }
 
     private func addLangInfo(y: Int) {
@@ -55,7 +99,13 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
         // info background
         let outerRect = addRect(x: 3, y: y, w: 42, h: 42, color: .clear)
-        outerRect.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat * 3, color: rgb(150, 150, 150))
+        outerRect.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat * 3,
+                              color: UIColor.black.withAlphaComponent(0.8))
+        outerRect.addTapGestureRecognizer { [weak self] in
+            gameLang = gameLang == .jp ? .en : .jp
+            saveGameLang()
+            self?.viewWillAppear()
+        }
 
         let topBarRect = UIView()
         topBarRect.backgroundColor = UIColor.darkGray.withAlphaComponent(0.7)
@@ -73,9 +123,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         addSubview(medalView)
         medalView.viewWillAppear()
 
-        let medalCountStr = "\(medal.count)".padWidthTo(3)
-        let starStr = "\(medalCountStr)"
-        let starAttrStr = getStrokeText(starStr,
+        let starAttrStr = getStrokeText("\(medal.count)".padWidthTo(3),
                                         rgb(220, 220, 220),
                                         strokeWidth: Float(stepFloat * -3/5),
                                         font: MyFont.heavyDigit(ofSize: 7 * fontSize))
@@ -106,7 +154,8 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
             font: MyFont.bold(ofSize: 8 * stepFloat)
         )
         button.setAttributedTitle(attrText, for: .normal)
-        button.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat * 3, color: UIColor.red.withSaturation(0.4))
+        button.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat * 3,
+                           color: UIColor.red.withSaturation(0.3))
         button.showsTouchWhenHighlighted = true
         button.addTarget(self, action: #selector(onGoButtonClicked), for: .touchUpInside)
 

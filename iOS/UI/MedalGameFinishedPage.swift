@@ -123,10 +123,10 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
             }
         }
 
-        layout(3, yMax - 18, 42, 12, button)
+        layout(3, yMax - 18, 28, 12, button)
         addSubview(button)
         playButton = button
-/*
+
         var leftSeconds = countDownSecs
         countDownTimer?.invalidate()
         countDownTimer = Timer.scheduledTimer(withTimeInterval: 1.00, repeats: true) { _ in
@@ -139,6 +139,17 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                 }
                 return
             }
-        }*/
+        }
+
+        let backButton = createButton(title: "", bgColor: .lightGray)
+        backButton.setIconImage(named: "baseline_exit_to_app_black_48pt", title: "", tintColor: .white, isIconOnLeft: false)
+
+        backButton.addTapGestureRecognizer {
+            countDownTimer?.invalidate()
+            dismissTwoVC()
+        }
+
+        layout(33, yMax - 18, 12, 12, backButton)
+        addSubview(backButton)
     }
 }

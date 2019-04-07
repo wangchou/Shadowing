@@ -43,6 +43,11 @@ extension UIView {
         frame.origin.x = boundRect.origin.x + xPadding + xShift
     }
 
+    func centerY(_ boundRect: CGRect, yShift: CGFloat = 0) {
+        let yPadding = (boundRect.height - frame.height)/2
+        frame.origin.y = boundRect.origin.y + yPadding + yShift
+    }
+
     func moveToBottom(_ boundRect: CGRect, yShift: CGFloat = 0) {
         frame.origin.y = boundRect.origin.y + boundRect.height - frame.size.height + yShift
     }
