@@ -54,31 +54,43 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         let medal = context.gameMedal
 
         // info background
-        let languageRect = addRect(x: 3, y: y, w: 42, h: 42, color: rgb(255, 255, 255).withAlphaComponent(0.7))
-        languageRect.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat * 4, color: rgb(150, 150, 150))
+        let outerRect = addRect(x: 3, y: y, w: 42, h: 42, color: .clear)
+        outerRect.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat * 3, color: rgb(150, 150, 150))
 
         let topBarRect = UIView()
-        topBarRect.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        layout(0, 0, 42, 12, topBarRect)
-        languageRect.addSubview(topBarRect)
+        topBarRect.backgroundColor = UIColor.darkGray.withAlphaComponent(0.7)
+        layout(0, 0, 42, 10, topBarRect)
+        outerRect.addSubview(topBarRect)
 
+        let bottomBarRect = UIView()
+        bottomBarRect.backgroundColor = UIColor.white.withAlphaComponent(0.7)
+        layout(0, 10, 42, 32, bottomBarRect)
+        outerRect.addSubview(bottomBarRect)
+
+        // medal
         let medalView = MedalView()
-        layout(6, y+2, 8, 8, medalView)
+        layout(6, y+2, 6, 6, medalView)
         addSubview(medalView)
         medalView.viewWillAppear()
 
         let medalCountStr = "\(medal.count)".padWidthTo(3)
         let starStr = "\(medalCountStr)"
-        let starAttrStr = getStrokeText(starStr, .white, strokeWidth: -0.5, font: MyFont.bold(ofSize: 8*fontSize))
-        var label = addAttrText(x: 24, y: y + 1, w: 18, h: 10, text: starAttrStr)
+        let starAttrStr = getStrokeText(starStr,
+                                        rgb(220, 220, 220),
+                                        strokeWidth: Float(stepFloat * -3/5),
+                                        font: MyFont.heavyDigit(ofSize: 7 * fontSize))
+        var label = addAttrText(x: 24, y: y + 1, w: 18, h: 8, text: starAttrStr)
         label.textAlignment = .right
 
         // language name
         let langTitle = gameLang == .jp ? "日本語" : "英語"
-        let attrTitle = getStrokeText(langTitle, .white, strokeWidth: -2.5, font: MyFont.bold(ofSize: 10*fontSize))
+        let attrTitle = getStrokeText(langTitle,
+                                      .white,
+                                      strokeWidth: Float(stepFloat * -2/5),
+                                      font: MyFont.bold(ofSize: 10*fontSize))
 
         label = addAttrText(x: 3, y: y+16, h: 10, text: attrTitle)
-        label.centerX(languageRect.frame)
+        label.centerX(outerRect.frame)
         label.textAlignment = .center
         addMedalProgressBar(y: y + 31, medal: medal)
     }
@@ -94,7 +106,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
             font: MyFont.bold(ofSize: 8 * stepFloat)
         )
         button.setAttributedTitle(attrText, for: .normal)
-        button.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat * 4, color: UIColor.red.withSaturation(0.4))
+        button.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat * 3, color: UIColor.red.withSaturation(0.4))
         button.showsTouchWhenHighlighted = true
         button.addTarget(self, action: #selector(onGoButtonClicked), for: .touchUpInside)
 
@@ -157,11 +169,10 @@ extension GridLayout where Self: UIView {
     ) {
 
         // lvl text
-        let font = MyFont.bold(ofSize: 4 * fontSize)
         var attrTitle = getStrokeText(medal.lowLevel.title,
                                       textColor,
-                                      strokeWidth: Float(-0.6 * fontSize), strokColor: strokeColor,
-                                      font: font)
+                                      strokeWidth: Float(-0.3 * fontSize), strokColor: strokeColor,
+                                      font: MyFont.bold(ofSize: 4 * fontSize))
         var label = addAttrText(x: 6, y: y, h: 6, text: attrTitle)
         label.textAlignment = .left
 
@@ -171,7 +182,7 @@ extension GridLayout where Self: UIView {
             "\(medal.count)/\(nextLevelBound)",
             textColor,
             strokeWidth: Float(-0.6 * fontSize), strokColor: strokeColor,
-            font: font)
+            font: MyFont.heavyDigit(ofSize: 4 * fontSize))
         label = addAttrText(x: 6, y: y, h: 6, text: attrTitle)
         layout(22, y, 20, 6, label)
         label.textAlignment = .right

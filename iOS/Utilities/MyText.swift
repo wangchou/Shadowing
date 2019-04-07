@@ -42,6 +42,13 @@ class MyFont {
                          UIFont.systemFont(ofSize: fontSize, weight: .bold)
         return fontCache[key]!
     }
+
+    static func heavyDigit(ofSize fontSize: CGFloat) -> UIFont {
+        let key = "heavy-\(fontSize)"
+        if let font = fontCache[key] { return font }
+        fontCache[key] = UIFont.systemFont(ofSize: fontSize, weight: .heavy)
+        return fontCache[key]!
+    }
 }
 
 extension NSMutableAttributedString {
