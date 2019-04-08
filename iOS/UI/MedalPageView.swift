@@ -213,7 +213,8 @@ extension GridLayout where Self: UIView {
         y: Int,
         medal: GameMedal,
         textColor: UIColor = .black,
-        strokeColor: UIColor = .white
+        strokeColor: UIColor = .white,
+        isSlideIn: Bool = false
     ) {
 
         // lvl text
@@ -223,6 +224,7 @@ extension GridLayout where Self: UIView {
                                       font: MyFont.bold(ofSize: 4 * fontSize))
         var label = addAttrText(x: 6, y: y, h: 6, text: attrTitle)
         label.textAlignment = .left
+        if isSlideIn { slideIn(view: label, delay: 1.4, duration: 0.3) }
 
         // medal count
         let nextLevelBound = medal.highLevel.rawValue * medal.medalsPerLevel
@@ -234,6 +236,7 @@ extension GridLayout where Self: UIView {
         label = addAttrText(x: 6, y: y, h: 6, text: attrTitle)
         layout(22, y, 20, 6, label)
         label.textAlignment = .right
+        if isSlideIn { slideIn(view: label, delay: 1.4, duration: 0.3) }
 
         // bar
         let progressBarBack = UIView()
@@ -241,6 +244,7 @@ extension GridLayout where Self: UIView {
         layout(6, y + 6, 36, 1, progressBarBack)
         progressBarBack.roundBorder(borderWidth: 1.5, cornerRadius: stepFloat/2, color: .clear)
         addSubview(progressBarBack)
+        if isSlideIn { slideIn(view: progressBarBack, delay: 1.4, duration: 0.3) }
 
         let progressBarFront = UIView()
         progressBarFront.backgroundColor = medal.lowLevel.color
@@ -254,5 +258,6 @@ extension GridLayout where Self: UIView {
         }
         progressBarFront.frame.size.width = progressBarBack.frame.width * percentage
         addSubview(progressBarFront)
+        if isSlideIn { slideIn(view: progressBarFront, delay: 1.4, duration: 0.3) }
     }
 }

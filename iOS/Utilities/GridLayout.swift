@@ -83,6 +83,31 @@ extension GridLayout where Self: UIView {
         return label
     }
 
+    @discardableResult
+    func addStrokeText(x: Int,
+                       y: Int,
+                       w: Int? = nil,
+                       h: Int,
+                       text: String,
+                       textColor: UIColor,
+                       strokeWidth: Float,
+                       strokeColor: UIColor,
+                       font: UIFont,
+                       completion: ((UIView) -> Void)? = nil
+        ) -> UILabel {
+        let label = UILabel()
+        let attrText = getStrokeText(text,
+            textColor,
+            strokeWidth: strokeWidth,
+            strokColor: strokeColor,
+            font: font)
+        label.attributedText = attrText
+        layout(x, y, w ?? (gridCount - x), h, label)
+        addSubview(label)
+        completion?(label)
+        return label
+    }
+
     func addRoundRect(x: Int, y: Int, w: Int, h: Int,
                       borderColor: UIColor,
                       radius: CGFloat? = nil,
