@@ -45,24 +45,40 @@ func easyLoad<T: Codable>(object: inout T, key: String) {
     // swiftlint:enable force_cast
 }
 
-func loadGameMiscData() {
-    easyLoad(object: &userSaidSentences, key: userSaidSentencesKey + gameLang.key)
-    easyLoad(object: &sentenceScores, key: sentenceScoreKey  + gameLang.key)
-    easyLoad(object: &lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)
-    easyLoad(object: &translations, key: translationsKey + gameLang.key)
-
-    guard gameLang == Lang.jp else { return }
-
-    if let loadedKanaTokenInfos = loadFromUserDefault(type: type(of: kanaTokenInfosCacheDictionary), key: kanaTokenInfosKey + gameLang.key) {
-        let validSentenceSet: Set<String> = Set(userSaidSentences.values).union(Set(userSaidSentences.keys))
-        print("\t\t key count: \(validSentenceSet.count) / \(loadedKanaTokenInfos.keys.count)")
-        for key in validSentenceSet {
-            if let value = loadedKanaTokenInfos[key] {
-                kanaTokenInfosCacheDictionary[key] = value
-            }
+func loadGameMiscData(isLoadKana: Bool = false, isAsync: Bool = false) {
+    if isAsync {
+        DispatchQueue.global().async {
+            easyLoad(object: &translations, key: translationsKey + gameLang.key)
+        }
+        DispatchQueue.global().async {
+            easyLoad(object: &userSaidSentences, key: userSaidSentencesKey + gameLang.key)
+        }
+        DispatchQueue.global().async {
+            easyLoad(object: &sentenceScores, key: sentenceScoreKey  + gameLang.key)
+        }
+        DispatchQueue.global().async {
+            easyLoad(object: &lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)
         }
     } else {
-        print("create new kanaTokenInfos")
+        easyLoad(object: &translations, key: translationsKey + gameLang.key)
+        easyLoad(object: &userSaidSentences, key: userSaidSentencesKey + gameLang.key)
+        easyLoad(object: &sentenceScores, key: sentenceScoreKey  + gameLang.key)
+        easyLoad(object: &lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)
+    }
+    guard isLoadKana else { return }
+
+    DispatchQueue.global().async {
+        if let loadedKanaTokenInfos = loadFromUserDefault(type: type(of: kanaTokenInfosCacheDictionary), key: kanaTokenInfosKey + Lang.jp.key) {
+            let validSentenceSet: Set<String> = Set(userSaidSentences.values).union(Set(userSaidSentences.keys))
+            //print("\t\t key count: \(validSentenceSet.count) / \(loadedKanaTokenInfos.keys.count)")
+            for key in validSentenceSet {
+                if let value = loadedKanaTokenInfos[key] {
+                    kanaTokenInfosCacheDictionary[key] = value
+                }
+            }
+        } else {
+            print("create new kanaTokenInfos")
+        }
     }
 
 }

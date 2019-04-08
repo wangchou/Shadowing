@@ -79,6 +79,7 @@
 		BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD8208EF15F00C18520 /* constants.swift */; };
 		BEBF5D1C2255D9F60069C34F /* GameMedal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBF5D1B2255D9F60069C34F /* GameMedal.swift */; };
 		BEBF5D1E225624C50069C34F /* MedalGameFinishedPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBF5D1D225624C50069C34F /* MedalGameFinishedPage.swift */; };
+		BEC1EB5C225B026A003DD265 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC1EB5B225B026A003DD265 /* SplashScreenViewController.swift */; };
 		BEC2E92F217875C30095A65D /* RootContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC2E92E217875C30095A65D /* RootContainerViewController.swift */; };
 		BEC2E9312179BD090095A65D /* TopicFilterBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC2E9302179BD090095A65D /* TopicFilterBarView.swift */; };
 		BEC4CF0E219D727B00E1A54C /* TopChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC4CF0D219D727B00E1A54C /* TopChartView.swift */; };
@@ -224,6 +225,7 @@
 		BEBDEDD8208EF15F00C18520 /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		BEBF5D1B2255D9F60069C34F /* GameMedal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMedal.swift; sourceTree = "<group>"; };
 		BEBF5D1D225624C50069C34F /* MedalGameFinishedPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalGameFinishedPage.swift; sourceTree = "<group>"; };
+		BEC1EB5B225B026A003DD265 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		BEC2E92E217875C30095A65D /* RootContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerViewController.swift; sourceTree = "<group>"; };
 		BEC2E9302179BD090095A65D /* TopicFilterBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicFilterBarView.swift; sourceTree = "<group>"; };
 		BEC4CF0D219D727B00E1A54C /* TopChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopChartView.swift; sourceTree = "<group>"; };
@@ -490,6 +492,7 @@
 				BE28B2C121A3EAB500088214 /* Main.storyboard */,
 				BED1BA52224A35FF009B68B6 /* MedalPage.swift */,
 				BED1BA50224A3455009B68B6 /* MedalPageView.swift */,
+				BEC1EB5B225B026A003DD265 /* SplashScreenViewController.swift */,
 				BE5ABAC8217B703500A63C5F /* InfoPage.swift */,
 				BEC2E92E217875C30095A65D /* RootContainerViewController.swift */,
 				BEBF5D1D225624C50069C34F /* MedalGameFinishedPage.swift */,
@@ -688,6 +691,7 @@
 				BE6C78542165DD2B0072B1C5 /* GameReportBoxView.swift in Sources */,
 				BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */,
 				BE221AA121A2A76D0009B23B /* CircleView.swift in Sources */,
+				BEC1EB5C225B026A003DD265 /* SplashScreenViewController.swift in Sources */,
 				BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */,
 				BE8180C020B3BEB6006ABCB3 /* MyText.swift in Sources */,
 				BE8F747F2176E258005546DC /* kanaFix.swift in Sources */,

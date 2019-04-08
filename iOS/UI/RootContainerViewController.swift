@@ -9,20 +9,21 @@
 import Foundation
 import UIKit
 import Speech
+import Promises
 
 class RootContainerViewController: UIViewController {
     static var isShowSetting = false
 
     var current: UIViewController!
-    var splashScreen: UIViewController!
+    var splashScreen: SplashScreenViewController!
     var topicSwipablePage: TopicSwipablePage!
     var infiniteChallengeSwipablePage: InfiniteChallengeSwipablePage!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        splashScreen = getVC("LaunchScreen")
 
         // swiftlint:disable force_cast
+        splashScreen = (getVC("LaunchScreen") as! SplashScreenViewController)
         topicSwipablePage = (getVC(TopicSwipablePage.storyboardId) as! TopicSwipablePage)
         infiniteChallengeSwipablePage = (getVC(InfiniteChallengeSwipablePage.storyboardId) as! InfiniteChallengeSwipablePage)
         // swiftlint:enable force_cast
@@ -31,18 +32,25 @@ class RootContainerViewController: UIViewController {
 
         showVC(splashScreen)
 
+        splashScreen.launched.always { [weak self] in
+            self?.loadStartupData()
+            self?.showInitialPage()
+        }
+    }
+
+    private func loadStartupData() {
+        let t1 = getNow()
         loadGameLang()
-        loadTopSentencesInfoDB()
+        loadGameSetting()
+        loadMedalCount()
+
+        loadTopicSentenceDB()
         loadSentenceDB()
         loadDataSets()
-        loadMedalCount()
-        loadGameHistory()
-        loadGameSetting()
-        loadGameMiscData()
 
-        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
-            self.showInitialPage()
-        }
+        loadGameHistory()
+        loadGameMiscData(isLoadKana: true, isAsync: true)
+        print("\nstartup load time: \(getNow() - t1)")
     }
 
     private func showInitialPage() {

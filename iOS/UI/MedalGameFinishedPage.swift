@@ -56,6 +56,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
     func viewWillAppear() {
         removeAllSubviews()
+        sayResult()
         drawTextBackground(bgColor: rgb(50, 50, 50), textColor: rgb(70, 70, 70))
         let yMax = Int(screen.height / stepFloat)
         addInfo(y: (yMax - 18)/2 - 21)
@@ -64,6 +65,15 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
     func viewWillDisappear() {
         countDownTimer?.invalidate()
+    }
+
+    private func sayResult() {
+        guard let record = context.gameRecord else { return }
+        let statusText = i18n.getSpeakingStatus(
+            percent: record.progress,
+            rank: record.rank.rawValue,
+            reward: record.medalReward)
+        _ = teacherSay(statusText, rate: fastRate)
     }
 
     private func addInfo(y: Int) {

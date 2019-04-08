@@ -173,18 +173,12 @@ class SettingPage: UITableViewController {
 
     @IBAction func gameLangSegmentControlValueChanged(_ sender: Any) {
         if gameLangSegmentControl.selectedSegmentIndex == 1 {
-            gameLang = .jp
+            changeGameLangTo(lang: .jp)
         } else {
-            gameLang = .en
+            changeGameLangTo(lang: .en)
         }
 
-        saveGameLang()
-        loadGameSetting()
         render()
-        loadGameHistory()
-        DispatchQueue.global().async {
-            loadGameMiscData()
-        }
 
         RootContainerViewController.isShowSetting = true
         if gameLang == .en {

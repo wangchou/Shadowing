@@ -102,8 +102,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         outerRect.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat * 3,
                               color: UIColor.black.withAlphaComponent(0.8))
         outerRect.addTapGestureRecognizer { [weak self] in
-            gameLang = gameLang == .jp ? .en : .jp
-            saveGameLang()
+            changeGameLangTo(lang: gameLang == .jp ? .en : .jp)
             self?.viewWillAppear()
         }
 
