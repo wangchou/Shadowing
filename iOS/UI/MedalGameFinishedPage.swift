@@ -98,20 +98,20 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         guard let gr = context.gameRecord else { return }
 
         drawTitleBlock(y: y, gr: gr, duration: 0.3).then {
-            self.drawCompleteness(y: y, gr, duration: 0.3)
+            self.drawCompleteness(y: y+5, gr, duration: 0.3)
         }.then {
             self.sayCompleteness(gr: gr)
         }.then {
-            self.drawRank(y: y, gr, duration: 0.3)
+            self.drawRank(y: y+5, gr, duration: 0.3)
         }.then {
             self.sayRank(gr: gr)
         }.then {
-            self.drawMedal(y: y, gr: gr, medal: medal, duration: 0.3)
+            self.drawMedal(y: y+18, gr: gr, medal: medal, duration: 0.3)
         }.then {
-            pausePromise(1).then {
-                self.addMedalProgressBar(y: y + 30, medal: medal,
+            pausePromise(0.3).then {
+                self.addMedalProgressBar(y: y + 31, medal: medal,
                                          textColor: .white, strokeColor: .black,
-                                         duration: 0)
+                                         duration: 0.2)
             }
             _ = self.sayMedalChange(gr: gr)
         }
@@ -141,7 +141,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                                  .white,
                                  strokeWidth: strokeWidth/2,
                                  font: MyFont.bold(ofSize: 3 * fontSize))
-        var label = addAttrText(x: 7, y: y+4, h: 4, text: attrText)
+        var label = addAttrText(x: 7, y: y, h: 4, text: attrText)
         label.textAlignment = .left
         slideIn(view: label, duration: duration)
 
@@ -150,7 +150,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
             strokeWidth: strokeWidth/2,
             strokColor: .white,
             font: MyFont.heavyDigit(ofSize: 8 * fontSize))
-        label = addAttrText(x: 3, y: y+7, w: 20, h: 8, text: attrText)
+        label = addAttrText(x: 3, y: y+3, w: 20, h: 8, text: attrText)
         label.textAlignment = .right
         slideIn(view: label, duration: duration)
 
@@ -158,7 +158,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                                  .white,
                                  strokeWidth: strokeWidth/2,
                                  font: MyFont.bold(ofSize: 3 * fontSize))
-        label = addAttrText(x: 23, y: y+11, h: 4, text: attrText)
+        label = addAttrText(x: 23, y: y+7, h: 4, text: attrText)
         label.textAlignment = .left
         slideIn(view: label, duration: duration)
 
@@ -171,7 +171,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                                  .white,
                                  strokeWidth: strokeWidth/2,
                                  font: MyFont.bold(ofSize: 3 * fontSize))
-        var label = addAttrText(x: 29, y: y+4, h: 4, text: attrText)
+        var label = addAttrText(x: 29, y: y, h: 4, text: attrText)
         label.textAlignment = .left
         slideIn(view: label, duration: duration)
 
@@ -181,7 +181,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                                  rank.color,
                                  strokeWidth: strokeWidth,
                                  font: MyFont.heavyDigit(ofSize: 8 * fontSize))
-        label = addAttrText(x: 26, y: y+7, w: 15, h: 8, text: attrText)
+        label = addAttrText(x: 26, y: y+3, w: 15, h: 8, text: attrText)
         label.textAlignment = .right
         slideIn(view: label, duration: duration)
 
@@ -191,23 +191,23 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     private func drawMedal(y: Int, gr: GameRecord, medal: GameMedal, duration: TimeInterval) -> Promise<Void> {
         // medal
         let medalView = MedalView()
-        layout(7, y + 18, 8, 8, medalView)
+        layout(7, y, 10, 10, medalView)
         addSubview(medalView)
         medalView.viewWillAppear()
-        slideIn(view: medalView, duration: duration)
+        shrinkIn(view: medalView, duration: duration)
 
         // medal text
         guard let reward = gr.medalReward else { return fulfilledVoidPromise() }
         let medalText = "\(reward >= 0 ? "+" : "")\(reward)"
         let attrText = getStrokeText("\(medalText)",
-            reward >= 0 ? myGreen : myRed,
+            .white,//reward >= 0 ? myGreen : myRed,
             strokeWidth: strokeWidth,
-            font: MyFont.heavyDigit(ofSize: 8 * fontSize))
+            font: MyFont.heavyDigit(ofSize: 10 * stepFloat))
 
-        let label = addAttrText(x: 21, y: y+18, w: 20, h: 8, text: attrText)
+        let label = addAttrText(x: 21, y: y, w: 20, h: 10, text: attrText)
         label.textAlignment = .right
 
-        slideIn(view: label, duration: duration)
+        shrinkIn(view: label, duration: duration)
 
         return fulfilledVoidPromise()
     }
@@ -274,6 +274,17 @@ func enlargeIn(view: UIView, delay: TimeInterval = 0, duration: TimeInterval) {
     let animator = UIViewPropertyAnimator(duration: duration, curve: .easeIn, animations: {
         view.transform = CGAffineTransform(scaleX: 1, y: 1)
         view.alpha = 1
+    })
+    Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { _ in
+        animator.startAnimation()
+    }
+}
+
+func shrinkIn(view: UIView, delay: TimeInterval = 0, duration: TimeInterval) {
+    view.transform = CGAffineTransform(scaleX: 3, y: 3)
+
+    let animator = UIViewPropertyAnimator(duration: duration, curve: .easeIn, animations: {
+        view.transform = CGAffineTransform(scaleX: 1, y: 1)
     })
     Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { _ in
         animator.startAnimation()

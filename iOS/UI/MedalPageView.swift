@@ -76,7 +76,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
         // total medal counts
         let outerRect = addRect(x: 13, y: y, w: 22, h: 7,
-                                color: UIColor.white.withAlphaComponent(0.2))
+                                color: UIColor.white.withAlphaComponent(0.15))
         outerRect.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat,
                               color: UIColor.black.withAlphaComponent(0.8))
 
