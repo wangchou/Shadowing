@@ -78,7 +78,7 @@ class GameContext {
         case .infiniteChallengeMode:
             return "[無限挑戦] \(infiniteChallengeLevel.title)"
         case .medalMode:
-            return "[🏅メダルモード] \(gameMedal.lowLevel.title)"
+            return "[メダルモード] \(gameMedal.lowLevel.title)"
         }
     }
 

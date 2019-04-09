@@ -97,9 +97,8 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     private func addLangInfo(y: Int) {
         let medal = context.gameMedal
 
-        let rect = addRect(x: 3, y: y+16, w: 42, h: 21, color: UIColor.black.withAlphaComponent(0.4))
+        let rect = addRect(x: 2, y: y+15, w: 44, h: 22, color: UIColor.black.withAlphaComponent(0.4))
         rect.roundBorder(borderWidth: 0, cornerRadius: stepFloat * 3, color: .clear)
-
 
         // info background
         let outerRect = addRect(x: 3, y: y, w: 42, h: 42,
@@ -119,14 +118,15 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
         let label = addAttrText(x: 3, y: y+7, h: 13, text: attrTitle)
         label.sizeToFit()
+        label.textAlignment = .center
         label.centerX(outerRect.frame)
 
-        drawLangMedalBox(y: y + 21)
+        drawMedal(y: y + 21)
 
         addMedalProgressBar(y: y + 26, medal: medal, isWithOutGlow: false)
     }
 
-    private func drawLangMedalBox(y: Int) {
+    private func drawMedal(y: Int) {
         let medal = context.gameMedal
         let x = 26
 
@@ -150,6 +150,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
     private func addGoButton(y: Int) {
         let button = UIButton()
+        let w = 15
         button.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .highlighted)
         button.backgroundColor = .red
         let attrText = getStrokeText(
@@ -159,12 +160,12 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         )
         button.setAttributedTitle(attrText, for: .normal)
         button.roundBorder(borderWidth: stepFloat/2,
-                           cornerRadius: stepFloat * 7.5,
+                           cornerRadius: stepFloat * CGFloat(w)/2,
                            color: .black)
         button.showsTouchWhenHighlighted = true
         button.addTarget(self, action: #selector(onGoButtonClicked), for: .touchUpInside)
 
-        layout(30, yMax - 18, 15, 15, button)
+        layout(45 - w, yMax - w - 3, w, w, button)
         addSubview(button)
     }
 
@@ -180,16 +181,27 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
 }
 
+func rollingText(view: UIView) {
+    let animator = UIViewPropertyAnimator(duration: 15, curve: .easeOut, animations: {
+        view.transform = CGAffineTransform.identity
+            .translatedBy(x: 0, y: screen.width/2)
+            .rotated(by: -1 * .pi/8)
+            .translatedBy(x: -400, y: -200)
+    })
+
+    animator.startAnimation()
+}
+
 extension GridLayout where Self: UIView {
     func drawTextBackground(bgColor: UIColor, textColor: UIColor) {
         backgroundColor = bgColor
         let num = Int(sqrt(pow(screen.width, 2) + pow(screen.height, 2)) / stepFloat)/8
         let level = context.gameMedal.lowLevel
-        let sentences = getRandSentences(level: level, numOfSentences: num * 2)
+        let sentences = getRandSentences(level: level, numOfSentences: num * 4)
         func randPad(_ string: String) -> String {
             var res = string
-            let prefixCount = Int.random(in: 0 ... 10 + level.rawValue * 3)
-            let suffixCount = Int.random(in: 2 ... 8)
+            let prefixCount = Int.random(in: 0 ... 10)
+            let suffixCount = Int.random(in: 2 ... 10)
             for _ in 0 ..< prefixCount {
                 res = " " + res
             }
@@ -201,7 +213,10 @@ extension GridLayout where Self: UIView {
         for i in 0 ..< num {
             let x = 1
             let y = i * 9
-            let sentence = randPad(sentences[i]) + sentences[i+num]
+            let sentence = randPad(sentences[i]) +
+                           randPad(sentences[i+num]) +
+                           randPad(sentences[i + (2 * num)]) +
+                           sentences[i + (3 * num)]
             let label = addText(x: x, y: y, h: 6 - level.rawValue/3, text: sentence, color: textColor)
             label.sizeToFit()
             label.centerX(frame)
@@ -209,8 +224,9 @@ extension GridLayout where Self: UIView {
             label.textAlignment = .left
 
             label.transform = CGAffineTransform.identity
-                .translatedBy(x: 0, y: -1 * screen.width/5)
+                .translatedBy(x: 0, y: screen.width/2)
                 .rotated(by: -1 * .pi/8)
+            rollingText(view: label)
         }
     }
 
