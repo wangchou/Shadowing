@@ -48,7 +48,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         drawTextBackground(bgColor: rgb(60, 60, 60), textColor: rgb(100, 100, 100))
         addTopBar(y: 5)
         addLangInfo(y: (yMax - 18)/2 - 21 + 10)
-        addGoButton(y: (yMax - 18)/2 - 21 + 46)
+        addGoButton(y: (yMax - 18)/2 - 21 + 40)
     }
 
     private func addTopBar(y: Int) {
@@ -97,38 +97,44 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     private func addLangInfo(y: Int) {
         let medal = context.gameMedal
 
-        let rect = addRect(x: 2, y: y+15, w: 44, h: 22, color: UIColor.black.withAlphaComponent(0.4))
-        rect.roundBorder(borderWidth: 0, cornerRadius: stepFloat * 3, color: .clear)
+        // back
+        var rect = addRect(x: 36, y: y+6, w: 8, h: 6, color: UIColor.white.withAlphaComponent(0.3))
+        rect.roundBorder(borderWidth: 0, cornerRadius: stepFloat, color: .clear)
+        var langTitle = gameLang == .jp ? "英" : "日"
+        var attrTitle = getStrokeText(langTitle,
+                                  rgb(150, 150, 150),
+                                  strokeWidth: Float(stepFloat * -2/5),
+                                  font: MyFont.bold(ofSize: 4*fontSize))
 
-        // info background
-        let outerRect = addRect(x: 3, y: y, w: 42, h: 42,
-                                color: UIColor.white.withAlphaComponent(0.05))
-        outerRect.addTapGestureRecognizer { [weak self] in
+        var label = addAttrText(x: 26, y: y+2, w: 18, h: 10, text: attrTitle)
+        label.textAlignment = .center
+        label.centerIn(rect.frame)
+
+        rect.addTapGestureRecognizer {
             changeGameLangTo(lang: gameLang == .jp ? .en : .jp)
-            self?.viewWillAppear()
+            self.viewWillAppear()
         }
-        outerRect.isHidden = true
 
-        // language name
-        let langTitle = gameLang == .jp ? "日本語" : "英語"
-        let attrTitle = getStrokeText(langTitle,
+        // main
+        rect = addRect(x: 4, y: y+15, w: 40, h: 22, color: UIColor.black.withAlphaComponent(0.4))
+        rect.roundBorder(borderWidth: 0, cornerRadius: stepFloat * 3, color: .clear)
+        langTitle = gameLang == .jp ? "日本語" : "英語"
+        attrTitle = getStrokeText(langTitle,
                                       .white,
                                       strokeWidth: Float(stepFloat * -2/5),
-                                      font: MyFont.bold(ofSize: 13*fontSize))
+                                      font: MyFont.bold(ofSize: 10*fontSize))
 
-        let label = addAttrText(x: 3, y: y+7, h: 13, text: attrTitle)
+        label = addAttrText(x: 7, y: y+9, h: 13, text: attrTitle)
         label.sizeToFit()
-        label.textAlignment = .center
-        label.centerX(outerRect.frame)
 
-        drawMedal(y: y + 21)
+        addMedalProgressBar(y: y + 19, medal: medal, isWithOutGlow: false)
 
-        addMedalProgressBar(y: y + 26, medal: medal, isWithOutGlow: false)
+        drawMedal(y: y + 29)
     }
 
     private func drawMedal(y: Int) {
         let medal = context.gameMedal
-        let x = 26
+        let x = 6
 
         // medal
         let medalView = MedalView()
@@ -150,7 +156,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
     private func addGoButton(y: Int) {
         let button = UIButton()
-        let w = 15
+        let w = 18
         button.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .highlighted)
         button.backgroundColor = .red
         let attrText = getStrokeText(
@@ -165,7 +171,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         button.showsTouchWhenHighlighted = true
         button.addTarget(self, action: #selector(onGoButtonClicked), for: .touchUpInside)
 
-        layout(45 - w, yMax - w - 3, w, w, button)
+        layout(26, y, w, w, button)
         addSubview(button)
     }
 
