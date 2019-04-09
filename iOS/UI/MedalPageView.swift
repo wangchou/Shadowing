@@ -139,11 +139,10 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         label = addAttrText(x: 3, y: y+16, h: 10, text: attrTitle)
         label.centerX(outerRect.frame)
         label.textAlignment = .center
-        addMedalProgressBar(y: y + 31, medal: medal)
+        addMedalProgressBar(y: y + 31, medal: medal, isWithOutGlow: true)
     }
 
     private func addGoButton() {
-
         let button = UIButton()
         button.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .highlighted)
         button.backgroundColor = .red
@@ -214,7 +213,8 @@ extension GridLayout where Self: UIView {
         medal: GameMedal,
         textColor: UIColor = .black,
         strokeColor: UIColor = .white,
-        isSlideIn: Bool = false
+        isWithOutGlow: Bool = false,
+        duration: TimeInterval = 0
     ) {
 
         // lvl text
@@ -222,9 +222,9 @@ extension GridLayout where Self: UIView {
                                       textColor,
                                       strokeWidth: Float(-0.3 * fontSize), strokColor: strokeColor,
                                       font: MyFont.bold(ofSize: 4 * fontSize))
-        var label = addAttrText(x: 6, y: y, h: 6, text: attrTitle)
+        var label = addAttrText(x: 7, y: y, h: 6, text: attrTitle)
         label.textAlignment = .left
-        if isSlideIn { slideIn(view: label, delay: 1.4, duration: 0.3) }
+        if duration > 0 { fadeIn(view: label, duration: duration) }
 
         // medal count
         let nextLevelBound = medal.highLevel.rawValue * medal.medalsPerLevel
@@ -233,31 +233,36 @@ extension GridLayout where Self: UIView {
             textColor,
             strokeWidth: Float(-0.6 * fontSize), strokColor: strokeColor,
             font: MyFont.heavyDigit(ofSize: 4 * fontSize))
-        label = addAttrText(x: 6, y: y, h: 6, text: attrTitle)
-        layout(22, y, 20, 6, label)
+        label = addAttrText(x: 7, y: y, h: 6, text: attrTitle)
+        layout(21, y, 20, 6, label)
         label.textAlignment = .right
-        if isSlideIn { slideIn(view: label, delay: 1.4, duration: 0.3) }
+        if duration > 0 { fadeIn(view: label, duration: duration) }
 
         // bar
         let progressBarBack = UIView()
         progressBarBack.backgroundColor = .white
-        layout(6, y + 6, 36, 1, progressBarBack)
-        progressBarBack.roundBorder(borderWidth: 1.5, cornerRadius: stepFloat/2, color: .clear)
+        layout(7, y + 6, 34, 1, progressBarBack)
+        progressBarBack.roundBorder(cornerRadius: stepFloat/2, color: .clear)
         addSubview(progressBarBack)
-        if isSlideIn { slideIn(view: progressBarBack, delay: 1.4, duration: 0.3) }
+        if duration > 0 { fadeIn(view: progressBarBack, duration: duration) }
 
-        let progressBarFront = UIView()
-        progressBarFront.backgroundColor = medal.lowLevel.color
-        progressBarFront.roundBorder(borderWidth: 1.5, cornerRadius: stepFloat/2, color: .clear)
-        layout(6, y + 6, 32, 1, progressBarFront)
-        var percentage: CGFloat = 0.0
-        if medal.lowLevel == Level.lv9 {
-            percentage = 1.0
-        } else {
-            percentage = CGFloat(medal.count % 50)/50.0
+        let progressBarMid = UIView()
+        progressBarMid.backgroundColor = medal.lowLevel.color.withSaturation(1)
+        progressBarMid.roundBorder(cornerRadius: stepFloat/2, color: .clear)
+        progressBarMid.frame = progressBarBack.frame
+        let percentage = medal.lowLevel == Level.lv9 ?
+            1.0 : CGFloat(medal.count % 50)/50.0
+        progressBarMid.frame.size.width = progressBarBack.frame.width * percentage
+        addSubview(progressBarMid)
+        if duration > 0 { fadeIn(view: progressBarMid, duration: duration) }
+
+        if isWithOutGlow  {
+            let progressBarFront = UIView()
+            progressBarFront.backgroundColor = .clear
+            progressBarFront.roundBorder(borderWidth: 0.5, cornerRadius: stepFloat/2, color: .white)
+            progressBarFront.frame = progressBarBack.frame
+            addSubview(progressBarFront)
+            if duration > 0 { fadeIn(view: progressBarFront, duration: duration) }
         }
-        progressBarFront.frame.size.width = progressBarBack.frame.width * percentage
-        addSubview(progressBarFront)
-        if isSlideIn { slideIn(view: progressBarFront, delay: 1.4, duration: 0.3) }
     }
 }
