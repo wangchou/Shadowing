@@ -98,12 +98,12 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         let medal = context.gameMedal
 
         // back
-        var rect = addRect(x: 36, y: y+6, w: 8, h: 6, color: UIColor.white.withAlphaComponent(0.3))
+        var rect = addRect(x: 36, y: y+6, w: 8, h: 6, color: UIColor.white.withAlphaComponent(0.4))
         rect.roundBorder(borderWidth: 0, cornerRadius: stepFloat, color: .clear)
         var langTitle = gameLang == .jp ? "英" : "日"
         var attrTitle = getStrokeText(langTitle,
-                                  rgb(150, 150, 150),
-                                  strokeWidth: Float(stepFloat * -2/5),
+                                  rgb(200, 200, 200),
+                                  strokeWidth: Float(stepFloat * -1/3),
                                   font: MyFont.bold(ofSize: 4*fontSize))
 
         var label = addAttrText(x: 26, y: y+2, w: 18, h: 10, text: attrTitle)
@@ -121,7 +121,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         langTitle = gameLang == .jp ? "日本語" : "英語"
         attrTitle = getStrokeText(langTitle,
                                       .white,
-                                      strokeWidth: Float(stepFloat * -2/5),
+                                      strokeWidth: Float(stepFloat * -1/3),
                                       font: MyFont.bold(ofSize: 10*fontSize))
 
         label = addAttrText(x: 7, y: y+9, h: 13, text: attrTitle)
@@ -149,8 +149,8 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
             strokeWidth: Float(-0.6 * fontSize), strokColor: .black,
             font: MyFont.heavyDigit(ofSize: 5 * fontSize))
         let label = addAttrText(x: 6, y: y, h: 6, text: attrTitle)
-        label.textAlignment = .right
-        layout(x + 4, y, 11, 6, label)
+        label.textAlignment = .left
+        layout(x + 6, y, 11, 6, label)
         label.centerY(medalView.frame)
     }
 

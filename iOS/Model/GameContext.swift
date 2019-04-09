@@ -186,6 +186,7 @@ extension GameContext {
         sentenceIndex = 0
         let numOfSentences = isSimulator ? 3 : 10
         let lowLevelNumOfSentence = Int(Double(numOfSentences) * gameMedal.lowPercent)
+
         sentences = getRandSentences(
             level: gameMedal.lowLevel,
             numOfSentences: lowLevelNumOfSentence

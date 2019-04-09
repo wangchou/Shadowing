@@ -51,7 +51,7 @@ struct GameMedal {
     }
 
     var lowPercent: Double {
-        return Double(count % medalsPerLevel) / Double(medalsPerLevel)
+        return 1 - Double(count % medalsPerLevel) / Double(medalsPerLevel)
     }
 
     var usingDetailRank: Bool {
