@@ -73,6 +73,10 @@ enum Level: Int, Codable {
         return titles[self.rawValue]
     }
 
+    var lvlTitle: String {
+        return "Lv.\(rawValue+1)" 
+    }
+
     var character: String {
         return title.prefix(1).s
     }

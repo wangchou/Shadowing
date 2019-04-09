@@ -32,7 +32,7 @@ class MedalView: UIView, ReloadableView {
         drawGradientCircle(rect: bounds, padding: w * 0.015, startColor: goldLight, endColor: goldDark)
         drawGradientCircle(rect: bounds, padding: w * 0.055, startColor: goldDark, endColor: goldLight)
         drawGradientCircle(rect: bounds, padding: w * 0.065, startColor: goldLight, endColor: goldDark)
-
+        
         drawStar()
     }
 

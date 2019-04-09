@@ -62,8 +62,8 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         strokeWidth = Float(stepFloat * -1/2.0)
         drawTextBackground(bgColor: rgb(50, 50, 50), textColor: rgb(70, 70, 70))
         let yMax = Int(screen.height / stepFloat)
-        addInfo(y: (yMax - 18)/2 - 18)
-        addActionButtons()
+        addInfo(y: (yMax - 12)/2 - 17)
+        addActionButtons(y: (yMax - 12)/2 + 28)
     }
 
     func viewWillDisappear() {
@@ -212,7 +212,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         return fulfilledVoidPromise()
     }
 
-    private func addActionButtons() {
+    private func addActionButtons(y: Int) {
         let yMax = Int(screen.height / stepFloat)
         let button = createButton(title: "", bgColor: .red)
         let countDownSecs = 5
@@ -223,7 +223,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
             }
         }
 
-        layout(3, yMax - 18, 28, 12, button)
+        layout(3, y, 32, 8, button)
         addSubview(button)
         playButton = button
 
@@ -249,7 +249,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
             dismissTwoVC()
         }
 
-        layout(33, yMax - 18, 12, 12, backButton)
+        layout(37, y, 8, 8, backButton)
         addSubview(backButton)
     }
 }
@@ -281,7 +281,7 @@ func enlargeIn(view: UIView, delay: TimeInterval = 0, duration: TimeInterval) {
 }
 
 func shrinkIn(view: UIView, delay: TimeInterval = 0, duration: TimeInterval) {
-    view.transform = CGAffineTransform(scaleX: 3, y: 3)
+    view.transform = CGAffineTransform(scaleX: 2, y: 2)
 
     let animator = UIViewPropertyAnimator(duration: duration, curve: .easeIn, animations: {
         view.transform = CGAffineTransform(scaleX: 1, y: 1)

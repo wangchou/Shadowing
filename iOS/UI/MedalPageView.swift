@@ -47,8 +47,8 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         removeAllSubviews()
         drawTextBackground(bgColor: rgb(60, 60, 60), textColor: rgb(100, 100, 100))
         addTopBar(y: 5)
-        addLangInfo(y: (yMax - 18)/2 - 21 + 7)
-        addGoButton()
+        addLangInfo(y: (yMax - 18)/2 - 21 + 10)
+        addGoButton(y: (yMax - 18)/2 - 21 + 46)
     }
 
     private func addTopBar(y: Int) {
@@ -97,69 +97,75 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     private func addLangInfo(y: Int) {
         let medal = context.gameMedal
 
+        let rect = addRect(x: 3, y: y+16, w: 42, h: 21, color: UIColor.black.withAlphaComponent(0.4))
+        rect.roundBorder(borderWidth: 0, cornerRadius: stepFloat * 3, color: .clear)
+
+
         // info background
-        let outerRect = addRect(x: 3, y: y, w: 42, h: 42, color: .clear)
-        outerRect.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat * 3,
-                              color: UIColor.black.withAlphaComponent(0.8))
+        let outerRect = addRect(x: 3, y: y, w: 42, h: 42,
+                                color: UIColor.white.withAlphaComponent(0.05))
         outerRect.addTapGestureRecognizer { [weak self] in
             changeGameLangTo(lang: gameLang == .jp ? .en : .jp)
             self?.viewWillAppear()
         }
-
-        let topBarRect = UIView()
-        topBarRect.backgroundColor = UIColor.darkGray.withAlphaComponent(0.7)
-        layout(0, 0, 42, 10, topBarRect)
-        outerRect.addSubview(topBarRect)
-
-        let bottomBarRect = UIView()
-        bottomBarRect.backgroundColor = UIColor.white.withAlphaComponent(0.7)
-        layout(0, 10, 42, 32, bottomBarRect)
-        outerRect.addSubview(bottomBarRect)
-
-        // medal
-        let medalView = MedalView()
-        layout(6, y+2, 6, 6, medalView)
-        addSubview(medalView)
-        medalView.viewWillAppear()
-
-        let starAttrStr = getStrokeText("\(medal.count)".padWidthTo(3),
-                                        rgb(220, 220, 220),
-                                        strokeWidth: Float(stepFloat * -3/5),
-                                        font: MyFont.heavyDigit(ofSize: 7 * fontSize))
-        var label = addAttrText(x: 24, y: y + 1, w: 18, h: 8, text: starAttrStr)
-        label.textAlignment = .right
+        outerRect.isHidden = true
 
         // language name
         let langTitle = gameLang == .jp ? "日本語" : "英語"
         let attrTitle = getStrokeText(langTitle,
                                       .white,
                                       strokeWidth: Float(stepFloat * -2/5),
-                                      font: MyFont.bold(ofSize: 10*fontSize))
+                                      font: MyFont.bold(ofSize: 13*fontSize))
 
-        label = addAttrText(x: 3, y: y+16, h: 10, text: attrTitle)
+        let label = addAttrText(x: 3, y: y+7, h: 13, text: attrTitle)
+        label.sizeToFit()
         label.centerX(outerRect.frame)
-        label.textAlignment = .center
-        addMedalProgressBar(y: y + 31, medal: medal, isWithOutGlow: true)
+
+        drawLangMedalBox(y: y + 21)
+
+        addMedalProgressBar(y: y + 26, medal: medal, isWithOutGlow: false)
     }
 
-    private func addGoButton() {
+    private func drawLangMedalBox(y: Int) {
+        let medal = context.gameMedal
+        let x = 26
+
+        // medal
+        let medalView = MedalView()
+        layout(x + 1, y, 4, 4, medalView)
+        addSubview(medalView)
+        medalView.viewWillAppear()
+
+        // medal count
+        let attrTitle = getStrokeText(
+            "\(medal.count)",
+            myOrange,
+            strokeWidth: Float(-0.6 * fontSize), strokColor: .black,
+            font: MyFont.heavyDigit(ofSize: 5 * fontSize))
+        let label = addAttrText(x: 6, y: y, h: 6, text: attrTitle)
+        label.textAlignment = .right
+        layout(x + 4, y, 11, 6, label)
+        label.centerY(medalView.frame)
+    }
+
+    private func addGoButton(y: Int) {
         let button = UIButton()
         button.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .highlighted)
         button.backgroundColor = .red
         let attrText = getStrokeText(
             "GO!",
             .white,
-            font: MyFont.bold(ofSize: 8 * stepFloat)
+            font: MyFont.bold(ofSize: 5 * stepFloat)
         )
         button.setAttributedTitle(attrText, for: .normal)
-        button.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat * 3,
-                           color: UIColor.red.withSaturation(0.3))
+        button.roundBorder(borderWidth: stepFloat/2,
+                           cornerRadius: stepFloat * 7.5,
+                           color: .black)
         button.showsTouchWhenHighlighted = true
         button.addTarget(self, action: #selector(onGoButtonClicked), for: .touchUpInside)
 
-        layout(3, yMax - 18, 42, 12, button)
+        layout(30, yMax - 18, 15, 15, button)
         addSubview(button)
-
     }
 
     @objc func onGoButtonClicked() {
@@ -211,14 +217,14 @@ extension GridLayout where Self: UIView {
     func addMedalProgressBar(
         y: Int,
         medal: GameMedal,
-        textColor: UIColor = .black,
-        strokeColor: UIColor = .white,
+        textColor: UIColor = .white,
+        strokeColor: UIColor = .black,
         isWithOutGlow: Bool = false,
         duration: TimeInterval = 0
     ) {
 
         // lvl text
-        var attrTitle = getStrokeText(medal.lowLevel.title,
+        var attrTitle = getStrokeText(medal.lowLevel.lvlTitle,
                                       textColor,
                                       strokeWidth: Float(-0.3 * fontSize), strokColor: strokeColor,
                                       font: MyFont.bold(ofSize: 4 * fontSize))
@@ -227,9 +233,8 @@ extension GridLayout where Self: UIView {
         if duration > 0 { fadeIn(view: label, duration: duration) }
 
         // medal count
-        let nextLevelBound = medal.highLevel.rawValue * medal.medalsPerLevel
         attrTitle = getStrokeText(
-            "\(medal.count)/\(nextLevelBound)",
+            "\(medal.count%medal.medalsPerLevel)/\(medal.medalsPerLevel)",
             textColor,
             strokeWidth: Float(-0.6 * fontSize), strokColor: strokeColor,
             font: MyFont.heavyDigit(ofSize: 4 * fontSize))
@@ -256,7 +261,7 @@ extension GridLayout where Self: UIView {
         addSubview(progressBarMid)
         if duration > 0 { fadeIn(view: progressBarMid, duration: duration) }
 
-        if isWithOutGlow  {
+        if isWithOutGlow {
             let progressBarFront = UIView()
             progressBarFront.backgroundColor = .clear
             progressBarFront.roundBorder(borderWidth: 0.5, cornerRadius: stepFloat/2, color: .white)
