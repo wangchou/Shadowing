@@ -60,7 +60,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     func viewWillAppear() {
         removeAllSubviews()
         strokeWidth = Float(stepFloat * -1/2.0)
-        drawTextBackground(bgColor: rgb(50, 50, 50), textColor: rgb(70, 70, 70))
+        drawTextBackground(bgColor: rgb(50, 50, 50), textColor: rgb(130, 113, 60))//rgb(70, 70, 70))
         let yMax = Int(screen.height / stepFloat)
         addInfo(y: (yMax - 12)/2 - 17)
         addActionButtons(y: (yMax - 12)/2 + 28)
@@ -213,7 +213,6 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     }
 
     private func addActionButtons(y: Int) {
-        let yMax = Int(screen.height / stepFloat)
         let button = createButton(title: "", bgColor: .red)
         let countDownSecs = 5
         button.setIconImage(named: "baseline_play_arrow_black_48pt", title: " 次の挑戦 (\(countDownSecs)秒)", tintColor: .white, isIconOnLeft: true)

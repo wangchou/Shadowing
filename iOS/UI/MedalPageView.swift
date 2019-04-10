@@ -45,7 +45,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
     func viewWillAppear() {
         removeAllSubviews()
-        drawTextBackground(bgColor: rgb(60, 60, 60), textColor: rgb(100, 100, 100))
+        drawTextBackground(bgColor: rgb(60, 60, 60), textColor: rgb(130, 113, 60))//rgb(100, 100, 100))
         addTopBar(y: 5)
         addLangInfo(y: (yMax - 18)/2 - 21 + 10)
         addGoButton(y: (yMax - 18)/2 - 21 + 40)
@@ -61,13 +61,16 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
             return button
         }
 
-        let leftButton = addButton(iconName: "outline_settings_black_24pt")
+        var iconPX = "24pt"
+        if isIPad { iconPX = "48pt"}
+
+        let leftButton = addButton(iconName: "outline_settings_black_\(iconPX)")
         layout(3, y, 7, 7, leftButton)
         leftButton.addTapGestureRecognizer {
             (rootViewController.current as? UIPageViewController)?.goToPreviousPage()
         }
 
-        let rightButton = addButton(iconName: "outline_all_inclusive_black_24pt")
+        let rightButton = addButton(iconName: "outline_all_inclusive_black_\(iconPX)")
         layout(38, y, 7, 7, rightButton)
 
         rightButton.addTapGestureRecognizer {
