@@ -211,7 +211,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
     private func addActionButtons(y: Int) {
         let button = createButton(title: "", bgColor: .red)
-        let countDownSecs = 7
+        let countDownSecs = 5
         button.setIconImage(named: "baseline_play_arrow_black_48pt", title: " 次の挑戦 (\(countDownSecs)秒)", tintColor: .white, isIconOnLeft: true)
         button.addTapGestureRecognizer {
             dismissTwoVC(animated: false) {

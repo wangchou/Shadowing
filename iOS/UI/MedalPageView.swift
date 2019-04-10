@@ -115,7 +115,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
                                       font: MyFont.bold(ofSize: 4*fontSize))
 
         changeLangButton.setAttributedTitle(attrTitle, for: .normal)
-        layout(36, y+6, 8, 6, changeLangButton)
+        layout(36, y+6, 8, 5, changeLangButton)
         changeLangButton.addTarget(self, action: #selector(onChangeLangButtonClicked), for: .touchUpInside)
         changeLangButton.showsTouchWhenHighlighted = true
         addSubview(changeLangButton)
@@ -133,29 +133,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
         addMedalProgressBar(y: y + 19, medal: medal, isWithOutGlow: false)
 
-        drawMedal(y: y + 29)
-    }
-
-    private func drawMedal(y: Int) {
-        let medal = context.gameMedal
-        let x = 6
-
-        // medal
-        let medalView = MedalView()
-        layout(x + 1, y, 4, 4, medalView)
-        addSubview(medalView)
-        medalView.viewWillAppear()
-
-        // medal count
-        let attrTitle = getStrokeText(
-            "\(medal.count)",
-            myOrange,
-            strokeWidth: Float(-0.6 * fontSize), strokColor: .black,
-            font: MyFont.heavyDigit(ofSize: 5 * fontSize))
-        let label = addAttrText(x: 6, y: y, h: 6, text: attrTitle)
-        label.textAlignment = .left
-        layout(x + 6, y, 11, 6, label)
-        label.centerY(medalView.frame)
+        drawMedal(medal.count, x: 6, y: y + 29)
     }
 
     private func addGoButton(y: Int) {
@@ -237,6 +215,32 @@ extension GridLayout where Self: UIView {
                 .rotated(by: -1 * .pi/8)
             rollingText(view: label)
         }
+    }
+
+    func drawMedal(_ medalCount: Int, x: Int, y: Int) {
+        let h = 6
+        let textSize = 5 * fontSize
+        let medalW = 4
+
+        // medal
+        let medalView = MedalView()
+        layout(x + 1, y, medalW, medalW, medalView)
+        addSubview(medalView)
+        medalView.viewWillAppear()
+
+        // medal count
+        let attrTitle = getStrokeText(
+            "\(medalCount)",
+            myOrange,
+            strokeWidth: Float(-0.6 * fontSize), strokColor: .black,
+            font: MyFont.heavyDigit(ofSize: textSize))
+        let label = addAttrText(x: 6, y: y, h: h, text: attrTitle)
+        label.textAlignment = .left
+        layout(x + medalW + 2, y, 11, h, label)
+        label.centerY(medalView.frame)
+        label.frame.origin.x = medalView.frame.origin.x +
+            medalView.frame.width +
+            stepFloat/2
     }
 
     func addMedalProgressBar(
