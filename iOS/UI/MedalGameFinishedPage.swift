@@ -60,6 +60,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     func viewWillAppear() {
         removeAllSubviews()
         strokeWidth = Float(stepFloat * -1/2.0)
+        backgroundColor = rgb(50, 50, 50)
         drawTextBackground(bgColor: rgb(50, 50, 50), textColor: rgb(130, 113, 60))//rgb(70, 70, 70))
         let yMax = Int(screen.height / stepFloat)
         addInfo(y: (yMax - 12)/2 - 17)
@@ -73,7 +74,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     private func sayCompleteness(gr: GameRecord) -> Promise<Void> {
         return teacherSay(
             gameLang == .jp ? "完成率：\(gr.progress)%" :"\(gr.progress)% completed.",
-            rate: fastRate)
+            rate: fastRate * 1.1)
     }
 
     private func sayRank(gr: GameRecord) -> Promise<Void> {
@@ -97,32 +98,28 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
         guard let gr = context.gameRecord else { return }
 
-        drawTitleBlock(y: y, gr: gr, duration: 0.3).then {
-            self.drawCompleteness(y: y+5, gr, duration: 0.3)
+        _ = drawTitleBlock(y: y, gr: gr, duration: 0.3)
+        _ = drawCompleteness(y: y+5, gr, duration: 0.3)
+        _ = drawRank(y: y+5, gr, delay: 0.7, duration: 0.3)
+
+        sayCompleteness(gr: gr).then { _ -> Promise<Void> in
+            _ = self.drawMedal(y: y+18, gr: gr, medal: medal, delay: 0.6, duration: 0.3)
+            return self.sayRank(gr: gr)
         }.then {
-            self.sayCompleteness(gr: gr)
-        }.then {
-            self.drawRank(y: y+5, gr, duration: 0.3)
-        }.then {
-            self.sayRank(gr: gr)
-        }.then {
-            self.drawMedal(y: y+18, gr: gr, medal: medal, duration: 0.3)
-        }.then {
-            pausePromise(0.3).then {
-                self.addMedalProgressBar(y: y + 31, medal: medal,
-                                         textColor: .white, strokeColor: .black,
-                                         duration: 0.2)
-            }
             _ = self.sayMedalChange(gr: gr)
+            self.addMedalProgressBar(y: y + 31, medal: medal,
+                                     textColor: .white, strokeColor: .black,
+                                     delay: 0.3,
+                                     duration: 0.2)
         }
     }
 
-    private func drawTitleBlock(y: Int, gr: GameRecord, duration: TimeInterval) -> Promise<Void> {
+    private func drawTitleBlock(y: Int, gr: GameRecord, delay: TimeInterval = 0, duration: TimeInterval) -> Promise<Void> {
         // info background
         let rect = addRect(x: 3, y: y, w: 42, h: 42, color: rgb(255, 255, 255).withAlphaComponent(0.1))
         rect.roundBorder(borderWidth: 0, cornerRadius: stepFloat * 3, color: .clear)
 
-        enlargeIn(view: rect, duration: duration)
+        enlargeIn(view: rect, delay: delay, duration: duration)
 
         let attrText = getStrokeText(gameLang == .jp ? "日本語" : "英語",
                                      rgb(220, 220, 220),
@@ -131,11 +128,11 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         let label = addAttrText(x: 12, y: y - 8, h: 12, text: attrText)
         label.centerX(frame)
         label.textAlignment = .center
-        enlargeIn(view: label, duration: duration)
+        enlargeIn(view: label, delay: delay, duration: duration)
         return fulfilledVoidPromise()
     }
 
-    private func drawCompleteness(y: Int, _ gr: GameRecord, duration: TimeInterval) -> Promise<Void> {
+    private func drawCompleteness(y: Int, _ gr: GameRecord, delay: TimeInterval = 0, duration: TimeInterval) -> Promise<Void> {
         // completeness
         var attrText = getStrokeText("完成率",
                                  .white,
@@ -143,7 +140,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                                  font: MyFont.bold(ofSize: 3 * fontSize))
         var label = addAttrText(x: 7, y: y, h: 4, text: attrText)
         label.textAlignment = .left
-        slideIn(view: label, duration: duration)
+        slideIn(view: label, delay: delay, duration: duration)
 
         attrText = getStrokeText(gr.progress,
             .black,
@@ -152,7 +149,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
             font: MyFont.heavyDigit(ofSize: 8 * fontSize))
         label = addAttrText(x: 3, y: y+3, w: 20, h: 8, text: attrText)
         label.textAlignment = .right
-        slideIn(view: label, duration: duration)
+        slideIn(view: label, delay: delay, duration: duration)
 
         attrText = getStrokeText("%",
                                  .white,
@@ -160,12 +157,12 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                                  font: MyFont.bold(ofSize: 3 * fontSize))
         label = addAttrText(x: 23, y: y+7, h: 4, text: attrText)
         label.textAlignment = .left
-        slideIn(view: label, duration: duration)
+        slideIn(view: label, delay: delay, duration: duration)
 
         return fulfilledVoidPromise()
     }
 
-    private func drawRank(y: Int, _ gr: GameRecord, duration: TimeInterval) -> Promise<Void> {
+    private func drawRank(y: Int, _ gr: GameRecord, delay: TimeInterval = 0, duration: TimeInterval) -> Promise<Void> {
         // rankTitle
         var attrText = getStrokeText("判定",
                                  .white,
@@ -173,7 +170,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                                  font: MyFont.bold(ofSize: 3 * fontSize))
         var label = addAttrText(x: 29, y: y, h: 4, text: attrText)
         label.textAlignment = .left
-        slideIn(view: label, duration: duration)
+        slideIn(view: label, delay: delay, duration: duration)
 
         // rank
         let rank = context.gameMedal.usingDetailRank ? gr.detailRank : gr.rank
@@ -183,18 +180,18 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                                  font: MyFont.heavyDigit(ofSize: 8 * fontSize))
         label = addAttrText(x: 26, y: y+3, w: 15, h: 8, text: attrText)
         label.textAlignment = .right
-        slideIn(view: label, duration: duration)
+        slideIn(view: label, delay: delay, duration: duration)
 
         return fulfilledVoidPromise()
     }
 
-    private func drawMedal(y: Int, gr: GameRecord, medal: GameMedal, duration: TimeInterval) -> Promise<Void> {
+    private func drawMedal(y: Int, gr: GameRecord, medal: GameMedal, delay: TimeInterval = 0, duration: TimeInterval) -> Promise<Void> {
         // medal
         let medalView = MedalView()
         layout(7, y, 10, 10, medalView)
         addSubview(medalView)
         medalView.viewWillAppear()
-        shrinkIn(view: medalView, duration: duration)
+        shrinkIn(view: medalView, delay: delay, duration: duration)
 
         // medal text
         guard let reward = gr.medalReward else { return fulfilledVoidPromise() }
@@ -207,14 +204,14 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         let label = addAttrText(x: 21, y: y, w: 20, h: 10, text: attrText)
         label.textAlignment = .right
 
-        shrinkIn(view: label, duration: duration)
+        shrinkIn(view: label, delay: delay, duration: duration)
 
         return fulfilledVoidPromise()
     }
 
     private func addActionButtons(y: Int) {
         let button = createButton(title: "", bgColor: .red)
-        let countDownSecs = 5
+        let countDownSecs = 7
         button.setIconImage(named: "baseline_play_arrow_black_48pt", title: " 次の挑戦 (\(countDownSecs)秒)", tintColor: .white, isIconOnLeft: true)
         button.addTapGestureRecognizer {
             dismissTwoVC(animated: false) {
@@ -226,19 +223,19 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         addSubview(button)
         playButton = button
 
-//        var leftSeconds = countDownSecs
-//        countDownTimer?.invalidate()
-//        countDownTimer = Timer.scheduledTimer(withTimeInterval: 1.00, repeats: true) { _ in
-//            leftSeconds -= 1
-//            playButton?.setTitle(" 次の挑戦 (\(leftSeconds)秒)", for: .normal)
-//            guard leftSeconds > 0 else {
-//                countDownTimer?.invalidate()
+        var leftSeconds = countDownSecs
+        countDownTimer?.invalidate()
+        countDownTimer = Timer.scheduledTimer(withTimeInterval: 1.00, repeats: true) { _ in
+            leftSeconds -= 1
+            playButton?.setTitle(" 次の挑戦 (\(leftSeconds)秒)", for: .normal)
+            guard leftSeconds > 0 else {
+                countDownTimer?.invalidate()
 //                dismissTwoVC(animated: false) {
 //                    launchNextGame()
 //                }
-//                return
-//            }
-//        }
+                return
+            }
+        }
 
         let backButton = createButton(title: "", bgColor: .lightGray)
         backButton.setIconImage(named: "baseline_exit_to_app_black_48pt", title: "", tintColor: .white, isIconOnLeft: false)
@@ -280,12 +277,14 @@ func enlargeIn(view: UIView, delay: TimeInterval = 0, duration: TimeInterval) {
 }
 
 func shrinkIn(view: UIView, delay: TimeInterval = 0, duration: TimeInterval) {
+    view.isHidden = true
     view.transform = CGAffineTransform(scaleX: 2, y: 2)
 
     let animator = UIViewPropertyAnimator(duration: duration, curve: .easeIn, animations: {
         view.transform = CGAffineTransform(scaleX: 1, y: 1)
     })
     Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { _ in
+        view.isHidden = false
         animator.startAnimation()
     }
 }

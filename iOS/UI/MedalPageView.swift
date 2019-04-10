@@ -230,7 +230,6 @@ extension GridLayout where Self: UIView {
             let label = addText(x: x, y: y, h: 6 - level.rawValue/3, text: sentence, color: textColor)
             label.sizeToFit()
             label.centerX(frame)
-            //label.backgroundColor = .white
             label.textAlignment = .left
 
             label.transform = CGAffineTransform.identity
@@ -246,6 +245,7 @@ extension GridLayout where Self: UIView {
         textColor: UIColor = .white,
         strokeColor: UIColor = .black,
         isWithOutGlow: Bool = false,
+        delay: TimeInterval = 0,
         duration: TimeInterval = 0
     ) {
 
@@ -256,7 +256,7 @@ extension GridLayout where Self: UIView {
                                       font: MyFont.bold(ofSize: 4 * fontSize))
         var label = addAttrText(x: 7, y: y, h: 6, text: attrTitle)
         label.textAlignment = .left
-        if duration > 0 { fadeIn(view: label, duration: duration) }
+        if duration > 0 { fadeIn(view: label, delay: delay, duration: duration) }
 
         // medal count
         attrTitle = getStrokeText(
@@ -267,7 +267,7 @@ extension GridLayout where Self: UIView {
         label = addAttrText(x: 7, y: y, h: 6, text: attrTitle)
         layout(21, y, 20, 6, label)
         label.textAlignment = .right
-        if duration > 0 { fadeIn(view: label, duration: duration) }
+        if duration > 0 { fadeIn(view: label, delay: delay, duration: duration) }
 
         // bar
         let progressBarBack = UIView()
@@ -275,7 +275,7 @@ extension GridLayout where Self: UIView {
         layout(7, y + 6, 34, 1, progressBarBack)
         progressBarBack.roundBorder(cornerRadius: stepFloat/2, color: .clear)
         addSubview(progressBarBack)
-        if duration > 0 { fadeIn(view: progressBarBack, duration: duration) }
+        if duration > 0 { fadeIn(view: progressBarBack, delay: delay, duration: duration) }
 
         let progressBarMid = UIView()
         progressBarMid.backgroundColor = medal.lowLevel.color.withSaturation(1)
@@ -285,7 +285,7 @@ extension GridLayout where Self: UIView {
             1.0 : CGFloat(medal.count % 50)/50.0
         progressBarMid.frame.size.width = progressBarBack.frame.width * percentage
         addSubview(progressBarMid)
-        if duration > 0 { fadeIn(view: progressBarMid, duration: duration) }
+        if duration > 0 { fadeIn(view: progressBarMid, delay: delay, duration: duration) }
 
         if isWithOutGlow {
             let progressBarFront = UIView()
@@ -293,7 +293,7 @@ extension GridLayout where Self: UIView {
             progressBarFront.roundBorder(borderWidth: 0.5, cornerRadius: stepFloat/2, color: .white)
             progressBarFront.frame = progressBarBack.frame
             addSubview(progressBarFront)
-            if duration > 0 { fadeIn(view: progressBarFront, duration: duration) }
+            if duration > 0 { fadeIn(view: progressBarFront, delay: delay, duration: duration) }
         }
     }
 }
