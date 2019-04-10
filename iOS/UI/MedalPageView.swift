@@ -97,37 +97,38 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         label.textAlignment = .center
     }
 
+    @objc func onChangeLangButtonClicked() {
+        changeGameLangTo(lang: gameLang == .jp ? .en : .jp)
+        self.viewWillAppear()
+    }
+
     private func addLangInfo(y: Int) {
         let medal = context.gameMedal
 
-        // back
-        var rect = addRect(x: 36, y: y+6, w: 8, h: 6, color: UIColor.white.withAlphaComponent(0.4))
-        rect.roundBorder(borderWidth: 0, cornerRadius: stepFloat, color: .clear)
-        var langTitle = gameLang == .jp ? "英" : "日"
-        var attrTitle = getStrokeText(langTitle,
-                                  rgb(200, 200, 200),
-                                  strokeWidth: Float(stepFloat * -1/3),
-                                  font: MyFont.bold(ofSize: 4*fontSize))
-
-        var label = addAttrText(x: 26, y: y+2, w: 18, h: 10, text: attrTitle)
-        label.textAlignment = .center
-        label.centerIn(rect.frame)
-
-        rect.addTapGestureRecognizer {
-            changeGameLangTo(lang: gameLang == .jp ? .en : .jp)
-            self.viewWillAppear()
-        }
-
-        // main
-        rect = addRect(x: 4, y: y+15, w: 40, h: 22, color: UIColor.black.withAlphaComponent(0.4))
-        rect.roundBorder(borderWidth: 0, cornerRadius: stepFloat * 3, color: .clear)
-        langTitle = gameLang == .jp ? "日本語" : "英語"
-        attrTitle = getStrokeText(langTitle,
-                                      .white,
+        // changeLangButton
+        let changeLangButton = UIButton()
+        changeLangButton.backgroundColor = UIColor.white.withAlphaComponent(0.4)
+        changeLangButton.roundBorder(borderWidth: 0, cornerRadius: stepFloat, color: .clear)
+        var attrTitle = getStrokeText(gameLang == .jp ? "英" : "日",
+                                      rgb(200, 200, 200),
                                       strokeWidth: Float(stepFloat * -1/3),
-                                      font: MyFont.bold(ofSize: 10*fontSize))
+                                      font: MyFont.bold(ofSize: 4*fontSize))
 
-        label = addAttrText(x: 7, y: y+9, h: 13, text: attrTitle)
+        changeLangButton.setAttributedTitle(attrTitle, for: .normal)
+        layout(36, y+6, 8, 6, changeLangButton)
+        changeLangButton.addTarget(self, action: #selector(onChangeLangButtonClicked), for: .touchUpInside)
+        changeLangButton.showsTouchWhenHighlighted = true
+        addSubview(changeLangButton)
+
+        // Title
+        let rect = addRect(x: 4, y: y+15, w: 40, h: 22, color: UIColor.black.withAlphaComponent(0.4))
+        rect.roundBorder(borderWidth: 0, cornerRadius: stepFloat * 3, color: .clear)
+        attrTitle = getStrokeText(gameLang == .jp ? "日本語" : "英語",
+                                  .white,
+                                  strokeWidth: Float(stepFloat * -1/3),
+                                  font: MyFont.bold(ofSize: 10*fontSize))
+
+        let label = addAttrText(x: 7, y: y+9, h: 13, text: attrTitle)
         label.sizeToFit()
 
         addMedalProgressBar(y: y + 19, medal: medal, isWithOutGlow: false)
