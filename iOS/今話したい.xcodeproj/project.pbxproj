@@ -103,6 +103,7 @@
 		BED1BA53224A35FF009B68B6 /* MedalPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1BA52224A35FF009B68B6 /* MedalPage.swift */; };
 		BED1CC0921452A54004AE397 /* GameSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1CC0821452A54004AE397 /* GameSetting.swift */; };
 		BEDB3685225EF61C00059997 /* UIView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDB3684225EF61C00059997 /* UIView+Animation.swift */; };
+		BEDB3687225F3DB800059997 /* MedalProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDB3686225F3DB800059997 /* MedalProgressBar.swift */; };
 		BEDE674521ABD04A00DF78AD /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDE674421ABD04A00DF78AD /* IAPHelper.swift */; };
 		BEDEDD3720A46D1B00E7B60B /* TopicsListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3620A46D1B00E7B60B /* TopicsListPage.swift */; };
 		BEDEDD3920A46FCA00E7B60B /* GameRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */; };
@@ -245,6 +246,7 @@
 		BED1BA52224A35FF009B68B6 /* MedalPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalPage.swift; sourceTree = "<group>"; };
 		BED1CC0821452A54004AE397 /* GameSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetting.swift; sourceTree = "<group>"; };
 		BEDB3684225EF61C00059997 /* UIView+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Animation.swift"; sourceTree = "<group>"; };
+		BEDB3686225F3DB800059997 /* MedalProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalProgressBar.swift; sourceTree = "<group>"; };
 		BEDE674421ABD04A00DF78AD /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		BEDEDD3620A46D1B00E7B60B /* TopicsListPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicsListPage.swift; sourceTree = "<group>"; };
 		BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRecord.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				BE7441B2216CCBE000E53A3D /* LineChart.swift */,
 				BE221AA021A2A76D0009B23B /* CircleView.swift */,
 				BE11DEC82257110500373586 /* MedalView.swift */,
+				BEDB3686225F3DB800059997 /* MedalProgressBar.swift */,
 				BEC4CF0D219D727B00E1A54C /* TopChartView.swift */,
 				BE8E51DE21CF7754007D29E6 /* TopChartView+LongTermGoal.swift */,
 				BE8E51DA21CF76CF007D29E6 /* TopChartView+DailyChart.swift */,
@@ -684,6 +687,7 @@
 				BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */,
 				BE8E51DD21CF7718007D29E6 /* TopChartView+Timeline.swift in Sources */,
 				BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */,
+				BEDB3687225F3DB800059997 /* MedalProgressBar.swift in Sources */,
 				BE050B7E22227530007017C5 /* MessengerBar.swift in Sources */,
 				BEEC7FAB2154FFA4001C2EFF /* TopicSwipablePage.swift in Sources */,
 				BEDEDD3720A46D1B00E7B60B /* TopicsListPage.swift in Sources */,

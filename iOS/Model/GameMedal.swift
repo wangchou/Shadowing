@@ -19,16 +19,16 @@ func loadMedalCount() {
     easyLoad(object: &medalCount, key: medalCountKey)
 }
 
-struct GameMedal {
-    let medalsPerLevel = 50
+let medalsPerLevel = 50
+func getMedalLevel(medalCount: Int) -> Level {
+    let lvl = medalCount / medalsPerLevel
+    return Level(rawValue: lvl) ?? .lv9
+}
 
+struct GameMedal {
     var totalCount: Int {
         return (medalCount[.jp] ?? 0) +
                (medalCount[.en] ?? 0)
-    }
-
-    func getMedalLevel(medalCount: Int) -> Int {
-        return medalCount / medalsPerLevel
     }
 
     func updateMedals(record: inout GameRecord) {
@@ -42,12 +42,10 @@ struct GameMedal {
     }
 
     var lowLevel: Level {
-        let lvl = getMedalLevel(medalCount: count)
-        return Level(rawValue: lvl) ?? .lv9
+        return getMedalLevel(medalCount: count)
     }
     var highLevel: Level {
-        let lvl = getMedalLevel(medalCount: count + 50)
-        return Level(rawValue: lvl) ?? .lv9
+        return getMedalLevel(medalCount: count + medalsPerLevel)
     }
 
     var lowPercent: Double {
@@ -55,18 +53,16 @@ struct GameMedal {
     }
 
     var usingDetailRank: Bool {
-        return getMedalLevel(medalCount: medalCount[gameLang] ?? 0) >= 4
+        return getMedalLevel(medalCount: medalCount[gameLang] ?? 0).rawValue >= 4
     }
 
     private func getMedalRewards(record: GameRecord) -> Int {
-        let lvl = getMedalLevel(medalCount: medalCount[gameLang] ?? 0)
+        let lvl = getMedalLevel(medalCount: medalCount[gameLang] ?? 0).rawValue
         switch lvl {
-        case 0 ... 4:
+        case 0 ... 3:
             return medalUpdateByLevelAndRank[lvl][record.rank]!
-        case 5 ... 9:
-            return medalUpdateByLevelAndRank[lvl][record.detailRank]!
         default:
-            return medalUpdateByLevelAndRank[9][record.detailRank]! - (record.p < 90 ? (9 - lvl) : 0)
+            return medalUpdateByLevelAndRank[lvl][record.detailRank]!
         }
     }
 }

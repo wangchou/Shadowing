@@ -78,8 +78,8 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     }
 
     private func sayRank(gr: GameRecord) -> Promise<Void> {
-        let rankText = context.gameMedal.usingDetailRank ? gr.detailRank.rawValue : gr.rank.rawValue
-
+        var rankText = context.gameMedal.usingDetailRank ? gr.detailRank.rawValue : gr.rank.rawValue
+        rankText = rankText.replacingOccurrences(of: "+", with: " plus")
         return teacherSay(
             gameLang == .jp ? "判定：\(rankText)" :"Rank \(rankText).",
             rate: fastRate)
@@ -107,7 +107,9 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
             return self.sayRank(gr: gr)
         }.then {
             _ = self.sayMedalChange(gr: gr)
-            self.addMedalProgressBar(y: y + 31, medal: medal,
+            self.addMedalProgressBar(y: y + 30,
+                                     medalFrom: medal.count - (context.gameRecord?.medalReward ?? 0),
+                                     medalTo: medal.count,
                                      delay: 0.3,
                                      duration: 0.2)
         }
@@ -200,7 +202,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
             strokeWidth: strokeWidth,
             font: MyFont.heavyDigit(ofSize: 10 * stepFloat))
 
-        let label = addAttrText(x: 21, y: y, w: 22, h: 10, text: attrText)
+        let label = addAttrText(x: 19, y: y, w: 22, h: 10, text: attrText)
         label.textAlignment = .right
 
         label.shrinkIn(delay: delay, duration: duration)
@@ -229,9 +231,9 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
             playButton?.setTitle(" 次の挑戦 (\(leftSeconds)秒)", for: .normal)
             guard leftSeconds > 0 else {
                 countDownTimer?.invalidate()
-//                dismissTwoVC(animated: false) {
-//                    launchNextGame()
-//                }
+                dismissTwoVC(animated: false) {
+                    launchNextGame()
+                }
                 return
             }
         }
