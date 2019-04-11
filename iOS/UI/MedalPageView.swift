@@ -253,6 +253,8 @@ extension GridLayout where Self: UIView {
         duration: TimeInterval = 0
     ) {
 
+        var views: [UIView] = []
+
         // lvl text
         var attrTitle = getStrokeText(medal.lowLevel.lvlTitle,
                                       textColor,
@@ -260,7 +262,7 @@ extension GridLayout where Self: UIView {
                                       font: MyFont.bold(ofSize: 4 * fontSize))
         var label = addAttrText(x: 7, y: y, h: 6, text: attrTitle)
         label.textAlignment = .left
-        if duration > 0 { fadeIn(view: label, delay: delay, duration: duration) }
+        views.append(label)
 
         // medal count
         attrTitle = getStrokeText(
@@ -271,7 +273,7 @@ extension GridLayout where Self: UIView {
         label = addAttrText(x: 7, y: y, h: 6, text: attrTitle)
         layout(21, y, 20, 6, label)
         label.textAlignment = .right
-        if duration > 0 { fadeIn(view: label, delay: delay, duration: duration) }
+        views.append(label)
 
         // bar
         let progressBarBack = UIView()
@@ -279,7 +281,7 @@ extension GridLayout where Self: UIView {
         layout(7, y + 6, 34, 1, progressBarBack)
         progressBarBack.roundBorder(cornerRadius: stepFloat/2, color: .clear)
         addSubview(progressBarBack)
-        if duration > 0 { fadeIn(view: progressBarBack, delay: delay, duration: duration) }
+        views.append(progressBarBack)
 
         let progressBarMid = UIView()
         progressBarMid.backgroundColor = medal.lowLevel.color.withSaturation(1)
@@ -289,7 +291,7 @@ extension GridLayout where Self: UIView {
             1.0 : CGFloat(medal.count % 50)/50.0
         progressBarMid.frame.size.width = progressBarBack.frame.width * percentage
         addSubview(progressBarMid)
-        if duration > 0 { fadeIn(view: progressBarMid, delay: delay, duration: duration) }
+        views.append(progressBarMid)
 
         if isWithOutGlow {
             let progressBarFront = UIView()
@@ -297,7 +299,13 @@ extension GridLayout where Self: UIView {
             progressBarFront.roundBorder(borderWidth: 0.5, cornerRadius: stepFloat/2, color: .white)
             progressBarFront.frame = progressBarBack.frame
             addSubview(progressBarFront)
-            if duration > 0 { fadeIn(view: progressBarFront, delay: delay, duration: duration) }
+            views.append(progressBarFront)
+        }
+
+        if duration > 0 {
+            views.forEach { view in
+                view.fadeIn(delay: delay, duration: duration)
+            }
         }
     }
 }

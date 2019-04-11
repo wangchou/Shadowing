@@ -102,6 +102,7 @@
 		BED1BA51224A3455009B68B6 /* MedalPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1BA50224A3455009B68B6 /* MedalPageView.swift */; };
 		BED1BA53224A35FF009B68B6 /* MedalPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1BA52224A35FF009B68B6 /* MedalPage.swift */; };
 		BED1CC0921452A54004AE397 /* GameSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1CC0821452A54004AE397 /* GameSetting.swift */; };
+		BEDB3685225EF61C00059997 /* UIView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDB3684225EF61C00059997 /* UIView+Animation.swift */; };
 		BEDE674521ABD04A00DF78AD /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDE674421ABD04A00DF78AD /* IAPHelper.swift */; };
 		BEDEDD3720A46D1B00E7B60B /* TopicsListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3620A46D1B00E7B60B /* TopicsListPage.swift */; };
 		BEDEDD3920A46FCA00E7B60B /* GameRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */; };
@@ -243,6 +244,7 @@
 		BED1BA50224A3455009B68B6 /* MedalPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalPageView.swift; sourceTree = "<group>"; };
 		BED1BA52224A35FF009B68B6 /* MedalPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalPage.swift; sourceTree = "<group>"; };
 		BED1CC0821452A54004AE397 /* GameSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetting.swift; sourceTree = "<group>"; };
+		BEDB3684225EF61C00059997 /* UIView+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Animation.swift"; sourceTree = "<group>"; };
 		BEDE674421ABD04A00DF78AD /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		BEDEDD3620A46D1B00E7B60B /* TopicsListPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicsListPage.swift; sourceTree = "<group>"; };
 		BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRecord.swift; sourceTree = "<group>"; };
@@ -514,6 +516,7 @@
 				BE9B476920AD50520063E0DA /* FuriganaUtils.swift */,
 				BE8180BF20B3BEB6006ABCB3 /* MyText.swift */,
 				BEF28B6220B52BF700385273 /* UI.swift */,
+				BEDB3684225EF61C00059997 /* UIView+Animation.swift */,
 				BE8E51E421CF7CD1007D29E6 /* GridLayout.swift */,
 				BEE665E120BA634600E4E322 /* Colors.swift */,
 				BE8E51E221CF7A3B007D29E6 /* Type+Conversion.swift */,
@@ -713,6 +716,7 @@
 				BE596468215A0DF200E4AA0C /* daily.swift in Sources */,
 				BE6F2F162144E049003A56CD /* rawDataSets.swift in Sources */,
 				BE8E51DB21CF76CF007D29E6 /* TopChartView+DailyChart.swift in Sources */,
+				BEDB3685225EF61C00059997 /* UIView+Animation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

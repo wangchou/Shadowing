@@ -119,7 +119,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         let rect = addRect(x: 3, y: y, w: 42, h: 42, color: rgb(255, 255, 255).withAlphaComponent(0.1))
         rect.roundBorder(borderWidth: 0, cornerRadius: stepFloat * 3, color: .clear)
 
-        enlargeIn(view: rect, delay: delay, duration: duration)
+        rect.enlargeIn(delay: delay, duration: duration)
 
         let attrText = getStrokeText(gameLang == .jp ? "日本語" : "英語",
                                      rgb(220, 220, 220),
@@ -128,7 +128,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         let label = addAttrText(x: 12, y: y - 8, h: 12, text: attrText)
         label.centerX(frame)
         label.textAlignment = .center
-        enlargeIn(view: label, delay: delay, duration: duration)
+        label.enlargeIn(delay: delay, duration: duration)
         return fulfilledVoidPromise()
     }
 
@@ -140,7 +140,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                                  font: MyFont.bold(ofSize: 3 * fontSize))
         var label = addAttrText(x: 7, y: y, h: 4, text: attrText)
         label.textAlignment = .left
-        slideIn(view: label, delay: delay, duration: duration)
+        label.slideIn(delay: delay, duration: duration)
 
         attrText = getStrokeText(gr.progress,
             .black,
@@ -149,7 +149,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
             font: MyFont.heavyDigit(ofSize: 8 * fontSize))
         label = addAttrText(x: 3, y: y+3, w: 20, h: 8, text: attrText)
         label.textAlignment = .right
-        slideIn(view: label, delay: delay, duration: duration)
+        label.slideIn(delay: delay, duration: duration)
 
         attrText = getStrokeText("%",
                                  .white,
@@ -157,7 +157,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                                  font: MyFont.bold(ofSize: 3 * fontSize))
         label = addAttrText(x: 23, y: y+7, h: 4, text: attrText)
         label.textAlignment = .left
-        slideIn(view: label, delay: delay, duration: duration)
+        label.slideIn(delay: delay, duration: duration)
 
         return fulfilledVoidPromise()
     }
@@ -170,7 +170,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                                  font: MyFont.bold(ofSize: 3 * fontSize))
         var label = addAttrText(x: 29, y: y, h: 4, text: attrText)
         label.textAlignment = .left
-        slideIn(view: label, delay: delay, duration: duration)
+        label.slideIn(delay: delay, duration: duration)
 
         // rank
         let rank = context.gameMedal.usingDetailRank ? gr.detailRank : gr.rank
@@ -180,7 +180,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                                  font: MyFont.heavyDigit(ofSize: 8 * fontSize))
         label = addAttrText(x: 26, y: y+3, w: 15, h: 8, text: attrText)
         label.textAlignment = .right
-        slideIn(view: label, delay: delay, duration: duration)
+        label.slideIn(delay: delay, duration: duration)
 
         return fulfilledVoidPromise()
     }
@@ -191,20 +191,20 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         layout(7, y, 10, 10, medalView)
         addSubview(medalView)
         medalView.viewWillAppear()
-        shrinkIn(view: medalView, delay: delay, duration: duration)
+        medalView.shrinkIn(delay: delay, duration: duration)
 
         // medal text
         guard let reward = gr.medalReward else { return fulfilledVoidPromise() }
         let medalText = "\(reward >= 0 ? "+" : "")\(reward)"
         let attrText = getStrokeText("\(medalText)",
-            .white,//reward >= 0 ? myGreen : myRed,
+            .white,
             strokeWidth: strokeWidth,
             font: MyFont.heavyDigit(ofSize: 10 * stepFloat))
 
-        let label = addAttrText(x: 21, y: y, w: 20, h: 10, text: attrText)
+        let label = addAttrText(x: 21, y: y, w: 22, h: 10, text: attrText)
         label.textAlignment = .right
 
-        shrinkIn(view: label, delay: delay, duration: duration)
+        label.shrinkIn(delay: delay, duration: duration)
 
         return fulfilledVoidPromise()
     }
@@ -247,55 +247,5 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
         layout(37, y, 8, 8, backButton)
         addSubview(backButton)
-    }
-}
-
-func slideIn(view: UIView, delay: TimeInterval = 0, duration: TimeInterval) {
-    view.frame.origin.x += screen.width
-    view.alpha = 0.2
-
-    let animator = UIViewPropertyAnimator(duration: duration, curve: .easeIn, animations: {
-        view.transform = CGAffineTransform(translationX: -1 * screen.width, y: 0)
-        view.alpha = 1
-    })
-    Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { _ in
-        animator.startAnimation()
-    }
-}
-
-func enlargeIn(view: UIView, delay: TimeInterval = 0, duration: TimeInterval) {
-    view.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-    view.alpha = 0
-
-    let animator = UIViewPropertyAnimator(duration: duration, curve: .easeIn, animations: {
-        view.transform = CGAffineTransform(scaleX: 1, y: 1)
-        view.alpha = 1
-    })
-    Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { _ in
-        animator.startAnimation()
-    }
-}
-
-func shrinkIn(view: UIView, delay: TimeInterval = 0, duration: TimeInterval) {
-    view.isHidden = true
-    view.transform = CGAffineTransform(scaleX: 2, y: 2)
-
-    let animator = UIViewPropertyAnimator(duration: duration, curve: .easeIn, animations: {
-        view.transform = CGAffineTransform(scaleX: 1, y: 1)
-    })
-    Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { _ in
-        view.isHidden = false
-        animator.startAnimation()
-    }
-}
-
-func fadeIn(view: UIView, delay: TimeInterval = 0, duration: TimeInterval) {
-    view.alpha = 0
-
-    let animator = UIViewPropertyAnimator(duration: duration, curve: .easeIn, animations: {
-        view.alpha = 1
-    })
-    Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { _ in
-        animator.startAnimation()
     }
 }
