@@ -74,7 +74,7 @@ enum Level: Int, Codable {
     }
 
     var lvlTitle: String {
-        return "Lv.\(rawValue+1)" 
+        return "Lv.\(rawValue+1)"
     }
 
     var character: String {

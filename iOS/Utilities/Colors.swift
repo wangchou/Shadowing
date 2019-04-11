@@ -30,6 +30,7 @@ let brassDark = rgb(148, 97, 33)
 let goldLight = rgb(255, 223, 55)
 let goldMiddle = rgb(198, 139, 33)
 let goldDark = rgb(179, 111, 29)
+let textGold = rgb(130, 113, 60)
 
 let myWhite = rgb(240, 240, 240)
 let myLightGray = rgb(224, 224, 224)

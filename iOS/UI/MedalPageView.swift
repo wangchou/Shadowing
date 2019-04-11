@@ -45,7 +45,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
     func viewWillAppear() {
         removeAllSubviews()
-        drawTextBackground(bgColor: rgb(60, 60, 60), textColor: rgb(130, 113, 60))//rgb(100, 100, 100))
+        drawTextBackground(bgColor: rgb(60, 60, 60), textColor: textGold)
         addTopBar(y: 5)
         addLangInfo(y: (yMax - 18)/2 - 21 + 10)
         addGoButton(y: (yMax - 18)/2 - 21 + 40)
@@ -132,8 +132,6 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         label.sizeToFit()
 
         addMedalProgressBar(y: y + 19, medal: medal, isWithOutGlow: false)
-
-        drawMedal(medal.count, x: 6, y: y + 29)
     }
 
     private func addGoButton(y: Int) {
@@ -234,46 +232,55 @@ extension GridLayout where Self: UIView {
             myOrange,
             strokeWidth: Float(-0.6 * fontSize), strokColor: .black,
             font: MyFont.heavyDigit(ofSize: textSize))
-        let label = addAttrText(x: 6, y: y, h: h, text: attrTitle)
-        label.textAlignment = .left
-        layout(x + medalW + 2, y, 11, h, label)
+        let label = addAttrText(x: x + medalW + 2, y: y, w: 11, h: h, text: attrTitle)
+
+        let rect = label.frame
+        label.sizeToFit()
+        label.moveToRight(rect)
         label.centerY(medalView.frame)
-        label.frame.origin.x = medalView.frame.origin.x +
-            medalView.frame.width +
+        medalView.frame.origin.x = label.frame.origin.x -
+            medalView.frame.width -
             stepFloat/2
     }
 
     func addMedalProgressBar(
         y: Int,
         medal: GameMedal,
-        textColor: UIColor = .white,
-        strokeColor: UIColor = .black,
         isWithOutGlow: Bool = false,
         delay: TimeInterval = 0,
         duration: TimeInterval = 0
     ) {
-
         var views: [UIView] = []
 
         // lvl text
-        var attrTitle = getStrokeText(medal.lowLevel.lvlTitle,
-                                      textColor,
-                                      strokeWidth: Float(-0.3 * fontSize), strokColor: strokeColor,
-                                      font: MyFont.bold(ofSize: 4 * fontSize))
-        var label = addAttrText(x: 7, y: y, h: 6, text: attrTitle)
+        let attrText = getStrokeText(medal.lowLevel.lvlTitle,
+                                     .white,
+                                     strokeWidth: Float(-0.3 * fontSize),
+                                     strokColor: .black,
+                                     font: MyFont.bold(ofSize: 4 * fontSize))
+
+        var label = addAttrText(x: 7, y: y, h: 6,
+                                text: attrText)
         label.textAlignment = .left
         views.append(label)
 
-        // medal count
-        let medalText = medal.count > 500 ? "MAX" : "\(medal.count%medal.medalsPerLevel)/\(medal.medalsPerLevel)"
-        attrTitle = getStrokeText(
-            medalText,
-            textColor,
-            strokeWidth: Float(-0.6 * fontSize), strokColor: strokeColor,
-            font: MyFont.heavyDigit(ofSize: 4 * fontSize))
-        label = addAttrText(x: 7, y: y, h: 6, text: attrTitle)
-        layout(21, y, 20, 6, label)
+        drawMedal(medal.count, x: 24, y: y + 1)
+
+        // medal lower bound
+        let lightTextColor = rgb(180, 180, 180)
+        var medalText = "\((medal.lowLevel.rawValue + 1) * medal.medalsPerLevel)"
+        label = addText(x: 31, y: y + 7, w: 10, h: 3,
+                            text: medalText, color: lightTextColor)
+        label.frame.origin.y += stepFloat/2
         label.textAlignment = .right
+        views.append(label)
+
+        // medal higher bound
+        medalText = "\(medal.lowLevel.rawValue * medal.medalsPerLevel)"
+        label = addText(x: 7, y: y + 7, w: 10, h: 3,
+                        text: medalText, color: lightTextColor)
+        label.frame.origin.y += stepFloat/2
+        label.textAlignment = .left
         views.append(label)
 
         // bar

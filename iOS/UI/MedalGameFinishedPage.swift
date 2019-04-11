@@ -61,7 +61,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         removeAllSubviews()
         strokeWidth = Float(stepFloat * -1/2.0)
         backgroundColor = rgb(50, 50, 50)
-        drawTextBackground(bgColor: rgb(50, 50, 50), textColor: rgb(130, 113, 60))//rgb(70, 70, 70))
+        drawTextBackground(bgColor: rgb(50, 50, 50), textColor: textGold)
         let yMax = Int(screen.height / stepFloat)
         addInfo(y: (yMax - 12)/2 - 17)
         addActionButtons(y: (yMax - 12)/2 + 28)
@@ -108,7 +108,6 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         }.then {
             _ = self.sayMedalChange(gr: gr)
             self.addMedalProgressBar(y: y + 31, medal: medal,
-                                     textColor: .white, strokeColor: .black,
                                      delay: 0.3,
                                      duration: 0.2)
         }
