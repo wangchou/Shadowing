@@ -265,8 +265,9 @@ extension GridLayout where Self: UIView {
         views.append(label)
 
         // medal count
+        let medalText = medal.count > 500 ? "MAX" : "\(medal.count%medal.medalsPerLevel)/\(medal.medalsPerLevel)"
         attrTitle = getStrokeText(
-            "\(medal.count%medal.medalsPerLevel)/\(medal.medalsPerLevel)",
+            medalText,
             textColor,
             strokeWidth: Float(-0.6 * fontSize), strokColor: strokeColor,
             font: MyFont.heavyDigit(ofSize: 4 * fontSize))
@@ -287,7 +288,7 @@ extension GridLayout where Self: UIView {
         progressBarMid.backgroundColor = medal.lowLevel.color.withSaturation(1)
         progressBarMid.roundBorder(cornerRadius: stepFloat/2, color: .clear)
         progressBarMid.frame = progressBarBack.frame
-        let percentage = medal.lowLevel == Level.lv9 ?
+        let percentage = medal.count > 500 ?
             1.0 : CGFloat(medal.count % 50)/50.0
         progressBarMid.frame.size.width = progressBarBack.frame.width * percentage
         addSubview(progressBarMid)
