@@ -92,7 +92,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         let starAttrStr = getStrokeText("\(context.gameMedal.totalCount)".padWidthTo(4),
                                         myOrange,
                                         strokeWidth: Float(stepFloat * -3/5),
-                                        font: MyFont.heavyDigit(ofSize: 5 * fontSize))
+                                        font: MyFont.heavyDigit(ofSize: 5 * stepFloat))
         let label = addAttrText(x: 19, y: y - 1, w: 14, h: 9, text: starAttrStr)
         label.textAlignment = .center
     }
@@ -112,7 +112,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         var attrTitle = getStrokeText(gameLang == .jp ? "英" : "日",
                                       rgb(200, 200, 200),
                                       strokeWidth: Float(stepFloat * -1/3),
-                                      font: MyFont.bold(ofSize: 4*fontSize))
+                                      font: MyFont.bold(ofSize: 4*stepFloat))
 
         changeLangButton.setAttributedTitle(attrTitle, for: .normal)
         layout(36, y+6, 8, 5, changeLangButton)
@@ -126,7 +126,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         attrTitle = getStrokeText(gameLang == .jp ? "日本語" : "英語",
                                   .white,
                                   strokeWidth: Float(stepFloat * -1/3),
-                                  font: MyFont.bold(ofSize: 10*fontSize))
+                                  font: MyFont.bold(ofSize: 10*stepFloat))
 
         let label = addAttrText(x: 7, y: y+9, h: 13, text: attrTitle)
         label.sizeToFit()
@@ -217,7 +217,7 @@ extension GridLayout where Self: UIView {
 
     func drawMedal(_ medalCount: Int, x: Int, y: Int) {
         let h = 6
-        let textSize = 5 * fontSize
+        let textSize = 5 * stepFloat
         let medalW = 4
 
         // medal
@@ -230,7 +230,7 @@ extension GridLayout where Self: UIView {
         let attrTitle = getStrokeText(
             "\(medalCount)",
             myOrange,
-            strokeWidth: Float(-0.6 * fontSize), strokColor: .black,
+            strokeWidth: Float(-0.6 * stepFloat), strokColor: .black,
             font: MyFont.heavyDigit(ofSize: textSize))
         let label = addAttrText(x: x + medalW + 2, y: y, w: 11, h: h, text: attrTitle)
 
@@ -255,9 +255,9 @@ extension GridLayout where Self: UIView {
         // lvl text
         let attrText = getStrokeText(medal.lowLevel.lvlTitle,
                                      .white,
-                                     strokeWidth: Float(-0.3 * fontSize),
+                                     strokeWidth: Float(-0.3 * stepFloat),
                                      strokColor: .black,
-                                     font: MyFont.bold(ofSize: 4 * fontSize))
+                                     font: MyFont.bold(ofSize: 4 * stepFloat))
 
         var label = addAttrText(x: 7, y: y, h: 6,
                                 text: attrText)

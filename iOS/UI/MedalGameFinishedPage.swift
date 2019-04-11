@@ -123,7 +123,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         let attrText = getStrokeText(gameLang == .jp ? "日本語" : "英語",
                                      rgb(220, 220, 220),
                                      strokeWidth: strokeWidth/2,
-                                     font: MyFont.bold(ofSize: 10 * fontSize))
+                                     font: MyFont.bold(ofSize: 10 * stepFloat))
         let label = addAttrText(x: 12, y: y - 8, h: 12, text: attrText)
         label.centerX(frame)
         label.textAlignment = .center
@@ -136,7 +136,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         var attrText = getStrokeText("完成率",
                                  .white,
                                  strokeWidth: strokeWidth/2,
-                                 font: MyFont.bold(ofSize: 3 * fontSize))
+                                 font: MyFont.bold(ofSize: 3 * stepFloat))
         var label = addAttrText(x: 7, y: y, h: 4, text: attrText)
         label.textAlignment = .left
         label.slideIn(delay: delay, duration: duration)
@@ -145,7 +145,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
             .black,
             strokeWidth: strokeWidth/2,
             strokColor: .white,
-            font: MyFont.heavyDigit(ofSize: 8 * fontSize))
+            font: MyFont.heavyDigit(ofSize: 8 * stepFloat))
         label = addAttrText(x: 3, y: y+3, w: 20, h: 8, text: attrText)
         label.textAlignment = .right
         label.slideIn(delay: delay, duration: duration)
@@ -153,7 +153,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         attrText = getStrokeText("%",
                                  .white,
                                  strokeWidth: strokeWidth/2,
-                                 font: MyFont.bold(ofSize: 3 * fontSize))
+                                 font: MyFont.bold(ofSize: 3 * stepFloat))
         label = addAttrText(x: 23, y: y+7, h: 4, text: attrText)
         label.textAlignment = .left
         label.slideIn(delay: delay, duration: duration)
@@ -166,7 +166,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         var attrText = getStrokeText("判定",
                                  .white,
                                  strokeWidth: strokeWidth/2,
-                                 font: MyFont.bold(ofSize: 3 * fontSize))
+                                 font: MyFont.bold(ofSize: 3 * stepFloat))
         var label = addAttrText(x: 29, y: y, h: 4, text: attrText)
         label.textAlignment = .left
         label.slideIn(delay: delay, duration: duration)
@@ -176,7 +176,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         attrText = getStrokeText(rank.rawValue,
                                  rank.color,
                                  strokeWidth: strokeWidth,
-                                 font: MyFont.heavyDigit(ofSize: 8 * fontSize))
+                                 font: MyFont.heavyDigit(ofSize: 8 * stepFloat))
         label = addAttrText(x: 26, y: y+3, w: 15, h: 8, text: attrText)
         label.textAlignment = .right
         label.slideIn(delay: delay, duration: duration)
