@@ -266,7 +266,7 @@ extension GridLayout where Self: UIView {
 
         drawMedal(medal.count, x: 24, y: y + 1)
 
-        // medal lower bound
+        // medal higher bound
         let lightTextColor = rgb(180, 180, 180)
         var medalText = "\((medal.lowLevel.rawValue + 1) * medal.medalsPerLevel)"
         label = addText(x: 31, y: y + 7, w: 10, h: 3,
@@ -275,7 +275,7 @@ extension GridLayout where Self: UIView {
         label.textAlignment = .right
         views.append(label)
 
-        // medal higher bound
+        // medal lower bound
         medalText = "\(medal.lowLevel.rawValue * medal.medalsPerLevel)"
         label = addText(x: 7, y: y + 7, w: 10, h: 3,
                         text: medalText, color: lightTextColor)
