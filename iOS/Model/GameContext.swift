@@ -89,7 +89,7 @@ class GameContext {
         case .infiniteChallengeMode:
             return "[♾] \(infiniteChallengeLevel.title)"
         case .medalMode:
-            return "[🏅] \(gameMedal.lowLevel.title)"
+            return "[🏅\(gameMedal.lowLevel.lvlTitle)] \(gameMedal.lowLevel.title)"
         }
     }
 

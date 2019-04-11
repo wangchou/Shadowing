@@ -28,7 +28,15 @@ class MessengerBar: UIView, ReloadableView {
     var skipNextButton: UIButton!
 
     private let circleWidth = 36
-    private let barWidth = screen.width - 160
+    private var barWidth: CGFloat {
+        return context.gameMode != .medalMode ?
+                    screen.width - 160 : screen.width - 112
+    }
+
+    private var pauseButtonX: CGFloat {
+        return context.gameMode != .medalMode ?
+            screen.width - 95 : screen.width - 47
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -79,7 +87,7 @@ class MessengerBar: UIView, ReloadableView {
         // pause/continue button
         pauseCountinueButton = UIButton()
         pauseCountinueButton.setIconImage(named: "baseline_pause_black_48pt", title: "", tintColor: .black, isIconOnLeft: false)
-        pauseCountinueButton.frame = CGRect(x: screen.width - 95, y: 5, width: 48, height: 48)
+        pauseCountinueButton.frame = CGRect(x: pauseButtonX, y: 5, width: 48, height: 48)
         addSubview(pauseCountinueButton)
 
         // skipNextButton
@@ -88,6 +96,7 @@ class MessengerBar: UIView, ReloadableView {
         skipNextButton.setIconImage(named: iconName, tintColor: .black, isIconOnLeft: false)
         skipNextButton.frame = CGRect(x: screen.width - 50, y: 5, width: 48, height: 48)
         addSubview(skipNextButton)
+        if context.gameMode == .medalMode { skipNextButton.isHidden = true }
 
         let separatedLine = UIView()
         separatedLine.backgroundColor = .darkGray
@@ -103,10 +112,7 @@ class MessengerBar: UIView, ReloadableView {
     }
 
     func viewWillAppear() {
-        let key = context.dataSetKey
-
-        let level: Level? = context.gameMode == .topicMode ?
-            dataKeyToLevels[key] : context.infiniteChallengeLevel
+        let level: Level? = context.gameRecord?.level
 
         if let level = level {
             levelLabel.text = level.character
