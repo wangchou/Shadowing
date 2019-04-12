@@ -304,14 +304,6 @@ func getRecordsByDate() -> [String: [GameRecord]] {
     return recordsByDate
 }
 
-func getTodayAndThisWeekPercent() -> (todayPercent: Float, weekPercent: Float) {
-    let counts = getSentenceCountsByDays()
-    let dailyGoal = GameContext.shared.gameSetting.dailySentenceGoal
-    let todayPercent = counts[0].f/dailyGoal.f
-    let weekPercent = Array(counts[0...6]).filter { $0 >= dailyGoal }.count.f / 7.0
-    return (todayPercent, weekPercent)
-}
-
 // [Today's correct sentence count, Yesterday's, ...]
 func getSentenceCountsByDays() -> [Int] {
     let calendar = Calendar.current

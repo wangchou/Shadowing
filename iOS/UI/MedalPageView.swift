@@ -47,8 +47,9 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         removeAllSubviews()
         drawTextBackground(bgColor: rgb(60, 60, 60), textColor: textGold)
         addTopBar(y: 5)
+
         addLangInfo(y: (yMax + 12)/2 - 22 - 1)
-        addGoButton(y: (yMax + 12)/2 - 22 + 26)
+        addGoButton(x: 25, y: (yMax + 12)/2 - 22 + 24, w: 21)
     }
 
     private func addTopBar(y: Int) {
@@ -115,48 +116,40 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
                                       font: MyFont.bold(ofSize: 4*stepFloat))
 
         changeLangButton.setAttributedTitle(attrTitle, for: .normal)
-        layout(36, y, 8, 5, changeLangButton)
+        layout(34, y, 8, 5, changeLangButton)
         changeLangButton.addTarget(self, action: #selector(onChangeLangButtonClicked), for: .touchUpInside)
         changeLangButton.showsTouchWhenHighlighted = true
         addSubview(changeLangButton)
 
         // Title
-        let rect = addRect(x: 4, y: y+9, w: 40, h: 28, color: UIColor.black.withAlphaComponent(0.5))
-        rect.roundBorder(borderWidth: 0, cornerRadius: stepFloat * 3, color: .clear)
+        let rect = addRect(x: 3, y: y+10, w: 42, h: 28, color: UIColor.black.withAlphaComponent(0.4))
+        rect.roundBorder(borderWidth: 0, cornerRadius: stepFloat * 2, color: .clear)
         attrTitle = getStrokeText(gameLang == .jp ? "日本語" : "英語",
                                   .white,
                                   strokeWidth: Float(stepFloat * -1/3),
-                                  font: MyFont.bold(ofSize: 10*stepFloat))
+                                  font: MyFont.bold(ofSize: 9*stepFloat))
 
-        let label = addAttrText(x: 7, y: y+3, h: 13, text: attrTitle)
+        let label = addAttrText(x: 7, y: y+4, h: 13, text: attrTitle)
         label.sizeToFit()
 
-        addMedalProgressBar(y: y + 13, medalFrom: medal.count)
-        addDailyGoalView(x: 7, y: y + 28)
+        addMedalProgressBar(x: 7, y: y + 13, medalFrom: medal.count)
+        addDailyGoalView(x: 7, y: y + 25)
     }
 
     private func addDailyGoalView(x: Int, y: Int) {
-        let todayAndWeekPercent = getTodayAndThisWeekPercent()
-        let weekGoalView = ProgressCircleView()
-        layout(x, y, 7, 7, weekGoalView)
-        addSubview(weekGoalView)
-        weekGoalView.percent = todayAndWeekPercent.weekPercent
-        weekGoalView.title = "本  週"
-        weekGoalView.lvl = context.gameMedal.lowLevel
-        weekGoalView.viewWillAppear()
+        let todayPercent = getTodaySentenceCount().f/context.gameSetting.dailySentenceGoal.f
 
         let dailyGoalView = ProgressCircleView()
-        layout(x + 9, y , 7, 7, dailyGoalView)
+        layout(x, y, 8, 8, dailyGoalView)
         addSubview(dailyGoalView)
-        dailyGoalView.percent = todayAndWeekPercent.todayPercent
-        dailyGoalView.title = i18n.simpleGoalText
+        dailyGoalView.percent = todayPercent
+        dailyGoalView.title = i18n.goalText
         dailyGoalView.lvl = context.gameMedal.lowLevel
         dailyGoalView.viewWillAppear()
     }
 
-    private func addGoButton(y: Int) {
+    private func addGoButton(x: Int, y: Int, w: Int) {
         let button = UIButton()
-        let w = 18
         button.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .highlighted)
         button.backgroundColor = .red
         let attrText = getStrokeText(
@@ -171,7 +164,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         button.showsTouchWhenHighlighted = true
         button.addTarget(self, action: #selector(onGoButtonClicked), for: .touchUpInside)
 
-        layout(26, y, w, w, button)
+        layout(x, y, w, w, button)
         addSubview(button)
     }
 
@@ -192,7 +185,7 @@ func rollingText(view: UIView) {
         view.transform = CGAffineTransform.identity
             .translatedBy(x: 0, y: screen.width/2)
             .rotated(by: -1 * .pi/8)
-            .translatedBy(x: -400, y: -200)
+            .translatedBy(x: -1.5 * screen.width * cos(.pi/8), y: -1.5 * screen.width * sin(.pi/8))
     })
 
     animator.startAnimation()
@@ -236,6 +229,7 @@ extension GridLayout where Self: UIView {
     }
 
     func addMedalProgressBar(
+        x: Int,
         y: Int,
         medalFrom: Int,
         medalTo: Int = -1,
@@ -243,7 +237,7 @@ extension GridLayout where Self: UIView {
         duration: TimeInterval = 0
     ) {
         let medalProgressBar = MedalProgressBar()
-        layout(7, y, 34, 15, medalProgressBar)
+        layout(x, y, 34, 15, medalProgressBar)
         addSubview(medalProgressBar)
         medalProgressBar.medalCount = medalFrom
         medalProgressBar.viewWillAppear()

@@ -89,7 +89,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         drawCompleteness(y: y+5, gr, duration: 0.3)
         drawRank(y: y+5, gr, delay: 0.4, duration: 0.3)
         drawMedal(y: y+18, gr: gr, medal: medal, delay: 0.8, duration: 0.3)
-        addMedalProgressBar(y: y + 30,
+        addMedalProgressBar(x: 7, y: y + 30,
                                  medalFrom: medal.count - (context.gameRecord?.medalReward ?? 0),
                                  medalTo: medal.count,
                                  delay: 1.4,
@@ -205,9 +205,9 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
             playButton?.setTitle(" 次の挑戦 (\(leftSeconds)秒)", for: .normal)
             guard leftSeconds > 0 else {
                 countDownTimer?.invalidate()
-//                dismissTwoVC(animated: false) {
-//                    launchNextGame()
-//                }
+                dismissTwoVC(animated: false) {
+                    launchNextGame()
+                }
                 return
             }
         }

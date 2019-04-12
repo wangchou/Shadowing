@@ -50,14 +50,13 @@ class ProgressCircleView: UIView, GridLayout, ReloadableView {
         let path = UIBezierPath(ovalIn: bounds)
         let backgroundLayer = CAShapeLayer()
         backgroundLayer.path = path.cgPath
-        backgroundLayer.fillColor = percent < 1.0 ? UIColor.clear.cgColor :
-                                                    lvl.color.withSaturation(1.0).cgColor
+        backgroundLayer.fillColor = rgb(36, 36, 36).withAlphaComponent(0.5).cgColor
         layer.addSublayer(backgroundLayer)
 
-        let lineWidth = stepFloat * 2
+        let lineWidth = stepFloat * 2.2
         let backCircle = CircleView(frame: bounds)
         backCircle.lineWidth = lineWidth
-        backCircle.lineColor = rgb(120, 120, 120)
+        backCircle.lineColor = rgb(80, 80, 80)
         addSubview(backCircle)
 
         frontCircle = CircleView(frame: bounds)
@@ -66,17 +65,22 @@ class ProgressCircleView: UIView, GridLayout, ReloadableView {
         frontCircle.percent = percent.c
         addSubview(frontCircle)
 
-        percentLabel = addText(x: 3, y: 3, w: 30, h: 9,
-                               text: percent >= 0 ? percentageText : "0%",
-                               font: MyFont.bold(ofSize: getFontSize(h: 9)),
-                               color: .white)
+        let attrText = getStrokeText(percent >= 0 ? percentageText : "0%",
+                                     .white,
+                                     strokeWidth: Float(-0.3 * stepFloat),
+                                     strokColor: .black,
+                                     font: MyFont.bold(ofSize: 8 * stepFloat))
+
+        percentLabel = addAttrText(x: 3, y: 3, w: 30, h: 9,
+                               text: attrText)
         percentLabel.textAlignment = .center
         percentLabel.centerIn(bounds)
 
-        let subLabel = addText(x: 3, y: -11, w: 50, h: 9,
-                                text: title,
-                                font: MyFont.regular(ofSize: getFontSize(h: 12)),
-                                color: .white)
+        let subLabel = addText(x: 3, y: 25, w: 50, h: 9,
+                               text: title,
+                               font: MyFont.regular(ofSize: 6 * stepFloat),
+                               color: minorTextColor)
+
         subLabel.textAlignment = .center
         subLabel.centerX(bounds)
     }

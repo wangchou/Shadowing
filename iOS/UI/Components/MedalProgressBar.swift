@@ -115,16 +115,15 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
         drawMedal(medalCount, x: 17, y: 1)
 
         // medal higher bound
-        let lightTextColor = rgb(200, 200, 200)
         var medalText = "\((lowLevel.rawValue + 1) * medalsPerLevel)"
         lvlEndLabel = addText(x: 24, y: 7, w: 10, h: 3,
-                                text: medalText, color: lightTextColor)
+                                text: medalText, color: minorTextColor)
         lvlEndLabel.textAlignment = .right
 
         // medal lower bound
         medalText = "\(lowLevel.rawValue * medalsPerLevel)"
         lvlStartLabel = addText(x: 0, y: 7, w: 10, h: 3,
-                                text: medalText, color: lightTextColor)
+                                text: medalText, color: minorTextColor)
         lvlStartLabel.textAlignment = .left
 
         // bar
