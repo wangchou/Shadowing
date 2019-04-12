@@ -357,6 +357,12 @@ class I18n {
         if isZh { return "句" }
         return "文"//を正しく話す"
     }
+    var goalText: String {
+        return "\(goalPrefix)\(GameContext.shared.gameSetting.dailySentenceGoal)\(goalSuffix)"
+    }
+    var simpleGoalText: String {
+        return "\(GameContext.shared.gameSetting.dailySentenceGoal)\(goalSuffix)"
+    }
     var day: String {
         if isZh { return "天"}
         return "日"

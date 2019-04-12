@@ -130,6 +130,15 @@ extension UIView {
     }
 }
 
+extension CGRect {
+    func padding(_ pad: CGFloat) -> CGRect {
+        return CGRect(x: self.origin.x + pad,
+                      y: self.origin.y + pad,
+                      width: self.size.width - 2 * pad,
+                      height: self.size.height - 2 * pad)
+    }
+}
+
 extension UIScrollView {
     func scrollTo(_ y: Int) {
         contentSize = CGSize(

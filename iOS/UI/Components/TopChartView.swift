@@ -36,11 +36,11 @@ class TopChartView: UIView, GridLayout, ReloadableView {
     var percentageText: String {
         if percent >= 1.0 { return "完 成" }
 
-        return String(format: "%.1f", percent * 100) + "%"
+        return String(format: "%.0f", percent * 100) + "%"
     }
 
     var goalText: String {
-        return "\(i18n.goalPrefix)\(context.gameSetting.dailySentenceGoal)\(i18n.goalSuffix)"
+        return i18n.goalText
     }
 
     var sprintText: String {

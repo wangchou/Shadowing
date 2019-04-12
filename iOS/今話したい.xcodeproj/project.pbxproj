@@ -110,6 +110,7 @@
 		BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */; };
 		BEE3069021835230007C679F /* GameCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE3068F21835230007C679F /* GameCommands.swift */; };
 		BEE665E220BA634600E4E322 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE665E120BA634600E4E322 /* Colors.swift */; };
+		BEEA091222606973008C98AE /* ProgressCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEA091122606973008C98AE /* ProgressCircleView.swift */; };
 		BEEC7FA92154C7AC001C2EFF /* TopBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEEC7FA82154C7AC001C2EFF /* TopBarView.xib */; };
 		BEEC7FAB2154FFA4001C2EFF /* TopicSwipablePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEC7FAA2154FFA4001C2EFF /* TopicSwipablePage.swift */; };
 		BEEC7FAD2155014E001C2EFF /* SettingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEC7FAC2155014E001C2EFF /* SettingPage.swift */; };
@@ -253,6 +254,7 @@
 		BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerEventDelegate.swift; sourceTree = "<group>"; };
 		BEE3068F21835230007C679F /* GameCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCommands.swift; sourceTree = "<group>"; };
 		BEE665E120BA634600E4E322 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		BEEA091122606973008C98AE /* ProgressCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCircleView.swift; sourceTree = "<group>"; };
 		BEEC7FA82154C7AC001C2EFF /* TopBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopBarView.xib; sourceTree = "<group>"; };
 		BEEC7FAA2154FFA4001C2EFF /* TopicSwipablePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicSwipablePage.swift; sourceTree = "<group>"; };
 		BEEC7FAC2155014E001C2EFF /* SettingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPage.swift; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 				BE8E51DE21CF7754007D29E6 /* TopChartView+LongTermGoal.swift */,
 				BE8E51DA21CF76CF007D29E6 /* TopChartView+DailyChart.swift */,
 				BE8E51DC21CF7718007D29E6 /* TopChartView+Timeline.swift */,
+				BEEA091122606973008C98AE /* ProgressCircleView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -641,6 +644,7 @@
 				BE9DF58A223E22BE00DFEE1D /* calculateMicLevel.swift in Sources */,
 				BE596466215A0DE100E4AA0C /* travel.swift in Sources */,
 				BE9D243A20C8DEE9000515DD /* GameReportView.swift in Sources */,
+				BEEA091222606973008C98AE /* ProgressCircleView.swift in Sources */,
 				BECAC3BF216B9D19001BBF49 /* InfiniteChallengeSwipablePage.swift in Sources */,
 				BE5E0CCE2183477400832E88 /* I18n.swift in Sources */,
 				BE7441B3216CCBE000E53A3D /* LineChart.swift in Sources */,

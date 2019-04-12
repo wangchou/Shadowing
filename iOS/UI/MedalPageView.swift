@@ -47,8 +47,8 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         removeAllSubviews()
         drawTextBackground(bgColor: rgb(60, 60, 60), textColor: textGold)
         addTopBar(y: 5)
-        addLangInfo(y: (yMax - 18)/2 - 21 + 10)
-        addGoButton(y: (yMax - 18)/2 - 21 + 40)
+        addLangInfo(y: (yMax + 12)/2 - 22 - 1)
+        addGoButton(y: (yMax + 12)/2 - 22 + 26)
     }
 
     private func addTopBar(y: Int) {
@@ -115,23 +115,43 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
                                       font: MyFont.bold(ofSize: 4*stepFloat))
 
         changeLangButton.setAttributedTitle(attrTitle, for: .normal)
-        layout(36, y+6, 8, 5, changeLangButton)
+        layout(36, y, 8, 5, changeLangButton)
         changeLangButton.addTarget(self, action: #selector(onChangeLangButtonClicked), for: .touchUpInside)
         changeLangButton.showsTouchWhenHighlighted = true
         addSubview(changeLangButton)
 
         // Title
-        let rect = addRect(x: 4, y: y+15, w: 40, h: 22, color: UIColor.black.withAlphaComponent(0.4))
+        let rect = addRect(x: 4, y: y+9, w: 40, h: 28, color: UIColor.black.withAlphaComponent(0.5))
         rect.roundBorder(borderWidth: 0, cornerRadius: stepFloat * 3, color: .clear)
         attrTitle = getStrokeText(gameLang == .jp ? "日本語" : "英語",
                                   .white,
                                   strokeWidth: Float(stepFloat * -1/3),
                                   font: MyFont.bold(ofSize: 10*stepFloat))
 
-        let label = addAttrText(x: 7, y: y+9, h: 13, text: attrTitle)
+        let label = addAttrText(x: 7, y: y+3, h: 13, text: attrTitle)
         label.sizeToFit()
 
-        addMedalProgressBar(y: y + 19, medalFrom: medal.count)
+        addMedalProgressBar(y: y + 13, medalFrom: medal.count)
+        addDailyGoalView(x: 7, y: y + 28)
+    }
+
+    private func addDailyGoalView(x: Int, y: Int) {
+        let todayAndWeekPercent = getTodayAndThisWeekPercent()
+        let weekGoalView = ProgressCircleView()
+        layout(x, y, 7, 7, weekGoalView)
+        addSubview(weekGoalView)
+        weekGoalView.percent = todayAndWeekPercent.weekPercent
+        weekGoalView.title = "本  週"
+        weekGoalView.lvl = context.gameMedal.lowLevel
+        weekGoalView.viewWillAppear()
+
+        let dailyGoalView = ProgressCircleView()
+        layout(x + 9, y , 7, 7, dailyGoalView)
+        addSubview(dailyGoalView)
+        dailyGoalView.percent = todayAndWeekPercent.todayPercent
+        dailyGoalView.title = i18n.simpleGoalText
+        dailyGoalView.lvl = context.gameMedal.lowLevel
+        dailyGoalView.viewWillAppear()
     }
 
     private func addGoButton(y: Int) {
