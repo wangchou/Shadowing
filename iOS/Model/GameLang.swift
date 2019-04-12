@@ -20,9 +20,6 @@ func changeGameLangTo(lang: Lang) {
 
     gameLang = lang
     saveGameLang()
-    if gameLang != .jp {
-        GameContext.shared.bottomTab = .infiniteChallenge
-    }
     loadGameSetting()
 
     DispatchQueue.global().async {
@@ -33,6 +30,11 @@ func changeGameLangTo(lang: Lang) {
     DispatchQueue.global().async {
         loadGameHistory()
     }
+    if gameLang == .en {
+        GameContext.shared.bottomTab = .infiniteChallenge
+        rootViewController.showInfiniteChallengePage(idx: 1)
+    }
+    rootViewController.reloadTableData()
 }
 
 func saveGameLang() {

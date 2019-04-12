@@ -172,6 +172,7 @@ class SettingPage: UITableViewController {
     }
 
     @IBAction func gameLangSegmentControlValueChanged(_ sender: Any) {
+        RootContainerViewController.isShowSetting = true
         if gameLangSegmentControl.selectedSegmentIndex == 1 {
             changeGameLangTo(lang: .jp)
         } else {
@@ -180,7 +181,6 @@ class SettingPage: UITableViewController {
 
         render()
 
-        RootContainerViewController.isShowSetting = true
         if gameLang == .en {
             context.bottomTab = .infiniteChallenge
             rootViewController.showInfiniteChallengePage(idx: 1)
