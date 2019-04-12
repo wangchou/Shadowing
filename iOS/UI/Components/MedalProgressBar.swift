@@ -53,7 +53,7 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
     }
 
     func render() {
-        let lowLevel = getMedalLevel(medalCount: medalCount)
+        let lowLevel = Level(medalCount: medalCount)
         // lvl text
         lvlLabel.attributedText = getStrokeText(lowLevel.lvlTitle,
                                                 .white,
@@ -100,7 +100,7 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
 
     private func sharedInit() {
         frame.size.width = screen.width*34/48
-        let lowLevel = getMedalLevel(medalCount: medalCount)
+        let lowLevel = Level(medalCount: medalCount)
         // lvl text
         let attrText = getStrokeText(lowLevel.lvlTitle,
                                      .white,

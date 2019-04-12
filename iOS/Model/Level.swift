@@ -22,15 +22,21 @@ private let titles = ["入門一", "入門二", "初級一", "初級二",
                       "中級一", "中級二", "上級一", "上級二", "超難問一", "超難問二"]
 let allLevels: [Level] = [.lv0, .lv1, .lv2, .lv3, .lv4, .lv5, .lv6, .lv7, .lv8, .lv9]
 
-func getLevel(avgSyllablesCount: Float) -> Level {
-    for i in 0..<allLevels.count where avgSyllablesCount < (allLevels[i].maxSyllablesCount.f + 1) {
-        return allLevels[i]
-    }
-    return Level.lv9
-}
-
 enum Level: Int, Codable {
     case lv0=0, lv1=1, lv2=2, lv3=3, lv4=4, lv5=5, lv6=6, lv7=7, lv8=8, lv9=9
+
+    init(medalCount: Int) {
+        let lvl = medalCount / medalsPerLevel
+        self = Level(rawValue: lvl) ?? .lv9
+    }
+
+    init(avgSyllablesCount: Float) {
+        for i in 0..<allLevels.count where avgSyllablesCount < (allLevels[i].maxSyllablesCount.f + 1) {
+            self = allLevels[i]
+            return
+        }
+        self = Level.lv9
+    }
 
     var next: Level {
         return Level(rawValue: (self.rawValue + 1) % 10)!

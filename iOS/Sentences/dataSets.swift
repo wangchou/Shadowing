@@ -74,7 +74,7 @@ func loadDataSets() {
                     return sum + count
                 }).f/sentences.count.f
             avgKanaCountDict[key] = avgKanaCount
-            dataKeyToLevels[key] = getLevel(avgSyllablesCount: avgKanaCount)
+            dataKeyToLevels[key] = Level(avgSyllablesCount: avgKanaCount)
         }
     dataSetKeys.sort { key1, key2 in
         if let count1 = avgKanaCountDict[key1],
