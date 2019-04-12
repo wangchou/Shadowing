@@ -515,8 +515,11 @@ class I18n {
         case .medalMode:
             guard let reward = reward else { return ""}
             let rewardText = reward >= 0 ? "plus \(reward)": "\(reward)"
-            if gameLang == .jp { return "完成率：\(percent)%、判定：\(rank)、メダル：\(rewardText)" }
-            return "\(percent)% completed. Rank \(rank). Medal \(rewardText)."
+            let rankText = rank.replacingOccurrences(of: "+", with: " plus")
+
+            return gameLang == .jp ?
+                "成績：\(percent)点。判定\(rankText)。メダル\(rewardText)。" :
+                "Score: \(percent) points. Rank: \(rankText). Medal \(rewardText)."
         default:
             if gameLang == .jp { return "完成率：\(percent)%、判定：\(rank)" }
             return "\(percent)% completed. Rank \(rank)."

@@ -71,15 +71,10 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     }
 
     private func sayResult(gr: GameRecord) {
-        var rankText = context.gameMedal.usingDetailRank ? gr.detailRank.rawValue : gr.rank.rawValue
-        rankText = rankText.replacingOccurrences(of: "+", with: " plus")
-
-        guard let reward = gr.medalReward else { return}
-        let rewardText = reward >= 0 ? "plus \(reward)": "\(reward)"
+        let rankText = context.gameMedal.usingDetailRank ? gr.detailRank.rawValue : gr.rank.rawValue
 
         _ = teacherSay(
-            gameLang == .jp ? "完成率：\(gr.progress)%. 判定：\(rankText). メダル　\(rewardText)." :
-                              "\(gr.progress)% completed. Rank \(rankText). Medal \(rewardText).",
+            i18n.getSpeakingStatus(percent: gr.progress, rank: rankText, reward: gr.medalReward),
             rate: fastRate)
     }
 
@@ -120,7 +115,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
     private func drawCompleteness(y: Int, _ gr: GameRecord, delay: TimeInterval = 0, duration: TimeInterval) {
         // completeness
-        var attrText = getStrokeText("完成率",
+        var attrText = getStrokeText("成績",
                                  .white,
                                  strokeWidth: strokeWidth/2,
                                  font: MyFont.bold(ofSize: 3 * stepFloat))
@@ -137,7 +132,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         label.textAlignment = .right
         label.slideIn(delay: delay, duration: duration)
 
-        attrText = getStrokeText("%",
+        attrText = getStrokeText("点",
                                  .white,
                                  strokeWidth: strokeWidth/2,
                                  font: MyFont.bold(ofSize: 3 * stepFloat))
