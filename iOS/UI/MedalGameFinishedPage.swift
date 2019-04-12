@@ -101,7 +101,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                                  duration: 0.1)
     }
 
-    private func drawTitleBlock(y: Int, gr: GameRecord, delay: TimeInterval = 0, duration: TimeInterval){
+    private func drawTitleBlock(y: Int, gr: GameRecord, delay: TimeInterval = 0, duration: TimeInterval) {
         // info background
         let rect = addRect(x: 3, y: y, w: 42, h: 42, color: rgb(255, 255, 255).withAlphaComponent(0.1))
         rect.roundBorder(borderWidth: 0, cornerRadius: stepFloat * 3, color: .clear)

@@ -17,9 +17,9 @@ private struct LangForEncode: Codable {
 
 func changeGameLangTo(lang: Lang) {
     let t1 = getNow()
-    saveGameLang()
 
     gameLang = lang
+    saveGameLang()
     if gameLang != .jp {
         GameContext.shared.bottomTab = .infiniteChallenge
     }
