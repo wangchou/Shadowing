@@ -115,7 +115,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
     private func drawCompleteness(y: Int, _ gr: GameRecord, delay: TimeInterval = 0, duration: TimeInterval) {
         // completeness
-        var attrText = getStrokeText("成績",
+        var attrText = getStrokeText(gameLang == .jp ? "成績" : "Score",
                                  .white,
                                  strokeWidth: strokeWidth/2,
                                  font: MyFont.bold(ofSize: 3 * stepFloat))
@@ -132,7 +132,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         label.textAlignment = .right
         label.slideIn(delay: delay, duration: duration)
 
-        attrText = getStrokeText("点",
+        attrText = getStrokeText(gameLang == .jp ? "点" : "pts",
                                  .white,
                                  strokeWidth: strokeWidth/2,
                                  font: MyFont.bold(ofSize: 3 * stepFloat))
@@ -143,7 +143,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
     private func drawRank(y: Int, _ gr: GameRecord, delay: TimeInterval = 0, duration: TimeInterval) {
         // rankTitle
-        var attrText = getStrokeText("判定",
+        var attrText = getStrokeText(gameLang == .jp ? "判定" : "Rank",
                                  .white,
                                  strokeWidth: strokeWidth/2,
                                  font: MyFont.bold(ofSize: 3 * stepFloat))

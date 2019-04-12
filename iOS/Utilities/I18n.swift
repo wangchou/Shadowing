@@ -379,19 +379,19 @@ class I18n {
     var meaningAndSpeaking: String {
         if isJa { return "意味と発音" }
         if isZh { return "意義與發音" }
-        return "meaning"
+        return "Meaning"
     }
 
     var speakingOnly: String {
         if isJa { return "発音のみ" }
         if isZh { return "跟讀" }
-        return "shadowing"
+        return "Shadowing"
     }
 
     var interpretation: String {
         if isJa { return "通訳" }
         if isZh { return "口譯" }
-        return "interpreter"
+        return "Interpreter"
     }
     var speedIs: String {
         if gameLang == .jp {
@@ -477,7 +477,7 @@ class I18n {
     var echoMethod: String {
         if isJa { return "エコー法"}
         if isZh { return "回音法" }
-        return "mind echo"
+        return "Mind Echo"
     }
     var listenToEcho: String {
         if isJa { return "心のエコーを聞いて" }
@@ -508,6 +508,24 @@ class I18n {
         if isZh { return "關閉"}
         return "Close"
     }
+    var score: String {
+        if isJa || isZh { return "成績" }
+        return "Score"
+    }
+
+    var rank: String {
+        if isJa || isZh { return "判定" }
+        return "Rank"
+    }
+    var pts: String {
+        if isJa || isZh { return "点" }
+        return "pts"
+    }
+    var medal: String {
+        if isJa { return "メダル" }
+        if isZh { return "徽章" }
+        return "Medal"
+    }
 
     func getSpeakingStatus(percent: String, rank: String, reward: Int?) -> String {
         let context = GameContext.shared
@@ -524,6 +542,27 @@ class I18n {
             if gameLang == .jp { return "完成率：\(percent)%、判定：\(rank)" }
             return "\(percent)% completed. Rank \(rank)."
         }
+    }
+
+    var beginner: String {
+        if isJa || isZh { return "入門" }
+        return "Beginner"
+    }
+    var elementary: String {
+        if isJa || isZh { return "初級" }
+        return "Elementary"
+    }
+    var intermediate: String {
+        if isJa || isZh { return "中級" }
+        return "Intermediate"
+    }
+    var advanced: String {
+        if isJa || isZh { return "上級" }
+        return "Advanced"
+    }
+    var expert: String {
+        if isJa || isZh { return "超難問" }
+        return "Expert"
     }
 }
 // swiftlint:enable file_length  type_body_length
