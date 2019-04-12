@@ -41,7 +41,7 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
         var times = 0
         let medalFrom = medalCount
         let maxTimes = 20
-        timer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) { [weak self] _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { [weak self] _ in
             self?.medalCount = ((maxTimes - times) * medalFrom + (times * medalTo)) / maxTimes
             self?.render()
             times += 1
