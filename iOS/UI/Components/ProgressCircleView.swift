@@ -56,7 +56,7 @@ class ProgressCircleView: UIView, GridLayout, ReloadableView {
         let lineWidth = stepFloat * 2.2
         let backCircle = CircleView(frame: bounds)
         backCircle.lineWidth = lineWidth
-        backCircle.lineColor = rgb(80, 80, 80)
+        backCircle.lineColor = progressBackGray
         addSubview(backCircle)
 
         frontCircle = CircleView(frame: bounds)

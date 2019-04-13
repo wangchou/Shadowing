@@ -32,6 +32,7 @@ let goldMiddle = rgb(198, 139, 33)
 let goldDark = rgb(179, 111, 29)
 let textGold = rgb(130, 113, 60)
 let minorTextColor = rgb(200, 200, 200)
+let progressBackGray = rgb(80, 80, 80)
 
 let myWhite = rgb(240, 240, 240)
 let myLightGray = rgb(224, 224, 224)

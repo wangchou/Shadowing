@@ -128,7 +128,7 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
 
         // bar
         let progressBarBack = UIView()
-        progressBarBack.backgroundColor = .white
+        progressBarBack.backgroundColor = progressBackGray
         layout(0, 6, 34, 1, progressBarBack)
         progressBarBack.roundBorder(cornerRadius: stepFloat/2, color: .clear)
         addSubview(progressBarBack)
