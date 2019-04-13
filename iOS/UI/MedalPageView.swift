@@ -233,8 +233,9 @@ extension GridLayout where Self: UIView {
         y: Int,
         medalFrom: Int,
         medalTo: Int = -1,
-        delay: TimeInterval = 0,
-        duration: TimeInterval = 0
+        animateInDelay: TimeInterval = 0,
+        duration: TimeInterval = 0,
+        animateProgressDelay: TimeInterval = 0
     ) {
         let medalProgressBar = MedalProgressBar()
         layout(x, y, 34, 15, medalProgressBar)
@@ -242,12 +243,12 @@ extension GridLayout where Self: UIView {
         medalProgressBar.medalCount = medalFrom
         medalProgressBar.viewWillAppear()
         if duration > 0 {
-            medalProgressBar.animateIn(delay: delay, duration: duration)
+            medalProgressBar.animateIn(delay: animateInDelay, duration: duration)
         }
 
         // animate progress
         if medalTo >= 0 {
-            Timer.scheduledTimer(withTimeInterval: delay + duration + 0.1, repeats: false) { _ in
+            Timer.scheduledTimer(withTimeInterval: animateProgressDelay, repeats: false) { _ in
                 medalProgressBar.animateMedalProgress(to: medalTo)
             }
         }

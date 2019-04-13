@@ -360,7 +360,7 @@ class I18n {
     var goalText: String {
         return "\(goalPrefix)\(GameContext.shared.gameSetting.dailySentenceGoal)\(goalSuffix)"
     }
-    
+
     var day: String {
         if isZh { return "天"}
         return "日"

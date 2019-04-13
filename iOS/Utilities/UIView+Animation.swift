@@ -38,7 +38,7 @@ extension UIView {
 
     func shrinkIn(delay: TimeInterval = 0, duration: TimeInterval) {
         isHidden = true
-        transform = CGAffineTransform(scaleX: 2, y: 2)
+        transform = CGAffineTransform(scaleX: 4, y: 4)
 
         let animator = UIViewPropertyAnimator(duration: duration, curve: .easeIn, animations: {
             self.transform = CGAffineTransform(scaleX: 1, y: 1)
@@ -54,6 +54,17 @@ extension UIView {
 
         let animator = UIViewPropertyAnimator(duration: duration, curve: .easeIn, animations: {
             self.alpha = 1
+        })
+        Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { _ in
+            animator.startAnimation()
+        }
+    }
+
+    func fadeOut(delay: TimeInterval = 0, duration: TimeInterval) {
+        alpha = 1
+
+        let animator = UIViewPropertyAnimator(duration: duration, curve: .easeIn, animations: {
+            self.alpha = 0
         })
         Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { _ in
             animator.startAnimation()

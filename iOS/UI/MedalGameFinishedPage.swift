@@ -41,6 +41,10 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
     var strokeWidth: Float = 0
 
+    var gr: GameRecord { return context.gameRecord! }
+
+    var medal: GameMedal { return context.gameMedal }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         sharedInit()
@@ -85,20 +89,22 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
         sayResult(gr: gr)
 
-        drawTitleBlock(y: y, gr: gr, duration: 0.3)
-        drawCompleteness(y: y+5, gr, duration: 0.3)
-        drawRank(y: y+5, gr, delay: 0.4, duration: 0.3)
-        drawMedal(y: y+18, gr: gr, medal: medal, delay: 0.8, duration: 0.3)
-        addMedalProgressBar(x: 7, y: y + 30,
-                                 medalFrom: medal.count - (context.gameRecord?.medalReward ?? 0),
-                                 medalTo: medal.count,
-                                 delay: 1.4,
-                                 duration: 0.1)
+        drawTitleBlock(y: y, duration: 0.3)
+        addMedalProgressBar(x: 7, y: y + 5,
+                            medalFrom: medal.count - (gr.medalReward ?? 0),
+                            medalTo: medal.count,
+                            animateInDelay: 0.3,
+                            duration: 0.3,
+                            animateProgressDelay: 1.7)
+        drawMedal(       y: y, delay: 1.4, duration: 0.2)
+        drawCompleteness(y: y+16, delay: 0.4, duration: 0.3)
+        drawRank(        y: y+16, delay: 0.8, duration: 0.3)
+        drawRecordDetail(y: y+18, delay: 1.0, duration: 0.6)
     }
 
-    private func drawTitleBlock(y: Int, gr: GameRecord, delay: TimeInterval = 0, duration: TimeInterval) {
+    private func drawTitleBlock(y: Int, delay: TimeInterval = 0, duration: TimeInterval) {
         // info background
-        let rect = addRect(x: 3, y: y, w: 42, h: 42, color: rgb(255, 255, 255).withAlphaComponent(0.1))
+        let rect = addRect(x: 3, y: y, w: 42, h: 40, color: rgb(0, 0, 0).withAlphaComponent(0.4))
         rect.roundBorder(borderWidth: 0, cornerRadius: stepFloat * 3, color: .clear)
 
         rect.enlargeIn(delay: delay, duration: duration)
@@ -113,7 +119,31 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         label.enlargeIn(delay: delay, duration: duration)
     }
 
-    private func drawCompleteness(y: Int, _ gr: GameRecord, delay: TimeInterval = 0, duration: TimeInterval) {
+    private func drawRecordDetail(y: Int, delay: TimeInterval = 0, duration: TimeInterval = 0) {
+        var colors: [UIColor] = []
+        colors.append(contentsOf: Array.init(repeating: myGreen.withSaturation(1.0).withAlphaComponent(0.8), count: gr.perfectCount))
+        colors.append(contentsOf: Array.init(repeating: myGreen.withAlphaComponent(0.5), count: gr.greatCount))
+        colors.append(contentsOf: Array.init(repeating: myOrange.withAlphaComponent(0.8), count: gr.goodCount))
+        colors.append(contentsOf: Array.init(repeating: myRed.withAlphaComponent(0.8), count: gr.missedCount))
+        let rect = getFrame(40, y, 1, 8)
+
+        let unit = Int(stepFloat/2).c
+
+        for i in 0 ..< colors.count {
+            let thisRect = CGRect(
+                x: rect.origin.x - unit,
+                y: rect.origin.y + rect.height - 2 * unit * i.c - unit,
+                width: 4 * unit,
+                height: unit
+            )
+            let bar = UIView(frame: thisRect)
+            bar.backgroundColor = colors[i]
+            addSubview(bar)
+            bar.fadeIn(delay: delay, duration: Double(i) * duration/Double(colors.count))
+        }
+    }
+
+    private func drawCompleteness(y: Int, delay: TimeInterval = 0, duration: TimeInterval) {
         // completeness
         var attrText = getStrokeText(gameLang == .jp ? "成績" : "Score",
                                  .white,
@@ -127,27 +157,27 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
             .black,
             strokeWidth: strokeWidth/2,
             strokColor: .white,
-            font: MyFont.heavyDigit(ofSize: 8 * stepFloat))
-        label = addAttrText(x: 3, y: y+3, w: 20, h: 8, text: attrText)
+            font: MyFont.heavyDigit(ofSize: 7 * stepFloat))
+        label = addAttrText(x: 1, y: y+3, w: 20, h: 8, text: attrText)
         label.textAlignment = .right
         label.slideIn(delay: delay, duration: duration)
 
         attrText = getStrokeText(gameLang == .jp ? "点" : "pts",
                                  .white,
                                  strokeWidth: strokeWidth/2,
-                                 font: MyFont.bold(ofSize: 3 * stepFloat))
-        label = addAttrText(x: 23, y: y+7, h: 4, text: attrText)
+                                 font: MyFont.bold(ofSize: 2 * stepFloat))
+        label = addAttrText(x: 21, y: y+7, h: 4, text: attrText)
         label.textAlignment = .left
         label.slideIn(delay: delay, duration: duration)
     }
 
-    private func drawRank(y: Int, _ gr: GameRecord, delay: TimeInterval = 0, duration: TimeInterval) {
+    private func drawRank(y: Int, delay: TimeInterval = 0, duration: TimeInterval) {
         // rankTitle
         var attrText = getStrokeText(gameLang == .jp ? "判定" : "Rank",
                                  .white,
                                  strokeWidth: strokeWidth/2,
                                  font: MyFont.bold(ofSize: 3 * stepFloat))
-        var label = addAttrText(x: 29, y: y, h: 4, text: attrText)
+        var label = addAttrText(x: 26, y: y, h: 4, text: attrText)
         label.textAlignment = .left
         label.slideIn(delay: delay, duration: duration)
 
@@ -157,31 +187,24 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                                  rank.color,
                                  strokeWidth: strokeWidth,
                                  font: MyFont.heavyDigit(ofSize: 8 * stepFloat))
-        label = addAttrText(x: 26, y: y+3, w: 15, h: 8, text: attrText)
+        label = addAttrText(x: 22, y: y+3, w: 15, h: 8, text: attrText)
         label.textAlignment = .right
         label.slideIn(delay: delay, duration: duration)
     }
 
-    private func drawMedal(y: Int, gr: GameRecord, medal: GameMedal, delay: TimeInterval = 0, duration: TimeInterval) {
-        // medal
-        let medalView = MedalView()
-        layout(7, y, 10, 10, medalView)
-        addSubview(medalView)
-        medalView.viewWillAppear()
-        medalView.shrinkIn(delay: delay, duration: duration)
-
+    private func drawMedal(y: Int, delay: TimeInterval = 0, duration: TimeInterval) {
         // medal text
         guard let reward = gr.medalReward else { return }
-        let medalText = "\(reward >= 0 ? "+" : "")\(reward)"
+        let medalText = "\(reward >= 0 ? "+" : "")\(reward)".padWidthTo(4)
         let attrText = getStrokeText("\(medalText)",
             .white,
             strokeWidth: strokeWidth,
-            font: MyFont.heavyDigit(ofSize: 10 * stepFloat))
+            font: MyFont.heavyDigit(ofSize: 6 * stepFloat))
 
-        let label = addAttrText(x: 19, y: y, w: 22, h: 10, text: attrText)
-        label.textAlignment = .right
-
+        let label = addAttrText(x: 34, y: y, w: 22, h: 6, text: attrText)
+        label.textAlignment = .left
         label.shrinkIn(delay: delay, duration: duration)
+        label.fadeOut(delay: delay + duration + 0.9, duration: 0.3)
     }
 
     private func addActionButtons(y: Int) {
@@ -205,9 +228,9 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
             playButton?.setTitle(" 次の挑戦 (\(leftSeconds)秒)", for: .normal)
             guard leftSeconds > 0 else {
                 countDownTimer?.invalidate()
-                dismissTwoVC(animated: false) {
-                    launchNextGame()
-                }
+//                dismissTwoVC(animated: false) {
+//                    launchNextGame()
+//                }
                 return
             }
         }
