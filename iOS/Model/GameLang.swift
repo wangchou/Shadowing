@@ -27,9 +27,9 @@ func changeGameLangTo(lang: Lang) {
         print("changeGameLangTo: \(getNow() - t1)\n")
     }
 
-    DispatchQueue.global().async {
-        loadGameHistory()
-    }
+
+    loadGameHistory()
+
     if gameLang == .en {
         GameContext.shared.bottomTab = .infiniteChallenge
         rootViewController.showInfiniteChallengePage(idx: 1)

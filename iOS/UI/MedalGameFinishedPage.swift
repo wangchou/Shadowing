@@ -228,9 +228,9 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
             playButton?.setTitle(" 次の挑戦 (\(leftSeconds)秒)", for: .normal)
             guard leftSeconds > 0 else {
                 countDownTimer?.invalidate()
-//                dismissTwoVC(animated: false) {
-//                    launchNextGame()
-//                }
+                dismissTwoVC(animated: false) {
+                    launchNextGame()
+                }
                 return
             }
         }
