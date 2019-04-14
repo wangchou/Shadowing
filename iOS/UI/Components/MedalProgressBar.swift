@@ -28,8 +28,9 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
     var lvlStartLabel: UILabel!
     var lvlEndLabel: UILabel!
 
-    func viewWillAppear() {
-        render()
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        viewWillAppear()
     }
 
     func animateIn(delay: TimeInterval, duration: TimeInterval) {
@@ -43,7 +44,7 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
         let maxTimes = 20
         timer = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { [weak self] _ in
             self?.medalCount = ((maxTimes - times) * medalFrom + (times * medalTo)) / maxTimes
-            self?.render()
+            self?.viewWillAppear()
             times += 1
             if times > maxTimes {
                 self?.timer?.invalidate()
@@ -52,7 +53,7 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
         }
     }
 
-    func render() {
+    func viewWillAppear() {
         let lowLevel = Level(medalCount: medalCount)
         // lvl text
         lvlLabel.attributedText = getStrokeText(lowLevel.lvlTitle,
@@ -158,7 +159,6 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
         medalView = MedalView()
         layout(x + 1, y, medalW, medalW, medalView)
         addSubview(medalView)
-        medalView.viewWillAppear()
 
         // medal count
         let attrTitle = getStrokeText(

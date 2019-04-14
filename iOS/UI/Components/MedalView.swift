@@ -21,6 +21,11 @@ class MedalView: UIView, ReloadableView {
         super.init(coder: aDecoder)
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        viewWillAppear()
+    }
+
     func viewWillAppear() {
         backgroundColor = .clear
 

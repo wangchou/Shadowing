@@ -87,7 +87,6 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         let medalView = MedalView()
         layout(15, y + 2, 4, 4, medalView)
         medalView.centerY(outerRect.frame)
-        medalView.viewWillAppear()
         addSubview(medalView)
 
         let starAttrStr = getStrokeText("\(context.gameMedal.totalCount)".padWidthTo(4),
@@ -145,7 +144,6 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         dailyGoalView.percent = todayPercent
         dailyGoalView.title = i18n.goalText
         dailyGoalView.lvl = context.gameMedal.lowLevel
-        dailyGoalView.viewWillAppear()
     }
 
     private func addGoButton(x: Int, y: Int, w: Int) {
@@ -241,7 +239,6 @@ extension GridLayout where Self: UIView {
         layout(x, y, 34, 15, medalProgressBar)
         addSubview(medalProgressBar)
         medalProgressBar.medalCount = medalFrom
-        medalProgressBar.viewWillAppear()
         if duration > 0 {
             medalProgressBar.animateIn(delay: animateInDelay, duration: duration)
         }

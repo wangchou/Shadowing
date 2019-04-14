@@ -40,6 +40,11 @@ class ProgressCircleView: UIView, GridLayout, ReloadableView {
         sharedInit()
     }
     func sharedInit() {
+        //viewWillAppear()
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
         viewWillAppear()
     }
 
