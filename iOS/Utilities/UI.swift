@@ -295,7 +295,7 @@ func showProcessingAlert() -> UIAlertController {
 // MARK: - launch storyboard
 func getVC(_ name: String) -> UIViewController {
     switch name {
-    case MedalGameFinishedPage.vcName:
+    case MedalGameFinishedPage.id:
         return MedalGameFinishedPage()
     default:
         return UIStoryboard(name: "Main", bundle: nil)

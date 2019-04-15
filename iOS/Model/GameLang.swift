@@ -27,7 +27,6 @@ func changeGameLangTo(lang: Lang) {
         print("changeGameLangTo: \(getNow() - t1)\n")
     }
 
-
     loadGameHistory()
 
     if gameLang == .en {

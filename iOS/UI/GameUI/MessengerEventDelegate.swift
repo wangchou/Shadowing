@@ -99,7 +99,7 @@ extension Messenger: GameEventDelegate {
                     if context.gameMode != .medalMode {
                         launchVC(self, GameFinishedPage.vcName, isOverCurrent: true, animated: true)
                     } else {
-                        launchVC(self, MedalGameFinishedPage.vcName, isOverCurrent: true, animated: true)
+                        launchVC(self, MedalGameFinishedPage.id, isOverCurrent: true, animated: true)
                     }
                 }
             }

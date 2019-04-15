@@ -52,6 +52,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         addGoButton(x: 25, y: (yMax + 12)/2 - 22 + 24, w: 21)
     }
 
+    // MARK: - TopBar
     private func addTopBar(y: Int) {
         func addButton(iconName: String) -> UIButton {
             let button = createButton(title: "", bgColor: myOrange)
@@ -97,19 +98,32 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         label.textAlignment = .center
     }
 
-    @objc func onChangeLangButtonClicked() {
-        changeGameLangTo(lang: gameLang == .jp ? .en : .jp)
-        self.viewWillAppear()
+    // MARK: - LangInfo
+    private func addLangInfo(y: Int) {
+        addChangeLangButton(y: y)
+        addLangTitleBox(y: y + 4)
+        addMedalProgressBar(x: 7, y: y + 13, medalFrom: context.gameMedal.count)
+        addDailyGoalView(x: 7, y: y + 25)
     }
 
-    private func addLangInfo(y: Int) {
-        let medal = context.gameMedal
+    private func addLangTitleBox(y: Int) {
+        let rect = addRect(x: 3, y: y+6, w: 42, h: 28, color: UIColor.black.withAlphaComponent(0.4))
+        rect.roundBorder(borderWidth: 0, cornerRadius: stepFloat * 2, color: .clear)
+        let attrTitle = getStrokeText(gameLang == .jp ? "日本語" : "英語",
+                                      .white,
+                                      strokeWidth: Float(stepFloat * -1/3),
+                                      font: MyFont.bold(ofSize: 9*stepFloat))
 
+        let label = addAttrText(x: 7, y: y, h: 13, text: attrTitle)
+        label.sizeToFit()
+    }
+
+    private func addChangeLangButton(y: Int) {
         // changeLangButton
         let changeLangButton = UIButton()
         changeLangButton.backgroundColor = UIColor.white.withAlphaComponent(0.4)
         changeLangButton.roundBorder(borderWidth: 0, cornerRadius: stepFloat, color: .clear)
-        var attrTitle = getStrokeText(gameLang == .jp ? "英" : "日",
+        let attrTitle = getStrokeText(gameLang == .jp ? "英" : "日",
                                       rgb(200, 200, 200),
                                       strokeWidth: Float(stepFloat * -1/3),
                                       font: MyFont.bold(ofSize: 4*stepFloat))
@@ -119,20 +133,6 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         changeLangButton.addTarget(self, action: #selector(onChangeLangButtonClicked), for: .touchUpInside)
         changeLangButton.showsTouchWhenHighlighted = true
         addSubview(changeLangButton)
-
-        // Title
-        let rect = addRect(x: 3, y: y+10, w: 42, h: 28, color: UIColor.black.withAlphaComponent(0.4))
-        rect.roundBorder(borderWidth: 0, cornerRadius: stepFloat * 2, color: .clear)
-        attrTitle = getStrokeText(gameLang == .jp ? "日本語" : "英語",
-                                  .white,
-                                  strokeWidth: Float(stepFloat * -1/3),
-                                  font: MyFont.bold(ofSize: 9*stepFloat))
-
-        let label = addAttrText(x: 7, y: y+4, h: 13, text: attrTitle)
-        label.sizeToFit()
-
-        addMedalProgressBar(x: 7, y: y + 13, medalFrom: medal.count)
-        addDailyGoalView(x: 7, y: y + 25)
     }
 
     private func addDailyGoalView(x: Int, y: Int) {
@@ -146,6 +146,12 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         dailyGoalView.lvl = context.gameMedal.lowLevel
     }
 
+    @objc func onChangeLangButtonClicked() {
+        changeGameLangTo(lang: gameLang == .jp ? .en : .jp)
+        self.viewWillAppear()
+    }
+
+    // MARK: - GoButton
     private func addGoButton(x: Int, y: Int, w: Int) {
         let button = UIButton()
         button.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .highlighted)
@@ -175,7 +181,6 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
             }
         }
     }
-
 }
 
 func rollingText(view: UIView) {
@@ -190,11 +195,13 @@ func rollingText(view: UIView) {
 }
 
 extension GridLayout where Self: UIView {
+    // MARK: - textBackground
     func drawTextBackground(bgColor: UIColor, textColor: UIColor) {
         backgroundColor = bgColor
         let num = Int(sqrt(pow(screen.width, 2) + pow(screen.height, 2)) / stepFloat)/8
         let level = context.gameMedal.lowLevel
         let sentences = getRandSentences(level: level, numOfSentences: num * 4)
+
         func randPad(_ string: String) -> String {
             var res = string
             let prefixCount = Int.random(in: 0 ... 10)
@@ -207,6 +214,7 @@ extension GridLayout where Self: UIView {
             }
             return res
         }
+
         for i in 0 ..< num {
             let x = 1
             let y = i * 9
@@ -226,6 +234,7 @@ extension GridLayout where Self: UIView {
         }
     }
 
+    // MARK: - progressBar
     func addMedalProgressBar(
         x: Int,
         y: Int,
