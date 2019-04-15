@@ -45,7 +45,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
     func viewWillAppear() {
         removeAllSubviews()
-        drawTextBackground(bgColor: rgb(60, 60, 60), textColor: textGold)
+        addTextbackground(bgColor: rgb(60, 60, 60), textColor: textGold)
         addTopBar(y: 5)
 
         addLangInfo(y: (yMax + 12)/2 - 22 - 1)
@@ -134,44 +134,6 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         addSubview(changeLangButton)
     }
 
-    private func addDailyGoalView(x: Int, y: Int) {
-        // title
-        var label = addText(x: x, y: y, h: 3, text: i18n.todaySummary, color: .white)
-        label.frame.origin.y += stepFloat/4
-
-        // Daily Circle Progress
-        let todayPercent = getTodaySentenceCount().f/context.gameSetting.dailySentenceGoal.f
-        let dailyGoalView = ProgressCircleView()
-        layout(x, y + 4, 8, 8, dailyGoalView)
-        addSubview(dailyGoalView)
-        dailyGoalView.percent = todayPercent
-        dailyGoalView.title = i18n.simpleGoalText
-        dailyGoalView.lvl = context.gameMedal.lowLevel
-
-        // 今日のメダル
-        let bgRect = addRect(x: x+10, y: y + 4, w: 8, h: 8,
-                           color: progressBackGray.withAlphaComponent(0.6))
-        bgRect.frame = bgRect.frame.padding(-1 * stepFloat * 8/24 * 1.1)
-        bgRect.roundBorder(borderWidth: 0.5, cornerRadius: bgRect.frame.width/2, color: .clear)
-
-        let todayMedalCount = getTodayMedalCount()
-        let medalCountColor = todayMedalCount > 0 ? myOrange :
-                             (todayMedalCount == 0 ? myWhite : myRed)
-        let attrText = getStrokeText("\(todayMedalCount)",
-                                     medalCountColor,
-                                     strokeWidth: Float(-0.3 * stepFloat),
-                                     strokColor: .black,
-                                     font: MyFont.heavyDigit(ofSize: 3.6 * stepFloat))
-        label = addAttrText(x: x+10, y: y + 4, h: 4, text: attrText)
-        label.sizeToFit()
-        label.centerIn(bgRect.frame)
-        label = addText(x: x+10, y: y+13, h: 4, text: i18n.medal,
-                            font: MyFont.regular(ofSize: 2 * stepFloat),
-                            color: minorTextColor)
-        label.sizeToFit()
-        label.centerX(bgRect.frame)
-    }
-
     @objc func onChangeLangButtonClicked() {
         changeGameLangTo(lang: gameLang == .jp ? .en : .jp)
         self.viewWillAppear()
@@ -222,7 +184,7 @@ func rollingText(view: UIView) {
 
 extension GridLayout where Self: UIView {
     // MARK: - textBackground
-    func drawTextBackground(bgColor: UIColor, textColor: UIColor) {
+    func addTextbackground(bgColor: UIColor, textColor: UIColor) {
         backgroundColor = bgColor
         let num = Int(sqrt(pow(screen.width, 2) + pow(screen.height, 2)) / stepFloat)/8
         let level = context.gameMedal.lowLevel
@@ -248,7 +210,9 @@ extension GridLayout where Self: UIView {
                            randPad(sentences[i+num]) +
                            randPad(sentences[i + (2 * num)]) +
                            sentences[i + (3 * num)]
-            let label = addText(x: x, y: y, h: 6 - level.rawValue/3, text: sentence, color: textColor)
+            let label = addText(x: x, y: y, h: 6 - level.rawValue/3,
+                                text: sentence,
+                                color: textColor)
             label.sizeToFit()
             label.centerX(frame)
             label.textAlignment = .left
@@ -257,6 +221,82 @@ extension GridLayout where Self: UIView {
                 .translatedBy(x: 0, y: screen.width/2)
                 .rotated(by: -1 * .pi/8)
             rollingText(view: label)
+        }
+    }
+
+    func addDailyGoalView(x: Int, y: Int,
+                          isFullStatus: Bool = false,
+                          delay: TimeInterval = 0,
+                          duration: TimeInterval = 0) {
+        // title
+        let titleLabel = addText(x: x, y: y, h: 3, text: i18n.todaySummary, color: .white)
+        titleLabel.frame.origin.y += stepFloat/4
+
+        // Daily Circle Progress
+        let todayPercent = getTodaySentenceCount().f/context.gameSetting.dailySentenceGoal.f
+        let dailyGoalView = ProgressCircleView()
+        layout(x, y + 4, 8, 8, dailyGoalView)
+        addSubview(dailyGoalView)
+        dailyGoalView.percent = todayPercent
+        dailyGoalView.title = i18n.simpleGoalText
+        dailyGoalView.lvl = context.gameMedal.lowLevel
+
+        func addCircleStatus(x: Int,
+                             valueString: String,
+                             isHeavy: Bool = true,
+                             valueColor: UIColor,
+                             subtitle: String) -> [UIView] {
+            let bgRect = addRect(x: x, y: y + 4, w: 8, h: 8,
+                                 color: progressBackGray.withAlphaComponent(0.6))
+            bgRect.frame = bgRect.frame.padding(-1 * stepFloat * 8/24 * 1.1)
+            bgRect.roundBorder(borderWidth: 0.5, cornerRadius: bgRect.frame.width/2, color: .clear)
+
+            let attrText = getStrokeText(valueString,
+                valueColor,
+                strokeWidth: Float(-0.3 * stepFloat),
+                strokColor: .black,
+                font: isHeavy ? MyFont.heavyDigit(ofSize: 3.6 * stepFloat) :
+                                MyFont.bold(ofSize: 3 * stepFloat)
+            )
+            let valueLabel = addAttrText(x: x+10, y: y + 4, h: 4, text: attrText)
+            valueLabel.sizeToFit()
+            valueLabel.centerIn(bgRect.frame)
+
+            let subtitleLabel = addText(x: x+10, y: y+13, h: 4, text: subtitle,
+                                     font: MyFont.regular(ofSize: 2 * stepFloat),
+                                     color: minorTextColor)
+            subtitleLabel.sizeToFit()
+            subtitleLabel.centerX(bgRect.frame)
+            return [bgRect, valueLabel, subtitleLabel]
+        }
+
+        var views: [UIView] = [titleLabel, dailyGoalView]
+
+        // 今日のメダル
+        let todayMedalCount = getTodayMedalCount()
+        let medalCountColor = todayMedalCount > 0 ? myOrange :
+            (todayMedalCount == 0 ? myWhite : myRed)
+        let medalCountViews = addCircleStatus(x: x + 11,
+                                              valueString: "\(todayMedalCount > 0 ? "+" : "")\(todayMedalCount)",
+                                              valueColor: medalCountColor,
+                                              subtitle: i18n.medal)
+        views.append(contentsOf: medalCountViews)
+
+        // ゲーム時間
+        if isFullStatus {
+            let playSecs = getTodaySeconds()
+            let timeValueString = playSecs < 6000 ? String(format: "%.1f", playSecs.f/60) :
+                                                    String(format: "%.0f", playSecs.f/60)
+            let timeStatusViews = addCircleStatus(x: x + 22,
+                                                  valueString: timeValueString,
+                                                  isHeavy: false,
+                                                  valueColor: .white,
+                                                  subtitle: "mins")
+            views.append(contentsOf: timeStatusViews)
+        }
+
+        if duration > 0 {
+            views.forEach { $0.fadeIn(delay: delay, duration: duration) }
         }
     }
 

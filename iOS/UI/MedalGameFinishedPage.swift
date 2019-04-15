@@ -62,10 +62,10 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         removeAllSubviews()
         strokeWidth = Float(stepFloat * -1/2.0)
         backgroundColor = rgb(50, 50, 50)
-        drawTextBackground(bgColor: rgb(50, 50, 50), textColor: textGold)
+        addTextbackground(bgColor: rgb(50, 50, 50), textColor: textGold)
         let yMax = Int(screen.height / stepFloat)
         addInfo(y: (yMax - 12)/2 - 17)
-        addActionButtons(y: (yMax - 12)/2 + 28)
+        addActionButtons(y: (yMax - 12)/2 + 30)
     }
 
     func viewWillDisappear() {
@@ -84,7 +84,6 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     // MARK: - AddInfo
     private func addInfo(y: Int) {
         let medal = context.gameMedal
-
         guard let gr = context.gameRecord else { return }
 
         sayResult(gr: gr)
@@ -100,11 +99,14 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         addCompleteness(y: y+16, delay: 0.4, duration: 0.3)
         addRank(        y: y+16, delay: 0.8, duration: 0.3)
         addRecordDetail(y: y+18, delay: 1.0, duration: 0.6)
+        addDailyGoalView(x: 7, y: y+28,
+                         isFullStatus: true,
+                         delay: 2.4, duration: 0.3)
     }
 
     private func addTitleBlock(y: Int, delay: TimeInterval = 0, duration: TimeInterval) {
         // info background
-        let rect = addRect(x: 3, y: y, w: 42, h: 40, color: rgb(0, 0, 0).withAlphaComponent(0.4))
+        let rect = addRect(x: 3, y: y, w: 42, h: 45, color: rgb(0, 0, 0).withAlphaComponent(0.4))
         rect.roundBorder(borderWidth: 0, cornerRadius: stepFloat * 3, color: .clear)
 
         rect.enlargeIn(delay: delay, duration: duration)
@@ -144,7 +146,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     }
 
     private func addCompleteness(y: Int, delay: TimeInterval = 0, duration: TimeInterval) {
-        var attrText = getStrokeText(gameLang == .jp ? "成績" : "Score",
+        var attrText = getStrokeText("成績",
                                  .white,
                                  strokeWidth: strokeWidth/2,
                                  font: MyFont.bold(ofSize: 3 * stepFloat))
@@ -161,7 +163,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         label.textAlignment = .right
         label.slideIn(delay: delay, duration: duration)
 
-        attrText = getStrokeText(gameLang == .jp ? "点" : "pts",
+        attrText = getStrokeText("点",
                                  .white,
                                  strokeWidth: strokeWidth/2,
                                  font: MyFont.bold(ofSize: 2 * stepFloat))
@@ -171,7 +173,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     }
 
     private func addRank(y: Int, delay: TimeInterval = 0, duration: TimeInterval) {
-        var attrText = getStrokeText(gameLang == .jp ? "判定" : "Rank",
+        var attrText = getStrokeText("判定",
                                  .white,
                                  strokeWidth: strokeWidth/2,
                                  font: MyFont.bold(ofSize: 3 * stepFloat))
@@ -202,7 +204,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         let label = addAttrText(x: 34, y: y, w: 22, h: 6, text: attrText)
         label.textAlignment = .left
         label.shrinkIn(delay: delay, duration: duration)
-        label.fadeOut(delay: delay + duration + 0.9, duration: 0.3)
+        label.fadeOut(delay: delay + duration + 1.2, duration: 0.3)
     }
 
     private func addActionButtons(y: Int) {
@@ -226,8 +228,10 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
             playButton?.setTitle(" 次の挑戦 (\(leftSeconds)秒)", for: .normal)
             guard leftSeconds > 0 else {
                 countDownTimer?.invalidate()
-                dismissTwoVC(animated: false) {
-                    launchNextGame()
+                if !isSimulator {
+                    dismissTwoVC(animated: false) {
+                        launchNextGame()
+                    }
                 }
                 return
             }

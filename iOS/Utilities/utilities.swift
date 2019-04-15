@@ -350,6 +350,19 @@ func getSentenceCountsByDays() -> [Int] {
     return sentenceCounts
 }
 
+func getTodaySeconds() -> Int {
+    guard !GameContext.shared.gameHistory.isEmpty else { return 0 }
+
+    let todayKey = getDateKey(date: Date())
+    var secs: Int = 0
+    for r in GameContext.shared.gameHistory {
+        if todayKey == getDateKey(date: r.startedTime) {
+            secs += r.playDuration
+        }
+    }
+    return secs
+}
+
 func getTodayMedalCount() -> Int {
     guard !GameContext.shared.gameHistory.isEmpty else { return 0 }
 
