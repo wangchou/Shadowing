@@ -111,6 +111,7 @@ enum Rank: String, Codable {
     case a = "A"
     case bP = "B+"
     case b = "B"
+    case cP = "C+"
     case c = "C"
     case d = "D"
     case e = "E"
@@ -122,7 +123,7 @@ enum Rank: String, Codable {
             return myBlue
         case .aP, .a, .bP :
             return myGreen
-        case .b, .c, .d:
+        case .b, .cP, .c, .d:
             return myOrange
         case .e, .f:
             return myRed

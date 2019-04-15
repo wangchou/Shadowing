@@ -65,16 +65,16 @@ struct GameMedal {
 
 // swiftlint:disable colon
 private let medalUpdateByLevelAndRank: [[Rank: Int]] = [
-    [.ss:  30, .s:  15, .aP:  7, .a:  7, .bP:  5, .b:  5, .c:  3, .d:  1, .e:  -1, .f:  -3], // lv1
-    [.ss:  30, .s:  15, .aP:  7, .a:  7, .bP:  4, .b:  4, .c:  2, .d:  0, .e:  -2, .f:  -4], // lv2
-    [.ss:  20, .s:  10, .aP:  5, .a:  5, .bP:  3, .b:  3, .c:  1, .d: -1, .e:  -3, .f:  -5], // lv3
-    [.ss:  20, .s:  10, .aP:  5, .a:  5, .bP:  2, .b:  2, .c:  0, .d: -2, .e:  -4, .f:  -5], // lv4
-    // turn on detail plus mode
-    [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  3, .b:  1, .c: -1, .d: -3, .e:  -5, .f:  -7], // lv5
-    [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  3, .b:  1, .c: -1, .d: -3, .e:  -5, .f:  -7], // lv6
-    [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  3, .b:  1, .c: -1, .d: -3, .e:  -5, .f:  -7], // lv7
-    [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  3, .b:  1, .c: -1, .d: -3, .e:  -5, .f:  -7], // lv8
-    [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  2, .b:  0, .c: -2, .d: -4, .e:  -6, .f:  -8], // lv9
-    [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  2, .b:  0, .c: -2, .d: -4, .e:  -6, .f:  -8]  // lv10
+    [.ss:  30, .s:  15, .aP:  7, .a:  7, .bP:  5, .b:  5, .cP:  3, .c:  3, .d:  1, .e:  -1, .f:  -3], // lv1  avg 55
+    [.ss:  30, .s:  15, .aP:  7, .a:  7, .bP:  4, .b:  4, .cP:  2, .c:  2, .d:  0, .e:  -2, .f:  -4], // lv2  avg 60
+    [.ss:  20, .s:  10, .aP:  5, .a:  5, .bP:  3, .b:  3, .cP:  1, .c:  1, .d: -1, .e:  -3, .f:  -5], // lv3  avg 65
+    [.ss:  20, .s:  10, .aP:  5, .a:  5, .bP:  2, .b:  2, .cP:  0, .c:  0, .d: -2, .e:  -4, .f:  -5], // lv4  avg 70
+    // turn on detail mode (add A+ & B+ & C+)
+    [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  3, .b:  1, .cP:  0, .c: -1, .d: -3, .e:  -5, .f:  -7], // lv5  avg 75
+    [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  3, .b:  1, .cP:  0, .c: -1, .d: -3, .e:  -5, .f:  -7], // lv6
+    [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  3, .b:  0, .cP: -1, .c: -3, .d: -5, .e:  -7, .f:  -9], // lv7  avg 77.5 4000 sentences
+    [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  3, .b:  0, .cP: -1, .c: -3, .d: -5, .e:  -7, .f:  -9], // lv8
+    [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  2, .b:  0, .cP: -2, .c: -4, .d: -6, .e:  -8, .f: -10], // lv9  avg 80   5000 sentences
+    [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  2, .b:  0, .cP: -2, .c: -4, .d: -6, .e:  -8, .f: -10]  // lv10
 ]
 // swiftlint:enable colon

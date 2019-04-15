@@ -109,6 +109,7 @@ struct GameRecord: Codable {
         if p >= 90 { return .a }
         if p >= 85 && isDetail { return .bP }
         if p >= 80 { return .b }
+        if p >= 75 && isDetail { return .cP }
         if p >= 70 { return .c }
         if p >= 60 { return .d }
         if p >= 40 { return .e }
