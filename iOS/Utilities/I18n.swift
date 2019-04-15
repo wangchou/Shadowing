@@ -361,6 +361,10 @@ class I18n {
         return "\(goalPrefix)\(GameContext.shared.gameSetting.dailySentenceGoal)\(goalSuffix)"
     }
 
+    var simpleGoalText: String {
+        return "\(GameContext.shared.gameSetting.dailySentenceGoal)\(goalSuffix)"
+    }
+
     var day: String {
         if isZh { return "天"}
         return "日"
@@ -526,9 +530,8 @@ class I18n {
         return "pts"
     }
     var medal: String {
-        if isJa { return "メダル" }
         if isZh { return "徽章" }
-        return "Medal"
+        return "メダル"
     }
 
     func getSpeakingStatus(percent: String, rank: String, reward: Int?) -> String {
@@ -567,6 +570,11 @@ class I18n {
     var expert: String {
         if isJa || isZh { return "超難問" }
         return "Expert"
+    }
+
+    var todaySummary: String {
+        if isZh { return "今日統計"}
+        return "今日のまとめ"
     }
 }
 // swiftlint:enable file_length  type_body_length

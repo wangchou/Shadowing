@@ -49,7 +49,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         addTopBar(y: 5)
 
         addLangInfo(y: (yMax + 12)/2 - 22 - 1)
-        addGoButton(x: 25, y: (yMax + 12)/2 - 22 + 24, w: 21)
+        addGoButton(x: 28, y: (yMax + 12)/2 - 22 + 27, w: 18)
     }
 
     // MARK: - TopBar
@@ -103,11 +103,11 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         addChangeLangButton(y: y)
         addLangTitleBox(y: y + 4)
         addMedalProgressBar(x: 7, y: y + 13, medalFrom: context.gameMedal.count)
-        addDailyGoalView(x: 7, y: y + 25)
+        addDailyGoalView(x: 7, y: y + 24)
     }
 
     private func addLangTitleBox(y: Int) {
-        let rect = addRect(x: 3, y: y+6, w: 42, h: 28, color: UIColor.black.withAlphaComponent(0.4))
+        let rect = addRect(x: 3, y: y+6, w: 42, h: 31, color: UIColor.black.withAlphaComponent(0.4))
         rect.roundBorder(borderWidth: 0, cornerRadius: stepFloat * 2, color: .clear)
         let attrTitle = getStrokeText(gameLang == .jp ? "日本語" : "英語",
                                       .white,
@@ -119,7 +119,6 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     }
 
     private func addChangeLangButton(y: Int) {
-        // changeLangButton
         let changeLangButton = UIButton()
         changeLangButton.backgroundColor = UIColor.white.withAlphaComponent(0.4)
         changeLangButton.roundBorder(borderWidth: 0, cornerRadius: stepFloat, color: .clear)
@@ -136,14 +135,41 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     }
 
     private func addDailyGoalView(x: Int, y: Int) {
-        let todayPercent = getTodaySentenceCount().f/context.gameSetting.dailySentenceGoal.f
+        // title
+        var label = addText(x: x, y: y, h: 3, text: i18n.todaySummary, color: .white)
+        label.frame.origin.y += stepFloat/4
 
+        // Daily Circle Progress
+        let todayPercent = getTodaySentenceCount().f/context.gameSetting.dailySentenceGoal.f
         let dailyGoalView = ProgressCircleView()
-        layout(x, y, 8, 8, dailyGoalView)
+        layout(x, y + 4, 8, 8, dailyGoalView)
         addSubview(dailyGoalView)
         dailyGoalView.percent = todayPercent
-        dailyGoalView.title = i18n.goalText
+        dailyGoalView.title = i18n.simpleGoalText
         dailyGoalView.lvl = context.gameMedal.lowLevel
+
+        // 今日のメダル
+        let bgRect = addRect(x: x+10, y: y + 4, w: 8, h: 8,
+                           color: progressBackGray.withAlphaComponent(0.6))
+        bgRect.frame = bgRect.frame.padding(-1 * stepFloat * 8/24 * 1.1)
+        bgRect.roundBorder(borderWidth: 0.5, cornerRadius: bgRect.frame.width/2, color: .clear)
+
+        let todayMedalCount = getTodayMedalCount()
+        let medalCountColor = todayMedalCount > 0 ? myOrange :
+                             (todayMedalCount == 0 ? myWhite : myRed)
+        let attrText = getStrokeText("\(todayMedalCount)",
+                                     medalCountColor,
+                                     strokeWidth: Float(-0.3 * stepFloat),
+                                     strokColor: .black,
+                                     font: MyFont.heavyDigit(ofSize: 3.6 * stepFloat))
+        label = addAttrText(x: x+10, y: y + 4, h: 4, text: attrText)
+        label.sizeToFit()
+        label.centerIn(bgRect.frame)
+        label = addText(x: x+10, y: y+13, h: 4, text: i18n.medal,
+                            font: MyFont.regular(ofSize: 2 * stepFloat),
+                            color: minorTextColor)
+        label.sizeToFit()
+        label.centerX(bgRect.frame)
     }
 
     @objc func onChangeLangButtonClicked() {
