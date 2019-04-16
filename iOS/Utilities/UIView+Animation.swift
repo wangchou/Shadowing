@@ -40,7 +40,7 @@ extension UIView {
         isHidden = true
         transform = CGAffineTransform(scaleX: 4, y: 4)
 
-        let animator = UIViewPropertyAnimator(duration: duration, curve: .easeIn, animations: {
+        let animator = UIViewPropertyAnimator(duration: duration, curve: .easeInOut, animations: {
             self.transform = CGAffineTransform(scaleX: 1, y: 1)
         })
         Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { _ in

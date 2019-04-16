@@ -88,20 +88,23 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
         sayResult(gr: gr)
 
-        addTitleBlock(y: y, duration: 0.3)
+        addTitleBlock(y: y, duration: 0.2)
         addMedalProgressBar(x: 7, y: y + 5,
                             medalFrom: medal.count - (gr.medalReward ?? 0),
                             medalTo: medal.count,
-                            animateInDelay: 0.3,
-                            duration: 0.3,
-                            animateProgressDelay: 1.7)
-        addMedal(       y: y, delay: 1.4, duration: 0.2)
-        addCompleteness(y: y+16, delay: 0.4, duration: 0.3)
-        addRank(        y: y+16, delay: 0.8, duration: 0.3)
-        addRecordDetail(y: y+18, delay: 1.0, duration: 0.6)
+                            animateInDelay: 0,
+                            duration: 0.2,
+                            animateProgressDelay: 1.1,
+                            isLightSubText: true)
+        addMedal(       y: y, delay: 1.0, duration: 0.2)
+
+        addCompleteness(y: y+16, delay: 0.3, duration: 0.2)
+        addRank(        y: y+16, delay: 0.3, duration: 0.2)
+        addRecordDetail(y: y+18, delay: 0.6, duration: 0.2)
+
         addDailyGoalView(x: 7, y: y+28,
                          isFullStatus: true,
-                         delay: 2.4, duration: 0.3)
+                         delay: 0.9, duration: 0.2)
     }
 
     private func addTitleBlock(y: Int, delay: TimeInterval = 0, duration: TimeInterval) {
@@ -204,7 +207,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         let label = addAttrText(x: 34, y: y, w: 22, h: 6, text: attrText)
         label.textAlignment = .left
         label.shrinkIn(delay: delay, duration: duration)
-        label.fadeOut(delay: delay + duration + 1.2, duration: 0.3)
+        label.fadeOut(delay: delay + duration + 3.0, duration: 0.2)
     }
 
     private func addActionButtons(y: Int) {

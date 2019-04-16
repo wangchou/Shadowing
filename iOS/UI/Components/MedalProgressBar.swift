@@ -19,6 +19,8 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
 
     var medalCount: Int = 0
 
+    var isLightSubText: Bool = false
+
     var timer: Timer?
 
     var lvlLabel: UILabel!
@@ -81,6 +83,14 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
 
         // medal lower bound
         lvlStartLabel.text = "\(lowLevel.rawValue * medalsPerLevel)"
+
+        if isLightSubText {
+            lvlEndLabel.textColor = minorTextColor.withAlphaComponent(0.7)
+            lvlStartLabel.textColor = minorTextColor.withAlphaComponent(0.7)
+        } else {
+            lvlEndLabel.textColor = minorTextColor
+            lvlStartLabel.textColor = minorTextColor
+        }
 
         // bar
         progressBarMid.backgroundColor = lowLevel.color.withSaturation(1)

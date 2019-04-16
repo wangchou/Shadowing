@@ -308,12 +308,14 @@ extension GridLayout where Self: UIView {
         medalTo: Int = -1,
         animateInDelay: TimeInterval = 0,
         duration: TimeInterval = 0,
-        animateProgressDelay: TimeInterval = 0
+        animateProgressDelay: TimeInterval = 0,
+        isLightSubText: Bool = false
     ) {
         let medalProgressBar = MedalProgressBar()
         layout(x, y, 34, 15, medalProgressBar)
         addSubview(medalProgressBar)
         medalProgressBar.medalCount = medalFrom
+        medalProgressBar.isLightSubText = isLightSubText
         if duration > 0 {
             medalProgressBar.animateIn(delay: animateInDelay, duration: duration)
         }
