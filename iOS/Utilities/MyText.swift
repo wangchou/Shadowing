@@ -99,7 +99,7 @@ func getStrokeText(
     strokColor: UIColor = .black,
     font: UIFont = UIFont.boldSystemFont(ofSize: 32)
     ) -> NSMutableAttributedString {
-    let limitedWidth = max(-5, strokeWidth)
+    let limitedWidth = max(-4, strokeWidth)
     return getText(text, color: color, strokeWidth: limitedWidth, strokeColor: strokColor, font: font)
 }
 

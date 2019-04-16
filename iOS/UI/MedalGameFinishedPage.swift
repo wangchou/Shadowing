@@ -64,8 +64,8 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         backgroundColor = rgb(50, 50, 50)
         addTextbackground(bgColor: rgb(50, 50, 50), textColor: textGold)
         let yMax = Int(screen.height / stepFloat)
-        addInfo(y: (yMax - 12)/2 - 17)
-        addActionButtons(y: (yMax - 12)/2 + 30)
+        addInfo(y: (yMax - 12)/2 - 18)
+        addActionButtons(y: (yMax - 12)/2 + 29)
     }
 
     func viewWillDisappear() {
@@ -115,7 +115,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         rect.enlargeIn(delay: delay, duration: duration)
 
         let attrText = getStrokeText(gameLang == .jp ? "日本語" : "英語",
-                                     rgb(220, 220, 220),
+                                     .white,
                                      strokeWidth: strokeWidth/2,
                                      font: MyFont.bold(ofSize: 10 * stepFloat))
         let label = addAttrText(x: 12, y: y - 8, h: 12, text: attrText)
@@ -138,7 +138,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
             let thisRect = CGRect(
                 x: rect.origin.x - unit,
                 y: rect.origin.y + rect.height - 2 * unit * i.c - unit,
-                width: 4 * unit,
+                width: 3 * unit,
                 height: unit
             )
             let bar = UIView(frame: thisRect)
@@ -213,7 +213,11 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     private func addActionButtons(y: Int) {
         let button = createButton(title: "", bgColor: .red)
         let countDownSecs = 5
-        button.setIconImage(named: "baseline_play_arrow_black_48pt", title: " 次の挑戦 (\(countDownSecs)秒)", tintColor: .white, isIconOnLeft: true)
+        button.setIconImage(named: "baseline_play_arrow_black_48pt",
+                            title: " 次の挑戦 (\(countDownSecs)秒)",
+                            tintColor: .white,
+                            isIconOnLeft: true)
+        button.titleLabel?.font = MyFont.regular(ofSize: stepFloat * 3.2 )
         button.addTapGestureRecognizer {
             dismissTwoVC(animated: false) {
                 launchNextGame()
