@@ -100,11 +100,11 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
         addCompleteness(y: y+16, delay: 0.3, duration: 0.2)
         addRank(        y: y+16, delay: 0.3, duration: 0.2)
-        addRecordDetail(y: y+18, delay: 0.6, duration: 0.2)
+        addRecordDetail(y: y+18, delay: 0.6, duration: 0.5)
 
         addDailyGoalView(x: 7, y: y+28,
                          isFullStatus: true,
-                         delay: 0.9, duration: 0.2)
+                         delay: 0.6, duration: 0.6)
     }
 
     private func addTitleBlock(y: Int, delay: TimeInterval = 0, duration: TimeInterval) {

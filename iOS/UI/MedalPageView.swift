@@ -296,7 +296,13 @@ extension GridLayout where Self: UIView {
         }
 
         if duration > 0 {
-            views.forEach { $0.fadeIn(delay: delay, duration: duration) }
+            views.forEach { $0.fadeIn(delay: delay, duration: duration,
+                                      fromAlpha: 0, toAlpha: 0.7) }
+            Timer.scheduledTimer(withTimeInterval: delay + duration, repeats: false) { _ in
+                views.forEach { $0.fadeIn(delay: 0, duration: 2,
+                                          fromAlpha: 0.7, toAlpha: 1.0) }
+
+            }
         }
     }
 

@@ -49,11 +49,13 @@ extension UIView {
         }
     }
 
-    func fadeIn(delay: TimeInterval = 0, duration: TimeInterval) {
-        alpha = 0
+    func fadeIn(delay: TimeInterval = 0, duration: TimeInterval,
+                fromAlpha: CGFloat = 0,
+                toAlpha: CGFloat = 1) {
+        alpha = fromAlpha
 
         let animator = UIViewPropertyAnimator(duration: duration, curve: .easeIn, animations: {
-            self.alpha = 1
+            self.alpha = toAlpha
         })
         Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { _ in
             animator.startAnimation()
