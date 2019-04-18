@@ -123,6 +123,7 @@ class SpeechRecognizer: NSObject {
 
         recognitionRequest = nil
         recognitionTask = nil
+        postEvent(.listenStopped, string: "")
     }
 
     // MARK: - Private Methods

@@ -63,6 +63,11 @@ extension Messenger: GameEventDelegate {
         case .listenStarted:
             addLabel(rubyAttrStr("..."), pos: .right)
 
+        case .listenStopped:
+            DispatchQueue.main.async {
+                self.levelMeterValueBar.frame.size.height = 0
+            }
+
         case .scoreCalculated:
             DispatchQueue.main.async {
                 self.levelMeterValueBar.frame.size.height = 0
