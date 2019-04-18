@@ -103,9 +103,9 @@ func loadTopicSentenceDB() {
     }
 }
 
-private func getSentencesById(id: Int) -> String {
+private func getSentencesByIds(ids: [Int]) -> [String] {
     guard let path = Bundle.main.path(forResource: sqliteFileName, ofType: "sqlite") else {
-        print("sqlite file not found"); return "Not Found"
+        print("sqlite file not found"); return []
     }
     do {
         let db = try Connection(path, readonly: true)
@@ -115,22 +115,23 @@ private func getSentencesById(id: Int) -> String {
         let dbEn = Expression<String>("en")
 
         let query = sentenceTable.select(dbJa, dbEn)
-            .filter(dbId == id)
+            .filter(ids.contains(dbId))
+        var sentences: [String] = []
         for s in try db.prepare(query) {
             if gameLang == .jp {
                 translations[s[dbJa]]=s[dbEn]
-                return s[dbJa]
+                sentences.append(s[dbJa])
             }
             if gameLang == .en {
                 translations[s[dbEn]]=s[dbJa]
-                return s[dbEn]
+                sentences.append(s[dbEn])
             }
         }
-
+        return sentences
     } catch {
         print("db error")
     }
-    return ""
+    return []
 }
 
 func getSentenceCount(minKanaCount: Int, maxKanaCount: Int) -> Int {
@@ -154,15 +155,26 @@ func getRandSentences(level: Level, numOfSentences: Int) -> [String] {
         }
     }
 
+    var randomIds: [Int] = []
     var randomSentences: [String] = []
     while randomSentences.count < numOfSentences {
-        if let newId = combinedIds.randomElement() {
-            let str = getSentencesById(id: newId)
+        while randomIds.count < numOfSentences + numOfSentences/2 {
+            if let newId = combinedIds.randomElement() {
+                if !randomIds.contains(newId) {
+                    randomIds.append(newId)
+                }
+            }
+        }
+
+        let strs = getSentencesByIds(ids: randomIds)
+        for str in strs {
             if !randomSentences.contains(str) {
                 randomSentences.append(str)
+                if randomSentences.count == numOfSentences {
+                    return randomSentences
+                }
             }
         }
     }
-
     return randomSentences
 }
