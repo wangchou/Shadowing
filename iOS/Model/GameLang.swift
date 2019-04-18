@@ -16,24 +16,21 @@ private struct LangForEncode: Codable {
 }
 
 func changeGameLangTo(lang: Lang) {
-    let t1 = getNow()
-
     gameLang = lang
     saveGameLang()
     loadGameSetting()
 
     DispatchQueue.global().async {
         loadGameMiscData()
-        print("changeGameLangTo: \(getNow() - t1)\n")
     }
 
-    loadGameHistory()
-
-    if gameLang == .en {
-        GameContext.shared.bottomTab = .infiniteChallenge
-        rootViewController.showInfiniteChallengePage(idx: 1)
+    DispatchQueue.main.async {
+        if gameLang == .en {
+            GameContext.shared.bottomTab = .infiniteChallenge
+            rootViewController.showInfiniteChallengePage(idx: 1)
+        }
+        rootViewController.reloadTableData()
     }
-    rootViewController.reloadTableData()
 }
 
 func saveGameLang() {

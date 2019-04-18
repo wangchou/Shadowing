@@ -30,7 +30,11 @@ class GameContext {
     private init() {}
 
     // MARK: - Long-term data will be kept in UserDefault
-    var gameHistory = [GameRecord]()
+    var gameHistory: [GameRecord] {
+        if gameLang == .jp { return jpHistory }
+        if gameLang == .en { return enHistory }
+        return []
+    }
     var gameSetting = GameSetting()
     var gameMedal = GameMedal()
     var bottomTab: UITab = .topics

@@ -12,16 +12,27 @@ private let context = GameContext.shared
 
 private let gameHistoryKey = "game record array json"
 
+var enHistory: [GameRecord] = []
+var jpHistory: [GameRecord] = []
+
 func saveGameHistory() {
     saveToUserDefault(object: context.gameHistory, key: gameHistoryKey + gameLang.key)
 }
 
 func loadGameHistory() {
-    if let gameHistory = loadFromUserDefault(type: [GameRecord].self, key: gameHistoryKey + gameLang.key) {
-        context.gameHistory = gameHistory
+    if let gameHistory = loadFromUserDefault(type: [GameRecord].self, key: gameHistoryKey + Lang.jp.key) {
+
+        jpHistory = gameHistory
     } else {
         print("[\(gameLang)] create new gameHistory")
-        context.gameHistory = [GameRecord]()
+        jpHistory = [GameRecord]()
+    }
+    if let gameHistory = loadFromUserDefault(type: [GameRecord].self, key: gameHistoryKey + Lang.en.key) {
+
+        enHistory = gameHistory
+    } else {
+        print("[\(gameLang)] create new gameHistory")
+        enHistory = [GameRecord]()
     }
 }
 
@@ -48,17 +59,35 @@ func updateGameHistory() {
     guard let record = context.gameRecord else { return }
     if let bestRecord = findBestRecord(key: record.dataSetKey) {
         if isBetter(record, to: bestRecord) {
-            context.gameHistory.insert(record, at: 0)
+            insertRecord(record)
             context.gameRecord?.isNewRecord = true
         } else {
-            context.gameHistory.append(record)
+            appendRecord(record)
             context.gameRecord?.isNewRecord = false
         }
     } else {
-        context.gameHistory.append(record)
+        appendRecord(record)
         context.gameRecord?.isNewRecord = true
     }
     saveGameHistory()
+}
+
+private func insertRecord(_ record: GameRecord) {
+    if gameLang == .jp {
+        jpHistory.insert(record, at: 0)
+    }
+    if gameLang == .en {
+        enHistory.insert(record, at: 0)
+    }
+}
+
+private func appendRecord(_ record: GameRecord) {
+    if gameLang == .jp {
+        jpHistory.append(record)
+    }
+    if gameLang == .en {
+        enHistory.append(record)
+    }
 }
 
 struct GameRecord: Codable {
