@@ -23,7 +23,7 @@ class SpeechEngine {
     var isEngineRunning = false
     var audioEngine = AVAudioEngine()
 
-    private var speechRecognizer = SpeechRecognizer()
+    private var speechRecognizer = SpeechRecognizer.shared
     private var tts = TTS()
 
     // MARK: - Public Funtions
