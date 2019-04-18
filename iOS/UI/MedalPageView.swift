@@ -239,7 +239,6 @@ extension GridLayout where Self: UIView {
         addSubview(dailyGoalView)
         dailyGoalView.percent = todayPercent
         dailyGoalView.title = i18n.simpleGoalText
-        dailyGoalView.lvl = context.gameMedal.lowLevel
 
         func addCircleStatus(x: Int,
                              valueString: String,
@@ -274,7 +273,7 @@ extension GridLayout where Self: UIView {
 
         // 今日のメダル
         let todayMedalCount = getTodayMedalCount()
-        let medalCountColor = todayMedalCount > 0 ? myOrange :
+        let medalCountColor = todayMedalCount > 0 ? myGreen :
             (todayMedalCount == 0 ? myWhite : myRed)
         let medalCountViews = addCircleStatus(x: x + 11,
                                               valueString: "\(todayMedalCount > 0 ? "+" : "")\(todayMedalCount)",
@@ -297,10 +296,10 @@ extension GridLayout where Self: UIView {
 
         if duration > 0 {
             views.forEach { $0.fadeIn(delay: delay, duration: duration,
-                                      fromAlpha: 0, toAlpha: 0.7) }
+                                      fromAlpha: 0, toAlpha: 0.6) }
             Timer.scheduledTimer(withTimeInterval: delay + duration, repeats: false) { _ in
-                views.forEach { $0.fadeIn(delay: 0, duration: 2,
-                                          fromAlpha: 0.7, toAlpha: 1.0) }
+                views.forEach { $0.fadeIn(delay: 0, duration: 1.0,
+                                          fromAlpha: 0.6, toAlpha: 1.0) }
 
             }
         }
@@ -321,7 +320,7 @@ extension GridLayout where Self: UIView {
         layout(x, y, 34, 15, medalProgressBar)
         addSubview(medalProgressBar)
         medalProgressBar.medalCount = medalFrom
-        medalProgressBar.isLightSubText = isLightSubText
+        medalProgressBar.isFinishedPageMode = isLightSubText
         if duration > 0 {
             medalProgressBar.animateIn(delay: animateInDelay, duration: duration)
         }

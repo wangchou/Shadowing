@@ -184,7 +184,7 @@ extension GameContext {
 
     private func loadMedalGameSentence() {
         sentenceIndex = 0
-        let numOfSentences = 10//isSimulator ? 3 : 10
+        let numOfSentences = isSimulator ? 3 : 10
         let lowLevelNumOfSentence = Int(Double(numOfSentences) * gameMedal.lowPercent)
 
         sentences = getRandSentences(
@@ -208,9 +208,9 @@ extension GameContext {
 
     func nextSentence() -> Bool {
         sentenceIndex += 1
-//        if isSimulator {
-//            guard sentenceIndex < 3 else { return false }
-//        }
+        if isSimulator {
+            guard sentenceIndex < 3 else { return false }
+        }
         guard sentenceIndex < sentences.count else { return false }
 
         userSaidSentences[targetString] = ""

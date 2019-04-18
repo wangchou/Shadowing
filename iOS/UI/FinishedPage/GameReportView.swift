@@ -152,7 +152,7 @@ extension GridLayout where Self: UIView {
         button.backgroundColor = bgColor
         button.titleLabel?.font = MyFont.regular(ofSize: stepFloat * 4)
         button.titleLabel?.textColor = myLightGray
-        button.roundBorder(borderWidth: 1, cornerRadius: stepFloat, color: .clear)
+        button.roundBorder(borderWidth: 1, cornerRadius: stepFloat * 2, color: .clear)
         return button
     }
 }

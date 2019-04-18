@@ -21,7 +21,12 @@ class ProgressCircleView: UIView, GridLayout, ReloadableView {
     var goalLabel: UILabel!
 
     var percent: Float = 1.0
-    var lvl: Level = .lv5
+    var color: UIColor {
+        if percent < 0.6 { return myRed }
+        if percent < 0.8 { return myOrange }
+        if percent < 1.0 { return myGreen }
+        return myBlue
+    }
     var title = "每日50文"
 
     var percentageText: String {
@@ -66,7 +71,7 @@ class ProgressCircleView: UIView, GridLayout, ReloadableView {
 
         frontCircle = CircleView(frame: bounds)
         frontCircle.lineWidth = lineWidth
-        frontCircle.lineColor = lvl.color.withSaturation(1.0)
+        frontCircle.lineColor = color.withSaturation(1.0)
         frontCircle.percent = percent.c
         addSubview(frontCircle)
 

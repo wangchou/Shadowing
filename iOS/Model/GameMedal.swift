@@ -34,7 +34,7 @@ struct GameMedal {
     }
 
     var count: Int {
-        return 75//medalCount[gameLang] ?? 0
+        return medalCount[gameLang] ?? 0
     }
 
     var lowLevel: Level {

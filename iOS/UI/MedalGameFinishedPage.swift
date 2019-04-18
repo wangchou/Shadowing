@@ -65,7 +65,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         addTextbackground(bgColor: rgb(50, 50, 50), textColor: textGold)
         let yMax = Int(screen.height / stepFloat)
         addInfo(y: (yMax - 12)/2 - 18)
-        addActionButtons(y: (yMax - 12)/2 + 29)
+        addActionButtons(y: (yMax - 12)/2 + 30)
     }
 
     func viewWillDisappear() {
@@ -89,33 +89,37 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         sayResult(gr: gr)
 
         addTitleBlock(y: y, duration: 0.2)
-        addMedalProgressBar(x: 7, y: y + 5,
+
+        // 1 now
+        addCompleteness(y: y+5, delay: 0, duration: 0.2)
+        addRank(        y: y+5, delay: 0.3, duration: 0.2)
+        addRecordDetail(y: y+7, delay: 0.3, duration: 0.6)
+
+        // 2 changes
+        addMedalProgressBar(x: 7, y: y + 18,
                             medalFrom: medal.count - (gr.medalReward ?? 0),
                             medalTo: medal.count,
-                            animateInDelay: 0,
+                            animateInDelay: 0.6,
                             duration: 0.2,
                             animateProgressDelay: 1.1,
                             isLightSubText: true)
-        addMedal(       y: y, delay: 1.0, duration: 0.2)
+        addMedal(       y: y+13, delay: 0.6, duration: 0.2)
 
-        addCompleteness(y: y+16, delay: 0.3, duration: 0.2)
-        addRank(        y: y+16, delay: 0.3, duration: 0.2)
-        addRecordDetail(y: y+18, delay: 0.6, duration: 0.5)
-
-        addDailyGoalView(x: 7, y: y+28,
+        // 3 long-term
+        addDailyGoalView(x: 7, y: y+30,
                          isFullStatus: true,
-                         delay: 0.6, duration: 0.6)
+                         delay: 1.5, duration: 0.2)
     }
 
     private func addTitleBlock(y: Int, delay: TimeInterval = 0, duration: TimeInterval) {
         // info background
-        let rect = addRect(x: 3, y: y, w: 42, h: 45, color: rgb(0, 0, 0).withAlphaComponent(0.4))
+        let rect = addRect(x: 3, y: y, w: 42, h: 46, color: rgb(0, 0, 0).withAlphaComponent(0.4))
         rect.roundBorder(borderWidth: 0, cornerRadius: stepFloat * 3, color: .clear)
 
         rect.enlargeIn(delay: delay, duration: duration)
 
         let attrText = getStrokeText(gameLang == .jp ? "日本語" : "英語",
-                                     .white,
+                                     rgb(220, 220, 220),
                                      strokeWidth: strokeWidth/2,
                                      font: MyFont.bold(ofSize: 10 * stepFloat))
         let label = addAttrText(x: 12, y: y - 8, h: 12, text: attrText)
@@ -182,7 +186,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                                  font: MyFont.bold(ofSize: 3 * stepFloat))
         var label = addAttrText(x: 26, y: y, h: 4, text: attrText)
         label.textAlignment = .left
-        label.slideIn(delay: delay, duration: duration)
+        label.fadeIn(delay: delay, duration: duration)
 
         // rank
         let rank = context.gameMedal.usingDetailRank ? gr.detailRank : gr.rank
@@ -192,7 +196,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                                  font: MyFont.heavyDigit(ofSize: 8 * stepFloat))
         label = addAttrText(x: 22, y: y+3, w: 15, h: 8, text: attrText)
         label.textAlignment = .right
-        label.slideIn(delay: delay, duration: duration)
+        label.fadeIn(delay: delay, duration: duration)
     }
 
     private func addMedal(y: Int, delay: TimeInterval = 0, duration: TimeInterval) {
@@ -204,10 +208,10 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
             strokeWidth: strokeWidth,
             font: MyFont.heavyDigit(ofSize: 6 * stepFloat))
 
-        let label = addAttrText(x: 34, y: y, w: 22, h: 6, text: attrText)
-        label.textAlignment = .left
+        let label = addAttrText(x: 35, y: y, w: 22, h: 6, text: attrText)
+        label.sizeToFit()
         label.shrinkIn(delay: delay, duration: duration)
-        label.fadeOut(delay: delay + duration + 3.0, duration: 0.2)
+        label.fadeOut(delay: delay + duration + 2.4, duration: 0.2)
     }
 
     private func addActionButtons(y: Int) {
