@@ -106,9 +106,27 @@ class RootContainerViewController: UIViewController {
         }
         if let listPage = infiniteChallengeSwipablePage.listPage {
             listPage.topChartView.viewWillAppear()
+            listPage.topChartView.animateProgress()
         }
     }
 
+    func updateWhenEnterForeground() {
+        if let pageVC = current as? UIPageViewController {
+            if let vc = pageVC.viewControllers?[0] {
+                if let vc = vc as? MedalPage {
+                    vc.medalPageView?.viewWillAppear()
+                }
+                if let vc = vc as? TopicsListPage {
+                    vc.topChartView?.viewWillAppear()
+                    vc.topChartView?.animateProgress()
+                }
+                if let vc = vc as? InfiniteChallengeListPage {
+                    vc.topChartView?.viewWillAppear()
+                    vc.topChartView?.animateProgress()
+                }
+            }
+        }
+    }
     private func showVC(_ vc: UIViewController) {
         addChild(vc)
         vc.view.frame = view.bounds
