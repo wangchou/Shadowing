@@ -51,13 +51,17 @@ class InfiniteChallengeListPage: UIViewController {
         }
         bottomBarView.contentTab = .infiniteChallenge
         topBarView.titleLabel.text = i18n.infiniteChallengeTitle
+        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
+            DispatchQueue.main.async {
+                self.topChartView.viewWillAppear()
+                self.topChartView.animateProgress()
+            }
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        topChartView.viewWillAppear() // icListTopView may not be available yet
         tableView.reloadData()
-        topChartView.animateProgress()
     }
 }
 

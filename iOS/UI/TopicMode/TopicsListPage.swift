@@ -53,21 +53,24 @@ class TopicsListPage: UIViewController {
         topBarView.titleLabel.text = I18n.shared.topicPageTitile
         let height = screen.width * 46/48
         topArea.frame.size.height = height + 61
-        DispatchQueue.main.async {
-            if context.dataSetKey == "" {
-                context.dataSetKey = dataSetKeys[0]
-                context.loadLearningSentences()
+
+        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
+            DispatchQueue.main.async {
+                self.topChartView.viewWillAppear()
+                self.topChartView.animateProgress()
+                self.topicFilterBarView.viewWillAppear()
+                self.topicButtonAreaView.viewWillAppear()
+                if context.dataSetKey == "" {
+                    context.dataSetKey = dataSetKeys[0]
+                    context.loadLearningSentences()
+                }
             }
-            self.topicFilterBarView.viewWillAppear()
-            self.topicButtonAreaView.viewWillAppear()
         }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         sentencesTableView.reloadData()
-        topChartView.viewWillAppear()
-        topChartView.animateProgress()
     }
 
     @objc func reloadTopicSentences() {
