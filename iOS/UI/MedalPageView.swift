@@ -185,6 +185,7 @@ func rollingText(view: UIView) {
 extension GridLayout where Self: UIView {
     // MARK: - textBackground
     func addTextbackground(bgColor: UIColor, textColor: UIColor) {
+        return
         backgroundColor = bgColor
         let num = Int(sqrt(pow(screen.width, 2) + pow(screen.height, 2)) / stepFloat)/8
         let level = context.gameMedal.lowLevel
