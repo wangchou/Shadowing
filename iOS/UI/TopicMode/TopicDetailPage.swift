@@ -137,7 +137,7 @@ class TopicDetailPage: UIViewController {
         context.gameMode = .topicMode
         if isUnderDailySentenceLimit() {
             Analytics.logEvent("challenge_topic_\(gameLang.prefix)", parameters: nil)
-            launchVC(self, "MessengerGame")
+            launchVC(Messenger.id, self)
         }
     }
 }

@@ -300,6 +300,10 @@ func getVC(_ name: String) -> UIViewController {
     switch name {
     case MedalGameFinishedPage.id:
         return MedalGameFinishedPage()
+    case MedalPage.id:
+        return MedalPage()
+    case MedalSummaryPage.id:
+        return MedalSummaryPage()
     default:
         return UIStoryboard(name: "Main", bundle: nil)
             .instantiateViewController(withIdentifier: name)
@@ -307,8 +311,8 @@ func getVC(_ name: String) -> UIViewController {
 }
 
 func launchVC(
-    _ originVC: UIViewController,
     _ vcName: String,
+    _ originVC: UIViewController? = nil,
     isOverCurrent: Bool = false,
     animated: Bool = false,
     completion: ((UIViewController) -> Void)? = nil
@@ -320,7 +324,8 @@ func launchVC(
         vc.modalTransitionStyle = .crossDissolve
     }
 
-    originVC.present(vc, animated: animated) {
+    (originVC ?? UIApplication.getPresentedViewController())?
+        .present(vc, animated: animated) {
         completion?(vc)
     }
 }

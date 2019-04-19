@@ -19,6 +19,7 @@ enum LabelPosition {
 
 // Prototype 8: messenger / line interface
 class Messenger: UIViewController {
+    static let id = "MessengerGame"
     var lastLabel: FuriganaLabel = FuriganaLabel()
 
     private var y: Int = 8
@@ -225,8 +226,7 @@ class Messenger: UIViewController {
                 context.loadNextChallenge()
                 rootViewController.topicSwipablePage.detailPage?.render()
             }
-            guard let vc = UIApplication.getPresentedViewController() else { return }
-            launchVC(vc, "MessengerGame")
+            launchVC(Messenger.id)
         }
     }
 

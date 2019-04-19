@@ -831,36 +831,6 @@ Ruth Yuru Chen
             </objects>
             <point key="canvasLocation" x="-1935" y="-53"/>
         </scene>
-        <!--Medal Page-->
-        <scene sceneID="itp-dS-DqK">
-            <objects>
-                <viewController storyboardIdentifier="MedalPage" id="b30-63-Sws" customClass="MedalPage" customModule="今話したい" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="7Qg-Fz-iom">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IK6-jy-fI3" customClass="MedalPageView" customModule="今話したい" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="IK6-jy-fI3" firstAttribute="leading" secondItem="nsK-mH-Qlx" secondAttribute="leading" id="OUX-E9-hjH"/>
-                            <constraint firstItem="nsK-mH-Qlx" firstAttribute="trailing" secondItem="IK6-jy-fI3" secondAttribute="trailing" id="RaV-n6-eyp"/>
-                            <constraint firstAttribute="bottom" secondItem="IK6-jy-fI3" secondAttribute="bottom" id="eef-wh-Ob3"/>
-                            <constraint firstItem="IK6-jy-fI3" firstAttribute="top" secondItem="7Qg-Fz-iom" secondAttribute="top" id="tPD-iF-gJz"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="nsK-mH-Qlx"/>
-                    </view>
-                    <connections>
-                        <outlet property="medalPageView" destination="IK6-jy-fI3" id="hhg-ef-8Xc"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gCR-cp-3gf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1036" y="99"/>
-        </scene>
         <!--Voice Selection Page-->
         <scene sceneID="iq6-1W-dSb">
             <objects>

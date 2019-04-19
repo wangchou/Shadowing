@@ -102,9 +102,9 @@ extension Messenger: GameEventDelegate {
                 // prevent alerting block present
                 isAlerting.always {
                     if context.gameMode != .medalMode {
-                        launchVC(self, GameFinishedPage.vcName, isOverCurrent: true, animated: true)
+                        launchVC(GameFinishedPage.vcName, self, isOverCurrent: true, animated: true)
                     } else {
-                        launchVC(self, MedalGameFinishedPage.id, isOverCurrent: true, animated: true)
+                        launchVC(MedalGameFinishedPage.id, self, isOverCurrent: true, animated: true)
                     }
                 }
             }

@@ -1,5 +1,5 @@
 //
-//  MedalGamePage.swift
+//  MedalPage.swift
 //  今話したい
 //
 //  Created by Wangchou Lu on 3/26/31 H.
@@ -11,7 +11,22 @@ import UIKit
 
 private let context = GameContext.shared
 
-@IBDesignable
+class MedalPage: UIViewController {
+    static let id = "MedalPage"
+    var medalPageView: MedalPageView? {
+        return (view as? MedalPageView)
+    }
+
+    override func loadView() {
+        view = MedalPageView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        medalPageView?.viewWillAppear()
+    }
+}
+
 class MedalPageView: UIView, ReloadableView, GridLayout {
     var gridCount: Int = 48
 
@@ -20,7 +35,11 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     var spacing: CGFloat = 0
 
     var yMax: Int {
-        return Int(screen.height / stepFloat)
+        return Int((screen.height - getBottomPadding()) / stepFloat)
+    }
+
+    var iconSize: String {
+        return isIPad ? "48pt" : "24pt"
     }
 
     override init(frame: CGRect) {
@@ -50,37 +69,37 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
         addLangInfo(y: (yMax + 12)/2 - 22 - 1)
         addGoButton(x: 28, y: (yMax + 12)/2 - 22 + 27, w: 18)
+        addBottomButtons()
     }
 
     // MARK: - TopBar
-    private func addTopBar(y: Int) {
-        func addButton(iconName: String) -> UIButton {
-            let button = createButton(title: "", bgColor: myOrange)
-            button.setIconImage(named: iconName, tintColor: .black, isIconOnLeft: false)
-            button.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat,
-                               color: rgb(35, 35, 35))
-            addSubview(button)
-            return button
+    private func addButton(iconName: String,
+                           _ x: Int, _ y: Int, _ w: Int, _ h: Int,
+                           onClick: (() -> Void)?) {
+        let button = createButton(title: "", bgColor: myOrange)
+        button.setIconImage(named: iconName, tintColor: .black, isIconOnLeft: false)
+        button.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat,
+                           color: rgb(35, 35, 35))
+        addSubview(button)
+        layout(x, y, w, h, button)
+        button.addTapGestureRecognizer {
+            onClick?()
         }
+    }
 
-        var iconPX = "24pt"
-        if isIPad { iconPX = "48pt"}
-
-        let leftButton = addButton(iconName: "outline_settings_black_\(iconPX)")
-        layout(2, y, 7, 7, leftButton)
-        leftButton.addTapGestureRecognizer {
+    private func addTopBar(y: Int) {
+        addButton(iconName: "outline_settings_black_\(iconSize)",
+        2, y, 7, 7) {
             (rootViewController.current as? UIPageViewController)?.goToPreviousPage()
         }
 
-        let rightButton = addButton(iconName: "outline_all_inclusive_black_\(iconPX)")
-        layout(39, y, 7, 7, rightButton)
-
-        rightButton.addTapGestureRecognizer {
+        addButton(iconName: "outline_all_inclusive_black_\(iconSize)",
+        39, y, 7, 7) {
             (rootViewController.current as? UIPageViewController)?.goToNextPage()
         }
 
         // total medal counts
-        let outerRect = addRect(x: 13, y: y, w: 19, h: 7,
+        let outerRect = addRect(x: 13, y: y, w: 21, h: 7,
                                 color: UIColor.black.withAlphaComponent(0.2))
         outerRect.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat,
                               color: UIColor.black.withAlphaComponent(0.8))
@@ -93,9 +112,9 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         addSubview(medalView)
 
         let starAttrStr = getStrokeText("\(context.gameMedal.totalCount)",
-                                        myOrange,
-                                        strokeWidth: Float(stepFloat * -3/5),
-                                        font: MyFont.heavyDigit(ofSize: 5 * stepFloat))
+            myOrange,
+            strokeWidth: Float(stepFloat * -3/5),
+            font: MyFont.heavyDigit(ofSize: 5 * stepFloat))
         let label = addAttrText(x: 19, y: y - 1, w: 13, h: 9, text: starAttrStr)
         label.moveToRight(outerRect.frame, xShift: -1.5 * stepFloat)
         label.textAlignment = .right
@@ -166,15 +185,20 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     @objc func onGoButtonClicked() {
         context.gameMode = .medalMode
         guard !TopicDetailPage.isChallengeButtonDisabled else { return }
-        if let vc = UIApplication.getPresentedViewController() {
-            if isUnderDailySentenceLimit() {
-                launchVC(vc, "MessengerGame")
-            }
+        if isUnderDailySentenceLimit() {
+            launchVC(Messenger.id)
+        }
+    }
+
+    func addBottomButtons() {
+        addButton(iconName: "round_insert_chart_outlined_black_\(iconSize)",
+        13, yMax - 10, 7, 7) {
+            launchVC(MedalSummaryPage.id)
         }
     }
 }
 
-func rollingText(view: UIView) {
+private func rollingText(view: UIView) {
     let animator = UIViewPropertyAnimator(duration: 15, curve: .easeOut, animations: {
         view.transform = CGAffineTransform.identity
             .translatedBy(x: 0, y: screen.width/2)
@@ -189,7 +213,7 @@ extension GridLayout where Self: UIView {
     // MARK: - textBackground
     func addTextbackground(bgColor: UIColor, textColor: UIColor) {
         return
-        backgroundColor = bgColor
+            backgroundColor = bgColor
         let num = Int(sqrt(pow(screen.width, 2) + pow(screen.height, 2)) / stepFloat)/8
         let level = context.gameMedal.lowLevel
         let sentences = getRandSentences(level: level, numOfSentences: num * 4)
@@ -211,9 +235,9 @@ extension GridLayout where Self: UIView {
             let x = 1
             let y = i * 9
             let sentence = randPad(sentences[i]) +
-                           randPad(sentences[i+num]) +
-                           randPad(sentences[i + (2 * num)]) +
-                           sentences[i + (3 * num)]
+                randPad(sentences[i+num]) +
+                randPad(sentences[i + (2 * num)]) +
+                sentences[i + (3 * num)]
             let label = addText(x: x, y: y, h: 6 - level.rawValue/3,
                                 text: sentence,
                                 color: textColor)
@@ -255,19 +279,19 @@ extension GridLayout where Self: UIView {
             bgRect.roundBorder(borderWidth: 0.5, cornerRadius: bgRect.frame.width/2, color: .clear)
 
             let attrText = getStrokeText(valueString,
-                valueColor,
-                strokeWidth: Float(-0.3 * stepFloat),
-                strokColor: .black,
-                font: isHeavy ? MyFont.heavyDigit(ofSize: 3.6 * stepFloat) :
-                                MyFont.bold(ofSize: 3 * stepFloat)
+                                         valueColor,
+                                         strokeWidth: Float(-0.3 * stepFloat),
+                                         strokColor: .black,
+                                         font: isHeavy ? MyFont.heavyDigit(ofSize: 3.6 * stepFloat) :
+                                            MyFont.bold(ofSize: 3 * stepFloat)
             )
             let valueLabel = addAttrText(x: x+10, y: y + 4, h: 4, text: attrText)
             valueLabel.sizeToFit()
             valueLabel.centerIn(bgRect.frame)
 
             let subtitleLabel = addText(x: x+10, y: y+13, h: 4, text: subtitle,
-                                     font: MyFont.regular(ofSize: 2 * stepFloat),
-                                     color: minorTextColor)
+                                        font: MyFont.regular(ofSize: 2 * stepFloat),
+                                        color: minorTextColor)
             subtitleLabel.sizeToFit()
             subtitleLabel.centerX(bgRect.frame)
             return [bgRect, valueLabel, subtitleLabel]
@@ -281,15 +305,15 @@ extension GridLayout where Self: UIView {
             (todayMedalCount == 0 ? myWhite : myRed)
         let medalCountViews = addCircleStatus(x: x + 11,
                                               valueString: "\(todayMedalCount > 0 ? "+" : "")\(todayMedalCount)",
-                                              valueColor: medalCountColor,
-                                              subtitle: i18n.medal)
+            valueColor: medalCountColor,
+            subtitle: i18n.medal)
         views.append(contentsOf: medalCountViews)
 
         // ゲーム時間
         if isFullStatus {
             let playSecs = getTodaySeconds()
             let timeValueString = playSecs < 6000 ? String(format: "%.1f", playSecs.f/60) :
-                                                    String(format: "%.0f", playSecs.f/60)
+                String(format: "%.0f", playSecs.f/60)
             let timeStatusViews = addCircleStatus(x: x + 22,
                                                   valueString: timeValueString,
                                                   isHeavy: false,
@@ -319,7 +343,7 @@ extension GridLayout where Self: UIView {
         duration: TimeInterval = 0,
         animateProgressDelay: TimeInterval = 0,
         isLightSubText: Bool = false
-    ) {
+        ) {
         let medalProgressBar = MedalProgressBar()
         layout(x, y, 34, 15, medalProgressBar)
         addSubview(medalProgressBar)

@@ -237,7 +237,7 @@ class SettingPage: UITableViewController {
                 VoiceSelectionPage.selectingVoiceFor = .assisant
                 VoiceSelectionPage.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.assisant)
             }
-            launchVC(self, "VoiceSelectionViewController", isOverCurrent: true, animated: true)
+            launchVC("VoiceSelectionViewController", self, isOverCurrent: true, animated: true)
         }
     }
 }

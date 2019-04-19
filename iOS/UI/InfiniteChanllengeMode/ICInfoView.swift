@@ -191,12 +191,10 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
     @objc func onChallengeButtonClicked() {
         context.gameMode = .infiniteChallengeMode
         guard !TopicDetailPage.isChallengeButtonDisabled else { return }
-        if let vc = UIApplication.getPresentedViewController() {
-            context.infiniteChallengeLevel = self.level
-            if isUnderDailySentenceLimit() {
-                Analytics.logEvent("challenge_infinite_\(gameLang.prefix)", parameters: nil)
-                launchVC(vc, "MessengerGame")
-            }
+        context.infiniteChallengeLevel = self.level
+        if isUnderDailySentenceLimit() {
+            Analytics.logEvent("challenge_infinite_\(gameLang.prefix)", parameters: nil)
+            launchVC(Messenger.id)
         }
     }
 }
