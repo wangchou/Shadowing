@@ -77,10 +77,10 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
         let rect = medalCountLabel.frame
         medalCountLabel.sizeToFit()
         medalCountLabel.moveToRight(rect)
-        medalCountLabel.centerY(medalView.frame)
 
         medalView.frame.size.width = majorSize * stepFloat * 0.9
         medalView.frame.size.height = majorSize * stepFloat * 0.9
+        medalCountLabel.centerY(medalView.frame)
 
         // medal position
         medalView.frame.origin.x = medalCountLabel.frame.origin.x -

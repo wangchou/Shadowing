@@ -67,35 +67,38 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         if isIPad { iconPX = "48pt"}
 
         let leftButton = addButton(iconName: "outline_settings_black_\(iconPX)")
-        layout(3, y, 7, 7, leftButton)
+        layout(2, y, 7, 7, leftButton)
         leftButton.addTapGestureRecognizer {
             (rootViewController.current as? UIPageViewController)?.goToPreviousPage()
         }
 
         let rightButton = addButton(iconName: "outline_all_inclusive_black_\(iconPX)")
-        layout(38, y, 7, 7, rightButton)
+        layout(39, y, 7, 7, rightButton)
 
         rightButton.addTapGestureRecognizer {
             (rootViewController.current as? UIPageViewController)?.goToNextPage()
         }
 
         // total medal counts
-        let outerRect = addRect(x: 13, y: y, w: 22, h: 7,
-                                color: UIColor.white.withAlphaComponent(0.15))
+        let outerRect = addRect(x: 13, y: y, w: 19, h: 7,
+                                color: UIColor.black.withAlphaComponent(0.2))
         outerRect.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat,
                               color: UIColor.black.withAlphaComponent(0.8))
+        outerRect.centerX(frame)
 
         let medalView = MedalView()
         layout(15, y + 2, 4, 4, medalView)
         medalView.centerY(outerRect.frame)
+        medalView.moveToLeft(outerRect.frame, xShift: stepFloat * 1.5)
         addSubview(medalView)
 
-        let starAttrStr = getStrokeText("\(context.gameMedal.totalCount)".padWidthTo(4),
+        let starAttrStr = getStrokeText("\(context.gameMedal.totalCount)",
                                         myOrange,
                                         strokeWidth: Float(stepFloat * -3/5),
                                         font: MyFont.heavyDigit(ofSize: 5 * stepFloat))
-        let label = addAttrText(x: 19, y: y - 1, w: 14, h: 9, text: starAttrStr)
-        label.textAlignment = .center
+        let label = addAttrText(x: 19, y: y - 1, w: 13, h: 9, text: starAttrStr)
+        label.moveToRight(outerRect.frame, xShift: -1.5 * stepFloat)
+        label.textAlignment = .right
     }
 
     // MARK: - LangInfo
