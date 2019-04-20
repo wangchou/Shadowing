@@ -108,7 +108,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         // 3 long-term
         addDailyGoalView(x: 7, y: y+30,
                          isFullStatus: true,
-                         delay: 1.5, duration: 0.2)
+                         delay: 1.8, duration: 0.2)
     }
 
     private func addTitleBlock(y: Int, delay: TimeInterval = 0, duration: TimeInterval) {
@@ -153,7 +153,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     }
 
     private func addCompleteness(y: Int, delay: TimeInterval = 0, duration: TimeInterval) {
-        var attrText = getStrokeText("成績",
+        var attrText = getStrokeText("完成率",
                                  .white,
                                  strokeWidth: strokeWidth/2,
                                  font: MyFont.bold(ofSize: 3 * stepFloat))
@@ -170,7 +170,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         label.textAlignment = .right
         label.slideIn(delay: delay, duration: duration)
 
-        attrText = getStrokeText("点",
+        attrText = getStrokeText("%",
                                  .white,
                                  strokeWidth: strokeWidth/2,
                                  font: MyFont.bold(ofSize: 2 * stepFloat))

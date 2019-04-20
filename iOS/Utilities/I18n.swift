@@ -543,8 +543,8 @@ class I18n {
             let rankText = rank.replacingOccurrences(of: "+", with: " plus")
 
             return gameLang == .jp ?
-                "\(percent)点。判定：\(rankText)。メダル：\(rewardText)。" :
-            "\(percent) points. Rank: \(rankText)... Medal: \(rewardText)"
+                "\(percent)%。判定：\(rankText)。メダル：\(rewardText)。" :
+            "\(percent)% Completed. Rank: \(rankText)... Medal: \(rewardText)"
         default:
             if gameLang == .jp { return "完成率：\(percent)%、判定：\(rank)" }
             return "\(percent)% completed. Rank \(rank)..."
