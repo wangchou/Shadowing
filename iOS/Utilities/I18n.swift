@@ -369,6 +369,9 @@ class I18n {
         if isZh { return "天"}
         return "日"
     }
+    var time: String {
+        return "時間"
+    }
     var dayRange: String {
         if isZh { return "天"}
         return "日間"
@@ -532,6 +535,10 @@ class I18n {
     var medal: String {
         if isZh { return "徽章" }
         return "メダル"
+    }
+    var date: String {
+        if isZh { return "日期" }
+        return "日付"
     }
 
     func getSpeakingStatus(percent: String, rank: String, reward: Int?) -> String {
