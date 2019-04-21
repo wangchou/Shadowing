@@ -14,6 +14,10 @@ private let fontSize = screen.width * 12 / 320
 @IBDesignable
 class LineChart: LineChartView, ChartViewDelegate {
 
+    var color: UIColor = .black
+    var lineColor: UIColor = .black
+    var leftAxisMinimum: Double = 0
+    var leftAxisMaximum: Double = 100
     override init(frame: CGRect) {
         super.init(frame: frame)
         sharedInit()
@@ -44,8 +48,8 @@ class LineChart: LineChartView, ChartViewDelegate {
         xAxis.gridLineDashLengths = [0.5, 2]
         xAxis.gridLineDashPhase = 10
 
-        leftAxis.axisMaximum = 100
-        leftAxis.axisMinimum = 0
+        leftAxis.axisMaximum = leftAxisMaximum
+        leftAxis.axisMinimum = leftAxisMinimum
         leftAxis.gridLineDashLengths = [0.5, 2]
 
         xAxis.labelPosition = .bottom
@@ -68,8 +72,8 @@ class LineChart: LineChartView, ChartViewDelegate {
 
         set1.lineDashLengths = [5, 2.5]
         set1.highlightLineDashLengths = [5, 2.5]
-        set1.setColor(.black)
-        set1.setCircleColor(.black)
+        set1.setColor(color)
+        set1.setCircleColor(lineColor)
         set1.lineWidth = 0.5
         set1.circleRadius = 2
         set1.drawValuesEnabled = false

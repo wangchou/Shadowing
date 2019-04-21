@@ -34,6 +34,18 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
     var spacing: CGFloat = 0
     var tableData: [Summary] = []
 
+    var dataPoints: [(x: Int, y: Int)] {
+        var points: [(x: Int, y: Int)] = []
+        var x = 0
+        var medalCount = 0
+        for summary in tableData {
+            points.append((x: x, y: medalCount))
+            x += 10
+            medalCount += summary.medalCount
+        }
+        return points
+    }
+
     var tableView: UITableView!
 
     func viewWillAppear() {
@@ -56,7 +68,7 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
 
         // Top Area
         let topView = addRect(x: 0, y: 0, w: 48, h: 32, color: rgb(74, 74, 74))
-        addText(x: 2, y: 3, h: 8, text: "日本語", color: .white)
+        addText(x: 2, y: 3, h: 8, text: i18n.language, color: .white)
         let medalView = MedalView()
         layout(3, 3, 3, 3, medalView)
         addSubview(medalView)
@@ -72,14 +84,14 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
         label.centerY(originFrame)
         label.moveToRight(originFrame)
         medalView.centerY(label.frame)
-        medalView.frame.origin.x = label.frame.origin.x - medalView.frame.width
+        medalView.frame.origin.x = label.frame.origin.x - medalView.frame.width - stepFloat/2
 
         label = addText(x: 36, y: 12, w: 10, h: 3, text: "遊びの時間",
                         font: subTitleFont,
                         color: subTitleGray)
         label.textAlignment = .right
         let hours = totalSummary.duration/3600
-        let mins = totalSummary.duration/60
+        let mins = (totalSummary.duration%3600)/60
         let secs = totalSummary.duration % 60
         func padZero(_ value: Int) -> String {
             return value < 10 ? "0\(value)" : "\(value)"
@@ -104,7 +116,16 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
         label.textAlignment = .center
 
         // Chart
-        addRect(x: 3, y: 11, w: 26, h: 16, color: rgb(150, 50, 50))
+        let chart = LineChart()
+        chart.color = .white
+        chart.lineColor = .white
+        chart.leftAxisMaximum = 500
+        chart.leftAxisMinimum = 0
+        chart.xAxis.enabled = false
+        chart.setDataCount(level: Level.lv2, dataPoints: dataPoints)
+        chart.viewWillAppear()
+        layout(2, 10, 28, 20, chart)
+        addSubview(chart)
 
         // tableView
         let tableTitleBar = addRect(x: 0, y: 32, w: 48, h: 6, color: rgb(228, 182, 107))
