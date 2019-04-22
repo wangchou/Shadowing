@@ -34,29 +34,29 @@ extension UIView {
     func centerIn(_ boundRect: CGRect) {
         let xPadding = (boundRect.width - frame.width)/2
         let yPadding = (boundRect.height - frame.height)/2
-        frame.origin.x = boundRect.origin.x + xPadding
-        frame.origin.y = boundRect.origin.y + yPadding
+        frame.origin.x = boundRect.x + xPadding
+        frame.origin.y = boundRect.y + yPadding
     }
 
     func centerX(_ boundRect: CGRect, xShift: CGFloat = 0) {
         let xPadding = (boundRect.width - frame.width)/2
-        frame.origin.x = boundRect.origin.x + xPadding + xShift
+        frame.origin.x = boundRect.x + xPadding + xShift
     }
 
     func centerY(_ boundRect: CGRect, yShift: CGFloat = 0) {
         let yPadding = (boundRect.height - frame.height)/2
-        frame.origin.y = boundRect.origin.y + yPadding + yShift
+        frame.origin.y = boundRect.y + yPadding + yShift
     }
 
     func moveToBottom(_ boundRect: CGRect, yShift: CGFloat = 0) {
-        frame.origin.y = boundRect.origin.y + boundRect.height - frame.size.height + yShift
+        frame.origin.y = boundRect.y + boundRect.height - frame.height + yShift
     }
 
     func moveToRight(_ boundRect: CGRect, xShift: CGFloat = 0) {
-        frame.origin.x = boundRect.origin.x + boundRect.width - frame.size.width + xShift
+        frame.origin.x = boundRect.x + boundRect.width - frame.size.width + xShift
     }
     func moveToLeft(_ boundRect: CGRect, xShift: CGFloat = 0) {
-        frame.origin.x = boundRect.origin.x + xShift
+        frame.origin.x = boundRect.x + xShift
     }
 
     func removeAllSubviews() {
@@ -135,10 +135,18 @@ extension UIView {
 
 extension CGRect {
     func padding(_ pad: CGFloat) -> CGRect {
-        return CGRect(x: self.origin.x + pad,
-                      y: self.origin.y + pad,
-                      width: self.size.width - 2 * pad,
-                      height: self.size.height - 2 * pad)
+        return CGRect(x: x + pad,
+                      y: y + pad,
+                      width: width - 2 * pad,
+                      height: height - 2 * pad)
+    }
+
+    var y: CGFloat {
+        return origin.y
+    }
+    
+    var x: CGFloat {
+        return origin.x
     }
 }
 

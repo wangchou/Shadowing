@@ -140,8 +140,8 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
         for i in 0 ..< colors.count {
             let thisRect = CGRect(
-                x: rect.origin.x - unit,
-                y: rect.origin.y + rect.height - 2 * unit * i.c - unit,
+                x: rect.x - unit,
+                y: rect.y + rect.height - 2 * unit * i.c - unit,
                 width: 3 * unit,
                 height: unit
             )

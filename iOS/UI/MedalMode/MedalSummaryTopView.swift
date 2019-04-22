@@ -119,10 +119,10 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         daysButton.backgroundColor = subTitleGray
         daysButton.roundBorder(borderWidth: 0.5, cornerRadius: stepFloat, color: .clear)
         daysButton.sizeToFit()
-        daysButton.frame.origin.x = langLabel.frame.origin.x +
+        daysButton.frame.origin.x = langLabel.frame.x +
             langLabel.frame.width +
             2 * stepFloat
-        daysButton.frame.origin.y = langLabel.frame.origin.y +
+        daysButton.frame.origin.y = langLabel.frame.y +
             langLabel.frame.height -
             daysButton.frame.height
         daysButton.frame.size.width += stepFloat
@@ -145,7 +145,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         label.centerY(originFrame)
         label.moveToRight(originFrame)
         medalView.centerY(label.frame)
-        medalView.frame.origin.x = label.frame.origin.x - medalView.frame.width - stepFloat/2
+        medalView.frame.origin.x = label.frame.x - medalView.frame.width - stepFloat/2
 
         label = addText(x: 36, y: y+12, w: 10, h: 3, text: "遊びの時間",
                         font: subTitleFont,

@@ -43,18 +43,19 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
     func viewWillAppear() {
         tableData = getSummaryByDays()
         removeAllSubviews()
-        renderTop()
-        renderBottomTable()
+        addTopView()
+        addBottomTable()
+        addCloseButton()
     }
 
-    private func renderTop() {
+    private func addTopView() {
         topView = MedalSummaryTopView()
         topView.tableData = tableData
         layout(0, 0, 48, 32+y, topView)
         addSubview(topView)
     }
 
-    private func renderBottomTable() {
+    private func addBottomTable() {
         // MARK: - Add Bottom TableView
         let tableTitleBar = addRect(x: 0, y: y+32, w: 48, h: 6, color: rgb(228, 182, 107))
         var label = addText(x: 0, y: y+32, w: 15, h: 5, text: i18n.date)
@@ -83,8 +84,9 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
                                          tableTitleBar.frame.height -
                                          stepFloat * 7)
         addSubview(tableView)
+    }
 
-        // close button
+    private func addCloseButton() {
         let button = UIButton()
         button.frame = CGRect(x: 0,
                               y: tableView.frame.origin.y + tableView.frame.height,
