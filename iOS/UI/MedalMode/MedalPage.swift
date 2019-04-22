@@ -35,7 +35,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     var spacing: CGFloat = 0
 
     var yMax: Int {
-        return Int((screen.height - getBottomPadding()) / stepFloat)
+        return Int((screen.height - getBottomPadding()) / step)
     }
 
     var iconSize: String {
@@ -78,7 +78,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
                            onClick: (() -> Void)?) {
         let button = createButton(title: "", bgColor: myOrange)
         button.setIconImage(named: iconName, tintColor: .black, isIconOnLeft: false)
-        button.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat,
+        button.roundBorder(borderWidth: step/2, cornerRadius: step,
                            color: rgb(35, 35, 35))
         addSubview(button)
         layout(x, y, w, h, button)
@@ -101,22 +101,22 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         // total medal counts
         let outerRect = addRect(x: 13, y: y, w: 21, h: 7,
                                 color: UIColor.black.withAlphaComponent(0.2))
-        outerRect.roundBorder(borderWidth: stepFloat/2, cornerRadius: stepFloat,
+        outerRect.roundBorder(borderWidth: step/2, cornerRadius: step,
                               color: UIColor.black.withAlphaComponent(0.8))
         outerRect.centerX(frame)
 
         let medalView = MedalView()
         layout(15, y + 2, 4, 4, medalView)
         medalView.centerY(outerRect.frame)
-        medalView.moveToLeft(outerRect.frame, xShift: stepFloat * 1.5)
+        medalView.moveToLeft(outerRect.frame, xShift: step * 1.5)
         addSubview(medalView)
 
         let starAttrStr = getStrokeText("\(context.gameMedal.totalCount)",
             myOrange,
-            strokeWidth: Float(stepFloat * -3/5),
-            font: MyFont.heavyDigit(ofSize: 5 * stepFloat))
+            strokeWidth: Float(step * -3/5),
+            font: MyFont.heavyDigit(ofSize: 5 * step))
         let label = addAttrText(x: 19, y: y - 1, w: 13, h: 9, text: starAttrStr)
-        label.moveToRight(outerRect.frame, xShift: -1.5 * stepFloat)
+        label.moveToRight(outerRect.frame, xShift: -1.5 * step)
         label.textAlignment = .right
     }
 
@@ -130,11 +130,11 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
     private func addLangTitleBox(y: Int) {
         let rect = addRect(x: 3, y: y+6, w: 42, h: 31, color: UIColor.black.withAlphaComponent(0.4))
-        rect.roundBorder(borderWidth: 0, cornerRadius: stepFloat * 2, color: .clear)
+        rect.roundBorder(borderWidth: 0, cornerRadius: step * 2, color: .clear)
         let attrTitle = getStrokeText(gameLang == .jp ? "日本語" : "英語",
                                       .white,
-                                      strokeWidth: Float(stepFloat * -1/3),
-                                      font: MyFont.bold(ofSize: 9*stepFloat))
+                                      strokeWidth: Float(step * -1/3),
+                                      font: MyFont.bold(ofSize: 9*step))
 
         let label = addAttrText(x: 7, y: y, h: 13, text: attrTitle)
         label.sizeToFit()
@@ -143,11 +143,11 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     private func addChangeLangButton(y: Int) {
         let changeLangButton = UIButton()
         changeLangButton.backgroundColor = UIColor.white.withAlphaComponent(0.4)
-        changeLangButton.roundBorder(borderWidth: 0, cornerRadius: stepFloat, color: .clear)
+        changeLangButton.roundBorder(borderWidth: 0, cornerRadius: step, color: .clear)
         let attrTitle = getStrokeText(gameLang == .jp ? "英" : "日",
                                       rgb(200, 200, 200),
-                                      strokeWidth: Float(stepFloat * -1/3),
-                                      font: MyFont.bold(ofSize: 4*stepFloat))
+                                      strokeWidth: Float(step * -1/3),
+                                      font: MyFont.bold(ofSize: 4*step))
 
         changeLangButton.setAttributedTitle(attrTitle, for: .normal)
         layout(34, y, 8, 5, changeLangButton)
@@ -169,11 +169,11 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         let attrText = getStrokeText(
             "GO!",
             .white,
-            font: MyFont.bold(ofSize: 5 * stepFloat)
+            font: MyFont.bold(ofSize: 5 * step)
         )
         button.setAttributedTitle(attrText, for: .normal)
-        button.roundBorder(borderWidth: stepFloat/2,
-                           cornerRadius: stepFloat * CGFloat(w)/2,
+        button.roundBorder(borderWidth: step/2,
+                           cornerRadius: step * CGFloat(w)/2,
                            color: .black)
         button.showsTouchWhenHighlighted = true
         button.addTarget(self, action: #selector(onGoButtonClicked), for: .touchUpInside)
@@ -214,7 +214,7 @@ extension GridLayout where Self: UIView {
     func addTextbackground(bgColor: UIColor, textColor: UIColor) {
         return
             backgroundColor = bgColor
-        let num = Int(sqrt(pow(screen.width, 2) + pow(screen.height, 2)) / stepFloat)/8
+        let num = Int(sqrt(pow(screen.width, 2) + pow(screen.height, 2)) / step)/8
         let level = context.gameMedal.lowLevel
         let sentences = getRandSentences(level: level, numOfSentences: num * 4)
 
@@ -258,7 +258,7 @@ extension GridLayout where Self: UIView {
                           duration: TimeInterval = 0) {
         // title
         let titleLabel = addText(x: x, y: y, h: 3, text: i18n.todaySummary, color: .white)
-        titleLabel.frame.origin.y += stepFloat/4
+        titleLabel.frame.origin.y += step/4
 
         // Daily Circle Progress
         let todayPercent = getTodaySentenceCount().f/context.gameSetting.dailySentenceGoal.f
@@ -275,22 +275,22 @@ extension GridLayout where Self: UIView {
                              subtitle: String) -> [UIView] {
             let bgRect = addRect(x: x, y: y + 4, w: 8, h: 8,
                                  color: progressBackGray.withAlphaComponent(0.6))
-            bgRect.frame = bgRect.frame.padding(-1 * stepFloat * 8/24 * 1.1)
+            bgRect.frame = bgRect.frame.padding(-1 * step * 8/24 * 1.1)
             bgRect.roundBorder(borderWidth: 0.5, cornerRadius: bgRect.frame.width/2, color: .clear)
 
             let attrText = getStrokeText(valueString,
                                          valueColor,
-                                         strokeWidth: Float(-0.3 * stepFloat),
+                                         strokeWidth: Float(-0.3 * step),
                                          strokColor: .black,
-                                         font: isHeavy ? MyFont.heavyDigit(ofSize: 3.6 * stepFloat) :
-                                            MyFont.bold(ofSize: 3 * stepFloat)
+                                         font: isHeavy ? MyFont.heavyDigit(ofSize: 3.6 * step) :
+                                            MyFont.bold(ofSize: 3 * step)
             )
             let valueLabel = addAttrText(x: x+10, y: y + 4, h: 4, text: attrText)
             valueLabel.sizeToFit()
             valueLabel.centerIn(bgRect.frame)
 
             let subtitleLabel = addText(x: x+10, y: y+13, h: 4, text: subtitle,
-                                        font: MyFont.regular(ofSize: 2 * stepFloat),
+                                        font: MyFont.regular(ofSize: 2 * step),
                                         color: minorTextColor)
             subtitleLabel.sizeToFit()
             subtitleLabel.centerX(bgRect.frame)

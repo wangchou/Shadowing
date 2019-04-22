@@ -36,7 +36,7 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
     var topView: MedalSummaryTopView!
     var topSubviews: [UIView] = []
     var y: Int {
-        return Int((getTopPadding() - 20)/stepFloat)
+        return Int((getTopPadding() - 20)/step)
     }
     var tableView: UITableView!
 
@@ -82,7 +82,7 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
                                  height: screen.height -
                                          topView.frame.height -
                                          tableTitleBar.frame.height -
-                                         stepFloat * 7)
+                                         step * 7)
         addSubview(tableView)
     }
 
@@ -91,10 +91,10 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
         button.frame = CGRect(x: 0,
                               y: tableView.frame.origin.y + tableView.frame.height,
                               width: screen.width,
-                              height: stepFloat * 7)
+                              height: step * 7)
         button.backgroundColor = rgb(74, 74, 74)
         button.setTitle("x", for: .normal)
-        button.titleLabel?.font = MyFont.regular(ofSize: stepFloat * 4)
+        button.titleLabel?.font = MyFont.regular(ofSize: step * 4)
         button.setTitleColor(.white, for: .normal)
         button.addTapGestureRecognizer {
             dismissVC()

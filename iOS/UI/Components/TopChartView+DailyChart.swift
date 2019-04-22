@@ -21,12 +21,12 @@ extension TopChartView {
         circleFrame = circleFrame.padding(5)
 
         let backCircle = CircleView(frame: circleFrame)
-        backCircle.lineWidth = stepFloat * 1.3
+        backCircle.lineWidth = step * 1.3
         backCircle.lineColor = rgb(155, 155, 155)
         addSubview(backCircle)
 
         frontCircle = CircleView(frame: circleFrame)
-        frontCircle!.lineWidth = stepFloat * 1.3
+        frontCircle!.lineWidth = step * 1.3
         frontCircle!.percent = percent.c
         addSubview(frontCircle!)
 

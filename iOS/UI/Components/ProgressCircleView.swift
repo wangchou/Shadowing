@@ -63,7 +63,7 @@ class ProgressCircleView: UIView, GridLayout, ReloadableView {
         backgroundLayer.fillColor = rgb(36, 36, 36).withAlphaComponent(0.5).cgColor
         layer.addSublayer(backgroundLayer)
 
-        let lineWidth = stepFloat * 2.2
+        let lineWidth = step * 2.2
         let backCircle = CircleView(frame: bounds)
         backCircle.lineWidth = lineWidth
         backCircle.lineColor = progressBackGray
@@ -77,9 +77,9 @@ class ProgressCircleView: UIView, GridLayout, ReloadableView {
 
         let attrText = getStrokeText(percent >= 0 ? percentageText : "0%",
                                      .white,
-                                     strokeWidth: Float(-0.3 * stepFloat),
+                                     strokeWidth: Float(-0.3 * step),
                                      strokColor: .black,
-                                     font: MyFont.bold(ofSize: 8 * stepFloat))
+                                     font: MyFont.bold(ofSize: 8 * step))
 
         percentLabel = addAttrText(x: 3, y: 3, w: 30, h: 9,
                                text: attrText)
@@ -88,7 +88,7 @@ class ProgressCircleView: UIView, GridLayout, ReloadableView {
 
         let subLabel = addText(x: 3, y: 25, w: 50, h: 9,
                                text: title,
-                               font: MyFont.regular(ofSize: 6 * stepFloat),
+                               font: MyFont.regular(ofSize: 6 * step),
                                color: minorTextColor)
 
         subLabel.textAlignment = .center

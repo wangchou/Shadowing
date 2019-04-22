@@ -21,7 +21,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
     var axis: GridAxis = .horizontal
     var spacing: CGFloat = 0
     var y: Int {
-        return Int((getTopPadding() - 20)/stepFloat)
+        return Int((getTopPadding() - 20)/step)
     }
     var tableData: [Summary] = []
     var totalSummary: Summary {
@@ -107,7 +107,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         let totalSummary = self.totalSummary // avoid recalculation
 
         let subTitleGray = rgb(155, 155, 155)
-        let subTitleFont = MyFont.regular(ofSize: stepFloat * 2)
+        let subTitleFont = MyFont.regular(ofSize: step * 2)
 
         let langLabel = addText(x: 2, y: y + 3, h: 8, text: gameLang == .jp ? "日本語" : "英語", color: .white)
         langLabel.sizeToFit()
@@ -115,17 +115,17 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         let daysButton = UIButton()
         daysButton.setTitle(daysOption.rawValue, for: .normal)
         daysButton.setTitleColor(.white, for: .normal)
-        daysButton.titleLabel?.font = MyFont.regular(ofSize: stepFloat * 2)
+        daysButton.titleLabel?.font = MyFont.regular(ofSize: step * 2)
         daysButton.backgroundColor = subTitleGray
-        daysButton.roundBorder(borderWidth: 0.5, cornerRadius: stepFloat, color: .clear)
+        daysButton.roundBorder(borderWidth: 0.5, cornerRadius: step, color: .clear)
         daysButton.sizeToFit()
         daysButton.frame.origin.x = langLabel.frame.x +
             langLabel.frame.width +
-            2 * stepFloat
+            2 * step
         daysButton.frame.origin.y = langLabel.frame.y +
             langLabel.frame.height -
             daysButton.frame.height
-        daysButton.frame.size.width += stepFloat
+        daysButton.frame.size.width += step
         addSubview(daysButton)
         daysButton.addTarget(self, action: #selector(onDaysButtonClicked), for: .touchUpInside)
 
@@ -145,7 +145,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         label.centerY(originFrame)
         label.moveToRight(originFrame)
         medalView.centerY(label.frame)
-        medalView.frame.origin.x = label.frame.x - medalView.frame.width - stepFloat/2
+        medalView.frame.origin.x = label.frame.x - medalView.frame.width - step/2
 
         label = addText(x: 36, y: y+12, w: 10, h: 3, text: "遊びの時間",
                         font: subTitleFont,

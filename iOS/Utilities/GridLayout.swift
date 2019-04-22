@@ -30,16 +30,12 @@ extension GridLayout where Self: UIView {
             (axisBound / gridCount.c)
     }
 
-    var step: CGFloat { // is multiple of retina pixel width 0.5, ex 18, 19.5...
-        return floor((axisBound - spacing) * 2 / gridCount.c)/2
-    }
-
-    var stepFloat: CGFloat {
+    var step: CGFloat {
         return (axisBound - spacing) * 2 / gridCount.c / 2
     }
 
     func getFontSize(h: Int) -> CGFloat {
-        return h.c * stepFloat * 0.7
+        return h.c * step * 0.7
     }
 
     @discardableResult
@@ -143,10 +139,10 @@ extension GridLayout where Self: UIView {
         }
 
         return CGRect(
-            x: anchor.x + x.c * stepFloat,
-            y: anchor.y + y.c * stepFloat,
-            width: w.c * stepFloat,
-            height: h.c * stepFloat
+            x: anchor.x + x.c * step,
+            y: anchor.y + y.c * step,
+            width: w.c * step,
+            height: h.c * step
         )
     }
 }
