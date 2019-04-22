@@ -47,16 +47,14 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
     var totalSummary: Summary {
         var returnSummary = Summary()
         var reversedTable = Array(tableData.reversed())
-        for i in 0 ..< reversedTable.count {
-            if i + displayDays >= reversedTable.count {
-                let summary = reversedTable[i]
-                returnSummary.duration += summary.duration
-                returnSummary.sentenceCount += summary.sentenceCount
-                returnSummary.perfectCount += summary.perfectCount
-                returnSummary.greatCount += summary.greatCount
-                returnSummary.goodCount += summary.goodCount
-                returnSummary.missedCount += summary.missedCount
-            }
+        for i in 0 ..< reversedTable.count where i + displayDays >= reversedTable.count {
+            let summary = reversedTable[i]
+            returnSummary.duration += summary.duration
+            returnSummary.sentenceCount += summary.sentenceCount
+            returnSummary.perfectCount += summary.perfectCount
+            returnSummary.greatCount += summary.greatCount
+            returnSummary.goodCount += summary.goodCount
+            returnSummary.missedCount += summary.missedCount
         }
         return returnSummary
     }
@@ -67,11 +65,12 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
         var medalCount = 0
         var reversedTable = Array(tableData.reversed())
         for i in 0 ..< reversedTable.count {
+            medalCount += reversedTable[i].medalCount
             if i + displayDays >= reversedTable.count {
                 points.append((x: x, y: medalCount))
                 x += 10
             }
-            medalCount += reversedTable[i].medalCount
+
         }
         return points
     }
@@ -125,10 +124,8 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
     }
 
     private func renderTop() {
-        print(getTopPadding())
         backgroundColor = myRed
         tableData = getSummaryByDays()
-        
         let totalSummary = self.totalSummary // avoid recalculation
 
         let subTitleGray = rgb(155, 155, 155)

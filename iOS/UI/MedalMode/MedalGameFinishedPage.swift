@@ -223,6 +223,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                             isIconOnLeft: true)
         button.titleLabel?.font = MyFont.regular(ofSize: stepFloat * 3.2 )
         button.addTapGestureRecognizer {
+            SpeechEngine.shared.stopListeningAndSpeaking()
             dismissTwoVC(animated: false) {
                 launchNextGame()
             }
@@ -241,6 +242,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                 countDownTimer?.invalidate()
                 if !isSimulator {
                     dismissTwoVC(animated: false) {
+                        SpeechEngine.shared.stopListeningAndSpeaking()
                         launchNextGame()
                     }
                 }
