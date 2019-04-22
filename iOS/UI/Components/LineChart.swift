@@ -14,10 +14,15 @@ private let fontSize = screen.width * 12 / 320
 @IBDesignable
 class LineChart: LineChartView, ChartViewDelegate {
 
-    var color: UIColor = .black
     var lineColor: UIColor = .black
+    var circleColor: UIColor = .black
+    var circleRadius: CGFloat = 2
+    var lineWidth: CGFloat = 0.5
+    var lineDashLengths: [CGFloat] = [5, 2.5]
+    var highlightLineDashLengths: [CGFloat] = [5, 2.5]
     var leftAxisMinimum: Double = 0
     var leftAxisMaximum: Double = 100
+    var isDrawFill: Bool = false
     override init(frame: CGRect) {
         super.init(frame: frame)
         sharedInit()
@@ -70,12 +75,12 @@ class LineChart: LineChartView, ChartViewDelegate {
         let set1 = LineChartDataSet(values: values, label: "")
         set1.drawIconsEnabled = false
 
-        set1.lineDashLengths = [5, 2.5]
-        set1.highlightLineDashLengths = [5, 2.5]
-        set1.setColor(color)
-        set1.setCircleColor(lineColor)
-        set1.lineWidth = 0.5
-        set1.circleRadius = 2
+        set1.lineDashLengths = lineDashLengths
+        set1.highlightLineDashLengths = highlightLineDashLengths
+        set1.setColor(lineColor)
+        set1.setCircleColor(circleColor)
+        set1.lineWidth = lineWidth
+        set1.circleRadius = circleRadius
         set1.drawValuesEnabled = false
         set1.drawCircleHoleEnabled = false
 
@@ -84,7 +89,7 @@ class LineChart: LineChartView, ChartViewDelegate {
 
         set1.fillAlpha = 1
         set1.fill = Fill(linearGradient: gradient, angle: 90)
-        set1.drawFilledEnabled = true
+        set1.drawFilledEnabled = isDrawFill
 
         let data = LineChartData(dataSet: set1)
 

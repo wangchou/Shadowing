@@ -28,47 +28,131 @@ class MedalSummaryPage: UIViewController {
     }
 }
 
+enum DaysOption: String {
+    case oneWeek = "7日"
+    case oneMonth = "30日"
+    case all = "全部"
+}
+
 class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
     var gridCount: Int = 48
     var axis: GridAxis = .horizontal
     var spacing: CGFloat = 0
     var tableData: [Summary] = []
+    var topView: UIView!
+
+    var totalSummary: Summary {
+        var returnSummary = Summary()
+        var reversedTable = Array(tableData.reversed())
+        for i in 0 ..< reversedTable.count {
+            if i + displayDays >= reversedTable.count {
+                let summary = reversedTable[i]
+                returnSummary.duration += summary.duration
+                returnSummary.sentenceCount += summary.sentenceCount
+                returnSummary.perfectCount += summary.perfectCount
+                returnSummary.greatCount += summary.greatCount
+                returnSummary.goodCount += summary.goodCount
+                returnSummary.missedCount += summary.missedCount
+            }
+        }
+        return returnSummary
+    }
 
     var dataPoints: [(x: Int, y: Int)] {
         var points: [(x: Int, y: Int)] = []
         var x = 0
         var medalCount = 0
-        for summary in tableData {
-            points.append((x: x, y: medalCount))
-            x += 10
-            medalCount += summary.medalCount
+        var reversedTable = Array(tableData.reversed())
+        for i in 0 ..< reversedTable.count {
+            if i + displayDays >= reversedTable.count {
+                points.append((x: x, y: medalCount))
+                x += 10
+            }
+            medalCount += reversedTable[i].medalCount
         }
         return points
+    }
+
+    var daysOption: DaysOption = .oneWeek
+    var displayDays: Int {
+        switch daysOption {
+        case .oneWeek:
+            return 7
+        case .oneMonth:
+            return 30
+        case .all:
+            return 10000
+        }
+    }
+
+    var axisMax: Double {
+        var medalCount = 0
+        var medalCountMax = 0
+        let reversedTable = Array(tableData.reversed())
+        for i in 0 ..< reversedTable.count {
+            medalCount += reversedTable[i].medalCount
+            if i + displayDays >= reversedTable.count,
+               medalCount > medalCountMax {
+                medalCountMax = medalCount
+            }
+        }
+        return Double(medalCountMax - medalCountMax%50 + 50)
+    }
+
+    var axisMin: Double {
+        var medalCount = 0
+        var medalCountMin = 1000
+        let reversedTable = Array(tableData.reversed())
+        for i in 0 ..< reversedTable.count {
+            medalCount += reversedTable[i].medalCount
+            if i + displayDays >= reversedTable.count,
+                medalCount < medalCountMin {
+                medalCountMin = medalCount
+            }
+        }
+        return Double(max(0, medalCountMin - medalCountMin%50 - 50))
     }
 
     var tableView: UITableView!
 
     func viewWillAppear() {
         removeAllSubviews()
+        renderTop()
+        renderBottomTable()
+    }
+
+    private func renderTop() {
         backgroundColor = myRed
         tableData = getSummaryByDays()
+        print(tableData)
+        let totalSummary = self.totalSummary // avoid recalculation
 
         let subTitleGray = rgb(155, 155, 155)
         let subTitleFont = MyFont.regular(ofSize: stepFloat * 2)
-        var totalSummary = tableData.reduce(Summary()) { (result, summary) in
-            var totalSummary = result
-            totalSummary.duration += summary.duration
-            totalSummary.sentenceCount += summary.sentenceCount
-            totalSummary.perfectCount += summary.perfectCount
-            totalSummary.greatCount += summary.greatCount
-            totalSummary.goodCount += summary.goodCount
-            totalSummary.missedCount += summary.missedCount
-            return totalSummary
-        }
 
-        // Top Area
-        let topView = addRect(x: 0, y: 0, w: 48, h: 32, color: rgb(74, 74, 74))
-        addText(x: 2, y: 3, h: 8, text: i18n.language, color: .white)
+        // MARK: - TOP Area
+        topView = addRect(x: 0, y: 0, w: 48, h: 32, color: rgb(60, 60, 60))
+        let langLabel = addText(x: 2, y: 3, h: 8, text: gameLang == .jp ? "日本語" : "英語", color: .white)
+        langLabel.sizeToFit()
+
+        let daysButton = UIButton()
+        daysButton.setTitle(daysOption.rawValue, for: .normal)
+        daysButton.setTitleColor(.white, for: .normal)
+        daysButton.titleLabel?.font = MyFont.regular(ofSize: stepFloat * 2)
+        daysButton.backgroundColor = subTitleGray
+        daysButton.roundBorder(borderWidth: 0.5, cornerRadius: stepFloat, color: .clear)
+        daysButton.sizeToFit()
+        daysButton.frame.origin.x = langLabel.frame.origin.x +
+                                    langLabel.frame.width +
+                                    2 * stepFloat
+        daysButton.frame.origin.y = langLabel.frame.origin.y +
+                                    langLabel.frame.height -
+                                    daysButton.frame.height
+        daysButton.frame.size.width += stepFloat
+        addSubview(daysButton)
+        daysButton.addTarget(self, action: #selector(onDaysButtonClicked), for: .touchUpInside)
+
+        // MARK: - Right Summary Area
         let medalView = MedalView()
         layout(3, 3, 3, 3, medalView)
         addSubview(medalView)
@@ -115,21 +199,30 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
                         color: subTitleGray)
         label.textAlignment = .center
 
-        // Chart
+        // MARK: - Chart
         let chart = LineChart()
-        chart.color = .white
-        chart.lineColor = .white
-        chart.leftAxisMaximum = 500
-        chart.leftAxisMinimum = 0
+
+        chart.circleColor = .white
+        chart.lineColor = myOrange
+        chart.lineWidth = 1
+        chart.circleRadius = daysOption == .oneWeek ? 2 : 0
+        chart.lineDashLengths = [10, 0]
+        chart.leftAxisMaximum = axisMax
+        chart.leftAxisMinimum = axisMin
+        chart.leftAxis.labelTextColor = subTitleGray
         chart.xAxis.enabled = false
+        chart.isDrawFill = false
         chart.setDataCount(level: Level.lv2, dataPoints: dataPoints)
         chart.viewWillAppear()
-        layout(2, 10, 28, 20, chart)
+        layout(2, 9, 29, 20, chart)
         addSubview(chart)
 
-        // tableView
+    }
+
+    private func renderBottomTable() {
+        // MARK: - Add Bottom TableView
         let tableTitleBar = addRect(x: 0, y: 32, w: 48, h: 6, color: rgb(228, 182, 107))
-        label = addText(x: 0, y: 32, w: 15, h: 5, text: i18n.date)
+        var label = addText(x: 0, y: 32, w: 15, h: 5, text: i18n.date)
         label.textAlignment = .center
         label.centerY(tableTitleBar.frame)
 
@@ -150,7 +243,10 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
         tableView.frame = CGRect(x: 0,
                                  y: tableTitleBar.frame.origin.y + tableTitleBar.frame.height,
                                  width: screen.width,
-                                 height: screen.height - topView.frame.height - tableTitleBar.frame.height - stepFloat * 6)
+                                 height: screen.height -
+                                         topView.frame.height -
+                                         tableTitleBar.frame.height -
+                                         stepFloat * 6)
         addSubview(tableView)
 
         // close button
@@ -204,5 +300,17 @@ extension MedalSummaryPageView: UITableViewDataSource {
         cell.textLabel?.text = dateString + medalString + senteneCountString + durationstring
 
         return cell
+    }
+
+    @objc func onDaysButtonClicked() {
+        switch daysOption {
+        case .oneWeek:
+            daysOption = .oneMonth
+        case .oneMonth:
+            daysOption = .all
+        case .all:
+            daysOption = .oneWeek
+        }
+        viewWillAppear()
     }
 }
