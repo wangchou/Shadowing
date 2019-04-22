@@ -103,7 +103,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
     func viewWillAppear() {
         removeAllSubviews()
         backgroundColor = rgb(60, 60, 60)
-        
+
         let totalSummary = self.totalSummary // avoid recalculation
 
         let subTitleGray = rgb(155, 155, 155)
@@ -112,20 +112,21 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         let langLabel = addText(x: 2, y: y + 3, h: 8, text: gameLang == .jp ? "日本語" : "英語", color: .white)
         langLabel.sizeToFit()
 
+        // MARK: - Add day option button
         let daysButton = UIButton()
         daysButton.setTitle(daysOption.rawValue, for: .normal)
         daysButton.setTitleColor(.white, for: .normal)
-        daysButton.titleLabel?.font = MyFont.regular(ofSize: step * 2)
+        daysButton.titleLabel?.font = MyFont.regular(ofSize: step * 3)
         daysButton.backgroundColor = subTitleGray
         daysButton.roundBorder(borderWidth: 0.5, cornerRadius: step, color: .clear)
         daysButton.sizeToFit()
         daysButton.frame.origin.x = langLabel.frame.x +
-            langLabel.frame.width +
-            2 * step
+                                    langLabel.frame.width +
+                                    3 * step
         daysButton.frame.origin.y = langLabel.frame.y +
-            langLabel.frame.height -
-            daysButton.frame.height
-        daysButton.frame.size.width += step
+                                    langLabel.frame.height -
+                                    daysButton.frame.height
+        daysButton.frame.size.width += 2 * step
         addSubview(daysButton)
         daysButton.addTarget(self, action: #selector(onDaysButtonClicked), for: .touchUpInside)
 
@@ -184,9 +185,10 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         chart.lineWidth = 1
         chart.circleRadius = daysOption == .oneWeek ? 2 : 0
         chart.lineDashLengths = [10, 0]
+        chart.leftAxis.gridColor = .white
         chart.leftAxisMaximum = axisMax
         chart.leftAxisMinimum = axisMin
-        chart.leftAxis.labelTextColor = subTitleGray
+        chart.leftAxis.labelTextColor = .white
         chart.xAxis.enabled = false
         chart.isDrawFill = false
         chart.setDataCount(level: Level.lv2, dataPoints: dataPoints)

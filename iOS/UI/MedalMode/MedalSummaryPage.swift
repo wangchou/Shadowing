@@ -34,6 +34,7 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
     var spacing: CGFloat = 0
     var tableData: [Summary] = []
     var topView: MedalSummaryTopView!
+    var tableTitleBar: UIView!
     var topSubviews: [UIView] = []
     var y: Int {
         return Int((getTopPadding() - 20)/step)
@@ -44,6 +45,7 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
         tableData = getSummaryByDays()
         removeAllSubviews()
         addTopView()
+        addTableTitleBar()
         addBottomTable()
         addCloseButton()
     }
@@ -55,9 +57,8 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
         addSubview(topView)
     }
 
-    private func addBottomTable() {
-        // MARK: - Add Bottom TableView
-        let tableTitleBar = addRect(x: 0, y: y+32, w: 48, h: 6, color: rgb(228, 182, 107))
+    private func addTableTitleBar() {
+        tableTitleBar = addRect(x: 0, y: y+32, w: 48, h: 6, color: rgb(228, 182, 107))
         var label = addText(x: 0, y: y+32, w: 15, h: 5, text: i18n.date)
         label.textAlignment = .center
         label.centerY(tableTitleBar.frame)
@@ -73,11 +74,16 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
         label = addText(x: 37, y: y+32, w: 11, h: 5, text: i18n.time)
         label.textAlignment = .center
         label.centerY(tableTitleBar.frame)
+    }
 
+    private func addBottomTable() {
         tableView = UITableView()
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: SummaryTableCell.id)
+
+        tableView.rowHeight = step * 6
         tableView.dataSource = self
         tableView.frame = CGRect(x: 0,
-                                 y: tableTitleBar.frame.origin.y + tableTitleBar.frame.height,
+                                 y: tableTitleBar.frame.y + tableTitleBar.frame.height,
                                  width: screen.width,
                                  height: screen.height -
                                          topView.frame.height -
@@ -123,20 +129,100 @@ extension MedalSummaryPageView: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {
-                return UITableViewCell(style: .default, reuseIdentifier: "cell")
+        let cell: SummaryTableCell = {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SummaryTableCell.id) as? SummaryTableCell else {
+                return SummaryTableCell(style: .default, reuseIdentifier: SummaryTableCell.id)
             }
             return cell
         }()
 
         let data = tableData[indexPath.row]
-        let dateString = getDateString(date: data.date).padWidthTo(12, isBothSide: true)
-        let medalString = "\(data.medalCount)".padWidthTo(8)
-        let senteneCountString = "\(data.sentenceCount)".padWidthTo(12)
-        let durationstring = String(format: "%.1fm", data.duration.f/60).padWidthTo(12)
-        cell.textLabel?.text = dateString + medalString + senteneCountString + durationstring
+        cell.timeString = getDateString(date: data.date)
+        cell.medalCount = data.medalCount
+        cell.goalPercent = data.sentenceCount.f / context.gameSetting.dailySentenceGoal.f
+        cell.playTime = data.duration
+
+        //cell.textLabel?.text = dateString + medalString + senteneCountString + durationstring
 
         return cell
+    }
+}
+
+class SummaryTableCell: UITableViewCell, GridLayout, ReloadableView {
+    static let id = "SummaryTableCell"
+
+    var gridCount: Int = 48
+    var axis: GridAxis = .horizontal
+    var spacing: CGFloat = 0
+
+    var timeLabel = UILabel()
+    var medalCountLabel = UILabel()
+    var goalPercentLabel = UILabel()
+    var playTimeLabel = UILabel()
+
+    var timeString: String = "11/11 日" {
+        didSet {
+            timeLabel.text = timeString
+            timeLabel.frame.size.height = frame.height
+        }
+    }
+    var medalCount: Int = 10 {
+        didSet {
+            let medalCountText = "\(medalCount >= 0 ? "+" : "")\(medalCount)"
+            medalCountLabel.attributedText = getStrokeText(medalCountText,
+                                                           .red,//medalCount > 0 ? myGreen :
+                                                           //(medalCount == 0 ? .white : myRed),
+                                                           strokeWidth: Float(step/4),
+                                                           strokColor: .black,
+                                                           font: MyFont.heavyDigit(ofSize: step * 4))
+        }
+    }
+    var goalPercent: Float = 0.3 {
+        didSet {
+            let percentText = goalPercent >= 1 ? "完成" :"\(String(format: "%.0f", goalPercent * 100))%"
+            let color = goalPercent > 1 ? myBlue :
+                       (goalPercent >= 0.8 ? myGreen :
+                       (goalPercent >= 0.6 ? myOrange: myRed))
+            goalPercentLabel.text = percentText
+            goalPercentLabel.textColor = color
+        }
+    }
+    var playTime: Int = 1000 {
+        didSet {
+            let playTimeText = String(format: "%.1fm", playTime.f/60.0)
+            playTimeLabel.text = playTimeText
+        }
+    }
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        frame.size.width = screen.width
+        frame.size.height = step * 6
+        addSubview(timeLabel)
+        timeLabel.textAlignment = .center
+        timeLabel.font = MyFont.regular(ofSize: step * 3)
+        timeLabel.backgroundColor = rgb(155, 155, 155)
+        addSubview(medalCountLabel)
+        medalCountLabel.textAlignment = .center
+        addSubview(goalPercentLabel)
+        goalPercentLabel.textAlignment = .center
+        goalPercentLabel.font = MyFont.regular(ofSize: step * 3)
+        addSubview(playTimeLabel)
+        playTimeLabel.textAlignment = .center
+        playTimeLabel.font = MyFont.regular(ofSize: step * 3)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layout(0, 0, 15, 6, timeLabel)
+        layout(15, 0, 11, 6, medalCountLabel)
+        layout(26, 0, 11, 6, goalPercentLabel)
+        layout(37, 0, 11, 6, playTimeLabel)
+    }
+    func viewWillAppear() {
     }
 }
