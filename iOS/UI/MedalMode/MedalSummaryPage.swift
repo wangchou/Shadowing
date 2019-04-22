@@ -40,6 +40,9 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
     var spacing: CGFloat = 0
     var tableData: [Summary] = []
     var topView: UIView!
+    var y: Int {
+        return Int((getTopPadding() - 20)/stepFloat)
+    }
 
     var totalSummary: Summary {
         var returnSummary = Summary()
@@ -122,17 +125,19 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
     }
 
     private func renderTop() {
+        print(getTopPadding())
         backgroundColor = myRed
         tableData = getSummaryByDays()
-        print(tableData)
+        
         let totalSummary = self.totalSummary // avoid recalculation
 
         let subTitleGray = rgb(155, 155, 155)
         let subTitleFont = MyFont.regular(ofSize: stepFloat * 2)
 
         // MARK: - TOP Area
-        topView = addRect(x: 0, y: 0, w: 48, h: 32, color: rgb(60, 60, 60))
-        let langLabel = addText(x: 2, y: 3, h: 8, text: gameLang == .jp ? "日本語" : "英語", color: .white)
+        topView = addRect(x: 0, y: 0, w: 48, h: 32 + y, color: rgb(60, 60, 60))
+
+        let langLabel = addText(x: 2, y: y + 3, h: 8, text: gameLang == .jp ? "日本語" : "英語", color: .white)
         langLabel.sizeToFit()
 
         let daysButton = UIButton()
@@ -154,14 +159,14 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
 
         // MARK: - Right Summary Area
         let medalView = MedalView()
-        layout(3, 3, 3, 3, medalView)
+        layout(3, y + 3, 3, 3, medalView)
         addSubview(medalView)
-        var label = addText(x: 36, y: 4, w: 10, h: 3, text: "メダル",
+        var label = addText(x: 36, y: y + 3, w: 10, h: 3, text: "メダル",
                             font: subTitleFont,
                             color: subTitleGray)
         label.textAlignment = .right
 
-        label = addText(x: 30, y: 6, w: 16, h: 5, text: "\(context.gameMedal.count)", color: .white)
+        label = addText(x: 30, y: y+5, w: 16, h: 5, text: "\(context.gameMedal.count)", color: .white)
         label.textAlignment = .right
         let originFrame = label.frame
         label.sizeToFit()
@@ -170,7 +175,7 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
         medalView.centerY(label.frame)
         medalView.frame.origin.x = label.frame.origin.x - medalView.frame.width - stepFloat/2
 
-        label = addText(x: 36, y: 12, w: 10, h: 3, text: "遊びの時間",
+        label = addText(x: 36, y: y+12, w: 10, h: 3, text: "遊びの時間",
                         font: subTitleFont,
                         color: subTitleGray)
         label.textAlignment = .right
@@ -181,19 +186,19 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
             return value < 10 ? "0\(value)" : "\(value)"
         }
 
-        label = addText(x: 26, y: 14, w: 20, h: 5,
+        label = addText(x: 26, y: y+14, w: 20, h: 5,
                         text: "\(padZero(hours)):\(padZero(mins)):\(padZero(secs))",
                         color: .white)
         label.textAlignment = .right
 
-        label = addText(x: 36, y: 20, w: 10, h: 3, text: "正しい文",
+        label = addText(x: 36, y: y+21, w: 10, h: 3, text: "正しい文",
                         font: subTitleFont,
                         color: subTitleGray)
         label.textAlignment = .right
-        label = addText(x: 26, y: 22, w: 20, h: 5, text: "\(totalSummary.sentenceCount)", color: .white)
+        label = addText(x: 26, y: y+23, w: 20, h: 5, text: "\(totalSummary.sentenceCount)", color: .white)
         label.textAlignment = .right
 
-        label = addText(x: 0, y: 28, h: 3,
+        label = addText(x: 0, y: y+28, h: 3,
                         text: "正解 \(totalSummary.perfectCount) | すごい \(totalSummary.greatCount) | いいね \(totalSummary.goodCount) | ミス \(totalSummary.missedCount)",
                         font: subTitleFont,
                         color: subTitleGray)
@@ -214,27 +219,27 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
         chart.isDrawFill = false
         chart.setDataCount(level: Level.lv2, dataPoints: dataPoints)
         chart.viewWillAppear()
-        layout(2, 9, 29, 20, chart)
+        layout(2, y+9, 29, 20, chart)
         addSubview(chart)
 
     }
 
     private func renderBottomTable() {
         // MARK: - Add Bottom TableView
-        let tableTitleBar = addRect(x: 0, y: 32, w: 48, h: 6, color: rgb(228, 182, 107))
-        var label = addText(x: 0, y: 32, w: 15, h: 5, text: i18n.date)
+        let tableTitleBar = addRect(x: 0, y: y+32, w: 48, h: 6, color: rgb(228, 182, 107))
+        var label = addText(x: 0, y: y+32, w: 15, h: 5, text: i18n.date)
         label.textAlignment = .center
         label.centerY(tableTitleBar.frame)
 
-        label = addText(x: 15, y: 32, w: 11, h: 5, text: i18n.medal)
+        label = addText(x: 15, y: y+32, w: 11, h: 5, text: i18n.medal)
         label.textAlignment = .center
         label.centerY(tableTitleBar.frame)
 
-        label = addText(x: 26, y: 32, w: 11, h: 5, text: i18n.simpleGoalText)
+        label = addText(x: 26, y: y+32, w: 11, h: 5, text: i18n.simpleGoalText)
         label.textAlignment = .center
         label.centerY(tableTitleBar.frame)
 
-        label = addText(x: 37, y: 32, w: 11, h: 5, text: i18n.time)
+        label = addText(x: 37, y: y+32, w: 11, h: 5, text: i18n.time)
         label.textAlignment = .center
         label.centerY(tableTitleBar.frame)
 
@@ -246,7 +251,7 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
                                  height: screen.height -
                                          topView.frame.height -
                                          tableTitleBar.frame.height -
-                                         stepFloat * 6)
+                                         stepFloat * 7)
         addSubview(tableView)
 
         // close button
@@ -254,9 +259,10 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
         button.frame = CGRect(x: 0,
                               y: tableView.frame.origin.y + tableView.frame.height,
                               width: screen.width,
-                              height: stepFloat * 6)
+                              height: stepFloat * 7)
         button.backgroundColor = rgb(74, 74, 74)
         button.setTitle("x", for: .normal)
+        button.titleLabel?.font = MyFont.regular(ofSize: stepFloat * 4)
         button.setTitleColor(.white, for: .normal)
         button.addTapGestureRecognizer {
             dismissVC()
