@@ -15,6 +15,7 @@ private let context = GameContext.shared
 extension TopChartView {
     func renderDailyGoalMode() {
         gridCount = 48
+        removeAllSubviews()
         updateDailyViewBGColor()
 
         circleFrame = getFrame(11, 3, 24, 24)

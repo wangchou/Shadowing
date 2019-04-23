@@ -14,6 +14,7 @@ private let context = GameContext.shared
 // MARK: LongTermGoalMode
 extension TopChartView {
     func renderLongTermGoalMode() {
+        removeAllSubviews()
         gridCount = 50
         backgroundColor = rgb(28, 28, 28)
 

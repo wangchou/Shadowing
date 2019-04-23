@@ -39,6 +39,7 @@ struct TimelineBox {
 // MARK: Timeline Mode
 extension TopChartView {
     func renderTimelineMode() {
+        removeAllSubviews()
         gridCount = 16
         backgroundColor = longTermGoalColor.withSaturation(0.3)
         addTimeline()

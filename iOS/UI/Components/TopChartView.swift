@@ -135,8 +135,10 @@ class TopChartView: UIView, GridLayout, ReloadableView {
     func addOnClickHandler() {
         addTapGestureRecognizer { [weak self] in
             switchToNextTopViewMode()
-            Analytics.logEvent("top_chart_view_clicked", parameters: nil)
-            self?.viewWillAppear()
+            DispatchQueue.global().async {
+                Analytics.logEvent("top_chart_view_clicked", parameters: nil)
+            }
+            self?.render()
             self?.animateProgress()
         }
     }
@@ -144,9 +146,12 @@ class TopChartView: UIView, GridLayout, ReloadableView {
     func viewWillAppear() {
         frame.size.width = screen.width
         frame.size.height = screen.width * 34/48
-        removeAllSubviews()
         updateByRecords()
 
+        render()
+    }
+
+    func render() {
         switch GameContext.shared.gameSetting.icTopViewMode {
         case .dailyGoal:
             renderDailyGoalMode()
@@ -230,5 +235,7 @@ func switchToNextTopViewMode() {
     case .longTermGoal:
         context.gameSetting.icTopViewMode = .dailyGoal
     }
-    saveGameSetting()
+    DispatchQueue.global().async {
+        saveGameSetting()
+    }
 }

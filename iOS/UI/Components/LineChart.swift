@@ -22,7 +22,7 @@ class LineChart: LineChartView, ChartViewDelegate {
     var highlightLineDashLengths: [CGFloat] = [5, 2.5]
     var leftAxisMinimum: Double = 0
     var leftAxisMaximum: Double = 100
-    var isDrawFill: Bool = false
+    var isDrawFill: Bool = true
     override init(frame: CGRect) {
         super.init(frame: frame)
         sharedInit()
