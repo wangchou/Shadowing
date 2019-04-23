@@ -121,9 +121,9 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
     }
 
     private func getDateString(date: Date) -> String {
-        var weekdayLabels = i18n.isZh ?
-            ["日", "一", "二", "三", "四", "五", "六"] :
-            ["日", "月", "火", "水", "木", "金", "土"]
+        var weekdayLabels = i18n.isZh ? ["日", "一", "二", "三", "四", "五", "六"] :
+                            (i18n.isJa ? ["日", "月", "火", "水", "木", "金", "土"] :
+                                         ["S", "M", "T", "W", "T", "F", "S"])
         let month = Calendar.current.component(.month, from: date)
         let day = Calendar.current.component(.day, from: date)
         let weekdayIdx = Calendar.current.component(.weekday, from: date) - 1
@@ -216,6 +216,7 @@ class MedalSummaryTableCell: UITableViewCell, GridLayout, ReloadableView {
             goalPercentLabel.textColor = color
         }
     }
+
     var playTime: Int = 1000 {
         didSet {
             if playTime < 3600 {
