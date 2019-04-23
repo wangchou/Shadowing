@@ -106,7 +106,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         let subTitleGray = rgb(155, 155, 155)
         let subTitleFont = MyFont.regular(ofSize: step * 2)
 
-        let langLabel = addText(x: 2, y: y + 3, h: 8, text: gameLang == .jp ? "日本語" : "英語", color: .white)
+        let langLabel = addText(x: 2, y: y + 3, h: 9, text: gameLang == .jp ? "日本語" : "英語", color: .white)
         langLabel.sizeToFit()
 
         // MARK: - Add day option button
