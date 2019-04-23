@@ -83,12 +83,13 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
 
     private func addBottomTable() {
         tableView = UITableView()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: SummaryTableCell.id)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: MedalSummaryTableCell.id)
 
         tableView.rowHeight = step * 6
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        tableView.separatorColor = rgb(110, 110, 110)
+        tableView.separatorColor = rgb(200, 200, 200)
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.frame = CGRect(x: 0,
                                  y: tableTitleBar.frame.y + tableTitleBar.frame.height,
                                  width: screen.width,
@@ -105,16 +106,16 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
                               y: tableView.frame.origin.y + tableView.frame.height,
                               width: screen.width,
                               height: step * 7)
-        button.backgroundColor = rgb(74, 74, 74)
+        button.backgroundColor = rgb(180, 180, 180)
         button.setTitle("x", for: .normal)
         button.titleLabel?.font = MyFont.regular(ofSize: step * 4)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.addTapGestureRecognizer {
             dismissVC()
         }
         addSubview(button)
 
-        let line = addRect(x: 0, y: 0, w: 48, h: 1, color: .black)
+        let line = addRect(x: 0, y: 0, w: 48, h: 1, color: .darkGray)
         line.frame.size.height = 0.5
         line.frame.origin.y = button.frame.y
     }
@@ -140,10 +141,11 @@ extension MedalSummaryPageView: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: SummaryTableCell = {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: SummaryTableCell.id) as? SummaryTableCell else {
-                return SummaryTableCell(style: .default, reuseIdentifier: SummaryTableCell.id)
+        let cell: MedalSummaryTableCell = {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: MedalSummaryTableCell.id) as? MedalSummaryTableCell else {
+                return MedalSummaryTableCell(style: .default, reuseIdentifier: MedalSummaryTableCell.id)
             }
+            cell.selectionStyle = .none
             return cell
         }()
 
@@ -157,8 +159,14 @@ extension MedalSummaryPageView: UITableViewDataSource {
     }
 }
 
-class SummaryTableCell: UITableViewCell, GridLayout, ReloadableView {
-    static let id = "SummaryTableCell"
+extension MedalSummaryPageView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        return nil
+    }
+}
+
+class MedalSummaryTableCell: UITableViewCell, GridLayout, ReloadableView {
+    static let id = "MedalSummaryTableCell"
 
     var timeLabel = UILabel()
     var medalCountLabel = UILabel()
@@ -167,8 +175,17 @@ class SummaryTableCell: UITableViewCell, GridLayout, ReloadableView {
 
     var timeString: String = "11/11 日" {
         didSet {
-            timeLabel.text = timeString
+            let monthAndDay = timeString.split(separator: " ")[0].s
+            let weekDay = timeString.split(separator: " ")[1].s
+            let isWeekend = weekDay == "日" || weekDay == "六" || weekDay == "土"
+            let attrText = NSMutableAttributedString()
+            attrText.append(colorText(monthAndDay + " ", .black, fontSize: step * 3))
+            attrText.append(colorText(weekDay,
+                                      isWeekend ? UIColor.red.withBrightness(0.8) : .black,
+                                      fontSize: step * 3))
+            timeLabel.attributedText = attrText
             timeLabel.frame.size.height = frame.height
+            timeLabel.backgroundColor = isWeekend ? rgb(255, 230, 230) : rgb(240, 240, 240)
         }
     }
     var medalCount: Int = 10 {
@@ -176,7 +193,7 @@ class SummaryTableCell: UITableViewCell, GridLayout, ReloadableView {
             let medalCountText = "\(medalCount >= 0 ? "+" : "")\(medalCount)"
             medalCountLabel.attributedText = getStrokeText(medalCountText,
                                                            medalCount > 0 ? myGreen :
-                                                           (medalCount == 0 ? .white : myRed),
+                                                           (medalCount == 0 ? .white : .red),
                                                            strokeWidth: -1 * Float(step/4),
                                                            strokColor: .black,
                                                            font: MyFont.heavyDigit(ofSize: step * 3.2))
@@ -185,9 +202,9 @@ class SummaryTableCell: UITableViewCell, GridLayout, ReloadableView {
     var goalPercent: Float = 0.3 {
         didSet {
             let percentText = goalPercent >= 1 ? "完成" :"\(String(format: "%.0f", goalPercent * 100))%"
-            var color = goalPercent > 1 ? myBlue :
+            var color = goalPercent >= 1 ? myBlue :
                        (goalPercent >= 0.8 ? myGreen :
-                       (goalPercent >= 0.6 ? myOrange: myRed))
+                       (goalPercent >= 0.6 ? myOrange: .red))
 
             if goalPercent == 0 {
                 color = .black
@@ -215,7 +232,7 @@ class SummaryTableCell: UITableViewCell, GridLayout, ReloadableView {
         addSubview(timeLabel)
         timeLabel.textAlignment = .center
         timeLabel.font = MyFont.regular(ofSize: step * 3)
-        timeLabel.backgroundColor = .lightGray
+        timeLabel.backgroundColor = rgb(216, 216, 216)
 
         addSubview(medalCountLabel)
         medalCountLabel.textAlignment = .center
