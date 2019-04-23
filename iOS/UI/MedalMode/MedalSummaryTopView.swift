@@ -10,10 +10,21 @@ import UIKit
 
 private let context = GameContext.shared
 
-enum DaysOption: String {
-    case oneWeek = "7日"
-    case oneMonth = "30日"
-    case all = "全部"
+enum DaysOption {
+    case oneWeek
+    case oneMonth
+    case all
+}
+
+private func dayOptionString(option: DaysOption) -> String {
+    switch option {
+    case .oneWeek:
+        return i18n.sevenDays
+    case .oneMonth:
+        return i18n.thirtyDays
+    case .all:
+        return i18n.allDays
+    }
 }
 
 class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
@@ -111,7 +122,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
 
         // MARK: - Add day option button
         let daysButton = UIButton()
-        daysButton.setTitle(daysOption.rawValue, for: .normal)
+        daysButton.setTitle(dayOptionString(option: daysOption), for: .normal)
         daysButton.setTitleColor(.white, for: .normal)
         daysButton.titleLabel?.font = MyFont.regular(ofSize: step * 3)
         daysButton.backgroundColor = subTitleGray
@@ -119,7 +130,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         daysButton.sizeToFit()
         daysButton.frame.origin.x = langLabel.frame.x +
                                     langLabel.frame.width +
-                                    3 * step
+                                    2 * step
         daysButton.frame.size.width += 2 * step
         daysButton.frame.size.height = 4 * step
         daysButton.centerY(langLabel.frame)
@@ -131,7 +142,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         let medalView = MedalView()
         layout(3, y + 3, 3, 3, medalView)
         addSubview(medalView)
-        var label = addText(x: 36, y: y + 3, w: 10, h: 3, text: "メダル",
+        var label = addText(x: 36, y: y + 3, w: 10, h: 3, text: i18n.medal,
                             font: subTitleFont,
                             color: subTitleGray)
         label.textAlignment = .right
@@ -145,7 +156,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         medalView.centerY(label.frame)
         medalView.frame.origin.x = label.frame.x - medalView.frame.width - step/2
 
-        label = addText(x: 36, y: y+12, w: 10, h: 3, text: "遊びの時間",
+        label = addText(x: 36, y: y+12, w: 10, h: 3, text: i18n.playTime,
                         font: subTitleFont,
                         color: subTitleGray)
         label.textAlignment = .right
@@ -161,15 +172,15 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
             color: .white)
         label.textAlignment = .right
 
-        label = addText(x: 36, y: y+21, w: 10, h: 3, text: "正しい文",
+        label = addText(x: 26, y: y+21, w: 20, h: 3, text: i18n.correctSentences,
                         font: subTitleFont,
                         color: subTitleGray)
         label.textAlignment = .right
-        label = addText(x: 26, y: y+23, w: 20, h: 5, text: "\(totalSummary.sentenceCount)", color: .white)
+        label = addText(x: 23, y: y+23, w: 23, h: 5, text: "\(totalSummary.sentenceCount)", color: .white)
         label.textAlignment = .right
 
         label = addText(x: 0, y: y+28, h: 3,
-                        text: "正解 \(totalSummary.perfectCount) | すごい \(totalSummary.greatCount) | いいね \(totalSummary.goodCount) | ミス \(totalSummary.missedCount)",
+                        text: "\(i18n.excellent) \(totalSummary.perfectCount) | \(i18n.great) \(totalSummary.greatCount) | \(i18n.good) \(totalSummary.goodCount) | \(i18n.wrong) \(totalSummary.missedCount)",
             font: subTitleFont,
             color: subTitleGray)
         label.textAlignment = .center

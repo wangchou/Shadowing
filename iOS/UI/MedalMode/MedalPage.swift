@@ -186,7 +186,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
     func addBottomButtons() {
         addButton(iconName: "round_insert_chart_outlined_black_\(iconSize)",
-        13, yMax - 10, 7, 7) {
+        2, yMax - 9, 7, 7) {
             launchVC(MedalSummaryPage.id)
         }
     }
@@ -260,7 +260,6 @@ extension GridLayout where Self: UIView {
         layout(x, y + 4, 8, 8, dailyGoalView)
         addSubview(dailyGoalView)
         dailyGoalView.percent = todayPercent
-        dailyGoalView.title = i18n.simpleGoalText
 
         func addCircleStatus(x: Int,
                              valueString: String,
@@ -312,7 +311,7 @@ extension GridLayout where Self: UIView {
                                                   valueString: timeValueString,
                                                   isHeavy: false,
                                                   valueColor: .white,
-                                                  subtitle: "mins")
+                                                  subtitle: i18n.mins)
             views.append(contentsOf: timeStatusViews)
         }
 

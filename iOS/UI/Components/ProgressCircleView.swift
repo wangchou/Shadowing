@@ -25,7 +25,6 @@ class ProgressCircleView: UIView, GridLayout, ReloadableView {
         if percent < 1.0 { return myGreen }
         return myBlue
     }
-    var title = "每日50文"
 
     var percentageText: String {
         if percent >= 1.0 { return "完 成" }
@@ -85,7 +84,7 @@ class ProgressCircleView: UIView, GridLayout, ReloadableView {
         percentLabel.centerIn(bounds)
 
         let subLabel = addText(x: 3, y: 25, w: 50, h: 9,
-                               text: title,
+                               text: i18n.goalSubtitleText,
                                font: MyFont.regular(ofSize: 6 * step),
                                color: minorTextColor)
 

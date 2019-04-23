@@ -97,7 +97,7 @@ extension Messenger: GameEventDelegate {
         case .gameStateChanged:
             if context.gameState == .gameOver {
                 stopEventObserving(self)
-                addLabel(rubyAttrStr("遊戲結束。"))
+                addLabel(rubyAttrStr(i18n.gameOver))
 
                 // prevent alerting block present
                 isAlerting.always {
