@@ -28,12 +28,6 @@ class MedalPage: UIViewController {
 }
 
 class MedalPageView: UIView, ReloadableView, GridLayout {
-    var gridCount: Int = 48
-
-    var axis: GridAxis = .horizontal
-
-    var spacing: CGFloat = 0
-
     var yMax: Int {
         return Int((screen.height - getBottomPadding()) / step)
     }
@@ -212,8 +206,8 @@ private func rollingText(view: UIView) {
 extension GridLayout where Self: UIView {
     // MARK: - textBackground
     func addTextbackground(bgColor: UIColor, textColor: UIColor) {
-        return
-            backgroundColor = bgColor
+        if isSimulator { return }
+        backgroundColor = bgColor
         let num = Int(sqrt(pow(screen.width, 2) + pow(screen.height, 2)) / step)/8
         let level = context.gameMedal.lowLevel
         let sentences = getRandSentences(level: level, numOfSentences: num * 4)

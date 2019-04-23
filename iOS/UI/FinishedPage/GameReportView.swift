@@ -24,9 +24,6 @@ func stopCountDown() {
 
 @IBDesignable
 class GameReportView: UIView, ReloadableView, GridLayout {
-    let gridCount = 48
-    let axis: GridAxis = .horizontal
-    let spacing: CGFloat = 0
     var reportBox: GameReportBoxView?
 
     func viewWillAppear() {

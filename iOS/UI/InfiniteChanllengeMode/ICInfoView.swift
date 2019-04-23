@@ -16,14 +16,6 @@ private enum Texts: String {
 }
 
 class ICInfoView: UIView, GridLayout, ReloadableView {
-
-    // GridLayout
-    var gridCount: Int = 48
-
-    var axis: GridAxis = .horizontal
-
-    var spacing: CGFloat = 0
-
     var minKanaCount: Int = 1
     var maxKanaCount: Int = 10
     var sentencesCount: Int = -1

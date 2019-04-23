@@ -17,21 +17,19 @@ enum GridAxis {
 protocol GridLayout: class {
     var gridCount: Int { get }
     var axis: GridAxis { get }
-    var spacing: CGFloat { get }
 }
 
 extension GridLayout where Self: UIView {
-    var axisBound: CGFloat {
-        return axis == GridAxis.horizontal ? frame.width : frame.height
+    var gridCount: Int {
+        return 48
     }
 
-    var anotherAxisGridCount: CGFloat {
-        return (axis == GridAxis.horizontal ? frame.height : frame.width) /
-            (axisBound / gridCount.c)
+    var axis: GridAxis {
+        return .horizontal
     }
 
     var step: CGFloat {
-        return (axisBound - spacing) * 2 / gridCount.c / 2
+        return (axis == GridAxis.horizontal ? frame.width : frame.height) / gridCount.c
     }
 
     func getFontSize(h: Int) -> CGFloat {
@@ -45,17 +43,14 @@ extension GridLayout where Self: UIView {
                  h: Int,
                  text: String,
                  font: UIFont? = nil,
-                 color: UIColor? = nil,
-                 completion: ((UILabel) -> Void)? = nil
+                 color: UIColor? = nil
         ) -> UILabel {
         let label = UILabel()
         label.font = font ?? MyFont.regular(ofSize: getFontSize(h: h))
         label.textColor = color ?? .black
         label.text = text
-        layout(x, y, w ?? (gridCount - x), h, label)
+        layout(x, y, w, h, label)
         addSubview(label)
-
-        completion?(label)
         return label
     }
 
@@ -64,55 +59,13 @@ extension GridLayout where Self: UIView {
                      y: Int,
                      w: Int? = nil,
                      h: Int,
-                     text: NSAttributedString,
-                     completion: ((UIView) -> Void)? = nil
+                     text: NSAttributedString
         ) -> UILabel {
         let label = UILabel()
         label.attributedText = text
-        layout(x, y, w ?? (gridCount - x), h, label)
+        layout(x, y, w, h, label)
         addSubview(label)
-        completion?(label)
         return label
-    }
-
-    @discardableResult
-    func addStrokeText(x: Int,
-                       y: Int,
-                       w: Int? = nil,
-                       h: Int,
-                       text: String,
-                       textColor: UIColor,
-                       strokeWidth: Float,
-                       strokeColor: UIColor,
-                       font: UIFont,
-                       completion: ((UIView) -> Void)? = nil
-        ) -> UILabel {
-        let label = UILabel()
-        let attrText = getStrokeText(text,
-            textColor,
-            strokeWidth: strokeWidth,
-            strokColor: strokeColor,
-            font: font)
-        label.attributedText = attrText
-        layout(x, y, w ?? (gridCount - x), h, label)
-        addSubview(label)
-        completion?(label)
-        return label
-    }
-
-    func addRoundRect(x: Int, y: Int, w: Int, h: Int,
-                      borderColor: UIColor,
-                      radius: CGFloat? = nil,
-                      backgroundColor: UIColor? = nil
-        ) {
-        let roundRect = UIView()
-        layout(x, y, w, h, roundRect)
-        let radius = radius ?? h.c * step / 2
-        roundRect.roundBorder(borderWidth: 1.5, cornerRadius: radius, color: borderColor)
-        if let backgroundColor = backgroundColor {
-            roundRect.backgroundColor = backgroundColor
-        }
-        addSubview(roundRect)
     }
 
     @discardableResult
@@ -125,11 +78,11 @@ extension GridLayout where Self: UIView {
         return rect
     }
 
-    func layout(anchor: CGPoint = CGPoint(x: 0, y: 0), _ x: Int, _ y: Int, _ w: Int, _ h: Int, _ view: UIView) {
-        view.frame = getFrame(anchor: anchor, x, y, w, h)
+    func layout(_ x: Int, _ y: Int, _ w: Int? = nil, _ h: Int, _ view: UIView) {
+        view.frame = getFrame(x, y, w ?? (gridCount - x), h)
     }
 
-    func getFrame(anchor: CGPoint = CGPoint(x: 0, y: 0), _ x: Int, _ y: Int, _ w: Int, _ h: Int) -> CGRect {
+    func getFrame(_ x: Int, _ y: Int, _ w: Int, _ h: Int) -> CGRect {
         var x = x
         var y = y
         if axis == GridAxis.horizontal {
@@ -139,8 +92,8 @@ extension GridLayout where Self: UIView {
         }
 
         return CGRect(
-            x: anchor.x + x.c * step,
-            y: anchor.y + y.c * step,
+            x: x.c * step,
+            y: y.c * step,
             width: w.c * step,
             height: h.c * step
         )

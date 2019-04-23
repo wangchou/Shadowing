@@ -14,8 +14,6 @@ class ProgressCircleView: UIView, GridLayout, ReloadableView {
 
     var axis: GridAxis = .horizontal
 
-    var spacing: CGFloat = 0
-
     var frontCircle: CircleView!
     var percentLabel: UILabel!
     var goalLabel: UILabel!

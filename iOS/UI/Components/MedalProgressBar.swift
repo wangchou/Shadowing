@@ -13,10 +13,6 @@ private let context = GameContext.shared
 class MedalProgressBar: UIView, GridLayout, ReloadableView {
     var gridCount: Int = 34
 
-    var axis: GridAxis = .horizontal
-
-    var spacing: CGFloat = 0
-
     var medalCount: Int = 0
 
     var isFinishedPageMode: Bool = false

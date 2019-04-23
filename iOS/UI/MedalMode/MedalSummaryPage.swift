@@ -29,9 +29,6 @@ class MedalSummaryPage: UIViewController {
 }
 
 class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
-    var gridCount: Int = 48
-    var axis: GridAxis = .horizontal
-    var spacing: CGFloat = 0
     var tableData: [Summary] = []
     var topView: MedalSummaryTopView!
     var tableTitleBar: UIView!
@@ -150,10 +147,6 @@ extension MedalSummaryPageView: UITableViewDataSource {
 
 class SummaryTableCell: UITableViewCell, GridLayout, ReloadableView {
     static let id = "SummaryTableCell"
-
-    var gridCount: Int = 48
-    var axis: GridAxis = .horizontal
-    var spacing: CGFloat = 0
 
     var timeLabel = UILabel()
     var medalCountLabel = UILabel()

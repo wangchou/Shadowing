@@ -30,12 +30,6 @@ class MedalGameFinishedPage: UIViewController {
 }
 
 class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
-    var gridCount: Int = 48
-
-    var axis: GridAxis = .horizontal
-
-    var spacing: CGFloat = 0.0
-
     var strokeWidth: Float = 0
 
     var gr: GameRecord { return context.gameRecord! }

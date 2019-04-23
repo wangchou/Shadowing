@@ -25,7 +25,6 @@ private func getProgressColor(percent: Float) -> UIColor {
 class GameReportBoxView: UIView, ReloadableView, GridLayout {
     let gridCount = 44
     let axis: GridAxis = .horizontal
-    let spacing: CGFloat = 0
 
     // for animate progress bar at viewDidAppear
     private var timers: [String: Timer] = [:]

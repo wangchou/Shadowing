@@ -17,8 +17,6 @@ class TopChartView: UIView, GridLayout, ReloadableView {
 
     var axis: GridAxis = .horizontal
 
-    var spacing: CGFloat = 0
-
     // animateProgress
     var timer: Timer?
     var frontCircle: CircleView?

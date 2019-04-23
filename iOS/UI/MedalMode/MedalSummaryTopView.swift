@@ -17,9 +17,6 @@ enum DaysOption: String {
 }
 
 class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
-    var gridCount: Int = 48
-    var axis: GridAxis = .horizontal
-    var spacing: CGFloat = 0
     var y: Int {
         return Int((getTopPadding() - 20)/step)
     }
