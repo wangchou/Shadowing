@@ -39,7 +39,7 @@ class I18n {
 
     var narratorLabel: String {
         if isJa { return "挑戦の説明" }
-        if isZh { return "開始語音說明" }
+        if isZh { return "挑戰的語音說明" }
         return "Initial Descriptions"
     }
     var monitoringLabel: String {
@@ -222,7 +222,7 @@ class I18n {
 
     var setting: String {
         if isJa || isZh { return "設  定"}
-        return "Setting"
+        return "Settings"
     }
 
     var chinese: String {
@@ -325,17 +325,22 @@ class I18n {
     }
 
     var topicPageTitile: String {
-        if isZh || isJa {
-            return "話題 (\(languageInJa))"
-        }
+        if isZh { return "主題 (\(language))" }
+        if isZh { return "テーマ (\(language))" }
         return "Topics (ja)"
+    }
+
+    var infiniteChallenge: String {
+        if isZh { return "無限挑戰" }
+        if isJa { return "無限挑戦" }
+        return "Infinite Games"
     }
 
     var infiniteChallengeTitle: String {
         if isZh || isJa {
-            return "無限挑戦 (\(languageInJa))"
+            return "\(infiniteChallenge) (\(language))"
         }
-        return "Infinite Game (\(gameLang == .jp ? jaAbbr : enAbbr))"
+        return "\(infiniteChallenge) (\(gameLang == .jp ? jaAbbr : enAbbr))"
     }
 
     var languageInJa: String {
@@ -351,7 +356,7 @@ class I18n {
     var continues: String {
         if isZh { return "連續" }
         if isJa { return "連続" }
-        return "Strikes"
+        return "Is On"
     }
     var best: String {
         if isZh { return "最佳" }
@@ -657,27 +662,6 @@ class I18n {
         }
     }
 
-    var beginner: String {
-        if isJa || isZh { return "入門" }
-        return "Beginner"
-    }
-    var elementary: String {
-        if isJa || isZh { return "初級" }
-        return "Elementary"
-    }
-    var intermediate: String {
-        if isJa || isZh { return "中級" }
-        return "Intermediate"
-    }
-    var advanced: String {
-        if isJa || isZh { return "上級" }
-        return "Advanced"
-    }
-    var expert: String {
-        if isJa || isZh { return "超難問" }
-        return "Expert"
-    }
-
     var todaySummary: String {
         if isZh { return "本日的統計" }
         if isJa { return "今日のまとめ" }
@@ -702,6 +686,12 @@ class I18n {
         if isJa { return "今日の目標" }
         if isZh { return "今日的目標" }
         return "Today's Goal"
+    }
+
+    var medalMode: String {
+        if isJa { return "メダルモード" }
+        if isZh { return "徽章模式" }
+        return "Medal Game"
     }
 }
 // swiftlint:enable file_length  type_body_length

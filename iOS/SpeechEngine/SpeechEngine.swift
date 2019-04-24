@@ -137,18 +137,18 @@ extension SpeechEngine {
             ).then(updateSpeakDuration)
     }
 }
-func speakTitle(title: String) -> Promise<Void> {
+func speakTitle() -> Promise<Void> {
+    let title = context.gameTitleToSpeak
     if context.gameMode == .topicMode {
         let voiceId = getDefaultVoiceId(language: "zh-TW")
         return engine.speak(text: title, speaker: voiceId, rate: normalRate)
     }
 
-    if gameLang == .jp {
+    if (gameLang == .jp && i18n.isJa) ||
+       (gameLang == .en && !(i18n.isZh || i18n.isJa)) {
         return teacherSay(title, rate: normalRate)
-    } else {
-        let voiceId = getDefaultVoiceId(language: "ja-JP")
-        return engine.speak(text: title, speaker: voiceId, rate: normalRate)
     }
+    return narratorSay(title)
 }
 func narratorSay(_ text: String) -> Promise<Void> {
     let currentLocale = AVSpeechSynthesisVoice.currentLanguageCode()

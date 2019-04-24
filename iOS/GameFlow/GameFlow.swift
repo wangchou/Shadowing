@@ -73,7 +73,7 @@ class GameFlow {
 
         context.loadLearningSentences()
 
-        speakTitle(title: context.gameTitle)
+        speakTitle()
             .then( tryWait )
             .then( speakNarratorString )
             .then( tryWait )

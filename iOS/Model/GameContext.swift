@@ -75,14 +75,14 @@ class GameContext {
         return gameRecord?.level.autoSpeed ?? AVSpeechUtteranceDefaultSpeechRate * 0.8
     }
 
-    var gameTitle: String {
+    var gameTitleToSpeak: String {
         switch gameMode {
         case .topicMode:
             return getDataSetTitle(dataSetKey: dataSetKey)
         case .infiniteChallengeMode:
-            return "[無限挑戦] \(infiniteChallengeLevel.title)"
+            return "[\(i18n.infiniteChallenge)] \(infiniteChallengeLevel.title)"
         case .medalMode:
-            return "[メダルモード] \(gameMedal.lowLevel.title)"
+            return "[\(i18n.medalMode)] \(gameMedal.lowLevel.title)"
         }
     }
 
@@ -93,7 +93,8 @@ class GameContext {
         case .infiniteChallengeMode:
             return "[♾] \(infiniteChallengeLevel.title)"
         case .medalMode:
-            return "[🏅\(gameMedal.lowLevel.lvlTitle)] \(gameMedal.lowLevel.title)"
+            let isEn = !i18n.isZh && !i18n.isJa
+            return "[🏅\(isEn ? gameMedal.lowLevel.lvlTitle : "")] \(gameMedal.lowLevel.title)"
         }
     }
 
