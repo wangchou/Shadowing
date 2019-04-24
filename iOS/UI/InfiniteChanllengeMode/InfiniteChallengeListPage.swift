@@ -35,6 +35,10 @@ class InfiniteChallengeListPage: UIViewController {
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        showHideBottomBar()
+    }
+
+    private func showHideBottomBar() {
         if gameLang.isSupportTopicMode {
             tableBottomConstraint.constant = -50
             bottomBarView.isHidden = false
@@ -46,6 +50,7 @@ class InfiniteChallengeListPage: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        showHideBottomBar()
         context.gameMode = .infiniteChallengeMode
         if IAPHelper.shared.products.isEmpty {
             IAPHelper.shared.requsestProducts()

@@ -335,7 +335,7 @@ class I18n {
         if isZh || isJa {
             return "無限挑戦 (\(languageInJa))"
         }
-        return "Infinite Challenge"
+        return "Infinite Game (\(gameLang == .jp ? jaAbbr : enAbbr))"
     }
 
     var languageInJa: String {
