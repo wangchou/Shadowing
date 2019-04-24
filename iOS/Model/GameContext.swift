@@ -15,8 +15,12 @@ enum GameFlowMode: String, Codable {
     case shadowing, chat
 }
 
-enum ContentTab: String, Codable {
+enum UITab {
     case topics, infiniteChallenge
+}
+
+enum GameMode {
+    case topicMode, infiniteChallengeMode, medalMode
 }
 
 class GameContext {
@@ -26,15 +30,21 @@ class GameContext {
     private init() {}
 
     // MARK: - Long-term data will be kept in UserDefault
-    var gameHistory = [GameRecord]()
+    var gameHistory: [GameRecord] {
+        if gameLang == .jp { return jpHistory }
+        if gameLang == .en { return enHistory }
+        return []
+    }
     var gameSetting = GameSetting()
+    var gameMedal = GameMedal()
+    var bottomTab: UITab = .topics
 
     // MARK: - Medium-term context of current game
     var gameRecord: GameRecord?
     var sentenceIndex: Int = 0
     var sentences: [String] = []
 
-    var contentTab: ContentTab = .topics
+    var gameMode: GameMode = .topicMode
     var infiniteChallengeLevel: Level = .lv0
     var topicDataSetKey: String = ""
     var gameState: GameState = .justStarted {
@@ -45,7 +55,14 @@ class GameContext {
 
     var dataSetKey: String {
         get {
-            return contentTab == .topics ? topicDataSetKey : infiniteChallengeLevel.infinteChallengeDatasetKey
+            switch gameMode {
+            case .topicMode:
+                return topicDataSetKey
+            case .infiniteChallengeMode:
+                return infiniteChallengeLevel.infinteChallengeDatasetKey
+            case .medalMode:
+                return medalModeKey
+            }
         }
 
         set {
@@ -59,9 +76,25 @@ class GameContext {
     }
 
     var gameTitle: String {
-        return contentTab == .topics ?
-            getDataSetTitle(dataSetKey: dataSetKey) :
-        "[無限挑戦] \(infiniteChallengeLevel.title)"
+        switch gameMode {
+        case .topicMode:
+            return getDataSetTitle(dataSetKey: dataSetKey)
+        case .infiniteChallengeMode:
+            return "[無限挑戦] \(infiniteChallengeLevel.title)"
+        case .medalMode:
+            return "[メダルモード] \(gameMedal.lowLevel.title)"
+        }
+    }
+
+    var gameSimpleTitle: String {
+        switch gameMode {
+        case .topicMode:
+            return getDataSetTitle(dataSetKey: dataSetKey)
+        case .infiniteChallengeMode:
+            return "[♾] \(infiniteChallengeLevel.title)"
+        case .medalMode:
+            return "[🏅\(gameMedal.lowLevel.lvlTitle)] \(gameMedal.lowLevel.title)"
+        }
     }
 
     // MARK: - Short-term context for a sentence, will be discarded after each sentence played
@@ -116,10 +149,13 @@ class GameContext {
 extension GameContext {
 
     func loadLearningSentences() {
-        if contentTab == .topics {
+        switch gameMode {
+        case .topicMode:
             loadTopicSentence()
-        } else {
+        case .infiniteChallengeMode:
             loadInfiniteChallengeLevelSentence()
+        case .medalMode:
+            loadMedalGameSentence()
         }
     }
 
@@ -135,15 +171,11 @@ extension GameContext {
     private func loadInfiniteChallengeLevelSentence() {
         let level = infiniteChallengeLevel
         sentenceIndex = 0
-        loadSentenceDB()
         let numOfSentences = isSimulator ? 3 : 10
-        let sentenceIds = randSentenceIds(
-            minKanaCount: level.minSyllablesCount,
-            maxKanaCount: level.maxSyllablesCount,
+        sentences = getRandSentences(
+            level: level,
             numOfSentences: numOfSentences
         )
-
-        sentences = getSentencesByIds(ids: sentenceIds)
 
         if gameLang == .jp {
             sentences.forEach { s in
@@ -152,6 +184,30 @@ extension GameContext {
         }
 
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level)
+    }
+
+    private func loadMedalGameSentence() {
+        sentenceIndex = 0
+        let numOfSentences = isSimulator ? 3 : 10
+        let lowLevelNumOfSentence = Int(Double(numOfSentences) * gameMedal.lowPercent)
+
+        sentences = getRandSentences(
+            level: gameMedal.lowLevel,
+            numOfSentences: lowLevelNumOfSentence
+        )
+        sentences += getRandSentences(
+            level: gameMedal.highLevel,
+            numOfSentences: numOfSentences - lowLevelNumOfSentence
+        )
+        sentences.shuffle()
+
+        if gameLang == .jp {
+            sentences.forEach { s in
+                _ = s.furiganaAttributedString // load furigana
+            }
+        }
+
+        gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: gameMedal.lowLevel)
     }
 
     func nextSentence() -> Bool {
@@ -166,22 +222,24 @@ extension GameContext {
     }
 
     func loadNextChallenge() {
-        if contentTab == .topics {
+        if gameMode == .topicMode {
             if let currentIdx = dataSetKeys.lastIndex(of: dataSetKey) {
                 dataSetKey = dataSetKeys[(currentIdx + 1) % dataSetKeys.count]
             }
-        } else {
+        }
+        if gameMode == .infiniteChallengeMode {
             infiniteChallengeLevel = infiniteChallengeLevel.next
         }
         loadLearningSentences()
     }
 
     func loadPrevousChallenge() {
-        if contentTab == .topics {
+        if gameMode == .topicMode {
             if let currentIdx = dataSetKeys.lastIndex(of: dataSetKey) {
                 dataSetKey = dataSetKeys[(currentIdx + dataSetKeys.count - 1) % dataSetKeys.count]
             }
-        } else {
+        }
+        if gameMode == .infiniteChallengeMode {
             infiniteChallengeLevel = infiniteChallengeLevel.previous
         }
         loadLearningSentences()

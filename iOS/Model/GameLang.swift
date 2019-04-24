@@ -6,11 +6,31 @@
 //  Copyright © 30 Heisei Lu, WangChou. All rights reserved.
 //
 
+import Foundation
+
 private let gameLangKey = "GameLangKey 2018/11/23"
 
 // https://stackoverflow.com/questions/44580719/how-do-i-make-an-enum-decodable-in-swift-4
 private struct LangForEncode: Codable {
     var lang: Lang
+}
+
+func changeGameLangTo(lang: Lang) {
+    gameLang = lang
+    saveGameLang()
+    loadGameSetting()
+
+    DispatchQueue.global().async {
+        loadGameMiscData()
+    }
+
+    DispatchQueue.main.async {
+        if gameLang == .en {
+            GameContext.shared.bottomTab = .infiniteChallenge
+            rootViewController.showInfiniteChallengePage(idx: 1)
+        }
+        rootViewController.reloadTableData()
+    }
 }
 
 func saveGameLang() {
@@ -22,7 +42,7 @@ func loadGameLang() {
     if let loadedGameLang = loadFromUserDefault(type: LangForEncode.self, key: gameLangKey) {
         gameLang = loadedGameLang.lang
         if gameLang != .jp {
-            GameContext.shared.contentTab = .infiniteChallenge
+            GameContext.shared.bottomTab = .infiniteChallenge
         }
     }
 }
@@ -66,4 +86,4 @@ enum Lang: Int, Codable {
     }
 }
 
-var gameLang: Lang = Lang.unset
+var gameLang: Lang = Lang.jp

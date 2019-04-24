@@ -9,21 +9,21 @@
 import Foundation
 import UIKit
 import Speech
+import Promises
 
 class RootContainerViewController: UIViewController {
     static var isShowSetting = false
 
     var current: UIViewController!
-    var splashScreen: UIViewController!
-    var languageSelectionScreen: UIViewController!
+    var splashScreen: SplashScreenViewController!
     var topicSwipablePage: TopicSwipablePage!
     var infiniteChallengeSwipablePage: InfiniteChallengeSwipablePage!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        splashScreen = getVC("LaunchScreen")
 
         // swiftlint:disable force_cast
+        splashScreen = (getVC("LaunchScreen") as! SplashScreenViewController)
         topicSwipablePage = (getVC(TopicSwipablePage.storyboardId) as! TopicSwipablePage)
         infiniteChallengeSwipablePage = (getVC(InfiniteChallengeSwipablePage.storyboardId) as! InfiniteChallengeSwipablePage)
         // swiftlint:enable force_cast
@@ -32,86 +32,101 @@ class RootContainerViewController: UIViewController {
 
         showVC(splashScreen)
 
-        loadGameLang()
-        loadTopSentencesInfoDB()
-        loadDataSets()
-        loadGameHistory()
-        loadGameSetting()
-        loadGameMiscData()
-
-        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
-            self.showInitialPage()
+        splashScreen.launched.always { [weak self] in
+            self?.loadStartupData()
+            self?.showInitialPage()
         }
+    }
+
+    private func loadStartupData() {
+        let t1 = getNow()
+        loadGameLang()
+        loadGameSetting()
+        loadMedalCount()
+
+        loadTopicSentenceDB()
+        loadSentenceDB()
+        loadDataSets()
+
+        loadGameHistory()
+        loadGameMiscData(isLoadKana: true, isAsync: true)
+        print("\nstartup load time: \(getNow() - t1)")
     }
 
     private func showInitialPage() {
-        if gameLang == .unset {
-            languageSelectionScreen = getVC("InitialLanguageSelectionScreen")
-            showVC(languageSelectionScreen)
-            return
-        }
-
         if gameLang.isSupportTopicMode {
-            showMainPage()
+            showMainPage(idx: 1)
         } else {
-            showInfiniteChallengePage()
+            showInfiniteChallengePage(idx: 1)
         }
     }
 
-    func showMainPage(isShowSetting: Bool = false) {
+    func showMainPage(idx: Int) {
         guard current != topicSwipablePage else { return }
         removeCurrent()
         current = topicSwipablePage
         let sp: TopicSwipablePage! = topicSwipablePage
-        if !sp.pages.isEmpty {
-            let idx = isShowSetting ? 0 : 1
-            sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
+        if sp.isPagesReady {
+           sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
+        } else {
+            TopicSwipablePage.initialIdx = idx
         }
         showVC(current)
     }
 
-    func showInfiniteChallengePage(isShowSetting: Bool = false) {
+    func showInfiniteChallengePage(idx: Int) {
         guard current != infiniteChallengeSwipablePage else { return }
         removeCurrent()
         current = infiniteChallengeSwipablePage
         let sp: InfiniteChallengeSwipablePage! = infiniteChallengeSwipablePage
-        if !sp.pages.isEmpty {
-            let idx = isShowSetting ? 0 : 1
-            sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
+        if sp.isPagesReady {
+           sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
+        } else {
+            InfiniteChallengeSwipablePage.initialIdx = idx
         }
 
         showVC(current)
     }
 
     func reloadTableData() {
-        let sp0 = topicSwipablePage!
-        if !sp0.pages.isEmpty,
-           let listPage = (sp0.pages[1] as? TopicsListPage),
+        if let listPage = topicSwipablePage.listPage,
             listPage.sentencesTableView != nil {
             listPage.sentencesTableView.reloadData()
         }
-        let sp1 = infiniteChallengeSwipablePage!
-        if !sp1.pages.isEmpty,
-            let listPage = (sp1.pages[1] as? InfiniteChallengeListPage),
+        if let listPage = infiniteChallengeSwipablePage.listPage,
             listPage.tableView != nil {
             listPage.tableView.reloadData()
         }
     }
 
     func rerenderTopView() {
-        let sp0: TopicSwipablePage! = topicSwipablePage
-        if !sp0.pages.isEmpty,
-            let listPage = (sp0.pages[1] as? TopicsListPage) {
-            listPage.topChartView.viewWillAppear()
+        if let listPage = topicSwipablePage.listPage {
+            listPage.topChartView.render()
             listPage.topChartView.animateProgress()
         }
-        let sp1: InfiniteChallengeSwipablePage! = infiniteChallengeSwipablePage
-        if !sp1.pages.isEmpty,
-            let listPage = (sp1.pages[1] as? InfiniteChallengeListPage) {
-            listPage.topChartView.viewWillAppear()
+        if let listPage = infiniteChallengeSwipablePage.listPage {
+            listPage.topChartView.render()
+            listPage.topChartView.animateProgress()
         }
     }
 
+    func updateWhenEnterForeground() {
+        if let pageVC = current as? UIPageViewController {
+            if let vc = pageVC.viewControllers?[0] {
+                if let vc = vc as? MedalPage {
+                    vc.medalPageView?.viewWillAppear()
+                }
+                if let vc = vc as? TopicsListPage {
+                    vc.topChartView?.viewWillAppear()
+                    vc.topChartView?.animateProgress()
+                }
+                if let vc = vc as? InfiniteChallengeListPage {
+                    vc.topChartView?.viewWillAppear()
+                    vc.topChartView?.animateProgress()
+                }
+            }
+        }
+    }
     private func showVC(_ vc: UIViewController) {
         addChild(vc)
         vc.view.frame = view.bounds

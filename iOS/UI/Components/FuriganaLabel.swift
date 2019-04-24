@@ -56,8 +56,8 @@ class FuriganaLabel: UILabel {
         var height = CGFloat()
 
         let textDrawRect = CGRect(
-            x: self.frame.origin.x,
-            y: self.frame.origin.y,
+            x: self.frame.x,
+            y: self.frame.y,
             width: width - widthPadding * 2,
             height: CGFloat.greatestFiniteMagnitude
         )
@@ -86,8 +86,8 @@ class FuriganaLabel: UILabel {
         let framesetter = CTFramesetterCreateWithAttributedString(attributed)
         repeat {
             let textDrawRect = CGRect(
-                x: self.frame.origin.x,
-                y: self.frame.origin.y,
+                x: self.frame.x,
+                y: self.frame.y,
                 width: width - widthPadding * 2,
                 height: CGFloat.greatestFiniteMagnitude
             )

@@ -26,7 +26,7 @@ class InfiniteChallengeListPage: UIViewController {
         topBarView.rightButton.setIconImage(named: "outline_info_black_48pt", isIconOnLeft: false)
         if Locale.current.languageCode == "zh" {
             topBarView.customOnRightButtonClicked = {
-                launchStoryboard(self, "InfoPage")
+                launchVC("InfoPage", self)
             }
         } else {
             topBarView.rightButton.isHidden = true
@@ -45,20 +45,23 @@ class InfiniteChallengeListPage: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        //viewWillLayoutSubviews()
         super.viewWillAppear(animated)
         if IAPHelper.shared.products.isEmpty {
             IAPHelper.shared.requsestProducts()
         }
         bottomBarView.contentTab = .infiniteChallenge
         topBarView.titleLabel.text = i18n.infiniteChallengeTitle
-        topChartView.viewWillAppear() // icListTopView may not be available yet
-        tableView.reloadData()
+        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
+            DispatchQueue.main.async {
+                self.topChartView.viewWillAppear()
+                self.topChartView.animateProgress()
+            }
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        topChartView.animateProgress()
+        tableView.reloadData()
     }
 }
 
@@ -81,10 +84,11 @@ extension InfiniteChallengeListPage: UITableViewDataSource {
 
 extension InfiniteChallengeListPage: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let infiniteChallengeSwipablePage = (rootViewController.current as? UIPageViewController) as? InfiniteChallengeSwipablePage,
-            let infiniteChallengePage = infiniteChallengeSwipablePage.pages[2] as? InfiniteChallengePage {
-            infiniteChallengePage.level = allLevels[indexPath.row]
+        if let swipablePage = rootViewController.current as? InfiniteChallengeSwipablePage,
+           let infiniteChallengePage = swipablePage.detailPage {
+                infiniteChallengePage.level = allLevels[indexPath.row]
         }
+
         (rootViewController.current as? UIPageViewController)?.goToNextPage { _ in
             let cell = self.tableView.dequeueReusableCell(withIdentifier: "InfiniteChallengeTableCell", for: indexPath)
             cell.isSelected = false

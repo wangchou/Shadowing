@@ -14,14 +14,6 @@ let backGray = rgb(248, 248, 252)
 
 @IBDesignable
 class TopicButtonAreaView: UIView, GridLayout, ReloadableView {
-
-    // GridLayout
-    var gridCount: Int = 48
-
-    var axis: GridAxis = .horizontal
-
-    var spacing: CGFloat = 0
-
     var playButton: UIButton!
     var repeatOneSwitchButton: UIButton!
     var topViewSwitchButton: UIButton!
@@ -96,9 +88,9 @@ class TopicButtonAreaView: UIView, GridLayout, ReloadableView {
     }
 
     @objc func onPlayButtonClicked() {
+        context.gameMode = .topicMode
         if isUnderDailySentenceLimit() {
-            guard let vc = UIApplication.getPresentedViewController() else { return }
-            launchStoryboard(vc, "MessengerGame")
+            launchVC(Messenger.id)
         }
     }
 

@@ -14,7 +14,7 @@ private let context = GameContext.shared
 @IBDesignable
 class BottomBarView: UIView, XibView {
     var contentView: UIView?
-    var contentTab: ContentTab = .topics {
+    var contentTab: UITab = .topics {
         didSet {
             updateContentTab()
         }
@@ -44,25 +44,25 @@ class BottomBarView: UIView, XibView {
         var leftColor: UIColor = UIColor(white: 0, alpha: 0.66)
         var rightColor: UIColor = UIColor(white: 0, alpha: 0.66)
         let leftImgName: String = "outline_featured_play_list_black_48pt"
-        var rightImgName: String = "baseline_all_inclusive_black_48pt"
+        var rightImgName: String = "outline_all_inclusive_black_48pt"
         switch contentTab {
         case .topics:
             leftColor = tintColor
         case .infiniteChallenge:
             rightColor = tintColor
-            rightImgName = "baseline_all_inclusive_black_48pt"
+            rightImgName = "outline_all_inclusive_black_48pt"
         }
         leftButton.setIconImage(named: leftImgName, tintColor: leftColor)
         rightButton.setIconImage(named: rightImgName, tintColor: rightColor)
     }
     @IBAction func onLeftButtonClicked(_ sender: Any) {
         RootContainerViewController.isShowSetting = false
-        context.contentTab = .topics
-        rootViewController.showMainPage()
+        context.bottomTab = .topics
+        rootViewController.showMainPage(idx: 2)
     }
     @IBAction func onRightButtonClicked(_ sender: Any) {
         RootContainerViewController.isShowSetting = false
-        context.contentTab = .infiniteChallenge
-        rootViewController.showInfiniteChallengePage()
+        context.bottomTab = .infiniteChallenge
+        rootViewController.showInfiniteChallengePage(idx: 2)
     }
 }

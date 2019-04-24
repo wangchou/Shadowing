@@ -14,6 +14,7 @@ private let context = GameContext.shared
 // MARK: LongTermGoalMode
 extension TopChartView {
     func renderLongTermGoalMode() {
+        removeAllSubviews()
         gridCount = 50
         backgroundColor = rgb(28, 28, 28)
 
@@ -29,7 +30,7 @@ extension TopChartView {
             func addWord(_ word: String, _ level: Level) {
                 descAttrText.append(getText(word,
                                             color: level.color.withSaturation(1.0),
-                                            font: MyFont.bold(ofSize: stepFloat * 8)))
+                                            font: MyFont.bold(ofSize: step * 8)))
             }
             addWord("今", Level.lv0)
             addWord("話", Level.lv2)
@@ -64,7 +65,7 @@ extension TopChartView {
             t = addText(x: 0, y: 20, w: 8, h: 3, text: "\(levelSentenceCounts[i])", color: c)
             t.textAlignment = .right
             t.moveToRight(bar.frame)
-            t.moveToBottom(frame, yShift: -1 * stepFloat)
+            t.moveToBottom(frame, yShift: -1 * step)
         }
     }
 
@@ -76,17 +77,17 @@ extension TopChartView {
         var descAttrText = NSMutableAttributedString()
         func addWhiteText(_ text: String) {
             descAttrText.append(getText(text, color: .white,
-                                        font: MyFont.bold(ofSize: stepFloat * 2.5)
+                                        font: MyFont.bold(ofSize: step * 2.5)
             ))
         }
         func addGrayText(_ text: String) {
             descAttrText.append(getText(text, color: gray,
-                                        font: MyFont.regular(ofSize: stepFloat * 2.5)
+                                        font: MyFont.regular(ofSize: step * 2.5)
             ))
         }
         func addBoldGrayText(_ text: String) {
             descAttrText.append(getText(text, color: gray,
-                                        font: MyFont.bold(ofSize: stepFloat * 2.5)
+                                        font: MyFont.bold(ofSize: step * 2.5)
             ))
         }
         if isGameClear {

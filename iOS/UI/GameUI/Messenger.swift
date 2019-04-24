@@ -19,6 +19,7 @@ enum LabelPosition {
 
 // Prototype 8: messenger / line interface
 class Messenger: UIViewController {
+    static let id = "MessengerGame"
     var lastLabel: FuriganaLabel = FuriganaLabel()
 
     private var y: Int = 8
@@ -109,7 +110,7 @@ class Messenger: UIViewController {
             speedLabel.textColor = UIColor.white
         }
 
-        if context.contentTab == .topics {
+        if context.gameMode == .topicMode {
             repeatOneSwitchButton.isHidden = false
         } else {
             repeatOneSwitchButton.isHidden = true
@@ -221,16 +222,11 @@ class Messenger: UIViewController {
 
         postCommand(.forceStopGame)
         self.dismiss(animated: true) {
-            if context.contentTab == .topics {
+            if context.gameMode == .topicMode {
                 context.loadNextChallenge()
-                let pages = rootViewController.topicSwipablePage.pages
-                if pages.count > 2,
-                    let topicDetailPage = pages[2] as? TopicDetailPage {
-                    topicDetailPage.render()
-                }
+                rootViewController.topicSwipablePage.detailPage?.render()
             }
-            guard let vc = UIApplication.getPresentedViewController() else { return }
-            launchStoryboard(vc, "MessengerGame")
+            launchVC(Messenger.id)
         }
     }
 

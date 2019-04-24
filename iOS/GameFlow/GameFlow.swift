@@ -158,13 +158,21 @@ extension GameFlow {
 
             context.gameRecord?.playDuration = self.gameSeconds
             self.timer?.invalidate()
+            if let gr = context.gameRecord {
+                if context.gameMode == .infiniteChallengeMode {
+                    lastInfiniteChallengeSentences[gr.level] = context.sentences
+                }
+                if context.gameMode == .medalMode {
+                    context.gameMedal.updateMedals(record: &context.gameRecord!)
+                    saveMedalCount()
+                }
+
+            }
             updateGameHistory()
             saveGameSetting()
-            if context.contentTab == .infiniteChallenge,
-                let gr = context.gameRecord {
-                lastInfiniteChallengeSentences[gr.level] = context.sentences
+            DispatchQueue.global().async {
+                saveGameMiscData()
             }
-            saveGameMiscData()
         }
     }
 
@@ -198,7 +206,7 @@ extension GameFlow {
         guard context.gameSetting.isSpeakTranslation else {
             return fulfilledVoidPromise()
         }
-        var translationsDict = (gameLang == .jp && context.contentTab == .topics) ?
+        var translationsDict = (gameLang == .jp && context.gameMode == .topicMode) ?
             chTranslations : translations
         var translation = translationsDict[context.targetString] ?? ""
 

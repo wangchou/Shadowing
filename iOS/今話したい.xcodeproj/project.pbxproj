@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		BE050B7E22227530007017C5 /* MessengerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE050B7D22227530007017C5 /* MessengerBar.swift */; };
+		BE11DEC92257110500373586 /* MedalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE11DEC82257110500373586 /* MedalView.swift */; };
 		BE152048218085120059A7C2 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE152047218085120059A7C2 /* Level.swift */; };
 		BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB3D209B19B200D23F22 /* GameContext.swift */; };
 		BE1CA958209DC43800086853 /* Messenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA957209DC43800086853 /* Messenger.swift */; };
 		BE1FA4C021E3818A00111561 /* inf_sentences_100points_duolingo_with_topics.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BE1FA4BF21E3818A00111561 /* inf_sentences_100points_duolingo_with_topics.sqlite */; };
 		BE2142B121D370B900FA2925 /* grammarN5.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2142B021D370B900FA2925 /* grammarN5.swift */; };
 		BE221AA121A2A76D0009B23B /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE221AA021A2A76D0009B23B /* CircleView.swift */; };
+		BE2473A6226DDA2100EDFA5E /* MedalSummaryTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2473A5226DDA2100EDFA5E /* MedalSummaryTopView.swift */; };
 		BE28B2C221A3EAB600088214 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE28B2C121A3EAB500088214 /* Main.storyboard */; };
 		BE3260C821BF912D00A13C94 /* vocabulary1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260C721BF912D00A13C94 /* vocabulary1.swift */; };
 		BE3260CA21BFCF5E00A13C94 /* vocabulary2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260C921BFCF5E00A13C94 /* vocabulary2.swift */; };
@@ -25,16 +27,6 @@
 		BE596470215A0ECE00E4AA0C /* speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE59646F215A0ECE00E4AA0C /* speech.swift */; };
 		BE596474215A0EF400E4AA0C /* expressive.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596473215A0EF400E4AA0C /* expressive.swift */; };
 		BE5ABAC9217B703500A63C5F /* InfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5ABAC8217B703500A63C5F /* InfoPage.swift */; };
-		BE5ABAD4217C4CCD00A63C5F /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABACE217C4CCC00A63C5F /* Charts.framework */; };
-		BE5ABAD5217C4CCD00A63C5F /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABACE217C4CCC00A63C5F /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BE5ABAD6217C4CCD00A63C5F /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABACF217C4CCC00A63C5F /* Promises.framework */; };
-		BE5ABAD7217C4CCD00A63C5F /* Promises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABACF217C4CCC00A63C5F /* Promises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BE5ABAD8217C4CCD00A63C5F /* FBLPromises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABAD0217C4CCC00A63C5F /* FBLPromises.framework */; };
-		BE5ABAD9217C4CCD00A63C5F /* FBLPromises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABAD0217C4CCC00A63C5F /* FBLPromises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BE5ABADA217C4CCD00A63C5F /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABAD1217C4CCC00A63C5F /* SQLite.framework */; };
-		BE5ABADB217C4CCD00A63C5F /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABAD1217C4CCC00A63C5F /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BE5ABADE217C4CCD00A63C5F /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABAD3217C4CCD00A63C5F /* Alamofire.framework */; };
-		BE5ABADF217C4CCD00A63C5F /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE5ABAD3217C4CCD00A63C5F /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE5D838920A80BD0002031BF /* TopicDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5D838820A80BD0002031BF /* TopicDetailPage.swift */; };
 		BE5E0CCE2183477400832E88 /* I18n.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5E0CCD2183477400832E88 /* I18n.swift */; };
 		BE65A939209C6E67006645CA /* GameEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65A938209C6E67006645CA /* GameEvents.swift */; };
@@ -63,6 +55,7 @@
 		BE8180C020B3BEB6006ABCB3 /* MyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180BF20B3BEB6006ABCB3 /* MyText.swift */; };
 		BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */; };
 		BE8283B42133DAE2008BC875 /* SpeechEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8283B32133DAE2008BC875 /* SpeechEngine.swift */; };
+		BE82FE612269C5A900907388 /* MedalSummaryPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82FE602269C5A900907388 /* MedalSummaryPage.swift */; };
 		BE8E51DB21CF76CF007D29E6 /* TopChartView+DailyChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8E51DA21CF76CF007D29E6 /* TopChartView+DailyChart.swift */; };
 		BE8E51DD21CF7718007D29E6 /* TopChartView+Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8E51DC21CF7718007D29E6 /* TopChartView+Timeline.swift */; };
 		BE8E51DF21CF7754007D29E6 /* TopChartView+LongTermGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8E51DE21CF7754007D29E6 /* TopChartView+LongTermGoal.swift */; };
@@ -86,6 +79,9 @@
 		BEBDEDDD208EF15F00C18520 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */; };
 		BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */; };
 		BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD8208EF15F00C18520 /* constants.swift */; };
+		BEBF5D1C2255D9F60069C34F /* GameMedal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBF5D1B2255D9F60069C34F /* GameMedal.swift */; };
+		BEBF5D1E225624C50069C34F /* MedalGameFinishedPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBF5D1D225624C50069C34F /* MedalGameFinishedPage.swift */; };
+		BEC1EB5C225B026A003DD265 /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC1EB5B225B026A003DD265 /* SplashScreenViewController.swift */; };
 		BEC2E92F217875C30095A65D /* RootContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC2E92E217875C30095A65D /* RootContainerViewController.swift */; };
 		BEC2E9312179BD090095A65D /* TopicFilterBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC2E9302179BD090095A65D /* TopicFilterBarView.swift */; };
 		BEC4CF0E219D727B00E1A54C /* TopChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC4CF0D219D727B00E1A54C /* TopChartView.swift */; };
@@ -93,16 +89,29 @@
 		BECAC3BA216B8FE3001BBF49 /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECAC3B9216B8FE3001BBF49 /* BottomBarView.swift */; };
 		BECAC3BC216B904A001BBF49 /* BottomBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BECAC3BB216B904A001BBF49 /* BottomBarView.xib */; };
 		BECAC3BF216B9D19001BBF49 /* InfiniteChallengeSwipablePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECAC3BE216B9D19001BBF49 /* InfiniteChallengeSwipablePage.swift */; };
-		BECD8B2F21A817D000FF44A2 /* LanguageSelectionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD8B2E21A817D000FF44A2 /* LanguageSelectionPage.swift */; };
 		BECD9077219D279C00400FD3 /* InfiniteChallengeListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD9076219D279C00400FD3 /* InfiniteChallengeListPage.swift */; };
 		BECD907B219D294100400FD3 /* InfiniteChallengeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD907A219D294100400FD3 /* InfiniteChallengeTableCell.swift */; };
+		BED1BA462249FD6A009B68B6 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA412249FD6A009B68B6 /* Charts.framework */; };
+		BED1BA472249FD6A009B68B6 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA412249FD6A009B68B6 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BED1BA482249FD6A009B68B6 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA422249FD6A009B68B6 /* SQLite.framework */; };
+		BED1BA492249FD6A009B68B6 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA422249FD6A009B68B6 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BED1BA4A2249FD6A009B68B6 /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA432249FD6A009B68B6 /* Promises.framework */; };
+		BED1BA4B2249FD6A009B68B6 /* Promises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA432249FD6A009B68B6 /* Promises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BED1BA4C2249FD6A009B68B6 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA442249FD6A009B68B6 /* Alamofire.framework */; };
+		BED1BA4D2249FD6A009B68B6 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA442249FD6A009B68B6 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BED1BA4E2249FD6A009B68B6 /* FBLPromises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA452249FD6A009B68B6 /* FBLPromises.framework */; };
+		BED1BA4F2249FD6A009B68B6 /* FBLPromises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA452249FD6A009B68B6 /* FBLPromises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BED1BA53224A35FF009B68B6 /* MedalPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1BA52224A35FF009B68B6 /* MedalPage.swift */; };
 		BED1CC0921452A54004AE397 /* GameSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1CC0821452A54004AE397 /* GameSetting.swift */; };
+		BEDB3685225EF61C00059997 /* UIView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDB3684225EF61C00059997 /* UIView+Animation.swift */; };
+		BEDB3687225F3DB800059997 /* MedalProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDB3686225F3DB800059997 /* MedalProgressBar.swift */; };
 		BEDE674521ABD04A00DF78AD /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDE674421ABD04A00DF78AD /* IAPHelper.swift */; };
 		BEDEDD3720A46D1B00E7B60B /* TopicsListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3620A46D1B00E7B60B /* TopicsListPage.swift */; };
 		BEDEDD3920A46FCA00E7B60B /* GameRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */; };
 		BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */; };
 		BEE3069021835230007C679F /* GameCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE3068F21835230007C679F /* GameCommands.swift */; };
 		BEE665E220BA634600E4E322 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE665E120BA634600E4E322 /* Colors.swift */; };
+		BEEA091222606973008C98AE /* ProgressCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEA091122606973008C98AE /* ProgressCircleView.swift */; };
 		BEEC7FA92154C7AC001C2EFF /* TopBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEEC7FA82154C7AC001C2EFF /* TopBarView.xib */; };
 		BEEC7FAB2154FFA4001C2EFF /* TopicSwipablePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEC7FAA2154FFA4001C2EFF /* TopicSwipablePage.swift */; };
 		BEEC7FAD2155014E001C2EFF /* SettingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEC7FAC2155014E001C2EFF /* SettingPage.swift */; };
@@ -120,11 +129,11 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BE5ABAD9217C4CCD00A63C5F /* FBLPromises.framework in Embed Frameworks */,
-				BE5ABADF217C4CCD00A63C5F /* Alamofire.framework in Embed Frameworks */,
-				BE5ABAD7217C4CCD00A63C5F /* Promises.framework in Embed Frameworks */,
-				BE5ABADB217C4CCD00A63C5F /* SQLite.framework in Embed Frameworks */,
-				BE5ABAD5217C4CCD00A63C5F /* Charts.framework in Embed Frameworks */,
+				BED1BA4B2249FD6A009B68B6 /* Promises.framework in Embed Frameworks */,
+				BED1BA492249FD6A009B68B6 /* SQLite.framework in Embed Frameworks */,
+				BED1BA472249FD6A009B68B6 /* Charts.framework in Embed Frameworks */,
+				BED1BA4D2249FD6A009B68B6 /* Alamofire.framework in Embed Frameworks */,
+				BED1BA4F2249FD6A009B68B6 /* FBLPromises.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -133,12 +142,14 @@
 
 /* Begin PBXFileReference section */
 		BE050B7D22227530007017C5 /* MessengerBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerBar.swift; sourceTree = "<group>"; };
+		BE11DEC82257110500373586 /* MedalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalView.swift; sourceTree = "<group>"; };
 		BE152047218085120059A7C2 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		BE17FB3D209B19B200D23F22 /* GameContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameContext.swift; sourceTree = "<group>"; };
 		BE1CA957209DC43800086853 /* Messenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messenger.swift; sourceTree = "<group>"; };
 		BE1FA4BF21E3818A00111561 /* inf_sentences_100points_duolingo_with_topics.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences_100points_duolingo_with_topics.sqlite; sourceTree = "<group>"; };
 		BE2142B021D370B900FA2925 /* grammarN5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = grammarN5.swift; sourceTree = "<group>"; };
 		BE221AA021A2A76D0009B23B /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		BE2473A5226DDA2100EDFA5E /* MedalSummaryTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalSummaryTopView.swift; sourceTree = "<group>"; };
 		BE28B2C121A3EAB500088214 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		BE3260C721BF912D00A13C94 /* vocabulary1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vocabulary1.swift; sourceTree = "<group>"; };
 		BE3260C921BFCF5E00A13C94 /* vocabulary2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vocabulary2.swift; sourceTree = "<group>"; };
@@ -150,11 +161,6 @@
 		BE59646F215A0ECE00E4AA0C /* speech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = speech.swift; sourceTree = "<group>"; };
 		BE596473215A0EF400E4AA0C /* expressive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = expressive.swift; sourceTree = "<group>"; };
 		BE5ABAC8217B703500A63C5F /* InfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPage.swift; sourceTree = "<group>"; };
-		BE5ABACE217C4CCC00A63C5F /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
-		BE5ABACF217C4CCC00A63C5F /* Promises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Promises.framework; path = Carthage/Build/iOS/Promises.framework; sourceTree = "<group>"; };
-		BE5ABAD0217C4CCC00A63C5F /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBLPromises.framework; path = Carthage/Build/iOS/FBLPromises.framework; sourceTree = "<group>"; };
-		BE5ABAD1217C4CCC00A63C5F /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
-		BE5ABAD3217C4CCD00A63C5F /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		BE5D838820A80BD0002031BF /* TopicDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailPage.swift; sourceTree = "<group>"; };
 		BE5E0CCD2183477400832E88 /* I18n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = I18n.swift; sourceTree = "<group>"; };
 		BE65A938209C6E67006645CA /* GameEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEvents.swift; sourceTree = "<group>"; };
@@ -193,6 +199,7 @@
 		BE8180BF20B3BEB6006ABCB3 /* MyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyText.swift; sourceTree = "<group>"; };
 		BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFinishedPage.swift; sourceTree = "<group>"; };
 		BE8283B32133DAE2008BC875 /* SpeechEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechEngine.swift; sourceTree = "<group>"; };
+		BE82FE602269C5A900907388 /* MedalSummaryPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalSummaryPage.swift; sourceTree = "<group>"; };
 		BE8E51DA21CF76CF007D29E6 /* TopChartView+DailyChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TopChartView+DailyChart.swift"; sourceTree = "<group>"; };
 		BE8E51DC21CF7718007D29E6 /* TopChartView+Timeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TopChartView+Timeline.swift"; sourceTree = "<group>"; };
 		BE8E51DE21CF7754007D29E6 /* TopChartView+LongTermGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TopChartView+LongTermGoal.swift"; sourceTree = "<group>"; };
@@ -222,6 +229,9 @@
 		BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		BEBDEDD6208EF15E00C18520 /* CalculateScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculateScore.swift; sourceTree = "<group>"; };
 		BEBDEDD8208EF15F00C18520 /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
+		BEBF5D1B2255D9F60069C34F /* GameMedal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMedal.swift; sourceTree = "<group>"; };
+		BEBF5D1D225624C50069C34F /* MedalGameFinishedPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalGameFinishedPage.swift; sourceTree = "<group>"; };
+		BEC1EB5B225B026A003DD265 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		BEC2E92E217875C30095A65D /* RootContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerViewController.swift; sourceTree = "<group>"; };
 		BEC2E9302179BD090095A65D /* TopicFilterBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicFilterBarView.swift; sourceTree = "<group>"; };
 		BEC4CF0D219D727B00E1A54C /* TopChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopChartView.swift; sourceTree = "<group>"; };
@@ -229,16 +239,24 @@
 		BECAC3B9216B8FE3001BBF49 /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
 		BECAC3BB216B904A001BBF49 /* BottomBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomBarView.xib; sourceTree = "<group>"; };
 		BECAC3BE216B9D19001BBF49 /* InfiniteChallengeSwipablePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteChallengeSwipablePage.swift; sourceTree = "<group>"; };
-		BECD8B2E21A817D000FF44A2 /* LanguageSelectionPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectionPage.swift; sourceTree = "<group>"; };
 		BECD9076219D279C00400FD3 /* InfiniteChallengeListPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteChallengeListPage.swift; sourceTree = "<group>"; };
 		BECD907A219D294100400FD3 /* InfiniteChallengeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteChallengeTableCell.swift; sourceTree = "<group>"; };
+		BED1BA412249FD6A009B68B6 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
+		BED1BA422249FD6A009B68B6 /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
+		BED1BA432249FD6A009B68B6 /* Promises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Promises.framework; path = Carthage/Build/iOS/Promises.framework; sourceTree = "<group>"; };
+		BED1BA442249FD6A009B68B6 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		BED1BA452249FD6A009B68B6 /* FBLPromises.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBLPromises.framework; path = Carthage/Build/iOS/FBLPromises.framework; sourceTree = "<group>"; };
+		BED1BA52224A35FF009B68B6 /* MedalPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalPage.swift; sourceTree = "<group>"; };
 		BED1CC0821452A54004AE397 /* GameSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetting.swift; sourceTree = "<group>"; };
+		BEDB3684225EF61C00059997 /* UIView+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Animation.swift"; sourceTree = "<group>"; };
+		BEDB3686225F3DB800059997 /* MedalProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalProgressBar.swift; sourceTree = "<group>"; };
 		BEDE674421ABD04A00DF78AD /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		BEDEDD3620A46D1B00E7B60B /* TopicsListPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopicsListPage.swift; sourceTree = "<group>"; };
 		BEDEDD3820A46FCA00E7B60B /* GameRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRecord.swift; sourceTree = "<group>"; };
 		BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerEventDelegate.swift; sourceTree = "<group>"; };
 		BEE3068F21835230007C679F /* GameCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCommands.swift; sourceTree = "<group>"; };
 		BEE665E120BA634600E4E322 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		BEEA091122606973008C98AE /* ProgressCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCircleView.swift; sourceTree = "<group>"; };
 		BEEC7FA82154C7AC001C2EFF /* TopBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopBarView.xib; sourceTree = "<group>"; };
 		BEEC7FAA2154FFA4001C2EFF /* TopicSwipablePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicSwipablePage.swift; sourceTree = "<group>"; };
 		BEEC7FAC2155014E001C2EFF /* SettingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPage.swift; sourceTree = "<group>"; };
@@ -254,20 +272,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BED1BA4A2249FD6A009B68B6 /* Promises.framework in Frameworks */,
 				BE7AFAF721CA2DC900C41BF4 /* FirebaseCoreDiagnostics.framework in Frameworks */,
+				BED1BA4C2249FD6A009B68B6 /* Alamofire.framework in Frameworks */,
+				BED1BA482249FD6A009B68B6 /* SQLite.framework in Frameworks */,
 				BE7AFAF821CA2DC900C41BF4 /* GoogleUtilities.framework in Frameworks */,
+				BED1BA4E2249FD6A009B68B6 /* FBLPromises.framework in Frameworks */,
 				BE7AFAF921CA2DC900C41BF4 /* GoogleAppMeasurement.framework in Frameworks */,
 				BE7AFAFA21CA2DC900C41BF4 /* FirebaseAnalytics.framework in Frameworks */,
 				BE7AFAFB21CA2DC900C41BF4 /* FIRAnalyticsConnector.framework in Frameworks */,
 				BE7AFAFD21CA2DC900C41BF4 /* FirebaseCore.framework in Frameworks */,
 				BE7AFAFE21CA2DC900C41BF4 /* nanopb.framework in Frameworks */,
+				BED1BA462249FD6A009B68B6 /* Charts.framework in Frameworks */,
 				BE7AFAFF21CA2DC900C41BF4 /* FirebaseInstanceID.framework in Frameworks */,
-				BE5ABAD8217C4CCD00A63C5F /* FBLPromises.framework in Frameworks */,
 				BE7E88B921AA768800B9355E /* StoreKit.framework in Frameworks */,
-				BE5ABADE217C4CCD00A63C5F /* Alamofire.framework in Frameworks */,
-				BE5ABAD6217C4CCD00A63C5F /* Promises.framework in Frameworks */,
-				BE5ABADA217C4CCD00A63C5F /* SQLite.framework in Frameworks */,
-				BE5ABAD4217C4CCD00A63C5F /* Charts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,10 +348,13 @@
 				BEC2E9302179BD090095A65D /* TopicFilterBarView.swift */,
 				BE7441B2216CCBE000E53A3D /* LineChart.swift */,
 				BE221AA021A2A76D0009B23B /* CircleView.swift */,
+				BE11DEC82257110500373586 /* MedalView.swift */,
+				BEDB3686225F3DB800059997 /* MedalProgressBar.swift */,
 				BEC4CF0D219D727B00E1A54C /* TopChartView.swift */,
 				BE8E51DE21CF7754007D29E6 /* TopChartView+LongTermGoal.swift */,
 				BE8E51DA21CF76CF007D29E6 /* TopChartView+DailyChart.swift */,
 				BE8E51DC21CF7718007D29E6 /* TopChartView+Timeline.swift */,
+				BEEA091122606973008C98AE /* ProgressCircleView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -393,9 +414,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BE82FE5F2269C58D00907388 /* MedalMode */ = {
+			isa = PBXGroup;
+			children = (
+				BED1BA52224A35FF009B68B6 /* MedalPage.swift */,
+				BEBF5D1D225624C50069C34F /* MedalGameFinishedPage.swift */,
+				BE82FE602269C5A900907388 /* MedalSummaryPage.swift */,
+				BE2473A5226DDA2100EDFA5E /* MedalSummaryTopView.swift */,
+			);
+			path = MedalMode;
+			sourceTree = "<group>";
+		};
 		BE9556EF212D7C130045E578 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BEBF5D1B2255D9F60069C34F /* GameMedal.swift */,
 				BEBDEDD8208EF15F00C18520 /* constants.swift */,
 				BEF28B6020B52BB000385273 /* Score.swift */,
 				BE152047218085120059A7C2 /* Level.swift */,
@@ -412,12 +445,12 @@
 		BEBDEDB3208EF09F00C18520 = {
 			isa = PBXGroup;
 			children = (
+				BED1BA442249FD6A009B68B6 /* Alamofire.framework */,
+				BED1BA412249FD6A009B68B6 /* Charts.framework */,
+				BED1BA452249FD6A009B68B6 /* FBLPromises.framework */,
+				BED1BA432249FD6A009B68B6 /* Promises.framework */,
+				BED1BA422249FD6A009B68B6 /* SQLite.framework */,
 				BEB6F6C72182B89D0011E1C1 /* InfoPlist.strings */,
-				BE5ABAD3217C4CCD00A63C5F /* Alamofire.framework */,
-				BE5ABACE217C4CCC00A63C5F /* Charts.framework */,
-				BE5ABAD0217C4CCC00A63C5F /* FBLPromises.framework */,
-				BE5ABACF217C4CCC00A63C5F /* Promises.framework */,
-				BE5ABAD1217C4CCC00A63C5F /* SQLite.framework */,
 				BEBDEDBE208EF09F00C18520 /* Project */,
 				BE6F2F142144DFB5003A56CD /* Sentences */,
 				BE9556EF212D7C130045E578 /* Model */,
@@ -478,9 +511,10 @@
 			children = (
 				BE2951112155F51A008239F9 /* GameUI */,
 				BE28B2C121A3EAB500088214 /* Main.storyboard */,
+				BEC1EB5B225B026A003DD265 /* SplashScreenViewController.swift */,
 				BE5ABAC8217B703500A63C5F /* InfoPage.swift */,
 				BEC2E92E217875C30095A65D /* RootContainerViewController.swift */,
-				BECD8B2E21A817D000FF44A2 /* LanguageSelectionPage.swift */,
+				BE82FE5F2269C58D00907388 /* MedalMode */,
 				BE2951132155F5D0008239F9 /* Components */,
 				BECD9079219D28C300400FD3 /* SettingPage */,
 				BE29510F2155F4F7008239F9 /* TopicMode */,
@@ -499,6 +533,7 @@
 				BE9B476920AD50520063E0DA /* FuriganaUtils.swift */,
 				BE8180BF20B3BEB6006ABCB3 /* MyText.swift */,
 				BEF28B6220B52BF700385273 /* UI.swift */,
+				BEDB3684225EF61C00059997 /* UIView+Animation.swift */,
 				BE8E51E421CF7CD1007D29E6 /* GridLayout.swift */,
 				BEE665E120BA634600E4E322 /* Colors.swift */,
 				BE8E51E221CF7A3B007D29E6 /* Type+Conversion.swift */,
@@ -546,6 +581,7 @@
 				TargetAttributes = {
 					BEBDEDBB208EF09F00C18520 = {
 						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 1020;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 1;
@@ -619,10 +655,12 @@
 				BE9DF58A223E22BE00DFEE1D /* calculateMicLevel.swift in Sources */,
 				BE596466215A0DE100E4AA0C /* travel.swift in Sources */,
 				BE9D243A20C8DEE9000515DD /* GameReportView.swift in Sources */,
+				BEEA091222606973008C98AE /* ProgressCircleView.swift in Sources */,
 				BECAC3BF216B9D19001BBF49 /* InfiniteChallengeSwipablePage.swift in Sources */,
 				BE5E0CCE2183477400832E88 /* I18n.swift in Sources */,
 				BE7441B3216CCBE000E53A3D /* LineChart.swift in Sources */,
 				BE1CA958209DC43800086853 /* Messenger.swift in Sources */,
+				BE11DEC92257110500373586 /* MedalView.swift in Sources */,
 				BEBDEDD9208EF15F00C18520 /* utilities.swift in Sources */,
 				BE439C6321DF3AF100C0BE14 /* grammarN4.swift in Sources */,
 				BEEC7FAF21550818001C2EFF /* TopBarView.swift in Sources */,
@@ -631,7 +669,6 @@
 				BECAC3B5216B34FA001BBF49 /* InfiniteChanllengePage.swift in Sources */,
 				BE5D838920A80BD0002031BF /* TopicDetailPage.swift in Sources */,
 				BE3260CA21BFCF5E00A13C94 /* vocabulary2.swift in Sources */,
-				BECD8B2F21A817D000FF44A2 /* LanguageSelectionPage.swift in Sources */,
 				BE8E51E521CF7CD1007D29E6 /* GridLayout.swift in Sources */,
 				BE6ED56820A17BB000553D1A /* GameFlow.swift in Sources */,
 				BEEC7FAD2155014E001C2EFF /* SettingPage.swift in Sources */,
@@ -642,11 +679,14 @@
 				BE8E51E321CF7A3B007D29E6 /* Type+Conversion.swift in Sources */,
 				BE8E51DF21CF7754007D29E6 /* TopChartView+LongTermGoal.swift in Sources */,
 				BEC2E9312179BD090095A65D /* TopicFilterBarView.swift in Sources */,
+				BEBF5D1C2255D9F60069C34F /* GameMedal.swift in Sources */,
 				BEA4E71E21AE604400CE6E63 /* secret.swift in Sources */,
 				BEA4E72021AFB8B800CE6E63 /* GameExpirationDateInMS.swift in Sources */,
 				BEF4B151219C0E3B00B8E45E /* VoiceTableCell.swift in Sources */,
+				BED1BA53224A35FF009B68B6 /* MedalPage.swift in Sources */,
 				BEC4CF0E219D727B00E1A54C /* TopChartView.swift in Sources */,
 				BE7725C420A2CBC200DF186A /* dataSets.swift in Sources */,
+				BE82FE612269C5A900907388 /* MedalSummaryPage.swift in Sources */,
 				BE9B476A20AD50520063E0DA /* FuriganaUtils.swift in Sources */,
 				BE76F117214ECC6E004E130B /* GameMiscData.swift in Sources */,
 				BE596474215A0EF400E4AA0C /* expressive.swift in Sources */,
@@ -662,21 +702,25 @@
 				BEBDEDE0208EF15F00C18520 /* constants.swift in Sources */,
 				BE8E51DD21CF7718007D29E6 /* TopChartView+Timeline.swift in Sources */,
 				BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */,
+				BEDB3687225F3DB800059997 /* MedalProgressBar.swift in Sources */,
 				BE050B7E22227530007017C5 /* MessengerBar.swift in Sources */,
 				BEEC7FAB2154FFA4001C2EFF /* TopicSwipablePage.swift in Sources */,
 				BEDEDD3720A46D1B00E7B60B /* TopicsListPage.swift in Sources */,
 				BE7725CE20A4216700DF186A /* ContentCell.swift in Sources */,
 				BECD9077219D279C00400FD3 /* InfiniteChallengeListPage.swift in Sources */,
 				BE9B476820AD4E570063E0DA /* FuriganaLabel.swift in Sources */,
+				BEBF5D1E225624C50069C34F /* MedalGameFinishedPage.swift in Sources */,
 				BE6C78542165DD2B0072B1C5 /* GameReportBoxView.swift in Sources */,
 				BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */,
 				BE221AA121A2A76D0009B23B /* CircleView.swift in Sources */,
+				BEC1EB5C225B026A003DD265 /* SplashScreenViewController.swift in Sources */,
 				BEBDEDDE208EF15F00C18520 /* CalculateScore.swift in Sources */,
 				BE8180C020B3BEB6006ABCB3 /* MyText.swift in Sources */,
 				BE8F747F2176E258005546DC /* kanaFix.swift in Sources */,
 				BEA86115216F264A00AECF13 /* sqliteSentences.swift in Sources */,
 				BECAC3BA216B8FE3001BBF49 /* BottomBarView.swift in Sources */,
 				BE59646E215A0EC300E4AA0C /* love.swift in Sources */,
+				BE2473A6226DDA2100EDFA5E /* MedalSummaryTopView.swift in Sources */,
 				BE955E47216DAB8F00D424FA /* ICInfoView.swift in Sources */,
 				BE8283B42133DAE2008BC875 /* SpeechEngine.swift in Sources */,
 				BE8E51E721CF7F3F007D29E6 /* IAPHelper+Receipt.swift in Sources */,
@@ -692,6 +736,7 @@
 				BE596468215A0DF200E4AA0C /* daily.swift in Sources */,
 				BE6F2F162144E049003A56CD /* rawDataSets.swift in Sources */,
 				BE8E51DB21CF76CF007D29E6 /* TopChartView+DailyChart.swift in Sources */,
+				BEDB3685225EF61C00059997 /* UIView+Animation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

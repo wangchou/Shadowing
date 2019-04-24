@@ -9,6 +9,9 @@ import UIKit
 import Foundation
 import AVFoundation
 
+let IDIOM = UI_USER_INTERFACE_IDIOM()
+let isIPad = IDIOM == UIUserInterfaceIdiom.pad
+
 #if targetEnvironment(simulator)
     let isSimulator = true
     let dailyFreeLimit = 1000
@@ -26,8 +29,27 @@ let micOutVolume: Float = 0
 
 let screen = UIScreen.main.bounds
 
+// safe area padding
+func getTopPadding() -> CGFloat {
+    if #available(iOS 11.0, *) {
+        let window = UIApplication.shared.keyWindow
+        return window?.safeAreaInsets.top ?? 0
+    }
+    return 0
+}
+
+func getBottomPadding() -> CGFloat {
+    if #available(iOS 11.0, *) {
+        let window = UIApplication.shared.keyWindow
+        return window?.safeAreaInsets.bottom ?? 0
+    }
+    return 0
+}
+
 // listening duration = speakDuration + 0.4 secs
 let pauseDuration: Float = 0.4
 let practicePauseDuration: Float = 0.6 //longer for waiting table animation in practice
 
 let abilities = ["日常", "旅遊", "N5", "N4", "敬語", "戀愛", "論述", "單字"]
+
+let medalModeKey = "Medal Mode Key"

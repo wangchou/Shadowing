@@ -343,11 +343,93 @@ func getSentenceCountsByDays() -> [Int] {
             sentenceCounts.append(0)
         }
         for i in 0..<sentenceCounts.count {
-            sentenceCounts[i] += Int(arc4random_uniform(UInt32(60)))
+            sentenceCounts[i] += Int.random(in: 0 ..< 60)
         }
     }
     //print(sentenceCounts)
     return sentenceCounts
+}
+
+struct Summary {
+    var date: Date = Date()
+    var medalCount: Int = 0
+    var sentenceCount: Int = 0
+    var duration: Int = 0
+    var perfectCount: Int = 0
+    var greatCount: Int = 0
+    var goodCount: Int = 0
+    var missedCount: Int = 0
+}
+
+// [Today's correct sentence count, Yesterday's, ...]
+func getSummaryByDays() -> [Summary] {
+    let calendar = Calendar.current
+    var recordsByDate = getRecordsByDate()
+
+    guard !GameContext.shared.gameHistory.isEmpty || isSimulator else { return [] }
+    var firstRecordDate = Date()
+    GameContext.shared.gameHistory.forEach { r in
+        let date = r.startedTime
+        if date < firstRecordDate {
+            firstRecordDate = date
+        }
+    }
+
+    var minusOneDay = DateComponents()
+    minusOneDay.day = -1
+    let dateBound = calendar.date(byAdding: minusOneDay, to: firstRecordDate) ?? firstRecordDate
+    var date = Date()
+    var summarys: [Summary] = []
+    while date > dateBound {
+        let key = getDateKey(date: date)
+        var summary = Summary()
+        summary.date = date
+        if let records = recordsByDate[key],
+            !records.isEmpty {
+
+            for r in records {
+                summary.medalCount += r.medalReward ?? 0
+                summary.sentenceCount += r.correctCount
+                summary.duration += r.playDuration
+                summary.perfectCount += r.perfectCount
+                summary.greatCount += r.greatCount
+                summary.goodCount += r.goodCount
+                summary.missedCount += r.missedCount
+            }
+        }
+        summarys.append(summary)
+
+        date = calendar.date(byAdding: minusOneDay, to: date) ?? date
+    }
+
+    //print(sentenceCounts)
+    return summarys
+}
+
+func getTodaySeconds() -> Int {
+    guard !GameContext.shared.gameHistory.isEmpty else { return 0 }
+
+    let todayKey = getDateKey(date: Date())
+    var secs: Int = 0
+    for r in GameContext.shared.gameHistory {
+        if todayKey == getDateKey(date: r.startedTime) {
+            secs += r.playDuration
+        }
+    }
+    return secs
+}
+
+func getTodayMedalCount() -> Int {
+    guard !GameContext.shared.gameHistory.isEmpty else { return 0 }
+
+    let todayKey = getDateKey(date: Date())
+    var medalCount: Int = 0
+    for r in GameContext.shared.gameHistory {
+        if todayKey == getDateKey(date: r.startedTime) {
+            medalCount += r.medalReward ?? 0
+        }
+    }
+    return medalCount
 }
 
 func getTodaySentenceCount() -> Int {

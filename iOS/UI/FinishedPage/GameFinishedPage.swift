@@ -12,6 +12,7 @@ import UIKit
 private let context = GameContext.shared
 
 class GameFinishedPage: UIViewController {
+    static let vcName = "GameFinishedPage"
     @IBOutlet weak var reportView: GameReportView!
 
     @IBOutlet weak var tableView: UITableView!

@@ -39,6 +39,7 @@ struct TimelineBox {
 // MARK: Timeline Mode
 extension TopChartView {
     func renderTimelineMode() {
+        removeAllSubviews()
         gridCount = 16
         backgroundColor = longTermGoalColor.withSaturation(0.3)
         addTimeline()
@@ -83,36 +84,36 @@ extension TopChartView {
         for boxIndex in 0..<5 {
             let box = addRect(x: 1 + boxIndex * 3, y: 8, w: 3, h: 2)
             addTimelinePadding(box)
-            box.frame.size.width -= stepFloat * 0.3
-            box.frame.size.height += stepFloat * 0.2
-            box.frame.origin.y += stepFloat * 0.3
+            box.frame.size.width -= step * 0.3
+            box.frame.size.height += step * 0.2
+            box.frame.origin.y += step * 0.3
             box.roundBorder(borderWidth: 0, cornerRadius: 5, color: .clear)
             box.backgroundColor = .white
 
             let topText = addText(
                 x: 1 + boxIndex * 3, y: 8, w: 4, h: 2,
                 text: topTexts[boxIndex],
-                font: MyFont.bold(ofSize: stepFloat * 0.7),
+                font: MyFont.bold(ofSize: step * 0.7),
                 color: rgb(74, 74, 74)
             )
             topText.textAlignment = .center
             topText.centerX(box.frame)
-            topText.frame.origin.y += stepFloat * 0.4
+            topText.frame.origin.y += step * 0.4
 
             let bottomText = addText(
                 x: 1 + boxIndex * 3, y: 9, w: 4, h: 2,
                 text: bottomTexts[boxIndex],
-                font: MyFont.regular(ofSize: stepFloat * 0.5),
+                font: MyFont.regular(ofSize: step * 0.5),
                 color: .lightGray
             )
             bottomText.textAlignment = .center
             bottomText.centerX(box.frame)
-            bottomText.frame.origin.y += stepFloat * 0.25
+            bottomText.frame.origin.y += step * 0.25
         }
     }
 
     func addTimelineBox(row: Int, column: Int, color: UIColor = myLightGray) {
-        let width = stepFloat * 0.7
+        let width = step * 0.7
         let box = UIView()
         box.backgroundColor = color
         layout(timelineColumnCount - column, row, 1, 1, box)
@@ -130,19 +131,19 @@ extension TopChartView {
             y: row,
             w: 3, h: 1,
             text: text,
-            font: MyFont.thin(ofSize: stepFloat * 0.7),
+            font: MyFont.thin(ofSize: step * 0.7),
             color: color
         )
         if row == 0 { // month labels
-            label.frame.origin.y += stepFloat * (-0.1 + timelineYPadding)
+            label.frame.origin.y += step * (-0.1 + timelineYPadding)
         } else {
-            label.frame.origin.y += stepFloat * (-0.2 + timelineYPadding)
+            label.frame.origin.y += step * (-0.2 + timelineYPadding)
         }
-        label.frame.origin.x += stepFloat * timelineXPadding
+        label.frame.origin.x += step * timelineXPadding
     }
 
     func addTimelinePadding(_ view: UIView) {
-        view.frame.origin.y += stepFloat * timelineYPadding
-        view.frame.origin.x += stepFloat * timelineXPadding
+        view.frame.origin.y += step * timelineYPadding
+        view.frame.origin.x += step * timelineXPadding
     }
 }

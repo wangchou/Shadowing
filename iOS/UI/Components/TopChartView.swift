@@ -17,8 +17,6 @@ class TopChartView: UIView, GridLayout, ReloadableView {
 
     var axis: GridAxis = .horizontal
 
-    var spacing: CGFloat = 0
-
     // animateProgress
     var timer: Timer?
     var frontCircle: CircleView?
@@ -36,11 +34,11 @@ class TopChartView: UIView, GridLayout, ReloadableView {
     var percentageText: String {
         if percent >= 1.0 { return "完 成" }
 
-        return String(format: "%.1f", percent * 100) + "%"
+        return String(format: "%.0f", percent * 100) + "%"
     }
 
     var goalText: String {
-        return "\(i18n.goalPrefix)\(context.gameSetting.dailySentenceGoal)\(i18n.goalSuffix)"
+        return i18n.goalText
     }
 
     var sprintText: String {
@@ -137,8 +135,10 @@ class TopChartView: UIView, GridLayout, ReloadableView {
     func addOnClickHandler() {
         addTapGestureRecognizer { [weak self] in
             switchToNextTopViewMode()
-            Analytics.logEvent("top_chart_view_clicked", parameters: nil)
-            self?.viewWillAppear()
+            DispatchQueue.global().async {
+                Analytics.logEvent("top_chart_view_clicked", parameters: nil)
+            }
+            self?.render()
             self?.animateProgress()
         }
     }
@@ -146,9 +146,12 @@ class TopChartView: UIView, GridLayout, ReloadableView {
     func viewWillAppear() {
         frame.size.width = screen.width
         frame.size.height = screen.width * 34/48
-        removeAllSubviews()
         updateByRecords()
 
+        render()
+    }
+
+    func render() {
         switch GameContext.shared.gameSetting.icTopViewMode {
         case .dailyGoal:
             renderDailyGoalMode()
@@ -232,5 +235,7 @@ func switchToNextTopViewMode() {
     case .longTermGoal:
         context.gameSetting.icTopViewMode = .dailyGoal
     }
-    saveGameSetting()
+    DispatchQueue.global().async {
+        saveGameSetting()
+    }
 }

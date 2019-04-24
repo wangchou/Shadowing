@@ -12,16 +12,27 @@ private let context = GameContext.shared
 
 private let gameHistoryKey = "game record array json"
 
+var enHistory: [GameRecord] = []
+var jpHistory: [GameRecord] = []
+
 func saveGameHistory() {
     saveToUserDefault(object: context.gameHistory, key: gameHistoryKey + gameLang.key)
 }
 
 func loadGameHistory() {
-    if let gameHistory = loadFromUserDefault(type: [GameRecord].self, key: gameHistoryKey + gameLang.key) {
-        context.gameHistory = gameHistory
+    if let gameHistory = loadFromUserDefault(type: [GameRecord].self, key: gameHistoryKey + Lang.jp.key) {
+
+        jpHistory = gameHistory
     } else {
         print("[\(gameLang)] create new gameHistory")
-        context.gameHistory = [GameRecord]()
+        jpHistory = [GameRecord]()
+    }
+    if let gameHistory = loadFromUserDefault(type: [GameRecord].self, key: gameHistoryKey + Lang.en.key) {
+
+        enHistory = gameHistory
+    } else {
+        print("[\(gameLang)] create new gameHistory")
+        enHistory = [GameRecord]()
     }
 }
 
@@ -48,17 +59,35 @@ func updateGameHistory() {
     guard let record = context.gameRecord else { return }
     if let bestRecord = findBestRecord(key: record.dataSetKey) {
         if isBetter(record, to: bestRecord) {
-            context.gameHistory.insert(record, at: 0)
+            insertRecord(record)
             context.gameRecord?.isNewRecord = true
         } else {
-            context.gameHistory.append(record)
+            appendRecord(record)
             context.gameRecord?.isNewRecord = false
         }
     } else {
-        context.gameHistory.append(record)
+        appendRecord(record)
         context.gameRecord?.isNewRecord = true
     }
     saveGameHistory()
+}
+
+private func insertRecord(_ record: GameRecord) {
+    if gameLang == .jp {
+        jpHistory.insert(record, at: 0)
+    }
+    if gameLang == .en {
+        enHistory.insert(record, at: 0)
+    }
+}
+
+private func appendRecord(_ record: GameRecord) {
+    if gameLang == .jp {
+        jpHistory.append(record)
+    }
+    if gameLang == .en {
+        enHistory.append(record)
+    }
 }
 
 struct GameRecord: Codable {
@@ -69,6 +98,7 @@ struct GameRecord: Codable {
     let sentencesCount: Int
     let level: Level
     var isNewRecord = false
+    var medalReward: Int?
     var perfectCount = 0
     var greatCount = 0
     var goodCount = 0
@@ -94,10 +124,21 @@ struct GameRecord: Codable {
     }
 
     var rank: Rank {
-        if p == 100 && perfectCount.f * 1.2 >=  sentencesCount.f { return .ss }
+        return getRank(isDetail: false)
+    }
+
+    var detailRank: Rank {
+        return getRank(isDetail: true)
+    }
+
+    private func getRank(isDetail: Bool = false) -> Rank {
+        if p == 100 && perfectCount.f * 1.3 >=  sentencesCount.f { return .ss }
         if p == 100 { return .s }
+        if p >= 95 && isDetail { return .aP }
         if p >= 90 { return .a }
+        if p >= 85 && isDetail { return .bP }
         if p >= 80 { return .b }
+        if p >= 75 && isDetail { return .cP }
         if p >= 70 { return .c }
         if p >= 60 { return .d }
         if p >= 40 { return .e }

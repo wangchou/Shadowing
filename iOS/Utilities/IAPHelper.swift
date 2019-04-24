@@ -124,10 +124,9 @@ class IAPHelper: NSObject {
 
         let cancelTitle = isChallenge ? i18n.startChallenge : i18n.close
 
-        let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel) { _ in
-            if isChallenge,
-               let vc = UIApplication.getPresentedViewController() {
-                launchStoryboard(vc, "MessengerGame")
+        let cancelAction = UIAlertAction(title: cancelTitle, style: isIPad ? .default : .cancel) { _ in
+            if isChallenge {
+                launchVC(Messenger.id)
             }
         }
 
@@ -148,7 +147,17 @@ class IAPHelper: NSObject {
         }
 
         // Add the actions
-        actionSheet.addAction(cancelAction)
+        if isChallenge || !isIPad {
+            actionSheet.addAction(cancelAction)
+        }
+
+        // https://medium.com/@nickmeehan/actionsheet-popover-on-ipad-in-swift-5768dfa82094
+        if let popoverController = actionSheet.popoverPresentationController,
+           let vc = UIApplication.getPresentedViewController() {
+            popoverController.sourceView = vc.view
+            popoverController.sourceRect = CGRect(x: vc.view.bounds.midX, y: vc.view.bounds.midY, width: 0, height: 0)
+            popoverController.permittedArrowDirections = []
+        }
 
         UIApplication.getPresentedViewController()?.present(actionSheet, animated: true)
     }

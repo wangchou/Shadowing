@@ -11,8 +11,8 @@ import UIKit
 
 private let context = GameContext.shared
 
-var countDownTimer: Timer?
-var pauseOrPlayButton: UIButton?
+private var countDownTimer: Timer?
+private var pauseOrPlayButton: UIButton?
 private var isPauseMode: Bool = true
 
 func stopCountDown() {
@@ -24,9 +24,6 @@ func stopCountDown() {
 
 @IBDesignable
 class GameReportView: UIView, ReloadableView, GridLayout {
-    let gridCount = 48
-    let axis: GridAxis = .horizontal
-    let spacing: CGFloat = 0
     var reportBox: GameReportBoxView?
 
     func viewWillAppear() {
@@ -34,7 +31,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         backgroundColor = UIColor.black.withAlphaComponent(0.6)
         reportBox = GameReportBoxView()
 
-        if context.contentTab == .topics {
+        if context.gameMode == .topicMode {
             frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.38)
             layout(2, 4, 44, 50, reportBox!)
         } else {
@@ -56,17 +53,6 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         pauseOrPlayButton = nil
         reportBox?.removeAllSubviews()
         removeAllSubviews()
-    }
-
-    func createButton(title: String, bgColor: UIColor) -> UIButton {
-        let button = UIButton()
-        button.setTitle(title, for: .normal)
-        button.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .highlighted)
-        button.backgroundColor = bgColor
-        button.titleLabel?.font = MyFont.regular(ofSize: step * 4)
-        button.titleLabel?.textColor = myLightGray
-        button.roundBorder(borderWidth: 1, cornerRadius: 5, color: .clear)
-        return button
     }
 
     func addNextGameButton() -> UIButton {
@@ -91,7 +77,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
             }
         }
 
-        if context.contentTab == .topics {
+        if context.gameMode == .topicMode {
             layout(2, 56, 28, 8, button)
         } else {
             layout(2, 46, 28, 8, button)
@@ -122,14 +108,14 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         backButton.addTapGestureRecognizer {
             stopCountDown()
             dismissTwoVC()
-            if context.contentTab == .infiniteChallenge {
+            if context.gameMode == .infiniteChallengeMode {
                 if let icwPage = rootViewController.current as? InfiniteChallengeSwipablePage {
-                    (icwPage.pages[2] as? InfiniteChallengePage)?.tableView.reloadData()
+                    icwPage.detailPage?.tableView.reloadData()
                 }
             }
         }
 
-        if context.contentTab == .topics {
+        if context.gameMode == .topicMode {
             layout(32, 56, 14, 8, backButton)
         } else {
             layout(32, 46, 14, 8, backButton)
@@ -144,17 +130,25 @@ class GameReportView: UIView, ReloadableView, GridLayout {
     }
 }
 
-private func launchNextGame() {
-    if context.contentTab == .topics && !context.gameSetting.isRepeatOne {
+func launchNextGame() {
+    if context.gameMode == .topicMode && !context.gameSetting.isRepeatOne {
         context.loadNextChallenge()
-        let pages = rootViewController.topicSwipablePage.pages
-        if pages.count > 2,
-            let topicDetailPage = pages[2] as? TopicDetailPage {
-            topicDetailPage.render()
-        }
+        rootViewController.topicSwipablePage.detailPage?.render()
     }
     if isUnderDailySentenceLimit() {
-        guard let vc = UIApplication.getPresentedViewController() else { return }
-        launchStoryboard(vc, "MessengerGame")
+        launchVC(Messenger.id)
+    }
+}
+
+extension GridLayout where Self: UIView {
+    func createButton(title: String, bgColor: UIColor) -> UIButton {
+        let button = UIButton()
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .highlighted)
+        button.backgroundColor = bgColor
+        button.titleLabel?.font = MyFont.regular(ofSize: step * 4)
+        button.titleLabel?.textColor = myLightGray
+        button.roundBorder(borderWidth: 1, cornerRadius: step, color: .clear)
+        return button
     }
 }

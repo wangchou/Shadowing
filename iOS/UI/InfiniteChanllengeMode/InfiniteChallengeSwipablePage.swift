@@ -11,7 +11,23 @@ import UIKit
 
 class InfiniteChallengeSwipablePage: UIPageViewController {
     static let storyboardId = "InfiniteChallengeSwipablePage"
+    static var initialIdx = 1
     var pages = [UIViewController]()
+
+    var isPagesReady: Bool { return pages.count >= 4}
+
+    var settingPage: SettingPage? {
+        return !isPagesReady ? nil : pages[0] as? SettingPage
+    }
+    var medalPage: MedalPage? {
+        return !isPagesReady ? nil : pages[1] as? MedalPage
+    }
+    var listPage: InfiniteChallengeListPage? {
+        return !isPagesReady ? nil : pages[2] as? InfiniteChallengeListPage
+    }
+    var detailPage: InfiniteChallengePage? {
+        return !isPagesReady ? nil : pages[3] as? InfiniteChallengePage
+    }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -30,9 +46,10 @@ class InfiniteChallengeSwipablePage: UIPageViewController {
             pages.append(getVC(storyboardId))
         }
         addPage("SettingPage")
+        addPage("MedalPage")
         addPage("InfiniteChallengeListPage")
         addPage("InfiniteChallengePage")
-        let idx = RootContainerViewController.isShowSetting ? 0 : 1
+        let idx = RootContainerViewController.isShowSetting ? 0 : InfiniteChallengeSwipablePage.initialIdx
         setViewControllers([pages[idx]], direction: .forward, animated: true, completion: nil)
 
         dataSource = self
@@ -46,7 +63,7 @@ class InfiniteChallengeSwipablePage: UIPageViewController {
 
 extension InfiniteChallengeSwipablePage: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        if let index = pages.index(of: viewController),
+        if let index = pages.firstIndex(of: viewController),
             index + 1 < pages.count {
             return pages[index + 1]
         }
@@ -54,7 +71,7 @@ extension InfiniteChallengeSwipablePage: UIPageViewControllerDataSource {
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        if let index = pages.index(of: viewController),
+        if let index = pages.firstIndex(of: viewController),
             index - 1 >= 0 {
             return pages[index - 1]
         }

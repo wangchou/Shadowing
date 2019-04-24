@@ -14,16 +14,9 @@ private let context = GameContext.shared
 typealias AnimateBarContext = (progress: UILabel, bar: UIView, from: Int, to: Int, max: Int)
 
 private func getProgressColor(percent: Float) -> UIColor {
-    if percent < 0.4 {
-        return myRed
-    }
-    if percent < 0.7 {
-        return myOrange
-    }
-
-    if percent < 1 {
-        return myGreen
-    }
+    if percent < 0.4 { return myRed }
+    if percent < 0.7 { return myOrange }
+    if percent < 1.0 { return myGreen }
 
     return myBlue
 }
@@ -32,7 +25,6 @@ private func getProgressColor(percent: Float) -> UIColor {
 class GameReportBoxView: UIView, ReloadableView, GridLayout {
     let gridCount = 44
     let axis: GridAxis = .horizontal
-    let spacing: CGFloat = 0
 
     // for animate progress bar at viewDidAppear
     private var timers: [String: Timer] = [:]
@@ -56,14 +48,19 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         guard let record = context.gameRecord else { return }
         roundBorder(cornerRadius: 15, color: .white)
         let tags = "#\(record.level.title)"
-        var title = getDataSetTitle(dataSetKey: record.dataSetKey)
-        if context.contentTab == .infiniteChallenge {
-            title = "無限挑戰"
+        var title = ""
+        switch context.gameMode {
+        case .topicMode:
+            title = getDataSetTitle(dataSetKey: record.dataSetKey)
+        case .infiniteChallengeMode:
+            title = "無限挑戦"
+        case .medalMode:
+            title = "追星模式"
         }
         addText(2, 1, 6, title, color: myLightGray, strokeColor: .black)
         addText(2, 7, 6, tags, color: myOrange, strokeColor: .black)
 
-        let statusText = i18n.getSpeakingStatus(percent: record.progress, rank: record.rank.rawValue)
+        let statusText = i18n.getSpeakingStatus(percent: record.progress, rank: record.rank.rawValue, reward: record.medalReward)
         statusSpeakingPromise = teacherSay(statusText, rate: fastRate)
     }
 
@@ -107,7 +104,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
                                                endNumber: todaySentenceCount,
                                                maxNumber: dailyGoal)
 
-        if context.contentTab == .topics {
+        if context.gameMode == .topicMode {
             let topic = getDataSetTopic(dataSetKey: record.dataSetKey)
             let tagPointsWithoutLast = getTagPoints(isWithoutLast: true)
             let fromTagPoint = tagPointsWithoutLast["#" + topic] ?? 0

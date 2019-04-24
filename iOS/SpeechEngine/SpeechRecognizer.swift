@@ -19,6 +19,9 @@ enum SpeechRecognitionError: Error {
 }
 
 class SpeechRecognizer: NSObject {
+    // Singleton
+    static let shared = SpeechRecognizer()
+
     private let speechRecognizerJP: SFSpeechRecognizer! = SFSpeechRecognizer(locale: Locale(identifier: "ja_JP"))
     private let speechRecognizerEN: SFSpeechRecognizer! = SFSpeechRecognizer(locale: Locale(identifier: "en_US"))
 
@@ -43,6 +46,11 @@ class SpeechRecognizer: NSObject {
 
     override init() {
         super.init()
+        let session = AVAudioSession.sharedInstance()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleInterruption(notification:)),
+                                               name: AVAudioSession.interruptionNotification,
+                                               object: session)
         if !isSimulator {
             authorize()
         }
@@ -123,6 +131,7 @@ class SpeechRecognizer: NSObject {
 
         recognitionRequest = nil
         recognitionTask = nil
+        postEvent(.listenStopped, string: "")
     }
 
     // MARK: - Private Methods
@@ -174,6 +183,8 @@ class SpeechRecognizer: NSObject {
             case .notDetermined:
                 self.isAuthorized = false
                 print("Speech recognition not yet authorized")
+            @unknown default:
+                print("\n#### requestAuthorization unknown default ####\n")
             }
         }
     }
@@ -183,10 +194,28 @@ class SpeechRecognizer: NSObject {
         postEvent(.listenStarted, string: "")
         Timer.scheduledTimer(withTimeInterval: stopAfterSeconds, repeats: false) { [weak self] _ in
             let fakeSuffix = ["", "", "西宮", "はは"]
-            let fakeSaidString = context.targetString + fakeSuffix[Int(arc4random_uniform(UInt32(fakeSuffix.count)))]
+            let fakeSaidString = context.targetString + fakeSuffix[Int.random(in: 0 ..< fakeSuffix.count)]
 
             self?.promise.fulfill(fakeSaidString)
         }
         return promise
+    }
+
+    // https://stackoverflow.com/questions/48749729/avaudiosession-interruption-on-declining-phone-call
+    @objc func handleInterruption(notification: Notification) {
+        guard let userInfo = notification.userInfo,
+            let interruptionTypeRawValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
+            let interruptionType = AVAudioSession.InterruptionType(rawValue: interruptionTypeRawValue),
+            let session = notification.object as? AVAudioSession else {
+                print("Recorder - something went wrong")
+                return
+        }
+        switch interruptionType {
+        case .began:
+            self.endAudio()
+            try? session.setActive(false)
+        case .ended:
+            try? session.setActive(true)
+        }
     }
 }

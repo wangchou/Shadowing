@@ -23,7 +23,7 @@ class SpeechEngine {
     var isEngineRunning = false
     var audioEngine = AVAudioEngine()
 
-    private var speechRecognizer = SpeechRecognizer()
+    private var speechRecognizer = SpeechRecognizer.shared
     private var tts = TTS()
 
     // MARK: - Public Funtions
@@ -138,7 +138,7 @@ extension SpeechEngine {
     }
 }
 func speakTitle(title: String) -> Promise<Void> {
-    if context.contentTab == .topics {
+    if context.gameMode == .topicMode {
         let voiceId = getDefaultVoiceId(language: "zh-TW")
         return engine.speak(text: title, speaker: voiceId, rate: normalRate)
     }
@@ -170,7 +170,7 @@ func narratorSay(_ text: String) -> Promise<Void> {
 
 func translatorSay(_ text: String) -> Promise<Void> {
     var translationLocale = "en-US"
-    if gameLang == .jp && context.contentTab == .topics {
+    if gameLang == .jp && context.gameMode == .topicMode {
         translationLocale = "zh-TW"
     }
     if gameLang == .en {

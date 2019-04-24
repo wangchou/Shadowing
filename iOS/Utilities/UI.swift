@@ -34,21 +34,29 @@ extension UIView {
     func centerIn(_ boundRect: CGRect) {
         let xPadding = (boundRect.width - frame.width)/2
         let yPadding = (boundRect.height - frame.height)/2
-        frame.origin.x = boundRect.origin.x + xPadding
-        frame.origin.y = boundRect.origin.y + yPadding
+        frame.origin.x = boundRect.x + xPadding
+        frame.origin.y = boundRect.y + yPadding
     }
 
     func centerX(_ boundRect: CGRect, xShift: CGFloat = 0) {
         let xPadding = (boundRect.width - frame.width)/2
-        frame.origin.x = boundRect.origin.x + xPadding + xShift
+        frame.origin.x = boundRect.x + xPadding + xShift
+    }
+
+    func centerY(_ boundRect: CGRect, yShift: CGFloat = 0) {
+        let yPadding = (boundRect.height - frame.height)/2
+        frame.origin.y = boundRect.y + yPadding + yShift
     }
 
     func moveToBottom(_ boundRect: CGRect, yShift: CGFloat = 0) {
-        frame.origin.y = boundRect.origin.y + boundRect.height - frame.size.height + yShift
+        frame.origin.y = boundRect.y + boundRect.height - frame.height + yShift
     }
 
     func moveToRight(_ boundRect: CGRect, xShift: CGFloat = 0) {
-        frame.origin.x = boundRect.origin.x + boundRect.width - frame.size.width + xShift
+        frame.origin.x = boundRect.x + boundRect.width - frame.size.width + xShift
+    }
+    func moveToLeft(_ boundRect: CGRect, xShift: CGFloat = 0) {
+        frame.origin.x = boundRect.x + xShift
     }
 
     func removeAllSubviews() {
@@ -122,6 +130,23 @@ extension UIView {
             UIGraphicsEndImageContext()
             return UIImage(cgImage: image!.cgImage!)
         }
+    }
+}
+
+extension CGRect {
+    func padding(_ pad: CGFloat) -> CGRect {
+        return CGRect(x: x + pad,
+                      y: y + pad,
+                      width: width - 2 * pad,
+                      height: height - 2 * pad)
+    }
+
+    var y: CGFloat {
+        return origin.y
+    }
+    
+    var x: CGFloat {
+        return origin.x
     }
 }
 
@@ -280,25 +305,35 @@ func showProcessingAlert() -> UIAlertController {
 
 // MARK: - launch storyboard
 func getVC(_ name: String) -> UIViewController {
-    return UIStoryboard(name: "Main", bundle: nil)
-        .instantiateViewController(withIdentifier: name)
+    switch name {
+    case MedalGameFinishedPage.id:
+        return MedalGameFinishedPage()
+    case MedalPage.id:
+        return MedalPage()
+    case MedalSummaryPage.id:
+        return MedalSummaryPage()
+    default:
+        return UIStoryboard(name: "Main", bundle: nil)
+            .instantiateViewController(withIdentifier: name)
+    }
 }
 
-func launchStoryboard(
-    _ originVC: UIViewController,
-    _ storyboardId: String,
+func launchVC(
+    _ vcName: String,
+    _ originVC: UIViewController? = nil,
     isOverCurrent: Bool = false,
     animated: Bool = false,
     completion: ((UIViewController) -> Void)? = nil
     ) {
-    let vc = getVC(storyboardId)
+    let vc = getVC(vcName)
     if isOverCurrent {
         vc.modalPresentationStyle = .overCurrentContext
     } else {
         vc.modalTransitionStyle = .crossDissolve
     }
 
-    originVC.present(vc, animated: animated) {
+    (originVC ?? UIApplication.getPresentedViewController())?
+        .present(vc, animated: animated) {
         completion?(vc)
     }
 }

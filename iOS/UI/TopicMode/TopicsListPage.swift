@@ -31,7 +31,7 @@ class TopicsListPage: UIViewController {
         topBarView.rightButton.setIconImage(named: "outline_info_black_48pt", isIconOnLeft: false)
         if Locale.current.languageCode == "zh" {
             topBarView.customOnRightButtonClicked = {
-                launchStoryboard(self, "InfoPage")
+                launchVC("InfoPage", self)
             }
         } else {
             topBarView.rightButton.isHidden = true
@@ -54,20 +54,23 @@ class TopicsListPage: UIViewController {
         let height = screen.width * 46/48
         topArea.frame.size.height = height + 61
 
-        sentencesTableView.reloadData()
-        topChartView.viewWillAppear()
-
-        if context.dataSetKey == "" {
-            context.dataSetKey = dataSetKeys[0]
-            context.loadLearningSentences()
+        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
+            DispatchQueue.main.async {
+                self.topChartView.viewWillAppear()
+                self.topChartView.animateProgress()
+                self.topicFilterBarView.viewWillAppear()
+                self.topicButtonAreaView.viewWillAppear()
+                if context.dataSetKey == "" {
+                    context.dataSetKey = dataSetKeys[0]
+                    context.loadLearningSentences()
+                }
+            }
         }
-        topicFilterBarView.viewWillAppear()
-        topicButtonAreaView.viewWillAppear()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        topChartView.animateProgress()
+        sentencesTableView.reloadData()
     }
 
     @objc func reloadTopicSentences() {

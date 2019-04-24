@@ -16,14 +16,6 @@ private enum Texts: String {
 }
 
 class ICInfoView: UIView, GridLayout, ReloadableView {
-
-    // GridLayout
-    var gridCount: Int = 48
-
-    var axis: GridAxis = .horizontal
-
-    var spacing: CGFloat = 0
-
     var minKanaCount: Int = 1
     var maxKanaCount: Int = 10
     var sentencesCount: Int = -1
@@ -189,13 +181,12 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
     }
 
     @objc func onChallengeButtonClicked() {
+        context.gameMode = .infiniteChallengeMode
         guard !TopicDetailPage.isChallengeButtonDisabled else { return }
-        if let vc = UIApplication.getPresentedViewController() {
-            context.infiniteChallengeLevel = self.level
-            if isUnderDailySentenceLimit() {
-                Analytics.logEvent("challenge_infinite_\(gameLang.prefix)", parameters: nil)
-                launchStoryboard(vc, "MessengerGame")
-            }
+        context.infiniteChallengeLevel = self.level
+        if isUnderDailySentenceLimit() {
+            Analytics.logEvent("challenge_infinite_\(gameLang.prefix)", parameters: nil)
+            launchVC(Messenger.id)
         }
     }
 }

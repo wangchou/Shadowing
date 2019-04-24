@@ -14,6 +14,7 @@ enum EventType {
     case willSpeakRange
     case speakEnded
     case listenStarted
+    case listenStopped
 
     case scoreCalculated
     case gameStateChanged

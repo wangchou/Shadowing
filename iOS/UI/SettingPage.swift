@@ -69,7 +69,10 @@ class SettingPage: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        render()
+    }
 
+    func render() {
         gameLangSegmentControl.setTitle(i18n.english, forSegmentAt: 0)
         gameLangSegmentControl.setTitle(i18n.japanese, forSegmentAt: 1)
 
@@ -169,22 +172,18 @@ class SettingPage: UITableViewController {
     }
 
     @IBAction func gameLangSegmentControlValueChanged(_ sender: Any) {
+        RootContainerViewController.isShowSetting = true
         if gameLangSegmentControl.selectedSegmentIndex == 1 {
-            gameLang = .jp
+            changeGameLangTo(lang: .jp)
         } else {
-            gameLang = .en
+            changeGameLangTo(lang: .en)
         }
 
-        saveGameLang()
-        loadGameHistory()
-        loadGameSetting()
-        loadGameMiscData()
-        viewWillAppear(false)
+        render()
 
-        RootContainerViewController.isShowSetting = true
         if gameLang == .en {
-            context.contentTab = .infiniteChallenge
-            rootViewController.showInfiniteChallengePage(isShowSetting: true)
+            context.bottomTab = .infiniteChallenge
+            rootViewController.showInfiniteChallengePage(idx: 1)
         }
         rootViewController.reloadTableData()
     }
@@ -238,7 +237,7 @@ class SettingPage: UITableViewController {
                 VoiceSelectionPage.selectingVoiceFor = .assisant
                 VoiceSelectionPage.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.assisant)
             }
-            launchStoryboard(self, "VoiceSelectionViewController", isOverCurrent: true, animated: true)
+            launchVC("VoiceSelectionViewController", self, isOverCurrent: true, animated: true)
         }
     }
 }

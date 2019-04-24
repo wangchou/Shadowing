@@ -44,5 +44,5 @@ struct Score: Codable {
     }
     #endif
 
-    var valueText: String { return "\(value)点" }
+    var valueText: String { return "\(value)\(i18n.pts)" }
 }

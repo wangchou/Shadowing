@@ -13,10 +13,6 @@ var isTopicOn: [String: Bool] = [topicForAll: true]
 class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
     var gridCount: Int = 5
 
-    var axis: GridAxis = .vertical
-
-    var spacing: CGFloat = 0
-
     var barWidth: CGFloat {
         return max(screen.width, 15 + abilities.count.c * 55)
     }

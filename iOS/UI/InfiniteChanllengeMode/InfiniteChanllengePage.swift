@@ -34,7 +34,6 @@ class InfiniteChallengePage: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadSentenceDB()
         tableView.register(
             UINib(nibName: "SentencesTableCell", bundle: nil),
             forCellReuseIdentifier: "ICContentTableCell"

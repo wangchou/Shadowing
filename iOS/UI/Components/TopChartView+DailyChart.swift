@@ -15,31 +15,25 @@ private let context = GameContext.shared
 extension TopChartView {
     func renderDailyGoalMode() {
         gridCount = 48
+        removeAllSubviews()
         updateDailyViewBGColor()
 
         circleFrame = getFrame(11, 3, 24, 24)
-
-        // padding 5
-        circleFrame = CGRect(
-            x: circleFrame.origin.x + 5,
-            y: circleFrame.origin.y + 5,
-            width: circleFrame.size.width - 10,
-            height: circleFrame.size.height - 10
-        )
+        circleFrame = circleFrame.padding(5)
 
         let backCircle = CircleView(frame: circleFrame)
-        backCircle.lineWidth = stepFloat * 1.3
+        backCircle.lineWidth = step * 1.3
         backCircle.lineColor = rgb(155, 155, 155)
         addSubview(backCircle)
 
         frontCircle = CircleView(frame: circleFrame)
-        frontCircle!.lineWidth = stepFloat * 1.3
-        frontCircle!.percent = percent >= 1.0 ? percent.c : 0
+        frontCircle!.lineWidth = step * 1.3
+        frontCircle!.percent = percent.c
         addSubview(frontCircle!)
 
-        percentLabel = addText(x: 14, y: 6, w: 30, h: 8,
-                               text: percent >= 1.0 ? percentageText : "0.0%",
-                               font: MyFont.bold(ofSize: getFontSize(h: 8)),
+        percentLabel = addText(x: 14, y: 6, w: 30, h: 9,
+                               text: percent >= 0 ? percentageText : "0%",
+                               font: MyFont.bold(ofSize: getFontSize(h: 9)),
                                color: .black)
         percentLabel?.textAlignment = .center
         percentLabel?.centerIn(circleFrame)

@@ -63,6 +63,11 @@ extension Messenger: GameEventDelegate {
         case .listenStarted:
             addLabel(rubyAttrStr("..."), pos: .right)
 
+        case .listenStopped:
+            DispatchQueue.main.async {
+                self.levelMeterValueBar.frame.size.height = 0
+            }
+
         case .scoreCalculated:
             DispatchQueue.main.async {
                 self.levelMeterValueBar.frame.size.height = 0
@@ -92,18 +97,22 @@ extension Messenger: GameEventDelegate {
         case .gameStateChanged:
             if context.gameState == .gameOver {
                 stopEventObserving(self)
-                addLabel(rubyAttrStr("遊戲結束。"))
+                addLabel(rubyAttrStr(i18n.gameOver))
 
                 // prevent alerting block present
                 isAlerting.always {
-                    launchStoryboard(self, "GameFinishedPage", isOverCurrent: true, animated: true)
+                    if context.gameMode != .medalMode {
+                        launchVC(GameFinishedPage.vcName, self, isOverCurrent: true, animated: true)
+                    } else {
+                        launchVC(MedalGameFinishedPage.id, self, isOverCurrent: true, animated: true)
+                    }
                 }
             }
 
             if context.gameState == .speakingTranslation {
                 tmpRangeQueue = []
                 let text = context.targetString
-                var translationsDict = (gameLang == .jp && context.contentTab == .topics) ?
+                var translationsDict = (gameLang == .jp && context.gameMode == .topicMode) ?
                     chTranslations : translations
                 var attrText: NSAttributedString
                 if context.gameSetting.isShowTranslation,
