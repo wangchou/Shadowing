@@ -84,7 +84,7 @@ class TopicDetailPage: UIViewController {
     }
 
     private func setupTopBar() {
-        topBarView.titleLabel.text = "關  卡"
+        topBarView.titleLabel.text = i18n.challenge
         topBarView.titleLabel.textColor = myWhite
         topBarView.backgroundColor = UIColor.black.withAlphaComponent(0)
         topBarView.leftButton.setIconImage(named: "round_arrow_back_ios_black_48pt", tintColor: UIColor(white: 255, alpha: 0.9))

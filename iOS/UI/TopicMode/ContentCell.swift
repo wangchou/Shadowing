@@ -15,6 +15,8 @@ class ContentCell: UITableViewCell {
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var rankLabel: UILabel!
 
+    @IBOutlet weak var rankTitleLabel: UILabel!
+    @IBOutlet weak var completeTitleLabel: UILabel!
     var strockedRankText: String? = "" {
         willSet(string) {
             rankLabel.attributedText = getRankText(string: string)

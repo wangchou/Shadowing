@@ -99,7 +99,7 @@ extension TopChartView {
             addWhiteText("\(percentText) ")
             addGrayText(i18n.longTermGoalMiddleText)
             addWhiteText(" \(remainingDays) ")
-            addGrayText("\(i18n.dayRange)。")
+            addGrayText("\(i18n.longTermGoalSuffix)")
         }
 
         let y = isGameClear ? 20 : 23

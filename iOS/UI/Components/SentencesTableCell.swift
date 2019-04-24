@@ -115,7 +115,7 @@ class SentencesTableCell: UITableViewCell {
             userSaidSentenceLabel.backgroundColor = score.color
             userSaidSentenceLabel.isHidden = score.type == .perfect ? true : false
         } else {
-            scoreLabel.text = "無分"
+            scoreLabel.text = i18n.noScore
             scoreLabel.textColor = myGray
             userSaidSentenceLabel.isHidden = true
         }

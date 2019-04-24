@@ -121,9 +121,10 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
     }
 
     private func getDateString(date: Date) -> String {
-        var weekdayLabels = i18n.isZh ? ["日", "一", "二", "三", "四", "五", "六"] :
+        let weekdayLabels = i18n.isZh ? ["日", "一", "二", "三", "四", "五", "六"] :
                             (i18n.isJa ? ["日", "月", "火", "水", "木", "金", "土"] :
                                          ["S", "M", "T", "W", "T", "F", "S"])
+        //let monthLabels = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."]
         let month = Calendar.current.component(.month, from: date)
         let day = Calendar.current.component(.day, from: date)
         let weekdayIdx = Calendar.current.component(.weekday, from: date) - 1
@@ -179,7 +180,8 @@ class MedalSummaryTableCell: UITableViewCell, GridLayout, ReloadableView {
         didSet {
             let monthAndDay = timeString.split(separator: " ")[0].s
             let weekDay = timeString.split(separator: " ")[1].s
-            let isWeekend = weekDay == "日" || weekDay == "六" || weekDay == "土"
+            let isWeekend = weekDay == "日" || weekDay == "六" || weekDay == "土" || weekDay == "S"
+            print(weekDay, isWeekend)
             let attrText = NSMutableAttributedString()
             attrText.append(colorText(monthAndDay + " ", .black, fontSize: step * 3))
             attrText.append(colorText(weekDay,

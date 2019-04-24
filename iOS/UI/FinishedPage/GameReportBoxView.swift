@@ -53,7 +53,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         case .topicMode:
             title = getDataSetTitle(dataSetKey: record.dataSetKey)
         case .infiniteChallengeMode:
-            title = "無限挑戦"
+            title = i18n.infiniteChallengeTitle
         case .medalMode:
             title = "追星模式"
         }
@@ -68,7 +68,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         guard let record = context.gameRecord else { return }
 
         let y = 13
-        addText(2, y, 3, "完成率")
+        addText(2, y, 3, i18n.completeness)
         Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) {_ in
             let progress = getAttrText([
                 ( record.progress.padWidthTo(4), .white, self.getFontSize(h: 12)),
@@ -78,7 +78,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
             self.addAttrText(2, y, 12, progress)
         }
 
-        addText(26, y, 3, "判定")
+        addText(26, y, 3, i18n.rank)
         Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { _ in
             self.addText(26, y, 12, record.rank.rawValue.padWidthTo(3), color: record.rank.color)
         }
@@ -99,7 +99,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         let todaySentenceCount = getTodaySentenceCount()
         let dailyGoal = context.gameSetting.dailySentenceGoal
         animateGoalBarContext = addProgressBar(y: y,
-                                               title: "今日の目標",
+                                               title: i18n.todayGoal,
                                                fromNumber: todaySentenceCount - record.correctCount,
                                                endNumber: todaySentenceCount,
                                                maxNumber: dailyGoal)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-let topicForAll = "全部"
+let topicForAll = i18n.all
 var isTopicOn: [String: Bool] = [topicForAll: true]
 class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
     var gridCount: Int = 5
@@ -28,7 +28,11 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
             if i == 0 {
                 buttonTitle = topicForAll
             } else {
-                buttonTitle = abilities[i-1]
+                if i18n.isZh {
+                    buttonTitle = abilities[i-1]
+                } else {
+                    buttonTitle = jaAbilities[i-1]
+                }
             }
             addButton(title: buttonTitle,
                       index: i,

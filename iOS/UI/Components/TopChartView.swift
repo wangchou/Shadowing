@@ -32,13 +32,9 @@ class TopChartView: UIView, GridLayout, ReloadableView {
     var percent: Float = 0
 
     var percentageText: String {
-        if percent >= 1.0 { return "完 成" }
+        if percent >= 1.0 { return i18n.done }
 
         return String(format: "%.0f", percent * 100) + "%"
-    }
-
-    var goalText: String {
-        return i18n.goalText
     }
 
     var sprintText: String {
@@ -91,7 +87,10 @@ class TopChartView: UIView, GridLayout, ReloadableView {
     }
 
     var longTermGoalText: String {
-        return "\(longTermGoal)\(i18n.sentence)"
+        if i18n.isZh || i18n.isJa {
+            return "\(longTermGoal)\(i18n.sentence)"
+        }
+        return "\(longTermGoal)"
     }
 
     var dayText: String {

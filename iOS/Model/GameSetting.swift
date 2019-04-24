@@ -62,7 +62,7 @@ struct GameSetting: Codable {
     var isShowTranslationInPractice: Bool = false
 
     // learning mode started
-    var learningMode: LearningMode = .speakingOnly
+    var learningMode: LearningMode = i18n.isZh ? .speakingOnly : .meaningAndSpeaking
     var isShowTranslation: Bool = false
     var isSpeakTranslation: Bool = true
     var isUsingGuideVoice: Bool = true

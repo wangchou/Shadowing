@@ -210,8 +210,7 @@ class I18n {
     }
 
     var done: String {
-        if isJa { return "完了" }
-        if isZh { return "完成" }
+        if isJa || isZh { return "完成" }
         return "Done"
     }
 
@@ -244,14 +243,27 @@ class I18n {
         return "English"
     }
 
+    var enAbbr: String {
+        if isJa || isZh { return "英"}
+        return "En"
+    }
+    var jaAbbr: String {
+        if isJa || isZh { return "日"}
+        return "Ja"
+    }
+
     var englishOrJapanese: String {
-        if isZh || isJa { return "\(english) / \(japanese)" }
-        return "英語 / 日本語"
+        return "\(english) / \(japanese)"
     }
 
     var chineseOrJapanese: String {
-        if isZh || isJa { return "\(chinese) / \(japanese)" }
-        return "中国語 / 日本語"
+        return "\(chinese) / \(japanese)"
+    }
+
+    var challenge: String {
+        if isJa { return "挑戦" }
+        if isZh { return "關卡" }
+        return "Challenge"
     }
 
     func getLangDescription(langAndRegion: String) -> String {
@@ -302,20 +314,28 @@ class I18n {
 
     var syllablesCount: String {
         if isZh { return gameLang == .jp ? "假名數" : "音節數" }
-        return gameLang == .jp ? "仮名数" : "音節数"
+        if isJa { return gameLang == .jp ? "仮名数" : "音節数" }
+        return gameLang == .jp ? "Kanas" : "Syllables"
     }
 
     var sentencesCount: String {
-        if isZh { return "句數"}
-        return "句数"
+        if isZh { return "句數" }
+        if isJa { return "句数" }
+        return "Sent."
     }
 
     var topicPageTitile: String {
-        return "話題 (\(languageInJa))"
+        if isZh || isJa {
+            return "話題 (\(languageInJa))"
+        }
+        return "Topics (ja)"
     }
 
     var infiniteChallengeTitle: String {
-        return "無限挑戦 (\(languageInJa))"
+        if isZh || isJa {
+            return "無限挑戦 (\(languageInJa))"
+        }
+        return "Infinite Challenge"
     }
 
     var languageInJa: String {
@@ -330,35 +350,45 @@ class I18n {
     }
     var continues: String {
         if isZh { return "連續" }
-        return "連続"
+        if isJa { return "連続" }
+        return "Strikes"
     }
     var best: String {
         if isZh { return "最佳" }
-        return "ベスト"
+        if isJa { return "ベスト" }
+        return "Best"
     }
     var last7Days: String {
         if isZh { return "過去7天" }
-        return "過去7日間"
+        if isJa { return "過去7日間" }
+        return "7 Days"
     }
 
     var last30Days: String {
         if isZh { return "過去30天" }
-        return "過去30日間"
+        if isJa { return "過去30日間" }
+        return "30 Days"
     }
     var sentence: String {
         if isZh { return "句" }
-        return "文"
+        if isJa { return "文" }
+        return "Sent."
     }
     var goalPrefix: String {
         if isZh { return "每天說對" }
-        return "毎日"
+        if isJa { return "毎日" }
+        return "Daily"
     }
     var goalSuffix: String {
         if isZh { return "句" }
-        return "文"//を正しく話す"
+        if isJa { return "文" }
+        return "Sent."
     }
     var goalText: String {
-        return "\(goalPrefix)\(GameContext.shared.gameSetting.dailySentenceGoal)\(goalSuffix)"
+        if isJa || isZh {
+            return "\(goalPrefix)\(GameContext.shared.gameSetting.dailySentenceGoal)\(goalSuffix)"
+        }
+        return "\(GameContext.shared.gameSetting.dailySentenceGoal) Sentences"
     }
 
     var simpleGoalText: String {
@@ -380,21 +410,15 @@ class I18n {
         return "30 days"
     }
 
-    var allDays: String {
+    var all: String {
         if isJa || isZh { return "全部" }
         return "All"
     }
 
-
-
-    var goalSubtitleText: String {
-        if isZh { return "說對" + simpleGoalText }
-        return simpleGoalText
-    }
-
     var day: String {
-        if isZh { return "天"}
-        return "日"
+        if isZh { return "天" }
+        if isJa { return "日" }
+        return "Days"
     }
     var time: String {
         if isZh || isJa {
@@ -402,13 +426,15 @@ class I18n {
         }
         return "Time"
     }
-    var dayRange: String {
-        if isZh { return "天"}
-        return "日間"
+    var longTermGoalSuffix: String {
+        if isZh { return "天。"}
+        if isJa { return "日間。" }
+        return "days left."
     }
     var longTermGoalMiddleText: String {
         if isZh { return "% 已說，離完成"}
-        return "% を話した、完了まで"
+        if isJa { return "% を話した、完了まで"}
+        return "% are said, "
     }
 
     var learningMode: String {
@@ -537,7 +563,8 @@ class I18n {
     }
     var freeVersion: String {
         if isZh { return "免費版" }
-        return "無料版"
+        if isJa { return "無料版" }
+        return "Free"
     }
     var itIsfreeVersion: String {
         if isJa { return "現在のバージョンは無料版です" }
@@ -562,7 +589,7 @@ class I18n {
     var pts: String {
         if isZh { return "分" }
         if isJa { return "点" }
-        return " pts"
+        return "%"
     }
 
     var playTime: String {
@@ -602,6 +629,15 @@ class I18n {
         if isZh { return "日期" }
         if isJa { return "日付"}
         return "Date"
+    }
+    var completeness: String {
+        if isZh || isJa { return "完成率"}
+        return "Complete"
+    }
+    var previousGame: String {
+        if isJa { return "前回の挑戦" }
+        if isZh { return "上次的挑戦" }
+        return "Last Game"
     }
 
     func getSpeakingStatus(percent: String, rank: String, reward: Int?) -> String {
@@ -646,6 +682,26 @@ class I18n {
         if isZh { return "本日的統計" }
         if isJa { return "今日のまとめ" }
         return "Today's Summary"
+    }
+
+    var secs: String {
+        if isJa && isZh { return "秒" }
+        return "s"
+    }
+
+    var nextGame: String {
+        if isJa { return "次の挑戦" }
+        if isZh { return "下個挑戰" }
+        return "Next Game"
+    }
+    var noScore: String {
+        if isZh { return "無分" }
+        return "  "
+    }
+    var todayGoal: String {
+        if isJa { return "今日の目標" }
+        if isZh { return "今日的目標" }
+        return "Today's Goal"
     }
 }
 // swiftlint:enable file_length  type_body_length

@@ -11,10 +11,6 @@ import Firebase
 
 private let context = GameContext.shared
 
-private enum Texts: String {
-    case precision = "完成率"
-}
-
 class ICInfoView: UIView, GridLayout, ReloadableView {
     var minKanaCount: Int = 1
     var maxKanaCount: Int = 10
@@ -105,7 +101,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
         var y = 1
         // line chart
         addRect(x: 0, y: 0, w: gridCount, h: 35, color: rgb(250, 250, 250))
-        addText(x: 1, y: y, h: 2, text: Texts.precision.rawValue)
+        addText(x: 1, y: y, h: 2, text: i18n.completeness)
         y += 2
 
         let chart = LineChart()
@@ -129,8 +125,8 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
         addAttrText(x: 36, y: y+1, h: 10, text: rankAttrText)
 
         addText(x: 2, y: y, h: 3, text: line1)
-        addText(x: 18, y: y, h: 3, text: "完成率")
-        addText(x: 35, y: y, h: 3, text: "判定")
+        addText(x: 18, y: y, h: 3, text: i18n.completeness)
+        addText(x: 35, y: y, h: 3, text: i18n.rank)
 
         y += 3
 
@@ -153,7 +149,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
 
         addSeparateLine(y: y, color: rgb(180, 180, 180))
         addSeparateLine(y: y+5, color: rgb(180, 180, 180))
-        addText(x: 1, y: y, h: 5, text: "前回の挑戦")
+        addText(x: 1, y: y, h: 5, text: i18n.previousGame)
     }
 
     func addSeparateLine(y: Int, color: UIColor = .darkGray) {

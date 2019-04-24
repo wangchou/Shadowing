@@ -46,6 +46,7 @@ class InfiniteChallengeListPage: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        context.gameMode = .infiniteChallengeMode
         if IAPHelper.shared.products.isEmpty {
             IAPHelper.shared.requsestProducts()
         }

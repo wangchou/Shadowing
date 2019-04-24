@@ -18,7 +18,7 @@ class InfiniteChallengePage: UIViewController {
     @IBOutlet weak var blockInfo: UILabel!
     @IBOutlet weak var translationButton: UIButton!
     var topBarTitle: String {
-        return i18n.languageInJa + " - " + level.title
+        return i18n.language + " - " + level.title
     }
     var topBarLeftText: String = ""
     var topBarRightText: String = ""

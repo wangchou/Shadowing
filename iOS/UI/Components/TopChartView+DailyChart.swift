@@ -39,7 +39,7 @@ extension TopChartView {
         percentLabel?.centerIn(circleFrame)
 
         let goalLabel = addText(x: 14, y: 28, w: 30, h: 4,
-                                text: goalText,
+                                text: i18n.goalText,
                                 font: MyFont.bold(ofSize: getFontSize(h: 4)))
         goalLabel.textAlignment = .center
         goalLabel.centerX(circleFrame)

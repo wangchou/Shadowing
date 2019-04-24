@@ -66,7 +66,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
                                      todaySentenceCount - record.correctCount < dailyGoal
         }
         let countDownSecs = isReachDailyByThisGame ? 7 : 5
-        button.setIconImage(named: "baseline_pause_black_48pt", title: " 次の挑戦 (\(countDownSecs)秒)", tintColor: .white, isIconOnLeft: true)
+        button.setIconImage(named: "baseline_pause_black_48pt", title: " \(i18n.nextGame) (\(countDownSecs)\(i18n.secs))", tintColor: .white, isIconOnLeft: true)
         button.addTapGestureRecognizer {
             if isPauseMode {
                 stopCountDown()
@@ -78,9 +78,9 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         }
 
         if context.gameMode == .topicMode {
-            layout(2, 56, 28, 8, button)
+            layout(2, 56, 30, 8, button)
         } else {
-            layout(2, 46, 28, 8, button)
+            layout(2, 46, 30, 8, button)
         }
 
         addSubview(button)
@@ -88,11 +88,13 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         countDownTimer?.invalidate()
         countDownTimer = Timer.scheduledTimer(withTimeInterval: 1.00, repeats: true) { _ in
             leftSeconds -= 1
-            pauseOrPlayButton?.setTitle(" 次の挑戦 (\(leftSeconds)秒)", for: .normal)
+            pauseOrPlayButton?.setTitle(" \(i18n.nextGame) (\(leftSeconds)\(i18n.secs))", for: .normal)
             guard leftSeconds > 0 else {
                 countDownTimer?.invalidate()
-                dismissTwoVC(animated: false) {
-                    launchNextGame()
+                if !isSimulator {
+                    dismissTwoVC(animated: false) {
+                        launchNextGame()
+                    }
                 }
                 return
             }
@@ -116,9 +118,9 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         }
 
         if context.gameMode == .topicMode {
-            layout(32, 56, 14, 8, backButton)
+            layout(34, 56, 12, 8, backButton)
         } else {
-            layout(32, 46, 14, 8, backButton)
+            layout(34, 46, 12, 8, backButton)
         }
 
         addSubview(backButton)

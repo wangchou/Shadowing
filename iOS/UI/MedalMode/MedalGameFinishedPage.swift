@@ -112,10 +112,11 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
         rect.enlargeIn(delay: delay, duration: duration)
 
-        let attrText = getStrokeText(gameLang == .jp ? "日本語" : "英語",
+        let fontSize = i18n.language.count < 6 ? 10 * step : 7 * step
+        let attrText = getStrokeText(i18n.language,
                                      rgb(220, 220, 220),
                                      strokeWidth: strokeWidth/2,
-                                     font: MyFont.bold(ofSize: 10 * step))
+                                     font: MyFont.bold(ofSize: fontSize))
         let label = addAttrText(x: 12, y: y - 8, h: 12, text: attrText)
         label.centerX(frame)
         label.textAlignment = .center
@@ -147,7 +148,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     }
 
     private func addCompleteness(y: Int, delay: TimeInterval = 0, duration: TimeInterval) {
-        var attrText = getStrokeText("完成率",
+        var attrText = getStrokeText(i18n.completeness,
                                  .white,
                                  strokeWidth: strokeWidth/2,
                                  font: MyFont.bold(ofSize: 3 * step))
@@ -174,7 +175,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     }
 
     private func addRank(y: Int, delay: TimeInterval = 0, duration: TimeInterval) {
-        var attrText = getStrokeText("判定",
+        var attrText = getStrokeText(i18n.rank,
                                  .white,
                                  strokeWidth: strokeWidth/2,
                                  font: MyFont.bold(ofSize: 3 * step))
@@ -212,7 +213,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         let button = createButton(title: "", bgColor: .red)
         let countDownSecs = 5
         button.setIconImage(named: "baseline_play_arrow_black_48pt",
-                            title: " 次の挑戦 (\(countDownSecs)秒)",
+                            title: " \(i18n.nextGame) (\(countDownSecs)\(i18n.secs))",
                             tintColor: .white,
                             isIconOnLeft: true)
         button.titleLabel?.font = MyFont.regular(ofSize: step * 3.2 )
@@ -231,7 +232,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         countDownTimer?.invalidate()
         countDownTimer = Timer.scheduledTimer(withTimeInterval: 1.00, repeats: true) { _ in
             leftSeconds -= 1
-            playButton?.setTitle(" 次の挑戦 (\(leftSeconds)秒)", for: .normal)
+            playButton?.setTitle(" \(i18n.nextGame) (\(leftSeconds)\(i18n.secs))", for: .normal)
             guard leftSeconds > 0 else {
                 countDownTimer?.invalidate()
                 if !isSimulator {

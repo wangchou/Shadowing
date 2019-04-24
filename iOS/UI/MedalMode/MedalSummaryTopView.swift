@@ -23,7 +23,7 @@ private func dayOptionString(option: DaysOption) -> String {
     case .oneMonth:
         return i18n.thirtyDays
     case .all:
-        return i18n.allDays
+        return i18n.all
     }
 }
 
@@ -117,7 +117,13 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         let subTitleGray = rgb(155, 155, 155)
         let subTitleFont = MyFont.regular(ofSize: step * 2)
 
-        let langLabel = addText(x: 2, y: y + 3, h: 8, text: gameLang == .jp ? "日本語" : "英語", color: .white)
+        let labelText = gameLang == .jp ? i18n.japanese : i18n.english
+        let labelHeight = labelText.count > 6 ? 6 : 8
+        let labelYPlus = labelText.count > 6 ? 4 : 3
+
+        let langLabel = addText(x: 2, y: y + labelYPlus, h: labelHeight,
+                                text: labelText,
+                                color: .white)
         langLabel.sizeToFit()
 
         // MARK: - Add day option button

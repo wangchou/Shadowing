@@ -57,6 +57,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     }
 
     func viewWillAppear() {
+        context.gameMode = .medalMode
         removeAllSubviews()
         addTextbackground(bgColor: rgb(60, 60, 60), textColor: textGold)
         addTopBar(y: 5)
@@ -125,10 +126,12 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     private func addLangTitleBox(y: Int) {
         let rect = addRect(x: 3, y: y+6, w: 42, h: 31, color: UIColor.black.withAlphaComponent(0.4))
         rect.roundBorder(borderWidth: 0, cornerRadius: step * 2, color: .clear)
-        let attrTitle = getStrokeText(gameLang == .jp ? "日本語" : "英語",
+        let font = (i18n.isZh || i18n.isJa) ? MyFont.bold(ofSize: 9*step) :
+                                              MyFont.bold(ofSize: 7*step)
+        let attrTitle = getStrokeText(gameLang == .jp ? i18n.japanese : i18n.english,
                                       .white,
                                       strokeWidth: Float(step * -1/3),
-                                      font: MyFont.bold(ofSize: 9*step))
+                                      font: font)
 
         let label = addAttrText(x: 7, y: y, h: 13, text: attrTitle)
         label.sizeToFit()
@@ -138,7 +141,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         let changeLangButton = UIButton()
         changeLangButton.backgroundColor = UIColor.white.withAlphaComponent(0.4)
         changeLangButton.roundBorder(borderWidth: 0, cornerRadius: step, color: .clear)
-        let attrTitle = getStrokeText(gameLang == .jp ? "英" : "日",
+        let attrTitle = getStrokeText(gameLang == .jp ? i18n.enAbbr : i18n.jaAbbr,
                                       rgb(200, 200, 200),
                                       strokeWidth: Float(step * -1/3),
                                       font: MyFont.bold(ofSize: 4*step))
