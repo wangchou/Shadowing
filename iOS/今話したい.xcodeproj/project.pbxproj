@@ -31,6 +31,7 @@
 		BE5E0CCE2183477400832E88 /* I18n.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5E0CCD2183477400832E88 /* I18n.swift */; };
 		BE65A939209C6E67006645CA /* GameEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65A938209C6E67006645CA /* GameEvents.swift */; };
 		BE67D2A921561A93007FE420 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE67D2A821561A92007FE420 /* Assets.xcassets */; };
+		BE6B56A5227087C00009A28C /* MedalCorrectionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6B56A4227087C00009A28C /* MedalCorrectionPage.swift */; };
 		BE6BB6012225286C00BE3CAC /* TopicButtonAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6BB6002225286C00BE3CAC /* TopicButtonAreaView.swift */; };
 		BE6C78542165DD2B0072B1C5 /* GameReportBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6C78532165DD2B0072B1C5 /* GameReportBoxView.swift */; };
 		BE6EA1FD218B6BB4004749F5 /* GameLang.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6EA1FC218B6BB4004749F5 /* GameLang.swift */; };
@@ -165,6 +166,7 @@
 		BE5E0CCD2183477400832E88 /* I18n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = I18n.swift; sourceTree = "<group>"; };
 		BE65A938209C6E67006645CA /* GameEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEvents.swift; sourceTree = "<group>"; };
 		BE67D2A821561A92007FE420 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BE6B56A4227087C00009A28C /* MedalCorrectionPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalCorrectionPage.swift; sourceTree = "<group>"; };
 		BE6BB6002225286C00BE3CAC /* TopicButtonAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicButtonAreaView.swift; sourceTree = "<group>"; };
 		BE6C78532165DD2B0072B1C5 /* GameReportBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameReportBoxView.swift; sourceTree = "<group>"; };
 		BE6EA1FC218B6BB4004749F5 /* GameLang.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLang.swift; sourceTree = "<group>"; };
@@ -421,6 +423,7 @@
 				BEBF5D1D225624C50069C34F /* MedalGameFinishedPage.swift */,
 				BE82FE602269C5A900907388 /* MedalSummaryPage.swift */,
 				BE2473A5226DDA2100EDFA5E /* MedalSummaryTopView.swift */,
+				BE6B56A4227087C00009A28C /* MedalCorrectionPage.swift */,
 			);
 			path = MedalMode;
 			sourceTree = "<group>";
@@ -693,6 +696,7 @@
 				BE76F11E214F56F6004E130B /* SentencesTableCell.swift in Sources */,
 				BED1CC0921452A54004AE397 /* GameSetting.swift in Sources */,
 				BEF28B6320B52BF700385273 /* UI.swift in Sources */,
+				BE6B56A5227087C00009A28C /* MedalCorrectionPage.swift in Sources */,
 				BE65A939209C6E67006645CA /* GameEvents.swift in Sources */,
 				BEE3069021835230007C679F /* GameCommands.swift in Sources */,
 				BE6EA1FD218B6BB4004749F5 /* GameLang.swift in Sources */,

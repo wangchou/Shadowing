@@ -12,6 +12,7 @@ import Promises
 private let context = GameContext.shared
 
 class SentencesTableCell: UITableViewCell {
+    static var id = "SentenceCell"
     static var isPracticing: Bool = false
     private var buttonColor = rgb(42, 163, 239)
     @IBOutlet weak var scoreLabel: UILabel!

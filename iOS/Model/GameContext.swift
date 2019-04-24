@@ -211,6 +211,34 @@ extension GameContext {
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: gameMedal.lowLevel)
     }
 
+    func loadMedalCorrectionSentence() -> Promise<Void> {
+        let promise = Promise<Void>.pending()
+        var sentencesSet: Set<String> = []
+        let todayKey = getDateKey(date: Date())
+        for r in GameContext.shared.gameHistory {
+            if todayKey == getDateKey(date: r.startedTime) {
+                for string in r.sentencesScore.keys {
+                    sentencesSet.insert(string)
+                }
+            }
+        }
+        let unsortedSentences = Array(sentencesSet)
+        var scores: [String: Int] = [:]
+
+        all(unsortedSentences.map { str in
+            calculateScore(str, userSaidSentences[str] ?? "")
+        }).then { scoresArray in
+            for i in 0 ..< unsortedSentences.count {
+                scores[unsortedSentences[i]] = scoresArray[i].value
+            }
+            self.sentences = unsortedSentences.sorted {
+                return (scores[$0] ?? 0) < (scores[$1] ?? 0)
+            }
+            promise.fulfill(())
+        }
+        return promise
+    }
+
     func nextSentence() -> Bool {
         sentenceIndex += 1
         if isSimulator {

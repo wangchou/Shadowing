@@ -144,7 +144,7 @@ extension CGRect {
     var y: CGFloat {
         return origin.y
     }
-    
+
     var x: CGFloat {
         return origin.x
     }
@@ -312,6 +312,8 @@ func getVC(_ name: String) -> UIViewController {
         return MedalPage()
     case MedalSummaryPage.id:
         return MedalSummaryPage()
+    case MedalCorrectionPage.id:
+        return MedalCorrectionPage()
     default:
         return UIStoryboard(name: "Main", bundle: nil)
             .instantiateViewController(withIdentifier: name)
