@@ -56,19 +56,19 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
 
     private func addTableTitleBar() {
         tableTitleBar = addRect(x: 0, y: y+32, w: 48, h: 6, color: rgb(228, 182, 107))
-        var label = addText(x: 0, y: y+32, w: 15, h: 5, text: i18n.date)
+        var label = addText(x: 0, y: y+32, w: 15, h: 4, text: i18n.date)
         label.textAlignment = .center
         label.centerY(tableTitleBar.frame)
 
-        label = addText(x: 15, y: y+32, w: 11, h: 5, text: i18n.medal)
+        label = addText(x: 15, y: y+32, w: 11, h: 4, text: i18n.medal)
         label.textAlignment = .center
         label.centerY(tableTitleBar.frame)
 
-        label = addText(x: 26, y: y+32, w: 11, h: 5, text: i18n.simpleGoalText)
+        label = addText(x: 26, y: y+32, w: 11, h: 4, text: i18n.simpleGoalText)
         label.textAlignment = .center
         label.centerY(tableTitleBar.frame)
 
-        label = addText(x: 37, y: y+32, w: 11, h: 5, text: i18n.time)
+        label = addText(x: 37, y: y+32, w: 11, h: 4, text: i18n.time)
         label.textAlignment = .center
         label.centerY(tableTitleBar.frame)
 
@@ -171,44 +171,50 @@ extension MedalSummaryPageView: UITableViewDelegate {
 class MedalSummaryTableCell: UITableViewCell, GridLayout, ReloadableView {
     static let id = "MedalSummaryTableCell"
 
+    var timeRect = UIView()
     var timeLabel = UILabel()
+    var weekLabel = UILabel()
     var medalCountLabel = UILabel()
     var goalPercentLabel = UILabel()
     var playTimeLabel = UILabel()
+
+    var red = UIColor.red.withSaturation(1)
+    var green = myGreen.withSaturation(1)
+    var orange = myOrange.withSaturation(1)
+    var blue = myBlue.withSaturation(1)
 
     var timeString: String = "11/11 日" {
         didSet {
             let monthAndDay = timeString.split(separator: " ")[0].s
             let weekDay = timeString.split(separator: " ")[1].s
             let isWeekend = weekDay == "日" || weekDay == "六" || weekDay == "土" || weekDay == "S"
-            print(weekDay, isWeekend)
-            let attrText = NSMutableAttributedString()
-            attrText.append(colorText(monthAndDay + " ", .black, fontSize: step * 3))
-            attrText.append(colorText(weekDay,
-                                      isWeekend ? UIColor.red.withBrightness(0.8) : .black,
-                                      fontSize: step * 3))
-            timeLabel.attributedText = attrText
+
+            timeLabel.text = monthAndDay
             timeLabel.frame.size.height = frame.height
-            timeLabel.backgroundColor = isWeekend ? rgb(255, 230, 230) : rgb(240, 240, 240)
+
+            weekLabel.text = weekDay
+            weekLabel.textColor = isWeekend ? UIColor.red.withBrightness(0.8) : .black
+
+            timeRect.backgroundColor = isWeekend ? rgb(255, 230, 230) : rgb(240, 240, 240)
         }
     }
     var medalCount: Int = 10 {
         didSet {
             let medalCountText = "\(medalCount >= 0 ? "+" : "")\(medalCount)"
             medalCountLabel.attributedText = getStrokeText(medalCountText,
-                                                           medalCount > 0 ? myGreen :
-                                                           (medalCount == 0 ? .white : .red),
-                                                           strokeWidth: -1 * Float(step/4),
+                                                           medalCount > 0 ? green :
+                                                           (medalCount == 0 ? .white : red),
+                                                           strokeWidth: -1 * Float(step/3),
                                                            strokColor: .black,
-                                                           font: MyFont.heavyDigit(ofSize: step * 3.2))
+                                                           font: MyFont.heavyDigit(ofSize: step * 3))
         }
     }
     var goalPercent: Float = 0.3 {
         didSet {
             let percentText = goalPercent >= 1 ? i18n.done :"\(String(format: "%.0f", goalPercent * 100))%"
             var color = goalPercent >= 1 ? myBlue :
-                       (goalPercent >= 0.8 ? myGreen :
-                       (goalPercent >= 0.6 ? myOrange: .red))
+                        (goalPercent >= 0.8 ? green :
+                        (goalPercent >= 0.6 ? orange: red))
 
             if goalPercent == 0 {
                 color = .black
@@ -234,21 +240,27 @@ class MedalSummaryTableCell: UITableViewCell, GridLayout, ReloadableView {
         frame.size.width = screen.width
         frame.size.height = step * 6
 
+        addSubview(timeRect)
+        timeRect.backgroundColor = rgb(216, 216, 216)
+
         addSubview(timeLabel)
-        timeLabel.textAlignment = .center
-        timeLabel.font = MyFont.regular(ofSize: step * 3)
-        timeLabel.backgroundColor = rgb(216, 216, 216)
+        timeLabel.textAlignment = .right
+        timeLabel.font = MyFont.regular(ofSize: step * 2.5)
+
+        addSubview(weekLabel)
+        weekLabel.textAlignment = .center
+        weekLabel.font = MyFont.regular(ofSize: step * 2.5)
 
         addSubview(medalCountLabel)
-        medalCountLabel.textAlignment = .center
+        medalCountLabel.textAlignment = .right
 
         addSubview(goalPercentLabel)
-        goalPercentLabel.textAlignment = .center
-        goalPercentLabel.font = MyFont.regular(ofSize: step * 3)
+        goalPercentLabel.textAlignment = .right
+        goalPercentLabel.font = MyFont.regular(ofSize: step * 2.5)
 
         addSubview(playTimeLabel)
         playTimeLabel.textAlignment = .right
-        playTimeLabel.font = MyFont.regular(ofSize: step * 3)
+        playTimeLabel.font = MyFont.regular(ofSize: step * 2.5)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -257,10 +269,12 @@ class MedalSummaryTableCell: UITableViewCell, GridLayout, ReloadableView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        layout(0, 0, 15, 6, timeLabel)
-        layout(15, 0, 11, 6, medalCountLabel)
-        layout(26, 0, 11, 6, goalPercentLabel)
-        layout(37, 0, 10, 6, playTimeLabel)
+        layout(0, 0, 14, 6, timeRect)
+        layout(0, 0, 8, 6, timeLabel)
+        layout(8, 0, 5, 6, weekLabel)
+        layout(14, 0, 9, 6, medalCountLabel)
+        layout(26, 0, 8, 6, goalPercentLabel)
+        layout(37, 0, 9, 6, playTimeLabel)
     }
     func viewWillAppear() {
     }
