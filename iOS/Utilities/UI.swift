@@ -24,6 +24,19 @@ extension UIView {
     }
     #endif
 
+    var x0: CGFloat {
+        return frame.x
+    }
+    var x1: CGFloat {
+        return frame.x + frame.width
+    }
+    var y0: CGFloat {
+        return frame.y
+    }
+    var y1: CGFloat {
+        return frame.y + frame.height
+    }
+
     func roundBorder(borderWidth: CGFloat = 1.5, cornerRadius: CGFloat = 15, color: UIColor = .black) {
         layer.borderWidth = borderWidth
         layer.cornerRadius = cornerRadius

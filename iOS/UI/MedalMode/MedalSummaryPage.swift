@@ -74,11 +74,11 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
 
         var line = addRect(x: 0, y: 0, w: 48, h: 1, color: .black)
         line.frame.size.height = 0.5
-        line.frame.origin.y = tableTitleBar.frame.y
+        line.frame.origin.y = tableTitleBar.y0
 
         line = addRect(x: 0, y: 0, w: 48, h: 1, color: .darkGray)
         line.frame.size.height = 0.5
-        line.frame.origin.y = tableTitleBar.frame.y + tableTitleBar.frame.height - 0.5
+        line.frame.origin.y = tableTitleBar.y1 - 0.5
     }
 
     private func addBottomTable() {
@@ -90,20 +90,21 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
         tableView.separatorColor = rgb(200, 200, 200)
         tableView.dataSource = self
         tableView.delegate = self
+
+        var height = screen.height
+        height -= tableTitleBar.y1
+        height -= step * 7
         tableView.frame = CGRect(x: 0,
-                                 y: tableTitleBar.frame.y + tableTitleBar.frame.height,
+                                 y: tableTitleBar.y1,
                                  width: screen.width,
-                                 height: screen.height -
-                                         topView.frame.height -
-                                         tableTitleBar.frame.height -
-                                         step * 7)
+                                 height: height)
         addSubview(tableView)
     }
 
     private func addCloseButton() {
         let button = UIButton()
         button.frame = CGRect(x: 0,
-                              y: tableView.frame.origin.y + tableView.frame.height,
+                              y: tableView.y1,
                               width: screen.width,
                               height: step * 7)
         button.backgroundColor = rgb(180, 180, 180)
@@ -117,7 +118,7 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
 
         let line = addRect(x: 0, y: 0, w: 48, h: 1, color: .darkGray)
         line.frame.size.height = 0.5
-        line.frame.origin.y = button.frame.y
+        line.frame.origin.y = button.y0
     }
 
     private func getDateString(date: Date) -> String {

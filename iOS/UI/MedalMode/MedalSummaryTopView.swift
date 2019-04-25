@@ -134,9 +134,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         daysButton.backgroundColor = subTitleGray
         daysButton.roundBorder(borderWidth: 0.5, cornerRadius: step, color: .clear)
         daysButton.sizeToFit()
-        daysButton.frame.origin.x = langLabel.frame.x +
-                                    langLabel.frame.width +
-                                    2 * step
+        daysButton.frame.origin.x = langLabel.x1 + 2 * step
         daysButton.frame.size.width += 2 * step
         daysButton.frame.size.height = 4 * step
         daysButton.centerY(langLabel.frame)
@@ -160,7 +158,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         label.centerY(originFrame)
         label.moveToRight(originFrame)
         medalView.centerY(label.frame)
-        medalView.frame.origin.x = label.frame.x - medalView.frame.width - step/2
+        medalView.frame.origin.x = label.x0 - medalView.frame.width - step/2
 
         label = addText(x: 36, y: y+12, w: 10, h: 3, text: i18n.playTime,
                         font: subTitleFont,

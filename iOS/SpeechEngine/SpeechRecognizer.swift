@@ -147,7 +147,7 @@ class SpeechRecognizer: NSObject {
 
         if let error = error {
             if let userInfo = error._userInfo,
-               let desc = userInfo["NSLocalizedDescription"] as? String {
+               let desc = (userInfo["NSLocalizedDescription"] as? String) {
                 // Retry means didn't hear anything please say again
                 if desc == "Retry" {
                     promise.fulfill("")

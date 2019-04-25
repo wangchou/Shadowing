@@ -106,7 +106,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.frame = CGRect(x: 0,
-                                 y: topView.frame.y + topView.frame.height,
+                                 y: topView.y1,
                                  width: screen.width,
                                  height: screen.height -
                                     topView.frame.height -
@@ -141,11 +141,11 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView {
 
         var line = addRect(x: 0, y: 0, w: 48, h: 1, color: .darkGray)
         line.frame.size.height = 0.5
-        line.frame.origin.y = button.frame.y
+        line.frame.origin.y = button.y0
 
         line = addRect(x: 41, y: 0, w: 1, h: 7, color: rgb(130, 130, 130))
         line.frame.size.width = 0.5
-        line.frame.origin.y = button.frame.y
+        line.frame.origin.y = button.y0
     }
 
     @objc func onPeekButtonClicked() {
@@ -170,7 +170,8 @@ extension MedalCorrectionPageView: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SentencesTableCell.id,                                                            for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: SentencesTableCell.id,
+                                                 for: indexPath)
         guard let contentCell = cell as? SentencesTableCell else {
             print("detailCell convert error")
             return cell

@@ -79,7 +79,7 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
         medalCountLabel.centerY(medalView.frame)
 
         // medal position
-        medalView.frame.origin.x = medalCountLabel.frame.x -
+        medalView.frame.origin.x = medalCountLabel.x0 -
                                     medalView.frame.width -
                                     step/2
 
@@ -192,9 +192,9 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
         label.sizeToFit()
         label.moveToRight(rect)
         label.centerY(medalView.frame)
-        medalView.frame.origin.x = label.frame.x -
-            medalView.frame.width -
-            step/2
+        medalView.frame.origin.x = label.x0 -
+                                   medalView.frame.width -
+                                   step/2
         medalCountLabel = label
     }
 }

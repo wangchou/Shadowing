@@ -4,7 +4,7 @@
 //
 //  Created by Wangchou Lu on H30/04/16.
 //  Copyright © 平成30年 Lu, WangChou. All rights reserved.
-//
+// swiftlint:disable file_length
 
 import Foundation
 import AVFoundation
@@ -472,3 +472,5 @@ func isUnderDailySentenceLimit() -> Bool {
     return false
 }
 #endif
+
+// swiftlint:enable file_length 

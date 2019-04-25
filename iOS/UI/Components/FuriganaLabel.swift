@@ -4,7 +4,7 @@ import UIKit
 class FuriganaLabel: UILabel {
     private var height: CGFloat = 60
     private var topShift: CGFloat {
-        return 6 + (text?.jpnType == JpnType.noKanjiAndNumber ? 5 : 0)
+        return 6 + ((text?.jpnType == JpnType.noKanjiAndNumber) ? 5 : 0)
     }
     var widthPadding: CGFloat = 7
 
@@ -56,8 +56,8 @@ class FuriganaLabel: UILabel {
         var height = CGFloat()
 
         let textDrawRect = CGRect(
-            x: self.frame.x,
-            y: self.frame.y,
+            x: self.x0,
+            y: self.y0,
             width: width - widthPadding * 2,
             height: CGFloat.greatestFiniteMagnitude
         )
@@ -86,8 +86,8 @@ class FuriganaLabel: UILabel {
         let framesetter = CTFramesetterCreateWithAttributedString(attributed)
         repeat {
             let textDrawRect = CGRect(
-                x: self.frame.x,
-                y: self.frame.y,
+                x: self.x0,
+                y: self.y0,
                 width: width - widthPadding * 2,
                 height: CGFloat.greatestFiniteMagnitude
             )
