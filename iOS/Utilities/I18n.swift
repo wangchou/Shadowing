@@ -616,6 +616,10 @@ class I18n {
         if gameLang == .jp { return "すごい" }
         return "Great"
     }
+    var correct: String { // excellent + great
+        if gameLang == .jp { return "正しい" }
+        return "Correct"
+    }
     var good: String {
         if gameLang == .jp { return "いいね" }
         return "Good"
@@ -686,6 +690,12 @@ class I18n {
         if isJa { return "今日の目標" }
         if isZh { return "今日的目標" }
         return "Today's Goal"
+    }
+
+    var todayAndLanguageReview: String {
+        if isJa { return "今日の間違い" }
+        if isZh { return "今日的錯誤" }
+        return "Mistakes Today"
     }
 
     var medalMode: String {

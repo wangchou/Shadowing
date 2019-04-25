@@ -155,7 +155,8 @@ extension TopicDetailPage: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContentTableCell", for: indexPath)
         guard let contentCell = cell as? SentencesTableCell else { print("detailCell convert error"); return cell }
         let sentence = context.sentences[indexPath.row]
-        contentCell.update(sentence: sentence, isShowTranslate: context.gameSetting.isShowTranslationInPractice)
+        contentCell.update(sentence: sentence,
+                           isShowTranslate: context.gameSetting.isShowTranslationInPractice)
 
         return contentCell
     }

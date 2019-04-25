@@ -211,8 +211,7 @@ extension GameContext {
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: gameMedal.lowLevel)
     }
 
-    func loadMedalCorrectionSentence() -> Promise<Void> {
-        let promise = Promise<Void>.pending()
+    func loadMedalCorrectionSentence() {
         var sentencesSet: Set<String> = []
         let todayKey = getDateKey(date: Date())
         for r in GameContext.shared.gameHistory {
@@ -222,21 +221,9 @@ extension GameContext {
                 }
             }
         }
-        let unsortedSentences = Array(sentencesSet)
-        var scores: [String: Int] = [:]
-
-        all(unsortedSentences.map { str in
-            calculateScore(str, userSaidSentences[str] ?? "")
-        }).then { scoresArray in
-            for i in 0 ..< unsortedSentences.count {
-                scores[unsortedSentences[i]] = scoresArray[i].value
-            }
-            self.sentences = unsortedSentences.sorted {
-                return (scores[$0] ?? 0) < (scores[$1] ?? 0)
-            }
-            promise.fulfill(())
+        sentences = Array(sentencesSet).sorted {
+            return (sentenceScores[$0]?.value ?? 0) < (sentenceScores[$1]?.value ?? 0)
         }
-        return promise
     }
 
     func nextSentence() -> Bool {

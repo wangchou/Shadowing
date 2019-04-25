@@ -195,9 +195,8 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
         addButton(iconName: "round_insert_chart_outlined_black_\(iconSize)",
         10, yMax - 9, 7, 7) {
-            context.loadMedalCorrectionSentence().then {
-                launchVC(MedalCorrectionPage.id)
-            }
+            context.loadMedalCorrectionSentence()
+            launchVC(MedalCorrectionPage.id)
         }
 
         if i18n.isZh {

@@ -31,20 +31,68 @@ class MedalCorrectionPage: UIViewController {
 class MedalCorrectionPageView: UIView, GridLayout, ReloadableView {
     var topView: UIView!
     var tableView: UITableView!
-    var sentences: [String] = []
+    var gridCount: Int = 48
+    var sentences: [String] {
+        return context.sentences
+    }
+    var missedCount: Int {
+        var count = 0
+        for str in sentences {
+            let score = sentenceScores[str]?.value ?? 0
+            if score < 60 {
+                count += 1
+            }
+        }
+        return count
+    }
+
+    var goodCount: Int {
+        var count = 0
+        for str in sentences {
+            let score = sentenceScores[str]?.value ?? 0
+            if score > 60 && score < 80 {
+                count += 1
+            }
+        }
+        return count
+    }
 
     func viewWillAppear() {
         removeAllSubviews()
         addTopView()
         addBottomTable()
-        addCloseButton()
+        addBottomButtons()
     }
 
     private func addTopView() {
         topView = UIView()
         topView.backgroundColor = rgb(60, 60, 60)
-        layout(0, 0, gridCount, 10, topView)
+        layout(0, 0, gridCount, 16, topView)
         addSubview(topView)
+
+        addText(x: 2, y: 3, h: 4, text: i18n.todayAndLanguageReview, color: .white)
+
+        let orangeCount = goodCount
+        let redCount = missedCount
+        let greenCount = sentences.count - orangeCount - redCount
+
+        let x = 3
+        let y = 8
+
+        func addCountBox(x: Int, y: Int, title: String, count: Int, color: UIColor) {
+            let rect = addRect(x: x, y: y, w: 9, h: 6, color: .black)
+            rect.roundBorder(borderWidth: 0.5, cornerRadius: step, color: .clear)
+            addText(x: x+1, y: y, w: 9, h: 2, text: title, color: .white)
+            let label = addText(x: x, y: y+1, w: 8, h: 5, text: "\(count)", color: color)
+            label.textAlignment = .right
+        }
+
+        addCountBox(x: x, y: y, title: i18n.correct, count: greenCount, color: myGreen)
+        addCountBox(x: x+10, y: y, title: i18n.good, count: orangeCount, color: myOrange)
+        addCountBox(x: x+20, y: y, title: i18n.wrong, count: redCount, color: myRed)
+
+        addRect(x: 34, y: 8, w: 12, h: 6, color: UIColor.red.withAlphaComponent(0.7))
+            .roundBorder(borderWidth: 0.5, cornerRadius: step, color: .clear)
     }
 
     private func addBottomTable() {
@@ -66,24 +114,48 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView {
         addSubview(tableView)
     }
 
-    private func addCloseButton() {
-        let button = UIButton()
+    private func addBottomButtons() {
+        var button = UIButton()
         button.frame = CGRect(x: 0,
                               y: tableView.frame.origin.y + tableView.frame.height,
                               width: screen.width,
                               height: step * 7)
-        button.backgroundColor = rgb(180, 180, 180)
-        button.setTitle("x", for: .normal)
-        button.titleLabel?.font = MyFont.regular(ofSize: step * 4)
-        button.setTitleColor(.black, for: .normal)
-        button.addTapGestureRecognizer {
-            dismissVC()
-        }
+        button.backgroundColor = rgb(73, 160, 83)
+        button.setTitle("\(i18n.english) / \(i18n.japanese)", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(UIColor.white.withAlphaComponent(0.5), for: .highlighted)
+        button.addTarget(self, action: #selector(onPeekButtonClicked), for: .touchUpInside)
         addSubview(button)
 
-        let line = addRect(x: 0, y: 0, w: 48, h: 1, color: .darkGray)
+        button = UIButton()
+        button.frame = CGRect(x: 41 * step,
+                              y: tableView.frame.origin.y + tableView.frame.height,
+                              width: 7 * step,
+                              height: step * 7)
+        button.backgroundColor = rgb(73, 160, 83).withSaturation(0)
+        button.setTitle("X", for: .normal)
+        button.setTitleColor(.lightText, for: .normal)
+        button.setTitleColor(UIColor.lightText.withAlphaComponent(0.5), for: .highlighted)
+        button.addTarget(self, action: #selector(onCloseButtonClicked), for: .touchUpInside)
+        addSubview(button)
+
+        var line = addRect(x: 0, y: 0, w: 48, h: 1, color: .darkGray)
         line.frame.size.height = 0.5
         line.frame.origin.y = button.frame.y
+
+        line = addRect(x: 41, y: 0, w: 1, h: 7, color: rgb(130, 130, 130))
+        line.frame.size.width = 0.5
+        line.frame.origin.y = button.frame.y
+    }
+
+    @objc func onPeekButtonClicked() {
+        context.gameSetting.isShowTranslationInPractice = !context.gameSetting.isShowTranslationInPractice
+        saveGameSetting()
+        tableView.reloadData()
+    }
+
+    @objc func onCloseButtonClicked() {
+        dismissVC()
     }
 
 }
@@ -98,14 +170,18 @@ extension MedalCorrectionPageView: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SentencesTableCell.id) as! SentencesTableCell
-        cell.selectionStyle = .none
+        let cell = tableView.dequeueReusableCell(withIdentifier: SentencesTableCell.id,                                                            for: indexPath)
+        guard let contentCell = cell as? SentencesTableCell else {
+            print("detailCell convert error")
+            return cell
+        }
+        contentCell.selectionStyle = .none
 
         let sentence = context.sentences[indexPath.row]
-        cell.update(sentence: sentence,
-                    isShowTranslate: context.gameSetting.isShowTranslationInPractice)
+        contentCell.update(sentence: sentence,
+                           isShowTranslate: context.gameSetting.isShowTranslationInPractice)
 
-        return cell
+        return contentCell
     }
 }
 
