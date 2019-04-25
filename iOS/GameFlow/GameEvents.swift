@@ -23,6 +23,8 @@ enum EventType {
     case levelMeterUpdate
 
     case gameResume
+
+    case practiceEnded
 }
 
 struct Event {

@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+class GridUIView: UIView, GridLayout {}
+
 enum GridAxis {
     case horizontal
     case vertical
@@ -97,5 +99,12 @@ extension GridLayout where Self: UIView {
             width: w.c * step,
             height: h.c * step
         )
+    }
+
+    var bottomButtonHeight: CGFloat {
+        return max(6 * step, getBottomPadding() + 4 * step)
+    }
+    var bottomButtonFont: UIFont {
+        return MyFont.regular(ofSize: step * 3)
     }
 }

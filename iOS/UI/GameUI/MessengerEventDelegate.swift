@@ -94,6 +94,9 @@ extension Messenger: GameEventDelegate {
             messengerBar.isGameStopped = false
             messengerBar.viewWillAppear()
 
+        case .practiceEnded:
+            return
+
         case .gameStateChanged:
             if context.gameState == .gameOver {
                 stopEventObserving(self)
@@ -128,6 +131,7 @@ extension Messenger: GameEventDelegate {
             if context.gameState == .echoMethod {
                 addLabel(rubyAttrStr(i18n.listenToEcho), pos: .center)
             }
+
         }
     }
 

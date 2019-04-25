@@ -222,8 +222,8 @@ private func rollingText(view: UIView) {
 extension GridLayout where Self: UIView {
     // MARK: - textBackground
     func addTextbackground(bgColor: UIColor, textColor: UIColor) {
-        if isSimulator { return }
         backgroundColor = bgColor
+        if isSimulator { return }
         let num = Int(sqrt(pow(screen.width, 2) + pow(screen.height, 2)) / step)/8
         let level = context.gameMedal.lowLevel
         let sentences = getRandSentences(level: level, numOfSentences: num * 4)

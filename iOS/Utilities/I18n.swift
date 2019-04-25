@@ -326,7 +326,7 @@ class I18n {
 
     var topicPageTitile: String {
         if isZh { return "主題 (\(language))" }
-        if isZh { return "テーマ (\(language))" }
+        if isJa { return "テーマ (\(language))" }
         return "Topics (ja)"
     }
 
@@ -693,9 +693,9 @@ class I18n {
     }
 
     var todayAndLanguageReview: String {
-        if isJa { return "今日の間違い" }
-        if isZh { return "今日的錯誤" }
-        return "Mistakes Today"
+        if isJa { return "今日話した\(language)" }
+        if isZh { return "今天說的\(language)" }
+        return "\(language) I said today"
     }
 
     var medalMode: String {

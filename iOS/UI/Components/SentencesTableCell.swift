@@ -158,7 +158,6 @@ extension SentencesTableCell {
 
     private func calculateScorePart(userSaidSentence: String) -> Promise<Score> {
         userSaidSentences[targetString] = userSaidSentence
-
         return calculateScore(targetString, userSaidSentence)
     }
 
@@ -178,6 +177,7 @@ extension SentencesTableCell {
         tableView?.endUpdates()
 
         sentenceScores[targetString] = score
+        postEvent(.practiceEnded)
         saveGameMiscData()
         return assisantSay(score.text)
     }

@@ -36,6 +36,7 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
     var y: Int {
         return Int((getTopPadding() - 20)/step)
     }
+
     var tableView: UITableView!
 
     func viewWillAppear() {
@@ -93,7 +94,7 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
 
         var height = screen.height
         height -= tableTitleBar.y1
-        height -= step * 7
+        height -= bottomButtonHeight
         tableView.frame = CGRect(x: 0,
                                  y: tableTitleBar.y1,
                                  width: screen.width,
@@ -102,14 +103,20 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
     }
 
     private func addCloseButton() {
-        let button = UIButton()
-        button.frame = CGRect(x: 0,
+        let bgRect = UIView()
+        bgRect.frame = CGRect(x: 0,
                               y: tableView.y1,
                               width: screen.width,
-                              height: step * 7)
+                              height: bottomButtonHeight)
+        bgRect.backgroundColor = rgb(180, 180, 180)
+        addSubview(bgRect)
+        let button = UIButton()
+        button.frame = bgRect.frame
+        button.frame.size.height = 6 * step
         button.backgroundColor = rgb(180, 180, 180)
-        button.setTitle("x", for: .normal)
-        button.titleLabel?.font = MyFont.regular(ofSize: step * 4)
+        button.setTitle("X", for: .normal)
+        button.setTitleColor(.lightGray, for: .highlighted)
+        button.titleLabel?.font = bottomButtonFont
         button.setTitleColor(.black, for: .normal)
         button.addTapGestureRecognizer {
             dismissVC()
