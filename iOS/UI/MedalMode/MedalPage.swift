@@ -188,12 +188,12 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     }
 
     func addBottomButtons() {
-        addButton(iconName: "round_insert_chart_outlined_black_\(iconSize)",
+        addButton(iconName: "round_timeline_black_\(iconSize)",
                   2, yMax - 9, 7, 7) {
             launchVC(MedalSummaryPage.id)
         }
 
-        addButton(iconName: "round_insert_chart_outlined_black_\(iconSize)",
+        addButton(iconName: "round_spellcheck_black_\(iconSize)",
         10, yMax - 9, 7, 7) {
             context.loadMedalCorrectionSentence()
             launchVC(MedalCorrectionPage.id)
