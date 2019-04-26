@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Promises
 
 private let context = GameContext.shared
 
@@ -35,10 +36,6 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
     var isWrongSelected: Bool = true
     var isGoodSelected: Bool = true
     var isCorrectSelected: Bool = false
-
-    var isPracticing: Bool = false
-    var practiceIdx: Int = 0
-    var practicingCell: SentencesTableCell?
     var sentences: [String] {
         return context.sentences
     }
@@ -105,18 +102,18 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         topView?.removeFromSuperview()
         topView = GridUIView()
         topView.backgroundColor = rgb(60, 60, 60)
-        layout(0, 0, gridCount, 18, topView)
+        layout(0, 0, gridCount, 20, topView)
         addSubview(topView)
 
-        var y = 5
+        var y = 6
         topView.addText(x: 2, y: y, h: 4, text: i18n.todayAndLanguageReview, color: .white)
 
         let orangeCount = goodCount
         let redCount = missedCount
         let greenCount = sentences.count - orangeCount - redCount
 
-        let x = 3
-        y += 5
+        let x = 7
+        y += 6
 
         func addCountBox(x: Int, y: Int,
                          title: String, count: Int, color: UIColor,
@@ -127,9 +124,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
             topView.addText(x: x+1, y: y, w: 9, h: 2, text: title, color: .white)
             let label = topView.addText(x: x, y: y+1, w: 8, h: 5, text: "\(count)", color: color)
             label.textAlignment = .right
-            if !isPracticing {
-                rect.addTapGestureRecognizer(action: onClick)
-            }
+            rect.addTapGestureRecognizer(action: onClick)
         }
 
         addCountBox(x: x, y: y,
@@ -139,14 +134,14 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
                         self.isCorrectSelected = !self.isCorrectSelected
                         self.viewWillAppear()
                     }
-        addCountBox(x: x+10, y: y,
+        addCountBox(x: x+11, y: y,
                     title: i18n.good, count: orangeCount, color: myOrange,
                     isSelected: isGoodSelected) { [weak self] in
                         guard let self = self else { return }
                         self.isGoodSelected = !self.isGoodSelected
                         self.viewWillAppear()
                     }
-        addCountBox(x: x+20, y: y,
+        addCountBox(x: x+22, y: y,
                     title: i18n.wrong, count: redCount, color: myRed,
                     isSelected: isWrongSelected) { [weak self] in
                         guard let self = self else { return }
@@ -155,68 +150,30 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
                     }
 
         let button = UIButton()
-        button.setIconImage(named: isPracticing ? "baseline_pause_black_\(iconSize)" :
-                                                  "baseline_play_arrow_black_\(iconSize)")
-        button.backgroundColor = UIColor.red.withAlphaComponent(0.7)
+        button.setIconImage(named: "baseline_sort_black_\(iconSize)")
+        button.backgroundColor = UIColor.white.withAlphaComponent(0.3)
         button.roundBorder(borderWidth: 0.5, cornerRadius: step, color: .clear)
         button.tintColor = .white
-        button.addTarget(self, action: #selector(onPracticeGameButtonClicked), for: .touchUpInside)
-        layout(34, y, 12, 6, button)
+        button.addTarget(self, action: #selector(onSortButtonClicked), for: .touchUpInside)
+        layout(40, y, 6, 6, button)
         topView.addSubview(button)
     }
 
-    // Mark: - Practice Game Related
+    @objc func onSortButtonClicked() {
+        viewWillAppear()
+    }
+
+    // MARK: - Practice Game Related
     // listening to sentence practice event
     func onEventHappened(_ notification: Notification) {
         guard let event = notification.object as? Event else { print("convert event fail"); return }
 
         switch event.type {
         case .practiceSentenceCalculated:
-            print("calculated")
             renderTopView()
-        case .practiceForceStopped:
-            print("forceStopped")
-            stopPracticeGame()
-        case .practiceSentenceEnded:
-            print("sentence end")
-            practiceNextSentence()
         default:
             return
         }
-    }
-
-    @objc func onPracticeGameButtonClicked() {
-        if !isPracticing {
-            isPracticing = true
-            practiceIdx = 0
-            renderTopView()
-            tableView.isUserInteractionEnabled = !isPracticing
-            practiceNextSentence()
-        } else {
-            practicingCell?.isAskedToStop = true
-        }
-    }
-
-    func practiceNextSentence() {
-        guard practiceIdx < selectedSentences.count else {
-            stopPracticeGame()
-            return
-        }
-        guard isPracticing else { return }
-
-        let indexPath = IndexPath(row: practiceIdx, section: 0)
-        tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
-        guard let cell = tableView.cellForRow(at: indexPath) as? SentencesTableCell else { return }
-        cell.practiceSentence()
-        practicingCell = cell
-        practiceIdx += 1
-    }
-
-    func stopPracticeGame() {
-        isPracticing = false
-        tableView.isUserInteractionEnabled = !isPracticing
-        renderTopView()
-        return
     }
 
     private func addBottomTable() {
@@ -228,7 +185,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         tableView.separatorColor = rgb(200, 200, 200)
         tableView.dataSource = self
-        tableView.delegate = self
+//        tableView.delegate = self
         tableView.frame = CGRect(x: 0,
                                  y: topView.y1,
                                  width: screen.width,
@@ -309,24 +266,15 @@ extension MedalCorrectionPageView: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SentencesTableCell.id,
-                                                 for: indexPath)
-        guard let contentCell = cell as? SentencesTableCell else {
-            print("detailCell convert error")
-            return cell
-        }
-        contentCell.selectionStyle = .none
+        // swiftlint:disable force_cast
+        let cell = tableView.dequeueReusableCell(withIdentifier: SentencesTableCell.id, for: indexPath) as! SentencesTableCell
+        // swiftlint:enable force_cast
+        cell.selectionStyle = .none
 
         let sentence = selectedSentences[indexPath.row]
-        contentCell.update(sentence: sentence,
-                           isShowTranslate: context.gameSetting.isShowTranslationInPractice)
+        cell.update(sentence: sentence,
+                    isShowTranslate: context.gameSetting.isShowTranslationInPractice)
 
-        return contentCell
-    }
-}
-
-extension MedalCorrectionPageView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        return nil
+        return cell
     }
 }

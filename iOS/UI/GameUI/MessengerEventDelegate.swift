@@ -94,9 +94,7 @@ extension Messenger: GameEventDelegate {
             messengerBar.isGameStopped = false
             messengerBar.viewWillAppear()
 
-        case .practiceSentenceEnded,
-             .practiceSentenceCalculated,
-             .practiceForceStopped:
+        case .practiceSentenceCalculated:
             return
 
         case .gameStateChanged:

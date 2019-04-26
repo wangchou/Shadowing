@@ -26,8 +26,6 @@ enum EventType {
 
     // for medal correction page
     case practiceSentenceCalculated
-    case practiceForceStopped
-    case practiceSentenceEnded
 }
 
 struct Event {
