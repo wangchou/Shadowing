@@ -8,6 +8,7 @@
 
 import UIKit
 import Promises
+import AudioToolbox
 
 private let context = GameContext.shared
 
@@ -149,6 +150,9 @@ extension SentencesTableCell {
             tableView?.beginUpdates()
             userSaidSentenceLabel.textColor = UIColor.red
             tableView?.endUpdates()
+
+
+            AudioServicesPlaySystemSound(1116)
         }
 
         let duration = getNow() - startTime + Double(practicePauseDuration)

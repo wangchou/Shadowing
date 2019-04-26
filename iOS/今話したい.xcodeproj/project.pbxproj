@@ -17,6 +17,7 @@
 		BE221AA121A2A76D0009B23B /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE221AA021A2A76D0009B23B /* CircleView.swift */; };
 		BE2473A6226DDA2100EDFA5E /* MedalSummaryTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2473A5226DDA2100EDFA5E /* MedalSummaryTopView.swift */; };
 		BE28B2C221A3EAB600088214 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE28B2C121A3EAB500088214 /* Main.storyboard */; };
+		BE2B7AC522735B010063118A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B7AC422735B010063118A /* AudioToolbox.framework */; };
 		BE3260C821BF912D00A13C94 /* vocabulary1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260C721BF912D00A13C94 /* vocabulary1.swift */; };
 		BE3260CA21BFCF5E00A13C94 /* vocabulary2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260C921BFCF5E00A13C94 /* vocabulary2.swift */; };
 		BE439C6321DF3AF100C0BE14 /* grammarN4.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE439C6221DF3AF100C0BE14 /* grammarN4.swift */; };
@@ -152,6 +153,7 @@
 		BE221AA021A2A76D0009B23B /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		BE2473A5226DDA2100EDFA5E /* MedalSummaryTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalSummaryTopView.swift; sourceTree = "<group>"; };
 		BE28B2C121A3EAB500088214 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		BE2B7AC422735B010063118A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		BE3260C721BF912D00A13C94 /* vocabulary1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vocabulary1.swift; sourceTree = "<group>"; };
 		BE3260C921BFCF5E00A13C94 /* vocabulary2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vocabulary2.swift; sourceTree = "<group>"; };
 		BE439C6221DF3AF100C0BE14 /* grammarN4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = grammarN4.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE2B7AC522735B010063118A /* AudioToolbox.framework in Frameworks */,
 				BED1BA4A2249FD6A009B68B6 /* Promises.framework in Frameworks */,
 				BE7AFAF721CA2DC900C41BF4 /* FirebaseCoreDiagnostics.framework in Frameworks */,
 				BED1BA4C2249FD6A009B68B6 /* Alamofire.framework in Frameworks */,
@@ -393,6 +396,7 @@
 		BE7E88B721AA768800B9355E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE2B7AC422735B010063118A /* AudioToolbox.framework */,
 				BE7AFADA21CA00EC00C41BF4 /* FIRAnalyticsConnector.framework */,
 				BE7AFAD321CA00EB00C41BF4 /* Firebase.framework */,
 				BE7AFAF221CA2DC900C41BF4 /* FIRAnalyticsConnector.framework */,

@@ -14,6 +14,13 @@ import Promises
 private let context = GameContext.shared
 private let engine = SpeechEngine.shared
 
+enum RingTone: String {
+    case blue = "/Library/Ringtones/Constellation.m4r"
+    case green = "/Library/Ringtones/Strum.m4r"
+    case orange = "/Library/Ringtones/Time Passing.m4r"
+    case red = "/Library/Ringtones/Slow Rise.m4r"
+}
+
 // MARK: - SpeechEngine
 // A wrapper of AVAudioEngine, SpeechRecognizer and TTS
 class SpeechEngine {
@@ -22,6 +29,21 @@ class SpeechEngine {
 
     var isEngineRunning = false
     var audioEngine = AVAudioEngine()
+    private var audioPlayer: AVAudioPlayer = AVAudioPlayer()
+
+    func playRineTone(ringTone: RingTone) {
+        let fileURL: URL = URL(fileURLWithPath: ringTone.rawValue)
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: fileURL)
+            audioPlayer.play()
+        } catch {
+            debugPrint("\(error)")
+        }
+    }
+
+    func stopRingTone() {
+        audioPlayer.setVolume(0, fadeDuration: 1)
+    }
 
     private var speechRecognizer = SpeechRecognizer.shared
     private var tts = TTS()
