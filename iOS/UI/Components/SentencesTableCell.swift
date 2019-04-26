@@ -15,6 +15,7 @@ class SentencesTableCell: UITableViewCell {
     static var id = "ContentTableCell"
     static var isPracticing: Bool = false
     private var buttonColor = rgb(42, 163, 239)
+    var isAskedToStop: Bool = false
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var sentenceLabel: FuriganaLabel!
     @IBOutlet weak var userSaidSentenceLabel: FuriganaLabel!
@@ -54,6 +55,7 @@ class SentencesTableCell: UITableViewCell {
         guard SentencesTableCell.isPracticing != true else { return }
         SentencesTableCell.isPracticing = true
         TopicDetailPage.isChallengeButtonDisabled = true
+        isAskedToStop = false
         isUserInteractionEnabled = false
         practiceButton.isEnabled = false
         practiceButton.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
@@ -65,6 +67,7 @@ class SentencesTableCell: UITableViewCell {
             .then(updateUIByScore)
             .catch { _ in
                 self.userSaidSentenceLabel.text = ""
+                postEvent(.practiceForceStopped)
             }
             .always {
                 self.isUserInteractionEnabled = true
@@ -73,6 +76,9 @@ class SentencesTableCell: UITableViewCell {
                 SentencesTableCell.isPracticing = false
                 TopicDetailPage.isChallengeButtonDisabled = false
                 SpeechEngine.shared.monitoringOff()
+                if !self.isAskedToStop {
+                    postEvent(.practiceSentenceEnded)
+                }
             }
     }
 
@@ -126,6 +132,7 @@ class SentencesTableCell: UITableViewCell {
 // MARK: Private Methods
 extension SentencesTableCell {
     private func speakPart() -> Promise<Void> {
+        if isAskedToStop { return rejectedVoidPromise() }
         startTime = getNow()
         let promise = teacherSay(targetString, rate: context.gameSetting.practiceSpeed)
         prepareForSpeaking()
@@ -135,18 +142,23 @@ extension SentencesTableCell {
     private func prepareForSpeaking() {
         tableView?.beginUpdates()
         scoreLabel.text = ""
-        userSaidSentenceLabel.text = ""
         userSaidSentences[targetString] = ""
         sentenceScores[targetString] = nil
-        userSaidSentenceLabel.backgroundColor = UIColor.white
         userSaidSentenceLabel.isHidden = false
+        userSaidSentenceLabel.text = "listening..."
+        userSaidSentenceLabel.textColor = UIColor.white
+        userSaidSentenceLabel.backgroundColor = UIColor.white
         tableView?.endUpdates()
     }
 
     private func listenPart() -> Promise<String> {
+        if isAskedToStop {
+            let promise = Promise<String>.pending()
+            promise.reject(GameError.forceStop)
+            return promise
+        }
         func prepareListening() {
             tableView?.beginUpdates()
-            userSaidSentenceLabel.text = "listening..."
             userSaidSentenceLabel.textColor = UIColor.red
             tableView?.endUpdates()
         }
@@ -157,11 +169,18 @@ extension SentencesTableCell {
     }
 
     private func calculateScorePart(userSaidSentence: String) -> Promise<Score> {
+        if isAskedToStop {
+            let promise = Promise<Score>.pending()
+            promise.reject(GameError.forceStop)
+            return promise
+        }
         userSaidSentences[targetString] = userSaidSentence
         return calculateScore(targetString, userSaidSentence)
     }
 
     private func updateUIByScore(score: Score) -> Promise<Void> {
+        if isAskedToStop { return rejectedVoidPromise() }
+
         tableView?.beginUpdates()
         let userSaidSentence = userSaidSentences[targetString] ?? ""
         userSaidSentenceLabel.textColor = UIColor.black
@@ -177,7 +196,7 @@ extension SentencesTableCell {
         tableView?.endUpdates()
 
         sentenceScores[targetString] = score
-        postEvent(.practiceEnded)
+        postEvent(.practiceSentenceCalculated)
         saveGameMiscData()
         return assisantSay(score.text)
     }

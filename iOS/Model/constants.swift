@@ -11,6 +11,7 @@ import AVFoundation
 
 let IDIOM = UI_USER_INTERFACE_IDIOM()
 let isIPad = IDIOM == UIUserInterfaceIdiom.pad
+let iconSize = isIPad ? "48pt" : "24pt"
 
 #if targetEnvironment(simulator)
     let isSimulator = true

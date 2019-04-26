@@ -24,7 +24,10 @@ enum EventType {
 
     case gameResume
 
-    case practiceEnded
+    // for medal correction page
+    case practiceSentenceCalculated
+    case practiceForceStopped
+    case practiceSentenceEnded
 }
 
 struct Event {

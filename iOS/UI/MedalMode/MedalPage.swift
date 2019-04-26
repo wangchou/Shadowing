@@ -32,10 +32,6 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         return Int((screen.height - getBottomPadding()) / step)
     }
 
-    var iconSize: String {
-        return isIPad ? "48pt" : "24pt"
-    }
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         sharedInit()

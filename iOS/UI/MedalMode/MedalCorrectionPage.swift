@@ -35,6 +35,10 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
     var isWrongSelected: Bool = true
     var isGoodSelected: Bool = true
     var isCorrectSelected: Bool = false
+
+    var isPracticing: Bool = false
+    var practiceIdx: Int = 0
+    var practicingCell: SentencesTableCell?
     var sentences: [String] {
         return context.sentences
     }
@@ -97,18 +101,6 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         }
     }
 
-    // listening to sentence practice event
-    func onEventHappened(_ notification: Notification) {
-        guard let event = notification.object as? Event else { print("convert event fail"); return }
-
-        switch event.type {
-        case .practiceEnded:
-            renderTopView()
-        default:
-            return
-        }
-    }
-
     private func renderTopView() {
         topView?.removeFromSuperview()
         topView = GridUIView()
@@ -135,7 +127,9 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
             topView.addText(x: x+1, y: y, w: 9, h: 2, text: title, color: .white)
             let label = topView.addText(x: x, y: y+1, w: 8, h: 5, text: "\(count)", color: color)
             label.textAlignment = .right
-            rect.addTapGestureRecognizer(action: onClick)
+            if !isPracticing {
+                rect.addTapGestureRecognizer(action: onClick)
+            }
         }
 
         addCountBox(x: x, y: y,
@@ -160,8 +154,69 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
                         self.viewWillAppear()
                     }
 
-        topView.addRect(x: 34, y: y, w: 12, h: 6, color: UIColor.red.withAlphaComponent(0.7))
-                .roundBorder(borderWidth: 0.5, cornerRadius: step, color: .clear)
+        let button = UIButton()
+        button.setIconImage(named: isPracticing ? "baseline_pause_black_\(iconSize)" :
+                                                  "baseline_play_arrow_black_\(iconSize)")
+        button.backgroundColor = UIColor.red.withAlphaComponent(0.7)
+        button.roundBorder(borderWidth: 0.5, cornerRadius: step, color: .clear)
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(onPracticeGameButtonClicked), for: .touchUpInside)
+        layout(34, y, 12, 6, button)
+        topView.addSubview(button)
+    }
+
+    // Mark: - Practice Game Related
+    // listening to sentence practice event
+    func onEventHappened(_ notification: Notification) {
+        guard let event = notification.object as? Event else { print("convert event fail"); return }
+
+        switch event.type {
+        case .practiceSentenceCalculated:
+            print("calculated")
+            renderTopView()
+        case .practiceForceStopped:
+            print("forceStopped")
+            stopPracticeGame()
+        case .practiceSentenceEnded:
+            print("sentence end")
+            practiceNextSentence()
+        default:
+            return
+        }
+    }
+
+    @objc func onPracticeGameButtonClicked() {
+        if !isPracticing {
+            isPracticing = true
+            practiceIdx = 0
+            renderTopView()
+            tableView.isUserInteractionEnabled = !isPracticing
+            practiceNextSentence()
+        } else {
+            practicingCell?.isAskedToStop = true
+        }
+    }
+
+    func practiceNextSentence() {
+        guard practiceIdx < selectedSentences.count else {
+            stopPracticeGame()
+            return
+        }
+        guard isPracticing else { return }
+
+        let indexPath = IndexPath(row: practiceIdx, section: 0)
+        tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        guard let cell = tableView.cellForRow(at: indexPath) as? SentencesTableCell else { return }
+        cell.practiceSentence()
+        practicingCell = cell
+        practiceIdx += 1
+    }
+
+    func stopPracticeGame() {
+        isPracticing = false
+        tableView.isUserInteractionEnabled = !isPracticing
+        renderTopView()
+        return
     }
 
     private func addBottomTable() {

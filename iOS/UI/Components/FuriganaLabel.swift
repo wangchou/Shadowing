@@ -4,7 +4,7 @@ import UIKit
 class FuriganaLabel: UILabel {
     private var height: CGFloat = 60
     private var topShift: CGFloat {
-        return 6 + ((text?.jpnType == JpnType.noKanjiAndNumber) ? 5 : 0)
+        return 6
     }
     var widthPadding: CGFloat = 7
 
