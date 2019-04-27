@@ -62,6 +62,11 @@
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2bm-r9-STx">
+                        <rect key="frame" x="0.0" y="0.0" width="310" height="71.5"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.40477846746575341" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="NSb-35-HsM"/>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="jEf-GW-fOX" secondAttribute="trailing" constant="6" id="20T-Qw-bdq"/>
@@ -69,9 +74,13 @@
                     <constraint firstItem="RVl-sV-xrU" firstAttribute="width" secondItem="d2j-Sd-YWt" secondAttribute="width" id="2FE-9f-ryI"/>
                     <constraint firstAttribute="bottom" secondItem="q6O-Sx-IVO" secondAttribute="bottom" id="3jG-DX-zgZ"/>
                     <constraint firstItem="RVl-sV-xrU" firstAttribute="centerY" secondItem="d2j-Sd-YWt" secondAttribute="centerY" id="4nL-yi-tch"/>
+                    <constraint firstItem="2bm-r9-STx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="9KG-PF-QYR"/>
                     <constraint firstAttribute="bottom" secondItem="WjY-pm-086" secondAttribute="bottom" id="ByM-G8-jb5"/>
                     <constraint firstItem="q6O-Sx-IVO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="DoB-Ql-oNi"/>
                     <constraint firstAttribute="bottom" secondItem="jEf-GW-fOX" secondAttribute="bottom" constant="5" id="FfK-lf-X2D"/>
+                    <constraint firstAttribute="bottom" secondItem="2bm-r9-STx" secondAttribute="bottom" id="Jbt-28-eOX"/>
+                    <constraint firstAttribute="trailing" secondItem="2bm-r9-STx" secondAttribute="trailing" id="POF-AP-4gW"/>
+                    <constraint firstItem="2bm-r9-STx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Qkq-Ka-WRm"/>
                     <constraint firstItem="q6O-Sx-IVO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="VDF-bV-Pe5"/>
                     <constraint firstItem="RVl-sV-xrU" firstAttribute="height" secondItem="d2j-Sd-YWt" secondAttribute="height" id="jPp-Lj-ySe"/>
                     <constraint firstItem="jEf-GW-fOX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="luo-8p-H2T"/>
@@ -82,6 +91,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="clickResponseOverlay" destination="2bm-r9-STx" id="wmf-Pe-spv"/>
                 <outlet property="contentView" destination="H2p-sc-9uM" id="zrf-UJ-WCY"/>
                 <outlet property="practiceButton" destination="jEf-GW-fOX" id="AtH-RR-LSN"/>
                 <outlet property="scoreLabel" destination="q6O-Sx-IVO" id="0ln-bF-CJz"/>

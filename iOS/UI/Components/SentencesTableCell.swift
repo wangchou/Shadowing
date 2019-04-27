@@ -23,6 +23,7 @@ class SentencesTableCell: UITableViewCell {
     @IBOutlet weak var practiceButton: UIButton!
     @IBOutlet weak var translationTextView: UITextView!
 
+    @IBOutlet weak var clickResponseOverlay: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -31,7 +32,30 @@ class SentencesTableCell: UITableViewCell {
         practiceButton.setTitleColor(rgb(50, 50, 50), for: .normal)
         practiceButton.setTitleColor(.lightGray, for: .disabled)
 
-        self.addTapGestureRecognizer(action: practiceSentence)
+        clickResponseOverlay.isHidden = true
+        clickResponseOverlay.backgroundColor = UIColor.black.withAlphaComponent(0.1)
+
+        // https://stackoverflow.com/questions/15628133/uitapgesturerecognizer-make-it-work-on-touch-down-not-touch-up
+        let touchRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleTouch(gesture:)))
+        touchRecognizer.minimumPressDuration = 0
+        addGestureRecognizer(touchRecognizer)
+    }
+
+    @objc func handleTouch(gesture: UILongPressGestureRecognizer) {
+        switch gesture.state {
+        case .began:
+            clickResponseOverlay.isHidden = false
+        case .cancelled:
+            clickResponseOverlay.isHidden = true
+        case .failed:
+            clickResponseOverlay.isHidden = true
+        case .ended:
+            clickResponseOverlay.isHidden = true
+            practiceSentence()
+        default:
+            ()
+
+        }
     }
 
     private var startTime: Double = 0
