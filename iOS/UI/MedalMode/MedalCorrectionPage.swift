@@ -33,13 +33,10 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
     var topView: GridUIView!
     var tableView: UITableView!
     var gridCount: Int = 48
-    var isWrongSelected: Bool = true
-    var isGoodSelected: Bool = true
-    var isCorrectSelected: Bool = false
     var sentences: [String] {
         return context.sentences
     }
-    var selectedSentences: [String] = []
+    var sortedSentences: [String] = []
     var missedCount: Int {
         var count = 0
         for str in sentences {
@@ -77,25 +74,10 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
     }
 
     func viewWillAppear() {
-        updateSelectedSentences()
         removeAllSubviews()
         renderTopView()
         addBottomTable()
         addBottomButtons()
-    }
-
-    private func updateSelectedSentences() {
-        selectedSentences = sentences.filter {
-            guard let score = sentenceScores[$0] else { return isWrongSelected }
-            switch score.type {
-            case .perfect, .great:
-                return isCorrectSelected
-            case .good:
-                return isGoodSelected
-            case .poor:
-                return isWrongSelected
-            }
-        }
     }
 
     private func renderTopView() {
@@ -116,38 +98,20 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         y += 6
 
         func addCountBox(x: Int, y: Int,
-                         title: String, count: Int, color: UIColor,
-                         isSelected: Bool,
-                         onClick: @escaping (() -> Void)) {
+                         title: String, count: Int, color: UIColor) {
             let rect = topView.addRect(x: x, y: y, w: 9, h: 6, color: .black)
-            rect.roundBorder(borderWidth: 1.5, cornerRadius: step, color: isSelected ? .white : .clear)
+            rect.roundBorder(borderWidth: 1.5, cornerRadius: step, color: .clear)
             topView.addText(x: x+1, y: y, w: 9, h: 2, text: title, color: .white)
             let label = topView.addText(x: x, y: y+1, w: 8, h: 5, text: "\(count)", color: color)
             label.textAlignment = .right
-            rect.addTapGestureRecognizer(action: onClick)
         }
 
         addCountBox(x: x, y: y,
-                    title: i18n.correct, count: greenCount, color: myGreen,
-                    isSelected: isCorrectSelected) { [weak self] in
-                        guard let self = self else { return }
-                        self.isCorrectSelected = !self.isCorrectSelected
-                        self.viewWillAppear()
-                    }
+                    title: i18n.correct, count: greenCount, color: myGreen)
         addCountBox(x: x+11, y: y,
-                    title: i18n.good, count: orangeCount, color: myOrange,
-                    isSelected: isGoodSelected) { [weak self] in
-                        guard let self = self else { return }
-                        self.isGoodSelected = !self.isGoodSelected
-                        self.viewWillAppear()
-                    }
+                    title: i18n.good, count: orangeCount, color: myOrange)
         addCountBox(x: x+22, y: y,
-                    title: i18n.wrong, count: redCount, color: myRed,
-                    isSelected: isWrongSelected) { [weak self] in
-                        guard let self = self else { return }
-                        self.isWrongSelected = !self.isWrongSelected
-                        self.viewWillAppear()
-                    }
+                    title: i18n.wrong, count: redCount, color: myRed)
 
         let button = UIButton()
         button.setIconImage(named: "baseline_sort_black_\(iconSize)")
@@ -177,6 +141,10 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
     }
 
     private func addBottomTable() {
+        sortedSentences = sentences.sorted {
+            return (sentenceScores[$0]?.value ?? 0) < (sentenceScores[$1]?.value ?? 0)
+        }
+
         tableView = UITableView()
         // https://stackoverflow.com/questions/25541786/custom-uitableviewcell-from-nib-in-swift
         tableView.register(UINib(nibName: "SentencesTableCell", bundle: nil),
@@ -185,7 +153,6 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         tableView.separatorColor = rgb(200, 200, 200)
         tableView.dataSource = self
-//        tableView.delegate = self
         tableView.frame = CGRect(x: 0,
                                  y: topView.y1,
                                  width: screen.width,
@@ -262,7 +229,7 @@ extension MedalCorrectionPageView: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return selectedSentences.count
+        return sortedSentences.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -271,7 +238,7 @@ extension MedalCorrectionPageView: UITableViewDataSource {
         // swiftlint:enable force_cast
         cell.selectionStyle = .none
 
-        let sentence = selectedSentences[indexPath.row]
+        let sentence = sortedSentences[indexPath.row]
         cell.update(sentence: sentence,
                     isShowTranslate: context.gameSetting.isShowTranslationInPractice)
 
