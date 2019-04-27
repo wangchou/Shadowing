@@ -21,6 +21,17 @@ enum RingTone: String {
     case timePassing = "/Library/Ringtones/Time Passing.m4r"
     case depression = "/Library/Ringtones/Slow Rise.m4r"
 
+    var volume: Float {
+        switch self {
+        case .depression:
+            return 0.7
+        case .minuet, .star:
+            return 0.6
+        default:
+            return 0.5
+        }
+    }
+
 //    case anticipate = "/System/Library/Audio/UISounds/New/Anticipate.caf"
 //    case silk = "/Library/Ringtones/Silk.m4r"
 //    case radiate = "/Library/Ringtones/Radiate.m4r"
@@ -43,7 +54,7 @@ class SpeechEngine {
             audioPlayer = try AVAudioPlayer(contentsOf: fileURL)
             audioPlayer?.volume = 0
             audioPlayer?.play()
-            audioPlayer?.setVolume(0.5, fadeDuration: 0.3)
+            audioPlayer?.setVolume(ringTone.volume, fadeDuration: 0.3)
         } catch {
             debugPrint("\(error)")
         }
