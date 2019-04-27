@@ -35,21 +35,23 @@ class SpeechEngine {
 
     var isEngineRunning = false
     var audioEngine = AVAudioEngine()
-    private var audioPlayer: AVAudioPlayer = AVAudioPlayer()
+    private var audioPlayer: AVAudioPlayer?
 
     func playRineTone(ringTone: RingTone) {
         let fileURL: URL = URL(fileURLWithPath: ringTone.rawValue)
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: fileURL)
-            audioPlayer.play()
+            audioPlayer?.volume = 0
+            audioPlayer?.play()
+            audioPlayer?.setVolume(0.5, fadeDuration: 0.3)
         } catch {
             debugPrint("\(error)")
         }
     }
 
-    func stopRingTone(fadeDuration: TimeInterval = 2) {
+    func stopRingTone(fadeDuration: TimeInterval = 0.3) {
         if !isSimulator {
-            audioPlayer.setVolume(0, fadeDuration: fadeDuration)
+            audioPlayer?.setVolume(0, fadeDuration: fadeDuration)
         }
     }
 
