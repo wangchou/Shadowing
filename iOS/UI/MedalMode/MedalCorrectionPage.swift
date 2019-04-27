@@ -176,7 +176,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         button.frame = bgRect.frame
         button.frame.size.height = bottomButtonTextAreaHeight
         button.backgroundColor = buttonGreen
-        button.setTitle("\(i18n.english) / \(i18n.japanese)", for: .normal)
+        button.setTitle("\(i18n.language) / \(i18n.translation)", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.setTitleColor(UIColor.white.withAlphaComponent(0.5), for: .highlighted)
         button.titleLabel?.font = bottomButtonFont

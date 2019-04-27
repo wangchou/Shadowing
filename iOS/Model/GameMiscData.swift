@@ -76,6 +76,7 @@ func loadGameMiscData(isLoadKana: Bool = false, isAsync: Bool = false) {
                     kanaTokenInfosCacheDictionary[key] = value
                 }
             }
+            print("kanaInfo loaded")
         } else {
             print("create new kanaTokenInfos")
         }

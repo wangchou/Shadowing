@@ -92,14 +92,16 @@ class SentencesTableCell: UITableViewCell {
 
         var translationsDict = (gameLang == .jp && context.gameMode == .topicMode) ?
                             chTranslations : translations
+        var secondaryDict = (gameLang == .jp && context.gameMode == .topicMode) ?
+                            translations : chTranslations
 
-        if let translation = translationsDict[sentence] {
+        if let translation = (translationsDict[sentence] ?? secondaryDict[sentence]) {
             translationTextView.text = translation
         } else {
             translationTextView.text = ""
         }
 
-        if isShowTranslate, translationsDict[sentence] != nil {
+        if isShowTranslate && translationTextView.text != "" {
             sentenceLabel.alpha = 0
             translationTextView.alpha = 1
         } else {

@@ -243,6 +243,12 @@ class I18n {
         return "English"
     }
 
+    var translation: String {
+        if isJa { return "翻訳" }
+        if isZh { return "翻譯" }
+        return "Translation"
+    }
+
     var enAbbr: String {
         if isJa || isZh { return "英"}
         return "En"
