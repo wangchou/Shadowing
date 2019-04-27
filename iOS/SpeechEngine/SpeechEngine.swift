@@ -56,7 +56,15 @@ class SpeechEngine {
     }
 
     private var speechRecognizer = SpeechRecognizer.shared
-    private var tts = TTS()
+
+    // two tts for preventing fullfill previous promise
+    private var tts: TTS {
+        return currentTTSIdx % 2 == 0 ? tts1 : tts2
+    }
+
+    private var currentTTSIdx = 0
+    private var tts1 = TTS()
+    private var tts2 = TTS()
 
     // MARK: - Public Funtions
     func start() {
@@ -79,7 +87,8 @@ class SpeechEngine {
 
     func stopListeningAndSpeaking() {
         speechRecognizer.endAudio()
-        tts.stop()
+        tts1.stop()
+        tts2.stop()
     }
 
     func monitoringOn() {
@@ -161,7 +170,7 @@ extension SpeechEngine {
             context.speakDuration = Float((getNow() - startTime))
             return fulfilledVoidPromise()
         }
-
+        currentTTSIdx += 1
         return tts.say(
             text,
             voiceId: speaker,

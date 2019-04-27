@@ -73,10 +73,10 @@ class SentencesTableCell: UITableViewCell {
             .always {
                 self.isUserInteractionEnabled = true
                 self.practiceButton.isEnabled = true
-                self.practiceButton.backgroundColor = self.buttonColor
                 SentencesTableCell.isPracticing = false
                 TopicDetailPage.isChallengeButtonDisabled = false
                 SpeechEngine.shared.monitoringOff()
+                self.practiceButton.backgroundColor = self.buttonColor
             }
     }
 
@@ -131,9 +131,8 @@ class SentencesTableCell: UITableViewCell {
 extension SentencesTableCell {
     private func speakPart() -> Promise<Void> {
         startTime = getNow()
-        let promise = teacherSay(targetString, rate: context.gameSetting.practiceSpeed)
         prepareForSpeaking()
-        return promise
+        return teacherSay(targetString, rate: context.gameSetting.practiceSpeed)
     }
 
     private func prepareForSpeaking() {
@@ -157,6 +156,7 @@ extension SentencesTableCell {
 
         let duration = getNow() - startTime + Double(practicePauseDuration)
         prepareListening()
+        print("listen for \(targetString): ", duration)
         return SpeechEngine.shared.listen(duration: duration)
     }
 
@@ -183,6 +183,7 @@ extension SentencesTableCell {
         sentenceScores[targetString] = score
         postEvent(.practiceSentenceCalculated)
         saveGameMiscData()
-        return assisantSay(score.text)
+        _ = assisantSay(score.text)
+        return fulfilledVoidPromise()
     }
 }
