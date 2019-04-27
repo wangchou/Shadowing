@@ -28,11 +28,7 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
             if i == 0 {
                 buttonTitle = topicForAll
             } else {
-                if i18n.isZh {
-                    buttonTitle = abilities[i-1]
-                } else {
-                    buttonTitle = jaAbilities[i-1]
-                }
+                buttonTitle = i18n.isZh ? abilities[i-1] : jaAbilities[i-1]
             }
             addButton(title: buttonTitle,
                       index: i,
@@ -44,6 +40,11 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
         delaysContentTouches = true
         canCancelContentTouches = true
         addSeparateLine()
+    }
+
+    private func getZhTitle(str: String) -> String {
+        if str == i18n.all { return str }
+        return i18n.isZh ? str : abilities[jaAbilities.index(of: str) ?? 0]
     }
 
     override func touchesShouldCancel(in view: UIView) -> Bool {
@@ -63,11 +64,13 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
         titleLabel.textAlignment = .center
         titleLabel.centerIn(buttonFrame)
 
+        let zhTitle = getZhTitle(str: title)
+
         let button = CircleView(frame: buttonFrame)
         button.lineWidth = 2
         button.percent = percent
 
-        if let isOn = isTopicOn[title],
+        if let isOn = isTopicOn[zhTitle],
             isOn {
             backCircle.lineColor = myGray
             backCircle.fillColor = myBlue.withAlphaComponent(0.3)
@@ -81,17 +84,18 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
         }
 
         button.addTapGestureRecognizer { [weak self] in
-            if title == topicForAll {
+
+            if zhTitle == topicForAll {
                 isTopicOn = [topicForAll: true]
             } else {
                 isTopicOn[topicForAll] = false
-                if isTopicOn[title] == true {
-                    isTopicOn[title] = false
+                if isTopicOn[zhTitle] == true {
+                    isTopicOn[zhTitle] = false
                     if !isTopicOn.values.contains(true) {
                         isTopicOn[topicForAll] = true
                     }
                 } else {
-                    isTopicOn[title] = true
+                    isTopicOn[zhTitle] = true
                 }
             }
             self?.viewWillAppear()
