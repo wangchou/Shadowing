@@ -51,25 +51,27 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
     private func addTopView() {
         topView = MedalSummaryTopView()
         topView.tableData = tableData
-        layout(0, 0, 48, 32+y, topView)
+        layout(0, 0, 48, 30+y, topView)
         addSubview(topView)
     }
 
     private func addTableTitleBar() {
-        tableTitleBar = addRect(x: 0, y: y+32, w: 48, h: 6, color: rgb(228, 182, 107))
-        var label = addText(x: 0, y: y+32, w: 15, h: 4, text: i18n.date)
+        let barY = y+30
+        tableTitleBar = addRect(x: 0, y: barY, w: 48, h: 6, color: rgb(228, 182, 107))
+
+        var label = addText(x: 0, y: barY, w: 15, h: 4, text: i18n.date)
         label.textAlignment = .center
         label.centerY(tableTitleBar.frame)
 
-        label = addText(x: 15, y: y+32, w: 11, h: 4, text: i18n.medal)
+        label = addText(x: 15, y: barY, w: 11, h: 4, text: i18n.medal)
         label.textAlignment = .center
         label.centerY(tableTitleBar.frame)
 
-        label = addText(x: 26, y: y+32, w: 11, h: 4, text: i18n.simpleGoalText)
+        label = addText(x: 26, y: barY, w: 11, h: 4, text: i18n.simpleGoalText)
         label.textAlignment = .center
         label.centerY(tableTitleBar.frame)
 
-        label = addText(x: 37, y: y+32, w: 11, h: 4, text: i18n.time)
+        label = addText(x: 37, y: barY, w: 11, h: 4, text: i18n.time)
         label.textAlignment = .center
         label.centerY(tableTitleBar.frame)
 

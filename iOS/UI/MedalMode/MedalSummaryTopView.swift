@@ -29,7 +29,7 @@ private func dayOptionString(option: DaysOption) -> String {
 
 class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
     var y: Int {
-        return Int((getTopPadding() - 20)/step)
+        return topPaddedY - 2
     }
     var tableData: [Summary] = []
     var totalSummary: Summary {

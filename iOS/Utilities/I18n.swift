@@ -693,9 +693,9 @@ class I18n {
     }
 
     var todayAndLanguageReview: String {
-        if isJa { return "今日話した\(language)" }
-        if isZh { return "今天說的\(language)" }
-        return "\(language) I said today"
+        if isJa { return "今日 (\(language))" }
+        if isZh { return "今天 (\(language))" }
+        return "Today (\(language))"
     }
 
     var medalMode: String {

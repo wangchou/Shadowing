@@ -88,13 +88,13 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         addSubview(topView)
 
         var y = topPaddedY
-        topView.addText(x: 2, y: y, h: 4, text: i18n.todayAndLanguageReview, color: .white)
+        topView.addText(x: 2, y: y, h: 5, text: i18n.todayAndLanguageReview, color: .white)
 
         let orangeCount = goodCount
         let redCount = missedCount
         let greenCount = sentences.count - orangeCount - redCount
 
-        let x = 7
+        let x = 4
         y += 6
 
         func addCountBox(x: Int, y: Int,
@@ -119,7 +119,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         button.roundBorder(borderWidth: 0.5, cornerRadius: step, color: .clear)
         button.tintColor = .white
         button.addTarget(self, action: #selector(onSortButtonClicked), for: .touchUpInside)
-        layout(40, y, 6, 6, button)
+        layout(39, y, 6, 6, button)
         topView.addSubview(button)
     }
 
