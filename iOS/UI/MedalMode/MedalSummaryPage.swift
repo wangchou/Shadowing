@@ -34,7 +34,7 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
     var tableTitleBar: UIView!
     var topSubviews: [UIView] = []
     var y: Int {
-        return Int((getTopPadding() - 20)/step)
+        return topPaddedY
     }
 
     var tableView: UITableView!
@@ -112,7 +112,7 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
         addSubview(bgRect)
         let button = UIButton()
         button.frame = bgRect.frame
-        button.frame.size.height = 6 * step
+        button.frame.size.height = bottomButtonTextAreaHeight
         button.backgroundColor = rgb(180, 180, 180)
         button.setTitle("X", for: .normal)
         button.setTitleColor(.lightGray, for: .highlighted)

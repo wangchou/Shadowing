@@ -101,8 +101,15 @@ extension GridLayout where Self: UIView {
         )
     }
 
+    var topPaddedY: Int {
+        return Int(getTopPadding() / step)
+    }
+
     var bottomButtonHeight: CGFloat {
-        return max(6 * step, getBottomPadding() + 4 * step)
+        return max(7 * step, getBottomPadding() + 5 * step)
+    }
+    var bottomButtonTextAreaHeight: CGFloat {
+        return 7 * step
     }
     var bottomButtonFont: UIFont {
         return MyFont.regular(ofSize: step * 3)

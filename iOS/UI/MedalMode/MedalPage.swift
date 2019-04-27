@@ -56,9 +56,9 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         context.gameMode = .medalMode
         removeAllSubviews()
         addTextbackground(bgColor: rgb(60, 60, 60), textColor: textGold)
-        addTopBar(y: 5)
+        addTopBar(y: topPaddedY + 1)
 
-        addLangInfo(y: (yMax + 12)/2 - 22 - 1)
+        addLangInfo(y: (yMax + 12)/2 - 22 - 4)
         addGoButton(x: 28, y: (yMax + 12)/2 - 22 + 27, w: 18)
         addBottomButtons()
     }
@@ -184,20 +184,21 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     }
 
     func addBottomButtons() {
+        let buttonY = Int((screen.height - bottomButtonHeight)/step) - 2
         addButton(iconName: "round_timeline_black_\(iconSize)",
-                  2, yMax - 9, 7, 7) {
+                  2, buttonY, 7, 7) {
             launchVC(MedalSummaryPage.id)
         }
 
         addButton(iconName: "round_spellcheck_black_\(iconSize)",
-        10, yMax - 9, 7, 7) {
+        10, buttonY, 7, 7) {
             context.loadMedalCorrectionSentence()
             launchVC(MedalCorrectionPage.id)
         }
 
         if i18n.isZh {
             addButton(iconName: "outline_info_black_\(iconSize)",
-                      39, yMax - 9, 7, 7) {
+                      39, buttonY, 7, 7) {
                 launchVC("InfoPage")
             }
         }

@@ -84,10 +84,10 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         topView?.removeFromSuperview()
         topView = GridUIView()
         topView.backgroundColor = rgb(60, 60, 60)
-        layout(0, 0, gridCount, 20, topView)
+        layout(0, 0, gridCount, 14 + topPaddedY, topView)
         addSubview(topView)
 
-        var y = 6
+        var y = topPaddedY
         topView.addText(x: 2, y: y, h: 4, text: i18n.todayAndLanguageReview, color: .white)
 
         let orangeCount = goodCount
@@ -165,7 +165,6 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
     private func addBottomButtons() {
         let buttonGreen = rgb(73, 160, 83)
         let buttonGray = buttonGreen.withSaturation(0)
-        let buttonActionHeight = step * 6
         var bgRect = UIView()
         bgRect.frame = CGRect(x: 0,
                               y: tableView.y1,
@@ -175,7 +174,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         addSubview(bgRect)
         var button = UIButton()
         button.frame = bgRect.frame
-        button.frame.size.height = buttonActionHeight
+        button.frame.size.height = bottomButtonTextAreaHeight
         button.backgroundColor = buttonGreen
         button.setTitle("\(i18n.english) / \(i18n.japanese)", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -193,7 +192,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         addSubview(bgRect)
         button = UIButton()
         button.frame = bgRect.frame
-        button.frame.size.height = buttonActionHeight
+        button.frame.size.height = bottomButtonTextAreaHeight
         button.backgroundColor = buttonGray
         button.titleLabel?.font = bottomButtonFont
         button.setTitle("X", for: .normal)
