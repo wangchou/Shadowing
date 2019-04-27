@@ -112,6 +112,10 @@ extension GridLayout where Self: UIView {
         return 7 * step
     }
     var bottomButtonFont: UIFont {
-        return MyFont.regular(ofSize: step * 3)
+        let fontSize = step * 3
+        if i18n.isJa || i18n.isZh {
+            return MyFont.regular(ofSize: fontSize)
+        }
+        return UIFont.systemFont(ofSize: fontSize, weight: .regular)
     }
 }

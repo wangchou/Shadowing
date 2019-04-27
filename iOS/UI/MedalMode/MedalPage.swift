@@ -129,8 +129,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
                                       strokeWidth: Float(step * -1/3),
                                       font: font)
 
-        let label = addAttrText(x: 7, y: y, h: 13, text: attrTitle)
-        label.sizeToFit()
+        addAttrText(x: 7, y: y - 2, h: 13, text: attrTitle)
     }
 
     private func addChangeLangButton(y: Int) {
@@ -249,6 +248,7 @@ extension GridLayout where Self: UIView {
                                 text: sentence,
                                 color: textColor)
             label.sizeToFit()
+            label.frame.size.height += step // fix sizeToFit will cut the bottom of g
             label.centerX(frame)
             label.textAlignment = .left
 

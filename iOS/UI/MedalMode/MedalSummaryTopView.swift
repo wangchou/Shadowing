@@ -119,12 +119,11 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
 
         let labelText = gameLang == .jp ? i18n.japanese : i18n.english
         let labelHeight = labelText.count > 6 ? 6 : 8
-        let labelYPlus = labelText.count > 6 ? 4 : 3
+        let labelYPlus = labelText.count > 6 ? 3 : 2
 
         let langLabel = addText(x: 2, y: y + labelYPlus, h: labelHeight,
                                 text: labelText,
                                 color: .white)
-        langLabel.sizeToFit()
 
         // MARK: - Add day option button
         let daysButton = UIButton()
@@ -134,7 +133,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         daysButton.backgroundColor = subTitleGray
         daysButton.roundBorder(borderWidth: 0.5, cornerRadius: step, color: .clear)
         daysButton.sizeToFit()
-        daysButton.frame.origin.x = langLabel.x1 + 2 * step
+        daysButton.frame.origin.x = 21 * step
         daysButton.frame.size.width += 2 * step
         daysButton.frame.size.height = 4 * step
         daysButton.centerY(langLabel.frame)
