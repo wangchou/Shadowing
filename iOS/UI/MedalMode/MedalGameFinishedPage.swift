@@ -64,6 +64,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
     func viewWillDisappear() {
         countDownTimer?.invalidate()
+        SpeechEngine.shared.stopRingTone()
     }
 
     // MARK: - Say Result

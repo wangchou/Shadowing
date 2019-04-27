@@ -173,6 +173,9 @@ extension GameFlow {
             DispatchQueue.global().async {
                 saveGameMiscData()
             }
+            if let r = context.gameRecord {
+                engine.playRineTone(ringTone: r.rank.ringTone)
+            }
         }
     }
 

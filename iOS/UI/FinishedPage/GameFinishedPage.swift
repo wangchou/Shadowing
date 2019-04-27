@@ -67,7 +67,6 @@ class GameFinishedPage: UIViewController {
             return score1.value < score2.value
         }
     }
-
 }
 
 extension GameFinishedPage: UITableViewDataSource {

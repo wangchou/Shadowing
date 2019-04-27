@@ -67,10 +67,6 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
     private func renderMiddleRecord() {
         guard let record = context.gameRecord else { return }
         let engine = SpeechEngine.shared
-        if record.rank.color == myBlue { engine.playRineTone(ringTone: .blue) }
-        if record.rank.color == myGreen { engine.playRineTone(ringTone: .green) }
-        if record.rank.color == myOrange { engine.playRineTone(ringTone: .orange) }
-        if record.rank.color == myRed { engine.playRineTone(ringTone: .red) }
         let y = 13
         addText(2, y, 3, i18n.completeness)
         Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) {_ in

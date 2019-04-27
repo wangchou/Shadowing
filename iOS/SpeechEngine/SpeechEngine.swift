@@ -15,10 +15,16 @@ private let context = GameContext.shared
 private let engine = SpeechEngine.shared
 
 enum RingTone: String {
-    case blue = "/Library/Ringtones/Constellation.m4r"
-    case green = "/Library/Ringtones/Strum.m4r"
-    case orange = "/Library/Ringtones/Time Passing.m4r"
-    case red = "/Library/Ringtones/Slow Rise.m4r"
+    case star = "/Library/Ringtones/Constellation.m4r"
+    case guitar = "/Library/Ringtones/Strum.m4r"
+    case minuet = "/System/Library/Audio/UISounds/New/Minuet.caf"
+    case timePassing = "/Library/Ringtones/Time Passing.m4r"
+    case depression = "/Library/Ringtones/Slow Rise.m4r"
+
+//    case anticipate = "/System/Library/Audio/UISounds/New/Anticipate.caf"
+//    case silk = "/Library/Ringtones/Silk.m4r"
+//    case radiate = "/Library/Ringtones/Radiate.m4r"
+//    case nightOwl = "/Library/Ringtones/Night Owl.m4r"
 }
 
 // MARK: - SpeechEngine
@@ -41,8 +47,8 @@ class SpeechEngine {
         }
     }
 
-    func stopRingTone() {
-        audioPlayer.setVolume(0, fadeDuration: 1)
+    func stopRingTone(fadeDuration: TimeInterval = 2) {
+        audioPlayer.setVolume(0, fadeDuration: fadeDuration)
     }
 
     private var speechRecognizer = SpeechRecognizer.shared
