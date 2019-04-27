@@ -48,7 +48,9 @@ class SpeechEngine {
     }
 
     func stopRingTone(fadeDuration: TimeInterval = 2) {
-        audioPlayer.setVolume(0, fadeDuration: fadeDuration)
+        if !isSimulator {
+            audioPlayer.setVolume(0, fadeDuration: fadeDuration)
+        }
     }
 
     private var speechRecognizer = SpeechRecognizer.shared

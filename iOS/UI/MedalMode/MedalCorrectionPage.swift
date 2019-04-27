@@ -149,7 +149,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         // https://stackoverflow.com/questions/25541786/custom-uitableviewcell-from-nib-in-swift
         tableView.register(UINib(nibName: "SentencesTableCell", bundle: nil),
                            forCellReuseIdentifier: SentencesTableCell.id)
-
+        tableView.delaysContentTouches = true
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         tableView.separatorColor = rgb(200, 200, 200)
         tableView.dataSource = self
