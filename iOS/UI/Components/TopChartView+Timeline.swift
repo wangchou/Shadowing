@@ -23,7 +23,7 @@ struct TimelineBox {
     }
 
     mutating func toYesterday() {
-        row -= 1
+        row = (row + 6)%7
         if row == 0 {
             row = 7
             column += 1
@@ -46,12 +46,23 @@ extension TopChartView {
         addTimelineBottomBar()
     }
 
+    private func getRowFrom(weekday: Int) -> Int {
+        // https://developer.apple.com/documentation/foundation/nsdatecomponents/1410442-weekday
+        // In weekday, Sun = 1, Mon = 2, ... Sat = 7
+        //
+        // Goal: Calender Row start from Monday
+        // In row,     Mon = 1, Tue = 2, ... Sun = 7
+        let row = (weekday + 6)%7
+        return row == 0 ? 7 : row
+    }
+
     func addTimeline() {
         let dailyGoal = context.gameSetting.dailySentenceGoal
         let today = Date()
         let weekday = Calendar.current.component(.weekday, from: today)
+
         var timelineBox = TimelineBox(date: today,
-                                      row: (weekday + 6)%7, // start from Monday
+                                      row: getRowFrom(weekday: weekday),
                                       column: 1)
         //let recordsByDate = getRecordsByDate()
         var index = 0
