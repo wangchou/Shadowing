@@ -30,10 +30,11 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
             } else {
                 buttonTitle = i18n.isZh ? abilities[i-1] : jaAbilities[i-1]
             }
+            let zhTitle = getZhTitle(str: buttonTitle)
             addButton(title: buttonTitle,
                       index: i,
-                      percent: (tagPoints["#" + buttonTitle] ?? 0).c /
-                               (tagMaxPoints["#"+buttonTitle] ?? 100).c
+                      percent: (tagPoints["#" + zhTitle] ?? 0).c /
+                               (tagMaxPoints["#"+zhTitle] ?? 100).c
             )
         }
         contentSize = CGSize(width: barWidth, height: 50)
