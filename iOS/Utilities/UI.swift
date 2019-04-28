@@ -113,8 +113,12 @@ extension UIView {
     public func addTapGestureRecognizer(action: (() -> Void)?) {
         self.isUserInteractionEnabled = true
         self.tapGestureRecognizerAction = action
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
-        self.addGestureRecognizer(tapGestureRecognizer)
+        if let button = self as? UIButton {
+            button.addTarget(self, action: #selector(handleTapGesture), for: .touchUpInside)
+        } else {
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
+            self.addGestureRecognizer(tapGestureRecognizer)
+        }
     }
 
     // Every time the user taps on the UIImageView, this function gets called,

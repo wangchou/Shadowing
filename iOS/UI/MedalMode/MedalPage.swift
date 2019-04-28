@@ -71,6 +71,8 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         button.setIconImage(named: iconName, tintColor: .black, isIconOnLeft: false)
         button.roundBorder(borderWidth: step/2, cornerRadius: step,
                            color: rgb(35, 35, 35))
+        button.showsTouchWhenHighlighted = true
+
         addSubview(button)
         layout(x, y, w, h, button)
         button.addTapGestureRecognizer {
