@@ -86,22 +86,22 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         addTitleBlock(y: y, duration: 0.2)
 
         // 1 now
-        addCompleteness(y: y+5, delay: 0, duration: 0.2)
-        addRank(        y: y+5, delay: 0.3, duration: 0.2)
-        addRecordDetail(y: y+7, delay: 0.3, duration: 0.6)
+        addCompleteness(y: y+4, delay: 0, duration: 0.2)
+        addRank(        y: y+4, delay: 0.3, duration: 0.2)
+        addRecordDetail(y: y+6, delay: 0.3, duration: 0.6)
 
         // 2 changes
-        addMedalProgressBar(x: 7, y: y + 18,
+        addMedalProgressBar(x: 7, y: y + 17,
                             medalFrom: medal.count - (gr.medalReward ?? 0),
                             medalTo: medal.count,
                             animateInDelay: 0.6,
                             duration: 0.2,
                             animateProgressDelay: 1.1,
                             isLightSubText: true)
-        addMedal(       y: y+13, delay: 0.6, duration: 0.2)
+        addMedal(       y: y+12, delay: 0.6, duration: 0.2)
 
         // 3 long-term
-        addDailyGoalView(x: 7, y: y+30,
+        addDailyGoalView(x: 7, y: y+29,
                          isFullStatus: true,
                          delay: 1.8, duration: 0.2)
     }
@@ -113,12 +113,14 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
         rect.enlargeIn(delay: delay, duration: duration)
 
-        let fontSize = i18n.language.count < 6 ? 10 * step : 7 * step
+        let fontSize = i18n.language.count > 5 ? 8 * step : 10 * step
         let attrText = getStrokeText(i18n.language,
                                      rgb(220, 220, 220),
                                      strokeWidth: strokeWidth/2,
                                      font: MyFont.bold(ofSize: fontSize))
-        let label = addAttrText(x: 12, y: y - 8, h: 12, text: attrText)
+        let label = addAttrText(x: 5,
+                                y: y - 8,
+                                h: 12, text: attrText)
         label.centerX(frame)
         label.textAlignment = .center
         label.enlargeIn(delay: delay, duration: duration)

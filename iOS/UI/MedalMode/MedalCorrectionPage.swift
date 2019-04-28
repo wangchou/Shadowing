@@ -205,7 +205,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         line.frame.size.height = 0.5
         line.frame.origin.y = button.y0
 
-        line = addRect(x: 39, y: 0, w: 1, h: 7, color: rgb(130, 130, 130))
+        line = addRect(x: 39, y: 0, w: 1, h: 10, color: rgb(130, 130, 130))
         line.frame.size.width = 0.5
         line.frame.origin.y = button.y0
     }

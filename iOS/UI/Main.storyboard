@@ -1389,7 +1389,7 @@ Ruth Yuru Chen
                                         <rect key="frame" x="0.0" y="905.33333333333337" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IVr-hM-UtT" id="lal-hd-ERN">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3U2-5G-XCz">
@@ -1421,7 +1421,7 @@ Ruth Yuru Chen
                                         <rect key="frame" x="0.0" y="1005.3333333333334" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nvf-m6-gIi" id="DtM-XQ-AHb">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cgn-Cn-7aR">
@@ -2028,6 +2028,13 @@ Ruth Yuru Chen
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ni-gP-NAS" userLabel="SafeAreaPlus45">
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="uyH-xY-JXm"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AZ4-uq-qPW" userLabel="messenger back white view">
                                 <rect key="frame" x="0.0" y="846" width="414" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2036,13 +2043,13 @@ Ruth Yuru Chen
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gcd-vA-OI8">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="828"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WDC-AY-rcB">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="758"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
                                     </scrollView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3SU-Up-VtH" userLabel="messenger bar" customClass="MessengerBar" customModule="今話したい" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="758" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="768" width="414" height="60"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="rEI-dc-kAr"/>
@@ -2090,29 +2097,29 @@ Ruth Yuru Chen
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BXE-ef-qrw" userLabel="BlackView">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="802"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="812"/>
                                 <subviews>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="5ov-3e-m3b">
-                                        <rect key="frame" x="71.666666666666686" y="757" width="261" height="31"/>
+                                        <rect key="frame" x="71.666666666666686" y="767" width="261" height="31"/>
                                         <color key="tintColor" red="0.12549019610000001" green="0.74117647060000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="speedChanged:" destination="nrb-Uw-BQq" eventType="valueChanged" id="e3U-qt-fBb"/>
                                         </connections>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.00x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SgB-j0-oP6">
-                                        <rect key="frame" x="340.66666666666669" y="758.33333333333337" width="58.333333333333314" height="28.666666666666629"/>
+                                        <rect key="frame" x="340.66666666666669" y="768.33333333333337" width="58.333333333333314" height="28.666666666666629"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="速度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NzW-b5-t7J">
-                                        <rect key="frame" x="14.999999999999996" y="758.33333333333337" width="48.666666666666657" height="28.666666666666629"/>
+                                        <rect key="frame" x="14.999999999999996" y="768.33333333333337" width="48.666666666666657" height="28.666666666666629"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="qwA-mv-j1J">
-                                        <rect key="frame" x="15" y="671.66666666666663" width="384" height="29"/>
+                                        <rect key="frame" x="15" y="681.66666666666663" width="384" height="29"/>
                                         <segments>
                                             <segment title="意義與發音"/>
                                             <segment title="發音"/>
@@ -2125,19 +2132,19 @@ Ruth Yuru Chen
                                         </connections>
                                     </segmentedControl>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="751" text="自動速度：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pk5-cH-oYP">
-                                        <rect key="frame" x="15.000000000000007" y="714.66666666666663" width="121.66666666666669" height="28.666666666666629"/>
+                                        <rect key="frame" x="15.000000000000007" y="724.66666666666663" width="121.66666666666669" height="28.666666666666629"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="751" text="學習模式：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0My-oC-lXl">
-                                        <rect key="frame" x="15.000000000000007" y="633" width="121.66666666666669" height="28.666666666666629"/>
+                                        <rect key="frame" x="15.000000000000007" y="643" width="121.66666666666669" height="28.666666666666629"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vBK-TF-3m9">
-                                        <rect key="frame" x="299" y="568" width="100" height="50"/>
+                                        <rect key="frame" x="299" y="578" width="100" height="50"/>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="9wA-fL-YYi"/>
@@ -2152,7 +2159,7 @@ Ruth Yuru Chen
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lpe-64-O87">
-                                        <rect key="frame" x="18" y="568" width="50" height="50"/>
+                                        <rect key="frame" x="18" y="578" width="50" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="UpI-gN-Kg6"/>
@@ -2166,7 +2173,7 @@ Ruth Yuru Chen
                                         </connections>
                                     </button>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tto-x3-3vf">
-                                        <rect key="frame" x="350" y="713.66666666666663" width="51" height="31"/>
+                                        <rect key="frame" x="350" y="723.66666666666663" width="51" height="31"/>
                                         <connections>
                                             <action selector="autoSpeedSwitchValueChanged:" destination="nrb-Uw-BQq" eventType="valueChanged" id="BZm-kG-XJp"/>
                                         </connections>
@@ -2199,18 +2206,22 @@ Ruth Yuru Chen
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.73679327449999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="xOt-Ok-aOS" firstAttribute="trailing" secondItem="5Ni-gP-NAS" secondAttribute="trailing" id="5DB-ap-a8A"/>
                             <constraint firstItem="gcd-vA-OI8" firstAttribute="top" secondItem="xOt-Ok-aOS" secondAttribute="top" id="5jP-1N-BOk"/>
+                            <constraint firstItem="xOt-Ok-aOS" firstAttribute="bottom" secondItem="5Ni-gP-NAS" secondAttribute="bottom" id="AZ5-Zt-yvD"/>
                             <constraint firstItem="3SU-Up-VtH" firstAttribute="top" secondItem="BXE-ef-qrw" secondAttribute="bottom" id="Buh-Td-4qU"/>
+                            <constraint firstItem="5Ni-gP-NAS" firstAttribute="top" secondItem="3SU-Up-VtH" secondAttribute="top" priority="750" id="DIM-wL-HVe"/>
                             <constraint firstItem="BXE-ef-qrw" firstAttribute="trailing" secondItem="xOt-Ok-aOS" secondAttribute="trailing" id="FHJ-uv-sL8"/>
                             <constraint firstItem="AZ4-uq-qPW" firstAttribute="leading" secondItem="xOt-Ok-aOS" secondAttribute="leading" id="HOn-ZD-DRA"/>
                             <constraint firstItem="AZ4-uq-qPW" firstAttribute="trailing" secondItem="xOt-Ok-aOS" secondAttribute="trailing" id="LZK-T6-cRk"/>
                             <constraint firstItem="xOt-Ok-aOS" firstAttribute="trailing" secondItem="gcd-vA-OI8" secondAttribute="trailing" id="Lrf-cX-R8S"/>
                             <constraint firstItem="gcd-vA-OI8" firstAttribute="leading" secondItem="AHw-hF-PFB" secondAttribute="leading" id="McP-J8-Qm1"/>
                             <constraint firstItem="xOt-Ok-aOS" firstAttribute="trailing" secondItem="pro-bo-zMg" secondAttribute="trailing" id="N33-Wl-x0U"/>
-                            <constraint firstItem="xOt-Ok-aOS" firstAttribute="bottom" secondItem="gcd-vA-OI8" secondAttribute="bottom" id="TZM-t0-uiT"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="gcd-vA-OI8" secondAttribute="bottom" id="TZM-t0-uiT"/>
                             <constraint firstItem="BXE-ef-qrw" firstAttribute="leading" secondItem="xOt-Ok-aOS" secondAttribute="leading" id="TvU-L0-jfv"/>
                             <constraint firstItem="xOt-Ok-aOS" firstAttribute="bottom" secondItem="pro-bo-zMg" secondAttribute="bottom" constant="150" id="UgC-kz-6VY"/>
                             <constraint firstItem="BXE-ef-qrw" firstAttribute="top" secondItem="AHw-hF-PFB" secondAttribute="top" id="g9E-xc-XsJ"/>
+                            <constraint firstItem="5Ni-gP-NAS" firstAttribute="leading" secondItem="xOt-Ok-aOS" secondAttribute="leading" id="iEt-2a-04z"/>
                             <constraint firstAttribute="bottom" secondItem="AZ4-uq-qPW" secondAttribute="bottom" id="jQ8-0Z-bgH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xOt-Ok-aOS"/>
