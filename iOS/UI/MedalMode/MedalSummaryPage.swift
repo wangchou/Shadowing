@@ -85,6 +85,7 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
     }
 
     private func addBottomTable() {
+        let bottomButtonHeight = getBottomButtonHeight()
         tableView = UITableView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: MedalSummaryTableCell.id)
 
@@ -109,16 +110,16 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
         bgRect.frame = CGRect(x: 0,
                               y: tableView.y1,
                               width: screen.width,
-                              height: bottomButtonHeight)
+                              height: getBottomButtonHeight())
         bgRect.backgroundColor = rgb(180, 180, 180)
         addSubview(bgRect)
         let button = UIButton()
         button.frame = bgRect.frame
-        button.frame.size.height = bottomButtonTextAreaHeight
+        button.frame.size.height = getBottomButtonTextAreaHeight()
         button.backgroundColor = rgb(180, 180, 180)
         button.setTitle("X", for: .normal)
         button.setTitleColor(.lightGray, for: .highlighted)
-        button.titleLabel?.font = bottomButtonFont
+        button.titleLabel?.font = getBottomButtonFont()
         button.setTitleColor(.black, for: .normal)
         button.addTapGestureRecognizer {
             dismissVC()

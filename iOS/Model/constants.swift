@@ -55,3 +55,23 @@ let abilities = ["日常", "旅遊", "N5", "N4", "敬語", "戀愛", "論述", "
 let jaAbilities = ["日常", "旅行", "N5", "N4", "敬語", "恋", "命題", "単語"]
 
 let medalModeKey = "Medal Mode Key"
+
+func getBottomButtonFont() -> UIFont {
+    let fontSize =  getStep() * 3
+    if i18n.isJa || i18n.isZh {
+        return MyFont.regular(ofSize: fontSize)
+    }
+    return UIFont.systemFont(ofSize: fontSize, weight: .regular)
+}
+
+func getStep() -> CGFloat {
+    return screen.width/48
+}
+
+func getBottomButtonHeight() -> CGFloat {
+    return max(getBottomButtonTextAreaHeight(), getBottomPadding() + 5 * getStep())
+}
+
+func getBottomButtonTextAreaHeight() -> CGFloat {
+    return 7 * getStep()
+}

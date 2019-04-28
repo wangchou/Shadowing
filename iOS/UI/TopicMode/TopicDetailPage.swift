@@ -33,6 +33,7 @@ class TopicDetailPage: UIViewController {
     @IBOutlet weak var peekButton: UIButton!
 
     @IBOutlet weak var topBarView: TopBarView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTopBar()
@@ -54,6 +55,7 @@ class TopicDetailPage: UIViewController {
         guard isViewReady else { return }
         titleLabel.text = getDataSetTitle(dataSetKey: context.dataSetKey)
         peekButton.setTitle(i18n.chineseOrJapanese, for: .normal)
+        peekButton.titleLabel?.font = getBottomButtonFont()
 
         if let gameRecord = findBestRecord(key: context.dataSetKey) {
             rankLabel.attributedText = getRankAttrText(rank: gameRecord.rank.rawValue, color: gameRecord.rank.color)

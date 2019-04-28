@@ -58,8 +58,8 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         backgroundColor = rgb(50, 50, 50)
         addTextbackground(bgColor: rgb(50, 50, 50), textColor: textGold)
         let yMax = Int(screen.height / step)
-        addInfo(y: (yMax - 12)/2 - 18)
-        addActionButtons(y: (yMax - 12)/2 + 30)
+        addInfo(y: (yMax - 12)/2 - 20)
+        addActionButtons(y: (yMax - 12)/2 + 28)
     }
 
     func viewWillDisappear() {
