@@ -42,27 +42,29 @@ class TopicButtonAreaView: UIView, GridLayout, ReloadableView {
 
         playButton = UIButton()
         playButton.addTarget(self, action: #selector(onPlayButtonClicked), for: .touchUpInside)
-        playButton.roundBorder(borderWidth: 0, cornerRadius: 5, color: .clear)
+        playButton.roundBorder(borderWidth: 0, cornerRadius: step, color: .clear)
         playButton.setIconImage(named: "baseline_play_arrow_black_48pt", title: "", tintColor: .black, isIconOnLeft: false)
         playButton.tintColor = myRed.withSaturation(1)
+        if isIPad { playButton.backgroundColor = backGray }
 
         layout(18, 2, 12, 8, playButton)
         addSubview(playButton)
 
         topViewSwitchButton = UIButton()
         topViewSwitchButton.addTarget(self, action: #selector(onSwitchButtonClicked), for: .touchUpInside)
-        topViewSwitchButton.roundBorder(borderWidth: 0, cornerRadius: 5, color: .clear)
-        topViewSwitchButton.setIconImage(named: "baseline_style_black_36pt", title: "", tintColor: .black, isIconOnLeft: false)
+        topViewSwitchButton.roundBorder(borderWidth: 0, cornerRadius: step, color: .clear)
+        topViewSwitchButton.setIconImage(named: "baseline_style_black_\(isIPad ? "48pt" : "36pt")", title: "", tintColor: .black, isIconOnLeft: false)
         topViewSwitchButton.tintColor = myGreen.withSaturation(1)
         layout(3, 2, 12, 8, topViewSwitchButton)
         addSubview(topViewSwitchButton)
+        if isIPad { topViewSwitchButton.backgroundColor = backGray }
 
         repeatOneSwitchButton = UIButton()
         repeatOneSwitchButton.addTarget(self, action: #selector(onRepeatOneButtonClicked), for: .touchUpInside)
         layout(35, 2, 8, 8, repeatOneSwitchButton)
 
         repeatOneSwitchButton.roundBorder(borderWidth: 0, cornerRadius: repeatOneSwitchButton.frame.width/2, color: .clear)
-        repeatOneSwitchButton.setIconImage(named: "baseline_repeat_one_black_24pt", title: "", tintColor: .white, isIconOnLeft: false)
+        repeatOneSwitchButton.setIconImage(named: "baseline_repeat_one_black_\(isIPad ? "48pt" : "24pt")", title: "", tintColor: .white, isIconOnLeft: false)
         addSubview(repeatOneSwitchButton)
 
         addSeparationLine(y: 12)
