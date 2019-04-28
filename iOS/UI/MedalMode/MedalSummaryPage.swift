@@ -30,18 +30,23 @@ class MedalSummaryPage: UIViewController {
 
 class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
     var tableData: [Summary] = []
+    var tableHeaderView: GridUIView!
     var topView: MedalSummaryTopView!
     var tableTitleBar: UIView!
     var topSubviews: [UIView] = []
-    var y: Int {
-        return topPaddedY
-    }
 
     var tableView: UITableView!
 
+    var safeAreaDiffY: Int {
+        return getTopPadding() > 20 ? 1 : 0
+    }
+
     func viewWillAppear() {
+        backgroundColor = rgb(60, 60, 60)
         tableData = getSummaryByDays()
         removeAllSubviews()
+        tableHeaderView = GridUIView()
+        layout(0, 0, gridCount, 36 - safeAreaDiffY, tableHeaderView)
         addTopView()
         addTableTitleBar()
         addBottomTable()
@@ -51,35 +56,35 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
     private func addTopView() {
         topView = MedalSummaryTopView()
         topView.tableData = tableData
-        layout(0, 0, 48, 30+y, topView)
-        addSubview(topView)
+        layout(0, 0, gridCount, 34 - safeAreaDiffY, topView)
+        tableHeaderView.addSubview(topView)
     }
 
     private func addTableTitleBar() {
-        let barY = y+30
-        tableTitleBar = addRect(x: 0, y: barY, w: 48, h: 6, color: rgb(228, 182, 107))
+        let barY = 30 - safeAreaDiffY
+        tableTitleBar = tableHeaderView.addRect(x: 0, y: barY, w: gridCount, h: 6, color: rgb(228, 182, 107))
 
-        var label = addText(x: 0, y: barY, w: 15, h: 4, text: i18n.date)
+        var label = tableHeaderView.addText(x: 0, y: barY, w: 15, h: 4, text: i18n.date)
         label.textAlignment = .center
         label.centerY(tableTitleBar.frame)
 
-        label = addText(x: 15, y: barY, w: 11, h: 4, text: i18n.medal)
+        label = tableHeaderView.addText(x: 15, y: barY, w: 11, h: 4, text: i18n.medal)
         label.textAlignment = .center
         label.centerY(tableTitleBar.frame)
 
-        label = addText(x: 26, y: barY, w: 11, h: 4, text: i18n.simpleGoalText)
+        label = tableHeaderView.addText(x: 26, y: barY, w: 11, h: 4, text: i18n.simpleGoalText)
         label.textAlignment = .center
         label.centerY(tableTitleBar.frame)
 
-        label = addText(x: 37, y: barY, w: 11, h: 4, text: i18n.time)
+        label = tableHeaderView.addText(x: 37, y: barY, w: 11, h: 4, text: i18n.time)
         label.textAlignment = .center
         label.centerY(tableTitleBar.frame)
 
-        var line = addRect(x: 0, y: 0, w: 48, h: 1, color: .black)
+        var line = tableHeaderView.addRect(x: 0, y: 0, w: gridCount, h: 1, color: .black)
         line.frame.size.height = 0.5
         line.frame.origin.y = tableTitleBar.y0
 
-        line = addRect(x: 0, y: 0, w: 48, h: 1, color: .darkGray)
+        line = tableHeaderView.addRect(x: 0, y: 0, w: gridCount, h: 1, color: .darkGray)
         line.frame.size.height = 0.5
         line.frame.origin.y = tableTitleBar.y1 - 0.5
     }
@@ -88,6 +93,7 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
         let bottomButtonHeight = getBottomButtonHeight()
         tableView = UITableView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: MedalSummaryTableCell.id)
+        tableView.tableHeaderView = tableHeaderView
 
         tableView.rowHeight = step * 6
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -95,11 +101,9 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
         tableView.dataSource = self
         tableView.delegate = self
 
-        var height = screen.height
-        height -= tableTitleBar.y1
-        height -= bottomButtonHeight
+        let height = screen.height - bottomButtonHeight - getTopPadding()
         tableView.frame = CGRect(x: 0,
-                                 y: tableTitleBar.y1,
+                                 y: getTopPadding(),
                                  width: screen.width,
                                  height: height)
         addSubview(tableView)
@@ -126,7 +130,7 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
         }
         addSubview(button)
 
-        let line = addRect(x: 0, y: 0, w: 48, h: 1, color: .darkGray)
+        let line = addRect(x: 0, y: 0, w: gridCount, h: 1, color: .darkGray)
         line.frame.size.height = 0.5
         line.frame.origin.y = button.y0
     }
