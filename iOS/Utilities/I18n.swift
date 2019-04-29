@@ -42,6 +42,11 @@ class I18n {
         if isZh { return "挑戰的語音說明" }
         return "Initial Descriptions"
     }
+    var showTranslationLabel: String {
+        if isJa { return "翻訳を表示する" }
+        if isZh { return "改顯示譯文" }
+        return "Show translation"
+    }
     var monitoringLabel: String {
         if isJa { return "モニタリング（有線イヤホンのみ）"}
         if isZh { return "即時監聽 (有線耳機 Only)" }
