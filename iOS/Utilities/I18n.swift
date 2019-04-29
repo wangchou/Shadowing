@@ -698,10 +698,10 @@ class I18n {
         return "Today's Goal"
     }
 
-    var todayAndLanguageReview: String {
-        if isJa { return "今日 (\(language))" }
-        if isZh { return "今天 (\(language))" }
-        return "Today (\(language))"
+    var today: String {
+        if isJa { return "今日" }
+        if isZh { return "今天" }
+        return "Today"
     }
 
     var medalMode: String {

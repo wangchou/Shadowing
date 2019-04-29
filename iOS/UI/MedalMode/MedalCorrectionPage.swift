@@ -87,11 +87,19 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         topView?.removeFromSuperview()
         topView = GridUIView()
         topView.backgroundColor = darkBackground
-        layout(0, 0, gridCount, 14 + topPaddedY, topView)
+        layout(0, 0, gridCount, 15 + topPaddedY, topView)
         addSubview(topView)
 
         var y = topPaddedY
-        topView.addText(x: 2, y: y, h: 5, text: i18n.todayAndLanguageReview, color: rgb(240, 240, 240))
+        let titleAttrText = NSMutableAttributedString()
+        let fontSize = getFontSize(h: 5)
+        titleAttrText.append(colorText(i18n.today,
+                                       rgb(240, 240, 240),
+                                       fontSize: fontSize))
+        titleAttrText.append(colorText(" (\(i18n.language))",
+                             rgb(160, 160, 160),
+                             fontSize: fontSize))
+        topView.addAttrText(x: 2, y: y, h: 5, text: titleAttrText)
 
         let orangeCount = goodCount
         let redCount = missedCount
