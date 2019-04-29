@@ -118,10 +118,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
 
         var button = UIButton()
         button.setIconImage(named: "baseline_sort_black_\(iconSize)")
-        button.backgroundColor = UIColor.white.withAlphaComponent(0.25)
-        button.showsTouchWhenHighlighted = true
-        button.roundBorder(borderWidth: 0.5, cornerRadius: step, color: .clear)
-        button.tintColor = rgb(220, 220, 220)
+        button.setStyle(style: .darkOption, step: step)
         button.addTapGestureRecognizer { [weak self] in
             self?.viewWillAppear()
         }
@@ -130,13 +127,8 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
 
         button = UIButton()
         let title = String(format: "%.2fx", context.gameSetting.practiceSpeed * 2)
-
-        button.backgroundColor = UIColor.white.withAlphaComponent(0.25)
+        button.setStyle(style: .darkOption, step: step)
         button.setTitle(title, for: .normal)
-        button.setTitleColor(rgb(220, 220, 220), for: .normal)
-        button.titleLabel?.textAlignment = .center
-        button.roundBorder(borderWidth: 0.5, cornerRadius: step, color: .clear)
-        button.showsTouchWhenHighlighted = true
         button.addTapGestureRecognizer { [weak self] in
             VoiceSelectionPage.fromPage = self?.vc
             VoiceSelectionPage.selectingVoiceFor = .teacher

@@ -45,8 +45,8 @@ let myLightRed = rgb(255, 130, 173)
 let lightestGray = rgb(250, 250, 250)
 
 // option buttons
-let buttonBackgroundGray = UIColor.white.withAlphaComponent(0.4)
-let buttonForegroundGray = rgb(200, 200, 200)
+let buttonBackgroundGray = UIColor.white.withAlphaComponent(0.25)
+let buttonForegroundGray = rgb(220, 220, 220)
 
 extension UIColor {
     func withSaturation(_ newS: CGFloat) -> UIColor {

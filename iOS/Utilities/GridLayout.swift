@@ -80,6 +80,19 @@ extension GridLayout where Self: UIView {
         return rect
     }
 
+    @discardableResult
+    func addButton(_ x: Int, _ y: Int, _ w: Int, _ h: Int,
+                   color: UIColor = .white,
+                   cornerRadius: CGFloat = screen.width/48) -> UIButton {
+        let button = UIButton()
+        layout(x, y, w, h, button)
+        button.backgroundColor = color
+        button.roundBorder(borderWidth: 0, cornerRadius: cornerRadius, color: .clear)
+        button.showsTouchWhenHighlighted = true
+        addSubview(button)
+        return button
+    }
+
     func layout(_ x: Int, _ y: Int, _ w: Int? = nil, _ h: Int, _ view: UIView) {
         view.frame = getFrame(x, y, w ?? (gridCount - x), h)
     }

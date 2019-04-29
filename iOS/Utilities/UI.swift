@@ -188,6 +188,24 @@ extension UIApplication {
     }
 }
 
+enum ButtonStyle {
+    case darkOption
+}
+
+extension UIButton {
+    func setStyle(style: ButtonStyle, step: CGFloat) {
+        switch style {
+        case .darkOption:
+            self.roundBorder(borderWidth: 0.5, cornerRadius: step, color: .clear)
+            self.tintColor = buttonForegroundGray
+            self.setTitleColor(buttonForegroundGray, for: .normal)
+            self.backgroundColor = buttonBackgroundGray
+            self.showsTouchWhenHighlighted = true
+            self.titleLabel?.textAlignment = .center
+        }
+    }
+}
+
 // dismiss presented vc
 func dismissVC(animated: Bool = true, completion: (() -> Void)? = nil) {
     guard let vc = UIApplication.getPresentedViewController() else { return }

@@ -136,23 +136,22 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
     private func addChangeLangButton(y: Int) {
         let changeLangButton = UIButton()
-        changeLangButton.backgroundColor = buttonBackgroundGray
-        changeLangButton.roundBorder(borderWidth: 0, cornerRadius: step, color: .clear)
+        layout(34, y, 8, 5, changeLangButton)
+        addSubview(changeLangButton)
+
         let attrTitle = getStrokeText(gameLang == .jp ? i18n.enAbbr : i18n.jaAbbr,
                                       buttonForegroundGray,
                                       strokeWidth: Float(step * -1/3),
                                       font: MyFont.bold(ofSize: 4*step))
 
         changeLangButton.setAttributedTitle(attrTitle, for: .normal)
-        layout(34, y, 8, 5, changeLangButton)
-        changeLangButton.addTarget(self, action: #selector(onChangeLangButtonClicked), for: .touchUpInside)
-        changeLangButton.showsTouchWhenHighlighted = true
-        addSubview(changeLangButton)
-    }
 
-    @objc func onChangeLangButtonClicked() {
-        changeGameLangTo(lang: gameLang == .jp ? .en : .jp)
-        self.viewWillAppear()
+        changeLangButton.addTapGestureRecognizer { [weak self] in
+            changeGameLangTo(lang: gameLang == .jp ? .en : .jp)
+            self?.viewWillAppear()
+        }
+
+        changeLangButton.setStyle(style: .darkOption, step: step)
     }
 
     // MARK: - GoButton
