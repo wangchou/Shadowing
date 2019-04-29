@@ -25,8 +25,8 @@ enum RingTone: String {
         switch self {
         case .depression:
             return 0.7
-        case .minuet, .star:
-            return 0.6
+        case .timePassing:
+            return 0.25
         default:
             return 0.5
         }

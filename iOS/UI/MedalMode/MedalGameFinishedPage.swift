@@ -26,6 +26,7 @@ class MedalGameFinishedPage: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         countDownTimer?.invalidate()
+        SpeechEngine.shared.stopRingTone()
     }
 }
 
@@ -59,11 +60,6 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         let yMax = Int(screen.height / step)
         addInfo(y: (yMax - 12)/2 - 20)
         addActionButtons(y: (yMax - 12)/2 + 28)
-    }
-
-    func viewWillDisappear() {
-        countDownTimer?.invalidate()
-        SpeechEngine.shared.stopRingTone()
     }
 
     // MARK: - Say Result

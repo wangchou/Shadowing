@@ -221,7 +221,7 @@ extension GridLayout where Self: UIView {
     func addTextbackground(bgColor: UIColor = darkBackground,
                            textColor: UIColor = textGold) {
         backgroundColor = bgColor
-        if isSimulator { return }
+        //if isSimulator { return }
         let num = Int(sqrt(pow(screen.width, 2) + pow(screen.height, 2)) / step)/8
         let level = context.gameMedal.lowLevel
         let sentences = getRandSentences(level: level, numOfSentences: num * 4)
