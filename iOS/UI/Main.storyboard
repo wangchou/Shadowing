@@ -61,31 +61,31 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="入門一" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0qv-GT-CPs">
-                                                    <rect key="frame" x="21" y="16" width="96" height="42"/>
+                                                    <rect key="frame" x="25" y="16" width="96" height="42"/>
                                                     <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="32"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="判定" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zFb-1j-IQc">
-                                                    <rect key="frame" x="270" y="10" width="25" height="15"/>
+                                                    <rect key="frame" x="364" y="10" width="25" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="完成率" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mzz-qW-JcI">
-                                                    <rect key="frame" x="183" y="10" width="37" height="14.5"/>
+                                                    <rect key="frame" x="277" y="10" width="37" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="100%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Nv-y5-1rR">
-                                                    <rect key="frame" x="183" y="24.5" width="80" height="39"/>
+                                                    <rect key="frame" x="277" y="24.5" width="80" height="39"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" ambiguous="YES" text="SS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Y4-e0-FMA">
-                                                    <rect key="frame" x="270" y="24.5" width="39" height="39"/>
+                                                    <rect key="frame" x="364" y="24.5" width="39" height="39"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -965,13 +965,66 @@ Ruth Yuru Chen
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="UU5-y4-gbW">
                                 <rect key="frame" x="0.0" y="94" width="414" height="768"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="jxR-ke-2hK">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="125"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="練習速度" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p01-bR-lIr">
+                                            <rect key="frame" x="15.000000000000004" y="40" width="57.333333333333343" height="24"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="24" id="mbc-Un-lrI"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qnt-8k-578">
+                                            <rect key="frame" x="0.0" y="69" width="414" height="44"/>
+                                            <subviews>
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="YHG-RG-JtR">
+                                                    <rect key="frame" x="13" y="7.6666666666666714" width="343" height="30"/>
+                                                    <connections>
+                                                        <action selector="practiceSpeedSliderValueChanged:" destination="8Mb-6R-zoy" eventType="valueChanged" id="Jft-8W-osD"/>
+                                                    </connections>
+                                                </slider>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.00x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Acc-lL-O4v">
+                                                    <rect key="frame" x="363" y="11.999999999999998" width="41" height="20.333333333333329"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="YHG-RG-JtR" firstAttribute="top" secondItem="Qnt-8k-578" secondAttribute="top" constant="7.5" id="4Ab-bV-CVW"/>
+                                                <constraint firstAttribute="height" constant="44" id="67E-r2-mYO"/>
+                                                <constraint firstAttribute="bottom" secondItem="YHG-RG-JtR" secondAttribute="bottom" constant="7.5" id="G2d-Cs-Smd"/>
+                                                <constraint firstAttribute="trailing" secondItem="YHG-RG-JtR" secondAttribute="trailing" constant="60" id="Wge-qa-aCU"/>
+                                                <constraint firstItem="Acc-lL-O4v" firstAttribute="centerY" secondItem="Qnt-8k-578" secondAttribute="centerY" id="dPC-F5-chc"/>
+                                                <constraint firstItem="YHG-RG-JtR" firstAttribute="leading" secondItem="Qnt-8k-578" secondAttribute="leading" constant="15" id="t02-3I-GXk"/>
+                                                <constraint firstAttribute="trailing" secondItem="Acc-lL-O4v" secondAttribute="trailing" constant="10" id="wL8-Wi-6xT"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="p01-bR-lIr" firstAttribute="top" secondItem="jxR-ke-2hK" secondAttribute="top" constant="40" id="2AN-Vy-fYj"/>
+                                        <constraint firstItem="p01-bR-lIr" firstAttribute="leading" secondItem="jxR-ke-2hK" secondAttribute="leading" constant="15" id="2jX-Qj-HLI"/>
+                                        <constraint firstAttribute="trailing" secondItem="Qnt-8k-578" secondAttribute="trailing" id="AKL-Ns-3d8"/>
+                                        <constraint firstItem="Qnt-8k-578" firstAttribute="leading" secondItem="jxR-ke-2hK" secondAttribute="leading" id="eSx-3f-IlZ"/>
+                                        <constraint firstItem="Qnt-8k-578" firstAttribute="top" secondItem="p01-bR-lIr" secondAttribute="bottom" constant="5" id="qEL-ml-vzO"/>
+                                    </constraints>
+                                </view>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="kFl-sC-nWJ">
-                                    <rect key="frame" x="0.0" y="118.33333333333334" width="414" height="71"/>
+                                    <rect key="frame" x="0.0" y="243.33333333333337" width="414" height="220"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="iPhone の「設定 &gt; 一般 &gt; アクセシビリティ &gt; スピーチ &gt; 声 &gt; \(lang)」で、高品質の声をダウンロードしましょう。" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9rs-6B-zev">
-                                            <rect key="frame" x="10" y="0.0" width="300" height="71"/>
+                                            <rect key="frame" x="10" y="-15" width="394" height="80"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="80" id="g62-75-gfR"/>
+                                            </constraints>
                                             <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -979,15 +1032,14 @@ Ruth Yuru Chen
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="9rs-6B-zev" secondAttribute="bottom" id="COs-15-KKW"/>
-                                        <constraint firstItem="9rs-6B-zev" firstAttribute="top" secondItem="kFl-sC-nWJ" secondAttribute="top" id="RlC-np-Yj5"/>
+                                        <constraint firstItem="9rs-6B-zev" firstAttribute="top" secondItem="kFl-sC-nWJ" secondAttribute="top" constant="-15" id="RlC-np-Yj5"/>
                                         <constraint firstItem="9rs-6B-zev" firstAttribute="leading" secondItem="kFl-sC-nWJ" secondAttribute="leading" constant="10" id="fEV-Qm-zmF"/>
                                         <constraint firstAttribute="trailing" secondItem="9rs-6B-zev" secondAttribute="trailing" constant="10" id="gQL-1x-Fpr"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="VoiceTableCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VoiceTableCell" rowHeight="45" id="kKJ-Eq-1Da" customClass="VoiceTableCell" customModule="今話したい" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.333333333333343" width="414" height="45"/>
+                                        <rect key="frame" x="0.0" y="180.33333333333334" width="414" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kKJ-Eq-1Da" id="jv7-eq-Mvs">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44.666666666666664"/>
@@ -1033,13 +1085,16 @@ Ruth Yuru Chen
                         <outlet property="cancelButton" destination="X1Y-Iv-oa2" id="grN-nU-DJz"/>
                         <outlet property="doneButton" destination="itA-gr-Rhf" id="qoJ-cQ-1fW"/>
                         <outlet property="downloadVoiceTextView" destination="9rs-6B-zev" id="gSX-ex-NuM"/>
+                        <outlet property="practiceSpeedLabel" destination="p01-bR-lIr" id="bRD-Er-cGx"/>
+                        <outlet property="practiceSpeedSlider" destination="YHG-RG-JtR" id="StC-vt-KAH"/>
+                        <outlet property="practiceSpeedValueLabel" destination="Acc-lL-O4v" id="YOb-DF-kpK"/>
                         <outlet property="tableView" destination="UU5-y4-gbW" id="wSp-xY-OhK"/>
                         <outlet property="titleLabel" destination="X0r-PM-HPt" id="lDq-Nq-Vds"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6h5-lK-YIB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-354.375" y="-169.01408450704224"/>
+            <point key="canvasLocation" x="-355.07246376811599" y="-169.41964285714286"/>
         </scene>
         <!--Item-->
         <scene sceneID="dx9-ut-S3b">
@@ -1393,7 +1448,7 @@ Ruth Yuru Chen
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3U2-5G-XCz">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.666666666666664"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <state key="normal" title="前往 iOS 設定中心">
                                                         <color key="titleColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -1418,14 +1473,14 @@ Ruth Yuru Chen
                             <tableViewSection headerTitle="您的回饋是 App 成長的原動力" id="YWv-0Z-c84" userLabel="Go to IOS Setting">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="nvf-m6-gIi">
-                                        <rect key="frame" x="0.0" y="1005.3333333333334" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="1005.3333333333335" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nvf-m6-gIi" id="DtM-XQ-AHb">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cgn-Cn-7aR">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.666666666666664"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <state key="normal" title="前往 App Store 留言">
                                                         <color key="titleColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -1507,21 +1562,21 @@ Ruth Yuru Chen
                                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LwG-wU-2DZ" userLabel="TopView" customClass="TopChartView" customModule="今話したい" customModuleProvider="target">
-                                            <rect key="frame" x="30" y="0.0" width="260" height="184"/>
+                                            <rect key="frame" x="93.666666666666671" y="0.0" width="226.66666666666663" height="160.66666666666666"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="LwG-wU-2DZ" secondAttribute="height" multiplier="48:34" id="sVp-sc-cxF"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BCi-iY-dna" customClass="TopicFilterBarView" customModule="今話したい" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="264" width="320" height="61"/>
+                                            <rect key="frame" x="0.0" y="264" width="414" height="61"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="61" id="d8T-wI-Vnl"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VmV-51-bgf" customClass="TopicButtonAreaView" customModule="今話したい" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="184" width="320" height="80"/>
+                                            <rect key="frame" x="0.0" y="160.66666666666666" width="414" height="103.33333333333334"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                     </subviews>
@@ -1548,7 +1603,7 @@ Ruth Yuru Chen
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="2iU-yl-Lpw">
-                                                    <rect key="frame" x="5" y="5" width="310" height="69.666666666666671"/>
+                                                    <rect key="frame" x="5" y="5" width="404" height="69.666666666666671"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="入" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5xV-sz-Wsr">
                                                             <rect key="frame" x="0.0" y="15" width="40" height="40"/>
@@ -1561,13 +1616,13 @@ Ruth Yuru Chen
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="N5 50句 - 第一關" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jN5-CV-8qC" customClass="FuriganaLabel" customModule="今話したい" customModuleProvider="target">
-                                                            <rect key="frame" x="40" y="0.0" width="135" height="69.666666666666671"/>
+                                                            <rect key="frame" x="40" y="0.0" width="229" height="69.666666666666671"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="yGY-8x-xy2">
-                                                            <rect key="frame" x="175" y="8.9999999999999964" width="90" height="51.666666666666657"/>
+                                                            <rect key="frame" x="269" y="8.9999999999999964" width="90" height="51.666666666666657"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="完成率" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qwr-6i-713">
                                                                     <rect key="frame" x="0.0" y="0.0" width="37" height="14.333333333333334"/>
@@ -1595,7 +1650,7 @@ Ruth Yuru Chen
                                                             </constraints>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Xv6-Tm-jXS">
-                                                            <rect key="frame" x="265" y="8.9999999999999964" width="45" height="51.666666666666657"/>
+                                                            <rect key="frame" x="359" y="8.9999999999999964" width="45" height="51.666666666666657"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="判定" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Spm-ma-gpe">
                                                                     <rect key="frame" x="0.0" y="0.0" width="24.666666666666668" height="14.333333333333334"/>
@@ -1734,10 +1789,10 @@ Ruth Yuru Chen
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="SAO-9L-ImD" userLabel="left part">
-                                            <rect key="frame" x="10" y="5" width="240" height="169"/>
+                                            <rect key="frame" x="10" y="5" width="334" height="169"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="こんにちは〜！" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GX6-Zg-Cjy">
-                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="25"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="334" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="QMi-G2-uce"/>
                                                     </constraints>
@@ -1746,19 +1801,19 @@ Ruth Yuru Chen
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Uc9-B5-RQL">
-                                                    <rect key="frame" x="0.0" y="25" width="240" height="96"/>
+                                                    <rect key="frame" x="0.0" y="25" width="334" height="96"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="TRn-h5-8ZG">
-                                                            <rect key="frame" x="0.0" y="0.0" width="240" height="96"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="334" height="96"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bd1-65-w1n">
-                                                                    <rect key="frame" x="0.0" y="9.6666666666666643" width="159.33333333333334" height="76.666666666666686"/>
+                                                                    <rect key="frame" x="0.0" y="9.6666666666666643" width="221.66666666666666" height="76.666666666666686"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="64"/>
                                                                     <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWi-Pi-rbk">
-                                                                    <rect key="frame" x="159.33333333333334" y="9.6666666666666643" width="80.666666666666657" height="76.666666666666686"/>
+                                                                    <rect key="frame" x="221.66666666666666" y="9.6666666666666643" width="112.33333333333334" height="76.666666666666686"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="64"/>
                                                                     <color key="textColor" red="1" green="0.56961647959999995" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -1773,10 +1828,10 @@ Ruth Yuru Chen
                                                     </constraints>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="XEk-Ip-cgT" userLabel="challenge button">
-                                                    <rect key="frame" x="0.0" y="121" width="240" height="48"/>
+                                                    <rect key="frame" x="0.0" y="121" width="334" height="48"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6UR-Kh-FRQ" userLabel="Skip Previous Button">
-                                                            <rect key="frame" x="0.0" y="0.0" width="73.333333333333329" height="48"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="104.66666666666667" height="48"/>
                                                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <state key="normal" image="baseline_skip_previous_black_48pt">
@@ -1787,7 +1842,7 @@ Ruth Yuru Chen
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qDS-dW-Rf8">
-                                                            <rect key="frame" x="83.333333333333343" y="0.0" width="73.333333333333343" height="48"/>
+                                                            <rect key="frame" x="114.66666666666666" y="0.0" width="104.66666666666666" height="48"/>
                                                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <state key="normal" image="baseline_play_arrow_black_48pt"/>
@@ -1796,7 +1851,7 @@ Ruth Yuru Chen
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lzl-Ke-SZ9" userLabel="Skip Next Button">
-                                                            <rect key="frame" x="166.66666666666666" y="0.0" width="73.333333333333343" height="48"/>
+                                                            <rect key="frame" x="229.33333333333334" y="0.0" width="104.66666666666666" height="48"/>
                                                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <state key="normal" image="baseline_skip_next_black_48pt"/>
@@ -1827,7 +1882,7 @@ Ruth Yuru Chen
                                             </constraints>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="yr3-fd-Cu0" userLabel="Perfect/Miss Count">
-                                            <rect key="frame" x="260" y="5" width="50" height="173"/>
+                                            <rect key="frame" x="354" y="5" width="50" height="173"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="正解" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcl-7d-eHE">
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="14.333333333333334"/>

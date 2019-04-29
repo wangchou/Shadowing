@@ -136,10 +136,10 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
     private func addChangeLangButton(y: Int) {
         let changeLangButton = UIButton()
-        changeLangButton.backgroundColor = UIColor.white.withAlphaComponent(0.4)
+        changeLangButton.backgroundColor = buttonBackgroundGray
         changeLangButton.roundBorder(borderWidth: 0, cornerRadius: step, color: .clear)
         let attrTitle = getStrokeText(gameLang == .jp ? i18n.enAbbr : i18n.jaAbbr,
-                                      rgb(200, 200, 200),
+                                      buttonForegroundGray,
                                       strokeWidth: Float(step * -1/3),
                                       font: MyFont.bold(ofSize: 4*step))
 

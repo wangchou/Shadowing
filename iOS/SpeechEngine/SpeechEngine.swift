@@ -98,8 +98,12 @@ class SpeechEngine {
 
     func stopListeningAndSpeaking() {
         speechRecognizer.endAudio()
-        tts1.stop()
-        tts2.stop()
+        if tts1.synthesizer.isSpeaking {
+            tts1.stop()
+        }
+        if tts2.synthesizer.isSpeaking {
+            tts2.stop()
+        }
     }
 
     func monitoringOn() {

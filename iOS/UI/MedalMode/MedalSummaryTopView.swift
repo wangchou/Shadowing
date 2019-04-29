@@ -131,9 +131,9 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         // MARK: - Add day option button
         let daysButton = UIButton()
         daysButton.setTitle(dayOptionString(option: daysOption), for: .normal)
-        daysButton.setTitleColor(.white, for: .normal)
+        daysButton.setTitleColor(rgb(220, 220, 220), for: .normal)
         daysButton.titleLabel?.font = MyFont.regular(ofSize: step * 3)
-        daysButton.backgroundColor = subTitleGray
+        daysButton.backgroundColor = UIColor.white.withAlphaComponent(0.25)
         daysButton.roundBorder(borderWidth: 0.5, cornerRadius: step, color: .clear)
         daysButton.sizeToFit()
         daysButton.frame.origin.x = 21 * step

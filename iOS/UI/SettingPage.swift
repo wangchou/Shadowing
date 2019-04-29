@@ -225,19 +225,17 @@ class SettingPage: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 4 {
-            VoiceSelectionPage.voices = getAvailableVoice(prefix: gameLang.prefix)
-
             if indexPath.row == 0 { // teacher voice
-                VoiceSelectionPage.fromSettingPage = self
+                VoiceSelectionPage.fromPage = self
                 VoiceSelectionPage.selectingVoiceFor = .teacher
                 VoiceSelectionPage.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher)
             }
             if indexPath.row == 1 { // assistant voice
-                VoiceSelectionPage.fromSettingPage = self
+                VoiceSelectionPage.fromPage = self
                 VoiceSelectionPage.selectingVoiceFor = .assisant
                 VoiceSelectionPage.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.assisant)
             }
-            launchVC("VoiceSelectionViewController", self, isOverCurrent: true, animated: true)
+            launchVC(VoiceSelectionPage.id, self, isOverCurrent: true, animated: true)
         }
     }
 }

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Promises
+import AVFoundation
 
 private let context = GameContext.shared
 
@@ -20,6 +21,7 @@ class MedalCorrectionPage: UIViewController {
 
     override func loadView() {
         view = MedalCorrectionPageView()
+        medalCorrectionPageView?.vc = self
         view.frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.height)
     }
 
@@ -33,6 +35,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
     var topView: GridUIView!
     var tableView: UITableView!
     var gridCount: Int = 48
+    var vc: MedalCorrectionPage?
     var sentences: [String] {
         return context.sentences
     }
@@ -80,7 +83,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         addBottomButtons()
     }
 
-    private func renderTopView() {
+    func renderTopView() {
         topView?.removeFromSuperview()
         topView = GridUIView()
         topView.backgroundColor = rgb(60, 60, 60)
@@ -88,14 +91,14 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         addSubview(topView)
 
         var y = topPaddedY
-        topView.addText(x: 2, y: y, h: 5, text: i18n.todayAndLanguageReview, color: .white)
+        topView.addText(x: 2, y: y, h: 5, text: i18n.todayAndLanguageReview, color: rgb(240, 240, 240))
 
         let orangeCount = goodCount
         let redCount = missedCount
         let greenCount = sentences.count - orangeCount - redCount
 
-        let x = 4
-        y += 6
+        let x = 3
+        y += 7
 
         func addCountBox(x: Int, y: Int,
                          title: String, count: Int, color: UIColor) {
@@ -113,18 +116,35 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         addCountBox(x: x+22, y: y,
                     title: i18n.wrong, count: redCount, color: myRed)
 
-        let button = UIButton()
+        var button = UIButton()
         button.setIconImage(named: "baseline_sort_black_\(iconSize)")
-        button.backgroundColor = UIColor.white.withAlphaComponent(0.3)
+        button.backgroundColor = UIColor.white.withAlphaComponent(0.25)
+        button.showsTouchWhenHighlighted = true
         button.roundBorder(borderWidth: 0.5, cornerRadius: step, color: .clear)
-        button.tintColor = .white
-        button.addTarget(self, action: #selector(onSortButtonClicked), for: .touchUpInside)
-        layout(39, y, 6, 6, button)
+        button.tintColor = rgb(220, 220, 220)
+        button.addTapGestureRecognizer { [weak self] in
+            self?.viewWillAppear()
+        }
+        layout(37, y, 9, 6, button)
         topView.addSubview(button)
-    }
 
-    @objc func onSortButtonClicked() {
-        viewWillAppear()
+        button = UIButton()
+        let title = String(format: "%.2fx", context.gameSetting.practiceSpeed * 2)
+
+        button.backgroundColor = UIColor.white.withAlphaComponent(0.25)
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(rgb(220, 220, 220), for: .normal)
+        button.titleLabel?.textAlignment = .center
+        button.roundBorder(borderWidth: 0.5, cornerRadius: step, color: .clear)
+        button.showsTouchWhenHighlighted = true
+        button.addTapGestureRecognizer { [weak self] in
+            VoiceSelectionPage.fromPage = self?.vc
+            VoiceSelectionPage.selectingVoiceFor = .teacher
+            VoiceSelectionPage.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher)
+            launchVC(VoiceSelectionPage.id, isOverCurrent: true, animated: true)
+        }
+        layout(37, y - 6, 9, 4, button)
+        topView.addSubview(button)
     }
 
     // MARK: - Practice Game Related
@@ -178,7 +198,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         button.backgroundColor = buttonGreen
         button.setTitle("\(i18n.language) / \(i18n.translation)", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(UIColor.white.withAlphaComponent(0.5), for: .highlighted)
+        button.setTitleColor(buttonForegroundGray, for: .highlighted)
         button.titleLabel?.font = bottomButtonFont
         button.addTarget(self, action: #selector(onPeekButtonClicked), for: .touchUpInside)
         addSubview(button)

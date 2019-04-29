@@ -32,9 +32,7 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         voiceId: String,
         rate: Float = AVSpeechUtteranceDefaultSpeechRate // 0.5, range 0 ~ 1.0
         ) -> Promise<Void> {
-        if synthesizer.isSpeaking {
-            synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
-        }
+        SpeechEngine.shared.stopListeningAndSpeaking()
         synthesizer.delegate = self
         let utterance = AVSpeechUtterance(string: getFixedKanaForTTS(text))
         if let voice = AVSpeechSynthesisVoice(identifier: voiceId) {
