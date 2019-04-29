@@ -190,18 +190,23 @@ extension UIApplication {
 
 enum ButtonStyle {
     case darkOption
+    case darkAction
 }
 
 extension UIButton {
-    func setStyle(style: ButtonStyle, step: CGFloat) {
+    func setStyle(style: ButtonStyle, step: CGFloat = screen.width/48) {
+        self.roundBorder(borderWidth: 0.5, cornerRadius: step, color: .clear)
+        self.showsTouchWhenHighlighted = true
+        self.titleLabel?.textAlignment = .center
         switch style {
         case .darkOption:
-            self.roundBorder(borderWidth: 0.5, cornerRadius: step, color: .clear)
             self.tintColor = buttonForegroundGray
             self.setTitleColor(buttonForegroundGray, for: .normal)
             self.backgroundColor = buttonBackgroundGray
-            self.showsTouchWhenHighlighted = true
-            self.titleLabel?.textAlignment = .center
+        case .darkAction:
+            self.tintColor = buttonActionGray
+            self.setTitleColor(buttonActionGray, for: .normal)
+            self.backgroundColor = buttonActionBackgroundGray
         }
     }
 }
@@ -358,8 +363,8 @@ func getVC(_ name: String) -> UIViewController {
 func launchVC(
     _ vcName: String,
     _ originVC: UIViewController? = nil,
-    isOverCurrent: Bool = false,
-    animated: Bool = false,
+    isOverCurrent: Bool = true,
+    animated: Bool = true,
     completion: ((UIViewController) -> Void)? = nil
     ) {
     let vc = getVC(vcName)

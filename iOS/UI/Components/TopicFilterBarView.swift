@@ -81,7 +81,7 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
             backCircle.lineColor = myLightGray
             backCircle.fillColor = lightestGray
             button.lineColor = rgb(100, 100, 100)
-            titleLabel.textColor = rgb(60, 60, 60)
+            titleLabel.textColor = darkBackground
         }
 
         button.addTapGestureRecognizer { [weak self] in

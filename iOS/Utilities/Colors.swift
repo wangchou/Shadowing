@@ -39,14 +39,16 @@ let myLightGray = rgb(224, 224, 224)
 let myGray = rgb(192, 192, 192)
 
 let myWaterBlue = rgb(64, 192, 255)
-let myLightGreen = rgb(181, 226, 75)
-let myLightRed = rgb(255, 130, 173)
 
 let lightestGray = rgb(250, 250, 250)
 
+let darkBackground = rgb(60, 60, 60)
+
 // option buttons
 let buttonBackgroundGray = UIColor.white.withAlphaComponent(0.25)
+let buttonActionBackgroundGray = UIColor.white.withAlphaComponent(0.3)
 let buttonForegroundGray = rgb(220, 220, 220)
+let buttonActionGray = UIColor.white
 
 extension UIColor {
     func withSaturation(_ newS: CGFloat) -> UIColor {

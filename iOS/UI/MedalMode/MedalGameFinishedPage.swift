@@ -55,8 +55,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     func viewWillAppear() {
         removeAllSubviews()
         strokeWidth = Float(step * -1/2.0)
-        backgroundColor = rgb(50, 50, 50)
-        addTextbackground(bgColor: rgb(50, 50, 50), textColor: textGold)
+        addTextbackground()
         let yMax = Int(screen.height / step)
         addInfo(y: (yMax - 12)/2 - 20)
         addActionButtons(y: (yMax - 12)/2 + 28)

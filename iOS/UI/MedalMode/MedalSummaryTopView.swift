@@ -113,7 +113,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
 
     func viewWillAppear() {
         removeAllSubviews()
-        backgroundColor = rgb(60, 60, 60)
+        backgroundColor = darkBackground
 
         let totalSummary = self.totalSummary // avoid recalculation
 

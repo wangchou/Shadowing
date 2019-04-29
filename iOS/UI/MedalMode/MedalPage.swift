@@ -55,7 +55,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     func viewWillAppear() {
         context.gameMode = .medalMode
         removeAllSubviews()
-        addTextbackground(bgColor: rgb(60, 60, 60), textColor: textGold)
+        addTextbackground()
         addTopBar(y: topPaddedY + 1)
 
         addLangInfo(y: (yMax + 12)/2 - 22 - 4)
@@ -179,7 +179,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         context.gameMode = .medalMode
         guard !TopicDetailPage.isChallengeButtonDisabled else { return }
         if isUnderDailySentenceLimit() {
-            launchVC(Messenger.id)
+            launchVC(Messenger.id, isOverCurrent: false)
         }
     }
 
@@ -218,7 +218,8 @@ private func rollingText(view: UIView) {
 
 extension GridLayout where Self: UIView {
     // MARK: - textBackground
-    func addTextbackground(bgColor: UIColor, textColor: UIColor) {
+    func addTextbackground(bgColor: UIColor = darkBackground,
+                           textColor: UIColor = textGold) {
         backgroundColor = bgColor
         if isSimulator { return }
         let num = Int(sqrt(pow(screen.width, 2) + pow(screen.height, 2)) / step)/8

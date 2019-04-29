@@ -226,7 +226,7 @@ class Messenger: UIViewController {
                 context.loadNextChallenge()
                 rootViewController.topicSwipablePage.detailPage?.render()
             }
-            launchVC(Messenger.id)
+            launchVC(Messenger.id, isOverCurrent: false)
         }
     }
 

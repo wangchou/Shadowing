@@ -86,7 +86,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
     func renderTopView() {
         topView?.removeFromSuperview()
         topView = GridUIView()
-        topView.backgroundColor = rgb(60, 60, 60)
+        topView.backgroundColor = darkBackground
         layout(0, 0, gridCount, 14 + topPaddedY, topView)
         addSubview(topView)
 
@@ -129,11 +129,12 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         let title = String(format: "%.2fx", context.gameSetting.practiceSpeed * 2)
         button.setStyle(style: .darkOption, step: step)
         button.setTitle(title, for: .normal)
+        button.titleLabel?.font = MyFont.regular(ofSize: step * 2.8)
         button.addTapGestureRecognizer { [weak self] in
             VoiceSelectionPage.fromPage = self?.vc
             VoiceSelectionPage.selectingVoiceFor = .teacher
             VoiceSelectionPage.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher)
-            launchVC(VoiceSelectionPage.id, isOverCurrent: true, animated: true)
+            launchVC(VoiceSelectionPage.id)
         }
         layout(37, y - 6, 9, 4, button)
         topView.addSubview(button)

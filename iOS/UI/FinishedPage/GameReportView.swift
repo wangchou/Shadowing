@@ -138,7 +138,7 @@ func launchNextGame() {
         rootViewController.topicSwipablePage.detailPage?.render()
     }
     if isUnderDailySentenceLimit() {
-        launchVC(Messenger.id)
+        launchVC(Messenger.id, isOverCurrent: false)
     }
 }
 

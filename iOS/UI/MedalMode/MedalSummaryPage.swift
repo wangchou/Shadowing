@@ -42,7 +42,7 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
     }
 
     func viewWillAppear() {
-        backgroundColor = rgb(60, 60, 60)
+        backgroundColor = darkBackground
         tableData = getSummaryByDays()
         removeAllSubviews()
         tableHeaderView = GridUIView()

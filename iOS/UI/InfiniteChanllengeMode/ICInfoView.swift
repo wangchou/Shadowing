@@ -182,7 +182,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
         context.infiniteChallengeLevel = self.level
         if isUnderDailySentenceLimit() {
             Analytics.logEvent("challenge_infinite_\(gameLang.prefix)", parameters: nil)
-            launchVC(Messenger.id)
+            launchVC(Messenger.id, isOverCurrent: false)
         }
     }
 }
