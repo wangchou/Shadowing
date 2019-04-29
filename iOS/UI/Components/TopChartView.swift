@@ -132,13 +132,12 @@ class TopChartView: UIView, GridLayout, ReloadableView {
     }
 
     func addOnClickHandler() {
-        addTapGestureRecognizer { [weak self] in
+        addTapGestureRecognizer {
             switchToNextTopViewMode()
+            rootViewController.rerenderTopView()
             DispatchQueue.global().async {
                 Analytics.logEvent("top_chart_view_clicked", parameters: nil)
             }
-            self?.render()
-            self?.animateProgress()
         }
     }
 
@@ -146,8 +145,21 @@ class TopChartView: UIView, GridLayout, ReloadableView {
         frame.size.width = screen.width
         frame.size.height = screen.width * 34/48
         updateByRecords()
-
         render()
+    }
+
+    func prepareForDailyGoalAppear() {
+        guard GameContext.shared.gameSetting.icTopViewMode == .dailyGoal else { return }
+        if getTodaySentenceCount() < context.gameSetting.dailySentenceGoal {
+            backgroundColor = longTermGoalColor.withSaturation(0)
+            percentLabel?.text = "0%"
+            frontCircle?.percent = 0
+        } else {
+            allSentenceCount = getAllSentencesCount()
+            backgroundColor = longTermGoalColor.withSaturation(1)
+            frontCircle?.percent = 1
+            percentLabel?.text = i18n.done
+        }
     }
 
     func render() {

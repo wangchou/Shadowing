@@ -54,8 +54,8 @@ class TopicsListPage: UIViewController {
         topBarView.titleLabel.text = I18n.shared.topicPageTitile
         let height = screen.width * 46/48
         topArea.frame.size.height = height + 61
-
-        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
+        topChartView.prepareForDailyGoalAppear()
+        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
             DispatchQueue.main.async {
                 self.topChartView.viewWillAppear()
                 self.topChartView.animateProgress()

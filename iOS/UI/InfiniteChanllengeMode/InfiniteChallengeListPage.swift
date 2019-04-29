@@ -57,7 +57,8 @@ class InfiniteChallengeListPage: UIViewController {
         }
         bottomBarView.contentTab = .infiniteChallenge
         topBarView.titleLabel.text = i18n.infiniteChallengeTitle
-        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
+        topChartView.prepareForDailyGoalAppear()
+        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
             DispatchQueue.main.async {
                 self.topChartView.viewWillAppear()
                 self.topChartView.animateProgress()

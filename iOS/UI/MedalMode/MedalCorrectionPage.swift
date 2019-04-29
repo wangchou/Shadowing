@@ -206,7 +206,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
 
         bgRect = UIView()
         bgRect.frame = CGRect(x: 39 * step,
-                              y: tableView.frame.origin.y + tableView.frame.height,
+                              y: tableView.y1,
                               width: 9 * step,
                               height: bottomButtonHeight)
         bgRect.backgroundColor = buttonGray

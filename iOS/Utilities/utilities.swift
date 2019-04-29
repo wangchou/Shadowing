@@ -304,6 +304,15 @@ func getRecordsByDate() -> [String: [GameRecord]] {
     return recordsByDate
 }
 
+func getAllSentencesCount() -> Int {
+    guard !GameContext.shared.gameHistory.isEmpty || isSimulator else { return 0 }
+    var sentenceCount = 0
+    GameContext.shared.gameHistory.forEach { r in
+        sentenceCount += r.sentencesCount
+    }
+    return sentenceCount
+}
+
 // [Today's correct sentence count, Yesterday's, ...]
 func getSentenceCountsByDays() -> [Int] {
     let calendar = Calendar.current
