@@ -43,14 +43,14 @@ class BottomBarView: UIView, XibView {
     private func updateContentTab() {
         var leftColor: UIColor = UIColor(white: 0, alpha: 0.66)
         var rightColor: UIColor = UIColor(white: 0, alpha: 0.66)
-        let leftImgName: String = "outline_featured_play_list_black_48pt"
-        var rightImgName: String = "outline_all_inclusive_black_48pt"
+        let leftImgName: String = "baseline_nature_people_black_36pt"
+        var rightImgName: String = "outline_all_inclusive_black_36pt"
         switch contentTab {
         case .topics:
             leftColor = tintColor
         case .infiniteChallenge:
             rightColor = tintColor
-            rightImgName = "outline_all_inclusive_black_48pt"
+            rightImgName = "outline_all_inclusive_black_36pt"
         }
         leftButton.setIconImage(named: leftImgName, tintColor: leftColor)
         rightButton.setIconImage(named: rightImgName, tintColor: rightColor)

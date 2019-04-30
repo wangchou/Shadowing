@@ -86,6 +86,8 @@ func getAttrText(_ parts: [(text: String,
         attrText.append(getText(
             part.text,
             color: part.color,
+            strokeWidth: -1,
+            strokeColor: .black,
             font: MyFont.bold(ofSize: part.fontSize)
         ))
     }

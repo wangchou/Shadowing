@@ -151,12 +151,12 @@ class TopChartView: UIView, GridLayout, ReloadableView {
     func prepareForDailyGoalAppear() {
         guard GameContext.shared.gameSetting.icTopViewMode == .dailyGoal else { return }
 
+        allSentenceCount = getAllSentencesCount()
         if getTodaySentenceCount() < context.gameSetting.dailySentenceGoal {
             backgroundColor = longTermGoalColor.withSaturation(0)
             percentLabel?.text = "0%"
             frontCircle?.removeFromSuperview()
         } else {
-            allSentenceCount = getAllSentencesCount()
             backgroundColor = longTermGoalColor.withSaturation(1)
             percentLabel?.text = i18n.done
             if let frame = frontCircle?.frame {

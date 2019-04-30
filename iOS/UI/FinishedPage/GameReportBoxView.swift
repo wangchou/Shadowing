@@ -36,7 +36,8 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
     private var statusSpeakingPromise: Promise<Void> = fulfilledVoidPromise()
 
     func viewWillAppear() {
-        backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        roundBorder(borderWidth: 1.5, cornerRadius: 2 * step, color: .white)
         showAbilityTargetLabelFunc = nil
         removeAllSubviews()
         renderTopTitle()
@@ -46,7 +47,6 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
 
     private func renderTopTitle() {
         guard let record = context.gameRecord else { return }
-        roundBorder(cornerRadius: 2*step, color: .clear)
         let tags = "#\(record.level.title)"
         var title = ""
         switch context.gameMode {
@@ -58,7 +58,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
             title = "追星模式"
         }
         addText(2, 1, 6, title, color: myLightGray, strokeColor: .black)
-        addText(2, 6, 6, tags, color: record.level.color.withAlphaComponent(0.85), strokeColor: .black)
+        addText(2, 6, 6, tags, color: record.level.color, strokeColor: .black)
 
         let statusText = i18n.getSpeakingStatus(percent: record.progress, rank: record.rank.rawValue, reward: record.medalReward)
         statusSpeakingPromise = teacherSay(statusText, rate: fastRate)
@@ -70,7 +70,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         addText(2, y, 3, i18n.completeness, color: minorTextColor)
 
         let progress = getAttrText([
-            ( record.progress.padWidthTo(4), .white, self.getFontSize(h: 12)),
+            ( record.progress.padWidthTo(4), .white, getFontSize(h: 12)),
             ( "%", .white, self.getFontSize(h: 3))
             ])
 
@@ -79,10 +79,13 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
 
         addText(26, y, 3, i18n.rank, color: minorTextColor)
 
-        label = addText(x: 27, y: y+1, h: 12,
-                         text: record.rank.rawValue.padWidthTo(3),
-                         font: MyFont.bold(ofSize: self.getFontSize(h: 12)),
-                         color: record.rank.color)
+        let rankText = getStrokeText(record.rank.rawValue.padWidthTo(3),
+                                     record.rank.color,
+                                     strokeWidth: -1,
+                                     strokColor: .black,
+                                     font: MyFont.bold(ofSize: getFontSize(h: 12)))
+        label = addAttrText(x: 27, y: y+1, h: 12,
+                         text: rankText)
         label.slideIn(duration: 0.5)
 
         let detailText = "\(i18n.excellent) \(record.perfectCount) | \(i18n.great) \(record.greatCount) | \(i18n.good) \(record.goodCount) | \(i18n.wrong) \(record.missedCount)"
