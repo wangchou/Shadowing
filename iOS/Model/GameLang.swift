@@ -30,6 +30,7 @@ func changeGameLangTo(lang: Lang) {
             rootViewController.showInfiniteChallengePage(idx: 1)
         }
         rootViewController.reloadTableData()
+        rootViewController.rerenderTopView(updateByRecords: true)
     }
 }
 

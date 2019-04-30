@@ -99,12 +99,14 @@ class RootContainerViewController: UIViewController {
         }
     }
 
-    func rerenderTopView() {
+    func rerenderTopView(updateByRecords: Bool = false) {
         if let listPage = topicSwipablePage.listPage {
-            listPage.topChartView.render()
+            if updateByRecords { listPage.topChartView?.updateByRecords() }
+            listPage.topChartView?.render()
         }
         if let listPage = infiniteChallengeSwipablePage.listPage {
-            listPage.topChartView.render()
+            if updateByRecords { listPage.topChartView?.updateByRecords() }
+            listPage.topChartView?.render()
         }
     }
 
