@@ -58,7 +58,6 @@ class TopicsListPage: UIViewController {
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
             DispatchQueue.main.async {
                 self.topChartView.viewWillAppear()
-                self.topChartView.animateProgress()
                 self.topicFilterBarView.viewWillAppear()
                 self.topicButtonAreaView.viewWillAppear()
                 if context.dataSetKey == "" {
