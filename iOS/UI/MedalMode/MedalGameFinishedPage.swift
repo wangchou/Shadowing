@@ -26,7 +26,6 @@ class MedalGameFinishedPage: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         countDownTimer?.invalidate()
-        SpeechEngine.shared.stopRingTone()
     }
 }
 
@@ -209,7 +208,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
     private func addActionButtons(y: Int) {
         let button = createButton(title: "", bgColor: .red)
-        let countDownSecs = 6
+        let countDownSecs = 5
         button.setIconImage(named: "baseline_play_arrow_black_48pt",
                             title: " \(i18n.nextGame) (\(countDownSecs)\(i18n.secs))",
                             tintColor: .white,
@@ -230,9 +229,6 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         countDownTimer?.invalidate()
         countDownTimer = Timer.scheduledTimer(withTimeInterval: 1.00, repeats: true) { _ in
             leftSeconds -= 1
-            if leftSeconds == 2 {
-                SpeechEngine.shared.stopRingTone()
-            }
             playButton?.setTitle(" \(i18n.nextGame) (\(leftSeconds)\(i18n.secs))", for: .normal)
             guard leftSeconds > 0 else {
                 countDownTimer?.invalidate()

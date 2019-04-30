@@ -63,36 +63,6 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         addBottomButtons()
     }
 
-    private func addTestRingToneButtons() {
-        context.gameRecord = GameRecord(context.dataSetKey, sentencesCount: 10, level: .lv5)
-        context.gameRecord?.medalReward = 3
-        addButton(iconName: "", 3, 10, 7, 7) {
-            context.gameRecord?.perfectCount = 10
-            SpeechEngine.shared.playRineTone(ringTone: .star)
-            launchVC(MedalGameFinishedPage.id)
-        }
-        addButton(iconName: "", 13, 10, 7, 7) {
-            context.gameRecord?.perfectCount = 9
-            SpeechEngine.shared.playRineTone(ringTone: .guitar)
-            launchVC(MedalGameFinishedPage.id)
-        }
-        addButton(iconName: "", 23, 10, 7, 7) {
-            context.gameRecord?.perfectCount = 8
-            SpeechEngine.shared.playRineTone(ringTone: .minuet)
-            launchVC(MedalGameFinishedPage.id)
-        }
-        addButton(iconName: "", 33, 10, 7, 7) {
-            context.gameRecord?.perfectCount = 7
-            SpeechEngine.shared.playRineTone(ringTone: .timePassing)
-            launchVC(MedalGameFinishedPage.id)
-        }
-        addButton(iconName: "", 43, 10, 7, 7) {
-            context.gameRecord?.perfectCount = 5
-            SpeechEngine.shared.playRineTone(ringTone: .depression)
-            launchVC(MedalGameFinishedPage.id)
-        }
-    }
-
     // MARK: - TopBar
     private func addButton(iconName: String,
                            _ x: Int, _ y: Int, _ w: Int, _ h: Int,

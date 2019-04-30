@@ -135,19 +135,4 @@ enum Rank: String, Codable {
             return myRed
         }
     }
-
-    var ringTone: RingTone {
-        switch self {
-        case .s, .ss:
-            return .star
-        case .aP, .a:
-            return .guitar
-        case .bP, .b:
-            return .minuet
-        case .cP, .c, .d:
-            return .timePassing
-        case .e, .f:
-            return .depression
-        }
-    }
 }

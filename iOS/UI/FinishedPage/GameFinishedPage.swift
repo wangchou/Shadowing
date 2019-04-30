@@ -55,7 +55,6 @@ class GameFinishedPage: UIViewController {
         super.viewWillDisappear(animated)
         SpeechEngine.shared.stopListeningAndSpeaking()
         reportView.viewDidDisappear()
-        SpeechEngine.shared.stopRingTone()
     }
 
     func sortSentenceByScore() {

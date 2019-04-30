@@ -14,32 +14,6 @@ import Promises
 private let context = GameContext.shared
 private let engine = SpeechEngine.shared
 
-enum RingTone: String {
-    case star = "/Library/Ringtones/Constellation.m4r"
-    case guitar = "/Library/Ringtones/Strum.m4r"
-    case minuet = "/System/Library/Audio/UISounds/New/Minuet.caf"
-    case timePassing = "/Library/Ringtones/Time Passing.m4r"
-    case depression = "/Library/Ringtones/Slow Rise.m4r"
-
-    var volume: Float {
-        switch self {
-        case .depression:
-            return 0.6
-        case .minuet:
-            return 0.6
-        case .timePassing:
-            return 0.25
-        default:
-            return 0.5
-        }
-    }
-
-//    case anticipate = "/System/Library/Audio/UISounds/New/Anticipate.caf"
-//    case silk = "/Library/Ringtones/Silk.m4r"
-//    case radiate = "/Library/Ringtones/Radiate.m4r"
-//    case nightOwl = "/Library/Ringtones/Night Owl.m4r"
-}
-
 // MARK: - SpeechEngine
 // A wrapper of AVAudioEngine, SpeechRecognizer and TTS
 class SpeechEngine {
@@ -49,24 +23,6 @@ class SpeechEngine {
     var isEngineRunning = false
     var audioEngine = AVAudioEngine()
     private var audioPlayer: AVAudioPlayer?
-
-    func playRineTone(ringTone: RingTone) {
-        let fileURL: URL = URL(fileURLWithPath: ringTone.rawValue)
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: fileURL)
-            audioPlayer?.volume = 0
-            audioPlayer?.play()
-            audioPlayer?.setVolume(ringTone.volume, fadeDuration: 0.3)
-        } catch {
-            debugPrint("\(error)")
-        }
-    }
-
-    func stopRingTone(fadeDuration: TimeInterval = 2) {
-        if !isSimulator {
-            audioPlayer?.setVolume(0, fadeDuration: fadeDuration)
-        }
-    }
 
     private var speechRecognizer = SpeechRecognizer.shared
 
