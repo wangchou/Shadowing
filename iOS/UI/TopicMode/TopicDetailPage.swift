@@ -23,6 +23,11 @@ class TopicDetailPage: UIViewController {
     @IBOutlet weak var challengeButton: UIButton!
     @IBOutlet weak var skipNextButton: UIButton!
 
+    @IBOutlet weak var perfectTitleLabel: UILabel!
+    @IBOutlet weak var greatTitleLabel: UILabel!
+    @IBOutlet weak var goodTitleLabel: UILabel!
+    @IBOutlet weak var missedTitleLabel: UILabel!
+
     @IBOutlet weak var perfectCountLabel: UILabel!
     @IBOutlet weak var greatCountLabel: UILabel!
     @IBOutlet weak var goodCountLabel: UILabel!
@@ -81,6 +86,12 @@ class TopicDetailPage: UIViewController {
             goodCountLabel.text = 0.s
             missedCountLabel.text = 0.s
         }
+        perfectTitleLabel.text = i18n.excellent
+        greatTitleLabel.text = i18n.great
+        goodTitleLabel.text = i18n.good
+        missedTitleLabel.text = i18n.wrong
+        missedTitleLabel.sizeToFit()
+
         challengeButton.setStyle(style: .darkAction)
         skipPreviousButton.setStyle(style: .darkAction)
         skipNextButton.setStyle(style: .darkAction)

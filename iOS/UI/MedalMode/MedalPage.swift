@@ -222,7 +222,7 @@ extension GridLayout where Self: UIView {
                            textColor: UIColor = textGold,
                            useGameSentences: Bool = false) {
         backgroundColor = bgColor
-        //if isSimulator { return }
+        if isSimulator { return }
         let num = Int(sqrt(pow(screen.width, 2) + pow(screen.height, 2)) / step)/8
         let level = useGameSentences ? Level.lv5 :
                                        context.gameMedal.lowLevel

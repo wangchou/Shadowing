@@ -26,6 +26,10 @@ func stopCountDown() {
 class GameReportView: UIView, ReloadableView, GridLayout {
     var reportBox: GameReportBoxView?
 
+    var safeAreaDiffY: Int {
+        return getTopPadding() > 20 ? 2 : 0
+    }
+
     func viewWillAppear() {
         removeAllSubviews()
         addTextbackground(bgColor: rgb(120, 120, 120),
@@ -35,11 +39,15 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         reportBox = GameReportBoxView()
 
         if context.gameMode == .topicMode {
-            frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.36)
-            layout(2, 4, 44, 48, reportBox!)
+            frame = CGRect(x: 0, y: 0,
+                           width: screen.width,
+                           height: screen.width * (1.37 + 0.01 * safeAreaDiffY.c))
+            layout(2, 4 + safeAreaDiffY, 44, 48, reportBox!)
         } else {
-            frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.17)
-            layout(2, 4, 44, 40, reportBox!)
+            frame = CGRect(x: 0, y: 0,
+                           width: screen.width,
+                           height: screen.width * (1.18 + 0.01 * safeAreaDiffY.c))
+            layout(2, 4 + safeAreaDiffY, 44, 40, reportBox!)
         }
 
         addReloadableSubview(reportBox!)
@@ -81,9 +89,9 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         }
 
         if context.gameMode == .topicMode {
-            layout(2, 54, 30, 8, button)
+            layout(2, 54 + safeAreaDiffY, 30, 8, button)
         } else {
-            layout(2, 46, 30, 8, button)
+            layout(2, 46 + safeAreaDiffY, 30, 8, button)
         }
 
         addSubview(button)
@@ -121,9 +129,9 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         }
 
         if context.gameMode == .topicMode {
-            layout(34, 54, 12, 8, backButton)
+            layout(34, 54 + safeAreaDiffY, 12, 8, backButton)
         } else {
-            layout(34, 46, 12, 8, backButton)
+            layout(34, 46 + safeAreaDiffY, 12, 8, backButton)
         }
 
         addSubview(backButton)
