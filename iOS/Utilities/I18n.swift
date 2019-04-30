@@ -620,23 +620,27 @@ class I18n {
     }
 
     var excellent: String {
-        if gameLang == .jp { return "正解" }
+        if isJa || isZh { return "正解" }
         return "EX."
     }
     var great: String {
-        if gameLang == .jp { return "すごい" }
+        if isJa { return "すごい" }
+        if isZh { return "真厲害" }
         return "Great"
     }
     var correct: String { // excellent + great
-        if gameLang == .jp { return "正しい" }
+        if isJa { return "正しい" }
+        if isZh { return "正確的" }
         return "Correct"
     }
     var good: String {
-        if gameLang == .jp { return "いいね" }
+        if isJa { return "いいね" }
+        if isZh { return "良好" }
         return "Good"
     }
     var wrong: String {
-        if gameLang == .jp { return "ミス" }
+        if isJa { return "ミス" }
+        if isZh { return "錯誤" }
         return "Wrong"
     }
 

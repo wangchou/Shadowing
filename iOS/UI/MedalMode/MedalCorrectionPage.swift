@@ -173,13 +173,13 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         tableView.delaysContentTouches = true
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         tableView.separatorColor = rgb(200, 200, 200)
-        tableView.dataSource = self
         tableView.frame = CGRect(x: 0,
                                  y: topView.y1,
                                  width: screen.width,
                                  height: screen.height -
                                     topView.frame.height -
                                     bottomButtonHeight)
+        tableView.dataSource = self
         addSubview(tableView)
     }
 

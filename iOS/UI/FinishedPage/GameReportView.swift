@@ -28,12 +28,15 @@ class GameReportView: UIView, ReloadableView, GridLayout {
 
     func viewWillAppear() {
         removeAllSubviews()
-        backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        addTextbackground(bgColor: rgb(120, 120, 120),
+                          textColor: context.gameRecord?.level.color.withBrightness(0.4) ?? .black,
+                          useGameSentences: true)
+        clipsToBounds = true
         reportBox = GameReportBoxView()
 
         if context.gameMode == .topicMode {
-            frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.38)
-            layout(2, 4, 44, 50, reportBox!)
+            frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.36)
+            layout(2, 4, 44, 48, reportBox!)
         } else {
             frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.width * 1.17)
             layout(2, 4, 44, 40, reportBox!)
@@ -78,7 +81,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         }
 
         if context.gameMode == .topicMode {
-            layout(2, 56, 30, 8, button)
+            layout(2, 54, 30, 8, button)
         } else {
             layout(2, 46, 30, 8, button)
         }
@@ -118,7 +121,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         }
 
         if context.gameMode == .topicMode {
-            layout(34, 56, 12, 8, backButton)
+            layout(34, 54, 12, 8, backButton)
         } else {
             layout(34, 46, 12, 8, backButton)
         }
