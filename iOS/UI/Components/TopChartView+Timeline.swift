@@ -118,7 +118,7 @@ extension TopChartView {
             box.frame.size.width -= step * 0.3
             box.frame.size.height += step * 0.2
             box.frame.origin.y += step * 0.3
-            box.roundBorder(borderWidth: 0, cornerRadius: 5, color: .clear)
+            box.roundBorder(borderWidth: 0, cornerRadius: step/3, color: .clear)
             box.backgroundColor = .white
 
             let topText = addText(

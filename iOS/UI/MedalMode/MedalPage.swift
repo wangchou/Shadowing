@@ -361,13 +361,13 @@ extension GridLayout where Self: UIView {
         animateInDelay: TimeInterval = 0,
         duration: TimeInterval = 0,
         animateProgressDelay: TimeInterval = 0,
-        isLightSubText: Bool = false
+        isFinishPage: Bool = false
         ) {
         let medalProgressBar = MedalProgressBar()
         layout(x, y, 34, 15, medalProgressBar)
         addSubview(medalProgressBar)
         medalProgressBar.medalCount = medalFrom
-        medalProgressBar.isFinishedPageMode = isLightSubText
+        medalProgressBar.isFinishedPageMode = isFinishPage
         if duration > 0 {
             medalProgressBar.animateIn(delay: animateInDelay, duration: duration)
         }

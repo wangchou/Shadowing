@@ -81,18 +81,18 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         addTitleBlock(y: y, duration: 0.2)
 
         // 1 now
-        addCompleteness(y: y+4, delay: 0, duration: 0.2)
-        addRank(        y: y+4, delay: 0.3, duration: 0.2)
-        addRecordDetail(y: y+6, delay: 0.3, duration: 0.6)
+        addCompleteness(y: y+3, delay: 0, duration: 0.2)
+        addRank(        y: y+3, delay: 0.3, duration: 0.2)
+        addRecordDetail(y: y+5, delay: 0.3, duration: 0.6)
 
         // 2 changes
-        addMedalProgressBar(x: 7, y: y + 17,
+        addMedalProgressBar(x: 7, y: y + 16,
                             medalFrom: medal.count - (gr.medalReward ?? 0),
                             medalTo: medal.count,
                             animateInDelay: 0.6,
                             duration: 0.2,
                             animateProgressDelay: 1.1,
-                            isLightSubText: true)
+                            isFinishPage: true)
         addMedal(       y: y+12, delay: 0.6, duration: 0.2)
 
         // 3 long-term
@@ -147,9 +147,9 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
     private func addCompleteness(y: Int, delay: TimeInterval = 0, duration: TimeInterval) {
         var attrText = getStrokeText(i18n.completeness,
-                                 .white,
+                                 minorTextColor,
                                  strokeWidth: strokeWidth/2,
-                                 font: MyFont.bold(ofSize: 3 * step))
+                                 font: MyFont.bold(ofSize: 2 * step))
         var label = addAttrText(x: 7, y: y, h: 4, text: attrText)
         label.textAlignment = .left
         label.slideIn(delay: delay, duration: duration)
@@ -164,7 +164,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         label.slideIn(delay: delay, duration: duration)
 
         attrText = getStrokeText("%",
-                                 .white,
+                                 minorTextColor,
                                  strokeWidth: strokeWidth/2,
                                  font: MyFont.bold(ofSize: 2 * step))
         label = addAttrText(x: 21, y: y+7, h: 4, text: attrText)
@@ -174,9 +174,9 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
     private func addRank(y: Int, delay: TimeInterval = 0, duration: TimeInterval) {
         var attrText = getStrokeText(i18n.rank,
-                                 .white,
+                                 minorTextColor,
                                  strokeWidth: strokeWidth/2,
-                                 font: MyFont.bold(ofSize: 3 * step))
+                                 font: MyFont.bold(ofSize: 2 * step))
         var label = addAttrText(x: 26, y: y, h: 4, text: attrText)
         label.textAlignment = .left
         label.fadeIn(delay: delay, duration: duration)

@@ -77,6 +77,7 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
         medalView.frame.size.width = majorSize * step * 0.9
         medalView.frame.size.height = majorSize * step * 0.9
         medalCountLabel.centerY(medalView.frame)
+        lvlLabel.centerY(medalView.frame)
 
         // medal position
         medalView.frame.origin.x = medalCountLabel.x0 -
@@ -124,7 +125,7 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
         let lowLevel = Level(medalCount: medalCount)
         // lvl text
         let attrText = getStrokeText(lowLevel.lvlTitle,
-                                     .white,
+                                     isFinishedPageMode ? minorTextColor : .white,
                                      strokeWidth: Float(-0.3 * step),
                                      strokColor: .black,
                                      font: MyFont.bold(ofSize: 4 * step))

@@ -109,7 +109,7 @@ extension TopChartView {
     func addDailySideBar() {
         let topRect = addRect(x: 38, y: 3, w: 8, h: 20, color: .white)
         topRect.roundBorder(borderWidth: 0,
-                            cornerRadius: 5,
+                            cornerRadius: step,
                             color: .clear)
 
         let xFrame = topRect.frame
@@ -121,7 +121,7 @@ extension TopChartView {
 
         let bottomRect = addRect(x: 38, y: 24, w: 8, h: 8, color: .white)
         bottomRect.roundBorder(borderWidth: 0,
-                               cornerRadius: 5,
+                               cornerRadius: step,
                                color: .clear)
         addDailySideBarText(bestText, y: 25, boundFrame: xFrame, color: .darkGray)
         addDailySideBarText(bestCountText, y: 28, isBold: true, boundFrame: xFrame)
@@ -158,7 +158,7 @@ extension TopChartView {
         guard isFreeVersion() else { return }
         let freeRect = addRect(x: 2, y: 27, w: 8, h: 5, color: .clear)
         freeRect.roundBorder(borderWidth: 1.5,
-                             cornerRadius: 5,
+                             cornerRadius: step,
                              color: .white)
         let freeLabel = addText(x: 14, y: 26, w: 8, h: 3,
                                 text: i18n.freeVersion,

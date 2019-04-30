@@ -167,7 +167,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
         button.backgroundColor = .red
         button.titleLabel?.font = MyFont.regular(ofSize: step * 5)
         button.titleLabel?.textColor = .white
-        button.roundBorder(borderWidth: 1.5, cornerRadius: 5, color: .clear)
+        button.roundBorder(borderWidth: 0.5, cornerRadius: step, color: .clear)
         button.showsTouchWhenHighlighted = true
         button.addTarget(self, action: #selector(onChallengeButtonClicked), for: .touchUpInside)
 
