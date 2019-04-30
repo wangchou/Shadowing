@@ -93,7 +93,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                             duration: 0.2,
                             animateProgressDelay: 1.1,
                             isFinishPage: true)
-        addMedal(       y: y+12, delay: 0.6, duration: 0.2)
+        addMedal(       y: y+11, delay: 0.6, duration: 0.2)
 
         // 3 long-term
         addDailyGoalView(x: 7, y: y+29,
@@ -209,7 +209,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
     private func addActionButtons(y: Int) {
         let button = createButton(title: "", bgColor: .red)
-        let countDownSecs = 5
+        let countDownSecs = 6
         button.setIconImage(named: "baseline_play_arrow_black_48pt",
                             title: " \(i18n.nextGame) (\(countDownSecs)\(i18n.secs))",
                             tintColor: .white,
@@ -230,6 +230,9 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         countDownTimer?.invalidate()
         countDownTimer = Timer.scheduledTimer(withTimeInterval: 1.00, repeats: true) { _ in
             leftSeconds -= 1
+            if leftSeconds == 2 {
+                SpeechEngine.shared.stopRingTone()
+            }
             playButton?.setTitle(" \(i18n.nextGame) (\(leftSeconds)\(i18n.secs))", for: .normal)
             guard leftSeconds > 0 else {
                 countDownTimer?.invalidate()

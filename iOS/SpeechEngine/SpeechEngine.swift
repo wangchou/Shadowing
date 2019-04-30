@@ -24,7 +24,9 @@ enum RingTone: String {
     var volume: Float {
         switch self {
         case .depression:
-            return 0.7
+            return 0.6
+        case .minuet:
+            return 0.6
         case .timePassing:
             return 0.25
         default:
@@ -60,7 +62,7 @@ class SpeechEngine {
         }
     }
 
-    func stopRingTone(fadeDuration: TimeInterval = 0.3) {
+    func stopRingTone(fadeDuration: TimeInterval = 2) {
         if !isSimulator {
             audioPlayer?.setVolume(0, fadeDuration: fadeDuration)
         }

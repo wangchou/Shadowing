@@ -76,7 +76,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
             isReachDailyByThisGame = todaySentenceCount >= dailyGoal &&
                                      todaySentenceCount - record.correctCount < dailyGoal
         }
-        let countDownSecs = isReachDailyByThisGame ? 7 : 5
+        let countDownSecs = isReachDailyByThisGame ? 8 : 6
         button.setIconImage(named: "baseline_pause_black_48pt", title: " \(i18n.nextGame) (\(countDownSecs)\(i18n.secs))", tintColor: .white, isIconOnLeft: true)
         button.addTapGestureRecognizer {
             if isPauseMode {
@@ -99,6 +99,9 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         countDownTimer?.invalidate()
         countDownTimer = Timer.scheduledTimer(withTimeInterval: 1.00, repeats: true) { _ in
             leftSeconds -= 1
+            if leftSeconds == 2 {
+                SpeechEngine.shared.stopRingTone()
+            }
             pauseOrPlayButton?.setTitle(" \(i18n.nextGame) (\(leftSeconds)\(i18n.secs))", for: .normal)
             guard leftSeconds > 0 else {
                 countDownTimer?.invalidate()
