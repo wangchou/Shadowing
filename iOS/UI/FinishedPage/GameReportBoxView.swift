@@ -75,7 +75,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
             ])
 
         var label = self.addAttrText(2, y+1, 12, progress)
-        label.slideIn(duration: 0.2)
+        label.slideIn(duration: 0.3)
 
         addText(26, y, 3, i18n.rank, color: minorTextColor)
 
@@ -83,7 +83,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
                          text: record.rank.rawValue.padWidthTo(3),
                          font: MyFont.bold(ofSize: self.getFontSize(h: 12)),
                          color: record.rank.color)
-        label.slideIn(duration: 0.4)
+        label.slideIn(duration: 0.5)
 
         let detailText = "\(i18n.excellent) \(record.perfectCount) | \(i18n.great) \(record.greatCount) | \(i18n.good) \(record.goodCount) | \(i18n.wrong) \(record.missedCount)"
         label = addText(x: 0, y: y+12, w: gridCount, h: 3,
@@ -147,14 +147,16 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
                                                strokeWidth: -2,
                                                strokeColor: .black, font: font)
 
-        let barBox = addRect(x: 2, y: y + 5, w: 40, h: lineHeight, color: progressBackGray)
+        let barBox = addRect(x: 2, y: y + 5, w: 40, h: lineHeight,
+                             color: progressBackGray)
         barBox.roundBorder(borderWidth: 0, cornerRadius: step/2, color: .lightGray)
 
         // animate progress bar for one second
         let fromPercent = min(1.0, (fromNumber.f/maxNumber.f))
         fullProgressWidth = getFrame(0, 0, 40, lineHeight).width
 
-        let bar = addRect(x: 2, y: y + 5, w: 1, h: lineHeight, color: color ?? getProgressColor(percent: fromPercent))
+        let bar = addRect(x: 2, y: y + 5, w: 1, h: lineHeight,
+                          color: color ?? getProgressColor(percent: fromPercent))
         bar.frame.size.width = fullProgressWidth * fromPercent.c
         bar.roundBorder(borderWidth: 0, cornerRadius: step/2, color: .clear)
 
@@ -168,7 +170,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
 
     private func animateBarContext(context: AnimateBarContext?, key: String) {
         guard let (label, bar, fromCount, toCount, maxCount) = context else { return }
-        let fontSize = getFontSize(h: 5)
+        let fontSize = getFontSize(h: 4)
         let font = MyFont.bold(ofSize: fontSize)
 
         var repeatCount = 0

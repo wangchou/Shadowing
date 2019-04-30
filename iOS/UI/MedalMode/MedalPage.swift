@@ -235,12 +235,15 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     }
 }
 
-private func rollingText(view: UIView) {
-    let animator = UIViewPropertyAnimator(duration: 15, curve: .easeOut, animations: {
+private func rollingText(view: UIView, width: CGFloat) {
+    let animator = UIViewPropertyAnimator(duration: 30, curve: .easeOut, animations: {
+        let tx: CGFloat = -1.5 * 320 * cos(.pi/8)
+        let ty: CGFloat = -1.5 * 320 * sin(.pi/8)
+
         view.transform = CGAffineTransform.identity
-            .translatedBy(x: 0, y: screen.width/2)
+            .translatedBy(x: 0, y: tan(.pi/8) * width/2)
             .rotated(by: -1 * .pi/8)
-            .translatedBy(x: -1.5 * screen.width * cos(.pi/8), y: -1.5 * screen.width * sin(.pi/8))
+            .translatedBy(x: tx, y: ty)
     })
 
     animator.startAnimation()
@@ -252,10 +255,9 @@ extension GridLayout where Self: UIView {
                            textColor: UIColor = textGold,
                            useGameSentences: Bool = false) {
         backgroundColor = bgColor
-        if isSimulator { return }
-        let num = Int(sqrt(pow(screen.width, 2) + pow(screen.height, 2)) / step)/8
-        let level = useGameSentences ? Level.lv5 :
-                                       context.gameMedal.lowLevel
+        //if isSimulator { return }
+        let num = Int(sqrt(pow(frame.width, 2) + pow(frame.height, 2)) / step)/8
+        let level = context.gameMedal.lowLevel
         func getGameSentences() -> [String] {
             var sentences: [String] = []
             let count = isSimulator ? 3 : context.sentences.count
@@ -282,7 +284,7 @@ extension GridLayout where Self: UIView {
 
         for i in 0 ..< num {
             let x = 1
-            let y = i * 9
+            let y = i * 9 + 3
             let sentence = randPad(sentences[i]) +
                 randPad(sentences[i+num]) +
                 randPad(sentences[i + (2 * num)]) +
@@ -296,9 +298,9 @@ extension GridLayout where Self: UIView {
             label.textAlignment = .left
 
             label.transform = CGAffineTransform.identity
-                .translatedBy(x: 0, y: screen.width/2)
+                .translatedBy(x: 0, y: tan(.pi/8) * frame.width/2)
                 .rotated(by: -1 * .pi/8)
-            rollingText(view: label)
+            rollingText(view: label, width: frame.width)
         }
     }
 

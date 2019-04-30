@@ -32,9 +32,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
 
     func viewWillAppear() {
         removeAllSubviews()
-        addTextbackground(bgColor: rgb(120, 120, 120),
-                          textColor: context.gameRecord?.level.color.withBrightness(0.4) ?? .black,
-                          useGameSentences: true)
+        backgroundColor = UIColor.black.withAlphaComponent(0.7)
         clipsToBounds = true
         reportBox = GameReportBoxView()
 

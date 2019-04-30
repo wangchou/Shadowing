@@ -521,9 +521,9 @@ Cg
                                     </fragment>
                                     <fragment>
                                         <string key="content">
-徽章模式持續挑整難度，讓使用者的突破自己的極限。
+徽章模式持續調整難度，讓使用者的挑戰極限。
 
-徽章數代表難度。根據每次遊戲的判定(SS to F)會增加或減少徽章數。
+徽章越多、句子越長。根據每次遊戲的判定(SS to F)會增加或減少徽章數。
 
 0個徽章時，難度相當於「入門一」。50個徽章時，難度相當於「入門二」。如果是介於中間的25個徽章時，一半的句子從「入門一」來、另一半句子從「入門二」來。
 </string>
@@ -796,7 +796,7 @@ A: 作者的經驗，通常是</string>
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">，來把音訊傳給Apple辨識。
+                                        <mutableString key="content">，來把音訊傳給Apple辨識。
 
 =&gt; 如果到 Apple 的網路不順，他們收到的就是很多雜訊的聲音，就會亂聽。 
 另外，如果是音量的問題用 iPhone 附的有線耳麥會好很多。
@@ -817,7 +817,7 @@ Lv.2 (50~100徽章)：平均正確率 &gt; 60%，就會持續上升。
 ...
 Lv.10 (450~500徽章)：平均正確率 &gt; 80%，就會持續上升。
 
-</string>
+</mutableString>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="18" name="PingFangTC-Regular"/>
