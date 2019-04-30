@@ -72,11 +72,13 @@ class ProgressCircleView: UIView, GridLayout, ReloadableView {
         frontCircle.percent = percent.c
         addSubview(frontCircle)
 
+        // fix en locale Done text will be too big
+        let fontSize = (i18n.isZh || i18n.isJa || percent < 1) ? 8 * step : 6 * step
         let attrText = getStrokeText(percent >= 0 ? percentageText : "0%",
                                      .white,
                                      strokeWidth: Float(-0.3 * step),
                                      strokColor: .black,
-                                     font: MyFont.bold(ofSize: 8 * step))
+                                     font: MyFont.bold(ofSize: fontSize))
 
         percentLabel = addAttrText(x: 3, y: 3, w: 30, h: 9,
                                text: attrText)
