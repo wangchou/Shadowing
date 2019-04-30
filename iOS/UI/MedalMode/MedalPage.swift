@@ -197,8 +197,9 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         }
 
         if i18n.isZh {
+            let x = isIPad ? 18 : 39
             addButton(iconName: "outline_info_black_\(iconSize)",
-                      39, buttonY, 7, 7) {
+                      x, buttonY, 7, 7) {
                 launchVC("InfoPage")
             }
         }

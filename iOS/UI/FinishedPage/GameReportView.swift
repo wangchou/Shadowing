@@ -27,7 +27,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
     var reportBox: GameReportBoxView?
 
     var safeAreaDiffY: Int {
-        return getTopPadding() > 20 ? 2 : 0
+        return (getTopPadding() > 20 && !isIPad) ? 2 : 0
     }
 
     func viewWillAppear() {

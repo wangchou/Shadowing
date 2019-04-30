@@ -107,13 +107,13 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
         rect.enlargeIn(delay: delay, duration: duration)
 
-        let fontSize = i18n.language.count > 5 ? 8 * step : 10 * step
+        let fontSize = (i18n.language.count > 5 || isIPad) ? 8 * step : 10 * step
         let attrText = getStrokeText(i18n.language,
                                      rgb(220, 220, 220),
                                      strokeWidth: strokeWidth/2,
                                      font: MyFont.bold(ofSize: fontSize))
         let label = addAttrText(x: 5,
-                                y: y - 8,
+                                y: isIPad ? (y - 7) : (y - 8),
                                 h: 12, text: attrText)
         label.centerX(frame)
         label.textAlignment = .center
