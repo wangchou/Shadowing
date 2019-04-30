@@ -94,6 +94,9 @@ extension Messenger: GameEventDelegate {
             messengerBar.isGameStopped = false
             messengerBar.viewWillAppear()
 
+        case .practiceSentenceCalculated:
+            return
+
         case .gameStateChanged:
             if context.gameState == .gameOver {
                 stopEventObserving(self)
@@ -102,9 +105,9 @@ extension Messenger: GameEventDelegate {
                 // prevent alerting block present
                 isAlerting.always {
                     if context.gameMode != .medalMode {
-                        launchVC(GameFinishedPage.vcName, self, isOverCurrent: true, animated: true)
+                        launchVC(GameFinishedPage.vcName, self)
                     } else {
-                        launchVC(MedalGameFinishedPage.id, self, isOverCurrent: true, animated: true)
+                        launchVC(MedalGameFinishedPage.id, self)
                     }
                 }
             }
@@ -128,6 +131,7 @@ extension Messenger: GameEventDelegate {
             if context.gameState == .echoMethod {
                 addLabel(rubyAttrStr(i18n.listenToEcho), pos: .center)
             }
+
         }
     }
 

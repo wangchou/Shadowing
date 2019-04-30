@@ -102,11 +102,9 @@ class RootContainerViewController: UIViewController {
     func rerenderTopView() {
         if let listPage = topicSwipablePage.listPage {
             listPage.topChartView.render()
-            listPage.topChartView.animateProgress()
         }
         if let listPage = infiniteChallengeSwipablePage.listPage {
             listPage.topChartView.render()
-            listPage.topChartView.animateProgress()
         }
     }
 

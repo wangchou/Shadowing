@@ -37,6 +37,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
 
     func viewWillAppear() {
         backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        roundBorder(borderWidth: 1.5, cornerRadius: 2 * step, color: .white)
         showAbilityTargetLabelFunc = nil
         removeAllSubviews()
         renderTopTitle()
@@ -46,19 +47,18 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
 
     private func renderTopTitle() {
         guard let record = context.gameRecord else { return }
-        roundBorder(cornerRadius: 15, color: .white)
         let tags = "#\(record.level.title)"
         var title = ""
         switch context.gameMode {
         case .topicMode:
             title = getDataSetTitle(dataSetKey: record.dataSetKey)
         case .infiniteChallengeMode:
-            title = "無限挑戦"
+            title = i18n.infiniteChallengeTitle
         case .medalMode:
             title = "追星模式"
         }
         addText(2, 1, 6, title, color: myLightGray, strokeColor: .black)
-        addText(2, 7, 6, tags, color: myOrange, strokeColor: .black)
+        addText(2, 6, 6, tags, color: record.level.color, strokeColor: .black)
 
         let statusText = i18n.getSpeakingStatus(percent: record.progress, rank: record.rank.rawValue, reward: record.medalReward)
         statusSpeakingPromise = teacherSay(statusText, rate: fastRate)
@@ -66,43 +66,53 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
 
     private func renderMiddleRecord() {
         guard let record = context.gameRecord else { return }
-
         let y = 13
-        addText(2, y, 3, "完成率")
-        Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) {_ in
-            let progress = getAttrText([
-                ( record.progress.padWidthTo(4), .white, self.getFontSize(h: 12)),
-                ( "%", .white, self.getFontSize(h: 3))
-                ])
+        addText(2, y, 3, i18n.completeness, color: minorTextColor)
 
-            self.addAttrText(2, y, 12, progress)
-        }
+        let progress = getAttrText([
+            ( record.progress.padWidthTo(4), .white, getFontSize(h: 12)),
+            ( "%", .white, self.getFontSize(h: 3))
+            ])
 
-        addText(26, y, 3, "判定")
-        Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { _ in
-            self.addText(26, y, 12, record.rank.rawValue.padWidthTo(3), color: record.rank.color)
-        }
+        var label = self.addAttrText(2, y+1, 12, progress)
+        label.slideIn(duration: 0.3)
 
-        addText(2, y+11, 3, "正解 \(record.perfectCount) | すごい \(record.greatCount) | いいね \(record.goodCount) | ミス \(record.missedCount)")
+        addText(26, y, 3, i18n.rank, color: minorTextColor)
+
+        let rankText = getStrokeText(record.rank.rawValue.padWidthTo(3),
+                                     record.rank.color,
+                                     strokeWidth: -1,
+                                     strokColor: .black,
+                                     font: MyFont.bold(ofSize: getFontSize(h: 12)))
+        label = addAttrText(x: 27, y: y+1, h: 12,
+                         text: rankText)
+        label.slideIn(duration: 0.5)
+
+        let detailText = "\(i18n.excellent) \(record.perfectCount) | \(i18n.great) \(record.greatCount) | \(i18n.good) \(record.goodCount) | \(i18n.wrong) \(record.missedCount)"
+        label = addText(x: 0, y: y+12, w: gridCount, h: 3,
+                            text: detailText,
+                            color: minorTextColor)
+        label.textAlignment = .center
     }
 
     private func renderMiddleGoalBar() {
         guard let record = context.gameRecord else { return }
-        let y = 28
+        let y = 29
         let line = UIView()
         layout(0, y, 44, 1, line)
-        line.backgroundColor = .lightGray
-        line.frame.size.height = 1.5
+        line.backgroundColor = rgb(150, 150, 150)
+        line.frame.size.height = 0.5
         addSubview(line)
 
         // sentence numbers
         let todaySentenceCount = getTodaySentenceCount()
         let dailyGoal = context.gameSetting.dailySentenceGoal
         animateGoalBarContext = addProgressBar(y: y,
-                                               title: "今日の目標",
+                                               title: i18n.todayGoal,
                                                fromNumber: todaySentenceCount - record.correctCount,
                                                endNumber: todaySentenceCount,
-                                               maxNumber: dailyGoal)
+                                               maxNumber: dailyGoal,
+                                               color: record.level.color)
 
         if context.gameMode == .topicMode {
             let topic = getDataSetTopic(dataSetKey: record.dataSetKey)
@@ -112,7 +122,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
             let toTagPoint = tagPoints["#" + topic] ?? 0
             let tagMaxPoints = getTagMaxPoints()
             let maxTagPoint = tagMaxPoints["#" + topic] ?? 1
-            animateTopicBarContext = addProgressBar(y: y + 10,
+            animateTopicBarContext = addProgressBar(y: y + 8,
                                                     title: topic,
                                                     fromNumber: fromTagPoint,
                                                     endNumber: toTagPoint,
@@ -124,8 +134,9 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
                                 title: String,
                                 fromNumber: Int,
                                 endNumber: Int,
-                                maxNumber: Int) -> AnimateBarContext {
-        let lineHeight = 4
+                                maxNumber: Int,
+                                color: UIColor? = nil) -> AnimateBarContext {
+        let lineHeight = 3
         addText(2, y + 1, lineHeight + 1, title, color: myLightGray)
 
         let text = "\(fromNumber)/\(maxNumber)"
@@ -139,16 +150,18 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
                                                strokeWidth: -2,
                                                strokeColor: .black, font: font)
 
-        let barBox = addRect(x: 2, y: y + 6, w: 40, h: lineHeight, color: .clear)
-        barBox.roundBorder(borderWidth: 1, cornerRadius: 0, color: .lightGray)
+        let barBox = addRect(x: 2, y: y + 5, w: 40, h: lineHeight,
+                             color: progressBackGray)
+        barBox.roundBorder(borderWidth: 0, cornerRadius: step/2, color: .lightGray)
 
         // animate progress bar for one second
         let fromPercent = min(1.0, (fromNumber.f/maxNumber.f))
         fullProgressWidth = getFrame(0, 0, 40, lineHeight).width
 
-        let bar = addRect(x: 2, y: y + 6, w: 1, h: lineHeight, color: getProgressColor(percent: fromPercent))
+        let bar = addRect(x: 2, y: y + 5, w: 1, h: lineHeight,
+                          color: color ?? getProgressColor(percent: fromPercent))
         bar.frame.size.width = fullProgressWidth * fromPercent.c
-        bar.roundBorder(borderWidth: 1, cornerRadius: 0, color: .clear)
+        bar.roundBorder(borderWidth: 0, cornerRadius: step/2, color: .clear)
 
         return (progressLabel, bar, fromNumber, endNumber, maxNumber)
     }
@@ -160,7 +173,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
 
     private func animateBarContext(context: AnimateBarContext?, key: String) {
         guard let (label, bar, fromCount, toCount, maxCount) = context else { return }
-        let fontSize = getFontSize(h: 5)
+        let fontSize = getFontSize(h: 4)
         let font = MyFont.bold(ofSize: fontSize)
 
         var repeatCount = 0
@@ -179,7 +192,6 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
             }
             let ratio: Float = (repeatCount.f - delayCount.f) / targetRepeatCount.f
             let currentProgress = (startProgress * (1 - ratio) + endProgress * ratio)
-            bar.backgroundColor = getProgressColor(percent: currentProgress)
             bar.frame.size.width = self.fullProgressWidth * currentProgress.c
             let text = "\((fromCount.f * (1 - ratio) + toCount.f * ratio).i)/\(maxCount)"
             label.attributedText = getText(text,

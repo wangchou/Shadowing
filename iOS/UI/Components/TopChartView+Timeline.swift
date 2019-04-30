@@ -23,7 +23,7 @@ struct TimelineBox {
     }
 
     mutating func toYesterday() {
-        row -= 1
+        row = (row + 6)%7
         if row == 0 {
             row = 7
             column += 1
@@ -46,11 +46,24 @@ extension TopChartView {
         addTimelineBottomBar()
     }
 
+    private func getRowFrom(weekday: Int) -> Int {
+        // https://developer.apple.com/documentation/foundation/nsdatecomponents/1410442-weekday
+        // In weekday, Sun = 1, Mon = 2, ... Sat = 7
+        //
+        // Goal: Calender Row start from Monday
+        // In row,     Mon = 1, Tue = 2, ... Sun = 7
+        let row = (weekday + 6)%7
+        return row == 0 ? 7 : row
+    }
+
     func addTimeline() {
         let dailyGoal = context.gameSetting.dailySentenceGoal
         let today = Date()
         let weekday = Calendar.current.component(.weekday, from: today)
-        var timelineBox = TimelineBox(date: today, row: weekday, column: 1)
+
+        var timelineBox = TimelineBox(date: today,
+                                      row: getRowFrom(weekday: weekday),
+                                      column: 1)
         //let recordsByDate = getRecordsByDate()
         var index = 0
         let sentencesCounts = getSentenceCountsByDays()
@@ -65,13 +78,31 @@ extension TopChartView {
             )
             timelineBox.toYesterday()
             if timelineBox.day == 1 {
-                addTimelineTextLabel(row: 0, column: timelineBox.column, text: "\(timelineBox.month)月")
+                var monthText = "\(timelineBox.month)月"
+                if !i18n.isZh && !i18n.isJa {
+                    let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                                  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+                    monthText = months[timelineBox.month - 1]
+                }
+                addTimelineTextLabel(row: 0, column: timelineBox.column, text: monthText)
             }
             index += 1
         }
-        let weekdayLabels = ["日", "月", "火", "水", "木", "金", "土"]
+        var weekdayLabels: [String] = []
+        if i18n.isJa {
+            weekdayLabels = ["月", "火", "水", "木", "金", "土", "日"]
+        } else if i18n.isZh {
+            weekdayLabels = ["一", "二", "三", "四", "五", "六", "日"]
+        } else {
+            weekdayLabels = ["M", "T", "W", "T", "F", "S", "S"]
+        }
+
         for i in 0..<weekdayLabels.count {
-            addTimelineTextLabel(row: i + 1, column: 0, text: weekdayLabels[i], color: (i == 0 || i == 6) ? .red : .black)
+            addTimelineTextLabel(row: i+1,
+                                 column: 0,
+                                 text: weekdayLabels[i],
+                                 color: (i == 5 || i == 6) ? .red : .black,
+                                 isEnWeekDay: !i18n.isJa && !i18n.isZh)
         }
     }
 
@@ -87,7 +118,7 @@ extension TopChartView {
             box.frame.size.width -= step * 0.3
             box.frame.size.height += step * 0.2
             box.frame.origin.y += step * 0.3
-            box.roundBorder(borderWidth: 0, cornerRadius: 5, color: .clear)
+            box.roundBorder(borderWidth: 0, cornerRadius: step/3, color: .clear)
             box.backgroundColor = .white
 
             let topText = addText(
@@ -125,11 +156,11 @@ extension TopChartView {
         addTimelinePadding(box)
     }
 
-    func addTimelineTextLabel(row: Int, column: Int, text: String, color: UIColor = .black) {
+    func addTimelineTextLabel(row: Int, column: Int, text: String, color: UIColor = .black, isEnWeekDay: Bool = false) {
         let label = addText(
             x: timelineColumnCount - column,
             y: row,
-            w: 3, h: 1,
+            w: isEnWeekDay ? 1 : 3, h: 1,
             text: text,
             font: MyFont.thin(ofSize: step * 0.7),
             color: color
@@ -140,6 +171,10 @@ extension TopChartView {
             label.frame.origin.y += step * (-0.2 + timelineYPadding)
         }
         label.frame.origin.x += step * timelineXPadding
+
+        if isEnWeekDay {
+            label.textAlignment = .center
+        }
     }
 
     func addTimelinePadding(_ view: UIView) {

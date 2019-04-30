@@ -32,13 +32,9 @@ class TopChartView: UIView, GridLayout, ReloadableView {
     var percent: Float = 0
 
     var percentageText: String {
-        if percent >= 1.0 { return "完 成" }
+        if percent >= 1.0 { return i18n.done }
 
         return String(format: "%.0f", percent * 100) + "%"
-    }
-
-    var goalText: String {
-        return i18n.goalText
     }
 
     var sprintText: String {
@@ -91,7 +87,10 @@ class TopChartView: UIView, GridLayout, ReloadableView {
     }
 
     var longTermGoalText: String {
-        return "\(longTermGoal)\(i18n.sentence)"
+        if i18n.isZh || i18n.isJa {
+            return "\(longTermGoal)\(i18n.sentence)"
+        }
+        return "\(longTermGoal)"
     }
 
     var dayText: String {
@@ -133,13 +132,12 @@ class TopChartView: UIView, GridLayout, ReloadableView {
     }
 
     func addOnClickHandler() {
-        addTapGestureRecognizer { [weak self] in
+        addTapGestureRecognizer {
             switchToNextTopViewMode()
+            rootViewController.rerenderTopView()
             DispatchQueue.global().async {
                 Analytics.logEvent("top_chart_view_clicked", parameters: nil)
             }
-            self?.render()
-            self?.animateProgress()
         }
     }
 
@@ -147,14 +145,36 @@ class TopChartView: UIView, GridLayout, ReloadableView {
         frame.size.width = screen.width
         frame.size.height = screen.width * 34/48
         updateByRecords()
-
         render()
+    }
+
+    func prepareForDailyGoalAppear() {
+        guard GameContext.shared.gameSetting.icTopViewMode == .dailyGoal else { return }
+
+        allSentenceCount = getAllSentencesCount()
+        if getTodaySentenceCount() < context.gameSetting.dailySentenceGoal {
+            backgroundColor = longTermGoalColor.withSaturation(0)
+            percentLabel?.text = "0%"
+            frontCircle?.removeFromSuperview()
+        } else {
+            backgroundColor = longTermGoalColor.withSaturation(1)
+            percentLabel?.text = i18n.done
+            if let frame = frontCircle?.frame {
+                frontCircle?.removeFromSuperview()
+                frontCircle = CircleView(frame: frame)
+                frontCircle!.lineWidth = step * 1.3
+                frontCircle!.percent = 1
+                addSubview(frontCircle!)
+            }
+        }
+
     }
 
     func render() {
         switch GameContext.shared.gameSetting.icTopViewMode {
         case .dailyGoal:
             renderDailyGoalMode()
+            animateProgress()
         case .timeline:
             renderTimelineMode()
         case .longTermGoal:

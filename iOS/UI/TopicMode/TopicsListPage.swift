@@ -50,14 +50,14 @@ class TopicsListPage: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        context.gameMode = .topicMode
         topBarView.titleLabel.text = I18n.shared.topicPageTitile
         let height = screen.width * 46/48
         topArea.frame.size.height = height + 61
-
-        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
+        topChartView.prepareForDailyGoalAppear()
+        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
             DispatchQueue.main.async {
                 self.topChartView.viewWillAppear()
-                self.topChartView.animateProgress()
                 self.topicFilterBarView.viewWillAppear()
                 self.topicButtonAreaView.viewWillAppear()
                 if context.dataSetKey == "" {
@@ -114,7 +114,10 @@ extension TopicsListPage: UITableViewDataSource {
             contentCell.levelLabel.textColor = level.color
             contentCell.levelLabel.roundBorder(borderWidth: 1.5, cornerRadius: 20, color: level.color)
             contentCell.levelLabel.backgroundColor = level.color.withAlphaComponent(0.1)
+
         }
+        contentCell.rankTitleLabel.text = i18n.rank
+        contentCell.completeTitleLabel.text = i18n.completeness
         contentCell.titleLabel.attributedText = attrStr
         let record = findBestRecord(key: dataSetKey)
         contentCell.strockedProgressText = record?.progress
@@ -139,7 +142,9 @@ func getDataSetTitle(dataSetKey: String) -> String {
     if let tags = datasetKeyToTags[dataSetKey],
         !tags.isEmpty {
         let tagsWithoutSharp = tags.map { t in return t.replacingOccurrences(of: "#", with: "")}
-        return "[\(tagsWithoutSharp[0])] " + tagsWithoutSharp[1...].joined(separator: "、")
+        let idx = abilities.index(of: tagsWithoutSharp[0]) ?? 0
+        let categoryText = i18n.isZh ? tagsWithoutSharp[0] : jaAbilities[idx]
+        return "[\(categoryText)] " + tagsWithoutSharp[1...].joined(separator: "、")
     }
 
     return ""

@@ -17,8 +17,9 @@ class InfiniteChallengePage: UIViewController {
     @IBOutlet weak var blockView: UIView!
     @IBOutlet weak var blockInfo: UILabel!
     @IBOutlet weak var translationButton: UIButton!
+    @IBOutlet weak var infoView: ICInfoView!
     var topBarTitle: String {
-        return i18n.languageInJa + " - " + level.title
+        return i18n.language + " - " + level.title
     }
     var topBarLeftText: String = ""
     var topBarRightText: String = ""
@@ -30,7 +31,6 @@ class InfiniteChallengePage: UIViewController {
     var maxKanaCount: Int {
         return level.maxSyllablesCount
     }
-    @IBOutlet weak var infoView: ICInfoView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +66,7 @@ class InfiniteChallengePage: UIViewController {
 
     func updateUI() {
         translationButton.setTitle(i18n.englishOrJapanese, for: .normal)
+        translationButton.titleLabel?.font = getBottomButtonFont()
         if topBarRightText == "" {
             topBarView.rightButton.isHidden = true
         } else {

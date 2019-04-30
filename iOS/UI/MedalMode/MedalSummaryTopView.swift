@@ -23,13 +23,16 @@ private func dayOptionString(option: DaysOption) -> String {
     case .oneMonth:
         return i18n.thirtyDays
     case .all:
-        return i18n.allDays
+        return i18n.all
     }
 }
 
 class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
+    var safeAreaDiffY: Int {
+        return getTopPadding() > 20 ? 1 : 0
+    }
     var y: Int {
-        return Int((getTopPadding() - 20)/step)
+        return -2 - safeAreaDiffY
     }
     var tableData: [Summary] = []
     var totalSummary: Summary {
@@ -110,27 +113,28 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
 
     func viewWillAppear() {
         removeAllSubviews()
-        backgroundColor = rgb(60, 60, 60)
+        backgroundColor = darkBackground
 
         let totalSummary = self.totalSummary // avoid recalculation
 
         let subTitleGray = rgb(155, 155, 155)
         let subTitleFont = MyFont.regular(ofSize: step * 2)
 
-        let langLabel = addText(x: 2, y: y + 3, h: 8, text: gameLang == .jp ? "日本語" : "英語", color: .white)
-        langLabel.sizeToFit()
+        let labelText = gameLang == .jp ? i18n.japanese : i18n.english
+        let labelHeight = labelText.count > 6 ? 6 : 8
+        let labelYPlus = labelText.count > 6 ? 3 : 2
+
+        let langLabel = addText(x: 2, y: y + labelYPlus, h: labelHeight,
+                                text: labelText,
+                                color: .white)
 
         // MARK: - Add day option button
         let daysButton = UIButton()
         daysButton.setTitle(dayOptionString(option: daysOption), for: .normal)
-        daysButton.setTitleColor(.white, for: .normal)
+        daysButton.setStyle(style: .darkOption, step: step)
         daysButton.titleLabel?.font = MyFont.regular(ofSize: step * 3)
-        daysButton.backgroundColor = subTitleGray
-        daysButton.roundBorder(borderWidth: 0.5, cornerRadius: step, color: .clear)
         daysButton.sizeToFit()
-        daysButton.frame.origin.x = langLabel.frame.x +
-                                    langLabel.frame.width +
-                                    2 * step
+        daysButton.frame.origin.x = 21 * step
         daysButton.frame.size.width += 2 * step
         daysButton.frame.size.height = 4 * step
         daysButton.centerY(langLabel.frame)
@@ -154,7 +158,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         label.centerY(originFrame)
         label.moveToRight(originFrame)
         medalView.centerY(label.frame)
-        medalView.frame.origin.x = label.frame.x - medalView.frame.width - step/2
+        medalView.frame.origin.x = label.x0 - medalView.frame.width - step/2
 
         label = addText(x: 36, y: y+12, w: 10, h: 3, text: i18n.playTime,
                         font: subTitleFont,

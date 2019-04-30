@@ -35,6 +35,10 @@ class InfiniteChallengeListPage: UIViewController {
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        showHideBottomBar()
+    }
+
+    private func showHideBottomBar() {
         if gameLang.isSupportTopicMode {
             tableBottomConstraint.constant = -50
             bottomBarView.isHidden = false
@@ -46,15 +50,17 @@ class InfiniteChallengeListPage: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        showHideBottomBar()
+        context.gameMode = .infiniteChallengeMode
         if IAPHelper.shared.products.isEmpty {
             IAPHelper.shared.requsestProducts()
         }
         bottomBarView.contentTab = .infiniteChallenge
         topBarView.titleLabel.text = i18n.infiniteChallengeTitle
-        Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { _ in
+        topChartView.prepareForDailyGoalAppear()
+        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
             DispatchQueue.main.async {
                 self.topChartView.viewWillAppear()
-                self.topChartView.animateProgress()
             }
         }
     }

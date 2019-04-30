@@ -26,6 +26,7 @@ class MedalGameFinishedPage: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         countDownTimer?.invalidate()
+        SpeechEngine.shared.stopRingTone()
     }
 }
 
@@ -55,15 +56,10 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     func viewWillAppear() {
         removeAllSubviews()
         strokeWidth = Float(step * -1/2.0)
-        backgroundColor = rgb(50, 50, 50)
-        addTextbackground(bgColor: rgb(50, 50, 50), textColor: textGold)
+        addTextbackground(useGameSentences: true)
         let yMax = Int(screen.height / step)
-        addInfo(y: (yMax - 12)/2 - 18)
-        addActionButtons(y: (yMax - 12)/2 + 30)
-    }
-
-    func viewWillDisappear() {
-        countDownTimer?.invalidate()
+        addInfo(y: (yMax - 12)/2 - 20)
+        addActionButtons(y: (yMax - 12)/2 + 28)
     }
 
     // MARK: - Say Result
@@ -85,22 +81,22 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         addTitleBlock(y: y, duration: 0.2)
 
         // 1 now
-        addCompleteness(y: y+5, delay: 0, duration: 0.2)
-        addRank(        y: y+5, delay: 0.3, duration: 0.2)
-        addRecordDetail(y: y+7, delay: 0.3, duration: 0.6)
+        addCompleteness(y: y+3, delay: 0, duration: 0.2)
+        addRank(        y: y+3, delay: 0.3, duration: 0.2)
+        addRecordDetail(y: y+5, delay: 0.3, duration: 0.6)
 
         // 2 changes
-        addMedalProgressBar(x: 7, y: y + 18,
+        addMedalProgressBar(x: 7, y: y + 16,
                             medalFrom: medal.count - (gr.medalReward ?? 0),
                             medalTo: medal.count,
                             animateInDelay: 0.6,
                             duration: 0.2,
                             animateProgressDelay: 1.1,
-                            isLightSubText: true)
-        addMedal(       y: y+13, delay: 0.6, duration: 0.2)
+                            isFinishPage: true)
+        addMedal(       y: y+11, delay: 0.6, duration: 0.2)
 
         // 3 long-term
-        addDailyGoalView(x: 7, y: y+30,
+        addDailyGoalView(x: 7, y: y+29,
                          isFullStatus: true,
                          delay: 1.8, duration: 0.2)
     }
@@ -112,11 +108,14 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
         rect.enlargeIn(delay: delay, duration: duration)
 
-        let attrText = getStrokeText(gameLang == .jp ? "日本語" : "英語",
+        let fontSize = i18n.language.count > 5 ? 8 * step : 10 * step
+        let attrText = getStrokeText(i18n.language,
                                      rgb(220, 220, 220),
                                      strokeWidth: strokeWidth/2,
-                                     font: MyFont.bold(ofSize: 10 * step))
-        let label = addAttrText(x: 12, y: y - 8, h: 12, text: attrText)
+                                     font: MyFont.bold(ofSize: fontSize))
+        let label = addAttrText(x: 5,
+                                y: y - 8,
+                                h: 12, text: attrText)
         label.centerX(frame)
         label.textAlignment = .center
         label.enlargeIn(delay: delay, duration: duration)
@@ -147,10 +146,10 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     }
 
     private func addCompleteness(y: Int, delay: TimeInterval = 0, duration: TimeInterval) {
-        var attrText = getStrokeText("完成率",
-                                 .white,
+        var attrText = getStrokeText(i18n.completeness,
+                                 minorTextColor,
                                  strokeWidth: strokeWidth/2,
-                                 font: MyFont.bold(ofSize: 3 * step))
+                                 font: MyFont.bold(ofSize: 2 * step))
         var label = addAttrText(x: 7, y: y, h: 4, text: attrText)
         label.textAlignment = .left
         label.slideIn(delay: delay, duration: duration)
@@ -165,7 +164,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         label.slideIn(delay: delay, duration: duration)
 
         attrText = getStrokeText("%",
-                                 .white,
+                                 minorTextColor,
                                  strokeWidth: strokeWidth/2,
                                  font: MyFont.bold(ofSize: 2 * step))
         label = addAttrText(x: 21, y: y+7, h: 4, text: attrText)
@@ -174,10 +173,10 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     }
 
     private func addRank(y: Int, delay: TimeInterval = 0, duration: TimeInterval) {
-        var attrText = getStrokeText("判定",
-                                 .white,
+        var attrText = getStrokeText(i18n.rank,
+                                 minorTextColor,
                                  strokeWidth: strokeWidth/2,
-                                 font: MyFont.bold(ofSize: 3 * step))
+                                 font: MyFont.bold(ofSize: 2 * step))
         var label = addAttrText(x: 26, y: y, h: 4, text: attrText)
         label.textAlignment = .left
         label.fadeIn(delay: delay, duration: duration)
@@ -210,9 +209,9 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
     private func addActionButtons(y: Int) {
         let button = createButton(title: "", bgColor: .red)
-        let countDownSecs = 5
+        let countDownSecs = 6
         button.setIconImage(named: "baseline_play_arrow_black_48pt",
-                            title: " 次の挑戦 (\(countDownSecs)秒)",
+                            title: " \(i18n.nextGame) (\(countDownSecs)\(i18n.secs))",
                             tintColor: .white,
                             isIconOnLeft: true)
         button.titleLabel?.font = MyFont.regular(ofSize: step * 3.2 )
@@ -231,7 +230,10 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         countDownTimer?.invalidate()
         countDownTimer = Timer.scheduledTimer(withTimeInterval: 1.00, repeats: true) { _ in
             leftSeconds -= 1
-            playButton?.setTitle(" 次の挑戦 (\(leftSeconds)秒)", for: .normal)
+            if leftSeconds == 2 {
+                SpeechEngine.shared.stopRingTone()
+            }
+            playButton?.setTitle(" \(i18n.nextGame) (\(leftSeconds)\(i18n.secs))", for: .normal)
             guard leftSeconds > 0 else {
                 countDownTimer?.invalidate()
                 if !isSimulator {

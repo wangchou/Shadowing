@@ -73,7 +73,7 @@ class GameFlow {
 
         context.loadLearningSentences()
 
-        speakTitle(title: context.gameTitle)
+        speakTitle()
             .then( tryWait )
             .then( speakNarratorString )
             .then( tryWait )
@@ -172,6 +172,9 @@ extension GameFlow {
             saveGameSetting()
             DispatchQueue.global().async {
                 saveGameMiscData()
+            }
+            if let r = context.gameRecord {
+                engine.playRineTone(ringTone: r.rank.ringTone)
             }
         }
     }

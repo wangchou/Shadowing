@@ -32,10 +32,6 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         return Int((screen.height - getBottomPadding()) / step)
     }
 
-    var iconSize: String {
-        return isIPad ? "48pt" : "24pt"
-    }
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         sharedInit()
@@ -57,13 +53,44 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     }
 
     func viewWillAppear() {
+        context.gameMode = .medalMode
         removeAllSubviews()
-        addTextbackground(bgColor: rgb(60, 60, 60), textColor: textGold)
-        addTopBar(y: 5)
+        addTextbackground()
+        addTopBar(y: topPaddedY + 1)
 
-        addLangInfo(y: (yMax + 12)/2 - 22 - 1)
+        addLangInfo(y: (yMax + 12)/2 - 22 - 4)
         addGoButton(x: 28, y: (yMax + 12)/2 - 22 + 27, w: 18)
         addBottomButtons()
+    }
+
+    private func addTestRingToneButtons() {
+        context.gameRecord = GameRecord(context.dataSetKey, sentencesCount: 10, level: .lv5)
+        context.gameRecord?.medalReward = 3
+        addButton(iconName: "", 3, 10, 7, 7) {
+            context.gameRecord?.perfectCount = 10
+            SpeechEngine.shared.playRineTone(ringTone: .star)
+            launchVC(MedalGameFinishedPage.id)
+        }
+        addButton(iconName: "", 13, 10, 7, 7) {
+            context.gameRecord?.perfectCount = 9
+            SpeechEngine.shared.playRineTone(ringTone: .guitar)
+            launchVC(MedalGameFinishedPage.id)
+        }
+        addButton(iconName: "", 23, 10, 7, 7) {
+            context.gameRecord?.perfectCount = 8
+            SpeechEngine.shared.playRineTone(ringTone: .minuet)
+            launchVC(MedalGameFinishedPage.id)
+        }
+        addButton(iconName: "", 33, 10, 7, 7) {
+            context.gameRecord?.perfectCount = 7
+            SpeechEngine.shared.playRineTone(ringTone: .timePassing)
+            launchVC(MedalGameFinishedPage.id)
+        }
+        addButton(iconName: "", 43, 10, 7, 7) {
+            context.gameRecord?.perfectCount = 5
+            SpeechEngine.shared.playRineTone(ringTone: .depression)
+            launchVC(MedalGameFinishedPage.id)
+        }
     }
 
     // MARK: - TopBar
@@ -74,6 +101,8 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         button.setIconImage(named: iconName, tintColor: .black, isIconOnLeft: false)
         button.roundBorder(borderWidth: step/2, cornerRadius: step,
                            color: rgb(35, 35, 35))
+        button.showsTouchWhenHighlighted = true
+
         addSubview(button)
         layout(x, y, w, h, button)
         button.addTapGestureRecognizer {
@@ -125,34 +154,34 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     private func addLangTitleBox(y: Int) {
         let rect = addRect(x: 3, y: y+6, w: 42, h: 31, color: UIColor.black.withAlphaComponent(0.4))
         rect.roundBorder(borderWidth: 0, cornerRadius: step * 2, color: .clear)
-        let attrTitle = getStrokeText(gameLang == .jp ? "日本語" : "英語",
+        let font = (i18n.isZh || i18n.isJa) ? MyFont.bold(ofSize: 9*step) :
+                                              MyFont.bold(ofSize: 7*step)
+        let attrTitle = getStrokeText(gameLang == .jp ? i18n.japanese : i18n.english,
                                       .white,
                                       strokeWidth: Float(step * -1/3),
-                                      font: MyFont.bold(ofSize: 9*step))
+                                      font: font)
 
-        let label = addAttrText(x: 7, y: y, h: 13, text: attrTitle)
-        label.sizeToFit()
+        addAttrText(x: 7, y: y - 2, h: 13, text: attrTitle)
     }
 
     private func addChangeLangButton(y: Int) {
         let changeLangButton = UIButton()
-        changeLangButton.backgroundColor = UIColor.white.withAlphaComponent(0.4)
-        changeLangButton.roundBorder(borderWidth: 0, cornerRadius: step, color: .clear)
-        let attrTitle = getStrokeText(gameLang == .jp ? "英" : "日",
-                                      rgb(200, 200, 200),
+        layout(34, y, 8, 5, changeLangButton)
+        addSubview(changeLangButton)
+
+        let attrTitle = getStrokeText(gameLang == .jp ? i18n.enAbbr : i18n.jaAbbr,
+                                      buttonForegroundGray,
                                       strokeWidth: Float(step * -1/3),
                                       font: MyFont.bold(ofSize: 4*step))
 
         changeLangButton.setAttributedTitle(attrTitle, for: .normal)
-        layout(34, y, 8, 5, changeLangButton)
-        changeLangButton.addTarget(self, action: #selector(onChangeLangButtonClicked), for: .touchUpInside)
-        changeLangButton.showsTouchWhenHighlighted = true
-        addSubview(changeLangButton)
-    }
 
-    @objc func onChangeLangButtonClicked() {
-        changeGameLangTo(lang: gameLang == .jp ? .en : .jp)
-        self.viewWillAppear()
+        changeLangButton.addTapGestureRecognizer { [weak self] in
+            changeGameLangTo(lang: gameLang == .jp ? .en : .jp)
+            self?.viewWillAppear()
+        }
+
+        changeLangButton.setStyle(style: .darkOption, step: step)
     }
 
     // MARK: - GoButton
@@ -180,30 +209,41 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         context.gameMode = .medalMode
         guard !TopicDetailPage.isChallengeButtonDisabled else { return }
         if isUnderDailySentenceLimit() {
-            launchVC(Messenger.id)
+            launchVC(Messenger.id, isOverCurrent: false)
         }
     }
 
     func addBottomButtons() {
-        addButton(iconName: "round_insert_chart_outlined_black_\(iconSize)",
-                  2, yMax - 9, 7, 7) {
+        let buttonY = Int((screen.height - bottomButtonHeight)/step) - 2
+        addButton(iconName: "round_timeline_black_\(iconSize)",
+                  2, buttonY, 7, 7) {
             launchVC(MedalSummaryPage.id)
         }
+
+        addButton(iconName: "round_spellcheck_black_\(iconSize)",
+        10, buttonY, 7, 7) {
+            context.loadMedalCorrectionSentence()
+            launchVC(MedalCorrectionPage.id)
+        }
+
         if i18n.isZh {
             addButton(iconName: "outline_info_black_\(iconSize)",
-                      10, yMax - 9, 7, 7) {
+                      39, buttonY, 7, 7) {
                 launchVC("InfoPage")
             }
         }
     }
 }
 
-private func rollingText(view: UIView) {
-    let animator = UIViewPropertyAnimator(duration: 15, curve: .easeOut, animations: {
+private func rollingText(view: UIView, width: CGFloat) {
+    let animator = UIViewPropertyAnimator(duration: 30, curve: .easeOut, animations: {
+        let tx: CGFloat = -1.5 * 320 * cos(.pi/8)
+        let ty: CGFloat = -1.5 * 320 * sin(.pi/8)
+
         view.transform = CGAffineTransform.identity
-            .translatedBy(x: 0, y: screen.width/2)
+            .translatedBy(x: 0, y: tan(.pi/8) * width/2)
             .rotated(by: -1 * .pi/8)
-            .translatedBy(x: -1.5 * screen.width * cos(.pi/8), y: -1.5 * screen.width * sin(.pi/8))
+            .translatedBy(x: tx, y: ty)
     })
 
     animator.startAnimation()
@@ -211,12 +251,23 @@ private func rollingText(view: UIView) {
 
 extension GridLayout where Self: UIView {
     // MARK: - textBackground
-    func addTextbackground(bgColor: UIColor, textColor: UIColor) {
-        if isSimulator { return }
+    func addTextbackground(bgColor: UIColor = darkBackground,
+                           textColor: UIColor = textGold,
+                           useGameSentences: Bool = false) {
         backgroundColor = bgColor
-        let num = Int(sqrt(pow(screen.width, 2) + pow(screen.height, 2)) / step)/8
+        //if isSimulator { return }
+        let num = Int(sqrt(pow(frame.width, 2) + pow(frame.height, 2)) / step)/8
         let level = context.gameMedal.lowLevel
-        let sentences = getRandSentences(level: level, numOfSentences: num * 4)
+        func getGameSentences() -> [String] {
+            var sentences: [String] = []
+            let count = isSimulator ? 3 : context.sentences.count
+            for i in 0 ..< num*4 {
+                sentences.append(context.sentences[i%count])
+            }
+            return sentences
+        }
+        let sentences = useGameSentences ? getGameSentences() :
+                                           getRandSentences(level: level, numOfSentences: num * 4)
 
         func randPad(_ string: String) -> String {
             var res = string
@@ -233,7 +284,7 @@ extension GridLayout where Self: UIView {
 
         for i in 0 ..< num {
             let x = 1
-            let y = i * 9
+            let y = i * 9 + 3
             let sentence = randPad(sentences[i]) +
                 randPad(sentences[i+num]) +
                 randPad(sentences[i + (2 * num)]) +
@@ -242,13 +293,14 @@ extension GridLayout where Self: UIView {
                                 text: sentence,
                                 color: textColor)
             label.sizeToFit()
+            label.frame.size.height += step // fix sizeToFit will cut the bottom of g
             label.centerX(frame)
             label.textAlignment = .left
 
             label.transform = CGAffineTransform.identity
-                .translatedBy(x: 0, y: screen.width/2)
+                .translatedBy(x: 0, y: tan(.pi/8) * frame.width/2)
                 .rotated(by: -1 * .pi/8)
-            rollingText(view: label)
+            rollingText(view: label, width: frame.width)
         }
     }
 
@@ -341,13 +393,13 @@ extension GridLayout where Self: UIView {
         animateInDelay: TimeInterval = 0,
         duration: TimeInterval = 0,
         animateProgressDelay: TimeInterval = 0,
-        isLightSubText: Bool = false
+        isFinishPage: Bool = false
         ) {
         let medalProgressBar = MedalProgressBar()
         layout(x, y, 34, 15, medalProgressBar)
         addSubview(medalProgressBar)
         medalProgressBar.medalCount = medalFrom
-        medalProgressBar.isFinishedPageMode = isLightSubText
+        medalProgressBar.isFinishedPageMode = isFinishPage
         if duration > 0 {
             medalProgressBar.animateIn(delay: animateInDelay, duration: duration)
         }

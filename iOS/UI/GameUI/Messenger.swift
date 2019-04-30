@@ -33,6 +33,8 @@ class Messenger: UIViewController {
     @IBOutlet weak var overlayView: UIView!
     @IBOutlet weak var speedSlider: UISlider!
     @IBOutlet weak var speedLabel: UILabel!
+    @IBOutlet weak var showTranslationLabel: UILabel!
+    @IBOutlet weak var showTranslationSwitch: UISwitch!
     @IBOutlet weak var autoSpeedSwitch: UISwitch!
     @IBOutlet weak var learningModeLabel: UILabel!
     @IBOutlet weak var learningModeSegmentControl: UISegmentedControl!
@@ -91,12 +93,16 @@ class Messenger: UIViewController {
     func renderOverlayView() {
         let i18n = I18n.shared
 
+        showTranslationLabel.text = i18n.showTranslationLabel
         autoSpeedLabel.text = i18n.autoSpeedLabel
         speedLabel.text = i18n.speed
 
         speedSlider.minimumValue = AVSpeechUtteranceMinimumSpeechRate
         speedSlider.maximumValue = AVSpeechUtteranceMaximumSpeechRate * 0.75
 
+        showTranslationSwitch.isOn = context.gameSetting.isShowTranslation
+        showTranslationSwitch.isEnabled = context.gameSetting.learningMode != .interpretation
+        showTranslationLabel.textColor = context.gameSetting.learningMode != .interpretation ? .white : UIColor.white.withAlphaComponent(0.3)
         autoSpeedSwitch.isOn = context.gameSetting.isAutoSpeed
         speedSlider.value = context.gameSetting.preferredSpeed
         fastLabel.text = String(format: "%.2fx", context.gameSetting.preferredSpeed*2)
@@ -226,7 +232,7 @@ class Messenger: UIViewController {
                 context.loadNextChallenge()
                 rootViewController.topicSwipablePage.detailPage?.render()
             }
-            launchVC(Messenger.id)
+            launchVC(Messenger.id, isOverCurrent: false)
         }
     }
 
@@ -241,6 +247,11 @@ class Messenger: UIViewController {
         saveGameSetting()
         renderOverlayView()
     }
+    @IBAction func showTranslationSwitchValueChanged(_ sender: Any) {
+        context.gameSetting.isShowTranslation = showTranslationSwitch.isOn
+        saveGameSetting()
+        renderOverlayView()
+    }
     @IBAction func autoSpeedSwitchValueChanged(_ sender: Any) {
         context.gameSetting.isAutoSpeed = autoSpeedSwitch.isOn
         saveGameSetting()
@@ -248,6 +259,7 @@ class Messenger: UIViewController {
     }
     @IBAction func learningModeSegmentControlValueChanged(_ sender: Any) {
         actOnLearningModeSegmentControlValueChanged(control: learningModeSegmentControl)
+        renderOverlayView()
     }
     @IBAction func repeatOneSwitchButtonClicked(_ sender: Any) {
         context.gameSetting.isRepeatOne = !context.gameSetting.isRepeatOne

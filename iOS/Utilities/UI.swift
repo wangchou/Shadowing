@@ -24,6 +24,19 @@ extension UIView {
     }
     #endif
 
+    var x0: CGFloat {
+        return frame.x
+    }
+    var x1: CGFloat {
+        return frame.x + frame.width
+    }
+    var y0: CGFloat {
+        return frame.y
+    }
+    var y1: CGFloat {
+        return frame.y + frame.height
+    }
+
     func roundBorder(borderWidth: CGFloat = 1.5, cornerRadius: CGFloat = 15, color: UIColor = .black) {
         layer.borderWidth = borderWidth
         layer.cornerRadius = cornerRadius
@@ -100,8 +113,12 @@ extension UIView {
     public func addTapGestureRecognizer(action: (() -> Void)?) {
         self.isUserInteractionEnabled = true
         self.tapGestureRecognizerAction = action
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
-        self.addGestureRecognizer(tapGestureRecognizer)
+        if let button = self as? UIButton {
+            button.addTarget(self, action: #selector(handleTapGesture), for: .touchUpInside)
+        } else {
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
+            self.addGestureRecognizer(tapGestureRecognizer)
+        }
     }
 
     // Every time the user taps on the UIImageView, this function gets called,
@@ -144,7 +161,7 @@ extension CGRect {
     var y: CGFloat {
         return origin.y
     }
-    
+
     var x: CGFloat {
         return origin.x
     }
@@ -168,6 +185,29 @@ extension UIApplication {
         }
 
         return presentViewController
+    }
+}
+
+enum ButtonStyle {
+    case darkOption
+    case darkAction
+}
+
+extension UIButton {
+    func setStyle(style: ButtonStyle, step: CGFloat = screen.width/48) {
+        self.roundBorder(borderWidth: 0.5, cornerRadius: step, color: .clear)
+        self.showsTouchWhenHighlighted = true
+        self.titleLabel?.textAlignment = .center
+        switch style {
+        case .darkOption:
+            self.tintColor = buttonForegroundGray
+            self.setTitleColor(buttonForegroundGray, for: .normal)
+            self.backgroundColor = buttonBackgroundGray
+        case .darkAction:
+            self.tintColor = buttonActionGray
+            self.setTitleColor(buttonActionGray, for: .normal)
+            self.backgroundColor = buttonActionBackgroundGray
+        }
     }
 }
 
@@ -312,6 +352,8 @@ func getVC(_ name: String) -> UIViewController {
         return MedalPage()
     case MedalSummaryPage.id:
         return MedalSummaryPage()
+    case MedalCorrectionPage.id:
+        return MedalCorrectionPage()
     default:
         return UIStoryboard(name: "Main", bundle: nil)
             .instantiateViewController(withIdentifier: name)
@@ -321,8 +363,8 @@ func getVC(_ name: String) -> UIViewController {
 func launchVC(
     _ vcName: String,
     _ originVC: UIViewController? = nil,
-    isOverCurrent: Bool = false,
-    animated: Bool = false,
+    isOverCurrent: Bool = true,
+    animated: Bool = true,
     completion: ((UIViewController) -> Void)? = nil
     ) {
     let vc = getVC(vcName)

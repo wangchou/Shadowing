@@ -23,6 +23,9 @@ enum EventType {
     case levelMeterUpdate
 
     case gameResume
+
+    // for medal correction page
+    case practiceSentenceCalculated
 }
 
 struct Event {

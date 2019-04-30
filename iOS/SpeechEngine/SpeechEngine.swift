@@ -14,6 +14,32 @@ import Promises
 private let context = GameContext.shared
 private let engine = SpeechEngine.shared
 
+enum RingTone: String {
+    case star = "/Library/Ringtones/Constellation.m4r"
+    case guitar = "/Library/Ringtones/Strum.m4r"
+    case minuet = "/System/Library/Audio/UISounds/New/Minuet.caf"
+    case timePassing = "/Library/Ringtones/Time Passing.m4r"
+    case depression = "/Library/Ringtones/Slow Rise.m4r"
+
+    var volume: Float {
+        switch self {
+        case .depression:
+            return 0.6
+        case .minuet:
+            return 0.6
+        case .timePassing:
+            return 0.25
+        default:
+            return 0.5
+        }
+    }
+
+//    case anticipate = "/System/Library/Audio/UISounds/New/Anticipate.caf"
+//    case silk = "/Library/Ringtones/Silk.m4r"
+//    case radiate = "/Library/Ringtones/Radiate.m4r"
+//    case nightOwl = "/Library/Ringtones/Night Owl.m4r"
+}
+
 // MARK: - SpeechEngine
 // A wrapper of AVAudioEngine, SpeechRecognizer and TTS
 class SpeechEngine {
@@ -22,9 +48,36 @@ class SpeechEngine {
 
     var isEngineRunning = false
     var audioEngine = AVAudioEngine()
+    private var audioPlayer: AVAudioPlayer?
+
+    func playRineTone(ringTone: RingTone) {
+        let fileURL: URL = URL(fileURLWithPath: ringTone.rawValue)
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: fileURL)
+            audioPlayer?.volume = 0
+            audioPlayer?.play()
+            audioPlayer?.setVolume(ringTone.volume, fadeDuration: 0.3)
+        } catch {
+            debugPrint("\(error)")
+        }
+    }
+
+    func stopRingTone(fadeDuration: TimeInterval = 2) {
+        if !isSimulator {
+            audioPlayer?.setVolume(0, fadeDuration: fadeDuration)
+        }
+    }
 
     private var speechRecognizer = SpeechRecognizer.shared
-    private var tts = TTS()
+
+    // two tts for preventing fullfill previous promise
+    private var tts: TTS {
+        return currentTTSIdx % 2 == 0 ? tts1 : tts2
+    }
+
+    private var currentTTSIdx = 0
+    private var tts1 = TTS()
+    private var tts2 = TTS()
 
     // MARK: - Public Funtions
     func start() {
@@ -47,7 +100,12 @@ class SpeechEngine {
 
     func stopListeningAndSpeaking() {
         speechRecognizer.endAudio()
-        tts.stop()
+        if tts1.synthesizer.isSpeaking {
+            tts1.stop()
+        }
+        if tts2.synthesizer.isSpeaking {
+            tts2.stop()
+        }
     }
 
     func monitoringOn() {
@@ -129,7 +187,7 @@ extension SpeechEngine {
             context.speakDuration = Float((getNow() - startTime))
             return fulfilledVoidPromise()
         }
-
+        currentTTSIdx += 1
         return tts.say(
             text,
             voiceId: speaker,
@@ -137,18 +195,18 @@ extension SpeechEngine {
             ).then(updateSpeakDuration)
     }
 }
-func speakTitle(title: String) -> Promise<Void> {
+func speakTitle() -> Promise<Void> {
+    let title = context.gameTitleToSpeak
     if context.gameMode == .topicMode {
         let voiceId = getDefaultVoiceId(language: "zh-TW")
         return engine.speak(text: title, speaker: voiceId, rate: normalRate)
     }
 
-    if gameLang == .jp {
+    if (gameLang == .jp && i18n.isJa) ||
+       (gameLang == .en && !(i18n.isZh || i18n.isJa)) {
         return teacherSay(title, rate: normalRate)
-    } else {
-        let voiceId = getDefaultVoiceId(language: "ja-JP")
-        return engine.speak(text: title, speaker: voiceId, rate: normalRate)
     }
+    return narratorSay(title)
 }
 func narratorSay(_ text: String) -> Promise<Void> {
     let currentLocale = AVSpeechSynthesisVoice.currentLanguageCode()

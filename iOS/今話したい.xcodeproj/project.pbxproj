@@ -17,6 +17,7 @@
 		BE221AA121A2A76D0009B23B /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE221AA021A2A76D0009B23B /* CircleView.swift */; };
 		BE2473A6226DDA2100EDFA5E /* MedalSummaryTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2473A5226DDA2100EDFA5E /* MedalSummaryTopView.swift */; };
 		BE28B2C221A3EAB600088214 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE28B2C121A3EAB500088214 /* Main.storyboard */; };
+		BE2B7AC522735B010063118A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B7AC422735B010063118A /* AudioToolbox.framework */; };
 		BE3260C821BF912D00A13C94 /* vocabulary1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260C721BF912D00A13C94 /* vocabulary1.swift */; };
 		BE3260CA21BFCF5E00A13C94 /* vocabulary2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260C921BFCF5E00A13C94 /* vocabulary2.swift */; };
 		BE439C6321DF3AF100C0BE14 /* grammarN4.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE439C6221DF3AF100C0BE14 /* grammarN4.swift */; };
@@ -31,6 +32,7 @@
 		BE5E0CCE2183477400832E88 /* I18n.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5E0CCD2183477400832E88 /* I18n.swift */; };
 		BE65A939209C6E67006645CA /* GameEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65A938209C6E67006645CA /* GameEvents.swift */; };
 		BE67D2A921561A93007FE420 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE67D2A821561A92007FE420 /* Assets.xcassets */; };
+		BE6B56A5227087C00009A28C /* MedalCorrectionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6B56A4227087C00009A28C /* MedalCorrectionPage.swift */; };
 		BE6BB6012225286C00BE3CAC /* TopicButtonAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6BB6002225286C00BE3CAC /* TopicButtonAreaView.swift */; };
 		BE6C78542165DD2B0072B1C5 /* GameReportBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6C78532165DD2B0072B1C5 /* GameReportBoxView.swift */; };
 		BE6EA1FD218B6BB4004749F5 /* GameLang.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6EA1FC218B6BB4004749F5 /* GameLang.swift */; };
@@ -151,6 +153,7 @@
 		BE221AA021A2A76D0009B23B /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		BE2473A5226DDA2100EDFA5E /* MedalSummaryTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalSummaryTopView.swift; sourceTree = "<group>"; };
 		BE28B2C121A3EAB500088214 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		BE2B7AC422735B010063118A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		BE3260C721BF912D00A13C94 /* vocabulary1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vocabulary1.swift; sourceTree = "<group>"; };
 		BE3260C921BFCF5E00A13C94 /* vocabulary2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vocabulary2.swift; sourceTree = "<group>"; };
 		BE439C6221DF3AF100C0BE14 /* grammarN4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = grammarN4.swift; sourceTree = "<group>"; };
@@ -165,6 +168,7 @@
 		BE5E0CCD2183477400832E88 /* I18n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = I18n.swift; sourceTree = "<group>"; };
 		BE65A938209C6E67006645CA /* GameEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEvents.swift; sourceTree = "<group>"; };
 		BE67D2A821561A92007FE420 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BE6B56A4227087C00009A28C /* MedalCorrectionPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalCorrectionPage.swift; sourceTree = "<group>"; };
 		BE6BB6002225286C00BE3CAC /* TopicButtonAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicButtonAreaView.swift; sourceTree = "<group>"; };
 		BE6C78532165DD2B0072B1C5 /* GameReportBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameReportBoxView.swift; sourceTree = "<group>"; };
 		BE6EA1FC218B6BB4004749F5 /* GameLang.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLang.swift; sourceTree = "<group>"; };
@@ -272,6 +276,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE2B7AC522735B010063118A /* AudioToolbox.framework in Frameworks */,
 				BED1BA4A2249FD6A009B68B6 /* Promises.framework in Frameworks */,
 				BE7AFAF721CA2DC900C41BF4 /* FirebaseCoreDiagnostics.framework in Frameworks */,
 				BED1BA4C2249FD6A009B68B6 /* Alamofire.framework in Frameworks */,
@@ -391,6 +396,7 @@
 		BE7E88B721AA768800B9355E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE2B7AC422735B010063118A /* AudioToolbox.framework */,
 				BE7AFADA21CA00EC00C41BF4 /* FIRAnalyticsConnector.framework */,
 				BE7AFAD321CA00EB00C41BF4 /* Firebase.framework */,
 				BE7AFAF221CA2DC900C41BF4 /* FIRAnalyticsConnector.framework */,
@@ -421,6 +427,7 @@
 				BEBF5D1D225624C50069C34F /* MedalGameFinishedPage.swift */,
 				BE82FE602269C5A900907388 /* MedalSummaryPage.swift */,
 				BE2473A5226DDA2100EDFA5E /* MedalSummaryTopView.swift */,
+				BE6B56A4227087C00009A28C /* MedalCorrectionPage.swift */,
 			);
 			path = MedalMode;
 			sourceTree = "<group>";
@@ -693,6 +700,7 @@
 				BE76F11E214F56F6004E130B /* SentencesTableCell.swift in Sources */,
 				BED1CC0921452A54004AE397 /* GameSetting.swift in Sources */,
 				BEF28B6320B52BF700385273 /* UI.swift in Sources */,
+				BE6B56A5227087C00009A28C /* MedalCorrectionPage.swift in Sources */,
 				BE65A939209C6E67006645CA /* GameEvents.swift in Sources */,
 				BEE3069021835230007C679F /* GameCommands.swift in Sources */,
 				BE6EA1FD218B6BB4004749F5 /* GameLang.swift in Sources */,
@@ -900,7 +908,7 @@
 				MACH_O_TYPE = mh_execute;
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				"OTHER_SWIFT_FLAGS[arch=*]" = "-Xfrontend -debug-time-function-bodies -Xfrontend -warn-long-expression-type-checking=300 -Xfrontend -warn-long-function-bodies=300";
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-Xfrontend -debug-time-function-bodies -Xfrontend -warn-long-expression-type-checking=300 -Xfrontend -warn-long-function-bodies=200";
 				PRODUCT_BUNDLE_IDENTIFIER = idv.wcl.imahanashitai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

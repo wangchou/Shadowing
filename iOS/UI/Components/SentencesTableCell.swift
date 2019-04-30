@@ -8,10 +8,13 @@
 
 import UIKit
 import Promises
+//import AudioToolbox
+//AudioServicesPlaySystemSound(1116)
 
 private let context = GameContext.shared
 
 class SentencesTableCell: UITableViewCell {
+    static var id = "ContentTableCell"
     static var isPracticing: Bool = false
     private var buttonColor = rgb(42, 163, 239)
     @IBOutlet weak var scoreLabel: UILabel!
@@ -28,7 +31,9 @@ class SentencesTableCell: UITableViewCell {
         practiceButton.setTitleColor(rgb(50, 50, 50), for: .normal)
         practiceButton.setTitleColor(.lightGray, for: .disabled)
 
-        self.addTapGestureRecognizer(action: practiceSentence)
+        addTapGestureRecognizer { [weak self] in
+            self?.practiceSentence()
+        }
     }
 
     private var startTime: Double = 0
@@ -68,10 +73,10 @@ class SentencesTableCell: UITableViewCell {
             .always {
                 self.isUserInteractionEnabled = true
                 self.practiceButton.isEnabled = true
-                self.practiceButton.backgroundColor = self.buttonColor
                 SentencesTableCell.isPracticing = false
                 TopicDetailPage.isChallengeButtonDisabled = false
                 SpeechEngine.shared.monitoringOff()
+                self.practiceButton.backgroundColor = self.buttonColor
             }
     }
 
@@ -87,14 +92,16 @@ class SentencesTableCell: UITableViewCell {
 
         var translationsDict = (gameLang == .jp && context.gameMode == .topicMode) ?
                             chTranslations : translations
+        var secondaryDict = (gameLang == .jp && context.gameMode == .topicMode) ?
+                            translations : chTranslations
 
-        if let translation = translationsDict[sentence] {
+        if let translation = (translationsDict[sentence] ?? secondaryDict[sentence]) {
             translationTextView.text = translation
         } else {
             translationTextView.text = ""
         }
 
-        if isShowTranslate, translationsDict[sentence] != nil {
+        if isShowTranslate && translationTextView.text != "" {
             sentenceLabel.alpha = 0
             translationTextView.alpha = 1
         } else {
@@ -115,7 +122,7 @@ class SentencesTableCell: UITableViewCell {
             userSaidSentenceLabel.backgroundColor = score.color
             userSaidSentenceLabel.isHidden = score.type == .perfect ? true : false
         } else {
-            scoreLabel.text = "無分"
+            scoreLabel.text = i18n.noScore
             scoreLabel.textColor = myGray
             userSaidSentenceLabel.isHidden = true
         }
@@ -126,38 +133,37 @@ class SentencesTableCell: UITableViewCell {
 extension SentencesTableCell {
     private func speakPart() -> Promise<Void> {
         startTime = getNow()
-        let promise = teacherSay(targetString, rate: context.gameSetting.practiceSpeed)
         prepareForSpeaking()
-        return promise
+        return teacherSay(targetString, rate: context.gameSetting.practiceSpeed)
     }
 
     private func prepareForSpeaking() {
         tableView?.beginUpdates()
         scoreLabel.text = ""
-        userSaidSentenceLabel.text = ""
         userSaidSentences[targetString] = ""
         sentenceScores[targetString] = nil
-        userSaidSentenceLabel.backgroundColor = UIColor.white
         userSaidSentenceLabel.isHidden = false
+        userSaidSentenceLabel.text = "listening..."
+        userSaidSentenceLabel.textColor = UIColor.white
+        userSaidSentenceLabel.backgroundColor = UIColor.white
         tableView?.endUpdates()
     }
 
     private func listenPart() -> Promise<String> {
         func prepareListening() {
             tableView?.beginUpdates()
-            userSaidSentenceLabel.text = "listening..."
             userSaidSentenceLabel.textColor = UIColor.red
             tableView?.endUpdates()
         }
 
         let duration = getNow() - startTime + Double(practicePauseDuration)
         prepareListening()
+        print("listen for \(targetString): ", duration)
         return SpeechEngine.shared.listen(duration: duration)
     }
 
     private func calculateScorePart(userSaidSentence: String) -> Promise<Score> {
         userSaidSentences[targetString] = userSaidSentence
-
         return calculateScore(targetString, userSaidSentence)
     }
 
@@ -177,7 +183,9 @@ extension SentencesTableCell {
         tableView?.endUpdates()
 
         sentenceScores[targetString] = score
+        postEvent(.practiceSentenceCalculated)
         saveGameMiscData()
-        return assisantSay(score.text)
+        _ = assisantSay(score.text)
+        return fulfilledVoidPromise()
     }
 }

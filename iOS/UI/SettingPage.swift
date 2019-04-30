@@ -27,6 +27,8 @@ class SettingPage: UITableViewController {
     @IBOutlet weak var practiceSpeedSlider: UISlider!
     @IBOutlet weak var learningModeLabel: UILabel!
 
+    @IBOutlet weak var showTranslationLabel: UILabel!
+    @IBOutlet weak var showTranslationSwitch: UISwitch!
     @IBOutlet weak var learningModeSegmentControl: UISegmentedControl!
     @IBOutlet weak var practiceSpeedFastLabel: UILabel!
     @IBOutlet weak var narratorLabel: UILabel!
@@ -82,6 +84,7 @@ class SettingPage: UITableViewController {
         topBarView.titleLabel.text = i18n.setting
         autoSpeedLabel.text = i18n.autoSpeedLabel
         narratorLabel.text = i18n.narratorLabel
+        showTranslationLabel.text = i18n.showTranslationLabel
         monitoringLabel.text = i18n.monitoringLabel
         wantToSayLabel.text = i18n.wantToSayLabel
 
@@ -120,6 +123,10 @@ class SettingPage: UITableViewController {
 
         narratorSwitch.isOn = setting.isUsingNarrator
         monitoringSwitch.isOn = setting.isMointoring
+        showTranslationSwitch.isOn = setting.isShowTranslation
+
+        showTranslationSwitch.isEnabled = context.gameSetting.learningMode != .interpretation
+        showTranslationLabel.textColor = context.gameSetting.learningMode != .interpretation ? .black : minorTextColor
 
         initLearningModeSegmentControl(label: learningModeLabel, control: learningModeSegmentControl)
     }
@@ -149,6 +156,11 @@ class SettingPage: UITableViewController {
     // game option group
     @IBAction func learningModeSegmentControlValueChanged(_ sender: Any) {
         actOnLearningModeSegmentControlValueChanged(control: learningModeSegmentControl)
+        render()
+    }
+    @IBAction func showTranslationSwitchValueChanged(_ sender: Any) {
+        context.gameSetting.isShowTranslation = showTranslationSwitch.isOn
+        saveGameSetting()
     }
     @IBAction func narratorSwitchValueChanged(_ sender: Any) {
         context.gameSetting.isUsingNarrator = narratorSwitch.isOn
@@ -225,19 +237,17 @@ class SettingPage: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 4 {
-            VoiceSelectionPage.voices = getAvailableVoice(prefix: gameLang.prefix)
-
             if indexPath.row == 0 { // teacher voice
-                VoiceSelectionPage.fromSettingPage = self
+                VoiceSelectionPage.fromPage = self
                 VoiceSelectionPage.selectingVoiceFor = .teacher
                 VoiceSelectionPage.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher)
             }
             if indexPath.row == 1 { // assistant voice
-                VoiceSelectionPage.fromSettingPage = self
+                VoiceSelectionPage.fromPage = self
                 VoiceSelectionPage.selectingVoiceFor = .assisant
                 VoiceSelectionPage.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.assisant)
             }
-            launchVC("VoiceSelectionViewController", self, isOverCurrent: true, animated: true)
+            launchVC(VoiceSelectionPage.id)
         }
     }
 }
@@ -255,6 +265,7 @@ func actOnLearningModeSegmentControlValueChanged(control: UISegmentedControl) {
     case .interpretation:
         context.gameSetting.isSpeakTranslation = true
         context.gameSetting.isUsingGuideVoice = false
+        context.gameSetting.isShowTranslation = false
     }
     saveGameSetting()
 }

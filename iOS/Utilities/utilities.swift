@@ -4,7 +4,7 @@
 //
 //  Created by Wangchou Lu on H30/04/16.
 //  Copyright © 平成30年 Lu, WangChou. All rights reserved.
-//
+// swiftlint:disable file_length
 
 import Foundation
 import AVFoundation
@@ -304,6 +304,15 @@ func getRecordsByDate() -> [String: [GameRecord]] {
     return recordsByDate
 }
 
+func getAllSentencesCount() -> Int {
+    guard !GameContext.shared.gameHistory.isEmpty || isSimulator else { return 0 }
+    var sentenceCount = 0
+    GameContext.shared.gameHistory.forEach { r in
+        sentenceCount += r.sentencesCount
+    }
+    return sentenceCount
+}
+
 // [Today's correct sentence count, Yesterday's, ...]
 func getSentenceCountsByDays() -> [Int] {
     let calendar = Calendar.current
@@ -472,3 +481,5 @@ func isUnderDailySentenceLimit() -> Bool {
     return false
 }
 #endif
+
+// swiftlint:enable file_length 

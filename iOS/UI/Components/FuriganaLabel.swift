@@ -3,8 +3,9 @@ import UIKit
 
 class FuriganaLabel: UILabel {
     private var height: CGFloat = 60
-    private var topShift: CGFloat {
-        return 6 + (text?.jpnType == JpnType.noKanjiAndNumber ? 5 : 0)
+    private var topShift: CGFloat { return 6 }
+    private var topTranslateY: CGFloat {
+        return text?.jpnType == JpnType.noKanjiAndNumber ? 5 : 0
     }
     var widthPadding: CGFloat = 7
 
@@ -45,7 +46,7 @@ class FuriganaLabel: UILabel {
         let frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, attributed.length), path, nil)
 
         context.textMatrix = CGAffineTransform.identity
-        context.translateBy(x: 0 + widthPadding, y: rect.height + topShift)
+        context.translateBy(x: 0 + widthPadding, y: rect.height + topShift + topTranslateY)
         context.scaleBy(x: 1.0, y: -1.0)
 
         CTFrameDraw(frame, context)
@@ -56,8 +57,8 @@ class FuriganaLabel: UILabel {
         var height = CGFloat()
 
         let textDrawRect = CGRect(
-            x: self.frame.x,
-            y: self.frame.y,
+            x: self.x0,
+            y: self.y0,
             width: width - widthPadding * 2,
             height: CGFloat.greatestFiniteMagnitude
         )
@@ -75,7 +76,7 @@ class FuriganaLabel: UILabel {
             height += ceil(ascent + leading)
         }
 
-        return height + topShift
+        return height + topShift + topTranslateY
     }
 
     // sizeToFit on width
@@ -86,8 +87,8 @@ class FuriganaLabel: UILabel {
         let framesetter = CTFramesetterCreateWithAttributedString(attributed)
         repeat {
             let textDrawRect = CGRect(
-                x: self.frame.x,
-                y: self.frame.y,
+                x: self.x0,
+                y: self.y0,
                 width: width - widthPadding * 2,
                 height: CGFloat.greatestFiniteMagnitude
             )
