@@ -10,7 +10,6 @@
 import UIKit
 
 class InfiniteChallengeSwipablePage: UIPageViewController {
-    static let storyboardId = "InfiniteChallengeSwipablePage"
     static var initialIdx = 1
     var pages = [UIViewController]()
 

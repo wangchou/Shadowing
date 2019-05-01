@@ -10,17 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
-        <scene sceneID="TzX-cI-iSf">
-            <objects>
-                <pageViewController storyboardIdentifier="MainSwipablePage" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="lQ2-QP-0IK" customClass="TopicSwipablePage" customModule="今話したい" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="nUx-eL-rmC"/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                </pageViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RP1-kY-iV3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1056" y="-1372"/>
-        </scene>
         <!--Infinite Challenge List Page-->
         <scene sceneID="29i-x1-ECm">
             <objects>
@@ -796,7 +785,7 @@ A: 作者的經驗，通常是</string>
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <mutableString key="content">，來把音訊傳給Apple辨識。
+                                        <string key="content">，來把音訊傳給Apple辨識。
 
 =&gt; 如果到 Apple 的網路不順，他們收到的就是很多雜訊的聲音，就會亂聽。 
 另外，如果是音量的問題用 iPhone 附的有線耳麥會好很多。
@@ -817,7 +806,7 @@ Lv.2 (50~100徽章)：平均正確率 &gt; 60%，就會持續上升。
 ...
 Lv.10 (450~500徽章)：平均正確率 &gt; 80%，就會持續上升。
 
-</mutableString>
+</string>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="18" name="PingFangTC-Regular"/>
@@ -911,7 +900,7 @@ Ruth Yuru Chen
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v0w-0j-HYO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1935" y="-53"/>
+            <point key="canvasLocation" x="-1433" y="-169"/>
         </scene>
         <!--Voice Selection Page-->
         <scene sceneID="iq6-1W-dSb">
@@ -1094,18 +1083,7 @@ Ruth Yuru Chen
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6h5-lK-YIB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-355.07246376811599" y="-169.41964285714286"/>
-        </scene>
-        <!--Item-->
-        <scene sceneID="dx9-ut-S3b">
-            <objects>
-                <pageViewController storyboardIdentifier="InfiniteChallengeSwipablePage" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="CDZ-8D-otl" customClass="InfiniteChallengeSwipablePage" customModule="今話したい" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="BSg-iO-gLd"/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                </pageViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VFx-Gb-c8K" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1058" y="-597"/>
+            <point key="canvasLocation" x="-678" y="-169"/>
         </scene>
         <!--Setting Page-->
         <scene sceneID="OMK-qr-MRE">
@@ -1565,7 +1543,7 @@ Ruth Yuru Chen
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZDf-IZ-WMA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-354.375" y="-852.46478873239437"/>
+            <point key="canvasLocation" x="-678" y="-852"/>
         </scene>
         <!--Topics List Page-->
         <scene sceneID="tne-QT-ifu">
@@ -2444,7 +2422,7 @@ Ruth Yuru Chen
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="72U-ci-rWN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2631" y="-852"/>
+            <point key="canvasLocation" x="-1432" y="-852"/>
         </scene>
     </scenes>
     <resources>

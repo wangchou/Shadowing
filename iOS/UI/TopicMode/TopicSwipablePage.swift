@@ -10,7 +10,6 @@
 import UIKit
 
 class TopicSwipablePage: UIPageViewController {
-    static let storyboardId = "MainSwipablePage"
     static var initialIdx = 1
     var pages = [UIViewController]()
 

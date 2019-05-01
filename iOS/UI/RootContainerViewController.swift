@@ -24,8 +24,8 @@ class RootContainerViewController: UIViewController {
 
         // swiftlint:disable force_cast
         splashScreen = (getVC("LaunchScreen") as! SplashScreenViewController)
-        topicSwipablePage = (getVC(TopicSwipablePage.storyboardId) as! TopicSwipablePage)
-        infiniteChallengeSwipablePage = (getVC(InfiniteChallengeSwipablePage.storyboardId) as! InfiniteChallengeSwipablePage)
+        topicSwipablePage = TopicSwipablePage(transitionStyle: .scroll, navigationOrientation: .horizontal)
+        infiniteChallengeSwipablePage = InfiniteChallengeSwipablePage(transitionStyle: .scroll, navigationOrientation: .horizontal)
         // swiftlint:enable force_cast
 
         current = splashScreen
