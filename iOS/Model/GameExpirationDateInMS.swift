@@ -6,15 +6,18 @@
 //  Copyright © 30 Heisei Lu, WangChou. All rights reserved.
 //
 import Foundation
+
+// Global
+var gameExpirationDate: Date = Date(ms: 0)
+var isEverReceiptProcessed: Bool = false
+
+// MARK: - Save/Load
 private let gameExpirationDateKey = "gameExpirationDateKey"
 
 private struct ExpirationDateForEncode: Codable {
     var date: Date
     var isEverReceiptProcessed: Bool
 }
-
-var gameExpirationDate: Date = Date(ms: 0)
-var isEverReceiptProcessed: Bool = false
 func saveGameExpirationDate() {
     let date: ExpirationDateForEncode = ExpirationDateForEncode(date: gameExpirationDate,
                                                                 isEverReceiptProcessed: isEverReceiptProcessed)

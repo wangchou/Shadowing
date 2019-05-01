@@ -15,13 +15,10 @@ enum EventType {
     case speakEnded
     case listenStarted
     case listenStopped
-
     case scoreCalculated
     case gameStateChanged
-
     case playTimeUpdate
     case levelMeterUpdate
-
     case gameResume
 
     // for medal correction page

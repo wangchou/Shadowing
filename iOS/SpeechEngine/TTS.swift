@@ -15,7 +15,7 @@ enum TTSError: Error {
     case TTSStop
 }
 
-class TTS: NSObject, AVSpeechSynthesizerDelegate {
+class TTS: NSObject {
     var synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
     var promise = Promise<Void>.pending()
     var targetLanguage: String {
@@ -27,11 +27,10 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         }
     }
 
-    func say(
-        _ text: String,
-        voiceId: String,
-        rate: Float = AVSpeechUtteranceDefaultSpeechRate // 0.5, range 0 ~ 1.0
-        ) -> Promise<Void> {
+    func say(_ text: String,
+             voiceId: String,
+             rate: Float = AVSpeechUtteranceDefaultSpeechRate // 0.5, range 0 ~ 1.0
+            ) -> Promise<Void> {
         SpeechEngine.shared.stopListeningAndSpeaking()
         synthesizer.delegate = self
         let utterance = AVSpeechUtterance(string: getFixedKanaForTTS(text))
@@ -58,21 +57,18 @@ class TTS: NSObject, AVSpeechSynthesizerDelegate {
         synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
         promise.fulfill(())
     }
+}
 
-    func speechSynthesizer(
-        _ synthesizer: AVSpeechSynthesizer,
-        didFinish utterance: AVSpeechUtterance
-        ) {
+extension TTS: AVSpeechSynthesizerDelegate {
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
+                           didFinish utterance: AVSpeechUtterance) {
         postEvent(.speakEnded)
         promise.fulfill(())
     }
 
-    func speechSynthesizer(
-        _ synthesizer: AVSpeechSynthesizer,
-        willSpeakRangeOfSpeechString characterRange: NSRange,
-        utterance: AVSpeechUtterance) {
-        //print(Date().timeIntervalSince1970, characterRange, utterance.speechString, utterance.speechString.substring(with: characterRange)?.s)
-
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
+                           willSpeakRangeOfSpeechString characterRange: NSRange,
+                           utterance: AVSpeechUtterance) {
         postEvent(.willSpeakRange, range: characterRange)
     }
 }

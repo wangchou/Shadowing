@@ -8,18 +8,9 @@
 
 import Foundation
 
-private let medalCountKey = "medal Count key"
-private var medalCount: [Lang: Int] = [:]
-
-func saveMedalCount() {
-    saveToUserDefault(object: medalCount, key: medalCountKey)
-}
-
-func loadMedalCount() {
-    easyLoad(object: &medalCount, key: medalCountKey)
-}
-
 let medalsPerLevel = 50
+
+private var medalCount: [Lang: Int] = [:]
 
 struct GameMedal {
     var totalCount: Int {
@@ -79,3 +70,14 @@ private let medalUpdateByLevelAndRank: [[Rank: Int]] = [
     [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  2, .b:  0, .cP: -2, .c: -4, .d: -6, .e:  -8, .f: -10]  // lv10
 ]
 // swiftlint:enable colon
+
+// MARK: Save/Load
+private let medalCountKey = "medal Count key"
+
+func saveMedalCount() {
+    saveToUserDefault(object: medalCount, key: medalCountKey)
+}
+
+func loadMedalCount() {
+    easyLoad(object: &medalCount, key: medalCountKey)
+}

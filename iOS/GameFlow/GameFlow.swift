@@ -15,16 +15,11 @@ enum GameError: Error {
 
 enum GameState {
     case justStarted
-
     case speakingTranslation
-
     case speakingTargetString
-
     case echoMethod
-
     case listening
     case scoreCalculated
-
     case gameOver
 }
 
@@ -85,7 +80,7 @@ class GameFlow {
     // Flow for learn a sentence
     private func learnNextSentence() {
         // Click skipNext  => stop previous game's promise chain
-        if self.isNeedToStopPromiseChain {
+        if isNeedToStopPromiseChain {
             isNeedToStopPromiseChain = false
             return
         }

@@ -119,7 +119,7 @@ extension TopicsListPage: UITableViewDataSource {
         contentCell.rankTitleLabel.text = i18n.rank
         contentCell.completeTitleLabel.text = i18n.completeness
         contentCell.titleLabel.attributedText = attrStr
-        let record = findBestRecord(key: dataSetKey)
+        let record = findBestRecord(dataSetKey: dataSetKey)
         contentCell.strockedProgressText = record?.progress
         contentCell.strockedRankText = record?.rank.rawValue
 

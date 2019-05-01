@@ -55,7 +55,7 @@ class InfiniteChallengePage: UIViewController {
         guard level != .lv0 else { blockView.isHidden = true; return }
 
         let lastLevel = allLevels[(allLevels.firstIndex(of: level) ?? 0) - 1]
-        if let lastLevelBestRecord = findBestRecord(key: lastLevel.infinteChallengeDatasetKey),
+        if let lastLevelBestRecord = findBestRecord(dataSetKey: lastLevel.infinteChallengeDatasetKey),
            lastLevelBestRecord.p >= lastLevel.lockPercentage {
             blockView.isHidden = true
         }

@@ -9,51 +9,10 @@
 import Foundation
 import AVFoundation
 
-private let gameSettingKey = "GameSettingKey"
 private let context = GameContext.shared
 
-func saveGameSetting() {
-   saveToUserDefault(object: context.gameSetting, key: gameSettingKey + gameLang.key)
-   saveIsRepeatOne()
-}
-
-func loadGameSetting() {
-    if let gameSetting = loadFromUserDefault(type: GameSetting.self, key: gameSettingKey + gameLang.key) {
-        context.gameSetting = gameSetting
-    } else {
-        print("[\(gameLang)] create new gameSetting")
-        context.gameSetting = GameSetting()
-        let langCode = gameLang == .jp ? "ja-JP" : "en-US"
-
-        if gameLang == .jp {
-            context.gameSetting.teacher = getDefaultVoiceId(language: langCode)
-            context.gameSetting.assisant = getDefaultVoiceId(language: langCode, isPreferMaleSiri: false)
-        } else {
-            context.gameSetting.teacher = getDefaultVoiceId(language: langCode, isPreferMaleSiri: false)
-            context.gameSetting.assisant = getDefaultVoiceId(language: langCode)
-        }
-        print(context.gameSetting.teacher, context.gameSetting.assisant)
-    }
-    loadIsRepeatOne()
-}
-
-func getDefaultVoiceId(language: String, isPreferMaleSiri: Bool = true, isPreferEnhanced: Bool = true) -> String {
-    var bestVoiceId = ""
-
-    let voices = getAvailableVoice(language: language).sorted { v1, v2 in
-        if v2.identifier.range(of: isPreferMaleSiri ? "siri_male" : "siri_female") != nil { return true}
-        if v1.identifier.range(of: isPreferMaleSiri ? "siri_male" : "siri_female") != nil { return false}
-        if v2.identifier.range(of: "siri") != nil { return true}
-        if v1.identifier.range(of: "siri") != nil { return false}
-        if v2.quality == .enhanced { return isPreferEnhanced ? true : false}
-        if v1.quality == .enhanced { return isPreferEnhanced ? false : true}
-        return v1.identifier < v2.identifier
-    }
-    guard !voices.isEmpty else { return AVSpeechSynthesisVoice(language: language)!.identifier }
-    bestVoiceId = voices.last!.identifier
-
-    return bestVoiceId
-}
+// Newly add settings
+private var globalIsRepeatOne: Bool = false
 
 struct GameSetting: Codable {
     var isAutoSpeed: Bool = true
@@ -97,9 +56,8 @@ enum LearningMode: Int, Codable {
     case interpretation = 3
 }
 
-// MARK: New Dynamic Settings
+// MARK: - Save/Load for one Bool
 private let isRepeatOneKey = "RepeatOneKey"
-private var globalIsRepeatOne: Bool = false
 
 // https://stackoverflow.com/questions/44580719/how-do-i-make-an-enum-decodable-in-swift-4
 private struct IsRepeatOneForEncode: Codable {
@@ -115,4 +73,50 @@ func loadIsRepeatOne() {
     if let loadedObj = loadFromUserDefault(type: IsRepeatOneForEncode.self, key: isRepeatOneKey) {
         globalIsRepeatOne = loadedObj.isRepeatOne
     }
+}
+
+// MARK: - save and load
+private let gameSettingKey = "GameSettingKey"
+
+func saveGameSetting() {
+    saveToUserDefault(object: context.gameSetting, key: gameSettingKey + gameLang.key)
+    saveIsRepeatOne()
+}
+
+func loadGameSetting() {
+    if let gameSetting = loadFromUserDefault(type: GameSetting.self, key: gameSettingKey + gameLang.key) {
+        context.gameSetting = gameSetting
+    } else {
+        print("[\(gameLang)] create new gameSetting")
+        context.gameSetting = GameSetting()
+        let langCode = gameLang == .jp ? "ja-JP" : "en-US"
+
+        if gameLang == .jp {
+            context.gameSetting.teacher = getDefaultVoiceId(language: langCode)
+            context.gameSetting.assisant = getDefaultVoiceId(language: langCode, isPreferMaleSiri: false)
+        } else {
+            context.gameSetting.teacher = getDefaultVoiceId(language: langCode, isPreferMaleSiri: false)
+            context.gameSetting.assisant = getDefaultVoiceId(language: langCode)
+        }
+        print(context.gameSetting.teacher, context.gameSetting.assisant)
+    }
+    loadIsRepeatOne()
+}
+
+func getDefaultVoiceId(language: String, isPreferMaleSiri: Bool = true, isPreferEnhanced: Bool = true) -> String {
+    var bestVoiceId = ""
+
+    let voices = getAvailableVoice(language: language).sorted { v1, v2 in
+        if v2.identifier.range(of: isPreferMaleSiri ? "siri_male" : "siri_female") != nil { return true}
+        if v1.identifier.range(of: isPreferMaleSiri ? "siri_male" : "siri_female") != nil { return false}
+        if v2.identifier.range(of: "siri") != nil { return true}
+        if v1.identifier.range(of: "siri") != nil { return false}
+        if v2.quality == .enhanced { return isPreferEnhanced ? true : false}
+        if v1.quality == .enhanced { return isPreferEnhanced ? false : true}
+        return v1.identifier < v2.identifier
+    }
+    guard !voices.isEmpty else { return AVSpeechSynthesisVoice(language: language)!.identifier }
+    bestVoiceId = voices.last!.identifier
+
+    return bestVoiceId
 }

@@ -151,6 +151,7 @@ extension SpeechEngine {
             ).then(updateSpeakDuration)
     }
 }
+
 func speakTitle() -> Promise<Void> {
     let title = context.gameTitleToSpeak
     if context.gameMode == .topicMode {
@@ -164,6 +165,7 @@ func speakTitle() -> Promise<Void> {
     }
     return narratorSay(title)
 }
+
 func narratorSay(_ text: String) -> Promise<Void> {
     let currentLocale = AVSpeechSynthesisVoice.currentLanguageCode()
     var voiceId = "unknown"

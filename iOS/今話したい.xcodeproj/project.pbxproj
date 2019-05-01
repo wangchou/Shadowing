@@ -516,13 +516,13 @@
 		BEDEDD4220A5D86500E7B60B /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				BE2951112155F51A008239F9 /* GameUI */,
 				BE28B2C121A3EAB500088214 /* Main.storyboard */,
+				BE2951132155F5D0008239F9 /* Components */,
+				BE2951112155F51A008239F9 /* GameUI */,
+				BEC2E92E217875C30095A65D /* RootContainerViewController.swift */,
 				BEC1EB5B225B026A003DD265 /* SplashScreenViewController.swift */,
 				BE5ABAC8217B703500A63C5F /* InfoPage.swift */,
-				BEC2E92E217875C30095A65D /* RootContainerViewController.swift */,
 				BE82FE5F2269C58D00907388 /* MedalMode */,
-				BE2951132155F5D0008239F9 /* Components */,
 				BECD9079219D28C300400FD3 /* SettingPage */,
 				BE29510F2155F4F7008239F9 /* TopicMode */,
 				BECAC3BD216B9CDF001BBF49 /* InfiniteChanllengeMode */,

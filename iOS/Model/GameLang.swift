@@ -8,48 +8,11 @@
 
 import Foundation
 
-private let gameLangKey = "GameLangKey 2018/11/23"
-
-// https://stackoverflow.com/questions/44580719/how-do-i-make-an-enum-decodable-in-swift-4
-private struct LangForEncode: Codable {
-    var lang: Lang
-}
-
-func changeGameLangTo(lang: Lang) {
-    gameLang = lang
-    saveGameLang()
-    loadGameSetting()
-
-    DispatchQueue.global().async {
-        loadGameMiscData()
-    }
-
-    DispatchQueue.main.async {
-        if gameLang == .en {
-            GameContext.shared.bottomTab = .infiniteChallenge
-            rootViewController.showInfiniteChallengePage(idx: 1)
-        }
-        rootViewController.reloadTableData()
-        rootViewController.rerenderTopView(updateByRecords: true)
-    }
-}
-
-func saveGameLang() {
-    let lang: LangForEncode = LangForEncode(lang: gameLang)
-    saveToUserDefault(object: lang, key: gameLangKey)
-}
-
-func loadGameLang() {
-    if let loadedGameLang = loadFromUserDefault(type: LangForEncode.self, key: gameLangKey) {
-        gameLang = loadedGameLang.lang
-        if gameLang != .jp {
-            GameContext.shared.bottomTab = .infiniteChallenge
-        }
-    }
-}
-
+// Global
 var jaSentenceInfos: [Int: SentenceInfo] = [:]
 var enSentenceInfos: [Int: SentenceInfo] = [:]
+
+var gameLang: Lang = Lang.jp
 
 enum Lang: Int, Codable {
     case jp, en, unset
@@ -87,4 +50,42 @@ enum Lang: Int, Codable {
     }
 }
 
-var gameLang: Lang = Lang.jp
+// https://stackoverflow.com/questions/44580719/how-do-i-make-an-enum-decodable-in-swift-4
+private let gameLangKey = "GameLangKey 2018/11/23"
+
+private struct LangForEncode: Codable {
+    var lang: Lang
+}
+
+func saveGameLang() {
+    let lang: LangForEncode = LangForEncode(lang: gameLang)
+    saveToUserDefault(object: lang, key: gameLangKey)
+}
+
+func loadGameLang() {
+    if let loadedGameLang = loadFromUserDefault(type: LangForEncode.self, key: gameLangKey) {
+        gameLang = loadedGameLang.lang
+        if gameLang != .jp {
+            GameContext.shared.bottomTab = .infiniteChallenge
+        }
+    }
+}
+
+func changeGameLangTo(lang: Lang) {
+    gameLang = lang
+    saveGameLang()
+    loadGameSetting()
+
+    DispatchQueue.global().async {
+        loadGameMiscData()
+    }
+
+    DispatchQueue.main.async {
+        if gameLang == .en {
+            GameContext.shared.bottomTab = .infiniteChallenge
+            rootViewController.showInfiniteChallengePage(idx: 1)
+        }
+        rootViewController.reloadTableData()
+        rootViewController.rerenderTopView(updateByRecords: true)
+    }
+}

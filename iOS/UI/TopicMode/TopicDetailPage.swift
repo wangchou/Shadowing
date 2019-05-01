@@ -64,7 +64,7 @@ class TopicDetailPage: UIViewController {
         peekButton.setTitle(i18n.chineseOrJapanese, for: .normal)
         peekButton.titleLabel?.font = getBottomButtonFont()
 
-        if let gameRecord = findBestRecord(key: context.dataSetKey) {
+        if let gameRecord = findBestRecord(dataSetKey: context.dataSetKey) {
             rankLabel.attributedText = getRankAttrText(rank: gameRecord.rank.rawValue, color: gameRecord.rank.color)
 
             progressLabel.attributedText = getProgressAttrText(progress: gameRecord.progress)

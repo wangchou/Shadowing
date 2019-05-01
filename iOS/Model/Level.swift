@@ -27,7 +27,7 @@ private let enTitles = ["Level 1", "Level 2", "Level 3", "Level 4",
 let allLevels: [Level] = [.lv0, .lv1, .lv2, .lv3, .lv4, .lv5, .lv6, .lv7, .lv8, .lv9]
 
 enum Level: Int, Codable {
-    case lv0=0, lv1=1, lv2=2, lv3=3, lv4=4, lv5=5, lv6=6, lv7=7, lv8=8, lv9=9
+    case lv0, lv1, lv2, lv3, lv4, lv5, lv6, lv7, lv8, lv9
 
     init(medalCount: Int) {
         let lvl = medalCount / medalsPerLevel
@@ -35,7 +35,7 @@ enum Level: Int, Codable {
     }
 
     init(avgSyllablesCount: Float) {
-        for i in 0..<allLevels.count where avgSyllablesCount < (allLevels[i].maxSyllablesCount.f + 1) {
+        for i in 0 ..< allLevels.count where avgSyllablesCount < (allLevels[i].maxSyllablesCount.f + 1) {
             self = allLevels[i]
             return
         }
@@ -98,11 +98,11 @@ enum Level: Int, Codable {
     }
 
     var bestInfinteChallengeRank: String? {
-        return findBestRecord(key: self.infinteChallengeDatasetKey)?.rank.rawValue
+        return findBestRecord(dataSetKey: self.infinteChallengeDatasetKey)?.rank.rawValue
     }
 
     var bestInfinteChallengeProgress: String? {
-        return findBestRecord(key: self.infinteChallengeDatasetKey)?.progress
+        return findBestRecord(dataSetKey: self.infinteChallengeDatasetKey)?.progress
     }
 
     var autoSpeed: Float {
