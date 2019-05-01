@@ -101,7 +101,6 @@ class GameFlow {
                     self.isNeedToStopPromiseChain = false
                     return
                 }
-
                 if context.nextSentence() {
                     self.learnNextSentence()
                 } else {
