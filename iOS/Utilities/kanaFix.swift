@@ -37,7 +37,8 @@ let ttsKanaFix: [String: String] = [
     "博士": "はかせ",
     "私立学校": "しりつ学校",
     "強すぎ": "つよすぎ",
-    "何と": "なんと"
+    "何と": "なんと",
+    "弾いて": "ひいて"
 ]
 
 func getFixedKanaForTTS(_ text: String) -> String {
