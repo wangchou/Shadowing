@@ -241,6 +241,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
     }
 
     @objc func onCloseButtonClicked() {
+        rootViewController.updateWhenEnterForeground()
         dismissVC()
     }
 

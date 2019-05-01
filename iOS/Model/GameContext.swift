@@ -212,6 +212,13 @@ extension GameContext {
     }
 
     func loadMedalCorrectionSentence() {
+
+        sentences = Array(getTodaySentenceSet()).sorted {
+            return (sentenceScores[$0]?.value ?? 0) < (sentenceScores[$1]?.value ?? 0)
+        }
+    }
+
+    private func getTodaySentenceSet() -> Set<String> {
         var sentencesSet: Set<String> = []
         let todayKey = getDateKey(date: Date())
         for r in GameContext.shared.gameHistory {
@@ -221,9 +228,17 @@ extension GameContext {
                 }
             }
         }
-        sentences = Array(sentencesSet).sorted {
-            return (sentenceScores[$0]?.value ?? 0) < (sentenceScores[$1]?.value ?? 0)
+        return sentencesSet
+    }
+    func getMissedCount() -> Int {
+        var missedCount = 0
+        getTodaySentenceSet().forEach { str in
+            let score = sentenceScores[str]?.value ?? 0
+            if score < 60 {
+                missedCount += 1
+            }
         }
+        return missedCount
     }
 
     func nextSentence() -> Bool {

@@ -195,6 +195,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
             context.loadMedalCorrectionSentence()
             launchVC(MedalCorrectionPage.id)
         }
+        addMissCountBubble(buttonY: buttonY)
 
         if i18n.isZh {
             let x = isIPad ? 18 : 39
@@ -202,6 +203,24 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
                       x, buttonY, 7, 7) {
                 launchVC("InfoPage")
             }
+        }
+    }
+
+    private func addMissCountBubble(buttonY: Int) {
+        let missedCount = context.getMissedCount()
+        if missedCount > 0 {
+            let w = missedCount >= 100 ? 7 :
+                   (missedCount >= 10 ? 5 : 4)
+            let y = missedCount >= 100 ? (buttonY - 2) : (buttonY - 1)
+            let circle = addRect(x: 19-w, y: y, w: w, h: 4, color: .red)
+            circle.roundBorder(borderWidth: step/4, cornerRadius: circle.frame.height/2, color: .black)
+            let missedText = getStrokeText("\(missedCount)", .white,
+                                           strokeWidth: -2, strokColor: .black,
+                                           font: MyFont.heavyDigit(ofSize: step * 2.4))
+            let label = addAttrText(x: 0, y: 0, h: 3,
+                                    text: missedText)
+            label.sizeToFit()
+            label.centerIn(circle.frame)
         }
     }
 }
@@ -226,7 +245,7 @@ extension GridLayout where Self: UIView {
                            textColor: UIColor = textGold,
                            useGameSentences: Bool = false) {
         backgroundColor = bgColor
-        //if isSimulator { return }
+        if isSimulator { return }
         let num = Int(sqrt(pow(frame.width, 2) + pow(frame.height, 2)) / step)/8
         let level = context.gameMedal.lowLevel
         func getGameSentences() -> [String] {
