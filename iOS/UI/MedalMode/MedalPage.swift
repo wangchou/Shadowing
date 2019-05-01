@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Promises
 import UIKit
 
 private let context = GameContext.shared
@@ -195,8 +196,10 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
             context.loadMedalCorrectionSentence()
             launchVC(MedalCorrectionPage.id)
         }
-        addMissCountBubble(buttonY: buttonY)
 
+        waitSentenceScoresLoaded.then { _ in
+            self.addMissCountBubble(buttonY: buttonY)
+        }
         if i18n.isZh {
             let x = isIPad ? 18 : 39
             addButton(iconName: "outline_info_black_\(iconSize)",

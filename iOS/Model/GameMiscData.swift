@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Promises
 
 private let context = GameContext.shared
 
@@ -47,7 +48,10 @@ func easyLoad<T: Codable>(object: inout T, key: String) {
     // swiftlint:enable force_cast
 }
 
+var waitSentenceScoresLoaded = fulfilledVoidPromise()
+
 func loadGameMiscData(isLoadKana: Bool = false, isAsync: Bool = false) {
+    waitSentenceScoresLoaded = Promise<Void>.pending()
     if isAsync {
         DispatchQueue.global().async {
             easyLoad(object: &translations, key: translationsKey + gameLang.key)
@@ -57,6 +61,7 @@ func loadGameMiscData(isLoadKana: Bool = false, isAsync: Bool = false) {
         }
         DispatchQueue.global().async {
             easyLoad(object: &sentenceScores, key: sentenceScoreKey  + gameLang.key)
+            waitSentenceScoresLoaded.fulfill(())
         }
         DispatchQueue.global().async {
             easyLoad(object: &lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Promises
 
 private let context = GameContext.shared
 
@@ -90,14 +91,12 @@ func saveGameHistory() {
 
 func loadGameHistory() {
     if let gameHistory = loadFromUserDefault(type: [GameRecord].self, key: gameHistoryKey + Lang.jp.key) {
-
         jpHistory = gameHistory
     } else {
         print("[\(gameLang)] create new gameHistory")
         jpHistory = [GameRecord]()
     }
     if let gameHistory = loadFromUserDefault(type: [GameRecord].self, key: gameHistoryKey + Lang.en.key) {
-
         enHistory = gameHistory
     } else {
         print("[\(gameLang)] create new gameHistory")

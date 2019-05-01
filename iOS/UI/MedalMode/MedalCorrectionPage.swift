@@ -78,9 +78,11 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
 
     func viewWillAppear() {
         removeAllSubviews()
-        renderTopView()
-        addBottomTable()
-        addBottomButtons()
+        waitSentenceScoresLoaded.then { [weak self] _ in
+            self?.renderTopView()
+            self?.addBottomTable()
+            self?.addBottomButtons()
+        }
     }
 
     func renderTopView() {
