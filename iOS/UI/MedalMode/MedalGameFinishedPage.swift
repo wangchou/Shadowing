@@ -207,22 +207,21 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     }
 
     private func addActionButtons(y: Int) {
-        let button = createButton(title: "", bgColor: .red)
-        let countDownSecs = 5
-        button.setIconImage(named: "baseline_play_arrow_black_48pt",
-                            title: " \(i18n.nextGame) (\(countDownSecs)\(i18n.secs))",
-                            tintColor: .white,
-                            isIconOnLeft: true)
-        button.titleLabel?.font = MyFont.regular(ofSize: step * 3.2 )
-        button.addTapGestureRecognizer {
+        let button = addButton(title: "", bgColor: .red) {
             SpeechEngine.shared.stopListeningAndSpeaking()
             dismissTwoVC(animated: false) {
                 launchNextGame()
             }
         }
 
+        let countDownSecs = 5
+        button.setIconImage(named: "baseline_play_arrow_black_48pt",
+                            title: " \(i18n.nextGame) (\(countDownSecs)\(i18n.secs))",
+                            tintColor: .white,
+                            isIconOnLeft: true)
+        button.titleLabel?.font = MyFont.regular(ofSize: step * 3.2 )
+
         layout(3, y, 32, 8, button)
-        addSubview(button)
         playButton = button
 
         var leftSeconds = countDownSecs
@@ -242,15 +241,13 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
             }
         }
 
-        let backButton = createButton(title: "", bgColor: .lightGray)
-        backButton.setIconImage(named: "baseline_exit_to_app_black_48pt", title: "", tintColor: .white, isIconOnLeft: false)
-
-        backButton.addTapGestureRecognizer {
+        let backButton = addButton(title: "", bgColor: .lightGray) {
             countDownTimer?.invalidate()
             dismissTwoVC()
         }
 
+        backButton.setIconImage(named: "baseline_exit_to_app_black_48pt", title: "", tintColor: .white, isIconOnLeft: false)
+
         layout(37, y, 8, 8, backButton)
-        addSubview(backButton)
     }
 }

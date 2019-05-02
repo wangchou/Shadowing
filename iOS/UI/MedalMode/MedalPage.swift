@@ -65,30 +65,26 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     }
 
     // MARK: - TopBar
-    private func addButton(iconName: String,
-                           _ x: Int, _ y: Int, _ w: Int, _ h: Int,
-                           onClick: (() -> Void)?) {
-        let button = createButton(title: "", bgColor: myOrange)
+    private func addIconButton(iconName: String,
+                               _ x: Int, _ y: Int, _ w: Int, _ h: Int,
+                               onClick: (() -> Void)?) {
+        let button = addButton(title: "", bgColor: myOrange, onClick: onClick)
         button.setIconImage(named: iconName, tintColor: .black, isIconOnLeft: false)
         button.roundBorder(borderWidth: step/2, cornerRadius: step,
                            color: rgb(35, 35, 35))
         button.showsTouchWhenHighlighted = true
 
-        addSubview(button)
         layout(x, y, w, h, button)
-        button.addTapGestureRecognizer {
-            onClick?()
-        }
     }
 
     private func addTopBar(y: Int) {
-        addButton(iconName: "outline_settings_black_\(iconSize)",
-        2, y, 7, 7) {
+        addIconButton(iconName: "outline_settings_black_\(iconSize)",
+                      2, y, 7, 7) {
             (rootViewController.current as? UIPageViewController)?.goToPreviousPage()
         }
 
-        addButton(iconName: "outline_all_inclusive_black_\(iconSize)",
-        39, y, 7, 7) {
+        addIconButton(iconName: "outline_all_inclusive_black_\(iconSize)",
+                      39, y, 7, 7) {
             (rootViewController.current as? UIPageViewController)?.goToNextPage()
         }
 
@@ -186,12 +182,12 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
     func addBottomButtons() {
         let buttonY = Int((screen.height - bottomButtonHeight)/step) - 2
-        addButton(iconName: "round_timeline_black_\(iconSize)",
+        addIconButton(iconName: "round_timeline_black_\(iconSize)",
                   2, buttonY, 7, 7) {
             launchVC(MedalSummaryPage.id)
         }
 
-        addButton(iconName: "round_spellcheck_black_\(iconSize)",
+        addIconButton(iconName: "round_spellcheck_black_\(iconSize)",
         10, buttonY, 7, 7) {
             context.loadMedalCorrectionSentence()
             launchVC(MedalCorrectionPage.id)
@@ -202,7 +198,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         }
         if i18n.isZh {
             let x = isIPad ? 18 : 39
-            addButton(iconName: "outline_info_black_\(iconSize)",
+            addIconButton(iconName: "outline_info_black_\(iconSize)",
                       x, buttonY, 7, 7) {
                 launchVC("InfoPage")
             }

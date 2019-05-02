@@ -93,6 +93,24 @@ extension GridLayout where Self: UIView {
         return button
     }
 
+    @discardableResult
+    func addButton(title: String, bgColor: UIColor, onClick: (() -> Void)? = nil) -> UIButton {
+        let button = UIButton()
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .highlighted)
+        button.backgroundColor = bgColor
+        button.titleLabel?.font = MyFont.regular(ofSize: step * 4)
+        button.titleLabel?.textColor = myLightGray
+        button.roundBorder(borderWidth: 1, cornerRadius: step, color: .clear)
+        if let onClick = onClick {
+            button.addTapGestureRecognizer {
+                onClick()
+            }
+        }
+        addSubview(button)
+        return button
+    }
+
     func layout(_ x: Int, _ y: Int, _ w: Int? = nil, _ h: Int, _ view: UIView) {
         view.frame = getFrame(x, y, w ?? (gridCount - x), h)
     }

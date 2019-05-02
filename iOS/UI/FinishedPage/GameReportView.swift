@@ -67,17 +67,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
 
     func addNextGameButton() -> UIButton {
         isPauseMode = true
-        let button = createButton(title: "", bgColor: .red)
-        let todaySentenceCount = getTodaySentenceCount()
-        let dailyGoal = context.gameSetting.dailySentenceGoal
-        var isReachDailyByThisGame = false
-        if let record = context.gameRecord {
-            isReachDailyByThisGame = todaySentenceCount >= dailyGoal &&
-                                     todaySentenceCount - record.correctCount < dailyGoal
-        }
-        let countDownSecs = isReachDailyByThisGame ? 7 : 5
-        button.setIconImage(named: "baseline_pause_black_48pt", title: " \(i18n.nextGame) (\(countDownSecs)\(i18n.secs))", tintColor: .white, isIconOnLeft: true)
-        button.addTapGestureRecognizer {
+        let button = addButton(title: "", bgColor: .red) {
             if isPauseMode {
                 stopCountDown()
             } else {
@@ -87,13 +77,22 @@ class GameReportView: UIView, ReloadableView, GridLayout {
             }
         }
 
+        let todaySentenceCount = getTodaySentenceCount()
+        let dailyGoal = context.gameSetting.dailySentenceGoal
+        var isReachDailyByThisGame = false
+        if let record = context.gameRecord {
+            isReachDailyByThisGame = todaySentenceCount >= dailyGoal &&
+                                     todaySentenceCount - record.correctCount < dailyGoal
+        }
+        let countDownSecs = isReachDailyByThisGame ? 7 : 5
+        button.setIconImage(named: "baseline_pause_black_48pt", title: " \(i18n.nextGame) (\(countDownSecs)\(i18n.secs))", tintColor: .white, isIconOnLeft: true)
+
         if context.gameMode == .topicMode {
             layout(2, 54 + safeAreaDiffY, 30, 8, button)
         } else {
             layout(2, 46 + safeAreaDiffY, 30, 8, button)
         }
 
-        addSubview(button)
         var leftSeconds = countDownSecs
         countDownTimer?.invalidate()
         countDownTimer = Timer.scheduledTimer(withTimeInterval: 1.00, repeats: true) { _ in
@@ -114,10 +113,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
     }
 
     func addBackButton() {
-        let backButton = createButton(title: "", bgColor: .lightGray)
-        backButton.setIconImage(named: "baseline_exit_to_app_black_48pt", title: "", tintColor: .white, isIconOnLeft: false)
-
-        backButton.addTapGestureRecognizer {
+        let backButton = addButton(title: "", bgColor: .lightGray) {
             stopCountDown()
             dismissTwoVC()
             if context.gameMode == .infiniteChallengeMode {
@@ -126,14 +122,13 @@ class GameReportView: UIView, ReloadableView, GridLayout {
                 }
             }
         }
+        backButton.setIconImage(named: "baseline_exit_to_app_black_48pt", title: "", tintColor: .white, isIconOnLeft: false)
 
         if context.gameMode == .topicMode {
             layout(34, 54 + safeAreaDiffY, 12, 8, backButton)
         } else {
             layout(34, 46 + safeAreaDiffY, 12, 8, backButton)
         }
-
-        addSubview(backButton)
     }
 
     override func prepareForInterfaceBuilder() {
@@ -149,18 +144,5 @@ func launchNextGame() {
     }
     if isUnderDailySentenceLimit() {
         launchVC(Messenger.id, isOverCurrent: false)
-    }
-}
-
-extension GridLayout where Self: UIView {
-    func createButton(title: String, bgColor: UIColor) -> UIButton {
-        let button = UIButton()
-        button.setTitle(title, for: .normal)
-        button.setTitleColor(UIColor.white.withAlphaComponent(0.6), for: .highlighted)
-        button.backgroundColor = bgColor
-        button.titleLabel?.font = MyFont.regular(ofSize: step * 4)
-        button.titleLabel?.textColor = myLightGray
-        button.roundBorder(borderWidth: 1, cornerRadius: step, color: .clear)
-        return button
     }
 }
