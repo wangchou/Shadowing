@@ -35,7 +35,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
     private var showAbilityTargetLabelFunc: (() -> Void)?
     private var statusSpeakingPromise: Promise<Void> = fulfilledVoidPromise()
 
-    func viewWillAppear() {
+    func render() {
         backgroundColor = UIColor.black.withAlphaComponent(0.6)
         roundBorder(borderWidth: 1.5, cornerRadius: 2 * step, color: .white)
         showAbilityTargetLabelFunc = nil
@@ -54,8 +54,8 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
             title = getDataSetTitle(dataSetKey: record.dataSetKey)
         case .infiniteChallengeMode:
             title = i18n.infiniteChallengeTitle
-        case .medalMode:
-            title = "追星模式"
+        default:
+            ()
         }
         addText(2, 1, 6, title, color: myLightGray, strokeColor: .black)
         addText(2, 6, 6, tags, color: record.level.color, strokeColor: .black)
@@ -230,6 +230,6 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
 
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
-        viewWillAppear()
+        render()
     }
 }

@@ -30,7 +30,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         return (getTopPadding() > 20 && !isIPad) ? 2 : 0
     }
 
-    func viewWillAppear() {
+    func render() {
         removeAllSubviews()
         backgroundColor = UIColor.black.withAlphaComponent(0.6)
         clipsToBounds = true
@@ -47,8 +47,9 @@ class GameReportView: UIView, ReloadableView, GridLayout {
                            height: screen.width * (1.18 + 0.01 * safeAreaDiffY.c))
             layout(2, 4 + safeAreaDiffY, 44, 40, reportBox!)
         }
+        addSubview(reportBox!)
+        reportBox?.render()
 
-        addReloadableSubview(reportBox!)
         pauseOrPlayButton = addNextGameButton()
         addBackButton()
     }
@@ -137,7 +138,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
 
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
-        viewWillAppear()
+        render()
     }
 }
 

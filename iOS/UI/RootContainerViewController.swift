@@ -102,11 +102,11 @@ class RootContainerViewController: UIViewController {
     func rerenderTopView(updateByRecords: Bool = false) {
         if let listPage = topicSwipablePage.listPage {
             if updateByRecords { listPage.topChartView?.updateByRecords() }
-            listPage.topChartView?.render()
+            listPage.topChartView?.renderWithoutUpdateData()
         }
         if let listPage = infiniteChallengeSwipablePage.listPage {
             if updateByRecords { listPage.topChartView?.updateByRecords() }
-            listPage.topChartView?.render()
+            listPage.topChartView?.renderWithoutUpdateData()
         }
     }
 
@@ -114,14 +114,14 @@ class RootContainerViewController: UIViewController {
         if let pageVC = current as? UIPageViewController {
             if let vc = pageVC.viewControllers?[0] {
                 if let vc = vc as? MedalPage {
-                    vc.medalPageView?.viewWillAppear()
+                    vc.medalPageView?.render()
                 }
                 if let vc = vc as? TopicsListPage {
-                    vc.topChartView?.viewWillAppear()
+                    vc.topChartView?.render()
                     vc.topChartView?.animateProgress()
                 }
                 if let vc = vc as? InfiniteChallengeListPage {
-                    vc.topChartView?.viewWillAppear()
+                    vc.topChartView?.render()
                     vc.topChartView?.animateProgress()
                 }
             }

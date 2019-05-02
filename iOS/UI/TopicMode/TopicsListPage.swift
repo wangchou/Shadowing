@@ -57,9 +57,9 @@ class TopicsListPage: UIViewController {
         topChartView.prepareForDailyGoalAppear()
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
             DispatchQueue.main.async {
-                self.topChartView.viewWillAppear()
-                self.topicFilterBarView.viewWillAppear()
-                self.topicButtonAreaView.viewWillAppear()
+                self.topChartView.render()
+                self.topicFilterBarView.render()
+                self.topicButtonAreaView.render()
                 if context.dataSetKey == "" {
                     context.dataSetKey = dataSetKeys[0]
                     context.loadLearningSentences()

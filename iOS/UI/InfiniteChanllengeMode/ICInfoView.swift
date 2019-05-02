@@ -80,20 +80,20 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        viewWillAppear()
+        render()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        viewWillAppear()
+        render()
     }
 
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
-        viewWillAppear()
+        render()
     }
 
-    func viewWillAppear() {
+    func render() {
         frame.size.width = screen.width
         frame.size.height = screen.width * 64/48
         removeAllSubviews()

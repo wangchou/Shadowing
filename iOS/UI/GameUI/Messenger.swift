@@ -77,7 +77,7 @@ class Messenger: UIViewController {
         GameFlow.shared.start()
         UIApplication.shared.isIdleTimerDisabled = true
 
-        messengerBar.viewWillAppear()
+        messengerBar.render()
         renderOverlayView()
         levelMeterValueBar.frame.size.height = 0
     }
@@ -216,7 +216,7 @@ class Messenger: UIViewController {
             continueGame()
         } else {
             messengerBar.isGameStopped = true
-            messengerBar.viewWillAppear()
+            messengerBar.render()
             postCommand(.pause)
             overlayView.isHidden = false
 

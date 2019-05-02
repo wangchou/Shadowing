@@ -12,7 +12,7 @@ import Charts
 private let fontSize = screen.width * 12 / 320
 
 @IBDesignable
-class LineChart: LineChartView, ChartViewDelegate {
+class LineChart: LineChartView, ChartViewDelegate, ReloadableView {
 
     var lineColor: UIColor = .black
     var circleColor: UIColor = .black
@@ -94,11 +94,5 @@ class LineChart: LineChartView, ChartViewDelegate {
         let data = LineChartData(dataSet: set1)
 
         self.data = data
-    }
-}
-
-extension LineChart: ReloadableView {
-    func viewWillAppear() {
-        render()
     }
 }

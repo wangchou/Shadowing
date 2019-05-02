@@ -32,25 +32,12 @@ class ProgressCircleView: UIView, GridLayout, ReloadableView {
         return String(format: "%.0f", percent * 100) + "%"
     }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        sharedInit()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        sharedInit()
-    }
-    func sharedInit() {
-        //viewWillAppear()
-    }
-
     override func layoutSubviews() {
         super.layoutSubviews()
-        viewWillAppear()
+        render()
     }
 
-    func viewWillAppear() {
+    func render() {
         removeAllSubviews()
         layer.sublayers?.forEach { $0.removeFromSuperlayer() }
 

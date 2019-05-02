@@ -30,7 +30,7 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        viewWillAppear()
+        render()
     }
 
     func animateIn(delay: TimeInterval, duration: TimeInterval) {
@@ -44,7 +44,7 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
         let maxTimes = 20
         timer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) { [weak self] _ in
             self?.medalCount = ((maxTimes - times) * medalFrom + (times * medalTo)) / maxTimes
-            self?.viewWillAppear()
+            self?.render()
             times += 1
             if times > maxTimes {
                 self?.timer?.invalidate()
@@ -54,7 +54,7 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
         }
     }
 
-    func viewWillAppear() {
+    func render() {
         let lowLevel = Level(medalCount: medalCount)
         var majorSize: CGFloat = 4
         if isFinishedPageMode { majorSize = 5}

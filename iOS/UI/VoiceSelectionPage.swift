@@ -133,7 +133,7 @@ class VoiceSelectionPage: UIViewController {
             context.gameSetting.assisant = selectedVoice?.identifier ?? "unknown"
         }
         if let settingPage = VoiceSelectionPage.fromPage as? SettingPage {
-            settingPage.viewWillAppear(false)
+            settingPage.render()
         }
         if let correctionPage = VoiceSelectionPage.fromPage as? MedalCorrectionPage {
             correctionPage.medalCorrectionPageView?.renderTopView()

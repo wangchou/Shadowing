@@ -24,7 +24,7 @@ class MedalPage: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        medalPageView?.viewWillAppear()
+        medalPageView?.render()
     }
 }
 
@@ -53,7 +53,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         self.frame = CGRect(x: 0, y: 0, width: screen.width, height: screen.height)
     }
 
-    func viewWillAppear() {
+    func render() {
         context.gameMode = .medalMode
         removeAllSubviews()
         addTextbackground()
@@ -149,7 +149,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
         changeLangButton.addTapGestureRecognizer { [weak self] in
             changeGameLangTo(lang: gameLang == .jp ? .en : .jp)
-            self?.viewWillAppear()
+            self?.render()
         }
 
         changeLangButton.setStyle(style: .darkOption, step: step)

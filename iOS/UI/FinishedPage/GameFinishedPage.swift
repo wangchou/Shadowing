@@ -43,7 +43,7 @@ class GameFinishedPage: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         sortSentenceByScore()
-        reportView.viewWillAppear()
+        reportView.render()
     }
 
     override func viewDidAppear(_ animated: Bool) {

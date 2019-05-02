@@ -13,14 +13,14 @@ import Promises
 // https://medium.com/@robnorback/the-secret-to-1-second-compile-times-in-xcode-9de4ec8345a1
 
 protocol ReloadableView {
-    func viewWillAppear()
+    func render()
 }
 
 extension UIView {
 
     #if DEBUG
     @objc func injected() {
-        (self as? ReloadableView)?.viewWillAppear()
+        (self as? ReloadableView)?.render()
     }
     #endif
 
@@ -79,7 +79,7 @@ extension UIView {
     func addReloadableSubview(_ view: UIView) {
         addSubview(view)
         if let view = view as? ReloadableView {
-            view.viewWillAppear()
+            view.render()
         }
     }
 

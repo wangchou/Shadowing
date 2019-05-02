@@ -21,7 +21,7 @@ class MedalGameFinishedPage: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        (view as? MedalGameFinishedPageView)?.viewWillAppear()
+        (view as? MedalGameFinishedPageView)?.render()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -52,7 +52,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     }
 
     // MARK: - Lifecycle
-    func viewWillAppear() {
+    func render() {
         removeAllSubviews()
         strokeWidth = Float(step * -1/2.0)
         addTextbackground(useGameSentences: true)

@@ -23,10 +23,10 @@ class MedalView: UIView, ReloadableView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        viewWillAppear()
+        render()
     }
 
-    func viewWillAppear() {
+    func render() {
         backgroundColor = .clear
 
         layer.sublayers?.forEach { $0.removeFromSuperlayer() }

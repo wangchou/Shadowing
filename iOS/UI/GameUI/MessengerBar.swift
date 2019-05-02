@@ -15,7 +15,7 @@ class MessengerBar: UIView, ReloadableView {
 
     var isGameStopped: Bool = false {
         didSet {
-            viewWillAppear()
+            render()
         }
     }
 
@@ -111,7 +111,7 @@ class MessengerBar: UIView, ReloadableView {
         progressBarFront.roundBorder(borderWidth: 0.5, cornerRadius: 3.5, color: .clear)
     }
 
-    func viewWillAppear() {
+    func render() {
         let level: Level? = context.gameRecord?.level
 
         if let level = level {

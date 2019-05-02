@@ -108,10 +108,10 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        viewWillAppear()
+        render()
     }
 
-    func viewWillAppear() {
+    func render() {
         removeAllSubviews()
         backgroundColor = darkBackground
 
@@ -205,7 +205,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         chart.xAxis.enabled = false
         chart.isDrawFill = false
         chart.setDataCount(level: Level.lv2, dataPoints: dataPoints)
-        chart.viewWillAppear()
+        chart.render()
         layout(2, y+9, 29, 20, chart)
         addSubview(chart)
     }
@@ -219,6 +219,6 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         case .all:
             daysOption = .oneWeek
         }
-        viewWillAppear()
+        render()
     }
 }

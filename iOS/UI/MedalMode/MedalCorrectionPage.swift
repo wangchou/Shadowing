@@ -27,7 +27,7 @@ class MedalCorrectionPage: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        medalCorrectionPageView?.viewWillAppear()
+        medalCorrectionPageView?.render()
     }
 }
 
@@ -76,7 +76,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         stopEventObserving(self)
     }
 
-    func viewWillAppear() {
+    func render() {
         removeAllSubviews()
         all([waitKanaInfoLoaded,
              waitSentenceScoresLoaded]).then { [weak self] _ in
@@ -134,7 +134,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         button.setIconImage(named: "baseline_sort_black_\(iconSize)")
         button.setStyle(style: .darkOption, step: step)
         button.addTapGestureRecognizer { [weak self] in
-            self?.viewWillAppear()
+            self?.render()
         }
         layout(37, y, 9, 6, button)
         topView.addSubview(button)
