@@ -681,6 +681,11 @@ class I18n {
         }
     }
 
+    var listening: String {
+        if isZh { return "正在聽..." }
+        if isJa { return "聞いています。" }
+        return "listening..."
+    }
     var todaySummary: String {
         if isZh { return "本日的統計" }
         if isJa { return "今日のまとめ" }

@@ -78,7 +78,8 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
 
     func viewWillAppear() {
         removeAllSubviews()
-        waitSentenceScoresLoaded.then { [weak self] _ in
+        all([waitKanaInfoLoaded,
+             waitSentenceScoresLoaded]).then { [weak self] _ in
             self?.renderTopView()
             self?.addBottomTable()
             self?.addBottomButtons()

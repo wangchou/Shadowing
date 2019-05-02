@@ -49,6 +49,7 @@ func easyLoad<T: Codable>(object: inout T, key: String) {
 }
 
 var waitSentenceScoresLoaded = fulfilledVoidPromise()
+var waitKanaInfoLoaded = fulfilledVoidPromise()
 
 func loadGameMiscData(isLoadKana: Bool = false, isAsync: Bool = false) {
     waitSentenceScoresLoaded = Promise<Void>.pending()
@@ -74,6 +75,7 @@ func loadGameMiscData(isLoadKana: Bool = false, isAsync: Bool = false) {
     }
     guard isLoadKana else { return }
 
+    waitKanaInfoLoaded = Promise<Void>.pending()
     DispatchQueue.global().async {
         if let loadedKanaTokenInfos = loadFromUserDefault(type: type(of: kanaTokenInfosCacheDictionary), key: kanaTokenInfosKey + Lang.jp.key) {
             let validSentenceSet: Set<String> = Set(userSaidSentences.values).union(Set(userSaidSentences.keys))
@@ -86,5 +88,6 @@ func loadGameMiscData(isLoadKana: Bool = false, isAsync: Bool = false) {
         } else {
             print("create new kanaTokenInfos")
         }
+        waitKanaInfoLoaded.fulfill(())
     }
 }
