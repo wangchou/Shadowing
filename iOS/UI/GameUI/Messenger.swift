@@ -59,7 +59,7 @@ class Messenger: UIViewController {
         overlayView.isHidden = true
         exitButton.layer.cornerRadius = 5
         levelMeterView.isUserInteractionEnabled = false
-        levelMeterValueBar.roundBorder(borderWidth: 0, cornerRadius: 4.5, color: .clear)
+        levelMeterValueBar.roundBorder(radius: 4.5)
         scrollView.delaysContentTouches = false
 
         // actions
@@ -122,7 +122,7 @@ class Messenger: UIViewController {
             repeatOneSwitchButton.isHidden = true
         }
 
-        repeatOneSwitchButton.roundBorder(borderWidth: 0, cornerRadius: 25, color: .clear)
+        repeatOneSwitchButton.roundBorder(radius: 25)
 
         if context.gameSetting.isRepeatOne {
             repeatOneSwitchButton.tintColor = UIColor.white
@@ -178,7 +178,7 @@ class Messenger: UIViewController {
 
         myLabel.frame = CGRect(x: 5, y: y, width: width, height: height)
 
-        myLabel.roundBorder()
+        myLabel.roundBorder(width: 1.5, radius: 15, color: .black)
 
         switch pos {
         case .left:

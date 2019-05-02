@@ -87,7 +87,7 @@ extension GridLayout where Self: UIView {
         let button = UIButton()
         layout(x, y, w, h, button)
         button.backgroundColor = color
-        button.roundBorder(borderWidth: 0, cornerRadius: cornerRadius, color: .clear)
+        button.roundBorder(radius: cornerRadius)
         button.showsTouchWhenHighlighted = true
         addSubview(button)
         return button
@@ -101,7 +101,7 @@ extension GridLayout where Self: UIView {
         button.backgroundColor = bgColor
         button.titleLabel?.font = MyFont.regular(ofSize: step * 4)
         button.titleLabel?.textColor = myLightGray
-        button.roundBorder(borderWidth: 1, cornerRadius: step, color: .clear)
+        button.roundBorder(radius: step)
         if let onClick = onClick {
             button.addTapGestureRecognizer {
                 onClick()

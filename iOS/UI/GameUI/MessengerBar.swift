@@ -77,7 +77,7 @@ class MessengerBar: UIView, ReloadableView {
         progressBarBack = UIView()
         progressBarBack.backgroundColor = rgb(220, 220, 220)
         progressBarBack.frame = CGRect(x: 60, y: 38, width: barWidth, height: 7)
-        progressBarBack.roundBorder(borderWidth: 0.5, cornerRadius: 3.5, color: .clear)
+        progressBarBack.roundBorder(radius: 3.5)
         addSubview(progressBarBack)
 
         progressBarFront = UIView()
@@ -108,7 +108,7 @@ class MessengerBar: UIView, ReloadableView {
     private func initData() {
         topicProgressLabel.text = "0/\(context.sentences.count)"
         progressBarFront.frame = CGRect(x: 60, y: 38, width: 0, height: 7)
-        progressBarFront.roundBorder(borderWidth: 0.5, cornerRadius: 3.5, color: .clear)
+        progressBarFront.roundBorder(radius: 3.5)
     }
 
     func render() {
@@ -117,7 +117,7 @@ class MessengerBar: UIView, ReloadableView {
         if let level = level {
             levelLabel.text = level.character
             levelLabel.textColor = level.color
-            levelLabel.roundBorder(borderWidth: 1.5, cornerRadius: circleWidth.c/2, color: level.color)
+            levelLabel.roundBorder(width: 1.5, radius: circleWidth.c/2, color: level.color)
             levelLabel.backgroundColor = level.color.withAlphaComponent(0.1)
         }
 
@@ -128,7 +128,7 @@ class MessengerBar: UIView, ReloadableView {
             (context.sentenceIndex.c + 1)/context.sentences.count.c
 
         progressBarFront.frame = CGRect(x: 60, y: 38, width: (barWidth * progressPercent).f.i, height: 7)
-        progressBarFront.roundBorder(borderWidth: 0.5, cornerRadius: 3.5, color: .clear)
+        progressBarFront.roundBorder(radius: 3.5)
 
         let imageName = isGameStopped ? "baseline_play_arrow_black_48pt" : "baseline_pause_black_48pt"
         pauseCountinueButton.setIconImage(named: imageName, title: "", tintColor: .black, isIconOnLeft: false)

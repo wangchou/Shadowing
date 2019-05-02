@@ -103,7 +103,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     private func addTitleBlock(y: Int, delay: TimeInterval = 0, duration: TimeInterval) {
         // info background
         let rect = addRect(x: 3, y: y, w: 42, h: 46, color: rgb(0, 0, 0).withAlphaComponent(0.4))
-        rect.roundBorder(borderWidth: 0, cornerRadius: step * 3, color: .clear)
+        rect.roundBorder(radius: step * 3)
 
         rect.enlargeIn(delay: delay, duration: duration)
 

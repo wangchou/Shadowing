@@ -37,7 +37,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
 
     func render() {
         backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        roundBorder(borderWidth: 1.5, cornerRadius: 2 * step, color: .white)
+        roundBorder(width: 1.5, radius: 2 * step, color: .white)
         showAbilityTargetLabelFunc = nil
         removeAllSubviews()
         renderTopTitle()
@@ -152,7 +152,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
 
         let barBox = addRect(x: 2, y: y + 5, w: 40, h: lineHeight,
                              color: progressBackGray)
-        barBox.roundBorder(borderWidth: 0, cornerRadius: step/2, color: .lightGray)
+        barBox.roundBorder(radius: step/2, color: .lightGray)
 
         // animate progress bar for one second
         let fromPercent = min(1.0, (fromNumber.f/maxNumber.f))
@@ -161,7 +161,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         let bar = addRect(x: 2, y: y + 5, w: 1, h: lineHeight,
                           color: color ?? getProgressColor(percent: fromPercent))
         bar.frame.size.width = fullProgressWidth * fromPercent.c
-        bar.roundBorder(borderWidth: 0, cornerRadius: step/2, color: .clear)
+        bar.roundBorder(radius: step/2)
 
         return (progressLabel, bar, fromNumber, endNumber, maxNumber)
     }

@@ -114,7 +114,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         func addCountBox(x: Int, y: Int,
                          title: String, count: Int, color: UIColor) {
             let rect = topView.addRect(x: x, y: y, w: 9, h: 6, color: .black)
-            rect.roundBorder(borderWidth: 1.5, cornerRadius: step, color: .clear)
+            rect.roundBorder(radius: step)
             topView.addText(x: x+1, y: y, w: 9, h: 2,
                             text: title,
                             font: MyFont.regular(ofSize: step * 1.7),

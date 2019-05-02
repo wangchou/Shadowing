@@ -11,7 +11,7 @@ import UIKit
 class InfoPage: UIViewController {
     @IBOutlet weak var closeButton: UIButton!
     override func viewDidLoad() {
-        closeButton.roundBorder(borderWidth: 0, cornerRadius: 25, color: .clear)
+        closeButton.roundBorder(radius: 25)
 
     }
     @IBAction func onCloseButtonClicked(_ sender: Any) {
