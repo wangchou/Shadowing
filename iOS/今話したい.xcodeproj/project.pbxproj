@@ -73,6 +73,7 @@
 		BE9DF58A223E22BE00DFEE1D /* calculateMicLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9DF589223E22BE00DFEE1D /* calculateMicLevel.swift */; };
 		BEA4E71E21AE604400CE6E63 /* secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA4E71D21AE604400CE6E63 /* secret.swift */; };
 		BEA4E72021AFB8B800CE6E63 /* GameExpirationDateInMS.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA4E71F21AFB8B800CE6E63 /* GameExpirationDateInMS.swift */; };
+		BEA580A3227AF23E00BF2520 /* quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA580A2227AF23E00BF2520 /* quote.swift */; };
 		BEA86115216F264A00AECF13 /* sqliteSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA86114216F264A00AECF13 /* sqliteSentences.swift */; };
 		BEB6F6C92182B89D0011E1C1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEB6F6C72182B89D0011E1C1 /* InfoPlist.strings */; };
 		BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */; };
@@ -219,6 +220,7 @@
 		BE9DF589223E22BE00DFEE1D /* calculateMicLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = calculateMicLevel.swift; sourceTree = "<group>"; };
 		BEA4E71D21AE604400CE6E63 /* secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secret.swift; sourceTree = "<group>"; };
 		BEA4E71F21AFB8B800CE6E63 /* GameExpirationDateInMS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameExpirationDateInMS.swift; sourceTree = "<group>"; };
+		BEA580A2227AF23E00BF2520 /* quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = quote.swift; sourceTree = "<group>"; };
 		BEA86114216F264A00AECF13 /* sqliteSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sqliteSentences.swift; sourceTree = "<group>"; };
 		BEB6F6C82182B89D0011E1C1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Project/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BEB6F6CA2182B8AA0011E1C1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = Project/ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -389,6 +391,7 @@
 				BE3260C721BF912D00A13C94 /* vocabulary1.swift */,
 				BE3260C921BFCF5E00A13C94 /* vocabulary2.swift */,
 				BE596473215A0EF400E4AA0C /* expressive.swift */,
+				BEA580A2227AF23E00BF2520 /* quote.swift */,
 			);
 			path = Sentences;
 			sourceTree = "<group>";
@@ -662,6 +665,7 @@
 				BE9DF58A223E22BE00DFEE1D /* calculateMicLevel.swift in Sources */,
 				BE596466215A0DE100E4AA0C /* travel.swift in Sources */,
 				BE9D243A20C8DEE9000515DD /* GameReportView.swift in Sources */,
+				BEA580A3227AF23E00BF2520 /* quote.swift in Sources */,
 				BEEA091222606973008C98AE /* ProgressCircleView.swift in Sources */,
 				BECAC3BF216B9D19001BBF49 /* InfiniteChallengeSwipablePage.swift in Sources */,
 				BE5E0CCE2183477400832E88 /* I18n.swift in Sources */,
