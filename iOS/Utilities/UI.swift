@@ -13,14 +13,14 @@ import Promises
 // https://medium.com/@robnorback/the-secret-to-1-second-compile-times-in-xcode-9de4ec8345a1
 
 protocol ReloadableView {
-    func viewWillAppear()
+    func render()
 }
 
 extension UIView {
 
     #if DEBUG
     @objc func injected() {
-        (self as? ReloadableView)?.viewWillAppear()
+        (self as? ReloadableView)?.render()
     }
     #endif
 
@@ -37,9 +37,9 @@ extension UIView {
         return frame.y + frame.height
     }
 
-    func roundBorder(borderWidth: CGFloat = 1.5, cornerRadius: CGFloat = 15, color: UIColor = .black) {
-        layer.borderWidth = borderWidth
-        layer.cornerRadius = cornerRadius
+    func roundBorder(width: CGFloat = 0, radius: CGFloat = 15, color: UIColor = .clear) {
+        layer.borderWidth = width
+        layer.cornerRadius = radius
         layer.borderColor = color.cgColor
         clipsToBounds = true
     }
@@ -74,13 +74,6 @@ extension UIView {
 
     func removeAllSubviews() {
         subviews.forEach { $0.removeFromSuperview() }
-    }
-
-    func addReloadableSubview(_ view: UIView) {
-        addSubview(view)
-        if let view = view as? ReloadableView {
-            view.viewWillAppear()
-        }
     }
 
     // MARK: Add onClick event
@@ -195,18 +188,18 @@ enum ButtonStyle {
 
 extension UIButton {
     func setStyle(style: ButtonStyle, step: CGFloat = screen.width/48) {
-        self.roundBorder(borderWidth: 0.5, cornerRadius: step, color: .clear)
-        self.showsTouchWhenHighlighted = true
-        self.titleLabel?.textAlignment = .center
+        roundBorder(radius: step)
+        showsTouchWhenHighlighted = true
+        titleLabel?.textAlignment = .center
         switch style {
         case .darkOption:
-            self.tintColor = buttonForegroundGray
-            self.setTitleColor(buttonForegroundGray, for: .normal)
-            self.backgroundColor = buttonBackgroundGray
+            tintColor = buttonForegroundGray
+            setTitleColor(buttonForegroundGray, for: .normal)
+            backgroundColor = buttonBackgroundGray
         case .darkAction:
-            self.tintColor = buttonActionGray
-            self.setTitleColor(buttonActionGray, for: .normal)
-            self.backgroundColor = buttonActionBackgroundGray
+            tintColor = buttonActionGray
+            setTitleColor(buttonActionGray, for: .normal)
+            backgroundColor = buttonActionBackgroundGray
         }
     }
 }

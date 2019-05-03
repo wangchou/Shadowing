@@ -117,18 +117,18 @@ class TopChartView: UIView, GridLayout, ReloadableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addOnClickHandler()
-        viewWillAppear()
+        render()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         addOnClickHandler()
-        viewWillAppear()
+        render()
     }
 
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
-        viewWillAppear()
+        render()
     }
 
     func addOnClickHandler() {
@@ -141,11 +141,11 @@ class TopChartView: UIView, GridLayout, ReloadableView {
         }
     }
 
-    func viewWillAppear() {
+    func render() {
         frame.size.width = screen.width
         frame.size.height = screen.width * 34/48
         updateByRecords()
-        render()
+        renderWithoutUpdateData()
     }
 
     func prepareForDailyGoalAppear() {
@@ -170,7 +170,7 @@ class TopChartView: UIView, GridLayout, ReloadableView {
 
     }
 
-    func render() {
+    func renderWithoutUpdateData() {
         switch GameContext.shared.gameSetting.icTopViewMode {
         case .dailyGoal:
             renderDailyGoalMode()

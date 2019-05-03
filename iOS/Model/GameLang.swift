@@ -75,7 +75,7 @@ func changeGameLangTo(lang: Lang) {
     gameLang = lang
     saveGameLang()
     loadGameSetting()
-    loadGameMiscData(isLoadKana: false, isAsync: true)
+    loadGameMiscData(isLoadKana: false)
 
     DispatchQueue.main.async {
         if gameLang == .en {

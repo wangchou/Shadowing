@@ -86,7 +86,9 @@ extension GameRecord {
 private let gameHistoryKey = "game record array json"
 
 func saveGameHistory() {
-    saveToUserDefault(object: context.gameHistory, key: gameHistoryKey + gameLang.key)
+    DispatchQueue.global().async {
+        saveToUserDefault(object: context.gameHistory, key: gameHistoryKey + gameLang.key)
+    }
 }
 
 func loadGameHistory() {

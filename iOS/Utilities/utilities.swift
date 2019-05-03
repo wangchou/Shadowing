@@ -308,7 +308,7 @@ func getAllSentencesCount() -> Int {
     guard !GameContext.shared.gameHistory.isEmpty || isSimulator else { return 0 }
     var sentenceCount = 0
     GameContext.shared.gameHistory.forEach { r in
-        sentenceCount += r.perfectCount + r.greatCount
+        sentenceCount += r.correctCount
     }
     return sentenceCount
 }

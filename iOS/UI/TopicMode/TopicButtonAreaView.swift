@@ -56,17 +56,15 @@ class TopicButtonAreaView: UIView, GridLayout, ReloadableView {
 
         repeatOneSwitchButton = addButton(35, 2, 8, 8)
         repeatOneSwitchButton.addTarget(self, action: #selector(onRepeatOneButtonClicked), for: .touchUpInside)
-        repeatOneSwitchButton.roundBorder(borderWidth: 0,
-                                          cornerRadius: repeatOneSwitchButton.frame.width/2,
-                                          color: .clear)
+        repeatOneSwitchButton.roundBorder(radius: repeatOneSwitchButton.frame.width/2)
         repeatOneSwitchButton.setIconImage(named: "baseline_repeat_one_black_\(isIPad ? "48pt" : "24pt")",
                                            isIconOnLeft: false)
 
         addSeparationLine(y: 12)
-        viewWillAppear()
+        render()
     }
 
-    func viewWillAppear() {
+    func render() {
         if context.gameSetting.isRepeatOne {
             repeatOneSwitchButton.tintColor = UIColor.white
             repeatOneSwitchButton.backgroundColor = myOrange.withSaturation(1)
@@ -99,6 +97,6 @@ class TopicButtonAreaView: UIView, GridLayout, ReloadableView {
     @objc func onRepeatOneButtonClicked() {
         context.gameSetting.isRepeatOne = !context.gameSetting.isRepeatOne
         saveGameSetting()
-        viewWillAppear()
+        render()
     }
 }

@@ -47,7 +47,7 @@ class InfiniteChallengePage: UIViewController {
         infoView.minKanaCount = minKanaCount
         infoView.maxKanaCount = maxKanaCount
         infoView.sentencesCount = getSentenceCount(minKanaCount: minKanaCount, maxKanaCount: maxKanaCount)
-        infoView.viewWillAppear()
+        infoView.render()
 
         // add block screen
         blockView.isHidden = false

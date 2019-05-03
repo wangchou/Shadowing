@@ -24,7 +24,7 @@ class MedalSummaryPage: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        medalSummaryPageView?.viewWillAppear()
+        medalSummaryPageView?.render()
     }
 }
 
@@ -41,7 +41,7 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
         return getTopPadding() > 20 ? 1 : 0
     }
 
-    func viewWillAppear() {
+    func render() {
         backgroundColor = darkBackground
         tableData = getSummaryByDays()
         removeAllSubviews()
@@ -183,7 +183,7 @@ extension MedalSummaryPageView: UITableViewDelegate {
     }
 }
 
-class MedalSummaryTableCell: UITableViewCell, GridLayout, ReloadableView {
+class MedalSummaryTableCell: UITableViewCell, GridLayout {
     static let id = "MedalSummaryTableCell"
 
     var timeRect = UIView()
@@ -290,7 +290,5 @@ class MedalSummaryTableCell: UITableViewCell, GridLayout, ReloadableView {
         layout(14, 0, 9, 6, medalCountLabel)
         layout(26, 0, 8, 6, goalPercentLabel)
         layout(37, 0, 9, 6, playTimeLabel)
-    }
-    func viewWillAppear() {
     }
 }

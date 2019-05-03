@@ -21,7 +21,7 @@ class MedalGameFinishedPage: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        (view as? MedalGameFinishedPageView)?.viewWillAppear()
+        (view as? MedalGameFinishedPageView)?.render()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -52,7 +52,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     }
 
     // MARK: - Lifecycle
-    func viewWillAppear() {
+    func render() {
         removeAllSubviews()
         strokeWidth = Float(step * -1/2.0)
         addTextbackground(useGameSentences: true)
@@ -103,7 +103,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     private func addTitleBlock(y: Int, delay: TimeInterval = 0, duration: TimeInterval) {
         // info background
         let rect = addRect(x: 3, y: y, w: 42, h: 46, color: rgb(0, 0, 0).withAlphaComponent(0.4))
-        rect.roundBorder(borderWidth: 0, cornerRadius: step * 3, color: .clear)
+        rect.roundBorder(radius: step * 3)
 
         rect.enlargeIn(delay: delay, duration: duration)
 
@@ -207,22 +207,21 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     }
 
     private func addActionButtons(y: Int) {
-        let button = createButton(title: "", bgColor: .red)
-        let countDownSecs = 5
-        button.setIconImage(named: "baseline_play_arrow_black_48pt",
-                            title: " \(i18n.nextGame) (\(countDownSecs)\(i18n.secs))",
-                            tintColor: .white,
-                            isIconOnLeft: true)
-        button.titleLabel?.font = MyFont.regular(ofSize: step * 3.2 )
-        button.addTapGestureRecognizer {
+        let button = addButton(title: "", bgColor: .red) {
             SpeechEngine.shared.stopListeningAndSpeaking()
             dismissTwoVC(animated: false) {
                 launchNextGame()
             }
         }
 
+        let countDownSecs = 5
+        button.setIconImage(named: "baseline_play_arrow_black_48pt",
+                            title: " \(i18n.nextGame) (\(countDownSecs)\(i18n.secs))",
+                            tintColor: .white,
+                            isIconOnLeft: true)
+        button.titleLabel?.font = MyFont.regular(ofSize: step * 3.2 )
+
         layout(3, y, 32, 8, button)
-        addSubview(button)
         playButton = button
 
         var leftSeconds = countDownSecs
@@ -242,15 +241,13 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
             }
         }
 
-        let backButton = createButton(title: "", bgColor: .lightGray)
-        backButton.setIconImage(named: "baseline_exit_to_app_black_48pt", title: "", tintColor: .white, isIconOnLeft: false)
-
-        backButton.addTapGestureRecognizer {
+        let backButton = addButton(title: "", bgColor: .lightGray) {
             countDownTimer?.invalidate()
             dismissTwoVC()
         }
 
+        backButton.setIconImage(named: "baseline_exit_to_app_black_48pt", title: "", tintColor: .white, isIconOnLeft: false)
+
         layout(37, y, 8, 8, backButton)
-        addSubview(backButton)
     }
 }

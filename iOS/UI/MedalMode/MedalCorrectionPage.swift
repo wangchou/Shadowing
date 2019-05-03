@@ -27,7 +27,7 @@ class MedalCorrectionPage: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        medalCorrectionPageView?.viewWillAppear()
+        medalCorrectionPageView?.render()
     }
 }
 
@@ -76,9 +76,9 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         stopEventObserving(self)
     }
 
-    func viewWillAppear() {
-        removeAllSubviews()
+    func render() {
         waitSentenceScoresLoaded.then { [weak self] _ in
+            self?.removeAllSubviews()
             self?.renderTopView()
             self?.addBottomTable()
             self?.addBottomButtons()
@@ -113,7 +113,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         func addCountBox(x: Int, y: Int,
                          title: String, count: Int, color: UIColor) {
             let rect = topView.addRect(x: x, y: y, w: 9, h: 6, color: .black)
-            rect.roundBorder(borderWidth: 1.5, cornerRadius: step, color: .clear)
+            rect.roundBorder(radius: step)
             topView.addText(x: x+1, y: y, w: 9, h: 2,
                             text: title,
                             font: MyFont.regular(ofSize: step * 1.7),
@@ -133,7 +133,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         button.setIconImage(named: "baseline_sort_black_\(iconSize)")
         button.setStyle(style: .darkOption, step: step)
         button.addTapGestureRecognizer { [weak self] in
-            self?.viewWillAppear()
+            self?.render()
         }
         layout(37, y, 9, 6, button)
         topView.addSubview(button)

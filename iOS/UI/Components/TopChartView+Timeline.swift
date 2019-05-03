@@ -118,7 +118,7 @@ extension TopChartView {
             box.frame.size.width -= step * 0.3
             box.frame.size.height += step * 0.2
             box.frame.origin.y += step * 0.3
-            box.roundBorder(borderWidth: 0, cornerRadius: step/3, color: .clear)
+            box.roundBorder(radius: step/3)
             box.backgroundColor = .white
 
             let topText = addText(
@@ -150,7 +150,7 @@ extension TopChartView {
         layout(timelineColumnCount - column, row, 1, 1, box)
         box.frame.size.width = width
         box.frame.size.height = width
-        box.roundBorder(borderWidth: 1, cornerRadius: width/2, color: .black)
+        box.roundBorder(width: 1, radius: width/2, color: .black)
         addSubview(box)
 
         addTimelinePadding(box)

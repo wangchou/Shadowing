@@ -28,13 +28,15 @@ private let kanaTokenInfosKey = "kanaTokenInfos key"
 private let translationsKey = "translation key"
 
 func saveGameMiscData() {
-    saveToUserDefault(object: userSaidSentences, key: userSaidSentencesKey + gameLang.key)
-    saveToUserDefault(object: sentenceScores, key: sentenceScoreKey + gameLang.key)
-    saveToUserDefault(object: lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)
-    saveToUserDefault(object: translations, key: translationsKey + gameLang.key)
+    DispatchQueue.global().async {
+        saveToUserDefault(object: userSaidSentences, key: userSaidSentencesKey + gameLang.key)
+        saveToUserDefault(object: sentenceScores, key: sentenceScoreKey + gameLang.key)
+        saveToUserDefault(object: lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)
+        saveToUserDefault(object: translations, key: translationsKey + gameLang.key)
 
-    guard gameLang == Lang.jp else { return }
-    saveToUserDefault(object: kanaTokenInfosCacheDictionary, key: kanaTokenInfosKey + gameLang.key)
+        guard gameLang == Lang.jp else { return }
+        saveToUserDefault(object: kanaTokenInfosCacheDictionary, key: kanaTokenInfosKey + gameLang.key)
+    }
 }
 
 func easyLoad<T: Codable>(object: inout T, key: String) {
@@ -49,42 +51,75 @@ func easyLoad<T: Codable>(object: inout T, key: String) {
 }
 
 var waitSentenceScoresLoaded = fulfilledVoidPromise()
+var waitUserSaidSentencesLoaded = fulfilledVoidPromise()
+var waitKanaInfoLoaded = Promise<Void>.pending()
 
-func loadGameMiscData(isLoadKana: Bool = false, isAsync: Bool = false) {
+func loadGameMiscData(isLoadKana: Bool = false) {
     waitSentenceScoresLoaded = Promise<Void>.pending()
-    if isAsync {
-        DispatchQueue.global().async {
-            easyLoad(object: &translations, key: translationsKey + gameLang.key)
-        }
-        DispatchQueue.global().async {
-            easyLoad(object: &userSaidSentences, key: userSaidSentencesKey + gameLang.key)
-        }
-        DispatchQueue.global().async {
-            easyLoad(object: &sentenceScores, key: sentenceScoreKey  + gameLang.key)
-            waitSentenceScoresLoaded.fulfill(())
-        }
-        DispatchQueue.global().async {
-            easyLoad(object: &lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)
-        }
-    } else {
+    waitUserSaidSentencesLoaded = Promise<Void>.pending()
+
+    DispatchQueue.global().async {
         easyLoad(object: &translations, key: translationsKey + gameLang.key)
-        easyLoad(object: &userSaidSentences, key: userSaidSentencesKey + gameLang.key)
-        easyLoad(object: &sentenceScores, key: sentenceScoreKey  + gameLang.key)
-        easyLoad(object: &lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)
     }
+    DispatchQueue.global().async {
+        easyLoad(object: &userSaidSentences, key: userSaidSentencesKey + gameLang.key)
+        waitUserSaidSentencesLoaded.fulfill(())
+    }
+    DispatchQueue.global().async {
+        easyLoad(object: &sentenceScores, key: sentenceScoreKey  + gameLang.key)
+        waitSentenceScoresLoaded.fulfill(())
+    }
+    DispatchQueue.global().async {
+        easyLoad(object: &lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)
+        clear130KanaSideEffect()
+    }
+
     guard isLoadKana else { return }
 
     DispatchQueue.global().async {
-        if let loadedKanaTokenInfos = loadFromUserDefault(type: type(of: kanaTokenInfosCacheDictionary), key: kanaTokenInfosKey + Lang.jp.key) {
-            let validSentenceSet: Set<String> = Set(userSaidSentences.values).union(Set(userSaidSentences.keys))
-            //print("\t\t key count: \(validSentenceSet.count) / \(loadedKanaTokenInfos.keys.count)")
-            for key in validSentenceSet {
-                if let value = loadedKanaTokenInfos[key] {
-                    kanaTokenInfosCacheDictionary[key] = value
-                }
+        if let loadedKanaTokenInfos = loadFromUserDefault(type: type(of: kanaTokenInfosCacheDictionary),
+                                                          key: kanaTokenInfosKey + Lang.jp.key) {
+            loadedKanaTokenInfos.keys.forEach { key in
+                kanaTokenInfosCacheDictionary[key] = loadedKanaTokenInfos[key]
             }
         } else {
-            print("create new kanaTokenInfos")
+            print("use new kanaTokenInfos")
         }
+        waitKanaInfoLoaded.fulfill(())
+    }
+}
+
+// clear version 1.3.0 & 1.3.1 kana is cleared side effect
+// should be remove after 1.4.0
+var sideEffectIsCleared = false
+
+func clear130KanaSideEffect() {
+    guard gameLang == .jp, !sideEffectIsCleared else { return }
+
+    waitKanaInfoLoaded.then { _ in
+        // said topic sentences
+        rawDataSets.forEach { sentences in
+            sentences.forEach { sentence in
+                if let userSaidSentence = userSaidSentences[sentence],
+                    kanaTokenInfosCacheDictionary[userSaidSentence] == nil {
+                    _ = userSaidSentence.furiganaAttributedString
+                }
+            }
+        }
+
+        // said ic sentences
+        for (_, sentences) in lastInfiniteChallengeSentences {
+            sentences.forEach { sentence in
+                if kanaTokenInfosCacheDictionary[sentence] == nil {
+                    _ = sentence.furiganaAttributedString
+                }
+                if let userSaidSentence = userSaidSentences[sentence],
+                    kanaTokenInfosCacheDictionary[userSaidSentence] == nil {
+                    _ = userSaidSentence.furiganaAttributedString
+                }
+            }
+        }
+
+        sideEffectIsCleared = true
     }
 }

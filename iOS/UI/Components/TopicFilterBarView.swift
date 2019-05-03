@@ -17,7 +17,7 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
         return max(screen.width, 15 + abilities.count.c * 55)
     }
 
-    func viewWillAppear() {
+    func render() {
         removeAllSubviews()
 
         let tagPoints = getTagPoints()
@@ -99,7 +99,7 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
                     isTopicOn[zhTitle] = true
                 }
             }
-            self?.viewWillAppear()
+            self?.render()
             NotificationCenter.default.post(
                 name: .topicFlagChanged,
                 object: nil

@@ -50,6 +50,11 @@ class SpeechEngine {
         }
     }
 
+    func restart() {
+        stop()
+        start()
+    }
+
     func listen(duration: Double) -> Promise<String> {
         return speechRecognizer.listen(stopAfterSeconds: duration)
     }
@@ -117,11 +122,10 @@ class SpeechEngine {
                 return
         }
         switch reason {
-        case .newDeviceAvailable, .oldDeviceUnavailable, .override, .categoryChange:
+        case .newDeviceAvailable, .oldDeviceUnavailable, .override:
             print("route change notification:", reason.rawValue)
             if isEngineRunning {
-                stop()
-                start()
+                restart()
             }
         default: ()
             print("unhandle route change notification:", reason.rawValue)

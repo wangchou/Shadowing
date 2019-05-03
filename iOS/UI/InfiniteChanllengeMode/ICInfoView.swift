@@ -80,20 +80,20 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        viewWillAppear()
+        render()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        viewWillAppear()
+        render()
     }
 
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
-        viewWillAppear()
+        render()
     }
 
-    func viewWillAppear() {
+    func render() {
         frame.size.width = screen.width
         frame.size.height = screen.width * 64/48
         removeAllSubviews()
@@ -167,7 +167,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
         button.backgroundColor = .red
         button.titleLabel?.font = MyFont.regular(ofSize: step * 5)
         button.titleLabel?.textColor = .white
-        button.roundBorder(borderWidth: 0.5, cornerRadius: step, color: .clear)
+        button.roundBorder(radius: step)
         button.showsTouchWhenHighlighted = true
         button.addTarget(self, action: #selector(onChallengeButtonClicked), for: .touchUpInside)
 

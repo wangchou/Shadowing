@@ -26,7 +26,7 @@ class SentencesTableCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        practiceButton.roundBorder(borderWidth: 0, cornerRadius: 5, color: .clear)
+        practiceButton.roundBorder(radius: 5)
         practiceButton.backgroundColor = buttonColor
         practiceButton.setTitleColor(rgb(50, 50, 50), for: .normal)
         practiceButton.setTitleColor(.lightGray, for: .disabled)
@@ -143,7 +143,7 @@ extension SentencesTableCell {
         userSaidSentences[targetString] = ""
         sentenceScores[targetString] = nil
         userSaidSentenceLabel.isHidden = false
-        userSaidSentenceLabel.text = "listening..."
+        userSaidSentenceLabel.text = i18n.listening
         userSaidSentenceLabel.textColor = UIColor.white
         userSaidSentenceLabel.backgroundColor = UIColor.white
         tableView?.endUpdates()
@@ -156,8 +156,19 @@ extension SentencesTableCell {
             tableView?.endUpdates()
         }
 
+        func updateUIAfterListeningFor(duration: TimeInterval) {
+            Timer.scheduledTimer(withTimeInterval: duration, repeats: false) { _ in
+                DispatchQueue.main.async {
+                    self.tableView?.beginUpdates()
+                    self.userSaidSentenceLabel.textColor = .clear
+                    self.tableView?.endUpdates()
+                }
+            }
+        }
+
         let duration = getNow() - startTime + Double(practicePauseDuration)
         prepareListening()
+        updateUIAfterListeningFor(duration: duration)
         print("listen for \(targetString): ", duration)
         return SpeechEngine.shared.listen(duration: duration)
     }

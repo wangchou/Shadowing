@@ -30,7 +30,7 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        viewWillAppear()
+        render()
     }
 
     func animateIn(delay: TimeInterval, duration: TimeInterval) {
@@ -44,7 +44,7 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
         let maxTimes = 20
         timer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) { [weak self] _ in
             self?.medalCount = ((maxTimes - times) * medalFrom + (times * medalTo)) / maxTimes
-            self?.viewWillAppear()
+            self?.render()
             times += 1
             if times > maxTimes {
                 self?.timer?.invalidate()
@@ -54,7 +54,7 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
         }
     }
 
-    func viewWillAppear() {
+    func render() {
         let lowLevel = Level(medalCount: medalCount)
         var majorSize: CGFloat = 4
         if isFinishedPageMode { majorSize = 5}
@@ -152,12 +152,12 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
         progressBarBack = UIView()
         progressBarBack.backgroundColor = progressBackGray
         layout(0, 6, 34, 1, progressBarBack)
-        progressBarBack.roundBorder(cornerRadius: step/2, color: .clear)
+        progressBarBack.roundBorder(radius: step/2)
         addSubview(progressBarBack)
 
         progressBarMid = UIView()
         progressBarMid.backgroundColor = lowLevel.color.withSaturation(1)
-        progressBarMid.roundBorder(cornerRadius: step/2, color: .clear)
+        progressBarMid.roundBorder(radius: step/2)
         progressBarMid.frame = progressBarBack.frame
         let percentage = medalCount > 500 ?
             1.0 : CGFloat(medalCount % 50)/50.0
@@ -166,7 +166,7 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
 
         progressBarFront = UIView()
         progressBarFront.backgroundColor = .clear
-        progressBarFront.roundBorder(borderWidth: 0.5, cornerRadius: step/2, color: .black)
+        progressBarFront.roundBorder(width: 0.5, radius: step/2, color: .black)
         progressBarFront.frame = progressBarBack.frame
         addSubview(progressBarFront)
     }

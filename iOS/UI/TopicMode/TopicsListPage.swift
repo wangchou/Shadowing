@@ -57,9 +57,9 @@ class TopicsListPage: UIViewController {
         topChartView.prepareForDailyGoalAppear()
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
             DispatchQueue.main.async {
-                self.topChartView.viewWillAppear()
-                self.topicFilterBarView.viewWillAppear()
-                self.topicButtonAreaView.viewWillAppear()
+                self.topChartView.render()
+                self.topicFilterBarView.render()
+                self.topicButtonAreaView.render()
                 if context.dataSetKey == "" {
                     context.dataSetKey = dataSetKeys[0]
                     context.loadLearningSentences()
@@ -112,7 +112,7 @@ extension TopicsListPage: UITableViewDataSource {
         if let level = dataKeyToLevels[dataSetKey] {
             contentCell.levelLabel.text = level.character
             contentCell.levelLabel.textColor = level.color
-            contentCell.levelLabel.roundBorder(borderWidth: 1.5, cornerRadius: 20, color: level.color)
+            contentCell.levelLabel.roundBorder(width: 1.5, radius: 20, color: level.color)
             contentCell.levelLabel.backgroundColor = level.color.withAlphaComponent(0.1)
 
         }

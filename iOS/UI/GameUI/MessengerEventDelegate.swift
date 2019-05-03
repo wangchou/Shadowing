@@ -74,7 +74,7 @@ extension Messenger: GameEventDelegate {
             }
             guard let score = event.score else { return }
             onScore(score)
-            messengerBar.viewWillAppear()
+            messengerBar.render()
 
         case .playTimeUpdate:
             guard let seconds = event.int else { return }
@@ -92,7 +92,7 @@ extension Messenger: GameEventDelegate {
 
         case .gameResume:
             messengerBar.isGameStopped = false
-            messengerBar.viewWillAppear()
+            messengerBar.render()
 
         case .practiceSentenceCalculated:
             return
