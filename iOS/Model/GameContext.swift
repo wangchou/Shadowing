@@ -222,7 +222,13 @@ extension GameContext {
         // Should be removed in 1.4.0
         if gameLang == .jp {
             sentences.forEach { s in
-                _ = s.furiganaAttributedString // load furigana
+                if kanaTokenInfosCacheDictionary[s] == nil {
+                    _ = s.furiganaAttributedString // load furigana
+                }
+                if let userSaidSentence = userSaidSentences[s],
+                    kanaTokenInfosCacheDictionary[userSaidSentence] == nil {
+                    _ = userSaidSentence.furiganaAttributedString
+                }
             }
         }
     }
