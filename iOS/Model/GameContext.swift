@@ -99,6 +99,11 @@ class GameContext {
     }
 
     // MARK: - Short-term context for a sentence, will be discarded after each sentence played
+    var score: Score = Score(value: 100)
+
+    // Real duration in seconds of tts speaking
+    var speakDuration: Float = 0
+
     var targetString: String {
         guard sentenceIndex < sentences.count else { return ""}
         return sentences[sentenceIndex]
@@ -117,11 +122,6 @@ class GameContext {
     var userSaidString: String {
         return userSaidSentences[self.targetString] ?? ""
     }
-
-    var score: Score = Score(value: 100)
-
-    // Real duration in seconds of tts speaking
-    var speakDuration: Float = 0
 
     // Calculated duration when guide voice off mode
     var calculatedSpeakDuration: Promise<Float> {
@@ -215,6 +215,15 @@ extension GameContext {
 
         sentences = Array(getTodaySentenceSet()).sorted {
             return (sentenceScores[$0]?.value ?? 0) < (sentenceScores[$1]?.value ?? 0)
+        }
+
+        // This should not trigger network requests
+        // It is safeNet for bug side effect in 1.3.0 & 1.3.1
+        // Should be removed in 1.4.0
+        if gameLang == .jp {
+            sentences.forEach { s in
+                _ = s.furiganaAttributedString // load furigana
+            }
         }
     }
 

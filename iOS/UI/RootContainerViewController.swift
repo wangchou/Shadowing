@@ -49,7 +49,7 @@ class RootContainerViewController: UIViewController {
         loadDataSets()
 
         loadGameHistory()
-        loadGameMiscData(isLoadKana: true, isAsync: true)
+        loadGameMiscData(isLoadKana: true)
         print("\nstartup load time: \(getNow() - t1)")
     }
 

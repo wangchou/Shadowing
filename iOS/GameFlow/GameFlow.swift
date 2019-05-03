@@ -164,12 +164,7 @@ extension GameFlow {
             }
             updateGameHistory()
             saveGameSetting()
-            DispatchQueue.global().async {
-                saveGameMiscData()
-            }
-//            if let r = context.gameRecord, r.p{
-//                engine.playRineTone(ringTone: r.rank.ringTone)
-//            }
+            saveGameMiscData()
         }
     }
 

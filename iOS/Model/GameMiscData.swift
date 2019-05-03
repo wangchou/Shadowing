@@ -28,13 +28,15 @@ private let kanaTokenInfosKey = "kanaTokenInfos key"
 private let translationsKey = "translation key"
 
 func saveGameMiscData() {
-    saveToUserDefault(object: userSaidSentences, key: userSaidSentencesKey + gameLang.key)
-    saveToUserDefault(object: sentenceScores, key: sentenceScoreKey + gameLang.key)
-    saveToUserDefault(object: lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)
-    saveToUserDefault(object: translations, key: translationsKey + gameLang.key)
+    DispatchQueue.global().async {
+        saveToUserDefault(object: userSaidSentences, key: userSaidSentencesKey + gameLang.key)
+        saveToUserDefault(object: sentenceScores, key: sentenceScoreKey + gameLang.key)
+        saveToUserDefault(object: lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)
+        saveToUserDefault(object: translations, key: translationsKey + gameLang.key)
 
-    guard gameLang == Lang.jp else { return }
-    saveToUserDefault(object: kanaTokenInfosCacheDictionary, key: kanaTokenInfosKey + gameLang.key)
+        guard gameLang == Lang.jp else { return }
+        saveToUserDefault(object: kanaTokenInfosCacheDictionary, key: kanaTokenInfosKey + gameLang.key)
+    }
 }
 
 func easyLoad<T: Codable>(object: inout T, key: String) {
@@ -49,45 +51,42 @@ func easyLoad<T: Codable>(object: inout T, key: String) {
 }
 
 var waitSentenceScoresLoaded = fulfilledVoidPromise()
-var waitKanaInfoLoaded = fulfilledVoidPromise()
+var waitUserSaidSentencesLoaded = fulfilledVoidPromise()
 
-func loadGameMiscData(isLoadKana: Bool = false, isAsync: Bool = false) {
+func loadGameMiscData(isLoadKana: Bool = false) {
     waitSentenceScoresLoaded = Promise<Void>.pending()
-    if isAsync {
-        DispatchQueue.global().async {
-            easyLoad(object: &translations, key: translationsKey + gameLang.key)
-        }
-        DispatchQueue.global().async {
-            easyLoad(object: &userSaidSentences, key: userSaidSentencesKey + gameLang.key)
-        }
-        DispatchQueue.global().async {
-            easyLoad(object: &sentenceScores, key: sentenceScoreKey  + gameLang.key)
-            waitSentenceScoresLoaded.fulfill(())
-        }
-        DispatchQueue.global().async {
-            easyLoad(object: &lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)
-        }
-    } else {
+    waitUserSaidSentencesLoaded = Promise<Void>.pending()
+
+    DispatchQueue.global().async {
         easyLoad(object: &translations, key: translationsKey + gameLang.key)
+    }
+    DispatchQueue.global().async {
         easyLoad(object: &userSaidSentences, key: userSaidSentencesKey + gameLang.key)
+        waitUserSaidSentencesLoaded.fulfill(())
+    }
+    DispatchQueue.global().async {
         easyLoad(object: &sentenceScores, key: sentenceScoreKey  + gameLang.key)
+        waitSentenceScoresLoaded.fulfill(())
+    }
+    DispatchQueue.global().async {
         easyLoad(object: &lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)
     }
+
     guard isLoadKana else { return }
 
-    waitKanaInfoLoaded = Promise<Void>.pending()
     DispatchQueue.global().async {
-        if let loadedKanaTokenInfos = loadFromUserDefault(type: type(of: kanaTokenInfosCacheDictionary), key: kanaTokenInfosKey + Lang.jp.key) {
-            let validSentenceSet: Set<String> = Set(userSaidSentences.values).union(Set(userSaidSentences.keys))
-            //print("\t\t key count: \(validSentenceSet.count) / \(loadedKanaTokenInfos.keys.count)")
-            for key in validSentenceSet {
-                if let value = loadedKanaTokenInfos[key] {
-                    kanaTokenInfosCacheDictionary[key] = value
+        if let loadedKanaTokenInfos = loadFromUserDefault(type: type(of: kanaTokenInfosCacheDictionary),
+                                                          key: kanaTokenInfosKey + Lang.jp.key) {
+            waitUserSaidSentencesLoaded.then { _ in
+                let validSentenceSet: Set<String> = Set(userSaidSentences.values).union(Set(userSaidSentences.keys))
+                for key in validSentenceSet {
+                    if let value = loadedKanaTokenInfos[key] {
+                        kanaTokenInfosCacheDictionary[key] = value
+                    }
                 }
             }
         } else {
-            print("create new kanaTokenInfos")
+            print("use new kanaTokenInfos")
         }
-        waitKanaInfoLoaded.fulfill(())
     }
 }
