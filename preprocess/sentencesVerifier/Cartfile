@@ -1,4 +1,4 @@
 github "google/promises"
-github "Alamofire/Alamofire" ~> 4.7
+github "Alamofire/Alamofire" ~> 4.8.2
 github "stephencelis/SQLite.swift" ~> 0.11.5
 github "wangchou/SwiftSyllables"

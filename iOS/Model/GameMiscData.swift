@@ -102,6 +102,7 @@ func clear130KanaSideEffect() {
             sentences.forEach { sentence in
                 if let userSaidSentence = userSaidSentences[sentence],
                     kanaTokenInfosCacheDictionary[userSaidSentence] == nil {
+                    print(".")
                     _ = userSaidSentence.furiganaAttributedString
                 }
             }
@@ -111,10 +112,12 @@ func clear130KanaSideEffect() {
         for (_, sentences) in lastInfiniteChallengeSentences {
             sentences.forEach { sentence in
                 if kanaTokenInfosCacheDictionary[sentence] == nil {
+                    print(".")
                     _ = sentence.furiganaAttributedString
                 }
                 if let userSaidSentence = userSaidSentences[sentence],
                     kanaTokenInfosCacheDictionary[userSaidSentence] == nil {
+                    print(".")
                     _ = userSaidSentence.furiganaAttributedString
                 }
             }
