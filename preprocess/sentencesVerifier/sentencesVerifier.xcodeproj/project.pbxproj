@@ -40,6 +40,7 @@
 		BE8E51EA21D0E414007D29E6 /* String+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8E51E821D0E414007D29E6 /* String+Utilities.swift */; };
 		BE8E51EB21D0E414007D29E6 /* Type+Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8E51E921D0E414007D29E6 /* Type+Conversion.swift */; };
 		BE8E51F121D0E7D4007D29E6 /* grammarN5.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8E51F021D0E7D4007D29E6 /* grammarN5.swift */; };
+		BE93170F227DB24C00552E5B /* quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE93170E227DB24C00552E5B /* quote.swift */; };
 		BE9C6814217342D3007A8D83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9C6813217342D3007A8D83 /* AppDelegate.swift */; };
 		BE9C6816217342D3007A8D83 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9C6815217342D3007A8D83 /* ViewController.swift */; };
 		BE9C6818217342D5007A8D83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE9C6817217342D5007A8D83 /* Assets.xcassets */; };
@@ -93,6 +94,7 @@
 		BE8E51E821D0E414007D29E6 /* String+Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+Utilities.swift"; path = "../../../iOS/Utilities/String+Utilities.swift"; sourceTree = "<group>"; };
 		BE8E51E921D0E414007D29E6 /* Type+Conversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Type+Conversion.swift"; path = "../../../iOS/Utilities/Type+Conversion.swift"; sourceTree = "<group>"; };
 		BE8E51F021D0E7D4007D29E6 /* grammarN5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = grammarN5.swift; path = ../../../iOS/Sentences/grammarN5.swift; sourceTree = "<group>"; };
+		BE93170E227DB24C00552E5B /* quote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = quote.swift; path = ../../../iOS/Sentences/quote.swift; sourceTree = "<group>"; };
 		BE9C6810217342D3007A8D83 /* sentencesVerifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sentencesVerifier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE9C6813217342D3007A8D83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE9C6815217342D3007A8D83 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 		BE88D5FE2174D1F2004E1CD0 /* ReferencedFromIOSApp */ = {
 			isa = PBXGroup;
 			children = (
+				BE93170E227DB24C00552E5B /* quote.swift */,
 				BE439C6421DF3B3600C0BE14 /* grammarN4.swift */,
 				BE8E51E821D0E414007D29E6 /* String+Utilities.swift */,
 				BE8E51E921D0E414007D29E6 /* Type+Conversion.swift */,
@@ -274,6 +277,7 @@
 				BE869D34218F34F700689755 /* speech.swift in Sources */,
 				BE2142A921D3553200FA2925 /* ViewController+VerifyTopicSentences.swift in Sources */,
 				BE3260CD21C0F1BD00A13C94 /* vocabulary1.swift in Sources */,
+				BE93170F227DB24C00552E5B /* quote.swift in Sources */,
 				BE55B43B217365AC006DC271 /* sqlite.swift in Sources */,
 				BE869D35218F34F700689755 /* expressive.swift in Sources */,
 				BE439C6521DF3B3600C0BE14 /* grammarN4.swift in Sources */,

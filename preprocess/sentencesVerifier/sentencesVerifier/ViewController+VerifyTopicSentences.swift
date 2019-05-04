@@ -30,16 +30,16 @@ var isGroupCorrect = true
 extension ViewController {
     func verifyAllTopicSentences() {
         isInfiniteChallengePreprocessingMode = false
-        sentences = inWork.components(separatedBy: "\n")
-//        sentences = grammarN5.joined(separator: "\n")
-//                             .components(separatedBy: "\n")
-//                             .filter {s in
-//                                return !s.hasPrefix("#") && (isGroupMode || s != "" )
-//                             }
-//                             .map {s in
-//                                let subStrings = s.components(separatedBy: "|")
-//                                return subStrings[0]
-//                             }
+        //sentences = inWork.components(separatedBy: "\n")
+        sentences = quote.joined(separator: "\n")
+                             .components(separatedBy: "\n")
+                             .filter {s in
+                                return !s.hasPrefix("#") && (isGroupMode || s != "" )
+                             }
+                             .map {s in
+                                let subStrings = s.components(separatedBy: "|")
+                                return subStrings[0]
+                             }
 
         for i in 0...sentences.count {
             sentenceIds.append(i)
