@@ -221,13 +221,15 @@ extension GameContext {
         // It is safeNet for bug side effect in 1.3.0 & 1.3.1
         // Should be removed in 1.4.0
         if gameLang == .jp {
-            sentences.forEach { s in
-                if kanaTokenInfosCacheDictionary[s] == nil {
-                    _ = s.furiganaAttributedString // load furigana
-                }
-                if let userSaidSentence = userSaidSentences[s],
-                    kanaTokenInfosCacheDictionary[userSaidSentence] == nil {
-                    _ = userSaidSentence.furiganaAttributedString
+            waitKanaInfoLoaded.then { _ in
+                self.sentences.forEach { s in
+                    if kanaTokenInfosCacheDictionary[s] == nil {
+                        _ = s.furiganaAttributedString // load furigana
+                    }
+                    if let userSaidSentence = userSaidSentences[s],
+                        kanaTokenInfosCacheDictionary[userSaidSentence] == nil {
+                        _ = userSaidSentence.furiganaAttributedString
+                    }
                 }
             }
         }
