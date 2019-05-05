@@ -91,6 +91,9 @@ class VoiceSelectionPage: UIViewController {
     @IBOutlet weak var practiceSpeedSlider: UISlider!
     @IBOutlet weak var practiceSpeedValueLabel: UILabel!
 
+    var originPracticeSpeed: Float = 0
+    var originVoice: String = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
         doneButton.isEnabled = false
@@ -109,15 +112,25 @@ class VoiceSelectionPage: UIViewController {
             practiceSpeedValueLabel.text = String(format: "%.2fx", context.gameSetting.practiceSpeed * 2)
             practiceSpeedLabel.text = i18n.settingSectionPracticeSpeed
         }
+        originPracticeSpeed = context.gameSetting.practiceSpeed
+        originVoice = selectingVoiceFor == .teacher ?
+            context.gameSetting.teacher : context.gameSetting.assisant
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        SpeechEngine.shared.stopListeningAndSpeaking()
     }
 
     @IBAction func onCancelButtonClicked(_ sender: Any) {
+        context.gameSetting.practiceSpeed = originPracticeSpeed
+        context.gameSetting.teacher = originVoice
+        saveGameSetting()
         self.dismiss(animated: true)
     }
 
     @IBAction func practiceSpeedSliderValueChanged(_ sender: Any) {
         context.gameSetting.practiceSpeed = practiceSpeedSlider.value
-        saveGameSetting()
         practiceSpeedValueLabel.text = String(format: "%.2fx", practiceSpeedSlider.value * 2)
         let speedText = String(format: "%.2f", context.gameSetting.practiceSpeed * 2)
         _ = teacherSay("\(i18n.speedIs)\(speedText)です", rate: context.gameSetting.practiceSpeed)
@@ -127,11 +140,6 @@ class VoiceSelectionPage: UIViewController {
 
     @IBAction func onDoneButtonClicked(_ sender: Any) {
         self.dismiss(animated: true)
-        if selectingVoiceFor == .teacher {
-            context.gameSetting.teacher = selectedVoice?.identifier ?? "unknown"
-        } else {
-            context.gameSetting.assisant = selectedVoice?.identifier ?? "unknown"
-        }
         if let settingPage = VoiceSelectionPage.fromPage as? SettingPage {
             settingPage.render()
         }
@@ -172,9 +180,14 @@ extension VoiceSelectionPage: UITableViewDataSource {
 extension VoiceSelectionPage: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedVoice = voicesGrouped[indexPath.section][indexPath.row]
-        let originalVoiceId = selectingVoiceFor == .teacher ?
-            context.gameSetting.teacher : context.gameSetting.assisant
-        if originalVoiceId == selectedVoice?.identifier {
+
+        if selectingVoiceFor == .teacher {
+            context.gameSetting.teacher = selectedVoice?.identifier ?? "unknown"
+        } else {
+            context.gameSetting.assisant = selectedVoice?.identifier ?? "unknown"
+        }
+
+        if originVoice == selectedVoice?.identifier {
             doneButton.isEnabled = false || isSpeedChanged
         } else {
             doneButton.isEnabled = true
