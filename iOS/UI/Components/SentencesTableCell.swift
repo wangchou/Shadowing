@@ -37,9 +37,7 @@ class SentencesTableCell: UITableViewCell {
     }
 
     private var startTime: Double = 0
-    private var targetString: String {
-        return sentenceLabel.text ?? " "
-    }
+    private var targetString: String = ""
 
     private var tableView: UITableView? {
         var view = superview
@@ -81,6 +79,7 @@ class SentencesTableCell: UITableViewCell {
     }
 
     func update(sentence: String, isShowTranslate: Bool = false) {
+        targetString = sentence
         sentenceLabel.widthPadding = 4
         userSaidSentenceLabel.widthPadding = 4
 

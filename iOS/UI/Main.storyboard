@@ -634,7 +634,7 @@ Cg
 
 4. 語音老師的重音有時怪怪的。不照著唸、使用正確的重音去唸，會提升辨識率。
 
-5. 保持平常心。有時不是你唸錯，真的是語音辨識錯誤。
+5. 保持平常心。有時不是你唸錯，真的是語音辨識錯誤。(特別是句子很短的時候，Siri的辨識度會較差。)
 
 6. 關閉自動速度調整：自己挑選一個適合自己的速度。
 
@@ -785,7 +785,7 @@ A: 作者的經驗，通常是</string>
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">，來把音訊傳給Apple辨識。
+                                        <mutableString key="content">，來把音訊傳給Apple辨識。
 
 =&gt; 如果到 Apple 的網路不順，他們收到的就是很多雜訊的聲音，就會亂聽。 
 另外，如果是音量的問題用 iPhone 附的有線耳麥會好很多。
@@ -806,7 +806,7 @@ Lv.2 (50~100徽章)：平均正確率 &gt; 60%，就會持續上升。
 ...
 Lv.10 (450~500徽章)：平均正確率 &gt; 80%，就會持續上升。
 
-</string>
+</mutableString>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="18" name="PingFangTC-Regular"/>

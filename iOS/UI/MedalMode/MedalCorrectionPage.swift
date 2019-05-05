@@ -55,7 +55,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         var count = 0
         for str in sentences {
             let score = sentenceScores[str]?.value ?? 0
-            if score > 60 && score < 80 {
+            if score >= 60 && score < 80 {
                 count += 1
             }
         }
@@ -268,6 +268,7 @@ extension MedalCorrectionPageView: UITableViewDataSource {
         cell.selectionStyle = .none
 
         let sentence = sortedSentences[indexPath.row]
+
         cell.update(sentence: sentence,
                     isShowTranslate: context.gameSetting.isShowTranslationInPractice)
 
