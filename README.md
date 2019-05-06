@@ -1,15 +1,19 @@
 # Shadowing App (今、話したい)
 「今話したい」是個練習日文、英文口說的App。App語音先說、你接著複誦。最後用辨識的結果，指出要加強的地方。目標是讓你「從會聽，但不會說」到擁有JLPT N3的口說能力。(or 英檢中高級)
 
-iOS App Store(v1.2): https://itunes.apple.com/app/id1439727086
+* 支援 Hands-Free 自動播放
+* 自動調整難度 (徽章系統)
+* 三萬句以上的英、日文
 
-demo videos(v1.1): https://youtu.be/wetrfwJ2sFo
+iOS App Store: https://itunes.apple.com/app/id1439727086
+
+demo videos: https://tinyurl.com/y4tvhx5r
 
 # About App Privacy
 This app will only transmit what you said Japanese Text and Navigation Flow to our server anonymously for converting it to furigana. We also will not keep any other private/personal information from users.
 
 ## How the iOS app looks like?
-<img src="https://raw.githubusercontent.com/wangchou/Shadowing/master/img/screenshot201903.jpg" height="300">
+<img src="https://raw.githubusercontent.com/wangchou/Shadowing/master/img/screenshot201905.jpg" height="240">
 
 ## Why this project?
 ### There are two problems I want to solve.
