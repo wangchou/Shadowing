@@ -13,7 +13,7 @@ demo videos: https://tinyurl.com/y4tvhx5r
 This app will only transmit what you said Japanese Text and Navigation Flow to our server anonymously for converting it to furigana. We also will not keep any other private/personal information from users.
 
 ## How the iOS app looks like?
-<img src="https://raw.githubusercontent.com/wangchou/Shadowing/master/img/screenshot201905.jpg" height="300">
+<img src="https://raw.githubusercontent.com/wangchou/Shadowing/master/img/screenshot201905.jpg" height="240">
 
 ## Why this project?
 ### There are two problems I want to solve.
