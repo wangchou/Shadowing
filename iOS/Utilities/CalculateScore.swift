@@ -30,8 +30,9 @@ func getKanaTokenInfos(_ kanjiString: String) -> Promise<[[String]]> {
                     promise.fulfill([])
                     return
                 }
-                kanaTokenInfosCacheDictionary[kanjiString] = tokenInfos
-                promise.fulfill(tokenInfos)
+                let fixedTokenInfo = doKanaCacheRulesFix(kanaCache: tokenInfos)
+                kanaTokenInfosCacheDictionary[kanjiString] = fixedTokenInfo
+                promise.fulfill(fixedTokenInfo)
 
             case .failure:
                 promise.fulfill([])
@@ -84,11 +85,11 @@ func calculateScore(
             return 0
         }
         let score = (len - distanceBetween(trimedS1, trimedS2)) * 100 / len
-        if score != 100 {
-            print("-------")
-            print("1>" ,str1)
-            print("2>", str2, score)
-        }
+//        if score != 100 {
+//            print("-------")
+//            print("1>" ,str1)
+//            print("2>", str2, score)
+//        }
         return score
     }
 
