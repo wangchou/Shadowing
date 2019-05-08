@@ -20,6 +20,8 @@ let ttsKanaFix: [String: String] = [
     "台湾人": "台湾じん",
     "辛い": "つらい",
     "何で": "なんで",
+    "何の": "なんの",
+    "何と": "なんと",
     "高すぎ": "たかすぎ",
     "後で": "あとで",
     "次いつ": "つぎいつ",
@@ -37,7 +39,6 @@ let ttsKanaFix: [String: String] = [
     "博士": "はかせ",
     "私立学校": "しりつ学校",
     "強すぎ": "つよすぎ",
-    "何と": "なんと",
     "弾いて": "ひいて"
 ]
 
@@ -79,7 +80,10 @@ var furiganaFix: [String: String] = [
     "誕生日": "たんじょうび", //vs たんじょーび
     "冷蔵庫": "れいぞうこ",
     "山": "やま", // vs さん
-    "にんぎょう": "にんぎょー"
+    "にんぎょう": "にんぎょー",
+    "位": "くらい",
+    "雨": "あめ", // vs う
+    "土": "つち" // vs ど
 ]
 func getFixedFuriganaForScore(_ token: String) -> String? {
     return furiganaFix[token]
