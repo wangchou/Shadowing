@@ -20,6 +20,8 @@ let ttsKanaFix: [String: String] = [
     "台湾人": "台湾じん",
     "辛い": "つらい",
     "何で": "なんで",
+    "何の": "なんの",
+    "何と": "なんと",
     "高すぎ": "たかすぎ",
     "後で": "あとで",
     "次いつ": "つぎいつ",
@@ -37,7 +39,6 @@ let ttsKanaFix: [String: String] = [
     "博士": "はかせ",
     "私立学校": "しりつ学校",
     "強すぎ": "つよすぎ",
-    "何と": "なんと",
     "弾いて": "ひいて"
 ]
 
@@ -50,6 +51,7 @@ func getFixedKanaForTTS(_ text: String) -> String {
 }
 
 // MARK: Fix mecab kanji to furigana error
+// single word fix
 var furiganaFix: [String: String] = [
     "何時": "なんじ",
     "という": "トイウ",
@@ -79,8 +81,41 @@ var furiganaFix: [String: String] = [
     "誕生日": "たんじょうび", //vs たんじょーび
     "冷蔵庫": "れいぞうこ",
     "山": "やま", // vs さん
-    "にんぎょう": "にんぎょー"
+    "にんぎょう": "にんぎょー",
+    "位": "くらい",
+    "雨": "あめ", // vs う
+    "土": "つち" // vs ど
 ]
+
 func getFixedFuriganaForScore(_ token: String) -> String? {
     return furiganaFix[token]
+}
+
+// whole sentence fix by hard assign result
+func doKanaCacheHardFix() {
+    kanaTokenInfosCacheDictionary["大喜びだ。"] = [
+        ["大", "接頭詞", "オオ", "オオ"],
+        ["喜び", "名詞", "ヨロコビ", "ヨロコビ"],
+        ["だ", "助動詞", "ダ", "ダ"]
+    ]
+}
+
+private let threeRules = [["雪", "が", "降り", "フリ"]]
+
+// swiftlint:disable for_where
+// whole sentence fix by rules
+func doKanaCacheRulesFix(kanaCache: [[String]]) -> [[String]] {
+    var newCache = kanaCache
+    guard kanaCache.count >= 3 else { return kanaCache }
+    for i in 0 ..< kanaCache.count - 2 {
+        for rule in threeRules {
+            if kanaCache[i][0] == rule[0],
+                kanaCache[i+1][0] == rule[1],
+                newCache[i+2][0] == rule[2] {
+                newCache[i+2][2] = rule[3]
+                newCache[i+2][3] = rule[3]
+            }
+        }
+    }
+    return newCache
 }

@@ -80,8 +80,10 @@ func loadGameMiscData(isLoadKana: Bool = false) {
         if let loadedKanaTokenInfos = loadFromUserDefault(type: type(of: kanaTokenInfosCacheDictionary),
                                                           key: kanaTokenInfosKey + Lang.jp.key) {
             loadedKanaTokenInfos.keys.forEach { key in
+                guard kanaTokenInfosCacheDictionary[key] == nil else { return }
                 kanaTokenInfosCacheDictionary[key] = loadedKanaTokenInfos[key]
             }
+            doKanaCacheHardFix()
         } else {
             print("use new kanaTokenInfos")
         }

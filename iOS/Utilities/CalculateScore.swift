@@ -30,8 +30,9 @@ func getKanaTokenInfos(_ kanjiString: String) -> Promise<[[String]]> {
                     promise.fulfill([])
                     return
                 }
-                kanaTokenInfosCacheDictionary[kanjiString] = tokenInfos
-                promise.fulfill(tokenInfos)
+                let fixedTokenInfo = doKanaCacheRulesFix(kanaCache: tokenInfos)
+                kanaTokenInfosCacheDictionary[kanjiString] = fixedTokenInfo
+                promise.fulfill(fixedTokenInfo)
 
             case .failure:
                 promise.fulfill([])

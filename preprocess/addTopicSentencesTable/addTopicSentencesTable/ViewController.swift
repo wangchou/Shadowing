@@ -82,6 +82,7 @@ func runAll() {
             for id in 0..<kanas.count {
                 updateIdWithListened(id: id, kana_count: kanas[id].count, ja: sentences[id], tokenInfos: kanaTokenInfosCacheDictionary[sentences[id]] ?? [])
             }
+            print("Done")
         }
 
     } catch {

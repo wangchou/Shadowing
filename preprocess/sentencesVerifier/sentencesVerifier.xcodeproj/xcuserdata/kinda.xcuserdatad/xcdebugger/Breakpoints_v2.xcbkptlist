@@ -42,13 +42,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../iOS/Utilities/CalculateScore.swift"
-            timestampString = "568265822.779431"
+            timestampString = "578982917.790502"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "29"
             endingLineNumber = "29"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "getKanaTokenInfos(_:)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

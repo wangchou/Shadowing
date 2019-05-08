@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		BE050B7E22227530007017C5 /* MessengerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE050B7D22227530007017C5 /* MessengerBar.swift */; };
+		BE10602C2282DEC7009F5B70 /* inf_sentences_100points_duolingo_with_topics.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BE10602B2282DEC7009F5B70 /* inf_sentences_100points_duolingo_with_topics.sqlite */; };
 		BE11DEC92257110500373586 /* MedalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE11DEC82257110500373586 /* MedalView.swift */; };
 		BE152048218085120059A7C2 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE152047218085120059A7C2 /* Level.swift */; };
 		BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17FB3D209B19B200D23F22 /* GameContext.swift */; };
 		BE1CA958209DC43800086853 /* Messenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1CA957209DC43800086853 /* Messenger.swift */; };
-		BE1FA4C021E3818A00111561 /* inf_sentences_100points_duolingo_with_topics.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BE1FA4BF21E3818A00111561 /* inf_sentences_100points_duolingo_with_topics.sqlite */; };
 		BE2142B121D370B900FA2925 /* grammarN5.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2142B021D370B900FA2925 /* grammarN5.swift */; };
 		BE221AA121A2A76D0009B23B /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE221AA021A2A76D0009B23B /* CircleView.swift */; };
 		BE2473A6226DDA2100EDFA5E /* MedalSummaryTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2473A5226DDA2100EDFA5E /* MedalSummaryTopView.swift */; };
@@ -145,11 +145,11 @@
 
 /* Begin PBXFileReference section */
 		BE050B7D22227530007017C5 /* MessengerBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerBar.swift; sourceTree = "<group>"; };
+		BE10602B2282DEC7009F5B70 /* inf_sentences_100points_duolingo_with_topics.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences_100points_duolingo_with_topics.sqlite; sourceTree = "<group>"; };
 		BE11DEC82257110500373586 /* MedalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalView.swift; sourceTree = "<group>"; };
 		BE152047218085120059A7C2 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		BE17FB3D209B19B200D23F22 /* GameContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameContext.swift; sourceTree = "<group>"; };
 		BE1CA957209DC43800086853 /* Messenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messenger.swift; sourceTree = "<group>"; };
-		BE1FA4BF21E3818A00111561 /* inf_sentences_100points_duolingo_with_topics.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences_100points_duolingo_with_topics.sqlite; sourceTree = "<group>"; };
 		BE2142B021D370B900FA2925 /* grammarN5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = grammarN5.swift; sourceTree = "<group>"; };
 		BE221AA021A2A76D0009B23B /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		BE2473A5226DDA2100EDFA5E /* MedalSummaryTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalSummaryTopView.swift; sourceTree = "<group>"; };
@@ -484,7 +484,7 @@
 		BEBDEDBE208EF09F00C18520 /* Project */ = {
 			isa = PBXGroup;
 			children = (
-				BE1FA4BF21E3818A00111561 /* inf_sentences_100points_duolingo_with_topics.sqlite */,
+				BE10602B2282DEC7009F5B70 /* inf_sentences_100points_duolingo_with_topics.sqlite */,
 				BE67D2A821561A92007FE420 /* Assets.xcassets */,
 				BEBDEDCB208EF0A000C18520 /* Info.plist */,
 				BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */,
@@ -627,7 +627,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE1FA4C021E3818A00111561 /* inf_sentences_100points_duolingo_with_topics.sqlite in Resources */,
+				BE10602C2282DEC7009F5B70 /* inf_sentences_100points_duolingo_with_topics.sqlite in Resources */,
 				BE28B2C221A3EAB600088214 /* Main.storyboard in Resources */,
 				BE7AFA9C21C9F85A00C41BF4 /* GoogleService-Info.plist in Resources */,
 				BE76F11F214F56F6004E130B /* SentencesTableCell.xib in Resources */,

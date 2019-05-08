@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE10602022829533009F5B70 /* quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE10601F22829533009F5B70 /* quote.swift */; };
 		BE2142AF21D3707400FA2925 /* grammarN5.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2142AE21D3707400FA2925 /* grammarN5.swift */; };
 		BE3260D321C18EA200A13C94 /* vocabulary1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260D121C18EA200A13C94 /* vocabulary1.swift */; };
 		BE3260D421C18EA200A13C94 /* vocabulary2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260D221C18EA200A13C94 /* vocabulary2.swift */; };
@@ -58,6 +59,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BE10601F22829533009F5B70 /* quote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = quote.swift; path = ../../iOS/Sentences/quote.swift; sourceTree = "<group>"; };
 		BE2142AE21D3707400FA2925 /* grammarN5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = grammarN5.swift; path = ../../iOS/Sentences/grammarN5.swift; sourceTree = "<group>"; };
 		BE3260D121C18EA200A13C94 /* vocabulary1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = vocabulary1.swift; path = ../../iOS/Sentences/vocabulary1.swift; sourceTree = "<group>"; };
 		BE3260D221C18EA200A13C94 /* vocabulary2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = vocabulary2.swift; path = ../../iOS/Sentences/vocabulary2.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		BE3EA03D217761C600B65F48 /* reference from iOS project */ = {
 			isa = PBXGroup;
 			children = (
+				BE10601F22829533009F5B70 /* quote.swift */,
 				BE439C6621DF3B4F00C0BE14 /* grammarN4.swift */,
 				BE2142AE21D3707400FA2925 /* grammarN5.swift */,
 				BE8E51EC21D0E57D007D29E6 /* String+Utilities.swift */,
@@ -254,6 +257,7 @@
 				BE869D11218E110000689755 /* kanaFix.swift in Sources */,
 				BE869D0F218E110000689755 /* love.swift in Sources */,
 				BE869D14218E110000689755 /* speech.swift in Sources */,
+				BE10602022829533009F5B70 /* quote.swift in Sources */,
 				BE869D0D218E110000689755 /* daily.swift in Sources */,
 				BE869D0B218E110000689755 /* rawDataSets.swift in Sources */,
 				BE869D15218E110000689755 /* expressive.swift in Sources */,
