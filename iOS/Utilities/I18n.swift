@@ -367,7 +367,7 @@ class I18n {
     var continues: String {
         if isZh { return "連續" }
         if isJa { return "連続" }
-        return "Is On"
+        return "Streak"
     }
     var best: String {
         if isZh { return "最佳" }
