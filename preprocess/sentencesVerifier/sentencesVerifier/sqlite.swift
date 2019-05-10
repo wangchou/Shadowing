@@ -83,32 +83,6 @@ func updateSyllablesCount(id: Int, syllablesCount: Int) {
     }
 }
 
-func getSentenceCount(minKanaCount: Int, maxKanaCount: Int) -> Int {
-    guard let startKanaInfo = kanaInfos[minKanaCount],
-        let endKanaInfo = kanaInfos[maxKanaCount] else { print("err in getSentenceCount"); return -1}
-
-    let startId = startKanaInfo.startId
-    let endId = endKanaInfo.startId + endKanaInfo.sentenceCount - 1
-
-    return endId - startId
-}
-
-func randSentenceIds(minKanaCount: Int, maxKanaCount: Int, numOfSentences: Int) -> [Int] {
-    guard let startKanaInfo = kanaInfos[minKanaCount],
-          let endKanaInfo = kanaInfos[maxKanaCount] else { print("err in randSentenceIds"); return []}
-
-    let startId = startKanaInfo.startId
-    let endId = endKanaInfo.startId + endKanaInfo.sentenceCount - 1
-
-    var randomIds: [Int] = []
-    let maxCount = min(getSentenceCount(minKanaCount: minKanaCount, maxKanaCount: maxKanaCount), numOfSentences)
-    for _ in 0..<maxCount {
-        randomIds.append(Int(arc4random_uniform(UInt32(endId - startId))) + startId)
-    }
-
-    return randomIds
-}
-
 func loadWritableDb() {
     let fileManager = FileManager.default
     do {

@@ -63,7 +63,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "195"
             endingLineNumber = "195"
-            landmarkName = "prepareSentences()"
+            landmarkName = "loadICSentences()"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>

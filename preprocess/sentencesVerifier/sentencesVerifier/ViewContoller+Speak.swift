@@ -54,7 +54,13 @@ enum Speaker: String {
     }
 }
 
-func prepareSpeak() {
+func say(_ s: String) {
+    theErr = SpeakCFString(fCurSpeechChannel!, getFixedKanaForTTS(s) as CFString, nil)
+    if theErr != OSErr(noErr) { print("error... speak") }
+    //print("\(s) is spoken")
+}
+
+func setupSpeechChannelAndDoneCallback() {
     // new channel
     theErr = NewSpeechChannel(nil, &fCurSpeechChannel)
     if theErr != OSErr(noErr) { print("error... 1") }
@@ -92,7 +98,7 @@ func prepareSpeak() {
 
     if theErr == OSErr(noErr) {
         typealias DoneCallBackType = @convention(c) (SpeechChannel, SRefCon)->Void
-        let callback = OurSpeechDoneCallBackProc as DoneCallBackType?
+        let callback = onSpeakEnded as DoneCallBackType?
         let callbackAddr = unsafeBitCast(callback, to: UInt.self) as CFNumber
         theErr = SetSpeechProperty(fCurSpeechChannel!,
                                    kSpeechSpeechDoneCallBack,
@@ -103,15 +109,8 @@ func prepareSpeak() {
     }
 }
 
-func speak(_ s: String) {
-    theErr = SpeakCFString(fCurSpeechChannel!, getFixedKanaForTTS(s) as CFString, nil)
-    if theErr != OSErr(noErr) { print("error... speak") }
-    //print("\(s) is spoken")
-}
-
-
-func OurSpeechDoneCallBackProc(_ inSpeechChannel: SpeechChannel, _ inRefCon: SRefCon) {
-    toggleSTT()
+private func onSpeakEnded(_ inSpeechChannel: SpeechChannel, _ inRefCon: SRefCon) {
+    toggleSpeechToText()
     let waitTime:TimeInterval = 1.5
     var isEmptyString: Bool = false
 
@@ -120,7 +119,7 @@ func OurSpeechDoneCallBackProc(_ inSpeechChannel: SpeechChannel, _ inRefCon: SRe
             let s = vc.textView.string
             isEmptyString = s == ""
             let id = sentenceIds[sentencesIdx-1]
-            if isInfiniteChallengePreprocessingMode {
+            if isProcessingICDataset {
                 //updateIdWithListened(id: id, siriSaid: s)
                 var calcScoreFn: (String, String) -> Promise<Score>
                 switch speaker {
@@ -132,7 +131,7 @@ func OurSpeechDoneCallBackProc(_ inSpeechChannel: SpeechChannel, _ inRefCon: SRe
                 calcScoreFn(idToSentences[id]!, s).then { score in
                     updatePerfectCount(id: id, score: score)
                     updateSiriSaidAndScore(id: id, siriSaid: s, score: score)
-                    nextSentence(isEmptyString: isEmptyString)
+                    nextSentence(isNeedToReset: isEmptyString)
                 }
             } else {
                 let s1 = sentences[id]
@@ -144,18 +143,18 @@ func OurSpeechDoneCallBackProc(_ inSpeechChannel: SpeechChannel, _ inRefCon: SRe
                         print(s2)
                         isGroupCorrect = false
                     }
-                    nextSentence(isEmptyString: isEmptyString)
+                    nextSentence(isNeedToReset: isEmptyString)
                 }
             }
         }
     }
 }
 
-func nextSentence(isEmptyString: Bool) {
+func nextSentence(isNeedToReset: Bool) {
     let waitTime:TimeInterval = 1.5
     // listening and speaking time off => one more double fn-fn
-    if isEmptyString {
-        toggleSTT()
+    if isNeedToReset {
+        toggleSpeechToText()
         Timer.scheduledTimer(withTimeInterval: waitTime, repeats: false) { _ in
             verifyNextSentence()
         }
@@ -165,7 +164,7 @@ func nextSentence(isEmptyString: Bool) {
 }
 
 //https://stackoverflow.com/questions/27484330/simulate-keypress-using-swift
-func toggleSTT() {
+func toggleSpeechToText() {
     FakeKey.send(63, useCommandFlag: false)
     FakeKey.send(63, useCommandFlag: false)
 }
