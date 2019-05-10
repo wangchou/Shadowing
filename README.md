@@ -5,7 +5,7 @@
 * 自動調整難度 (徽章系統)
 * 三萬句以上的英、日文
 
-iOS App Store: https://itunes.apple.com/app/id1439727086
+iOS App Store: https://itunes.apple.com/tw/app/id1439727086
 
 demo videos: https://tinyurl.com/y4tvhx5r
 
