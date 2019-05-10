@@ -39,16 +39,26 @@ var sortedIds: [Int] = []
 var count = 0
 var totalCount = 0
 
+var speakerList: [Speaker] = [.otoya, .kyoko, .samantha, .alex]
+
 class ViewController: NSViewController {
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var label: NSTextField!
     @IBOutlet var textView: NSTextView!
+    @IBOutlet weak var speakerSegmentControl: NSSegmentedControl!
 
     @IBOutlet var rightTextView: NSTextView!
     @IBOutlet var wrongTextView: NSTextView!
     override func viewDidLoad() {
         super.viewDidLoad()
         vc = self
+        speakerSegmentControl.segmentCount = speakerList.count
+        for (i, speaker) in speakerList.enumerated() {
+            speakerSegmentControl.setWidth(70, forSegment: i)
+            speakerSegmentControl.setLabel(speaker.rawValue, forSegment: i)
+        }
+        speakerSegmentControl.frame.size.width = (speakerList.count * 70).c
+        speakerSegmentControl.setSelected(true, forSegment: 0)
     }
 
     override var representedObject: Any? {
@@ -56,22 +66,14 @@ class ViewController: NSViewController {
         // Update the view, if already loaded.
         }
     }
-
-    @IBAction func otoyaInfiniteChallengeButtonClicked(_ sender: Any) {
-        infiniteChallengeButtonClicked(.otoya)
+    @IBAction func onSpeakerSwitched(_ sender: Any) {
+        speaker = speakerList[speakerSegmentControl.selectedSegment]
     }
 
-    @IBAction func kyokoInfiniteChallengeButtonClicked(_ sender: Any) {
-        infiniteChallengeButtonClicked(.kyoko)
+    @IBAction func sayButtonClicked(_ sender: Any) {
+        infiniteChallengeButtonClicked(speaker)
     }
 
-    @IBAction func alexInifiniteChallengeButtonClicked(_ sender: Any) {
-        infiniteChallengeButtonClicked(.alex)
-    }
-
-    @IBAction func samanthaInifiniteChallengeButtonClicked(_ sender: Any) {
-        infiniteChallengeButtonClicked(.samantha)
-    }
 
     func infiniteChallengeButtonClicked(_ inSpeaker: Speaker) {
         isInfiniteChallengePreprocessingMode = true
@@ -87,21 +89,10 @@ class ViewController: NSViewController {
     // Not sure why swift sqlite3 library could be so slow
     // Oh damn, this library even not support connectionPool...
     // Nodejs runs on 500 updates/sec
-    @IBAction func alexCalculateScoreButtonClicked(_ sender: Any) {
-        calculateScoreButtonClicked(.alex)
+    @IBAction func calculateScoreButtonClicked(_ sender: Any) {
+        calculateScoreButtonClicked(speaker)
     }
 
-    @IBAction func samanthaCalculateScoreButtonClicked(_ sender: Any) {
-        calculateScoreButtonClicked(.samantha)
-    }
-
-    @IBAction func otoyaCalculateScoreButtonClicked(_ sender: Any) {
-        calculateScoreButtonClicked(.otoya)
-    }
-
-    @IBAction func kyokoCalculateScoreButtonClicked(_ sender: Any) {
-        calculateScoreButtonClicked(.kyoko)
-    }
 
     func calculateScoreButtonClicked(_ inSpeaker: Speaker) {
         startTime = now()
