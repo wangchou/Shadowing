@@ -98,6 +98,35 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         addDailyGoalView(x: 7, y: y+29,
                          isFullStatus: true,
                          delay: 1.8, duration: 0.2)
+        addTipBox()
+    }
+
+    private func addTipBox() {
+        if isIPad { return }
+        let y = Int((screen.height - bottomButtonHeight)/step) - 1
+        let h = 6
+        let font = MyFont.regular(ofSize: step * 2)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = step/3
+        let attributes: [NSAttributedString.Key: Any] = [
+            .paragraphStyle: paragraphStyle,
+            .font: font
+        ]
+        let attributedString = NSAttributedString(string: i18n.getRandTip(),
+                                                  attributes: attributes)
+
+        let box = addRect(x: 3, y: y, w: gridCount - 6, h: h)
+        box.roundBorder(radius: step)
+        box.backgroundColor = rgb(190, 190, 190).withAlphaComponent(0.7)
+
+        let label = UILabel()
+        label.attributedText = attributedString
+        label.textAlignment = .center
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
+
+        layout(4, y, gridCount-8, h, label)
+        addSubview(label)
     }
 
     private func addTitleBlock(y: Int, delay: TimeInterval = 0, duration: TimeInterval) {

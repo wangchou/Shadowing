@@ -723,5 +723,71 @@ class I18n {
         if isZh { return "徽章模式" }
         return "Medal Game"
     }
+
+    var tip1: String {
+        let teacherName = gameLang == .jp ? "Otoya" : "Samatha"
+        if isZh { return "安裝高品質語音。(\(teacherName) 300MB, iPhone設定：「輔助使用 > 語音」)" }
+        if isJa { return "高品質の声をダウンロードしましょう。(\(teacherName) 300MB, iPhoneの設定：「アクセシビリティ」>「スピーチ」)"}
+        return "Download high-quality voices (\(teacherName) 300MB) from iPhone Setting:「Accessibility > Speech」。"
+    }
+
+    var tip2: String {
+        if isZh { return "用有線耳麥、監聽自己的聲音。(需到設定開啟)" }
+        if isJa { return "有線イヤホンを使用して、自分の声をモニタリングする。(設定ページ)" }
+        return "Use wired Apple earbuds to monitoring spoken voice. (turn it on in setting page)"
+    }
+
+    var tip3: String {
+        if isZh { return "Siri 只聽得懂咬字清楚、大聲的句子。" }
+        if isJa { return "Siriは、歯切れの良い大きな声だけを理解できる。" }
+        return "Please articulate and keep voice loud."
+    }
+
+    var tip4: String {
+        if gameLang == .en {
+            if isZh { return "選英國腔老師時、Siri只聽得懂英國腔。" }
+            if isJa { return "イギリスの先生を選んだ時、イギリスのアクセントを話そう。" }
+            return "When choosing teacher from England, speak in England's accent."
+        } else {
+            if isZh { return "日文新手請從「主題模式」開始" }
+            if isJa { return "初心者は「テーマモード」から始めてください。" }
+            return "For Japanese beginner, please play \"Topic Mode\" first."
+        }
+    }
+
+    var tip5: String {
+        if isZh { return "挑選一個適合自己的速度。" }
+        if isJa { return "自分に合う速度を選んでください。" }
+        return "Choose the suitable speed for your level."
+    }
+
+    var tip6: String {
+        if isZh { return "躺在床上唸錯時，請做仰臥起坐、保持清醒。" }
+        if isJa { return "ベッドで間違って話した後に、腹筋運動をします。" }
+        return "When practicing on the bed, do sit-ups after speaking wrongly."
+    }
+
+    var tip7: String {
+        if isZh { return "當Siri說話時、請專注聽、螢幕只是輔助。" }
+        if isJa { return "シリが話しているときはリスニングに集中してください。" }
+        return "Focus on listening when siri is talking. (not focus on watching)"
+    }
+
+    var tip8: String {
+        if isZh { return "累了、就休息一下。這樣學的更快。" }
+        if isJa { return "疲れたら、少し休みましょう。これはもっと速い道です。" }
+        return "If you feel tired, take a rest. Learning speed will be faster."
+    }
+
+    var tip9: String {
+        if isZh { return "在安靜、有穩定網路的地方練習。" }
+        if isJa { return "安定したネットワークで静かな場所で練習しましょ。" }
+        return "Practice at a quiet place with stable network"
+    }
+
+    func getRandTip() -> String {
+        return [tip1, tip2, tip3, tip4, tip5, tip6, tip7, tip8, tip9]
+            .randomElement()!
+    }
 }
 // swiftlint:enable file_length  type_body_length
