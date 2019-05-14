@@ -1,1 +1,4 @@
 Carthage
+xcuserdata/*
+xcshareddata/*
+sentencesVerifier.xcodeproj/xcuserdata/*

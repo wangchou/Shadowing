@@ -29,89 +29,78 @@ var verifyNextSentence: () -> () = verifyNextChallengeSentence
 // 1. set sunflower 2ch as input and output
 // 2. in accessibility make sure the setting of "STT do not mute other audio"
 // 3. let programe say some sentence with offline enhanced dictation then turn it off.
-//    then use online STTlike iOS
+//    then use online STT like iOS
 // run this whole day
 
-var isInfiniteChallengePreprocessingMode = true
+// infinite challenge dataset
+var isProcessingICDataset = true
 var isUpdateDB = true
 var speaker: Speaker = .otoya
 var sortedIds: [Int] = []
 var count = 0
 var totalCount = 0
 
+var speakerList: [Speaker] = [.otoya, .kyoko, .samantha, .alex]
+
 class ViewController: NSViewController {
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var label: NSTextField!
     @IBOutlet var textView: NSTextView!
-
+    @IBOutlet weak var speakerSegmentControl: NSSegmentedControl!
     @IBOutlet var rightTextView: NSTextView!
     @IBOutlet var wrongTextView: NSTextView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         vc = self
-    }
-
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
+        speakerSegmentControl.segmentCount = speakerList.count
+        for (i, speaker) in speakerList.enumerated() {
+            speakerSegmentControl.setWidth(70, forSegment: i)
+            speakerSegmentControl.setLabel(speaker.rawValue, forSegment: i)
         }
+        speakerSegmentControl.frame.size.width = (speakerList.count * 70).c
+        speakerSegmentControl.setSelected(true, forSegment: 0)
     }
 
-    @IBAction func otoyaInfiniteChallengeButtonClicked(_ sender: Any) {
-        infiniteChallengeButtonClicked(.otoya)
+    @IBAction func onSpeakerSwitched(_ sender: Any) {
+        speaker = speakerList[speakerSegmentControl.selectedSegment]
     }
 
-    @IBAction func kyokoInfiniteChallengeButtonClicked(_ sender: Any) {
-        infiniteChallengeButtonClicked(.kyoko)
-    }
-
-    @IBAction func alexInifiniteChallengeButtonClicked(_ sender: Any) {
-        infiniteChallengeButtonClicked(.alex)
-    }
-
-    @IBAction func samanthaInifiniteChallengeButtonClicked(_ sender: Any) {
-        infiniteChallengeButtonClicked(.samantha)
-    }
-
-    func infiniteChallengeButtonClicked(_ inSpeaker: Speaker) {
-        isInfiniteChallengePreprocessingMode = true
-        speaker = inSpeaker
-        prepareSentences()
-        prepareSpeak()
-        scrollView.becomeFirstResponder()
+    @IBAction func sayButtonClicked(_ sender: Any) {
+        isProcessingICDataset = true
+        loadICSentences()
+        setupSpeechChannelAndDoneCallback()
         verifyNextSentence()
     }
-
 
     // This is freaking slow, only 30 updates/sec
     // Not sure why swift sqlite3 library could be so slow
     // Oh damn, this library even not support connectionPool...
     // Nodejs runs on 500 updates/sec
-    @IBAction func alexCalculateScoreButtonClicked(_ sender: Any) {
-        calculateScoreButtonClicked(.alex)
-    }
-
-    @IBAction func samanthaCalculateScoreButtonClicked(_ sender: Any) {
-        calculateScoreButtonClicked(.samantha)
-    }
-
-    @IBAction func otoyaCalculateScoreButtonClicked(_ sender: Any) {
-        calculateScoreButtonClicked(.otoya)
-    }
-
-    @IBAction func kyokoCalculateScoreButtonClicked(_ sender: Any) {
-        calculateScoreButtonClicked(.kyoko)
-    }
-
-    func calculateScoreButtonClicked(_ inSpeaker: Speaker) {
+    @IBAction func calculateScoreButtonClicked(_ sender: Any) {
         startTime = now()
-        speaker = inSpeaker
-        prepareSentences()
+        loadICSentences()
         count = 0
         totalCount = 0
         sentencesIdx = 0
         sortedIds = idToSiriSaid.keys.sorted()
         calculateNextScores()
+    }
+
+    @IBAction func syllablesCountButtonClicked(_ sender: Any) {
+        startTime = now()
+        speaker = .alex
+        loadICSentences()
+        for id in idToSentences.keys.sorted() {
+            guard let en = idToSentences[id] else { continue }
+            let syllablesCount = SwiftSyllables.getSyllables(en.spellOutNumbers())
+            updateSyllablesCount(id: id, syllablesCount: syllablesCount)
+        }
+        print("Syllables count updated \(round(now() - startTime))s")
+    }
+
+    @IBAction func topicSentenceButtonClicked(_ sender: Any) {
+        verifyAllTopicSentences()
     }
 
     func calculateNextScores() {
@@ -124,7 +113,7 @@ class ViewController: NSViewController {
             let promise = Promise<Void>.pending()
             guard idToScore[id] == nil || idToScore[id] == 0 else { continue }
             guard let siriSaid = idToSiriSaid[id],
-                  siriSaid != "" else { continue }
+                siriSaid != "" else { continue }
             guard let originalText = idToSentences[id] else { continue }
             promiseArr.append(promise)
             var calcScoreFn: (String, String) -> Promise<Score>
@@ -155,70 +144,55 @@ class ViewController: NSViewController {
             }
         }
     }
-
-    @IBAction func syllablesCountButtonClicked(_ sender: Any) {
-        startTime = now()
-        speaker = .alex
-        prepareSentences()
-        for id in idToSentences.keys.sorted() {
-            guard let en = idToSentences[id] else { continue }
-            let syllablesCount = SwiftSyllables.getSyllables(en.spellOutNumbers())
-            updateSyllablesCount(id: id, syllablesCount: syllablesCount)
-        }
-        print("Syllables count updated \(round(now() - startTime))s")
-    }
-
-    @IBAction func topicSentenceButtonClicked(_ sender: Any) {
-        verifyAllTopicSentences()
-    }
 }
 
-func prepareSentences() {
+func loadICSentences() {
+    guard isProcessingICDataset else { print("call loadICSentences in non IC mode"); return }
+
     sentenceIds = []
-    if isInfiniteChallengePreprocessingMode {
-        switch speaker {
-        case .otoya, .kyoko:
-            bothPerfectCountLimit = 1000
-            voicePerfectCountLimit = 2000
-            syllablesLenLimit = 40
-        case .alex, .samantha:
-            bothPerfectCountLimit = 1500
-            voicePerfectCountLimit = 2000
-            syllablesLenLimit = 30
-        }
-        loadWritableDb()
-        startTime = now()
-        for id in idToSentences.keys.sorted() {
-            // perfect count filtering
-            guard let syllablesLen = idToSyllablesLen[id] else { continue }
-            guard syllablesLen <= syllablesLenLimit else { continue }
-            let bothPerfectCount = bothPerfectCounts[syllablesLen] ?? 0
-            let pairedVoicePerfectCount = pairedVoicePerfectCounts[syllablesLen] ?? 0
-            let currentVoicePerfectCount = currentVoicePerfectCounts[syllablesLen] ?? 0
-            if pairedVoicePerfectCount >= voicePerfectCountLimit { continue }
-            if bothPerfectCount >= bothPerfectCountLimit { continue }
-            if currentVoicePerfectCount >= voicePerfectCountLimit { continue }
 
-            if idToScore[id] == 100 {
-                currentVoicePerfectCounts[syllablesLen] = currentVoicePerfectCount + 1
-            }
-            if idToPairedScore[id] == 100 {
-                pairedVoicePerfectCounts[syllablesLen] = pairedVoicePerfectCount + 1
-                if idToScore[id] == 100 {
-                    bothPerfectCounts[syllablesLen] = bothPerfectCount + 1
-                }
-            }
-
-            //guard id % 30 == 0 else { continue }
-
-            guard idToSiriSaid[id] == "" || idToSiriSaid[id] == nil else { continue }
-            let pairedScore = idToPairedScore[id]
-            if pairedScore == nil || pairedScore == 100 {
-                sentenceIds.append(id)
-            }
-        }
-        sentences = getSentencesByIds(ids: sentenceIds)
+    switch speaker {
+    case .otoya, .kyoko:
+        bothPerfectCountLimit = 1000
+        voicePerfectCountLimit = 2000
+        syllablesLenLimit = 40
+    case .alex, .samantha:
+        bothPerfectCountLimit = 1500
+        voicePerfectCountLimit = 2000
+        syllablesLenLimit = 30
     }
+    loadWritableDb()
+    startTime = now()
+    for id in idToSentences.keys.sorted() {
+        // perfect count filtering
+        guard let syllablesLen = idToSyllablesLen[id] else { continue }
+        guard syllablesLen <= syllablesLenLimit else { continue }
+        let bothPerfectCount = bothPerfectCounts[syllablesLen] ?? 0
+        let pairedVoicePerfectCount = pairedVoicePerfectCounts[syllablesLen] ?? 0
+        let currentVoicePerfectCount = currentVoicePerfectCounts[syllablesLen] ?? 0
+        if pairedVoicePerfectCount >= voicePerfectCountLimit { continue }
+        if bothPerfectCount >= bothPerfectCountLimit { continue }
+        if currentVoicePerfectCount >= voicePerfectCountLimit { continue }
+
+        if idToScore[id] == 100 {
+            currentVoicePerfectCounts[syllablesLen] = currentVoicePerfectCount + 1
+        }
+        if idToPairedScore[id] == 100 {
+            pairedVoicePerfectCounts[syllablesLen] = pairedVoicePerfectCount + 1
+            if idToScore[id] == 100 {
+                bothPerfectCounts[syllablesLen] = bothPerfectCount + 1
+            }
+        }
+
+        //guard id % 30 == 0 else { continue }
+
+        guard idToSiriSaid[id] == "" || idToSiriSaid[id] == nil else { continue }
+        let pairedScore = idToPairedScore[id]
+        if pairedScore == nil || pairedScore == 100 {
+            sentenceIds.append(id)
+        }
+    }
+    sentences = getSentencesByIds(ids: sentenceIds)
 
     print(sentenceIds.count)
     print(bothPerfectCounts)
@@ -234,7 +208,7 @@ func verifyNextChallengeSentence() {
     
     while true {
         guard sentencesIdx < sentences.count else { return }
-        guard isInfiniteChallengePreprocessingMode else { break }
+        guard isProcessingICDataset else { break }
         if isPerfectCountOverLimit(id: sentenceIds[sentencesIdx]){
             sentencesIdx = sentencesIdx + 1
         } else {
@@ -244,9 +218,9 @@ func verifyNextChallengeSentence() {
 
     let s = sentences[sentencesIdx]
     vc.textView.string = ""
-    toggleSTT()
+    toggleSpeechToText()
     Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
-        speak(s)
+        say(s)
     }
     sentencesIdx += 1
 }

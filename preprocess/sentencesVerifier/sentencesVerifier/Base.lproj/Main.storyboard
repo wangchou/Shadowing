@@ -773,83 +773,23 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nNe-fW-Ow3">
-                                <rect key="frame" x="44" y="400" width="232" height="32"/>
-                                <buttonCell key="cell" type="push" title="otoya say: ja + infiniteChallenge" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Yjk-47-9E2">
+                                <rect key="frame" x="44" y="388" width="63" height="32"/>
+                                <buttonCell key="cell" type="push" title="Say" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Yjk-47-9E2">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="otoyaInfiniteChallengeButtonClicked:" target="XfG-lQ-9wD" id="a4i-iq-ZZ0"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ir1-xc-bEo">
-                                <rect key="frame" x="44" y="440" width="235" height="32"/>
-                                <buttonCell key="cell" type="push" title="kyoko say: ja + infiniteChallenge" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dBR-sY-g5l">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="kyokoInfiniteChallengeButtonClicked:" target="XfG-lQ-9wD" id="lch-fs-aW1"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vsD-PR-Kt4">
-                                <rect key="frame" x="44" y="313" width="228" height="32"/>
-                                <buttonCell key="cell" type="push" title="alex say: en + infiniteChallenge" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="10P-aJ-98o">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="alexInifiniteChallengeButtonClicked:" target="XfG-lQ-9wD" id="XY7-Dm-pxT"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gvk-fL-5Er">
-                                <rect key="frame" x="44" y="350" width="263" height="32"/>
-                                <buttonCell key="cell" type="push" title="samantha say: en + infiniteChallenge" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="h1N-yI-Sjf">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="samanthaInifiniteChallengeButtonClicked:" target="XfG-lQ-9wD" id="cWz-Id-Q45"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3FU-5p-BtO">
-                                <rect key="frame" x="44" y="263" width="261" height="32"/>
-                                <buttonCell key="cell" type="push" title="calcScore: otoya + infinitieChallenge" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="De2-JH-J3T">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="otoyaCalculateScoreButtonClicked:" target="XfG-lQ-9wD" id="dmx-eS-9Ed"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jhR-2d-nD9">
-                                <rect key="frame" x="44" y="213" width="263" height="32"/>
-                                <buttonCell key="cell" type="push" title="calcScore: kyoko + infinitieChallenge" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PCM-HI-Q3a">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="kyokoCalculateScoreButtonClicked:" target="XfG-lQ-9wD" id="HxU-iE-eie"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4by-Pe-c3O">
-                                <rect key="frame" x="44" y="163" width="252" height="32"/>
-                                <buttonCell key="cell" type="push" title="calcScore: alex + infinitieChallenge" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kOj-vT-aRr">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="alexCalculateScoreButtonClicked:" target="XfG-lQ-9wD" id="rQB-wD-amM"/>
+                                    <action selector="sayButtonClicked:" target="XfG-lQ-9wD" id="9Fl-c8-Nas"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xba-zz-L5U">
-                                <rect key="frame" x="44" y="113" width="287" height="32"/>
-                                <buttonCell key="cell" type="push" title="calcScore: samantha + infinitieChallenge" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nBe-0K-ujC">
+                                <rect key="frame" x="44" y="347" width="132" height="32"/>
+                                <buttonCell key="cell" type="push" title="CalculateScore" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nBe-0K-ujC">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="samanthaCalculateScoreButtonClicked:" target="XfG-lQ-9wD" id="GM2-Md-1Cv"/>
+                                    <action selector="calculateScoreButtonClicked:" target="XfG-lQ-9wD" id="K7K-if-ncP"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CK2-wp-NAJ">
@@ -889,16 +829,36 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <segmentedControl verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GzS-P3-Pcr">
+                                <rect key="frame" x="48" y="434" width="104" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="dLv-FT-czZ">
+                                    <font key="font" metaFont="system"/>
+                                    <segments>
+                                        <segment width="32"/>
+                                        <segment width="32" selected="YES" tag="1"/>
+                                        <segment width="32">
+                                            <nil key="label"/>
+                                        </segment>
+                                    </segments>
+                                </segmentedCell>
+                                <connections>
+                                    <action selector="onSpeakerSwitched:" target="XfG-lQ-9wD" id="Ir1-j4-31D"/>
+                                </connections>
+                            </segmentedControl>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A3q-QZ-BUv">
+                                <rect key="frame" x="18" y="462" width="125" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Infinite Chanllenge" id="py8-2U-09m">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="4by-Pe-c3O" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="50" id="F6q-2e-nFB"/>
-                            <constraint firstItem="jhR-2d-nD9" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="50" id="Gcb-TC-67N"/>
-                            <constraint firstItem="ir1-xc-bEo" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="50" id="QyC-iF-GIC"/>
-                            <constraint firstItem="3FU-5p-BtO" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="50" id="h4O-4k-epd"/>
                             <constraint firstItem="nNe-fW-Ow3" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="50" id="ihs-9S-5mN"/>
                             <constraint firstItem="xba-zz-L5U" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="50" id="kRR-X9-so2"/>
-                            <constraint firstItem="vsD-PR-Kt4" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="50" id="kru-I1-6pD"/>
-                            <constraint firstItem="gvk-fL-5Er" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="50" id="o3d-gy-4VV"/>
                             <constraint firstItem="CK2-wp-NAJ" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="50" id="xBH-Lt-O09"/>
                             <constraint firstItem="wZR-9j-odn" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="50" id="yBk-gB-6Zo"/>
                         </constraints>
@@ -907,6 +867,7 @@
                         <outlet property="label" destination="wZR-9j-odn" id="Kon-fE-Hib"/>
                         <outlet property="rightTextView" destination="mde-Lj-O7e" id="jl4-ln-UJR"/>
                         <outlet property="scrollView" destination="hQd-cC-F9a" id="UPw-w5-IIc"/>
+                        <outlet property="speakerSegmentControl" destination="GzS-P3-Pcr" id="EMI-Wg-diC"/>
                         <outlet property="textView" destination="nMe-y7-fEe" id="Pam-Ak-dPL"/>
                         <outlet property="wrongTextView" destination="bgF-Rd-n6s" id="Goy-8L-JSM"/>
                     </connections>

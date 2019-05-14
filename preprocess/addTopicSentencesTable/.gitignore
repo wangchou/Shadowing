@@ -1,2 +1,5 @@
 Carthage
+xcuserdata/*
+xcshareddata/*
+addTopicSentencesTable.xcodeproj/xcuserdata/*
 build

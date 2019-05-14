@@ -29,7 +29,7 @@ var groupStartIdx = 0
 var isGroupCorrect = true
 extension ViewController {
     func verifyAllTopicSentences() {
-        isInfiniteChallengePreprocessingMode = false
+        isProcessingICDataset = false
         //sentences = inWork.components(separatedBy: "\n")
         sentences = quote.joined(separator: "\n")
                              .components(separatedBy: "\n")
@@ -47,9 +47,8 @@ extension ViewController {
 
         speaker = .otoya
         //speaker = .kyoko
-        prepareSpeak()
+        setupSpeechChannelAndDoneCallback()
 
-        scrollView.becomeFirstResponder()
         verifyNextSentence = verifyNextTopicSentence
 
         groupStartIdx = 0
@@ -104,9 +103,9 @@ func verifyNextTopicSentence() {
     }
 
     vc.textView.string = ""
-    toggleSTT()
+    toggleSpeechToText()
     Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
-        speak(s)
+        say(s)
     }
     sentencesIdx += 1
 }
