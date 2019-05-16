@@ -31,16 +31,20 @@ class DifficultyCalculator {
         }
     }
 
-    public func getSentenceVocLevel(sentence: String) -> Int {
-        var maxDifficult = 0
+    // find top 3 difficult words in sentences and add it as sum
+    public func getDifficulty(sentence: String) -> Int {
+        var difficults: [Int] = []
         let words = lemmatization(for: sentence)
         for word in words {
             let wordLevel = getWordLevel(word: word)
-            if  wordLevel > maxDifficult {
-                maxDifficult = wordLevel
-            }
+            difficults.append(wordLevel)
         }
-        return maxDifficult
+        difficults.sort(by: > )
+        var difficulty = 0
+        for i in 0 ... 2 where i < difficults.count {
+            difficulty += difficults[i]
+        }
+        return difficulty
     }
 
     private func getLines(filename: String) -> [String] {
@@ -88,7 +92,7 @@ class DifficultyCalculator {
                 return i
             }
         }
-        return 100
+        return 10000
     }
 }
 
@@ -100,23 +104,24 @@ extension DifficultyCalculator {
         var targetLevel = 0
         var levelSentenceCounts: [Int: Int] = [:]
         for (i, sentence) in enSentences.enumerated() {
-            let sentenceLevel = getSentenceVocLevel(sentence: sentence)
+            let sentenceLevel = getDifficulty(sentence: sentence)
             levelSentenceCounts[sentenceLevel] = (levelSentenceCounts[sentenceLevel] ?? 0) + 1
-            if sentenceLevel == targetLevel % 9 && targetLevel < 36 {
-                if targetLevel % 9 == 0 { print("\n") }
-                print(sentenceLevel, sentence, "|", jaSentences[i])
+            if sentenceLevel == targetLevel % 200 {
+                //print(sentenceLevel, sentence, "|", jaSentences[i])
+                print(sentenceLevel, sentence)
+
                 targetLevel += 1
             }
-            if sentenceLevel == 100 {
+            if sentenceLevel > 10000 {
                 removeCount += 1
             }
         }
 
         print("\nRemove Count: \(removeCount) / \(enSentences.count)")
-        for i in 0 ... 8 {
+        for i in 0 ... 24 {
             print(i, levelSentenceCounts[i]!)
         }
-        print(100, levelSentenceCounts[100]!)
+        //print(10000, levelSentenceCounts[100]!)
         print("\n")
 
     }
