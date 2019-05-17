@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Promises
 
 private let context = GameContext.shared
 private var countDownTimer: Timer?
@@ -35,6 +36,10 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     var gr: GameRecord { return context.gameRecord! }
 
     var medal: GameMedal { return context.gameMedal }
+    
+    private var statusSpeakingPromise: Promise<Void> = fulfilledVoidPromise()
+
+    var isJustReachDailyGoal: Bool = false
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -65,9 +70,22 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     private func sayResult(gr: GameRecord) {
         let rankText = context.gameMedal.usingDetailRank ? gr.detailRank.rawValue : gr.rank.rawValue
 
-        _ = teacherSay(
+        statusSpeakingPromise = teacherSay(
             i18n.getSpeakingStatus(percent: gr.progress, rank: rankText, reward: gr.medalReward),
             rate: fastRate)
+
+        let todaySentenceCount = getTodaySentenceCount()
+        if  todaySentenceCount >= context.gameSetting.dailySentenceGoal,
+            todaySentenceCount - (context.gameRecord?.correctCount ?? 0) < context.gameSetting.dailySentenceGoal {
+            isJustReachDailyGoal = true
+        }
+
+        if isJustReachDailyGoal {
+            statusSpeakingPromise.then {
+                _ = teacherSay(i18n.reachDailyGoal, rate: fastRate)
+            }
+        }
+
     }
 
     // MARK: - AddInfo
@@ -243,7 +261,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
             }
         }
 
-        let countDownSecs = 5
+        let countDownSecs = isJustReachDailyGoal ? 7 : 5
         button.setIconImage(named: "baseline_play_arrow_black_48pt",
                             title: " \(i18n.nextGame) (\(countDownSecs)\(i18n.secs))",
                             tintColor: .white,

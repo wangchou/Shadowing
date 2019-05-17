@@ -66,7 +66,7 @@ private let medalUpdateByLevelAndRank: [[Rank: Int]] = [
     [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  3, .b:  0, .cP: -1, .c: -3, .d: -5, .e:  -7, .f:  -9], // lv6
     [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  2, .b:  0, .cP: -2, .c: -4, .d: -6, .e:  -8, .f: -10], // lv7  avg 80 4000 sentences
     [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  2, .b:  0, .cP: -2, .c: -4, .d: -6, .e:  -8, .f: -10], // lv8
-    [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  2, .b:  0, .cP: -2, .c: -4, .d: -6, .e:  -8, .f: -10], // lv9  avg 80   5000 sentences
+    [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  2, .b:  0, .cP: -2, .c: -4, .d: -6, .e:  -8, .f: -10], // lv9  avg 80 5000 sentences
     [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  2, .b:  0, .cP: -2, .c: -4, .d: -6, .e:  -8, .f: -10]  // lv10
 ]
 // swiftlint:enable colon
