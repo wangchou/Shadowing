@@ -92,7 +92,7 @@ class DifficultyCalculator {
                 return i
             }
         }
-        return 10000
+        return 7
     }
 }
 
