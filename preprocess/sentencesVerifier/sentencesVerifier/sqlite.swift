@@ -83,6 +83,18 @@ func updateSyllablesCount(id: Int, syllablesCount: Int) {
     }
 }
 
+func updateEnDifficuty(id: Int, difficulty: Int) {
+    let dbEnDifficuty = Expression<Int>("en_voc_difficulty")
+    do {
+        let target = sentenceTable.filter(dbId == id)
+        try dbW.run(target.update(
+            dbEnDifficuty <- difficulty
+        ))
+    } catch {
+        print("db update error: \(error)")
+    }
+}
+
 func loadWritableDb() {
     let fileManager = FileManager.default
     do {

@@ -99,6 +99,9 @@ class ViewController: NSViewController {
         print("Syllables count updated \(round(now() - startTime))s")
     }
 
+    @IBAction func enDifficutyButtonClicked(_ sender: Any) {
+        updateEnSentencesDifficulty()
+    }
     @IBAction func topicSentenceButtonClicked(_ sender: Any) {
         verifyAllTopicSentences()
     }

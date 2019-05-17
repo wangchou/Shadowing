@@ -34,7 +34,7 @@ class DifficultyCalculator {
     // find top 3 difficult words in sentences and add it as sum
     public func getDifficulty(sentence: String) -> Int {
         var difficults: [Int] = []
-        let words = lemmatization(for: sentence)
+        let words = lemmatization(for: sentence.lowercased())
         for word in words {
             let wordLevel = getWordLevel(word: word)
             difficults.append(wordLevel)
