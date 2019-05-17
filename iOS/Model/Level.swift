@@ -14,8 +14,8 @@ var avgKanaCountDict: [String: Float] = [:]
 private let minKanaCounts = [2, 7, 10, 12, 14, 16, 19, 23, 27, 32]
 private let maxKanaCounts = [6, 9, 11, 13, 15, 18, 22, 26, 31, 40]
 //for en
-private let minSyllablesCounts = [1, 6, 9, 12, 14, 18, 21, 23, 26, 31]
-private let maxSyllablesCounts = [5, 8, 11, 14, 16, 20, 23, 26, 31, 40]
+private let minSyllablesCounts = [1, 6, 9, 11, 13, 15, 17, 20, 24, 29]
+private let maxSyllablesCounts = [5, 8, 10, 12, 14, 16, 19, 23, 28, 40]
 
 private let colors = [myRed, myRed, myOrange, myOrange, myGreen, myGreen, myBlue, myBlue, myPurple, myPurple]
 private let titles = ["入門一", "入門二", "初級一", "初級二",

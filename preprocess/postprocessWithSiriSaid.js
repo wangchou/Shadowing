@@ -130,9 +130,16 @@ function getSentences() {
     let inDb = new sqlite3.Database(`./${inDbName}`)
     inDb.all("SELECT id, kana_count, ja, otoya_score, kyoko_score, syllables_count, en, alex_score, samantha_score, en_voc_difficulty FROM sentences where (otoya_score=100 and kyoko_score=100) or (alex_score=100 and samantha_score=100) ", function(err, rows) {
         inDb.close();
+        var removeCount = 0
         for(var i = 0; i < rows.length; i++) {
-          rows[i].syllables_count += rows[i].en_voc_difficulty
+          if (rows[i].en_voc_difficulty * 1.5 > rows[i].syllables_count) {
+            rows[i].syllables_count += 10000
+            removeCount += 1
+          } else{
+            rows[i].syllables_count += rows[i].en_voc_difficulty
+          }
         }
+        console.log(removeCount)
         resolve([...rows])
     });
   })
