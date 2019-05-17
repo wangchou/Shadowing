@@ -35,7 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
 
         FirebaseApp.configure()
-        AnalyticsConfiguration.shared().setAnalyticsCollectionEnabled(true)
 
         return true
     }

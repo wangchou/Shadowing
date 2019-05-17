@@ -4,7 +4,7 @@ const sqlite3 = require('sqlite3').verbose();
 const { execSync } = require('child_process');
 var levenshtein = require('levenshtein-edit-distance')
 
-let inDbName = "inf_sentences_1202_samantha.sqlite"
+let inDbName = "inf_sentences_190517_with_difficulty.sqlite"
 let outDbName = "inf_sentences_100points_duolingo.sqlite"
 let tableName = "sentences"
 let kanaTableName = "kanaInfo"
@@ -128,8 +128,11 @@ function dumpCounts(arr) {
 function getSentences() {
   return new Promise(function(resolve, reject) {
     let inDb = new sqlite3.Database(`./${inDbName}`)
-    inDb.all("SELECT id, kana_count, ja, otoya_score, kyoko_score, syllables_count, en, alex_score, samantha_score FROM sentences where (otoya_score=100 and kyoko_score=100) or (alex_score=100 and samantha_score=100) ", function(err, rows) {
+    inDb.all("SELECT id, kana_count, ja, otoya_score, kyoko_score, syllables_count, en, alex_score, samantha_score, en_voc_difficulty FROM sentences where (otoya_score=100 and kyoko_score=100) or (alex_score=100 and samantha_score=100) ", function(err, rows) {
         inDb.close();
+        for(var i = 0; i < rows.length; i++) {
+          rows[i].syllables_count += rows[i].en_voc_difficulty
+        }
         resolve([...rows])
     });
   })

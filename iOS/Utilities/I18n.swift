@@ -732,9 +732,9 @@ class I18n {
     }
 
     var tip2: String {
-        if isZh { return "用有線耳麥、監聽自己的聲音。(需到設定開啟)" }
-        if isJa { return "有線イヤホンを使用して、自分の声をモニタリングする。(設定ページ)" }
-        return "Use wired Apple earbuds to monitoring spoken voice. (turn it on in setting page)"
+        if isZh { return "用有線耳麥、監聽自己的聲音。" }
+        if isJa { return "有線イヤホンを使用して、自分の声をモニタリングする。" }
+        return "Use wired Apple earbuds to monitoring spoken voice. "
     }
 
     var tip3: String {

@@ -40,7 +40,7 @@ extension ViewController {
             difficultyCounts[difficulty] = (difficultyCounts[difficulty] ?? 0) + 1
             updateEnDifficuty(id: sentenceIds[i], difficulty: difficulty)
 
-            if i % 100 == 0 {
+            if i % 10 == 0 && difficulty > 5 {
                 print(i, String(format: "%.1f", now() - startTime), difficulty, sentences[i])
             }
         }
@@ -49,11 +49,6 @@ extension ViewController {
                 print(i, difficultyCounts[i]!)
             }
         }
-        print("10000", difficultyCounts[10000]!)
         print("sentence count:", sentenceIds.count)
-//        print("==========")
-//        for s in maxDifficultySentences {
-//            print(s)
-//        }
     }
 }

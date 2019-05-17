@@ -16,19 +16,19 @@ private var globalIsRepeatOne: Bool = false
 
 struct GameSetting: Codable {
     var isAutoSpeed: Bool = true
-    var preferredSpeed: Float = AVSpeechUtteranceDefaultSpeechRate
-    var practiceSpeed: Float = AVSpeechUtteranceDefaultSpeechRate * 0.75
+    var preferredSpeed: Float = AVSpeechUtteranceDefaultSpeechRate * 0.9
+    var practiceSpeed: Float = AVSpeechUtteranceDefaultSpeechRate * 0.7
     var isShowTranslationInPractice: Bool = false
 
     // learning mode started
-    var learningMode: LearningMode = i18n.isZh ? .speakingOnly : .meaningAndSpeaking
+    var learningMode: LearningMode = .speakingOnly
     var isShowTranslation: Bool = false
-    var isSpeakTranslation: Bool = i18n.isZh ? false : true
+    var isSpeakTranslation: Bool = false
     var isUsingGuideVoice: Bool = true
     // learning mode ended
 
     var isUsingNarrator: Bool = true
-    var isMointoring: Bool = false
+    var isMointoring: Bool = true
     var teacher: String = "unknown"
     var assisant: String = "unknown"
     var dailySentenceGoal: Int = 50
