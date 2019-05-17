@@ -17,10 +17,6 @@ extension String {
         guard self.count > count else { return self }
         return String(self.suffix(self.count - count))
     }
-//    func substring(with nsrange: NSRange) -> Substring? {
-//        guard let range = Range(nsrange, in: self) else { return nil }
-//        return self[range]
-//    }
     var isDigit: Bool {
         return Int(
             self.replacingOccurrences(of: ",", with: "")

@@ -10,6 +10,7 @@
 		BE687A06228BBCC4006563DF /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE687A05228BBCC4006563DF /* main.swift */; };
 		BE687A0D228C3F8C006563DF /* String+Variations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE687A0C228C3F8C006563DF /* String+Variations.swift */; };
 		BE687A11228D45BC006563DF /* DifficultyCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE687A10228D45BC006563DF /* DifficultyCalculator.swift */; };
+		BEC680D7228E6F8400C2A145 /* thisProjectOnly.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC680D6228E6F8400C2A145 /* thisProjectOnly.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +30,16 @@
 		BE687A05228BBCC4006563DF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		BE687A0C228C3F8C006563DF /* String+Variations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Variations.swift"; sourceTree = "<group>"; };
 		BE687A10228D45BC006563DF /* DifficultyCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyCalculator.swift; sourceTree = "<group>"; };
+		BEC680CD228E6F3500C2A145 /* level8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level8; path = ../../level8; sourceTree = "<group>"; };
+		BEC680CE228E6F3500C2A145 /* level1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level1; path = ../../level1; sourceTree = "<group>"; };
+		BEC680CF228E6F3500C2A145 /* level5 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level5; path = ../../level5; sourceTree = "<group>"; };
+		BEC680D0228E6F3500C2A145 /* level2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level2; path = ../../level2; sourceTree = "<group>"; };
+		BEC680D1228E6F3500C2A145 /* level0 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level0; path = ../../level0; sourceTree = "<group>"; };
+		BEC680D2228E6F3500C2A145 /* level6 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level6; path = ../../level6; sourceTree = "<group>"; };
+		BEC680D3228E6F3500C2A145 /* level7 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level7; path = ../../level7; sourceTree = "<group>"; };
+		BEC680D4228E6F3500C2A145 /* level3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level3; path = ../../level3; sourceTree = "<group>"; };
+		BEC680D5228E6F3500C2A145 /* level4 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = level4; path = ../../level4; sourceTree = "<group>"; };
+		BEC680D6228E6F8400C2A145 /* thisProjectOnly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = thisProjectOnly.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,9 +72,19 @@
 		BE687A04228BBCC4006563DF /* processVOC */ = {
 			isa = PBXGroup;
 			children = (
+				BEC680D1228E6F3500C2A145 /* level0 */,
+				BEC680CE228E6F3500C2A145 /* level1 */,
+				BEC680D0228E6F3500C2A145 /* level2 */,
+				BEC680D4228E6F3500C2A145 /* level3 */,
+				BEC680D5228E6F3500C2A145 /* level4 */,
+				BEC680CF228E6F3500C2A145 /* level5 */,
+				BEC680D2228E6F3500C2A145 /* level6 */,
+				BEC680D3228E6F3500C2A145 /* level7 */,
+				BEC680CD228E6F3500C2A145 /* level8 */,
 				BE687A05228BBCC4006563DF /* main.swift */,
 				BE687A0C228C3F8C006563DF /* String+Variations.swift */,
 				BE687A10228D45BC006563DF /* DifficultyCalculator.swift */,
+				BEC680D6228E6F8400C2A145 /* thisProjectOnly.swift */,
 			);
 			path = processVOC;
 			sourceTree = "<group>";
@@ -126,6 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE687A0D228C3F8C006563DF /* String+Variations.swift in Sources */,
+				BEC680D7228E6F8400C2A145 /* thisProjectOnly.swift in Sources */,
 				BE687A11228D45BC006563DF /* DifficultyCalculator.swift in Sources */,
 				BE687A06228BBCC4006563DF /* main.swift in Sources */,
 			);
