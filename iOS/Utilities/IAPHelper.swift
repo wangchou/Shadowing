@@ -98,7 +98,7 @@ class IAPHelper: NSObject {
             case IAPProduct.unlimitedOneMonth.rawValue:
                 localizedTitle = i18n.buyOneMonth
             case IAPProduct.unlimitedThreeMonths.rawValue:
-                localizedTitle = i18n.buyThreeMonths
+                continue
             case IAPProduct.unlimitedForever.rawValue:
                 localizedTitle = i18n.buyForever
             default:
@@ -124,27 +124,7 @@ class IAPHelper: NSObject {
 
         let cancelTitle = isChallenge ? i18n.startChallenge : i18n.close
 
-        let cancelAction = UIAlertAction(title: cancelTitle, style: isIPad ? .default : .cancel) { _ in
-            if isChallenge {
-                launchVC(Messenger.id, isOverCurrent: false)
-            }
-        }
-
-        if isChallenge {
-            countDownSeconds = 3
-            cancelAction.isEnabled = false
-            actionSheet.message = i18n.purchaseViewMessage + "\n\n\(countDownSeconds)"
-            timer?.invalidate()
-            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-                countDownSeconds -= 1
-                actionSheet.message = i18n.purchaseViewMessage + "\n\n\(countDownSeconds)"
-                if countDownSeconds <= 0 {
-                    cancelAction.isEnabled = true
-                    actionSheet.message = i18n.purchaseViewMessage
-                    timer?.invalidate()
-                }
-            }
-        }
+        let cancelAction = UIAlertAction(title: cancelTitle, style: isIPad ? .default : .cancel)
 
         // Add the actions
         if isChallenge || !isIPad {

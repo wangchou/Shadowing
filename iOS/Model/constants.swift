@@ -18,7 +18,7 @@ let iconSize = isIPad ? "48pt" : "24pt"
     let dailyFreeLimit = 1000
 #else
     let isSimulator = false
-    let dailyFreeLimit = 100
+    let dailyFreeLimit = 60
 #endif
 
 let normalRate = AVSpeechUtteranceDefaultSpeechRate
