@@ -493,24 +493,24 @@ class I18n {
         return "Restore purchase records"
     }
     var startChallenge: String {
-        if isJa { return "挑戦を続ける" }
-        if isZh { return "繼續挑戰"}
-        return "Continue to challenge"
+        if isJa { return "明日挑戦します" }
+        if isZh { return "明天再挑戰"}
+        return "Challenge it tomorrow"
     }
     var purchaseViewTitle: String {
-        if isJa { return "[無料版] 毎日\(dailyFreeLimit)文の挑戦制限" }
-        if isZh { return "[免費版] 每日\(dailyFreeLimit)句挑戰限制" }
-        return "[Free version] Daily \(dailyFreeLimit) sentences limit"
+        if isJa { return "[体験版] 毎日\(dailyFreeLimit)文の挑戦制限" }
+        if isZh { return "[試玩版] 已達每日\(dailyFreeLimit)句挑戰限制" }
+        return "[Trial version] Daily \(dailyFreeLimit) sentences limit"
     }
     var purchaseViewMessage: String {
-        if isJa { return "\nアイテムは自動的に更新されませんので、\nお気軽に購入してください。\n\n〜 スタジオ大草原不可避 〜" }
-        if isZh { return "\n所有項目皆不會自動續約、請安心購買。\n\n〜 大草原不可避工作室 〜" }
-        return "\nPurchased item will not auto-renew. \nPlease feel free to buy it.\n\n〜 Studio 大草原不可避 〜"
+        if isJa { return "\n今日もあなたにとって楽しい一日でありますように。\n\n〜 スタジオ大草原不可避 〜" }
+        if isZh { return "\n希望你今天也玩的很開心。 \n\n〜 大草原不可避工作室 〜" }
+        return "Hope you already have great fun today. \n\n〜 Studio 大草原不可避 〜"
     }
     var freeButtonPurchaseMessage: String {
-        if isJa { return "\n[無料版制限] 1日に100文を話すと、広告が表示されます。アイテムは自動的に更新されませんので、お気軽に購入してください。\n\n〜 スタジオ大草原不可避 〜" }
-        if isZh { return "\n[免費版限制] 一天唸超過一百句後、會顯示廣告。以下項目皆不會自動續約、請安心購買。\n\n〜 大草原不可避工作室 〜" }
-        return "\n[Free version constraint] Ads will be displayed after speaking more than 100 sentences a day. Purchased item will not auto-renew. Please feel free to buy it.\n\n〜 Studio 大草原不可避 〜"
+        if isJa { return "\n[体験版制限] 1日に\(dailyFreeLimit)文だけを話すことができます。\n\n〜 スタジオ大草原不可避 〜" }
+        if isZh { return "\n[試玩版限制] 一天只能挑戰\(dailyFreeLimit)句。\n\n〜 大草原不可避工作室 〜" }
+        return "\n[Trial version constraint] User only can play \(dailyFreeLimit) sentences a day. \n\n〜 Studio 大草原不可避 〜"
     }
     var previousPurchaseRestored: String {
         if isJa { return "購入記録を復元しました" }
@@ -528,19 +528,19 @@ class I18n {
         return "processing"
     }
     var buyOneMonth: String {
-        if isJa { return "1ヶ月有料版" }
-        if isZh { return "付費版一個月" }
-        return "Paid Version (1 Month)"
+        if isJa { return "完全版(1ヶ月) " }
+        if isZh { return "正式版一個月" }
+        return "Full Version (1 Month)"
     }
     var buyThreeMonths: String {
-        if isJa { return "3ヶ月有料版" }
-        if isZh { return "付費版三個月" }
-        return "Paid Version (3 Months)"
+        if isJa { return "完全版(3ヶ月) " }
+        if isZh { return "正式版三個月" }
+        return "Full Version (3 Months)"
     }
     var buyForever: String {
-        if isJa { return "永久有料版" }
-        if isZh { return "永久付費版" }
-        return "Paid Version (Forever)"
+        if isJa { return "完全版(永久) " }
+        if isZh { return "永久正式版" }
+        return "Full Version (Forever)"
     }
     var cannotMakePayment: String {
         if isJa { return "iTunes Store や App Store で購入できない (ペアレンタルコントロールを使いますか？)" }
@@ -578,14 +578,14 @@ class I18n {
         return "Go to App Store"
     }
     var freeVersion: String {
-        if isZh { return "免費版" }
-        if isJa { return "無料版" }
-        return "Free"
+        if isZh { return "試玩版" }
+        if isJa { return "体験版" }
+        return "Trial"
     }
     var itIsfreeVersion: String {
-        if isJa { return "現在のバージョンは無料版です" }
-        if isZh { return "目前的版本為免費版"}
-        return "You are using Free Version"
+        if isJa { return "現在のバージョンは体験版です" }
+        if isZh { return "目前的版本為試玩版"}
+        return "You are using Trial Version"
     }
     var close: String {
         if isJa { return "閉じる" }
