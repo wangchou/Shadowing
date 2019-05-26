@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BE10602022829533009F5B70 /* quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE10601F22829533009F5B70 /* quote.swift */; };
+		BE1FE1E8229ADA4F004A9E77 /* inf_sentences_100points_duolingo.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BE1FE1E7229ADA4F004A9E77 /* inf_sentences_100points_duolingo.sqlite */; };
 		BE2142AF21D3707400FA2925 /* grammarN5.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2142AE21D3707400FA2925 /* grammarN5.swift */; };
 		BE3260D321C18EA200A13C94 /* vocabulary1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260D121C18EA200A13C94 /* vocabulary1.swift */; };
 		BE3260D421C18EA200A13C94 /* vocabulary2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260D221C18EA200A13C94 /* vocabulary2.swift */; };
@@ -38,7 +39,6 @@
 		BE869D1B218E120C00689755 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE869D1A218E120C00689755 /* Score.swift */; };
 		BE8E51EE21D0E57D007D29E6 /* String+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8E51EC21D0E57D007D29E6 /* String+Utilities.swift */; };
 		BE8E51EF21D0E57D007D29E6 /* Type+Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8E51ED21D0E57D007D29E6 /* Type+Conversion.swift */; };
-		BEB69554228EBBD5001D31A6 /* inf_sentences_100points_duolingo.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BEB69553228EBBD5001D31A6 /* inf_sentences_100points_duolingo.sqlite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,6 +60,7 @@
 
 /* Begin PBXFileReference section */
 		BE10601F22829533009F5B70 /* quote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = quote.swift; path = ../../iOS/Sentences/quote.swift; sourceTree = "<group>"; };
+		BE1FE1E7229ADA4F004A9E77 /* inf_sentences_100points_duolingo.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences_100points_duolingo.sqlite; sourceTree = "<group>"; };
 		BE2142AE21D3707400FA2925 /* grammarN5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = grammarN5.swift; path = ../../iOS/Sentences/grammarN5.swift; sourceTree = "<group>"; };
 		BE3260D121C18EA200A13C94 /* vocabulary1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = vocabulary1.swift; path = ../../iOS/Sentences/vocabulary1.swift; sourceTree = "<group>"; };
 		BE3260D221C18EA200A13C94 /* vocabulary2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = vocabulary2.swift; path = ../../iOS/Sentences/vocabulary2.swift; sourceTree = "<group>"; };
@@ -89,7 +90,6 @@
 		BE869D1A218E120C00689755 /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Score.swift; path = ../../iOS/Model/Score.swift; sourceTree = "<group>"; };
 		BE8E51EC21D0E57D007D29E6 /* String+Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+Utilities.swift"; path = "../../iOS/Utilities/String+Utilities.swift"; sourceTree = "<group>"; };
 		BE8E51ED21D0E57D007D29E6 /* Type+Conversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Type+Conversion.swift"; path = "../../iOS/Utilities/Type+Conversion.swift"; sourceTree = "<group>"; };
-		BEB69553228EBBD5001D31A6 /* inf_sentences_100points_duolingo.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = inf_sentences_100points_duolingo.sqlite; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +110,7 @@
 		BE3EA021217761B200B65F48 = {
 			isa = PBXGroup;
 			children = (
-				BEB69553228EBBD5001D31A6 /* inf_sentences_100points_duolingo.sqlite */,
+				BE1FE1E7229ADA4F004A9E77 /* inf_sentences_100points_duolingo.sqlite */,
 				BE39E0A72180E72000A34C50 /* Alamofire.framework */,
 				BE39E0A82180E72000A34C50 /* FBLPromises.framework */,
 				BE39E0A92180E72000A34C50 /* Promises.framework */,
@@ -229,7 +229,7 @@
 			files = (
 				BE3EA032217761B400B65F48 /* Assets.xcassets in Resources */,
 				BE3EA035217761B400B65F48 /* Main.storyboard in Resources */,
-				BEB69554228EBBD5001D31A6 /* inf_sentences_100points_duolingo.sqlite in Resources */,
+				BE1FE1E8229ADA4F004A9E77 /* inf_sentences_100points_duolingo.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

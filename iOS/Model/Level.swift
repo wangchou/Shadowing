@@ -11,27 +11,30 @@ import AVFoundation
 
 var avgKanaCountDict: [String: Float] = [:]
 // for ja
-private let minKanaCounts = [2, 7, 10, 12, 14, 16, 19, 23, 27, 32]
-private let maxKanaCounts = [6, 9, 11, 13, 15, 18, 22, 26, 31, 40]
+private let minKanaCounts = [2, 7, 10, 12, 14, 16, 19, 23, 27, 31, 34, 37]
+private let maxKanaCounts = [6, 9, 11, 13, 15, 18, 22, 26, 30, 33, 36, 40]
 //for en
-private let minSyllablesCounts = [1, 6, 9, 11, 13, 15, 17, 20, 24, 29]
-private let maxSyllablesCounts = [5, 8, 10, 12, 14, 16, 19, 23, 28, 40]
+private let minSyllablesCounts = [1, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 27]
+private let maxSyllablesCounts = [5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 26, 31]
 
-private let colors = [myRed, myRed, myOrange, myOrange, myGreen, myGreen, myBlue, myBlue, myPurple, myPurple]
+private let colors = [myRed, myRed, myOrange, myOrange,
+                      myGreen, myGreen, myBlue, myBlue,
+                      myPurple, myPurple, myPurple, myPurple]
 private let titles = ["入門一", "入門二", "初級一", "初級二",
-                      "中級一", "中級二", "上級一", "上級二", "超難問一", "超難問二"]
+                      "中級一", "中級二", "上級一", "上級二",
+                      "超難問一", "超難問二", "超難問三", "超難問四"]
 
 private let enTitles = ["Level 1", "Level 2", "Level 3", "Level 4",
                         "Level 5", "Level 6", "Level 7", "Level 8",
-                        "Level 9", "Level 10"]
-let allLevels: [Level] = [.lv0, .lv1, .lv2, .lv3, .lv4, .lv5, .lv6, .lv7, .lv8, .lv9]
+                        "Level 9", "Level 10", "Level 11", "Level 12"]
+let allLevels: [Level] = [.lv0, .lv1, .lv2, .lv3, .lv4, .lv5, .lv6, .lv7, .lv8, .lv9, .lv10, .lv11]
 
 enum Level: Int, Codable {
-    case lv0, lv1, lv2, lv3, lv4, lv5, lv6, lv7, lv8, lv9
+    case lv0, lv1, lv2, lv3, lv4, lv5, lv6, lv7, lv8, lv9, lv10, lv11
 
     init(medalCount: Int) {
         let lvl = medalCount / medalsPerLevel
-        self = Level(rawValue: lvl) ?? .lv9
+        self = Level(rawValue: lvl) ?? .lv11
     }
 
     init(avgSyllablesCount: Float) {
@@ -39,15 +42,19 @@ enum Level: Int, Codable {
             self = allLevels[i]
             return
         }
-        self = Level.lv9
+        self = Level.lv11
+    }
+
+    var levelCount: Int {
+        return allLevels.count
     }
 
     var next: Level {
-        return Level(rawValue: (self.rawValue + 1) % 10)!
+        return Level(rawValue: (self.rawValue + 1) % levelCount)!
     }
 
     var previous: Level {
-        return Level(rawValue: (self.rawValue + 9) % 10)!
+        return Level(rawValue: (self.rawValue + levelCount - 1) % levelCount)!
     }
 
     var color: UIColor {
@@ -106,7 +113,7 @@ enum Level: Int, Codable {
     }
 
     var autoSpeed: Float {
-        return AVSpeechUtteranceDefaultSpeechRate * min(1.05, (0.70 + Float(self.rawValue) * 0.04))
+        return AVSpeechUtteranceDefaultSpeechRate * min(1.1, (0.7 + Float(self.rawValue) * 0.04))
     }
 }
 
