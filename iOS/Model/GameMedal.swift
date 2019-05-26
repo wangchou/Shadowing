@@ -41,7 +41,7 @@ struct GameMedal {
     }
 
     var usingDetailRank: Bool {
-        return Level(medalCount: medalCount[gameLang] ?? 0).rawValue >= 4
+        return Level(medalCount: medalCount[gameLang] ?? 0).rawValue >= 2
     }
 
     private func getMedalRewards(record: GameRecord) -> Int {
@@ -67,7 +67,9 @@ private let medalUpdateByLevelAndRank: [[Rank: Int]] = [
     [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  2, .b:  0, .cP: -2, .c: -4, .d: -6, .e:  -8, .f: -10], // lv7  avg 80 4000 sentences
     [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  2, .b:  0, .cP: -2, .c: -4, .d: -6, .e:  -8, .f: -10], // lv8
     [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  2, .b:  0, .cP: -2, .c: -4, .d: -6, .e:  -8, .f: -10], // lv9  avg 80 5000 sentences
-    [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  2, .b:  0, .cP: -2, .c: -4, .d: -6, .e:  -8, .f: -10]  // lv10
+    [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  2, .b:  0, .cP: -2, .c: -4, .d: -6, .e:  -8, .f: -10],  // lv10
+    [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  2, .b:  0, .cP: -2, .c: -4, .d: -6, .e:  -8, .f: -10],  // lv11
+    [.ss:  20, .s:  10, .aP:  7, .a:  5, .bP:  2, .b:  0, .cP: -2, .c: -4, .d: -6, .e:  -8, .f: -10]  // lv12
 ]
 // swiftlint:enable colon
 

@@ -136,7 +136,7 @@ function getSentences() {
             rows[i].syllables_count += 10000
             removeCount += 1
           } else{
-            rows[i].syllables_count += rows[i].en_voc_difficulty
+            rows[i].syllables_count += parseInt(rows[i].en_voc_difficulty * 0.7)
           }
         }
         console.log(removeCount)
