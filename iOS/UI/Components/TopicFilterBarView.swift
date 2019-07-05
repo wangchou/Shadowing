@@ -23,19 +23,18 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
         let tagPoints = getTagPoints()
         let tagMaxPoints = getTagMaxPoints()
 
-        for i in 0...abilities.count {
+        for i in 0 ... abilities.count {
             var buttonTitle = ""
             if i == 0 {
                 buttonTitle = topicForAll
             } else {
-                buttonTitle = i18n.isZh ? abilities[i-1] : jaAbilities[i-1]
+                buttonTitle = i18n.isZh ? abilities[i - 1] : jaAbilities[i - 1]
             }
             let zhTitle = getZhTitle(str: buttonTitle)
             addButton(title: buttonTitle,
                       index: i,
                       percent: (tagPoints["#" + zhTitle] ?? 0).c /
-                               (tagMaxPoints["#"+zhTitle] ?? 100).c
-            )
+                          (tagMaxPoints["#" + zhTitle] ?? 100).c)
         }
         contentSize = CGSize(width: barWidth, height: 50)
         delaysContentTouches = true
@@ -48,7 +47,7 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
         return i18n.isZh ? str : abilities[jaAbilities.index(of: str) ?? 0]
     }
 
-    override func touchesShouldCancel(in view: UIView) -> Bool {
+    override func touchesShouldCancel(in _: UIView) -> Bool {
         return true
     }
 
@@ -111,7 +110,7 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
 
     func addSeparateLine() {
         let line = UIView()
-        line.frame = self.frame
+        line.frame = frame
         line.frame.origin.y = frame.size.height - 0.5
         line.frame.size.width = barWidth
         line.frame.size.height = 0.5

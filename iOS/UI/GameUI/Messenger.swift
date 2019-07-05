@@ -25,25 +25,25 @@ class Messenger: UIViewController {
     private var y: Int = 8
     private var previousY: Int = 0
 
-    @IBOutlet weak var levelMeterView: UIView!
-    @IBOutlet weak var levelMeterValueBar: UIView!
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet var levelMeterView: UIView!
+    @IBOutlet var levelMeterValueBar: UIView!
+    @IBOutlet var scrollView: UIScrollView!
 
     // pauseOverlay
-    @IBOutlet weak var overlayView: UIView!
-    @IBOutlet weak var speedSlider: UISlider!
-    @IBOutlet weak var speedLabel: UILabel!
-    @IBOutlet weak var showTranslationLabel: UILabel!
-    @IBOutlet weak var showTranslationSwitch: UISwitch!
-    @IBOutlet weak var autoSpeedSwitch: UISwitch!
-    @IBOutlet weak var learningModeLabel: UILabel!
-    @IBOutlet weak var learningModeSegmentControl: UISegmentedControl!
-    @IBOutlet weak var repeatOneSwitchButton: UIButton!
-    @IBOutlet weak var exitButton: UIButton!
-    @IBOutlet weak var fastLabel: UILabel!
-    @IBOutlet weak var autoSpeedLabel: UILabel!
+    @IBOutlet var overlayView: UIView!
+    @IBOutlet var speedSlider: UISlider!
+    @IBOutlet var speedLabel: UILabel!
+    @IBOutlet var showTranslationLabel: UILabel!
+    @IBOutlet var showTranslationSwitch: UISwitch!
+    @IBOutlet var autoSpeedSwitch: UISwitch!
+    @IBOutlet var learningModeLabel: UILabel!
+    @IBOutlet var learningModeSegmentControl: UISegmentedControl!
+    @IBOutlet var repeatOneSwitchButton: UIButton!
+    @IBOutlet var exitButton: UIButton!
+    @IBOutlet var fastLabel: UILabel!
+    @IBOutlet var autoSpeedLabel: UILabel!
 
-    @IBOutlet weak var messengerBar: MessengerBar!
+    @IBOutlet var messengerBar: MessengerBar!
 
     let spacing = 15
 
@@ -105,7 +105,7 @@ class Messenger: UIViewController {
         showTranslationLabel.textColor = context.gameSetting.learningMode != .interpretation ? .white : UIColor.white.withAlphaComponent(0.3)
         autoSpeedSwitch.isOn = context.gameSetting.isAutoSpeed
         speedSlider.value = context.gameSetting.preferredSpeed
-        fastLabel.text = String(format: "%.2fx", context.gameSetting.preferredSpeed*2)
+        fastLabel.text = String(format: "%.2fx", context.gameSetting.preferredSpeed * 2)
         if context.gameSetting.isAutoSpeed {
             speedSlider.isEnabled = false
             fastLabel.textColor = UIColor.lightGray
@@ -135,7 +135,7 @@ class Messenger: UIViewController {
         initLearningModeSegmentControl(label: learningModeLabel, control: learningModeSegmentControl)
     }
 
-    func prescrolling(_ text: NSAttributedString, pos: LabelPosition = .left) {
+    func prescrolling(_ text: NSAttributedString, pos _: LabelPosition = .left) {
         let originalPreviousY = previousY
         let originalY = y
         let originalLastLabel = lastLabel
@@ -166,7 +166,7 @@ class Messenger: UIViewController {
     }
 
     func updateLabel(_ myLabel: FuriganaLabel, text: NSAttributedString, pos: LabelPosition) {
-        let maxLabelWidth: Int = Int(screen.width*3/4)
+        let maxLabelWidth: Int = Int(screen.width * 3 / 4)
 
         var height = 30
         var width = 10
@@ -219,15 +219,14 @@ class Messenger: UIViewController {
             messengerBar.render()
             postCommand(.pause)
             overlayView.isHidden = false
-
         }
     }
 
     @objc func skipNext() {
-        // TODO check next level is accessible for infiniteChallenge Mode
+        // TODO: check next level is accessible for infiniteChallenge Mode
 
         postCommand(.forceStopGame)
-        self.dismiss(animated: true) {
+        dismiss(animated: true) {
             if context.gameMode == .topicMode {
                 context.loadNextChallenge()
                 rootViewController.topicSwipablePage.detailPage?.render()
@@ -242,32 +241,37 @@ class Messenger: UIViewController {
     }
 
     // pauseOverlay actions
-    @IBAction func speedChanged(_ sender: Any) {
+    @IBAction func speedChanged(_: Any) {
         context.gameSetting.preferredSpeed = speedSlider.value
         saveGameSetting()
         renderOverlayView()
     }
-    @IBAction func showTranslationSwitchValueChanged(_ sender: Any) {
+
+    @IBAction func showTranslationSwitchValueChanged(_: Any) {
         context.gameSetting.isShowTranslation = showTranslationSwitch.isOn
         saveGameSetting()
         renderOverlayView()
     }
-    @IBAction func autoSpeedSwitchValueChanged(_ sender: Any) {
+
+    @IBAction func autoSpeedSwitchValueChanged(_: Any) {
         context.gameSetting.isAutoSpeed = autoSpeedSwitch.isOn
         saveGameSetting()
         renderOverlayView()
     }
-    @IBAction func learningModeSegmentControlValueChanged(_ sender: Any) {
+
+    @IBAction func learningModeSegmentControlValueChanged(_: Any) {
         actOnLearningModeSegmentControlValueChanged(control: learningModeSegmentControl)
         renderOverlayView()
     }
-    @IBAction func repeatOneSwitchButtonClicked(_ sender: Any) {
+
+    @IBAction func repeatOneSwitchButtonClicked(_: Any) {
         context.gameSetting.isRepeatOne = !context.gameSetting.isRepeatOne
         saveGameSetting()
         renderOverlayView()
     }
-    @IBAction func exitButtonClicked(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+
+    @IBAction func exitButtonClicked(_: Any) {
+        dismiss(animated: true, completion: nil)
         postCommand(.forceStopGame)
     }
 }

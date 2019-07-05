@@ -1,4 +1,6 @@
 //
+import AVFoundation
+import Foundation
 //  constants.swift
 //  VoiceOnly
 //
@@ -6,8 +8,6 @@
 //  Copyright © 平成30年 Lu, WangChou. All rights reserved.
 //
 import UIKit
-import Foundation
-import AVFoundation
 
 let IDIOM = UI_USER_INTERFACE_IDIOM()
 let isIPad = IDIOM == UIUserInterfaceIdiom.pad
@@ -49,7 +49,7 @@ func getBottomPadding() -> CGFloat {
 
 // listening duration = speakDuration + 0.4 secs
 let pauseDuration: Float = 0.4
-let practicePauseDuration: Float = 0.6 //longer for waiting table animation in practice
+let practicePauseDuration: Float = 0.6 // longer for waiting table animation in practice
 
 let abilities = ["日常", "旅遊", "戀愛", "名言", "N5", "N4", "敬語", "論述", "單字"]
 let jaAbilities = ["日常", "旅行", "恋", "名言", "N5", "N4", "敬語", "命題", "単語"]
@@ -57,7 +57,7 @@ let jaAbilities = ["日常", "旅行", "恋", "名言", "N5", "N4", "敬語", "�
 let medalModeKey = "Medal Mode Key"
 
 func getBottomButtonFont() -> UIFont {
-    let fontSize =  getStep() * 3
+    let fontSize = getStep() * 3
     if i18n.isJa || i18n.isZh {
         return MyFont.regular(ofSize: fontSize)
     }
@@ -65,7 +65,7 @@ func getBottomButtonFont() -> UIFont {
 }
 
 func getStep() -> CGFloat {
-    return screen.width/48
+    return screen.width / 48
 }
 
 func getBottomButtonHeight() -> CGFloat {

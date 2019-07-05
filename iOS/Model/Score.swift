@@ -8,7 +8,7 @@
 
 import Foundation
 #if os(iOS)
-import UIKit
+    import UIKit
 #endif
 
 enum ScoreType: String, Codable {
@@ -24,25 +24,25 @@ struct Score: Codable {
     var type: ScoreType {
         if value >= 100 { return .perfect }
         if value >= 80 { return .great }
-        if value >= 60 { return .good}
+        if value >= 60 { return .good }
         return .poor
     }
 
     #if os(iOS)
-    var text: String {
-        if type == .perfect { return gameLang == .jp ? "正解" : "Excellent!" }
-        if type == .great { return gameLang == .jp ? "すごい" : "Great!" }
-        if type == .good { return gameLang == .jp ? "いいね" : "Good." }
-        return gameLang == .jp ? "違います" : "Not right."
-    }
+        var text: String {
+            if type == .perfect { return gameLang == .jp ? "正解" : "Excellent!" }
+            if type == .great { return gameLang == .jp ? "すごい" : "Great!" }
+            if type == .good { return gameLang == .jp ? "いいね" : "Good." }
+            return gameLang == .jp ? "違います" : "Not right."
+        }
 
-    var color: UIColor {
-        if type == .perfect { return myGreen }
-        if type == .great { return myGreen }
-        if type == .good { return myOrange}
-        return myRed
-    }
+        var color: UIColor {
+            if type == .perfect { return myGreen }
+            if type == .great { return myGreen }
+            if type == .good { return myOrange }
+            return myRed
+        }
 
-    var valueText: String { return "\(value)\(i18n.pts)" }
+        var valueText: String { return "\(value)\(i18n.pts)" }
     #endif
 }

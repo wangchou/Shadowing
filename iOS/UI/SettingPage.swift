@@ -6,8 +6,8 @@
 //  Copyright © 30 Heisei Lu, WangChou. All rights reserved.
 //
 
-import Foundation
 import AVFoundation
+import Foundation
 import UIKit
 
 private let context = GameContext.shared
@@ -15,34 +15,34 @@ private let context = GameContext.shared
 private let dailyGoals: [Int] = [20, 50, 100, 200, 500]
 
 class SettingPage: UITableViewController {
-    @IBOutlet weak var topBarView: TopBarView!
-    @IBOutlet weak var gameLangSegmentControl: UISegmentedControl!
+    @IBOutlet var topBarView: TopBarView!
+    @IBOutlet var gameLangSegmentControl: UISegmentedControl!
 
-    @IBOutlet weak var wantToSayLabel: UILabel!
-    @IBOutlet weak var autoSpeedLabel: UILabel!
-    @IBOutlet weak var autoSpeedSwitch: UISwitch!
-    @IBOutlet weak var gameSpeedSlider: UISlider!
-    @IBOutlet weak var gameSpeedFastLabel: UILabel!
+    @IBOutlet var wantToSayLabel: UILabel!
+    @IBOutlet var autoSpeedLabel: UILabel!
+    @IBOutlet var autoSpeedSwitch: UISwitch!
+    @IBOutlet var gameSpeedSlider: UISlider!
+    @IBOutlet var gameSpeedFastLabel: UILabel!
 
-    @IBOutlet weak var practiceSpeedSlider: UISlider!
-    @IBOutlet weak var learningModeLabel: UILabel!
+    @IBOutlet var practiceSpeedSlider: UISlider!
+    @IBOutlet var learningModeLabel: UILabel!
 
-    @IBOutlet weak var showTranslationLabel: UILabel!
-    @IBOutlet weak var showTranslationSwitch: UISwitch!
-    @IBOutlet weak var learningModeSegmentControl: UISegmentedControl!
-    @IBOutlet weak var practiceSpeedFastLabel: UILabel!
-    @IBOutlet weak var narratorLabel: UILabel!
-    @IBOutlet weak var narratorSwitch: UISwitch!
-    @IBOutlet weak var monitoringLabel: UILabel!
-    @IBOutlet weak var monitoringSwitch: UISwitch!
+    @IBOutlet var showTranslationLabel: UILabel!
+    @IBOutlet var showTranslationSwitch: UISwitch!
+    @IBOutlet var learningModeSegmentControl: UISegmentedControl!
+    @IBOutlet var practiceSpeedFastLabel: UILabel!
+    @IBOutlet var narratorLabel: UILabel!
+    @IBOutlet var narratorSwitch: UISwitch!
+    @IBOutlet var monitoringLabel: UILabel!
+    @IBOutlet var monitoringSwitch: UISwitch!
 
-    @IBOutlet weak var teacherLabel: UILabel!
-    @IBOutlet weak var teacherNameLabel: UILabel!
-    @IBOutlet weak var assisantLabel: UILabel!
-    @IBOutlet weak var assistantNameLabel: UILabel!
-    @IBOutlet weak var gotoIOSSettingButton: UIButton!
-    @IBOutlet weak var dailyGoalSegmentedControl: UISegmentedControl!
-    @IBOutlet weak var gotoAppStoreButton: UIButton!
+    @IBOutlet var teacherLabel: UILabel!
+    @IBOutlet var teacherNameLabel: UILabel!
+    @IBOutlet var assisantLabel: UILabel!
+    @IBOutlet var assistantNameLabel: UILabel!
+    @IBOutlet var gotoIOSSettingButton: UIButton!
+    @IBOutlet var dailyGoalSegmentedControl: UISegmentedControl!
+    @IBOutlet var gotoAppStoreButton: UIButton!
 
     var testSentence: String {
         if let voice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher) {
@@ -58,7 +58,6 @@ class SettingPage: UITableViewController {
         } else {
             return "It's nice to meet you."
         }
-
     }
 
     override func viewDidLoad() {
@@ -78,7 +77,7 @@ class SettingPage: UITableViewController {
         gameLangSegmentControl.setTitle(i18n.english, forSegmentAt: 0)
         gameLangSegmentControl.setTitle(i18n.japanese, forSegmentAt: 1)
 
-        for i in 0..<dailyGoals.count {
+        for i in 0 ..< dailyGoals.count {
             dailyGoalSegmentedControl.setTitle("\(dailyGoals[i])\(i18n.sentenceUnit)", forSegmentAt: i)
         }
         topBarView.titleLabel.text = i18n.setting
@@ -131,13 +130,13 @@ class SettingPage: UITableViewController {
         initLearningModeSegmentControl(label: learningModeLabel, control: learningModeSegmentControl)
     }
 
-    @IBAction func autoSpeedSwitchValueChanged(_ sender: Any) {
+    @IBAction func autoSpeedSwitchValueChanged(_: Any) {
         context.gameSetting.isAutoSpeed = autoSpeedSwitch.isOn
         saveGameSetting()
         viewWillAppear(false)
     }
 
-    @IBAction func gameSpeedSilderValueChanged(_ sender: Any) {
+    @IBAction func gameSpeedSilderValueChanged(_: Any) {
         context.gameSetting.preferredSpeed = gameSpeedSlider.value
         saveGameSetting()
         gameSpeedFastLabel.text = String(format: "%.2fx", gameSpeedSlider.value * 2)
@@ -145,7 +144,7 @@ class SettingPage: UITableViewController {
         _ = teacherSay("\(i18n.speedIs)\(speedText)です", rate: context.gameSetting.preferredSpeed)
     }
 
-    @IBAction func practiceSpeedSliderValueChanged(_ sender: Any) {
+    @IBAction func practiceSpeedSliderValueChanged(_: Any) {
         context.gameSetting.practiceSpeed = practiceSpeedSlider.value
         saveGameSetting()
         practiceSpeedFastLabel.text = String(format: "%.2fx", practiceSpeedSlider.value * 2)
@@ -154,28 +153,31 @@ class SettingPage: UITableViewController {
     }
 
     // game option group
-    @IBAction func learningModeSegmentControlValueChanged(_ sender: Any) {
+    @IBAction func learningModeSegmentControlValueChanged(_: Any) {
         actOnLearningModeSegmentControlValueChanged(control: learningModeSegmentControl)
         render()
     }
-    @IBAction func showTranslationSwitchValueChanged(_ sender: Any) {
+
+    @IBAction func showTranslationSwitchValueChanged(_: Any) {
         context.gameSetting.isShowTranslation = showTranslationSwitch.isOn
         saveGameSetting()
     }
-    @IBAction func narratorSwitchValueChanged(_ sender: Any) {
+
+    @IBAction func narratorSwitchValueChanged(_: Any) {
         context.gameSetting.isUsingNarrator = narratorSwitch.isOn
         saveGameSetting()
     }
-    @IBAction func monitoringSwitchValueChanged(_ sender: Any) {
+
+    @IBAction func monitoringSwitchValueChanged(_: Any) {
         context.gameSetting.isMointoring = monitoringSwitch.isOn
         saveGameSetting()
     }
 
-    @IBAction func goToSettingCenter(_ sender: Any) {
+    @IBAction func goToSettingCenter(_: Any) {
         goToIOSSettingCenter()
     }
 
-    @IBAction func gotoAppStore(_ sender: Any) {
+    @IBAction func gotoAppStore(_: Any) {
         if let url = URL(string: "https://itunes.apple.com/app/id1439727086") {
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -183,7 +185,7 @@ class SettingPage: UITableViewController {
         }
     }
 
-    @IBAction func gameLangSegmentControlValueChanged(_ sender: Any) {
+    @IBAction func gameLangSegmentControlValueChanged(_: Any) {
         RootContainerViewController.isShowSetting = true
         if gameLangSegmentControl.selectedSegmentIndex == 1 {
             changeGameLangTo(lang: .jp)
@@ -200,7 +202,7 @@ class SettingPage: UITableViewController {
         rootViewController.reloadTableData()
     }
 
-    @IBAction func dailyGoalSegmentedControlValueChanged(_ sender: Any) {
+    @IBAction func dailyGoalSegmentedControlValueChanged(_: Any) {
         switch dailyGoalSegmentedControl.selectedSegmentIndex {
         case 0, 1, 2, 3, 4:
             context.gameSetting.dailySentenceGoal = dailyGoals[dailyGoalSegmentedControl.selectedSegmentIndex]
@@ -210,7 +212,7 @@ class SettingPage: UITableViewController {
         saveGameSetting()
     }
 
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_: UITableView, titleForHeaderInSection section: Int) -> String? {
         let i18n = I18n.shared
         switch section {
         case 0:
@@ -235,7 +237,7 @@ class SettingPage: UITableViewController {
         }
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 4 {
             if indexPath.row == 0 { // teacher voice
                 VoiceSelectionPage.fromPage = self

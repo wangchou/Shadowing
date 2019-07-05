@@ -68,7 +68,7 @@ class ProgressCircleView: UIView, GridLayout, ReloadableView {
                                      font: MyFont.bold(ofSize: fontSize))
 
         percentLabel = addAttrText(x: 3, y: 3, w: 30, h: 9,
-                               text: attrText)
+                                   text: attrText)
         percentLabel.textAlignment = .center
         percentLabel.centerIn(bounds)
 

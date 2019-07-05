@@ -9,13 +9,13 @@
 import UIKit
 
 class InfiniteChallengeTableCell: UITableViewCell {
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var finishedRateLabel: UILabel!
-    @IBOutlet weak var rankLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var finishedRateLabel: UILabel!
+    @IBOutlet var rankLabel: UILabel!
 
-    @IBOutlet weak var rankTitleLabel: UILabel!
+    @IBOutlet var rankTitleLabel: UILabel!
 
-    @IBOutlet weak var finishedRateTitleLabel: UILabel!
+    @IBOutlet var finishedRateTitleLabel: UILabel!
     var level: Level = .lv0 {
         willSet(level) {
             titleLabel.text = level.title

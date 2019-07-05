@@ -1,6 +1,6 @@
+import Alamofire
 import Foundation
 import Promises
-import Alamofire
 
 #if os(iOS)
     let serverURL = "http://52.194.172.67/nlp"
@@ -22,21 +22,21 @@ func getKanaTokenInfos(_ kanjiString: String) -> Promise<[[String]]> {
         serverURL,
         method: .post,
         parameters: parameters
-        ).responseJSON { response in
-            switch response.result {
-            case .success:
-                guard let tokenInfos = response.result.value as? [[String]] else {
-                    print("parse tokenInfo response error")
-                    promise.fulfill([])
-                    return
-                }
-                let fixedTokenInfo = doKanaCacheRulesFix(kanaCache: tokenInfos)
-                kanaTokenInfosCacheDictionary[kanjiString] = fixedTokenInfo
-                promise.fulfill(fixedTokenInfo)
-
-            case .failure:
+    ).responseJSON { response in
+        switch response.result {
+        case .success:
+            guard let tokenInfos = response.result.value as? [[String]] else {
+                print("parse tokenInfo response error")
                 promise.fulfill([])
+                return
             }
+            let fixedTokenInfo = doKanaCacheRulesFix(kanaCache: tokenInfos)
+            kanaTokenInfosCacheDictionary[kanjiString] = fixedTokenInfo
+            promise.fulfill(fixedTokenInfo)
+
+        case .failure:
+            promise.fulfill([])
+        }
     }
     return promise
 }
@@ -50,14 +50,14 @@ func getKana(_ kanjiString: String) -> Promise<String> {
     }
 
     getKanaTokenInfos(kanjiString).then { tokenInfos in
-        let kanaStr = tokenInfos.reduce("", { kanaStr, tokenInfo in
+        let kanaStr = tokenInfos.reduce("") { kanaStr, tokenInfo in
             if tokenInfo.count < 2 || tokenInfo[1] == "記号" {
                 return kanaStr
             }
             let kanaPart = getFixedFuriganaForScore(tokenInfo[0]) ??
                 (tokenInfo[tokenInfo.count - 1] == "*" ? tokenInfo[0] : tokenInfo[tokenInfo.count - 1])
             return kanaStr + kanaPart
-        })
+        }
         promise.fulfill(kanaStr)
     }
 
@@ -69,7 +69,7 @@ func calculateScore(
     _ sentence2: String
 ) -> Promise<Score> {
     #if os(iOS)
-    if gameLang == .en { return calculateScoreEn(sentence1, sentence2) }
+        if gameLang == .en { return calculateScoreEn(sentence1, sentence2) }
     #endif
     let promise = Promise<Score>.pending()
 
@@ -79,7 +79,7 @@ func calculateScore(
         let len = max(trimedS1.count, trimedS2.count)
         guard len > 0 else {
             #if os(iOS)
-            showMessage(I18n.shared.cannotReachServer)
+                showMessage(I18n.shared.cannotReachServer)
             #endif
             print("zero len error on calcScore", str1, str2)
             return 0
@@ -95,11 +95,11 @@ func calculateScore(
 
     all([
         getKana(sentence1),
-        getKana(sentence2)
+        getKana(sentence2),
     ]).then { kanas in
         let score = calcScore(kanas[0].kataganaToHiragana, kanas[1].kataganaToHiragana)
         #if os(iOS)
-        postEvent(.scoreCalculated, score: Score(value: score))
+            postEvent(.scoreCalculated, score: Score(value: score))
         #endif
         promise.fulfill(Score(value: score))
     }.catch { error in
@@ -112,13 +112,13 @@ func calculateScore(
 func calculateScoreEn(
     _ sentence1: String,
     _ sentence2: String
-    ) -> Promise<Score> {
+) -> Promise<Score> {
     let promise = Promise<Score>.pending()
     func calcScore(_ str1: String, _ str2: String) -> Int {
         let len = max(str1.count, str2.count)
         guard len > 0 else {
             #if os(iOS)
-            showMessage(I18n.shared.cannotReachServer)
+                showMessage(I18n.shared.cannotReachServer)
             #endif
             print("zero len error on calcScore", str1, str2)
             return 0
@@ -132,13 +132,13 @@ func calculateScoreEn(
 
     let score = calcScore(normalizedText1, normalizedText2)
     #if os(iOS)
-    postEvent(.scoreCalculated, score: Score(value: score))
+        postEvent(.scoreCalculated, score: Score(value: score))
     #endif
     promise.fulfill(Score(value: score))
     return promise
 }
 
-// TODO
+// TODO:
 // digits mapping => "20" : "twenty"
 // contraction => "it's : "it is"
 // special abbreviations => "mt." : "Mount", "m: meters"
@@ -154,7 +154,7 @@ func normalizeEnglishText(_ text: String) -> String {
     tagger.string = text
     let range = NSRange(location: 0, length: text.count)
 
-    tagger.enumerateTags(in: range, scheme: .tokenType, options: []) { (tag, tokenRange, _, _) in
+    tagger.enumerateTags(in: range, scheme: .tokenType, options: []) { tag, tokenRange, _, _ in
         let token = (text as NSString).substring(with: tokenRange)
         if tag?.rawValue == "Punctuation" {
             returnText += ""
@@ -164,8 +164,8 @@ func normalizeEnglishText(_ text: String) -> String {
     }
 
     return returnText.lowercased()
-                     .spellOutNumbers()
-                     .replacingOccurrences(of: "where is", with: "where's")
-                     .replacingOccurrences(of: " ", with: "")
-                     .replacingOccurrences(of: "-", with: "")
+        .spellOutNumbers()
+        .replacingOccurrences(of: "where is", with: "where's")
+        .replacingOccurrences(of: " ", with: "")
+        .replacingOccurrences(of: "-", with: "")
 }

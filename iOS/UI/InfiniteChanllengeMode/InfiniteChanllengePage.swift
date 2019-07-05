@@ -12,15 +12,16 @@ import UIKit
 private let context = GameContext.shared
 
 class InfiniteChallengePage: UIViewController {
-    @IBOutlet weak var topBarView: TopBarView!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var blockView: UIView!
-    @IBOutlet weak var blockInfo: UILabel!
-    @IBOutlet weak var translationButton: UIButton!
-    @IBOutlet weak var infoView: ICInfoView!
+    @IBOutlet var topBarView: TopBarView!
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var blockView: UIView!
+    @IBOutlet var blockInfo: UILabel!
+    @IBOutlet var translationButton: UIButton!
+    @IBOutlet var infoView: ICInfoView!
     var topBarTitle: String {
         return i18n.language + " - " + level.title
     }
+
     var topBarLeftText: String = ""
     var topBarRightText: String = ""
     var level: Level = .lv0
@@ -28,6 +29,7 @@ class InfiniteChallengePage: UIViewController {
     var minKanaCount: Int {
         return level.minSyllablesCount
     }
+
     var maxKanaCount: Int {
         return level.maxSyllablesCount
     }
@@ -56,7 +58,7 @@ class InfiniteChallengePage: UIViewController {
 
         let lastLevel = allLevels[(allLevels.firstIndex(of: level) ?? 0) - 1]
         if let lastLevelBestRecord = findBestRecord(dataSetKey: lastLevel.infinteChallengeDatasetKey),
-           lastLevelBestRecord.p >= lastLevel.lockPercentage {
+            lastLevelBestRecord.p >= lastLevel.lockPercentage {
             blockView.isHidden = true
         }
 
@@ -77,7 +79,8 @@ class InfiniteChallengePage: UIViewController {
 
         topBarView.titleLabel.text = topBarTitle
     }
-    @IBAction func onTranslationButtonClicked(_ sender: Any) {
+
+    @IBAction func onTranslationButtonClicked(_: Any) {
         context.gameSetting.isShowTranslationInPractice = !context.gameSetting.isShowTranslationInPractice
         saveGameSetting()
         tableView.reloadData()
@@ -85,11 +88,11 @@ class InfiniteChallengePage: UIViewController {
 }
 
 extension InfiniteChallengePage: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in _: UITableView) -> Int {
         return 1
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         if let sentences = lastInfiniteChallengeSentences[self.level] {
             return sentences.count
         }
@@ -97,7 +100,6 @@ extension InfiniteChallengePage: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         let cell = tableView.dequeueReusableCell(withIdentifier: "ICContentTableCell", for: indexPath)
         guard let contentCell = cell as? SentencesTableCell else { print("detailCell convert error"); return cell }
 

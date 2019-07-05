@@ -1,4 +1,6 @@
 //
+import Foundation
+import SQLite
 //  sqlite.swift
 //  sentencesVerifier
 //
@@ -6,8 +8,6 @@
 //  Copyright © 30 Heisei Lu, WangChou. All rights reserved.
 //
 import SwiftSyllablesMac
-import Foundation
-import SQLite
 
 struct KanaInfo {
     var kanaCount: Int
@@ -30,9 +30,8 @@ private let sentenceTable = Table("sentences")
 private let dbId = Expression<Int>("id")
 
 func getSentencesByIds(ids: [Int]) -> [String] {
-    return ids.map { id in return idToSentences[id] ?? "" }
+    return ids.map { id in idToSentences[id] ?? "" }
 }
-
 
 func updateIdWithListened(id: Int, siriSaid: String) {
     let dbSiriSaid = Expression<String>(speaker.dbField)
@@ -125,17 +124,17 @@ func loadWritableDb() {
             do {
                 idToSiriSaid[row[id]] = try row.get(siriSaid)
             } catch {
-                //print(error)
+                // print(error)
             }
             do {
                 idToPairedScore[row[id]] = try row.get(pairedScore)
             } catch {
-                //print(error)
+                // print(error)
             }
             do {
                 idToScore[row[id]] = try row.get(score)
             } catch {
-                //print(error)
+                // print(error)
             }
             switch speaker {
             case .otoya, .kyoko:
@@ -146,7 +145,6 @@ func loadWritableDb() {
                 } catch {
                     if let s = idToSentences[row[id]] {
                         idToSyllablesLen[row[id]] = SwiftSyllables.getSyllables(s)
-
                     }
                 }
             }

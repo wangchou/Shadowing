@@ -6,6 +6,7 @@ disabled_rules: # rule identifiers to exclude from running
   - line_length
   - cyclomatic_complexity
   - large_tuple
+  - trailing_comma
 opt_in_rules: # some rules are only opt-in
   - empty_count
 whitelist_rules:

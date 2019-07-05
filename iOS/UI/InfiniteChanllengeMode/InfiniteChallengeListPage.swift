@@ -11,12 +11,12 @@ import UIKit
 private let context = GameContext.shared
 
 class InfiniteChallengeListPage: UIViewController {
-    @IBOutlet weak var topBarView: TopBarView!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var bottomBarView: BottomBarView!
-    @IBOutlet weak var tableBottomConstraint: NSLayoutConstraint!
+    @IBOutlet var topBarView: TopBarView!
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var bottomBarView: BottomBarView!
+    @IBOutlet var tableBottomConstraint: NSLayoutConstraint!
 
-    @IBOutlet weak var topChartView: TopChartView!
+    @IBOutlet var topChartView: TopChartView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,11 +72,11 @@ class InfiniteChallengeListPage: UIViewController {
 }
 
 extension InfiniteChallengeListPage: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in _: UITableView) -> Int {
         return 1
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return allLevels.count
     }
 
@@ -89,10 +89,10 @@ extension InfiniteChallengeListPage: UITableViewDataSource {
 }
 
 extension InfiniteChallengeListPage: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let swipablePage = rootViewController.current as? InfiniteChallengeSwipablePage,
-           let infiniteChallengePage = swipablePage.detailPage {
-                infiniteChallengePage.level = allLevels[indexPath.row]
+            let infiniteChallengePage = swipablePage.detailPage {
+            infiniteChallengePage.level = allLevels[indexPath.row]
         }
 
         (rootViewController.current as? UIPageViewController)?.goToNextPage { _ in

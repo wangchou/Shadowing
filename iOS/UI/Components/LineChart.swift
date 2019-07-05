@@ -6,14 +6,13 @@
 //  Copyright © 30 Heisei Lu, WangChou. All rights reserved.
 //
 
-import UIKit
 import Charts
+import UIKit
 
 private let fontSize = screen.width * 12 / 320
 
 @IBDesignable
 class LineChart: LineChartView, ChartViewDelegate, ReloadableView {
-
     var lineColor: UIColor = .black
     var circleColor: UIColor = .black
     var circleRadius: CGFloat = 2
@@ -69,7 +68,7 @@ class LineChart: LineChartView, ChartViewDelegate, ReloadableView {
 
     func setDataCount(level: Level, dataPoints: [(x: Int, y: Int)]) {
         let values = dataPoints.map { p in
-            return ChartDataEntry(x: Double(p.x), y: Double(p.y))
+            ChartDataEntry(x: Double(p.x), y: Double(p.y))
         }
 
         let set1 = LineChartDataSet(values: values, label: "")

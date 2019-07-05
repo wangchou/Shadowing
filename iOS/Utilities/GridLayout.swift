@@ -45,8 +45,7 @@ extension GridLayout where Self: UIView {
                  h: Int,
                  text: String,
                  font: UIFont? = nil,
-                 color: UIColor? = nil
-        ) -> UILabel {
+                 color: UIColor? = nil) -> UILabel {
         let label = UILabel()
         label.font = font ?? MyFont.regular(ofSize: getFontSize(h: h))
         label.textColor = color ?? .black
@@ -61,8 +60,7 @@ extension GridLayout where Self: UIView {
                      y: Int,
                      w: Int? = nil,
                      h: Int,
-                     text: NSAttributedString
-        ) -> UILabel {
+                     text: NSAttributedString) -> UILabel {
         let label = UILabel()
         label.attributedText = text
         layout(x, y, w, h, label)
@@ -83,7 +81,7 @@ extension GridLayout where Self: UIView {
     @discardableResult
     func addButton(_ x: Int, _ y: Int, _ w: Int, _ h: Int,
                    color: UIColor = .white,
-                   cornerRadius: CGFloat = screen.width/48) -> UIButton {
+                   cornerRadius: CGFloat = screen.width / 48) -> UIButton {
         let button = UIButton()
         layout(x, y, w, h, button)
         button.backgroundColor = color

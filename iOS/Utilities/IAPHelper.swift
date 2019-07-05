@@ -6,11 +6,11 @@
 //  Copyright © 30 Heisei Lu, WangChou. All rights reserved.
 //
 
-import StoreKit
 import Alamofire
-import Promises
-import UIKit
 import FirebaseAnalytics
+import Promises
+import StoreKit
+import UIKit
 
 enum IAPProduct: String {
     case unlimitedForever
@@ -21,7 +21,7 @@ enum IAPProduct: String {
 let productIds: Set<String> = [
     IAPProduct.unlimitedForever.rawValue,
     IAPProduct.unlimitedOneMonth.rawValue,
-    IAPProduct.unlimitedThreeMonths.rawValue
+    IAPProduct.unlimitedThreeMonths.rawValue,
 ]
 
 enum RequestURL: String {
@@ -29,7 +29,7 @@ enum RequestURL: String {
     case sandbox = "https://sandbox.itunes.apple.com/verifyReceipt"
 
     var url: URL {
-        return URL(string: self.rawValue)!
+        return URL(string: rawValue)!
     }
 }
 
@@ -40,7 +40,6 @@ enum GetExpirationError: Error {
 }
 
 class IAPHelper: NSObject {
-
     static let shared = IAPHelper()
     var products: [SKProduct] = []
     var timer: Timer?
@@ -71,17 +70,16 @@ class IAPHelper: NSObject {
 
     func showPurchaseView(isChallenge: Bool = true) {
         let eventName = "iap_view_\(isChallenge ? "challenge_button" : "free_button")"
-        var timer: Timer?
-        var countDownSeconds = 3
         Analytics.logEvent("\(eventName)_show", parameters: nil)
         let actionSheet = UIAlertController(
             title: isChallenge ? i18n.purchaseViewTitle : i18n.itIsfreeVersion,
             message: isChallenge ? i18n.purchaseViewMessage : i18n.freeButtonPurchaseMessage,
-            preferredStyle: .actionSheet)
+            preferredStyle: .actionSheet
+        )
 
         // Create the actions
         let sortedProducts = products.sorted {
-            return $0.price.doubleValue <= $1.price.doubleValue
+            $0.price.doubleValue <= $1.price.doubleValue
         }
         for product in sortedProducts {
             var priceString = ""
@@ -133,7 +131,7 @@ class IAPHelper: NSObject {
 
         // https://medium.com/@nickmeehan/actionsheet-popover-on-ipad-in-swift-5768dfa82094
         if let popoverController = actionSheet.popoverPresentationController,
-           let vc = UIApplication.getPresentedViewController() {
+            let vc = UIApplication.getPresentedViewController() {
             popoverController.sourceView = vc.view
             popoverController.sourceRect = CGRect(x: vc.view.bounds.midX, y: vc.view.bounds.midY, width: 0, height: 0)
             popoverController.permittedArrowDirections = []
@@ -144,8 +142,9 @@ class IAPHelper: NSObject {
 }
 
 // MARK: - SKProductsRequestDelegate
+
 extension IAPHelper: SKProductsRequestDelegate {
-    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+    func productsRequest(_: SKProductsRequest, didReceive response: SKProductsResponse) {
         products = response.products
     }
 
@@ -175,8 +174,9 @@ extension IAPHelper: SKProductsRequestDelegate {
 }
 
 // MARK: - SKPaymentTransactionObserver
+
 extension IAPHelper: SKPaymentTransactionObserver {
-    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+    func paymentQueue(_: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         var shouldProcessReceipt = false
         for transaction in transactions {
             switch transaction.transactionState {
@@ -185,7 +185,8 @@ extension IAPHelper: SKPaymentTransactionObserver {
                 shouldProcessReceipt = true
                 updateExpirationDate(
                     productId: transaction.payment.productIdentifier,
-                    purchaseDateInMS: transaction.transactionDate?.ms ?? Date().ms)
+                    purchaseDateInMS: transaction.transactionDate?.ms ?? Date().ms
+                )
                 SKPaymentQueue.default().finishTransaction(transaction)
 
             case .failed:
@@ -199,7 +200,8 @@ extension IAPHelper: SKPaymentTransactionObserver {
                 shouldProcessReceipt = true
                 updateExpirationDate(
                     productId: transaction.payment.productIdentifier,
-                    purchaseDateInMS: transaction.original?.transactionDate?.ms ?? Date().ms)
+                    purchaseDateInMS: transaction.original?.transactionDate?.ms ?? Date().ms
+                )
                 SKPaymentQueue.default().finishTransaction(transaction)
 
             case .purchasing:

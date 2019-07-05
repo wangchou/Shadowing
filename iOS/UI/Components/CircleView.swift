@@ -22,11 +22,13 @@ class CircleView: UIView {
             circleLayer.strokeColor = newValue.cgColor
         }
     }
+
     var lineWidth: CGFloat = 0.75 {
         willSet {
             circleLayer.lineWidth = newValue
         }
     }
+
     var percent: CGFloat = 1.0 {
         willSet {
             circleLayer.strokeEnd = newValue
@@ -41,10 +43,11 @@ class CircleView: UIView {
         // The path should be the entire circle.
         let circlePath = UIBezierPath(
             arcCenter: CGPoint(x: frame.width / 2.0, y: frame.height / 2.0),
-            radius: frame.width/2,
+            radius: frame.width / 2,
             startAngle: CGFloat(.pi * -0.5),
             endAngle: CGFloat(.pi * 1.5),
-            clockwise: true)
+            clockwise: true
+        )
 
         // Setup the CAShapeLayer with the path, colors, and line width
         circleLayer = CAShapeLayer()
@@ -66,11 +69,12 @@ class CircleView: UIView {
 
     func toInitialState() {
         circleLayer.removeAllAnimations()
-        //percent = 0
+        // percent = 0
     }
+
     func toEndState() {
         circleLayer.removeAllAnimations()
-        //percent = 1.0
+        // percent = 1.0
     }
 
     func animate(duration: TimeInterval) {

@@ -6,10 +6,10 @@
 //  Copyright © 平成30年 Lu, WangChou. All rights reserved.
 //
 
-import Foundation
-import UIKit
-import Promises
 import Firebase
+import Foundation
+import Promises
+import UIKit
 
 private let context = GameContext.shared
 
@@ -17,27 +17,27 @@ class TopicDetailPage: UIViewController {
     static var isChallengeButtonDisabled = false
     var isViewReady = false
 
-    @IBOutlet weak var rankLabel: UILabel!
-    @IBOutlet weak var progressLabel: UILabel!
-    @IBOutlet weak var skipPreviousButton: UIButton!
-    @IBOutlet weak var challengeButton: UIButton!
-    @IBOutlet weak var skipNextButton: UIButton!
+    @IBOutlet var rankLabel: UILabel!
+    @IBOutlet var progressLabel: UILabel!
+    @IBOutlet var skipPreviousButton: UIButton!
+    @IBOutlet var challengeButton: UIButton!
+    @IBOutlet var skipNextButton: UIButton!
 
-    @IBOutlet weak var perfectTitleLabel: UILabel!
-    @IBOutlet weak var greatTitleLabel: UILabel!
-    @IBOutlet weak var goodTitleLabel: UILabel!
-    @IBOutlet weak var missedTitleLabel: UILabel!
+    @IBOutlet var perfectTitleLabel: UILabel!
+    @IBOutlet var greatTitleLabel: UILabel!
+    @IBOutlet var goodTitleLabel: UILabel!
+    @IBOutlet var missedTitleLabel: UILabel!
 
-    @IBOutlet weak var perfectCountLabel: UILabel!
-    @IBOutlet weak var greatCountLabel: UILabel!
-    @IBOutlet weak var goodCountLabel: UILabel!
-    @IBOutlet weak var missedCountLabel: UILabel!
+    @IBOutlet var perfectCountLabel: UILabel!
+    @IBOutlet var greatCountLabel: UILabel!
+    @IBOutlet var goodCountLabel: UILabel!
+    @IBOutlet var missedCountLabel: UILabel!
 
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var peekButton: UIButton!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var peekButton: UIButton!
 
-    @IBOutlet weak var topBarView: TopBarView!
+    @IBOutlet var topBarView: TopBarView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +47,7 @@ class TopicDetailPage: UIViewController {
             forCellReuseIdentifier: "ContentTableCell"
         )
     }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor = darkBackground
@@ -97,7 +98,7 @@ class TopicDetailPage: UIViewController {
         skipNextButton.setStyle(style: .darkAction)
 
         // load furigana
-        all(context.sentences.map {$0.furiganaAttributedString}).then { _ in
+        all(context.sentences.map { $0.furiganaAttributedString }).then { _ in
             self.tableView.reloadData()
         }
     }
@@ -132,21 +133,22 @@ class TopicDetailPage: UIViewController {
         #endif
     }
 
-    @IBAction func challenge(_ sender: Any) {
+    @IBAction func challenge(_: Any) {
         guard !TopicDetailPage.isChallengeButtonDisabled else { return }
         launchGame()
     }
 
-    @IBAction func onSkipPreviousButtonClicked(_ sender: Any) {
+    @IBAction func onSkipPreviousButtonClicked(_: Any) {
         context.loadPrevousChallenge()
         render()
     }
-    @IBAction func onSkipNextButtonClicked(_ sender: Any) {
+
+    @IBAction func onSkipNextButtonClicked(_: Any) {
         context.loadNextChallenge()
         render()
     }
 
-    @IBAction func touchUpPeekButton(_ sender: Any) {
+    @IBAction func touchUpPeekButton(_: Any) {
         context.gameSetting.isShowTranslationInPractice = !context.gameSetting.isShowTranslationInPractice
         saveGameSetting()
         tableView.reloadData()
@@ -162,11 +164,11 @@ class TopicDetailPage: UIViewController {
 }
 
 extension TopicDetailPage: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in _: UITableView) -> Int {
         return 1
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return context.sentences.count
     }
 

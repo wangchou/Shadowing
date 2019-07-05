@@ -137,24 +137,23 @@ class MedalSummaryPageView: UIView, GridLayout, ReloadableView {
 
     private func getDateString(date: Date) -> String {
         let weekdayLabels = i18n.isZh ? ["日", "一", "二", "三", "四", "五", "六"] :
-                            (i18n.isJa ? ["日", "月", "火", "水", "木", "金", "土"] :
-                                         ["S", "M", "T", "W", "T", "F", "S"])
-        //let monthLabels = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."]
+            (i18n.isJa ? ["日", "月", "火", "水", "木", "金", "土"] :
+                ["S", "M", "T", "W", "T", "F", "S"])
+        // let monthLabels = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."]
         let month = Calendar.current.component(.month, from: date)
         let day = Calendar.current.component(.day, from: date)
         let weekdayIdx = Calendar.current.component(.weekday, from: date) - 1
 
         return "\(month)/\(day) \(weekdayLabels[weekdayIdx])"
     }
-
 }
 
 extension MedalSummaryPageView: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in _: UITableView) -> Int {
         return 1
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return tableData.count
     }
 
@@ -178,7 +177,7 @@ extension MedalSummaryPageView: UITableViewDataSource {
 }
 
 extension MedalSummaryPageView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+    func tableView(_: UITableView, willSelectRowAt _: IndexPath) -> IndexPath? {
         return nil
     }
 }
@@ -213,23 +212,25 @@ class MedalSummaryTableCell: UITableViewCell, GridLayout {
             timeRect.backgroundColor = isWeekend ? rgb(255, 230, 230) : rgb(240, 240, 240)
         }
     }
+
     var medalCount: Int = 10 {
         didSet {
             let medalCountText = "\(medalCount >= 0 ? "+" : "")\(medalCount)"
             medalCountLabel.attributedText = getStrokeText(medalCountText,
                                                            medalCount > 0 ? green :
-                                                           (medalCount == 0 ? .white : red),
-                                                           strokeWidth: -1 * Float(step/3),
+                                                               (medalCount == 0 ? .white : red),
+                                                           strokeWidth: -1 * Float(step / 3),
                                                            strokColor: .black,
                                                            font: MyFont.heavyDigit(ofSize: step * 3))
         }
     }
+
     var goalPercent: Float = 0.3 {
         didSet {
-            let percentText = goalPercent >= 1 ? i18n.done :"\(String(format: "%.0f", goalPercent * 100))%"
+            let percentText = goalPercent >= 1 ? i18n.done : "\(String(format: "%.0f", goalPercent * 100))%"
             var color = goalPercent >= 1 ? myBlue :
-                        (goalPercent >= 0.8 ? green :
-                        (goalPercent >= 0.6 ? orange: red))
+                (goalPercent >= 0.8 ? green :
+                    (goalPercent >= 0.6 ? orange : red))
 
             if goalPercent == 0 {
                 color = .black
@@ -243,9 +244,9 @@ class MedalSummaryTableCell: UITableViewCell, GridLayout {
     var playTime: Int = 1000 {
         didSet {
             if playTime < 3600 {
-                playTimeLabel.text = String(format: "%.1fm", playTime.f/60.0)
+                playTimeLabel.text = String(format: "%.1fm", playTime.f / 60.0)
             } else {
-                playTimeLabel.text = String(format: "%dh%dm", playTime/3600, (playTime%3600)/60)
+                playTimeLabel.text = String(format: "%dh%dm", playTime / 3600, (playTime % 3600) / 60)
             }
         }
     }

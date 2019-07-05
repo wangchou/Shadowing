@@ -33,19 +33,22 @@ struct GameRecord: Codable {
         self.dataSetKey = dataSetKey
         self.sentencesCount = sentencesCount
         self.level = level
-        self.sentencesScore = [:]
-        self.startedTime = Date()
+        sentencesScore = [:]
+        startedTime = Date()
     }
 }
 
 // MARK: - Computed property and func
+
 extension GameRecord {
     var missedCount: Int {
         return sentencesCount - perfectCount - greatCount - goodCount
     }
+
     var correctCount: Int {
         return perfectCount + greatCount
     }
+
     var dateKey: String {
         return getDateKey(date: startedTime)
     }
@@ -68,13 +71,13 @@ extension GameRecord {
     }
 
     private func getRank(isDetail: Bool = false) -> Rank {
-        if p == 100 && perfectCount.f * 1.3 >=  sentencesCount.f { return .ss }
+        if p == 100, perfectCount.f * 1.3 >= sentencesCount.f { return .ss }
         if p == 100 { return .s }
-        if p >= 95 && isDetail { return .aP }
+        if p >= 95, isDetail { return .aP }
         if p >= 90 { return .a }
-        if p >= 85 && isDetail { return .bP }
+        if p >= 85, isDetail { return .bP }
         if p >= 80 { return .b }
-        if p >= 75 && isDetail { return .cP }
+        if p >= 75, isDetail { return .cP }
         if p >= 70 { return .c }
         if p >= 60 { return .d }
         if p >= 40 { return .e }
@@ -83,6 +86,7 @@ extension GameRecord {
 }
 
 // MARK: - Save / Load
+
 private let gameHistoryKey = "game record array json"
 
 func saveGameHistory() {
@@ -107,6 +111,7 @@ func loadGameHistory() {
 }
 
 // MARK: - Utils
+
 func getAllGameHistory() -> [GameRecord] {
     var records: [GameRecord] = []
     [Lang.en, Lang.jp].forEach { lang in
@@ -122,7 +127,7 @@ func isBetter(_ record: GameRecord, to bestRecord: GameRecord) -> Bool {
 }
 
 func findBestRecord(dataSetKey: String) -> GameRecord? {
-    return context.gameHistory.first(where: {$0.dataSetKey == dataSetKey})
+    return context.gameHistory.first(where: { $0.dataSetKey == dataSetKey })
 }
 
 // best record will insert at array HEAD

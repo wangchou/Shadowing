@@ -6,15 +6,16 @@
 //  Copyright © 30 Heisei Lu, WangChou. All rights reserved.
 //
 
-import Foundation
 import AVFoundation
-import Speech
+import Foundation
 import Promises
+import Speech
 
 private let context = GameContext.shared
 private let engine = SpeechEngine.shared
 
 // MARK: - SpeechEngine
+
 // A wrapper of AVAudioEngine, SpeechRecognizer and TTS
 class SpeechEngine {
     // Singleton
@@ -36,6 +37,7 @@ class SpeechEngine {
     private var tts2 = TTS()
 
     // MARK: - Public Funtions
+
     func start() {
         guard !isEngineRunning else { return }
         isEngineRunning = true
@@ -79,6 +81,7 @@ class SpeechEngine {
     }
 
     // MARK: - Private
+
     private func stop() {
         guard isEngineRunning else { return }
         isEngineRunning = false
@@ -103,6 +106,7 @@ class SpeechEngine {
     }
 
     // MARK: - Handle Route Change
+
     private init() {
         guard !isSimulator else { return }
         setupNotifications()
@@ -117,9 +121,9 @@ class SpeechEngine {
 
     @objc func handleRouteChange(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
-              let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt,
-              let reason = AVAudioSession.RouteChangeReason(rawValue: reasonValue) else {
-                return
+            let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt,
+            let reason = AVAudioSession.RouteChangeReason(rawValue: reasonValue) else {
+            return
         }
         switch reason {
         case .newDeviceAvailable, .oldDeviceUnavailable, .override:
@@ -134,6 +138,7 @@ class SpeechEngine {
 }
 
 // MARK: - Wrappers of engine.speak
+
 // narratorSay      speak intitial instructions
 // translatorSay    speak translation
 // teacherSay       speak the text for repeating
@@ -144,7 +149,7 @@ extension SpeechEngine {
     fileprivate func speak(text: String, speaker: String, rate: Float) -> Promise<Void> {
         let startTime = getNow()
         func updateSpeakDuration() -> Promise<Void> {
-            context.speakDuration = Float((getNow() - startTime))
+            context.speakDuration = Float(getNow() - startTime)
             return fulfilledVoidPromise()
         }
         currentTTSIdx += 1
@@ -152,7 +157,7 @@ extension SpeechEngine {
             text,
             voiceId: speaker,
             rate: rate
-            ).then(updateSpeakDuration)
+        ).then(updateSpeakDuration)
     }
 }
 
@@ -164,7 +169,7 @@ func speakTitle() -> Promise<Void> {
     }
 
     if (gameLang == .jp && i18n.isJa) ||
-       (gameLang == .en && !(i18n.isZh || i18n.isJa)) {
+        (gameLang == .en && !(i18n.isZh || i18n.isJa)) {
         return teacherSay(title, rate: normalRate)
     }
     return narratorSay(title)
@@ -184,13 +189,13 @@ func narratorSay(_ text: String) -> Promise<Void> {
     } else {
         voiceId = getDefaultVoiceId(language: "en-US")
     }
-    //print("narrator", voiceId)
+    // print("narrator", voiceId)
     return engine.speak(text: text, speaker: voiceId, rate: rate)
 }
 
 func translatorSay(_ text: String) -> Promise<Void> {
     var translationLocale = "en-US"
-    if gameLang == .jp && context.gameMode == .topicMode {
+    if gameLang == .jp, context.gameMode == .topicMode {
         translationLocale = "zh-TW"
     }
     if gameLang == .en {
@@ -221,6 +226,7 @@ func ttsSay(_ text: String, speaker: String, rate: Float = context.teachingRate)
 }
 
 // MARK: - Utilities
+
 private func isHeadphonePlugged() -> Bool {
     let currentRoute = AVAudioSession.sharedInstance().currentRoute
     for description in currentRoute.outputs {

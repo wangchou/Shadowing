@@ -13,9 +13,9 @@ class DifficultyCalculator {
 
     let filenames = ["level0", "level1", "level2", "level3", "level4", "level5", "level6", "level7", "level8"]
     var allVocSet: Set<String> = []
-    var levelVocSets: [Set<String>] = [[],[],[],[],[],[],[],[],[]]
+    var levelVocSets: [Set<String>] = [[], [], [], [], [], [], [], [], []]
     // work on text
-    let tagger = NSLinguisticTagger(tagSchemes:[.tokenType, .language, .lexicalClass, .nameType, .lemma], options: 0)
+    let tagger = NSLinguisticTagger(tagSchemes: [.tokenType, .language, .lexicalClass, .nameType, .lemma], options: 0)
     let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace, .omitOther]
 
     private init() {
@@ -39,7 +39,7 @@ class DifficultyCalculator {
             let wordLevel = getWordLevel(word: word)
             difficults.append(wordLevel)
         }
-        difficults.sort(by: > )
+        difficults.sort(by: >)
         var difficulty = 0
         for i in 0 ... 2 where i < difficults.count {
             difficulty += difficults[i]
@@ -53,9 +53,8 @@ class DifficultyCalculator {
 
         do {
             let text = try String(contentsOf: url, encoding: .utf8)
-            return text.split(separator: "\n").map { return $0.lowercased() }
-        }
-        catch {
+            return text.split(separator: "\n").map { $0.lowercased() }
+        } catch {
             print("error")
         }
         return []
@@ -64,8 +63,8 @@ class DifficultyCalculator {
     private func lemmatization(for text: String) -> [String] {
         var words: [String] = []
         tagger.string = text
-        let range = NSRange(location:0, length: text.utf16.count)
-        tagger.enumerateTags(in: range, unit: .word, scheme: .lemma, options: options) { tag, tokenRange, stop in
+        let range = NSRange(location: 0, length: text.utf16.count)
+        tagger.enumerateTags(in: range, unit: .word, scheme: .lemma, options: options) { tag, tokenRange, _ in
             if let lemma = tag?.rawValue {
                 words.append(lemma.lowercased())
             } else {
@@ -107,7 +106,7 @@ extension DifficultyCalculator {
             let sentenceLevel = getDifficulty(sentence: sentence)
             levelSentenceCounts[sentenceLevel] = (levelSentenceCounts[sentenceLevel] ?? 0) + 1
             if sentenceLevel == targetLevel % 200 {
-                //print(sentenceLevel, sentence, "|", jaSentences[i])
+                // print(sentenceLevel, sentence, "|", jaSentences[i])
                 print(sentenceLevel, sentence)
 
                 targetLevel += 1
@@ -121,9 +120,8 @@ extension DifficultyCalculator {
         for i in 0 ... 24 {
             print(i, levelSentenceCounts[i]!)
         }
-        //print(10000, levelSentenceCounts[100]!)
+        // print(10000, levelSentenceCounts[100]!)
         print("\n")
-
     }
 
     func showUncoveredWords() {
@@ -136,7 +134,7 @@ extension DifficultyCalculator {
             let words = lemmatization(for: sentence)
             for word in words {
                 if word.isDigit { continue }
-                if !containsIn(vocSet: allVocSet, words: word.variations){
+                if !containsIn(vocSet: allVocSet, words: word.variations) {
                     unknownWords.append(word)
                     exampleSentences[word] = sentence
                 }
@@ -159,11 +157,11 @@ extension DifficultyCalculator {
 
         var i = 1
         for (word, count) in wordFreqArray {
-            if i%10 == 1 {
+            if i % 10 == 1 {
                 print("\n==\(i) \(count)==")
             }
             print(word, "|", exampleSentences[word]!)
-            i = i+1
+            i = i + 1
         }
     }
 }

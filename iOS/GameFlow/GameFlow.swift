@@ -54,6 +54,7 @@ class GameFlow {
     private init() {}
 
     // MARK: - Key GameFlow
+
     func start() {
         isPaused = false
 
@@ -69,9 +70,9 @@ class GameFlow {
         context.loadLearningSentences()
 
         speakTitle()
-            .then( tryWait )
-            .then( speakNarratorString )
-            .then( tryWait )
+            .then(tryWait)
+            .then(speakNarratorString)
+            .then(tryWait)
             .always {
                 self.learnNextSentence()
             }
@@ -85,13 +86,13 @@ class GameFlow {
             return
         }
         speakTranslation()
-            .then( tryWait )
-            .then( speakTargetString )
-            .then( tryWait )
-            .then( echoMethod )
-            .then( tryWait )
-            .then( listenPart )
-            .then( tryWait )
+            .then(tryWait)
+            .then(speakTargetString)
+            .then(tryWait)
+            .then(echoMethod)
+            .then(tryWait)
+            .then(listenPart)
+            .then(tryWait)
             .catch { error in
                 print("Promise chain is dead", error)
             }
@@ -111,6 +112,7 @@ class GameFlow {
 }
 
 // MARK: - Flow Steps
+
 extension GameFlow {
     private var narratorString: String {
         switch context.gameSetting.learningMode {
@@ -126,7 +128,7 @@ extension GameFlow {
     private func speakNarratorString() -> Promise<Void> {
         if !context.gameSetting.isUsingNarrator { return fulfilledVoidPromise() }
 
-        return narratorSay(self.narratorString)
+        return narratorSay(narratorString)
     }
 
     private func tryWait() -> Promise<Void> {
@@ -160,7 +162,6 @@ extension GameFlow {
                     context.gameMedal.updateMedals(record: &context.gameRecord!)
                     saveMedalCount()
                 }
-
             }
             updateGameHistory()
             saveGameSetting()
@@ -250,9 +251,9 @@ extension GameFlow {
 
         return context
             .calculatedSpeakDuration
-            .then({ speakDuration -> Promise<String> in
-                return engine.listen(duration: Double(speakDuration + pauseDuration))
-            })
+            .then { speakDuration -> Promise<String> in
+                engine.listen(duration: Double(speakDuration + pauseDuration))
+            }
     }
 
     private func saveUserSaidString(userSaidString: String) -> Promise<Void> {

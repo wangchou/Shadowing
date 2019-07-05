@@ -19,9 +19,10 @@ class BottomBarView: UIView, XibView {
             updateContentTab()
         }
     }
+
     var nibName: String = "BottomBarView"
-    @IBOutlet weak var leftButton: UIButton!
-    @IBOutlet weak var rightButton: UIButton!
+    @IBOutlet var leftButton: UIButton!
+    @IBOutlet var rightButton: UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,6 +41,7 @@ class BottomBarView: UIView, XibView {
         updateContentTab()
         backgroundColor = rgb(250, 250, 250)
     }
+
     private func updateContentTab() {
         var leftColor: UIColor = UIColor(white: 0, alpha: 0.66)
         var rightColor: UIColor = UIColor(white: 0, alpha: 0.66)
@@ -55,12 +57,14 @@ class BottomBarView: UIView, XibView {
         leftButton.setIconImage(named: leftImgName, tintColor: leftColor)
         rightButton.setIconImage(named: rightImgName, tintColor: rightColor)
     }
-    @IBAction func onLeftButtonClicked(_ sender: Any) {
+
+    @IBAction func onLeftButtonClicked(_: Any) {
         RootContainerViewController.isShowSetting = false
         context.bottomTab = .topics
         rootViewController.showMainPage(idx: 2)
     }
-    @IBAction func onRightButtonClicked(_ sender: Any) {
+
+    @IBAction func onRightButtonClicked(_: Any) {
         RootContainerViewController.isShowSetting = false
         context.bottomTab = .infiniteChallenge
         rootViewController.showInfiniteChallengePage(idx: 2)

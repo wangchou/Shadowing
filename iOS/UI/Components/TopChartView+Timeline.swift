@@ -18,12 +18,13 @@ struct TimelineBox {
     var day: Int {
         return Calendar.current.component(.day, from: date)
     }
+
     var month: Int {
         return Calendar.current.component(.month, from: date)
     }
 
     mutating func toYesterday() {
-        row = (row + 6)%7
+        row = (row + 6) % 7
         if row == 0 {
             row = 7
             column += 1
@@ -37,6 +38,7 @@ struct TimelineBox {
 }
 
 // MARK: Timeline Mode
+
 extension TopChartView {
     func renderTimelineMode() {
         removeAllSubviews()
@@ -52,7 +54,7 @@ extension TopChartView {
         //
         // Goal: Calender Row start from Monday
         // In row,     Mon = 1, Tue = 2, ... Sun = 7
-        let row = (weekday + 6)%7
+        let row = (weekday + 6) % 7
         return row == 0 ? 7 : row
     }
 
@@ -64,12 +66,12 @@ extension TopChartView {
         var timelineBox = TimelineBox(date: today,
                                       row: getRowFrom(weekday: weekday),
                                       column: 1)
-        //let recordsByDate = getRecordsByDate()
+        // let recordsByDate = getRecordsByDate()
         var index = 0
         let sentencesCounts = getSentenceCountsByDays()
         while timelineBox.column < timelineColumnCount {
-            //let dateString = getDateKey(date: timelineBox.date)
-            //let color = getColorFrom(records: recordsByDate[dateString])
+            // let dateString = getDateKey(date: timelineBox.date)
+            // let color = getColorFrom(records: recordsByDate[dateString])
             let isGoalCompleted = (index < sentencesCounts.count && sentencesCounts[index] >= dailyGoal)
             addTimelineBox(
                 row: timelineBox.row,
@@ -79,7 +81,7 @@ extension TopChartView {
             timelineBox.toYesterday()
             if timelineBox.day == 1 {
                 var monthText = "\(timelineBox.month)月"
-                if !i18n.isZh && !i18n.isJa {
+                if !i18n.isZh, !i18n.isJa {
                     let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
                     monthText = months[timelineBox.month - 1]
@@ -97,8 +99,8 @@ extension TopChartView {
             weekdayLabels = ["M", "T", "W", "T", "F", "S", "S"]
         }
 
-        for i in 0..<weekdayLabels.count {
-            addTimelineTextLabel(row: i+1,
+        for i in 0 ..< weekdayLabels.count {
+            addTimelineTextLabel(row: i + 1,
                                  column: 0,
                                  text: weekdayLabels[i],
                                  color: (i == 5 || i == 6) ? .red : .black,
@@ -112,13 +114,13 @@ extension TopChartView {
 
         let topTexts = ["\(continues)", "\(bestCount)", "\(sevenDaysPercentText)%", "\(thirtyDaysPercentText)%", "\(allSentenceCount)"]
         let bottomTexts = [i18n.continues, i18n.best, i18n.last7Days, i18n.last30Days, i18n.sentence]
-        for boxIndex in 0..<5 {
+        for boxIndex in 0 ..< 5 {
             let box = addRect(x: 1 + boxIndex * 3, y: 8, w: 3, h: 2)
             addTimelinePadding(box)
             box.frame.size.width -= step * 0.3
             box.frame.size.height += step * 0.2
             box.frame.origin.y += step * 0.3
-            box.roundBorder(radius: step/3)
+            box.roundBorder(radius: step / 3)
             box.backgroundColor = .white
 
             let topText = addText(
@@ -150,7 +152,7 @@ extension TopChartView {
         layout(timelineColumnCount - column, row, 1, 1, box)
         box.frame.size.width = width
         box.frame.size.height = width
-        box.roundBorder(width: 1, radius: width/2, color: .black)
+        box.roundBorder(width: 1, radius: width / 2, color: .black)
         addSubview(box)
 
         addTimelinePadding(box)

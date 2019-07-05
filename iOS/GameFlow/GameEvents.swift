@@ -40,13 +40,14 @@ extension Notification.Name {
     static let eventHappened = Notification.Name("eventHappended")
 }
 
-func postEvent (
+func postEvent(
     _ type: EventType,
     string: String? = nil,
     int: Int? = nil,
     gameState: GameState? = nil,
     score: Score? = nil,
-    range: NSRange? = nil) {
+    range: NSRange? = nil
+) {
     NotificationCenter.default.post(
         name: .eventHappened,
         object: Event(type: type, string: string, int: int, gameState: gameState, score: score, range: range)

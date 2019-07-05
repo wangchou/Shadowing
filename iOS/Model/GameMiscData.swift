@@ -20,6 +20,7 @@ var kanaTokenInfosCacheDictionary: [String: [[String]]] = [:] //tokenInfo =[kanj
 var translations: [String: String] = [:] // en => ja & ja => en
 
 // MARK: - Save and Load
+
 private let userSaidSentencesKey = "user said sentences key"
 private let sentenceScoreKey = "sentence score key"
 private let lastChallengeSenteceKey = "last challenge senteces key"
@@ -66,7 +67,7 @@ func loadGameMiscData(isLoadKana: Bool = false) {
         waitUserSaidSentencesLoaded.fulfill(())
     }
     DispatchQueue.global().async {
-        easyLoad(object: &sentenceScores, key: sentenceScoreKey  + gameLang.key)
+        easyLoad(object: &sentenceScores, key: sentenceScoreKey + gameLang.key)
         waitSentenceScoresLoaded.fulfill(())
     }
     DispatchQueue.global().async {

@@ -6,25 +6,26 @@
 //  Copyright © 30 Heisei Lu, WangChou. All rights reserved.
 //
 
-import Foundation
 import Cocoa
+import Foundation
 import Promises
 
 typealias SRefCon = UnsafeRawPointer
-private var fCurSpeechChannel: SpeechChannel? = nil
+private var fCurSpeechChannel: SpeechChannel?
 private var theErr = OSErr(noErr)
 
 enum Speaker: String {
-    case otoya="otoya"
-    case kyoko="kyoko"
-    case alex="alex"
-    case samantha="samantha"
+    case otoya
+    case kyoko
+    case alex
+    case samantha
 
     var dbField: String {
-        return self.rawValue
+        return rawValue
     }
+
     var dbScoreField: String {
-        return self.rawValue + "_score"
+        return rawValue + "_score"
     }
 
     var pairDbField: String {
@@ -57,7 +58,7 @@ enum Speaker: String {
 func say(_ s: String) {
     theErr = SpeakCFString(fCurSpeechChannel!, getFixedKanaForTTS(s) as CFString, nil)
     if theErr != OSErr(noErr) { print("error... speak") }
-    //print("\(s) is spoken")
+    // print("\(s) is spoken")
 }
 
 func setupSpeechChannelAndDoneCallback() {
@@ -67,22 +68,22 @@ func setupSpeechChannelAndDoneCallback() {
 
     // set voice to Otoya
     var fSelectedVoiceID: OSType = 201
-    var fSelectedVoiceCreator: OSType = 1835364215
+    var fSelectedVoiceCreator: OSType = 1_835_364_215
 
     // set voice to Alex
     switch speaker {
     case .alex:
-        fSelectedVoiceCreator = 1835364215
+        fSelectedVoiceCreator = 1_835_364_215
         fSelectedVoiceID = 201
     case .samantha:
-        fSelectedVoiceCreator = 1886745202
-        fSelectedVoiceID = 184844493
+        fSelectedVoiceCreator = 1_886_745_202
+        fSelectedVoiceID = 184_844_493
     case .otoya:
-        fSelectedVoiceID = 369338093
-        fSelectedVoiceCreator = 1886745202
+        fSelectedVoiceID = 369_338_093
+        fSelectedVoiceCreator = 1_886_745_202
     case .kyoko:
-        fSelectedVoiceCreator = 1886745202
-        fSelectedVoiceID = 369275117
+        fSelectedVoiceCreator = 1_886_745_202
+        fSelectedVoiceID = 369_275_117
     }
 
     let voiceDict: NSDictionary = [kSpeechVoiceID: fSelectedVoiceID,
@@ -97,7 +98,7 @@ func setupSpeechChannelAndDoneCallback() {
     }
 
     if theErr == OSErr(noErr) {
-        typealias DoneCallBackType = @convention(c) (SpeechChannel, SRefCon)->Void
+        typealias DoneCallBackType = @convention(c) (SpeechChannel, SRefCon) -> Void
         let callback = onSpeakEnded as DoneCallBackType?
         let callbackAddr = unsafeBitCast(callback, to: UInt.self) as CFNumber
         theErr = SetSpeechProperty(fCurSpeechChannel!,
@@ -109,18 +110,18 @@ func setupSpeechChannelAndDoneCallback() {
     }
 }
 
-private func onSpeakEnded(_ inSpeechChannel: SpeechChannel, _ inRefCon: SRefCon) {
+private func onSpeakEnded(_: SpeechChannel, _: SRefCon) {
     toggleSpeechToText()
-    let waitTime:TimeInterval = 1.5
+    let waitTime: TimeInterval = 1.5
     var isEmptyString: Bool = false
 
     DispatchQueue.main.async {
         Timer.scheduledTimer(withTimeInterval: waitTime, repeats: false) { _ in
             let s = vc.textView.string
             isEmptyString = s == ""
-            let id = sentenceIds[sentencesIdx-1]
+            let id = sentenceIds[sentencesIdx - 1]
             if isProcessingICDataset {
-                //updateIdWithListened(id: id, siriSaid: s)
+                // updateIdWithListened(id: id, siriSaid: s)
                 var calcScoreFn: (String, String) -> Promise<Score>
                 switch speaker {
                 case .alex, .samantha:
@@ -151,7 +152,7 @@ private func onSpeakEnded(_ inSpeechChannel: SpeechChannel, _ inRefCon: SRefCon)
 }
 
 func nextSentence(isNeedToReset: Bool) {
-    let waitTime:TimeInterval = 1.5
+    let waitTime: TimeInterval = 1.5
     // listening and speaking time off => one more double fn-fn
     if isNeedToReset {
         toggleSpeechToText()
@@ -163,7 +164,7 @@ func nextSentence(isNeedToReset: Bool) {
     }
 }
 
-//https://stackoverflow.com/questions/27484330/simulate-keypress-using-swift
+// https://stackoverflow.com/questions/27484330/simulate-keypress-using-swift
 func toggleSpeechToText() {
     FakeKey.send(63, useCommandFlag: false)
     FakeKey.send(63, useCommandFlag: false)

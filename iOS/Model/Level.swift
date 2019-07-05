@@ -6,14 +6,14 @@
 //  Copyright © 30 Heisei Lu, WangChou. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
 
 var avgKanaCountDict: [String: Float] = [:]
 // for ja
 private let minKanaCounts = [2, 7, 10, 12, 14, 16, 19, 23, 27, 31, 34, 37]
 private let maxKanaCounts = [6, 9, 11, 13, 15, 18, 22, 26, 30, 33, 36, 40]
-//for en
+// for en
 private let minSyllablesCounts = [1, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 27]
 private let maxSyllablesCounts = [5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 26, 31]
 
@@ -50,11 +50,11 @@ enum Level: Int, Codable {
     }
 
     var next: Level {
-        return Level(rawValue: (self.rawValue + 1) % levelCount)!
+        return Level(rawValue: (rawValue + 1) % levelCount)!
     }
 
     var previous: Level {
-        return Level(rawValue: (self.rawValue + levelCount - 1) % levelCount)!
+        return Level(rawValue: (rawValue + levelCount - 1) % levelCount)!
     }
 
     var color: UIColor {
@@ -83,7 +83,7 @@ enum Level: Int, Codable {
     }
 
     var infinteChallengeDatasetKey: String {
-        return "Level DataSet Key \(self.rawValue)\(gameLang.key)"
+        return "Level DataSet Key \(rawValue)\(gameLang.key)"
     }
 
     var title: String {
@@ -94,7 +94,7 @@ enum Level: Int, Codable {
     }
 
     var lvlTitle: String {
-        return "Lv.\(rawValue+1)"
+        return "Lv.\(rawValue + 1)"
     }
 
     var character: String {
@@ -105,15 +105,15 @@ enum Level: Int, Codable {
     }
 
     var bestInfinteChallengeRank: String? {
-        return findBestRecord(dataSetKey: self.infinteChallengeDatasetKey)?.rank.rawValue
+        return findBestRecord(dataSetKey: infinteChallengeDatasetKey)?.rank.rawValue
     }
 
     var bestInfinteChallengeProgress: String? {
-        return findBestRecord(dataSetKey: self.infinteChallengeDatasetKey)?.progress
+        return findBestRecord(dataSetKey: infinteChallengeDatasetKey)?.progress
     }
 
     var autoSpeed: Float {
-        return AVSpeechUtteranceDefaultSpeechRate * min(1.1, (0.7 + Float(self.rawValue) * 0.04))
+        return AVSpeechUtteranceDefaultSpeechRate * min(1.1, 0.7 + Float(rawValue) * 0.04)
     }
 }
 
@@ -134,7 +134,7 @@ enum Rank: String, Codable {
         switch self {
         case .s, .ss:
             return myBlue
-        case .aP, .a, .bP :
+        case .aP, .a, .bP:
             return myGreen
         case .b, .cP, .c, .d:
             return myOrange

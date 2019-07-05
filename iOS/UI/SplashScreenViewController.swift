@@ -6,8 +6,8 @@
 //  Copyright © 31 Heisei Lu, WangChou. All rights reserved.
 //
 
-import UIKit
 import Promises
+import UIKit
 
 class SplashScreenViewController: UIViewController {
     var launched: Promise<Void> = Promise<Void>.pending()

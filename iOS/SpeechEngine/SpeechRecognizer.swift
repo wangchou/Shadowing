@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import Speech
 import Promises
+import Speech
 
 private let context = GameContext.shared
 private let engine = SpeechEngine.shared
@@ -30,13 +30,14 @@ class SpeechRecognizer: NSObject {
         case .jp:
             return speechRecognizerJP
         default:
-            if  let voice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher),
+            if let voice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher),
                 let recognizer = SFSpeechRecognizer(locale: Locale(identifier: voice.language.replacingOccurrences(of: "-", with: "_"))) {
                 return recognizer
             }
             return speechRecognizerEN
         }
     }
+
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private var isRunning: Bool = false
@@ -57,6 +58,7 @@ class SpeechRecognizer: NSObject {
     }
 
     // MARK: - Public Methods
+
     func listen(stopAfterSeconds: Double = 5) -> Promise<String> {
         endAudio()
         promise = Promise<String>.pending()
@@ -98,7 +100,7 @@ class SpeechRecognizer: NSObject {
         }
 
         inputNode = engine.audioEngine.inputNode
-        //let recordingFormat = inputNode.outputFormat(forBus: 0)
+        // let recordingFormat = inputNode.outputFormat(forBus: 0)
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: nil) { [weak self] buffer, _ in
             guard let self = self else { return }
             self.recognitionRequest?.append(buffer)
@@ -135,6 +137,7 @@ class SpeechRecognizer: NSObject {
     }
 
     // MARK: - Private Methods
+
     func resultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
         guard engine.isEngineRunning else {
             promise.reject(SpeechRecognitionError.engineStopped)
@@ -142,12 +145,12 @@ class SpeechRecognizer: NSObject {
         }
 
         if let result = result {
-            promise.fulfill( result.bestTranscription.formattedString)
+            promise.fulfill(result.bestTranscription.formattedString)
         }
 
         if let error = error {
             if let userInfo = error._userInfo,
-               let desc = (userInfo["NSLocalizedDescription"] as? String) {
+                let desc = (userInfo["NSLocalizedDescription"] as? String) {
                 // Retry means didn't hear anything please say again
                 if desc == "Retry" {
                     promise.fulfill("")
@@ -207,12 +210,12 @@ class SpeechRecognizer: NSObject {
             let interruptionTypeRawValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
             let interruptionType = AVAudioSession.InterruptionType(rawValue: interruptionTypeRawValue),
             let session = notification.object as? AVAudioSession else {
-                print("Recorder - something went wrong")
-                return
+            print("Recorder - something went wrong")
+            return
         }
         switch interruptionType {
         case .began:
-            self.endAudio()
+            endAudio()
             try? session.setActive(false)
         case .ended:
             try? session.setActive(true)

@@ -12,12 +12,14 @@ var gameExpirationDate: Date = Date(ms: 0)
 var isEverReceiptProcessed: Bool = false
 
 // MARK: - Save/Load
+
 private let gameExpirationDateKey = "gameExpirationDateKey"
 
 private struct ExpirationDateForEncode: Codable {
     var date: Date
     var isEverReceiptProcessed: Bool
 }
+
 func saveGameExpirationDate() {
     let date: ExpirationDateForEncode = ExpirationDateForEncode(date: gameExpirationDate,
                                                                 isEverReceiptProcessed: isEverReceiptProcessed)
@@ -36,12 +38,13 @@ func loadGameExpirationDate() {
 }
 
 // MARK: - Update Expiration Date
+
 private let oneHundredYearsInMS: Int64 = 100 * 12 * 31 * 86400 * 1000
 private let oneMonthInMS: Int64 = 31 * 86400 * 1000
 private let threeMonthsInMS: Int64 = 3 * 31 * 86400 * 1000
 
 // previous paided version
-private let paidToFreeDateMS: Int64 = 1544298312000
+private let paidToFreeDateMS: Int64 = 1_544_298_312_000
 
 func updateExpirationDate(productId: String, purchaseDateInMS: Int64) {
     var addtionInMS: Int64 = 0

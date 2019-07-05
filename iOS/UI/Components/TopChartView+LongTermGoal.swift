@@ -12,6 +12,7 @@ import UIKit
 private let context = GameContext.shared
 
 // MARK: LongTermGoalMode
+
 extension TopChartView {
     func renderLongTermGoalMode() {
         removeAllSubviews()
@@ -47,6 +48,7 @@ extension TopChartView {
             goalLabel.centerX(boxFrame)
         }
     }
+
     func addLongTermGoalBottomBar() {
         let lvlColors = [Level.lv0.color.withSaturation(1.0),
                          Level.lv2.color.withSaturation(1.0),
@@ -57,8 +59,8 @@ extension TopChartView {
         var wPoints = [0, 5, 15, 30, 50]
         var t: UILabel
         var bar: UIView
-        for i in 0..<levelSentenceCounts.count {
-            let w = wPoints[i+1] - wPoints[i]
+        for i in 0 ..< levelSentenceCounts.count {
+            let w = wPoints[i + 1] - wPoints[i]
             let c = lvlColors[i]
             bar = addRect(x: wPoints[i], y: 30, w: w, h: 1, color: c)
             bar.moveToBottom(frame)
@@ -71,24 +73,21 @@ extension TopChartView {
 
     func addLongTermGoalDesc() {
         let boxFrame = getFrame(0, 0, gridCount, 20)
-        let percentText = String(format: "%.1f", 100 * allSentenceCount.f/longTermGoal.f)
-        let remainingDays = String(format: "%.1f", max(0, longTermGoal - allSentenceCount).f/context.gameSetting.dailySentenceGoal.f)
+        let percentText = String(format: "%.1f", 100 * allSentenceCount.f / longTermGoal.f)
+        let remainingDays = String(format: "%.1f", max(0, longTermGoal - allSentenceCount).f / context.gameSetting.dailySentenceGoal.f)
         let gray = rgb(155, 155, 155)
         var descAttrText = NSMutableAttributedString()
         func addWhiteText(_ text: String) {
             descAttrText.append(getText(text, color: .white,
-                                        font: MyFont.bold(ofSize: step * 2.5)
-            ))
+                                        font: MyFont.bold(ofSize: step * 2.5)))
         }
         func addGrayText(_ text: String) {
             descAttrText.append(getText(text, color: gray,
-                                        font: MyFont.regular(ofSize: step * 2.5)
-            ))
+                                        font: MyFont.regular(ofSize: step * 2.5)))
         }
         func addBoldGrayText(_ text: String) {
             descAttrText.append(getText(text, color: gray,
-                                        font: MyFont.bold(ofSize: step * 2.5)
-            ))
+                                        font: MyFont.bold(ofSize: step * 2.5)))
         }
         if isGameClear {
             addWhiteText("100 ")

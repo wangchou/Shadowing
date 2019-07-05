@@ -6,8 +6,8 @@
 //  Copyright © 30 Heisei Lu, WangChou. All rights reserved.
 //
 
-import Foundation
 import Cocoa
+import Foundation
 import Promises
 
 import Foundation
@@ -22,31 +22,31 @@ import Foundation
 let okS = """
 """
 let inWork =
-"""
-"""
+    """
+    """
 var isGroupMode = true
 var groupStartIdx = 0
 var isGroupCorrect = true
 extension ViewController {
     func verifyAllTopicSentences() {
         isProcessingICDataset = false
-        //sentences = inWork.components(separatedBy: "\n")
+        // sentences = inWork.components(separatedBy: "\n")
         sentences = quote.joined(separator: "\n")
-                             .components(separatedBy: "\n")
-                             .filter {s in
-                                return !s.hasPrefix("#") && (isGroupMode || s != "" )
-                             }
-                             .map {s in
-                                let subStrings = s.components(separatedBy: "|")
-                                return subStrings[0]
-                             }
+            .components(separatedBy: "\n")
+            .filter { s in
+                !s.hasPrefix("#") && (isGroupMode || s != "")
+            }
+            .map { s in
+                let subStrings = s.components(separatedBy: "|")
+                return subStrings[0]
+            }
 
-        for i in 0...sentences.count {
+        for i in 0 ... sentences.count {
             sentenceIds.append(i)
         }
 
         speaker = .otoya
-        //speaker = .kyoko
+        // speaker = .kyoko
         setupSpeechChannelAndDoneCallback()
 
         verifyNextSentence = verifyNextTopicSentence
@@ -60,17 +60,17 @@ extension ViewController {
 
 func verifyNextTopicSentence() {
     let duration = "\(round(now() - startTime))s"
-    let percentage = "\(round(100.0*Double(sentencesIdx)/Double(sentences.count)))%"
+    let percentage = "\(round(100.0 * Double(sentencesIdx) / Double(sentences.count)))%"
     vc.label.stringValue = "\(percentage) | \(duration) | \(sentencesIdx)/\(sentences.count)"
 
     vc.scrollView.becomeFirstResponder()
 
     func appendGroupText(isLast: Bool = false) {
         var groupText = ""
-        for i in groupStartIdx..<sentencesIdx {
-            groupText.append(sentences[i]+"\n")
+        for i in groupStartIdx ..< sentencesIdx {
+            groupText.append(sentences[i] + "\n")
         }
-        if !isLast && isGroupMode {
+        if !isLast, isGroupMode {
             groupText.append("\n")
         }
         if isGroupCorrect {

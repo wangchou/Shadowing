@@ -7,6 +7,7 @@ class FuriganaLabel: UILabel {
     private var topTranslateY: CGFloat {
         return text?.jpnType == JpnType.noKanjiAndNumber ? 5 : 0
     }
+
     var widthPadding: CGFloat = 7
 
     override var text: String? {
@@ -19,7 +20,7 @@ class FuriganaLabel: UILabel {
 
     override var attributedText: NSAttributedString? {
         willSet {
-            if  let newValue = newValue,
+            if let newValue = newValue,
                 newValue != self.attributedText {
                 height = heightOfCoreText(attributed: newValue, width: self.frame.width)
             }
@@ -37,7 +38,7 @@ class FuriganaLabel: UILabel {
     // modified from reference: https://stackoverflow.com/questions/47636905/custom-uitableviewcell-with-core-text
     override func drawText(in rect: CGRect) {
         guard let attributed = self.attributedText,
-              let context = UIGraphicsGetCurrentContext() else { return }
+            let context = UIGraphicsGetCurrentContext() else { return }
 
         var textDrawRect = rect
         textDrawRect.size.width = rect.width - widthPadding * 2
@@ -57,8 +58,8 @@ class FuriganaLabel: UILabel {
         var height = CGFloat()
 
         let textDrawRect = CGRect(
-            x: self.x0,
-            y: self.y0,
+            x: x0,
+            y: y0,
             width: width - widthPadding * 2,
             height: CGFloat.greatestFiniteMagnitude
         )
@@ -87,8 +88,8 @@ class FuriganaLabel: UILabel {
         let framesetter = CTFramesetterCreateWithAttributedString(attributed)
         repeat {
             let textDrawRect = CGRect(
-                x: self.x0,
-                y: self.y0,
+                x: x0,
+                y: y0,
                 width: width - widthPadding * 2,
                 height: CGFloat.greatestFiniteMagnitude
             )
@@ -103,9 +104,8 @@ class FuriganaLabel: UILabel {
             }
             previousWidth = width
             width -= resizeWidthStep
-        } while(width > 30)
+        } while width > 30
 
         return previousWidth
-
     }
 }

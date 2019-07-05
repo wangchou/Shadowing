@@ -9,6 +9,6 @@
 import UIKit
 
 class VoiceTableCell: UITableViewCell {
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var localeLabel: UILabel!
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var localeLabel: UILabel!
 }

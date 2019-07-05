@@ -57,7 +57,7 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
     func render() {
         let lowLevel = Level(medalCount: medalCount)
         var majorSize: CGFloat = 4
-        if isFinishedPageMode { majorSize = 5}
+        if isFinishedPageMode { majorSize = 5 }
         // lvl text
         lvlLabel.attributedText = getStrokeText(lowLevel.lvlTitle,
                                                 .white,
@@ -67,9 +67,9 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
 
         // medal count
         medalCountLabel.attributedText = getStrokeText("\(medalCount)",
-            myOrange,
-            strokeWidth: Float(-0.6 * step), strokColor: .black,
-            font: MyFont.heavyDigit(ofSize: (majorSize + 1) * step))
+                                                       myOrange,
+                                                       strokeWidth: Float(-0.6 * step), strokColor: .black,
+                                                       font: MyFont.heavyDigit(ofSize: (majorSize + 1) * step))
         let rect = medalCountLabel.frame
         medalCountLabel.sizeToFit()
         medalCountLabel.moveToRight(rect)
@@ -81,8 +81,8 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
 
         // medal position
         medalView.frame.origin.x = medalCountLabel.x0 -
-                                    medalView.frame.width -
-                                    step/2
+            medalView.frame.width -
+            step / 2
 
         // medal higher bound
         lvlEndLabel.text = "\((lowLevel.rawValue + 1) * medalsPerLevel)"
@@ -98,7 +98,7 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
         // bar
         progressBarMid.backgroundColor = lowLevel.color.withSaturation(1)
         let percentage = medalCount > 500 ?
-            1.0 : CGFloat(medalCount % 50)/50.0
+            1.0 : CGFloat(medalCount % 50) / 50.0
         progressBarMid.frame.size.width = frame.width * percentage
 
         var barHeight: CGFloat = 1
@@ -107,7 +107,7 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
         progressBarMid.frame.size.height = barHeight * step
         progressBarFront.frame.size.height = barHeight * step
 
-        if isFinishedPageMode { progressBarBack.alpha = 0.7}
+        if isFinishedPageMode { progressBarBack.alpha = 0.7 }
     }
 
     override init(frame: CGRect) {
@@ -121,7 +121,7 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
     }
 
     private func sharedInit() {
-        frame.size.width = screen.width*34/48
+        frame.size.width = screen.width * 34 / 48
         let lowLevel = Level(medalCount: medalCount)
         // lvl text
         let attrText = getStrokeText(lowLevel.lvlTitle,
@@ -139,7 +139,7 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
         // medal higher bound
         var medalText = "\((lowLevel.rawValue + 1) * medalsPerLevel)"
         lvlEndLabel = addText(x: 24, y: 7, w: 10, h: 3,
-                                text: medalText, color: minorTextColor)
+                              text: medalText, color: minorTextColor)
         lvlEndLabel.textAlignment = .right
 
         // medal lower bound
@@ -152,21 +152,21 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
         progressBarBack = UIView()
         progressBarBack.backgroundColor = progressBackGray
         layout(0, 6, 34, 1, progressBarBack)
-        progressBarBack.roundBorder(radius: step/2)
+        progressBarBack.roundBorder(radius: step / 2)
         addSubview(progressBarBack)
 
         progressBarMid = UIView()
         progressBarMid.backgroundColor = lowLevel.color.withSaturation(1)
-        progressBarMid.roundBorder(radius: step/2)
+        progressBarMid.roundBorder(radius: step / 2)
         progressBarMid.frame = progressBarBack.frame
         let percentage = medalCount > 500 ?
-            1.0 : CGFloat(medalCount % 50)/50.0
+            1.0 : CGFloat(medalCount % 50) / 50.0
         progressBarMid.frame.size.width = progressBarBack.frame.width * percentage
         addSubview(progressBarMid)
 
         progressBarFront = UIView()
         progressBarFront.backgroundColor = .clear
-        progressBarFront.roundBorder(width: 0.5, radius: step/2, color: .black)
+        progressBarFront.roundBorder(width: 0.5, radius: step / 2, color: .black)
         progressBarFront.frame = progressBarBack.frame
         addSubview(progressBarFront)
     }
@@ -186,7 +186,8 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
             "\(medalCount)",
             myOrange,
             strokeWidth: Float(-0.6 * step), strokColor: .black,
-            font: MyFont.heavyDigit(ofSize: textSize))
+            font: MyFont.heavyDigit(ofSize: textSize)
+        )
         let label = addAttrText(x: x + medalW + 2, y: y, w: 11, h: h, text: attrTitle)
 
         let rect = label.frame
@@ -194,8 +195,8 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
         label.moveToRight(rect)
         label.centerY(medalView.frame)
         medalView.frame.origin.x = label.x0 -
-                                   medalView.frame.width -
-                                   step/2
+            medalView.frame.width -
+            step / 2
         medalCountLabel = label
     }
 }

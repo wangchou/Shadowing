@@ -28,12 +28,12 @@ func calculateMicLevel(buffer: AVAudioPCMBuffer) {
     DispatchQueue.global().async {
         guard let data = buffer.floatChannelData?.pointee else { return }
         let squareSum = stride(from: 0,
-                                 to: Int(buffer.frameLength),
-                                 by: buffer.stride)
-                            .map { (i: Int) in data[i] * data[i] }
-                            .reduce(0) {(sum: Float, square: Float) in sum + square}
+                               to: Int(buffer.frameLength),
+                               by: buffer.stride)
+            .map { (i: Int) in data[i] * data[i] }
+            .reduce(0) { (sum: Float, square: Float) in sum + square }
 
-        let rms = sqrt( squareSum / Float(buffer.frameLength))
+        let rms = sqrt(squareSum / Float(buffer.frameLength))
         let avgPower = 20 * log10(rms)
         let meterLevel = scaledPower(power: avgPower)
         postEvent(.levelMeterUpdate, int: Int(meterLevel * 100))

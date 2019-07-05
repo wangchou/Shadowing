@@ -10,11 +10,10 @@ import Foundation
 import UIKit
 
 func rgb(_ red: Float, _ green: Float, _ blue: Float, _ alpha: Float = 1.0) -> UIColor {
-    return UIColor(red: CGFloat(red/255.0),
-                   green: CGFloat(green/255.0),
-                   blue: CGFloat(blue/255.0),
-                   alpha: CGFloat(alpha)
-           )
+    return UIColor(red: CGFloat(red / 255.0),
+                   green: CGFloat(green / 255.0),
+                   blue: CGFloat(blue / 255.0),
+                   alpha: CGFloat(alpha))
 }
 
 let myRed = rgb(254, 67, 134)
@@ -56,8 +55,8 @@ extension UIColor {
         var s: CGFloat = 0
         var b: CGFloat = 0
         var a: CGFloat = 0
-        if self.getHue(&h, saturation: &s, brightness: &b, alpha: &a) {
-            return UIColor.init(hue: h, saturation: newS, brightness: b, alpha: a)
+        if getHue(&h, saturation: &s, brightness: &b, alpha: &a) {
+            return UIColor(hue: h, saturation: newS, brightness: b, alpha: a)
         }
 
         print("withSaturation getHue fail")
@@ -69,12 +68,11 @@ extension UIColor {
         var s: CGFloat = 0
         var b: CGFloat = 0
         var a: CGFloat = 0
-        if self.getHue(&h, saturation: &s, brightness: &b, alpha: &a) {
-            return UIColor.init(hue: h, saturation: s, brightness: newB, alpha: a)
+        if getHue(&h, saturation: &s, brightness: &b, alpha: &a) {
+            return UIColor(hue: h, saturation: s, brightness: newB, alpha: a)
         }
 
         print("withBrightness getHue fail")
         return self
     }
-
 }

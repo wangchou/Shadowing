@@ -12,7 +12,6 @@ private let context = GameContext.shared
 
 @IBDesignable
 class MessengerBar: UIView, ReloadableView {
-
     var isGameStopped: Bool = false {
         didSet {
             render()
@@ -30,7 +29,7 @@ class MessengerBar: UIView, ReloadableView {
     private let circleWidth = 36
     private var barWidth: CGFloat {
         return context.gameMode != .medalMode ?
-                    screen.width - 160 : screen.width - 112
+            screen.width - 160 : screen.width - 112
     }
 
     private var pauseButtonX: CGFloat {
@@ -117,7 +116,7 @@ class MessengerBar: UIView, ReloadableView {
         if let level = level {
             levelLabel.text = level.character
             levelLabel.textColor = level.color
-            levelLabel.roundBorder(width: 1.5, radius: circleWidth.c/2, color: level.color)
+            levelLabel.roundBorder(width: 1.5, radius: circleWidth.c / 2, color: level.color)
             levelLabel.backgroundColor = level.color.withAlphaComponent(0.1)
         }
 
@@ -125,7 +124,7 @@ class MessengerBar: UIView, ReloadableView {
         topicProgressLabel.text = "\(context.sentenceIndex + 1)/\(context.sentences.count)"
 
         let progressPercent: CGFloat = context.sentences.isEmpty ? 0 :
-            (context.sentenceIndex.c + 1)/context.sentences.count.c
+            (context.sentenceIndex.c + 1) / context.sentences.count.c
 
         progressBarFront.frame = CGRect(x: 60, y: 38, width: (barWidth * progressPercent).f.i, height: 7)
         progressBarFront.roundBorder(radius: 3.5)

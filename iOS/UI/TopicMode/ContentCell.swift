@@ -10,13 +10,13 @@ import Foundation
 import UIKit
 
 class ContentCell: UITableViewCell {
-    @IBOutlet weak var levelLabel: UILabel!
-    @IBOutlet weak var titleLabel: FuriganaLabel!
-    @IBOutlet weak var progressLabel: UILabel!
-    @IBOutlet weak var rankLabel: UILabel!
+    @IBOutlet var levelLabel: UILabel!
+    @IBOutlet var titleLabel: FuriganaLabel!
+    @IBOutlet var progressLabel: UILabel!
+    @IBOutlet var rankLabel: UILabel!
 
-    @IBOutlet weak var rankTitleLabel: UILabel!
-    @IBOutlet weak var completeTitleLabel: UILabel!
+    @IBOutlet var rankTitleLabel: UILabel!
+    @IBOutlet var completeTitleLabel: UILabel!
     var strockedRankText: String? = "" {
         willSet(string) {
             rankLabel.attributedText = getRankText(string: string)

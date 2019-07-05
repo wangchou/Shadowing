@@ -12,6 +12,7 @@ import UIKit
 private let context = GameContext.shared
 
 // MARK: Daily Goal Mode
+
 extension TopChartView {
     func renderDailyGoalMode() {
         gridCount = 48
@@ -78,7 +79,7 @@ extension TopChartView {
                 return
             }
             guard let self = self else { return }
-            let currentPercent = self.percent * repeatCount.f/targetCount.f
+            let currentPercent = self.percent * repeatCount.f / targetCount.f
             percentLabel.text = String(format: "%.1f", currentPercent * 100) + "%"
             percentLabel.centerIn(self.circleFrame)
             repeatCount += 1

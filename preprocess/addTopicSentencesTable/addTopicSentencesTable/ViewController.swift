@@ -7,11 +7,10 @@
 //
 
 import Cocoa
-import SQLite
 import Promises
+import SQLite
 
 class ViewController: NSViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         runAll()
@@ -20,7 +19,7 @@ class ViewController: NSViewController {
 
     override var representedObject: Any? {
         didSet {
-        // Update the view, if already loaded.
+            // Update the view, if already loaded.
         }
     }
 }
@@ -37,7 +36,7 @@ func createWritableDB() {
             .url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             .appendingPathComponent("\(sqliteFileName)_with_topics.sqlite")
             .path
-        
+
         let dbResourcePath = Bundle.main.path(forResource: sqliteFileName, ofType: "sqlite")!
         if !fileManager.fileExists(atPath: writableDBPath) {
             print("not exist")
@@ -75,11 +74,11 @@ func runAll() {
         }
         print(sentences.count)
         var kanaPromises: [Promise<String>] = []
-        sentences.forEach {s in
+        sentences.forEach { s in
             kanaPromises.append(getKana(s))
         }
         all(kanaPromises).then { kanas in
-            for id in 0..<kanas.count {
+            for id in 0 ..< kanas.count {
                 updateIdWithListened(id: id, kana_count: kanas[id].count, ja: sentences[id], tokenInfos: kanaTokenInfosCacheDictionary[sentences[id]] ?? [])
             }
             print("Done")
