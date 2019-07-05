@@ -25,35 +25,36 @@ private let importantParticles: Set = [
     // 接續助詞
     "ば", "とも", "ど", "ども", "が", "に", "を", "て", "して", "で", "つつ", "ながら", "ものの", "ものを", "ものから", "し", "のに",
     // 副助詞
-    "だけ", "まで", "のみ", "しか", "でも", "ばかり", "くらい", "など", "ほど", "さえ", "こそ", "きり"
+    "だけ", "まで", "のみ", "しか", "でも", "ばかり", "くらい", "など", "ほど", "さえ", "こそ", "きり",
 ]
 
 extension String {
     var hiraganaOnly: String {
-        let hiragana = self.kataganaToHiragana
+        let hiragana = kataganaToHiragana
         guard let hiraganaRange = hiragana.range(of: "[\\p{Hiragana}ー]*[\\p{Hiragana}ー]", options: .regularExpression)
-            else { return "" }
+        else { return "" }
         return String(hiragana[hiraganaRange])
     }
 
     var jpnType: JpnType {
         guard let kanjiRange = self.range(of: "[\\p{Han}\\d]*[\\p{Han}\\d]", options: .regularExpression) else { return JpnType.noKanjiAndNumber }
 
-        if String(self[kanjiRange]).count == self.count {
+        if String(self[kanjiRange]).count == count {
             return JpnType.kanjiAndNumberOnly
         }
         return JpnType.mixed
     }
+
     #if os(iOS)
-    var furiganaAttributedString: Promise<NSMutableAttributedString> {
-        let promise = Promise<NSMutableAttributedString>.pending()
+        var furiganaAttributedString: Promise<NSMutableAttributedString> {
+            let promise = Promise<NSMutableAttributedString>.pending()
 
-        getKanaTokenInfos(self).then {
-            promise.fulfill(getFuriganaString(tokenInfos: $0))
+            getKanaTokenInfos(self).then {
+                promise.fulfill(getFuriganaString(tokenInfos: $0))
+            }
+
+            return promise
         }
-
-        return promise
-    }
     #endif
 
     // Hiragana: 3040-309F
@@ -64,8 +65,8 @@ extension String {
             let scalars = ch.unicodeScalars
             let chValue = scalars[scalars.startIndex].value
             // 30FC is 長音（ー）there is no match in hiragana
-            if chValue >= 0x30A0 && chValue <= 0x30FB {
-                if let newScalar = UnicodeScalar( chValue - 0x60) {
+            if chValue >= 0x30A0, chValue <= 0x30FB {
+                if let newScalar = UnicodeScalar(chValue - 0x60) {
                     hiragana.append(Character(newScalar))
                 } else {
                     print("kataganaToHiragana fail")
@@ -84,6 +85,7 @@ extension String {
 }
 
 // MARK: English
+
 private func getEnglishNumber(number: Int?) -> String {
     guard let number = number else { return "" }
     let userLocale = Locale(identifier: "en")
@@ -105,6 +107,7 @@ extension String {
 }
 
 // MARK: general operation
+
 extension String {
     func replaceRegex(_ pattern: String, _ template: String) -> String {
         do {
@@ -112,15 +115,16 @@ extension String {
             return re.stringByReplacingMatches(
                 in: self,
                 options: [],
-                range: NSRange(location: 0, length: self.utf16.count),
-                withTemplate: template)
+                range: NSRange(location: 0, length: utf16.count),
+                withTemplate: template
+            )
         } catch {
             return self
         }
     }
 
     func patternCount(_ pattern: String) -> Int {
-        return self.components(separatedBy: pattern).count - 1
+        return components(separatedBy: pattern).count - 1
     }
 
     // https://stackoverflow.com/questions/27880650/swift-extract-regex-matches
@@ -128,11 +132,11 @@ extension String {
         do {
             let regex = try NSRegularExpression(pattern: regex)
             let results = regex.matches(in: self,
-                                        range: NSRange(self.startIndex..., in: self))
+                                        range: NSRange(startIndex..., in: self))
             return results.compactMap {
                 Range($0.range, in: self).map { String(self[$0]) }
             }
-        } catch let error {
+        } catch {
             print("invalid regex: \(error.localizedDescription)")
             return []
         }
@@ -144,21 +148,21 @@ extension String {
     }
 
     var fullRange: NSRange {
-        return NSRange(location: 0, length: self.count)
+        return NSRange(location: 0, length: count)
     }
 
     func padWidthTo(_ width: Int, isBothSide: Bool = false) -> String {
-        let padCount = max(width - self.count, 0)
+        let padCount = max(width - count, 0)
 
         func getEmptySpaces(_ padCount: Int) -> String {
             guard padCount > 0 else { return "" }
             var spaces = ""
-            for _ in 1...padCount { spaces += " " }
+            for _ in 1 ... padCount { spaces += " " }
             return spaces
         }
 
         if isBothSide {
-            let leftPadCount =  padCount / 2
+            let leftPadCount = padCount / 2
             let rightPadCount = padCount - leftPadCount
             return getEmptySpaces(leftPadCount) + self + getEmptySpaces(rightPadCount)
         }

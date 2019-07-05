@@ -13,12 +13,12 @@ private let context = GameContext.shared
 
 class GameFinishedPage: UIViewController {
     static let vcName = "GameFinishedPage"
-    @IBOutlet weak var reportView: GameReportView!
+    @IBOutlet var reportView: GameReportView!
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var tableView: UITableView!
     @objc func injected() {
         #if DEBUG
-        viewWillAppear(false)
+            viewWillAppear(false)
         #endif
     }
 
@@ -69,16 +69,15 @@ class GameFinishedPage: UIViewController {
 }
 
 extension GameFinishedPage: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in _: UITableView) -> Int {
         return 1
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return context.sentences.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         let cell = tableView.dequeueReusableCell(withIdentifier: "FinishedTableCell", for: indexPath)
         guard let finishedCell = cell as? SentencesTableCell else { print("detailCell convert error"); return cell }
         let sentence = context.sentences[indexPath.row]
@@ -98,7 +97,7 @@ extension GameFinishedPage: UITableViewDelegate {
         }
     }
 
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    func scrollViewDidScroll(_: UIScrollView) {
         stopCountDown()
     }
 }

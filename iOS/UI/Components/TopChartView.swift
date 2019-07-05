@@ -6,8 +6,8 @@
 //  Copyright © 30 Heisei Lu, WangChou. All rights reserved.
 //
 
-import UIKit
 import FirebaseAnalytics
+import UIKit
 
 private let context = GameContext.shared
 
@@ -23,7 +23,7 @@ class TopChartView: UIView, GridLayout, ReloadableView {
     var percentLabel: UILabel?
     var circleFrame: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
 
-    var timelineColumnCount: Int  = 15
+    var timelineColumnCount: Int = 15
     var timelineYPadding: CGFloat = 0.3
     var timelineXPadding: CGFloat = -0.35
 
@@ -53,6 +53,7 @@ class TopChartView: UIView, GridLayout, ReloadableView {
     var isGameClear: Bool {
         return allSentenceCount >= 10000
     }
+
     var clearDurationInDays: Int = 0
     var clearDate: Date = Date()
 
@@ -71,6 +72,7 @@ class TopChartView: UIView, GridLayout, ReloadableView {
 
         return Level.lv6.color.withSaturation(1.0)
     }
+
     var longTermGoal: Int {
         if allSentenceCount < 1000 {
             return 1000
@@ -109,6 +111,7 @@ class TopChartView: UIView, GridLayout, ReloadableView {
     var bestText: String {
         return i18n.best
     }
+
     var bestCount: Int = 0
     var bestCountText: String {
         return "\(bestCount)"
@@ -143,7 +146,7 @@ class TopChartView: UIView, GridLayout, ReloadableView {
 
     func render() {
         frame.size.width = screen.width
-        frame.size.height = screen.width * 34/48
+        frame.size.height = screen.width * 34 / 48
         updateByRecords()
         renderWithoutUpdateData()
     }
@@ -167,7 +170,6 @@ class TopChartView: UIView, GridLayout, ReloadableView {
                 addSubview(frontCircle!)
             }
         }
-
     }
 
     func renderWithoutUpdateData() {
@@ -187,7 +189,7 @@ class TopChartView: UIView, GridLayout, ReloadableView {
         percent = min(sentenceCounts[0].f / context.gameSetting.dailySentenceGoal.f, 1.0)
 
         continueSentenceCount = sentenceCounts[0]
-        for i in 1..<sentenceCounts.count {
+        for i in 1 ..< sentenceCounts.count {
             if sentenceCounts[i] >= context.gameSetting.dailySentenceGoal {
                 continueSentenceCount += sentenceCounts[i]
             } else {
@@ -196,7 +198,7 @@ class TopChartView: UIView, GridLayout, ReloadableView {
         }
 
         continues = 0
-        for i in 0..<sentenceCounts.count {
+        for i in 0 ..< sentenceCounts.count {
             if sentenceCounts[i] >= context.gameSetting.dailySentenceGoal {
                 continues += 1
             } else if i > 0 { // skip today

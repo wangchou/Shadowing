@@ -6,9 +6,9 @@
 //  Copyright © 平成30年 Lu, WangChou. All rights reserved.
 //
 
-import UIKit
 import Charts
 import Foundation
+import UIKit
 
 private let context = GameContext.shared
 private let engine = SpeechEngine.shared
@@ -18,12 +18,12 @@ extension Notification.Name {
 }
 
 class TopicsListPage: UIViewController {
-    @IBOutlet weak var sentencesTableView: UITableView!
-    @IBOutlet weak var topArea: UIView!
-    @IBOutlet weak var topChartView: TopChartView!
-    @IBOutlet weak var topBarView: TopBarView!
-    @IBOutlet weak var topicButtonAreaView: TopicButtonAreaView!
-    @IBOutlet weak var topicFilterBarView: TopicFilterBarView!
+    @IBOutlet var sentencesTableView: UITableView!
+    @IBOutlet var topArea: UIView!
+    @IBOutlet var topChartView: TopChartView!
+    @IBOutlet var topBarView: TopBarView!
+    @IBOutlet var topicButtonAreaView: TopicButtonAreaView!
+    @IBOutlet var topicFilterBarView: TopicFilterBarView!
 
     var timelineSubviews: [String: UIView] = [:]
     override func viewDidLoad() {
@@ -44,7 +44,7 @@ class TopicsListPage: UIViewController {
 
     @objc func injected() {
         #if DEBUG
-        viewWillAppear(false)
+            viewWillAppear(false)
         #endif
     }
 
@@ -52,7 +52,7 @@ class TopicsListPage: UIViewController {
         super.viewWillAppear(animated)
         context.gameMode = .topicMode
         topBarView.titleLabel.text = I18n.shared.topicPageTitile
-        let height = screen.width * 46/48
+        let height = screen.width * 46 / 48
         topArea.frame.size.height = height + 61
         topChartView.prepareForDailyGoalAppear()
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
@@ -84,11 +84,11 @@ class TopicsListPage: UIViewController {
 }
 
 extension TopicsListPage: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in _: UITableView) -> Int {
         return 1
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return dataSetKeys.count
     }
 
@@ -102,19 +102,20 @@ extension TopicsListPage: UITableViewDataSource {
 
         attrStr.append(rubyAttrStr(
             dataSetTitle,
-            fontSize: 16))
+            fontSize: 16
+        ))
 
         attrStr.append(rubyAttrStr(
             "\n\(dataSetKey)",
             fontSize: 14,
-            color: hashtagColor, isWithStroke: false))
+            color: hashtagColor, isWithStroke: false
+        ))
 
         if let level = dataKeyToLevels[dataSetKey] {
             contentCell.levelLabel.text = level.character
             contentCell.levelLabel.textColor = level.color
             contentCell.levelLabel.roundBorder(width: 1.5, radius: 20, color: level.color)
             contentCell.levelLabel.backgroundColor = level.color.withAlphaComponent(0.1)
-
         }
         contentCell.rankTitleLabel.text = i18n.rank
         contentCell.completeTitleLabel.text = i18n.completeness
@@ -141,7 +142,7 @@ extension TopicsListPage: UITableViewDelegate {
 func getDataSetTitle(dataSetKey: String) -> String {
     if let tags = datasetKeyToTags[dataSetKey],
         !tags.isEmpty {
-        let tagsWithoutSharp = tags.map { t in return t.replacingOccurrences(of: "#", with: "")}
+        let tagsWithoutSharp = tags.map { t in t.replacingOccurrences(of: "#", with: "") }
         let idx = abilities.index(of: tagsWithoutSharp[0]) ?? 0
         let categoryText = i18n.isZh ? tagsWithoutSharp[0] : jaAbilities[idx]
         return "[\(categoryText)] " + tagsWithoutSharp[1...].joined(separator: "、")
@@ -153,7 +154,7 @@ func getDataSetTitle(dataSetKey: String) -> String {
 func getDataSetTopic(dataSetKey: String) -> String {
     if let tags = datasetKeyToTags[dataSetKey],
         !tags.isEmpty {
-        let tagsWithoutSharp = tags.map { t in return t.replacingOccurrences(of: "#", with: "")}
+        let tagsWithoutSharp = tags.map { t in t.replacingOccurrences(of: "#", with: "") }
         return tagsWithoutSharp[0]
     }
 

@@ -1,12 +1,12 @@
 import Foundation
 
 func download(_ something: String, _ seconds: UInt32 = 1, completionHandler: @escaping () -> Void = {}) {
-  print("Downloading \(something)")
-  DispatchQueue.global().async {
-    sleep(seconds)
-    print("\(something) is downloaded")
-    completionHandler()
-  }
+    print("Downloading \(something)")
+    DispatchQueue.global().async {
+        sleep(seconds)
+        print("\(something) is downloaded")
+        completionHandler()
+    }
 }
 
 let cmdGroup = DispatchGroup()
@@ -32,38 +32,38 @@ struct DownloadCommand: Command {
     let type = CommandType.download
     var text: String
     func exec() {
-      download(self.text) {
-        downloadState = self.text
-        cmdGroup.leave()
-      }
+        download(text) {
+            downloadState = self.text
+            cmdGroup.leave()
+        }
     }
 }
 
 func downloadAB() {
-  cmdQueue.async {
-    print("just downloaded \(downloadState)")
-    dispatch(DownloadCommand(text: "A"))
-    print("just downloaded \(downloadState)")
-    dispatch(DownloadCommand(text: "B"))
-  }
+    cmdQueue.async {
+        print("just downloaded \(downloadState)")
+        dispatch(DownloadCommand(text: "A"))
+        print("just downloaded \(downloadState)")
+        dispatch(DownloadCommand(text: "B"))
+    }
 }
 
 func downloadCD() {
-  cmdQueue.async {
-    print("just downloaded \(downloadState)")
-    dispatch(DownloadCommand(text: "C"))
-    print("just downloaded \(downloadState)")
-    dispatch(DownloadCommand(text: "D"))
-  }
+    cmdQueue.async {
+        print("just downloaded \(downloadState)")
+        dispatch(DownloadCommand(text: "C"))
+        print("just downloaded \(downloadState)")
+        dispatch(DownloadCommand(text: "D"))
+    }
 }
 
 func runCommands() {
-  cmdQueue.async {
-    for _ in 1...2 {
-      downloadAB()
+    cmdQueue.async {
+        for _ in 1 ... 2 {
+            downloadAB()
+        }
+        downloadCD()
     }
-    downloadCD()
-  }
 }
 
 print("main thread: dispatch runCommands started")

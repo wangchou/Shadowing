@@ -26,8 +26,7 @@ extension Messenger: GameEventDelegate {
         case .willSpeakRange:
             guard let newRange = event.range else { return }
             if !context.gameSetting.isShowTranslation,
-               context.gameState == .speakingTargetString {
-
+                context.gameState == .speakingTargetString {
                 tmpRangeQueue.append(newRange)
                 let duration = Double(0.15 / (2 * context.teachingRate))
 
@@ -36,9 +35,9 @@ extension Messenger: GameEventDelegate {
                         tmpRangeQueue.removeFirst()
                     }
                 }
-                let allRange: NSRange = tmpRangeQueue.reduce(tmpRangeQueue[0], {allR, curR in
-                    return allR.union(curR)
-                })
+                let allRange: NSRange = tmpRangeQueue.reduce(tmpRangeQueue[0]) { allR, curR in
+                    allR.union(curR)
+                }
 
                 var attrText = NSMutableAttributedString()
 
@@ -50,7 +49,6 @@ extension Messenger: GameEventDelegate {
                     attrText.addAttribute(.backgroundColor, value: highlightColor, range: allRange)
                     var whiteRange = NSRange(location: allRange.upperBound, length: context.targetString.count - allRange.upperBound)
                     attrText.addAttribute(.backgroundColor, value: UIColor.clear, range: whiteRange)
-
                 }
                 lastLabel.attributedText = attrText
             }
@@ -131,7 +129,6 @@ extension Messenger: GameEventDelegate {
             if context.gameState == .echoMethod {
                 addLabel(rubyAttrStr(i18n.listenToEcho), pos: .center)
             }
-
         }
     }
 
@@ -146,7 +143,6 @@ extension Messenger: GameEventDelegate {
     //      targetString: 明日、晴れるかな
     //      ttsKanaFix will sometimes make the range is wrong
     func getRangeWithParticleFix(tokenInfos: [[String]], allRange: NSRange?) -> NSRange? {
-
         guard let r = allRange else { return nil }
         var lowerBound = r.lowerBound
         var upperBound = min(r.upperBound, context.targetString.count)
@@ -155,7 +151,7 @@ extension Messenger: GameEventDelegate {
         var isPrefixSubVerbRemoved = false
         var isParticleSuffixExtended = false
 
-        for i in 0..<tokenInfos.count {
+        for i in 0 ..< tokenInfos.count {
             let part = tokenInfos[i]
             let partLen = part[0].count
             let isParticle = part[1] == "助詞" || part[1] == "記号" || part[1] == "助動詞"
@@ -163,15 +159,15 @@ extension Messenger: GameEventDelegate {
 
             // fix: "お掛けに" なりませんか
             if part[1] == "接頭詞",
-               currentIndex >= lowerBound,
-               currentIndex + partLen == upperBound,
-               i < tokenInfos.count - 1 {
-                upperBound += tokenInfos[i+1][0].count
+                currentIndex >= lowerBound,
+                currentIndex + partLen == upperBound,
+                i < tokenInfos.count - 1 {
+                upperBound += tokenInfos[i + 1][0].count
             }
-            if  i > 0,
-                tokenInfos[i-1][1] == "接頭詞",
+            if i > 0,
+                tokenInfos[i - 1][1] == "接頭詞",
                 currentIndex == lowerBound {
-                lowerBound -= tokenInfos[i-1][0].count
+                lowerBound -= tokenInfos[i - 1][0].count
             }
 
             // prefix particle remove
@@ -202,7 +198,6 @@ extension Messenger: GameEventDelegate {
                         isPrefixSubVerbRemoved = true
                     }
                 }
-
             }
 
             // for "っています" subVerb + Particle + others
@@ -230,7 +225,7 @@ extension Messenger: GameEventDelegate {
     private func onScore(_ score: Score) {
         let attributed = NSMutableAttributedString()
         if let tokenInfos = kanaTokenInfosCacheDictionary[context.userSaidString],
-           gameLang == .jp {
+            gameLang == .jp {
             attributed.append(getFuriganaString(tokenInfos: tokenInfos))
         } else {
             attributed.append(rubyAttrStr(context.userSaidString))
@@ -242,7 +237,7 @@ extension Messenger: GameEventDelegate {
             attributed.append(rubyAttrStr(i18n.iCannotHearYou))
         }
 
-        attributed.append(rubyAttrStr(" \(score.valueText) \(score.type == .perfect ? "💯": "")"))
+        attributed.append(rubyAttrStr(" \(score.valueText) \(score.type == .perfect ? "💯" : "")"))
 
         updateLastLabelText(attributed, pos: .right)
 

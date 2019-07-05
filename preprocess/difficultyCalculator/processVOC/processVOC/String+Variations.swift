@@ -11,23 +11,26 @@ import Foundation
 extension String {
     func trimSuffix(_ count: Int) -> String {
         guard self.count > count else { return self }
-        return String(self.prefix(self.count - count))
+        return String(prefix(self.count - count))
     }
+
     func trimPrefix(_ count: Int) -> String {
         guard self.count > count else { return self }
-        return String(self.suffix(self.count - count))
+        return String(suffix(self.count - count))
     }
+
     var isDigit: Bool {
         return Int(
-            self.replacingOccurrences(of: ",", with: "")
+            replacingOccurrences(of: ",", with: "")
                 .replacingOccurrences(of: ".", with: "")
                 .replacingOccurrences(of: "th", with: "")
                 .replacingOccurrences(of: "st", with: "")
                 .replacingOccurrences(of: "nd", with: "")
                 .replacingOccurrences(of: "rd", with: "")
 
-            ) != nil
+        ) != nil
     }
+
     var variations: [String] {
         var word = self
         if word.hasSuffix(".") {
@@ -36,7 +39,7 @@ extension String {
 
         var words: [String] = []
         // Prefix
-        if word.hasPrefix("un") || word.hasPrefix("im") || word.hasPrefix("in"){
+        if word.hasPrefix("un") || word.hasPrefix("im") || word.hasPrefix("in") {
             words = [word.trimPrefix(2)]
         }
         // suffix

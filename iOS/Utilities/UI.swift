@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import UIKit
 import Promises
+import UIKit
 
 // https://medium.com/@robnorback/the-secret-to-1-second-compile-times-in-xcode-9de4ec8345a1
 
@@ -17,22 +17,24 @@ protocol ReloadableView {
 }
 
 extension UIView {
-
     #if DEBUG
-    @objc func injected() {
-        (self as? ReloadableView)?.render()
-    }
+        @objc func injected() {
+            (self as? ReloadableView)?.render()
+        }
     #endif
 
     var x0: CGFloat {
         return frame.x
     }
+
     var x1: CGFloat {
         return frame.x + frame.width
     }
+
     var y0: CGFloat {
         return frame.y
     }
+
     var y1: CGFloat {
         return frame.y + frame.height
     }
@@ -45,19 +47,19 @@ extension UIView {
     }
 
     func centerIn(_ boundRect: CGRect) {
-        let xPadding = (boundRect.width - frame.width)/2
-        let yPadding = (boundRect.height - frame.height)/2
+        let xPadding = (boundRect.width - frame.width) / 2
+        let yPadding = (boundRect.height - frame.height) / 2
         frame.origin.x = boundRect.x + xPadding
         frame.origin.y = boundRect.y + yPadding
     }
 
     func centerX(_ boundRect: CGRect, xShift: CGFloat = 0) {
-        let xPadding = (boundRect.width - frame.width)/2
+        let xPadding = (boundRect.width - frame.width) / 2
         frame.origin.x = boundRect.x + xPadding + xShift
     }
 
     func centerY(_ boundRect: CGRect, yShift: CGFloat = 0) {
-        let yPadding = (boundRect.height - frame.height)/2
+        let yPadding = (boundRect.height - frame.height) / 2
         frame.origin.y = boundRect.y + yPadding + yShift
     }
 
@@ -68,6 +70,7 @@ extension UIView {
     func moveToRight(_ boundRect: CGRect, xShift: CGFloat = 0) {
         frame.origin.x = boundRect.x + boundRect.width - frame.size.width + xShift
     }
+
     func moveToLeft(_ boundRect: CGRect, xShift: CGFloat = 0) {
         frame.origin.x = boundRect.x + xShift
     }
@@ -77,6 +80,7 @@ extension UIView {
     }
 
     // MARK: Add onClick event
+
     // from https://medium.com/@sdrzn/adding-gesture-recognizers-with-closures-instead-of-selectors-9fb3e09a8f0b
 
     // In order to create computed properties for extensions, we need a key to
@@ -104,19 +108,19 @@ extension UIView {
     // This is the meat of the sauce, here we create the tap gesture recognizer and
     // store the closure the user passed to us in the associated object we declared above
     public func addTapGestureRecognizer(action: (() -> Void)?) {
-        self.isUserInteractionEnabled = true
-        self.tapGestureRecognizerAction = action
+        isUserInteractionEnabled = true
+        tapGestureRecognizerAction = action
         if let button = self as? UIButton {
             button.addTarget(self, action: #selector(handleTapGesture), for: .touchUpInside)
         } else {
             let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
-            self.addGestureRecognizer(tapGestureRecognizer)
+            addGestureRecognizer(tapGestureRecognizer)
         }
     }
 
     // Every time the user taps on the UIImageView, this function gets called,
     // which triggers the closure we stored
-    @objc fileprivate func handleTapGesture(sender: UITapGestureRecognizer) {
+    @objc fileprivate func handleTapGesture(sender _: UITapGestureRecognizer) {
         if let action = self.tapGestureRecognizerAction {
             action?()
         } else {
@@ -134,8 +138,8 @@ extension UIView {
                 layer.render(in: rendererContext.cgContext)
             }
         } else {
-            UIGraphicsBeginImageContext(self.frame.size)
-            self.layer.render(in: UIGraphicsGetCurrentContext()!)
+            UIGraphicsBeginImageContext(frame.size)
+            layer.render(in: UIGraphicsGetCurrentContext()!)
             let image = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             return UIImage(cgImage: image!.cgImage!)
@@ -166,7 +170,7 @@ extension UIScrollView {
             width: frame.size.width,
             height: max(frame.size.height, CGFloat(y))
         )
-        scrollRectToVisible(CGRect(x: 5, y: y-1, width: 1, height: 1), animated: true)
+        scrollRectToVisible(CGRect(x: 5, y: y - 1, width: 1, height: 1), animated: true)
     }
 }
 
@@ -187,7 +191,7 @@ enum ButtonStyle {
 }
 
 extension UIButton {
-    func setStyle(style: ButtonStyle, step: CGFloat = screen.width/48) {
+    func setStyle(style: ButtonStyle, step: CGFloat = screen.width / 48) {
         roundBorder(radius: step)
         showsTouchWhenHighlighted = true
         titleLabel?.textAlignment = .center
@@ -222,6 +226,7 @@ func dismissTwoVC(animated: Bool = true, completion: (() -> Void)? = nil) {
 }
 
 // MARK: XibView
+
 // modified from https://medium.com/zenchef-tech-and-product/how-to-visualize-reusable-xibs-in-storyboards-using-ibdesignable-c0488c7f525d
 
 protocol XibView: class {
@@ -244,7 +249,8 @@ extension XibView where Self: UIView {
         let nib = UINib(nibName: nibName, bundle: bundle)
         return nib.instantiate(
             withOwner: self,
-            options: nil).first as? UIView
+            options: nil
+        ).first as? UIView
     }
 }
 
@@ -258,7 +264,7 @@ extension UIPageViewController {
         }
     }
 
-    func goToPreviousPage(animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
+    func goToPreviousPage(animated _: Bool = true, completion: ((Bool) -> Void)? = nil) {
         if let currentViewController = viewControllers?[0] {
             if let previousPage = dataSource?.pageViewController(self, viewControllerBefore: currentViewController) {
                 setViewControllers([previousPage], direction: .reverse, animated: true, completion: completion)
@@ -268,9 +274,11 @@ extension UIPageViewController {
 }
 
 // MARK: Alerts
+
 enum TMPError: Error {
     case alert
 }
+
 var isAlerting = fulfilledVoidPromise()
 func showMessage(_ message: String, seconds: Float = 2) {
     isAlerting.then {
@@ -278,7 +286,7 @@ func showMessage(_ message: String, seconds: Float = 2) {
         let alert = UIAlertController(title: message, message: "", preferredStyle: .alert)
         UIApplication.getPresentedViewController()?.present(alert, animated: true)
 
-        let when = DispatchTime.now() + DispatchTimeInterval.milliseconds(Int(seconds*1000))
+        let when = DispatchTime.now() + DispatchTimeInterval.milliseconds(Int(seconds * 1000))
         DispatchQueue.main.asyncAfter(deadline: when) {
             alert.dismiss(animated: true) {
                 isAlerting.reject(TMPError.alert) // discard all other show message
@@ -319,7 +327,8 @@ func showOkAlert(title: String?, message: String? = nil, okTitle: String = I18n.
     let alert = UIAlertController(
         title: title,
         message: message,
-        preferredStyle: .alert)
+        preferredStyle: .alert
+    )
     let okAction = UIAlertAction(title: okTitle, style: .default) { _ in
         alert.dismiss(animated: true, completion: nil)
     }
@@ -331,12 +340,14 @@ func showProcessingAlert() -> UIAlertController {
     let alert = UIAlertController(
         title: I18n.shared.processing,
         message: "",
-        preferredStyle: .alert)
+        preferredStyle: .alert
+    )
     UIApplication.getPresentedViewController()?.present(alert, animated: true)
     return alert
 }
 
 // MARK: - launch storyboard
+
 func getVC(_ name: String) -> UIViewController {
     switch name {
     case MedalGameFinishedPage.id:
@@ -359,7 +370,7 @@ func launchVC(
     isOverCurrent: Bool = true,
     animated: Bool = true,
     completion: ((UIViewController) -> Void)? = nil
-    ) {
+) {
     let vc = getVC(vcName)
     if isOverCurrent {
         vc.modalPresentationStyle = .overCurrentContext
@@ -369,8 +380,8 @@ func launchVC(
 
     (originVC ?? UIApplication.getPresentedViewController())?
         .present(vc, animated: animated) {
-        completion?(vc)
-    }
+            completion?(vc)
+        }
 }
 
 func goToIOSSettingCenter() {

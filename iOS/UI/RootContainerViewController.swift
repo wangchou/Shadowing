@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import UIKit
-import Speech
 import Promises
+import Speech
+import UIKit
 
 class RootContainerViewController: UIViewController {
     static var isShowSetting = false
@@ -67,7 +67,7 @@ class RootContainerViewController: UIViewController {
         current = topicSwipablePage
         let sp: TopicSwipablePage! = topicSwipablePage
         if sp.isPagesReady {
-           sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
+            sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
         } else {
             TopicSwipablePage.initialIdx = idx
         }
@@ -80,7 +80,7 @@ class RootContainerViewController: UIViewController {
         current = infiniteChallengeSwipablePage
         let sp: InfiniteChallengeSwipablePage! = infiniteChallengeSwipablePage
         if sp.isPagesReady {
-           sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
+            sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
         } else {
             InfiniteChallengeSwipablePage.initialIdx = idx
         }
@@ -127,6 +127,7 @@ class RootContainerViewController: UIViewController {
             }
         }
     }
+
     private func showVC(_ vc: UIViewController) {
         addChild(vc)
         vc.view.frame = view.bounds

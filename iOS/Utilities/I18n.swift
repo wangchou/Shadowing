@@ -42,21 +42,25 @@ class I18n {
         if isZh { return "挑戰的語音說明" }
         return "Initial Descriptions"
     }
+
     var showTranslationLabel: String {
         if isJa { return "翻訳を表示する" }
         if isZh { return "改顯示譯文" }
         return "Show translation"
     }
+
     var monitoringLabel: String {
-        if isJa { return "モニタリング（有線イヤホンのみ）"}
+        if isJa { return "モニタリング（有線イヤホンのみ）" }
         if isZh { return "即時監聽 (有線耳機 Only)" }
         return "Wired Monitoring"
     }
+
     var gotoIOSSettingButtonTitle: String {
         if isJa { return "iPhone 設定へ" }
         if isZh { return "前往 iPhone 設定中心" }
         return "Go to iPhone Setting Center"
     }
+
     var voiceNotAvailableMessage: String {
         let lang = gameLang == .jp ? japanese : english
         if isJa { return "もっと声をダウンロードしましょう\n「設定」>「一般」>「アクセシビリティ」>「スピーチ」 >「声」>「\(lang)」の順に選択します。" }
@@ -65,20 +69,23 @@ class I18n {
     }
 
     var settingSectionGameSpeed: String {
-        if isJa { return "挑戦中"}
+        if isJa { return "挑戦中" }
         if isZh { return "遊戲時" }
         return "Game Speed"
     }
+
     var settingSectionPracticeSpeed: String {
-        if isJa { return  "練習の速度" }
+        if isJa { return "練習の速度" }
         if isZh { return "練習的速度" }
         return "Practice Speed"
     }
+
     var gameSetting: String {
         if isJa { return "ゲーム設定" }
         if isZh { return "遊戲設定" }
         return "Game Settings"
     }
+
     var micAndSpeechPermission: String {
         if isJa { return "マイク と 音声認識の権限" }
         if isZh { return "麥克風與語音辨識權限" }
@@ -131,6 +138,7 @@ class I18n {
         if isZh { return "語音合成" }
         return "Text to Speech (\(langToSpeak))"
     }
+
     var teacherLabel: String {
         if gameLang == .jp {
             if isJa { return "日本語先生" }
@@ -142,6 +150,7 @@ class I18n {
         if isZh { return "英文老師" }
         return "Teacher"
     }
+
     var assistantLabel: String {
         if gameLang == .jp {
             if isJa { return "日本語アシスタント" }
@@ -152,11 +161,13 @@ class I18n {
         if isZh { return "英文助理" }
         return "Assisant"
     }
+
     var enhancedVoice: String {
         if isJa { return "(拡張)" }
         if isZh { return "(高品質)" }
         return "(Enhanced)"
     }
+
     var cannotReachServer: String {
         return isJa ? "サーバーに接続できません" : "連不到主機"
     }
@@ -174,26 +185,26 @@ class I18n {
     }
 
     var gotoIOSCenterCancelTitle: String {
-        if isJa { return "キャンセル"}
+        if isJa { return "キャンセル" }
         if isZh { return "取消" }
         return "Cancel"
     }
 
     var speechErrorMessage: String {
         if isJa { return "音声をAppleに送信中にエラーが発生しました。" }
-        if isZh { return "傳送聲音往Apple時，錯誤發生。"}
+        if isZh { return "傳送聲音往Apple時，錯誤發生。" }
         return "An error occurred when transmitting voice to Apple."
     }
 
     var continueGameButtonTitle: String {
         if isJa { return "つづく" }
-        if isZh { return "繼續遊戲"}
+        if isZh { return "繼續遊戲" }
         return "Back to Game"
     }
 
     var finishGameButtonTitle: String {
         if isJa { return "ゲームを終る" }
-        if isZh { return "結束遊戲"}
+        if isZh { return "結束遊戲" }
         return "Stop Game"
     }
 
@@ -226,7 +237,7 @@ class I18n {
     }
 
     var setting: String {
-        if isJa || isZh { return "設  定"}
+        if isJa || isZh { return "設  定" }
         return "Settings"
     }
 
@@ -255,11 +266,12 @@ class I18n {
     }
 
     var enAbbr: String {
-        if isJa || isZh { return "英"}
+        if isJa || isZh { return "英" }
         return "En"
     }
+
     var jaAbbr: String {
-        if isJa || isZh { return "日"}
+        if isJa || isZh { return "日" }
         return "Ja"
     }
 
@@ -279,7 +291,7 @@ class I18n {
 
     func getLangDescription(langAndRegion: String) -> String {
         let pairs = langAndRegion.split(separator: "-")
-                                 .map { substring in substring.s}
+            .map { substring in substring.s }
         let lang = pairs[0] == "ja" ? japanese : english
         let region = getRegion(region: pairs[1])
         if region == "" { return lang }
@@ -312,11 +324,13 @@ class I18n {
         if isZh { return "澳洲 🇦🇺" }
         return "Australia 🇦🇺"
     }
+
     var ie: String {
         if isJa { return "アイルランド 🇨🇮" }
         if isZh { return "愛爾蘭 🇨🇮" }
         return "Ireland 🇨🇮"
     }
+
     var za: String {
         if isJa { return "南アフリカ 🇿🇦" }
         if isZh { return "南非 🇿🇦" }
@@ -364,16 +378,19 @@ class I18n {
         }
         return english
     }
+
     var continues: String {
         if isZh { return "連續" }
         if isJa { return "連続" }
         return "Streak"
     }
+
     var best: String {
         if isZh { return "最佳" }
         if isJa { return "ベスト" }
         return "Best"
     }
+
     var last7Days: String {
         if isZh { return "過去7天" }
         if isJa { return "過去7日間" }
@@ -385,21 +402,25 @@ class I18n {
         if isJa { return "過去30日間" }
         return "30 Days"
     }
+
     var sentence: String {
         if isZh { return "句" }
         if isJa { return "文" }
         return "Sent."
     }
+
     var goalPrefix: String {
         if isZh { return "每天說對" }
         if isJa { return "毎日" }
         return "Daily"
     }
+
     var goalSuffix: String {
         if isZh { return "句" }
         if isJa { return "文" }
         return "Sent."
     }
+
     var goalText: String {
         if isJa || isZh {
             return "\(goalPrefix)\(GameContext.shared.gameSetting.dailySentenceGoal)\(goalSuffix)"
@@ -436,20 +457,23 @@ class I18n {
         if isJa { return "日" }
         return "Days"
     }
+
     var time: String {
         if isZh || isJa {
             return "時間"
         }
         return "Time"
     }
+
     var longTermGoalSuffix: String {
-        if isZh { return "天。"}
+        if isZh { return "天。" }
         if isJa { return "日間。" }
         return "days left."
     }
+
     var longTermGoalMiddleText: String {
-        if isZh { return "% 已說，離完成"}
-        if isJa { return "% を話した、完了まで"}
+        if isZh { return "% 已說，離完成" }
+        if isJa { return "% を話した、完了まで" }
         return "% are said, "
     }
 
@@ -476,120 +500,143 @@ class I18n {
         if isZh { return "口譯" }
         return "Interpreter"
     }
+
     var speedIs: String {
         if gameLang == .jp {
             return "速度は"
         }
         return "Speed is "
     }
+
     var canChangeItLaterInSetting: String {
         if isJa { return "後で、設定ページから変更することができます。" }
         if isZh { return "之後可從設定頁面更改。" }
         return "It could be changed from the settings page later."
     }
+
     var restorePreviousPurchase: String {
         if isJa { return "購入記録を復元する" }
         if isZh { return "恢復購買紀錄" }
         return "Restore purchase records"
     }
+
     var startChallenge: String {
         if isJa { return "明日挑戦します" }
-        if isZh { return "明天再挑戰"}
+        if isZh { return "明天再挑戰" }
         return "Challenge it tomorrow"
     }
+
     var purchaseViewTitle: String {
         if isJa { return "[体験版] 毎日\(dailyFreeLimit)文の挑戦制限" }
         if isZh { return "[試玩版] 已達每日\(dailyFreeLimit)句挑戰限制" }
         return "[Trial version] Daily \(dailyFreeLimit) sentences limit"
     }
+
     var purchaseViewMessage: String {
         if isJa { return "\n今日もあなたにとって楽しい一日でありますように。\n\n〜 スタジオ大草原不可避 〜" }
         if isZh { return "\n希望你今天也玩的很開心。 \n\n〜 大草原不可避工作室 〜" }
         return "Hope you already have great fun today. \n\n〜 Studio 大草原不可避 〜"
     }
+
     var freeButtonPurchaseMessage: String {
         if isJa { return "\n[体験版制限] 1日に\(dailyFreeLimit)文だけを話すことができます。\n\n〜 スタジオ大草原不可避 〜" }
         if isZh { return "\n[試玩版限制] 一天只能挑戰\(dailyFreeLimit)句。\n\n〜 大草原不可避工作室 〜" }
         return "\n[Trial version constraint] User only can play \(dailyFreeLimit) sentences a day. \n\n〜 Studio 大草原不可避 〜"
     }
+
     var previousPurchaseRestored: String {
         if isJa { return "購入記録を復元しました" }
         if isZh { return "已恢復過去購買紀錄" }
         return "Past purchase records are restored"
     }
+
     var iGotIt: String {
         if isJa { return "わかりました" }
         if isZh { return "我知道了" }
         return "Ok"
     }
+
     var processing: String {
         if isJa { return "処理しています。" }
         if isZh { return "處理中" }
         return "processing"
     }
+
     var buyOneMonth: String {
         if isJa { return "完全版(1ヶ月) " }
         if isZh { return "正式版一個月" }
         return "Full Version (1 Month)"
     }
+
     var buyThreeMonths: String {
         if isJa { return "完全版(3ヶ月) " }
         if isZh { return "正式版三個月" }
         return "Full Version (3 Months)"
     }
+
     var buyForever: String {
         if isJa { return "完全版(永久) " }
         if isZh { return "永久正式版" }
         return "Full Version (Forever)"
     }
+
     var cannotMakePayment: String {
         if isJa { return "iTunes Store や App Store で購入できない (ペアレンタルコントロールを使いますか？)" }
         if isZh { return "本機器沒有辦法付款 (家長保護控制開啟中?)" }
         return "This device is not able or allowed to make payments. (Is Parental controls on?)"
     }
+
     var iCannotHearYou: String {
         if isJa { return "聞こえない" }
-        if isZh { return "聽不清楚"}
+        if isZh { return "聽不清楚" }
         return "I cannot hear you"
     }
+
     var remaining: String {
         if isJa { return "まだ" }
-        if isZh { return "還有"}
+        if isZh { return "還有" }
         return "まだ"
     }
+
     var echoMethod: String {
-        if isJa { return "エコー法"}
+        if isJa { return "エコー法" }
         if isZh { return "回音法" }
         return "Mind Echo"
     }
+
     var listenToEcho: String {
         if isJa { return "心のエコーを聞いて" }
         if isZh { return "聽心中回音" }
         return "Listen to echo in mind."
     }
+
     var yourFeedbackMakeAppBetter: String {
         if isJa { return "あなたの声はAppの成長の原動力です" }
-        if isZh { return "您的回饋是 App 成長的原動力"}
+        if isZh { return "您的回饋是 App 成長的原動力" }
         return "Your feedback makes app better."
     }
+
     var gotoAppStore: String {
         if isJa { return "App Store へ" }
-        if isZh { return "前往 App Store"}
+        if isZh { return "前往 App Store" }
         return "Go to App Store"
     }
+
     var freeVersion: String {
         if isZh { return "試玩版" }
         if isJa { return "体験版" }
         return "Trial"
     }
+
     var itIsfreeVersion: String {
         if isJa { return "現在のバージョンは体験版です" }
-        if isZh { return "目前的版本為試玩版"}
+        if isZh { return "目前的版本為試玩版" }
         return "You are using Trial Version"
     }
+
     var close: String {
         if isJa { return "閉じる" }
-        if isZh { return "關閉"}
+        if isZh { return "關閉" }
         return "Close"
     }
 
@@ -597,11 +644,13 @@ class I18n {
         if isJa || isZh { return "判定" }
         return "Rank"
     }
+
     var medal: String {
         if isZh { return "小徽章" }
-        if isJa { return "メダル"}
+        if isJa { return "メダル" }
         return "Medal"
     }
+
     var pts: String {
         if isZh { return "分" }
         if isJa { return "点" }
@@ -613,6 +662,7 @@ class I18n {
         if isJa { return "遊びの時間" }
         return "Play Time"
     }
+
     var correctSentences: String {
         if isZh { return "唸對句數" }
         if isJa { return "正しい文" }
@@ -623,21 +673,25 @@ class I18n {
         if isJa || isZh { return "正解" }
         return "EX."
     }
+
     var great: String {
         if isJa { return "すごい" }
         if isZh { return "真厲害" }
         return "Great"
     }
+
     var correct: String { // excellent + great
         if isJa { return "正しい" }
         if isZh { return "正確的" }
         return "Correct"
     }
+
     var good: String {
         if isJa { return "いいね" }
         if isZh { return "良好" }
         return "Good"
     }
+
     var wrong: String {
         if isJa { return "ミス" }
         if isZh { return "錯誤" }
@@ -646,18 +700,21 @@ class I18n {
 
     var mins: String {
         if isZh { return "分鐘" }
-        if isJa { return "分"}
+        if isJa { return "分" }
         return "mins"
     }
+
     var date: String {
         if isZh { return "日期" }
-        if isJa { return "日付"}
+        if isJa { return "日付" }
         return "Date"
     }
+
     var completeness: String {
-        if isZh || isJa { return "完成率"}
+        if isZh || isJa { return "完成率" }
         return "Complete"
     }
+
     var previousGame: String {
         if isJa { return "前回の挑戦" }
         if isZh { return "上次的挑戦" }
@@ -668,13 +725,13 @@ class I18n {
         let context = GameContext.shared
         switch context.gameMode {
         case .medalMode:
-            guard let reward = reward else { return ""}
-            let rewardText = reward >= 0 ? "plus \(reward)": "\(reward)"
+            guard let reward = reward else { return "" }
+            let rewardText = reward >= 0 ? "plus \(reward)" : "\(reward)"
             let rankText = rank.replacingOccurrences(of: "+", with: " plus")
 
             return gameLang == .jp ?
                 "\(percent)%。判定：\(rankText)。メダル：\(rewardText)。" :
-            "\(percent)% Completed. Rank: \(rankText)... Medal: \(rewardText)"
+                "\(percent)% Completed. Rank: \(rankText)... Medal: \(rewardText)"
         default:
             if gameLang == .jp { return "完成率：\(percent)%、判定：\(rank)" }
             return "\(percent)% completed. Rank \(rank)..."
@@ -686,6 +743,7 @@ class I18n {
         if isJa { return "聞いています。" }
         return "listening..."
     }
+
     var todaySummary: String {
         if isZh { return "本日的統計" }
         if isJa { return "今日のまとめ" }
@@ -693,7 +751,7 @@ class I18n {
     }
 
     var secs: String {
-        if isJa && isZh { return "秒" }
+        if isJa, isZh { return "秒" }
         return "s"
     }
 
@@ -702,10 +760,12 @@ class I18n {
         if isZh { return "下個挑戰" }
         return "Next Game"
     }
+
     var noScore: String {
         if isZh { return "無分" }
         return "  "
     }
+
     var todayGoal: String {
         if isJa { return "今日の目標" }
         if isZh { return "今日的目標" }
@@ -727,7 +787,7 @@ class I18n {
     var tip1: String {
         let teacherName = gameLang == .jp ? "Otoya" : "Samatha"
         if isZh { return "安裝高品質語音。(\(teacherName) 300MB, iPhone設定：「輔助使用 > 語音」)" }
-        if isJa { return "高品質の声をダウンロードしましょう。(\(teacherName) 300MB, iPhoneの設定：「アクセシビリティ」>「スピーチ」)"}
+        if isJa { return "高品質の声をダウンロードしましょう。(\(teacherName) 300MB, iPhoneの設定：「アクセシビリティ」>「スピーチ」)" }
         return "Download high-quality voices (\(teacherName) 300MB) from iPhone Setting:「Accessibility > Speech」。"
     }
 
@@ -790,4 +850,5 @@ class I18n {
             .randomElement()!
     }
 }
+
 // swiftlint:enable file_length  type_body_length

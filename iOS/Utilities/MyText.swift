@@ -9,12 +9,12 @@
 import Foundation
 import UIKit
 
-//Hiragino Maru Gothic ProN
+// Hiragino Maru Gothic ProN
 //    -- HiraMaruProN-W4
-//Hiragino Mincho ProN
+// Hiragino Mincho ProN
 //    -- HiraMinProN-W3
 //    -- HiraMinProN-W6
-//Hiragino Sans
+// Hiragino Sans
 //    -- HiraginoSans-W3
 //    -- HiraginoSans-W6
 class MyFont {
@@ -23,7 +23,7 @@ class MyFont {
         let key = "thin-\(fontSize)"
         if let font = fontCache[key] { return font }
         fontCache[key] = UIFont(name: ".HiraKakuInterface-W2", size: fontSize) ??
-                         UIFont.systemFont(ofSize: fontSize, weight: .thin)
+            UIFont.systemFont(ofSize: fontSize, weight: .thin)
         return fontCache[key]!
     }
 
@@ -31,7 +31,7 @@ class MyFont {
         let key = "regular-\(fontSize)"
         if let font = fontCache[key] { return font }
         fontCache[key] = UIFont(name: ".HiraKakuInterface-W3", size: fontSize) ??
-                         UIFont.systemFont(ofSize: fontSize, weight: .regular)
+            UIFont.systemFont(ofSize: fontSize, weight: .regular)
         return fontCache[key]!
     }
 
@@ -39,7 +39,7 @@ class MyFont {
         let key = "bold-\(fontSize)"
         if let font = fontCache[key] { return font }
         fontCache[key] = UIFont(name: ".HiraKakuInterface-W6", size: fontSize) ??
-                         UIFont.systemFont(ofSize: fontSize, weight: .bold)
+            UIFont.systemFont(ofSize: fontSize, weight: .bold)
         return fontCache[key]!
     }
 
@@ -53,7 +53,7 @@ class MyFont {
 
 extension NSMutableAttributedString {
     var allRange: NSRange {
-        return NSRange(location: 0, length: self.length)
+        return NSRange(location: 0, length: length)
     }
 }
 
@@ -64,7 +64,7 @@ func getText(
     strokeColor: UIColor? = nil,
     font: UIFont? = nil,
     terminator: String = ""
-    ) -> NSMutableAttributedString {
+) -> NSMutableAttributedString {
     let text = NSMutableAttributedString(string: "\(text)\(terminator)")
     var attributes: [NSAttributedString.Key: Any] = [:]
     if let color = color { attributes[.foregroundColor] = color }
@@ -100,7 +100,7 @@ func getStrokeText(
     strokeWidth: Float = -1.5,
     strokColor: UIColor = .black,
     font: UIFont = UIFont.boldSystemFont(ofSize: 32)
-    ) -> NSMutableAttributedString {
+) -> NSMutableAttributedString {
     let limitedWidth = max(-4, strokeWidth)
     return getText(text, color: color, strokeWidth: limitedWidth, strokeColor: strokColor, font: font)
 }
@@ -110,6 +110,6 @@ func colorText(
     _ color: UIColor = .lightText,
     terminator: String = "",
     fontSize: CGFloat = 24
-    ) -> NSMutableAttributedString {
+) -> NSMutableAttributedString {
     return getText(text, color: color, font: MyFont.regular(ofSize: fontSize), terminator: terminator)
 }

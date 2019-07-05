@@ -6,8 +6,8 @@
 //  Copyright © 30 Heisei Lu, WangChou. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
 
 private let context = GameContext.shared
 
@@ -26,13 +26,15 @@ class VoiceSelectionPage: UIViewController {
         return (VoiceSelectionPage.fromPage as? MedalCorrectionPage) != nil
     }
 
-    @IBOutlet weak var downloadVoiceTextView: UITextView!
+    @IBOutlet var downloadVoiceTextView: UITextView!
     var selectingVoiceFor: SelectingVoiceFor {
         return VoiceSelectionPage.selectingVoiceFor
     }
+
     var voices: [AVSpeechSynthesisVoice] {
         return getAvailableVoice(prefix: gameLang.prefix)
     }
+
     var voicesGrouped: [[AVSpeechSynthesisVoice]] {
         var voiceDictByLanguage: [String: [AVSpeechSynthesisVoice]] = [:]
         voices.forEach { v in
@@ -46,12 +48,13 @@ class VoiceSelectionPage: UIViewController {
         for key in voiceDictByLanguage.keys.sorted() {
             voicesGrouped.append(
                 voiceDictByLanguage[key]!.sorted {
-                    return $0.name < $1.name
+                    $0.name < $1.name
                 }
             )
         }
         return voicesGrouped
     }
+
     var selectedVoice: AVSpeechSynthesisVoice? {
         set {
             VoiceSelectionPage.selectedVoice = newValue
@@ -81,15 +84,15 @@ class VoiceSelectionPage: UIViewController {
         }
     }
 
-    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet var cancelButton: UIButton!
 
-    @IBOutlet weak var doneButton: UIButton!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet var doneButton: UIButton!
+    @IBOutlet var titleLabel: UILabel!
 
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var practiceSpeedLabel: UILabel!
-    @IBOutlet weak var practiceSpeedSlider: UISlider!
-    @IBOutlet weak var practiceSpeedValueLabel: UILabel!
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var practiceSpeedLabel: UILabel!
+    @IBOutlet var practiceSpeedSlider: UISlider!
+    @IBOutlet var practiceSpeedValueLabel: UILabel!
 
     var originPracticeSpeed: Float = 0
     var originVoice: String = ""
@@ -122,14 +125,14 @@ class VoiceSelectionPage: UIViewController {
         SpeechEngine.shared.stopListeningAndSpeaking()
     }
 
-    @IBAction func onCancelButtonClicked(_ sender: Any) {
+    @IBAction func onCancelButtonClicked(_: Any) {
         context.gameSetting.practiceSpeed = originPracticeSpeed
         context.gameSetting.teacher = originVoice
         saveGameSetting()
-        self.dismiss(animated: true)
+        dismiss(animated: true)
     }
 
-    @IBAction func practiceSpeedSliderValueChanged(_ sender: Any) {
+    @IBAction func practiceSpeedSliderValueChanged(_: Any) {
         context.gameSetting.practiceSpeed = practiceSpeedSlider.value
         practiceSpeedValueLabel.text = String(format: "%.2fx", practiceSpeedSlider.value * 2)
         let speedText = String(format: "%.2f", context.gameSetting.practiceSpeed * 2)
@@ -138,8 +141,8 @@ class VoiceSelectionPage: UIViewController {
         isSpeedChanged = true
     }
 
-    @IBAction func onDoneButtonClicked(_ sender: Any) {
-        self.dismiss(animated: true)
+    @IBAction func onDoneButtonClicked(_: Any) {
+        dismiss(animated: true)
         if let settingPage = VoiceSelectionPage.fromPage as? SettingPage {
             settingPage.render()
         }
@@ -151,11 +154,11 @@ class VoiceSelectionPage: UIViewController {
 }
 
 extension VoiceSelectionPage: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in _: UITableView) -> Int {
         return voicesGrouped.count
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         return voicesGrouped[section].count
     }
 
@@ -172,7 +175,7 @@ extension VoiceSelectionPage: UITableViewDataSource {
         return voiceCell
     }
 
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_: UITableView, titleForHeaderInSection section: Int) -> String? {
         return i18n.getLangDescription(langAndRegion: voicesGrouped[section][0].language)
     }
 }
@@ -194,7 +197,7 @@ extension VoiceSelectionPage: UITableViewDelegate {
         }
 
         let speed = isWithPracticeSpeedSection ? context.gameSetting.practiceSpeed :
-                                                 AVSpeechUtteranceDefaultSpeechRate
+            AVSpeechUtteranceDefaultSpeechRate
         _ = ttsSay(
             testSentence,
             speaker: selectedVoice?.identifier ?? "unknown",

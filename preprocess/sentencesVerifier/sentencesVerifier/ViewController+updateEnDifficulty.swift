@@ -24,7 +24,7 @@ extension ViewController {
             if bothPerfectCount >= bothPerfectCountLimit { continue }
             if currentVoicePerfectCount >= voicePerfectCountLimit { continue }
 
-            if idToScore[id] == 100 && idToPairedScore[id] == 100 {
+            if idToScore[id] == 100, idToPairedScore[id] == 100 {
                 sentenceIds.append(id)
             }
         }
@@ -40,7 +40,7 @@ extension ViewController {
             difficultyCounts[difficulty] = (difficultyCounts[difficulty] ?? 0) + 1
             updateEnDifficuty(id: sentenceIds[i], difficulty: difficulty)
 
-            if i % 10 == 0 && difficulty > 5 {
+            if i % 10 == 0, difficulty > 5 {
                 print(i, String(format: "%.1f", now() - startTime), difficulty, sentences[i])
             }
         }

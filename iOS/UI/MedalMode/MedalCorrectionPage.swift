@@ -6,10 +6,10 @@
 //  Copyright © 31 Heisei Lu, WangChou. All rights reserved.
 //
 
-import Foundation
-import UIKit
-import Promises
 import AVFoundation
+import Foundation
+import Promises
+import UIKit
 
 private let context = GameContext.shared
 
@@ -39,6 +39,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
     var sentences: [String] {
         return context.sentences
     }
+
     var sortedSentences: [String] = []
     var missedCount: Int {
         var count = 0
@@ -55,7 +56,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         var count = 0
         for str in sentences {
             let score = sentenceScores[str]?.value ?? 0
-            if score >= 60 && score < 80 {
+            if score >= 60, score < 80 {
                 count += 1
             }
         }
@@ -78,13 +79,13 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
 
     func render() {
         all([waitKanaInfoLoaded,
-            waitSentenceScoresLoaded]).then { [weak self] _ in
-                DispatchQueue.main.async {
-                    self?.removeAllSubviews()
-                    self?.renderTopView()
-                    self?.addBottomTable()
-                    self?.addBottomButtons()
-                }
+             waitSentenceScoresLoaded]).then { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.removeAllSubviews()
+                self?.renderTopView()
+                self?.addBottomTable()
+                self?.addBottomButtons()
+            }
         }
     }
 
@@ -102,8 +103,8 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
                                        rgb(240, 240, 240),
                                        fontSize: fontSize))
         titleAttrText.append(colorText(" (\(i18n.language))",
-                             rgb(160, 160, 160),
-                             fontSize: fontSize))
+                                       rgb(160, 160, 160),
+                                       fontSize: fontSize))
         topView.addAttrText(x: 2, y: y, h: 5, text: titleAttrText)
 
         let orangeCount = goodCount
@@ -117,19 +118,19 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
                          title: String, count: Int, color: UIColor) {
             let rect = topView.addRect(x: x, y: y, w: 9, h: 6, color: .black)
             rect.roundBorder(radius: step)
-            topView.addText(x: x+1, y: y, w: 9, h: 2,
+            topView.addText(x: x + 1, y: y, w: 9, h: 2,
                             text: title,
                             font: MyFont.regular(ofSize: step * 1.7),
                             color: .white)
-            let label = topView.addText(x: x, y: y+1, w: 8, h: 5, text: "\(count)", color: color)
+            let label = topView.addText(x: x, y: y + 1, w: 8, h: 5, text: "\(count)", color: color)
             label.textAlignment = .right
         }
 
         addCountBox(x: x, y: y,
                     title: i18n.correct, count: greenCount, color: myGreen)
-        addCountBox(x: x+11, y: y,
+        addCountBox(x: x + 11, y: y,
                     title: i18n.good, count: orangeCount, color: myOrange)
-        addCountBox(x: x+22, y: y,
+        addCountBox(x: x + 22, y: y,
                     title: i18n.wrong, count: redCount, color: myRed)
 
         var button = UIButton()
@@ -157,6 +158,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
     }
 
     // MARK: - Practice Game Related
+
     // listening to sentence practice event
     func onEventHappened(_ notification: Notification) {
         guard let event = notification.object as? Event else { print("convert event fail"); return }
@@ -171,7 +173,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
 
     private func addBottomTable() {
         sortedSentences = sentences.sorted {
-            return (sentenceScores[$0]?.value ?? 0) < (sentenceScores[$1]?.value ?? 0)
+            (sentenceScores[$0]?.value ?? 0) < (sentenceScores[$1]?.value ?? 0)
         }
 
         tableView = UITableView()
@@ -185,8 +187,8 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
                                  y: topView.y1,
                                  width: screen.width,
                                  height: screen.height -
-                                    topView.frame.height -
-                                    bottomButtonHeight)
+                                     topView.frame.height -
+                                     bottomButtonHeight)
         tableView.dataSource = self
         addSubview(tableView)
     }
@@ -249,15 +251,14 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         rootViewController.updateWhenEnterForeground()
         dismissVC()
     }
-
 }
 
 extension MedalCorrectionPageView: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in _: UITableView) -> Int {
         return 1
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return sortedSentences.count
     }
 

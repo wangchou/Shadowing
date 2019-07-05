@@ -56,7 +56,7 @@ class TopicButtonAreaView: UIView, GridLayout, ReloadableView {
 
         repeatOneSwitchButton = addButton(35, 2, 8, 8)
         repeatOneSwitchButton.addTarget(self, action: #selector(onRepeatOneButtonClicked), for: .touchUpInside)
-        repeatOneSwitchButton.roundBorder(radius: repeatOneSwitchButton.frame.width/2)
+        repeatOneSwitchButton.roundBorder(radius: repeatOneSwitchButton.frame.width / 2)
         repeatOneSwitchButton.setIconImage(named: "baseline_repeat_one_black_\(isIPad ? "48pt" : "24pt")",
                                            isIconOnLeft: false)
 

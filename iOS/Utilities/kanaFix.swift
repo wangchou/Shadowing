@@ -9,6 +9,7 @@
 import Foundation
 
 // MARK: Fix apple tts pronounciation Error
+
 let ttsKanaFix: [String: String] = [
     "明日": "あした",
     "に行って": "にいって",
@@ -39,18 +40,19 @@ let ttsKanaFix: [String: String] = [
     "博士": "はかせ",
     "私立学校": "しりつ学校",
     "強すぎ": "つよすぎ",
-    "弾いて": "ひいて"
+    "弾いて": "ひいて",
 ]
 
 func getFixedKanaForTTS(_ text: String) -> String {
     var fixedText = text
-    ttsKanaFix.forEach { (kanji, kana) in
+    ttsKanaFix.forEach { kanji, kana in
         fixedText = fixedText.replacingOccurrences(of: kanji, with: kana)
     }
     return fixedText
 }
 
 // MARK: Fix mecab kanji to furigana error
+
 // single word fix
 var furiganaFix: [String: String] = [
     "何時": "なんじ",
@@ -78,13 +80,13 @@ var furiganaFix: [String: String] = [
     "後": "あと", // vs のち
     "昨夜": "さくや", // vs ゆうべ
     "ゆうべ": "ゆうべ",
-    "誕生日": "たんじょうび", //vs たんじょーび
+    "誕生日": "たんじょうび", // vs たんじょーび
     "冷蔵庫": "れいぞうこ",
     "山": "やま", // vs さん
     "にんぎょう": "にんぎょー",
     "位": "くらい",
     "雨": "あめ", // vs う
-    "土": "つち" // vs ど
+    "土": "つち", // vs ど
 ]
 
 func getFixedFuriganaForScore(_ token: String) -> String? {
@@ -96,7 +98,7 @@ func doKanaCacheHardFix() {
     kanaTokenInfosCacheDictionary["大喜びだ。"] = [
         ["大", "接頭詞", "オオ", "オオ"],
         ["喜び", "名詞", "ヨロコビ", "ヨロコビ"],
-        ["だ", "助動詞", "ダ", "ダ"]
+        ["だ", "助動詞", "ダ", "ダ"],
     ]
 }
 
@@ -110,10 +112,10 @@ func doKanaCacheRulesFix(kanaCache: [[String]]) -> [[String]] {
     for i in 0 ..< kanaCache.count - 2 {
         for rule in threeRules {
             if kanaCache[i][0] == rule[0],
-                kanaCache[i+1][0] == rule[1],
-                newCache[i+2][0] == rule[2] {
-                newCache[i+2][2] = rule[3]
-                newCache[i+2][3] = rule[3]
+                kanaCache[i + 1][0] == rule[1],
+                newCache[i + 2][0] == rule[2] {
+                newCache[i + 2][2] = rule[3]
+                newCache[i + 2][3] = rule[3]
             }
         }
     }

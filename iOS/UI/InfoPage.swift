@@ -9,12 +9,12 @@
 import UIKit
 
 class InfoPage: UIViewController {
-    @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet var closeButton: UIButton!
     override func viewDidLoad() {
         closeButton.roundBorder(radius: 25)
-
     }
-    @IBAction func onCloseButtonClicked(_ sender: Any) {
-        self.dismiss(animated: true)
+
+    @IBAction func onCloseButtonClicked(_: Any) {
+        dismiss(animated: true)
     }
 }

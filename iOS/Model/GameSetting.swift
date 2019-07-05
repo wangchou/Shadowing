@@ -6,8 +6,8 @@
 //  Copyright © 30 Heisei Lu, WangChou. All rights reserved.
 //
 
-import Foundation
 import AVFoundation
+import Foundation
 
 private let context = GameContext.shared
 
@@ -57,6 +57,7 @@ enum LearningMode: Int, Codable {
 }
 
 // MARK: - Save/Load for one Bool
+
 private let isRepeatOneKey = "RepeatOneKey"
 
 // https://stackoverflow.com/questions/44580719/how-do-i-make-an-enum-decodable-in-swift-4
@@ -76,6 +77,7 @@ func loadIsRepeatOne() {
 }
 
 // MARK: - save and load
+
 private let gameSettingKey = "GameSettingKey"
 
 func saveGameSetting() {
@@ -107,12 +109,12 @@ func getDefaultVoiceId(language: String, isPreferMaleSiri: Bool = true, isPrefer
     var bestVoiceId = ""
 
     let voices = getAvailableVoice(language: language).sorted { v1, v2 in
-        if v2.identifier.range(of: isPreferMaleSiri ? "siri_male" : "siri_female") != nil { return true}
-        if v1.identifier.range(of: isPreferMaleSiri ? "siri_male" : "siri_female") != nil { return false}
-        if v2.identifier.range(of: "siri") != nil { return true}
-        if v1.identifier.range(of: "siri") != nil { return false}
-        if v2.quality == .enhanced { return isPreferEnhanced ? true : false}
-        if v1.quality == .enhanced { return isPreferEnhanced ? false : true}
+        if v2.identifier.range(of: isPreferMaleSiri ? "siri_male" : "siri_female") != nil { return true }
+        if v1.identifier.range(of: isPreferMaleSiri ? "siri_male" : "siri_female") != nil { return false }
+        if v2.identifier.range(of: "siri") != nil { return true }
+        if v1.identifier.range(of: "siri") != nil { return false }
+        if v2.quality == .enhanced { return isPreferEnhanced ? true : false }
+        if v1.quality == .enhanced { return isPreferEnhanced ? false : true }
         return v1.identifier < v2.identifier
     }
     guard !voices.isEmpty else { return AVSpeechSynthesisVoice(language: language)!.identifier }

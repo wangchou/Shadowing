@@ -6,8 +6,8 @@
 //  Copyright © 30 Heisei Lu, WangChou. All rights reserved.
 //
 
-import UIKit
 import Firebase
+import UIKit
 
 private let context = GameContext.shared
 
@@ -20,15 +20,19 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
     var line1: String {
         return level.title
     }
+
     var line2: String {
         return "\(i18n.syllablesCount)：\(minKanaCount)〜\(maxKanaCount)"
     }
+
     var line3: String {
         return "\(i18n.sentencesCount)：\(sentencesCount)"
     }
+
     var bestRank: String? {
         return level.bestInfinteChallengeRank
     }
+
     var bestProgress: String? {
         return level.bestInfinteChallengeProgress
     }
@@ -38,10 +42,10 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
         let dataSetKey = level.infinteChallengeDatasetKey
         let gameRecords = context.gameHistory
             .filter { r in
-                return r.dataSetKey == dataSetKey
+                r.dataSetKey == dataSetKey
             }
-            .sorted {(r1, r2) in
-                return r1.startedTime < r2.startedTime
+            .sorted { r1, r2 in
+                r1.startedTime < r2.startedTime
             }
         guard !gameRecords.isEmpty else {
             points.append((x: 100, y: 1))
@@ -49,9 +53,9 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
         }
         var sentenceCount = 0
         points.append(contentsOf: gameRecords.map { r -> (x: Int, y: Int) in
-                sentenceCount += r.sentencesCount
-                return (x: sentenceCount, y: Int(r.p))
-            })
+            sentenceCount += r.sentencesCount
+            return (x: sentenceCount, y: Int(r.p))
+        })
         return points
     }
 
@@ -68,9 +72,10 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
             return attrText
         }
     }
+
     private var rankAttrText: NSAttributedString {
         let font = MyFont.bold(ofSize: getFontSize(h: 11))
-        if  let bestRank = bestRank,
+        if let bestRank = bestRank,
             let rank = Rank(rawValue: bestRank) {
             return getStrokeText(bestRank.padWidthTo(2), rank.color, font: font)
         } else {
@@ -95,7 +100,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
 
     func render() {
         frame.size.width = screen.width
-        frame.size.height = screen.width * 64/48
+        frame.size.height = screen.width * 64 / 48
         removeAllSubviews()
 
         var y = 1
@@ -121,8 +126,8 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
         y += 1
 
         // description
-        addAttrText(x: 18, y: y+1, h: 10, text: progressAttrText)
-        addAttrText(x: 36, y: y+1, h: 10, text: rankAttrText)
+        addAttrText(x: 18, y: y + 1, h: 10, text: progressAttrText)
+        addAttrText(x: 36, y: y + 1, h: 10, text: rankAttrText)
 
         addText(x: 2, y: y, h: 3, text: line1)
         addText(x: 18, y: y, h: 3, text: i18n.completeness)
@@ -148,7 +153,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
         addRect(x: 0, y: y, w: gridCount, h: 5, color: level.color.withAlphaComponent(0.3))
 
         addSeparateLine(y: y, color: rgb(180, 180, 180))
-        addSeparateLine(y: y+5, color: rgb(180, 180, 180))
+        addSeparateLine(y: y + 5, color: rgb(180, 180, 180))
         addText(x: 1, y: y, h: 5, text: i18n.previousGame)
     }
 
@@ -179,7 +184,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
     @objc func onChallengeButtonClicked() {
         context.gameMode = .infiniteChallengeMode
         guard !TopicDetailPage.isChallengeButtonDisabled else { return }
-        context.infiniteChallengeLevel = self.level
+        context.infiniteChallengeLevel = level
         if isUnderDailySentenceLimit() {
             Analytics.logEvent("challenge_infinite_\(gameLang.prefix)", parameters: nil)
             launchVC(Messenger.id, isOverCurrent: false)

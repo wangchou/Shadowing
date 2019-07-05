@@ -31,9 +31,11 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
     var safeAreaDiffY: Int {
         return getTopPadding() > 20 ? 1 : 0
     }
+
     var y: Int {
         return -2 - safeAreaDiffY
     }
+
     var tableData: [Summary] = []
     var totalSummary: Summary {
         var returnSummary = Summary()
@@ -61,7 +63,6 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
                 points.append((x: x, y: medalCount))
                 x += 10
             }
-
         }
         return points
     }
@@ -89,7 +90,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
                 medalCountMax = medalCount
             }
         }
-        return Double(medalCountMax - medalCountMax%50 + 50)
+        return Double(medalCountMax - medalCountMax % 50 + 50)
     }
 
     var axisMin: Double {
@@ -103,7 +104,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
                 medalCountMin = medalCount
             }
         }
-        return Double(max(0, medalCountMin - medalCountMin%50 - 50))
+        return Double(max(0, medalCountMin - medalCountMin % 50 - 50))
     }
 
     override func layoutSubviews() {
@@ -129,6 +130,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
                                 color: .white)
 
         // MARK: - Add day option button
+
         let daysButton = UIButton()
         daysButton.setTitle(dayOptionString(option: daysOption), for: .normal)
         daysButton.setStyle(style: .darkOption, step: step)
@@ -143,6 +145,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         daysButton.addTarget(self, action: #selector(onDaysButtonClicked), for: .touchUpInside)
 
         // MARK: - Right Summary Area
+
         let medalView = MedalView()
         layout(3, y + 3, 3, 3, medalView)
         addSubview(medalView)
@@ -151,45 +154,46 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
                             color: subTitleGray)
         label.textAlignment = .right
 
-        label = addText(x: 30, y: y+5, w: 16, h: 5, text: "\(context.gameMedal.count)", color: .white)
+        label = addText(x: 30, y: y + 5, w: 16, h: 5, text: "\(context.gameMedal.count)", color: .white)
         label.textAlignment = .right
         let originFrame = label.frame
         label.sizeToFit()
         label.centerY(originFrame)
         label.moveToRight(originFrame)
         medalView.centerY(label.frame)
-        medalView.frame.origin.x = label.x0 - medalView.frame.width - step/2
+        medalView.frame.origin.x = label.x0 - medalView.frame.width - step / 2
 
-        label = addText(x: 36, y: y+12, w: 10, h: 3, text: i18n.playTime,
+        label = addText(x: 36, y: y + 12, w: 10, h: 3, text: i18n.playTime,
                         font: subTitleFont,
                         color: subTitleGray)
         label.textAlignment = .right
-        let hours = totalSummary.duration/3600
-        let mins = (totalSummary.duration%3600)/60
+        let hours = totalSummary.duration / 3600
+        let mins = (totalSummary.duration % 3600) / 60
         let secs = totalSummary.duration % 60
         func padZero(_ value: Int) -> String {
             return value < 10 ? "0\(value)" : "\(value)"
         }
 
-        label = addText(x: 26, y: y+14, w: 20, h: 5,
+        label = addText(x: 26, y: y + 14, w: 20, h: 5,
                         text: "\(padZero(hours)):\(padZero(mins)):\(padZero(secs))",
-            color: .white)
+                        color: .white)
         label.textAlignment = .right
 
-        label = addText(x: 26, y: y+21, w: 20, h: 3, text: i18n.correctSentences,
+        label = addText(x: 26, y: y + 21, w: 20, h: 3, text: i18n.correctSentences,
                         font: subTitleFont,
                         color: subTitleGray)
         label.textAlignment = .right
-        label = addText(x: 23, y: y+23, w: 23, h: 5, text: "\(totalSummary.sentenceCount)", color: .white)
+        label = addText(x: 23, y: y + 23, w: 23, h: 5, text: "\(totalSummary.sentenceCount)", color: .white)
         label.textAlignment = .right
 
-        label = addText(x: 0, y: y+28, h: 3,
+        label = addText(x: 0, y: y + 28, h: 3,
                         text: "\(i18n.excellent) \(totalSummary.perfectCount) | \(i18n.great) \(totalSummary.greatCount) | \(i18n.good) \(totalSummary.goodCount) | \(i18n.wrong) \(totalSummary.missedCount)",
-            font: subTitleFont,
-            color: subTitleGray)
+                        font: subTitleFont,
+                        color: subTitleGray)
         label.textAlignment = .center
 
         // MARK: - Chart
+
         let chart = LineChart()
 
         chart.circleColor = .white
@@ -206,7 +210,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         chart.isDrawFill = false
         chart.setDataCount(level: Level.lv2, dataPoints: dataPoints)
         chart.render()
-        layout(2, y+9, 29, 20, chart)
+        layout(2, y + 9, 29, 20, chart)
         addSubview(chart)
     }
 

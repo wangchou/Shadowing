@@ -6,10 +6,10 @@
 //  Copyright © 30 Heisei Lu, WangChou. All rights reserved.
 //
 
-import UIKit
 import Promises
-//import AudioToolbox
-//AudioServicesPlaySystemSound(1116)
+import UIKit
+// import AudioToolbox
+// AudioServicesPlaySystemSound(1116)
 
 private let context = GameContext.shared
 
@@ -17,11 +17,11 @@ class SentencesTableCell: UITableViewCell {
     static var id = "ContentTableCell"
     static var isPracticing: Bool = false
     private var buttonColor = rgb(42, 163, 239)
-    @IBOutlet weak var scoreLabel: UILabel!
-    @IBOutlet weak var sentenceLabel: FuriganaLabel!
-    @IBOutlet weak var userSaidSentenceLabel: FuriganaLabel!
-    @IBOutlet weak var practiceButton: UIButton!
-    @IBOutlet weak var translationTextView: UITextView!
+    @IBOutlet var scoreLabel: UILabel!
+    @IBOutlet var sentenceLabel: FuriganaLabel!
+    @IBOutlet var userSaidSentenceLabel: FuriganaLabel!
+    @IBOutlet var practiceButton: UIButton!
+    @IBOutlet var translationTextView: UITextView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,7 +47,7 @@ class SentencesTableCell: UITableViewCell {
         return view as? UITableView
     }
 
-    @IBAction func practiceButtonTapped(_ sender: Any) {
+    @IBAction func practiceButtonTapped(_: Any) {
         practiceSentence()
     }
 
@@ -90,9 +90,9 @@ class SentencesTableCell: UITableViewCell {
         }
 
         var translationsDict = (gameLang == .jp && context.gameMode == .topicMode) ?
-                            chTranslations : translations
+            chTranslations : translations
         var secondaryDict = (gameLang == .jp && context.gameMode == .topicMode) ?
-                            translations : chTranslations
+            translations : chTranslations
 
         if let translation = (translationsDict[sentence] ?? secondaryDict[sentence]) {
             translationTextView.text = translation
@@ -100,7 +100,7 @@ class SentencesTableCell: UITableViewCell {
             translationTextView.text = ""
         }
 
-        if isShowTranslate && translationTextView.text != "" {
+        if isShowTranslate, translationTextView.text != "" {
             sentenceLabel.alpha = 0
             translationTextView.alpha = 1
         } else {
@@ -129,6 +129,7 @@ class SentencesTableCell: UITableViewCell {
 }
 
 // MARK: Private Methods
+
 extension SentencesTableCell {
     private func speakPart() -> Promise<Void> {
         startTime = getNow()

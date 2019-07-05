@@ -8,12 +8,13 @@
 
 import Foundation
 
-import StoreKit
 import Alamofire
+import StoreKit
 
 private var isSandbox = false
 
 // MARK: - validate receipt
+
 extension IAPHelper {
     // https://stackoverflow.com/questions/43146453/ios-receipt-not-found
     // There is no receipt on debug mode / testflight / sandbox mode
@@ -37,46 +38,45 @@ extension IAPHelper {
     private func validateReceiptBySendingTo(_ requestURL: URL) {
         guard let receiptURL = Bundle.main.appStoreReceiptURL,
             FileManager.default.fileExists(atPath: receiptURL.path) else {
-                NSLog("No receipt available to submit")
-                return
+            NSLog("No receipt available to submit")
+            return
         }
 
         do {
             let receipt: Data = try Data(contentsOf: receiptURL)
-            let parameters: Parameters =  [
+            let parameters: Parameters = [
                 "receipt-data": receipt.base64EncodedString(),
-                "password": sharedSecret
+                "password": sharedSecret,
             ]
             Alamofire.request(
                 requestURL,
                 method: .post,
                 parameters: parameters,
                 encoding: JSONEncoding.default
-                ).responseJSON { response in
-                    switch response.result {
-                    case .success:
-                        if let value = response.result.value as? [String: Any] {
-                            let status = value["status"] as? Int ?? -1
-                            switch status {
-                            case 0:
-                                if let receipt = value["receipt"] as? [String: Any] {
-                                    self.updateExpirationDateByReceipt(receipt)
-                                }
-
-                            case 21007:  // special code for sandbox from Apple
-                                isSandbox = true
-                                self.validateReceiptBySendingTo(RequestURL.sandbox.url)
-
-                            default:
-                                print("something wrong with error code:", status)
+            ).responseJSON { response in
+                switch response.result {
+                case .success:
+                    if let value = response.result.value as? [String: Any] {
+                        let status = value["status"] as? Int ?? -1
+                        switch status {
+                        case 0:
+                            if let receipt = value["receipt"] as? [String: Any] {
+                                self.updateExpirationDateByReceipt(receipt)
                             }
-                        } else {
-                            print("Receiving receipt from App Store failed: \(response.result)")
 
+                        case 21007: // special code for sandbox from Apple
+                            isSandbox = true
+                            self.validateReceiptBySendingTo(RequestURL.sandbox.url)
+
+                        default:
+                            print("something wrong with error code:", status)
                         }
-                    case .failure:
-                        print("Network Error")
+                    } else {
+                        print("Receiving receipt from App Store failed: \(response.result)")
                     }
+                case .failure:
+                    print("Network Error")
+                }
             }
         } catch {
             print("Error occurs in getExpirationDate")
@@ -85,13 +85,13 @@ extension IAPHelper {
 
     private func updateExpirationDateByReceipt(_ receipt: [String: Any]) {
         gameExpirationDate = Date(ms: 0)
-        //let receiptType = receipt["receipt_type"] as? String ?? ""
-        //let isSandbox = receiptType.range(of: "andbox") != nil //sandbox
+        // let receiptType = receipt["receipt_type"] as? String ?? ""
+        // let isSandbox = receiptType.range(of: "andbox") != nil //sandbox
         let originalPurchaseDateMS = Int64(receipt["original_purchase_date_ms"] as? String ?? "0") ?? 0
 
         let inApp = (receipt["in_app"] as? [[String: Any]]) ?? []
         let keyInfoInApp = inApp.map { dict -> (productId: String, ms: Int64) in
-            guard dict["cancellation_date"] == nil else { return ("cancelled", 0)}
+            guard dict["cancellation_date"] == nil else { return ("cancelled", 0) }
             return (
                 dict["product_id"] as? String ?? "unknown",
                 Int64(dict["purchase_date_ms"] as? String ?? "") ?? 0
@@ -107,10 +107,10 @@ extension IAPHelper {
             .sorted {
                 return $0.ms < $1.ms
             }
-            .forEach { (arg) in
+            .forEach { arg in
                 let (productId, dateInMS) = arg
                 updateExpirationDate(productId: productId, purchaseDateInMS: dateInMS)
-        }
+            }
 
         isEverReceiptProcessed = true
         saveGameExpirationDate()

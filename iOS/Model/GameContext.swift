@@ -6,10 +6,10 @@
 //  Copyright © 平成30年 Lu, WangChou. All rights reserved.
 //
 
+import AVFoundation
 import Foundation
 import Promises
 import UIKit
-import AVFoundation
 
 enum GameFlowMode: String, Codable {
     case shadowing, chat
@@ -25,21 +25,25 @@ enum GameMode {
 
 class GameContext {
     // MARK: - Singleton
+
     static let shared = GameContext()
 
     private init() {}
 
     // MARK: - Long-term data will be kept in UserDefault
+
     var gameHistory: [GameRecord] {
         if gameLang == .jp { return jpHistory }
         if gameLang == .en { return enHistory }
         return []
     }
+
     var gameSetting = GameSetting()
     var gameMedal = GameMedal()
     var bottomTab: UITab = .topics
 
     // MARK: - Medium-term context of current game
+
     var gameRecord: GameRecord?
     var sentenceIndex: Int = 0
     var sentences: [String] = []
@@ -99,13 +103,14 @@ class GameContext {
     }
 
     // MARK: - Short-term context for a sentence, will be discarded after each sentence played
+
     var score: Score = Score(value: 100)
 
     // Real duration in seconds of tts speaking
     var speakDuration: Float = 0
 
     var targetString: String {
-        guard sentenceIndex < sentences.count else { return ""}
+        guard sentenceIndex < sentences.count else { return "" }
         return sentences[sentenceIndex]
     }
 
@@ -127,19 +132,19 @@ class GameContext {
     var calculatedSpeakDuration: Promise<Float> {
         let duration: Promise<Float> = Promise<Float>.pending()
         if gameLang == .jp {
-            getKana(targetString).then({ [unowned self] kana in
+            getKana(targetString).then { [unowned self] kana in
                 duration.fulfill(
                     1.0 +
-                    kana.count.f * 0.13 /
-                    (self.teachingRate/AVSpeechUtteranceDefaultSpeechRate)
+                        kana.count.f * 0.13 /
+                        (self.teachingRate / AVSpeechUtteranceDefaultSpeechRate)
                 )
-            })
+            }
         } else {
             let level = gameRecord?.level ?? Level.lv4
             duration.fulfill(
-                    1.0 +
+                1.0 +
                     level.maxSyllablesCount.f * 0.13 /
-                    (self.teachingRate/AVSpeechUtteranceDefaultSpeechRate)
+                    (teachingRate / AVSpeechUtteranceDefaultSpeechRate)
             )
         }
         return duration
@@ -147,8 +152,8 @@ class GameContext {
 }
 
 // MARK: - functions for a single game
-extension GameContext {
 
+extension GameContext {
     func loadLearningSentences() {
         switch gameMode {
         case .topicMode:
@@ -212,9 +217,8 @@ extension GameContext {
     }
 
     func loadMedalCorrectionSentence() {
-
         sentences = Array(getTodaySentenceSet()).sorted {
-            return (sentenceScores[$0]?.value ?? 0) < (sentenceScores[$1]?.value ?? 0)
+            (sentenceScores[$0]?.value ?? 0) < (sentenceScores[$1]?.value ?? 0)
         }
 
         // This should not trigger network requests
@@ -247,6 +251,7 @@ extension GameContext {
         }
         return sentencesSet
     }
+
     func getMissedCount() -> Int {
         var missedCount = 0
         getTodaySentenceSet().forEach { str in

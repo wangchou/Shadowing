@@ -6,8 +6,8 @@
 //  Copyright © 31 Heisei Lu, WangChou. All rights reserved.
 //
 
-import UIKit
 import Promises
+import UIKit
 
 private let context = GameContext.shared
 private var countDownTimer: Timer?
@@ -25,7 +25,7 @@ class MedalGameFinishedPage: UIViewController {
         (view as? MedalGameFinishedPageView)?.render()
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_: Bool) {
         countDownTimer?.invalidate()
     }
 }
@@ -36,7 +36,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     var gr: GameRecord { return context.gameRecord! }
 
     var medal: GameMedal { return context.gameMedal }
-    
+
     private var statusSpeakingPromise: Promise<Void> = fulfilledVoidPromise()
 
     var isJustReachDailyGoal: Bool = false
@@ -57,25 +57,28 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     }
 
     // MARK: - Lifecycle
+
     func render() {
         removeAllSubviews()
-        strokeWidth = Float(step * -1/2.0)
+        strokeWidth = Float(step * -1 / 2.0)
         addTextbackground(useGameSentences: true)
         let yMax = Int(screen.height / step)
-        addInfo(y: (yMax - 12)/2 - 20)
-        addActionButtons(y: (yMax - 12)/2 + 28)
+        addInfo(y: (yMax - 12) / 2 - 20)
+        addActionButtons(y: (yMax - 12) / 2 + 28)
     }
 
     // MARK: - Say Result
+
     private func sayResult(gr: GameRecord) {
         let rankText = context.gameMedal.usingDetailRank ? gr.detailRank.rawValue : gr.rank.rawValue
 
         statusSpeakingPromise = teacherSay(
             i18n.getSpeakingStatus(percent: gr.progress, rank: rankText, reward: gr.medalReward),
-            rate: fastRate)
+            rate: fastRate
+        )
 
         let todaySentenceCount = getTodaySentenceCount()
-        if  todaySentenceCount >= context.gameSetting.dailySentenceGoal,
+        if todaySentenceCount >= context.gameSetting.dailySentenceGoal,
             todaySentenceCount - (context.gameRecord?.correctCount ?? 0) < context.gameSetting.dailySentenceGoal {
             isJustReachDailyGoal = true
         }
@@ -85,10 +88,10 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                 _ = teacherSay(i18n.reachDailyGoal, rate: fastRate)
             }
         }
-
     }
 
     // MARK: - AddInfo
+
     private func addInfo(y: Int) {
         let medal = context.gameMedal
         guard let gr = context.gameRecord else { return }
@@ -98,9 +101,9 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         addTitleBlock(y: y, duration: 0.2)
 
         // 1 now
-        addCompleteness(y: y+3, delay: 0, duration: 0.2)
-        addRank(        y: y+3, delay: 0.3, duration: 0.2)
-        addRecordDetail(y: y+5, delay: 0.3, duration: 0.6)
+        addCompleteness(y: y + 3, delay: 0, duration: 0.2)
+        addRank(y: y + 3, delay: 0.3, duration: 0.2)
+        addRecordDetail(y: y + 5, delay: 0.3, duration: 0.6)
 
         // 2 changes
         addMedalProgressBar(x: 7, y: y + 16,
@@ -110,10 +113,10 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                             duration: 0.2,
                             animateProgressDelay: 1.1,
                             isFinishPage: true)
-        addMedal(       y: y+11, delay: 0.6, duration: 0.2)
+        addMedal(y: y + 11, delay: 0.6, duration: 0.2)
 
         // 3 long-term
-        addDailyGoalView(x: 7, y: y+29,
+        addDailyGoalView(x: 7, y: y + 29,
                          isFullStatus: true,
                          delay: 1.8, duration: 0.2)
         addTipBox()
@@ -121,14 +124,14 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
     private func addTipBox() {
         if isIPad { return }
-        let y = Int((screen.height - bottomButtonHeight)/step) - 1
+        let y = Int((screen.height - bottomButtonHeight) / step) - 1
         let h = 6
         let font = MyFont.regular(ofSize: step * 2)
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = step/3
+        paragraphStyle.lineSpacing = step / 3
         let attributes: [NSAttributedString.Key: Any] = [
             .paragraphStyle: paragraphStyle,
-            .font: font
+            .font: font,
         ]
         let attributedString = NSAttributedString(string: i18n.getRandTip(),
                                                   attributes: attributes)
@@ -143,7 +146,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
 
-        layout(4, y, gridCount-8, h, label)
+        layout(4, y, gridCount - 8, h, label)
         addSubview(label)
     }
 
@@ -157,7 +160,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         let fontSize = (i18n.language.count > 5 || isIPad) ? 8 * step : 10 * step
         let attrText = getStrokeText(i18n.language,
                                      rgb(220, 220, 220),
-                                     strokeWidth: strokeWidth/2,
+                                     strokeWidth: strokeWidth / 2,
                                      font: MyFont.bold(ofSize: fontSize))
         let label = addAttrText(x: 5,
                                 y: isIPad ? (y - 7) : (y - 8),
@@ -169,13 +172,13 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
     private func addRecordDetail(y: Int, delay: TimeInterval = 0, duration: TimeInterval = 0) {
         var colors: [UIColor] = []
-        colors.append(contentsOf: Array.init(repeating: myGreen.withSaturation(1.0).withAlphaComponent(0.8), count: gr.perfectCount))
-        colors.append(contentsOf: Array.init(repeating: myGreen.withAlphaComponent(0.5), count: gr.greatCount))
-        colors.append(contentsOf: Array.init(repeating: myOrange.withAlphaComponent(0.8), count: gr.goodCount))
-        colors.append(contentsOf: Array.init(repeating: myRed.withAlphaComponent(0.8), count: gr.missedCount))
+        colors.append(contentsOf: Array(repeating: myGreen.withSaturation(1.0).withAlphaComponent(0.8), count: gr.perfectCount))
+        colors.append(contentsOf: Array(repeating: myGreen.withAlphaComponent(0.5), count: gr.greatCount))
+        colors.append(contentsOf: Array(repeating: myOrange.withAlphaComponent(0.8), count: gr.goodCount))
+        colors.append(contentsOf: Array(repeating: myRed.withAlphaComponent(0.8), count: gr.missedCount))
         let rect = getFrame(40, y, 1, 8)
 
-        let unit = Int(step/2).c
+        let unit = Int(step / 2).c
 
         for i in 0 ..< colors.count {
             let thisRect = CGRect(
@@ -187,42 +190,42 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
             let bar = UIView(frame: thisRect)
             bar.backgroundColor = colors[i]
             addSubview(bar)
-            bar.fadeIn(delay: delay, duration: Double(i) * duration/Double(colors.count))
+            bar.fadeIn(delay: delay, duration: Double(i) * duration / Double(colors.count))
         }
     }
 
     private func addCompleteness(y: Int, delay: TimeInterval = 0, duration: TimeInterval) {
         var attrText = getStrokeText(i18n.completeness,
-                                 minorTextColor,
-                                 strokeWidth: strokeWidth/2,
-                                 font: MyFont.bold(ofSize: 2 * step))
+                                     minorTextColor,
+                                     strokeWidth: strokeWidth / 2,
+                                     font: MyFont.bold(ofSize: 2 * step))
         var label = addAttrText(x: 7, y: y, h: 4, text: attrText)
         label.textAlignment = .left
         label.slideIn(delay: delay, duration: duration)
 
         attrText = getStrokeText(gr.progress,
-            .black,
-            strokeWidth: strokeWidth/2,
-            strokColor: .white,
-            font: MyFont.heavyDigit(ofSize: 7 * step))
-        label = addAttrText(x: 1, y: y+3, w: 20, h: 8, text: attrText)
+                                 .black,
+                                 strokeWidth: strokeWidth / 2,
+                                 strokColor: .white,
+                                 font: MyFont.heavyDigit(ofSize: 7 * step))
+        label = addAttrText(x: 1, y: y + 3, w: 20, h: 8, text: attrText)
         label.textAlignment = .right
         label.slideIn(delay: delay, duration: duration)
 
         attrText = getStrokeText("%",
                                  minorTextColor,
-                                 strokeWidth: strokeWidth/2,
+                                 strokeWidth: strokeWidth / 2,
                                  font: MyFont.bold(ofSize: 2 * step))
-        label = addAttrText(x: 21, y: y+7, h: 4, text: attrText)
+        label = addAttrText(x: 21, y: y + 7, h: 4, text: attrText)
         label.textAlignment = .left
         label.slideIn(delay: delay, duration: duration)
     }
 
     private func addRank(y: Int, delay: TimeInterval = 0, duration: TimeInterval) {
         var attrText = getStrokeText(i18n.rank,
-                                 minorTextColor,
-                                 strokeWidth: strokeWidth/2,
-                                 font: MyFont.bold(ofSize: 2 * step))
+                                     minorTextColor,
+                                     strokeWidth: strokeWidth / 2,
+                                     font: MyFont.bold(ofSize: 2 * step))
         var label = addAttrText(x: 26, y: y, h: 4, text: attrText)
         label.textAlignment = .left
         label.fadeIn(delay: delay, duration: duration)
@@ -233,7 +236,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                                  rank.color,
                                  strokeWidth: strokeWidth,
                                  font: MyFont.heavyDigit(ofSize: 8 * step))
-        label = addAttrText(x: 22, y: y+3, w: 15, h: 8, text: attrText)
+        label = addAttrText(x: 22, y: y + 3, w: 15, h: 8, text: attrText)
         label.textAlignment = .right
         label.fadeIn(delay: delay, duration: duration)
     }
@@ -243,9 +246,9 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
         guard let reward = gr.medalReward else { return }
         let medalText = "\(reward >= 0 ? "+" : "")\(reward)".padWidthTo(4)
         let attrText = getStrokeText("\(medalText)",
-            .white,
-            strokeWidth: strokeWidth,
-            font: MyFont.heavyDigit(ofSize: 6 * step))
+                                     .white,
+                                     strokeWidth: strokeWidth,
+                                     font: MyFont.heavyDigit(ofSize: 6 * step))
 
         let label = addAttrText(x: 35, y: y, w: 22, h: 6, text: attrText)
         label.sizeToFit()
@@ -266,7 +269,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
                             title: " \(i18n.nextGame) (\(countDownSecs)\(i18n.secs))",
                             tintColor: .white,
                             isIconOnLeft: true)
-        button.titleLabel?.font = MyFont.regular(ofSize: step * 3.2 )
+        button.titleLabel?.font = MyFont.regular(ofSize: step * 3.2)
 
         layout(3, y, 32, 8, button)
         playButton = button

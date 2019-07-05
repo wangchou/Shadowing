@@ -14,10 +14,10 @@ class TopBarView: UIView, XibView {
     var contentView: UIView?
     var nibName: String = "TopBarView"
 
-    @IBOutlet weak var bottomSeparator: UIView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var leftButton: UIButton!
-    @IBOutlet weak var rightButton: UIButton!
+    @IBOutlet var bottomSeparator: UIView!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var leftButton: UIButton!
+    @IBOutlet var rightButton: UIButton!
     var customOnleftButtonClicked: (() -> Void)?
     var customOnRightButtonClicked: (() -> Void)?
     override func awakeFromNib() {
@@ -37,7 +37,7 @@ class TopBarView: UIView, XibView {
         titleLabel.textColor = UIColor(white: 0, alpha: 0.66)
     }
 
-    @IBAction func leftButtonClicked(_ sender: Any) {
+    @IBAction func leftButtonClicked(_: Any) {
         if let onClick = customOnleftButtonClicked {
             onClick()
         } else {
@@ -45,7 +45,7 @@ class TopBarView: UIView, XibView {
         }
     }
 
-    @IBAction func rightButtonClicked(_ sender: Any) {
+    @IBAction func rightButtonClicked(_: Any) {
         if let onClick = customOnRightButtonClicked {
             onClick()
         } else {
@@ -59,17 +59,17 @@ extension UIButton {
         let closeImage = UIImage(named: named)?.withRenderingMode(
             UIImage.RenderingMode.alwaysTemplate)
         self.tintColor = tintColor
-        self.setImage(closeImage, for: .normal)
-        self.imageView?.contentMode = .scaleAspectFit
+        setImage(closeImage, for: .normal)
+        imageView?.contentMode = .scaleAspectFit
 
-        self.titleLabel?.font = MyFont.regular(ofSize: 21)
-        self.setTitle(title, for: .normal)
+        titleLabel?.font = MyFont.regular(ofSize: 21)
+        setTitle(title, for: .normal)
 
         if !isIconOnLeft {
-            self.semanticContentAttribute = .forceRightToLeft
-            self.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -15)
+            semanticContentAttribute = .forceRightToLeft
+            titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -15)
         } else {
-            self.titleEdgeInsets = UIEdgeInsets(top: 0, left: -15, bottom: 0, right: 0)
+            titleEdgeInsets = UIEdgeInsets(top: 0, left: -15, bottom: 0, right: 0)
         }
     }
 }

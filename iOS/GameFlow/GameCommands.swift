@@ -23,7 +23,7 @@ struct Command {
     let type: CommandType
 }
 
-func postCommand (_ type: CommandType) {
+func postCommand(_ type: CommandType) {
     NotificationCenter.default.post(
         name: .commandHappened,
         object: Command(type: type)

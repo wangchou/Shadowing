@@ -82,7 +82,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
         var isReachDailyByThisGame = false
         if let record = context.gameRecord {
             isReachDailyByThisGame = todaySentenceCount >= dailyGoal &&
-                                     todaySentenceCount - record.correctCount < dailyGoal
+                todaySentenceCount - record.correctCount < dailyGoal
         }
         let countDownSecs = isReachDailyByThisGame ? 7 : 5
         button.setIconImage(named: "baseline_pause_black_48pt", title: " \(i18n.nextGame) (\(countDownSecs)\(i18n.secs))", tintColor: .white, isIconOnLeft: true)
@@ -138,7 +138,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
 }
 
 func launchNextGame() {
-    if context.gameMode == .topicMode && !context.gameSetting.isRepeatOne {
+    if context.gameMode == .topicMode, !context.gameSetting.isRepeatOne {
         context.loadNextChallenge()
         rootViewController.topicSwipablePage.detailPage?.render()
     }

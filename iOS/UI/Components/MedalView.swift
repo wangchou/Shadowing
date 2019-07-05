@@ -12,7 +12,6 @@
 import UIKit
 
 class MedalView: UIView, ReloadableView {
-
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -47,12 +46,12 @@ class MedalView: UIView, ReloadableView {
         gradientLayer.endPoint = CGPoint(x: 0.2, y: 1)
         gradientLayer.frame = bounds
         gradientLayer.colors = [
-            goldMiddle.cgColor, UIColor.black.cgColor
+            goldMiddle.cgColor, UIColor.black.cgColor,
         ]
 
         let path = UIBezierPath()
         let r = bounds.width * 0.30
-        let o = CGPoint(x: bounds.width/2, y: bounds.width/2)
+        let o = CGPoint(x: bounds.width / 2, y: bounds.width / 2)
 
         func getP(_ idx: CGFloat) -> CGPoint {
             return CGPoint(x: o.x + r * sin(.pi * idx * 0.4), y: o.y - r * cos(.pi * idx * 0.4))
@@ -68,7 +67,7 @@ class MedalView: UIView, ReloadableView {
         let shapeLayer = CAShapeLayer()
         shapeLayer.strokeColor = UIColor.white.cgColor
         shapeLayer.fillColor = UIColor.white.cgColor
-        shapeLayer.lineWidth = bounds.width/30
+        shapeLayer.lineWidth = bounds.width / 30
         shapeLayer.lineCap = .round
         shapeLayer.lineJoin = .round
         shapeLayer.path = path.cgPath
@@ -77,7 +76,6 @@ class MedalView: UIView, ReloadableView {
     }
 
     private func drawGradientCircle(rect: CGRect, padding: CGFloat = 0, startColor: UIColor, endColor: UIColor) {
-
         let gradientLayer = CAGradientLayer()
         gradientLayer.startPoint = CGPoint(x: 1, y: 0.2)
         gradientLayer.endPoint = CGPoint(x: 0.2, y: 1)

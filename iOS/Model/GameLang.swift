@@ -22,6 +22,7 @@ enum Lang: Int, Codable {
         if self == .en { return "en" }
         return "unset"
     }
+
     var isSupportTopicMode: Bool {
         if self == .jp { return true }
         return false

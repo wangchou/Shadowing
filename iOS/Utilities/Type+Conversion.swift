@@ -9,7 +9,7 @@
 import Foundation
 
 #if os(iOS)
-import UIKit
+    import UIKit
 #endif
 
 extension Int {
@@ -29,8 +29,8 @@ extension CGFloat {
 
 extension Date {
     var ms: Int64 {
-        return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
-        //RESOLVED CRASH HERE
+        return Int64((timeIntervalSince1970 * 1000.0).rounded())
+        // RESOLVED CRASH HERE
     }
 
     init(ms: Int64) {
