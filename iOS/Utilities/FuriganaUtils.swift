@@ -105,7 +105,7 @@ func getFuriganaAttrString(_ parts: [String],
         return attrStr
     }
 
-    // divider is first "kanji or number part" in parts
+    // divider is first non "kanji or number part" in parts
     for dividerIndex in 0..<parts.count {
         let divider = parts[dividerIndex]
         guard divider.jpnType == JpnType.noKanjiAndNumber &&
