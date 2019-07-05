@@ -56,7 +56,6 @@ struct GameMedal {
     }
 }
 
-// swiftlint:disable colon
 private let medalUpdateByLevelAndRank: [[Rank: Int]] = [
     [.ss: 30, .s: 15, .aP: 7, .a: 7, .bP: 5, .b: 5, .cP: 3, .c: 3, .d: 1, .e: -1, .f: -3], // lv1  avg 55
     [.ss: 20, .s: 10, .aP: 7, .a: 5, .bP: 3, .b: 3, .cP: 1, .c: 1, .d: -1, .e: -3, .f: -5], // lv2  avg 65
@@ -72,7 +71,6 @@ private let medalUpdateByLevelAndRank: [[Rank: Int]] = [
     [.ss: 20, .s: 10, .aP: 7, .a: 5, .bP: 2, .b: 0, .cP: -2, .c: -4, .d: -6, .e: -8, .f: -10], // lv11
     [.ss: 20, .s: 10, .aP: 7, .a: 5, .bP: 2, .b: 0, .cP: -2, .c: -4, .d: -6, .e: -8, .f: -10], // lv12
 ]
-// swiftlint:enable colon
 
 // MARK: Save/Load
 

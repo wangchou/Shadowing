@@ -70,8 +70,6 @@ class IAPHelper: NSObject {
 
     func showPurchaseView(isChallenge: Bool = true) {
         let eventName = "iap_view_\(isChallenge ? "challenge_button" : "free_button")"
-        var timer: Timer?
-        var countDownSeconds = 3
         Analytics.logEvent("\(eventName)_show", parameters: nil)
         let actionSheet = UIAlertController(
             title: isChallenge ? i18n.purchaseViewTitle : i18n.itIsfreeVersion,

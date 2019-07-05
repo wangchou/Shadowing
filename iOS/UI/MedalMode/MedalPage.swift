@@ -211,8 +211,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     private func addMissCountBubble(buttonY: Int) {
         let missedCount = context.getMissedCount()
         if missedCount > 0 {
-            let w = missedCount >= 100 ? 7 :
-                (missedCount >= 10 ? 5 : 4)
+            let w = missedCount >= 100 ? 7 : (missedCount >= 10 ? 5 : 4)
             let y = missedCount >= 100 ? (buttonY - 2) : (buttonY - 1)
             let circle = addRect(x: 19 - w, y: y, w: w, h: 4, color: .red)
             circle.roundBorder(width: step / 4, radius: circle.frame.height / 2, color: .black)
