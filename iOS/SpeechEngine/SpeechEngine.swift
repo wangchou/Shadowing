@@ -96,7 +96,6 @@ class SpeechEngine {
         let mainMixer = audioEngine.mainMixerNode
         let mic = audioEngine.inputNode // only for real device, simulator will crash
         audioEngine.connect(mic, to: mainMixer, format: nil)
-
         mainMixer.outputVolume = 0
     }
 

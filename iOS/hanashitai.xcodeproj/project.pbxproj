@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0995A7A092B793A0D54379EB /* Pods_hanashitai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B621F3792575CA46DA1E2512 /* Pods_hanashitai.framework */; };
 		BE050B7E22227530007017C5 /* MessengerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE050B7D22227530007017C5 /* MessengerBar.swift */; };
 		BE11DEC92257110500373586 /* MedalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE11DEC82257110500373586 /* MedalView.swift */; };
 		BE152048218085120059A7C2 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE152047218085120059A7C2 /* Level.swift */; };
@@ -48,8 +49,8 @@
 		BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */; };
 		BE8283B42133DAE2008BC875 /* SpeechEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8283B32133DAE2008BC875 /* SpeechEngine.swift */; };
 		BE82FE612269C5A900907388 /* MedalSummaryPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82FE602269C5A900907388 /* MedalSummaryPage.swift */; };
-		BE84C1DD23446E5F00CB53AA /* Pods_今話したい.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE84C1DC23446E5F00CB53AA /* Pods_今話したい.framework */; };
-		BE84C1DE23446E5F00CB53AA /* Pods_今話したい.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE84C1DC23446E5F00CB53AA /* Pods_今話したい.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BE84C1E02344A4C400CB53AA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B7AC422735B010063118A /* AudioToolbox.framework */; };
+		BE84C1E12344A4CD00CB53AA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7E88B821AA768800B9355E /* StoreKit.framework */; };
 		BE8E51DB21CF76CF007D29E6 /* TopChartView+DailyChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8E51DA21CF76CF007D29E6 /* TopChartView+DailyChart.swift */; };
 		BE8E51DD21CF7718007D29E6 /* TopChartView+Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8E51DC21CF7718007D29E6 /* TopChartView+Timeline.swift */; };
 		BE8E51DF21CF7754007D29E6 /* TopChartView+LongTermGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8E51DE21CF7754007D29E6 /* TopChartView+LongTermGoal.swift */; };
@@ -96,6 +97,8 @@
 		BEDEDD5120A5DED600E7B60B /* MessengerEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */; };
 		BEE3069021835230007C679F /* GameCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE3068F21835230007C679F /* GameCommands.swift */; };
 		BEE665E220BA634600E4E322 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE665E120BA634600E4E322 /* Colors.swift */; };
+		BEE8BFBF2344A6DE0042EE2C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE8BFBE2344A6DE0042EE2C /* AVFoundation.framework */; };
+		BEE8BFC12344A7060042EE2C /* Speech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE8BFC02344A7060042EE2C /* Speech.framework */; };
 		BEEA091222606973008C98AE /* ProgressCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEA091122606973008C98AE /* ProgressCircleView.swift */; };
 		BEEC7FA92154C7AC001C2EFF /* TopBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEEC7FA82154C7AC001C2EFF /* TopBarView.xib */; };
 		BEEC7FAB2154FFA4001C2EFF /* TopicSwipablePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEC7FAA2154FFA4001C2EFF /* TopicSwipablePage.swift */; };
@@ -107,22 +110,10 @@
 		BEF4B151219C0E3B00B8E45E /* VoiceTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF4B150219C0E3B00B8E45E /* VoiceTableCell.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		BE84C1DF23446E5F00CB53AA /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				BE84C1DE23446E5F00CB53AA /* Pods_今話したい.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		2708DA81054F15878F6AE745 /* Pods-今話したい.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-今話したい.debug.xcconfig"; path = "Target Support Files/Pods-今話したい/Pods-今話したい.debug.xcconfig"; sourceTree = "<group>"; };
+		90EB2EE36D046887387380C9 /* Pods-hanashitai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hanashitai.release.xcconfig"; path = "Target Support Files/Pods-hanashitai/Pods-hanashitai.release.xcconfig"; sourceTree = "<group>"; };
+		B621F3792575CA46DA1E2512 /* Pods_hanashitai.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hanashitai.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE050B7D22227530007017C5 /* MessengerBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerBar.swift; sourceTree = "<group>"; };
 		BE11DEC82257110500373586 /* MedalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalView.swift; sourceTree = "<group>"; };
 		BE152047218085120059A7C2 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
@@ -208,7 +199,7 @@
 		BEB6F6CB2182B8B60011E1C1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "Project/zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		BEB6F6D02182DBCA0011E1C1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "Project/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		BEB6F6D12182DBDA0011E1C1 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "Project/zh-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		BEBDEDBC208EF09F00C18520 /* 今話したい.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "今話したい.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEBDEDBC208EF09F00C18520 /* hanashitai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hanashitai.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEBDEDCB208EF0A000C18520 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BEBDEDD1208EF15E00C18520 /* utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utilities.swift; sourceTree = "<group>"; };
@@ -238,6 +229,8 @@
 		BEDEDD5020A5DED600E7B60B /* MessengerEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerEventDelegate.swift; sourceTree = "<group>"; };
 		BEE3068F21835230007C679F /* GameCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCommands.swift; sourceTree = "<group>"; };
 		BEE665E120BA634600E4E322 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		BEE8BFBE2344A6DE0042EE2C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		BEE8BFC02344A7060042EE2C /* Speech.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Speech.framework; path = System/Library/Frameworks/Speech.framework; sourceTree = SDKROOT; };
 		BEEA091122606973008C98AE /* ProgressCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCircleView.swift; sourceTree = "<group>"; };
 		BEEC7FA82154C7AC001C2EFF /* TopBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopBarView.xib; sourceTree = "<group>"; };
 		BEEC7FAA2154FFA4001C2EFF /* TopicSwipablePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicSwipablePage.swift; sourceTree = "<group>"; };
@@ -248,7 +241,7 @@
 		BEF4B14E219C093800B8E45E /* VoiceSelectionPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceSelectionPage.swift; sourceTree = "<group>"; };
 		BEF4B150219C0E3B00B8E45E /* VoiceTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceTableCell.swift; sourceTree = "<group>"; };
 		D9E85465E2C426817FF152D5 /* Pods-今話したい.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-今話したい.release.xcconfig"; path = "Target Support Files/Pods-今話したい/Pods-今話したい.release.xcconfig"; sourceTree = "<group>"; };
-		F2D4CDCE5B83D330C1289A0D /* Pods______.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods______.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E0CB2CAED1E443B55D2C487D /* Pods-hanashitai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hanashitai.debug.xcconfig"; path = "Target Support Files/Pods-hanashitai/Pods-hanashitai.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,7 +249,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE84C1DD23446E5F00CB53AA /* Pods_今話したい.framework in Frameworks */,
+				BEE8BFBF2344A6DE0042EE2C /* AVFoundation.framework in Frameworks */,
+				BE84C1E12344A4CD00CB53AA /* StoreKit.framework in Frameworks */,
+				BEE8BFC12344A7060042EE2C /* Speech.framework in Frameworks */,
+				BE84C1E02344A4C400CB53AA /* AudioToolbox.framework in Frameworks */,
+				0995A7A092B793A0D54379EB /* Pods_hanashitai.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +265,8 @@
 			children = (
 				2708DA81054F15878F6AE745 /* Pods-今話したい.debug.xcconfig */,
 				D9E85465E2C426817FF152D5 /* Pods-今話したい.release.xcconfig */,
+				E0CB2CAED1E443B55D2C487D /* Pods-hanashitai.debug.xcconfig */,
+				90EB2EE36D046887387380C9 /* Pods-hanashitai.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -372,7 +371,8 @@
 		BE7E88B721AA768800B9355E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BE84C1DC23446E5F00CB53AA /* Pods_今話したい.framework */,
+				BEE8BFC02344A7060042EE2C /* Speech.framework */,
+				BEE8BFBE2344A6DE0042EE2C /* AVFoundation.framework */,
 				BE4558282344684D001ACF58 /* Amplitude.framework */,
 				BE2B7AC422735B010063118A /* AudioToolbox.framework */,
 				BE7AFADA21CA00EC00C41BF4 /* FIRAnalyticsConnector.framework */,
@@ -394,7 +394,7 @@
 				BE7AFAEF21CA2DC800C41BF4 /* GoogleUtilities.framework */,
 				BE7AFAF521CA2DC900C41BF4 /* nanopb.framework */,
 				BE7E88B821AA768800B9355E /* StoreKit.framework */,
-				F2D4CDCE5B83D330C1289A0D /* Pods______.framework */,
+				B621F3792575CA46DA1E2512 /* Pods_hanashitai.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -409,6 +409,14 @@
 				BE6B56A4227087C00009A28C /* MedalCorrectionPage.swift */,
 			);
 			path = MedalMode;
+			sourceTree = "<group>";
+		};
+		BE84C1E22344A50500CB53AA /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				BE84C1DC23446E5F00CB53AA /* Pods_今話したい.framework */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		BE9556EF212D7C130045E578 /* Model */ = {
@@ -441,13 +449,14 @@
 				BEF28B5F20B52B7900385273 /* Utilities */,
 				BE7E88B721AA768800B9355E /* Frameworks */,
 				A9F614D46265A9129B5B2A95 /* Pods */,
+				BE84C1E22344A50500CB53AA /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
 		BEBDEDBD208EF09F00C18520 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BEBDEDBC208EF09F00C18520 /* 今話したい.app */,
+				BEBDEDBC208EF09F00C18520 /* hanashitai.app */,
 			);
 			name = Products;
 			path = ..;
@@ -532,9 +541,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BEBDEDBB208EF09F00C18520 /* 今話したい */ = {
+		BEBDEDBB208EF09F00C18520 /* hanashitai */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BEBDEDCE208EF0A000C18520 /* Build configuration list for PBXNativeTarget "今話したい" */;
+			buildConfigurationList = BEBDEDCE208EF0A000C18520 /* Build configuration list for PBXNativeTarget "hanashitai" */;
 			buildPhases = (
 				EFAD8EA7608DC38A867B3523 /* [CP] Check Pods Manifest.lock */,
 				BEBDEDB8208EF09F00C18520 /* Sources */,
@@ -542,15 +551,14 @@
 				BEBDEDBA208EF09F00C18520 /* Resources */,
 				BE4D6D2620AD2F4D0020B151 /* ShellScript */,
 				E0FA05783F9F3BA5B01D36E7 /* [CP] Embed Pods Frameworks */,
-				BE84C1DF23446E5F00CB53AA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "今話したい";
+			name = hanashitai;
 			productName = VoiceOnly;
-			productReference = BEBDEDBC208EF09F00C18520 /* 今話したい.app */;
+			productReference = BEBDEDBC208EF09F00C18520 /* hanashitai.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -574,7 +582,7 @@
 					};
 				};
 			};
-			buildConfigurationList = BEBDEDB7208EF09F00C18520 /* Build configuration list for PBXProject "今話したい" */;
+			buildConfigurationList = BEBDEDB7208EF09F00C18520 /* Build configuration list for PBXProject "hanashitai" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -591,7 +599,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BEBDEDBB208EF09F00C18520 /* 今話したい */,
+				BEBDEDBB208EF09F00C18520 /* hanashitai */,
 			);
 		};
 /* End PBXProject section */
@@ -634,15 +642,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-今話したい/Pods-今話したい-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-hanashitai/Pods-hanashitai-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-今話したい/Pods-今話したい-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-hanashitai/Pods-hanashitai-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-今話したい/Pods-今話したい-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-hanashitai/Pods-hanashitai-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EFAD8EA7608DC38A867B3523 /* [CP] Check Pods Manifest.lock */ = {
@@ -660,7 +668,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-今話したい-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-hanashitai-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -902,7 +910,7 @@
 		};
 		BEBDEDCF208EF0A000C18520 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2708DA81054F15878F6AE745 /* Pods-今話したい.debug.xcconfig */;
+			baseConfigurationReference = E0CB2CAED1E443B55D2C487D /* Pods-hanashitai.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_DEBUG_INFORMATION_LEVEL = "line-tables-only";
@@ -912,7 +920,6 @@
 				DEVELOPMENT_TEAM = ETE87474CU;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Project",
 				);
@@ -942,7 +949,7 @@
 		};
 		BEBDEDD0208EF0A000C18520 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D9E85465E2C426817FF152D5 /* Pods-今話したい.release.xcconfig */;
+			baseConfigurationReference = 90EB2EE36D046887387380C9 /* Pods-hanashitai.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_DEBUG_INFORMATION_LEVEL = "line-tables-only";
@@ -952,7 +959,6 @@
 				DEVELOPMENT_TEAM = ETE87474CU;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Project",
 				);
@@ -980,7 +986,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BEBDEDB7208EF09F00C18520 /* Build configuration list for PBXProject "今話したい" */ = {
+		BEBDEDB7208EF09F00C18520 /* Build configuration list for PBXProject "hanashitai" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BEBDEDCC208EF0A000C18520 /* Debug */,
@@ -989,7 +995,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BEBDEDCE208EF0A000C18520 /* Build configuration list for PBXNativeTarget "今話したい" */ = {
+		BEBDEDCE208EF0A000C18520 /* Build configuration list for PBXNativeTarget "hanashitai" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BEBDEDCF208EF0A000C18520 /* Debug */,

@@ -89,6 +89,10 @@ class SpeechRecognizer: NSObject {
             return promise
         }
 
+        if #available(iOS 13.0, *) {
+            recognitionRequest.requiresOnDeviceRecognition = false
+        }
+
         recognitionRequest.shouldReportPartialResults = false
         recognitionRequest.taskHint = .dictation
 
