@@ -39,7 +39,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
     var tableData: [Summary] = []
     var totalSummary: Summary {
         var returnSummary = Summary()
-        var reversedTable = Array(tableData.reversed())
+        let reversedTable = Array(tableData.reversed())
         for i in 0 ..< reversedTable.count where i + displayDays >= reversedTable.count {
             let summary = reversedTable[i]
             returnSummary.duration += summary.duration
@@ -56,7 +56,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         var points: [(x: Int, y: Int)] = []
         var x = 0
         var medalCount = 0
-        var reversedTable = Array(tableData.reversed())
+        let reversedTable = Array(tableData.reversed())
         for i in 0 ..< reversedTable.count {
             medalCount += reversedTable[i].medalCount
             if i + displayDays >= reversedTable.count {

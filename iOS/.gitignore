@@ -1,2 +1,2 @@
-Carthage/*
-*.framework/*
+Pods
+*/xcsharedata

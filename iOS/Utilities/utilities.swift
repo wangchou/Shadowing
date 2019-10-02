@@ -324,7 +324,7 @@ func getDateKey(date: Date) -> String {
     // [Today's correct sentence count, Yesterday's, ...]
     func getSentenceCountsByDays() -> [Int] {
         let calendar = Calendar.current
-        var recordsByDate = getRecordsByDate()
+        let recordsByDate = getRecordsByDate()
 
         guard !GameContext.shared.gameHistory.isEmpty || isSimulator else { return [0] }
         var firstRecordDate = Date()
@@ -381,7 +381,7 @@ func getDateKey(date: Date) -> String {
     // [Today's correct sentence count, Yesterday's, ...]
     func getSummaryByDays() -> [Summary] {
         let calendar = Calendar.current
-        var recordsByDate = getRecordsByDate()
+        let recordsByDate = getRecordsByDate()
 
         guard !GameContext.shared.gameHistory.isEmpty || isSimulator else { return [] }
         var firstRecordDate = Date()

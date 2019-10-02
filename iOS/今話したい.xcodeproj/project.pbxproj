@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,7 +17,6 @@
 		BE221AA121A2A76D0009B23B /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE221AA021A2A76D0009B23B /* CircleView.swift */; };
 		BE2473A6226DDA2100EDFA5E /* MedalSummaryTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2473A5226DDA2100EDFA5E /* MedalSummaryTopView.swift */; };
 		BE28B2C221A3EAB600088214 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE28B2C121A3EAB500088214 /* Main.storyboard */; };
-		BE2B7AC522735B010063118A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B7AC422735B010063118A /* AudioToolbox.framework */; };
 		BE3260C821BF912D00A13C94 /* vocabulary1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260C721BF912D00A13C94 /* vocabulary1.swift */; };
 		BE3260CA21BFCF5E00A13C94 /* vocabulary2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260C921BFCF5E00A13C94 /* vocabulary2.swift */; };
 		BE439C6321DF3AF100C0BE14 /* grammarN4.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE439C6221DF3AF100C0BE14 /* grammarN4.swift */; };
@@ -45,19 +44,12 @@
 		BE7725C420A2CBC200DF186A /* dataSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725BC20A2CBC100DF186A /* dataSets.swift */; };
 		BE7725CE20A4216700DF186A /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7725CD20A4216700DF186A /* ContentCell.swift */; };
 		BE7AFA9C21C9F85A00C41BF4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE7AFA9B21C9F85A00C41BF4 /* GoogleService-Info.plist */; };
-		BE7AFAF721CA2DC900C41BF4 /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAEE21CA2DC800C41BF4 /* FirebaseCoreDiagnostics.framework */; };
-		BE7AFAF821CA2DC900C41BF4 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAEF21CA2DC800C41BF4 /* GoogleUtilities.framework */; };
-		BE7AFAF921CA2DC900C41BF4 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAF021CA2DC800C41BF4 /* GoogleAppMeasurement.framework */; };
-		BE7AFAFA21CA2DC900C41BF4 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAF121CA2DC800C41BF4 /* FirebaseAnalytics.framework */; };
-		BE7AFAFB21CA2DC900C41BF4 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAF221CA2DC900C41BF4 /* FIRAnalyticsConnector.framework */; };
-		BE7AFAFD21CA2DC900C41BF4 /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAF421CA2DC900C41BF4 /* FirebaseCore.framework */; };
-		BE7AFAFE21CA2DC900C41BF4 /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAF521CA2DC900C41BF4 /* nanopb.framework */; };
-		BE7AFAFF21CA2DC900C41BF4 /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7AFAF621CA2DC900C41BF4 /* FirebaseInstanceID.framework */; };
-		BE7E88B921AA768800B9355E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7E88B821AA768800B9355E /* StoreKit.framework */; };
 		BE8180C020B3BEB6006ABCB3 /* MyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180BF20B3BEB6006ABCB3 /* MyText.swift */; };
 		BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */; };
 		BE8283B42133DAE2008BC875 /* SpeechEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8283B32133DAE2008BC875 /* SpeechEngine.swift */; };
 		BE82FE612269C5A900907388 /* MedalSummaryPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82FE602269C5A900907388 /* MedalSummaryPage.swift */; };
+		BE84C1DD23446E5F00CB53AA /* Pods_今話したい.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE84C1DC23446E5F00CB53AA /* Pods_今話したい.framework */; };
+		BE84C1DE23446E5F00CB53AA /* Pods_今話したい.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE84C1DC23446E5F00CB53AA /* Pods_今話したい.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE8E51DB21CF76CF007D29E6 /* TopChartView+DailyChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8E51DA21CF76CF007D29E6 /* TopChartView+DailyChart.swift */; };
 		BE8E51DD21CF7718007D29E6 /* TopChartView+Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8E51DC21CF7718007D29E6 /* TopChartView+Timeline.swift */; };
 		BE8E51DF21CF7754007D29E6 /* TopChartView+LongTermGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8E51DE21CF7754007D29E6 /* TopChartView+LongTermGoal.swift */; };
@@ -94,16 +86,6 @@
 		BECAC3BF216B9D19001BBF49 /* InfiniteChallengeSwipablePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECAC3BE216B9D19001BBF49 /* InfiniteChallengeSwipablePage.swift */; };
 		BECD9077219D279C00400FD3 /* InfiniteChallengeListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD9076219D279C00400FD3 /* InfiniteChallengeListPage.swift */; };
 		BECD907B219D294100400FD3 /* InfiniteChallengeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD907A219D294100400FD3 /* InfiniteChallengeTableCell.swift */; };
-		BED1BA462249FD6A009B68B6 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA412249FD6A009B68B6 /* Charts.framework */; };
-		BED1BA472249FD6A009B68B6 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA412249FD6A009B68B6 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BED1BA482249FD6A009B68B6 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA422249FD6A009B68B6 /* SQLite.framework */; };
-		BED1BA492249FD6A009B68B6 /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA422249FD6A009B68B6 /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BED1BA4A2249FD6A009B68B6 /* Promises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA432249FD6A009B68B6 /* Promises.framework */; };
-		BED1BA4B2249FD6A009B68B6 /* Promises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA432249FD6A009B68B6 /* Promises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BED1BA4C2249FD6A009B68B6 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA442249FD6A009B68B6 /* Alamofire.framework */; };
-		BED1BA4D2249FD6A009B68B6 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA442249FD6A009B68B6 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BED1BA4E2249FD6A009B68B6 /* FBLPromises.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA452249FD6A009B68B6 /* FBLPromises.framework */; };
-		BED1BA4F2249FD6A009B68B6 /* FBLPromises.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BED1BA452249FD6A009B68B6 /* FBLPromises.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BED1BA53224A35FF009B68B6 /* MedalPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1BA52224A35FF009B68B6 /* MedalPage.swift */; };
 		BED1CC0921452A54004AE397 /* GameSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1CC0821452A54004AE397 /* GameSetting.swift */; };
 		BEDB3685225EF61C00059997 /* UIView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDB3684225EF61C00059997 /* UIView+Animation.swift */; };
@@ -126,17 +108,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		BE5ABAE0217C4CCD00A63C5F /* Embed Frameworks */ = {
+		BE84C1DF23446E5F00CB53AA /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BED1BA4B2249FD6A009B68B6 /* Promises.framework in Embed Frameworks */,
-				BED1BA492249FD6A009B68B6 /* SQLite.framework in Embed Frameworks */,
-				BED1BA472249FD6A009B68B6 /* Charts.framework in Embed Frameworks */,
-				BED1BA4D2249FD6A009B68B6 /* Alamofire.framework in Embed Frameworks */,
-				BED1BA4F2249FD6A009B68B6 /* FBLPromises.framework in Embed Frameworks */,
+				BE84C1DE23446E5F00CB53AA /* Pods_今話したい.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -144,6 +122,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2708DA81054F15878F6AE745 /* Pods-今話したい.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-今話したい.debug.xcconfig"; path = "Target Support Files/Pods-今話したい/Pods-今話したい.debug.xcconfig"; sourceTree = "<group>"; };
 		BE050B7D22227530007017C5 /* MessengerBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerBar.swift; sourceTree = "<group>"; };
 		BE11DEC82257110500373586 /* MedalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalView.swift; sourceTree = "<group>"; };
 		BE152047218085120059A7C2 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
@@ -158,6 +137,7 @@
 		BE3260C721BF912D00A13C94 /* vocabulary1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vocabulary1.swift; sourceTree = "<group>"; };
 		BE3260C921BFCF5E00A13C94 /* vocabulary2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vocabulary2.swift; sourceTree = "<group>"; };
 		BE439C6221DF3AF100C0BE14 /* grammarN4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = grammarN4.swift; sourceTree = "<group>"; };
+		BE4558282344684D001ACF58 /* Amplitude.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Amplitude.framework; path = Carthage/Build/iOS/Amplitude.framework; sourceTree = "<group>"; };
 		BE596465215A0DE100E4AA0C /* travel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = travel.swift; sourceTree = "<group>"; };
 		BE596467215A0DF200E4AA0C /* daily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = daily.swift; sourceTree = "<group>"; };
 		BE596469215A0E4D00E4AA0C /* polite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = polite.swift; sourceTree = "<group>"; };
@@ -205,6 +185,7 @@
 		BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFinishedPage.swift; sourceTree = "<group>"; };
 		BE8283B32133DAE2008BC875 /* SpeechEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechEngine.swift; sourceTree = "<group>"; };
 		BE82FE602269C5A900907388 /* MedalSummaryPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalSummaryPage.swift; sourceTree = "<group>"; };
+		BE84C1DC23446E5F00CB53AA /* Pods_今話したい.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "Pods_今話したい.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE8E51DA21CF76CF007D29E6 /* TopChartView+DailyChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TopChartView+DailyChart.swift"; sourceTree = "<group>"; };
 		BE8E51DC21CF7718007D29E6 /* TopChartView+Timeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TopChartView+Timeline.swift"; sourceTree = "<group>"; };
 		BE8E51DE21CF7754007D29E6 /* TopChartView+LongTermGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TopChartView+LongTermGoal.swift"; sourceTree = "<group>"; };
@@ -271,6 +252,8 @@
 		BEF28B6220B52BF700385273 /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 		BEF4B14E219C093800B8E45E /* VoiceSelectionPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceSelectionPage.swift; sourceTree = "<group>"; };
 		BEF4B150219C0E3B00B8E45E /* VoiceTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceTableCell.swift; sourceTree = "<group>"; };
+		D9E85465E2C426817FF152D5 /* Pods-今話したい.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-今話したい.release.xcconfig"; path = "Target Support Files/Pods-今話したい/Pods-今話したい.release.xcconfig"; sourceTree = "<group>"; };
+		F2D4CDCE5B83D330C1289A0D /* Pods______.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods______.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,27 +261,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE2B7AC522735B010063118A /* AudioToolbox.framework in Frameworks */,
-				BED1BA4A2249FD6A009B68B6 /* Promises.framework in Frameworks */,
-				BE7AFAF721CA2DC900C41BF4 /* FirebaseCoreDiagnostics.framework in Frameworks */,
-				BED1BA4C2249FD6A009B68B6 /* Alamofire.framework in Frameworks */,
-				BED1BA482249FD6A009B68B6 /* SQLite.framework in Frameworks */,
-				BE7AFAF821CA2DC900C41BF4 /* GoogleUtilities.framework in Frameworks */,
-				BED1BA4E2249FD6A009B68B6 /* FBLPromises.framework in Frameworks */,
-				BE7AFAF921CA2DC900C41BF4 /* GoogleAppMeasurement.framework in Frameworks */,
-				BE7AFAFA21CA2DC900C41BF4 /* FirebaseAnalytics.framework in Frameworks */,
-				BE7AFAFB21CA2DC900C41BF4 /* FIRAnalyticsConnector.framework in Frameworks */,
-				BE7AFAFD21CA2DC900C41BF4 /* FirebaseCore.framework in Frameworks */,
-				BE7AFAFE21CA2DC900C41BF4 /* nanopb.framework in Frameworks */,
-				BED1BA462249FD6A009B68B6 /* Charts.framework in Frameworks */,
-				BE7AFAFF21CA2DC900C41BF4 /* FirebaseInstanceID.framework in Frameworks */,
-				BE7E88B921AA768800B9355E /* StoreKit.framework in Frameworks */,
+				BE84C1DD23446E5F00CB53AA /* Pods_今話したい.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A9F614D46265A9129B5B2A95 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2708DA81054F15878F6AE745 /* Pods-今話したい.debug.xcconfig */,
+				D9E85465E2C426817FF152D5 /* Pods-今話したい.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		BE17FB38209B0F5F00D23F22 /* SpeechEngine */ = {
 			isa = PBXGroup;
 			children = (
@@ -399,6 +377,8 @@
 		BE7E88B721AA768800B9355E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE84C1DC23446E5F00CB53AA /* Pods_今話したい.framework */,
+				BE4558282344684D001ACF58 /* Amplitude.framework */,
 				BE2B7AC422735B010063118A /* AudioToolbox.framework */,
 				BE7AFADA21CA00EC00C41BF4 /* FIRAnalyticsConnector.framework */,
 				BE7AFAD321CA00EB00C41BF4 /* Firebase.framework */,
@@ -419,6 +399,7 @@
 				BE7AFAEF21CA2DC800C41BF4 /* GoogleUtilities.framework */,
 				BE7AFAF521CA2DC900C41BF4 /* nanopb.framework */,
 				BE7E88B821AA768800B9355E /* StoreKit.framework */,
+				F2D4CDCE5B83D330C1289A0D /* Pods______.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -469,6 +450,7 @@
 				BEDEDD4220A5D86500E7B60B /* UI */,
 				BEF28B5F20B52B7900385273 /* Utilities */,
 				BE7E88B721AA768800B9355E /* Frameworks */,
+				A9F614D46265A9129B5B2A95 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -564,11 +546,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BEBDEDCE208EF0A000C18520 /* Build configuration list for PBXNativeTarget "今話したい" */;
 			buildPhases = (
+				EFAD8EA7608DC38A867B3523 /* [CP] Check Pods Manifest.lock */,
 				BEBDEDB8208EF09F00C18520 /* Sources */,
 				BEBDEDB9208EF09F00C18520 /* Frameworks */,
 				BEBDEDBA208EF09F00C18520 /* Resources */,
 				BE4D6D2620AD2F4D0020B151 /* ShellScript */,
-				BE5ABAE0217C4CCD00A63C5F /* Embed Frameworks */,
+				E0FA05783F9F3BA5B01D36E7 /* [CP] Embed Pods Frameworks */,
+				BE84C1DF23446E5F00CB53AA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -653,6 +637,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		E0FA05783F9F3BA5B01D36E7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-今話したい/Pods-今話したい-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-今話したい/Pods-今話したい-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-今話したい/Pods-今話したい-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EFAD8EA7608DC38A867B3523 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-今話したい-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -889,6 +912,7 @@
 		};
 		BEBDEDCF208EF0A000C18520 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2708DA81054F15878F6AE745 /* Pods-今話したい.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_DEBUG_INFORMATION_LEVEL = "line-tables-only";
@@ -911,8 +935,10 @@
 				);
 				MACH_O_TYPE = mh_execute;
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = YES;
-				OTHER_LDFLAGS = "-ObjC";
-				"OTHER_SWIFT_FLAGS[arch=*]" = "-Xfrontend -debug-time-function-bodies -Xfrontend -warn-long-expression-type-checking=300 -Xfrontend -warn-long-function-bodies=200";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = idv.wcl.imahanashitai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -926,6 +952,7 @@
 		};
 		BEBDEDD0208EF0A000C18520 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D9E85465E2C426817FF152D5 /* Pods-今話したい.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_DEBUG_INFORMATION_LEVEL = "line-tables-only";
@@ -947,7 +974,10 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = idv.wcl.imahanashitai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
