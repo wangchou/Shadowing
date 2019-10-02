@@ -22,24 +22,36 @@ class MyFont {
     static func thin(ofSize fontSize: CGFloat) -> UIFont {
         let key = "thin-\(fontSize)"
         if let font = fontCache[key] { return font }
-        fontCache[key] = UIFont(name: ".HiraKakuInterface-W2", size: fontSize) ??
-            UIFont.systemFont(ofSize: fontSize, weight: .thin)
+        if #available(iOS 13.0, *) {
+            fontCache[key] = UIFont.systemFont(ofSize: fontSize, weight: .thin)
+        } else {
+            fontCache[key] = UIFont(name: ".HiraKakuInterface-W2", size: fontSize) ??
+                UIFont.systemFont(ofSize: fontSize, weight: .thin)
+        }
         return fontCache[key]!
     }
 
     static func regular(ofSize fontSize: CGFloat) -> UIFont {
         let key = "regular-\(fontSize)"
         if let font = fontCache[key] { return font }
-        fontCache[key] = UIFont(name: ".HiraKakuInterface-W3", size: fontSize) ??
-            UIFont.systemFont(ofSize: fontSize, weight: .regular)
+        if #available(iOS 13.0, *) {
+            fontCache[key] = UIFont.systemFont(ofSize: fontSize, weight: .regular)
+        } else {
+            fontCache[key] = UIFont(name: ".HiraKakuInterface-W3", size: fontSize) ??
+                UIFont.systemFont(ofSize: fontSize, weight: .regular)
+        }
         return fontCache[key]!
     }
 
     static func bold(ofSize fontSize: CGFloat) -> UIFont {
         let key = "bold-\(fontSize)"
         if let font = fontCache[key] { return font }
-        fontCache[key] = UIFont(name: ".HiraKakuInterface-W6", size: fontSize) ??
-            UIFont.systemFont(ofSize: fontSize, weight: .bold)
+        if #available(iOS 13.0, *) {
+            fontCache[key] = UIFont.systemFont(ofSize: fontSize, weight: .bold)
+        } else {
+            fontCache[key] = UIFont(name: ".HiraKakuInterface-W6", size: fontSize) ??
+                UIFont.systemFont(ofSize: fontSize, weight: .bold)
+        }
         return fontCache[key]!
     }
 
