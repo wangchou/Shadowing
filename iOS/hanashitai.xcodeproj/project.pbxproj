@@ -20,6 +20,7 @@
 		BE28B2C221A3EAB600088214 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE28B2C121A3EAB500088214 /* Main.storyboard */; };
 		BE3260C821BF912D00A13C94 /* vocabulary1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260C721BF912D00A13C94 /* vocabulary1.swift */; };
 		BE3260CA21BFCF5E00A13C94 /* vocabulary2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260C921BFCF5E00A13C94 /* vocabulary2.swift */; };
+		BE3A91422345E10300AEBE1B /* ヒラギノ角ゴシック W2.ttc in Resources */ = {isa = PBXBuildFile; fileRef = BE3A91412345E0FB00AEBE1B /* ヒラギノ角ゴシック W2.ttc */; };
 		BE439C6321DF3AF100C0BE14 /* grammarN4.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE439C6221DF3AF100C0BE14 /* grammarN4.swift */; };
 		BE596466215A0DE100E4AA0C /* travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596465215A0DE100E4AA0C /* travel.swift */; };
 		BE596468215A0DF200E4AA0C /* daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596467215A0DF200E4AA0C /* daily.swift */; };
@@ -48,6 +49,7 @@
 		BE8180C020B3BEB6006ABCB3 /* MyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180BF20B3BEB6006ABCB3 /* MyText.swift */; };
 		BE8180C220B3D947006ABCB3 /* GameFinishedPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */; };
 		BE8283B42133DAE2008BC875 /* SpeechEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8283B32133DAE2008BC875 /* SpeechEngine.swift */; };
+		BE8295D42345D132009DA354 /* ヒラギノ角ゴシック W0.ttc in Resources */ = {isa = PBXBuildFile; fileRef = BE8295D32345D129009DA354 /* ヒラギノ角ゴシック W0.ttc */; };
 		BE82FE612269C5A900907388 /* MedalSummaryPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82FE602269C5A900907388 /* MedalSummaryPage.swift */; };
 		BE84C1E02344A4C400CB53AA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B7AC422735B010063118A /* AudioToolbox.framework */; };
 		BE84C1E12344A4CD00CB53AA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7E88B821AA768800B9355E /* StoreKit.framework */; };
@@ -127,6 +129,7 @@
 		BE2B7AC422735B010063118A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		BE3260C721BF912D00A13C94 /* vocabulary1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vocabulary1.swift; sourceTree = "<group>"; };
 		BE3260C921BFCF5E00A13C94 /* vocabulary2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vocabulary2.swift; sourceTree = "<group>"; };
+		BE3A91412345E0FB00AEBE1B /* ヒラギノ角ゴシック W2.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ヒラギノ角ゴシック W2.ttc"; sourceTree = "<group>"; };
 		BE439C6221DF3AF100C0BE14 /* grammarN4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = grammarN4.swift; sourceTree = "<group>"; };
 		BE4558282344684D001ACF58 /* Amplitude.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Amplitude.framework; path = Carthage/Build/iOS/Amplitude.framework; sourceTree = "<group>"; };
 		BE596465215A0DE100E4AA0C /* travel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = travel.swift; sourceTree = "<group>"; };
@@ -175,6 +178,7 @@
 		BE8180BF20B3BEB6006ABCB3 /* MyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyText.swift; sourceTree = "<group>"; };
 		BE8180C120B3D947006ABCB3 /* GameFinishedPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFinishedPage.swift; sourceTree = "<group>"; };
 		BE8283B32133DAE2008BC875 /* SpeechEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechEngine.swift; sourceTree = "<group>"; };
+		BE8295D32345D129009DA354 /* ヒラギノ角ゴシック W0.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ヒラギノ角ゴシック W0.ttc"; sourceTree = "<group>"; };
 		BE82FE602269C5A900907388 /* MedalSummaryPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalSummaryPage.swift; sourceTree = "<group>"; };
 		BE84C1DC23446E5F00CB53AA /* Pods_今話したい.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "Pods_今話したい.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE8E51DA21CF76CF007D29E6 /* TopChartView+DailyChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TopChartView+DailyChart.swift"; sourceTree = "<group>"; };
@@ -470,6 +474,8 @@
 				BEBDEDCB208EF0A000C18520 /* Info.plist */,
 				BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */,
 				BE7AFA9B21C9F85A00C41BF4 /* GoogleService-Info.plist */,
+				BE3A91412345E0FB00AEBE1B /* ヒラギノ角ゴシック W2.ttc */,
+				BE8295D32345D129009DA354 /* ヒラギノ角ゴシック W0.ttc */,
 				BEBDEDBD208EF09F00C18520 /* Products */,
 			);
 			path = Project;
@@ -609,6 +615,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE3A91422345E10300AEBE1B /* ヒラギノ角ゴシック W2.ttc in Resources */,
+				BE8295D42345D132009DA354 /* ヒラギノ角ゴシック W0.ttc in Resources */,
 				BE1FE1EA229ADA93004A9E77 /* inf_sentences_100points_duolingo_with_topics.sqlite in Resources */,
 				BE28B2C221A3EAB600088214 /* Main.storyboard in Resources */,
 				BE7AFA9C21C9F85A00C41BF4 /* GoogleService-Info.plist in Resources */,
