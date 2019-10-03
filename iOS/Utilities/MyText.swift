@@ -142,20 +142,3 @@ func colorText(
 ) -> NSMutableAttributedString {
     return getText(text, color: color, font: MyFont.regular(ofSize: fontSize), terminator: terminator)
 }
-
-extension UIFont {
-
-    @available(iOS 13.0, *)
-    convenience init?(
-        style: UIFont.TextStyle,
-        weight: UIFont.Weight = .regular,
-        design: UIFontDescriptor.SystemDesign = .default) {
-
-        guard let descriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: style)
-            .addingAttributes([UIFontDescriptor.AttributeName.traits: [UIFontDescriptor.TraitKey.weight: weight]])
-            .withDesign(design) else {
-                return nil
-        }
-        self.init(descriptor: descriptor, size: 0)
-    }
-}
