@@ -59,37 +59,26 @@ func loadGameMiscData(isLoadKana: Bool = false) {
     waitSentenceScoresLoaded = Promise<Void>.pending()
     waitUserSaidSentencesLoaded = Promise<Void>.pending()
 
-    DispatchQueue.global().async {
-        easyLoad(object: &translations, key: translationsKey + gameLang.key)
-    }
-    DispatchQueue.global().async {
-        easyLoad(object: &userSaidSentences, key: userSaidSentencesKey + gameLang.key)
-        waitUserSaidSentencesLoaded.fulfill(())
-    }
-    DispatchQueue.global().async {
-        easyLoad(object: &sentenceScores, key: sentenceScoreKey + gameLang.key)
-        waitSentenceScoresLoaded.fulfill(())
-    }
-    DispatchQueue.global().async {
-        easyLoad(object: &lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)
-        clear130KanaSideEffect()
-    }
+    easyLoad(object: &translations, key: translationsKey + gameLang.key)
+    easyLoad(object: &userSaidSentences, key: userSaidSentencesKey + gameLang.key)
+    waitUserSaidSentencesLoaded.fulfill(())
+    easyLoad(object: &sentenceScores, key: sentenceScoreKey + gameLang.key)
+    waitSentenceScoresLoaded.fulfill(())
+    easyLoad(object: &lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)
+    clear130KanaSideEffect()
 
     guard isLoadKana else { return }
-
-    DispatchQueue.global().async {
-        if let loadedKanaTokenInfos = loadFromUserDefault(type: type(of: kanaTokenInfosCacheDictionary),
-                                                          key: kanaTokenInfosKey + Lang.jp.key) {
-            loadedKanaTokenInfos.keys.forEach { key in
-                guard kanaTokenInfosCacheDictionary[key] == nil else { return }
-                kanaTokenInfosCacheDictionary[key] = loadedKanaTokenInfos[key]
-            }
-            doKanaCacheHardFix()
-        } else {
-            print("use new kanaTokenInfos")
+    if let loadedKanaTokenInfos = loadFromUserDefault(type: type(of: kanaTokenInfosCacheDictionary),
+                                                      key: kanaTokenInfosKey + Lang.jp.key) {
+        loadedKanaTokenInfos.keys.forEach { key in
+            guard kanaTokenInfosCacheDictionary[key] == nil else { return }
+            kanaTokenInfosCacheDictionary[key] = loadedKanaTokenInfos[key]
         }
-        waitKanaInfoLoaded.fulfill(())
+        doKanaCacheHardFix()
+    } else {
+        print("use new kanaTokenInfos")
     }
+    waitKanaInfoLoaded.fulfill(())
 }
 
 // clear version 1.3.0 & 1.3.1 kana is cleared side effect
