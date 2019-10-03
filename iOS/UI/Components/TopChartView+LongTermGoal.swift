@@ -55,8 +55,8 @@ extension TopChartView {
                          Level.lv4.color.withSaturation(1.0),
                          Level.lv6.color.withSaturation(1.0)]
 
-        var levelSentenceCounts = [1000, 3000, 6000, 10000]
-        var wPoints = [0, 5, 15, 30, 50]
+        let levelSentenceCounts = [1000, 3000, 6000, 10000]
+        let wPoints = [0, 5, 15, 30, 50]
         var t: UILabel
         var bar: UIView
         for i in 0 ..< levelSentenceCounts.count {

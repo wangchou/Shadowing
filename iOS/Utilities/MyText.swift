@@ -19,27 +19,56 @@ import UIKit
 //    -- HiraginoSans-W6
 class MyFont {
     static var fontCache: [String: UIFont] = [:]
+
+    static func rubyThin(ofSize fontSize: CGFloat) -> UIFont {
+        let key = "thin-\(fontSize)"
+        if let font = fontCache[key] { return font }
+        if #available(iOS 13.0, *) {
+            fontCache[key] =
+            UIFont(name: "HiraginoSans-W0", size: fontSize)
+        } else {
+            fontCache[key] = UIFont(name: ".HiraKakuInterface-W2", size: fontSize) ??
+                UIFont.systemFont(ofSize: fontSize, weight: .thin)
+        }
+        return fontCache[key]!
+    }
+
     static func thin(ofSize fontSize: CGFloat) -> UIFont {
         let key = "thin-\(fontSize)"
         if let font = fontCache[key] { return font }
-        fontCache[key] = UIFont(name: ".HiraKakuInterface-W2", size: fontSize) ??
-            UIFont.systemFont(ofSize: fontSize, weight: .thin)
+        if #available(iOS 13.0, *) {
+            fontCache[key] =
+            UIFont(name: "HiraginoSans-W2", size: fontSize)
+        } else {
+            fontCache[key] = UIFont(name: ".HiraKakuInterface-W2", size: fontSize) ??
+                UIFont.systemFont(ofSize: fontSize, weight: .thin)
+        }
         return fontCache[key]!
     }
 
     static func regular(ofSize fontSize: CGFloat) -> UIFont {
         let key = "regular-\(fontSize)"
         if let font = fontCache[key] { return font }
-        fontCache[key] = UIFont(name: ".HiraKakuInterface-W3", size: fontSize) ??
-            UIFont.systemFont(ofSize: fontSize, weight: .regular)
+        if #available(iOS 13.0, *) {
+            fontCache[key] = 
+            UIFont(name: "HiraginoSans-W3", size: fontSize)
+        } else {
+            fontCache[key] = UIFont(name: ".HiraKakuInterface-W3", size: fontSize) ??
+                UIFont.systemFont(ofSize: fontSize, weight: .regular)
+        }
         return fontCache[key]!
     }
 
     static func bold(ofSize fontSize: CGFloat) -> UIFont {
         let key = "bold-\(fontSize)"
         if let font = fontCache[key] { return font }
-        fontCache[key] = UIFont(name: ".HiraKakuInterface-W6", size: fontSize) ??
-            UIFont.systemFont(ofSize: fontSize, weight: .bold)
+        if #available(iOS 13.0, *) {
+            fontCache[key] =
+                UIFont(name: "HiraginoSans-W6", size: fontSize)
+        } else {
+            fontCache[key] = UIFont(name: ".HiraKakuInterface-W6", size: fontSize) ??
+                UIFont.systemFont(ofSize: fontSize, weight: .bold)
+        }
         return fontCache[key]!
     }
 

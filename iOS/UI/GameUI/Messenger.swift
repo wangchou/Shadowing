@@ -176,6 +176,10 @@ class Messenger: UIViewController {
         height = Int(myLabel.heightOfCoreText(attributed: text, width: CGFloat(maxLabelWidth)))
         width = Int(myLabel.widthOfCoreText(attributed: text, maxWidth: CGFloat(maxLabelWidth)))
 
+        if #available(iOS 13, *), height > 40 {
+            height += 3
+        }
+
         myLabel.frame = CGRect(x: 5, y: y, width: width, height: height)
 
         myLabel.roundBorder(width: 1.5, radius: 15, color: .black)

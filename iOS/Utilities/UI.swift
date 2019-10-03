@@ -375,6 +375,7 @@ func launchVC(
     if isOverCurrent {
         vc.modalPresentationStyle = .overCurrentContext
     } else {
+        vc.modalPresentationStyle = .overFullScreen
         vc.modalTransitionStyle = .crossDissolve
     }
 

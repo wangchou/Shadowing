@@ -47,11 +47,20 @@ import Promises
         }
 
         if ruby != "" {
-            let fontRuby = MyFont.thin(ofSize: fontSize / 2)
+            let fontRuby = MyFont.rubyThin(ofSize: fontSize / 2)
             let alignMode: CTRubyAlignment = ruby.count >= string.count * 2 ? .center : .auto
+            var rubyAttributes: CFDictionary
+            if #available(iOS 13, *) {
+                rubyAttributes = [kCTFontAttributeName: fontRuby,
+                 kCTStrokeWidthAttributeName: -2.0,
+                ] as CFDictionary
+            } else {
+                rubyAttributes = [kCTFontAttributeName: fontRuby,
+                ] as CFDictionary
+            }
             let annotation = CTRubyAnnotationCreateWithAttributes(
                 alignMode, .auto, .before, ruby as CFString,
-                [kCTFontAttributeName: fontRuby] as CFDictionary
+                rubyAttributes
             )
             attributes[rubyAnnotationKey] = annotation
         }

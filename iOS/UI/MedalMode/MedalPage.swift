@@ -226,14 +226,17 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     }
 }
 
-private func rollingText(view: UIView, width: CGFloat) {
+private func rollingText(view: UIView) {
     let animator = UIViewPropertyAnimator(duration: 30, curve: .easeOut, animations: {
         let tx: CGFloat = -1.5 * 320 * cos(.pi / 8)
-        let ty: CGFloat = -1.5 * 320 * sin(.pi / 8)
+        var ty: CGFloat = -1.5 * 320 * sin(.pi / 8)
 
-        view.transform = CGAffineTransform.identity
-            .translatedBy(x: 0, y: tan(.pi / 8) * width / 2)
-            .rotated(by: -1 * .pi / 8)
+        // not sure why... this will fix bug
+        if #available(iOS 13, *) {
+            ty = 0
+        }
+
+        view.transform = view.transform
             .translatedBy(x: tx, y: ty)
     })
 
@@ -289,10 +292,14 @@ extension GridLayout where Self: UIView {
             label.centerX(frame)
             label.textAlignment = .left
 
+            var ty = tan(.pi / 8) * frame.width
+            if #available(iOS 13, *) {
+                ty = 0
+            }
             label.transform = CGAffineTransform.identity
-                .translatedBy(x: 0, y: tan(.pi / 8) * frame.width / 2)
+                .translatedBy(x: 0, y: ty)
                 .rotated(by: -1 * .pi / 8)
-            rollingText(view: label, width: frame.width)
+            rollingText(view: label)
         }
     }
 

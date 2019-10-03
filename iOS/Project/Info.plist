@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.3.8</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -52,6 +52,11 @@
 	<string>${PRODUCT_NAME} needs micphone to recognize Japanese you said.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>${PRODUCT_NAME} needs Speech Recognition for scoring Japanese you said.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>ヒラギノ角ゴシック W0.ttc</string>
+		<string>ヒラギノ角ゴシック W2.ttc</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>Main</string>
 	<key>UIMainStoryboardFile</key>
@@ -71,6 +76,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>
