@@ -80,9 +80,7 @@ class SpeechEngine {
         audioEngine.mainMixerNode.outputVolume = 0
     }
 
-    // MARK: - Private
-
-    private func stop() {
+    func stop() {
         guard isEngineRunning else { return }
         isEngineRunning = false
         tts.stop()
@@ -92,6 +90,7 @@ class SpeechEngine {
         closeNodeGraph()
     }
 
+    // MARK: - Private
     private func buildNodeGraph() {
         let mainMixer = audioEngine.mainMixerNode
         let mic = audioEngine.inputNode // only for real device, simulator will crash
