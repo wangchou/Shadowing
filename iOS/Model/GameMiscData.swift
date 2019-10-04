@@ -53,67 +53,42 @@ func easyLoad<T: Codable>(object: inout T, key: String) {
 
 var waitSentenceScoresLoaded = fulfilledVoidPromise()
 var waitUserSaidSentencesLoaded = fulfilledVoidPromise()
+var waitTranslationLoaded = fulfilledVoidPromise()
 var waitKanaInfoLoaded = Promise<Void>.pending()
 
 func loadGameMiscData(isLoadKana: Bool = false) {
+    waitTranslationLoaded = Promise<Void>.pending()
     waitSentenceScoresLoaded = Promise<Void>.pending()
     waitUserSaidSentencesLoaded = Promise<Void>.pending()
 
-    easyLoad(object: &translations, key: translationsKey + gameLang.key)
-    easyLoad(object: &userSaidSentences, key: userSaidSentencesKey + gameLang.key)
-    waitUserSaidSentencesLoaded.fulfill(())
-    easyLoad(object: &sentenceScores, key: sentenceScoreKey + gameLang.key)
-    waitSentenceScoresLoaded.fulfill(())
-    easyLoad(object: &lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)
-    clear130KanaSideEffect()
+    DispatchQueue.global().async {
+        easyLoad(object: &translations, key: translationsKey + gameLang.key)
+        waitTranslationLoaded.fulfill(())
+    }
+    DispatchQueue.global().async {
+        easyLoad(object: &userSaidSentences, key: userSaidSentencesKey + gameLang.key)
+        waitUserSaidSentencesLoaded.fulfill(())
+    }
+    DispatchQueue.global().async {
+        easyLoad(object: &sentenceScores, key: sentenceScoreKey + gameLang.key)
+        waitSentenceScoresLoaded.fulfill(())
+    }
+    DispatchQueue.global().async {
+        easyLoad(object: &lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)
+    }
 
     guard isLoadKana else { return }
-    if let loadedKanaTokenInfos = loadFromUserDefault(type: type(of: kanaTokenInfosCacheDictionary),
-                                                      key: kanaTokenInfosKey + Lang.jp.key) {
-        loadedKanaTokenInfos.keys.forEach { key in
-            guard kanaTokenInfosCacheDictionary[key] == nil else { return }
-            kanaTokenInfosCacheDictionary[key] = loadedKanaTokenInfos[key]
-        }
-        doKanaCacheHardFix()
-    } else {
-        print("use new kanaTokenInfos")
-    }
-    waitKanaInfoLoaded.fulfill(())
-}
-
-// clear version 1.3.0 & 1.3.1 kana is cleared side effect
-// should be remove after 1.4.0
-var sideEffectIsCleared = false
-
-func clear130KanaSideEffect() {
-    guard gameLang == .jp, !sideEffectIsCleared else { return }
-
-    waitKanaInfoLoaded.then { _ in
-        // said topic sentences
-        rawDataSets.forEach { sentences in
-            sentences.forEach { sentence in
-                if let userSaidSentence = userSaidSentences[sentence],
-                    userSaidSentence != "",
-                    kanaTokenInfosCacheDictionary[userSaidSentence] == nil {
-                    _ = userSaidSentence.furiganaAttributedString
-                }
+    DispatchQueue.global().async {
+        if let loadedKanaTokenInfos = loadFromUserDefault(type: type(of: kanaTokenInfosCacheDictionary),
+                                                          key: kanaTokenInfosKey + Lang.jp.key) {
+            loadedKanaTokenInfos.keys.forEach { key in
+                guard kanaTokenInfosCacheDictionary[key] == nil else { return }
+                kanaTokenInfosCacheDictionary[key] = loadedKanaTokenInfos[key]
             }
+            doKanaCacheHardFix()
+        } else {
+            print("use new kanaTokenInfos")
         }
-
-        // said ic sentences
-        for (_, sentences) in lastInfiniteChallengeSentences {
-            sentences.forEach { sentence in
-                if kanaTokenInfosCacheDictionary[sentence] == nil {
-                    _ = sentence.furiganaAttributedString
-                }
-                if let userSaidSentence = userSaidSentences[sentence],
-                    userSaidSentence != "",
-                    kanaTokenInfosCacheDictionary[userSaidSentence] == nil {
-                    _ = userSaidSentence.furiganaAttributedString
-                }
-            }
-        }
-
-        sideEffectIsCleared = true
+        waitKanaInfoLoaded.fulfill(())
     }
 }

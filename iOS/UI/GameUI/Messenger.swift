@@ -8,6 +8,7 @@
 
 import AVFoundation
 import UIKit
+import Promises
 
 private let context = GameContext.shared
 
@@ -76,7 +77,6 @@ class Messenger: UIViewController {
         startEventObserving(self)
         GameFlow.shared.start()
         UIApplication.shared.isIdleTimerDisabled = true
-
         messengerBar.render()
         renderOverlayView()
         levelMeterValueBar.frame.size.height = 0

@@ -69,7 +69,13 @@ class GameFlow {
 
         context.loadLearningSentences()
 
-        speakTitle()
+        Promises.all([
+            waitTranslationLoaded,
+            waitKanaInfoLoaded
+            ])
+            .then { _ in
+                return speakTitle()
+            }
             .then(tryWait)
             .then(speakNarratorString)
             .then(tryWait)
