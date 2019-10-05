@@ -78,6 +78,10 @@ class FuriganaLabel: UILabel {
             height += ceil(ascent + leading)
         }
 
+        if #available(iOS 13, *), height + topShift + topTranslateY > 50 {
+            height += 4
+        }
+
         return height + topShift + topTranslateY
     }
 
