@@ -176,13 +176,13 @@ class Messenger: UIViewController {
         height = Int(myLabel.heightOfCoreText(attributed: text, width: CGFloat(maxLabelWidth)))
         width = Int(myLabel.widthOfCoreText(attributed: text, maxWidth: CGFloat(maxLabelWidth)))
 
-        if #available(iOS 13, *), height > 40 {
+        if #available(iOS 13, *), height > 50 {
             height += 3
         }
 
         myLabel.frame = CGRect(x: 5, y: y, width: width, height: height)
 
-        myLabel.roundBorder(width: 1.5, radius: 15, color: .black)
+        myLabel.roundBorder(width: 1.5, radius: 15, color: rgb(40, 40, 40))
 
         switch pos {
         case .left:

@@ -8,7 +8,7 @@ class FuriganaLabel: UILabel {
         return text?.jpnType == JpnType.noKanjiAndNumber ? 5 : 0
     }
 
-    var widthPadding: CGFloat = 7
+    var widthPadding: CGFloat = 10
 
     override var text: String? {
         willSet {
