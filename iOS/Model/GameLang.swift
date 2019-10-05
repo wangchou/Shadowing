@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Promises
 
 // Global
 var jaSentenceInfos: [Int: SentenceInfo] = [:]
@@ -77,7 +78,7 @@ func changeGameLangTo(lang: Lang) {
     saveGameLang()
     loadGameSetting()
     loadGameMiscData(isLoadKana: false)
-
+    
     DispatchQueue.main.async {
         if gameLang == .en {
             GameContext.shared.bottomTab = .infiniteChallenge
@@ -86,4 +87,5 @@ func changeGameLangTo(lang: Lang) {
         rootViewController.reloadTableData()
         rootViewController.rerenderTopView(updateByRecords: true)
     }
+
 }
