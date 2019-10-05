@@ -134,6 +134,10 @@ class Messenger: UIViewController {
         }
 
         initLearningModeSegmentControl(label: learningModeLabel, control: learningModeSegmentControl)
+
+        if #available(iOS 13, *) {
+            learningModeSegmentControl.backgroundColor = .lightGray
+        }
     }
 
     func prescrolling(_ text: NSAttributedString, pos _: LabelPosition = .left) {
