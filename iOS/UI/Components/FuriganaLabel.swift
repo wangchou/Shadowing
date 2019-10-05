@@ -13,6 +13,7 @@ class FuriganaLabel: UILabel {
     override var text: String? {
         willSet {
             if let newValue = newValue {
+                lineBreakMode = .byWordWrapping
                 self.attributedText = rubyAttrStr(newValue)
             }
         }
