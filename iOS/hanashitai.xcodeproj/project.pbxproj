@@ -557,6 +557,7 @@
 				BEBDEDBA208EF09F00C18520 /* Resources */,
 				BE4D6D2620AD2F4D0020B151 /* ShellScript */,
 				E0FA05783F9F3BA5B01D36E7 /* [CP] Embed Pods Frameworks */,
+				BE16FC5E234859A4007EEBA8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -631,6 +632,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		BE16FC5E234859A4007EEBA8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n";
+		};
 		BE4D6D2620AD2F4D0020B151 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -924,7 +942,7 @@
 				CLANG_DEBUG_INFORMATION_LEVEL = "line-tables-only";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ETE87474CU;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -965,7 +983,7 @@
 				CLANG_DEBUG_INFORMATION_LEVEL = "line-tables-only";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ETE87474CU;
 				FRAMEWORK_SEARCH_PATHS = (

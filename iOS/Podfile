@@ -11,5 +11,8 @@ target 'hanashitai' do
   pod 'Charts',                  '3.2.1'
   pod 'SQLite.swift'
   pod 'PromisesSwift'
-  pod 'FirebaseAnalytics'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Performance'
+  pod 'Fabric', '~> 1.10.2'
+  pod 'Crashlytics', '~> 3.13.4'
 end
