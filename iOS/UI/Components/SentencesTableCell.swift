@@ -89,9 +89,9 @@ class SentencesTableCell: UITableViewCell {
             sentenceLabel.text = sentence
         }
 
-        var translationsDict = (gameLang == .jp && context.gameMode == .topicMode) ?
+        let translationsDict = (gameLang == .jp && context.gameMode == .topicMode) ?
             chTranslations : translations
-        var secondaryDict = (gameLang == .jp && context.gameMode == .topicMode) ?
+        let secondaryDict = (gameLang == .jp && context.gameMode == .topicMode) ?
             translations : chTranslations
 
         if let translation = (translationsDict[sentence] ?? secondaryDict[sentence]) {

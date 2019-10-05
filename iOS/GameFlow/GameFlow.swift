@@ -205,7 +205,7 @@ extension GameFlow {
         guard context.gameSetting.isSpeakTranslation else {
             return fulfilledVoidPromise()
         }
-        var translationsDict = (gameLang == .jp && context.gameMode == .topicMode) ?
+        let translationsDict = (gameLang == .jp && context.gameMode == .topicMode) ?
             chTranslations : translations
         var translation = translationsDict[context.targetString] ?? ""
 

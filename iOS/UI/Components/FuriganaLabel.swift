@@ -13,7 +13,7 @@ class FuriganaLabel: UILabel {
     override var text: String? {
         willSet {
             if let newValue = newValue {
-                self.attributedText = rubyAttrStr(newValue, "")
+                self.attributedText = rubyAttrStr(newValue)
             }
         }
     }

@@ -50,8 +50,7 @@ class MyFont {
         let key = "regular-\(fontSize)"
         if let font = fontCache[key] { return font }
         if #available(iOS 13.0, *) {
-            fontCache[key] = 
-            UIFont(name: "HiraginoSans-W3", size: fontSize)
+            fontCache[key] = UIFont(name: "HiraginoSans-W3", size: fontSize)
         } else {
             fontCache[key] = UIFont(name: ".HiraKakuInterface-W3", size: fontSize) ??
                 UIFont.systemFont(ofSize: fontSize, weight: .regular)

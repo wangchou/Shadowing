@@ -78,7 +78,6 @@ func changeGameLangTo(lang: Lang) {
     saveGameLang()
     loadGameSetting()
     loadGameMiscData(isLoadKana: false)
-    
     DispatchQueue.main.async {
         if gameLang == .en {
             GameContext.shared.bottomTab = .infiniteChallenge

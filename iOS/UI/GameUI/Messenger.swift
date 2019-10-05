@@ -182,7 +182,7 @@ class Messenger: UIViewController {
         width = Int(myLabel.widthOfCoreText(attributed: text, maxWidth: CGFloat(maxLabelWidth)))
 
         if #available(iOS 13, *), height > 50 {
-            height += 3
+            height += 4
         }
 
         myLabel.frame = CGRect(x: 5, y: y, width: width, height: height)
