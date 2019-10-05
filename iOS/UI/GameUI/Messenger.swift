@@ -28,6 +28,7 @@ class Messenger: UIViewController {
 
     @IBOutlet var levelMeterView: UIView!
     @IBOutlet var levelMeterValueBar: UIView!
+    @IBOutlet var levelMeterHeightConstraint: NSLayoutConstraint!
     @IBOutlet var scrollView: UIScrollView!
 
     // pauseOverlay

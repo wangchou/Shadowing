@@ -63,12 +63,12 @@ extension Messenger: GameEventDelegate {
 
         case .listenStopped:
             DispatchQueue.main.async {
-                self.levelMeterValueBar.frame.size.height = 0
+                self.levelMeterHeightConstraint.constant = 0
             }
 
         case .scoreCalculated:
             DispatchQueue.main.async {
-                self.levelMeterValueBar.frame.size.height = 0
+                self.levelMeterHeightConstraint.constant = 0
             }
             guard let score = event.score else { return }
             onScore(score)
@@ -84,8 +84,7 @@ extension Messenger: GameEventDelegate {
             guard let micLevel = event.int else { return }
             DispatchQueue.main.async {
                 let height = CGFloat(20.0 * micLevel.f / 100.0)
-                self.levelMeterValueBar.frame.size.height = height
-                self.levelMeterValueBar.frame.origin.y = 6 + 20 - height
+                self.levelMeterHeightConstraint.constant = height
             }
 
         case .gameResume:

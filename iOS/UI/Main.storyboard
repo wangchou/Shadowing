@@ -2173,7 +2173,7 @@ Ruth Yuru Chen
                                         <color key="backgroundColor" white="0.90234375" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="9" id="QXP-yX-CZF"/>
-                                            <constraint firstAttribute="height" id="ls0-Cb-PO4"/>
+                                            <constraint firstAttribute="height" id="YGm-ea-gBV"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -2340,6 +2340,7 @@ Ruth Yuru Chen
                         <outlet property="fastLabel" destination="NzW-b5-t7J" id="47g-mZ-txk"/>
                         <outlet property="learningModeLabel" destination="0My-oC-lXl" id="4oN-w4-5Z6"/>
                         <outlet property="learningModeSegmentControl" destination="qwA-mv-j1J" id="jFc-Sh-eli"/>
+                        <outlet property="levelMeterHeightConstraint" destination="YGm-ea-gBV" id="tzt-YQ-eMp"/>
                         <outlet property="levelMeterValueBar" destination="8Md-Mp-8et" id="yiy-hW-51l"/>
                         <outlet property="levelMeterView" destination="pro-bo-zMg" id="041-rQ-Rhf"/>
                         <outlet property="messengerBar" destination="3SU-Up-VtH" id="eNo-Pl-7u2"/>
