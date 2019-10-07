@@ -79,14 +79,16 @@ func loadIsRepeatOne() {
 // MARK: - save and load
 
 private let gameSettingKey = "GameSettingKey"
-
+private let unknownVoice = "unknownVoice"
 func saveGameSetting() {
     saveToUserDefault(object: context.gameSetting, key: gameSettingKey + gameLang.key)
     saveIsRepeatOne()
 }
 
 func loadGameSetting() {
-    if let gameSetting = loadFromUserDefault(type: GameSetting.self, key: gameSettingKey + gameLang.key) {
+    if let gameSetting = loadFromUserDefault(type: GameSetting.self, key: gameSettingKey + gameLang.key),
+       gameSetting.teacher != unknownVoice,
+       gameSetting.assisant != unknownVoice {
         context.gameSetting = gameSetting
     } else {
         print("[\(gameLang)] create new gameSetting")
@@ -106,8 +108,6 @@ func loadGameSetting() {
 }
 
 func getDefaultVoiceId(language: String, isPreferMaleSiri: Bool = true, isPreferEnhanced: Bool = true) -> String {
-    var bestVoiceId = ""
-
     let voices = getAvailableVoice(language: language).sorted { v1, v2 in
         if v2.identifier.range(of: isPreferMaleSiri ? "siri_male" : "siri_female") != nil { return true }
         if v1.identifier.range(of: isPreferMaleSiri ? "siri_male" : "siri_female") != nil { return false }
@@ -117,8 +117,14 @@ func getDefaultVoiceId(language: String, isPreferMaleSiri: Bool = true, isPrefer
         if v1.quality == .enhanced { return isPreferEnhanced ? false : true }
         return v1.identifier < v2.identifier
     }
-    guard !voices.isEmpty else { return AVSpeechSynthesisVoice(language: language)!.identifier }
-    bestVoiceId = voices.last!.identifier
 
-    return bestVoiceId
+    guard let voice = voices.last else {
+        if let voice = AVSpeechSynthesisVoice(language: language) {
+            return voice.identifier
+        } else {
+            showMessage(i18n.defaultVoiceIsNotAvailable, isNeedConfirm: true)
+            return AVSpeechSynthesisVoice(language: nil)?.identifier ?? unknownVoice
+        }
+    }
+    return voice.identifier
 }

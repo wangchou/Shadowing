@@ -280,18 +280,34 @@ enum TMPError: Error {
 }
 
 var isAlerting = fulfilledVoidPromise()
-func showMessage(_ message: String, seconds: Float = 2) {
+var lastAlertMessage = ""
+func showMessage(_ message: String, seconds: Float = 2, isNeedConfirm: Bool = false) {
+    guard lastAlertMessage != message else { return }
+    lastAlertMessage = message
     isAlerting.then {
         isAlerting = Promise<Void>.pending()
         let alert = UIAlertController(title: message, message: "", preferredStyle: .alert)
-        UIApplication.getPresentedViewController()?.present(alert, animated: true)
 
-        let when = DispatchTime.now() + DispatchTimeInterval.milliseconds(Int(seconds * 1000))
-        DispatchQueue.main.asyncAfter(deadline: when) {
+        func hideAlert() {
             alert.dismiss(animated: true) {
                 isAlerting.reject(TMPError.alert) // discard all other show message
                 isAlerting = fulfilledVoidPromise()
+                lastAlertMessage = ""
                 print("alert dismissed")
+            }
+        }
+
+        if isNeedConfirm {
+            let dismissAction = UIAlertAction(title: i18n.confirm, style: .default) { _ in
+                hideAlert()
+            }
+            alert.addAction(dismissAction)
+            UIApplication.getPresentedViewController()?.present(alert, animated: true)
+        } else {
+            UIApplication.getPresentedViewController()?.present(alert, animated: true)
+            let when = DispatchTime.now() + DispatchTimeInterval.milliseconds(Int(seconds * 1000))
+            DispatchQueue.main.asyncAfter(deadline: when) {
+                hideAlert()
             }
         }
     }

@@ -37,6 +37,11 @@ class I18n {
         return "Speed"
     }
 
+    var confirm: String {
+        if isZh { return "我知道了" }
+        return "OK"
+    }
+
     var narratorLabel: String {
         if isJa { return "挑戦の説明" }
         if isZh { return "挑戰的語音說明" }
@@ -66,6 +71,13 @@ class I18n {
         if isJa { return "もっと声をダウンロードしましょう\n「設定」>「一般」>「アクセシビリティ」>「スピーチ」 >「声」>「\(lang)」の順に選択します。" }
         if isZh { return "更多語音選項: \n請前往手機的「設定 > 一般 > 輔助使用 > 語音 > 聲音 > \(lang)」下載" }
         return "Download more voices:\nGo to Settings > General > Accessibility > Speech > Voice > \(lang)"
+    }
+
+    var defaultVoiceIsNotAvailable: String {
+        let lang = gameLang == .jp ? japanese : english
+        if isJa { return "\(lang)の声をダウンロードしましょう\n「設定」>「一般」>「アクセシビリティ」>「スピーチ」 >「声」>「\(lang)」の順に選択しましょう。" }
+        if isZh { return "找不到\(lang)語音：\n請前往手機的「設定 > 一般 > 輔助使用 > 語音 > 聲音 > \(lang)」下載" }
+        return "No TTS Voice found:\nGo to Settings > General > Accessibility > Speech > Voice > \(lang) to Download"
     }
 
     var settingSectionGameSpeed: String {
