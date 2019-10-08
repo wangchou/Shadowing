@@ -14,6 +14,7 @@ private let context = GameContext.shared
 
 class MedalPage: UIViewController {
     static let id = "MedalPage"
+    static var shared: MedalPage?
     var medalPageView: MedalPageView? {
         return (view as? MedalPageView)
     }
@@ -25,6 +26,12 @@ class MedalPage: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         medalPageView?.render()
+        MedalPage.shared = self
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        MedalPage.shared = nil
     }
 }
 

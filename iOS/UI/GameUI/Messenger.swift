@@ -83,6 +83,15 @@ class Messenger: UIViewController {
         levelMeterValueBar.frame.size.height = 0
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if context.gameMode == .medalMode {
+            DispatchQueue.main.async {
+                MedalPage.shared?.medalPageView?.render()
+            }
+        }
+    }
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         scrollView.removeAllSubviews()
