@@ -18,25 +18,25 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="無分" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q6O-Sx-IVO">
-                        <rect key="frame" x="0.0" y="0.0" width="55" height="72"/>
+                        <rect key="frame" x="0.0" y="0.0" width="62" height="72"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="55" id="wQG-c9-okA"/>
+                            <constraint firstAttribute="width" constant="62" id="wQG-c9-okA"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <color key="textColor" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="WjY-pm-086">
-                        <rect key="frame" x="55" y="0.0" width="204" height="72"/>
+                        <rect key="frame" x="64" y="0.0" width="195" height="72"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ただの人間にはには" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d2j-Sd-YWt" customClass="FuriganaLabel" customModule="hanashitai" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="204" height="24"/>
+                                <rect key="frame" x="0.0" y="0.0" width="195" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="How are you Do you like to go to school" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UGH-kP-Qt8" customClass="FuriganaLabel" customModule="hanashitai" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="24" width="204" height="48"/>
+                                <rect key="frame" x="0.0" y="24" width="195" height="48"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -55,7 +55,7 @@
                         </connections>
                     </button>
                     <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="How are you Do you like to go to school" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVl-sV-xrU" userLabel="TranslationTextView">
-                        <rect key="frame" x="55" y="0.0" width="204" height="24"/>
+                        <rect key="frame" x="64" y="0.0" width="195" height="24"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="20"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -63,7 +63,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="jEf-GW-fOX" secondAttribute="trailing" constant="6" id="20T-Qw-bdq"/>
-                    <constraint firstItem="WjY-pm-086" firstAttribute="leading" secondItem="q6O-Sx-IVO" secondAttribute="trailing" id="24O-sQ-q3F"/>
+                    <constraint firstItem="WjY-pm-086" firstAttribute="leading" secondItem="q6O-Sx-IVO" secondAttribute="trailing" constant="2" id="24O-sQ-q3F"/>
                     <constraint firstItem="RVl-sV-xrU" firstAttribute="width" secondItem="d2j-Sd-YWt" secondAttribute="width" id="2FE-9f-ryI"/>
                     <constraint firstAttribute="bottom" secondItem="q6O-Sx-IVO" secondAttribute="bottom" id="3jG-DX-zgZ"/>
                     <constraint firstItem="RVl-sV-xrU" firstAttribute="centerY" secondItem="d2j-Sd-YWt" secondAttribute="centerY" id="4nL-yi-tch"/>
