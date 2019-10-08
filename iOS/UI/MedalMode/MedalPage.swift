@@ -158,7 +158,8 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
             Promises.all([waitTranslationLoaded,
                           waitKanaInfoLoaded,
                           waitSentenceScoresLoaded,
-                          waitUserSaidSentencesLoaded]).then { _ in
+                          waitUserSaidSentencesLoaded,
+                          waitSentenceDBLoaded]).then { _ in
                             changeLangButton.isUserInteractionEnabled = true
                 self?.render()
             }

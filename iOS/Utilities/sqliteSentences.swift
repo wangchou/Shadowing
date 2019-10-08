@@ -8,6 +8,7 @@
 
 import Foundation
 import SQLite
+import Promises
 
 struct SentenceInfo {
     var syllablesCount: Int
@@ -25,7 +26,9 @@ var topicSentencesInfos: [String: TopicSentenceInfo] = [:]
 private var sqliteFileName = "inf_sentences_100points_duolingo_with_topics"
 
 #if os(iOS)
+    var waitSentenceDBLoaded = Promise<Void>.pending()
     func loadSentenceDB() {
+        waitSentenceDBLoaded = Promise<Void>.pending()
         guard let path = Bundle.main.path(forResource: sqliteFileName, ofType: "sqlite") else {
             print("sqlite file not found"); return
         }
@@ -72,6 +75,7 @@ private var sqliteFileName = "inf_sentences_100points_duolingo_with_topics"
         } catch {
             print("db error")
         }
+        waitSentenceDBLoaded.fulfill(())
     }
 #endif
 
