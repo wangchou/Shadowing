@@ -97,6 +97,7 @@ class Messenger: UIViewController {
         scrollView.removeAllSubviews()
         view.removeAllSubviews()
         stopEventObserving(self)
+        SpeechEngine.shared.monitoringOff()
         UIApplication.shared.isIdleTimerDisabled = false
     }
 
