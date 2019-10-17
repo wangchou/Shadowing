@@ -250,7 +250,6 @@ extension GameFlow {
 
     private func listenWrapped() -> Promise<String> {
         context.gameState = .listening
-        if context.gameSetting.isMointoring { engine.monitoringOn() }
         if context.gameSetting.isUsingGuideVoice {
             return engine
                 .listen(duration: Double(context.speakDuration + pauseDuration))
@@ -265,7 +264,6 @@ extension GameFlow {
 
     private func saveUserSaidString(userSaidString: String) -> Promise<Void> {
         if isNeedToStopPromiseChain { return rejectedVoidPromise() }
-        engine.monitoringOff()
         userSaidSentences[context.targetString] = userSaidString
         return fulfilledVoidPromise()
     }

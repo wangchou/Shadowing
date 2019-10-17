@@ -35,6 +35,8 @@ class SettingPage: UITableViewController {
     @IBOutlet var narratorSwitch: UISwitch!
     @IBOutlet var monitoringLabel: UILabel!
     @IBOutlet var monitoringSwitch: UISwitch!
+    @IBOutlet var monitoringVolumeSlider: UISlider!
+    @IBOutlet var monitoringVolumeLabel: UILabel!
 
     @IBOutlet var teacherLabel: UILabel!
     @IBOutlet var teacherNameLabel: UILabel!
@@ -122,6 +124,15 @@ class SettingPage: UITableViewController {
 
         narratorSwitch.isOn = setting.isUsingNarrator
         monitoringSwitch.isOn = setting.isMointoring
+        if setting.isMointoring {
+            monitoringVolumeSlider.isEnabled = true
+        } else {
+            monitoringVolumeSlider.isEnabled = false
+        }
+        monitoringVolumeSlider.value = Float(setting.monitoringVolume)
+
+        monitoringVolumeLabel.text = (setting.monitoringVolume > 0 ? "+":"") + String(format: "%ddb", setting.monitoringVolume)
+
         showTranslationSwitch.isOn = setting.isShowTranslation
 
         showTranslationSwitch.isEnabled = context.gameSetting.learningMode != .interpretation
@@ -170,6 +181,13 @@ class SettingPage: UITableViewController {
 
     @IBAction func monitoringSwitchValueChanged(_: Any) {
         context.gameSetting.isMointoring = monitoringSwitch.isOn
+        saveGameSetting()
+    }
+
+    @IBAction func monitoringVolumeSliderValueChanged(_ sender: Any) {
+        let volume = Int(monitoringVolumeSlider.value)
+        context.gameSetting.monitoringVolume = volume
+        monitoringVolumeLabel.text = (volume > 0 ? "+":"") + String(format: "%ddb", volume)
         saveGameSetting()
     }
 

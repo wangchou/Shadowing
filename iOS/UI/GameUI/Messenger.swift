@@ -80,6 +80,9 @@ class Messenger: UIViewController {
         UIApplication.shared.isIdleTimerDisabled = true
         messengerBar.render()
         renderOverlayView()
+        if context.gameSetting.isMointoring {
+            SpeechEngine.shared.monitoringOn()
+        }
         levelMeterValueBar.frame.size.height = 0
     }
 

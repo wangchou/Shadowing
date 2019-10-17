@@ -73,7 +73,7 @@ class SpeechEngine {
 
     func monitoringOn() {
         guard isHeadphonePlugged() else { return }
-        audioEngine.mainMixerNode.outputVolume = 1
+        audioEngine.mainMixerNode.outputVolume = pow(2, Float(context.gameSetting.monitoringVolume)/10)
     }
 
     func monitoringOff() {

@@ -13,6 +13,7 @@ private let context = GameContext.shared
 
 // Newly add settings
 private var globalIsRepeatOne: Bool = false
+private var globalMonitoringVolume: Int = 20
 
 struct GameSetting: Codable {
     var isAutoSpeed: Bool = true
@@ -41,6 +42,14 @@ struct GameSetting: Codable {
             globalIsRepeatOne = newValue
         }
     }
+    var monitoringVolume: Int {
+        get {
+            return globalMonitoringVolume
+        }
+        set {
+            globalMonitoringVolume = newValue
+        }
+    }
 }
 
 enum ICTopViewMode: Int, Codable {
@@ -66,13 +75,32 @@ private struct IsRepeatOneForEncode: Codable {
 }
 
 func saveIsRepeatOne() {
-    let tmpObj: IsRepeatOneForEncode = IsRepeatOneForEncode(isRepeatOne: globalIsRepeatOne)
+    let tmpObj = IsRepeatOneForEncode(isRepeatOne: globalIsRepeatOne)
     saveToUserDefault(object: tmpObj, key: isRepeatOneKey)
 }
 
 func loadIsRepeatOne() {
     if let loadedObj = loadFromUserDefault(type: IsRepeatOneForEncode.self, key: isRepeatOneKey) {
         globalIsRepeatOne = loadedObj.isRepeatOne
+    }
+}
+
+// MARK: - Save/Load for monitoringVolume
+
+private let monitoringVolumeKey = "monitoringVolumeKey"
+
+private struct MonitoringVolumeForEncode: Codable {
+    var monitoringVolume: Int
+}
+
+func saveMonitoringVolume() {
+    let tmpObj = MonitoringVolumeForEncode(monitoringVolume: globalMonitoringVolume)
+    saveToUserDefault(object: tmpObj, key: monitoringVolumeKey + gameLang.key)
+}
+
+func loadMonitoringVolume() {
+    if let loadedObj = loadFromUserDefault(type: MonitoringVolumeForEncode.self, key: monitoringVolumeKey + gameLang.key) {
+        globalMonitoringVolume = loadedObj.monitoringVolume
     }
 }
 
@@ -83,6 +111,7 @@ private let unknownVoice = "unknownVoice"
 func saveGameSetting() {
     saveToUserDefault(object: context.gameSetting, key: gameSettingKey + gameLang.key)
     saveIsRepeatOne()
+    saveMonitoringVolume()
 }
 
 func loadGameSetting() {
@@ -105,6 +134,7 @@ func loadGameSetting() {
         print(context.gameSetting.teacher, context.gameSetting.assisant)
     }
     loadIsRepeatOne()
+    loadMonitoringVolume()
 }
 
 func getDefaultVoiceId(language: String, isPreferMaleSiri: Bool = true, isPreferEnhanced: Bool = true) -> String {
