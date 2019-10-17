@@ -46,6 +46,7 @@ import Foundation
             }
 
             utterance.rate = rate
+            utterance.volume = 0.8
             postEvent(.sayStarted, string: text)
             synthesizer.speak(utterance)
             promise = Promise<Void>.pending()

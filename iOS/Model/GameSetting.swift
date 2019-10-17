@@ -13,7 +13,7 @@ private let context = GameContext.shared
 
 // Newly add settings
 private var globalIsRepeatOne: Bool = false
-private var globalMonitoringVolume: Int = 20
+private var globalMonitoringVolume: Int = 0
 
 struct GameSetting: Codable {
     var isAutoSpeed: Bool = true
