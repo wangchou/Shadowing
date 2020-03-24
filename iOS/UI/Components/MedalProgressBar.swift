@@ -59,7 +59,7 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
         var majorSize: CGFloat = 4
         if isFinishedPageMode { majorSize = 5 }
         // lvl text
-        lvlLabel.attributedText = getStrokeText(lowLevel.lvlTitle,
+        lvlLabel.attributedText = getStrokeText(lowLevel.title,
                                                 .white,
                                                 strokeWidth: Float(-0.3 * step),
                                                 strokColor: .black,

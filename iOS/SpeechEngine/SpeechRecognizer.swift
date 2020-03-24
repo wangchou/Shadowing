@@ -161,7 +161,7 @@ class SpeechRecognizer: NSObject {
                 } else {
                     promise.fulfill("")
                     _ = getKanaTokenInfos("\(error)")
-                    print(error)
+                    print(error, desc)
                 }
                 promise.fulfill("")
                 return
