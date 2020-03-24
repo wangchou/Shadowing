@@ -78,17 +78,15 @@ func loadGameMiscData(isLoadKana: Bool = false) {
     }
 
     guard isLoadKana else { return }
-    DispatchQueue.global().async {
-        if let loadedKanaTokenInfos = loadFromUserDefault(type: type(of: kanaTokenInfosCacheDictionary),
-                                                          key: kanaTokenInfosKey + Lang.jp.key) {
-            loadedKanaTokenInfos.keys.forEach { key in
-                guard kanaTokenInfosCacheDictionary[key] == nil else { return }
-                kanaTokenInfosCacheDictionary[key] = loadedKanaTokenInfos[key]
-            }
-            doKanaCacheHardFix()
-        } else {
-            print("use new kanaTokenInfos")
+    if let loadedKanaTokenInfos = loadFromUserDefault(type: type(of: kanaTokenInfosCacheDictionary),
+                                                      key: kanaTokenInfosKey + Lang.jp.key) {
+        loadedKanaTokenInfos.keys.forEach { key in
+            guard kanaTokenInfosCacheDictionary[key] == nil else { return }
+            kanaTokenInfosCacheDictionary[key] = loadedKanaTokenInfos[key]
         }
-        waitKanaInfoLoaded.fulfill(())
+        doKanaCacheHardFix()
+    } else {
+        print("use new kanaTokenInfos")
     }
+    waitKanaInfoLoaded.fulfill(())
 }

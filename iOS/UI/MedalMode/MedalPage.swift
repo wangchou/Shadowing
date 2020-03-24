@@ -79,7 +79,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         let button = addButton(title: "", bgColor: myOrange, onClick: onClick)
         button.setIconImage(named: iconName, tintColor: .black, isIconOnLeft: false)
         button.roundBorder(width: step / 2, radius: step,
-                           color: rgb(35, 35, 35))
+                           color: darkBackground)
         button.showsTouchWhenHighlighted = true
 
         layout(x, y, w, h, button)
@@ -98,9 +98,9 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
         // total medal counts
         let outerRect = addRect(x: 13, y: y, w: 21, h: 7,
-                                color: UIColor.black.withAlphaComponent(0.2))
-        outerRect.roundBorder(width: step / 2, radius: step,
-                              color: UIColor.black.withAlphaComponent(0.8))
+                                color: UIColor.black.withAlphaComponent(0.4))
+        outerRect.roundBorder(width: step / 4, radius: step,
+                              color: darkBackground)
         outerRect.centerX(frame)
 
         let medalView = MedalView()
@@ -123,12 +123,12 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     private func addLangInfo(y: Int) {
         addChangeLangButton(y: y)
         addLangTitleBox(y: y + 4)
-        addMedalProgressBar(x: 7, y: y + 13, medalFrom: context.gameMedal.count)
-        addDailyGoalView(x: 7, y: y + 24)
+        addMedalProgressBar(x: 7, y: y + 14, medalFrom: context.gameMedal.count)
+        addDailyGoalView(x: 7, y: y + 25)
     }
 
     private func addLangTitleBox(y: Int) {
-        let rect = addRect(x: 3, y: y + 6, w: 42, h: 31, color: UIColor.black.withAlphaComponent(0.4))
+        let rect = addRect(x: 3, y: y + 6, w: 42, h: 32, color: UIColor.black.withAlphaComponent(0.4))
         rect.roundBorder(radius: step * 2)
         let font = (i18n.isZh || i18n.isJa) ? MyFont.bold(ofSize: 9 * step) :
             MyFont.bold(ofSize: 7 * step)
@@ -180,9 +180,9 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
             font: MyFont.bold(ofSize: 5 * step)
         )
         button.setAttributedTitle(attrText, for: .normal)
-        button.roundBorder(width: step / 2,
+        button.roundBorder(width: step / 4,
                            radius: step * CGFloat(w) / 2,
-                           color: .black)
+                           color: darkBackground)
         button.showsTouchWhenHighlighted = true
         button.addTarget(self, action: #selector(onGoButtonClicked), for: .touchUpInside)
 
@@ -225,11 +225,12 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
     private func addMissCountBubble(buttonY: Int) {
         let missedCount = context.getMissedCount()
+        print("missedCount: \(missedCount)")
         if missedCount > 0 {
             let w = missedCount >= 100 ? 7 : (missedCount >= 10 ? 5 : 4)
             let y = missedCount >= 100 ? (buttonY - 2) : (buttonY - 1)
             let circle = addRect(x: 19 - w, y: y, w: w, h: 4, color: .red)
-            circle.roundBorder(width: step / 4, radius: circle.frame.height / 2, color: .black)
+            circle.roundBorder(width: step / 4, radius: circle.frame.height / 2, color: darkBackground)
             let missedText = getStrokeText("\(missedCount)", .white,
                                            strokeWidth: -2, strokColor: .black,
                                            font: MyFont.heavyDigit(ofSize: step * 2.4))
