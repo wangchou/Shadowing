@@ -84,7 +84,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
             isReachDailyByThisGame = todaySentenceCount >= dailyGoal &&
                 todaySentenceCount - record.correctCount < dailyGoal
         }
-        let countDownSecs = isReachDailyByThisGame ? 7 : 5
+        let countDownSecs = isReachDailyByThisGame ? 8 : 5
         button.setIconImage(named: "baseline_pause_black_48pt", title: " \(i18n.nextGame) (\(countDownSecs)\(i18n.secs))", tintColor: .white, isIconOnLeft: true)
 
         if context.gameMode == .topicMode {

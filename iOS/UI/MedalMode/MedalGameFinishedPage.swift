@@ -264,7 +264,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
             }
         }
 
-        let countDownSecs = isJustReachDailyGoal ? 7 : 5
+        let countDownSecs = isJustReachDailyGoal ? 8 : 5
         button.setIconImage(named: "baseline_play_arrow_black_48pt",
                             title: " \(i18n.nextGame) (\(countDownSecs)\(i18n.secs))",
                             tintColor: .white,
