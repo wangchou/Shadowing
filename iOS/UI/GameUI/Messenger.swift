@@ -196,7 +196,7 @@ class Messenger: UIViewController {
 
         myLabel.frame = CGRect(x: 5, y: y, width: width, height: height)
 
-        myLabel.roundBorder(width: 1.5, radius: 15, color: rgb(40, 40, 40))
+        myLabel.roundBorder(width: 1.5, radius: 15, color: rgb(40, 40, 40).withAlphaComponent(0.85))
 
         switch pos {
         case .left:
@@ -204,11 +204,11 @@ class Messenger: UIViewController {
         case .right:
             myLabel.frame.origin.x = CGFloat(Int(screen.width) - 5 - Int(myLabel.frame.width))
             if text.string == "..." {
-                myLabel.backgroundColor = .gray
+                myLabel.backgroundColor = UIColor.gray.withBrightness(0.7)
             } else if text.string == i18n.iCannotHearYou {
-                myLabel.backgroundColor = myRed
+                myLabel.backgroundColor = myRed.withBrightness(1)
             } else {
-                myLabel.backgroundColor = myGreen
+                myLabel.backgroundColor = myGreen.withBrightness(0.85)
             }
         case .center:
             myLabel.backgroundColor = .clear
