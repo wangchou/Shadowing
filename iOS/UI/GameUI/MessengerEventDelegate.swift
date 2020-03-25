@@ -240,7 +240,7 @@ extension Messenger: GameEventDelegate {
 
         updateLastLabelText(attributed, pos: .right)
 
-        lastLabel.backgroundColor = score.bubbleColor
+        lastLabel.backgroundColor = score.color
 //        sentenceCountLabel.text = "\(i18n.remaining)\(context.sentences.count - context.sentenceIndex - 1)\(i18n.sentenceUnit)"
     }
 }

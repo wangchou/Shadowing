@@ -43,13 +43,6 @@ struct Score: Codable {
             return myRed
         }
 
-        var bubbleColor: UIColor {
-            if type == .perfect { return myGreen.withBrightness(0.87) }
-            if type == .great { return myGreen.withBrightness(0.87) }
-            if type == .good { return myOrange.withBrightness(1.05) }
-            return myRed.withBrightness(1.1)
-        }
-
         var valueText: String { return "\(value)\(i18n.pts)" }
     #endif
 }
