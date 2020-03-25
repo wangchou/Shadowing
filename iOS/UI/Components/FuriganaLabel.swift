@@ -4,7 +4,23 @@ import UIKit
 class FuriganaLabel: UILabel {
     private var height: CGFloat = 60
     private var topShift: CGFloat {
-        return text?.jpnType == JpnType.noKanjiAndNumber ? 13 : 6
+        return hasRuby ? 6 : 13
+    }
+
+    private var hasRuby: Bool {
+        var foundRuby = false
+        if let attributedText = attributedText {
+            attributedText.enumerateAttribute(
+                rubyAnnotationKey,
+                in: NSRange(location: 0, length: attributedText.length),
+                options: .longestEffectiveRangeNotRequired) { obj, _, _ in
+                    if obj != nil {
+                        foundRuby = true
+                    }
+            }
+        }
+
+        return foundRuby
     }
 
     var widthPadding: CGFloat = 10
@@ -82,7 +98,7 @@ class FuriganaLabel: UILabel {
         }
 
         if #available(iOS 13, *) {
-            height += text?.jpnType == JpnType.noKanjiAndNumber ? 7 : 0
+            height += hasRuby ? 0 : 7
         }
 
         return height + topShift
