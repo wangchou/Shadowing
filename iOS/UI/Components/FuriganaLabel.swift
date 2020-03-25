@@ -3,9 +3,8 @@ import UIKit
 
 class FuriganaLabel: UILabel {
     private var height: CGFloat = 60
-    private var topShift: CGFloat { return 6 }
-    private var topTranslateY: CGFloat {
-        return text?.jpnType == JpnType.noKanjiAndNumber ? 5 : 0
+    private var topShift: CGFloat {
+        return text?.jpnType == JpnType.noKanjiAndNumber ? 13 : 6
     }
 
     var widthPadding: CGFloat = 10
@@ -48,7 +47,7 @@ class FuriganaLabel: UILabel {
         let frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, attributed.length), path, nil)
 
         context.textMatrix = CGAffineTransform.identity
-        context.translateBy(x: 0 + widthPadding, y: rect.height + topShift + topTranslateY)
+        context.translateBy(x: 0 + widthPadding, y: rect.height + topShift)
         context.scaleBy(x: 1.0, y: -1.0)
 
         CTFrameDraw(frame, context)
@@ -78,11 +77,15 @@ class FuriganaLabel: UILabel {
             height += ceil(ascent + leading)
         }
 
-        if #available(iOS 13, *), height + topShift + topTranslateY > 50 {
+        if #available(iOS 13, *), height + topShift > 50 {
             height += 4
         }
 
-        return height + topShift + topTranslateY
+        if #available(iOS 13, *) {
+            height += text?.jpnType == JpnType.noKanjiAndNumber ? 7 : 0
+        }
+
+        return height + topShift
     }
 
     // sizeToFit on width
