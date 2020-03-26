@@ -200,15 +200,13 @@ func translatorSay(_ text: String) -> Promise<Void> {
         translationLocale = "ja-JP"
     }
     var voiceId = "unknown"
-    var rate = normalRate
     if translationLocale.hasPrefix("zh") {
         voiceId = getDefaultVoiceId(language: "zh-TW", isPreferEnhanced: false)
-        rate = fastRate
     } else {
         voiceId = getDefaultVoiceId(language: translationLocale)
     }
-    print("translator:", voiceId, text, rate)
-    return engine.speak(text: text, speaker: voiceId, rate: rate)
+    print("translator:", voiceId, text)
+    return engine.speak(text: text, speaker: voiceId, rate: context.teachingRate)
 }
 
 func assisantSay(_ text: String) -> Promise<Void> {
