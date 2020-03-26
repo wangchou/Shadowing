@@ -82,7 +82,7 @@ class SentencesTableCell: UITableViewCell {
         targetString = sentence
         sentenceLabel.widthPadding = 4
         userSaidSentenceLabel.widthPadding = 4
-        translationTextView.textContainerInset = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
+        translationTextView.textContainerInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
 
         if let tokenInfos = kanaTokenInfosCacheDictionary[sentence] {
             sentenceLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)

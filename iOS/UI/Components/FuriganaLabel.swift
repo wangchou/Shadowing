@@ -4,7 +4,7 @@ import UIKit
 class FuriganaLabel: UILabel {
     private var height: CGFloat = 60
     private var topShift: CGFloat {
-        return hasRuby ? 6 : 13
+        return 10
     }
 
     private var hasRuby: Bool {
@@ -93,12 +93,8 @@ class FuriganaLabel: UILabel {
             height += ceil(ascent + leading)
         }
 
-        if #available(iOS 13, *), height + topShift > 50 {
-            height += 4
-        }
-
         if #available(iOS 13, *) {
-            height += hasRuby ? 0 : 7
+            height += 3
         }
 
         return height + topShift
