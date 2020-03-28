@@ -47,7 +47,7 @@ extension Messenger: GameEventDelegate {
                 } else {
                     attrText.append(rubyAttrStr(context.targetString))
                     attrText.addAttribute(.backgroundColor, value: highlightColor, range: allRange)
-                    var whiteRange = NSRange(location: allRange.upperBound, length: context.targetString.count - allRange.upperBound)
+                    let whiteRange = NSRange(location: allRange.upperBound, length: context.targetString.count - allRange.upperBound)
                     attrText.addAttribute(.backgroundColor, value: UIColor.clear, range: whiteRange)
                 }
                 lastLabel.attributedText = attrText
@@ -236,7 +236,7 @@ extension Messenger: GameEventDelegate {
             attributed.append(rubyAttrStr(i18n.iCannotHearYou))
         }
 
-        attributed.append(rubyAttrStr(" \(score.valueText) \(score.type == .perfect ? "💯" : "")"))
+        attributed.append(rubyAttrStr(" \(score.valueText) \(score.type == .perfect ? "💯　" : "")"))
 
         updateLastLabelText(attributed, pos: .right)
 
