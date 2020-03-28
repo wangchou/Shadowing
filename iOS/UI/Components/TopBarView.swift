@@ -23,7 +23,7 @@ class TopBarView: UIView, XibView {
     override func awakeFromNib() {
         super.awakeFromNib()
         xibSetup()
-        leftButton.setIconImage(named: "round_stars_black_48pt")
+        leftButton.setIconImage(named: "round_arrow_back_ios_black_48pt")
         rightButton.setIconImage(named: "round_arrow_forward_ios_black_48pt", isIconOnLeft: false)
         titleLabel.textColor = UIColor(white: 0, alpha: 0.66)
     }
@@ -32,7 +32,7 @@ class TopBarView: UIView, XibView {
         super.prepareForInterfaceBuilder()
         xibSetup()
         contentView?.prepareForInterfaceBuilder()
-        leftButton.setIconImage(named: "round_stars_black_48pt")
+        leftButton.setIconImage(named: "round_arrow_back_ios_black_48pt")
         rightButton.setIconImage(named: "round_arrow_forward_ios_black_48pt", isIconOnLeft: false)
         titleLabel.textColor = UIColor(white: 0, alpha: 0.66)
     }

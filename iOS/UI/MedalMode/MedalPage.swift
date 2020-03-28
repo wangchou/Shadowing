@@ -91,7 +91,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
             (rootViewController.current as? UIPageViewController)?.goToPreviousPage()
         }
 
-        addIconButton(iconName: "outline_all_inclusive_black_\(iconSize)",
+        addIconButton(iconName: "round_arrow_forward_ios_black_\(iconSize)",
                       39, y, 7, 7) {
             (rootViewController.current as? UIPageViewController)?.goToNextPage()
         }
