@@ -8,13 +8,12 @@
 
 import UIKit
 
-let topicForAll = i18n.all
-var isTopicOn: [String: Bool] = [topicForAll: true]
+var isTopicOn: [String: Bool] = [abilities[0]: true]
 class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
     var gridCount: Int = 5
 
     var barWidth: CGFloat {
-        return max(screen.width, 15 + abilities.count.c * 55)
+        return max(screen.width, 15 + (abilities.count.c - 1) * 55)
     }
 
     func render() {
@@ -23,13 +22,8 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
         let tagPoints = getTagPoints()
         let tagMaxPoints = getTagMaxPoints()
 
-        for i in 0 ... abilities.count {
-            var buttonTitle = ""
-            if i == 0 {
-                buttonTitle = topicForAll
-            } else {
-                buttonTitle = i18n.isZh ? abilities[i - 1] : jaAbilities[i - 1]
-            }
+        for i in 0 ..< abilities.count {
+            let buttonTitle = i18n.isZh ? abilities[i] : jaAbilities[i]
             let zhTitle = getZhTitle(str: buttonTitle)
             addButton(title: buttonTitle,
                       index: i,
@@ -84,18 +78,10 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
         }
 
         button.addTapGestureRecognizer { [weak self] in
-
-            if zhTitle == topicForAll {
-                isTopicOn = [topicForAll: true]
-            } else {
-                isTopicOn[topicForAll] = false
-                if isTopicOn[zhTitle] == true {
-                    isTopicOn[zhTitle] = false
-                    if !isTopicOn.values.contains(true) {
-                        isTopicOn[topicForAll] = true
-                    }
-                } else {
-                    isTopicOn[zhTitle] = true
+            for i in 0 ..< abilities.count {
+                let buttonTitle = i18n.isZh ? abilities[i] : jaAbilities[i]
+                if let title = self?.getZhTitle(str: buttonTitle) {
+                    isTopicOn[title] = zhTitle == title
                 }
             }
             self?.render()

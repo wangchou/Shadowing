@@ -28,15 +28,6 @@ func getTagPoints(isWithoutLast: Bool = false) -> [String: Int] {
             }
         }
     }
-
-    var sum = 0
-    let mainTags = abilities.map { "#\($0)" }
-    for (key, value) in tagPoints {
-        if mainTags.contains(key) {
-            sum += value
-        }
-    }
-    tagPoints["#" + topicForAll] = sum
     return tagPoints
 }
 
@@ -49,9 +40,6 @@ func getTagMaxPoints() -> [String: Int] {
             tagMaxPoints[tag] = (tagMaxPoints[tag] ?? 0) + 100
         }
     }
-    var sum = 0
-    tagMaxPoints.values.forEach { p in sum += p }
-    tagMaxPoints["#" + topicForAll] = sum
     return tagMaxPoints
 }
 
@@ -86,7 +74,6 @@ func loadDataSets() {
 }
 
 private func isDataSetTopicOn(sentences: [String]) -> Bool {
-    guard isTopicOn[topicForAll] != true else { return true }
     let key = sentences[0]
     guard let topic = datasetKeyToTags[key]?[0].split(separator: "#")[0].s,
         let isOn = isTopicOn[topic] else { return false }
