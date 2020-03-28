@@ -124,8 +124,8 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
     private func addTipBox() {
         if isIPad { return }
-        let y = Int((screen.height - bottomButtonHeight) / step) - 1
-        let h = 6
+        let y = Int((screen.height - bottomButtonHeight) / step) - 3
+        let h = 8
         let font = MyFont.regular(ofSize: step * 2)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = step / 3
