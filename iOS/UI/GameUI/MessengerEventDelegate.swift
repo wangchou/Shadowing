@@ -46,9 +46,12 @@ extension Messenger: GameEventDelegate {
                     attrText = getFuriganaString(tokenInfos: tokenInfos, highlightRange: fixedRange)
                 } else {
                     attrText.append(rubyAttrStr(context.targetString))
-                    attrText.addAttribute(.backgroundColor, value: highlightColor, range: allRange)
+                    attrText.addAttributes([
+                        .nantesLabelBackgroundFillColor: highlightColor,
+                        .nantesLabelBackgroundCornerRadius: 5
+                    ], range: allRange)
                     let whiteRange = NSRange(location: allRange.upperBound, length: context.targetString.count - allRange.upperBound)
-                    attrText.addAttribute(.backgroundColor, value: UIColor.clear, range: whiteRange)
+                    attrText.addAttribute(.nantesLabelBackgroundFillColor, value: UIColor.clear, range: whiteRange)
                 }
                 lastLabel.attributedText = attrText
             }

@@ -1,7 +1,17 @@
 import Foundation
 import UIKit
 
+public extension NSAttributedString.Key {
+    static let nantesLabelBackgroundCornerRadius: NSAttributedString.Key = .init("NantesLabelBackgroundCornerRadiusAttribute")
+    static let nantesLabelBackgroundFillColor: NSAttributedString.Key = .init("NantesLabelBackgroundFillColorAttribute")
+    static let nantesLabelBackgroundFillPadding: NSAttributedString.Key = .init("NantesLabelBackgroundFillPaddingAttribute")
+    static let nantesLabelBackgroundLineWidth: NSAttributedString.Key = .init("NantesLabelBackgroundLineWidthAttribute")
+    static let nantesLabelBackgroundStrokeColor: NSAttributedString.Key = .init("NantesLabelBackgroundStrokeColorAttribute")
+    static let nantesLabelStrikeOut: NSAttributedString.Key = .init("NantesLabelStrikeOutAttribute")
+}
+
 class FuriganaLabel: UILabel {
+    open var linkBackgroundEdgeInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     private var height: CGFloat = 60
     private var topShift: CGFloat {
         return 10
@@ -66,7 +76,92 @@ class FuriganaLabel: UILabel {
         context.translateBy(x: 0 + widthPadding, y: rect.height + topShift)
         context.scaleBy(x: 1.0, y: -1.0)
 
+        drawBackground(frame, inRect: rect, context: context)
+
         CTFrameDraw(frame, context)
+    }
+
+    // modified from
+    // https://github.com/instacart/Nantes/blob/master/Source/Classes/Drawing/Drawing.swift
+    private func drawBackground(_ frame: CTFrame, inRect rect: CGRect, context: CGContext) {
+        guard let lines = CTFrameGetLines(frame) as [AnyObject] as? [CTLine] else {
+            return
+        }
+
+        var origins: [CGPoint] = .init(repeating: .zero, count: lines.count)
+        CTFrameGetLineOrigins(frame, CFRange(location: 0, length: 0), &origins)
+
+        var lineIndex = 0
+        for line in lines {
+            var ascent: CGFloat = 0.0
+            var descent: CGFloat = 0.0
+            var leading: CGFloat = 0.0
+
+            let width = CGFloat(CTLineGetTypographicBounds(line, &ascent, &descent, &leading))
+
+            guard let glyphRuns = CTLineGetGlyphRuns(line) as [AnyObject] as? [CTRun] else {
+                continue
+            }
+
+            for glyphRun in glyphRuns {
+                guard let attributes = CTRunGetAttributes(glyphRun) as NSDictionary as? [NSAttributedString.Key: Any] else {
+                    continue
+                }
+
+                let strokeColor: UIColor? = attributes[.nantesLabelBackgroundStrokeColor] as? UIColor
+                let fillColor: UIColor? = attributes[.nantesLabelBackgroundFillColor] as? UIColor
+                let fillPadding: UIEdgeInsets = attributes[.nantesLabelBackgroundFillPadding] as? UIEdgeInsets ?? .zero
+                let cornerRadius: CGFloat = attributes[.nantesLabelBackgroundCornerRadius] as? CGFloat ?? 0.0
+                let lineWidth: CGFloat = attributes[.nantesLabelBackgroundLineWidth] as? CGFloat ?? 0.0
+
+                guard strokeColor != nil || fillColor != nil else {
+                    lineIndex += 1
+                    continue
+                }
+
+                var runBounds: CGRect = .zero
+                var runAscent: CGFloat = 0.0
+                var runDescent: CGFloat = 0.0
+
+                runBounds.size.width = CGFloat(CTRunGetTypographicBounds(glyphRun, CFRange(location: 0, length: 0), &runAscent, &runDescent, nil)) + fillPadding.left + fillPadding.right
+                runBounds.size.height = ascent + descent + fillPadding.top + fillPadding.bottom // modified
+
+                var xOffset: CGFloat = 0.0
+                let glyphRange = CTRunGetStringRange(glyphRun)
+
+                switch CTRunGetStatus(glyphRun) {
+                case .rightToLeft:
+                    xOffset = CTLineGetOffsetForStringIndex(line, glyphRange.location + glyphRange.length, nil)
+                default:
+                    xOffset = CTLineGetOffsetForStringIndex(line, glyphRange.location, nil)
+                }
+
+                runBounds.origin.x = origins[lineIndex].x + rect.origin.x + xOffset - fillPadding.left - rect.origin.x
+                runBounds.origin.y = origins[lineIndex].y + rect.origin.y - fillPadding.bottom - rect.origin.y - runDescent
+
+                // We don't want to draw too far to the right
+                runBounds.size.width = runBounds.width > width ? width : runBounds.width
+
+                let roundedRect = runBounds.inset(by: linkBackgroundEdgeInset).insetBy(dx: lineWidth, dy: lineWidth)
+                let path: CGPath = UIBezierPath(roundedRect: roundedRect, cornerRadius: cornerRadius).cgPath
+
+                context.setLineJoin(.round)
+
+                if let fillColor = fillColor {
+                    context.setFillColor(fillColor.cgColor)
+                    context.addPath(path)
+                    context.fillPath()
+                }
+
+                if let strokeColor = strokeColor {
+                    context.setStrokeColor(strokeColor.cgColor)
+                    context.addPath(path)
+                    context.strokePath()
+                }
+            }
+
+            lineIndex += 1
+        }
     }
 
     func heightOfCoreText(attributed: NSAttributedString, width: CGFloat) -> CGFloat {
