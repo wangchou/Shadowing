@@ -155,6 +155,7 @@ extension Messenger: GameEventDelegate {
         var isPrefixParticleRemoved = false
         var isPrefixSubVerbRemoved = false
         var isParticleSuffixExtended = false
+        var isWordExpanded = false
 
         for i in 0 ..< tokenInfos.count {
             let part = tokenInfos[i]
@@ -205,10 +206,27 @@ extension Messenger: GameEventDelegate {
                 }
             }
 
+            // fixed to whole word
+            // "有給休假"，只 highlight "休假" 時 => 改 highlight 整個字
+            func expandWholeWord() {
+                if  currentIndex <= lowerBound,
+                    lowerBound < currentIndex + partLen {
+                    lowerBound = currentIndex
+                }
+
+                if  !isWordExpanded,
+                    currentIndex < upperBound,
+                    upperBound < currentIndex + partLen {
+                    upperBound = currentIndex + partLen
+                    isWordExpanded = true
+                }
+            }
+
             // for "っています" subVerb + Particle + others
             trimPrefixSubVerb()
             trimPrefixParticle()
             trimPrefixSubVerb()
+            expandWholeWord()
 
             // suffix particle extend
             if !isParticleSuffixExtended,
