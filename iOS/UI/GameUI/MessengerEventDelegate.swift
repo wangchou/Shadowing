@@ -44,17 +44,17 @@ extension Messenger: GameEventDelegate {
                 if let tokenInfos = kanaTokenInfosCacheDictionary[context.targetString] {
                     let fixedRange = getRangeWithParticleFix(tokenInfos: tokenInfos, allRange: allRange)
                     attrText = getFuriganaString(tokenInfos: tokenInfos, highlightRange: fixedRange)
-                    attrText.addAttributes([.nantesLabelBackgroundFillColor: highlightColor,
-                                            .nantesLabelBackgroundCornerRadius: 5],
+                    attrText.addAttributes([.hightlightBackgroundFillColor: highlightColor,
+                                            .hightlightBackgroundCornerRadius: 5],
                                            range: fixedRange!)
                 } else {
                     attrText.append(rubyAttrStr(context.targetString))
                     attrText.addAttributes([
-                        .nantesLabelBackgroundFillColor: highlightColor,
-                        .nantesLabelBackgroundCornerRadius: 5
+                        .hightlightBackgroundFillColor: highlightColor,
+                        .hightlightBackgroundCornerRadius: 5
                     ], range: allRange)
                     let whiteRange = NSRange(location: allRange.upperBound, length: context.targetString.count - allRange.upperBound)
-                    attrText.addAttribute(.nantesLabelBackgroundFillColor, value: UIColor.clear, range: whiteRange)
+                    attrText.addAttribute(.hightlightBackgroundFillColor, value: UIColor.clear, range: whiteRange)
                 }
                 lastLabel.attributedText = attrText
             }

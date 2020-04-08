@@ -2,12 +2,8 @@ import Foundation
 import UIKit
 
 public extension NSAttributedString.Key {
-    static let nantesLabelBackgroundCornerRadius: NSAttributedString.Key = .init("NantesLabelBackgroundCornerRadiusAttribute")
-    static let nantesLabelBackgroundFillColor: NSAttributedString.Key = .init("NantesLabelBackgroundFillColorAttribute")
-    static let nantesLabelBackgroundFillPadding: NSAttributedString.Key = .init("NantesLabelBackgroundFillPaddingAttribute")
-    static let nantesLabelBackgroundLineWidth: NSAttributedString.Key = .init("NantesLabelBackgroundLineWidthAttribute")
-    static let nantesLabelBackgroundStrokeColor: NSAttributedString.Key = .init("NantesLabelBackgroundStrokeColorAttribute")
-    static let nantesLabelStrikeOut: NSAttributedString.Key = .init("NantesLabelStrikeOutAttribute")
+    static let hightlightBackgroundCornerRadius: NSAttributedString.Key = .init("hightlightBackgroundCornerRadiusAttribute")
+    static let hightlightBackgroundFillColor: NSAttributedString.Key = .init("highlightBackgroundFillColorAttribute")
 }
 
 class FuriganaLabel: UILabel {
@@ -108,23 +104,21 @@ class FuriganaLabel: UILabel {
                 guard let attributes = CTRunGetAttributes(glyphRun) as NSDictionary as? [NSAttributedString.Key: Any] else {
                     continue
                 }
-                if (attributes[.nantesLabelBackgroundFillColor] as? UIColor) == highlightColor {
+                if (attributes[.hightlightBackgroundFillColor] as? UIColor) == highlightColor {
                     backgroundRectCount += 1
                 }
             }
+
             var backgroundRectIndex = 0
             for glyphRun in glyphRuns {
                 guard let attributes = CTRunGetAttributes(glyphRun) as NSDictionary as? [NSAttributedString.Key: Any] else {
                     continue
                 }
 
-                let strokeColor: UIColor? = attributes[.nantesLabelBackgroundStrokeColor] as? UIColor
-                let fillColor: UIColor? = attributes[.nantesLabelBackgroundFillColor] as? UIColor
-                let fillPadding: UIEdgeInsets = attributes[.nantesLabelBackgroundFillPadding] as? UIEdgeInsets ?? .zero
-                let cornerRadius: CGFloat = attributes[.nantesLabelBackgroundCornerRadius] as? CGFloat ?? 0.0
-                let lineWidth: CGFloat = attributes[.nantesLabelBackgroundLineWidth] as? CGFloat ?? 0.0
+                let fillColor: UIColor? = attributes[.hightlightBackgroundFillColor] as? UIColor
+                let cornerRadius: CGFloat = attributes[.hightlightBackgroundCornerRadius] as? CGFloat ?? 0.0
 
-                guard strokeColor != nil || fillColor != nil else {
+                guard fillColor != nil else {
                     lineIndex += 1
                     continue
                 }
@@ -133,8 +127,8 @@ class FuriganaLabel: UILabel {
                 var runAscent: CGFloat = 0.0
                 var runDescent: CGFloat = 0.0
 
-                runBounds.size.width = CGFloat(CTRunGetTypographicBounds(glyphRun, CFRange(location: 0, length: 0), &runAscent, &runDescent, nil)) + fillPadding.left + fillPadding.right
-                runBounds.size.height = ascent + descent + fillPadding.top + fillPadding.bottom // modified
+                runBounds.size.width = CGFloat(CTRunGetTypographicBounds(glyphRun, CFRange(location: 0, length: 0), &runAscent, &runDescent, nil))
+                runBounds.size.height = ascent + descent
 
                 var xOffset: CGFloat = 0.0
                 let glyphRange = CTRunGetStringRange(glyphRun)
@@ -146,27 +140,26 @@ class FuriganaLabel: UILabel {
                     xOffset = CTLineGetOffsetForStringIndex(line, glyphRange.location, nil)
                 }
 
-                runBounds.origin.x = origins[lineIndex].x + rect.origin.x + xOffset - fillPadding.left - rect.origin.x
-                runBounds.origin.y = origins[lineIndex].y + rect.origin.y - fillPadding.bottom - rect.origin.y - runDescent
+                runBounds.origin.x = origins[lineIndex].x + rect.origin.x + xOffset  - rect.origin.x
+                runBounds.origin.y = origins[lineIndex].y + rect.origin.y  - rect.origin.y - runDescent
 
                 // We don't want to draw too far to the right
                 runBounds.size.width = runBounds.width > width ? width : runBounds.width
 
-                let roundedRect = runBounds.inset(by: linkBackgroundEdgeInset).insetBy(dx: lineWidth, dy: lineWidth)
-                let path: CGPath = UIBezierPath(roundedRect: roundedRect,
-                                                byRoundingCorners: [.bottomLeft, .bottomRight],
-                                                cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)).cgPath
                 context.setLineJoin(.round)
 
                 if let fillColor = fillColor {
                     var roundingCorners: UIRectCorner = []
+
                     if backgroundRectIndex == 0 {
                         roundingCorners = roundingCorners.union([.bottomLeft, .topLeft])
                     }
+
                     if backgroundRectIndex == backgroundRectCount - 1 {
                         roundingCorners = roundingCorners.union([.bottomRight, .topRight])
                     }
-                    let path: CGPath = UIBezierPath(roundedRect: roundedRect,
+
+                    let path: CGPath = UIBezierPath(roundedRect: runBounds,
                                                     byRoundingCorners: roundingCorners,
                                                     cornerRadii: CGSize(width: cornerRadius,
                                                                         height: cornerRadius)).cgPath
@@ -177,12 +170,6 @@ class FuriganaLabel: UILabel {
                     if fillColor == highlightColor {
                         backgroundRectIndex += 1
                     }
-                }
-
-                if let strokeColor = strokeColor {
-                    context.setStrokeColor(strokeColor.cgColor)
-                    context.addPath(path)
-                    context.strokePath()
                 }
             }
 

@@ -34,7 +34,7 @@ import Promises
 
         var attributes: [NSAttributedString.Key: Any] = [
             .font: isSimple ? fontRegular : fontBold,
-            .nantesLabelBackgroundFillColor: UIColor.clear,
+            .hightlightBackgroundFillColor: UIColor.clear,
             //.nantesLabelBackgroundCornerRadius: 5,
         ]
 
