@@ -103,6 +103,16 @@ class FuriganaLabel: UILabel {
                 continue
             }
 
+            var backgroundRectCount = 0
+            for glyphRun in glyphRuns {
+                guard let attributes = CTRunGetAttributes(glyphRun) as NSDictionary as? [NSAttributedString.Key: Any] else {
+                    continue
+                }
+                if (attributes[.nantesLabelBackgroundFillColor] as? UIColor) == highlightColor {
+                    backgroundRectCount += 1
+                }
+            }
+            var backgroundRectIndex = 0
             for glyphRun in glyphRuns {
                 guard let attributes = CTRunGetAttributes(glyphRun) as NSDictionary as? [NSAttributedString.Key: Any] else {
                     continue
@@ -143,14 +153,30 @@ class FuriganaLabel: UILabel {
                 runBounds.size.width = runBounds.width > width ? width : runBounds.width
 
                 let roundedRect = runBounds.inset(by: linkBackgroundEdgeInset).insetBy(dx: lineWidth, dy: lineWidth)
-                let path: CGPath = UIBezierPath(roundedRect: roundedRect, cornerRadius: cornerRadius).cgPath
-
+                let path: CGPath = UIBezierPath(roundedRect: roundedRect,
+                                                byRoundingCorners: [.bottomLeft, .bottomRight],
+                                                cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)).cgPath
                 context.setLineJoin(.round)
 
                 if let fillColor = fillColor {
+                    var roundingCorners: UIRectCorner = []
+                    if backgroundRectIndex == 0 {
+                        roundingCorners = roundingCorners.union([.bottomLeft, .topLeft])
+                    }
+                    if backgroundRectIndex == backgroundRectCount - 1 {
+                        roundingCorners = roundingCorners.union([.bottomRight, .topRight])
+                    }
+                    let path: CGPath = UIBezierPath(roundedRect: roundedRect,
+                                                    byRoundingCorners: roundingCorners,
+                                                    cornerRadii: CGSize(width: cornerRadius,
+                                                                        height: cornerRadius)).cgPath
                     context.setFillColor(fillColor.cgColor)
                     context.addPath(path)
                     context.fillPath()
+
+                    if fillColor == highlightColor {
+                        backgroundRectIndex += 1
+                    }
                 }
 
                 if let strokeColor = strokeColor {

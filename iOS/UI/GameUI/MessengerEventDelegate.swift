@@ -44,6 +44,9 @@ extension Messenger: GameEventDelegate {
                 if let tokenInfos = kanaTokenInfosCacheDictionary[context.targetString] {
                     let fixedRange = getRangeWithParticleFix(tokenInfos: tokenInfos, allRange: allRange)
                     attrText = getFuriganaString(tokenInfos: tokenInfos, highlightRange: fixedRange)
+                    attrText.addAttributes([.nantesLabelBackgroundFillColor: highlightColor,
+                                            .nantesLabelBackgroundCornerRadius: 5],
+                                           range: fixedRange!)
                 } else {
                     attrText.append(rubyAttrStr(context.targetString))
                     attrText.addAttributes([
