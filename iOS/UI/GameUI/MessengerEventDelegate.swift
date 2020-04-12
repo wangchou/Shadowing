@@ -44,14 +44,12 @@ extension Messenger: GameEventDelegate {
                 if let tokenInfos = kanaTokenInfosCacheDictionary[context.targetString] {
                     let fixedRange = getRangeWithParticleFix(tokenInfos: tokenInfos, allRange: allRange)
                     attrText = getFuriganaString(tokenInfos: tokenInfos, highlightRange: fixedRange)
-                    attrText.addAttributes([.hightlightBackgroundFillColor: highlightColor,
-                                            .hightlightBackgroundCornerRadius: 5],
+                    attrText.addAttributes([.hightlightBackgroundFillColor: highlightColor],
                                            range: fixedRange!)
                 } else {
                     attrText.append(rubyAttrStr(context.targetString))
                     attrText.addAttributes([
-                        .hightlightBackgroundFillColor: highlightColor,
-                        .hightlightBackgroundCornerRadius: 5
+                        .hightlightBackgroundFillColor: highlightColor
                     ], range: allRange)
                     let whiteRange = NSRange(location: allRange.upperBound, length: context.targetString.count - allRange.upperBound)
                     attrText.addAttribute(.hightlightBackgroundFillColor, value: UIColor.clear, range: whiteRange)

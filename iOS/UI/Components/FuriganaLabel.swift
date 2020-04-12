@@ -2,7 +2,6 @@ import Foundation
 import UIKit
 
 public extension NSAttributedString.Key {
-    static let hightlightBackgroundCornerRadius: NSAttributedString.Key = .init("hightlightBackgroundCornerRadiusAttribute")
     static let hightlightBackgroundFillColor: NSAttributedString.Key = .init("highlightBackgroundFillColorAttribute")
 }
 
@@ -27,6 +26,10 @@ class FuriganaLabel: UILabel {
         }
 
         return foundRuby
+    }
+
+    private var isEnglish: Bool {
+        return attributedText?.string.isNoKanji ?? true
     }
 
     var widthPadding: CGFloat = 10
@@ -109,14 +112,13 @@ class FuriganaLabel: UILabel {
                 }
             }
 
-            var backgroundRectIndex = 0
+            var unitedHighlightBounds: CGRect = CGRect(x: CGFloat.infinity, y: CGFloat.infinity, width: 0, height: 0)
             for glyphRun in glyphRuns {
                 guard let attributes = CTRunGetAttributes(glyphRun) as NSDictionary as? [NSAttributedString.Key: Any] else {
                     continue
                 }
 
                 let fillColor: UIColor? = attributes[.hightlightBackgroundFillColor] as? UIColor
-                let cornerRadius: CGFloat = attributes[.hightlightBackgroundCornerRadius] as? CGFloat ?? 0.0
 
                 guard fillColor != nil else {
                     lineIndex += 1
@@ -146,31 +148,36 @@ class FuriganaLabel: UILabel {
                 // We don't want to draw too far to the right
                 runBounds.size.width = runBounds.width > width ? width : runBounds.width
 
-                context.setLineJoin(.round)
+                if fillColor == highlightColor {
+                    let newX = min(unitedHighlightBounds.origin.x, runBounds.origin.x)
+                    let newY = min(unitedHighlightBounds.origin.y, runBounds.origin.y)
+                    let newWidth = max(unitedHighlightBounds.width, runBounds.origin.x + runBounds.width - newX)
 
-                if let fillColor = fillColor {
-                    var roundingCorners: UIRectCorner = []
-
-                    if backgroundRectIndex == 0 {
-                        roundingCorners = roundingCorners.union([.bottomLeft, .topLeft])
-                    }
-
-                    if backgroundRectIndex == backgroundRectCount - 1 {
-                        roundingCorners = roundingCorners.union([.bottomRight, .topRight])
-                    }
-
+                    unitedHighlightBounds = CGRect(x: newX,
+                                          y: newY,
+                                          width: newWidth ,
+                                          height: ascent + descent)
+                } else if let fillColor = fillColor {
+                    context.setLineJoin(.round)
                     let path: CGPath = UIBezierPath(roundedRect: runBounds,
-                                                    byRoundingCorners: roundingCorners,
-                                                    cornerRadii: CGSize(width: cornerRadius,
-                                                                        height: cornerRadius)).cgPath
+                                                    byRoundingCorners: [.bottomLeft, .topLeft, .bottomRight, .topRight],
+                                                    cornerRadii: CGSize(width: 5,
+                                                                        height: 5)).cgPath
                     context.setFillColor(fillColor.cgColor)
                     context.addPath(path)
                     context.fillPath()
-
-                    if fillColor == highlightColor {
-                        backgroundRectIndex += 1
-                    }
                 }
+            }
+
+            if unitedHighlightBounds.width > 0 {
+                context.setLineJoin(.round)
+                let path: CGPath = UIBezierPath(roundedRect: unitedHighlightBounds.expanding(padX: isEnglish ? 3 : 1, padY: 3),
+                                                byRoundingCorners: [.bottomLeft, .topLeft, .bottomRight, .topRight],
+                                                cornerRadii: CGSize(width: 5,
+                                                                    height: 5)).cgPath
+                context.setFillColor(highlightColor.cgColor)
+                context.addPath(path)
+                context.fillPath()
             }
 
             lineIndex += 1

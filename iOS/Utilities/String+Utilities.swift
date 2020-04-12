@@ -45,6 +45,11 @@ extension String {
         return JpnType.mixed
     }
 
+    var isNoKanji: Bool {
+        guard let kanjiRange = self.range(of: "[\\p{Han}]*[\\p{Han}]", options: .regularExpression) else { return true }
+        return false
+    }
+
     #if os(iOS)
         var furiganaAttributedString: Promise<NSMutableAttributedString> {
             let promise = Promise<NSMutableAttributedString>.pending()

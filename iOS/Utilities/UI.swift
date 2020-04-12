@@ -155,6 +155,13 @@ extension CGRect {
                       height: height - 2 * pad)
     }
 
+    func expanding(padX: CGFloat, padY: CGFloat) -> CGRect {
+        return CGRect(x: x - padX,
+                      y: y - padY,
+                      width: width + 2 * padX,
+                      height: height + 2 * padY)
+    }
+
     var y: CGFloat {
         return origin.y
     }
