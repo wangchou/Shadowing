@@ -208,11 +208,7 @@ class FuriganaLabel: UILabel {
             height += ceil(ascent + leading)
         }
 
-        height += 2
-
-        if height > 50 && isEnglish {
-            height += 5
-        }
+        height += height > 50 ? 7 : 2
 
         return height + topShift
     }

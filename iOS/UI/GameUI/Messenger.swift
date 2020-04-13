@@ -196,7 +196,7 @@ class Messenger: UIViewController {
 
         myLabel.frame = CGRect(x: 5, y: y, width: width, height: height)
 
-        myLabel.roundBorder(width: 1.5, radius: 15, color: rgb(40, 40, 40).withAlphaComponent(0.85))
+        myLabel.roundBorder(width: 1.5, radius: 15, color: rgb(50, 50, 50).withAlphaComponent(0.85))
 
         switch pos {
         case .left:

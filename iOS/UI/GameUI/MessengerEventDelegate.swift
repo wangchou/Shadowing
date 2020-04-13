@@ -262,7 +262,10 @@ extension Messenger: GameEventDelegate {
 
         updateLastLabelText(attributed, pos: .right)
 
-        lastLabel.backgroundColor = score.color
-//        sentenceCountLabel.text = "\(i18n.remaining)\(context.sentences.count - context.sentenceIndex - 1)\(i18n.sentenceUnit)"
+        var color = score.color
+        if color == myRed {
+            color = myRed.withBrightness(1.15)
+        }
+        lastLabel.backgroundColor = color
     }
 }

@@ -505,7 +505,7 @@ class I18n {
 
     var longTermGoalSuffix: String {
         if isZh { return "天。" }
-        if isJa { return "日間。" }
+        if isJa { return "日間" }
         return "days left."
     }
 
