@@ -5,5 +5,5 @@
   Created by Wangchou Lu on 10/26/30 H.
   Copyright © 30 Heisei Lu, WangChou. All rights reserved.
 */
-"NSMicrophoneUsageDescription" = "「今話したい」needs micphone to recognize Japanese you said.";
+"NSMicrophoneUsageDescription" = "「今話したい」needs microphone to recognize Japanese you said.";
 "NSSpeechRecognitionUsageDescription" = "「今話したい」needs Speech Recognition for scoring Japanese you said.";
