@@ -45,8 +45,10 @@ extension String {
         return JpnType.mixed
     }
 
-    var isNoKanji: Bool {
-        guard let kanjiRange = self.range(of: "[\\p{Han}]*[\\p{Han}]", options: .regularExpression) else { return true }
+    var isHasEn: Bool {
+        if self.range(of: "[a-zA-Z]*[a-zA-Z]", options: .regularExpression) != nil {
+            return true
+        }
         return false
     }
 

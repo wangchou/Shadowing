@@ -29,7 +29,7 @@ class FuriganaLabel: UILabel {
     }
 
     private var isEnglish: Bool {
-        return attributedText?.string.isNoKanji ?? true
+        return attributedText?.string.isHasEn ?? true
     }
 
     var widthPadding: CGFloat = 10
@@ -208,8 +208,10 @@ class FuriganaLabel: UILabel {
             height += ceil(ascent + leading)
         }
 
-        if #available(iOS 13, *) {
-            height += 3
+        height += 2
+
+        if height > 50 && isEnglish {
+            height += 5
         }
 
         return height + topShift
