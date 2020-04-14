@@ -88,7 +88,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
                             text: rankText)
         label.slideIn(duration: 0.5)
 
-        let detailText = "\(i18n.excellent) \(record.perfectCount) | \(i18n.great) \(record.greatCount) | \(i18n.good) \(record.goodCount) | \(i18n.wrong) \(record.missedCount)"
+        let detailText = "\(i18n.excellentShort) \(record.perfectCount) | \(i18n.great) \(record.greatCount) | \(i18n.good) \(record.goodCount) | \(i18n.wrong) \(record.missedCount)"
         label = addText(x: 0, y: y + 12, w: gridCount, h: 3,
                         text: detailText,
                         color: minorTextColor)

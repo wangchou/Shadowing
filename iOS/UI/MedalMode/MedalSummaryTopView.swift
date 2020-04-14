@@ -187,7 +187,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         label.textAlignment = .right
 
         label = addText(x: 0, y: y + 28, h: 3,
-                        text: "\(i18n.excellent) \(totalSummary.perfectCount) | \(i18n.great) \(totalSummary.greatCount) | \(i18n.good) \(totalSummary.goodCount) | \(i18n.wrong) \(totalSummary.missedCount)",
+                        text: "\(i18n.excellentShort) \(totalSummary.perfectCount) | \(i18n.great) \(totalSummary.greatCount) | \(i18n.good) \(totalSummary.goodCount) | \(i18n.wrong) \(totalSummary.missedCount)",
                         font: subTitleFont,
                         color: subTitleGray)
         label.textAlignment = .center

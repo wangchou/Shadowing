@@ -709,7 +709,12 @@ class I18n {
 
     var excellent: String {
         if isJa || isZh { return "正解" }
-        return "EX."
+        return "Excellent"
+    }
+
+    var excellentShort: String {
+        if isJa || isZh { return "正解" }
+        return "XLNT"
     }
 
     var great: String {
