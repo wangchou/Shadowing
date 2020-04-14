@@ -57,7 +57,11 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
     func render() {
         let lowLevel = Level(medalCount: medalCount)
         var majorSize: CGFloat = 4
-        if isFinishedPageMode { majorSize = 5 }
+
+        if isFinishedPageMode {
+            majorSize = lowLevel.rawValue < 8 ? 5 : 4
+        }
+        
         // lvl text
         lvlLabel.attributedText = getStrokeText(lowLevel.title,
                                                 .white,
