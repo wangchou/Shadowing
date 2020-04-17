@@ -343,7 +343,9 @@ func showGoToPermissionSettingAlert() {
     alertController.addAction(okAction)
     alertController.addAction(cancelAction)
 
-    UIApplication.getPresentedViewController()?.present(alertController, animated: true)
+    DispatchQueue.main.async {
+        UIApplication.getPresentedViewController()?.present(alertController, animated: true)
+    }
 }
 
 func showOkAlert(title: String?, message: String? = nil, okTitle: String = I18n.shared.iGotIt) {
