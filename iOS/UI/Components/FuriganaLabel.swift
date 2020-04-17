@@ -208,7 +208,9 @@ class FuriganaLabel: UILabel {
             height += ceil(ascent + leading)
         }
 
-        height += height > 50 ? 7 : 2
+        if #available(iOS 13, *) {
+            height += height > 50 ? 7 : 2
+        }
 
         return height + topShift
     }
