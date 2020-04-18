@@ -61,10 +61,10 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     }
 
     func render() {
-        context.gameMode = .medalMode
-        removeAllSubviews()
         waitSentenceDBLoaded.then { [weak self] _ in
             guard let self = self else { return }
+            context.gameMode = .medalMode
+            self.removeAllSubviews()
             self.addTextbackground()
             self.addTopBar(y: self.topPaddedY + 1)
 
@@ -197,7 +197,9 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         context.gameMode = .medalMode
         guard !TopicDetailPage.isChallengeButtonDisabled else { return }
         if isUnderDailySentenceLimit() {
-            launchVC(Messenger.id, isOverCurrent: false)
+            waitSentenceDBLoaded.then { _ in
+                launchVC(Messenger.id, isOverCurrent: false)
+            }
         }
     }
 
