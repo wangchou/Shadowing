@@ -63,12 +63,15 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     func render() {
         context.gameMode = .medalMode
         removeAllSubviews()
-        addTextbackground()
-        addTopBar(y: topPaddedY + 1)
+        waitSentenceDBLoaded.then { [weak self] _ in
+            guard let self = self else { return }
+            self.addTextbackground()
+            self.addTopBar(y: self.topPaddedY + 1)
 
-        addLangInfo(y: (yMax + 12) / 2 - 22 - 4)
-        addGoButton(x: 28, y: (yMax + 12) / 2 - 22 + 27, w: 18)
-        addBottomButtons()
+            self.addLangInfo(y: (self.yMax + 12) / 2 - 22 - 4)
+            self.addGoButton(x: 28, y: (self.yMax + 12) / 2 - 22 + 27, w: 18)
+            self.addBottomButtons()
+        }
     }
 
     // MARK: - TopBar
