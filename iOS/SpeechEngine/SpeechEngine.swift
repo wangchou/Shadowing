@@ -82,12 +82,13 @@ class SpeechEngine {
 
     func stop() {
         guard isEngineRunning else { return }
-        isEngineRunning = false
+
         tts.stop()
 
         guard !isSimulator else { return }
         speechRecognizer.endAudio(isCanceling: true)
-        closeNodeGraph()
+        audioEngine.stop()
+        isEngineRunning = false
     }
 
     // MARK: - Private
@@ -96,11 +97,6 @@ class SpeechEngine {
         let mic = audioEngine.inputNode // only for real device, simulator will crash
         audioEngine.connect(mic, to: mainMixer, format: nil)
         mainMixer.outputVolume = 0
-    }
-
-    private func closeNodeGraph() {
-        guard audioEngine.isRunning else { return }
-        audioEngine.stop()
     }
 
     // MARK: - Handle Route Change
