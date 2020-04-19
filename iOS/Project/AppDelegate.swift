@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DispatchQueue.main.async { [weak self] in
             self?.rootViewController.updateWhenEnterForeground()
         }
-        SpeechEngine.shared.restart()
+        SpeechEngine.shared.stop()
     }
 
     func applicationDidBecomeActive(_: UIApplication) {
