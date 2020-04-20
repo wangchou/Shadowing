@@ -219,7 +219,7 @@ func ttsSay(_ text: String, speaker: String, rate: Float = context.teachingRate)
 
 // MARK: - Utilities
 
-private func isHeadphonePlugged() -> Bool {
+func isHeadphonePlugged() -> Bool {
     let currentRoute = AVAudioSession.sharedInstance().currentRoute
     for description in currentRoute.outputs {
         if description.portType == AVAudioSession.Port.headphones ||

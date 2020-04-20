@@ -35,8 +35,12 @@ import Promises
             // default  23ms | 1024 frames | <1% CPU (iphone SE)
             // 0.001   0.7ms |   32 frames |  8% CPU
             // 0.008   5.6ms |  256 frames |  1% CPU
-            try session.setPreferredIOBufferDuration(0.004)
-            // print(session.ioBufferDuration)
+            if isHeadphonePlugged() {
+                try session.setPreferredIOBufferDuration(0.004)
+            } else {
+                try session.setPreferredIOBufferDuration(0.04)
+            }
+            //print(session.ioBufferDuration)
 
             session.requestRecordPermission { success in
                 if success { print("Record Permission Granted") } else {
