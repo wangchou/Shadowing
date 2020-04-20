@@ -95,6 +95,11 @@ class SpeechEngine {
     private func buildNodeGraph() {
         let mainMixer = audioEngine.mainMixerNode
         let mic = audioEngine.inputNode // only for real device, simulator will crash
+
+        if #available(iOS 13, *) {
+            mic.isVoiceProcessingBypassed = true
+        }
+
         audioEngine.connect(mic, to: mainMixer, format: nil)
         mainMixer.outputVolume = 0
     }
