@@ -241,7 +241,14 @@ extension Messenger: GameEventDelegate {
             currentIndex += partLen
         }
 
-        guard upperBound >= lowerBound else { return nil }
+        guard upperBound >= lowerBound,
+              upperBound <= context.targetString.count,
+              lowerBound <= context.targetString.count,
+              upperBound >= 0,
+              lowerBound >= 0 else {
+                print("something went wrong on highlight bounds")
+                return nil
+        }
         return NSRange(location: lowerBound, length: upperBound - lowerBound)
     }
 
