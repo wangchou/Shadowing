@@ -38,7 +38,7 @@ class SpeechRecognizer: NSObject {
         }
     }
 
-    private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+    var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private var isRunning: Bool = false
     private var isAuthorized: Bool = false
@@ -103,15 +103,6 @@ class SpeechRecognizer: NSObject {
             return promise
         }
 
-        inputNode = engine.audioEngine.inputNode
-
-        inputNode.installTap(onBus: 0, bufferSize: 1024, format: nil) { [weak self] buffer, _ in
-            guard let self = self else { return }
-            self.recognitionRequest?.append(buffer)
-
-            calculateMicLevel(buffer: buffer)
-        }
-
         Timer.scheduledTimer(withTimeInterval: stopAfterSeconds, repeats: false) { _ in
             self.endAudio()
         }
@@ -129,7 +120,6 @@ class SpeechRecognizer: NSObject {
 
         guard !isSimulator else { return }
 
-        inputNode.removeTap(onBus: 0)
         recognitionRequest?.endAudio()
         if isCanceling {
             recognitionTask?.cancel()

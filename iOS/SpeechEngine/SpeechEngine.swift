@@ -22,6 +22,7 @@ class SpeechEngine {
     static let shared = SpeechEngine()
 
     var isEngineRunning = false
+    var isInstallTapSuceeced = false
     var audioEngine = AVAudioEngine()
     private var audioPlayer: AVAudioPlayer?
 
@@ -88,16 +89,26 @@ class SpeechEngine {
         guard !isSimulator else { return }
         speechRecognizer.endAudio(isCanceling: true)
         audioEngine.stop()
+        audioEngine.inputNode.removeTap(onBus: 0)
         isEngineRunning = false
     }
 
     // MARK: - Private
     private func buildNodeGraph() {
+        isInstallTapSuceeced = false
         let mainMixer = audioEngine.mainMixerNode
         let mic = audioEngine.inputNode // only for real device, simulator will crash
 
         if #available(iOS 13, *) {
             mic.isVoiceProcessingBypassed = true
+        }
+
+        mic.installTap(onBus: 0, bufferSize: 1024, format: nil) { [weak self] buffer, _ in
+            guard let self = self,
+                  let recognitionRequest = self.speechRecognizer.recognitionRequest else { return }
+            self.isInstallTapSuceeced = true
+            recognitionRequest.append(buffer)
+            calculateMicLevel(buffer: buffer)
         }
 
         audioEngine.connect(mic, to: mainMixer, format: nil)

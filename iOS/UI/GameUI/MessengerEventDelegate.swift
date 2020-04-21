@@ -265,6 +265,9 @@ extension Messenger: GameEventDelegate {
 
         if attributed.string == "" {
             attributed.append(rubyAttrStr(i18n.iCannotHearYou))
+            if !SpeechEngine.shared.isInstallTapSuceeced {
+                SpeechEngine.shared.restart()
+            }
         }
 
         attributed.append(rubyAttrStr(" \(score.valueText) \(score.type == .perfect ? "💯　" : "")"))
