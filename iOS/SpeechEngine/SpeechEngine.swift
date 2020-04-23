@@ -89,7 +89,6 @@ class SpeechEngine {
         guard !isSimulator else { return }
         speechRecognizer.endAudio(isCanceling: true)
         audioEngine.stop()
-        audioEngine.inputNode.removeTap(onBus: 0)
         isEngineRunning = false
     }
 
@@ -103,6 +102,7 @@ class SpeechEngine {
             mic.isVoiceProcessingBypassed = true
         }
 
+        mic.removeTap(onBus: 0)
         mic.installTap(onBus: 0, bufferSize: 1024, format: nil) { [weak self] buffer, _ in
             guard let self = self,
                   let recognitionRequest = self.speechRecognizer.recognitionRequest else { return }
