@@ -61,7 +61,7 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
         if isFinishedPageMode {
             majorSize = lowLevel.rawValue < 8 ? 5 : 4
         }
-        
+
         // lvl text
         lvlLabel.attributedText = getStrokeText(lowLevel.title,
                                                 .white,

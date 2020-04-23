@@ -43,8 +43,14 @@ extension Messenger: GameEventDelegate {
 
                 if let tokenInfos = kanaTokenInfosCacheDictionary[context.targetString] {
                     let fixedRange = getRangeWithParticleFix(tokenInfos: tokenInfos, allRange: allRange)
-                    attrText = getFuriganaString(tokenInfos: tokenInfos, highlightRange: fixedRange)
-                    if let fixedRange = fixedRange {
+                    attrText = getFuriganaString(tokenInfos: tokenInfos)
+
+                    // version: 1.3.13 - 1.3.14
+                    // Crashed info: NSMutableRLEArray objectAtIndex:effectiveRange:: Out of bounds
+                    // cannot reproduce it => add upperBound check here
+                    if let fixedRange = fixedRange,
+                       attrText.allRange.contains(fixedRange.lowerBound),
+                       attrText.allRange.contains(fixedRange.upperBound - 1) {
                         attrText.addAttributes([.hightlightBackgroundFillColor: highlightColor],
                                                range: fixedRange)
                     }
@@ -66,6 +72,7 @@ extension Messenger: GameEventDelegate {
             }
         case .listenStarted:
             addLabel(rubyAttrStr("..."), pos: .right)
+            tmpRangeQueue = []
 
         case .listenStopped:
             DispatchQueue.main.async {
@@ -81,7 +88,7 @@ extension Messenger: GameEventDelegate {
             messengerBar.render()
 
         case .playTimeUpdate:
-            guard let seconds = event.int else { return }
+            guard event.int != nil else { return }
             func add0(_ s: String) -> String {
                 return s.count == 1 ? "0" + s : s
             }
