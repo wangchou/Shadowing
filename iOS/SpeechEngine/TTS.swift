@@ -75,5 +75,10 @@ import Foundation
                                utterance _: AVSpeechUtterance) {
             postEvent(.willSpeakRange, range: characterRange)
         }
+
+        func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+            postEvent(.speakEnded)
+            promise.fulfill(())
+        }
     }
 #endif

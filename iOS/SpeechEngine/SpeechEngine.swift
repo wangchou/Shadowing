@@ -174,7 +174,7 @@ extension SpeechEngine {
 func speakTitle() -> Promise<Void> {
     let title = context.gameTitleToSpeak
     if context.gameMode == .topicMode {
-        let voiceId = getDefaultVoiceId(language: "zh-TW")
+        let voiceId = getDefaultVoiceId(language: "zh-TW", isPreferEnhanced: false)
         return engine.speak(text: title, speaker: voiceId, rate: normalRate)
     }
 
