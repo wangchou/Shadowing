@@ -20,7 +20,7 @@ import Promises
             let session: AVAudioSession = AVAudioSession.sharedInstance()
             try session.setCategory(
                 AVAudioSession.Category.playAndRecord,
-                mode: AVAudioSession.Mode.default,
+                mode: AVAudioSession.Mode.voiceChat,
                 // if set both allowBluetooth and allowBluetoothA2DP here will
                 // cause installTap callback not be calling. Not sure why
                 options: [
@@ -35,10 +35,16 @@ import Promises
             // default  23ms | 1024 frames | <1% CPU (iphone SE)
             // 0.001   0.7ms |   32 frames |  8% CPU
             // 0.008   5.6ms |  256 frames |  1% CPU
+
+            // Important Warning
+            // if bufferDuration is too low (0.004) => dyanmic installTap failure on default mic (iPhone 8 and later)
+            // if bufferDuration is too high (0.04) => tts be muted through bluetooth
             if isHeadphonePlugged() {
                 try session.setPreferredIOBufferDuration(0.004)
+            } else if isBluetooth() {
+                try session.setPreferredIOBufferDuration(0.01)
             } else {
-                try session.setPreferredIOBufferDuration(0.04)
+                try session.setPreferredIOBufferDuration(0.02)
             }
             //print(session.ioBufferDuration)
 

@@ -245,3 +245,15 @@ func isHeadphonePlugged() -> Bool {
     }
     return false
 }
+
+func isBluetooth() -> Bool {
+    let currentRoute = AVAudioSession.sharedInstance().currentRoute
+    for description in currentRoute.outputs {
+        if description.portType == AVAudioSession.Port.bluetoothA2DP ||
+           description.portType == AVAudioSession.Port.bluetoothLE ||
+           description.portType == AVAudioSession.Port.bluetoothHFP {
+            return true
+        }
+    }
+    return false
+}
