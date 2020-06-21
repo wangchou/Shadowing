@@ -9,7 +9,7 @@ import Promises
     let serverURL = "http://localhost:3000/nlp"
 #endif
 
-func getKanaTokenInfos(_ kanjiString: String) -> Promise<[[String]]> {
+func getKanaTokenInfos(_ kanjiString: String, retryCount: Int = 0) -> Promise<[[String]]> {
     let promise = Promise<[[String]]>.pending()
     let parameters: Parameters = ["jpnStr": kanjiString]
 
@@ -18,11 +18,20 @@ func getKanaTokenInfos(_ kanjiString: String) -> Promise<[[String]]> {
         return promise
     }
 
-    Alamofire.request(
+    let configuration = URLSessionConfiguration.default
+    configuration.timeoutIntervalForRequest = 4
+    let sessionManager = Alamofire.SessionManager(configuration: configuration)
+
+    sessionManager.request(
         serverURL,
         method: .post,
         parameters: parameters
     ).responseJSON { response in
+        // https://stackoverflow.com/questions/39984880/alamofire-result-failure-error-domain-nsurlerrordomain-code-999-cancelled
+        // swiftlint:disable redundant_discardable_let
+        let _ = sessionManager // for retain
+        // swiftlint:enable redundant_discardable_let
+
         switch response.result {
         case .success:
             guard let tokenInfos = response.result.value as? [[String]] else {
@@ -34,8 +43,16 @@ func getKanaTokenInfos(_ kanjiString: String) -> Promise<[[String]]> {
             kanaTokenInfosCacheDictionary[kanjiString] = fixedTokenInfo
             promise.fulfill(fixedTokenInfo)
 
-        case .failure:
-            promise.fulfill([])
+        case .failure(let error):
+            print(error)
+            if retryCount < 3 {
+                getKanaTokenInfos(kanjiString, retryCount: retryCount + 1)
+                    .then { tokenInfo in
+                        promise.fulfill(tokenInfo)
+                    }
+            } else {
+                promise.fulfill([])
+            }
         }
     }
     return promise
