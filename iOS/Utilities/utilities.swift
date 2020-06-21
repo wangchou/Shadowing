@@ -15,7 +15,7 @@ import Promises
 
     // MARK: - Audio Session
 
-    func configureAudioSession() {
+    func configureAudioSession(isAskingPermission: Bool = true) {
         do {
             let session: AVAudioSession = AVAudioSession.sharedInstance()
             try session.setCategory(
@@ -47,6 +47,8 @@ import Promises
                 try session.setPreferredIOBufferDuration(0.02)
             }
             //print(session.ioBufferDuration)
+
+            guard isAskingPermission else { return }
 
             session.requestRecordPermission { success in
                 if success { print("Record Permission Granted") } else {

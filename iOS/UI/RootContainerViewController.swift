@@ -36,6 +36,11 @@ class RootContainerViewController: UIViewController {
             self?.loadStartupData()
             self?.showInitialPage()
         }
+
+        // for tts in setting page
+        DispatchQueue.global().async {
+            configureAudioSession(isAskingPermission: false)
+        }
     }
 
     private func loadStartupData() {

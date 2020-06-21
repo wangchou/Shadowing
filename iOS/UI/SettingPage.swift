@@ -64,7 +64,6 @@ class SettingPage: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         topBarView.leftButton.isHidden = true
         gameSpeedSlider.addTapGestureRecognizer(action: nil)
         practiceSpeedSlider.addTapGestureRecognizer(action: nil)
@@ -72,7 +71,6 @@ class SettingPage: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        SpeechEngine.shared.start()
         render()
     }
 
