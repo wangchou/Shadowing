@@ -48,7 +48,7 @@ import Foundation
             utterance.rate = rate
 
             let isCompactVoice = "\(utterance.voice?.identifier)".contains("compact")
-            utterance.volume = isCompactVoice ? 1.0 : 0.8
+            utterance.volume = isCompactVoice ? 1.6 : 1.2
 
             postEvent(.sayStarted, string: text)
             synthesizer.speak(utterance)

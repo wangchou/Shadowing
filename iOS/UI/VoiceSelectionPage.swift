@@ -108,6 +108,7 @@ class VoiceSelectionPage: UIViewController {
         doneButton.setTitle(i18n.done, for: .normal)
         cancelButton.setTitle(i18n.cancel, for: .normal)
         downloadVoiceTextView.text = i18n.voiceNotAvailableMessage
+        downloadVoiceTextView.font = MyFont.regular(ofSize: 12)
         if !isWithPracticeSpeedSection {
             tableView.tableHeaderView = nil
         } else {

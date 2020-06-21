@@ -72,6 +72,7 @@ class SettingPage: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        SpeechEngine.shared.start()
         render()
     }
 
