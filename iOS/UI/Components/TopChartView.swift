@@ -120,13 +120,13 @@ class TopChartView: UIView, GridLayout, ReloadableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addOnClickHandler()
-        render()
+        render(animated: false)
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         addOnClickHandler()
-        render()
+        render(animated: false)
     }
 
     override func prepareForInterfaceBuilder() {
@@ -145,18 +145,25 @@ class TopChartView: UIView, GridLayout, ReloadableView {
     }
 
     func render() {
+        render(animated: true)
+    }
+
+    func render(animated: Bool = true) {
         frame.size.width = screen.width
         frame.size.height = screen.width * 34 / 48
         updateByRecords()
-        renderWithoutUpdateData()
+        renderWithoutUpdateData(animated: animated)
     }
 
     func prepareForDailyGoalAppear() {
         guard GameContext.shared.gameSetting.icTopViewMode == .dailyGoal else { return }
 
         allSentenceCount = getAllSentencesCount()
-        if getTodaySentenceCount() < context.gameSetting.dailySentenceGoal {
-            backgroundColor = longTermGoalColor.withSaturation(0)
+        let todaySentenceCount = getTodaySentenceCount()
+        if todaySentenceCount < context.gameSetting.dailySentenceGoal {
+            if todaySentenceCount > 0 {
+                backgroundColor = longTermGoalColor.withSaturation(0)
+            }
             percentLabel?.text = "0%"
             frontCircle?.removeFromSuperview()
         } else {
@@ -172,11 +179,13 @@ class TopChartView: UIView, GridLayout, ReloadableView {
         }
     }
 
-    func renderWithoutUpdateData() {
+    func renderWithoutUpdateData(animated: Bool = true) {
         switch GameContext.shared.gameSetting.icTopViewMode {
         case .dailyGoal:
             renderDailyGoalMode()
-            animateProgress()
+            if animated {
+                animateProgress()
+            }
         case .timeline:
             renderTimelineMode()
         case .longTermGoal:
