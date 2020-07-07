@@ -20,7 +20,7 @@ func getKanaTokenInfos(_ kanjiString: String, retryCount: Int = 0) -> Promise<[[
 
     // timeout and retry for solving 4G network packet lost
     let configuration = URLSessionConfiguration.default
-    configuration.timeoutIntervalForRequest = TimeInterval(retryCount + 2)
+    configuration.timeoutIntervalForRequest = TimeInterval(retryCount * 2 + 2)
     let sessionManager = Alamofire.SessionManager(configuration: configuration)
 
     sessionManager.request(
@@ -46,7 +46,7 @@ func getKanaTokenInfos(_ kanjiString: String, retryCount: Int = 0) -> Promise<[[
 
         case .failure(let error):
             print(error)
-            if retryCount < 4 {
+            if retryCount < 5 {
                 getKanaTokenInfos(kanjiString, retryCount: retryCount + 1)
                     .then { tokenInfo in
                         promise.fulfill(tokenInfo)
