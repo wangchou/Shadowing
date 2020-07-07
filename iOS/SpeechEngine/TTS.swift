@@ -47,8 +47,11 @@ import Foundation
 
             utterance.rate = rate
 
-            //let isCompactVoice = "\(utterance.voice?.identifier)".contains("compact")
-            utterance.volume = 1.0
+            if isHeadphonePlugged() {
+                utterance.volume = 0.6
+            } else {
+                utterance.volume = 1.0
+            }
 
             postEvent(.sayStarted, string: text)
             synthesizer.speak(utterance)

@@ -16,11 +16,12 @@ import Promises
     // MARK: - Audio Session
 
     func configureAudioSession(isAskingPermission: Bool = true) {
+        let session: AVAudioSession = AVAudioSession.sharedInstance()
+
         do {
-            let session: AVAudioSession = AVAudioSession.sharedInstance()
             try session.setCategory(
                 AVAudioSession.Category.playAndRecord,
-                mode: AVAudioSession.Mode.voiceChat,
+                mode: AVAudioSession.Mode.default,
                 // if set both allowBluetooth and allowBluetoothA2DP here will
                 // cause installTap callback not be calling. Not sure why
                 options: [
@@ -39,26 +40,21 @@ import Promises
             // Important Warning
             // if bufferDuration is too low (0.004) => dyanmic installTap failure on default mic (iPhone 8 and later)
             // if bufferDuration is too high (0.04) => tts be muted through bluetooth
-            if isHeadphonePlugged() {
-                try session.setPreferredIOBufferDuration(0.004)
-            } else if isBluetooth() {
-                try session.setPreferredIOBufferDuration(0.01)
-            } else {
-                try session.setPreferredIOBufferDuration(0.02)
-            }
-            //print(session.ioBufferDuration)
 
-            guard isAskingPermission else { return }
-
-            session.requestRecordPermission { success in
-                if success { print("Record Permission Granted") } else {
-                    print("Record Permission fail")
-                    showGoToPermissionSettingAlert()
-                }
-            }
+            try session.setPreferredIOBufferDuration(0.008)
         } catch {
             print("configuare audio session with \(error)")
         }
+
+        guard isAskingPermission else { return }
+
+        session.requestRecordPermission { success in
+            if success { print("Record Permission Granted") } else {
+                print("Record Permission fail")
+                showGoToPermissionSettingAlert()
+            }
+        }
+
     }
 
     // MARK: - Misc

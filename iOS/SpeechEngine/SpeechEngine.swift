@@ -98,10 +98,6 @@ class SpeechEngine {
         let mainMixer = audioEngine.mainMixerNode
         let mic = audioEngine.inputNode // only for real device, simulator will crash
 
-        if #available(iOS 13, *) {
-            mic.isVoiceProcessingBypassed = true
-        }
-
         mic.removeTap(onBus: 0)
         mic.installTap(onBus: 0, bufferSize: 1024, format: nil) { [weak self] buffer, _ in
             guard let self = self,
