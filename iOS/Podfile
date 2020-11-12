@@ -1,12 +1,18 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-platform :ios, '10.0'
+
+workspace 'hanashitai.xcworkspace'
+project 'hanashitai.xcodeproj'
+project 'SentenceTests/SentenceTests.xcodeproj'
+
 
 use_frameworks!
 inhibit_all_warnings!
 
 target 'hanashitai' do
+  platform :ios, '10.0'
+  project 'hanashitai.xcodeproj'
   pod 'Alamofire'
   pod 'Charts',                  '3.2.1'
   pod 'SQLite.swift'
@@ -15,4 +21,23 @@ target 'hanashitai' do
   pod 'Firebase/Performance'
   pod 'Fabric', '~> 1.10.2'
   pod 'Crashlytics', '~> 3.13.4'
+end
+
+target 'SentenceTests' do
+  platform :osx, '10.15'
+  project 'SentenceTests/SentenceTests.xcodeproj'
+  pod 'Alamofire'
+  pod 'PromisesSwift'
+end
+
+# https://github.com/CocoaPods/CocoaPods/issues/3707#issuecomment-354754864
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name =~ /-macOS$/
+      target.build_configurations.each do |config|
+        config.build_settings['DYLIB_INSTALL_NAME_BASE'] = target.product_name
+        config.build_settings['ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES'] = 'YES'
+      end
+    end
+  end
 end

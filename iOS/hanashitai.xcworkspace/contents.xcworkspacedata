@@ -5,6 +5,9 @@
       location = "group:hanashitai.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:SentenceTests/SentenceTests.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>
