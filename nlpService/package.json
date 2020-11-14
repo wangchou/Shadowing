@@ -2,9 +2,10 @@
   "name": "nlpService",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "license": "MIT",
   "scripts": {
-    "start": "node --experimental-modules index.mjs"
+    "start": "node --experimental-modules index.js"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
