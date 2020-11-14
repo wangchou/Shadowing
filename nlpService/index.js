@@ -5,7 +5,7 @@ import morgan from 'morgan'
 import fs from 'fs'
 import path from 'path'
 import mcache from 'memory-cache'
-import { numberToKana } from './numberToKana.js'
+import { getFixedTokenInfos } from './utils.js'
 
 import os from 'os'
 const isMac = os.type() === 'Darwin'
@@ -69,13 +69,7 @@ app.post('/nlp', cache(864000), (req, res) => {
     }
     // trimedResult = [[kanji, 詞性, furikana, yomikana]]
     let trimedResult = result.map((arr) => [arr[0], arr[1], arr[arr.length-2], arr[arr.length-1]])
-                             .map((arr) => {
-                                 if(arr[3] == '*' && arr[0].match(/^[\d]+$/) != null) {
-                                     arr[2] = arr[3] = numberToKana(arr[0])
-                                 }
-                                 return arr
-                             })
-    res.json(trimedResult);
+    res.json(getFixedTokenInfos(trimedResult));
   });
 })
 
