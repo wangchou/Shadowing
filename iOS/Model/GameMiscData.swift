@@ -84,7 +84,6 @@ func loadGameMiscData(isLoadKana: Bool = false) {
             guard kanaTokenInfosCacheDictionary[key] == nil else { return }
             kanaTokenInfosCacheDictionary[key] = loadedKanaTokenInfos[key]
         }
-        doKanaCacheHardFix()
     } else {
         print("use new kanaTokenInfos")
     }

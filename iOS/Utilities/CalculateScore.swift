@@ -6,7 +6,7 @@ import Promises
     let serverURL = "http://52.194.172.67/nlp"
 #else
     var kanaTokenInfosCacheDictionary: [String: [[String]]] = [:]
-    let serverURL = "http://localhost:3000/nlp"
+    let serverURL = "http://127.0.0.1:3000/nlp"
 #endif
 
 func getKanaTokenInfos(_ kanjiString: String, retryCount: Int = 0) -> Promise<[[String]]> {
@@ -40,9 +40,7 @@ func getKanaTokenInfos(_ kanjiString: String, retryCount: Int = 0) -> Promise<[[
                 promise.fulfill([])
                 return
             }
-            let fixedTokenInfo = doKanaCacheRulesFix(kanaCache: tokenInfos)
-            kanaTokenInfosCacheDictionary[kanjiString] = fixedTokenInfo
-            promise.fulfill(fixedTokenInfo)
+            promise.fulfill(tokenInfos)
 
         case .failure(let error):
             print(error)
@@ -59,7 +57,7 @@ func getKanaTokenInfos(_ kanjiString: String, retryCount: Int = 0) -> Promise<[[
     return promise
 }
 
-func getKana(_ kanjiString: String) -> Promise<String> {
+func getKana(_ kanjiString: String, isFuri: Bool = false) -> Promise<String> {
     let promise = Promise<String>.pending()
 
     if kanjiString.isEmpty {
@@ -72,8 +70,9 @@ func getKana(_ kanjiString: String) -> Promise<String> {
             if tokenInfo.count < 2 || tokenInfo[1] == "記号" {
                 return kanaStr
             }
+            let shift = isFuri ? 2 : 1
             let kanaPart = getFixedFuriganaForScore(tokenInfo[0]) ??
-                (tokenInfo[tokenInfo.count - 1] == "*" ? tokenInfo[0] : tokenInfo[tokenInfo.count - 1])
+                (tokenInfo[tokenInfo.count - shift] == "*" ? tokenInfo[0] : tokenInfo[tokenInfo.count - shift])
             return kanaStr + kanaPart
         }
         promise.fulfill(kanaStr)
