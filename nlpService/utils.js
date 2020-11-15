@@ -1,6 +1,5 @@
 import fs from 'fs';
-import { numberToKana } from './numberToKana.js'
-
+import { numberToKana, fixNumberGrouping } from './numberToKana.js'
 
 function loadGlobalReplacement(fname) {
     return fs.readFileSync(fname,'utf8')
@@ -145,14 +144,15 @@ function ifKanaFix(tokenInfo, fixes) {
 }
 
 export let getFixedTokenInfos = (tokenInfos) => {
-  var newTokenInfos = complexKanaFix(tokenInfos, nComplexFixes)
+  var newTokenInfos = fixNumberGrouping(tokenInfos)
+  newTokenInfos = complexKanaFix(newTokenInfos, nComplexFixes)
   newTokenInfos = overwriteFix(newTokenInfos)
 
   return newTokenInfos
         .map(tokenInfo => {
             var tmp = simpleKanaFix(tokenInfo, nSimpleFixes) // global fix
             tmp = ifKanaFix(tmp, nIfFixes)
-            if(tmp[2] == '*' && tmp[0].match(/^[\d]+$/)) {
+            if(tmp[2] == '*' && tmp[0].match(/^[\d][\d,]*$/)) {
                 tmp[2] = tmp[3] = numberToKana(tmp[0])
             }
             return tmp

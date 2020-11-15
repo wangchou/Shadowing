@@ -77,3 +77,44 @@ export let numberToKana = (number, isFromBig = false) => {
 
 //console.log(numberToKana(1603))
 //console.log(numberToKana(111111111111))
+
+function isDigit(str) {
+    return str.match(/^[\d]+$/) != null
+}
+// for apple recognized japanese
+//     from ["1" "," "000" "," "000"] to ["1,000,000"]
+export let fixNumberGrouping = (tokenInfos) => {
+    var newTokenInfos = []
+    var compound = ""
+    for(var i = 0; i < tokenInfos.length; i++) {
+        let token = tokenInfos[i][0]
+        var j = i+1
+        if(isDigit(token)) {
+            var newToken = token
+            var isPreviousDigit = true
+            for(; j < tokenInfos.length; j++) {
+                let token = tokenInfos[j][0]
+                if(isPreviousDigit && token == ',') {
+                    isPreviousDigit = false
+                    newToken += token
+                    continue
+                } else if(!isPreviousDigit && isDigit(token)) {
+                    isPreviousDigit = true
+                    newToken += token
+                    continue
+                } else {
+                    break
+                }
+            }
+            if(j > i + 1) {
+                newTokenInfos.push([newToken, "名詞", "*", "*"])
+                i = j-1
+            } else {
+                newTokenInfos.push(tokenInfos[i])
+            }
+        } else {
+            newTokenInfos.push(tokenInfos[i])
+        }
+    }
+    return newTokenInfos
+}
