@@ -143,7 +143,7 @@ function ifKanaFix(tokenInfo, fixes) {
   return newTokenInfo
 }
 
-export let getFixedTokenInfos = (tokenInfos) => {
+export let getFixedTokenInfos = (tokenInfos, localFixes = []) => {
   var newTokenInfos = fixNumberGrouping(tokenInfos)
   newTokenInfos = complexKanaFix(newTokenInfos, nComplexFixes)
   newTokenInfos = overwriteFix(newTokenInfos)
@@ -152,9 +152,47 @@ export let getFixedTokenInfos = (tokenInfos) => {
         .map(tokenInfo => {
             var tmp = simpleKanaFix(tokenInfo, nSimpleFixes) // global fix
             tmp = ifKanaFix(tmp, nIfFixes)
-            if(tmp[2] == '*' && tmp[0].match(/^[\d][\d,]*$/)) {
-                tmp[2] = tmp[3] = numberToKana(tmp[0])
+            if(localFixes.length > 0) {
+                tmp = simpleKanaFix(tmp, localFixes) // newly added local fix
             }
+            if(tmp[2] == '*' && tmp[0].match(/^[\d][\d,]*$/)) {
+                tmp[2] = tmp[3] = numberToKana(tmp[0].replace(/,/g, ""))
+            }
+            if(tmp[3] == undefined) { tmp[3] = tmp[2] }
             return tmp
         })
+}
+
+// str \t correct_kana \t replace1 \t replace2 \t replace3 ... \n
+export let loadNLocal = () => {
+    var correctKanas = {}
+    var nLocalFixes = {}
+    fs.readFileSync('local.n','utf8')
+             .split('\n')
+             .forEach(line => {
+                 var items = line.split('\t')
+                 var str = items[0]
+                 var correctKana = items[1]
+                 if(correctKana != "") {
+                    correctKanas[str] = correctKana
+                 }
+                 var newLocalFixes = []
+                 var key = ""
+                 if(items[2]) {
+                     items[2]
+                         .split(' ')
+                         .forEach((item, i) => {
+                             if(i % 2 == 0) {
+                                 key = item
+                             } else {
+                                 newLocalFixes.push([key, item])
+                             }
+                         })
+                     nLocalFixes[str] = newLocalFixes
+                 }
+             })
+    return {
+        correctKanas: correctKanas,
+        nLocalFixes: nLocalFixes
+    }
 }

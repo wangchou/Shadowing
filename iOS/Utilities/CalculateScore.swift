@@ -9,9 +9,12 @@ import Promises
     let serverURL = "http://127.0.0.1:3000/nlp"
 #endif
 
-func getKanaTokenInfos(_ kanjiString: String, retryCount: Int = 0) -> Promise<[[String]]> {
+func getKanaTokenInfos(_ kanjiString: String, originalString: String, retryCount: Int = 0) -> Promise<[[String]]> {
     let promise = Promise<[[String]]>.pending()
-    let parameters: Parameters = ["jpnStr": kanjiString]
+    let parameters: Parameters = [
+        "jpnStr": kanjiString,
+        "originalStr": originalString
+    ]
 
     if let tokenInfos = kanaTokenInfosCacheDictionary[kanjiString] {
         promise.fulfill(tokenInfos)
@@ -45,7 +48,9 @@ func getKanaTokenInfos(_ kanjiString: String, retryCount: Int = 0) -> Promise<[[
         case .failure(let error):
             print(error)
             if retryCount < 5 {
-                getKanaTokenInfos(kanjiString, retryCount: retryCount + 1)
+                getKanaTokenInfos(kanjiString,
+                                 originalString: originalString,
+                                 retryCount: retryCount + 1)
                     .then { tokenInfo in
                         promise.fulfill(tokenInfo)
                     }
@@ -57,7 +62,7 @@ func getKanaTokenInfos(_ kanjiString: String, retryCount: Int = 0) -> Promise<[[
     return promise
 }
 
-func getKana(_ kanjiString: String, isFuri: Bool = false) -> Promise<String> {
+func getKana(_ kanjiString: String, isFuri: Bool = false, originalString: String) -> Promise<String> {
     let promise = Promise<String>.pending()
 
     if kanjiString.isEmpty {
@@ -65,7 +70,7 @@ func getKana(_ kanjiString: String, isFuri: Bool = false) -> Promise<String> {
         return promise
     }
 
-    getKanaTokenInfos(kanjiString).then { tokenInfos in
+    getKanaTokenInfos(kanjiString, originalString: originalString).then { tokenInfos in
         let kanaStr = tokenInfos.reduce("") { kanaStr, tokenInfo in
             if tokenInfo.count < 2 || tokenInfo[1] == "記号" {
                 return kanaStr
@@ -82,8 +87,8 @@ func getKana(_ kanjiString: String, isFuri: Bool = false) -> Promise<String> {
 }
 
 func calculateScore(
-    _ sentence1: String,
-    _ sentence2: String
+    _ originalString: String,
+    _ recognizedString: String
 ) -> Promise<Score> {
     #if os(iOS)
         if gameLang == .en { return calculateScoreEn(sentence1, sentence2) }
@@ -111,8 +116,8 @@ func calculateScore(
     }
 
     all([
-        getKana(sentence1),
-        getKana(sentence2),
+        getKana(originalString, originalString: originalString),
+        getKana(recognizedString, originalString: originalString),
     ]).then { kanas in
         let score = calcScore(kanas[0].kataganaToHiragana, kanas[1].kataganaToHiragana)
         #if os(iOS)

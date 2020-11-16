@@ -13,6 +13,8 @@
 		BE29DC3A255D3627009CA02A /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE29DC36255D3627009CA02A /* utilities.swift */; };
 		BE29DC3B255D3627009CA02A /* CalculateScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE29DC37255D3627009CA02A /* CalculateScore.swift */; };
 		BE29DC3E255D369C009CA02A /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE29DC3D255D369C009CA02A /* Score.swift */; };
+		BE7F8BDA25625AD5008AE195 /* DifficultyCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7F8BD925625AD5008AE195 /* DifficultyCalculator.swift */; };
+		BE7F8BDD25625AF5008AE195 /* String+Variations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7F8BDC25625AF5008AE195 /* String+Variations.swift */; };
 		BEBCDDF6255D317000C5485B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBCDDF5255D317000C5485B /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +39,8 @@
 		BE29DC36255D3627009CA02A /* utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = utilities.swift; path = ../Utilities/utilities.swift; sourceTree = "<group>"; };
 		BE29DC37255D3627009CA02A /* CalculateScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CalculateScore.swift; path = ../Utilities/CalculateScore.swift; sourceTree = "<group>"; };
 		BE29DC3D255D369C009CA02A /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Score.swift; path = ../Model/Score.swift; sourceTree = "<group>"; };
+		BE7F8BD925625AD5008AE195 /* DifficultyCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DifficultyCalculator.swift; path = ../../preprocess/difficultyCalculator/processVOC/processVOC/DifficultyCalculator.swift; sourceTree = "<group>"; };
+		BE7F8BDC25625AF5008AE195 /* String+Variations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "String+Variations.swift"; path = "../../preprocess/difficultyCalculator/processVOC/processVOC/String+Variations.swift"; sourceTree = "<group>"; };
 		BEBCDDF2255D317000C5485B /* SentenceTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SentenceTests; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBCDDF5255D317000C5485B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -74,6 +78,8 @@
 		BEBCDDE9255D317000C5485B = {
 			isa = PBXGroup;
 			children = (
+				BE7F8BDC25625AF5008AE195 /* String+Variations.swift */,
+				BE7F8BD925625AD5008AE195 /* DifficultyCalculator.swift */,
 				BE29DC3D255D369C009CA02A /* Score.swift */,
 				BE29DC37255D3627009CA02A /* CalculateScore.swift */,
 				BE29DC34255D3627009CA02A /* kanaFix.swift */,
@@ -204,6 +210,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE7F8BDD25625AF5008AE195 /* String+Variations.swift in Sources */,
+				BE7F8BDA25625AD5008AE195 /* DifficultyCalculator.swift in Sources */,
 				BE29DC3E255D369C009CA02A /* Score.swift in Sources */,
 				BE29DC38255D3627009CA02A /* kanaFix.swift in Sources */,
 				BE29DC39255D3627009CA02A /* String+Utilities.swift in Sources */,
@@ -344,7 +352,7 @@
 					"'@loader_path/Frameworks'",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -361,7 +369,7 @@
 					"'@loader_path/Frameworks'",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

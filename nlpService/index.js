@@ -5,7 +5,7 @@ import morgan from 'morgan'
 import fs from 'fs'
 import path from 'path'
 import mcache from 'memory-cache'
-import { getFixedTokenInfos } from './utils.js'
+import { getFixedTokenInfos, loadNLocal } from './utils.js'
 
 import os from 'os'
 const isMac = os.type() === 'Darwin'
@@ -25,6 +25,8 @@ if(isMac) {
 } else {
   __dirname = '/home/ubuntu/Shadowing/prototype/nlpService/log'
 }
+
+var { nLocalFixes, correctKanas } = loadNLocal()
 
 // https://medium.com/the-node-js-collection/simple-server-side-cache-for-express-js-with-node-js-45ff296ca0f0
 var cache = (duration) => {
@@ -69,7 +71,9 @@ app.post('/nlp', cache(864000), (req, res) => {
     }
     // trimedResult = [[kanji, 詞性, furikana, yomikana]]
     let trimedResult = result.map((arr) => [arr[0], arr[1], arr[arr.length-2], arr[arr.length-1]])
-    res.json(getFixedTokenInfos(trimedResult));
+    let originalStr = req.body.originalStr || req.body.jpnStr
+    let localFixes = nLocalFixes[originalStr] || []
+    res.json(getFixedTokenInfos(trimedResult, localFixes));
   });
 })
 

@@ -117,6 +117,7 @@ PODS:
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
   - SQLite.swift/standard (0.12.2)
+  - SwiftSyllables (0.1.9)
 
 DEPENDENCIES:
   - Alamofire
@@ -127,6 +128,7 @@ DEPENDENCIES:
   - Firebase/Performance
   - PromisesSwift
   - SQLite.swift
+  - "SwiftSyllables (from `git@github.com:wangchou/SwiftSyllables.git`)"
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -157,6 +159,15 @@ SPEC REPOS:
     - Protobuf
     - SQLite.swift
 
+EXTERNAL SOURCES:
+  SwiftSyllables:
+    :git: "git@github.com:wangchou/SwiftSyllables.git"
+
+CHECKOUT OPTIONS:
+  SwiftSyllables:
+    :commit: db7c819d95ab2bd29b7f49fe5eb18d339c36b3b9
+    :git: "git@github.com:wangchou/SwiftSyllables.git"
+
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   Charts: f122fb70b19847fa5817d018b77d6c5a2296ab25
@@ -184,7 +195,8 @@ SPEC CHECKSUMS:
   PromisesSwift: 37bad6f4daddb02f7c9c531efe91e8b21c13ee2f
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
+  SwiftSyllables: e64d9f8687694a17e228dcf7a596bb3fdc64935f
 
-PODFILE CHECKSUM: d54a060881a78ac7f663e93fd082a1b5367e17b4
+PODFILE CHECKSUM: f60839305e837484f96ed0da7ddffabef1b17a36
 
 COCOAPODS: 1.7.5
