@@ -27,7 +27,7 @@ extension TopChartView {
     func addLongTermTitle() {
         let boxFrame = getFrame(0, 0, gridCount, 20)
         if isGameClear {
-            var descAttrText = NSMutableAttributedString()
+            let descAttrText = NSMutableAttributedString()
             func addWord(_ word: String, _ level: Level) {
                 descAttrText.append(getText(word,
                                             color: level.color.withSaturation(1.0),

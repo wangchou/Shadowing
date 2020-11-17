@@ -33,30 +33,32 @@ import Foundation
         ) -> Promise<Void> {
             SpeechEngine.shared.stopListeningAndSpeaking()
             synthesizer.delegate = self
-            let utterance = AVSpeechUtterance(string: getFixedKanaForTTS(text))
-            if let voice = AVSpeechSynthesisVoice(identifier: voiceId) {
-                utterance.voice = voice
-            } else {
-                if targetLanguage == AVSpeechSynthesisVoice.currentLanguageCode() {
-                    // Do nothing, if not set utterance.voice
-                    // Siri will say it
+            getFixedKanaForTTS(text).then { ttsString in
+                let utterance = AVSpeechUtterance(string: ttsString)
+                if let voice = AVSpeechSynthesisVoice(identifier: voiceId) {
+                    utterance.voice = voice
                 } else {
-                    utterance.voice = AVSpeechSynthesisVoice(language: targetLanguage)
+                    if self.targetLanguage == AVSpeechSynthesisVoice.currentLanguageCode() {
+                        // Do nothing, if not set utterance.voice
+                        // Siri will say it
+                    } else {
+                        utterance.voice = AVSpeechSynthesisVoice(language: self.targetLanguage)
+                    }
                 }
+
+                utterance.rate = rate
+
+                if isHeadphonePlugged() {
+                    utterance.volume = 0.6
+                } else {
+                    utterance.volume = 1.0
+                }
+
+                postEvent(.sayStarted, string: text)
+                self.synthesizer.speak(utterance)
             }
 
-            utterance.rate = rate
-
-            if isHeadphonePlugged() {
-                utterance.volume = 0.6
-            } else {
-                utterance.volume = 1.0
-            }
-
-            postEvent(.sayStarted, string: text)
-            synthesizer.speak(utterance)
             promise = Promise<Void>.pending()
-
             return promise
         }
 

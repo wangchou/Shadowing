@@ -39,5 +39,11 @@ post_install do |installer|
         config.build_settings['ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES'] = 'YES'
       end
     end
+    # https://github.com/CocoaPods/CocoaPods/issues/9884#issuecomment-698811522
+    target.build_configurations.each do |bc|
+        if bc.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] == '8.0'
+            bc.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.0'
+        end
+    end
   end
 end

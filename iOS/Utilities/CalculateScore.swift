@@ -9,7 +9,7 @@ import Promises
     let serverURL = "http://127.0.0.1:3000/nlp"
 #endif
 
-func getKanaTokenInfos(_ kanjiString: String, originalString: String, retryCount: Int = 0) -> Promise<[[String]]> {
+func getKanaTokenInfos(_ kanjiString: String, originalString: String = "", retryCount: Int = 0) -> Promise<[[String]]> {
     let promise = Promise<[[String]]>.pending()
     let parameters: Parameters = [
         "jpnStr": kanjiString,
@@ -62,7 +62,7 @@ func getKanaTokenInfos(_ kanjiString: String, originalString: String, retryCount
     return promise
 }
 
-func getKana(_ kanjiString: String, isFuri: Bool = false, originalString: String) -> Promise<String> {
+func getKana(_ kanjiString: String, isFuri: Bool = false, originalString: String?) -> Promise<String> {
     let promise = Promise<String>.pending()
 
     if kanjiString.isEmpty {
@@ -70,7 +70,7 @@ func getKana(_ kanjiString: String, isFuri: Bool = false, originalString: String
         return promise
     }
 
-    getKanaTokenInfos(kanjiString, originalString: originalString).then { tokenInfos in
+    getKanaTokenInfos(kanjiString, originalString: originalString ?? kanjiString).then { tokenInfos in
         let kanaStr = tokenInfos.reduce("") { kanaStr, tokenInfo in
             if tokenInfo.count < 2 || tokenInfo[1] == "記号" {
                 return kanaStr
@@ -91,7 +91,7 @@ func calculateScore(
     _ recognizedString: String
 ) -> Promise<Score> {
     #if os(iOS)
-        if gameLang == .en { return calculateScoreEn(sentence1, sentence2) }
+        if gameLang == .en { return calculateScoreEn(originalString, recognizedString) }
     #endif
     let promise = Promise<Score>.pending()
 
