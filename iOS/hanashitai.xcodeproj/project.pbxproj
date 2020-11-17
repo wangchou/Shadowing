@@ -201,7 +201,6 @@
 		BEB6F6C82182B89D0011E1C1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Project/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BEB6F6CA2182B8AA0011E1C1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = Project/ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BEB6F6CB2182B8B60011E1C1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "Project/zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		BEB6F6D02182DBCA0011E1C1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "Project/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		BEB6F6D12182DBDA0011E1C1 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "Project/zh-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		BEBDEDBC208EF09F00C18520 /* hanashitai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hanashitai.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -575,7 +574,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = "Lu, WangChou";
 				TargetAttributes = {
 					BEBDEDBB208EF09F00C18520 = {
@@ -598,7 +597,6 @@
 				Base,
 				ja,
 				"zh-Hant",
-				"zh-Hans",
 				"zh-HK",
 			);
 			mainGroup = BEBDEDB3208EF09F00C18520;
@@ -808,7 +806,6 @@
 				BEB6F6C82182B89D0011E1C1 /* en */,
 				BEB6F6CA2182B8AA0011E1C1 /* ja */,
 				BEB6F6CB2182B8B60011E1C1 /* zh-Hant */,
-				BEB6F6D02182DBCA0011E1C1 /* zh-Hans */,
 				BEB6F6D12182DBDA0011E1C1 /* zh-HK */,
 			);
 			name = InfoPlist.strings;
