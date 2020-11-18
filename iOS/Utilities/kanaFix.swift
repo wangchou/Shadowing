@@ -11,7 +11,7 @@ import Promises
 
 // MARK: Fix apple tts pronounciation Error
 
-let ttsKanaFix: [(String, String)] = [
+let ttsGlobalFixes: [(String, String)] = [
     // newly added
     ("一人前", "いちにんまえ"),
     ("フランス人", "フランスじん"),
@@ -126,8 +126,25 @@ let ttsKanaFix: [(String, String)] = [
     ("弾いて", "ひいて"),
 ]
 
-func getFixedKanaForTTS(_ text: String, localFixes: [(String, String)] = []) -> Promise<String> {
-    let promise = Promise<String>.pending()
+func getUpdateTextMap(map: [Int],
+                     ranges: [(lower: Int, upper: Int)],
+                     fixString: String) -> [Int] {
+    var newMap: [Int] = map
+    //replace from upper ranges
+    ranges.reversed().forEach { range in
+        newMap.replaceSubrange(range.lower ..< range.upper,
+                              with: repeatElement(map[range.upper - 1], count: fixString.count))
+    }
+    return newMap
+}
+
+func getFixedTTSString(_ text: String, localFixes: [(String, String)] = [], isJP: Bool = true) -> Promise<(String, [Int])> {
+    let promise = Promise<(String, [Int])>.pending()
+    guard isJP else {
+        promise.fulfill((text, Array(0 ..< text.count)))
+        return promise
+    }
+
     var fixedText = ""
     var previousEn = false
     getKanaTokenInfos(text, originalString: text).then { tokenInfos in
@@ -150,14 +167,31 @@ func getFixedKanaForTTS(_ text: String, localFixes: [(String, String)] = []) -> 
             }
             fixedText += token
         }
-        localFixes.forEach { kanji, kana in
-            fixedText = fixedText.replacingOccurrences(of: kanji, with: kana)
-        }
-        ttsKanaFix.forEach { kanji, kana in
-            fixedText = fixedText.replacingOccurrences(of: kanji, with: kana)
+
+        var allFixes = localFixes
+        allFixes.append(contentsOf: ttsGlobalFixes)
+
+
+        var ttsToDisplayMap = Array(0 ..< fixedText.count)
+        allFixes.forEach { kanji, fix in
+            let ranges = fixedText.ranges(of: kanji)
+            if !ranges.isEmpty {
+//                if(kanji.count != fix.count) {
+//                    print(fixedText, fixedText.count)
+//                }
+                ttsToDisplayMap = getUpdateTextMap(map: ttsToDisplayMap,
+                                                  ranges: ranges,
+                                                  fixString: fix)
+                fixedText = fixedText.replacingOccurrences(of: kanji, with: fix)
+//                if(kanji.count != fix.count) {
+//                    print("\t\(kanji) -> \(fix)", ranges)
+//                    print("\t ttsMap(\(ttsToDisplayMap.count)) :", ttsToDisplayMap)
+//                    print("\t ttsText(\(fixedText.count)):", fixedText)
+//                }
+            }
         }
 
-        promise.fulfill(fixedText)
+        promise.fulfill((fixedText, ttsToDisplayMap))
     }
 
     return promise
@@ -170,4 +204,25 @@ var furiganaFix: [String: String] = [:]
 
 func getFixedFuriganaForScore(_ token: String) -> String? {
     return furiganaFix[token]
+}
+
+extension StringProtocol {
+    func ranges<S: StringProtocol>(of string: S, options: String.CompareOptions = []) -> [(lower: Int, upper: Int)] {
+        var result: [Range<String.Index>] = []
+        var startIndex = self.startIndex
+        while startIndex < endIndex,
+            let range = self[startIndex...]
+                .range(of: string, options: options) {
+                result.append(range)
+                startIndex = range.lowerBound < range.upperBound ? range.upperBound :
+                    index(range.lowerBound, offsetBy: 1, limitedBy: endIndex) ?? endIndex
+        }
+        return result.map { range in
+            let boundPair = (
+                lower: self.distance(from: self.startIndex, to: range.lowerBound),
+                upper: self.distance(from: self.startIndex, to: range.upperBound)
+            )
+            return boundPair
+        }
+    }
 }

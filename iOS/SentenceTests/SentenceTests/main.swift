@@ -176,8 +176,8 @@ func checkTTSFixes() {
         let ttsFixes = rows[r][14].components(separatedBy: " ")
         let localFixes: [(String, String)] = arrayToTuple(ttsFixes)
 
-        getFixedKanaForTTS(jpn0, localFixes: localFixes)
-            .then { swiftTTSStr in
+        getFixedTTSString(jpn0, localFixes: localFixes)
+            .then { swiftTTSStr, _ in
                 if jsTTSStr != swiftTTSStr {
                     print(r)
                     print(jpn0)

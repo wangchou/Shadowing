@@ -15,8 +15,13 @@ import Foundation
         case TTSStop
     }
 
+    // input/displayed: 1日○○○○
+    // after fix, we let tts say いちにち○○○○
+    // ttsToDisplayMap will map willSpeakRange from いちにち○○○○ to 1日○○○○
+    // it looks like [1 1 1 1 2 3 4 5]
     class TTS: NSObject {
         var synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
+        var ttsToDisplayMap: [Int] = []
         var promise = Promise<Void>.pending()
         var targetLanguage: String {
             switch gameLang {
@@ -33,7 +38,9 @@ import Foundation
         ) -> Promise<Void> {
             SpeechEngine.shared.stopListeningAndSpeaking()
             synthesizer.delegate = self
-            getFixedKanaForTTS(text).then { ttsString in
+
+            getFixedTTSString(text, isJP: targetLanguage == "ja-JP").then { ttsString, ttsToDisplayMap in
+                self.ttsToDisplayMap = ttsToDisplayMap
                 let utterance = AVSpeechUtterance(string: ttsString)
                 if let voice = AVSpeechSynthesisVoice(identifier: voiceId) {
                     utterance.voice = voice
@@ -53,7 +60,7 @@ import Foundation
                 } else {
                     utterance.volume = 1.0
                 }
-
+                // said jpn
                 postEvent(.sayStarted, string: text)
                 self.synthesizer.speak(utterance)
             }
@@ -78,7 +85,10 @@ import Foundation
         func speechSynthesizer(_: AVSpeechSynthesizer,
                                willSpeakRangeOfSpeechString characterRange: NSRange,
                                utterance _: AVSpeechUtterance) {
-            postEvent(.willSpeakRange, range: characterRange)
+            let first = ttsToDisplayMap[characterRange.lowerBound]
+            let last = ttsToDisplayMap[characterRange.upperBound-1]
+            postEvent(.willSpeakRange, range: NSRange(location: first,
+                                                     length: last - first + 1))
         }
 
         func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
