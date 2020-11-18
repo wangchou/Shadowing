@@ -155,18 +155,6 @@ func checkKanaFixes() {
     print(targetIndex, "Done")
 }
 
-func arrayToTuple(_ arr: [String]) -> [(String, String)] {
-    var key = ""
-    var output: [(String, String)] = []
-    for (i, element) in arr.enumerated() {
-        if i % 2 == 0 {
-            key = element
-        } else {
-            output.append((key, element))
-        }
-    }
-    return output
-}
 func checkTTSFixes() {
     var sentenceCount = 0
     for r in 0 ... targetIndex {
@@ -174,7 +162,7 @@ func checkTTSFixes() {
         let jpn0 = rows[r][0]
         let jsTTSStr = rows[r][12]
         let ttsFixes = rows[r][14].components(separatedBy: " ")
-        let localFixes: [(String, String)] = arrayToTuple(ttsFixes)
+        let localFixes: [(String, String)] = arrayToPair(ttsFixes)
 
         getFixedTTSString(jpn0, localFixes: localFixes)
             .then { swiftTTSStr, _ in

@@ -148,6 +148,7 @@ export let getFixedTokenInfos = (tokenInfos, localFixes = []) => {
   newTokenInfos = complexKanaFix(newTokenInfos, nComplexFixes)
   newTokenInfos = overwriteFix(newTokenInfos)
 
+  var isPreviousEn = false
   return newTokenInfos
         .map(tokenInfo => {
             var tmp = simpleKanaFix(tokenInfo, nSimpleFixes) // global fix
@@ -159,6 +160,17 @@ export let getFixedTokenInfos = (tokenInfos, localFixes = []) => {
                 tmp[2] = tmp[3] = numberToKana(tmp[0].replace(/,/g, ""))
             }
             if(tmp[3] == undefined) { tmp[3] = tmp[2] }
+
+            //avoid ACME Ltd. -> ACMELtd. case
+            if(tmp[0].match(/^[a-zA-Z]+$/)) {
+                if(isPreviousEn) {
+                    tmp[0] = ` ${tmp[0]}`
+                }
+                isPreviousEn = true
+            } else {
+                isPreviousEn = false
+            }
+
             return tmp
         })
 }

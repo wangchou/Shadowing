@@ -76,8 +76,7 @@ func getKana(_ kanjiString: String, isFuri: Bool = false, originalString: String
                 return kanaStr
             }
             let shift = isFuri ? 2 : 1
-            let kanaPart = getFixedFuriganaForScore(tokenInfo[0]) ??
-                (tokenInfo[tokenInfo.count - shift] == "*" ? tokenInfo[0] : tokenInfo[tokenInfo.count - shift])
+            let kanaPart = (tokenInfo[tokenInfo.count - shift] == "*" ? tokenInfo[0] : tokenInfo[tokenInfo.count - shift])
             return kanaStr + kanaPart
         }
         promise.fulfill(kanaStr)

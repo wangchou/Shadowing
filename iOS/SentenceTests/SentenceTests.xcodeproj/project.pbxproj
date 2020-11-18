@@ -16,6 +16,7 @@
 		BE7F8BDA25625AD5008AE195 /* DifficultyCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7F8BD925625AD5008AE195 /* DifficultyCalculator.swift */; };
 		BE7F8BDD25625AF5008AE195 /* String+Variations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7F8BDC25625AF5008AE195 /* String+Variations.swift */; };
 		BEBCDDF6255D317000C5485B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBCDDF5255D317000C5485B /* main.swift */; };
+		BEE2B9802564E8F300B1C287 /* FuriganaUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE2B97F2564E8F300B1C287 /* FuriganaUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +44,7 @@
 		BE7F8BDC25625AF5008AE195 /* String+Variations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "String+Variations.swift"; path = "../../preprocess/difficultyCalculator/processVOC/processVOC/String+Variations.swift"; sourceTree = "<group>"; };
 		BEBCDDF2255D317000C5485B /* SentenceTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SentenceTests; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBCDDF5255D317000C5485B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		BEE2B97F2564E8F300B1C287 /* FuriganaUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FuriganaUtils.swift; path = ../Utilities/FuriganaUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 		BEBCDDE9255D317000C5485B = {
 			isa = PBXGroup;
 			children = (
+				BEE2B97F2564E8F300B1C287 /* FuriganaUtils.swift */,
 				BE7F8BDC25625AF5008AE195 /* String+Variations.swift */,
 				BE7F8BD925625AD5008AE195 /* DifficultyCalculator.swift */,
 				BE29DC3D255D369C009CA02A /* Score.swift */,
@@ -210,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEE2B9802564E8F300B1C287 /* FuriganaUtils.swift in Sources */,
 				BE7F8BDD25625AF5008AE195 /* String+Variations.swift in Sources */,
 				BE7F8BDA25625AD5008AE195 /* DifficultyCalculator.swift in Sources */,
 				BE29DC3E255D369C009CA02A /* Score.swift in Sources */,

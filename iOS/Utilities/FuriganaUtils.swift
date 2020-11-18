@@ -169,7 +169,7 @@ import Promises
                 furiganaAttrStr.append(rubyAttrStr(tokenInfo[0]))
             } else {
                 let kanjiStr = tokenInfo[0]
-                let kana = getFixedFuriganaForScore(kanjiStr) ?? tokenInfo[tokenInfo.count - 2].kataganaToHiragana
+                let kana = tokenInfo[tokenInfo.count - 2].kataganaToHiragana
                 let parts = kanjiStr // [わたし、| 気 | になります！]
                     .replaceRegex("([\\p{Han}\\d]*[\\p{Han}\\d])", "👻$1👻")
                     .components(separatedBy: "👻")

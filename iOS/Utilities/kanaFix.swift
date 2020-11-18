@@ -146,26 +146,9 @@ func getFixedTTSString(_ text: String, localFixes: [(String, String)] = [], isJP
     }
 
     var fixedText = ""
-    var previousEn = false
     getKanaTokenInfos(text, originalString: text).then { tokenInfos in
         tokenInfos.forEach { tokenInfo in
-            let token = tokenInfo[0]
-            let isEn = token.range(of: #"^[a-zA-Z]+$"#,
-                                   options: .regularExpression) != nil
-            if isEn {
-                //avoid ACME Ltd. -> ACMELtd. case
-                if isEn {
-                    if previousEn {
-                        fixedText += " "
-                    }
-                    previousEn = true
-                } else {
-                    previousEn = false
-                }
-            } else {
-                previousEn = false
-            }
-            fixedText += token
+            fixedText += tokenInfo[0]
         }
 
         var allFixes = localFixes
@@ -198,13 +181,6 @@ func getFixedTTSString(_ text: String, localFixes: [(String, String)] = [], isJP
 }
 
 // MARK: Fix mecab kanji to furigana error
-
-// single word fix
-var furiganaFix: [String: String] = [:]
-
-func getFixedFuriganaForScore(_ token: String) -> String? {
-    return furiganaFix[token]
-}
 
 extension StringProtocol {
     func ranges<S: StringProtocol>(of string: S, options: String.CompareOptions = []) -> [(lower: Int, upper: Int)] {

@@ -496,4 +496,17 @@ func getDateKey(date: Date) -> String {
     }
 #endif
 
+func arrayToPair(_ arr: [String]) -> [(String, String)] {
+    var key = ""
+    var output: [(String, String)] = []
+    for (i, element) in arr.enumerated() {
+        if i % 2 == 0 {
+            key = element
+        } else {
+            output.append((key, element))
+        }
+    }
+    return output
+}
+
 // swiftlint:enable file_length
