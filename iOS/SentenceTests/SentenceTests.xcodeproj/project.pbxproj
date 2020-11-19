@@ -17,6 +17,18 @@
 		BE7F8BDD25625AF5008AE195 /* String+Variations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7F8BDC25625AF5008AE195 /* String+Variations.swift */; };
 		BEBCDDF6255D317000C5485B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBCDDF5255D317000C5485B /* main.swift */; };
 		BEE2B9802564E8F300B1C287 /* FuriganaUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE2B97F2564E8F300B1C287 /* FuriganaUtils.swift */; };
+		BEE2B9902565190500B1C287 /* grammarN4.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE2B9832565190400B1C287 /* grammarN4.swift */; };
+		BEE2B9912565190500B1C287 /* polite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE2B9842565190400B1C287 /* polite.swift */; };
+		BEE2B9922565190500B1C287 /* grammarN5.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE2B9852565190400B1C287 /* grammarN5.swift */; };
+		BEE2B9932565190500B1C287 /* love.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE2B9862565190400B1C287 /* love.swift */; };
+		BEE2B9942565190500B1C287 /* daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE2B9872565190400B1C287 /* daily.swift */; };
+		BEE2B9952565190500B1C287 /* vocabulary1.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE2B9882565190400B1C287 /* vocabulary1.swift */; };
+		BEE2B9962565190500B1C287 /* speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE2B9892565190400B1C287 /* speech.swift */; };
+		BEE2B9972565190500B1C287 /* rawDataSets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE2B98A2565190400B1C287 /* rawDataSets.swift */; };
+		BEE2B9982565190500B1C287 /* expressive.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE2B98B2565190400B1C287 /* expressive.swift */; };
+		BEE2B9992565190500B1C287 /* vocabulary2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE2B98C2565190400B1C287 /* vocabulary2.swift */; };
+		BEE2B99A2565190500B1C287 /* travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE2B98D2565190400B1C287 /* travel.swift */; };
+		BEE2B99B2565190500B1C287 /* quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE2B98E2565190500B1C287 /* quote.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +57,19 @@
 		BEBCDDF2255D317000C5485B /* SentenceTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SentenceTests; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBCDDF5255D317000C5485B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		BEE2B97F2564E8F300B1C287 /* FuriganaUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FuriganaUtils.swift; path = ../Utilities/FuriganaUtils.swift; sourceTree = "<group>"; };
+		BEE2B9832565190400B1C287 /* grammarN4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = grammarN4.swift; path = ../Sentences/grammarN4.swift; sourceTree = "<group>"; };
+		BEE2B9842565190400B1C287 /* polite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = polite.swift; path = ../Sentences/polite.swift; sourceTree = "<group>"; };
+		BEE2B9852565190400B1C287 /* grammarN5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = grammarN5.swift; path = ../Sentences/grammarN5.swift; sourceTree = "<group>"; };
+		BEE2B9862565190400B1C287 /* love.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = love.swift; path = ../Sentences/love.swift; sourceTree = "<group>"; };
+		BEE2B9872565190400B1C287 /* daily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = daily.swift; path = ../Sentences/daily.swift; sourceTree = "<group>"; };
+		BEE2B9882565190400B1C287 /* vocabulary1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = vocabulary1.swift; path = ../Sentences/vocabulary1.swift; sourceTree = "<group>"; };
+		BEE2B9892565190400B1C287 /* speech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = speech.swift; path = ../Sentences/speech.swift; sourceTree = "<group>"; };
+		BEE2B98A2565190400B1C287 /* rawDataSets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = rawDataSets.swift; path = ../Sentences/rawDataSets.swift; sourceTree = "<group>"; };
+		BEE2B98B2565190400B1C287 /* expressive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = expressive.swift; path = ../Sentences/expressive.swift; sourceTree = "<group>"; };
+		BEE2B98C2565190400B1C287 /* vocabulary2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = vocabulary2.swift; path = ../Sentences/vocabulary2.swift; sourceTree = "<group>"; };
+		BEE2B98D2565190400B1C287 /* travel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = travel.swift; path = ../Sentences/travel.swift; sourceTree = "<group>"; };
+		BEE2B98E2565190500B1C287 /* quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = quote.swift; path = ../Sentences/quote.swift; sourceTree = "<group>"; };
+		BEE2B98F2565190500B1C287 /* dataSets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = dataSets.swift; path = ../Sentences/dataSets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +105,7 @@
 		BEBCDDE9255D317000C5485B = {
 			isa = PBXGroup;
 			children = (
+				BEE2B982256518E400B1C287 /* sentences */,
 				BEE2B97F2564E8F300B1C287 /* FuriganaUtils.swift */,
 				BE7F8BDC25625AF5008AE195 /* String+Variations.swift */,
 				BE7F8BD925625AD5008AE195 /* DifficultyCalculator.swift */,
@@ -109,6 +135,26 @@
 				BEBCDDF5255D317000C5485B /* main.swift */,
 			);
 			path = SentenceTests;
+			sourceTree = "<group>";
+		};
+		BEE2B982256518E400B1C287 /* sentences */ = {
+			isa = PBXGroup;
+			children = (
+				BEE2B9872565190400B1C287 /* daily.swift */,
+				BEE2B98F2565190500B1C287 /* dataSets.swift */,
+				BEE2B98B2565190400B1C287 /* expressive.swift */,
+				BEE2B9832565190400B1C287 /* grammarN4.swift */,
+				BEE2B9852565190400B1C287 /* grammarN5.swift */,
+				BEE2B9862565190400B1C287 /* love.swift */,
+				BEE2B9842565190400B1C287 /* polite.swift */,
+				BEE2B98E2565190500B1C287 /* quote.swift */,
+				BEE2B98A2565190400B1C287 /* rawDataSets.swift */,
+				BEE2B9892565190400B1C287 /* speech.swift */,
+				BEE2B98D2565190400B1C287 /* travel.swift */,
+				BEE2B9882565190400B1C287 /* vocabulary1.swift */,
+				BEE2B98C2565190400B1C287 /* vocabulary2.swift */,
+			);
+			name = sentences;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,6 +259,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEE2B9902565190500B1C287 /* grammarN4.swift in Sources */,
+				BEE2B9912565190500B1C287 /* polite.swift in Sources */,
+				BEE2B9922565190500B1C287 /* grammarN5.swift in Sources */,
+				BEE2B9932565190500B1C287 /* love.swift in Sources */,
+				BEE2B9942565190500B1C287 /* daily.swift in Sources */,
+				BEE2B9952565190500B1C287 /* vocabulary1.swift in Sources */,
+				BEE2B9962565190500B1C287 /* speech.swift in Sources */,
+				BEE2B9972565190500B1C287 /* rawDataSets.swift in Sources */,
+				BEE2B9982565190500B1C287 /* expressive.swift in Sources */,
+				BEE2B9992565190500B1C287 /* vocabulary2.swift in Sources */,
+				BEE2B99A2565190500B1C287 /* travel.swift in Sources */,
+				BEE2B99B2565190500B1C287 /* quote.swift in Sources */,
 				BEE2B9802564E8F300B1C287 /* FuriganaUtils.swift in Sources */,
 				BE7F8BDD25625AF5008AE195 /* String+Variations.swift in Sources */,
 				BE7F8BDA25625AD5008AE195 /* DifficultyCalculator.swift in Sources */,

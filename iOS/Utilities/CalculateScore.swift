@@ -43,6 +43,7 @@ func getKanaTokenInfos(_ kanjiString: String, originalString: String = "", retry
                 promise.fulfill([])
                 return
             }
+            kanaTokenInfosCacheDictionary[kanjiString] = tokenInfos
             promise.fulfill(tokenInfos)
 
         case .failure(let error):
@@ -51,8 +52,9 @@ func getKanaTokenInfos(_ kanjiString: String, originalString: String = "", retry
                 getKanaTokenInfos(kanjiString,
                                  originalString: originalString,
                                  retryCount: retryCount + 1)
-                    .then { tokenInfo in
-                        promise.fulfill(tokenInfo)
+                    .then { tokenInfos in
+                        kanaTokenInfosCacheDictionary[kanjiString] = tokenInfos
+                        promise.fulfill(tokenInfos)
                     }
             } else {
                 promise.fulfill([])

@@ -27,7 +27,7 @@ class DifficultyCalculator {
                     levelVocSets[i].insert(v)
                 }
             }
-            print(i, levelVocSets[i].count, allVocSet.count)
+            //print(i, levelVocSets[i].count, allVocSet.count)
         }
     }
 

@@ -160,6 +160,29 @@ import Promises
 
 #endif
 
+func encode<T: Codable>(_ object: T) -> String? {
+    if let jsonData = try? JSONEncoder().encode(object) {
+        return String(data: jsonData, encoding: .utf8)
+    }
+    return nil
+}
+
+func decode<T: Codable>(type _: T.Type, jsonString: String) -> T? {
+    if let jsonData = jsonString.data(using: .utf8) {
+        let decoder = JSONDecoder()
+        return try? decoder.decode(T.self, from: jsonData)
+    }
+    return nil
+}
+
+func tokenInfosToString(tokenInfos: [[String]]) -> String {
+    return encode(tokenInfos) ?? ""
+}
+
+func stringToTokenInfos(jsonString: String) -> [[String]]? {
+    return decode(type: [[String]].self, jsonString: jsonString)
+}
+
 // MARK: - NLP
 
 // separate long text by punctuations
@@ -274,29 +297,6 @@ extension MutableCollection {
             let i = index(firstUnshuffled, offsetBy: d)
             swapAt(firstUnshuffled, i)
         }
-    }
-}
-
-func tokenInfosToString(tokenInfos: [[String]]) -> String {
-    let jsonEncoder = JSONEncoder()
-    do {
-        let jsonData = try jsonEncoder.encode(tokenInfos)
-        return String(data: jsonData, encoding: .utf8) ?? ""
-    } catch {
-        print(error)
-        return ""
-    }
-}
-
-func stringToTokenInfos(jsonString: String) -> [[String]]? {
-    do {
-        // Decode data to object
-        let jsonDecoder = JSONDecoder()
-        guard let jsonData = jsonString.data(using: .utf8) else { return nil }
-        return try jsonDecoder.decode([[String]].self, from: jsonData)
-    } catch {
-        print(error)
-        return nil
     }
 }
 

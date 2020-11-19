@@ -28,6 +28,7 @@ target 'SentenceTests' do
   pod 'SwiftSyllables', :git => "git@github.com:wangchou/SwiftSyllables.git"
   pod 'Alamofire'
   pod 'PromisesSwift'
+  pod 'SQLite.swift'
 end
 
 # https://github.com/CocoaPods/CocoaPods/issues/3707#issuecomment-354754864
