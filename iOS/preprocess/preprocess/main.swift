@@ -330,10 +330,15 @@ func addSentencesTable() {
             ]).then { scores in
                 jpnOK[jpn0] = scores[0].value == 100 &&
                               scores[1].value == 100
-                engOK[eng0] = scores[2].value == 100 &&
-                              scores[3].value == 100 &&
-                              scores[4].value == 100 &&
-                              scores[5].value == 100
+
+                // 16202(4 ok) -> 20044 (3 ok) -> 17302 (4 ok or 3 ok + diff > 13)
+                var enOKCount = 0
+                enOKCount += scores[2].value == 100 ? 1 : 0
+                enOKCount += scores[3].value == 100 ? 1 : 0
+                enOKCount += scores[4].value == 100 ? 1 : 0
+                enOKCount += scores[5].value == 100 ? 1 : 0
+                engOK[eng0] = enOKCount == 4 ||
+                              (enOKCount >= 3 && (engDifficulty[eng0] ?? 0) > 13)
                 isFinished = true
             }
             waitForFinishing()
@@ -389,6 +394,7 @@ func addJpInfoTables() {
                 difficultyIds[difficulty]?.append(id)
             }
         }
+        var totalJpCount = 0
         print("- jpn difficulty -")
         for difficulty in 0 ... 1000 {
             if let ids = difficultyIds[difficulty],
@@ -398,9 +404,11 @@ func addJpInfoTables() {
                     dbIds <- encode(ids) ?? ""
                 )
                 print(difficulty, ids.count)
+                totalJpCount += ids.count
                 try dbW.run(insertSql)
             }
         }
+        print("totalJpCount: \(totalJpCount)")
 
 
     } catch {
@@ -433,7 +441,7 @@ func addEnInfoTables() {
                 difficultyIds[difficulty]?.append(id)
             }
         }
-
+        var totalEnCount = 0
         print("- en difficulty -")
         for difficulty in 0 ... 1000 {
             if let ids = difficultyIds[difficulty],
@@ -443,11 +451,11 @@ func addEnInfoTables() {
                     dbIds <- encode(ids) ?? ""
                 )
                 print(difficulty, ids.count)
+                totalEnCount += ids.count
                 try dbW.run(insertSql)
             }
         }
-
-
+        print("totalEnCount: \(totalEnCount)")
     } catch {
         print("db error: \(error)")
     }

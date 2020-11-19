@@ -132,6 +132,8 @@ func calculateScore(
     return promise
 }
 
+var nCache: [String: String] = [:]
+
 func calculateScoreEn(
     _ sentence1: String,
     _ sentence2: String
@@ -150,8 +152,8 @@ func calculateScoreEn(
         return score
     }
 
-    let normalizedText1 = normalizeEnglishText(sentence1)
-    let normalizedText2 = normalizeEnglishText(sentence2)
+    let normalizedText1 = nCache[sentence1] ?? normalizeEnglishText(sentence1)
+    let normalizedText2 = nCache[sentence2] ?? normalizeEnglishText(sentence2)
 
     let score = calcScore(normalizedText1, normalizedText2)
     #if os(iOS)
@@ -174,21 +176,50 @@ func normalizeEnglishText(_ text: String) -> String {
 
     var returnText = ""
 
-    tagger.string = text
-    let range = NSRange(location: 0, length: text.count)
+    let newText = text
+        .lowercased()
+        .spellOutNumbers()
+        .replacingOccurrences(of: " ", with: "")
+        .replacingOccurrences(of: "-", with: "")
+        .replacingOccurrences(of:"favourite", with: "favorite")
+        .replacingOccurrences(of:"colour", with: "color")
+        .replacingOccurrences(of:"colourful", with: "colorful")
+        .replacingOccurrences(of:"flavour", with: "flavor")
+        .replacingOccurrences(of:"humour", with: "humor")
+        .replacingOccurrences(of:"labour", with: "labor")
+        .replacingOccurrences(of:"viour", with: "vior")
+        .replacingOccurrences(of:"neighbour", with: "neighbor")
+        .replacingOccurrences(of:"licence", with: "license")
+        .replacingOccurrences(of:"defence", with: "defense")
+        .replacingOccurrences(of:"offence", with: "offense")
+        .replacingOccurrences(of:"analyse", with: "analyze")
+        .replacingOccurrences(of:"emphasise", with: "emphasize")
+        .replacingOccurrences(of:"moustache", with: "mustache")
+        .replacingOccurrences(of:"centre", with: "center")
+        .replacingOccurrences(of:"favour", with: "favor")
+        .replacingOccurrences(of:"lled", with: "led")
+        .replacingOccurrences(of:"recognise", with: "recognize")
+        .replacingOccurrences(of:"fibre", with: "fiber")
+        .replacingOccurrences(of:"litre", with: "liter")
+        .replacingOccurrences(of:"ere's", with: "ereis")
+        .replacingOccurrences(of:"hat's", with: "hatis")
+        .replacingOccurrences(of:"i'm", with: "iam")
+        .replacingOccurrences(of:"'ll", with: "will")
+        .replacingOccurrences(of:"you're", with: "youare")
+        .replacingOccurrences(of:"he's", with: "heis")
+        .replacingOccurrences(of:"desert", with: "dessert")
 
+    tagger.string = newText
+    let range = NSRange(location: 0, length: newText.count)
     tagger.enumerateTags(in: range, scheme: .tokenType, options: []) { tag, tokenRange, _, _ in
-        let token = (text as NSString).substring(with: tokenRange)
+        let token = (newText as NSString).substring(with: tokenRange)
         if tag?.rawValue == "Punctuation" {
             returnText += ""
         } else {
             returnText += "\(token)"
         }
     }
+    nCache[text] = returnText
 
-    return returnText.lowercased()
-        .spellOutNumbers()
-        .replacingOccurrences(of: "where is", with: "where's")
-        .replacingOccurrences(of: " ", with: "")
-        .replacingOccurrences(of: "-", with: "")
+    return returnText
 }
