@@ -27,12 +27,11 @@ func getSentences() -> [[String]] {
         }
     }
     return rows.filter { row in
-        return !row.isEmpty
+        return row.count > 5
     }
 }
 
 var rows = getSentences()
-            .filter {row in return row.count > 5}
 print(rows.count)
 
 var targetIndex = 2000 //rows.count - 1

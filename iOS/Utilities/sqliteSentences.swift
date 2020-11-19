@@ -11,19 +11,19 @@ import SQLite
 import Promises
 
 struct SentenceInfo {
-    var syllablesCount: Int
     var ids: Set<Int>
+    var syllablesCount: Int
     var sentenceCount: Int
 }
 
 struct TopicSentenceInfo {
-    var kanaCount: Int
     var ja: String
+    var kanaCount: Int
     var tokenInfos: [[String]]? //tokenInfo =[kanji, 詞性, furikana, yomikana]
 }
 
 var topicSentencesInfos: [String: TopicSentenceInfo] = [:]
-private var sqliteFileName = "inf_sentences_100points_duolingo_with_topics"
+private var sqliteFileName = "sentences20201118"
 
 #if os(iOS)
     var waitSentenceDBLoaded = Promise<Void>.pending()
@@ -87,9 +87,9 @@ func loadTopicSentenceDB() {
     }
     do {
         let db = try Connection(path, readonly: true)
-        let kanaCount = Expression<Int>("kana_count")
-        let ja = Expression<String>("ja")
         let topicSentencesInfoTable = Table("topicSentencesInfo")
+        let ja = Expression<String>("ja")
+        let kanaCount = Expression<Int>("kana_count")
         let tokenInfos = Expression<String>("tokenInfos")
         for row in try db.prepare(topicSentencesInfoTable) {
             let topicSentenceInfo = TopicSentenceInfo(

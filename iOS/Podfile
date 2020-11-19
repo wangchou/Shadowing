@@ -4,7 +4,7 @@
 
 workspace 'hanashitai.xcworkspace'
 project 'hanashitai.xcodeproj'
-project 'SentenceTests/SentenceTests.xcodeproj'
+project 'preprocess/preprocess.xcodeproj'
 
 use_frameworks!
 inhibit_all_warnings!
@@ -22,9 +22,9 @@ target 'hanashitai' do
   pod 'Crashlytics', '~> 3.13.4'
 end
 
-target 'SentenceTests' do
+target 'preprocess' do
   platform :osx, '10.15'
-  project 'SentenceTests/SentenceTests.xcodeproj'
+  project 'preprocess/preprocess.xcodeproj'
   pod 'SwiftSyllables', :git => "git@github.com:wangchou/SwiftSyllables.git"
   pod 'Alamofire'
   pod 'PromisesSwift'

@@ -5,7 +5,7 @@
       location = "group:hanashitai.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:SentenceTests/SentenceTests.xcodeproj">
+      location = "group:preprocess/preprocess.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
