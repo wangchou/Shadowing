@@ -50,7 +50,7 @@ class RootContainerViewController: UIViewController {
         loadMedalCount()
 
         loadTopicSentenceDB()
-        loadSentenceDB()
+        loadSentenceInfo()
         loadDataSets()
 
         loadGameHistory()

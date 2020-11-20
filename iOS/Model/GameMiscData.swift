@@ -17,7 +17,6 @@ var userSaidSentences: [String: String] = [:]
 var sentenceScores: [String: Score] = [:]
 var lastInfiniteChallengeSentences: [Level: [String]] = [:]
 var kanaTokenInfosCacheDictionary: [String: [[String]]] = [:] //tokenInfo =[kanji, 詞性, furikana, yomikana]
-var translations: [String: String] = [:] // en => ja & ja => en
 
 // MARK: - Save and Load
 
@@ -33,8 +32,6 @@ func saveGameMiscData() {
         saveToUserDefault(object: userSaidSentences, key: userSaidSentencesKey + gameLang.key)
         saveToUserDefault(object: sentenceScores, key: sentenceScoreKey + gameLang.key)
         saveToUserDefault(object: lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)
-        saveToUserDefault(object: translations, key: translationsKey + gameLang.key)
-
         guard gameLang == Lang.jp else { return }
         saveToUserDefault(object: kanaTokenInfosCacheDictionary, key: kanaTokenInfosKey + gameLang.key)
     }
@@ -53,18 +50,12 @@ func easyLoad<T: Codable>(object: inout T, key: String) {
 
 var waitSentenceScoresLoaded = fulfilledVoidPromise()
 var waitUserSaidSentencesLoaded = fulfilledVoidPromise()
-var waitTranslationLoaded = fulfilledVoidPromise()
 var waitKanaInfoLoaded = Promise<Void>.pending()
 
 func loadGameMiscData(isLoadKana: Bool = false) {
-    waitTranslationLoaded = Promise<Void>.pending()
     waitSentenceScoresLoaded = Promise<Void>.pending()
     waitUserSaidSentencesLoaded = Promise<Void>.pending()
 
-    DispatchQueue.global().async {
-        easyLoad(object: &translations, key: translationsKey + gameLang.key)
-        waitTranslationLoaded.fulfill(())
-    }
     DispatchQueue.global().async {
         easyLoad(object: &userSaidSentences, key: userSaidSentencesKey + gameLang.key)
         waitUserSaidSentencesLoaded.fulfill(())

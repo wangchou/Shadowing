@@ -191,10 +191,6 @@ func checkTTSFixes() {
 //checkTTSFixes()
 
 private var sqliteFileName = "sentences20201118.sqlite"
-private var tokenInfosTableName = "tokenInfos"
-private var sentencesTableName = "sentence"
-private var jpInfoTableName = "jpInfo" // sentence ids sorted by difficulty
-private var enInfoTableName = "enInfo"
 
 private var writableDBPath = ""
 var dbW: Connection!
@@ -216,7 +212,7 @@ func createWritableDB() {
     }
 }
 var isAddedToTokenInfo: [String: Bool] = [:]
-func updateIdWithListened(ja: String, kana_count: Int,  tokenInfos: [[String]]) {
+func updateIdWithListened(ja: String, kanaCount: Int, tokenInfos: [[String]]) {
     guard isAddedToTokenInfo[ja] != true else { return }
     do {
         let table = Table(tokenInfosTableName)
@@ -225,7 +221,7 @@ func updateIdWithListened(ja: String, kana_count: Int,  tokenInfos: [[String]]) 
         let dbTokenInfos = Expression<String>("tokenInfos")
 
         let insertSql = table.insert(dbJa <- ja,
-                                     dbKanaCount <- kana_count,
+                                     dbKanaCount <- kanaCount,
                                      dbTokenInfos <- tokenInfosToString(tokenInfos: tokenInfos))
         try dbW.run(insertSql)
         isAddedToTokenInfo[ja] = true
@@ -245,12 +241,12 @@ func addTokenInfosTable() {
     do {
         let tokenInfosTable = Table(tokenInfosTableName)
         let ja = Expression<String>("ja")
-        let kana_count = Expression<Int>("kana_count")
+        let kanaCount = Expression<Int>("kana_count")
         let tokenInfos = Expression<String>("tokenInfos")
         try dbW.run(tokenInfosTable.drop(ifExists: true))
         try dbW.run(tokenInfosTable.create { t in
             t.column(ja, primaryKey: true)
-            t.column(kana_count)
+            t.column(kanaCount)
             t.column(tokenInfos)
         })
         var sentences: [String] = []
@@ -258,11 +254,11 @@ func addTokenInfosTable() {
             sentences.append(contentsOf: sArray)
         }
         print(sentences.count)
-        for (_, jpn) in sentences.enumerated() {
+        for jpn in sentences {
             isFinished = false
             getKana(jpn, originalString: jpn).then { kana in
                 updateIdWithListened(ja: jpn,
-                                    kana_count: kana.count,
+                                    kanaCount: kana.count,
                                     tokenInfos: kanaTokenInfosCacheDictionary[jpn] ?? [])
                 isFinished = true
             }
@@ -273,10 +269,10 @@ func addTokenInfosTable() {
     }
 }
 
-var jpnOK : [String: Bool] = [:]
-var engOK : [String: Bool] = [:]
-var jpnDifficulty : [String: Int] = [:]
-var engDifficulty : [String: Int] = [:]
+var jpnOK: [String: Bool] = [:]
+var engOK: [String: Bool] = [:]
+var jpnDifficulty: [String: Int] = [:]
+var engDifficulty: [String: Int] = [:]
 var sentences: [(id: Int, jpn: String, eng: String)] = []
 func addSentencesTable() {
     do {
@@ -357,7 +353,7 @@ func addSentencesTable() {
                     jpnDifficulty[jpn0] = kana.count
 
                     updateIdWithListened(ja: jpn0,
-                                         kana_count: kana.count,
+                                         kanaCount: kana.count,
                                          tokenInfos: kanaTokenInfosCacheDictionary[jpn0] ?? [])
                     isFinished = true
                 }
@@ -398,7 +394,7 @@ func addJpInfoTables() {
         print("- jpn difficulty -")
         for difficulty in 0 ... 1000 {
             if let ids = difficultyIds[difficulty],
-               ids.count > 0 {
+               !ids.isEmpty {
                 let insertSql = jpInfoTable.insert(
                     dbDifficulty <- difficulty,
                     dbIds <- encode(ids) ?? ""
@@ -409,7 +405,6 @@ func addJpInfoTables() {
             }
         }
         print("totalJpCount: \(totalJpCount)")
-
 
     } catch {
         print("db error: \(error)")
@@ -445,7 +440,7 @@ func addEnInfoTables() {
         print("- en difficulty -")
         for difficulty in 0 ... 1000 {
             if let ids = difficultyIds[difficulty],
-               ids.count > 0 {
+               !ids.isEmpty {
                 let insertSql = enInfoTable.insert(
                     dbDifficulty <- difficulty,
                     dbIds <- encode(ids) ?? ""

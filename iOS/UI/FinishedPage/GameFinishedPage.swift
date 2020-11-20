@@ -60,8 +60,8 @@ class GameFinishedPage: UIViewController {
     func sortSentenceByScore() {
         context.sentences.sort { chStr1, chStr2 in
             guard let record = context.gameRecord else { return true }
-            guard let score1 = record.sentencesScore[chStr1] else { return false }
-            guard let score2 = record.sentencesScore[chStr2] else { return true }
+            guard let score1 = record.sentencesScore[chStr1.origin] else { return false }
+            guard let score2 = record.sentencesScore[chStr2.origin] else { return true }
 
             return score1.value < score2.value
         }

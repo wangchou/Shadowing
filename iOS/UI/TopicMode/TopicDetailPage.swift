@@ -98,7 +98,7 @@ class TopicDetailPage: UIViewController {
         skipNextButton.setStyle(style: .darkAction)
 
         // load furigana
-        all(context.sentences.map { $0.furiganaAttributedString }).then { _ in
+        all(context.sentences.map { $0.ja.furiganaAttributedString }).then { _ in
             self.tableView.reloadData()
         }
     }

@@ -78,28 +78,19 @@ class SentencesTableCell: UITableViewCell {
             }
     }
 
-    func update(sentence: String, isShowTranslate: Bool = false) {
-        targetString = sentence
+    func update(sentence: Sentence, isShowTranslate: Bool = false) {
+        targetString = sentence.origin
         sentenceLabel.widthPadding = 4
         userSaidSentenceLabel.widthPadding = 4
         translationTextView.textContainerInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
 
-        if let tokenInfos = kanaTokenInfosCacheDictionary[sentence] {
+        if let tokenInfos = kanaTokenInfosCacheDictionary[sentence.origin] {
             sentenceLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
         } else {
-            sentenceLabel.text = sentence
+            sentenceLabel.text = sentence.origin
         }
 
-        let translationsDict = (gameLang == .jp && context.gameMode == .topicMode) ?
-            chTranslations : translations
-        let secondaryDict = (gameLang == .jp && context.gameMode == .topicMode) ?
-            translations : chTranslations
-
-        if let translation = (translationsDict[sentence] ?? secondaryDict[sentence]) {
-            translationTextView.text = translation
-        } else {
-            translationTextView.text = ""
-        }
+        translationTextView.text = sentence.translation
 
         if isShowTranslate, translationTextView.text != "" {
             sentenceLabel.alpha = 0
@@ -109,14 +100,14 @@ class SentencesTableCell: UITableViewCell {
             translationTextView.alpha = 0
         }
 
-        let userSaidSentence = userSaidSentences[sentence] ?? ""
+        let userSaidSentence = userSaidSentences[sentence.origin] ?? ""
         if let tokenInfos = kanaTokenInfosCacheDictionary[userSaidSentence] {
             userSaidSentenceLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
         } else {
             userSaidSentenceLabel.text = userSaidSentence
         }
 
-        if let score = sentenceScores[sentence] {
+        if let score = sentenceScores[sentence.origin] {
             scoreLabel.text = score.valueText
             scoreLabel.textColor = score.color
             userSaidSentenceLabel.backgroundColor = score.color

@@ -124,13 +124,9 @@ extension Messenger: GameEventDelegate {
 
             if context.gameState == .speakingTranslation {
                 tmpRangeQueue = []
-                let text = context.targetString
-                let translationsDict = (gameLang == .jp && context.gameMode == .topicMode) ?
-                    chTranslations : translations
                 var attrText: NSAttributedString
-                if context.gameSetting.isShowTranslation,
-                    let translation = translationsDict[text] {
-                    attrText = rubyAttrStr(translation)
+                if context.gameSetting.isShowTranslation {
+                    attrText = rubyAttrStr(context.translation)
                 } else {
                     attrText = context.targetAttrString
                 }

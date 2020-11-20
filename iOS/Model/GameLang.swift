@@ -10,8 +10,8 @@ import Foundation
 import Promises
 
 // Global
-var jaSentenceInfos: [Int: SentenceInfo] = [:]
-var enSentenceInfos: [Int: SentenceInfo] = [:]
+var jaDifficultyInfos: [Int: DifficultyInfo] = [:]
+var enDifficultyInfos: [Int: DifficultyInfo] = [:]
 
 var gameLang: Lang = Lang.jp
 
@@ -29,12 +29,12 @@ enum Lang: Int, Codable {
         return false
     }
 
-    var sentenceInfos: [Int: SentenceInfo] {
+    var difficultyInfos: [Int: DifficultyInfo] {
         switch self {
         case .jp:
-            return jaSentenceInfos
+            return jaDifficultyInfos
         case .en:
-            return enSentenceInfos
+            return enDifficultyInfos
         case .unset:
             return [:]
         }

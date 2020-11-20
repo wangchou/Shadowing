@@ -10,10 +10,32 @@ import Foundation
 import SQLite
 import Promises
 
-struct SentenceInfo {
+struct Sentence: Hashable, Equatable {
+    var id: Int
+    var ja: String
+    var en: String
+    var cmn: String
+    var origin: String {
+        return gameLang == Lang.jp ? ja : en
+    }
+    var translation: String { return cmn }
+    var ttsFixes: [(String, String)]
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(ja)
+        hasher.combine(en)
+    }
+    static func == (lhs: Sentence, rhs: Sentence) -> Bool {
+        return lhs.ja == rhs.ja && lhs.en == rhs.en
+    }
+}
+
+struct DifficultyInfo {
+    var difficulty: Int
     var ids: Set<Int>
-    var syllablesCount: Int
-    var sentenceCount: Int
+    var sentenceCount: Int {
+        return ids.count
+    }
 }
 
 struct TopicSentenceInfo {
@@ -24,116 +46,93 @@ struct TopicSentenceInfo {
 
 var topicSentencesInfos: [String: TopicSentenceInfo] = [:]
 private var sqliteFileName = "sentences20201118"
+var tokenInfosTableName = "tokenInfos"
+var sentencesTableName = "sentence"
+var jpInfoTableName = "jpInfo" // sentence ids sorted by difficulty
+var enInfoTableName = "enInfo"
 
+private let dbPath = Bundle.main.path(forResource: sqliteFileName, ofType: "sqlite") ?? ""
 #if os(iOS)
     var waitSentenceDBLoaded = Promise<Void>.pending()
-    func loadSentenceDB() {
+    func loadSentenceInfo() {
         waitSentenceDBLoaded = Promise<Void>.pending()
-        guard let path = Bundle.main.path(forResource: sqliteFileName, ofType: "sqlite") else {
-            print("sqlite file not found"); return
-        }
         do {
-            // kanaInfos
-            let db = try Connection(path, readonly: true)
-            let kanaInfoTable = Table("kanaInfo")
-            let kanaCount = Expression<Int>("kana_count")
-            let ids = Expression<String>("ids")
-            let sentenceCount = Expression<Int>("sentence_count")
-            for row in try db.prepare(kanaInfoTable) {
-                let ids: Set<Int> = Set(row[ids].split(separator: ",")
-                    .map { Int($0.s) ?? -1 }
-                    .filter { $0 != -1 }
-                )
-                jaSentenceInfos[row[kanaCount]] = SentenceInfo(syllablesCount: row[kanaCount], ids: ids, sentenceCount: row[sentenceCount])
-            }
+            // jpInfos
+            let db = try Connection(dbPath, readonly: true)
+            let dbDifficulty = Expression<Int>("difficulty")
+            let dbIds = Expression<String>("ids")
 
-            // syllablesInfo
-            let syllablesInfoTable = Table("syllablesInfo")
-            let syllablesCount = Expression<Int>("syllables_count")
-            for row in try db.prepare(syllablesInfoTable) {
-                let ids: Set<Int> = Set(row[ids].split(separator: ",")
-                    .map { Int($0.s) ?? -1 }
-                    .filter { $0 != -1 }
-                )
-                enSentenceInfos[row[syllablesCount]] = SentenceInfo(syllablesCount: row[syllablesCount], ids: ids, sentenceCount: row[sentenceCount])
+            let jpInfoTable = Table(jpInfoTableName)
+            for row in try db.prepare(jpInfoTable) {
+                let idArray: [Int] = decode(type: [Int].self, jsonString: row[dbIds]) ?? []
+                let ids: Set<Int> = Set(idArray)
+                let difficulty = row[dbDifficulty]
+                jaDifficultyInfos[difficulty] = DifficultyInfo(difficulty: difficulty, ids: ids)
             }
-
-            let topicSentencesInfoTable = Table("topicSentencesInfo")
-            let ja = Expression<String>("ja")
-            let tokenInfos = Expression<String>("tokenInfos")
-            for row in try db.prepare(topicSentencesInfoTable) {
-                let topicSentenceInfo = TopicSentenceInfo(
-                    kanaCount: row[kanaCount],
-                    ja: row[ja],
-                    tokenInfos: stringToTokenInfos(jsonString: row[tokenInfos])
-                )
-                topicSentencesInfos[row[ja]] = topicSentenceInfo
-                if let tmpTokenInfos = topicSentenceInfo.tokenInfos {
-                    kanaTokenInfosCacheDictionary[row[ja]] = tmpTokenInfos
-                }
+            // enInfos
+            let enInfoTable = Table(enInfoTableName)
+            for row in try db.prepare(enInfoTable) {
+                let idArray: [Int] = decode(type: [Int].self, jsonString: row[dbIds]) ?? []
+                let ids: Set<Int> = Set(idArray)
+                let difficulty = row[dbDifficulty]
+                enDifficultyInfos[difficulty] = DifficultyInfo(difficulty: difficulty, ids: ids)
             }
         } catch {
-            print("db error")
+            print("db error 1:\(error)")
         }
         waitSentenceDBLoaded.fulfill(())
     }
-#endif
 
 func loadTopicSentenceDB() {
     guard topicSentencesInfos.isEmpty else { return }
-
-    guard let path = Bundle.main.path(forResource: sqliteFileName, ofType: "sqlite") else {
-        print("sqlite file not found"); return
-    }
     do {
-        let db = try Connection(path, readonly: true)
-        let topicSentencesInfoTable = Table("topicSentencesInfo")
-        let ja = Expression<String>("ja")
-        let kanaCount = Expression<Int>("kana_count")
-        let tokenInfos = Expression<String>("tokenInfos")
-        for row in try db.prepare(topicSentencesInfoTable) {
-            let topicSentenceInfo = TopicSentenceInfo(
-                kanaCount: row[kanaCount],
-                ja: row[ja],
-                tokenInfos: stringToTokenInfos(jsonString: row[tokenInfos])
-            )
-            topicSentencesInfos[row[ja]] = topicSentenceInfo
-            if let tmpTokenInfos = topicSentenceInfo.tokenInfos {
-                kanaTokenInfosCacheDictionary[row[ja]] = tmpTokenInfos
+        let db = try Connection(dbPath, readonly: true)
+        let tokenInfosTable = Table(tokenInfosTableName)
+        let dbJa = Expression<String>("ja")
+        let dbKanaCount = Expression<Int>("kana_count")
+        let dbTokenInfos = Expression<String>("tokenInfos")
+        var topicSentences: [String] = []
+        rawDataSets.forEach { sArray in
+            topicSentences.append(contentsOf: sArray)
+        }
+        for ja in topicSentences {
+            let query = tokenInfosTable.select(dbJa, dbKanaCount, dbTokenInfos)
+                .filter(dbJa == ja)
+            for row in try db.prepare(query) {
+                let tokenInfos = stringToTokenInfos(jsonString: row[dbTokenInfos])
+                kanaTokenInfosCacheDictionary[ja] = tokenInfos
+                topicSentencesInfos[ja] = TopicSentenceInfo(ja: ja, kanaCount: row[dbKanaCount], tokenInfos: tokenInfos)
             }
         }
     } catch {
-        print("db error")
+        print("db error 2:\(error)")
     }
 }
 
-private func getSentencesByIds(ids: [Int]) -> [String] {
-    guard let path = Bundle.main.path(forResource: sqliteFileName, ofType: "sqlite") else {
-        print("sqlite file not found"); return []
-    }
+private func getSentencesByIds(ids: [Int]) -> [Sentence] {
     do {
-        let db = try Connection(path, readonly: true)
-        let sentenceTable = Table("sentences")
+        let db = try Connection(dbPath, readonly: true)
+        let sentenceTable = Table(sentencesTableName)
         let dbId = Expression<Int>("id")
         let dbJa = Expression<String>("ja")
         let dbEn = Expression<String>("en")
+        let dbCmn = Expression<String>("cmn")
+        let dbJaTTSFixes = Expression<String>("ja_tts_fixes")
 
-        let query = sentenceTable.select(dbJa, dbEn)
+        let query = sentenceTable.select(dbId, dbJa, dbEn, dbCmn, dbJaTTSFixes)
             .filter(ids.contains(dbId))
-        var sentences: [String] = []
-        for s in try db.prepare(query) {
-            if gameLang == .jp {
-                translations[s[dbJa]] = s[dbEn]
-                sentences.append(s[dbJa])
-            }
-            if gameLang == .en {
-                translations[s[dbEn]] = s[dbJa]
-                sentences.append(s[dbEn])
-            }
+        var sentences: [Sentence] = []
+        for row in try db.prepare(query) {
+            let ttsFixes = arrayToPair(row[dbJaTTSFixes].components(separatedBy: " "))
+            sentences.append(Sentence(id: row[dbId],
+                                      ja: row[dbJa],
+                                      en: row[dbEn],
+                                      cmn: row[dbCmn],
+                                      ttsFixes: ttsFixes))
         }
         return sentences
     } catch {
-        print("db error")
+        print("db error 3:\(error)")
     }
     return []
 }
@@ -141,7 +140,7 @@ private func getSentencesByIds(ids: [Int]) -> [String] {
 func getSentenceCount(minKanaCount: Int, maxKanaCount: Int) -> Int {
     var sentenceCount = 0
     for kanaCount in minKanaCount ... maxKanaCount {
-        if let count = gameLang.sentenceInfos[kanaCount]?.sentenceCount {
+        if let count = gameLang.difficultyInfos[kanaCount]?.sentenceCount {
             sentenceCount += count
         }
     }
@@ -149,18 +148,18 @@ func getSentenceCount(minKanaCount: Int, maxKanaCount: Int) -> Int {
     return sentenceCount
 }
 
-func getRandSentences(level: Level, numOfSentences: Int) -> [String] {
+func getRandSentences(level: Level, numOfSentences: Int) -> [Sentence] {
     let minKanaCount = level.minSyllablesCount
     let maxKanaCount = level.maxSyllablesCount
     var combinedIds: Set<Int> = []
     for kanaCount in minKanaCount ... maxKanaCount {
-        if let ids = gameLang.sentenceInfos[kanaCount]?.ids {
+        if let ids = gameLang.difficultyInfos[kanaCount]?.ids {
             combinedIds = combinedIds.union(ids)
         }
     }
 
     var randomIds: [Int] = []
-    var randomSentences: [String] = []
+    var randomSentences: [Sentence] = []
     while randomSentences.count < numOfSentences {
         while randomIds.count < numOfSentences + numOfSentences / 2 {
             if let newId = combinedIds.randomElement() {
@@ -170,10 +169,17 @@ func getRandSentences(level: Level, numOfSentences: Int) -> [String] {
             }
         }
 
-        let strs = getSentencesByIds(ids: randomIds)
-        for str in strs {
-            if !randomSentences.contains(str) {
-                randomSentences.append(str)
+        let sentences = getSentencesByIds(ids: randomIds)
+        for s in sentences {
+            let isSame = !randomSentences.filter { randS in
+                if gameLang == Lang.jp {
+                    return s.ja == randS.ja
+                } else {
+                    return s.en == randS.en
+                }
+            }.isEmpty
+            if !isSame {
+                randomSentences.append(s)
                 if randomSentences.count == numOfSentences {
                     return randomSentences
                 }
@@ -182,3 +188,4 @@ func getRandSentences(level: Level, numOfSentences: Int) -> [String] {
     }
     return randomSentences
 }
+#endif

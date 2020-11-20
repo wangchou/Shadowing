@@ -70,7 +70,6 @@ class GameFlow {
         context.loadLearningSentences()
 
         Promises.all([
-            waitTranslationLoaded,
             waitKanaInfoLoaded,
             waitSentenceDBLoaded
             ])
@@ -163,7 +162,9 @@ extension GameFlow {
             self.timer?.invalidate()
             if let gr = context.gameRecord {
                 if context.gameMode == .infiniteChallengeMode {
-                    lastInfiniteChallengeSentences[gr.level] = context.sentences
+                    lastInfiniteChallengeSentences[gr.level] = context.sentences.map {s in
+                        return s.origin
+                    }
                 }
                 if context.gameMode == .medalMode {
                     context.gameMedal.updateMedals(record: &context.gameRecord!)
@@ -206,9 +207,8 @@ extension GameFlow {
         guard context.gameSetting.isSpeakTranslation else {
             return fulfilledVoidPromise()
         }
-        let translationsDict = (gameLang == .jp && context.gameMode == .topicMode) ?
-            chTranslations : translations
-        var translation = translationsDict[context.targetString] ?? ""
+
+        var translation = context.targetSentence.translation
 
         // only speak the first meaning when multiple meanings are available
         if translation.range(of: "/") != nil {

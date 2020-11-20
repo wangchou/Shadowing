@@ -158,8 +158,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         changeLangButton.addTapGestureRecognizer { [weak self] in
             changeLangButton.isUserInteractionEnabled = false
             changeGameLangTo(lang: gameLang == .jp ? .en : .jp)
-            Promises.all([waitTranslationLoaded,
-                          waitKanaInfoLoaded,
+            Promises.all([waitKanaInfoLoaded,
                           waitSentenceScoresLoaded,
                           waitUserSaidSentencesLoaded,
                           waitSentenceDBLoaded]).then { _ in
@@ -274,8 +273,8 @@ extension GridLayout where Self: UIView {
         if isSimulator { return }
         let num = Int(sqrt(pow(frame.width, 2) + pow(frame.height, 2)) / step) / 8
         let level = context.gameMedal.lowLevel
-        func getGameSentences() -> [String] {
-            var sentences: [String] = []
+        func getGameSentences() -> [Sentence] {
+            var sentences: [Sentence] = []
             let count = isSimulator ? 3 : context.sentences.count
             for i in 0 ..< num * 4 {
                 sentences.append(context.sentences[i % count])
@@ -301,10 +300,10 @@ extension GridLayout where Self: UIView {
         for i in 0 ..< num {
             let x = 1
             let y = i * 9 + 3
-            let sentence = randPad(sentences[i]) +
-                randPad(sentences[i + num]) +
-                randPad(sentences[i + (2 * num)]) +
-                sentences[i + (3 * num)]
+            let sentence = randPad(sentences[i].origin) +
+                randPad(sentences[i + num].origin) +
+                randPad(sentences[i + (2 * num)].origin) +
+                sentences[i + (3 * num)].origin
             let label = addText(x: x, y: y, h: 6 - level.rawValue / 3,
                                 text: sentence,
                                 color: textColor)

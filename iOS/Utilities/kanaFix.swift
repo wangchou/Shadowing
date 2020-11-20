@@ -154,7 +154,6 @@ func getFixedTTSString(_ text: String, localFixes: [(String, String)] = [], isJP
         var allFixes = localFixes
         allFixes.append(contentsOf: ttsGlobalFixes)
 
-
         var ttsToDisplayMap = Array(0 ..< fixedText.count)
         allFixes.forEach { kanji, fix in
             let ranges = fixedText.ranges(of: kanji)

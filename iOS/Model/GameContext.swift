@@ -46,7 +46,7 @@ class GameContext {
 
     var gameRecord: GameRecord?
     var sentenceIndex: Int = 0
-    var sentences: [String] = []
+    var sentences: [Sentence] = []
 
     var gameMode: GameMode = .topicMode
     var infiniteChallengeLevel: Level = .lv0
@@ -109,9 +109,15 @@ class GameContext {
     // Real duration in seconds of tts speaking
     var speakDuration: Float = 0
 
-    var targetString: String {
-        guard sentenceIndex < sentences.count else { return "" }
+    var targetSentence: Sentence {
         return sentences[sentenceIndex]
+    }
+
+    var targetString: String {
+        return targetSentence.origin
+    }
+    var translation: String {
+        return targetSentence.translation
     }
 
     var targetAttrString: NSMutableAttributedString {
@@ -168,7 +174,9 @@ extension GameContext {
     private func loadTopicSentence() {
         sentenceIndex = 0
         guard let selectedDataSet = dataSets[dataSetKey] else { return }
-        sentences = selectedDataSet
+        sentences = selectedDataSet.map {ja in
+            return Sentence(id: -1, ja: ja, en: "", cmn: chTranslations[ja] ?? "", ttsFixes: [])
+        }
 
         let level = dataKeyToLevels[dataSetKey] ?? .lv0
         gameRecord = GameRecord(dataSetKey, sentencesCount: sentences.count, level: level)
@@ -185,7 +193,7 @@ extension GameContext {
 
         if gameLang == .jp {
             sentences.forEach { s in
-                _ = s.furiganaAttributedString // load furigana
+                _ = s.ja.furiganaAttributedString // load furigana
             }
         }
 
@@ -209,7 +217,7 @@ extension GameContext {
 
         if gameLang == .jp {
             sentences.forEach { s in
-                _ = s.furiganaAttributedString // load furigana
+                _ = s.ja.furiganaAttributedString // load furigana
             }
         }
 
@@ -219,6 +227,12 @@ extension GameContext {
     func loadMedalCorrectionSentence() {
         sentences = Array(getTodaySentenceSet()).sorted {
             (sentenceScores[$0]?.value ?? 0) < (sentenceScores[$1]?.value ?? 0)
+        }.map {str -> Sentence in
+            if gameLang == .jp {
+                return Sentence(id: -1, ja: str, en: "", cmn: "", ttsFixes: [])
+            } else {
+                return Sentence(id: -1, ja: "", en: str, cmn: "", ttsFixes: [])
+            }
         }
 
         // This should not trigger network requests
@@ -227,10 +241,10 @@ extension GameContext {
         if gameLang == .jp {
             waitKanaInfoLoaded.then { _ in
                 self.sentences.forEach { s in
-                    if kanaTokenInfosCacheDictionary[s] == nil {
-                        _ = s.furiganaAttributedString // load furigana
+                    if kanaTokenInfosCacheDictionary[s.ja] == nil {
+                        _ = s.ja.furiganaAttributedString // load furigana
                     }
-                    if let userSaidSentence = userSaidSentences[s],
+                    if let userSaidSentence = userSaidSentences[s.ja],
                         kanaTokenInfosCacheDictionary[userSaidSentence] == nil {
                         _ = userSaidSentence.furiganaAttributedString
                     }

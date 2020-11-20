@@ -28,6 +28,11 @@ struct GameRecord: Codable {
     var greatCount = 0
     var goodCount = 0
     var sentencesScore: [String: Score]
+    var sentences: [Sentence] {
+        return sentencesScore.keys.map { str in
+            return Sentence(id: -1, ja: str, en: str, cmn: str, ttsFixes: [])
+        }
+    }
 
     init(_ dataSetKey: String, sentencesCount: Int, level: Level) {
         self.dataSetKey = dataSetKey

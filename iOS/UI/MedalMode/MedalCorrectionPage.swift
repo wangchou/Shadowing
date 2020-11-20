@@ -36,15 +36,15 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
     var tableView: UITableView!
     var gridCount: Int = 48
     var vc: MedalCorrectionPage?
-    var sentences: [String] {
+    var sentences: [Sentence] {
         return context.sentences
     }
 
-    var sortedSentences: [String] = []
+    var sortedSentences: [Sentence] = []
     var missedCount: Int {
         var count = 0
-        for str in sentences {
-            let score = sentenceScores[str]?.value ?? 0
+        for s in sentences {
+            let score = sentenceScores[s.origin]?.value ?? 0
             if score < 60 {
                 count += 1
             }
@@ -54,8 +54,8 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
 
     var goodCount: Int {
         var count = 0
-        for str in sentences {
-            let score = sentenceScores[str]?.value ?? 0
+        for s in sentences {
+            let score = sentenceScores[s.origin]?.value ?? 0
             if score >= 60, score < 80 {
                 count += 1
             }
@@ -178,7 +178,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
 
     private func addBottomTable() {
         sortedSentences = sentences.sorted {
-            (sentenceScores[$0]?.value ?? 0) < (sentenceScores[$1]?.value ?? 0)
+            (sentenceScores[$0.origin]?.value ?? 0) < (sentenceScores[$1.origin]?.value ?? 0)
         }
 
         tableView = UITableView()
