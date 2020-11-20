@@ -15,9 +15,11 @@ struct Sentence: Hashable, Equatable {
     var ja: String
     var en: String
     var cmn: String
+    #if os(iOS)
     var origin: String {
         return gameLang == Lang.jp ? ja : en
     }
+    #endif
     var translation: String { return cmn }
     var ttsFixes: [(String, String)]
 
@@ -48,6 +50,7 @@ var topicSentencesInfos: [String: TopicSentenceInfo] = [:]
 private var sqliteFileName = "sentences20201118"
 var tokenInfosTableName = "tokenInfos"
 var sentencesTableName = "sentence"
+var translationTableName = "translation"
 var jpInfoTableName = "jpInfo" // sentence ids sorted by difficulty
 var enInfoTableName = "enInfo"
 
@@ -135,6 +138,43 @@ private func getSentencesByIds(ids: [Int]) -> [Sentence] {
         print("db error 3:\(error)")
     }
     return []
+}
+
+func getSentenceByString(_ string: String) -> Sentence {
+    do {
+        let db = try Connection(dbPath, readonly: true)
+        let translationTable = Table(translationTableName)
+        let dbId = Expression<Int>("id")
+        let dbOrigin = Expression<String>("origin")
+        var id = -1
+        var query = translationTable.select(dbId)
+            .filter(string == dbOrigin)
+        for row in try db.prepare(query) {
+            id = row[dbId]
+        }
+
+        let sentenceTable = Table(sentencesTableName)
+        let dbJa = Expression<String>("ja")
+        let dbEn = Expression<String>("en")
+        let dbCmn = Expression<String>("cmn")
+        let dbJaTTSFixes = Expression<String>("ja_tts_fixes")
+
+        query = sentenceTable.select(dbId, dbJa, dbEn, dbCmn, dbJaTTSFixes)
+            .filter(dbId == id)
+        for row in try db.prepare(query) {
+            let ttsFixes = arrayToPair(row[dbJaTTSFixes].components(separatedBy: " "))
+            return Sentence(id: row[dbId],
+                            ja: row[dbJa],
+                            en: row[dbEn],
+                            cmn: row[dbCmn],
+                            ttsFixes: ttsFixes)
+        }
+
+    } catch {
+        print("db error 3:\(error)")
+    }
+    print("Error: cannnot find sentence by \(string)")
+    return Sentence(id: -1, ja: "", en: "", cmn: "", ttsFixes: [])
 }
 
 func getSentenceCount(minKanaCount: Int, maxKanaCount: Int) -> Int {

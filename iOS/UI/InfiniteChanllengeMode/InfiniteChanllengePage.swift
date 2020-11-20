@@ -105,11 +105,7 @@ extension InfiniteChallengePage: UITableViewDataSource {
 
         if let strings = lastInfiniteChallengeSentences[self.level] {
             let sentences = strings.map { str -> Sentence in
-                if gameLang == .jp {
-                    return Sentence(id: -1, ja: str, en: "", cmn: "", ttsFixes: [])
-                } else {
-                    return Sentence(id: -1, ja: "", en: str, cmn: "", ttsFixes: [])
-                }
+                return getSentenceByString(str)
             }
             contentCell.update(sentence: sentences[indexPath.row], isShowTranslate: context.gameSetting.isShowTranslationInPractice)
         }

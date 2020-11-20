@@ -175,7 +175,7 @@ extension GameContext {
         sentenceIndex = 0
         guard let selectedDataSet = dataSets[dataSetKey] else { return }
         sentences = selectedDataSet.map {ja in
-            return Sentence(id: -1, ja: ja, en: "", cmn: chTranslations[ja] ?? "", ttsFixes: [])
+            return getSentenceByString(ja)
         }
 
         let level = dataKeyToLevels[dataSetKey] ?? .lv0
@@ -228,11 +228,7 @@ extension GameContext {
         sentences = Array(getTodaySentenceSet()).sorted {
             (sentenceScores[$0]?.value ?? 0) < (sentenceScores[$1]?.value ?? 0)
         }.map {str -> Sentence in
-            if gameLang == .jp {
-                return Sentence(id: -1, ja: str, en: "", cmn: "", ttsFixes: [])
-            } else {
-                return Sentence(id: -1, ja: "", en: str, cmn: "", ttsFixes: [])
-            }
+            return getSentenceByString(str)
         }
 
         // This should not trigger network requests

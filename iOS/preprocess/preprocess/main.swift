@@ -36,65 +36,6 @@ print(rows.count)
 
 var targetIndex = 2000 //rows.count - 1
 var batchSize = 10
-func showStatus() {
-    var jpn100Count = 0
-    var en100Count = 0
-    var both100Count = 0
-    var bothBadCount = 0
-    var sentenceCount = 0
-    for r in 0 ... targetIndex {
-        let row = rows[r]
-        let jpn0 = row[0]
-        let eng0 = row[1]
-        //let cmn0 = row[2]
-        let jpn1 = row[3]
-        let jpn2 = row[4]
-        let eng1 = row[5]
-        let eng2 = row[6]
-        let eng3 = row[7]
-        let eng4 = row[8]
-        let enSyllablesCount = SwiftSyllables.getSyllables(eng0.spellOutNumbers())
-        let enDifficulty = DifficultyCalculator.shred.getDifficulty(sentence: eng0)
-        let kanaCount = row[9].count
-        //let kana1 = row[10]
-        //let kana2 = row[11]
-        all([
-            calculateScore(jpn0, jpn1),
-            calculateScore(jpn0, jpn2),
-            calculateScoreEn(eng0, eng1),
-            calculateScoreEn(eng0, eng2),
-            calculateScoreEn(eng0, eng3),
-            calculateScoreEn(eng0, eng4)
-        ]).then { scores in
-            let jpnOK = scores[0].value == 100 && scores[1].value == 100
-            let enOK = scores[2].value == 100 && scores[3].value == 100 &&
-                scores[4].value == 100 && scores[5].value == 100
-            jpn100Count += jpnOK ? 1 :0
-            en100Count += enOK ? 1 : 0
-            both100Count += jpnOK && enOK ? 1 : 0
-            bothBadCount += !jpnOK && !enOK ? 1 : 0
-            sentenceCount += 1
-            if sentenceCount%100 == 0 {
-                print("---")
-                print(jpn100Count, en100Count, both100Count, bothBadCount, sentenceCount)
-                print(jpn0)
-                print(eng0)
-                print("syllables :", enSyllablesCount)
-                print("difficulty:", enDifficulty)
-                print("kanaCount :", kanaCount)
-            }
-        }
-
-        while sentenceCount < r - batchSize {
-            RunLoop.main.run(until: Date(timeIntervalSinceNow: 0.001))
-        }
-    }
-
-    while sentenceCount < targetIndex {
-        RunLoop.main.run(until: Date(timeIntervalSinceNow: 0.001))
-    }
-}
-
 func checkKanaFixes() {
     var swiftKana: [String: String] = [:]
     var finishedCount = 0
@@ -274,6 +215,47 @@ var engOK: [String: Bool] = [:]
 var jpnDifficulty: [String: Int] = [:]
 var engDifficulty: [String: Int] = [:]
 var sentences: [(id: Int, jpn: String, eng: String)] = []
+var isAddToTranslation: [String: Bool] = [:]
+
+func addTranslationTable() {
+    let translationTable = Table(translationTableName)
+    let dbOrigin = Expression<String>("origin")
+    let dbId = Expression<Int>("Id")
+    do {
+        try dbW.run(translationTable.drop(ifExists: true))
+        try dbW.run(translationTable.create { t in
+            t.column(dbOrigin, primaryKey: true)
+            t.column(dbId)
+        })
+        func addTranslation(origin: String, id: Int) {
+            do {
+                guard isAddToTranslation[origin] == nil else { return }
+                let insertSql = translationTable.insert(
+                    dbOrigin <- origin,
+                    dbId <- id
+                )
+                try dbW.run(insertSql)
+                isAddToTranslation[origin] = true
+            } catch {
+                print(error)
+            }
+        }
+
+        for (id, row) in rows.enumerated() {
+            let jpn = row[0]
+            let eng = row[1]
+            if jpnOK[jpn] == true {
+                addTranslation(origin: jpn, id: id)
+            }
+            if engOK[eng] == true {
+                addTranslation(origin: eng, id: id)
+            }
+        }
+    } catch {
+        print(error)
+    }
+}
+
 func addSentencesTable() {
     do {
         let sentencesTable = Table(sentencesTableName)
@@ -290,9 +272,9 @@ func addSentencesTable() {
             t.column(dbCmn)
             t.column(dbJaTTSFixes)
         })
-        for (i, row) in rows.enumerated() {
+        for (id, row) in rows.enumerated() {
             //if(i % 500 == 0) {
-                print(i)
+                print(id)
             //}
 //            if(i > 2000) {
 //                break
@@ -300,7 +282,7 @@ func addSentencesTable() {
 
             let jpn0 = row[0]
             let eng0 = row[1]
-            sentences.append((id: i, jpn: jpn0, eng: eng0))
+            sentences.append((id: id, jpn: jpn0, eng: eng0))
 
             let cmn = row[2]
             let jpn1 = row[3]
@@ -335,6 +317,7 @@ func addSentencesTable() {
                 enOKCount += scores[5].value == 100 ? 1 : 0
                 engOK[eng0] = enOKCount == 4 ||
                               (enOKCount >= 3 && (engDifficulty[eng0] ?? 0) > 13)
+
                 isFinished = true
             }
             waitForFinishing()
@@ -343,7 +326,7 @@ func addSentencesTable() {
             getKana(jpn0, isFuri: true, originalString: jpn0)
                 .then { kana in
                     let insertSql = sentencesTable.insert(
-                        dbId <- i,
+                        dbId <- id,
                         dbJa <- jpn0,
                         dbEn <- eng0,
                         dbCmn <- cmn,
@@ -461,6 +444,7 @@ func runAll() {
         dbW = try Connection(writableDBPath, readonly: false)
         addTokenInfosTable()
         addSentencesTable()
+        addTranslationTable()
         addJpInfoTables()
         addEnInfoTables()
     } catch {

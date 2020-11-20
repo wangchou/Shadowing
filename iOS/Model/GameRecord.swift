@@ -30,7 +30,7 @@ struct GameRecord: Codable {
     var sentencesScore: [String: Score]
     var sentences: [Sentence] {
         return sentencesScore.keys.map { str in
-            return Sentence(id: -1, ja: str, en: str, cmn: str, ttsFixes: [])
+            return getSentenceByString(str)
         }
     }
 
