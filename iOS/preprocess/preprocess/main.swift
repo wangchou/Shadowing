@@ -10,6 +10,7 @@ import Promises
 import SwiftSyllables
 import SQLite
 
+private var topicSentenceIdStart = 1000000
 func getSentences() -> [[String]] {
     let file = "sentences.tsv"
     var rows: [[String]] = []
@@ -206,7 +207,7 @@ func addTokenInfosTable() {
             waitForFinishing()
         }
     } catch {
-        print("db error: \(error)")
+        print("db error 4: \(error)")
     }
 }
 
@@ -217,8 +218,8 @@ var engDifficulty: [String: Int] = [:]
 var sentences: [(id: Int, jpn: String, eng: String)] = []
 var isAddToTranslation: [String: Bool] = [:]
 
-func addTranslationTable() {
-    let translationTable = Table(translationTableName)
+func addStringToIdTable() {
+    let translationTable = Table(stringToIdTableName)
     let dbOrigin = Expression<String>("origin")
     let dbId = Expression<Int>("Id")
     do {
@@ -249,6 +250,15 @@ func addTranslationTable() {
             }
             if engOK[eng] == true {
                 addTranslation(origin: eng, id: id)
+            }
+        }
+
+        // topic sentence
+        var topicSentenceId = topicSentenceIdStart
+        for sArray in rawDataSets {
+            for topicSentence in sArray {
+                topicSentenceId += 1
+                addTranslation(origin: topicSentence, id: topicSentenceId)
             }
         }
     } catch {
@@ -342,8 +352,23 @@ func addSentencesTable() {
                 }
             waitForFinishing()
         }
+        // topic sentence
+        var topicSentenceId = topicSentenceIdStart
+        for sArray in rawDataSets {
+            for topicSentence in sArray {
+                topicSentenceId += 1
+                let insertSql = sentencesTable.insert(
+                    dbId <- topicSentenceId,
+                    dbJa <- topicSentence,
+                    dbEn <- "",
+                    dbCmn <- topicTranslation[topicSentence] ?? "",
+                    dbJaTTSFixes <- ""
+                )
+                try dbW.run(insertSql)
+            }
+        }
     } catch {
-        print("db error: \(error)")
+        print("db error 5: \(error)")
     }
 }
 
@@ -388,9 +413,8 @@ func addJpInfoTables() {
             }
         }
         print("totalJpCount: \(totalJpCount)")
-
     } catch {
-        print("db error: \(error)")
+        print("db error 6: \(error)")
     }
 }
 func addEnInfoTables() {
@@ -444,11 +468,11 @@ func runAll() {
         dbW = try Connection(writableDBPath, readonly: false)
         addTokenInfosTable()
         addSentencesTable()
-        addTranslationTable()
+        addStringToIdTable()
         addJpInfoTables()
         addEnInfoTables()
     } catch {
-        print("db error: \(error)")
+        print("db error 7: \(error)")
     }
 
 }

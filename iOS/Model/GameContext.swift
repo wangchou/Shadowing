@@ -252,9 +252,9 @@ extension GameContext {
     private func getTodaySentenceSet() -> Set<String> {
         var sentencesSet: Set<String> = []
         let todayKey = getDateKey(date: Date())
-        for r in GameContext.shared.gameHistory {
-            if todayKey == getDateKey(date: r.startedTime) {
-                for string in r.sentencesScore.keys {
+        for record in GameContext.shared.gameHistory {
+            if todayKey == getDateKey(date: record.startedTime) {
+                for string in record.sentencesScore.keys {
                     sentencesSet.insert(string)
                 }
             }

@@ -50,7 +50,7 @@ var topicSentencesInfos: [String: TopicSentenceInfo] = [:]
 private var sqliteFileName = "sentences20201118"
 var tokenInfosTableName = "tokenInfos"
 var sentencesTableName = "sentence"
-var translationTableName = "translation"
+var stringToIdTableName = "stringToId"
 var jpInfoTableName = "jpInfo" // sentence ids sorted by difficulty
 var enInfoTableName = "enInfo"
 
@@ -143,11 +143,11 @@ private func getSentencesByIds(ids: [Int]) -> [Sentence] {
 func getSentenceByString(_ string: String) -> Sentence {
     do {
         let db = try Connection(dbPath, readonly: true)
-        let translationTable = Table(translationTableName)
+        let stringToIdTable = Table(stringToIdTableName)
         let dbId = Expression<Int>("id")
         let dbOrigin = Expression<String>("origin")
         var id = -1
-        var query = translationTable.select(dbId)
+        var query = stringToIdTable.select(dbId)
             .filter(string == dbOrigin)
         for row in try db.prepare(query) {
             id = row[dbId]

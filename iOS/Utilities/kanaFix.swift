@@ -126,9 +126,10 @@ let ttsGlobalFixes: [(String, String)] = [
     ("弾いて", "ひいて"),
 ]
 
-func getUpdateTextMap(map: [Int],
-                     ranges: [(lower: Int, upper: Int)],
-                     fixString: String) -> [Int] {
+func getUpdateTextMap(
+    map: [Int],
+    ranges: [(lower: Int, upper: Int)],
+    fixString: String) -> [Int] {
     var newMap: [Int] = map
     //replace from upper ranges
     ranges.reversed().forEach { range in
