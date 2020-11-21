@@ -48,6 +48,12 @@ class I18n {
         return "Initial Descriptions"
     }
 
+    var translationTranslationLabel: String {
+        if isJa { return "翻訳言語" }
+        if isZh { return "翻譯的語言" }
+        return "Translation Language"
+    }
+
     var showTranslationLabel: String {
         if isJa { return "翻訳を表示する" }
         if isZh { return "改顯示譯文" }

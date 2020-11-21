@@ -27,6 +27,8 @@ class SettingPage: UITableViewController {
     @IBOutlet var practiceSpeedSlider: UISlider!
     @IBOutlet var learningModeLabel: UILabel!
 
+    @IBOutlet weak var translationLanguageLabel: UILabel!
+    @IBOutlet weak var translationLanguageSegment: UISegmentedControl!
     @IBOutlet var showTranslationLabel: UILabel!
     @IBOutlet var showTranslationSwitch: UISwitch!
     @IBOutlet var learningModeSegmentControl: UISegmentedControl!
@@ -42,6 +44,8 @@ class SettingPage: UITableViewController {
     @IBOutlet var teacherNameLabel: UILabel!
     @IBOutlet var assisantLabel: UILabel!
     @IBOutlet var assistantNameLabel: UILabel!
+    @IBOutlet var translatorLabel: UILabel!
+    @IBOutlet var translatorNameLabel: UILabel!
     @IBOutlet var gotoIOSSettingButton: UIButton!
     @IBOutlet var dailyGoalSegmentedControl: UISegmentedControl!
     @IBOutlet var gotoAppStoreButton: UIButton!
@@ -81,9 +85,13 @@ class SettingPage: UITableViewController {
         for i in 0 ..< dailyGoals.count {
             dailyGoalSegmentedControl.setTitle("\(dailyGoals[i])\(i18n.sentenceUnit)", forSegmentAt: i)
         }
+        translationLanguageSegment.setTitle("\(gameLang == .jp ? i18n.english : i18n.japanese)", forSegmentAt: 0)
+        translationLanguageSegment.setTitle("\(i18n.chinese)", forSegmentAt: 1)
+
         topBarView.titleLabel.text = i18n.setting
         autoSpeedLabel.text = i18n.autoSpeedLabel
         narratorLabel.text = i18n.narratorLabel
+        translationLanguageLabel.text = i18n.translationTranslationLabel
         showTranslationLabel.text = i18n.showTranslationLabel
         monitoringLabel.text = i18n.monitoringLabel
         wantToSayLabel.text = i18n.wantToSayLabel
@@ -92,11 +100,15 @@ class SettingPage: UITableViewController {
         assisantLabel.text = i18n.assistantLabel
 
         if let teacher = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher) {
-            teacherNameLabel.text = teacher.name
+            teacherNameLabel.text = teacher.name + " (\(teacher.language == "ja-JP" ? i18n.japanese : i18n.english))"
         }
 
-        if let assisant = AVSpeechSynthesisVoice(identifier: context.gameSetting.assisant) {
+        if let assisant = AVSpeechSynthesisVoice(identifier: context.gameSetting.assistant) {
             assistantNameLabel.text = assisant.name
+        }
+
+        if let translator = AVSpeechSynthesisVoice(identifier: context.gameSetting.translator) {
+            translatorNameLabel.text = translator.name
         }
 
         gameLangSegmentControl.selectedSegmentIndex = gameLang == .jp ? 1 : 0
@@ -229,6 +241,18 @@ class SettingPage: UITableViewController {
         saveGameSetting()
     }
 
+    @IBAction func translationLanguageSegmentedControlValueChanged(_: Any) {
+        switch translationLanguageSegment.selectedSegmentIndex {
+        case 0:
+            context.gameSetting.translationLang = gameLang == .jp ? .en : .jp
+        case 1:
+            context.gameSetting.translationLang = .zh
+        default:
+            context.gameSetting.translationLang = .zh
+        }
+        saveGameSetting()
+    }
+
     override func tableView(_: UITableView, titleForHeaderInSection section: Int) -> String? {
         let i18n = I18n.shared
         switch section {
@@ -264,7 +288,12 @@ class SettingPage: UITableViewController {
             if indexPath.row == 1 { // assistant voice
                 VoiceSelectionPage.fromPage = self
                 VoiceSelectionPage.selectingVoiceFor = .assisant
-                VoiceSelectionPage.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.assisant)
+                VoiceSelectionPage.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.assistant)
+            }
+            if indexPath.row == 2 { // translator voice
+                VoiceSelectionPage.fromPage = self
+                VoiceSelectionPage.selectingVoiceFor = .translator
+                VoiceSelectionPage.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.translator)
             }
             launchVC(VoiceSelectionPage.id)
         }

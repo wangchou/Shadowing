@@ -220,7 +220,7 @@ func translatorSay(_ text: String) -> Promise<Void> {
 }
 
 func assisantSay(_ text: String) -> Promise<Void> {
-    return engine.speak(text: text, speaker: context.gameSetting.assisant, rate: normalRate)
+    return engine.speak(text: text, speaker: context.gameSetting.assistant, rate: normalRate)
 }
 
 func teacherSay(_ text: String, rate: Float = context.teachingRate) -> Promise<Void> {

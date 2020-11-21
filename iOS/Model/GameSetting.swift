@@ -16,6 +16,7 @@ private var globalIsRepeatOne: Bool = false
 private var globalMonitoringVolume: Int = 0
 
 struct GameSetting: Codable {
+    var version: String = "1.4.0"
     var isAutoSpeed: Bool = true
     var preferredSpeed: Float = AVSpeechUtteranceDefaultSpeechRate * 0.9
     var practiceSpeed: Float = AVSpeechUtteranceDefaultSpeechRate * 0.7
@@ -26,12 +27,14 @@ struct GameSetting: Codable {
     var isShowTranslation: Bool = false
     var isSpeakTranslation: Bool = false
     var isUsingGuideVoice: Bool = true
+    var translationLang: Lang = .zh
     // learning mode ended
 
     var isUsingNarrator: Bool = true
     var isMointoring: Bool = true
     var teacher: String = "unknown"
-    var assisant: String = "unknown"
+    var assistant: String = "unknown"
+    var translator: String = "unknown"
     var dailySentenceGoal: Int = 50
     var icTopViewMode: ICTopViewMode = .dailyGoal
     var isRepeatOne: Bool {
@@ -117,7 +120,7 @@ func saveGameSetting() {
 func loadGameSetting() {
     if let gameSetting = loadFromUserDefault(type: GameSetting.self, key: gameSettingKey + gameLang.key),
        gameSetting.teacher != unknownVoice,
-       gameSetting.assisant != unknownVoice {
+       gameSetting.assistant != unknownVoice {
         context.gameSetting = gameSetting
     } else {
         print("[\(gameLang)] create new gameSetting")
@@ -126,12 +129,12 @@ func loadGameSetting() {
 
         if gameLang == .jp {
             context.gameSetting.teacher = getDefaultVoiceId(language: langCode)
-            context.gameSetting.assisant = getDefaultVoiceId(language: langCode, isPreferMaleSiri: false)
+            context.gameSetting.assistant = getDefaultVoiceId(language: langCode, isPreferMaleSiri: false)
         } else {
             context.gameSetting.teacher = getDefaultVoiceId(language: langCode, isPreferMaleSiri: false)
-            context.gameSetting.assisant = getDefaultVoiceId(language: langCode)
+            context.gameSetting.assistant = getDefaultVoiceId(language: langCode)
         }
-        print(context.gameSetting.teacher, context.gameSetting.assisant)
+        print(context.gameSetting.teacher, context.gameSetting.assistant)
     }
     loadIsRepeatOne()
     loadMonitoringVolume()

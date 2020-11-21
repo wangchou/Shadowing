@@ -113,7 +113,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2708DA81054F15878F6AE745 /* Pods-今話したい.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-今話したい.debug.xcconfig"; path = "Target Support Files/Pods-今話したい/Pods-今話したい.debug.xcconfig"; sourceTree = "<group>"; };
 		90EB2EE36D046887387380C9 /* Pods-hanashitai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hanashitai.release.xcconfig"; path = "Target Support Files/Pods-hanashitai/Pods-hanashitai.release.xcconfig"; sourceTree = "<group>"; };
 		B621F3792575CA46DA1E2512 /* Pods_hanashitai.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hanashitai.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE050B7D22227530007017C5 /* MessengerBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerBar.swift; sourceTree = "<group>"; };
@@ -180,6 +179,7 @@
 		BE8295D32345D129009DA354 /* ヒラギノ角ゴシック W0.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ヒラギノ角ゴシック W0.ttc"; sourceTree = "<group>"; };
 		BE82FE602269C5A900907388 /* MedalSummaryPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalSummaryPage.swift; sourceTree = "<group>"; };
 		BE84C1DC23446E5F00CB53AA /* Pods_今話したい.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "Pods_今話したい.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE866E9A25692E45008C00D4 /* hanashitai.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = hanashitai.entitlements; sourceTree = "<group>"; };
 		BE8E51DA21CF76CF007D29E6 /* TopChartView+DailyChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TopChartView+DailyChart.swift"; sourceTree = "<group>"; };
 		BE8E51DC21CF7718007D29E6 /* TopChartView+Timeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TopChartView+Timeline.swift"; sourceTree = "<group>"; };
 		BE8E51DE21CF7754007D29E6 /* TopChartView+LongTermGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TopChartView+LongTermGoal.swift"; sourceTree = "<group>"; };
@@ -243,7 +243,6 @@
 		BEF28B6220B52BF700385273 /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 		BEF4B14E219C093800B8E45E /* VoiceSelectionPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceSelectionPage.swift; sourceTree = "<group>"; };
 		BEF4B150219C0E3B00B8E45E /* VoiceTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceTableCell.swift; sourceTree = "<group>"; };
-		D9E85465E2C426817FF152D5 /* Pods-今話したい.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-今話したい.release.xcconfig"; path = "Target Support Files/Pods-今話したい/Pods-今話したい.release.xcconfig"; sourceTree = "<group>"; };
 		E0CB2CAED1E443B55D2C487D /* Pods-hanashitai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hanashitai.debug.xcconfig"; path = "Target Support Files/Pods-hanashitai/Pods-hanashitai.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -266,8 +265,6 @@
 		A9F614D46265A9129B5B2A95 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2708DA81054F15878F6AE745 /* Pods-今話したい.debug.xcconfig */,
-				D9E85465E2C426817FF152D5 /* Pods-今話したい.release.xcconfig */,
 				E0CB2CAED1E443B55D2C487D /* Pods-hanashitai.debug.xcconfig */,
 				90EB2EE36D046887387380C9 /* Pods-hanashitai.release.xcconfig */,
 			);
@@ -442,6 +439,7 @@
 		BEBDEDB3208EF09F00C18520 = {
 			isa = PBXGroup;
 			children = (
+				BE866E9A25692E45008C00D4 /* hanashitai.entitlements */,
 				BEB6F6C72182B89D0011E1C1 /* InfoPlist.strings */,
 				BEBDEDBE208EF09F00C18520 /* Project */,
 				BE6F2F142144DFB5003A56CD /* Sentences */,
@@ -554,9 +552,8 @@
 				BEBDEDB8208EF09F00C18520 /* Sources */,
 				BEBDEDB9208EF09F00C18520 /* Frameworks */,
 				BEBDEDBA208EF09F00C18520 /* Resources */,
-				BE4D6D2620AD2F4D0020B151 /* ShellScript */,
+				BE4D6D2620AD2F4D0020B151 /* Run Script */,
 				E0FA05783F9F3BA5B01D36E7 /* [CP] Embed Pods Frameworks */,
-				BE16FC5E234859A4007EEBA8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -630,30 +627,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		BE16FC5E234859A4007EEBA8 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n";
-		};
-		BE4D6D2620AD2F4D0020B151 /* ShellScript */ = {
+		BE4D6D2620AD2F4D0020B151 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -937,9 +918,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_DEBUG_INFORMATION_LEVEL = "line-tables-only";
+				CODE_SIGN_ENTITLEMENTS = hanashitai.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ETE87474CU;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -955,7 +937,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
-				MARKETING_VERSION = 1.3.19;
+				MARKETING_VERSION = 1.4.0;
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -964,6 +946,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = idv.wcl.imahanashitai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
@@ -978,9 +961,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_DEBUG_INFORMATION_LEVEL = "line-tables-only";
+				CODE_SIGN_ENTITLEMENTS = hanashitai.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ETE87474CU;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -996,7 +980,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
-				MARKETING_VERSION = 1.3.19;
+				MARKETING_VERSION = 1.4.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1004,6 +988,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = idv.wcl.imahanashitai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

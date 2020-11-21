@@ -16,11 +16,12 @@ var enDifficultyInfos: [Int: DifficultyInfo] = [:]
 var gameLang: Lang = Lang.jp
 
 enum Lang: Int, Codable {
-    case jp, en, unset
+    case jp, en, zh, unset
 
     var key: String {
         if self == .jp { return "" }
         if self == .en { return "en" }
+        if self == .zh { return "zh" }
         return "unset"
     }
 
@@ -35,7 +36,7 @@ enum Lang: Int, Codable {
             return jaDifficultyInfos
         case .en:
             return enDifficultyInfos
-        case .unset:
+        case .zh, .unset:
             return [:]
         }
     }
@@ -46,6 +47,8 @@ enum Lang: Int, Codable {
             return "ja"
         case .en:
             return "en"
+        case .zh:
+            return "zh"
         case .unset:
             return "unset"
         }

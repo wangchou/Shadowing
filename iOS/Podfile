@@ -1,7 +1,6 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-
 workspace 'hanashitai.xcworkspace'
 project 'hanashitai.xcodeproj'
 project 'preprocess/preprocess.xcodeproj'
@@ -18,8 +17,7 @@ target 'hanashitai' do
   pod 'PromisesSwift'
   pod 'Firebase/Analytics'
   pod 'Firebase/Performance'
-  pod 'Fabric', '~> 1.10.2'
-  pod 'Crashlytics', '~> 3.13.4'
+  pod 'Firebase/Crashlytics'
 end
 
 target 'preprocess' do
@@ -29,6 +27,10 @@ target 'preprocess' do
   pod 'Alamofire'
   pod 'PromisesSwift'
   pod 'SQLite.swift'
+end
+
+def unsupported_pods
+   ['Firebase/Analytics']
 end
 
 # https://github.com/CocoaPods/CocoaPods/issues/3707#issuecomment-354754864

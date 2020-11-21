@@ -3,9 +3,6 @@ PODS:
   - Charts (3.2.1):
     - Charts/Core (= 3.2.1)
   - Charts/Core (3.2.1)
-  - Crashlytics (3.13.4):
-    - Fabric (~> 1.10.2)
-  - Fabric (1.10.2)
   - Firebase/Analytics (6.22.0):
     - Firebase/Core
   - Firebase/Core (6.22.0):
@@ -13,6 +10,9 @@ PODS:
     - FirebaseAnalytics (= 6.4.1)
   - Firebase/CoreOnly (6.22.0):
     - FirebaseCore (= 6.6.6)
+  - Firebase/Crashlytics (6.22.0):
+    - Firebase/CoreOnly
+    - FirebaseCrashlytics (~> 4.0.0-beta.7)
   - Firebase/Performance (6.22.0):
     - Firebase/CoreOnly
     - FirebasePerformance (~> 3.1.11)
@@ -42,6 +42,14 @@ PODS:
     - GoogleUtilities/Logger (~> 6.5)
     - nanopb (~> 0.3.901)
   - FirebaseCoreDiagnosticsInterop (1.2.0)
+  - FirebaseCrashlytics (4.0.0-beta.7):
+    - FirebaseAnalyticsInterop (~> 1.2)
+    - FirebaseCore (~> 6.6)
+    - FirebaseInstallations (~> 1.1)
+    - GoogleDataTransport (>= 5.1.1, ~> 5.1)
+    - GoogleDataTransportCCTSupport (>= 2.0.2, ~> 2.0)
+    - nanopb (~> 0.3.901)
+    - PromisesObjC (~> 1.2)
   - FirebaseInstallations (1.1.1):
     - FirebaseCore (~> 6.6)
     - GoogleUtilities/UserDefaults (~> 6.5)
@@ -122,20 +130,17 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - Charts (= 3.2.1)
-  - Crashlytics (~> 3.13.4)
-  - Fabric (~> 1.10.2)
   - Firebase/Analytics
+  - Firebase/Crashlytics
   - Firebase/Performance
   - PromisesSwift
   - SQLite.swift
   - "SwiftSyllables (from `git@github.com:wangchou/SwiftSyllables.git`)"
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - Charts
-    - Crashlytics
-    - Fabric
     - Firebase
     - FirebaseABTesting
     - FirebaseAnalytics
@@ -143,6 +148,7 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseCoreDiagnosticsInterop
+    - FirebaseCrashlytics
     - FirebaseInstallations
     - FirebaseInstanceID
     - FirebasePerformance
@@ -171,8 +177,6 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   Charts: f122fb70b19847fa5817d018b77d6c5a2296ab25
-  Crashlytics: 2dfd686bcb918dc10ee0e76f7f853fe42c7bd552
-  Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   Firebase: 32f9520684e87c7af3f0704f7f88042626d6b536
   FirebaseABTesting: 821a3a3e4a145987e80fee3657c4de1cb9adf693
   FirebaseAnalytics: 83f822fd0d33a46f49f89b8c3ab16ab4d89df08a
@@ -180,6 +184,7 @@ SPEC CHECKSUMS:
   FirebaseCore: 9aca0f1fffb405176ba15311a5621fcde4106fcf
   FirebaseCoreDiagnostics: 13a6564cd6d5375066bbc8940cc1753af24497f3
   FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
+  FirebaseCrashlytics: ad2e8527a7efd9a7e708d5abe57318ced2e1dbd1
   FirebaseInstallations: acb3216eb9784d3b1d2d2d635ff74fa892cc0c44
   FirebaseInstanceID: 4b87a9a75ef628a53bb5de46e4d4cecfcce88c02
   FirebasePerformance: 5652d2004001e886da6dca04f478c695f87c4702
@@ -197,6 +202,6 @@ SPEC CHECKSUMS:
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   SwiftSyllables: e64d9f8687694a17e228dcf7a596bb3fdc64935f
 
-PODFILE CHECKSUM: 615e8c0316e88eb31e118f4e8d752c70c08a2f19
+PODFILE CHECKSUM: b25e70320bc88a9266f55b108a73a8d11ae86bc8
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.10.0

@@ -12,7 +12,7 @@ import UIKit
 private let context = GameContext.shared
 
 enum SelectingVoiceFor {
-    case teacher, assisant
+    case teacher, assisant, translator
 }
 
 class VoiceSelectionPage: UIViewController {
@@ -118,7 +118,7 @@ class VoiceSelectionPage: UIViewController {
         }
         originPracticeSpeed = context.gameSetting.practiceSpeed
         originVoice = selectingVoiceFor == .teacher ?
-            context.gameSetting.teacher : context.gameSetting.assisant
+            context.gameSetting.teacher : context.gameSetting.assistant
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -188,7 +188,7 @@ extension VoiceSelectionPage: UITableViewDelegate {
         if selectingVoiceFor == .teacher {
             context.gameSetting.teacher = selectedVoice?.identifier ?? "unknown"
         } else {
-            context.gameSetting.assisant = selectedVoice?.identifier ?? "unknown"
+            context.gameSetting.assistant = selectedVoice?.identifier ?? "unknown"
         }
 
         if originVoice == selectedVoice?.identifier {
