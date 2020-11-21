@@ -102,6 +102,7 @@ class Messenger: UIViewController {
         stopEventObserving(self)
         SpeechEngine.shared.monitoringOff()
         UIApplication.shared.isIdleTimerDisabled = false
+        SpeechEngine.shared.stop()
     }
 
     func renderOverlayView() {

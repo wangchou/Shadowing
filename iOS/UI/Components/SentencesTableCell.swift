@@ -74,6 +74,7 @@ class SentencesTableCell: UITableViewCell {
                 SentencesTableCell.isPracticing = false
                 TopicDetailPage.isChallengeButtonDisabled = false
                 SpeechEngine.shared.monitoringOff()
+                SpeechEngine.shared.stop(isStopTTS: false)
                 self.practiceButton.backgroundColor = self.buttonColor
             }
     }
@@ -171,6 +172,9 @@ extension SentencesTableCell {
     }
 
     private func updateUIByScore(score: Score) -> Promise<Void> {
+        _ = assisantSay(score.text)
+        SpeechEngine.shared.stop(isStopTTS: false)
+
         tableView?.beginUpdates()
         let userSaidSentence = userSaidSentences[targetString] ?? ""
         userSaidSentenceLabel.textColor = UIColor.black
@@ -188,7 +192,7 @@ extension SentencesTableCell {
         sentenceScores[targetString] = score
         postEvent(.practiceSentenceCalculated)
         saveGameMiscData()
-        _ = assisantSay(score.text)
+
         return fulfilledVoidPromise()
     }
 }

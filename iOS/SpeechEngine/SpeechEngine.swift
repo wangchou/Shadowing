@@ -81,10 +81,12 @@ class SpeechEngine {
         audioEngine.mainMixerNode.outputVolume = 0
     }
 
-    func stop() {
+    func stop(isStopTTS: Bool = true) {
         guard isEngineRunning else { return }
 
-        tts.stop()
+        if isStopTTS {
+            tts.stop()
+        }
 
         guard !isSimulator else { return }
         speechRecognizer.endAudio(isCanceling: true)
