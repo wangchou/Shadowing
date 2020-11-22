@@ -140,7 +140,9 @@ func loadGameSetting() {
     loadMonitoringVolume()
 }
 
-func getDefaultVoiceId(language: String, isPreferMaleSiri: Bool = true, isPreferEnhanced: Bool = true) -> String {
+func getDefaultVoice(language: String,
+                     isPreferMaleSiri: Bool = true,
+                     isPreferEnhanced: Bool = true) -> AVSpeechSynthesisVoice? {
     let voices = getAvailableVoice(language: language).sorted { v1, v2 in
         if v2.identifier.range(of: isPreferMaleSiri ? "siri_male" : "siri_female") != nil { return true }
         if v1.identifier.range(of: isPreferMaleSiri ? "siri_male" : "siri_female") != nil { return false }
@@ -153,11 +155,21 @@ func getDefaultVoiceId(language: String, isPreferMaleSiri: Bool = true, isPrefer
 
     guard let voice = voices.last else {
         if let voice = AVSpeechSynthesisVoice(language: language) {
-            return voice.identifier
+            return voice
         } else {
-            showMessage(i18n.defaultVoiceIsNotAvailable, isNeedConfirm: true)
-            return AVSpeechSynthesisVoice(language: nil)?.identifier ?? unknownVoice
+            return nil
         }
+    }
+    return voice
+}
+
+func getDefaultVoiceId(language: String,
+                       isPreferMaleSiri: Bool = true,
+                       isPreferEnhanced: Bool = true) -> String {
+
+    guard let voice = getDefaultVoice(language: language, isPreferMaleSiri: isPreferMaleSiri, isPreferEnhanced: isPreferEnhanced) else {
+        showMessage(i18n.defaultVoiceIsNotAvailable, isNeedConfirm: true)
+        return unknownVoice
     }
     return voice.identifier
 }

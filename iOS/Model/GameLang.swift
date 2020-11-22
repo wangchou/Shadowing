@@ -53,6 +53,19 @@ enum Lang: Int, Codable {
             return "unset"
         }
     }
+
+    var defaultCode: String {
+        switch self {
+        case .jp:
+            return "ja-JP"
+        case .en:
+            return "en-US"
+        case .zh:
+            return "zh-TW"
+        case .unset:
+            return "unset"
+        }
+    }
 }
 
 // https://stackoverflow.com/questions/44580719/how-do-i-make-an-enum-decodable-in-swift-4

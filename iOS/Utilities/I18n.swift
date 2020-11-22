@@ -48,10 +48,10 @@ class I18n {
         return "Initial Descriptions"
     }
 
-    var translationTranslationLabel: String {
+    var translationLanguageLabel: String {
         if isJa { return "翻訳言語" }
         if isZh { return "翻譯的語言" }
-        return "Translation Language"
+        return "Translation Lang"
     }
 
     var showTranslationLabel: String {
@@ -97,12 +97,11 @@ class I18n {
     }
 
     var voiceNotAvailableMessage: String {
-        let lang = gameLang == .jp ? japanese : english
         if isJa {
-            return "もっと声をダウンロードしましょう\n「設定 > 一般 > アクセシビリティ > \(speechText) > 声 > \(lang)」の順に選択しましょう。"
+            return "もっと声をダウンロードしましょう\n「設定 > 一般 > アクセシビリティ > \(speechText) > 声 」の順に選択しましょう。"
         }
-        if isZh { return "更多語音選項: \n請前往手機的「設定 > 一般 > 輔助使用 > \(speechText) > 聲音 > \(lang)」下載" }
-        return "Download more voices:\nGo to Settings > General > Accessibility > \(speechText) > Voices > \(lang)"
+        if isZh { return "更多語音選項: \n請前往手機的「設定 > 一般 > 輔助使用 > \(speechText) > 聲音」下載" }
+        return "Download more voices:\nGo to Settings > General > Accessibility > \(speechText) > Voices"
     }
 
     var defaultVoiceIsNotAvailable: String {
@@ -111,6 +110,8 @@ class I18n {
         if isZh { return "找不到\(lang)語音：\n請前往手機的「設定 > 一般 > 輔助使用 > \(speechText) > 聲音 > \(lang)」下載" }
         return "No TTS Voice found:\nGo to Settings > General > Accessibility > \(speechText) > Voices > \(lang) to Download"
     }
+
+
 
     var settingSectionGameSpeed: String {
         if isJa { return "挑戦中" }
@@ -204,6 +205,12 @@ class I18n {
         if isJa { return "英語アシスタント" }
         if isZh { return "英文助理" }
         return "Assisant"
+    }
+
+    var translatorLabel: String {
+        if isJa { return "翻訳音声" }
+        if isZh { return "翻譯語音" }
+        return "Translator"
     }
 
     var enhancedVoice: String {
@@ -309,6 +316,12 @@ class I18n {
         return "Translation"
     }
 
+    var defaultVoice: String {
+        if isJa { return "" }
+        if isZh { return "預設" }
+        return "default"
+    }
+
     var enAbbr: String {
         if isJa || isZh { return "英" }
         return "En"
@@ -336,7 +349,7 @@ class I18n {
     func getLangDescription(langAndRegion: String) -> String {
         let pairs = langAndRegion.split(separator: "-")
             .map { substring in substring.s }
-        let lang = pairs[0] == "ja" ? japanese : english
+        var lang = pairs[0] == "ja" ? japanese : ((pairs[0] == "en") ? english : chinese)
         let region = getRegion(region: pairs[1])
         if region == "" { return lang }
         return "\(lang) (\(region))"
@@ -348,7 +361,28 @@ class I18n {
         if region == "IE" { return ie }
         if region == "AU" { return au }
         if region == "ZA" { return za }
-        return ""
+        if region == "TW" { return tw }
+        if region == "HK" { return hk }
+        if region == "CN" { return cn }
+        return region
+    }
+
+    var tw: String {
+        if isJa { return "台湾 🇹🇼" }
+        if isZh { return "台灣 🇹🇼" }
+        return "Taiwan 🇹🇼"
+    }
+
+    var hk: String {
+        if isJa { return "香港 🇭🇰" }
+        if isZh { return "香港 🇭🇰" }
+        return "Hong Kong 🇭🇰"
+    }
+
+    var cn: String {
+        if isJa { return "中国 🇨🇳" }
+        if isZh { return "中國 🇨🇳" }
+        return "China 🇨🇳"
     }
 
     var us: String {

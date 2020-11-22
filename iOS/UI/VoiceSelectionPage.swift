@@ -32,12 +32,19 @@ class VoiceSelectionPage: UIViewController {
     }
 
     var voices: [AVSpeechSynthesisVoice] {
-        return getAvailableVoice(prefix: gameLang.prefix)
+        switch selectingVoiceFor {
+        case .teacher, .assisant:
+            return getAvailableVoice(prefix: gameLang.prefix)
+        case .translator:
+            return getAvailableVoice(prefix: context.gameSetting.translationLang.prefix)
+        }
     }
 
     var voicesGrouped: [[AVSpeechSynthesisVoice]] {
         var voiceDictByLanguage: [String: [AVSpeechSynthesisVoice]] = [:]
+        var isZh = false
         voices.forEach { v in
+            if v.language.contains("zh") { isZh = true }
             if voiceDictByLanguage[v.language] != nil {
                 voiceDictByLanguage[v.language]?.append(v)
             } else {
@@ -45,7 +52,9 @@ class VoiceSelectionPage: UIViewController {
             }
         }
         var voicesGrouped: [[AVSpeechSynthesisVoice]] = []
-        for key in voiceDictByLanguage.keys.sorted() {
+        let keys = !isZh ? voiceDictByLanguage.keys.sorted() :
+                           voiceDictByLanguage.keys.sorted().reversed() // Taiwan Top
+        for key in keys {
             voicesGrouped.append(
                 voiceDictByLanguage[key]!.sorted {
                     $0.name < $1.name
@@ -66,16 +75,26 @@ class VoiceSelectionPage: UIViewController {
 
     var testSentence: String {
         if let voice = selectedVoice {
-            if selectingVoiceFor == .assisant {
+            let jaHello = "こんにちは、私の名前は\(voice.name)です。"
+            let enHello = "Hello. My name is \(voice.name)."
+            let zhHello = "你好，我的名字是\(voice.name)"
+            switch selectingVoiceFor {
+            case .teacher:
+                return gameLang == .jp ? jaHello : enHello
+            case .assisant:
                 return "\(Score(value: 100).text), \(Score(value: 80).text), \(Score(value: 60).text), \(Score(value: 0).text) "
-            }
-
-            if gameLang == .jp {
-                return "こんにちは、私の名前は\(voice.name)です。"
-            } else {
-                return "Hello. My name is \(voice.name)."
+            case .translator:
+                if voice.language.contains("ja") {
+                    return jaHello
+                } else if voice.language.contains("en") {
+                    return enHello
+                } else {
+                    return zhHello
+                }
             }
         }
+
+        print("Error: testSentence... should not reach here")
 
         if gameLang == .jp {
             return "今日はいい天気ですね。"
@@ -104,7 +123,17 @@ class VoiceSelectionPage: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        titleLabel.text = selectingVoiceFor == .teacher ? i18n.teacherLabel : i18n.assistantLabel
+        switch selectingVoiceFor {
+        case .teacher:
+            titleLabel.text = i18n.teacherLabel
+            originVoice = context.gameSetting.teacher
+        case .assisant:
+            titleLabel.text = i18n.assistantLabel
+            originVoice = context.gameSetting.assistant
+        case .translator:
+            titleLabel.text = i18n.translatorLabel
+            originVoice = context.gameSetting.translator
+        }
         doneButton.setTitle(i18n.done, for: .normal)
         cancelButton.setTitle(i18n.cancel, for: .normal)
         downloadVoiceTextView.text = i18n.voiceNotAvailableMessage
@@ -117,8 +146,7 @@ class VoiceSelectionPage: UIViewController {
             practiceSpeedLabel.text = i18n.settingSectionPracticeSpeed
         }
         originPracticeSpeed = context.gameSetting.practiceSpeed
-        originVoice = selectingVoiceFor == .teacher ?
-            context.gameSetting.teacher : context.gameSetting.assistant
+
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -185,10 +213,13 @@ extension VoiceSelectionPage: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedVoice = voicesGrouped[indexPath.section][indexPath.row]
 
-        if selectingVoiceFor == .teacher {
+        switch selectingVoiceFor {
+        case .teacher:
             context.gameSetting.teacher = selectedVoice?.identifier ?? "unknown"
-        } else {
+        case .assisant:
             context.gameSetting.assistant = selectedVoice?.identifier ?? "unknown"
+        case .translator:
+            context.gameSetting.translator = selectedVoice?.identifier ?? "unknown"
         }
 
         if originVoice == selectedVoice?.identifier {
@@ -197,8 +228,9 @@ extension VoiceSelectionPage: UITableViewDelegate {
             doneButton.isEnabled = true
         }
 
-        let speed = isWithPracticeSpeedSection ? context.gameSetting.practiceSpeed :
-            AVSpeechUtteranceDefaultSpeechRate
+        let speed = isWithPracticeSpeedSection ?
+                        context.gameSetting.practiceSpeed :
+                        AVSpeechUtteranceDefaultSpeechRate
         _ = ttsSay(
             testSentence,
             speaker: selectedVoice?.identifier ?? "unknown",

@@ -50,22 +50,6 @@ class SettingPage: UITableViewController {
     @IBOutlet var dailyGoalSegmentedControl: UISegmentedControl!
     @IBOutlet var gotoAppStoreButton: UIButton!
 
-    var testSentence: String {
-        if let voice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher) {
-            if gameLang == .jp {
-                return "こんにちは、私の名前は\(voice.name)です。"
-            } else {
-                return "Hello. My name is \(voice.name)."
-            }
-        }
-
-        if gameLang == .jp {
-            return "今日はいい天気ですね。"
-        } else {
-            return "It's nice to meet you."
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         topBarView.leftButton.isHidden = true
@@ -91,23 +75,29 @@ class SettingPage: UITableViewController {
         topBarView.titleLabel.text = i18n.setting
         autoSpeedLabel.text = i18n.autoSpeedLabel
         narratorLabel.text = i18n.narratorLabel
-        translationLanguageLabel.text = i18n.translationTranslationLabel
+        translationLanguageLabel.text = i18n.translationLanguageLabel
         showTranslationLabel.text = i18n.showTranslationLabel
         monitoringLabel.text = i18n.monitoringLabel
         wantToSayLabel.text = i18n.wantToSayLabel
 
         teacherLabel.text = i18n.teacherLabel
         assisantLabel.text = i18n.assistantLabel
+        translatorLabel.text = i18n.translatorLabel
 
-        if let teacher = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher) {
+        teacherNameLabel.text = i18n.defaultVoice
+        assistantNameLabel.text = i18n.defaultVoice
+        translatorNameLabel.text = i18n.defaultVoice
+        if let teacher = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher) ??
+            getDefaultVoice(language: gameLang.defaultCode){
             teacherNameLabel.text = teacher.name + " (\(teacher.language == "ja-JP" ? i18n.japanese : i18n.english))"
         }
 
-        if let assisant = AVSpeechSynthesisVoice(identifier: context.gameSetting.assistant) {
-            assistantNameLabel.text = assisant.name
+        if let assisant = AVSpeechSynthesisVoice(identifier: context.gameSetting.assistant) ??
+            getDefaultVoice(language: gameLang.defaultCode){
+            assistantNameLabel.text = assisant.name + " (\(assisant.language == "ja-JP" ? i18n.japanese : i18n.english))"
         }
 
-        if let translator = AVSpeechSynthesisVoice(identifier: context.gameSetting.translator) {
+        if let translator = AVSpeechSynthesisVoice(identifier: context.gameSetting.translator) ?? getDefaultVoice(language: context.gameSetting.translationLang.defaultCode) {
             translatorNameLabel.text = translator.name
         }
 
