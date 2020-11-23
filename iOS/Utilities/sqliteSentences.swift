@@ -20,7 +20,18 @@ struct Sentence: Hashable, Equatable {
         return gameLang == Lang.jp ? ja : en
     }
     #endif
-    var translation: String { return cmn }
+    var translation: String {
+        switch GameContext.shared.gameSetting.translationLang {
+        case .jp:
+            return ja
+        case .en:
+            return en
+        case .zh:
+            return cmn
+        case .unset:
+            return en
+        }
+    }
     var ttsFixes: [(String, String)]
 
     func hash(into hasher: inout Hasher) {

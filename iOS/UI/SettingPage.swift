@@ -87,27 +87,30 @@ class SettingPage: UITableViewController {
         teacherNameLabel.text = i18n.defaultVoice
         assistantNameLabel.text = i18n.defaultVoice
         translatorNameLabel.text = i18n.defaultVoice
+
         if let teacher = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher) ??
-            getDefaultVoice(language: gameLang.defaultCode){
-            teacherNameLabel.text = teacher.name + " (\(teacher.language == "ja-JP" ? i18n.japanese : i18n.english))"
+            getDefaultVoice(language: gameLang.defaultCode) {
+            teacherNameLabel.text = teacher.name
         }
 
         if let assisant = AVSpeechSynthesisVoice(identifier: context.gameSetting.assistant) ??
-            getDefaultVoice(language: gameLang.defaultCode){
-            assistantNameLabel.text = assisant.name + " (\(assisant.language == "ja-JP" ? i18n.japanese : i18n.english))"
+            getDefaultVoice(language: gameLang.defaultCode) {
+            assistantNameLabel.text = assisant.name
         }
 
         if let translator = AVSpeechSynthesisVoice(identifier: context.gameSetting.translator) ?? getDefaultVoice(language: context.gameSetting.translationLang.defaultCode) {
             translatorNameLabel.text = translator.name
         }
 
+        let setting = context.gameSetting
+
         gameLangSegmentControl.selectedSegmentIndex = gameLang == .jp ? 1 : 0
+        translationLanguageSegment.selectedSegmentIndex = setting.translationLang == .zh ? 1: 0
         dailyGoalSegmentedControl.selectedSegmentIndex = dailyGoals.firstIndex(of: context.gameSetting.dailySentenceGoal) ?? 1
 
         gotoIOSSettingButton.setTitle(i18n.gotoIOSSettingButtonTitle, for: .normal)
         gotoAppStoreButton.setTitle(i18n.gotoAppStore, for: .normal)
 
-        let setting = context.gameSetting
         autoSpeedSwitch.isOn = setting.isAutoSpeed
 
         if setting.isAutoSpeed {
@@ -182,6 +185,8 @@ class SettingPage: UITableViewController {
 
     @IBAction func monitoringSwitchValueChanged(_: Any) {
         context.gameSetting.isMointoring = monitoringSwitch.isOn
+        monitoringVolumeSlider.isEnabled = monitoringSwitch.isOn
+        monitoringVolumeSlider.setNeedsDisplay()
         saveGameSetting()
     }
 

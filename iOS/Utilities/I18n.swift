@@ -96,22 +96,34 @@ class I18n {
         }
     }
 
+    var general: String {
+        if #available(iOS 14, *) {
+            return ""
+        }
+        if isJa {
+            return "一般 > "
+        }
+        if isZh {
+            return "一般 > "
+        }
+
+        return "General > "
+    }
+
     var voiceNotAvailableMessage: String {
         if isJa {
-            return "もっと声をダウンロードしましょう\n「設定 > 一般 > アクセシビリティ > \(speechText) > 声 」の順に選択しましょう。"
+            return "もっと声をダウンロードしましょう\n「設定 > \(general)アクセシビリティ > \(speechText) > 声 」の順に選択しましょう。"
         }
-        if isZh { return "更多語音選項: \n請前往手機的「設定 > 一般 > 輔助使用 > \(speechText) > 聲音」下載" }
-        return "Download more voices:\nGo to Settings > General > Accessibility > \(speechText) > Voices"
+        if isZh { return "更多語音選項: \n請前往手機的「設定 > \(general)輔助使用 > \(speechText) > 聲音」下載" }
+        return "Download more voices:\nGo to Settings > \(general)Accessibility > \(speechText) > Voices"
     }
 
     var defaultVoiceIsNotAvailable: String {
         let lang = gameLang == .jp ? japanese : english
-        if isJa { return "\(lang)の声をダウンロードしましょう\n「設定 > 一般」> アクセシビリティ > \(speechText) > 声 > \(lang)」の順に選択しましょう。" }
-        if isZh { return "找不到\(lang)語音：\n請前往手機的「設定 > 一般 > 輔助使用 > \(speechText) > 聲音 > \(lang)」下載" }
-        return "No TTS Voice found:\nGo to Settings > General > Accessibility > \(speechText) > Voices > \(lang) to Download"
+        if isJa { return "\(lang)の声をダウンロードしましょう\n「設定 > \(general)アクセシビリティ > \(speechText) > 声 > \(lang)」の順に選択しましょう。" }
+        if isZh { return "找不到\(lang)語音：\n請前往手機的「設定 > \(general)輔助使用 > \(speechText) > 聲音 > \(lang)」下載" }
+        return "No TTS Voice found:\nGo to Settings > \(general)Accessibility > \(speechText) > Voices to Download"
     }
-
-
 
     var settingSectionGameSpeed: String {
         if isJa { return "挑戦中" }
@@ -353,6 +365,15 @@ class I18n {
         let region = getRegion(region: pairs[1])
         if region == "" { return lang }
         return "\(lang) (\(region))"
+    }
+
+    func getLang(lang: String) -> String {
+        if lang.contains("ja") {
+            return japanese
+        } else if lang.contains("en") {
+            return english
+        }
+        return chinese
     }
 
     func getRegion(region: String) -> String {
