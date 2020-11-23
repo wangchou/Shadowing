@@ -19,12 +19,28 @@ class I18n {
         return Locale.current.languageCode
     }
 
+    var regionCode: String? {
+        return Locale.current.regionCode
+    }
+
     var isJa: Bool {
         return langCode == "ja"
     }
 
     var isZh: Bool {
         return langCode == "zh"
+    }
+
+    var isEn: Bool {
+        return langCode == "en"
+    }
+
+    var isTW: Bool {
+        return regionCode == "TW"
+    }
+
+    var isHK: Bool {
+        return regionCode == "HK"
     }
 
     var autoSpeedLabel: String {

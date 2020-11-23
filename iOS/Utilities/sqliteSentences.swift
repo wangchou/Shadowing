@@ -29,7 +29,7 @@ struct Sentence: Hashable, Equatable {
         case .zh:
             return cmn
         case .unset:
-            return en
+            return cmn
         }
     }
     var ttsFixes: [(String, String)]

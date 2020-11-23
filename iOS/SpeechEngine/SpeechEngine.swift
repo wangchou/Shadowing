@@ -176,45 +176,40 @@ func speakTitle() -> Promise<Void> {
         return engine.speak(text: title, speaker: voiceId, rate: normalRate)
     }
 
-    if (gameLang == .jp && i18n.isJa) ||
-        (gameLang == .en && !(i18n.isZh || i18n.isJa)) {
+//    if (gameLajklng == .jp && i18n.isJa) ||
+//        (gameLang == .en && !(i18n.isZh || i18n.isJa)) {
         return teacherSay(title, rate: normalRate)
-    }
-    return narratorSay(title)
+//    }
+//    return narratorSay(title)
 }
 
 func narratorSay(_ text: String) -> Promise<Void> {
-    let currentLocale = AVSpeechSynthesisVoice.currentLanguageCode()
-    var voiceId = "unknown"
-    var rate = normalRate
-    if currentLocale.hasPrefix("ja") {
-        voiceId = getDefaultVoiceId(language: "ja-JP")
-    } else if currentLocale.hasPrefix("zh") {
-        voiceId = getDefaultVoiceId(language: "zh-TW", isPreferEnhanced: false)
-        rate = fastRate
-    } else if currentLocale.hasPrefix("en") {
-        voiceId = getDefaultVoiceId(language: currentLocale)
-    } else {
-        voiceId = getDefaultVoiceId(language: "en-US")
+    var currentLocale = AVSpeechSynthesisVoice.currentLanguageCode()
+
+    if !currentLocale.hasPrefix("ja") &&
+       !currentLocale.hasPrefix("en") &&
+       !currentLocale.hasPrefix("zh") {
+        currentLocale = "en-US"
     }
-    // print("narrator", voiceId)
-    return engine.speak(text: text, speaker: voiceId, rate: rate)
+    return engine.speak(text: text,
+                        speaker: getDefaultVoiceId(language: currentLocale),
+                        rate: normalRate)
 }
 
 func translatorSay(_ text: String) -> Promise<Void> {
-    var translationLocale = "en-US"
-    if gameLang == .jp, context.gameMode == .topicMode {
-        translationLocale = "zh-TW"
+    var voiceId = context.gameSetting.translator
+
+    if AVSpeechSynthesisVoice(identifier: voiceId) == nil {
+        switch context.gameSetting.translationLang {
+        case .jp:
+            voiceId = getDefaultVoiceId(language: "ja-JP")
+        case .en:
+            voiceId = getDefaultVoiceId(language: "en-US")
+        case .zh, .unset:
+            voiceId = getDefaultVoiceId(language: "zh-TW", isPreferEnhanced: false)
+        }
     }
-    if gameLang == .en {
-        translationLocale = "ja-JP"
-    }
-    var voiceId = "unknown"
-    if translationLocale.hasPrefix("zh") {
-        voiceId = getDefaultVoiceId(language: "zh-TW", isPreferEnhanced: false)
-    } else {
-        voiceId = getDefaultVoiceId(language: translationLocale)
-    }
+
     print("translator:", voiceId, text)
     return engine.speak(text: text, speaker: voiceId, rate: context.teachingRate)
 }
