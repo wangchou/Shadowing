@@ -159,9 +159,9 @@ class I18n {
     }
 
     var micAndSpeechPermission: String {
-        if isJa { return "マイク と 音声認識の権限" }
-        if isZh { return "麥克風與語音辨識權限" }
-        return "Mic and Recognition Permissions"
+        if isJa { return "音声認識の権限、アプリの言語" }
+        if isZh { return "APP介面語言、語音辨識權限" }
+        return "Mic and Recognition Permissions / Language of UI."
     }
 
     var gameOver: String {
