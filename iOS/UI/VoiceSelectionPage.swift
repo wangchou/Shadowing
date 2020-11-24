@@ -147,7 +147,6 @@ class VoiceSelectionPage: UIViewController {
             practiceSpeedLabel.text = i18n.settingSectionPracticeSpeed
         }
         originPracticeSpeed = context.gameSetting.practiceSpeed
-
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -157,7 +156,14 @@ class VoiceSelectionPage: UIViewController {
 
     @IBAction func onCancelButtonClicked(_: Any) {
         context.gameSetting.practiceSpeed = originPracticeSpeed
-        context.gameSetting.teacher = originVoice
+        switch selectingVoiceFor {
+        case .teacher:
+            context.gameSetting.teacher = originVoice
+        case .assisant:
+            context.gameSetting.assistant = originVoice
+        case .translator:
+            context.gameSetting.translator = originVoice
+        }
         saveGameSetting()
         dismiss(animated: true)
     }
@@ -197,7 +203,8 @@ extension VoiceSelectionPage: UITableViewDataSource {
         guard let voiceCell = cell as? VoiceTableCell else { print("voiceCell convert error"); return cell }
         let voice = voicesGrouped[indexPath.section][indexPath.row]
         voiceCell.nameLabel.text = voice.name
-        if voice == selectedVoice {
+
+        if voice.identifier == selectedVoice?.identifier {
             voiceCell.accessoryType = .checkmark
         } else {
             voiceCell.accessoryType = .none

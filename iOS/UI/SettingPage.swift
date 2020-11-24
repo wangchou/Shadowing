@@ -50,6 +50,20 @@ class SettingPage: UITableViewController {
     @IBOutlet var gotoIOSSettingButton: UIButton!
     @IBOutlet var gotoAppStoreButton: UIButton!
 
+    var teacher: AVSpeechSynthesisVoice? {
+        return AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher) ??
+            getDefaultVoice(language: gameLang.defaultCode)
+    }
+
+    var assistant: AVSpeechSynthesisVoice? {
+        return AVSpeechSynthesisVoice(identifier: context.gameSetting.assistant) ??
+            getDefaultVoice(language: gameLang.defaultCode)
+    }
+
+    var translator: AVSpeechSynthesisVoice? {
+        return AVSpeechSynthesisVoice(identifier: context.gameSetting.translator) ?? getDefaultVoice(language: context.gameSetting.translationLang.defaultCode)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         topBarView.leftButton.isHidden = true
@@ -87,23 +101,9 @@ class SettingPage: UITableViewController {
         assisantLabel.text = i18n.assistantLabel
         translatorLabel.text = i18n.translatorLabel
 
-        teacherNameLabel.text = i18n.defaultVoice
-        assistantNameLabel.text = i18n.defaultVoice
-        translatorNameLabel.text = i18n.defaultVoice
-
-        if let teacher = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher) ??
-            getDefaultVoice(language: gameLang.defaultCode) {
-            teacherNameLabel.text = teacher.name
-        }
-
-        if let assisant = AVSpeechSynthesisVoice(identifier: context.gameSetting.assistant) ??
-            getDefaultVoice(language: gameLang.defaultCode) {
-            assistantNameLabel.text = assisant.name
-        }
-
-        if let translator = AVSpeechSynthesisVoice(identifier: context.gameSetting.translator) ?? getDefaultVoice(language: context.gameSetting.translationLang.defaultCode) {
-            translatorNameLabel.text = translator.name
-        }
+        teacherNameLabel.text = teacher?.name ?? i18n.defaultVoice
+        assistantNameLabel.text = assistant?.name ?? i18n.defaultVoice
+        translatorNameLabel.text = translator?.name ?? i18n.defaultVoice
 
         gameLangSegmentControl.selectedSegmentIndex = gameLang == .jp ? 1 : 0
         translationLanguageSegment.selectedSegmentIndex = setting.translationLang == .zh ? 1: 0
@@ -225,17 +225,17 @@ class SettingPage: UITableViewController {
             if indexPath.row == 0 { // teacher voice
                 VoiceSelectionPage.fromPage = self
                 VoiceSelectionPage.selectingVoiceFor = .teacher
-                VoiceSelectionPage.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher)
+                VoiceSelectionPage.selectedVoice = teacher
             }
             if indexPath.row == 1 { // assistant voice
                 VoiceSelectionPage.fromPage = self
                 VoiceSelectionPage.selectingVoiceFor = .assisant
-                VoiceSelectionPage.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.assistant)
+                VoiceSelectionPage.selectedVoice = assistant
             }
             if indexPath.row == 2 { // translator voice
                 VoiceSelectionPage.fromPage = self
                 VoiceSelectionPage.selectingVoiceFor = .translator
-                VoiceSelectionPage.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.translator)
+                VoiceSelectionPage.selectedVoice = translator
             }
             launchVC(VoiceSelectionPage.id)
         }
