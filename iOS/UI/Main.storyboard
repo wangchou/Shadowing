@@ -317,7 +317,7 @@ Cg
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">」是個練習日文與英文口說的App。語音先說、你跟著複誦。最後用辨識的結果評分。透過和AI語音的快速訓練，讓你能不怕犯錯、大量練習口說。
+                                        <string key="content">」是個練習日文與英文口說的App。語音先說、你跟著複誦。最後用辨識的結果評分。透過和AI語音的密集訓練，讓你能不怕犯錯、大量練習口說。
 
 目標是讓你「從會聽，但不會說」到擁有日常的口說能力。(JLPT N3 or 英檢中高級)
 
@@ -387,7 +387,7 @@ Cg
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">App句子有兩種內容：話題句組(800句)與無限挑戰句組(30000句)。 
+                                        <string key="content">App句子有兩種內容：話題句組(1000句)與無限挑戰句組(20,000句)。 
 </string>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -421,7 +421,7 @@ Cg
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">有「日常、旅遊、敬語、戀愛、論述、單字」六個主題。每句都有中、日對照的翻譯。總共八百句。(僅日文有)
+                                        <string key="content">有「日常、旅遊、敬語、戀愛、論述、文法」等主題。每句都有對照的翻譯。總共一千句。(僅日文有)
 
 </string>
                                         <attributes>
@@ -459,6 +459,13 @@ Cg
                                             <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
+                                    <fragment content="多">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="HiraginoSansGB-W3"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
                                     <fragment content="個關卡。每個關卡逐漸加長句子，透過">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -490,7 +497,7 @@ Cg
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">提升你的口說能力。每句都有英、日對照的翻譯，總共有三萬句。
+                                        <string key="content">提升你的口說能力。每句都有英、日、中對照的翻譯，總共約兩萬句。
 
 </string>
                                         <attributes>
@@ -557,7 +564,7 @@ Cg
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">：到設定頁裡選擇各種腔調的語音，如美國腔或英國腔，更可找指示去下載高品質語音。(日文推薦：Otoya老師；英文推薦：Samantha老師)
+                                        <string key="content">：到設定頁裡選擇各種腔調的語音，如美國腔或英國腔，更可找指示去下載高品質語音。(日文推薦：Otoya老師；英文推薦：Samantha老師 約300MB)
 
 2. </string>
                                         <attributes>
@@ -577,8 +584,6 @@ Cg
                                     <fragment>
                                         <string key="content">：過程中使用的語音辨識皆為Apple提供，會需要把聲音傳到Apple的主機去。如果網路不穩會導致辨識結果不正確。
 
-3. Apple語音辨識有每天1000句的免費上限。超過會辨識失敗。
-
 </string>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -596,7 +601,7 @@ Cg
                                     </fragment>
                                     <fragment>
                                         <string key="content">
-1. 用耳麥(iPhone附的)，收音品質會比手機好。
+1. 用耳麥 (iPhone附的)，收音品質會比手機好。
 
 2. 試著讓咬字清楚、音量大聲。
 
@@ -635,9 +640,7 @@ Cg
 
 5. 保持平常心。有時不是你唸錯，真的是語音辨識錯誤。(特別是句子很短的時候，Siri的辨識度會較差。)
 
-6. 關閉自動速度調整：自己挑選一個適合自己的速度。
-
-7. 練習時等出現 Listening... 字樣；挑戰時等出現灰色框框再唸，有時是時間差的問題。
+6. 練習時等出現 Listening... 字樣；挑戰時等出現灰色框框再唸，有時是時間差的問題。
 
 </string>
                                         <attributes>
@@ -714,7 +717,7 @@ A: 每句都有請</string>
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">唸給它自己聽，都有唸到100分過。請用提高正確率的小秘訣多試試。但如果還是不行，就放下吧。很有可能Siri的聽力對某些正確腔調，辨識還無法像Otoya/Samantha腔調一樣正確。(PS: 測試過Siri, Kyoko, Otoya語音，各自都有無法唸到100分的句子。) 請以每句80分為目標。
+                                        <string key="content">唸給它自己聽，都有唸到100分過。請用提高正確率的小秘訣多試試。但如果還是不行，就放下吧。很有可能 Siri 的聽力對某些正確腔調，辨識還無法像Otoya/Samantha腔調一樣正確。(PS: 測試過 Siri, Kyoko, Otoya 語音，各自都有無法唸到100分的句子。) 請以每句80分為目標。
 
 Q: 挑戰中一直零分、顯示聽不清楚？
 A: 通常有兩種可能，麥克風收音不好。或是聽和說的時間錯開了。每句聽的長度是 </string>
@@ -768,7 +771,7 @@ A: 作者的經驗，通常是</string>
                                             <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content=")、但跟日本的朋友聊Line聲音就是斷斷續續的。我猜你碰到的情況有點類似。這個App需要用到">
+                                    <fragment content=")、但跟日本的朋友聊Line聲音就是斷斷續續的。我猜你碰到的情況有點類似。這個 App 需要用到">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="18" name="PingFangTC-Regular"/>
@@ -784,27 +787,62 @@ A: 作者的經驗，通常是</string>
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">，來把音訊傳給Apple辨識。
+                                        <mutableString key="content">，來把音訊傳給Apple 辨識。
 
-=&gt; 如果到 Apple 的網路不順，他們收到的就是很多雜訊的聲音，就會亂聽。 
+=&gt; 如果到 Apple 的網路不順，他們收到的就是很多雜訊的聲音，就會亂辨識。 
 另外，如果是音量的問題用 iPhone 附的有線耳麥會好很多。
 
-Q: 有些日文句子的假名標錯了！
-A: 抱歉，關於假名標錯的問題。現在「自然語言處理」自動標讀音只能達到99%正確。請回報，作者會盡可能去解決。
+Q: 有些日文句子的假名標錯/唸錯了！
+A: 請回報，作者會盡可能去解決。句子都有用人工修正過 AI 的自動標示，但還是會有漏掉的地方。
 
-Q: 有些日文句子的漢字，日文老師唸錯了？
-A: 抱歉，這個問題來自Apple。舉例來說：Siri和Google Translation都會把「台湾人」唸成「台湾ひと」，目前作者沒有能力解決。不過也請回報，如果無法解決，會把有問題的句子移除。
+Q: 有些日文句子的重音，日文老師唸錯了？
+A: 抱歉，這個問題來自 Apple。目前 Apple 沒有提供單獨修正每個字的重音的方法。
 
 Q: 網路明明很穩定，卻一直跳出「連不到主機」的錯誤訊息？
-A: 抱歉，那代表在東京的「漢字轉假名主機」掛掉了。
+A: 抱歉，那代表東京的「漢字轉假名主機」掛掉了。如果作者沒有短時間修好，請回報。
+
+Q: 怎麼決定句子難度的？
+A: 日文句子只看假名數量，句子越長就越難。英文句子根據台灣大考中心六級 + 托福 + GRE 單字表、和音節數來計算。
 
 Q: 徽章的給與數量的標準是什麼？
 A: 在設計中，每個等級的要求不同：
-Lv.1 (0~50徽章)：平均正確率 &gt; 55%，就會持續上升。
-Lv.2 (50~100徽章)：平均正確率 &gt; 60%，就會持續上升。
+Lv.1 (0~50徽章)：平均正確率 &gt; 60%，就會持續上升。
+Lv.2 (50~100徽章)：平均正確率 &gt; 70%，就會持續上升。
 ...
-Lv.10 (450~500徽章)：平均正確率 &gt; 80%，就會持續上升。
-
+Lv.10 (450~500徽章)：平均正確率 &gt; 85%，就會持續上升。
+</mutableString>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+感謝，以下語言相關開放資源：</string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="24" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+Tanaka Corpus (英、日對照句子)
+Tatoeba.org (英、日、中句子)
+OpenCC (簡 -&gt; 繁, 中文轉換)
+MeCab-neologd (日文自然語言處理)
+台灣大考中心六級英文單字表
+</string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
 </string>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -812,7 +850,7 @@ Lv.10 (450~500徽章)：平均正確率 &gt; 80%，就會持續上升。
                                             <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="以下">
+                                    <fragment content="最後">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="24" name="PingFangTC-Semibold"/>
@@ -847,19 +885,30 @@ Lv.10 (450~500徽章)：平均正確率 &gt; 80%，就會持續上升。
 Amber Liu
 Eason Chou
 Jennifer Chen
-kaminomi
-msglight4874
+kaminomi (PTT)
+msglight4874 (PTT)
 Satolu
 Sid Weng
 Stella
 Ruth Yuru Chen
 伯豪 &amp; 小乖
 肉鬆
-歐頭</string>
+歐頭
+</string>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="18" name="PingFangTC-Regular"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="PingFangTC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
@@ -1453,7 +1502,7 @@ Ruth Yuru Chen
                                             <rect key="frame" x="0.0" y="0.0" width="382.66666666666669" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="翻譯" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VM8-cs-FsY">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="翻譯" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VM8-cs-FsY">
                                                     <rect key="frame" x="20" y="12" width="34.666666666666664" height="20.333333333333332"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>

@@ -599,7 +599,7 @@ class I18n {
 
     var meaningAndSpeaking: String {
         if isJa { return "意味と発音" }
-        if isZh { return "意義、發音" }
+        if isZh { return "意義&發音" }
         return "Meaning"
     }
 
