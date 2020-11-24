@@ -726,8 +726,8 @@ class I18n {
     }
 
     var yourFeedbackMakeAppBetter: String {
-        if isJa { return "あなたの声はAppの成長の原動力です" }
-        if isZh { return "您的回饋是 App 成長的原動力" }
+        if isJa { return "君の声を聞かせて欲しい" }
+        if isZh { return "你的聲音是 App 成長的原動力" }
         return "Your feedback makes app better."
     }
 

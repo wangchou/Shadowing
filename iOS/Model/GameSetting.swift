@@ -34,7 +34,22 @@ struct GameSetting: Codable {
     var isMointoring: Bool = true
     var teacher: String = "unknown"
     var assistant: String = "unknown"
-    var translator: String = "unknown"
+    var translator: String {
+        get {
+            return translationLang == .zh ? translatorZh : translatorJpOrEn
+        }
+        set {
+            if translationLang == .zh {
+                translatorZh = newValue
+            } else {
+                translatorJpOrEn = newValue
+            }
+        }
+    }
+
+    var translatorJpOrEn: String = "unknown" // if gameLang == .jp => .en. if .en -> .jp
+    var translatorZh: String = "unknown"
+
     var dailySentenceGoal: Int = 50
     var icTopViewMode: ICTopViewMode = .dailyGoal
     var isRepeatOne: Bool {

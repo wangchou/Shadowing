@@ -16,23 +16,16 @@ private let dailyGoals: [Int] = [20, 50, 100, 200, 500]
 
 class SettingPage: UITableViewController {
     @IBOutlet var topBarView: TopBarView!
-    @IBOutlet var gameLangSegmentControl: UISegmentedControl!
 
     @IBOutlet var wantToSayLabel: UILabel!
-    @IBOutlet var autoSpeedLabel: UILabel!
-    @IBOutlet var autoSpeedSwitch: UISwitch!
-    @IBOutlet var gameSpeedSlider: UISlider!
-    @IBOutlet var gameSpeedFastLabel: UILabel!
+    @IBOutlet var gameLangSegmentControl: UISegmentedControl!
 
-    @IBOutlet var practiceSpeedSlider: UISlider!
     @IBOutlet var learningModeLabel: UILabel!
-
-    @IBOutlet weak var translationLanguageLabel: UILabel!
-    @IBOutlet weak var translationLanguageSegment: UISegmentedControl!
+    @IBOutlet var learningModeSegmentControl: UISegmentedControl!
+    @IBOutlet var translationLanguageLabel: UILabel!
+    @IBOutlet var translationLanguageSegment: UISegmentedControl!
     @IBOutlet var showTranslationLabel: UILabel!
     @IBOutlet var showTranslationSwitch: UISwitch!
-    @IBOutlet var learningModeSegmentControl: UISegmentedControl!
-    @IBOutlet var practiceSpeedFastLabel: UILabel!
     @IBOutlet var narratorLabel: UILabel!
     @IBOutlet var narratorSwitch: UISwitch!
     @IBOutlet var monitoringLabel: UILabel!
@@ -40,14 +33,23 @@ class SettingPage: UITableViewController {
     @IBOutlet var monitoringVolumeSlider: UISlider!
     @IBOutlet var monitoringVolumeLabel: UILabel!
 
+    @IBOutlet var autoSpeedLabel: UILabel!
+    @IBOutlet var autoSpeedSwitch: UISwitch!
+    @IBOutlet var gameSpeedSlider: UISlider!
+    @IBOutlet var gameSpeedFastLabel: UILabel!
+    @IBOutlet var practiceSpeedFastLabel: UILabel!
+    @IBOutlet var practiceSpeedSlider: UISlider!
+
     @IBOutlet var teacherLabel: UILabel!
     @IBOutlet var teacherNameLabel: UILabel!
     @IBOutlet var assisantLabel: UILabel!
     @IBOutlet var assistantNameLabel: UILabel!
     @IBOutlet var translatorLabel: UILabel!
     @IBOutlet var translatorNameLabel: UILabel!
-    @IBOutlet var gotoIOSSettingButton: UIButton!
+
     @IBOutlet var dailyGoalSegmentedControl: UISegmentedControl!
+
+    @IBOutlet var gotoIOSSettingButton: UIButton!
     @IBOutlet var gotoAppStoreButton: UIButton!
 
     override func viewDidLoad() {
@@ -145,31 +147,41 @@ class SettingPage: UITableViewController {
         initLearningModeSegmentControl(label: learningModeLabel, control: learningModeSegmentControl)
     }
 
-    @IBAction func autoSpeedSwitchValueChanged(_: Any) {
-        context.gameSetting.isAutoSpeed = autoSpeedSwitch.isOn
-        saveGameSetting()
-        viewWillAppear(false)
+    // MARK: - IBActions sorted by UI
+    @IBAction func gameLangSegmentControlValueChanged(_: Any) {
+        RootContainerViewController.isShowSetting = true
+        if gameLangSegmentControl.selectedSegmentIndex == 1 {
+            changeGameLangTo(lang: .jp)
+        } else {
+            changeGameLangTo(lang: .en)
+        }
+
+        render()
+
+        if gameLang == .en {
+            context.bottomTab = .infiniteChallenge
+            rootViewController.showInfiniteChallengePage(idx: 1)
+        }
+        rootViewController.reloadTableData()
     }
 
-    @IBAction func gameSpeedSilderValueChanged(_: Any) {
-        context.gameSetting.preferredSpeed = gameSpeedSlider.value
-        saveGameSetting()
-        gameSpeedFastLabel.text = String(format: "%.2fx", gameSpeedSlider.value * 2)
-        let speedText = String(format: "%.2f", context.gameSetting.preferredSpeed * 2)
-        _ = teacherSay("\(i18n.speedIs)\(speedText)です", rate: context.gameSetting.preferredSpeed)
-    }
+    // ---------------------------------------------------------------------------------
 
-    @IBAction func practiceSpeedSliderValueChanged(_: Any) {
-        context.gameSetting.practiceSpeed = practiceSpeedSlider.value
-        saveGameSetting()
-        practiceSpeedFastLabel.text = String(format: "%.2fx", practiceSpeedSlider.value * 2)
-        let speedText = String(format: "%.2f", context.gameSetting.practiceSpeed * 2)
-        _ = teacherSay("\(i18n.speedIs)\(speedText)です", rate: context.gameSetting.practiceSpeed)
-    }
-
-    // game option group
     @IBAction func learningModeSegmentControlValueChanged(_: Any) {
         actOnLearningModeSegmentControlValueChanged(control: learningModeSegmentControl)
+        render()
+    }
+
+    @IBAction func translationLanguageSegmentedControlValueChanged(_: Any) {
+        switch translationLanguageSegment.selectedSegmentIndex {
+        case 0:
+            context.gameSetting.translationLang = gameLang == .jp ? .en : .jp
+        case 1:
+            context.gameSetting.translationLang = .zh
+        default:
+            context.gameSetting.translationLang = .zh
+        }
+        saveGameSetting()
         render()
     }
 
@@ -197,6 +209,63 @@ class SettingPage: UITableViewController {
         saveGameSetting()
     }
 
+    // Game Speed ------------------------------------------------------------------
+
+    @IBAction func autoSpeedSwitchValueChanged(_: Any) {
+        context.gameSetting.isAutoSpeed = autoSpeedSwitch.isOn
+        saveGameSetting()
+        viewWillAppear(false)
+    }
+
+    @IBAction func gameSpeedSilderValueChanged(_: Any) {
+        context.gameSetting.preferredSpeed = gameSpeedSlider.value
+        saveGameSetting()
+        gameSpeedFastLabel.text = String(format: "%.2fx", gameSpeedSlider.value * 2)
+        let speedText = String(format: "%.2f", context.gameSetting.preferredSpeed * 2)
+        _ = teacherSay("\(i18n.speedIs)\(speedText)です", rate: context.gameSetting.preferredSpeed)
+    }
+
+    @IBAction func practiceSpeedSliderValueChanged(_: Any) {
+        context.gameSetting.practiceSpeed = practiceSpeedSlider.value
+        saveGameSetting()
+        practiceSpeedFastLabel.text = String(format: "%.2fx", practiceSpeedSlider.value * 2)
+        let speedText = String(format: "%.2f", context.gameSetting.practiceSpeed * 2)
+        _ = teacherSay("\(i18n.speedIs)\(speedText)です", rate: context.gameSetting.practiceSpeed)
+    }
+
+    // Change Voices
+    override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 4 {
+            if indexPath.row == 0 { // teacher voice
+                VoiceSelectionPage.fromPage = self
+                VoiceSelectionPage.selectingVoiceFor = .teacher
+                VoiceSelectionPage.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher)
+            }
+            if indexPath.row == 1 { // assistant voice
+                VoiceSelectionPage.fromPage = self
+                VoiceSelectionPage.selectingVoiceFor = .assisant
+                VoiceSelectionPage.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.assistant)
+            }
+            if indexPath.row == 2 { // translator voice
+                VoiceSelectionPage.fromPage = self
+                VoiceSelectionPage.selectingVoiceFor = .translator
+                VoiceSelectionPage.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.translator)
+            }
+            launchVC(VoiceSelectionPage.id)
+        }
+    }
+
+    // ----------------------- daily Goal -------------------------------------------
+    @IBAction func dailyGoalSegmentedControlValueChanged(_: Any) {
+        switch dailyGoalSegmentedControl.selectedSegmentIndex {
+        case 0, 1, 2, 3, 4:
+            context.gameSetting.dailySentenceGoal = dailyGoals[dailyGoalSegmentedControl.selectedSegmentIndex]
+        default:
+            context.gameSetting.dailySentenceGoal = 50
+        }
+        saveGameSetting()
+    }
+
     @IBAction func goToSettingCenter(_: Any) {
         goToIOSSettingCenter()
     }
@@ -209,44 +278,7 @@ class SettingPage: UITableViewController {
         }
     }
 
-    @IBAction func gameLangSegmentControlValueChanged(_: Any) {
-        RootContainerViewController.isShowSetting = true
-        if gameLangSegmentControl.selectedSegmentIndex == 1 {
-            changeGameLangTo(lang: .jp)
-        } else {
-            changeGameLangTo(lang: .en)
-        }
-
-        render()
-
-        if gameLang == .en {
-            context.bottomTab = .infiniteChallenge
-            rootViewController.showInfiniteChallengePage(idx: 1)
-        }
-        rootViewController.reloadTableData()
-    }
-
-    @IBAction func dailyGoalSegmentedControlValueChanged(_: Any) {
-        switch dailyGoalSegmentedControl.selectedSegmentIndex {
-        case 0, 1, 2, 3, 4:
-            context.gameSetting.dailySentenceGoal = dailyGoals[dailyGoalSegmentedControl.selectedSegmentIndex]
-        default:
-            context.gameSetting.dailySentenceGoal = 50
-        }
-        saveGameSetting()
-    }
-
-    @IBAction func translationLanguageSegmentedControlValueChanged(_: Any) {
-        switch translationLanguageSegment.selectedSegmentIndex {
-        case 0:
-            context.gameSetting.translationLang = gameLang == .jp ? .en : .jp
-        case 1:
-            context.gameSetting.translationLang = .zh
-        default:
-            context.gameSetting.translationLang = .zh
-        }
-        saveGameSetting()
-    }
+    // MARK: - Section Title
 
     override func tableView(_: UITableView, titleForHeaderInSection section: Int) -> String? {
         let i18n = I18n.shared
@@ -272,28 +304,9 @@ class SettingPage: UITableViewController {
             return "Other Setting"
         }
     }
-
-    override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 4 {
-            if indexPath.row == 0 { // teacher voice
-                VoiceSelectionPage.fromPage = self
-                VoiceSelectionPage.selectingVoiceFor = .teacher
-                VoiceSelectionPage.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher)
-            }
-            if indexPath.row == 1 { // assistant voice
-                VoiceSelectionPage.fromPage = self
-                VoiceSelectionPage.selectingVoiceFor = .assisant
-                VoiceSelectionPage.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.assistant)
-            }
-            if indexPath.row == 2 { // translator voice
-                VoiceSelectionPage.fromPage = self
-                VoiceSelectionPage.selectingVoiceFor = .translator
-                VoiceSelectionPage.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.translator)
-            }
-            launchVC(VoiceSelectionPage.id)
-        }
-    }
 }
+
+// MARK: - utility functions
 
 func actOnLearningModeSegmentControlValueChanged(control: UISegmentedControl) {
     context.gameSetting.learningMode = LearningMode(rawValue: control.selectedSegmentIndex) ?? .meaningAndSpeaking

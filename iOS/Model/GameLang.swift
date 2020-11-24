@@ -15,6 +15,7 @@ var enDifficultyInfos: [Int: DifficultyInfo] = [:]
 
 var gameLang: Lang = Lang.jp
 
+// TODO: fix Lang.jp to Lang.ja
 enum Lang: Int, Codable {
     case jp, en, zh, unset
 
