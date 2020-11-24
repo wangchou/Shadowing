@@ -43,6 +43,10 @@ class I18n {
         return regionCode == "HK"
     }
 
+    var isCN: Bool {
+        return regionCode == "CN"
+    }
+
     var speed: String {
         if isJa || isZh { return "速度" }
         return "Speed"

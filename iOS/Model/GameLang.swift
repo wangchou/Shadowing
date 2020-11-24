@@ -5,7 +5,7 @@
 //  Created by Wangchou Lu on 11/2/30 H.
 //  Copyright © 30 Heisei Lu, WangChou. All rights reserved.
 //
-
+import AVFoundation
 import Foundation
 import Promises
 
@@ -60,9 +60,18 @@ enum Lang: Int, Codable {
         case .jp:
             return "ja-JP"
         case .en:
+            if AVSpeechSynthesisVoice.currentLanguageCode().contains("en-") {
+                return AVSpeechSynthesisVoice.currentLanguageCode()
+            }
             return "en-US"
         case .zh:
-            return "zh-TW"
+            if i18n.isHK {
+                return "zh-HK"
+            } else if i18n.isCN {
+                return "zh-CN"
+            } else {
+                return "zh-TW"
+            }
         case .unset:
             return "unset"
         }
