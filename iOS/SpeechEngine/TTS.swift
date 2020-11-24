@@ -55,6 +55,7 @@ import Foundation
 
                 utterance.rate = rate
 
+                print(text, utterance.voice?.identifier ?? "", rate)
                 if isHeadphonePlugged() {
                     utterance.volume = 0.6
                 } else {

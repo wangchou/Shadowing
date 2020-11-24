@@ -43,11 +43,6 @@ class I18n {
         return regionCode == "HK"
     }
 
-    var autoSpeedLabel: String {
-        if isJa || isZh { return "自動速度" }
-        return "Auto Speed"
-    }
-
     var speed: String {
         if isJa || isZh { return "速度" }
         return "Speed"
@@ -141,10 +136,10 @@ class I18n {
         return "No TTS Voice found:\nGo to Settings > \(general)Accessibility > \(speechText) > Voices to Download"
     }
 
-    var settingSectionGameSpeed: String {
-        if isJa { return "挑戦中" }
-        if isZh { return "遊戲時" }
-        return "Game Speed"
+    var settingSectionGameSetting: String {
+        if isJa { return "ゲーム設定" }
+        if isZh { return "遊戲設定" }
+        return "Game Setting"
     }
 
     var settingSectionPracticeSpeed: String {
@@ -600,7 +595,7 @@ class I18n {
 
     var meaningAndSpeaking: String {
         if isJa { return "意味と発音" }
-        if isZh { return "意義與發音" }
+        if isZh { return "意義、發音" }
         return "Meaning"
     }
 

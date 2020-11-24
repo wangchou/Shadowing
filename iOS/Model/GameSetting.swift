@@ -17,8 +17,7 @@ private var globalMonitoringVolume: Int = 0
 
 struct GameSetting: Codable {
     var version: String = "1.4.0"
-    var isAutoSpeed: Bool = true
-    var preferredSpeed: Float = AVSpeechUtteranceDefaultSpeechRate * 0.9
+    var preferredSpeed: Float = AVSpeechUtteranceDefaultSpeechRate * 0.85
     var practiceSpeed: Float = AVSpeechUtteranceDefaultSpeechRate * 0.7
     var isShowTranslationInPractice: Bool = false
 

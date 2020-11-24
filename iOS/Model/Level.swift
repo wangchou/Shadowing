@@ -116,10 +116,6 @@ enum Level: Int, Codable {
     var bestInfinteChallengeProgress: String? {
         return findBestRecord(dataSetKey: infinteChallengeDatasetKey)?.progress
     }
-
-    var autoSpeed: Float {
-        return AVSpeechUtteranceDefaultSpeechRate * min(1.1, 0.7 + Float(rawValue) * 0.04)
-    }
 }
 
 enum Rank: String, Codable {

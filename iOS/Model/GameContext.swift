@@ -75,8 +75,7 @@ class GameContext {
     }
 
     var teachingRate: Float {
-        guard gameSetting.isAutoSpeed else { return gameSetting.preferredSpeed }
-        return gameRecord?.level.autoSpeed ?? AVSpeechUtteranceDefaultSpeechRate * 0.8
+        return gameSetting.preferredSpeed
     }
 
     var gameTitleToSpeak: String {

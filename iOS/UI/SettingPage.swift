@@ -22,6 +22,9 @@ class SettingPage: UITableViewController {
 
     @IBOutlet var learningModeLabel: UILabel!
     @IBOutlet var learningModeSegmentControl: UISegmentedControl!
+    @IBOutlet var gameSpeedNameLabel: UILabel!
+    @IBOutlet var gameSpeedSlider: UISlider!
+    @IBOutlet var gameSpeedFastLabel: UILabel!
     @IBOutlet var translationLanguageLabel: UILabel!
     @IBOutlet var translationLanguageSegment: UISegmentedControl!
     @IBOutlet var showTranslationLabel: UILabel!
@@ -33,13 +36,8 @@ class SettingPage: UITableViewController {
     @IBOutlet var monitoringVolumeSlider: UISlider!
     @IBOutlet var monitoringVolumeLabel: UILabel!
 
-    @IBOutlet var autoSpeedLabel: UILabel!
-    @IBOutlet var autoSpeedSwitch: UISwitch!
-    @IBOutlet var gameSpeedSlider: UISlider!
-    @IBOutlet var gameSpeedFastLabel: UILabel!
     @IBOutlet var practiceSpeedFastLabel: UILabel!
     @IBOutlet var practiceSpeedSlider: UISlider!
-
     @IBOutlet var teacherLabel: UILabel!
     @IBOutlet var teacherNameLabel: UILabel!
     @IBOutlet var assisantLabel: UILabel!
@@ -65,17 +63,20 @@ class SettingPage: UITableViewController {
     }
 
     func render() {
+        let setting = context.gameSetting
+        topBarView.titleLabel.text = i18n.setting
+
         gameLangSegmentControl.setTitle(i18n.english, forSegmentAt: 0)
         gameLangSegmentControl.setTitle(i18n.japanese, forSegmentAt: 1)
 
-        for i in 0 ..< dailyGoals.count {
-            dailyGoalSegmentedControl.setTitle("\(dailyGoals[i])\(i18n.sentenceUnit)", forSegmentAt: i)
-        }
         translationLanguageSegment.setTitle("\(gameLang == .jp ? i18n.english : i18n.japanese)", forSegmentAt: 0)
         translationLanguageSegment.setTitle("\(i18n.chinese)", forSegmentAt: 1)
 
-        topBarView.titleLabel.text = i18n.setting
-        autoSpeedLabel.text = i18n.autoSpeedLabel
+        gameSpeedNameLabel.text = i18n.speed
+        gameSpeedSlider.isContinuous = false
+        gameSpeedSlider.value = setting.preferredSpeed
+        gameSpeedFastLabel.text = String(format: "%.2fx", setting.preferredSpeed * 2)
+
         narratorLabel.text = i18n.narratorLabel
         translationLanguageLabel.text = i18n.translationLanguageLabel
         showTranslationLabel.text = i18n.showTranslationLabel
@@ -104,8 +105,6 @@ class SettingPage: UITableViewController {
             translatorNameLabel.text = translator.name
         }
 
-        let setting = context.gameSetting
-
         gameLangSegmentControl.selectedSegmentIndex = gameLang == .jp ? 1 : 0
         translationLanguageSegment.selectedSegmentIndex = setting.translationLang == .zh ? 1: 0
         dailyGoalSegmentedControl.selectedSegmentIndex = dailyGoals.firstIndex(of: context.gameSetting.dailySentenceGoal) ?? 1
@@ -113,20 +112,13 @@ class SettingPage: UITableViewController {
         gotoIOSSettingButton.setTitle(i18n.gotoIOSSettingButtonTitle, for: .normal)
         gotoAppStoreButton.setTitle(i18n.gotoAppStore, for: .normal)
 
-        autoSpeedSwitch.isOn = setting.isAutoSpeed
-
-        if setting.isAutoSpeed {
-            gameSpeedSlider.isEnabled = false
-            gameSpeedFastLabel.textColor = UIColor.lightGray
-        } else {
-            gameSpeedSlider.isEnabled = true
-            gameSpeedFastLabel.textColor = UIColor.black
-        }
-        gameSpeedSlider.value = setting.preferredSpeed
-        gameSpeedFastLabel.text = String(format: "%.2fx", setting.preferredSpeed * 2)
-
+        practiceSpeedSlider.isContinuous = false
         practiceSpeedSlider.value = setting.practiceSpeed
         practiceSpeedFastLabel.text = String(format: "%.2fx", setting.practiceSpeed * 2)
+
+        for i in 0 ..< dailyGoals.count {
+            dailyGoalSegmentedControl.setTitle("\(dailyGoals[i])\(i18n.sentenceUnit)", forSegmentAt: i)
+        }
 
         narratorSwitch.isOn = setting.isUsingNarrator
         monitoringSwitch.isOn = setting.isMointoring
@@ -211,12 +203,6 @@ class SettingPage: UITableViewController {
 
     // Game Speed ------------------------------------------------------------------
 
-    @IBAction func autoSpeedSwitchValueChanged(_: Any) {
-        context.gameSetting.isAutoSpeed = autoSpeedSwitch.isOn
-        saveGameSetting()
-        viewWillAppear(false)
-    }
-
     @IBAction func gameSpeedSilderValueChanged(_: Any) {
         context.gameSetting.preferredSpeed = gameSpeedSlider.value
         saveGameSetting()
@@ -235,7 +221,7 @@ class SettingPage: UITableViewController {
 
     // Change Voices
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 4 {
+        if indexPath.section == 3 {
             if indexPath.row == 0 { // teacher voice
                 VoiceSelectionPage.fromPage = self
                 VoiceSelectionPage.selectingVoiceFor = .teacher
@@ -286,18 +272,16 @@ class SettingPage: UITableViewController {
         case 0:
             return " "
         case 1:
-            return " "
+            return i18n.settingSectionGameSetting
         case 2:
-            return i18n.settingSectionGameSpeed
-        case 3:
             return i18n.settingSectionPracticeSpeed
-        case 4:
+        case 3:
             return i18n.textToSpeech
-        case 5:
+        case 4:
             return i18n.dailyGoal
-        case 6:
+        case 5:
             return i18n.micAndSpeechPermission
-        case 7:
+        case 6:
             return i18n.yourFeedbackMakeAppBetter
 
         default:

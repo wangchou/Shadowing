@@ -37,13 +37,11 @@ class Messenger: UIViewController {
     @IBOutlet var speedLabel: UILabel!
     @IBOutlet var showTranslationLabel: UILabel!
     @IBOutlet var showTranslationSwitch: UISwitch!
-    @IBOutlet var autoSpeedSwitch: UISwitch!
     @IBOutlet var learningModeLabel: UILabel!
     @IBOutlet var learningModeSegmentControl: UISegmentedControl!
     @IBOutlet var repeatOneSwitchButton: UIButton!
     @IBOutlet var exitButton: UIButton!
     @IBOutlet var fastLabel: UILabel!
-    @IBOutlet var autoSpeedLabel: UILabel!
 
     @IBOutlet var messengerBar: MessengerBar!
 
@@ -109,7 +107,6 @@ class Messenger: UIViewController {
         let i18n = I18n.shared
 
         showTranslationLabel.text = i18n.showTranslationLabel
-        autoSpeedLabel.text = i18n.autoSpeedLabel
         speedLabel.text = i18n.speed
 
         speedSlider.minimumValue = AVSpeechUtteranceMinimumSpeechRate
@@ -118,18 +115,8 @@ class Messenger: UIViewController {
         showTranslationSwitch.isOn = context.gameSetting.isShowTranslation
         showTranslationSwitch.isEnabled = context.gameSetting.learningMode != .interpretation
         showTranslationLabel.textColor = context.gameSetting.learningMode != .interpretation ? .white : UIColor.white.withAlphaComponent(0.3)
-        autoSpeedSwitch.isOn = context.gameSetting.isAutoSpeed
         speedSlider.value = context.gameSetting.preferredSpeed
         fastLabel.text = String(format: "%.2fx", context.gameSetting.preferredSpeed * 2)
-        if context.gameSetting.isAutoSpeed {
-            speedSlider.isEnabled = false
-            fastLabel.textColor = UIColor.lightGray
-            speedLabel.textColor = UIColor.gray
-        } else {
-            speedSlider.isEnabled = true
-            fastLabel.textColor = UIColor.white
-            speedLabel.textColor = UIColor.white
-        }
 
         if context.gameMode == .topicMode {
             repeatOneSwitchButton.isHidden = false
@@ -268,12 +255,6 @@ class Messenger: UIViewController {
 
     @IBAction func showTranslationSwitchValueChanged(_: Any) {
         context.gameSetting.isShowTranslation = showTranslationSwitch.isOn
-        saveGameSetting()
-        renderOverlayView()
-    }
-
-    @IBAction func autoSpeedSwitchValueChanged(_: Any) {
-        context.gameSetting.isAutoSpeed = autoSpeedSwitch.isOn
         saveGameSetting()
         renderOverlayView()
     }

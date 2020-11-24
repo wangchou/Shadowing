@@ -141,6 +141,7 @@ class VoiceSelectionPage: UIViewController {
         if !isWithPracticeSpeedSection {
             tableView.tableHeaderView = nil
         } else {
+            practiceSpeedSlider.isContinuous = false
             practiceSpeedSlider.value = context.gameSetting.practiceSpeed
             practiceSpeedValueLabel.text = String(format: "%.2fx", context.gameSetting.practiceSpeed * 2)
             practiceSpeedLabel.text = i18n.settingSectionPracticeSpeed
