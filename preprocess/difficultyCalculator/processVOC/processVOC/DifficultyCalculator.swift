@@ -98,11 +98,11 @@ class DifficultyCalculator {
 extension DifficultyCalculator {
     func showVOCSetStatus() {
         let enSentences = getLines(filename: "en.txt")
-        let jaSentences = getLines(filename: "ja.txt")
+        //let jaSentences = getLines(filename: "ja.txt")
         var removeCount = 0
         var targetLevel = 0
         var levelSentenceCounts: [Int: Int] = [:]
-        for (i, sentence) in enSentences.enumerated() {
+        for (_, sentence) in enSentences.enumerated() {
             let sentenceLevel = getDifficulty(sentence: sentence)
             levelSentenceCounts[sentenceLevel] = (levelSentenceCounts[sentenceLevel] ?? 0) + 1
             if sentenceLevel == targetLevel % 200 {

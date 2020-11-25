@@ -110,7 +110,18 @@
 		BEF28B6320B52BF700385273 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF28B6220B52BF700385273 /* UI.swift */; };
 		BEF4B14F219C093800B8E45E /* VoiceSelectionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF4B14E219C093800B8E45E /* VoiceSelectionPage.swift */; };
 		BEF4B151219C0E3B00B8E45E /* VoiceTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF4B150219C0E3B00B8E45E /* VoiceTableCell.swift */; };
+		BEFA9468256E6BA400F41949 /* hanashitaiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFA9467256E6BA400F41949 /* hanashitaiTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BEFA946A256E6BA400F41949 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEBDEDB4208EF09F00C18520 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BEBDEDBB208EF09F00C18520;
+			remoteInfo = hanashitai;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		90EB2EE36D046887387380C9 /* Pods-hanashitai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hanashitai.release.xcconfig"; path = "Target Support Files/Pods-hanashitai/Pods-hanashitai.release.xcconfig"; sourceTree = "<group>"; };
@@ -243,6 +254,9 @@
 		BEF28B6220B52BF700385273 /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 		BEF4B14E219C093800B8E45E /* VoiceSelectionPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceSelectionPage.swift; sourceTree = "<group>"; };
 		BEF4B150219C0E3B00B8E45E /* VoiceTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceTableCell.swift; sourceTree = "<group>"; };
+		BEFA9465256E6BA400F41949 /* hanashitaiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hanashitaiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEFA9467256E6BA400F41949 /* hanashitaiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hanashitaiTests.swift; sourceTree = "<group>"; };
+		BEFA9469256E6BA400F41949 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0CB2CAED1E443B55D2C487D /* Pods-hanashitai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hanashitai.debug.xcconfig"; path = "Target Support Files/Pods-hanashitai/Pods-hanashitai.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -256,6 +270,13 @@
 				BEE8BFC12344A7060042EE2C /* Speech.framework in Frameworks */,
 				BE84C1E02344A4C400CB53AA /* AudioToolbox.framework in Frameworks */,
 				0995A7A092B793A0D54379EB /* Pods_hanashitai.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEFA9462256E6BA400F41949 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +443,7 @@
 		BE9556EF212D7C130045E578 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BEFA9471256E6BCC00F41949 /* old */,
 				BEBF5D1B2255D9F60069C34F /* GameMedal.swift */,
 				BEBDEDD8208EF15F00C18520 /* constants.swift */,
 				BEF28B6020B52BB000385273 /* Score.swift */,
@@ -448,6 +470,7 @@
 				BE6AF37F209C146B00CBDB63 /* GameFlow */,
 				BEDEDD4220A5D86500E7B60B /* UI */,
 				BEF28B5F20B52B7900385273 /* Utilities */,
+				BEFA9466256E6BA400F41949 /* hanashitaiTests */,
 				BE7E88B721AA768800B9355E /* Frameworks */,
 				A9F614D46265A9129B5B2A95 /* Pods */,
 				BE84C1E22344A50500CB53AA /* Recovered References */,
@@ -458,6 +481,7 @@
 			isa = PBXGroup;
 			children = (
 				BEBDEDBC208EF09F00C18520 /* hanashitai.app */,
+				BEFA9465256E6BA400F41949 /* hanashitaiTests.xctest */,
 			);
 			name = Products;
 			path = ..;
@@ -541,6 +565,22 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		BEFA9466256E6BA400F41949 /* hanashitaiTests */ = {
+			isa = PBXGroup;
+			children = (
+				BEFA9467256E6BA400F41949 /* hanashitaiTests.swift */,
+				BEFA9469256E6BA400F41949 /* Info.plist */,
+			);
+			path = hanashitaiTests;
+			sourceTree = "<group>";
+		};
+		BEFA9471256E6BCC00F41949 /* old */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = old;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -564,13 +604,31 @@
 			productReference = BEBDEDBC208EF09F00C18520 /* hanashitai.app */;
 			productType = "com.apple.product-type.application";
 		};
+		BEFA9464256E6BA400F41949 /* hanashitaiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BEFA946E256E6BA400F41949 /* Build configuration list for PBXNativeTarget "hanashitaiTests" */;
+			buildPhases = (
+				BEFA9461256E6BA400F41949 /* Sources */,
+				BEFA9462256E6BA400F41949 /* Frameworks */,
+				BEFA9463256E6BA400F41949 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BEFA946B256E6BA400F41949 /* PBXTargetDependency */,
+			);
+			name = hanashitaiTests;
+			productName = hanashitaiTests;
+			productReference = BEFA9465256E6BA400F41949 /* hanashitaiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		BEBDEDB4208EF09F00C18520 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0930;
+				LastSwiftUpdateCheck = 1220;
 				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = "Lu, WangChou";
 				TargetAttributes = {
@@ -582,6 +640,10 @@
 								enabled = 1;
 							};
 						};
+					};
+					BEFA9464256E6BA400F41949 = {
+						CreatedOnToolsVersion = 12.2;
+						TestTargetID = BEBDEDBB208EF09F00C18520;
 					};
 				};
 			};
@@ -602,6 +664,7 @@
 			projectRoot = "";
 			targets = (
 				BEBDEDBB208EF09F00C18520 /* hanashitai */,
+				BEFA9464256E6BA400F41949 /* hanashitaiTests */,
 			);
 		};
 /* End PBXProject section */
@@ -621,6 +684,13 @@
 				BE67D2A921561A93007FE420 /* Assets.xcassets in Resources */,
 				BECAC3BC216B904A001BBF49 /* BottomBarView.xib in Resources */,
 				BEAF73B02566D2A9004D29D7 /* sentences20201118.sqlite in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEFA9463256E6BA400F41949 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -778,7 +848,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BEFA9461256E6BA400F41949 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEFA9468256E6BA400F41949 /* hanashitaiTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BEFA946B256E6BA400F41949 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BEBDEDBB208EF09F00C18520 /* hanashitai */;
+			targetProxy = BEFA946A256E6BA400F41949 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		BEB6F6C72182B89D0011E1C1 /* InfoPlist.strings */ = {
@@ -995,6 +1081,53 @@
 			};
 			name = Release;
 		};
+		BEFA946C256E6BA400F41949 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ETE87474CU;
+				INFOPLIST_FILE = hanashitaiTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wcl.hanashitaiTests.hanashitaiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/hanashitai.app/hanashitai";
+			};
+			name = Debug;
+		};
+		BEFA946D256E6BA400F41949 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ETE87474CU;
+				INFOPLIST_FILE = hanashitaiTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wcl.hanashitaiTests.hanashitaiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/hanashitai.app/hanashitai";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1012,6 +1145,15 @@
 			buildConfigurations = (
 				BEBDEDCF208EF0A000C18520 /* Debug */,
 				BEBDEDD0208EF0A000C18520 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BEFA946E256E6BA400F41949 /* Build configuration list for PBXNativeTarget "hanashitaiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEFA946C256E6BA400F41949 /* Debug */,
+				BEFA946D256E6BA400F41949 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

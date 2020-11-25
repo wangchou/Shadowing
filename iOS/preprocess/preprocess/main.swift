@@ -369,17 +369,12 @@ func addEnInfoTables() {
     }
 }
 func runAll() {
-    do {
-        createWritableDB()
-        addTokenInfosTable()
-        addSentencesTable()
-        addStringToIdTable()
-        addJpInfoTables()
-        addEnInfoTables()
-    } catch {
-        print("db error 7: \(error)")
-    }
-
+    createWritableDB()
+    addTokenInfosTable()
+    addSentencesTable()
+    addStringToIdTable()
+    addJpInfoTables()
+    addEnInfoTables()
 }
 
 runAll()

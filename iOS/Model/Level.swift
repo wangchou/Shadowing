@@ -7,9 +7,7 @@
 //
 
 import AVFoundation
-#if os(iOS)
 import UIKit
-#endif
 
 var avgKanaCountDict: [String: Float] = [:]
 // for ja
@@ -19,11 +17,10 @@ private let maxKanaCounts = [6, 9, 11, 13, 15, 18, 22, 26, 30, 33, 36, 40]
 private let minSyllablesCounts = [1, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 27]
 private let maxSyllablesCounts = [5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 26, 31]
 
-#if os(iOS)
 private let colors = [myRed, myRed, myOrange, myOrange,
                       myGreen, myGreen, myBlue, myBlue,
                       myPurple, myPurple, myPurple, myPurple]
-#endif
+
 private let titles = ["入門一", "入門二", "初級一", "初級二",
                       "中級一", "中級二", "上級一", "上級二",
                       "超難問一", "超難問二", "超難問三", "超難問四"]
@@ -60,11 +57,10 @@ enum Level: Int, Codable {
     var previous: Level {
         return Level(rawValue: (rawValue + levelCount - 1) % levelCount)!
     }
-    #if os(iOS)
+
     var color: UIColor {
         return colors[self.rawValue]
     }
-    #endif
 
     var lockPercentage: Float {
         switch self {
@@ -130,7 +126,7 @@ enum Rank: String, Codable {
     case d = "D"
     case e = "E"
     case f = "F"
-    #if os(iOS)
+
     var color: UIColor {
         switch self {
         case .s, .ss:
@@ -143,5 +139,4 @@ enum Rank: String, Codable {
             return myRed
         }
     }
-    #endif
 }

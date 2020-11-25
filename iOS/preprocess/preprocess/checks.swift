@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Promises
 
 var targetIndex = 2000//rows.count - 1
 var batchSize = 10
