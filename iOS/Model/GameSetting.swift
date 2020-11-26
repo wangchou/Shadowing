@@ -11,13 +11,9 @@ import Foundation
 
 private let context = GameContext.shared
 
-// Newly add settings
-private var globalIsRepeatOne: Bool = false
-private var globalMonitoringVolume: Int = 0
-
 struct GameSetting: Codable {
-    var version: String = "1.4.0"
-    var preferredSpeed: Float = AVSpeechUtteranceDefaultSpeechRate * 0.85
+    // MARK: - GameSetting Data fields
+    var gameSpeed: Float = AVSpeechUtteranceDefaultSpeechRate * 0.85
     var practiceSpeed: Float = AVSpeechUtteranceDefaultSpeechRate * 0.7
     var isShowTranslationInPractice: Bool = false
 
@@ -26,46 +22,75 @@ struct GameSetting: Codable {
     var isShowTranslation: Bool = false
     var isSpeakTranslation: Bool = false
     var isUsingGuideVoice: Bool = true
-    var translationLang: Lang = .zh
+    var translationLang: Lang = i18n.isZh ? .zh : (gameLang == .jp ? .en : .jp)
     // learning mode ended
 
     var isUsingNarrator: Bool = true
     var isMointoring: Bool = true
-    var teacher: String = "unknown"
-    var assistant: String = "unknown"
+    var dailySentenceGoal: Int = 50
+    var icTopViewMode: ICTopViewMode = .dailyGoal
+    var isRepeatOne: Bool = false
+    var monitoringVolume: Int = 0
+
+    // voice id started
+    var teacher: String = "unknown" // gameLang
+    var assistant: String = "unknown" // gameLang
+    var translatorJp: String = "unknown"
+    var translatorEn: String = "unknown"
+    var translatorZh: String = "unknown"
+
+    // MARK: - Computed Fields
     var translator: String {
         get {
-            return translationLang == .zh ? translatorZh : translatorJpOrEn
+            if translationLang == .zh {
+                return translatorZh
+            } else if translationLang == .en {
+                return translatorEn
+            } else {
+                return translatorJp
+            }
         }
         set {
             if translationLang == .zh {
                 translatorZh = newValue
+            } else if translationLang == .en {
+                translatorEn = newValue
             } else {
-                translatorJpOrEn = newValue
+                translatorJp = newValue
             }
         }
     }
+    // voice id ended
 
-    var translatorJpOrEn: String = "unknown" // if gameLang == .jp => .en. if .en -> .jp
-    var translatorZh: String = "unknown"
+    init() {}
 
-    var dailySentenceGoal: Int = 50
-    var icTopViewMode: ICTopViewMode = .dailyGoal
-    var isRepeatOne: Bool {
-        get {
-            return globalIsRepeatOne
-        }
-        set {
-            globalIsRepeatOne = newValue
-        }
-    }
-    var monitoringVolume: Int {
-        get {
-            return globalMonitoringVolume
-        }
-        set {
-            globalMonitoringVolume = newValue
-        }
+    // I know this is awful
+    // But I found there is no better way to handle "Adding new fields" to a codable setting after googling for 8 hours
+    // see discussions:
+    // https://forums.swift.org/t/revisit-synthesized-init-from-decoder-for-structs-with-default-property-values/12296/4
+    // https://www.hackingwithswift.com/forums/swift/codable-and-missing-keys/344
+    // https://stackoverflow.com/questions/44575293/with-jsondecoder-in-swift-4-can-missing-keys-use-a-default-value-instead-of-hav
+    // I guess this issue will never be solved until we can iterate over keypath (swift 6? like Tensorflow ABI did )
+    // --- KeyPathIterable thread ---
+    // https://forums.swift.org/t/storedpropertyiterable/19218
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        gameSpeed = try container.decodeIfPresent(Float.self, forKey: .gameSpeed) ?? gameSpeed
+        practiceSpeed = try container.decodeIfPresent(Float.self, forKey: .practiceSpeed) ?? practiceSpeed
+        isShowTranslationInPractice = try container.decodeIfPresent(Bool.self, forKey: .isShowTranslationInPractice) ?? isShowTranslationInPractice
+
+        learningMode = try container.decodeIfPresent(LearningMode.self, forKey: .learningMode) ?? learningMode
+        isShowTranslation = try container.decodeIfPresent(Bool.self, forKey: .isShowTranslation) ?? isShowTranslation
+        isSpeakTranslation = try container.decodeIfPresent(Bool.self, forKey: .isSpeakTranslation) ?? isSpeakTranslation
+        isUsingGuideVoice = try container.decodeIfPresent(Bool.self, forKey: .isUsingGuideVoice) ?? isUsingGuideVoice
+        translationLang = try container.decodeIfPresent(Lang.self, forKey: .translationLang) ?? translationLang
+
+        isUsingNarrator = try container.decodeIfPresent(Bool.self, forKey: .isUsingNarrator) ?? isUsingNarrator
+        isMointoring = try container.decodeIfPresent(Bool.self, forKey: .isMointoring) ?? isMointoring
+        dailySentenceGoal = try container.decodeIfPresent(Int.self, forKey: .dailySentenceGoal) ?? dailySentenceGoal
+        icTopViewMode = try container.decodeIfPresent(ICTopViewMode.self, forKey: .icTopViewMode) ?? icTopViewMode
+        isRepeatOne = try container.decodeIfPresent(Bool.self, forKey: .isRepeatOne) ?? isRepeatOne
+        monitoringVolume = try container.decodeIfPresent(Int.self, forKey: .monitoringVolume) ?? monitoringVolume
     }
 }
 
@@ -82,64 +107,20 @@ enum LearningMode: Int, Codable {
     case interpretation = 3
 }
 
-// MARK: - Save/Load for one Bool
-
-private let isRepeatOneKey = "RepeatOneKey"
-
-// https://stackoverflow.com/questions/44580719/how-do-i-make-an-enum-decodable-in-swift-4
-private struct IsRepeatOneForEncode: Codable {
-    var isRepeatOne: Bool
-}
-
-func saveIsRepeatOne() {
-    let tmpObj = IsRepeatOneForEncode(isRepeatOne: globalIsRepeatOne)
-    saveToUserDefault(object: tmpObj, key: isRepeatOneKey)
-}
-
-func loadIsRepeatOne() {
-    if let loadedObj = loadFromUserDefault(type: IsRepeatOneForEncode.self, key: isRepeatOneKey) {
-        globalIsRepeatOne = loadedObj.isRepeatOne
-    }
-}
-
-// MARK: - Save/Load for monitoringVolume
-
-private let monitoringVolumeKey = "monitoringVolumeKey"
-
-private struct MonitoringVolumeForEncode: Codable {
-    var monitoringVolume: Int
-}
-
-func saveMonitoringVolume() {
-    let tmpObj = MonitoringVolumeForEncode(monitoringVolume: globalMonitoringVolume)
-    saveToUserDefault(object: tmpObj, key: monitoringVolumeKey + gameLang.key)
-}
-
-func loadMonitoringVolume() {
-    if let loadedObj = loadFromUserDefault(type: MonitoringVolumeForEncode.self, key: monitoringVolumeKey + gameLang.key) {
-        globalMonitoringVolume = loadedObj.monitoringVolume
-    }
-}
-
 // MARK: - save and load
 
 private let gameSettingKey = "GameSettingKey"
-private let unknownVoice = "unknownVoice"
 func saveGameSetting() {
     saveToUserDefault(object: context.gameSetting, key: gameSettingKey + gameLang.key)
-    saveIsRepeatOne()
-    saveMonitoringVolume()
 }
 
 func loadGameSetting() {
-    if let gameSetting = loadFromUserDefault(type: GameSetting.self, key: gameSettingKey + gameLang.key),
-       gameSetting.teacher != unknownVoice,
-       gameSetting.assistant != unknownVoice {
+    if let gameSetting = loadFromUserDefault(type: GameSetting.self, key: gameSettingKey + gameLang.key) {
         context.gameSetting = gameSetting
     } else {
         print("[\(gameLang)] create new gameSetting")
         context.gameSetting = GameSetting()
-        let langCode = gameLang == .jp ? "ja-JP" : "en-US"
+        let langCode = gameLang.defaultCode
 
         if gameLang == .jp {
             context.gameSetting.teacher = getDefaultVoiceId(language: langCode)
@@ -150,8 +131,6 @@ func loadGameSetting() {
         }
         print(context.gameSetting.teacher, context.gameSetting.assistant)
     }
-    loadIsRepeatOne()
-    loadMonitoringVolume()
 }
 
 func getDefaultVoice(language: String,
@@ -183,7 +162,8 @@ func getDefaultVoiceId(language: String,
 
     guard let voice = getDefaultVoice(language: language, isPreferMaleSiri: isPreferMaleSiri, isPreferEnhanced: isPreferEnhanced) else {
         showMessage(i18n.defaultVoiceIsNotAvailable, isNeedConfirm: true)
-        return unknownVoice
+        print("getDefaultVoiceId(\(language), \(isPreferMaleSiri), \(isPreferEnhanced) Failed. return unknown")
+        return "unknown"
     }
     return voice.identifier
 }

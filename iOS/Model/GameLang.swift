@@ -17,7 +17,7 @@ var gameLang: Lang = Lang.jp
 
 // TODO: fix Lang.jp to Lang.ja
 enum Lang: Int, Codable {
-    case jp, en, zh, unset
+    case jp, en, unset, zh
 
     var key: String {
         if self == .jp { return "" }

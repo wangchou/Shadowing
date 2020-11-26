@@ -88,8 +88,8 @@ class SettingPage: UITableViewController {
 
         gameSpeedNameLabel.text = i18n.speed
         gameSpeedSlider.isContinuous = false
-        gameSpeedSlider.value = setting.preferredSpeed
-        gameSpeedFastLabel.text = String(format: "%.2fx", setting.preferredSpeed * 2)
+        gameSpeedSlider.value = setting.gameSpeed
+        gameSpeedFastLabel.text = String(format: "%.2fx", setting.gameSpeed * 2)
 
         narratorLabel.text = i18n.narratorLabel
         translationLanguageLabel.text = i18n.translationLanguageLabel
@@ -204,11 +204,11 @@ class SettingPage: UITableViewController {
     // Game Speed ------------------------------------------------------------------
 
     @IBAction func gameSpeedSilderValueChanged(_: Any) {
-        context.gameSetting.preferredSpeed = gameSpeedSlider.value
+        context.gameSetting.gameSpeed = gameSpeedSlider.value
         saveGameSetting()
         gameSpeedFastLabel.text = String(format: "%.2fx", gameSpeedSlider.value * 2)
-        let speedText = String(format: "%.2f", context.gameSetting.preferredSpeed * 2)
-        _ = teacherSay("\(i18n.speedIs)\(speedText)です", rate: context.gameSetting.preferredSpeed)
+        let speedText = String(format: "%.2f", context.gameSetting.gameSpeed * 2)
+        _ = teacherSay("\(i18n.speedIs)\(speedText)です", rate: context.gameSetting.gameSpeed)
     }
 
     @IBAction func practiceSpeedSliderValueChanged(_: Any) {

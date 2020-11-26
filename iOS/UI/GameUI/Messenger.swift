@@ -115,8 +115,8 @@ class Messenger: UIViewController {
         showTranslationSwitch.isOn = context.gameSetting.isShowTranslation
         showTranslationSwitch.isEnabled = context.gameSetting.learningMode != .interpretation
         showTranslationLabel.textColor = context.gameSetting.learningMode != .interpretation ? .white : UIColor.white.withAlphaComponent(0.3)
-        speedSlider.value = context.gameSetting.preferredSpeed
-        fastLabel.text = String(format: "%.2fx", context.gameSetting.preferredSpeed * 2)
+        speedSlider.value = context.gameSetting.gameSpeed
+        fastLabel.text = String(format: "%.2fx", context.gameSetting.gameSpeed * 2)
 
         if context.gameMode == .topicMode {
             repeatOneSwitchButton.isHidden = false
@@ -248,7 +248,7 @@ class Messenger: UIViewController {
 
     // pauseOverlay actions
     @IBAction func speedChanged(_: Any) {
-        context.gameSetting.preferredSpeed = speedSlider.value
+        context.gameSetting.gameSpeed = speedSlider.value
         saveGameSetting()
         renderOverlayView()
     }

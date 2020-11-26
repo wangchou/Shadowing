@@ -16,6 +16,7 @@ var enHistory: [GameRecord] = []
 var jpHistory: [GameRecord] = []
 
 struct GameRecord: Codable {
+    // data fields
     var gameFlowMode: GameFlowMode = .shadowing // deprecated, only for conform previous records
     var startedTime: Date
     var playDuration: Int = 0
@@ -28,6 +29,8 @@ struct GameRecord: Codable {
     var greatCount = 0
     var goodCount = 0
     var sentencesScore: [String: Score]
+
+    // func / computed field
     var sentences: [Sentence] {
         return sentencesScore.keys.map { str in
             return getSentenceByString(str)

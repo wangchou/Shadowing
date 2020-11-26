@@ -75,7 +75,7 @@ class GameContext {
     }
 
     var teachingRate: Float {
-        return gameSetting.preferredSpeed
+        return gameSetting.gameSpeed
     }
 
     var gameTitleToSpeak: String {

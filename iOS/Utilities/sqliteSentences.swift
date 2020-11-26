@@ -33,7 +33,7 @@ struct Sentence: Hashable, Equatable {
         }
     }
     #endif
-    
+
     var ttsFixes: [(String, String)]
 
     func hash(into hasher: inout Hasher) {

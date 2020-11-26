@@ -38,7 +38,7 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
 
     private func getZhTitle(str: String) -> String {
         if str == i18n.all { return str }
-        return i18n.isZh ? str : abilities[jaAbilities.index(of: str) ?? 0]
+        return i18n.isZh ? str : abilities[jaAbilities.firstIndex(of: str) ?? 0]
     }
 
     override func touchesShouldCancel(in _: UIView) -> Bool {

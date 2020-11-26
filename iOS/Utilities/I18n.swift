@@ -376,7 +376,7 @@ class I18n {
     func getLangDescription(langAndRegion: String) -> String {
         let pairs = langAndRegion.split(separator: "-")
             .map { substring in substring.s }
-        var lang = pairs[0] == "ja" ? japanese : ((pairs[0] == "en") ? english : chinese)
+        let lang = pairs[0] == "ja" ? japanese : ((pairs[0] == "en") ? english : chinese)
         let region = getRegion(region: pairs[1])
         if region == "" { return lang }
         return "\(lang) (\(region))"

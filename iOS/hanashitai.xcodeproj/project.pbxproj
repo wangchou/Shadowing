@@ -111,6 +111,8 @@
 		BEF4B14F219C093800B8E45E /* VoiceSelectionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF4B14E219C093800B8E45E /* VoiceSelectionPage.swift */; };
 		BEF4B151219C0E3B00B8E45E /* VoiceTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF4B150219C0E3B00B8E45E /* VoiceTableCell.swift */; };
 		BEFA9468256E6BA400F41949 /* hanashitaiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFA9467256E6BA400F41949 /* hanashitaiTests.swift */; };
+		BEFA9476256E763E00F41949 /* GameRecord20200617.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFA9474256E763E00F41949 /* GameRecord20200617.swift */; };
+		BEFA9477256E763E00F41949 /* GameSetting20200617.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFA9475256E763E00F41949 /* GameSetting20200617.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -257,6 +259,8 @@
 		BEFA9465256E6BA400F41949 /* hanashitaiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hanashitaiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEFA9467256E6BA400F41949 /* hanashitaiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hanashitaiTests.swift; sourceTree = "<group>"; };
 		BEFA9469256E6BA400F41949 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BEFA9474256E763E00F41949 /* GameRecord20200617.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameRecord20200617.swift; sourceTree = "<group>"; };
+		BEFA9475256E763E00F41949 /* GameSetting20200617.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSetting20200617.swift; sourceTree = "<group>"; };
 		E0CB2CAED1E443B55D2C487D /* Pods-hanashitai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hanashitai.debug.xcconfig"; path = "Target Support Files/Pods-hanashitai/Pods-hanashitai.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -577,6 +581,8 @@
 		BEFA9471256E6BCC00F41949 /* old */ = {
 			isa = PBXGroup;
 			children = (
+				BEFA9474256E763E00F41949 /* GameRecord20200617.swift */,
+				BEFA9475256E763E00F41949 /* GameSetting20200617.swift */,
 			);
 			path = old;
 			sourceTree = "<group>";
@@ -791,6 +797,7 @@
 				BEA4E72021AFB8B800CE6E63 /* GameExpirationDateInMS.swift in Sources */,
 				BEF4B151219C0E3B00B8E45E /* VoiceTableCell.swift in Sources */,
 				BED1BA53224A35FF009B68B6 /* MedalPage.swift in Sources */,
+				BEFA9477256E763E00F41949 /* GameSetting20200617.swift in Sources */,
 				BEC4CF0E219D727B00E1A54C /* TopChartView.swift in Sources */,
 				BE7725C420A2CBC200DF186A /* dataSets.swift in Sources */,
 				BE82FE612269C5A900907388 /* MedalSummaryPage.swift in Sources */,
@@ -832,6 +839,7 @@
 				BE955E47216DAB8F00D424FA /* ICInfoView.swift in Sources */,
 				BE8283B42133DAE2008BC875 /* SpeechEngine.swift in Sources */,
 				BE8E51E721CF7F3F007D29E6 /* IAPHelper+Receipt.swift in Sources */,
+				BEFA9476256E763E00F41949 /* GameRecord20200617.swift in Sources */,
 				BE3260C821BF912D00A13C94 /* vocabulary1.swift in Sources */,
 				BE17FB3E209B19B200D23F22 /* GameContext.swift in Sources */,
 				BE6BB6012225286C00BE3CAC /* TopicButtonAreaView.swift in Sources */,
@@ -1035,7 +1043,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
@@ -1076,7 +1084,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

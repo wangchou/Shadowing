@@ -143,7 +143,7 @@ func getDataSetTitle(dataSetKey: String) -> String {
     if let tags = datasetKeyToTags[dataSetKey],
         !tags.isEmpty {
         let tagsWithoutSharp = tags.map { t in t.replacingOccurrences(of: "#", with: "") }
-        let idx = abilities.index(of: tagsWithoutSharp[0]) ?? 0
+        let idx = abilities.firstIndex(of: tagsWithoutSharp[0]) ?? 0
         let categoryText = i18n.isZh ? tagsWithoutSharp[0] : jaAbilities[idx]
         return "[\(categoryText)] " + tagsWithoutSharp[1...].joined(separator: "、")
     }
