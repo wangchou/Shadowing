@@ -15,6 +15,12 @@ class I18n {
 
     private init() {}
 
+    var lang: Lang {
+        if isZh { return .zh }
+        if isJa { return .jp }
+        return .en
+    }
+
     var langCode: String? {
         return Locale.current.languageCode
     }

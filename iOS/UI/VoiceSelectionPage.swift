@@ -242,7 +242,8 @@ extension VoiceSelectionPage: UITableViewDelegate {
         _ = ttsSay(
             testSentence,
             speaker: selectedVoice?.identifier ?? "unknown",
-            rate: speed
+            rate: speed,
+            lang: selectingVoiceFor == .translator ? context.gameSetting.translationLang : gameLang
         )
         tableView.reloadData()
     }

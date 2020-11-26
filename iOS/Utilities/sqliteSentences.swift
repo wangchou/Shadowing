@@ -28,7 +28,7 @@ struct Sentence: Hashable, Equatable {
             return en
         case .zh:
             return cmn
-        case .unset:
+        default:
             return cmn
         }
     }

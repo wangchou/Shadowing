@@ -23,34 +23,24 @@ import Foundation
         var synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
         var ttsToDisplayMap: [Int] = []
         var promise = Promise<Void>.pending()
-        var targetLanguage: String {
-            switch gameLang {
-            case .jp:
-                return "ja-JP"
-            default:
-                return "en-US"
-            }
-        }
 
         func say(_ text: String,
                  voiceId: String,
-                 rate: Float = AVSpeechUtteranceDefaultSpeechRate // 0.5, range 0 ~ 1.0
+                 rate: Float = AVSpeechUtteranceDefaultSpeechRate, // 0.5, range 0 ~ 1.0,
+                 lang: Lang = .unset
         ) -> Promise<Void> {
             SpeechEngine.shared.stopListeningAndSpeaking()
             synthesizer.delegate = self
 
-            getFixedTTSString(text, isJP: targetLanguage == "ja-JP").then { ttsString, ttsToDisplayMap in
+            getFixedTTSString(text, isJP: gameLang == .jp).then { ttsString, ttsToDisplayMap in
                 self.ttsToDisplayMap = ttsToDisplayMap
                 let utterance = AVSpeechUtterance(string: ttsString)
                 if let voice = AVSpeechSynthesisVoice(identifier: voiceId) {
                     utterance.voice = voice
+                } else if lang != .unset { // fallback
+                    utterance.voice = getDefaultVoice(language: lang.defaultCode)
                 } else {
-                    if self.targetLanguage == AVSpeechSynthesisVoice.currentLanguageCode() {
-                        // Do nothing, if not set utterance.voice
-                        // Siri will say it
-                    } else {
-                        utterance.voice = AVSpeechSynthesisVoice(language: self.targetLanguage)
-                    }
+                    utterance.voice = getDefaultVoice(language: gameLang.defaultCode)
                 }
 
                 utterance.rate = rate

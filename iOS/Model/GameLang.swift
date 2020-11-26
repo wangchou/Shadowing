@@ -17,13 +17,26 @@ var gameLang: Lang = Lang.jp
 
 // TODO: fix Lang.jp to Lang.ja
 enum Lang: Int, Codable {
-    case jp, en, unset, zh
+    case jp, en, unset, zh, fr, es, de
 
     var key: String {
-        if self == .jp { return "" }
-        if self == .en { return "en" }
-        if self == .zh { return "zh" }
-        return "unset"
+        switch self {
+        case .jp:
+            return ""
+        case .en:
+            return "en"
+        case .zh:
+            return "zh"
+        case .fr:
+            return "fr"
+        case .es:
+            return "es"
+        case .de:
+            return "de"
+        case .unset:
+            return "unset"
+
+        }
     }
 
     var isSupportTopicMode: Bool {
@@ -37,7 +50,7 @@ enum Lang: Int, Codable {
             return jaDifficultyInfos
         case .en:
             return enDifficultyInfos
-        case .zh, .unset:
+        default:
             return [:]
         }
     }
@@ -46,12 +59,8 @@ enum Lang: Int, Codable {
         switch self {
         case .jp:
             return "ja"
-        case .en:
-            return "en"
-        case .zh:
-            return "zh"
-        case .unset:
-            return "unset"
+        default:
+            return self.key
         }
     }
 
@@ -72,6 +81,12 @@ enum Lang: Int, Codable {
             } else {
                 return "zh-TW"
             }
+        case .fr:
+            return "fr-FR"
+        case .es:
+            return "es-ES"
+        case .de:
+            return "de-DE"
         case .unset:
             return "unset"
         }

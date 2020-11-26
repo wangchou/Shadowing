@@ -154,7 +154,7 @@ class SpeechEngine {
 // ttsSay           speak sample text in voiceSelection Page
 
 extension SpeechEngine {
-    fileprivate func speak(text: String, speaker: String, rate: Float) -> Promise<Void> {
+    fileprivate func speak(text: String, speaker: String, rate: Float, lang: Lang) -> Promise<Void> {
         let startTime = getNow()
         func updateSpeakDuration() -> Promise<Void> {
             context.speakDuration = Float(getNow() - startTime)
@@ -164,7 +164,8 @@ extension SpeechEngine {
         return tts.say(
             text,
             voiceId: speaker,
-            rate: rate
+            rate: rate,
+            lang: lang
         ).then(updateSpeakDuration)
     }
 }
@@ -172,28 +173,26 @@ extension SpeechEngine {
 func speakTitle() -> Promise<Void> {
     let title = context.gameTitleToSpeak
     if context.gameMode == .topicMode {
-        let voiceId = getDefaultVoiceId(language: "zh-TW", isPreferEnhanced: false)
-        return engine.speak(text: title, speaker: voiceId, rate: normalRate)
+        let voiceId = context.gameSetting.translatorZh
+        return engine.speak(text: title, speaker: voiceId, rate: normalRate, lang: .zh)
     }
 
-//    if (gameLajklng == .jp && i18n.isJa) ||
-//        (gameLang == .en && !(i18n.isZh || i18n.isJa)) {
-        return teacherSay(title, rate: normalRate)
-//    }
-//    return narratorSay(title)
+    return narratorSay(title)
 }
 
 func narratorSay(_ text: String) -> Promise<Void> {
-    var currentLocale = AVSpeechSynthesisVoice.currentLanguageCode()
-
-    if !currentLocale.hasPrefix("ja") &&
-       !currentLocale.hasPrefix("en") &&
-       !currentLocale.hasPrefix("zh") {
-        currentLocale = "en-US"
+    var speaker: String
+    if i18n.isJa {
+        speaker = gameLang == .jp ? context.gameSetting.assistant : context.gameSetting.translatorJp
+    } else if i18n.isZh {
+        speaker = context.gameSetting.translatorZh
+    } else {
+        speaker = gameLang == .en ? context.gameSetting.assistant : context.gameSetting.translatorEn
     }
     return engine.speak(text: text,
-                        speaker: getDefaultVoiceId(language: currentLocale),
-                        rate: normalRate)
+                        speaker: speaker,
+                        rate: normalRate,
+                        lang: i18n.lang)
 }
 
 func translatorSay(_ text: String) -> Promise<Void> {
@@ -205,25 +204,37 @@ func translatorSay(_ text: String) -> Promise<Void> {
             voiceId = getDefaultVoiceId(language: "ja-JP")
         case .en:
             voiceId = getDefaultVoiceId(language: "en-US")
-        case .zh, .unset:
+        case .zh:
             voiceId = getDefaultVoiceId(language: "zh-TW", isPreferEnhanced: false)
+        default:
+            print("\(context.gameSetting.translationLang.key) should not be translation lang")
+            voiceId = "unknown"
         }
     }
 
     print("translator:", voiceId, text)
-    return engine.speak(text: text, speaker: voiceId, rate: context.teachingRate)
+    return engine.speak(text: text,
+                        speaker: voiceId,
+                        rate: context.teachingRate,
+                        lang: context.gameSetting.translationLang)
 }
 
 func assisantSay(_ text: String) -> Promise<Void> {
-    return engine.speak(text: text, speaker: context.gameSetting.assistant, rate: normalRate)
+    return engine.speak(text: text,
+                        speaker: context.gameSetting.assistant,
+                        rate: normalRate,
+                        lang: gameLang)
 }
 
 func teacherSay(_ text: String, rate: Float = context.teachingRate) -> Promise<Void> {
-    return engine.speak(text: text, speaker: context.gameSetting.teacher, rate: rate)
+    return engine.speak(text: text,
+                        speaker: context.gameSetting.teacher,
+                        rate: rate,
+                        lang: gameLang)
 }
 
-func ttsSay(_ text: String, speaker: String, rate: Float = context.teachingRate) -> Promise<Void> {
-    return engine.speak(text: text, speaker: speaker, rate: rate)
+func ttsSay(_ text: String, speaker: String, rate: Float = context.teachingRate, lang: Lang) -> Promise<Void> {
+    return engine.speak(text: text, speaker: speaker, rate: rate, lang: lang)
 }
 
 // MARK: - Utilities

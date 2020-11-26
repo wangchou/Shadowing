@@ -129,6 +129,11 @@ func loadGameSetting() {
             context.gameSetting.teacher = getDefaultVoiceId(language: langCode, isPreferMaleSiri: false)
             context.gameSetting.assistant = getDefaultVoiceId(language: langCode)
         }
+
+        context.gameSetting.translatorJp = getDefaultVoiceId(language: Lang.jp.defaultCode)
+        context.gameSetting.translatorEn = getDefaultVoiceId(language: Lang.en.defaultCode)
+        context.gameSetting.translatorZh = getDefaultVoiceId(language: Lang.zh.defaultCode)
+
         print(context.gameSetting.teacher, context.gameSetting.assistant)
     }
 }
