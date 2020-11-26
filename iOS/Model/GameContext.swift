@@ -78,6 +78,14 @@ class GameContext {
         return gameSetting.gameSpeed
     }
 
+    var assistantRate: Float {
+        return teachingRate > fastRate ? teachingRate : fastRate
+    }
+
+    var translatorNormalRate: Float {
+        return teachingRate > normalRate ? teachingRate : normalRate
+    }
+
     var gameTitleToSpeak: String {
         switch gameMode {
         case .topicMode:
@@ -115,6 +123,11 @@ class GameContext {
     var targetString: String {
         return targetSentence.origin
     }
+
+    var ttsFixes: [(String, String)] {
+        return targetSentence.ttsFixes
+    }
+
     var translation: String {
         return targetSentence.translation
     }

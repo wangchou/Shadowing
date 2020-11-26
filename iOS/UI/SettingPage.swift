@@ -208,7 +208,9 @@ class SettingPage: UITableViewController {
         saveGameSetting()
         gameSpeedFastLabel.text = String(format: "%.2fx", gameSpeedSlider.value * 2)
         let speedText = String(format: "%.2f", context.gameSetting.gameSpeed * 2)
-        _ = teacherSay("\(i18n.speedIs)\(speedText)です", rate: context.gameSetting.gameSpeed)
+        _ = teacherSay("\(i18n.speedIs)\(speedText)です",
+                       rate: context.gameSetting.gameSpeed,
+                       ttsFixes: [])
     }
 
     @IBAction func practiceSpeedSliderValueChanged(_: Any) {
@@ -216,7 +218,9 @@ class SettingPage: UITableViewController {
         saveGameSetting()
         practiceSpeedFastLabel.text = String(format: "%.2fx", practiceSpeedSlider.value * 2)
         let speedText = String(format: "%.2f", context.gameSetting.practiceSpeed * 2)
-        _ = teacherSay("\(i18n.speedIs)\(speedText)です", rate: context.gameSetting.practiceSpeed)
+        _ = teacherSay("\(i18n.speedIs)\(speedText)です",
+                       rate: context.gameSetting.practiceSpeed,
+                       ttsFixes: [])
     }
 
     // Change Voices

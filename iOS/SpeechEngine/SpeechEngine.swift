@@ -154,7 +154,11 @@ class SpeechEngine {
 // ttsSay           speak sample text in voiceSelection Page
 
 extension SpeechEngine {
-    fileprivate func speak(text: String, speaker: String, rate: Float, lang: Lang) -> Promise<Void> {
+    fileprivate func speak(text: String,
+                           speaker: String,
+                           rate: Float,
+                           lang: Lang,
+                           ttsFixes: [(String, String)] = []) -> Promise<Void> {
         let startTime = getNow()
         func updateSpeakDuration() -> Promise<Void> {
             context.speakDuration = Float(getNow() - startTime)
@@ -165,7 +169,8 @@ extension SpeechEngine {
             text,
             voiceId: speaker,
             rate: rate,
-            lang: lang
+            lang: lang,
+            ttsFixes: ttsFixes
         ).then(updateSpeakDuration)
     }
 }
@@ -191,7 +196,7 @@ func narratorSay(_ text: String) -> Promise<Void> {
     }
     return engine.speak(text: text,
                         speaker: speaker,
-                        rate: normalRate,
+                        rate: context.assistantRate,
                         lang: i18n.lang)
 }
 
@@ -215,24 +220,26 @@ func translatorSay(_ text: String) -> Promise<Void> {
     print("translator:", voiceId, text)
     return engine.speak(text: text,
                         speaker: voiceId,
-                        rate: context.teachingRate,
+                        rate: context.translatorNormalRate,
                         lang: context.gameSetting.translationLang)
 }
 
 func assisantSay(_ text: String) -> Promise<Void> {
     return engine.speak(text: text,
                         speaker: context.gameSetting.assistant,
-                        rate: normalRate,
+                        rate: context.assistantRate,
                         lang: gameLang)
 }
 
-func teacherSay(_ text: String, rate: Float = context.teachingRate) -> Promise<Void> {
+func teacherSay(_ text: String, rate: Float = context.teachingRate, ttsFixes: [(String, String)]) -> Promise<Void> {
     return engine.speak(text: text,
                         speaker: context.gameSetting.teacher,
                         rate: rate,
-                        lang: gameLang)
+                        lang: gameLang,
+                        ttsFixes: ttsFixes)
 }
 
+// only for voice selection page
 func ttsSay(_ text: String, speaker: String, rate: Float = context.teachingRate, lang: Lang) -> Promise<Void> {
     return engine.speak(text: text, speaker: speaker, rate: rate, lang: lang)
 }

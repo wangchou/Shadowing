@@ -27,12 +27,13 @@ import Foundation
         func say(_ text: String,
                  voiceId: String,
                  rate: Float = AVSpeechUtteranceDefaultSpeechRate, // 0.5, range 0 ~ 1.0,
-                 lang: Lang = .unset
+                 lang: Lang = .unset,
+                 ttsFixes: [(String, String)] = []
         ) -> Promise<Void> {
             SpeechEngine.shared.stopListeningAndSpeaking()
             synthesizer.delegate = self
 
-            getFixedTTSString(text, isJP: gameLang == .jp).then { ttsString, ttsToDisplayMap in
+            getFixedTTSString(text, localFixes: ttsFixes, isJP: gameLang == .jp).then { ttsString, ttsToDisplayMap in
                 self.ttsToDisplayMap = ttsToDisplayMap
                 let utterance = AVSpeechUtterance(string: ttsString)
                 if let voice = AVSpeechSynthesisVoice(identifier: voiceId) {

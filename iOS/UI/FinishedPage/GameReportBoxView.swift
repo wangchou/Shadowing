@@ -61,7 +61,9 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
         addText(2, 6, 6, tags, color: record.level.color, strokeColor: .black)
 
         let statusText = i18n.getSpeakingStatus(percent: record.progress, rank: record.rank.rawValue, reward: record.medalReward)
-        statusSpeakingPromise = teacherSay(statusText, rate: fastRate)
+        statusSpeakingPromise = teacherSay(statusText,
+                                           rate: context.assistantRate,
+                                           ttsFixes: [])
     }
 
     private func renderMiddleRecord() {
@@ -204,7 +206,9 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
                 self.timers[key] = nil
                 if startProgress < 1.0, endProgress == 1.0 {
                     _ = self.statusSpeakingPromise.then {
-                        teacherSay(i18n.reachDailyGoal, rate: fastRate)
+                        teacherSay(i18n.reachDailyGoal,
+                                   rate: GameContext.shared.assistantRate ,
+                                   ttsFixes: [])
                     }
                 }
             }

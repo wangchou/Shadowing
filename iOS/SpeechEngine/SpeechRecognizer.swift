@@ -213,6 +213,8 @@ class SpeechRecognizer: NSObject {
             try? session.setActive(false)
         case .ended:
             try? session.setActive(true)
+        @unknown default:
+            print("unkown interruptionType")
         }
     }
 }

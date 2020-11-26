@@ -139,7 +139,7 @@ func getUpdateTextMap(
     return newMap
 }
 
-func getFixedTTSString(_ text: String, localFixes: [(String, String)] = [], isJP: Bool = true) -> Promise<(String, [Int])> {
+func getFixedTTSString(_ text: String, localFixes: [(String, String)], isJP: Bool = true) -> Promise<(String, [Int])> {
     let promise = Promise<(String, [Int])>.pending()
     guard isJP else {
         promise.fulfill((text, Array(0 ..< text.count)))
@@ -172,6 +172,11 @@ func getFixedTTSString(_ text: String, localFixes: [(String, String)] = [], isJP
 //                    print("\t ttsText(\(fixedText.count)):", fixedText)
 //                }
             }
+        }
+        if !localFixes.isEmpty {
+            print("\n==================")
+            print("ttsFixes: \(localFixes)", "before: \(text)", "after: \(fixedText)" )
+            print("==================\n")
         }
 
         promise.fulfill((fixedText, ttsToDisplayMap))

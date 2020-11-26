@@ -226,7 +226,7 @@ extension GameFlow {
             return fulfilledVoidPromise()
         }
 
-        return teacherSay(context.targetString)
+        return teacherSay(context.targetString, ttsFixes: context.ttsFixes)
     }
 
     private func echoMethod() -> Promise<Void> {

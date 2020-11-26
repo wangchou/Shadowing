@@ -38,6 +38,7 @@ class SentencesTableCell: UITableViewCell {
 
     private var startTime: Double = 0
     private var targetString: String = ""
+    private var ttsFixes: [(String, String)] = []
 
     private var tableView: UITableView? {
         var view = superview
@@ -81,6 +82,7 @@ class SentencesTableCell: UITableViewCell {
 
     func update(sentence: Sentence, isShowTranslate: Bool = false) {
         targetString = sentence.origin
+        ttsFixes = sentence.ttsFixes
         sentenceLabel.widthPadding = 4
         userSaidSentenceLabel.widthPadding = 4
         translationTextView.textContainerInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
@@ -127,7 +129,9 @@ extension SentencesTableCell {
     private func speakPart() -> Promise<Void> {
         startTime = getNow()
         prepareForSpeaking()
-        return teacherSay(targetString, rate: context.gameSetting.practiceSpeed)
+        return teacherSay(targetString,
+                          rate: context.gameSetting.practiceSpeed,
+                          ttsFixes: ttsFixes)
     }
 
     private func prepareForSpeaking() {

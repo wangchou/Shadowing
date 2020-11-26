@@ -172,7 +172,9 @@ class VoiceSelectionPage: UIViewController {
         context.gameSetting.practiceSpeed = practiceSpeedSlider.value
         practiceSpeedValueLabel.text = String(format: "%.2fx", practiceSpeedSlider.value * 2)
         let speedText = String(format: "%.2f", context.gameSetting.practiceSpeed * 2)
-        _ = teacherSay("\(i18n.speedIs)\(speedText)です", rate: context.gameSetting.practiceSpeed)
+        _ = teacherSay("\(i18n.speedIs)\(speedText)です",
+                       rate: context.gameSetting.practiceSpeed,
+                       ttsFixes: [])
         doneButton.isEnabled = true
         isSpeedChanged = true
     }

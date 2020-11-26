@@ -74,7 +74,8 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
         statusSpeakingPromise = teacherSay(
             i18n.getSpeakingStatus(percent: gr.progress, rank: rankText, reward: gr.medalReward),
-            rate: fastRate
+            rate: context.assistantRate,
+            ttsFixes: []
         )
 
         let todaySentenceCount = getTodaySentenceCount()
@@ -85,7 +86,9 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
         if isJustReachDailyGoal {
             statusSpeakingPromise.then {
-                _ = teacherSay(i18n.reachDailyGoal, rate: fastRate)
+                _ = teacherSay(i18n.reachDailyGoal,
+                               rate: fastRate,
+                               ttsFixes: [])
             }
         }
     }
