@@ -406,6 +406,7 @@ class I18n {
         if region == "TW" { return tw }
         if region == "HK" { return hk }
         if region == "CN" { return cn }
+        if region == "JP" { return jp }
         return region
     }
 
@@ -457,6 +458,12 @@ class I18n {
         return "South Africa 🇿🇦"
     }
 
+    var jp: String {
+        if isJa { return "日本 🇯🇵" }
+        if isZh { return "日本 🇯🇵" }
+        return "Japan 🇯🇵"
+    }
+
     var syllablesCount: String {
         if isZh { return gameLang == .jp ? "假名數" : "音節數" }
         if isJa { return gameLang == .jp ? "仮名数" : "音節数" }
@@ -472,7 +479,7 @@ class I18n {
     var topicPageTitile: String {
         if isZh { return "主題 (\(language))" }
         if isJa { return "テーマ (\(language))" }
-        return "Topics (ja)"
+        return "Topics" // japanese is too long
     }
 
     var infiniteChallenge: String {
