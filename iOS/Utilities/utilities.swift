@@ -144,7 +144,12 @@ import Promises
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(object) {
             UserDefaults.standard.set(encoded, forKey: key)
+
             print("\(key) saved")
+//            if let jsonStr = String(data: encoded, encoding: .utf8) {
+//                print(jsonStr)
+//            }
+
         } else {
             print("save \(key) Failed")
         }

@@ -171,7 +171,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SwiftSyllables:
-    :commit: db7c819d95ab2bd29b7f49fe5eb18d339c36b3b9
+    :commit: d4d1f97210719ee0b50b6bdfd8768fe252e8dfe0
     :git: "git@github.com:wangchou/SwiftSyllables.git"
 
 SPEC CHECKSUMS:
@@ -200,7 +200,7 @@ SPEC CHECKSUMS:
   PromisesSwift: 37bad6f4daddb02f7c9c531efe91e8b21c13ee2f
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
-  SwiftSyllables: e64d9f8687694a17e228dcf7a596bb3fdc64935f
+  SwiftSyllables: c23d5c62647460a387fa29edcb1f181491e74699
 
 PODFILE CHECKSUM: b25e70320bc88a9266f55b108a73a8d11ae86bc8
 
