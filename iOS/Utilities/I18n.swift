@@ -695,12 +695,6 @@ class I18n {
         return "Full Version (1 Month)"
     }
 
-    var buyThreeMonths: String {
-        if isJa { return "完全版(3ヶ月) " }
-        if isZh { return "正式版三個月" }
-        return "Full Version (3 Months)"
-    }
-
     var buyForever: String {
         if isJa { return "完全版(永久) " }
         if isZh { return "永久正式版" }
@@ -710,7 +704,7 @@ class I18n {
     var cannotMakePayment: String {
         if isJa { return "iTunes Store や App Store で購入できない (ペアレンタルコントロールを使いますか？)" }
         if isZh { return "本機器沒有辦法付款 (家長保護控制開啟中?)" }
-        return "This device is not able or allowed to make payments. (Is Parental controls on?)"
+        return "This device is not able or allowed to make payments. (Is parental controls on?)"
     }
 
     var iCannotHearYou: String {
