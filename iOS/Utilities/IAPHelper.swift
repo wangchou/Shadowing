@@ -70,7 +70,9 @@ class IAPHelper: NSObject {
 
     func showPurchaseView(isChallenge: Bool = true) {
         let eventName = "iap_view_\(isChallenge ? "challenge_button" : "free_button")"
+        #if !(targetEnvironment(macCatalyst))
         Analytics.logEvent("\(eventName)_show", parameters: nil)
+        #endif
         let actionSheet = UIAlertController(
             title: isChallenge ? i18n.purchaseViewTitle : i18n.itIsfreeVersion,
             message: isChallenge ? i18n.purchaseViewMessage : i18n.freeButtonPurchaseMessage,
@@ -107,9 +109,10 @@ class IAPHelper: NSObject {
             let buyAction = UIAlertAction(title: title, style: .default) { [weak self] _ in
                 actionSheet.dismiss(animated: true, completion: nil)
                 self?.buy(product)
-
+                #if !(targetEnvironment(macCatalyst))
                 Analytics.logEvent("\(eventName)_buy",
                                    parameters: [AnalyticsParameterItemID: product.productIdentifier])
+                #endif
             }
             actionSheet.addAction(buyAction)
         }

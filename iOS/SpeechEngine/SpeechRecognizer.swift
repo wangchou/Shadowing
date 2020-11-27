@@ -30,10 +30,12 @@ class SpeechRecognizer: NSObject {
         case .jp:
             return speechRecognizerJP
         default:
+            #if !(targetEnvironment(macCatalyst))
             if let voice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher),
                 let recognizer = SFSpeechRecognizer(locale: Locale(identifier: voice.language.replacingOccurrences(of: "-", with: "_"))) {
                 return recognizer
             }
+            #endif
             return speechRecognizerEN
         }
     }
@@ -148,6 +150,7 @@ class SpeechRecognizer: NSObject {
                 // Retry means didn't hear anything please say again
                 if desc == "Retry" {
                     promise.fulfill("")
+                    //print(error, desc)
                 } else {
                     promise.fulfill("")
                     _ = getKanaTokenInfos("\(error)")

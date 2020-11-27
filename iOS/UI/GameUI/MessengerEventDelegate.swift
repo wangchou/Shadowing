@@ -264,7 +264,7 @@ extension Messenger: GameEventDelegate {
             attributed.append(rubyAttrStr(context.userSaidString))
         }
 
-        print(context.userSaidString)
+        print("'\(context.userSaidString)'")
 
         if attributed.string == "" {
             attributed.append(rubyAttrStr(i18n.iCannotHearYou))
@@ -274,7 +274,6 @@ extension Messenger: GameEventDelegate {
         }
 
         attributed.append(rubyAttrStr(" \(score.valueText) \(score.type == .perfect ? "💯　" : "")"))
-
         updateLastLabelText(attributed, pos: .right)
 
         var color = score.color

@@ -38,10 +38,35 @@ post_install do |installer|
         config.build_settings['ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES'] = 'YES'
       end
     end
+
     # https://github.com/CocoaPods/CocoaPods/issues/9884#issuecomment-698811522
     target.build_configurations.each do |bc|
         if bc.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] == '8.0'
             bc.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.0'
+        end
+    end
+
+    # handle non mac catalyst lib
+    # https://stackoverflow.com/a/63559134/2797799
+    libs = ["FirebaseAnalytics", "FirebasePerformance", "FIRAnalyticsConnector", "GoogleAppMeasurement"]
+
+    target.build_configurations.each do |config|
+        xcconfig_path = config.base_configuration_reference.real_path
+        xcconfig = File.read(xcconfig_path)
+        values = ""
+
+        libs.each { |lib|
+            if xcconfig["-framework \"#{lib}\""]
+                puts "Found '#{lib}' on target '#{target.name}'"
+                xcconfig.sub!(" -framework \"#{lib}\"", '')
+                values += " -framework \"#{lib}\""
+            end
+        }
+
+        if values.length > 0
+            puts "Preparing '#{target.name}' for Catalyst\n\n"
+            new_xcconfig = xcconfig + 'OTHER_LDFLAGS[sdk=iphone*] = $(inherited)' + values
+            File.open(xcconfig_path, "w") { |file| file << new_xcconfig }
         end
     end
   end

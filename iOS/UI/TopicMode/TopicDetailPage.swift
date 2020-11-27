@@ -157,7 +157,9 @@ class TopicDetailPage: UIViewController {
     private func launchGame() {
         context.gameMode = .topicMode
         if isUnderDailySentenceLimit() {
+            #if !(targetEnvironment(macCatalyst))
             Analytics.logEvent("challenge_topic_\(gameLang.prefix)", parameters: nil)
+            #endif
             launchVC(Messenger.id, self, isOverCurrent: false)
         }
     }

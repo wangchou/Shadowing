@@ -186,7 +186,9 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
         guard !TopicDetailPage.isChallengeButtonDisabled else { return }
         context.infiniteChallengeLevel = level
         if isUnderDailySentenceLimit() {
+            #if !(targetEnvironment(macCatalyst))
             Analytics.logEvent("challenge_infinite_\(gameLang.prefix)", parameters: nil)
+            #endif
             launchVC(Messenger.id, isOverCurrent: false)
         }
     }

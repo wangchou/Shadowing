@@ -139,7 +139,9 @@ class TopChartView: UIView, GridLayout, ReloadableView {
             switchToNextTopViewMode()
             rootViewController.rerenderTopView()
             DispatchQueue.global().async {
+                #if !(targetEnvironment(macCatalyst))
                 Analytics.logEvent("top_chart_view_clicked", parameters: nil)
+                #endif
             }
         }
     }

@@ -127,7 +127,6 @@ func loadGameSetting() {
         print("[\(gameLang)] create new gameSetting")
         context.gameSetting = GameSetting()
         let langCode = gameLang.defaultCode
-
         if gameLang == .jp {
             context.gameSetting.teacher = getDefaultVoiceId(language: langCode)
             context.gameSetting.assistant = getDefaultVoiceId(language: langCode, isPreferMaleSiri: false)

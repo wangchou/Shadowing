@@ -69,9 +69,11 @@ enum Lang: Int, Codable {
         case .jp:
             return "ja-JP"
         case .en:
+            #if !(targetEnvironment(macCatalyst))
             if AVSpeechSynthesisVoice.currentLanguageCode().contains("en-") {
                 return AVSpeechSynthesisVoice.currentLanguageCode()
             }
+            #endif
             return "en-US"
         case .zh:
             if i18n.isHK {
