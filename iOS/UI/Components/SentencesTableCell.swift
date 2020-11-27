@@ -36,8 +36,9 @@ class SentencesTableCell: UITableViewCell {
         }
     }
 
+    var targetString: String = ""
+
     private var startTime: Double = 0
-    private var targetString: String = ""
     private var ttsFixes: [(String, String)] = []
 
     private var tableView: UITableView? {
@@ -55,6 +56,7 @@ class SentencesTableCell: UITableViewCell {
     func practiceSentence() {
         stopCountDown()
         guard SentencesTableCell.isPracticing != true else { return }
+        startEventObserving(self)
         SentencesTableCell.isPracticing = true
         TopicDetailPage.isChallengeButtonDisabled = true
         isUserInteractionEnabled = false
@@ -77,6 +79,7 @@ class SentencesTableCell: UITableViewCell {
                 SpeechEngine.shared.monitoringOff()
                 SpeechEngine.shared.stop(isStopTTS: false)
                 self.practiceButton.backgroundColor = self.buttonColor
+                stopEventObserving(self)
             }
     }
 
@@ -147,6 +150,16 @@ extension SentencesTableCell {
     }
 
     private func listenPart() -> Promise<String> {
+        if !context.gameSetting.isShowTranslationInPractice {
+            if let tokenInfos = kanaTokenInfosCacheDictionary[targetString] {
+                sentenceLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
+            } else {
+                sentenceLabel.text = targetString
+            }
+            FuriganaLabel.clearHighlighRange()
+        }
+        stopEventObserving(self)
+
         func prepareListening() {
             tableView?.beginUpdates()
             userSaidSentenceLabel.textColor = UIColor.red

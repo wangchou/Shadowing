@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 private let context = GameContext.shared
-private var tmpRangeQueue: [NSRange] = []
 
 extension Messenger: GameEventDelegate {
     @objc func onEventHappened(_ notification: Notification) {
@@ -27,42 +26,9 @@ extension Messenger: GameEventDelegate {
             guard let newRange = event.range else { return }
             if !context.gameSetting.isShowTranslation,
                 context.gameState == .speakingTargetString {
-                tmpRangeQueue.append(newRange)
-                let duration = Double(0.15 / (2 * context.teachingRate))
-
-                Timer.scheduledTimer(withTimeInterval: duration, repeats: false) { _ in
-                    if !tmpRangeQueue.isEmpty {
-                        tmpRangeQueue.removeFirst()
-                    }
-                }
-                let allRange: NSRange = tmpRangeQueue.reduce(tmpRangeQueue[0]) { allR, curR in
-                    allR.union(curR)
-                }
-
-                var attrText = NSMutableAttributedString()
-
-                if let tokenInfos = kanaTokenInfosCacheDictionary[context.targetString] {
-                    let fixedRange = getRangeWithParticleFix(tokenInfos: tokenInfos, allRange: allRange)
-                    attrText = getFuriganaString(tokenInfos: tokenInfos)
-
-                    // version: 1.3.13 - 1.3.14
-                    // Crashed info: NSMutableRLEArray objectAtIndex:effectiveRange:: Out of bounds
-                    // cannot reproduce it => add upperBound check here
-                    if let fixedRange = fixedRange,
-                       attrText.allRange.contains(fixedRange.lowerBound),
-                       attrText.allRange.contains(fixedRange.upperBound - 1) {
-                        attrText.addAttributes([.hightlightBackgroundFillColor: highlightColor],
-                                               range: fixedRange)
-                    }
-                } else {
-                    attrText.append(rubyAttrStr(context.targetString))
-                    attrText.addAttributes([
-                        .hightlightBackgroundFillColor: highlightColor
-                    ], range: allRange)
-                    let whiteRange = NSRange(location: allRange.upperBound, length: context.targetString.count - allRange.upperBound)
-                    attrText.addAttribute(.hightlightBackgroundFillColor, value: UIColor.clear, range: whiteRange)
-                }
-                lastLabel.attributedText = attrText
+                lastLabel.updateHighlightRange(newRange: newRange,
+                                               targetString: context.targetString,
+                                               voiceRate: context.teachingRate)
             }
 
         case .speakEnded:
@@ -72,7 +38,7 @@ extension Messenger: GameEventDelegate {
             }
         case .listenStarted:
             addLabel(rubyAttrStr("..."), pos: .right)
-            tmpRangeQueue = []
+            FuriganaLabel.clearHighlighRange()
 
         case .listenStopped:
             DispatchQueue.main.async {
@@ -123,7 +89,7 @@ extension Messenger: GameEventDelegate {
             }
 
             if context.gameState == .speakingTranslation {
-                tmpRangeQueue = []
+                FuriganaLabel.clearHighlighRange()
                 var attrText: NSAttributedString
                 if context.gameSetting.isShowTranslation {
                     attrText = rubyAttrStr(context.translation)
@@ -138,121 +104,6 @@ extension Messenger: GameEventDelegate {
                 addLabel(rubyAttrStr(i18n.listenToEcho), pos: .center)
             }
         }
-    }
-
-    // The iOS tts speak japanese always report willSpeak before particle or mark
-    // ex: when speaking 鴨川沿いには遊歩道があります
-    // the tts spoke "鴨川沿いには", but the delegate always report "鴨川沿い"
-    // then it reports "には遊歩道"
-    // so this function will remove prefix particle range and extend suffix particle range
-    //
-    // known unfixable bug:
-    //      pass to tts:  あした、晴れるかな
-    //      targetString: 明日、晴れるかな
-    //      ttsKanaFix will sometimes make the range is wrong
-    func getRangeWithParticleFix(tokenInfos: [[String]], allRange: NSRange?) -> NSRange? {
-        guard let r = allRange else { return nil }
-        var lowerBound = r.lowerBound
-        var upperBound = min(r.upperBound, context.targetString.count)
-        var currentIndex = 0
-        var isPrefixParticleRemoved = false
-        var isPrefixSubVerbRemoved = false
-        var isParticleSuffixExtended = false
-        var isWordExpanded = false
-
-        for i in 0 ..< tokenInfos.count {
-            let part = tokenInfos[i]
-            let partLen = part[0].count
-            let isParticle = part[1] == "助詞" || part[1] == "記号" || part[1] == "助動詞"
-            let isVerbLike = part[1] == "動詞" || part[1] == "形容詞"
-
-            // fix: "お掛けに" なりませんか
-            if part[1] == "接頭詞",
-                currentIndex >= lowerBound,
-                currentIndex + partLen == upperBound,
-                i < tokenInfos.count - 1 {
-                upperBound += tokenInfos[i + 1][0].count
-            }
-            if i > 0,
-                tokenInfos[i - 1][1] == "接頭詞",
-                currentIndex == lowerBound {
-                lowerBound -= tokenInfos[i - 1][0].count
-            }
-
-            // prefix particle remove
-            // ex: "が降りそう" の　"が"
-            func trimPrefixParticle() {
-                if !isPrefixParticleRemoved,
-                    currentIndex <= lowerBound,
-                    currentIndex + partLen > lowerBound,
-                    currentIndex + partLen < upperBound {
-                    if isParticle {
-                        lowerBound = currentIndex + partLen
-                    } else {
-                        isPrefixParticleRemoved = true
-                    }
-                }
-            }
-
-            // prefix subVerb remove
-            // ex: "が降りそう" の　"り"
-            func trimPrefixSubVerb() {
-                if !isPrefixSubVerbRemoved,
-                    currentIndex < lowerBound,
-                    currentIndex + partLen >= lowerBound,
-                    currentIndex + partLen < upperBound {
-                    if isVerbLike {
-                        lowerBound = currentIndex + partLen
-                    } else {
-                        isPrefixSubVerbRemoved = true
-                    }
-                }
-            }
-
-            // fixed to whole word
-            // "有給休假"，只 highlight "休假" 時 => 改 highlight 整個字
-            func expandWholeWord() {
-                if  currentIndex <= lowerBound,
-                    lowerBound < currentIndex + partLen {
-                    lowerBound = currentIndex
-                }
-
-                if  !isWordExpanded,
-                    currentIndex < upperBound,
-                    upperBound < currentIndex + partLen {
-                    upperBound = currentIndex + partLen
-                    isWordExpanded = true
-                }
-            }
-
-            // for "っています" subVerb + Particle + others
-            trimPrefixSubVerb()
-            trimPrefixParticle()
-            trimPrefixSubVerb()
-            expandWholeWord()
-
-            // suffix particle extend
-            if !isParticleSuffixExtended,
-                currentIndex >= upperBound {
-                if isParticle {
-                    upperBound = currentIndex + partLen
-                } else {
-                    isParticleSuffixExtended = true
-                }
-            }
-
-            currentIndex += partLen
-        }
-
-        guard upperBound >= lowerBound,
-              upperBound <= context.targetString.count,
-              lowerBound <= context.targetString.count,
-              upperBound >= 0,
-              lowerBound >= 0 else {
-                print("something went wrong on highlight bounds")
-                return nil
-        }
-        return NSRange(location: lowerBound, length: upperBound - lowerBound)
     }
 
     private func onScore(_ score: Score) {

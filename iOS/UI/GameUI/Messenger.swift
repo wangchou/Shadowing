@@ -21,7 +21,7 @@ enum LabelPosition {
 // Prototype 8: messenger / line interface
 class Messenger: UIViewController {
     static let id = "MessengerGame"
-    var lastLabel: FuriganaLabel = FuriganaLabel()
+    var lastLabel = FuriganaLabel()
 
     private var y: Int = 8
     private var previousY: Int = 0
