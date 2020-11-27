@@ -33,11 +33,11 @@ struct GameSetting: Codable {
     var monitoringVolume: Int = 0
 
     // voice id started
-    var teacher: String = "unknown" // gameLang
-    var assistant: String = "unknown" // gameLang
-    var translatorJp: String = "unknown"
-    var translatorEn: String = "unknown"
-    var translatorZh: String = "unknown"
+    var teacher: String = getDefaultVoiceId(language: gameLang.defaultCode, isPreferMaleSiri: gameLang == .jp)
+    var assistant: String = getDefaultVoiceId(language: gameLang.defaultCode, isPreferMaleSiri: gameLang != .jp)
+    var translatorJp: String = getDefaultVoiceId(language: Lang.jp.defaultCode)
+    var translatorEn: String = getDefaultVoiceId(language: Lang.en.defaultCode)
+    var translatorZh: String = getDefaultVoiceId(language: Lang.zh.defaultCode)
 
     // MARK: - Computed Fields
     var translator: String {
@@ -91,6 +91,12 @@ struct GameSetting: Codable {
         icTopViewMode = try container.decodeIfPresent(ICTopViewMode.self, forKey: .icTopViewMode) ?? icTopViewMode
         isRepeatOne = try container.decodeIfPresent(Bool.self, forKey: .isRepeatOne) ?? isRepeatOne
         monitoringVolume = try container.decodeIfPresent(Int.self, forKey: .monitoringVolume) ?? monitoringVolume
+
+        teacher = try container.decodeIfPresent(String.self, forKey: .teacher) ?? teacher
+        assistant = try container.decodeIfPresent(String.self, forKey: .assistant) ?? assistant
+        translatorJp = try container.decodeIfPresent(String.self, forKey: .translatorJp) ?? translatorJp
+        translatorEn = try container.decodeIfPresent(String.self, forKey: .translatorEn) ?? assistant
+        translatorZh = try container.decodeIfPresent(String.self, forKey: .translatorZh) ?? translatorZh
     }
 }
 

@@ -167,7 +167,7 @@ class I18n {
     var micAndSpeechPermission: String {
         if isJa { return "音声認識の権限、アプリの言語" }
         if isZh { return "APP介面語言、語音辨識權限" }
-        return "Mic and Recognition Permissions / Language of UI."
+        return "Mic Permissions / Language of UI"
     }
 
     var gameOver: String {
@@ -734,13 +734,13 @@ class I18n {
     var listenToEcho: String {
         if isJa { return "心のエコーを聞いて" }
         if isZh { return "聽心中回音" }
-        return "Listen to echo in mind."
+        return "Listen to echo in mind"
     }
 
     var yourFeedbackMakeAppBetter: String {
         if isJa { return "君の声を聞かせて欲しい" }
         if isZh { return "你的聲音是 App 成長的原動力" }
-        return "Your feedback makes app better."
+        return "Your voice makes app better"
     }
 
     var gotoAppStore: String {
