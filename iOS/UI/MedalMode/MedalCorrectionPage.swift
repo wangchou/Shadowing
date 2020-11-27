@@ -155,7 +155,8 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         button.addTapGestureRecognizer { [weak self] in
             VoiceSelectionPage.fromPage = self?.vc
             VoiceSelectionPage.selectingVoiceFor = .teacher
-            VoiceSelectionPage.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher)
+            VoiceSelectionPage.selectedVoice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher) ??
+                getDefaultVoice(language: gameLang.defaultCode)
             launchVC(VoiceSelectionPage.id)
         }
         layout(37, y - 6, 9, 4, button)

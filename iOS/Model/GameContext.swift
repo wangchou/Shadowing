@@ -237,6 +237,7 @@ extension GameContext {
     }
 
     func loadMedalCorrectionSentence() {
+        sentenceIndex = 0
         sentences = Array(getTodaySentenceSet()).sorted {
             (sentenceScores[$0]?.value ?? 0) < (sentenceScores[$1]?.value ?? 0)
         }.map {str -> Sentence in
