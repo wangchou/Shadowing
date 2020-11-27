@@ -80,7 +80,7 @@ class SentencesTableCell: UITableViewCell {
             }
     }
 
-    func update(sentence: Sentence, isShowTranslate: Bool = false) {
+    func update(sentence: Sentence, isShowTranslate: Bool = false, isTopicDetail: Bool = false) {
         targetString = sentence.origin
         ttsFixes = sentence.ttsFixes
         sentenceLabel.widthPadding = 4
@@ -93,7 +93,7 @@ class SentencesTableCell: UITableViewCell {
             sentenceLabel.text = sentence.origin
         }
 
-        translationTextView.text = sentence.translation
+        translationTextView.text = isTopicDetail ? sentence.cmn : sentence.translation
 
         if isShowTranslate, translationTextView.text != "" {
             sentenceLabel.alpha = 0

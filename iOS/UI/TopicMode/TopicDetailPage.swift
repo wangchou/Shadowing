@@ -177,7 +177,8 @@ extension TopicDetailPage: UITableViewDataSource {
         guard let contentCell = cell as? SentencesTableCell else { print("detailCell convert error"); return cell }
         let sentence = context.sentences[indexPath.row]
         contentCell.update(sentence: sentence,
-                           isShowTranslate: context.gameSetting.isShowTranslationInPractice)
+                           isShowTranslate: context.gameSetting.isShowTranslationInPractice,
+                           isTopicDetail: true)
 
         return contentCell
     }
