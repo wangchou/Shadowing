@@ -35,6 +35,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         FirebaseApp.configure()
 
+        #if targetEnvironment(macCatalyst)
+        UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .forEach { windowScene in
+                windowScene.sizeRestrictions?.minimumSize = CGSize(width: 480, height: 800)
+                windowScene.sizeRestrictions?.maximumSize = CGSize(width: 480, height: 800)
+            }
+        #endif
+
         return true
     }
 
