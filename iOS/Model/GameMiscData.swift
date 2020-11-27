@@ -22,8 +22,8 @@ var kanaTokenInfosCacheDictionary: [String: [[String]]] = [:] //tokenInfo =[kanj
 
 private let userSaidSentencesKey = "user said sentences key"
 private let sentenceScoreKey = "sentence score key"
-private let lastChallengeSenteceKey = "last challenge senteces key"
-private let lastEnChallengeSenteceKey = "last english challenge senteces key"
+private let lastChallengeSenteceKey = "last challenge senteces key 1.4.0"
+private let lastEnChallengeSenteceKey = "last english challenge senteces key 1.4.0"
 private let kanaTokenInfosKey = "kanaTokenInfos key"
 private let translationsKey = "translation key"
 

@@ -206,11 +206,11 @@ func translatorSay(_ text: String) -> Promise<Void> {
     if AVSpeechSynthesisVoice(identifier: voiceId) == nil {
         switch context.gameSetting.translationLang {
         case .jp:
-            voiceId = getDefaultVoiceId(language: "ja-JP")
+            voiceId = getDefaultVoiceId(language: Lang.jp.defaultCode)
         case .en:
-            voiceId = getDefaultVoiceId(language: "en-US")
+            voiceId = getDefaultVoiceId(language: Lang.en.defaultCode)
         case .zh:
-            voiceId = getDefaultVoiceId(language: "zh-TW", isPreferEnhanced: false)
+            voiceId = getDefaultVoiceId(language: Lang.zh.defaultCode, isPreferEnhanced: false)
         default:
             print("\(context.gameSetting.translationLang.key) should not be translation lang")
             voiceId = "unknown"

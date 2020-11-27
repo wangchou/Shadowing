@@ -125,6 +125,25 @@ func loadTopicSentenceDB() {
     }
 }
 
+func loadTokenInfos(ja: String) {
+    do {
+        let db = try Connection(dbPath, readonly: true)
+        let tokenInfosTable = Table(tokenInfosTableName)
+        let dbJa = Expression<String>("ja")
+        let dbKanaCount = Expression<Int>("kana_count")
+        let dbTokenInfos = Expression<String>("tokenInfos")
+
+        let query = tokenInfosTable.select(dbJa, dbKanaCount, dbTokenInfos)
+            .filter(dbJa == ja)
+        for row in try db.prepare(query) {
+            let tokenInfos = stringToTokenInfos(jsonString: row[dbTokenInfos])
+            kanaTokenInfosCacheDictionary[ja] = tokenInfos
+        }
+    } catch {
+        print(error)
+    }
+}
+
 private func getSentencesByIds(ids: [Int]) -> [Sentence] {
     do {
         let db = try Connection(dbPath, readonly: true)
