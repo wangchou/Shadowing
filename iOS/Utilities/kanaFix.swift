@@ -139,9 +139,9 @@ func getUpdateTextMap(
     return newMap
 }
 
-func getFixedTTSString(_ text: String, localFixes: [(String, String)], isJP: Bool = true) -> Promise<(String, [Int])> {
+func getFixedTTSString(_ text: String, localFixes: [(String, String)], isJa: Bool = false) -> Promise<(String, [Int])> {
     let promise = Promise<(String, [Int])>.pending()
-    guard isJP else {
+    guard isJa else {
         promise.fulfill((text, Array(0 ..< text.count)))
         return promise
     }

@@ -33,9 +33,9 @@ import Foundation
         ) -> Promise<Void> {
             SpeechEngine.shared.stopListeningAndSpeaking()
             synthesizer.delegate = self
-
-            getFixedTTSString(text, localFixes: ttsFixes, isJP: gameLang == .ja).then { ttsString, ttsToDisplayMap in
-                self.lastString = ttsString
+            let isJa = lang == .ja
+            getFixedTTSString(text, localFixes: ttsFixes, isJa: isJa).then { ttsString, ttsToDisplayMap in
+                self.lastString = text
                 self.ttsToDisplayMap = ttsToDisplayMap
                 let utterance = AVSpeechUtterance(string: ttsString)
                 if let voice = AVSpeechSynthesisVoice(identifier: voiceId) {
