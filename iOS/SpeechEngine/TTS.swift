@@ -23,6 +23,7 @@ import Foundation
         var synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
         var ttsToDisplayMap: [Int] = []
         var promise = Promise<Void>.pending()
+        var lastString = ""
 
         func say(_ text: String,
                  voiceId: String,
@@ -34,6 +35,7 @@ import Foundation
             synthesizer.delegate = self
 
             getFixedTTSString(text, localFixes: ttsFixes, isJP: gameLang == .ja).then { ttsString, ttsToDisplayMap in
+                self.lastString = ttsString
                 self.ttsToDisplayMap = ttsToDisplayMap
                 let utterance = AVSpeechUtterance(string: ttsString)
                 if let voice = AVSpeechSynthesisVoice(identifier: voiceId) {
@@ -46,7 +48,8 @@ import Foundation
 
                 utterance.rate = rate
 
-                print(text, utterance.voice?.identifier ?? "", rate)
+                print("ori:", text, utterance.voice?.identifier ?? "", rate)
+                print("tts:", ttsString)
                 if isHeadphonePlugged() {
                     utterance.volume = 0.6
                 } else {
@@ -65,6 +68,32 @@ import Foundation
             synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
             promise.fulfill(())
         }
+
+        func fixRange(characterRange: NSRange, ttsToDisplayMap: [Int]) -> NSRange {
+            let min = 0
+            let max = ttsToDisplayMap.count
+            var lowerBound = characterRange.lowerBound
+            var upperBound = characterRange.upperBound
+            if lowerBound < min {
+                lowerBound = min
+            }
+            if lowerBound > max - 1 {
+                lowerBound = max - 1
+            }
+            if upperBound < min {
+                upperBound = min + 1
+            }
+            if upperBound > max {
+                upperBound = max
+            }
+            if lowerBound != characterRange.lowerBound ||
+                upperBound != characterRange.upperBound {
+                print("Something wrong with character range: \(characterRange)")
+                print("from string '\(lastString)'")
+            }
+
+            return NSRange(location: lowerBound, length: upperBound - lowerBound)
+        }
     }
 
     extension TTS: AVSpeechSynthesizerDelegate {
@@ -77,8 +106,9 @@ import Foundation
         func speechSynthesizer(_: AVSpeechSynthesizer,
                                willSpeakRangeOfSpeechString characterRange: NSRange,
                                utterance _: AVSpeechUtterance) {
-            let first = ttsToDisplayMap[characterRange.lowerBound]
-            let last = ttsToDisplayMap[characterRange.upperBound-1]
+            let fixedRange = fixRange(characterRange: characterRange, ttsToDisplayMap: ttsToDisplayMap)
+            let first = ttsToDisplayMap[fixedRange.lowerBound]
+            let last = ttsToDisplayMap[fixedRange.upperBound-1]
             postEvent(.willSpeakRange, range: NSRange(location: first,
                                                      length: last - first + 1))
         }

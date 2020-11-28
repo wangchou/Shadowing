@@ -39,8 +39,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.connectedScenes
             .compactMap { $0 as? UIWindowScene }
             .forEach { windowScene in
-                windowScene.sizeRestrictions?.minimumSize = CGSize(width: 480, height: 800)
-                windowScene.sizeRestrictions?.maximumSize = CGSize(width: 480, height: 800)
+                let height = windowScene.screen.nativeBounds.height/1.5 - 64
+                let width = height * 8 / 15
+                print(windowScene.screen.nativeBounds, windowScene.screen.scale)
+                windowScene.sizeRestrictions?.minimumSize = CGSize(width: width, height: height)
+                windowScene.sizeRestrictions?.maximumSize = CGSize(width: width, height: height)
+                screen = CGRect(x: 0, y: 0, width: width, height: height)
             }
         #endif
 

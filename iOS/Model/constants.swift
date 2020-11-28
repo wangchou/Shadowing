@@ -28,7 +28,12 @@ let fastRate = AVSpeechUtteranceDefaultSpeechRate * 1.1
 // if in quite place. turn micOutVolume to 3
 let micOutVolume: Float = 0
 
-let screen = UIScreen.main.bounds
+#if targetEnvironment(macCatalyst)
+    var screen = CGRect(x: 0, y: 0, width: 480, height: 900)
+#else
+    let screen = UIScreen.main.bounds
+#endif
+
 
 // safe area padding
 func getTopPadding() -> CGFloat {
