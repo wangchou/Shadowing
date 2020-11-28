@@ -70,6 +70,7 @@
 		BEA580A3227AF23E00BF2520 /* quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA580A2227AF23E00BF2520 /* quote.swift */; };
 		BEA86115216F264A00AECF13 /* sqliteSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA86114216F264A00AECF13 /* sqliteSentences.swift */; };
 		BEAF73B02566D2A9004D29D7 /* sentences20201118.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = BEAF73AF2566D2A9004D29D7 /* sentences20201118.sqlite */; };
+		BEB30CD6257165BE00387E52 /* SentencesTableCell+GameEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB30CD5257165BE00387E52 /* SentencesTableCell+GameEventDelegate.swift */; };
 		BEB6F6C92182B89D0011E1C1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEB6F6C72182B89D0011E1C1 /* InfoPlist.strings */; };
 		BEBDEDC0208EF09F00C18520 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */; };
 		BEBDEDD9208EF15F00C18520 /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBDEDD1208EF15E00C18520 /* utilities.swift */; };
@@ -209,6 +210,7 @@
 		BEA580A2227AF23E00BF2520 /* quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = quote.swift; sourceTree = "<group>"; };
 		BEA86114216F264A00AECF13 /* sqliteSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sqliteSentences.swift; sourceTree = "<group>"; };
 		BEAF73AF2566D2A9004D29D7 /* sentences20201118.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = sentences20201118.sqlite; sourceTree = "<group>"; };
+		BEB30CD5257165BE00387E52 /* SentencesTableCell+GameEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SentencesTableCell+GameEventDelegate.swift"; sourceTree = "<group>"; };
 		BEB6F6C82182B89D0011E1C1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Project/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BEB6F6CA2182B8AA0011E1C1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = Project/ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BEB6F6CB2182B8B60011E1C1 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "Project/zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 			children = (
 				BE76F11D214F56F6004E130B /* SentencesTableCell.xib */,
 				BE76F11C214F56F6004E130B /* SentencesTableCell.swift */,
+				BEB30CD5257165BE00387E52 /* SentencesTableCell+GameEventDelegate.swift */,
 				BEEC7FA82154C7AC001C2EFF /* TopBarView.xib */,
 				BEEC7FAE21550818001C2EFF /* TopBarView.swift */,
 				BECAC3B9216B8FE3001BBF49 /* BottomBarView.swift */,
@@ -778,6 +781,7 @@
 				BE8E51E321CF7A3B007D29E6 /* Type+Conversion.swift in Sources */,
 				BE8E51DF21CF7754007D29E6 /* TopChartView+LongTermGoal.swift in Sources */,
 				BEC2E9312179BD090095A65D /* TopicFilterBarView.swift in Sources */,
+				BEB30CD6257165BE00387E52 /* SentencesTableCell+GameEventDelegate.swift in Sources */,
 				BEBF5D1C2255D9F60069C34F /* GameMedal.swift in Sources */,
 				BEA4E71E21AE604400CE6E63 /* secret.swift in Sources */,
 				BEA4E72021AFB8B800CE6E63 /* GameExpirationDateInMS.swift in Sources */,

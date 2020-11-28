@@ -188,7 +188,7 @@ func speakTitle() -> Promise<Void> {
 func narratorSay(_ text: String) -> Promise<Void> {
     var speaker: String
     if i18n.isJa {
-        speaker = gameLang == .jp ? context.gameSetting.assistant : context.gameSetting.translatorJp
+        speaker = gameLang == .ja ? context.gameSetting.assistant : context.gameSetting.translatorJp
     } else if i18n.isZh {
         speaker = context.gameSetting.translatorZh
     } else {
@@ -205,12 +205,12 @@ func translatorSay(_ text: String) -> Promise<Void> {
 
     if AVSpeechSynthesisVoice(identifier: voiceId) == nil {
         switch context.gameSetting.translationLang {
-        case .jp:
-            voiceId = getDefaultVoiceId(language: "ja-JP")
+        case .ja:
+            voiceId = getDefaultVoiceId(language: Lang.ja.defaultCode)
         case .en:
-            voiceId = getDefaultVoiceId(language: "en-US")
+            voiceId = getDefaultVoiceId(language: Lang.en.defaultCode)
         case .zh:
-            voiceId = getDefaultVoiceId(language: "zh-TW", isPreferEnhanced: false)
+            voiceId = getDefaultVoiceId(language: Lang.zh.defaultCode, isPreferEnhanced: false)
         default:
             print("\(context.gameSetting.translationLang.key) should not be translation lang")
             voiceId = "unknown"

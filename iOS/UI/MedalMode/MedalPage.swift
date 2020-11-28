@@ -61,7 +61,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     }
 
     func render() {
-        waitSentenceDBLoaded.then { [weak self] _ in
+        waitDifficultyDBLoaded.then { [weak self] _ in
             guard let self = self else { return }
             context.gameMode = .medalMode
             self.removeAllSubviews()
@@ -135,7 +135,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         rect.roundBorder(radius: step * 2)
         let font = (i18n.isZh || i18n.isJa) ? MyFont.bold(ofSize: 9 * step) :
             MyFont.bold(ofSize: 7 * step)
-        let attrTitle = getStrokeText(gameLang == .jp ? i18n.japanese : i18n.english,
+        let attrTitle = getStrokeText(gameLang == .ja ? i18n.japanese : i18n.english,
                                       .white,
                                       strokeWidth: Float(step * -1 / 3),
                                       font: font)
@@ -148,7 +148,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         layout(34, y, 8, 5, changeLangButton)
         addSubview(changeLangButton)
 
-        let attrTitle = getStrokeText(gameLang == .jp ? i18n.enAbbr : i18n.jaAbbr,
+        let attrTitle = getStrokeText(gameLang == .ja ? i18n.enAbbr : i18n.jaAbbr,
                                       buttonForegroundGray,
                                       strokeWidth: Float(step * -1 / 3),
                                       font: MyFont.bold(ofSize: 4 * step))
@@ -157,11 +157,11 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
         changeLangButton.addTapGestureRecognizer { [weak self] in
             changeLangButton.isUserInteractionEnabled = false
-            changeGameLangTo(lang: gameLang == .jp ? .en : .jp)
+            changeGameLangTo(lang: gameLang == .ja ? .en : .ja)
             Promises.all([waitKanaInfoLoaded,
                           waitSentenceScoresLoaded,
                           waitUserSaidSentencesLoaded,
-                          waitSentenceDBLoaded]).then { _ in
+                          waitDifficultyDBLoaded]).then { _ in
                             changeLangButton.isUserInteractionEnabled = true
                 self?.render()
             }
@@ -196,7 +196,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         context.gameMode = .medalMode
         guard !TopicDetailPage.isChallengeButtonDisabled else { return }
         if isUnderDailySentenceLimit() {
-            waitSentenceDBLoaded.then { _ in
+            waitDifficultyDBLoaded.then { _ in
                 launchVC(Messenger.id, isOverCurrent: false)
             }
         }
@@ -229,7 +229,6 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
     private func addMissCountBubble(buttonY: Int) {
         let missedCount = context.getMissedCount()
-        print("missedCount: \(missedCount)")
         if missedCount > 0 {
             let w = missedCount >= 100 ? 7 : (missedCount >= 10 ? 5 : 4)
             let y = missedCount >= 100 ? (buttonY - 2) : (buttonY - 1)

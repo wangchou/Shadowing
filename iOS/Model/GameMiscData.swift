@@ -22,8 +22,8 @@ var kanaTokenInfosCacheDictionary: [String: [[String]]] = [:] //tokenInfo =[kanj
 
 private let userSaidSentencesKey = "user said sentences key"
 private let sentenceScoreKey = "sentence score key"
-private let lastChallengeSenteceKey = "last challenge senteces key"
-private let lastEnChallengeSenteceKey = "last english challenge senteces key"
+private let lastChallengeSenteceKey = "last challenge senteces key 1.4.0"
+private let lastEnChallengeSenteceKey = "last english challenge senteces key 1.4.0"
 private let kanaTokenInfosKey = "kanaTokenInfos key"
 private let translationsKey = "translation key"
 
@@ -32,7 +32,7 @@ func saveGameMiscData() {
         saveToUserDefault(object: userSaidSentences, key: userSaidSentencesKey + gameLang.key)
         saveToUserDefault(object: sentenceScores, key: sentenceScoreKey + gameLang.key)
         saveToUserDefault(object: lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)
-        guard gameLang == Lang.jp else { return }
+        guard gameLang == Lang.ja else { return }
         saveToUserDefault(object: kanaTokenInfosCacheDictionary, key: kanaTokenInfosKey + gameLang.key)
     }
 }
@@ -70,7 +70,7 @@ func loadGameMiscData(isLoadKana: Bool = false) {
 
     guard isLoadKana else { return }
     if let loadedKanaTokenInfos = loadFromUserDefault(type: type(of: kanaTokenInfosCacheDictionary),
-                                                      key: kanaTokenInfosKey + Lang.jp.key) {
+                                                      key: kanaTokenInfosKey + Lang.ja.key) {
         loadedKanaTokenInfos.keys.forEach { key in
             guard kanaTokenInfosCacheDictionary[key] == nil else { return }
             kanaTokenInfosCacheDictionary[key] = loadedKanaTokenInfos[key]

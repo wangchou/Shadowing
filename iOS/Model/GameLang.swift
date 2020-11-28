@@ -13,15 +13,15 @@ import Promises
 var jaDifficultyInfos: [Int: DifficultyInfo] = [:]
 var enDifficultyInfos: [Int: DifficultyInfo] = [:]
 
-var gameLang: Lang = Lang.jp
+var gameLang = Lang.ja
 
-// TODO: fix Lang.jp to Lang.ja
+// TODO: fix Lang.ja to Lang.ja
 enum Lang: Int, Codable {
-    case jp, en, unset, zh, fr, es, de
+    case ja, en, unset, zh, fr, es, de
 
     var key: String {
         switch self {
-        case .jp:
+        case .ja:
             return ""
         case .en:
             return "en"
@@ -40,13 +40,13 @@ enum Lang: Int, Codable {
     }
 
     var isSupportTopicMode: Bool {
-        if self == .jp { return true }
+        if self == .ja { return true }
         return false
     }
 
     var difficultyInfos: [Int: DifficultyInfo] {
         switch self {
-        case .jp:
+        case .ja:
             return jaDifficultyInfos
         case .en:
             return enDifficultyInfos
@@ -56,17 +56,12 @@ enum Lang: Int, Codable {
     }
 
     var prefix: String {
-        switch self {
-        case .jp:
-            return "ja"
-        default:
-            return self.key
-        }
+        return self == .ja ? "ja" : self.key
     }
 
     var defaultCode: String {
         switch self {
-        case .jp:
+        case .ja:
             return "ja-JP"
         case .en:
             #if !(targetEnvironment(macCatalyst))
@@ -110,7 +105,7 @@ func saveGameLang() {
 func loadGameLang() {
     if let loadedGameLang = loadFromUserDefault(type: LangForEncode.self, key: gameLangKey) {
         gameLang = loadedGameLang.lang
-        if gameLang != .jp {
+        if gameLang != .ja {
             GameContext.shared.bottomTab = .infiniteChallenge
         }
     }

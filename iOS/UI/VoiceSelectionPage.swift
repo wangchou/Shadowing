@@ -80,7 +80,7 @@ class VoiceSelectionPage: UIViewController {
             let zhHello = "你好，我的名字是\(voice.name)"
             switch selectingVoiceFor {
             case .teacher:
-                return gameLang == .jp ? jaHello : enHello
+                return gameLang == .ja ? jaHello : enHello
             case .assisant:
                 return "\(Score(value: 100).text), \(Score(value: 80).text), \(Score(value: 60).text), \(Score(value: 0).text) "
             case .translator:
@@ -96,7 +96,7 @@ class VoiceSelectionPage: UIViewController {
 
         print("Error: testSentence... should not reach here")
 
-        if gameLang == .jp {
+        if gameLang == .ja {
             return "今日はいい天気ですね。"
         } else {
             return "It's nice to meet you."

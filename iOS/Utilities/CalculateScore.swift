@@ -16,6 +16,11 @@ func getKanaTokenInfos(_ kanjiString: String, originalString: String = "", retry
         "originalStr": originalString
     ]
 
+    // try to lookup from local sqlite
+    if kanaTokenInfosCacheDictionary[kanjiString] == nil {
+        loadTokenInfos(ja: kanjiString)
+    }
+
     if let tokenInfos = kanaTokenInfosCacheDictionary[kanjiString] {
         promise.fulfill(tokenInfos)
         return promise
