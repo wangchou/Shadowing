@@ -76,11 +76,11 @@ enum Level: Int, Codable {
     }
 
     var minSyllablesCount: Int {
-        return gameLang == .jp ? minKanaCounts[self.rawValue] : minSyllablesCounts[self.rawValue]
+        return gameLang == .ja ? minKanaCounts[self.rawValue] : minSyllablesCounts[self.rawValue]
     }
 
     var maxSyllablesCount: Int {
-        return gameLang == .jp ? maxKanaCounts[self.rawValue] : maxSyllablesCounts[self.rawValue]
+        return gameLang == .ja ? maxKanaCounts[self.rawValue] : maxSyllablesCounts[self.rawValue]
     }
 
     var infinteChallengeDatasetKey: String {

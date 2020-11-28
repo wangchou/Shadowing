@@ -135,7 +135,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         rect.roundBorder(radius: step * 2)
         let font = (i18n.isZh || i18n.isJa) ? MyFont.bold(ofSize: 9 * step) :
             MyFont.bold(ofSize: 7 * step)
-        let attrTitle = getStrokeText(gameLang == .jp ? i18n.japanese : i18n.english,
+        let attrTitle = getStrokeText(gameLang == .ja ? i18n.japanese : i18n.english,
                                       .white,
                                       strokeWidth: Float(step * -1 / 3),
                                       font: font)
@@ -148,7 +148,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         layout(34, y, 8, 5, changeLangButton)
         addSubview(changeLangButton)
 
-        let attrTitle = getStrokeText(gameLang == .jp ? i18n.enAbbr : i18n.jaAbbr,
+        let attrTitle = getStrokeText(gameLang == .ja ? i18n.enAbbr : i18n.jaAbbr,
                                       buttonForegroundGray,
                                       strokeWidth: Float(step * -1 / 3),
                                       font: MyFont.bold(ofSize: 4 * step))
@@ -157,7 +157,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
         changeLangButton.addTapGestureRecognizer { [weak self] in
             changeLangButton.isUserInteractionEnabled = false
-            changeGameLangTo(lang: gameLang == .jp ? .en : .jp)
+            changeGameLangTo(lang: gameLang == .ja ? .en : .ja)
             Promises.all([waitKanaInfoLoaded,
                           waitSentenceScoresLoaded,
                           waitUserSaidSentencesLoaded,

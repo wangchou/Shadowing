@@ -22,7 +22,7 @@ struct GameSetting: Codable {
     var isShowTranslation: Bool = false
     var isSpeakTranslation: Bool = false
     var isUsingGuideVoice: Bool = true
-    var translationLang: Lang = i18n.isZh ? .zh : (gameLang == .jp ? .en : .jp)
+    var translationLang: Lang = i18n.isZh ? .zh : (gameLang == .ja ? .en : .ja)
     // learning mode ended
 
     var isUsingNarrator: Bool = true
@@ -33,9 +33,9 @@ struct GameSetting: Codable {
     var monitoringVolume: Int = 0
 
     // voice id started
-    var teacher: String = getDefaultVoiceId(language: gameLang.defaultCode, isPreferMaleSiri: gameLang == .jp)
-    var assistant: String = getDefaultVoiceId(language: gameLang.defaultCode, isPreferMaleSiri: gameLang != .jp)
-    var translatorJp: String = getDefaultVoiceId(language: Lang.jp.defaultCode)
+    var teacher: String = getDefaultVoiceId(language: gameLang.defaultCode, isPreferMaleSiri: gameLang == .ja)
+    var assistant: String = getDefaultVoiceId(language: gameLang.defaultCode, isPreferMaleSiri: gameLang != .ja)
+    var translatorJp: String = getDefaultVoiceId(language: Lang.ja.defaultCode)
     var translatorEn: String = getDefaultVoiceId(language: Lang.en.defaultCode)
     var translatorZh: String = getDefaultVoiceId(language: Lang.zh.defaultCode)
 
@@ -128,7 +128,7 @@ func loadGameSetting() {
         context.gameSetting = GameSetting()
         let langCode = gameLang.defaultCode
 
-        if gameLang == .jp {
+        if gameLang == .ja {
             context.gameSetting.teacher = getDefaultVoiceId(language: langCode)
             context.gameSetting.assistant = getDefaultVoiceId(language: langCode, isPreferMaleSiri: false)
         } else {
@@ -136,7 +136,7 @@ func loadGameSetting() {
             context.gameSetting.assistant = getDefaultVoiceId(language: langCode)
         }
 
-        context.gameSetting.translatorJp = getDefaultVoiceId(language: Lang.jp.defaultCode)
+        context.gameSetting.translatorJp = getDefaultVoiceId(language: Lang.ja.defaultCode)
         context.gameSetting.translatorEn = getDefaultVoiceId(language: Lang.en.defaultCode)
         context.gameSetting.translatorZh = getDefaultVoiceId(language: Lang.zh.defaultCode)
 

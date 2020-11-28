@@ -109,7 +109,7 @@ extension Messenger: GameEventDelegate {
     private func onScore(_ score: Score) {
         let attributed = NSMutableAttributedString()
         if let tokenInfos = kanaTokenInfosCacheDictionary[context.userSaidString],
-            gameLang == .jp {
+            gameLang == .ja {
             attributed.append(getFuriganaString(tokenInfos: tokenInfos))
         } else {
             attributed.append(rubyAttrStr(context.userSaidString))

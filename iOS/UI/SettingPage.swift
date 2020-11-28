@@ -83,7 +83,7 @@ class SettingPage: UITableViewController {
         gameLangSegmentControl.setTitle(i18n.english, forSegmentAt: 0)
         gameLangSegmentControl.setTitle(i18n.japanese, forSegmentAt: 1)
 
-        translationLanguageSegment.setTitle("\(gameLang == .jp ? i18n.english : i18n.japanese)", forSegmentAt: 0)
+        translationLanguageSegment.setTitle("\(gameLang == .ja ? i18n.english : i18n.japanese)", forSegmentAt: 0)
         translationLanguageSegment.setTitle("\(i18n.chinese)", forSegmentAt: 1)
 
         gameSpeedNameLabel.text = i18n.speed
@@ -105,7 +105,7 @@ class SettingPage: UITableViewController {
         assistantNameLabel.text = assistant?.name ?? i18n.defaultVoice
         translatorNameLabel.text = translator?.name ?? i18n.defaultVoice
 
-        gameLangSegmentControl.selectedSegmentIndex = gameLang == .jp ? 1 : 0
+        gameLangSegmentControl.selectedSegmentIndex = gameLang == .ja ? 1 : 0
         translationLanguageSegment.selectedSegmentIndex = setting.translationLang == .zh ? 1: 0
         dailyGoalSegmentedControl.selectedSegmentIndex = dailyGoals.firstIndex(of: context.gameSetting.dailySentenceGoal) ?? 1
 
@@ -143,7 +143,7 @@ class SettingPage: UITableViewController {
     @IBAction func gameLangSegmentControlValueChanged(_: Any) {
         RootContainerViewController.isShowSetting = true
         if gameLangSegmentControl.selectedSegmentIndex == 1 {
-            changeGameLangTo(lang: .jp)
+            changeGameLangTo(lang: .ja)
         } else {
             changeGameLangTo(lang: .en)
         }
@@ -167,7 +167,7 @@ class SettingPage: UITableViewController {
     @IBAction func translationLanguageSegmentedControlValueChanged(_: Any) {
         switch translationLanguageSegment.selectedSegmentIndex {
         case 0:
-            context.gameSetting.translationLang = gameLang == .jp ? .en : .jp
+            context.gameSetting.translationLang = gameLang == .ja ? .en : .ja
         case 1:
             context.gameSetting.translationLang = .zh
         default:

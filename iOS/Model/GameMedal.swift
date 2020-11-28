@@ -14,7 +14,7 @@ private var medalCount: [Lang: Int] = [:]
 
 struct GameMedal {
     var totalCount: Int {
-        return (medalCount[.jp] ?? 0) +
+        return (medalCount[.ja] ?? 0) +
             (medalCount[.en] ?? 0)
     }
 

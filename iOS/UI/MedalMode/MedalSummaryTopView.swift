@@ -121,7 +121,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         let subTitleGray = rgb(155, 155, 155)
         let subTitleFont = MyFont.regular(ofSize: step * 2)
 
-        let labelText = gameLang == .jp ? i18n.japanese : i18n.english
+        let labelText = gameLang == .ja ? i18n.japanese : i18n.english
         let labelHeight = labelText.count > 6 ? 6 : 8
         let labelYPlus = labelText.count > 6 ? 3 : 2
 

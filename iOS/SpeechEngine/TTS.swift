@@ -33,7 +33,7 @@ import Foundation
             SpeechEngine.shared.stopListeningAndSpeaking()
             synthesizer.delegate = self
 
-            getFixedTTSString(text, localFixes: ttsFixes, isJP: gameLang == .jp).then { ttsString, ttsToDisplayMap in
+            getFixedTTSString(text, localFixes: ttsFixes, isJP: gameLang == .ja).then { ttsString, ttsToDisplayMap in
                 self.ttsToDisplayMap = ttsToDisplayMap
                 let utterance = AVSpeechUtterance(string: ttsString)
                 if let voice = AVSpeechSynthesisVoice(identifier: voiceId) {

@@ -27,7 +27,7 @@ class SpeechRecognizer: NSObject {
 
     private var speechRecognizer: SFSpeechRecognizer {
         switch gameLang {
-        case .jp:
+        case .ja:
             return speechRecognizerJP
         default:
             if let voice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher),

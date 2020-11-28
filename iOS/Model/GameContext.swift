@@ -33,7 +33,7 @@ class GameContext {
     // MARK: - Long-term data will be kept in UserDefault
 
     var gameHistory: [GameRecord] {
-        if gameLang == .jp { return jpHistory }
+        if gameLang == .ja { return jaHistory }
         if gameLang == .en { return enHistory }
         return []
     }
@@ -149,7 +149,7 @@ class GameContext {
     // Calculated duration when guide voice off mode
     var calculatedSpeakDuration: Promise<Float> {
         let duration: Promise<Float> = Promise<Float>.pending()
-        if gameLang == .jp {
+        if gameLang == .ja {
             getKana(targetString, originalString: nil).then { [unowned self] kana in
                 duration.fulfill(
                     1.0 +
@@ -203,7 +203,7 @@ extension GameContext {
             numOfSentences: numOfSentences
         )
 
-        if gameLang == .jp {
+        if gameLang == .ja {
             sentences.forEach { s in
                 _ = s.ja.furiganaAttributedString // load furigana
             }
@@ -227,7 +227,7 @@ extension GameContext {
         )
         sentences.shuffle()
 
-        if gameLang == .jp {
+        if gameLang == .ja {
             sentences.forEach { s in
                 _ = s.ja.furiganaAttributedString // load furigana
             }
@@ -247,7 +247,7 @@ extension GameContext {
         // This should not trigger network requests
         // It is safeNet for bug side effect in 1.3.0 & 1.3.1
         // Should be removed in 1.4.0
-        if gameLang == .jp {
+        if gameLang == .ja {
             waitKanaInfoLoaded.then { _ in
                 self.sentences.forEach { s in
                     if kanaTokenInfosCacheDictionary[s.ja] == nil {

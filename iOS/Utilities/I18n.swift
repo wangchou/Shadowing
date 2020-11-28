@@ -17,7 +17,7 @@ class I18n {
 
     var lang: Lang {
         if isZh { return .zh }
-        if isJa { return .jp }
+        if isJa { return .ja }
         return .en
     }
 
@@ -140,7 +140,7 @@ class I18n {
     }
 
     var defaultVoiceIsNotAvailable: String {
-        let lang = gameLang == .jp ? japanese : english
+        let lang = gameLang == .ja ? japanese : english
         if isJa { return "\(lang)の声をダウンロードしましょう\n「設定 > \(general)アクセシビリティ > \(speechText) > 声 > \(lang)」の順に選択しましょう。" }
         if isZh { return "找不到\(lang)語音：\n請前往手機的「設定 > \(general)輔助使用 > \(speechText) > 聲音 > \(lang)」下載" }
         return "No TTS Voice found:\nGo to Settings > \(general)Accessibility > \(speechText) > Voices to Download"
@@ -201,7 +201,7 @@ class I18n {
     }
 
     var reachDailyGoal: String {
-        if gameLang == .jp { return "今日の目標を完成しました。よくやった！" }
+        if gameLang == .ja { return "今日の目標を完成しました。よくやった！" }
         return "Daily goal is completed. Good Job!"
     }
 
@@ -224,7 +224,7 @@ class I18n {
     }
 
     var teacherLabel: String {
-        if gameLang == .jp {
+        if gameLang == .ja {
             if isJa { return "日本語先生" }
             if isZh { return "日文老師" }
             return "Teacher"
@@ -236,7 +236,7 @@ class I18n {
     }
 
     var assistantLabel: String {
-        if gameLang == .jp {
+        if gameLang == .ja {
             if isJa { return "日本語アシスタント" }
             if isZh { return "日文助理" }
             return "Assisant"
@@ -300,7 +300,7 @@ class I18n {
 
     var langToSpeak: String {
         switch gameLang {
-        case .jp:
+        case .ja:
             return japanese
         case .en:
             return english
@@ -471,9 +471,9 @@ class I18n {
     }
 
     var syllablesCount: String {
-        if isZh { return gameLang == .jp ? "假名數" : "音節數" }
-        if isJa { return gameLang == .jp ? "仮名数" : "音節数" }
-        return gameLang == .jp ? "Kanas" : "Syllables"
+        if isZh { return gameLang == .ja ? "假名數" : "音節數" }
+        if isJa { return gameLang == .ja ? "仮名数" : "音節数" }
+        return gameLang == .ja ? "Kanas" : "Syllables"
     }
 
     var sentencesCount: String {
@@ -498,15 +498,15 @@ class I18n {
         if isZh || isJa {
             return "\(infiniteChallenge) (\(language))"
         }
-        return "\(infiniteChallenge) (\(gameLang == .jp ? jaAbbr : enAbbr))"
+        return "\(infiniteChallenge) (\(gameLang == .ja ? jaAbbr : enAbbr))"
     }
 
     var languageInJa: String {
-        return gameLang == .jp ? "日本語" : "英語"
+        return gameLang == .ja ? "日本語" : "英語"
     }
 
     var language: String {
-        if gameLang == .jp {
+        if gameLang == .ja {
             return japanese
         }
         return english
@@ -635,7 +635,7 @@ class I18n {
     }
 
     var speedIs: String {
-        if gameLang == .jp {
+        if gameLang == .ja {
             return "速度は"
         }
         return "Speed is "
@@ -861,11 +861,11 @@ class I18n {
             let rewardText = reward >= 0 ? "plus \(reward)" : "\(reward)"
             let rankText = rank.replacingOccurrences(of: "+", with: " plus")
 
-            return gameLang == .jp ?
+            return gameLang == .ja ?
                 "\(percent)%。判定：\(rankText)。メダル：\(rewardText)。" :
                 "\(percent)% Completed. Rank: \(rankText)... Medal: \(rewardText)"
         default:
-            if gameLang == .jp { return "完成率：\(percent)%、判定：\(rank)" }
+            if gameLang == .ja { return "完成率：\(percent)%、判定：\(rank)" }
             return "\(percent)% completed. Rank \(rank)..."
         }
     }
@@ -917,7 +917,7 @@ class I18n {
     }
 
     var tip1: String {
-        let teacherName = gameLang == .jp ? "Otoya" : "Samatha"
+        let teacherName = gameLang == .ja ? "Otoya" : "Samatha"
         if isZh { return "安裝高品質語音。(\(teacherName) 300MB, iPhone設定：「輔助使用 > 語音」)" }
         if isJa { return "高品質の声をダウンロードしましょう。(\(teacherName) 300MB, iPhoneの設定：「アクセシビリティ」>「スピーチ」)" }
         return "Download high-quality voices (\(teacherName) 300MB) from iPhone Setting:「Accessibility > Speech」。"

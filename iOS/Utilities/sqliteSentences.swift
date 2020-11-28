@@ -17,12 +17,12 @@ struct Sentence: Hashable, Equatable {
     var cmn: String
     #if os(iOS)
     var origin: String {
-        return gameLang == Lang.jp ? ja : en
+        return gameLang == Lang.ja ? ja : en
     }
 
     var translation: String {
         switch GameContext.shared.gameSetting.translationLang {
-        case .jp:
+        case .ja:
             return ja
         case .en:
             return en
@@ -238,7 +238,7 @@ func getRandSentences(level: Level, numOfSentences: Int) -> [Sentence] {
         let sentences = getSentencesByIds(ids: randomIds)
         for s in sentences {
             let isSame = !randomSentences.filter { randS in
-                if gameLang == Lang.jp {
+                if gameLang == Lang.ja {
                     return s.ja == randS.ja
                 } else {
                     return s.en == randS.en
