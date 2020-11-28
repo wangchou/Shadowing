@@ -225,7 +225,7 @@ class SettingPage: UITableViewController {
 
     // Change Voices
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 3 {
+        if indexPath.section == 2 {
             if indexPath.row == 0 { // teacher voice
                 VoiceSelectionPage.fromPage = self
                 VoiceSelectionPage.selectingVoiceFor = .teacher
@@ -278,14 +278,16 @@ class SettingPage: UITableViewController {
         case 1:
             return i18n.settingSectionGameSetting
         case 2:
-            return i18n.settingSectionPracticeSpeed
-        case 3:
             return i18n.textToSpeech
+        case 3:
+            return i18n.settingSectionPracticeSpeed
         case 4:
-            return i18n.dailyGoal
+            return i18n.settingSectionGameAdvancedSetting
         case 5:
-            return i18n.micAndSpeechPermission
+            return i18n.dailyGoal
         case 6:
+            return i18n.micAndSpeechPermission
+        case 7:
             return i18n.yourFeedbackMakeAppBetter
 
         default:

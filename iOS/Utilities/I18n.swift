@@ -84,13 +84,13 @@ class I18n {
     var monitoringLabel: String {
         if isJa { return "モニタリング（有線イヤホンのみ）" }
         if isZh { return "即時監聽 (有線耳機 Only)" }
-        return "Wired Monitoring"
+        return "Wired Monitroing"
     }
 
     var gotoIOSSettingButtonTitle: String {
-        if isJa { return "iPhone 設定へ" }
-        if isZh { return "前往 iPhone 設定中心" }
-        return "Go to iPhone Setting Center"
+        if isJa { return "iOS 設定へ" }
+        if isZh { return "前往 iOS 設定中心" }
+        return "Go to iOS Setting Center"
     }
 
     var speechText: String {
@@ -152,10 +152,16 @@ class I18n {
         return "Game Setting"
     }
 
+    var settingSectionGameAdvancedSetting: String {
+        if isJa { return "ゲーム詳細設定" }
+        if isZh { return "遊戲進階設定" }
+        return "Game Advanced Setting"
+    }
+
     var settingSectionPracticeSpeed: String {
         if isJa { return "練習の速度" }
         if isZh { return "練習的速度" }
-        return "Practice Speed"
+        return "Speed in practice"
     }
 
     var gameSetting: String {
@@ -166,8 +172,8 @@ class I18n {
 
     var micAndSpeechPermission: String {
         if isJa { return "音声認識の権限、アプリの言語" }
-        if isZh { return "APP介面語言、語音辨識權限" }
-        return "Mic Permissions / Language of UI"
+        if isZh { return "APP 的語言、語音辨識權限" }
+        return "Mic Permissions / App Language"
     }
 
     var gameOver: String {
@@ -179,7 +185,7 @@ class I18n {
     var gameStartedWithGuideVoice: String {
         if isJa { return "私のあとに\(langToSpeak)を繰り返してください。" }
         if isZh { return "當我說完\(langToSpeak)後，請跟著說～" }
-        return "Please repeat \"\(langToSpeak) Sentences\" after me."
+        return "Please repeat \"\(langToSpeak) sentences\" after me."
     }
 
     var gameStartedWithEchoMethod: String {
@@ -191,7 +197,7 @@ class I18n {
     var gameStartedWithoutGuideVoice: String {
         if isJa { return "\(langToSpeak)の文を読んていってください。" }
         if isZh { return "請唸出對應的\(langToSpeak)。" }
-        return "Please speak displayed \"\(langToSpeak) Sentences\"."
+        return "Please speak displayed \"\(langToSpeak) sentences\"."
     }
 
     var reachDailyGoal: String {
@@ -214,7 +220,7 @@ class I18n {
     var textToSpeech: String {
         if isJa { return "音声合成" }
         if isZh { return "語音合成" }
-        return "Text to Speech (\(langToSpeak))"
+        return "Speech Voices"
     }
 
     var teacherLabel: String {
