@@ -100,6 +100,7 @@ class SpeechEngine {
         let mainMixer = audioEngine.mainMixerNode
         let mic = audioEngine.inputNode // only for real device, simulator will crash
 
+        #if !(targetEnvironment(macCatalyst))
         mic.removeTap(onBus: 0)
         mic.installTap(onBus: 0, bufferSize: 1024, format: nil) { [weak self] buffer, _ in
             guard let self = self,
@@ -111,6 +112,45 @@ class SpeechEngine {
 
         audioEngine.connect(mic, to: mainMixer, format: nil)
         mainMixer.outputVolume = 0
+        #else
+        // mac catalyst
+        // not knowing why... but need to convert to the same format in catalyst to
+        // make wired mic work...
+        // for built-in mic work need to force channel = 2
+        // ps: my sony wireless mic is always working
+        // tested in macOS 11.0.1, xcode 12.2
+        let inputFormat = mic.outputFormat(forBus: 0)
+        print(inputFormat)
+        let outputFormat = AVAudioFormat(commonFormat: inputFormat.commonFormat,
+                                        sampleRate: inputFormat.sampleRate,
+                                        channels: 2, // 1 or built-in 4 not working?
+                                        interleaved: inputFormat.isInterleaved)!
+        let converter = AVAudioConverter(from: inputFormat, to: outputFormat)!
+
+        mic.removeTap(onBus: 0)
+        mic.installTap(onBus: 0, bufferSize: 1024, format: inputFormat) { [weak self] buffer, _ in
+            guard let self = self,
+                  let recognitionRequest = self.speechRecognizer.recognitionRequest else { return }
+
+            self.isInstallTapSuceeced = true
+
+            let inputCallback: AVAudioConverterInputBlock = { inNumPackets, outStatus in
+                outStatus.pointee = AVAudioConverterInputStatus.haveData
+                return buffer
+            }
+
+            let convertedBuffer = AVAudioPCMBuffer(pcmFormat: outputFormat,
+                                                  frameCapacity: buffer.frameCapacity)!
+
+            var error: NSError?
+            _ = converter.convert(to: convertedBuffer, error: &error, withInputFrom: inputCallback)
+
+            if let error = error { print(error) }
+
+            recognitionRequest.append(convertedBuffer)
+            calculateMicLevel(buffer: convertedBuffer)
+        }
+        #endif
     }
 
     // MARK: - Handle Route Change
@@ -134,7 +174,7 @@ class SpeechEngine {
             return
         }
         switch reason {
-        case .newDeviceAvailable, .oldDeviceUnavailable, .override:
+        case .newDeviceAvailable, .oldDeviceUnavailable, .override, .categoryChange:
             print("route change notification:", reason.rawValue)
             if isEngineRunning {
                 restart()
