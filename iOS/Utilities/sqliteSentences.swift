@@ -56,7 +56,6 @@ struct DifficultyInfo {
 struct TopicSentenceInfo {
     var ja: String
     var kanaCount: Int
-    var tokenInfos: [[String]]? //tokenInfo =[kanji, 詞性, furikana, yomikana]
 }
 
 var topicSentencesInfos: [String: TopicSentenceInfo] = [:]
@@ -69,9 +68,9 @@ var enInfoTableName = "enInfo"
 
 private let dbPath = Bundle.main.path(forResource: sqliteFileName, ofType: "sqlite") ?? ""
 #if os(iOS)
-    var waitSentenceDBLoaded = Promise<Void>.pending()
-    func loadSentenceInfo() {
-        waitSentenceDBLoaded = Promise<Void>.pending()
+    var waitDifficultyDBLoaded = Promise<Void>.pending()
+    func loadDifficultyInfo() {
+        waitDifficultyDBLoaded = Promise<Void>.pending()
         do {
             // jpInfos
             let db = try Connection(dbPath, readonly: true)
@@ -96,7 +95,7 @@ private let dbPath = Bundle.main.path(forResource: sqliteFileName, ofType: "sqli
         } catch {
             print("db error 1:\(error)")
         }
-        waitSentenceDBLoaded.fulfill(())
+        waitDifficultyDBLoaded.fulfill(())
     }
 
 func loadTopicSentenceDB() {
@@ -107,18 +106,13 @@ func loadTopicSentenceDB() {
         let dbJa = Expression<String>("ja")
         let dbKanaCount = Expression<Int>("kana_count")
         let dbTokenInfos = Expression<String>("tokenInfos")
-        var topicSentences: [String] = []
-        rawDataSets.forEach { sArray in
-            topicSentences.append(contentsOf: sArray)
-        }
-        for ja in topicSentences {
-            let query = tokenInfosTable.select(dbJa, dbKanaCount, dbTokenInfos)
-                .filter(dbJa == ja)
-            for row in try db.prepare(query) {
-                let tokenInfos = stringToTokenInfos(jsonString: row[dbTokenInfos])
-                kanaTokenInfosCacheDictionary[ja] = tokenInfos
-                topicSentencesInfos[ja] = TopicSentenceInfo(ja: ja, kanaCount: row[dbKanaCount], tokenInfos: tokenInfos)
-            }
+        let topicSentences = rawDataSets.flatMap { $0 }
+        let query = tokenInfosTable.select(dbJa, dbKanaCount, dbTokenInfos)
+                                   .filter(topicSentences.contains(dbJa))
+        for row in try db.prepare(query) {
+            let ja = row[dbJa]
+            kanaTokenInfosCacheDictionary[ja] = stringToTokenInfos(jsonString: row[dbTokenInfos])
+            topicSentencesInfos[ja] = TopicSentenceInfo(ja: ja, kanaCount: row[dbKanaCount])
         }
     } catch {
         print("db error 2:\(error)")

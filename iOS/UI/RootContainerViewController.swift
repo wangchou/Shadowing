@@ -50,8 +50,8 @@ class RootContainerViewController: UIViewController {
         loadMedalCount()
 
         loadTopicSentenceDB()
-        loadSentenceInfo()
-        loadDataSets()
+        loadDifficultyInfo()
+        buildDataSets()
 
         loadGameHistory()
         loadGameMiscData(isLoadKana: true)

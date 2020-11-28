@@ -71,7 +71,7 @@ class GameFlow {
 
         Promises.all([
             waitKanaInfoLoaded,
-            waitSentenceDBLoaded
+            waitDifficultyDBLoaded
             ])
             .then { _ in
                 return speakTitle()

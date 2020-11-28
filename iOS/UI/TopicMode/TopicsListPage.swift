@@ -74,7 +74,7 @@ class TopicsListPage: UIViewController {
     }
 
     @objc func reloadTopicSentences() {
-        loadDataSets()
+        buildDataSets()
         sentencesTableView.reloadData()
 
         if !dataSetKeys.contains(context.dataSetKey) {

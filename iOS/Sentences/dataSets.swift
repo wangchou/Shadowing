@@ -43,7 +43,7 @@ func getTagMaxPoints() -> [String: Int] {
     return tagMaxPoints
 }
 
-func loadDataSets() {
+func buildDataSets() {
     dataSetKeys = []
     rawDataSets
         .filter { sentences in !sentences.isEmpty }

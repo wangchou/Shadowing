@@ -61,7 +61,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
     }
 
     func render() {
-        waitSentenceDBLoaded.then { [weak self] _ in
+        waitDifficultyDBLoaded.then { [weak self] _ in
             guard let self = self else { return }
             context.gameMode = .medalMode
             self.removeAllSubviews()
@@ -161,7 +161,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
             Promises.all([waitKanaInfoLoaded,
                           waitSentenceScoresLoaded,
                           waitUserSaidSentencesLoaded,
-                          waitSentenceDBLoaded]).then { _ in
+                          waitDifficultyDBLoaded]).then { _ in
                             changeLangButton.isUserInteractionEnabled = true
                 self?.render()
             }
@@ -196,7 +196,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
         context.gameMode = .medalMode
         guard !TopicDetailPage.isChallengeButtonDisabled else { return }
         if isUnderDailySentenceLimit() {
-            waitSentenceDBLoaded.then { _ in
+            waitDifficultyDBLoaded.then { _ in
                 launchVC(Messenger.id, isOverCurrent: false)
             }
         }
@@ -229,7 +229,6 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
     private func addMissCountBubble(buttonY: Int) {
         let missedCount = context.getMissedCount()
-        print("missedCount: \(missedCount)")
         if missedCount > 0 {
             let w = missedCount >= 100 ? 7 : (missedCount >= 10 ? 5 : 4)
             let y = missedCount >= 100 ? (buttonY - 2) : (buttonY - 1)
