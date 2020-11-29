@@ -674,7 +674,7 @@ class I18n {
     var freeButtonPurchaseMessage: String {
         if isJa { return "\n[体験版制限] 1日に\(dailyFreeLimit)文だけを話すことができます。\n\n〜 スタジオ大草原不可避 〜" }
         if isZh { return "\n[試玩版限制] 一天只能挑戰\(dailyFreeLimit)句。\n\n〜 大草原不可避工作室 〜" }
-        return "\n[Trial version constraint] User only can play \(dailyFreeLimit) sentences a day. \n\n〜 Studio 大草原不可避 〜"
+        return "\n[Trial version constraint] User can only play \(dailyFreeLimit) sentences a day. \n\n〜 Studio 大草原不可避 〜"
     }
 
     var previousPurchaseRestored: String {

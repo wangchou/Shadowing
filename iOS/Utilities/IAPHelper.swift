@@ -132,6 +132,10 @@ class IAPHelper: NSObject {
             actionSheet.addAction(cancelAction)
         }
 
+        #if targetEnvironment(macCatalyst)
+        actionSheet.addAction(cancelAction)
+        #endif
+
         // https://medium.com/@nickmeehan/actionsheet-popover-on-ipad-in-swift-5768dfa82094
         if let popoverController = actionSheet.popoverPresentationController,
             let vc = UIApplication.getPresentedViewController() {
