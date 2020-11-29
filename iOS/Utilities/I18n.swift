@@ -71,7 +71,7 @@ class I18n {
 
     var translationLanguageLabel: String {
         if isJa { return "翻訳言語" }
-        if isZh { return "翻譯的語言" }
+        if isZh { return "翻譯語言" }
         return "Translation Lang"
     }
 
@@ -158,10 +158,16 @@ class I18n {
         return "Game Advanced Setting"
     }
 
+    var settingSectionGameSpeed: String {
+        if isJa { return "ゲーム速度" }
+        if isZh { return "遊戲速度" }
+        return "Game Speed"
+    }
+
     var settingSectionPracticeSpeed: String {
-        if isJa { return "練習の速度" }
-        if isZh { return "練習的速度" }
-        return "Speed in practice"
+        if isJa { return "練習速度" }
+        if isZh { return "練習速度" }
+        return "Practice Speed"
     }
 
     var gameSetting: String {
@@ -247,8 +253,8 @@ class I18n {
     }
 
     var translatorLabel: String {
-        if isJa { return "翻訳音声" }
-        if isZh { return "翻譯語音" }
+        if isJa { return "翻訳アシスタント" }
+        if isZh { return "翻譯助理" }
         return "Translator"
     }
 

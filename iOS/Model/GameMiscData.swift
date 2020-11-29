@@ -24,8 +24,7 @@ private let userSaidSentencesKey = "user said sentences key"
 private let sentenceScoreKey = "sentence score key"
 private let lastChallengeSenteceKey = "last challenge senteces key 1.4.0"
 private let lastEnChallengeSenteceKey = "last english challenge senteces key 1.4.0"
-private let kanaTokenInfosKey = "kanaTokenInfos key"
-private let translationsKey = "translation key"
+private let kanaTokenInfosKey = "kanaTokenInfos key 1.4.0"
 
 func saveGameMiscData() {
     DispatchQueue.global().async {
@@ -33,16 +32,16 @@ func saveGameMiscData() {
         saveToUserDefault(object: sentenceScores, key: sentenceScoreKey + gameLang.key)
         saveToUserDefault(object: lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)
         guard gameLang == Lang.ja else { return }
-        saveToUserDefault(object: kanaTokenInfosCacheDictionary, key: kanaTokenInfosKey + gameLang.key)
+        saveToUserDefault(object: kanaTokenInfosCacheDictionary, key: kanaTokenInfosKey)
     }
 }
 
-func easyLoad<T: Codable>(object: inout T, key: String) {
+func loadObject<T: Codable>(object: inout T, key: String) {
     // swiftlint:disable force_cast
     if let loaded = loadFromUserDefault(type: type(of: object), key: key) {
         object = loaded
     } else {
-        print("[\(gameLang)] create new object")
+        print("[\(gameLang) - \(key)] create new object")
         object = [:] as! T
     }
     // swiftlint:enable force_cast
@@ -57,22 +56,22 @@ func loadGameMiscData(isLoadKana: Bool = false) {
     waitUserSaidSentencesLoaded = Promise<Void>.pending()
 
     DispatchQueue.global().async {
-        easyLoad(object: &userSaidSentences, key: userSaidSentencesKey + gameLang.key)
+        loadObject(object: &userSaidSentences, key: userSaidSentencesKey + gameLang.key)
         waitUserSaidSentencesLoaded.fulfill(())
     }
     DispatchQueue.global().async {
-        easyLoad(object: &sentenceScores, key: sentenceScoreKey + gameLang.key)
+        loadObject(object: &sentenceScores, key: sentenceScoreKey + gameLang.key)
         waitSentenceScoresLoaded.fulfill(())
     }
     DispatchQueue.global().async {
-        easyLoad(object: &lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)
+        loadObject(object: &lastInfiniteChallengeSentences, key: lastChallengeSenteceKey + gameLang.key)
     }
 
     guard isLoadKana else { return }
     if let loadedKanaTokenInfos = loadFromUserDefault(type: type(of: kanaTokenInfosCacheDictionary),
-                                                      key: kanaTokenInfosKey + Lang.ja.key) {
+                                                      key: kanaTokenInfosKey) {
         loadedKanaTokenInfos.keys.forEach { key in
-            guard kanaTokenInfosCacheDictionary[key] == nil else { return }
+            guard kanaTokenInfosCacheDictionary[key] == nil else { return } //prefer new > old
             kanaTokenInfosCacheDictionary[key] = loadedKanaTokenInfos[key]
         }
     } else {

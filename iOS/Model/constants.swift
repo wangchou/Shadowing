@@ -34,7 +34,6 @@ let micOutVolume: Float = 0
     let screen = UIScreen.main.bounds
 #endif
 
-
 // safe area padding
 func getTopPadding() -> CGFloat {
     if #available(iOS 11.0, *) {

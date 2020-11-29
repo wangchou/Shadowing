@@ -22,7 +22,6 @@ class SettingPage: UITableViewController {
 
     @IBOutlet var learningModeLabel: UILabel!
     @IBOutlet var learningModeSegmentControl: UISegmentedControl!
-    @IBOutlet var gameSpeedNameLabel: UILabel!
     @IBOutlet var gameSpeedSlider: UISlider!
     @IBOutlet var gameSpeedFastLabel: UILabel!
     @IBOutlet var translationLanguageLabel: UILabel!
@@ -86,7 +85,6 @@ class SettingPage: UITableViewController {
         translationLanguageSegment.setTitle("\(gameLang == .ja ? i18n.english : i18n.japanese)", forSegmentAt: 0)
         translationLanguageSegment.setTitle("\(i18n.chinese)", forSegmentAt: 1)
 
-        gameSpeedNameLabel.text = i18n.speed
         gameSpeedSlider.isContinuous = false
         gameSpeedSlider.value = setting.gameSpeed
         gameSpeedFastLabel.text = String(format: "%.2fx", setting.gameSpeed * 2)
@@ -225,7 +223,7 @@ class SettingPage: UITableViewController {
 
     // Change Voices
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 2 {
+        if indexPath.section == 4 {
             if indexPath.row == 0 { // teacher voice
                 VoiceSelectionPage.fromPage = self
                 VoiceSelectionPage.selectingVoiceFor = .teacher
@@ -236,11 +234,12 @@ class SettingPage: UITableViewController {
                 VoiceSelectionPage.selectingVoiceFor = .assisant
                 VoiceSelectionPage.selectedVoice = assistant
             }
-            if indexPath.row == 2 { // translator voice
-                VoiceSelectionPage.fromPage = self
-                VoiceSelectionPage.selectingVoiceFor = .translator
-                VoiceSelectionPage.selectedVoice = translator
-            }
+            launchVC(VoiceSelectionPage.id)
+        }
+        if indexPath.section == 5 && indexPath.row == 1 { // translator voice
+            VoiceSelectionPage.fromPage = self
+            VoiceSelectionPage.selectingVoiceFor = .translator
+            VoiceSelectionPage.selectedVoice = translator
             launchVC(VoiceSelectionPage.id)
         }
     }
@@ -278,16 +277,18 @@ class SettingPage: UITableViewController {
         case 1:
             return i18n.settingSectionGameSetting
         case 2:
-            return i18n.textToSpeech
+            return i18n.settingSectionGameSpeed
         case 3:
             return i18n.settingSectionPracticeSpeed
         case 4:
-            return i18n.settingSectionGameAdvancedSetting
+            return i18n.textToSpeech
         case 5:
-            return i18n.dailyGoal
+            return i18n.translation
         case 6:
-            return i18n.micAndSpeechPermission
+            return i18n.dailyGoal
         case 7:
+            return i18n.micAndSpeechPermission
+        case 8:
             return i18n.yourFeedbackMakeAppBetter
 
         default:

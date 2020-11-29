@@ -14,7 +14,7 @@ const mecab = new MeCab()
 if(isMac){
   mecab.command = 'mecab -d /usr/local/lib/mecab/dic/mecab-ipadic-neologd/ -E "<改行>\\n"';
 } else {
-  mecab.command = 'mecab -d /usr/lib/mecab/dic/mecab-ipadic-neologd -E "<改行>\\n"';
+  mecab.command = 'mecab -d /usr/lib/x86_64-linux-gnu/mecab/dic/mecab-ipadic-neologd -E "<改行>\\n"';
 }
 
 const app = express()
@@ -23,7 +23,7 @@ var __dirname
 if(isMac) {
   __dirname = './log'
 } else {
-  __dirname = '/home/ubuntu/Shadowing/prototype/nlpService/log'
+  __dirname = '/home/ubuntu/Shadowing/nlpService/log'
 }
 
 var { nLocalFixes, correctKanas } = loadNLocal()
@@ -48,17 +48,7 @@ var cache = (duration) => {
   }
 }
 
-var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'})
-app.use(morgan((tokens, req, res) => {
-    return [
-      tokens.method(req, res),
-      decodeURIComponent(tokens.url(req, res)),
-      tokens.status(req, res),
-      tokens.res(req, res, 'content-length'), '-',
-      tokens['response-time'](req, res), 'ms'
-    ].join(' ')
-}, {stream: accessLogStream}))
-
+app.use(morgan('[:date[clf]] :method :url :status :res[content-length] - :response-time ms'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 

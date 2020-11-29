@@ -81,5 +81,5 @@ func saveMedalCount() {
 }
 
 func loadMedalCount() {
-    easyLoad(object: &medalCount, key: medalCountKey)
+    loadObject(object: &medalCount, key: medalCountKey)
 }
