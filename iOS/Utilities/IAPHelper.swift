@@ -79,9 +79,28 @@ class IAPHelper: NSObject {
             preferredStyle: .actionSheet
         )
 
+        let cancelTitle = isChallenge ? i18n.startChallenge : i18n.close
+
+        let cancelAction = UIAlertAction(title: cancelTitle, style: isIPad ? .default : .cancel)
+
+        // Add the actions
+        if isChallenge || !isIPad {
+            actionSheet.addAction(cancelAction)
+        }
+
+        #if targetEnvironment(macCatalyst)
+        actionSheet.addAction(cancelAction)
+        #endif
+
+        let restoreAction = UIAlertAction(title: i18n.restorePreviousPurchase, style: .destructive) { [weak self] _ in
+            actionSheet.dismiss(animated: true, completion: nil)
+            self?.refreshReceipt()
+        }
+        actionSheet.addAction(restoreAction)
+
         // Create the actions
         let sortedProducts = products.sorted {
-            $0.price.doubleValue <= $1.price.doubleValue
+            $0.price.doubleValue >= $1.price.doubleValue
         }
         for product in sortedProducts {
             var priceString = ""
@@ -116,25 +135,6 @@ class IAPHelper: NSObject {
             }
             actionSheet.addAction(buyAction)
         }
-
-        let restoreAction = UIAlertAction(title: i18n.restorePreviousPurchase, style: .destructive) { [weak self] _ in
-            actionSheet.dismiss(animated: true, completion: nil)
-            self?.refreshReceipt()
-        }
-        actionSheet.addAction(restoreAction)
-
-        let cancelTitle = isChallenge ? i18n.startChallenge : i18n.close
-
-        let cancelAction = UIAlertAction(title: cancelTitle, style: isIPad ? .default : .cancel)
-
-        // Add the actions
-        if isChallenge || !isIPad {
-            actionSheet.addAction(cancelAction)
-        }
-
-        #if targetEnvironment(macCatalyst)
-        actionSheet.addAction(cancelAction)
-        #endif
 
         // https://medium.com/@nickmeehan/actionsheet-popover-on-ipad-in-swift-5768dfa82094
         if let popoverController = actionSheet.popoverPresentationController,
