@@ -14,7 +14,7 @@ class RMSentence: Object {
     @objc dynamic var ja = ""
     @objc dynamic var en = ""
     @objc dynamic var cmn = ""
-    @objc dynamic var ja_tts_fixes = ""
+    @objc dynamic var jaTTSFixes = ""
 
     override static func primaryKey() -> String? {
         return "id"

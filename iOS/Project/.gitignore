@@ -1,3 +1,4 @@
 *.sqlite
+*.realm*
 GoogleService-Info.plist
 *.framework

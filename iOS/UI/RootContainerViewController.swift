@@ -42,10 +42,10 @@ class RootContainerViewController: UIViewController {
             configureAudioSession(isAskingPermission: false)
         }
 
-        for family in UIFont.familyNames.sorted() {
-            let names = UIFont.fontNames(forFamilyName: family)
-            print("Family: \(family) Font names: \(names)")
-        }
+//        for family in UIFont.familyNames.sorted() {
+//            let names = UIFont.fontNames(forFamilyName: family)
+//            print("Family: \(family) Font names: \(names)")
+//        }
     }
 
     private func loadStartupData() {

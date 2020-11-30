@@ -13,7 +13,6 @@ target 'hanashitai' do
   project 'hanashitai.xcodeproj'
   pod 'Alamofire',               '4.8.2'
   pod 'Charts',                  '3.2.1'
-  pod 'SQLite.swift'
   pod 'PromisesSwift'
   pod 'Firebase/Analytics'
   pod 'Firebase/Performance'
@@ -27,7 +26,6 @@ target 'preprocess' do
   pod 'SwiftSyllables', :git => "git@github.com:wangchou/SwiftSyllables.git"
   pod 'Alamofire', '4.8.2'
   pod 'PromisesSwift'
-  pod 'SQLite.swift'
   pod 'RealmSwift'
 end
 

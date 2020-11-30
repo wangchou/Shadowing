@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BE1DA07C2574D01800B5F5F2 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DA07B2574D01700B5F5F2 /* RealmModel.swift */; };
-		BE2885802567943300D1A9BB /* sqliteSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE28857F2567943300D1A9BB /* sqliteSentences.swift */; };
+		BE2885802567943300D1A9BB /* realmSentences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE28857F2567943300D1A9BB /* realmSentences.swift */; };
 		BE29DC38255D3627009CA02A /* kanaFix.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE29DC34255D3627009CA02A /* kanaFix.swift */; };
 		BE29DC39255D3627009CA02A /* String+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE29DC35255D3627009CA02A /* String+Utilities.swift */; };
 		BE29DC3A255D3627009CA02A /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE29DC36255D3627009CA02A /* utilities.swift */; };
@@ -51,7 +51,7 @@
 		80AAEAFB80ACF963061E245E /* Pods_preprocess.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_preprocess.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB635DC1B52E1DAE56EC61BD /* Pods-preprocess.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-preprocess.debug.xcconfig"; path = "Target Support Files/Pods-preprocess/Pods-preprocess.debug.xcconfig"; sourceTree = "<group>"; };
 		BE1DA07B2574D01700B5F5F2 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmModel.swift; path = ../Model/RealmModel.swift; sourceTree = "<group>"; };
-		BE28857F2567943300D1A9BB /* sqliteSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = sqliteSentences.swift; path = ../Utilities/sqliteSentences.swift; sourceTree = "<group>"; };
+		BE28857F2567943300D1A9BB /* realmSentences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = realmSentences.swift; path = ../Utilities/realmSentences.swift; sourceTree = "<group>"; };
 		BE29DC34255D3627009CA02A /* kanaFix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = kanaFix.swift; path = ../Utilities/kanaFix.swift; sourceTree = "<group>"; };
 		BE29DC35255D3627009CA02A /* String+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "String+Utilities.swift"; path = "../Utilities/String+Utilities.swift"; sourceTree = "<group>"; };
 		BE29DC36255D3627009CA02A /* utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = utilities.swift; path = ../Utilities/utilities.swift; sourceTree = "<group>"; };
@@ -112,7 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				BE1DA07B2574D01700B5F5F2 /* RealmModel.swift */,
-				BE28857F2567943300D1A9BB /* sqliteSentences.swift */,
+				BE28857F2567943300D1A9BB /* realmSentences.swift */,
 				BEE2B982256518E400B1C287 /* sentences */,
 				BEE2B97F2564E8F300B1C287 /* FuriganaUtils.swift */,
 				BE7F8BDC25625AF5008AE195 /* String+Variations.swift */,
@@ -270,7 +270,7 @@
 			files = (
 				BE1DA07C2574D01800B5F5F2 /* RealmModel.swift in Sources */,
 				BE6E07772568E6F500BAAD23 /* checks.swift in Sources */,
-				BE2885802567943300D1A9BB /* sqliteSentences.swift in Sources */,
+				BE2885802567943300D1A9BB /* realmSentences.swift in Sources */,
 				BEE2B9902565190500B1C287 /* grammarN4.swift in Sources */,
 				BEE2B9912565190500B1C287 /* polite.swift in Sources */,
 				BEE2B9922565190500B1C287 /* grammarN5.swift in Sources */,

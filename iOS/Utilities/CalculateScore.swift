@@ -17,7 +17,7 @@ func getKanaTokenInfos(_ kanjiString: String, originalString: String = "", retry
     ]
 
     #if os(iOS)
-    // try to lookup from local sqlite
+    // try to lookup from local db
     if kanaTokenInfosCacheDictionary[kanjiString] == nil {
         loadTokenInfos(ja: kanjiString)
     }

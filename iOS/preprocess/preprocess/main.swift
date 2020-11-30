@@ -37,7 +37,7 @@ print(rows.count)
 // checkKanaFixes(rows: rows)
 // checkTTSFixes(rows: rows)
 
-var realm: Realm!
+private var realm: Realm!
 
 func createWritableDB() {
     do {
@@ -197,7 +197,7 @@ func addSentencesTable() {
                     rmSentence.ja = jpn0
                     rmSentence.en = eng0
                     rmSentence.cmn = cmn
-                    rmSentence.ja_tts_fixes = ttsFixes
+                    rmSentence.jaTTSFixes = ttsFixes
 
                     try realm.write {
                         realm.add(rmSentence)
@@ -221,7 +221,7 @@ func addSentencesTable() {
                 rmSentence.ja = topicSentence
                 rmSentence.en = ""
                 rmSentence.cmn = topicTranslation[topicSentence] ?? ""
-                rmSentence.ja_tts_fixes = ""
+                rmSentence.jaTTSFixes = ""
 
                 try realm.write {
                     realm.add(rmSentence)
@@ -257,6 +257,9 @@ func addJpInfoTables() {
             let jpInfo = RMJaInfo()
             jpInfo.difficulty = difficulty
             jpInfo.ids = encode(ids) ?? ""
+            try! realm.write {
+                realm.add(jpInfo)
+            }
             print(difficulty, ids.count)
             totalJpCount += ids.count
         }
@@ -288,6 +291,9 @@ func addEnInfoTables() {
             let enInfo = RMEnInfo()
             enInfo.difficulty = difficulty
             enInfo.ids = encode(ids) ?? ""
+            try! realm.write {
+                realm.add(enInfo)
+            }
             print(difficulty, ids.count)
             totalEnCount += ids.count
         }
