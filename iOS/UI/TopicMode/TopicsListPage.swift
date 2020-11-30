@@ -40,6 +40,9 @@ class TopicsListPage: UIViewController {
                                                selector: #selector(reloadTopicSentences),
                                                name: .topicFlagChanged,
                                                object: nil)
+        DispatchQueue.main.async {
+            self.topicFilterBarView.render()
+        }
     }
 
     @objc func injected() {
