@@ -56,6 +56,7 @@
 	<array>
 		<string>ヒラギノ角ゴシック W0.ttc</string>
 		<string>ヒラギノ角ゴシック W2.ttc</string>
+		<string>SF-Pro-Display-Black.otf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>Main</string>

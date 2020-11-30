@@ -74,7 +74,8 @@ class MyFont {
     static func heavyDigit(ofSize fontSize: CGFloat) -> UIFont {
         let key = "heavy-\(fontSize)"
         if let font = fontCache[key] { return font }
-        fontCache[key] = UIFont.systemFont(ofSize: fontSize, weight: .heavy)
+        fontCache[key] = UIFont(name: "SFProDisplay-Black", size: fontSize)
+            ?? UIFont.systemFont(ofSize: fontSize, weight: .heavy)
         return fontCache[key]!
     }
 }

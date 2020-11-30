@@ -34,7 +34,7 @@ extension TopChartView {
 
         percentLabel = addText(x: 14, y: 6, w: 30, h: 9,
                                text: percent >= 0 ? percentageText : "0%",
-                               font: MyFont.bold(ofSize: getFontSize(h: 9)),
+                               font: MyFont.bold(ofSize: getFontSize(h: 8)),
                                color: .black)
         percentLabel?.textAlignment = .center
         percentLabel?.centerIn(circleFrame)

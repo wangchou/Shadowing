@@ -21,6 +21,7 @@
 		BE3260CA21BFCF5E00A13C94 /* vocabulary2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260C921BFCF5E00A13C94 /* vocabulary2.swift */; };
 		BE3A91422345E10300AEBE1B /* ヒラギノ角ゴシック W2.ttc in Resources */ = {isa = PBXBuildFile; fileRef = BE3A91412345E0FB00AEBE1B /* ヒラギノ角ゴシック W2.ttc */; };
 		BE439C6321DF3AF100C0BE14 /* grammarN4.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE439C6221DF3AF100C0BE14 /* grammarN4.swift */; };
+		BE50D1D92574B0310039CE87 /* SF-Pro-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = BE50D1D82574B0310039CE87 /* SF-Pro-Display-Black.otf */; };
 		BE596466215A0DE100E4AA0C /* travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596465215A0DE100E4AA0C /* travel.swift */; };
 		BE596468215A0DF200E4AA0C /* daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596467215A0DF200E4AA0C /* daily.swift */; };
 		BE59646A215A0E4D00E4AA0C /* polite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596469215A0E4D00E4AA0C /* polite.swift */; };
@@ -142,6 +143,7 @@
 		BE3A91412345E0FB00AEBE1B /* ヒラギノ角ゴシック W2.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ヒラギノ角ゴシック W2.ttc"; sourceTree = "<group>"; };
 		BE439C6221DF3AF100C0BE14 /* grammarN4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = grammarN4.swift; sourceTree = "<group>"; };
 		BE4558282344684D001ACF58 /* Amplitude.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Amplitude.framework; path = Carthage/Build/iOS/Amplitude.framework; sourceTree = "<group>"; };
+		BE50D1D82574B0310039CE87 /* SF-Pro-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Black.otf"; sourceTree = "<group>"; };
 		BE596465215A0DE100E4AA0C /* travel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = travel.swift; sourceTree = "<group>"; };
 		BE596467215A0DF200E4AA0C /* daily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = daily.swift; sourceTree = "<group>"; };
 		BE596469215A0E4D00E4AA0C /* polite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = polite.swift; sourceTree = "<group>"; };
@@ -492,6 +494,7 @@
 		BEBDEDBE208EF09F00C18520 /* Project */ = {
 			isa = PBXGroup;
 			children = (
+				BE50D1D82574B0310039CE87 /* SF-Pro-Display-Black.otf */,
 				BEAF73AF2566D2A9004D29D7 /* sentences20201118.sqlite */,
 				BE67D2A821561A92007FE420 /* Assets.xcassets */,
 				BEBDEDCB208EF0A000C18520 /* Info.plist */,
@@ -673,6 +676,7 @@
 				BE8295D42345D132009DA354 /* ヒラギノ角ゴシック W0.ttc in Resources */,
 				BE28B2C221A3EAB600088214 /* Main.storyboard in Resources */,
 				BE7AFA9C21C9F85A00C41BF4 /* GoogleService-Info.plist in Resources */,
+				BE50D1D92574B0310039CE87 /* SF-Pro-Display-Black.otf in Resources */,
 				BE76F11F214F56F6004E130B /* SentencesTableCell.xib in Resources */,
 				BEB6F6C92182B89D0011E1C1 /* InfoPlist.strings in Resources */,
 				BEEC7FA92154C7AC001C2EFF /* TopBarView.xib in Resources */,
