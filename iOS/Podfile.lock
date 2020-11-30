@@ -108,6 +108,11 @@ PODS:
   - PromisesSwift (1.2.11):
     - PromisesObjC (= 1.2.11)
   - Protobuf (3.13.0)
+  - Realm (10.1.4):
+    - Realm/Headers (= 10.1.4)
+  - Realm/Headers (10.1.4)
+  - RealmSwift (10.1.4):
+    - Realm (= 10.1.4)
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
   - SQLite.swift/standard (0.12.2)
@@ -120,6 +125,7 @@ DEPENDENCIES:
   - Firebase/Crashlytics
   - Firebase/Performance
   - PromisesSwift
+  - RealmSwift
   - SQLite.swift
   - "SwiftSyllables (from `git@github.com:wangchou/SwiftSyllables.git`)"
 
@@ -145,6 +151,8 @@ SPEC REPOS:
     - PromisesObjC
     - PromisesSwift
     - Protobuf
+    - Realm
+    - RealmSwift
     - SQLite.swift
 
 EXTERNAL SOURCES:
@@ -177,9 +185,11 @@ SPEC CHECKSUMS:
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   PromisesSwift: fed4eb6f7a29846a22624d1b86b77e1dedb88724
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
+  Realm: 80f4fb2971ccb9adc27a47d0955ae8e533a7030b
+  RealmSwift: 0e566ca714edb377bba8ea0811eafcea0b93734e
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   SwiftSyllables: c23d5c62647460a387fa29edcb1f181491e74699
 
-PODFILE CHECKSUM: b8a3841ffde6267542fc8eaad4502b0bc5fe3d42
+PODFILE CHECKSUM: bb1bcf8e0fcf88aca3d731544d4e6a470f144b79
 
 COCOAPODS: 1.10.0

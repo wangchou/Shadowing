@@ -22,6 +22,7 @@
 		BE3A91422345E10300AEBE1B /* ヒラギノ角ゴシック W2.ttc in Resources */ = {isa = PBXBuildFile; fileRef = BE3A91412345E0FB00AEBE1B /* ヒラギノ角ゴシック W2.ttc */; };
 		BE439C6321DF3AF100C0BE14 /* grammarN4.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE439C6221DF3AF100C0BE14 /* grammarN4.swift */; };
 		BE50D1D92574B0310039CE87 /* SF-Pro-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = BE50D1D82574B0310039CE87 /* SF-Pro-Display-Black.otf */; };
+		BE50D2012574CD7A0039CE87 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE50D2002574CD7A0039CE87 /* RealmModel.swift */; };
 		BE596466215A0DE100E4AA0C /* travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596465215A0DE100E4AA0C /* travel.swift */; };
 		BE596468215A0DF200E4AA0C /* daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596467215A0DF200E4AA0C /* daily.swift */; };
 		BE59646A215A0E4D00E4AA0C /* polite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596469215A0E4D00E4AA0C /* polite.swift */; };
@@ -144,6 +145,7 @@
 		BE439C6221DF3AF100C0BE14 /* grammarN4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = grammarN4.swift; sourceTree = "<group>"; };
 		BE4558282344684D001ACF58 /* Amplitude.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Amplitude.framework; path = Carthage/Build/iOS/Amplitude.framework; sourceTree = "<group>"; };
 		BE50D1D82574B0310039CE87 /* SF-Pro-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Black.otf"; sourceTree = "<group>"; };
+		BE50D2002574CD7A0039CE87 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		BE596465215A0DE100E4AA0C /* travel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = travel.swift; sourceTree = "<group>"; };
 		BE596467215A0DF200E4AA0C /* daily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = daily.swift; sourceTree = "<group>"; };
 		BE596469215A0E4D00E4AA0C /* polite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = polite.swift; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 				BE6EA1FC218B6BB4004749F5 /* GameLang.swift */,
 				BE76F116214ECC6E004E130B /* GameMiscData.swift */,
 				BEA4E71F21AFB8B800CE6E63 /* GameExpirationDateInMS.swift */,
+				BE50D2002574CD7A0039CE87 /* RealmModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -769,6 +772,7 @@
 				BE11DEC92257110500373586 /* MedalView.swift in Sources */,
 				BEBDEDD9208EF15F00C18520 /* utilities.swift in Sources */,
 				BE439C6321DF3AF100C0BE14 /* grammarN4.swift in Sources */,
+				BE50D2012574CD7A0039CE87 /* RealmModel.swift in Sources */,
 				BEEC7FAF21550818001C2EFF /* TopBarView.swift in Sources */,
 				BEF4B14F219C093800B8E45E /* VoiceSelectionPage.swift in Sources */,
 				BEE665E220BA634600E4E322 /* Colors.swift in Sources */,
