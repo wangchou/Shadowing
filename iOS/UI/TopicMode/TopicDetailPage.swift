@@ -14,6 +14,7 @@ import UIKit
 private let context = GameContext.shared
 
 class TopicDetailPage: UIViewController {
+    static var lastDisplayed: TopicDetailPage?
     static var isChallengeButtonDisabled = false
     var isViewReady = false
 
@@ -56,6 +57,7 @@ class TopicDetailPage: UIViewController {
             IAPHelper.shared.requsestProducts()
         }
         render()
+        TopicDetailPage.lastDisplayed = self
     }
 
     func render() {

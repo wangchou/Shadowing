@@ -46,7 +46,7 @@ class GameFlow {
     private var isPaused: Bool = false
     private var isNeedToStopPromiseChain = false
     private var timer: Timer?
-    private var wait: Promise<Void> = Promise<Void>.pending()
+    private var wait = Promise<Void>.pending()
     private var gameSeconds: Int = 0
 
     static let shared = GameFlow()
@@ -57,7 +57,6 @@ class GameFlow {
 
     func start() {
         isPaused = false
-
         wait = fulfilledVoidPromise()
 
         startCommandObserving(self)
@@ -102,7 +101,10 @@ class GameFlow {
             .catch { error in
                 print("Promise chain is dead", error)
             }
-            .always {
+            .always { [weak self] in
+                guard let self = self else { return }
+                self.wait.fulfill(())
+
                 // Click skipNext  => stop previous game's promise chain
                 if self.isNeedToStopPromiseChain {
                     self.isNeedToStopPromiseChain = false

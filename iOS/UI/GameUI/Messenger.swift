@@ -90,6 +90,14 @@ class Messenger: UIViewController {
             DispatchQueue.main.async {
                 MedalPage.shared?.medalPageView?.render()
             }
+        } else if context.gameMode == .infiniteChallengeMode {
+            DispatchQueue.main.async {
+                InfiniteChallengePage.lastDisplayed?.infoView?.render()
+            }
+        } else if context.gameMode == .topicMode {
+            DispatchQueue.main.async {
+                TopicDetailPage.lastDisplayed?.render()
+            }
         }
     }
 

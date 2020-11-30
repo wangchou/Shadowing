@@ -12,6 +12,7 @@ import UIKit
 private let context = GameContext.shared
 
 class InfiniteChallengePage: UIViewController {
+    static var lastDisplayed: InfiniteChallengePage?
     @IBOutlet var topBarView: TopBarView!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var blockView: UIView!
@@ -64,6 +65,7 @@ class InfiniteChallengePage: UIViewController {
 
         blockInfo.text = "「\(lastLevel.title)」< \(lastLevel.lockPercentage.i)%"
         tableView.reloadData()
+        InfiniteChallengePage.lastDisplayed = self
     }
 
     func updateUI() {
