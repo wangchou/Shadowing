@@ -31,10 +31,12 @@ import Foundation
                  lang: Lang = .unset,
                  ttsFixes: [(String, String)] = []
         ) -> Promise<Void> {
-            SpeechEngine.shared.stopListeningAndSpeaking()
+            stop()
             synthesizer.delegate = self
             let isJa = lang == .ja
-            getFixedTTSString(text, localFixes: ttsFixes, isJa: isJa).then { ttsString, ttsToDisplayMap in
+            getFixedTTSString(text,
+                              localFixes: ttsFixes,
+                              isJa: isJa).then { ttsString, ttsToDisplayMap in
                 self.lastString = text
                 self.ttsToDisplayMap = ttsToDisplayMap
                 let utterance = AVSpeechUtterance(string: ttsString)
@@ -64,10 +66,9 @@ import Foundation
             return promise
         }
 
-        // for preload
-        func slientSay(voiceId: String) -> Promise<Void> {
+        // silent speak
+        func preloadVoice(voiceId: String) -> Promise<Void> {
             if let voice = AVSpeechSynthesisVoice(identifier: voiceId) {
-                print(#function, voiceId)
                 synthesizer.delegate = self
                 let utterance = AVSpeechUtterance(string: "hi")
                 utterance.voice = voice
@@ -82,8 +83,10 @@ import Foundation
         }
 
         func stop() {
-            synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
-            promise.fulfill(())
+            if synthesizer.isSpeaking {
+                synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
+                promise.fulfill(())
+            }
         }
 
         func fixRange(characterRange: NSRange, ttsToDisplayMap: [Int]) -> NSRange {

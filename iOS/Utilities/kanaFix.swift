@@ -126,7 +126,7 @@ let ttsGlobalFixes: [(String, String)] = [
     ("弾いて", "ひいて"),
 ]
 
-func getUpdateTextMap(
+func getUpdatedTextMap(
     map: [Int],
     ranges: [(lower: Int, upper: Int)],
     fixString: String) -> [Int] {
@@ -146,6 +146,7 @@ func getFixedTTSString(_ text: String, localFixes: [(String, String)], isJa: Boo
         return promise
     }
 
+    // need to tokenInfos to get displayed text
     var fixedText = ""
     getKanaTokenInfos(text, originalString: text).then { tokenInfos in
         tokenInfos.forEach { tokenInfo in
@@ -159,24 +160,11 @@ func getFixedTTSString(_ text: String, localFixes: [(String, String)], isJa: Boo
         allFixes.forEach { kanji, fix in
             let ranges = fixedText.ranges(of: kanji)
             if !ranges.isEmpty {
-//                if(kanji.count != fix.count) {
-//                    print(fixedText, fixedText.count)
-//                }
-                ttsToDisplayMap = getUpdateTextMap(map: ttsToDisplayMap,
+                ttsToDisplayMap = getUpdatedTextMap(map: ttsToDisplayMap,
                                                   ranges: ranges,
                                                   fixString: fix)
                 fixedText = fixedText.replacingOccurrences(of: kanji, with: fix)
-//                if(kanji.count != fix.count) {
-//                    print("\t\(kanji) -> \(fix)", ranges)
-//                    print("\t ttsMap(\(ttsToDisplayMap.count)) :", ttsToDisplayMap)
-//                    print("\t ttsText(\(fixedText.count)):", fixedText)
-//                }
             }
-        }
-        if !localFixes.isEmpty {
-            print("\n==================")
-            print("ttsFixes: \(localFixes)", "before: \(text)", "after: \(fixedText)" )
-            print("==================\n")
         }
 
         promise.fulfill((fixedText, ttsToDisplayMap))
