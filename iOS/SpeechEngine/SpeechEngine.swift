@@ -66,8 +66,6 @@ class SpeechEngine {
     func preloadTTSVoice() {
         _ = tts0.preloadVoice(voiceId: context.gameSetting.teacher)
         _ = tts1.preloadVoice(voiceId: context.gameSetting.assistant)
-        _ = tts0.preloadVoice(voiceId: context.gameSetting.translator)
-        _ = tts1.preloadVoice(voiceId: context.gameSetting.narrator)
     }
 
     func restart() {
@@ -292,7 +290,7 @@ func translatorSay(_ text: String) -> Promise<Void> {
     print("translator:", voiceId, text)
     return engine.speak(text: text,
                         speaker: voiceId,
-                        rate: context.translatorNormalRate,
+                        rate: context.translatorFastRate,
                         lang: context.gameSetting.translationLang)
 }
 

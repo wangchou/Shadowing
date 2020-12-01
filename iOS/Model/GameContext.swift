@@ -82,8 +82,8 @@ class GameContext {
         return teachingRate > fastRate ? teachingRate : fastRate
     }
 
-    var translatorNormalRate: Float {
-        return teachingRate > normalRate ? teachingRate : normalRate
+    var translatorFastRate: Float {
+        return teachingRate > fastRate ? teachingRate : fastRate
     }
 
     var gameTitleToSpeak: String {
