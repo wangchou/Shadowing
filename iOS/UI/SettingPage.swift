@@ -48,6 +48,7 @@ class SettingPage: UITableViewController {
 
     @IBOutlet var gotoIOSSettingButton: UIButton!
     @IBOutlet var gotoAppStoreButton: UIButton!
+    @IBOutlet var gotoAcknowledgeButton: UIButton!
 
     var teacher: AVSpeechSynthesisVoice? {
         return AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher) ??
@@ -109,6 +110,7 @@ class SettingPage: UITableViewController {
 
         gotoIOSSettingButton.setTitle(i18n.gotoIOSSettingButtonTitle, for: .normal)
         gotoAppStoreButton.setTitle(i18n.gotoAppStore, for: .normal)
+        gotoAcknowledgeButton.setTitle(i18n.gotoAcknowledge, for: .normal)
 
         practiceSpeedSlider.isContinuous = false
         practiceSpeedSlider.value = setting.practiceSpeed
@@ -265,6 +267,11 @@ class SettingPage: UITableViewController {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         }
+    }
+
+    @IBAction func gotoAcknowledge(_ sender: Any) {
+        InfoPage.content = i18n.acknowledgement
+        launchVC(InfoPage.id)
     }
 
     // MARK: - Section Title

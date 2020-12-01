@@ -787,7 +787,7 @@ A: 作者的經驗，通常是</string>
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content">，來把音訊傳給Apple 辨識。
+                                        <mutableString key="content">，來把音訊傳給Apple 辨識。
 
 =&gt; 如果到 Apple 的網路不順，他們收到的就是很多雜訊的聲音，就會亂辨識。 
 另外，如果是音量的問題用 iPhone 附的有線耳麥會好很多。
@@ -810,7 +810,7 @@ Lv.1 (0~50徽章)：平均正確率 &gt; 60%，就會持續上升。
 Lv.2 (50~100徽章)：平均正確率 &gt; 70%，就會持續上升。
 ...
 Lv.10 (450~500徽章)：平均正確率 &gt; 85%，就會持續上升。
-</string>
+</mutableString>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="18" name="PingFangTC-Regular"/>
@@ -857,7 +857,7 @@ Cg
                                             <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="感謝，曾參與測試">
+                                    <fragment content="感謝，曾參與">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="24" name="PingFangTC-Semibold"/>
@@ -865,7 +865,7 @@ Cg
                                             <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="、回報問題">
+                                    <fragment content="設計、測試問題">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="24" name="PingFangTC-Semibold"/>
@@ -885,8 +885,8 @@ Cg
 Amber Liu
 Eason Chou
 Jennifer Chen
-kaminomi (PTT)
-msglight4874 (PTT)
+kaminomi
+msglight4874
 Satolu
 Sid Weng
 Stella
@@ -944,6 +944,7 @@ Cg
                     </view>
                     <connections>
                         <outlet property="closeButton" destination="mgY-P7-HmR" id="b47-ru-p5c"/>
+                        <outlet property="textView" destination="xxo-M8-yBK" id="znX-rb-fEg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v0w-0j-HYO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1503,7 +1504,7 @@ Cg
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="語音" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VM8-cs-FsY">
-                                                    <rect key="frame" x="20" y="11.666666666666664" width="35" height="21"/>
+                                                    <rect key="frame" x="8" y="11.666666666666664" width="35" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1621,6 +1622,38 @@ Cg
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="" id="ip6-UM-DL1" userLabel="Go to IOS Setting">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="XvQ-Tt-fqv">
+                                        <rect key="frame" x="0.0" y="1277.6666660308838" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XvQ-Tt-fqv" id="pSk-qJ-Krk">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5p4-aB-CAT">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <state key="normal" title="致謝">
+                                                        <color key="titleColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="gotoAcknowledge:" destination="pxg-jG-gsh" eventType="touchUpInside" id="s2A-Vl-WAY"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="5p4-aB-CAT" firstAttribute="top" secondItem="pSk-qJ-Krk" secondAttribute="top" id="57L-In-DhR"/>
+                                                <constraint firstItem="5p4-aB-CAT" firstAttribute="leading" secondItem="pSk-qJ-Krk" secondAttribute="leading" id="82K-kK-LpT"/>
+                                                <constraint firstItem="5p4-aB-CAT" firstAttribute="centerX" secondItem="pSk-qJ-Krk" secondAttribute="centerX" id="PJv-iS-zP8"/>
+                                                <constraint firstAttribute="bottom" secondItem="5p4-aB-CAT" secondAttribute="bottom" id="i46-jj-mAe"/>
+                                                <constraint firstAttribute="trailing" secondItem="5p4-aB-CAT" secondAttribute="trailing" id="q2a-VI-lN0"/>
+                                                <constraint firstItem="5p4-aB-CAT" firstAttribute="centerY" secondItem="pSk-qJ-Krk" secondAttribute="centerY" id="zjg-1c-yB9"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="pxg-jG-gsh" id="jbC-Ns-0Yf"/>
@@ -1634,6 +1667,7 @@ Cg
                         <outlet property="gameLangSegmentControl" destination="cZC-Zx-nez" id="un1-mf-nip"/>
                         <outlet property="gameSpeedFastLabel" destination="Igd-ll-31p" id="xFI-YR-zz7"/>
                         <outlet property="gameSpeedSlider" destination="W34-8M-0SC" id="FbG-6Z-PjZ"/>
+                        <outlet property="gotoAcknowledgeButton" destination="5p4-aB-CAT" id="2fq-58-rVa"/>
                         <outlet property="gotoAppStoreButton" destination="Cgn-Cn-7aR" id="LRi-or-IFH"/>
                         <outlet property="gotoIOSSettingButton" destination="3U2-5G-XCz" id="5UJ-oO-YJ4"/>
                         <outlet property="learningModeLabel" destination="VM1-q9-0NV" id="ZAc-Ij-TF8"/>
