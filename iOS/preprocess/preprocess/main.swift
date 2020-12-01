@@ -36,12 +36,18 @@ print(rows.count)
 
 // checkKanaFixes(rows: rows)
 // checkTTSFixes(rows: rows)
-
+private var isCopyOnly = true
 private var realm: Realm!
 
 func createWritableDB() {
     do {
-        realm = try Realm()
+        if isCopyOnly {
+            let config = Realm.Configuration(
+                readOnly: true)
+            realm = try Realm(configuration: config)
+        } else {
+            realm = try Realm()
+        }
     } catch {
         print("db update error: \(error)")
     }
@@ -300,14 +306,53 @@ func addEnInfoTables() {
     }
     print("totalEnCount: \(totalEnCount)")
 }
+
+func encryptDBAndCopy() {
+    if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+        let fileURL = dir.appendingPathComponent("default.realm")
+        print(fileURL)
+        do {
+            // Generate 64 bytes of random data to serve as the encryption key
+            let key = NSMutableData(length: 64)!
+            let status = SecRandomCopyBytes(kSecRandomDefault,
+                                           key.length,
+                                           key.mutableBytes)
+            guard status == 0 else {
+                print("generate key failed")
+                return
+            }
+            print((key as Data).hexadecimal)
+            try realm.writeCopy(toFile: fileURL,
+                                encryptionKey: key as Data)
+            print("copy and encrypted to fileURL: \(fileURL)")
+        } catch {
+            print(error)
+        }
+    }
+}
+
 func runAll() {
     createWritableDB()
-    addTokenInfosTable()
-    addSentencesTable()
-    addStringToIdTable()
-    addJpInfoTables()
-    addEnInfoTables()
-    print("fileURL: \(realm.configuration.fileURL!)")
+    if !isCopyOnly {
+        addTokenInfosTable()
+        addSentencesTable()
+        addStringToIdTable()
+        addJpInfoTables()
+        addEnInfoTables()
+        print("unencrypted fileURL: \(realm.configuration.fileURL!)")
+    }
+    encryptDBAndCopy()
 }
 
 runAll()
+
+// https://stackoverflow.com/a/26502285/2797799
+extension Data {
+
+    /// Hexadecimal string representation of `Data` object.
+
+    var hexadecimal: String {
+        return map { String(format: "%02x", $0) }
+            .joined()
+    }
+}

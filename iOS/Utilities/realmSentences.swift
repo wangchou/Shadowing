@@ -62,6 +62,7 @@ var topicSentencesInfos: [String: TopicSentenceInfo] = [:]
 
 let config = Realm.Configuration(
     fileURL: Bundle.main.url(forResource: "default", withExtension: "realm"),
+    encryptionKey: dbKey,
     readOnly: true)
 
 private let realm = try! Realm(configuration: config)
