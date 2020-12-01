@@ -64,6 +64,23 @@ import Foundation
             return promise
         }
 
+        // for preload
+        func slientSay(voiceId: String) -> Promise<Void> {
+            if let voice = AVSpeechSynthesisVoice(identifier: voiceId) {
+                print(#function, voiceId)
+                synthesizer.delegate = self
+                let utterance = AVSpeechUtterance(string: "hi")
+                utterance.voice = voice
+                utterance.rate = AVSpeechUtteranceMaximumSpeechRate
+                utterance.volume = 0
+                ttsToDisplayMap = [0, 1]
+                self.synthesizer.speak(utterance)
+                promise = Promise<Void>.pending()
+                return promise
+            }
+            return fulfilledVoidPromise()
+        }
+
         func stop() {
             synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
             promise.fulfill(())

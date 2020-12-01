@@ -60,6 +60,18 @@ struct GameSetting: Codable {
             }
         }
     }
+
+    var narrator: String {
+        var speaker: String
+        if i18n.isJa {
+            speaker = gameLang == .ja ? context.gameSetting.assistant : context.gameSetting.translatorJp
+        } else if i18n.isZh {
+            speaker = context.gameSetting.translatorZh
+        } else {
+            speaker = gameLang == .en ? context.gameSetting.assistant : context.gameSetting.translatorEn
+        }
+        return speaker
+    }
     // voice id ended
 
     init() {}

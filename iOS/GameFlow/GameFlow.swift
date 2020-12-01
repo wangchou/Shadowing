@@ -61,6 +61,7 @@ class GameFlow {
 
         startCommandObserving(self)
         SpeechEngine.shared.start()
+        SpeechEngine.shared.preloadTTSVoice()
         context.gameState = .justStarted
         context.gameRecord?.startedTime = Date()
 
@@ -70,17 +71,17 @@ class GameFlow {
 
         Promises.all([
             waitKanaInfoLoaded,
-            waitDifficultyDBLoaded
-            ])
-            .then { _ in
-                return speakTitle()
-            }
-            .then(tryWait)
-            .then(speakNarratorString)
-            .then(tryWait)
-            .always {
-                self.learnNextSentence()
-            }
+            waitDifficultyDBLoaded,
+        ])
+        .then { _ in
+            return speakTitle()
+        }
+        .then(tryWait)
+        .then(speakNarratorString)
+        .then(tryWait)
+        .always {
+            self.learnNextSentence()
+        }
     }
 
     // Flow for learn a sentence

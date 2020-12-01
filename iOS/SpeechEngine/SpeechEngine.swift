@@ -29,13 +29,22 @@ class SpeechEngine {
     private var speechRecognizer = SpeechRecognizer.shared
 
     // two tts for preventing fullfill previous promise
-    private var tts: TTS {
-        return currentTTSIdx % 2 == 0 ? tts1 : tts2
-    }
+//    private var tts: TTS {
+//        switch currentTTSIdx % 3 {
+//        case 1:
+//            return tts1
+//        case 2:
+//            return tts2
+//        default:
+//            return tts0
+//        }
+//    }
 
     private var currentTTSIdx = 0
-    private var tts1 = TTS()
-    private var tts2 = TTS()
+    private var tts0 = TTS() // teacher
+    private var tts1 = TTS() // assistant
+    private var tts2 = TTS() // translator
+    private var tts3 = TTS() // narrator
 
     // MARK: - Public Funtions
 
@@ -53,6 +62,12 @@ class SpeechEngine {
         }
     }
 
+    // elimiated delay
+    func preloadTTSVoice() {
+        _ = tts0.slientSay(voiceId: context.gameSetting.teacher)
+        _ = tts1.slientSay(voiceId: context.gameSetting.assistant)
+    }
+
     func restart() {
         stop()
         start()
@@ -64,11 +79,17 @@ class SpeechEngine {
 
     func stopListeningAndSpeaking() {
         speechRecognizer.endAudio()
+        if tts0.synthesizer.isSpeaking {
+            tts0.stop()
+        }
         if tts1.synthesizer.isSpeaking {
             tts1.stop()
         }
         if tts2.synthesizer.isSpeaking {
             tts2.stop()
+        }
+        if tts3.synthesizer.isSpeaking {
+            tts3.stop()
         }
     }
 
@@ -85,7 +106,10 @@ class SpeechEngine {
         guard isEngineRunning else { return }
 
         if isStopTTS {
-            tts.stop()
+            tts0.stop()
+            tts1.stop()
+            tts2.stop()
+            tts3.stop()
         }
 
         guard !isSimulator else { return }
@@ -205,6 +229,20 @@ extension SpeechEngine {
             return fulfilledVoidPromise()
         }
         currentTTSIdx += 1
+
+        let tts: TTS!
+        switch speaker {
+        case context.gameSetting.teacher:
+            tts = tts0
+        case context.gameSetting.assistant:
+            tts = tts1
+        case context.gameSetting.translator:
+            tts = tts2
+        case context.gameSetting.narrator:
+            tts = tts3
+        default:
+            tts = tts3
+        }
         return tts.say(
             text,
             voiceId: speaker,
@@ -226,16 +264,8 @@ func speakTitle() -> Promise<Void> {
 }
 
 func narratorSay(_ text: String) -> Promise<Void> {
-    var speaker: String
-    if i18n.isJa {
-        speaker = gameLang == .ja ? context.gameSetting.assistant : context.gameSetting.translatorJp
-    } else if i18n.isZh {
-        speaker = context.gameSetting.translatorZh
-    } else {
-        speaker = gameLang == .en ? context.gameSetting.assistant : context.gameSetting.translatorEn
-    }
     return engine.speak(text: text,
-                        speaker: speaker,
+                        speaker: context.gameSetting.narrator,
                         rate: context.assistantRate,
                         lang: i18n.lang)
 }

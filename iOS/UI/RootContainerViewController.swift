@@ -53,6 +53,8 @@ class RootContainerViewController: UIViewController {
         initDB()
         loadGameLang()
         loadGameSetting()
+        SpeechEngine.shared.preloadTTSVoice()
+
         loadMedalCount()
 
         loadTopicSentenceDB()
