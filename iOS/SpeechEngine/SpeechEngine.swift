@@ -66,6 +66,8 @@ class SpeechEngine {
     func preloadTTSVoice() {
         _ = tts0.preloadVoice(voiceId: context.gameSetting.teacher)
         _ = tts1.preloadVoice(voiceId: context.gameSetting.assistant)
+        _ = tts0.preloadVoice(voiceId: context.gameSetting.translator)
+        _ = tts1.preloadVoice(voiceId: context.gameSetting.narrator)
     }
 
     func restart() {
