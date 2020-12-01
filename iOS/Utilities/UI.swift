@@ -183,7 +183,7 @@ extension UIScrollView {
 
 extension UIApplication {
     class func getPresentedViewController() -> UIViewController? {
-        var presentViewController = UIApplication.shared.keyWindow?.rootViewController
+        var presentViewController = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController
         while let pVC = presentViewController?.presentedViewController {
             presentViewController = pVC
         }

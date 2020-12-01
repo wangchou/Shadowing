@@ -50,6 +50,7 @@ class RootContainerViewController: UIViewController {
 
     private func loadStartupData() {
         let t1 = getNow()
+        initDB()
         loadGameLang()
         loadGameSetting()
         loadMedalCount()

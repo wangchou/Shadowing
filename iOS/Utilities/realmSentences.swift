@@ -65,8 +65,15 @@ let config = Realm.Configuration(
     encryptionKey: dbKey,
     readOnly: true)
 
-private let realm = try! Realm(configuration: config)
+private var realm: Realm!
 
+func initDB() {
+    do {
+        realm = try Realm(configuration: config)
+    } catch {
+        print(error.localizedDescription)
+    }
+}
 #if os(iOS)
     var waitDifficultyDBLoaded = Promise<Void>.pending()
     func loadDifficultyInfo() {
@@ -89,6 +96,7 @@ private let realm = try! Realm(configuration: config)
     }
 
 func loadTopicSentenceDB() {
+    let t1 = getNow()
     guard topicSentencesInfos.isEmpty else { return }
 
     let topicSentences = rawDataSets.flatMap { $0 }
@@ -100,6 +108,7 @@ func loadTopicSentenceDB() {
             print("cannot find tokenInfos with ja = \(ja)")
         }
     }
+    print("topicSentences loaded in \(getNow() - t1)")
 }
 
 func loadTokenInfos(ja: String) {

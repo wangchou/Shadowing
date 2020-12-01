@@ -8,8 +8,7 @@ import Foundation
 //  Copyright © 平成30年 Lu, WangChou. All rights reserved.
 //
 import UIKit
-
-let IDIOM = UI_USER_INTERFACE_IDIOM()
+let IDIOM = UIDevice.current.userInterfaceIdiom
 let isIPad = IDIOM == UIUserInterfaceIdiom.pad
 let iconSize = isIPad ? "48pt" : "24pt"
 
@@ -37,7 +36,7 @@ let micOutVolume: Float = 0
 // safe area padding
 func getTopPadding() -> CGFloat {
     if #available(iOS 11.0, *) {
-        let window = UIApplication.shared.keyWindow
+        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
         return window?.safeAreaInsets.top ?? 0
     }
     return 0
@@ -45,7 +44,7 @@ func getTopPadding() -> CGFloat {
 
 func getBottomPadding() -> CGFloat {
     if #available(iOS 11.0, *) {
-        let window = UIApplication.shared.keyWindow
+        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
         return window?.safeAreaInsets.bottom ?? 0
     }
     return 0

@@ -4,7 +4,7 @@
 //
 //  Created by Wangchou Lu on R 2/11/12.
 //
-
+// swiftlint:disable force_try
 import Foundation
 import Promises
 import SwiftSyllables
