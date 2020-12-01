@@ -115,8 +115,6 @@ func loadTokenInfos(ja: String) {
     if let rmTokenInfos = realm.object(ofType: RMTokenInfos.self, forPrimaryKey: ja) {
         kanaTokenInfosCacheDictionary[ja] = stringToTokenInfos(jsonString: rmTokenInfos.tokenInfos)
         topicSentencesInfos[ja] = TopicSentenceInfo(ja: ja, kanaCount: rmTokenInfos.kanaCount)
-    } else {
-        print("cannot find tokenInfos with ja = \(ja)")
     }
 }
 
