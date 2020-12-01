@@ -76,6 +76,8 @@ class VoiceSelectionPage: UIViewController {
     var testSentence: String {
         if let voice = selectedVoice {
             let jaHello = "こんにちは、私の名前は\(voice.name)です。"
+                .replacingOccurrences(of: "Otoya", with: " オトヤ ")
+                .replacingOccurrences(of: "Kyoko", with: " 京子 ")
             let enHello = "Hello. My name is \(voice.name)."
             let zhHello = "你好，我的名字是\(voice.name)"
             switch selectingVoiceFor {
