@@ -198,7 +198,7 @@ class SpeechEngine {
             return
         }
         switch reason {
-        case .newDeviceAvailable, .oldDeviceUnavailable, .override, .categoryChange:
+        case .newDeviceAvailable, .oldDeviceUnavailable, .override:
             print("route change notification:", reason.rawValue)
             if isEngineRunning {
                 restart()
