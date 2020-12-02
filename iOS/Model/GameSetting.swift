@@ -19,7 +19,9 @@ struct GameSetting: Codable {
 
     var learningMode: LearningMode = .speakingOnly
     var isShowTranslation: Bool = false
-    var isShowOriginal: Bool = true
+    var isShowOriginal: Bool {
+        return !isShowTranslation
+    }
     var isSpeakTranslation: Bool = false
     var isSpeakOriginal: Bool = true
 
@@ -96,7 +98,6 @@ struct GameSetting: Codable {
         isShowTranslation = try container.decodeIfPresent(Bool.self, forKey: .isShowTranslation) ?? isShowTranslation
         isSpeakTranslation = try container.decodeIfPresent(Bool.self, forKey: .isSpeakTranslation) ?? isSpeakTranslation
 
-        isShowOriginal = try container.decodeIfPresent(Bool.self, forKey: .isShowOriginal) ?? isShowOriginal
         isSpeakOriginal = try container.decodeIfPresent(Bool.self, forKey: .isSpeakOriginal) ?? isSpeakOriginal
 
         translationLang = try container.decodeIfPresent(Lang.self, forKey: .translationLang) ?? translationLang

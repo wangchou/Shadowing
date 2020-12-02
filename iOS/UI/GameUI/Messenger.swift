@@ -35,10 +35,9 @@ class Messenger: UIViewController {
     @IBOutlet var overlayView: UIView!
     @IBOutlet var speedSlider: UISlider!
     @IBOutlet var speedLabel: UILabel!
-    @IBOutlet var showTranslationLabel: UILabel!
-    @IBOutlet var showTranslationSwitch: UISwitch!
-    @IBOutlet var showOriginalLabel: UILabel!
-    @IBOutlet var showOriginalSwitch: UISwitch!
+    @IBOutlet var showOptionLabel: UILabel!
+    @IBOutlet var showOptionSegment: UISegmentedControl!
+
     @IBOutlet var learningModeLabel: UILabel!
     @IBOutlet var learningModeSegmentControl: UISegmentedControl!
     @IBOutlet var repeatOneSwitchButton: UIButton!
@@ -116,20 +115,16 @@ class Messenger: UIViewController {
     func renderOverlayView() {
         let i18n = I18n.shared
 
-        showTranslationLabel.text = i18n.showTranslationLabel
-        showOriginalLabel.text = i18n.showOriginalLabel
-        speedLabel.text = i18n.speed
-
         speedSlider.minimumValue = AVSpeechUtteranceMinimumSpeechRate
         speedSlider.maximumValue = AVSpeechUtteranceMaximumSpeechRate * 0.75
 
-        showTranslationSwitch.isOn = context.gameSetting.isShowTranslation
-        showTranslationSwitch.isEnabled = context.gameSetting.learningMode != .interpretation
-        showTranslationLabel.textColor = context.gameSetting.learningMode != .interpretation ? .white : UIColor.white.withAlphaComponent(0.3)
+        showOptionSegment.setTitle(i18n.translated, forSegmentAt: 0)
+        showOptionSegment.setTitle(i18n.original, forSegmentAt: 1)
 
-        showOriginalSwitch.isOn = context.gameSetting.isShowOriginal
-        showOriginalSwitch.isEnabled = context.gameSetting.learningMode != .interpretation
-        showOriginalLabel.textColor = context.gameSetting.learningMode != .interpretation ? .white : UIColor.white.withAlphaComponent(0.3)
+        showOptionLabel.text = i18n.showOptionLabel
+        showOptionSegment.selectedSegmentIndex = context.gameSetting.isShowTranslation ? 0 : 1
+        showOptionSegment.isEnabled = context.gameSetting.learningMode != .interpretation
+        showOptionLabel.textColor = context.gameSetting.learningMode != .interpretation ? .white : UIColor.white.withAlphaComponent(0.3)
 
         speedSlider.value = context.gameSetting.gameSpeed
         fastLabel.text = String(format: "%.2fx", context.gameSetting.gameSpeed * 2)
@@ -269,13 +264,8 @@ class Messenger: UIViewController {
         renderOverlayView()
     }
 
-    @IBAction func showTranslationSwitchValueChanged(_: Any) {
-        context.gameSetting.isShowTranslation = showTranslationSwitch.isOn
-        saveGameSetting()
-        renderOverlayView()
-    }
-    @IBAction func showOriginalSwitchValueChanged(_ sender: Any) {
-        context.gameSetting.isShowOriginal = showOriginalSwitch.isOn
+    @IBAction func showOptionSegmentValueChanged(_ sender: Any) {
+        context.gameSetting.isShowTranslation = showOptionSegment.selectedSegmentIndex == 0
         saveGameSetting()
         renderOverlayView()
     }

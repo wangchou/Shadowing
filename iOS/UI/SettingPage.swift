@@ -27,11 +27,8 @@ class SettingPage: UITableViewController {
     @IBOutlet var translationLanguageLabel: UILabel!
     @IBOutlet var translationLanguageSegment: UISegmentedControl!
 
-    @IBOutlet var showTranslationLabel: UILabel!
-    @IBOutlet var showTranslationSwitch: UISwitch!
-
-    @IBOutlet var showOriginalLabel: UILabel!
-    @IBOutlet var showOriginalSwitch: UISwitch!
+    @IBOutlet var showOptionLabel: UILabel!
+    @IBOutlet var showOptionSegmentControl: UISegmentedControl!
 
     @IBOutlet var narratorLabel: UILabel!
     @IBOutlet var narratorSwitch: UISwitch!
@@ -97,8 +94,6 @@ class SettingPage: UITableViewController {
 
         narratorLabel.text = i18n.narratorLabel
         translationLanguageLabel.text = i18n.translationLanguageLabel
-        showTranslationLabel.text = i18n.showTranslationLabel
-        showOriginalLabel.text = i18n.showOriginalLabel
         monitoringLabel.text = i18n.monitoringLabel
         wantToSayLabel.text = i18n.wantToSayLabel
 
@@ -137,12 +132,13 @@ class SettingPage: UITableViewController {
 
         monitoringVolumeLabel.text = (setting.monitoringVolume > 0 ? "+":"") + String(format: "%ddb", setting.monitoringVolume)
 
-        showTranslationSwitch.isOn = setting.isShowTranslation
+        showOptionSegmentControl.selectedSegmentIndex = setting.isShowTranslation ? 0 : 1
+        showOptionLabel.text = i18n.showOptionLabel
+        showOptionSegmentControl.setTitle(i18n.translated, forSegmentAt: 0)
+        showOptionSegmentControl.setTitle(i18n.original, forSegmentAt: 1)
 
-        showTranslationSwitch.isEnabled = context.gameSetting.learningMode != .interpretation
-        showTranslationLabel.textColor = context.gameSetting.learningMode != .interpretation ? .black : minorTextColor
-        showOriginalSwitch.isEnabled = context.gameSetting.learningMode != .interpretation
-        showOriginalLabel.textColor = context.gameSetting.learningMode != .interpretation ? .black : minorTextColor
+        showOptionSegmentControl.isEnabled = context.gameSetting.learningMode != .interpretation
+        showOptionLabel.textColor = context.gameSetting.learningMode != .interpretation ? .black : minorTextColor
 
         initLearningModeSegmentControl(label: learningModeLabel, control: learningModeSegmentControl)
     }
@@ -185,13 +181,8 @@ class SettingPage: UITableViewController {
         render()
     }
 
-    @IBAction func showTranslationSwitchValueChanged(_: Any) {
-        context.gameSetting.isShowTranslation = showTranslationSwitch.isOn
-        saveGameSetting()
-    }
-
-    @IBAction func showOriginalSwitchValueChanged(_ sender: Any) {
-        context.gameSetting.isShowOriginal = showOriginalSwitch.isOn
+    @IBAction func showOptionSegmentControlValueChanged(_ sender: Any) {
+        context.gameSetting.isShowTranslation = showOptionSegmentControl.selectedSegmentIndex == 0
         saveGameSetting()
     }
 
@@ -334,9 +325,8 @@ func actOnLearningModeSegmentControlValueChanged(control: UISegmentedControl) {
     case .interpretation:
         context.gameSetting.isSpeakTranslation = true
         context.gameSetting.isSpeakOriginal = false
-        
+
         context.gameSetting.isShowTranslation = false
-        context.gameSetting.isShowOriginal = true
     }
     saveGameSetting()
 }

@@ -65,8 +65,8 @@ class I18n {
 
     var narratorLabel: String {
         if isJa { return "挑戦の説明" }
-        if isZh { return "挑戰的語音說明" }
-        return "Initial Description"
+        if isZh { return "語音說明" }
+        return "Description"
     }
 
     var translationLanguageLabel: String {
@@ -75,16 +75,23 @@ class I18n {
         return "Translation Lang"
     }
 
-    var showTranslationLabel: String {
-        if isJa { return "翻訳を表示する" }
-        if isZh { return "顯示翻譯" }
-        return "Show Translation"
+    var translated: String {
+        if isJa { return "翻訳" }
+        if isZh { return "翻譯" }
+        return "Translated"
     }
 
-    var showOriginalLabel: String {
-        if isJa { return "原文を表示する" }
-        if isZh { return "顯示原文" }
-        return "Show Original Sent."
+
+    var original: String {
+        if isJa { return "原文" }
+        if isZh { return "原文" }
+        return "Original"
+    }
+
+    var showOptionLabel: String {
+        if isJa { return "表示オプション" }
+        if isZh { return "顯示文字" }
+        return "Show"
     }
 
     var monitoringLabel: String {
@@ -335,7 +342,7 @@ class I18n {
     var wantToSayLabel: String {
         if isJa { return "今話したいのは" }
         if isZh { return "我現在想說" }
-        return "It's time to speak "
+        return "I like to speak "
     }
 
     var setting: String {
@@ -740,7 +747,7 @@ class I18n {
     var echoMethod: String {
         if isJa { return "エコー法" }
         if isZh { return "回音法" }
-        return "Mind Echo"
+        return "Echo"
     }
 
     var listenToEcho: String {
@@ -941,8 +948,8 @@ class I18n {
 
             Tanaka Corpus (英、日對照句子)
             Tatoeba.org (英、日、中句子)
-            OpenCC (簡 -> 繁, 中文轉換)
-            MeCab-neologd (日文自然語言處理)
+            OpenCC (中文轉換)
+            mecab-neologd (日文自然語言處理)
             台灣大考中心六級英文單字表
 
 
@@ -956,8 +963,8 @@ class I18n {
 
         Tanaka Corpus (sentences)
         Tatoeba.org (sentences)
-        OpenCC (simplified Chinese -> traditional Chinese)
-        MeCab-neologd (nlp for Japanese)
+        OpenCC (Chinese Conversion)
+        mecab-neologd (nlp for Japanese)
         English vocabuly list from Taiwan College Entrance Center
 
 

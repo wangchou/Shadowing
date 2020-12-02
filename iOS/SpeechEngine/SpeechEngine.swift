@@ -52,8 +52,8 @@ class SpeechEngine {
 
     // elimiated delay
     func preloadTTSVoice() {
-        _ = tts0.preloadVoice(voiceId: context.gameSetting.teacher)
-        _ = tts1.preloadVoice(voiceId: context.gameSetting.assistant)
+        tts0.preloadVoice(voiceId: context.gameSetting.teacher)
+        tts1.preloadVoice(voiceId: context.gameSetting.assistant)
     }
 
     func restart() {
