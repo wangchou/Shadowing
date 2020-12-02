@@ -22,8 +22,9 @@ import Foundation
     class TTS: NSObject {
         var synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
         var ttsToDisplayMap: [Int] = []
-        var promise = Promise<Void>.pending()
+        var promise = fulfilledVoidPromise()
         var lastString = ""
+        var lastTTSString = ""
 
         func say(_ text: String,
                  voiceId: String,
@@ -31,14 +32,14 @@ import Foundation
                  lang: Lang = .unset,
                  ttsFixes: [(String, String)] = []
         ) -> Promise<Void> {
-            // print(text, voiceId, lang)
             stop()
-            synthesizer.delegate = self
             let isJa = lang == .ja
+            promise = Promise<Void>.pending()
             getFixedTTSString(text,
                               localFixes: ttsFixes,
                               isJa: isJa).then { ttsString, ttsToDisplayMap in
                 self.lastString = text
+                self.lastTTSString = ttsString
                 self.ttsToDisplayMap = ttsToDisplayMap
                 let utterance = AVSpeechUtterance(string: ttsString)
                 if let voice = AVSpeechSynthesisVoice(identifier: voiceId) {
@@ -60,35 +61,29 @@ import Foundation
                 } else {
                     utterance.volume = 1.0
                 }
-                // said jpn
+
                 postEvent(.sayStarted, string: text)
+                self.synthesizer.delegate = self
                 self.synthesizer.speak(utterance)
             }
 
-            promise = Promise<Void>.pending()
             return promise
         }
 
         // silent speak
-        func preloadVoice(voiceId: String) -> Promise<Void> {
+        func preloadVoice(voiceId: String) {
             if let voice = AVSpeechSynthesisVoice(identifier: voiceId) {
-                synthesizer.delegate = self
                 let utterance = AVSpeechUtterance(string: "hi")
                 utterance.voice = voice
                 utterance.rate = AVSpeechUtteranceMaximumSpeechRate
                 utterance.volume = 0
-                ttsToDisplayMap = [0, 1]
                 self.synthesizer.speak(utterance)
-                promise = Promise<Void>.pending()
-                return promise
             }
-            return fulfilledVoidPromise()
         }
 
         func stop() {
             if synthesizer.isSpeaking {
                 synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
-                promise.fulfill(())
             }
         }
 
@@ -121,24 +116,31 @@ import Foundation
 
     extension TTS: AVSpeechSynthesizerDelegate {
         func speechSynthesizer(_: AVSpeechSynthesizer,
-                               didFinish _: AVSpeechUtterance) {
-            postEvent(.speakEnded)
-            promise.fulfill(())
+                               didFinish utterance: AVSpeechUtterance) {
+            // not sure why, but the delegate is called by other strings anyway. (bug? for iOS14 en only)
+            if utterance.speechString == lastTTSString {
+                postEvent(.speakEnded, string: utterance.speechString + " did said")
+                promise.fulfill(())
+            }
         }
 
         func speechSynthesizer(_: AVSpeechSynthesizer,
                                willSpeakRangeOfSpeechString characterRange: NSRange,
-                               utterance _: AVSpeechUtterance) {
-            let fixedRange = fixRange(characterRange: characterRange, ttsToDisplayMap: ttsToDisplayMap)
-            let first = ttsToDisplayMap[fixedRange.lowerBound]
-            let last = ttsToDisplayMap[fixedRange.upperBound-1]
-            postEvent(.willSpeakRange, range: NSRange(location: first,
-                                                     length: last - first + 1))
+                               utterance: AVSpeechUtterance) {
+            if utterance.speechString == lastTTSString {
+                let fixedRange = fixRange(characterRange: characterRange, ttsToDisplayMap: ttsToDisplayMap)
+                let first = ttsToDisplayMap[fixedRange.lowerBound]
+                let last = ttsToDisplayMap[fixedRange.upperBound-1]
+                postEvent(.willSpeakRange, range: NSRange(location: first,
+                                                          length: last - first + 1))
+            }
         }
 
         func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
-            postEvent(.speakEnded)
-            promise.fulfill(())
+            if utterance.speechString == lastTTSString {
+                postEvent(.speakEnded, string: utterance.speechString + " cancelled")
+                promise.fulfill(())
+            }
         }
     }
 #endif

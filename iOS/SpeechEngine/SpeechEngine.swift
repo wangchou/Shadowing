@@ -222,12 +222,16 @@ extension SpeechEngine {
         switch speaker {
         case context.gameSetting.teacher:
             tts = tts0
+
         case context.gameSetting.assistant:
             tts = tts1
+
         case context.gameSetting.translator:
             tts = tts2
+
         case context.gameSetting.narrator:
             tts = tts3
+
         default:
             tts = tts3
         }

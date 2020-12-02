@@ -72,7 +72,7 @@ class I18n {
     var translationLanguageLabel: String {
         if isJa { return "翻訳言語" }
         if isZh { return "翻譯語言" }
-        return "Translation Language"
+        return "Translation Lang"
     }
 
     var showTranslationLabel: String {
@@ -84,7 +84,7 @@ class I18n {
     var showOriginalLabel: String {
         if isJa { return "原文を表示する" }
         if isZh { return "顯示原文" }
-        return "Show Original Sentence"
+        return "Show Original Sent."
     }
 
     var monitoringLabel: String {
