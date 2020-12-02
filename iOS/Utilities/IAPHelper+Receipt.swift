@@ -22,7 +22,7 @@ extension IAPHelper {
 
     func processReceipt() {
         if let receiptURL = Bundle.main.appStoreReceiptURL,
-            FileManager.default.fileExists(atPath: receiptURL.path) {
+           FileManager.default.fileExists(atPath: receiptURL.path) {
             validateReceiptBySendingTo(RequestURL.production.url)
         }
     }
@@ -37,7 +37,7 @@ extension IAPHelper {
 
     private func validateReceiptBySendingTo(_ requestURL: URL) {
         guard let receiptURL = Bundle.main.appStoreReceiptURL,
-            FileManager.default.fileExists(atPath: receiptURL.path) else {
+              FileManager.default.fileExists(atPath: receiptURL.path) else {
             NSLog("No receipt available to submit")
             return
         }

@@ -16,7 +16,7 @@ import Promises
     // MARK: - Audio Session
 
     func configureAudioSession(isAskingPermission: Bool = true) {
-        let session: AVAudioSession = AVAudioSession.sharedInstance()
+        let session = AVAudioSession.sharedInstance()
 
         do {
             try session.setCategory(
@@ -30,7 +30,7 @@ import Promises
             )
 
             // turn the measure mode will crash bluetooh, duckOthers and mixWithOthers
-            //try session.setMode(AVAudioSessionModeMeasurement)
+            // try session.setMode(AVAudioSessionModeMeasurement)
 
             // per ioBufferDuration delay, for live monitoring
             // default  23ms | 1024 frames | <1% CPU (iphone SE)
@@ -54,7 +54,6 @@ import Promises
                 showGoToPermissionSettingAlert()
             }
         }
-
     }
 
     // MARK: - Misc
@@ -158,7 +157,7 @@ import Promises
     func loadFromUserDefault<T: Codable>(type _: T.Type, key: String) -> T? {
         let decoder = JSONDecoder()
         if let data = UserDefaults.standard.data(forKey: key),
-            let obj = try? decoder.decode(T.self, from: data) {
+           let obj = try? decoder.decode(T.self, from: data) {
             return obj as T
         }
         print("load \(key) Failed")
@@ -358,7 +357,7 @@ func getDateKey(date: Date) -> String {
         while date > dateBound {
             let key = getDateKey(date: date)
             if let records = recordsByDate[key],
-                !records.isEmpty {
+               !records.isEmpty {
                 var continueSentenceCount = 0
                 for r in records {
                     continueSentenceCount += r.correctCount
@@ -383,7 +382,7 @@ func getDateKey(date: Date) -> String {
     }
 
     struct Summary {
-        var date: Date = Date()
+        var date = Date()
         var medalCount: Int = 0
         var sentenceCount: Int = 0
         var duration: Int = 0
@@ -417,7 +416,7 @@ func getDateKey(date: Date) -> String {
             var summary = Summary()
             summary.date = date
             if let records = recordsByDate[key],
-                !records.isEmpty {
+               !records.isEmpty {
                 for r in records {
                     summary.medalCount += r.medalReward ?? 0
                     summary.sentenceCount += r.correctCount

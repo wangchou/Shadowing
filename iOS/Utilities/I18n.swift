@@ -81,7 +81,6 @@ class I18n {
         return "Translated"
     }
 
-
     var original: String {
         if isJa { return "原文" }
         if isZh { return "原文" }

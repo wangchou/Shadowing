@@ -119,9 +119,9 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
             let rect = topView.addRect(x: x, y: y, w: 9, h: 6, color: .black)
             rect.roundBorder(radius: step)
             let typeLabel = topView.addText(x: x + 1, y: y, w: 9, h: 2,
-                            text: title,
-                            font: MyFont.regular(ofSize: step * 1.7),
-                            color: .white)
+                                            text: title,
+                                            font: MyFont.regular(ofSize: step * 1.7),
+                                            color: .white)
             let label = topView.addText(x: x, y: y + 1, w: 8, h: 5, text: "\(count)", color: color)
             label.textAlignment = .right
 

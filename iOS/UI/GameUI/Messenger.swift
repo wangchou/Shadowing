@@ -7,8 +7,8 @@
 //
 
 import AVFoundation
-import UIKit
 import Promises
+import UIKit
 
 private let context = GameContext.shared
 
@@ -183,7 +183,7 @@ class Messenger: UIViewController {
     }
 
     func updateLabel(_ myLabel: FuriganaLabel, text: NSAttributedString, pos: LabelPosition) {
-        let maxLabelWidth: Int = Int(screen.width * 3 / 4)
+        let maxLabelWidth = Int(screen.width * 3 / 4)
 
         var height = 30
         var width = 10
@@ -264,7 +264,7 @@ class Messenger: UIViewController {
         renderOverlayView()
     }
 
-    @IBAction func showOptionSegmentValueChanged(_ sender: Any) {
+    @IBAction func showOptionSegmentValueChanged(_: Any) {
         context.gameSetting.isShowTranslation = showOptionSegment.selectedSegmentIndex == 0
         saveGameSetting()
         renderOverlayView()

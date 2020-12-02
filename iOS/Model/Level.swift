@@ -59,7 +59,7 @@ enum Level: Int, Codable {
     }
 
     var color: UIColor {
-        return colors[self.rawValue]
+        return colors[rawValue]
     }
 
     var lockPercentage: Float {
@@ -76,11 +76,11 @@ enum Level: Int, Codable {
     }
 
     var minSyllablesCount: Int {
-        return gameLang == .ja ? minKanaCounts[self.rawValue] : minSyllablesCounts[self.rawValue]
+        return gameLang == .ja ? minKanaCounts[rawValue] : minSyllablesCounts[rawValue]
     }
 
     var maxSyllablesCount: Int {
-        return gameLang == .ja ? maxKanaCounts[self.rawValue] : maxSyllablesCounts[self.rawValue]
+        return gameLang == .ja ? maxKanaCounts[rawValue] : maxSyllablesCounts[rawValue]
     }
 
     var infinteChallengeDatasetKey: String {
@@ -89,9 +89,9 @@ enum Level: Int, Codable {
 
     var title: String {
         if i18n.isJa || i18n.isZh {
-            return titles[self.rawValue]
+            return titles[rawValue]
         }
-        return enTitles[self.rawValue]
+        return enTitles[rawValue]
     }
 
     var lvlTitle: String {

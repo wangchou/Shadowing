@@ -8,7 +8,7 @@
 import Foundation
 
 // Global
-var gameExpirationDate: Date = Date(ms: 0)
+var gameExpirationDate = Date(ms: 0)
 var isEverReceiptProcessed: Bool = false
 
 // MARK: - Save/Load
@@ -21,8 +21,8 @@ private struct ExpirationDateForEncode: Codable {
 }
 
 func saveGameExpirationDate() {
-    let date: ExpirationDateForEncode = ExpirationDateForEncode(date: gameExpirationDate,
-                                                                isEverReceiptProcessed: isEverReceiptProcessed)
+    let date = ExpirationDateForEncode(date: gameExpirationDate,
+                                       isEverReceiptProcessed: isEverReceiptProcessed)
     saveToUserDefault(object: date, key: gameExpirationDateKey)
 }
 

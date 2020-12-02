@@ -103,11 +103,11 @@ class RootContainerViewController: UIViewController {
 
     func reloadTableData() {
         if let listPage = topicSwipablePage.listPage,
-            listPage.sentencesTableView != nil {
+           listPage.sentencesTableView != nil {
             listPage.sentencesTableView.reloadData()
         }
         if let listPage = infiniteChallengeSwipablePage.listPage,
-            listPage.tableView != nil {
+           listPage.tableView != nil {
             listPage.tableView.reloadData()
         }
     }

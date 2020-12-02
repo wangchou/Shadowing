@@ -7,8 +7,8 @@
 // swiftlint:disable force_try
 import Foundation
 import Promises
-import SwiftSyllables
 import RealmSwift
+import SwiftSyllables
 
 func getSentences() -> [[String]] {
     let file = "sentences.tsv"
@@ -20,14 +20,14 @@ func getSentences() -> [[String]] {
             rows = try String(contentsOf: fileURL, encoding: .utf8)
                 .components(separatedBy: "\n")
                 .map { str in
-                    return str.components(separatedBy: "\t")
+                    str.components(separatedBy: "\t")
                 }
-        } catch let error {
+        } catch {
             print(error)
         }
     }
     return rows.filter { row in
-        return row.count > 5
+        row.count > 5
     }
 }
 
@@ -61,7 +61,7 @@ func updateIdWithListened(ja: String, kanaCount: Int, tokenInfos: [[String]]) {
         rmTokenInfos.ja = ja
         rmTokenInfos.kanaCount = kanaCount
         rmTokenInfos.tokenInfos = tokenInfosToString(tokenInfos: tokenInfos)
-        try realm.write {                  // 新增資料
+        try realm.write { // 新增資料
             realm.add(rmTokenInfos)
         }
         isAddedToTokenInfo[ja] = true
@@ -101,7 +101,7 @@ var jpnDifficulty: [String: Int] = [:]
 var engDifficulty: [String: Int] = [:]
 var sentences: [(id: Int, jpn: String, eng: String)] = []
 var isAddToTranslation: [String: Bool] = [:]
-private var topicSentenceIdStart = 1000000
+private var topicSentenceIdStart = 1_000_000
 
 func addStringToIdTable() {
     func addTranslation(origin: String, id: Int) {
@@ -145,9 +145,9 @@ func addStringToIdTable() {
 func addSentencesTable() {
     do {
         for (id, row) in rows.enumerated() {
-            //if(i % 500 == 0) {
-                print(id)
-            //}
+            // if(i % 500 == 0) {
+            print(id)
+            // }
 //            if(i > 2000) {
 //                break
 //            }
@@ -176,10 +176,10 @@ func addSentencesTable() {
                 calculateScoreEn(eng0, eng1),
                 calculateScoreEn(eng0, eng2),
                 calculateScoreEn(eng0, eng3),
-                calculateScoreEn(eng0, eng4)
+                calculateScoreEn(eng0, eng4),
             ]).then { scores in
                 jpnOK[jpn0] = scores[0].value == 100 &&
-                              scores[1].value == 100
+                    scores[1].value == 100
 
                 // 16202(4 ok) -> 20044 (3 ok) -> 17302 (4 ok or 3 ok + diff > 13)
                 var enOKCount = 0
@@ -188,7 +188,7 @@ func addSentencesTable() {
                 enOKCount += scores[4].value == 100 ? 1 : 0
                 enOKCount += scores[5].value == 100 ? 1 : 0
                 engOK[eng0] = enOKCount == 4 ||
-                              (enOKCount >= 3 && (engDifficulty[eng0] ?? 0) > 13)
+                    (enOKCount >= 3 && (engDifficulty[eng0] ?? 0) > 13)
 
                 isFinished = true
             }
@@ -315,8 +315,8 @@ func encryptDBAndCopy() {
             // Generate 64 bytes of random data to serve as the encryption key
             let key = NSMutableData(length: 64)!
             let status = SecRandomCopyBytes(kSecRandomDefault,
-                                           key.length,
-                                           key.mutableBytes)
+                                            key.length,
+                                            key.mutableBytes)
             guard status == 0 else {
                 print("generate key failed")
                 return
@@ -348,7 +348,6 @@ runAll()
 
 // https://stackoverflow.com/a/26502285/2797799
 extension Data {
-
     /// Hexadecimal string representation of `Data` object.
 
     var hexadecimal: String {

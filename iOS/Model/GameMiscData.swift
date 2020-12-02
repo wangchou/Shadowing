@@ -16,7 +16,7 @@ private let context = GameContext.shared
 var userSaidSentences: [String: String] = [:]
 var sentenceScores: [String: Score] = [:]
 var lastInfiniteChallengeSentences: [Level: [String]] = [:]
-var kanaTokenInfosCacheDictionary: [String: [[String]]] = [:] //tokenInfo =[kanji, 詞性, furikana, yomikana]
+var kanaTokenInfosCacheDictionary: [String: [[String]]] = [:] // tokenInfo =[kanji, 詞性, furikana, yomikana]
 
 // MARK: - Save and Load
 
@@ -71,7 +71,7 @@ func loadGameMiscData(isLoadKana: Bool = false) {
     if let loadedKanaTokenInfos = loadFromUserDefault(type: type(of: kanaTokenInfosCacheDictionary),
                                                       key: kanaTokenInfosKey) {
         loadedKanaTokenInfos.keys.forEach { key in
-            guard kanaTokenInfosCacheDictionary[key] == nil else { return } //prefer new > old
+            guard kanaTokenInfosCacheDictionary[key] == nil else { return } // prefer new > old
             kanaTokenInfosCacheDictionary[key] = loadedKanaTokenInfos[key]
         }
     } else {

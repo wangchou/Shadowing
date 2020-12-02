@@ -86,7 +86,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         for i in 0 ..< reversedTable.count {
             medalCount += reversedTable[i].medalCount
             if i + displayDays >= reversedTable.count,
-                medalCount > medalCountMax {
+               medalCount > medalCountMax {
                 medalCountMax = medalCount
             }
         }
@@ -100,7 +100,7 @@ class MedalSummaryTopView: UIView, GridLayout, ReloadableView {
         for i in 0 ..< reversedTable.count {
             medalCount += reversedTable[i].medalCount
             if i + displayDays >= reversedTable.count,
-                medalCount < medalCountMin {
+               medalCount < medalCountMin {
                 medalCountMin = medalCount
             }
         }

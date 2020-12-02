@@ -80,7 +80,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
         let todaySentenceCount = getTodaySentenceCount()
         if todaySentenceCount >= context.gameSetting.dailySentenceGoal,
-            todaySentenceCount - (context.gameRecord?.correctCount ?? 0) < context.gameSetting.dailySentenceGoal {
+           todaySentenceCount - (context.gameRecord?.correctCount ?? 0) < context.gameSetting.dailySentenceGoal {
             isJustReachDailyGoal = true
         }
 

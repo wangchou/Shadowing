@@ -76,7 +76,7 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
     private var rankAttrText: NSAttributedString {
         let font = MyFont.bold(ofSize: getFontSize(h: 11))
         if let bestRank = bestRank,
-            let rank = Rank(rawValue: bestRank) {
+           let rank = Rank(rawValue: bestRank) {
             return getStrokeText(bestRank.padWidthTo(2), rank.color, font: font)
         } else {
             return getStrokeText(" ?", .lightText, font: font)
@@ -186,8 +186,8 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
         guard !TopicDetailPage.isChallengeButtonDisabled else { return }
         context.infiniteChallengeLevel = level
         if isUnderDailySentenceLimit() {
-            #if !(targetEnvironment(macCatalyst))
-            Analytics.logEvent("challenge_infinite_\(gameLang.prefix)", parameters: nil)
+            #if !targetEnvironment(macCatalyst)
+                Analytics.logEvent("challenge_infinite_\(gameLang.prefix)", parameters: nil)
             #endif
             launchVC(Messenger.id, isOverCurrent: false)
         }

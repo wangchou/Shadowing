@@ -65,7 +65,7 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
         button.percent = percent
 
         if let isOn = isTopicOn[zhTitle],
-            isOn {
+           isOn {
             backCircle.lineColor = myGray
             backCircle.fillColor = myBlue.withAlphaComponent(0.3)
             button.lineColor = .black

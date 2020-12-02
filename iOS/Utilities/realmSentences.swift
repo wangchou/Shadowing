@@ -16,22 +16,22 @@ struct Sentence: Hashable, Equatable {
     var en: String
     var cmn: String
     #if os(iOS)
-    var origin: String {
-        return gameLang == Lang.ja ? ja : en
-    }
-
-    var translation: String {
-        switch GameContext.shared.gameSetting.translationLang {
-        case .ja:
-            return ja
-        case .en:
-            return en
-        case .zh:
-            return cmn
-        default:
-            return cmn
+        var origin: String {
+            return gameLang == Lang.ja ? ja : en
         }
-    }
+
+        var translation: String {
+            switch GameContext.shared.gameSetting.translationLang {
+            case .ja:
+                return ja
+            case .en:
+                return en
+            case .zh:
+                return cmn
+            default:
+                return cmn
+            }
+        }
     #endif
 
     var ttsFixes: [(String, String)]
@@ -40,6 +40,7 @@ struct Sentence: Hashable, Equatable {
         hasher.combine(ja)
         hasher.combine(en)
     }
+
     static func == (lhs: Sentence, rhs: Sentence) -> Bool {
         return lhs.ja == rhs.ja && lhs.en == rhs.en
     }
@@ -63,7 +64,8 @@ var topicSentencesInfos: [String: TopicSentenceInfo] = [:]
 let config = Realm.Configuration(
     fileURL: Bundle.main.url(forResource: "default", withExtension: "realm"),
     encryptionKey: dbKey,
-    readOnly: true)
+    readOnly: true
+)
 
 private var realm: Realm!
 
@@ -74,6 +76,7 @@ func initDB() {
         print(error.localizedDescription)
     }
 }
+
 #if os(iOS)
     var waitDifficultyDBLoaded = Promise<Void>.pending()
     func loadDifficultyInfo() {
@@ -95,118 +98,118 @@ func initDB() {
         waitDifficultyDBLoaded.fulfill(())
     }
 
-func loadTopicSentenceDB() {
-    let t1 = getNow()
-    guard topicSentencesInfos.isEmpty else { return }
+    func loadTopicSentenceDB() {
+        let t1 = getNow()
+        guard topicSentencesInfos.isEmpty else { return }
 
-    let topicSentences = rawDataSets.flatMap { $0 }
-    topicSentences.forEach {ja in
+        let topicSentences = rawDataSets.flatMap { $0 }
+        topicSentences.forEach { ja in
+            if let rmTokenInfos = realm.object(ofType: RMTokenInfos.self, forPrimaryKey: ja) {
+                kanaTokenInfosCacheDictionary[ja] = stringToTokenInfos(jsonString: rmTokenInfos.tokenInfos)
+                topicSentencesInfos[ja] = TopicSentenceInfo(ja: ja, kanaCount: rmTokenInfos.kanaCount)
+            } else {
+                print("cannot find tokenInfos with ja = \(ja)")
+            }
+        }
+        print("topicSentences loaded in \(getNow() - t1)")
+    }
+
+    func loadTokenInfos(ja: String) {
         if let rmTokenInfos = realm.object(ofType: RMTokenInfos.self, forPrimaryKey: ja) {
             kanaTokenInfosCacheDictionary[ja] = stringToTokenInfos(jsonString: rmTokenInfos.tokenInfos)
             topicSentencesInfos[ja] = TopicSentenceInfo(ja: ja, kanaCount: rmTokenInfos.kanaCount)
+        }
+    }
+
+    private func getSentencesByIds(ids: [Int]) -> [Sentence] {
+        var sentences: [Sentence] = []
+        ids.forEach { id in
+            if let rmSentence = realm.object(ofType: RMSentence.self, forPrimaryKey: id) {
+                let ttsFixes = arrayToPair(rmSentence.jaTTSFixes.components(separatedBy: " "))
+                sentences.append(Sentence(id: rmSentence.id,
+                                          ja: rmSentence.ja,
+                                          en: rmSentence.en,
+                                          cmn: rmSentence.cmn,
+                                          ttsFixes: ttsFixes))
+            } else {
+                print("cannot find rmSentence with id = \(id)")
+            }
+        }
+        return sentences
+    }
+
+    func getSentenceByString(_ string: String) -> Sentence {
+        // print(string)
+        if let rmStringToId = realm.object(ofType: RMStringToId.self, forPrimaryKey: string) {
+            // print(rmStringToId)
+            if let rmSentence = realm.object(ofType: RMSentence.self, forPrimaryKey: rmStringToId.id) {
+                // print(rmSentence)
+                let ttsFixes = arrayToPair(rmSentence.jaTTSFixes.components(separatedBy: " "))
+
+                let sentence = Sentence(id: rmSentence.id,
+                                        ja: rmSentence.ja,
+                                        en: rmSentence.en,
+                                        cmn: rmSentence.cmn,
+                                        ttsFixes: ttsFixes)
+                return sentence
+            } else {
+                print("cannot find rmSentence with id = \(rmStringToId.id)")
+            }
         } else {
-            print("cannot find tokenInfos with ja = \(ja)")
+            print("cannot find rmStringToId with string = \(string)")
         }
-    }
-    print("topicSentences loaded in \(getNow() - t1)")
-}
-
-func loadTokenInfos(ja: String) {
-    if let rmTokenInfos = realm.object(ofType: RMTokenInfos.self, forPrimaryKey: ja) {
-        kanaTokenInfosCacheDictionary[ja] = stringToTokenInfos(jsonString: rmTokenInfos.tokenInfos)
-        topicSentencesInfos[ja] = TopicSentenceInfo(ja: ja, kanaCount: rmTokenInfos.kanaCount)
-    }
-}
-
-private func getSentencesByIds(ids: [Int]) -> [Sentence] {
-    var sentences: [Sentence] = []
-    ids.forEach { id in
-        if let rmSentence = realm.object(ofType: RMSentence.self, forPrimaryKey: id) {
-            let ttsFixes = arrayToPair(rmSentence.jaTTSFixes.components(separatedBy: " "))
-            sentences.append(Sentence(id: rmSentence.id,
-                                      ja: rmSentence.ja,
-                                      en: rmSentence.en,
-                                      cmn: rmSentence.cmn,
-                                      ttsFixes: ttsFixes))
-        } else {
-            print("cannot find rmSentence with id = \(id)")
-        }
-    }
-    return sentences
-}
-
-func getSentenceByString(_ string: String) -> Sentence {
-    //print(string)
-    if let rmStringToId = realm.object(ofType: RMStringToId.self, forPrimaryKey: string) {
-        //print(rmStringToId)
-        if let rmSentence = realm.object(ofType: RMSentence.self, forPrimaryKey: rmStringToId.id) {
-            //print(rmSentence)
-            let ttsFixes = arrayToPair(rmSentence.jaTTSFixes.components(separatedBy: " "))
-
-            let sentence =  Sentence(id: rmSentence.id,
-                            ja: rmSentence.ja,
-                            en: rmSentence.en,
-                            cmn: rmSentence.cmn,
-                            ttsFixes: ttsFixes)
-            return sentence
-        } else {
-            print("cannot find rmSentence with id = \(rmStringToId.id)")
-        }
-    } else {
-        print("cannot find rmStringToId with string = \(string)")
-    }
-    return Sentence(id: -1, ja: "", en: "", cmn: "", ttsFixes: [])
-}
-
-func getSentenceCount(minKanaCount: Int, maxKanaCount: Int) -> Int {
-    var sentenceCount = 0
-    for kanaCount in minKanaCount ... maxKanaCount {
-        if let count = gameLang.difficultyInfos[kanaCount]?.sentenceCount {
-            sentenceCount += count
-        }
+        return Sentence(id: -1, ja: "", en: "", cmn: "", ttsFixes: [])
     }
 
-    return sentenceCount
-}
-
-func getRandSentences(level: Level, numOfSentences: Int) -> [Sentence] {
-    let minKanaCount = level.minSyllablesCount
-    let maxKanaCount = level.maxSyllablesCount
-    var combinedIds: Set<Int> = []
-    for kanaCount in minKanaCount ... maxKanaCount {
-        if let ids = gameLang.difficultyInfos[kanaCount]?.ids {
-            combinedIds = combinedIds.union(ids)
-        }
-    }
-
-    var randomIds: [Int] = []
-    var randomSentences: [Sentence] = []
-    while randomSentences.count < numOfSentences {
-        while randomIds.count < numOfSentences + numOfSentences / 2 {
-            if let newId = combinedIds.randomElement() {
-                if !randomIds.contains(newId) {
-                    randomIds.append(newId)
-                }
+    func getSentenceCount(minKanaCount: Int, maxKanaCount: Int) -> Int {
+        var sentenceCount = 0
+        for kanaCount in minKanaCount ... maxKanaCount {
+            if let count = gameLang.difficultyInfos[kanaCount]?.sentenceCount {
+                sentenceCount += count
             }
         }
 
-        let sentences = getSentencesByIds(ids: randomIds)
-        for s in sentences {
-            let isSame = !randomSentences.filter { randS in
-                if gameLang == Lang.ja {
-                    return s.ja == randS.ja
-                } else {
-                    return s.en == randS.en
+        return sentenceCount
+    }
+
+    func getRandSentences(level: Level, numOfSentences: Int) -> [Sentence] {
+        let minKanaCount = level.minSyllablesCount
+        let maxKanaCount = level.maxSyllablesCount
+        var combinedIds: Set<Int> = []
+        for kanaCount in minKanaCount ... maxKanaCount {
+            if let ids = gameLang.difficultyInfos[kanaCount]?.ids {
+                combinedIds = combinedIds.union(ids)
+            }
+        }
+
+        var randomIds: [Int] = []
+        var randomSentences: [Sentence] = []
+        while randomSentences.count < numOfSentences {
+            while randomIds.count < numOfSentences + numOfSentences / 2 {
+                if let newId = combinedIds.randomElement() {
+                    if !randomIds.contains(newId) {
+                        randomIds.append(newId)
+                    }
                 }
-            }.isEmpty
-            if !isSame {
-                randomSentences.append(s)
-                if randomSentences.count == numOfSentences {
-                    return randomSentences
+            }
+
+            let sentences = getSentencesByIds(ids: randomIds)
+            for s in sentences {
+                let isSame = !randomSentences.filter { randS in
+                    if gameLang == Lang.ja {
+                        return s.ja == randS.ja
+                    } else {
+                        return s.en == randS.en
+                    }
+                }.isEmpty
+                if !isSame {
+                    randomSentences.append(s)
+                    if randomSentences.count == numOfSentences {
+                        return randomSentences
+                    }
                 }
             }
         }
+        return randomSentences
     }
-    return randomSentences
-}
 #endif

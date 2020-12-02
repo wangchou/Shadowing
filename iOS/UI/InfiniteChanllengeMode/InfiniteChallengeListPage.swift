@@ -91,7 +91,7 @@ extension InfiniteChallengeListPage: UITableViewDataSource {
 extension InfiniteChallengeListPage: UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let swipablePage = rootViewController.current as? InfiniteChallengeSwipablePage,
-            let infiniteChallengePage = swipablePage.detailPage {
+           let infiniteChallengePage = swipablePage.detailPage {
             infiniteChallengePage.level = allLevels[indexPath.row]
         }
 

@@ -59,7 +59,7 @@ class InfiniteChallengePage: UIViewController {
 
         let lastLevel = allLevels[(allLevels.firstIndex(of: level) ?? 0) - 1]
         if let lastLevelBestRecord = findBestRecord(dataSetKey: lastLevel.infinteChallengeDatasetKey),
-            lastLevelBestRecord.p >= lastLevel.lockPercentage {
+           lastLevelBestRecord.p >= lastLevel.lockPercentage {
             blockView.isHidden = true
         }
 
@@ -95,7 +95,7 @@ extension InfiniteChallengePage: UITableViewDataSource {
     }
 
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        if let sentences = lastInfiniteChallengeSentences[self.level] {
+        if let sentences = lastInfiniteChallengeSentences[level] {
             return sentences.count
         }
         return 0
@@ -105,9 +105,9 @@ extension InfiniteChallengePage: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ICContentTableCell", for: indexPath)
         guard let contentCell = cell as? SentencesTableCell else { print("detailCell convert error"); return cell }
 
-        if let strings = lastInfiniteChallengeSentences[self.level] {
+        if let strings = lastInfiniteChallengeSentences[level] {
             let sentences = strings.map { str -> Sentence in
-                return getSentenceByString(str)
+                getSentenceByString(str)
             }
             contentCell.update(sentence: sentences[indexPath.row], isShowTranslate: context.gameSetting.isShowTranslationInPractice)
         }

@@ -20,7 +20,7 @@ import Foundation
     // ttsToDisplayMap will map willSpeakRange from いちにち○○○○ to 1日○○○○
     // it looks like [1 1 1 1 2 3 4 5]
     class TTS: NSObject {
-        var synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
+        var synthesizer = AVSpeechSynthesizer()
         var ttsToDisplayMap: [Int] = []
         var promise = fulfilledVoidPromise()
         var lastString = ""
@@ -30,8 +30,7 @@ import Foundation
                  voiceId: String,
                  rate: Float = AVSpeechUtteranceDefaultSpeechRate, // 0.5, range 0 ~ 1.0,
                  lang: Lang = .unset,
-                 ttsFixes: [(String, String)] = []
-        ) -> Promise<Void> {
+                 ttsFixes: [(String, String)] = []) -> Promise<Void> {
             stop()
             let isJa = lang == .ja
             promise = Promise<Void>.pending()
@@ -77,7 +76,7 @@ import Foundation
                 utterance.voice = voice
                 utterance.rate = AVSpeechUtteranceMaximumSpeechRate
                 utterance.volume = 0
-                self.synthesizer.speak(utterance)
+                synthesizer.speak(utterance)
             }
         }
 
@@ -130,13 +129,13 @@ import Foundation
             if utterance.speechString == lastTTSString {
                 let fixedRange = fixRange(characterRange: characterRange, ttsToDisplayMap: ttsToDisplayMap)
                 let first = ttsToDisplayMap[fixedRange.lowerBound]
-                let last = ttsToDisplayMap[fixedRange.upperBound-1]
+                let last = ttsToDisplayMap[fixedRange.upperBound - 1]
                 postEvent(.willSpeakRange, range: NSRange(location: first,
                                                           length: last - first + 1))
             }
         }
 
-        func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+        func speechSynthesizer(_: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
             if utterance.speechString == lastTTSString {
                 postEvent(.speakEnded, string: utterance.speechString + " cancelled")
                 promise.fulfill(())

@@ -83,7 +83,7 @@ class SpeechEngine {
 
     func monitoringOn() {
         guard isHeadphonePlugged() else { return }
-        audioEngine.mainMixerNode.outputVolume = pow(2, Float(context.gameSetting.monitoringVolume)/10 + 1.0)
+        audioEngine.mainMixerNode.outputVolume = pow(2, Float(context.gameSetting.monitoringVolume) / 10 + 1.0)
     }
 
     func monitoringOff() {
@@ -107,61 +107,62 @@ class SpeechEngine {
     }
 
     // MARK: - Private
+
     private func buildNodeGraph() {
         isInstallTapSuceeced = false
         let mainMixer = audioEngine.mainMixerNode
         let mic = audioEngine.inputNode // only for real device, simulator will crash
 
-        #if !(targetEnvironment(macCatalyst))
-        mic.removeTap(onBus: 0)
-        mic.installTap(onBus: 0, bufferSize: 1024, format: nil) { [weak self] buffer, _ in
-            guard let self = self,
-                  let recognitionRequest = self.speechRecognizer.recognitionRequest else { return }
-            self.isInstallTapSuceeced = true
-            recognitionRequest.append(buffer)
-            calculateMicLevel(buffer: buffer)
-        }
-
-        audioEngine.connect(mic, to: mainMixer, format: nil)
-        mainMixer.outputVolume = 0
-        #else
-        // mac catalyst
-        // not knowing why... but need to convert to the same format in catalyst to
-        // make wired mic work...
-        // for built-in mic work need to force channel = 2
-        // ps: my sony wireless mic is always working
-        // tested in macOS 11.0.1, xcode 12.2
-        let inputFormat = mic.outputFormat(forBus: 0)
-        print(inputFormat)
-        let outputFormat = AVAudioFormat(commonFormat: inputFormat.commonFormat,
-                                        sampleRate: inputFormat.sampleRate,
-                                        channels: 2, // 1 or built-in 4 not working?
-                                        interleaved: inputFormat.isInterleaved)!
-        let converter = AVAudioConverter(from: inputFormat, to: outputFormat)!
-
-        mic.removeTap(onBus: 0)
-        mic.installTap(onBus: 0, bufferSize: 1024, format: inputFormat) { [weak self] buffer, _ in
-            guard let self = self,
-                  let recognitionRequest = self.speechRecognizer.recognitionRequest else { return }
-
-            self.isInstallTapSuceeced = true
-
-            let inputCallback: AVAudioConverterInputBlock = { inNumPackets, outStatus in
-                outStatus.pointee = AVAudioConverterInputStatus.haveData
-                return buffer
+        #if !targetEnvironment(macCatalyst)
+            mic.removeTap(onBus: 0)
+            mic.installTap(onBus: 0, bufferSize: 1024, format: nil) { [weak self] buffer, _ in
+                guard let self = self,
+                      let recognitionRequest = self.speechRecognizer.recognitionRequest else { return }
+                self.isInstallTapSuceeced = true
+                recognitionRequest.append(buffer)
+                calculateMicLevel(buffer: buffer)
             }
 
-            let convertedBuffer = AVAudioPCMBuffer(pcmFormat: outputFormat,
-                                                  frameCapacity: buffer.frameCapacity)!
+            audioEngine.connect(mic, to: mainMixer, format: nil)
+            mainMixer.outputVolume = 0
+        #else
+            // mac catalyst
+            // not knowing why... but need to convert to the same format in catalyst to
+            // make wired mic work...
+            // for built-in mic work need to force channel = 2
+            // ps: my sony wireless mic is always working
+            // tested in macOS 11.0.1, xcode 12.2
+            let inputFormat = mic.outputFormat(forBus: 0)
+            print(inputFormat)
+            let outputFormat = AVAudioFormat(commonFormat: inputFormat.commonFormat,
+                                             sampleRate: inputFormat.sampleRate,
+                                             channels: 2, // 1 or built-in 4 not working?
+                                             interleaved: inputFormat.isInterleaved)!
+            let converter = AVAudioConverter(from: inputFormat, to: outputFormat)!
 
-            var error: NSError?
-            _ = converter.convert(to: convertedBuffer, error: &error, withInputFrom: inputCallback)
+            mic.removeTap(onBus: 0)
+            mic.installTap(onBus: 0, bufferSize: 1024, format: inputFormat) { [weak self] buffer, _ in
+                guard let self = self,
+                      let recognitionRequest = self.speechRecognizer.recognitionRequest else { return }
 
-            if let error = error { print(error) }
+                self.isInstallTapSuceeced = true
 
-            recognitionRequest.append(convertedBuffer)
-            calculateMicLevel(buffer: convertedBuffer)
-        }
+                let inputCallback: AVAudioConverterInputBlock = { _, outStatus in
+                    outStatus.pointee = AVAudioConverterInputStatus.haveData
+                    return buffer
+                }
+
+                let convertedBuffer = AVAudioPCMBuffer(pcmFormat: outputFormat,
+                                                       frameCapacity: buffer.frameCapacity)!
+
+                var error: NSError?
+                _ = converter.convert(to: convertedBuffer, error: &error, withInputFrom: inputCallback)
+
+                if let error = error { print(error) }
+
+                recognitionRequest.append(convertedBuffer)
+                calculateMicLevel(buffer: convertedBuffer)
+            }
         #endif
     }
 
@@ -181,8 +182,8 @@ class SpeechEngine {
 
     @objc func handleRouteChange(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
-            let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt,
-            let reason = AVAudioSession.RouteChangeReason(rawValue: reasonValue) else {
+              let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt,
+              let reason = AVAudioSession.RouteChangeReason(rawValue: reasonValue) else {
             return
         }
         switch reason {
@@ -205,12 +206,12 @@ class SpeechEngine {
 // assisantSay      speak correct, good, wrong...
 // ttsSay           speak sample text in voiceSelection Page
 
-extension SpeechEngine {
-    fileprivate func speak(text: String,
-                           speaker: String,
-                           rate: Float,
-                           lang: Lang,
-                           ttsFixes: [(String, String)] = []) -> Promise<Void> {
+private extension SpeechEngine {
+    func speak(text: String,
+               speaker: String,
+               rate: Float,
+               lang: Lang,
+               ttsFixes: [(String, String)] = []) -> Promise<Void> {
         let startTime = getNow()
         func updateSpeakDuration() -> Promise<Void> {
             context.speakDuration = Float(getNow() - startTime)
@@ -323,8 +324,8 @@ func isBluetooth() -> Bool {
     let currentRoute = AVAudioSession.sharedInstance().currentRoute
     for description in currentRoute.outputs {
         if description.portType == AVAudioSession.Port.bluetoothA2DP ||
-           description.portType == AVAudioSession.Port.bluetoothLE ||
-           description.portType == AVAudioSession.Port.bluetoothHFP {
+            description.portType == AVAudioSession.Port.bluetoothLE ||
+            description.portType == AVAudioSession.Port.bluetoothHFP {
             return true
         }
     }

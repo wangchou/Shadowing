@@ -35,7 +35,6 @@ enum Lang: Int, Codable {
             return "de"
         case .unset:
             return "unset"
-
         }
     }
 
@@ -56,7 +55,7 @@ enum Lang: Int, Codable {
     }
 
     var prefix: String {
-        return self == .ja ? "ja" : self.key
+        return self == .ja ? "ja" : key
     }
 
     var defaultCode: String {
@@ -64,10 +63,10 @@ enum Lang: Int, Codable {
         case .ja:
             return "ja-JP"
         case .en:
-            #if !(targetEnvironment(macCatalyst))
-            if AVSpeechSynthesisVoice.currentLanguageCode().contains("en-") {
-                return AVSpeechSynthesisVoice.currentLanguageCode()
-            }
+            #if !targetEnvironment(macCatalyst)
+                if AVSpeechSynthesisVoice.currentLanguageCode().contains("en-") {
+                    return AVSpeechSynthesisVoice.currentLanguageCode()
+                }
             #endif
             return "en-US"
         case .zh:
@@ -98,7 +97,7 @@ private struct LangForEncode: Codable {
 }
 
 func saveGameLang() {
-    let lang: LangForEncode = LangForEncode(lang: gameLang)
+    let lang = LangForEncode(lang: gameLang)
     saveToUserDefault(object: lang, key: gameLangKey)
 }
 
@@ -124,5 +123,4 @@ func changeGameLangTo(lang: Lang) {
         rootViewController.reloadTableData()
         rootViewController.rerenderTopView(updateByRecords: true)
     }
-
 }

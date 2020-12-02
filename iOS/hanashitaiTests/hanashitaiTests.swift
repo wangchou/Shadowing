@@ -11,7 +11,6 @@
 import XCTest
 
 class HanashitaiTests: XCTestCase {
-
 //    override func setUpWithError() throws {
 //        // Put setup code here. This method is called before the invocation of each test method in the class.
 //    }
@@ -72,9 +71,9 @@ class HanashitaiTests: XCTestCase {
             let setting1 = try JSONDecoder().decode(GameSetting.self, from: data1)
             let setting2 = try JSONDecoder().decode(GameSetting.self, from: data2)
             let setting3 = try JSONDecoder().decode(GameSetting.self, from: data3)
-            //print(setting1)
-            //print(setting2)
-            //print(setting3)
+            // print(setting1)
+            // print(setting2)
+            // print(setting3)
             XCTAssert(true)
         } catch {
             print(error)
@@ -90,7 +89,7 @@ class HanashitaiTests: XCTestCase {
         do {
             let data1 = Data(history10317json.utf8)
             let history1 = try JSONDecoder().decode([GameRecord].self, from: data1)
-            //print(history1)
+            // print(history1)
             XCTAssert(true)
         } catch {
             print(error)

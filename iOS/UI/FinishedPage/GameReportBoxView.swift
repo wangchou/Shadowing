@@ -73,7 +73,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
 
         let progress = getAttrText([
             (record.progress.padWidthTo(4), .white, getFontSize(h: 12)),
-            ("%", .white, self.getFontSize(h: 3)),
+            ("%", .white, getFontSize(h: 3)),
         ])
 
         var label = addAttrText(2, y + 1, 12, progress)
@@ -207,7 +207,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
                 if startProgress < 1.0, endProgress == 1.0 {
                     _ = self.statusSpeakingPromise.then {
                         teacherSay(i18n.reachDailyGoal,
-                                   rate: GameContext.shared.assistantRate ,
+                                   rate: GameContext.shared.assistantRate,
                                    ttsFixes: [])
                     }
                 }

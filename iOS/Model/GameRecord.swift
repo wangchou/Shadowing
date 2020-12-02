@@ -33,7 +33,7 @@ struct GameRecord: Codable {
     // func / computed field
     var sentences: [Sentence] {
         return sentencesScore.keys.map { str in
-            return getSentenceByString(str)
+            getSentenceByString(str)
         }
     }
 

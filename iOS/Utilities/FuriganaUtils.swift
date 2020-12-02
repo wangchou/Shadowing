@@ -34,7 +34,7 @@ import Promises
         var attributes: [NSAttributedString.Key: Any] = [
             .font: isSimple ? fontRegular : fontBold,
             .hightlightBackgroundFillColor: UIColor.clear,
-            //.nantesLabelBackgroundCornerRadius: 5,
+            // .nantesLabelBackgroundCornerRadius: 5,
         ]
 
         if color != .black {
@@ -52,11 +52,9 @@ import Promises
             var rubyAttributes: CFDictionary
             if #available(iOS 13, *) {
                 rubyAttributes = [kCTFontAttributeName: fontRuby,
-                 kCTStrokeWidthAttributeName: -2.0,
-                ] as CFDictionary
+                                  kCTStrokeWidthAttributeName: -2.0] as CFDictionary
             } else {
-                rubyAttributes = [kCTFontAttributeName: fontRuby,
-                ] as CFDictionary
+                rubyAttributes = [kCTFontAttributeName: fontRuby] as CFDictionary
             }
             let annotation = CTRubyAnnotationCreateWithAttributes(
                 alignMode, .auto, .before, ruby as CFString,
@@ -106,7 +104,7 @@ import Promises
         for dividerIndex in 0 ..< parts.count {
             let divider = parts[dividerIndex]
             guard divider.jpnType == JpnType.noKanjiAndNumber,
-                kana.patternCount(divider.hiraganaOnly) == (parts.filter { $0.hiraganaOnly == divider.hiraganaOnly }).count
+                  kana.patternCount(divider.hiraganaOnly) == (parts.filter { $0.hiraganaOnly == divider.hiraganaOnly }).count
             else {
                 continue
             }

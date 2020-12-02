@@ -21,7 +21,7 @@ class TopChartView: UIView, GridLayout, ReloadableView {
     var timer: Timer?
     var frontCircle: CircleView?
     var percentLabel: UILabel?
-    var circleFrame: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
+    var circleFrame = CGRect(x: 0, y: 0, width: 0, height: 0)
 
     var timelineColumnCount: Int = 15
     var timelineYPadding: CGFloat = 0.3
@@ -55,7 +55,7 @@ class TopChartView: UIView, GridLayout, ReloadableView {
     }
 
     var clearDurationInDays: Int = 0
-    var clearDate: Date = Date()
+    var clearDate = Date()
 
     var longTermGoalColor: UIColor {
         if allSentenceCount < 1000 {
@@ -139,8 +139,8 @@ class TopChartView: UIView, GridLayout, ReloadableView {
             switchToNextTopViewMode()
             rootViewController.rerenderTopView()
             DispatchQueue.global().async {
-                #if !(targetEnvironment(macCatalyst))
-                Analytics.logEvent("top_chart_view_clicked", parameters: nil)
+                #if !targetEnvironment(macCatalyst)
+                    Analytics.logEvent("top_chart_view_clicked", parameters: nil)
                 #endif
             }
         }

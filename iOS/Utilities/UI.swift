@@ -85,7 +85,7 @@ extension UIView {
 
     // In order to create computed properties for extensions, we need a key to
     // store and access the stored property
-    fileprivate struct AssociatedObjectKeys {
+    fileprivate enum AssociatedObjectKeys {
         static var tapGestureRecognizer = "MediaViewerAssociatedObjectKey_mediaViewer"
     }
 
@@ -121,7 +121,7 @@ extension UIView {
     // Every time the user taps on the UIImageView, this function gets called,
     // which triggers the closure we stored
     @objc fileprivate func handleTapGesture(sender _: UITapGestureRecognizer) {
-        if let action = self.tapGestureRecognizerAction {
+        if let action = tapGestureRecognizerAction {
             action?()
         } else {
             print("no action")
@@ -183,7 +183,7 @@ extension UIScrollView {
 
 extension UIApplication {
     class func getPresentedViewController() -> UIViewController? {
-        var presentViewController = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController
+        var presentViewController = UIApplication.shared.windows.filter { $0.isKeyWindow }.first?.rootViewController
         while let pVC = presentViewController?.presentedViewController {
             presentViewController = pVC
         }

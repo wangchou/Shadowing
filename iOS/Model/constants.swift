@@ -36,7 +36,7 @@ let micOutVolume: Float = 0
 // safe area padding
 func getTopPadding() -> CGFloat {
     if #available(iOS 11.0, *) {
-        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        let window = UIApplication.shared.windows.filter { $0.isKeyWindow }.first
         return window?.safeAreaInsets.top ?? 0
     }
     return 0
@@ -44,7 +44,7 @@ func getTopPadding() -> CGFloat {
 
 func getBottomPadding() -> CGFloat {
     if #available(iOS 11.0, *) {
-        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        let window = UIApplication.shared.windows.filter { $0.isKeyWindow }.first
         return window?.safeAreaInsets.bottom ?? 0
     }
     return 0

@@ -32,7 +32,7 @@ class ContentCell: UITableViewCell {
 
 func getRankText(string: String?) -> NSAttributedString {
     if let string = string,
-        let rank = Rank(rawValue: string) {
+       let rank = Rank(rawValue: string) {
         return getStrokeText(string, rank.color)
     } else {
         return getStrokeText("?", .lightText)

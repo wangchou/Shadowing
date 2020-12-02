@@ -15,7 +15,7 @@ func getTagPoints(isWithoutLast: Bool = false) -> [String: Int] {
 
     games.forEach { g in
         if let score = maxGamePoints[g.dataSetKey],
-            score.f > g.p {
+           score.f > g.p {
             return
         }
         maxGamePoints[g.dataSetKey] = g.p.i
@@ -35,7 +35,7 @@ func getTagMaxPoints() -> [String: Int] {
     var tagMaxPoints: [String: Int] = [:]
     datasetKeyToTags.keys.forEach { key in
         if let tags = datasetKeyToTags[key],
-            !tags.isEmpty {
+           !tags.isEmpty {
             let tag = tags[0]
             tagMaxPoints[tag] = (tagMaxPoints[tag] ?? 0) + 100
         }
@@ -66,7 +66,7 @@ func buildDataSets() {
         }
     dataSetKeys.sort { key1, key2 in
         if let count1 = avgKanaCountDict[key1],
-            let count2 = avgKanaCountDict[key2] {
+           let count2 = avgKanaCountDict[key2] {
             return count1 < count2
         }
         return true
@@ -76,7 +76,7 @@ func buildDataSets() {
 private func isDataSetTopicOn(sentences: [String]) -> Bool {
     let key = sentences[0]
     guard let topic = datasetKeyToTags[key]?[0].split(separator: "#")[0].s,
-        let isOn = isTopicOn[topic] else { return false }
+          let isOn = isTopicOn[topic] else { return false }
 
     return isOn
 }

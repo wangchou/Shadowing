@@ -25,7 +25,7 @@ class MyFont {
         if let font = fontCache[key] { return font }
         if #available(iOS 13.0, *) {
             fontCache[key] =
-            UIFont(name: "HiraginoSans-W0", size: fontSize)
+                UIFont(name: "HiraginoSans-W0", size: fontSize)
         } else {
             fontCache[key] = UIFont(name: ".HiraKakuInterface-W2", size: fontSize) ??
                 UIFont.systemFont(ofSize: fontSize, weight: .thin)
@@ -38,7 +38,7 @@ class MyFont {
         if let font = fontCache[key] { return font }
         if #available(iOS 13.0, *) {
             fontCache[key] =
-            UIFont(name: "HiraginoSans-W2", size: fontSize)
+                UIFont(name: "HiraginoSans-W2", size: fontSize)
         } else {
             fontCache[key] = UIFont(name: ".HiraKakuInterface-W2", size: fontSize) ??
                 UIFont.systemFont(ofSize: fontSize, weight: .thin)

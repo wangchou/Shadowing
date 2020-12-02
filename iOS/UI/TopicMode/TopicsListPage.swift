@@ -144,7 +144,7 @@ extension TopicsListPage: UITableViewDelegate {
 
 func getDataSetTitle(dataSetKey: String) -> String {
     if let tags = datasetKeyToTags[dataSetKey],
-        !tags.isEmpty {
+       !tags.isEmpty {
         let tagsWithoutSharp = tags.map { t in t.replacingOccurrences(of: "#", with: "") }
         let idx = abilities.firstIndex(of: tagsWithoutSharp[0]) ?? 0
         let categoryText = i18n.isZh ? tagsWithoutSharp[0] : jaAbilities[idx]
@@ -156,7 +156,7 @@ func getDataSetTitle(dataSetKey: String) -> String {
 
 func getDataSetTopic(dataSetKey: String) -> String {
     if let tags = datasetKeyToTags[dataSetKey],
-        !tags.isEmpty {
+       !tags.isEmpty {
         let tagsWithoutSharp = tags.map { t in t.replacingOccurrences(of: "#", with: "") }
         return tagsWithoutSharp[0]
     }

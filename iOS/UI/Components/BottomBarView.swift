@@ -43,8 +43,8 @@ class BottomBarView: UIView, XibView {
     }
 
     private func updateContentTab() {
-        var leftColor: UIColor = UIColor(white: 0, alpha: 0.66)
-        var rightColor: UIColor = UIColor(white: 0, alpha: 0.66)
+        var leftColor = UIColor(white: 0, alpha: 0.66)
+        var rightColor = UIColor(white: 0, alpha: 0.66)
         let leftImgName: String = "baseline_widgets_black_36pt"
         var rightImgName: String = "outline_all_inclusive_black_36pt"
         switch contentTab {

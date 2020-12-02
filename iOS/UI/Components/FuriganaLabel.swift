@@ -20,10 +20,11 @@ class FuriganaLabel: UILabel {
             attributedText.enumerateAttribute(
                 rubyAnnotationKey,
                 in: NSRange(location: 0, length: attributedText.length),
-                options: .longestEffectiveRangeNotRequired) { obj, _, _ in
-                    if obj != nil {
-                        foundRuby = true
-                    }
+                options: .longestEffectiveRangeNotRequired
+            ) { obj, _, _ in
+                if obj != nil {
+                    foundRuby = true
+                }
             }
         }
 
@@ -48,7 +49,7 @@ class FuriganaLabel: UILabel {
     override var attributedText: NSAttributedString? {
         willSet {
             if let newValue = newValue,
-                newValue != self.attributedText {
+               newValue != self.attributedText {
                 height = heightOfCoreText(attributed: newValue, width: self.frame.width)
             }
         }
@@ -64,8 +65,8 @@ class FuriganaLabel: UILabel {
 
     // modified from reference: https://stackoverflow.com/questions/47636905/custom-uitableviewcell-with-core-text
     override func drawText(in rect: CGRect) {
-        guard let attributed = self.attributedText,
-            let context = UIGraphicsGetCurrentContext() else { return }
+        guard let attributed = attributedText,
+              let context = UIGraphicsGetCurrentContext() else { return }
 
         var textDrawRect = rect
         textDrawRect.size.width = rect.width - widthPadding * 2
@@ -114,7 +115,7 @@ class FuriganaLabel: UILabel {
                 }
             }
 
-            var unitedHighlightBounds: CGRect = CGRect(x: CGFloat.infinity, y: CGFloat.infinity, width: 0, height: 0)
+            var unitedHighlightBounds = CGRect(x: CGFloat.infinity, y: CGFloat.infinity, width: 0, height: 0)
             for glyphRun in glyphRuns {
                 guard let attributes = CTRunGetAttributes(glyphRun) as NSDictionary as? [NSAttributedString.Key: Any] else {
                     continue
@@ -144,8 +145,8 @@ class FuriganaLabel: UILabel {
                     xOffset = CTLineGetOffsetForStringIndex(line, glyphRange.location, nil)
                 }
 
-                runBounds.origin.x = origins[lineIndex].x + rect.origin.x + xOffset  - rect.origin.x
-                runBounds.origin.y = origins[lineIndex].y + rect.origin.y  - rect.origin.y - runDescent
+                runBounds.origin.x = origins[lineIndex].x + rect.origin.x + xOffset - rect.origin.x
+                runBounds.origin.y = origins[lineIndex].y + rect.origin.y - rect.origin.y - runDescent
 
                 // We don't want to draw too far to the right
                 runBounds.size.width = runBounds.width > width ? width : runBounds.width
@@ -156,9 +157,9 @@ class FuriganaLabel: UILabel {
                     let newWidth = max(unitedHighlightBounds.width, runBounds.origin.x + runBounds.width - newX)
 
                     unitedHighlightBounds = CGRect(x: newX,
-                                          y: newY,
-                                          width: newWidth ,
-                                          height: ascent + descent)
+                                                   y: newY,
+                                                   width: newWidth,
+                                                   height: ascent + descent)
                 } else if let fillColor = fillColor {
                     context.setLineJoin(.round)
                     let path: CGPath = UIBezierPath(roundedRect: runBounds,
@@ -286,7 +287,7 @@ extension FuriganaLabel {
         } else {
             attrText.append(rubyAttrStr(targetString))
             attrText.addAttributes([
-                .hightlightBackgroundFillColor: highlightColor
+                .hightlightBackgroundFillColor: highlightColor,
             ], range: allRange)
             let whiteRange = NSRange(location: allRange.upperBound, length: targetString.count - allRange.upperBound)
             attrText.addAttribute(.hightlightBackgroundFillColor, value: UIColor.clear, range: whiteRange)
@@ -324,14 +325,14 @@ extension FuriganaLabel {
 
             // fix: "お掛けに" なりませんか
             if part[1] == "接頭詞",
-                currentIndex >= lowerBound,
-                currentIndex + partLen == upperBound,
-                i < tokenInfos.count - 1 {
+               currentIndex >= lowerBound,
+               currentIndex + partLen == upperBound,
+               i < tokenInfos.count - 1 {
                 upperBound += tokenInfos[i + 1][0].count
             }
             if i > 0,
-                tokenInfos[i - 1][1] == "接頭詞",
-                currentIndex == lowerBound {
+               tokenInfos[i - 1][1] == "接頭詞",
+               currentIndex == lowerBound {
                 lowerBound -= tokenInfos[i - 1][0].count
             }
 
@@ -339,9 +340,9 @@ extension FuriganaLabel {
             // ex: "が降りそう" の　"が"
             func trimPrefixParticle() {
                 if !isPrefixParticleRemoved,
-                    currentIndex <= lowerBound,
-                    currentIndex + partLen > lowerBound,
-                    currentIndex + partLen < upperBound {
+                   currentIndex <= lowerBound,
+                   currentIndex + partLen > lowerBound,
+                   currentIndex + partLen < upperBound {
                     if isParticle {
                         lowerBound = currentIndex + partLen
                     } else {
@@ -354,9 +355,9 @@ extension FuriganaLabel {
             // ex: "が降りそう" の　"り"
             func trimPrefixSubVerb() {
                 if !isPrefixSubVerbRemoved,
-                    currentIndex < lowerBound,
-                    currentIndex + partLen >= lowerBound,
-                    currentIndex + partLen < upperBound {
+                   currentIndex < lowerBound,
+                   currentIndex + partLen >= lowerBound,
+                   currentIndex + partLen < upperBound {
                     if isVerbLike {
                         lowerBound = currentIndex + partLen
                     } else {
@@ -368,14 +369,14 @@ extension FuriganaLabel {
             // fixed to whole word
             // "有給休假"，只 highlight "休假" 時 => 改 highlight 整個字
             func expandWholeWord() {
-                if  currentIndex <= lowerBound,
-                    lowerBound < currentIndex + partLen {
+                if currentIndex <= lowerBound,
+                   lowerBound < currentIndex + partLen {
                     lowerBound = currentIndex
                 }
 
-                if  !isWordExpanded,
-                    currentIndex < upperBound,
-                    upperBound < currentIndex + partLen {
+                if !isWordExpanded,
+                   currentIndex < upperBound,
+                   upperBound < currentIndex + partLen {
                     upperBound = currentIndex + partLen
                     isWordExpanded = true
                 }
@@ -389,7 +390,7 @@ extension FuriganaLabel {
 
             // suffix particle extend
             if !isParticleSuffixExtended,
-                currentIndex >= upperBound {
+               currentIndex >= upperBound {
                 if isParticle {
                     upperBound = currentIndex + partLen
                 } else {
@@ -405,8 +406,8 @@ extension FuriganaLabel {
               lowerBound <= targetString.count,
               upperBound >= 0,
               lowerBound >= 0 else {
-                print("something went wrong on highlight bounds")
-                return nil
+            print("something went wrong on highlight bounds")
+            return nil
         }
         return NSRange(location: lowerBound, length: upperBound - lowerBound)
     }

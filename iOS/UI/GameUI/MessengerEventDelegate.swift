@@ -17,7 +17,7 @@ extension Messenger: GameEventDelegate {
 
         if let gameState = event.gameState {
             print("\n == \(gameState.rawValue) ==")
-        } else if event.type != .willSpeakRange &&
+        } else if event.type != .willSpeakRange,
                   event.type != .playTimeUpdate {
             print("\t",
                   event.type,
@@ -31,22 +31,22 @@ extension Messenger: GameEventDelegate {
         case .sayStarted:
             guard let text = event.string else { return }
             if context.gameState == .speakTitle ||
-               context.gameState == .speakInitialDescription {
+                context.gameState == .speakInitialDescription {
                 addLabel(rubyAttrStr(text))
             }
 
         case .willSpeakRange:
             guard let newRange = event.range else { return }
-            if  context.gameSetting.isShowOriginal,
-                context.gameState == .speakingTargetString {
+            if context.gameSetting.isShowOriginal,
+               context.gameState == .speakingTargetString {
                 lastLabel.updateHighlightRange(newRange: newRange,
                                                targetString: context.targetString,
                                                voiceRate: context.teachingRate)
             }
 
         case .speakEnded:
-            if  context.gameSetting.isShowOriginal,
-                context.gameState == .speakingTargetString {
+            if context.gameSetting.isShowOriginal,
+               context.gameState == .speakingTargetString {
                 lastLabel.attributedText = context.targetAttrString
             }
         case .listenStarted:
@@ -127,13 +127,13 @@ extension Messenger: GameEventDelegate {
     private func onScore(_ score: Score) {
         let attributed = NSMutableAttributedString()
         if let tokenInfos = kanaTokenInfosCacheDictionary[context.userSaidString],
-            gameLang == .ja {
+           gameLang == .ja {
             attributed.append(getFuriganaString(tokenInfos: tokenInfos))
         } else {
             attributed.append(rubyAttrStr(context.userSaidString))
         }
 
-        //print("'\(context.userSaidString)'")
+        // print("'\(context.userSaidString)'")
 
         if attributed.string == "" {
             attributed.append(rubyAttrStr(i18n.iCannotHearYou))

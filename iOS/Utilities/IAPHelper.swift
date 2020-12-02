@@ -70,8 +70,8 @@ class IAPHelper: NSObject {
 
     func showPurchaseView(isChallenge: Bool = true) {
         let eventName = "iap_view_\(isChallenge ? "challenge_button" : "free_button")"
-        #if !(targetEnvironment(macCatalyst))
-        Analytics.logEvent("\(eventName)_show", parameters: nil)
+        #if !targetEnvironment(macCatalyst)
+            Analytics.logEvent("\(eventName)_show", parameters: nil)
         #endif
         let actionSheet = UIAlertController(
             title: isChallenge ? i18n.purchaseViewTitle : i18n.itIsfreeVersion,
@@ -89,7 +89,7 @@ class IAPHelper: NSObject {
         }
 
         #if targetEnvironment(macCatalyst)
-        actionSheet.addAction(cancelAction)
+            actionSheet.addAction(cancelAction)
         #endif
 
         let restoreAction = UIAlertAction(title: i18n.restorePreviousPurchase, style: .destructive) { [weak self] _ in
@@ -128,9 +128,9 @@ class IAPHelper: NSObject {
             let buyAction = UIAlertAction(title: title, style: .default) { [weak self] _ in
                 actionSheet.dismiss(animated: true, completion: nil)
                 self?.buy(product)
-                #if !(targetEnvironment(macCatalyst))
-                Analytics.logEvent("\(eventName)_buy",
-                                   parameters: [AnalyticsParameterItemID: product.productIdentifier])
+                #if !targetEnvironment(macCatalyst)
+                    Analytics.logEvent("\(eventName)_buy",
+                                       parameters: [AnalyticsParameterItemID: product.productIdentifier])
                 #endif
             }
             actionSheet.addAction(buyAction)
@@ -138,7 +138,7 @@ class IAPHelper: NSObject {
 
         // https://medium.com/@nickmeehan/actionsheet-popover-on-ipad-in-swift-5768dfa82094
         if let popoverController = actionSheet.popoverPresentationController,
-            let vc = UIApplication.getPresentedViewController() {
+           let vc = UIApplication.getPresentedViewController() {
             popoverController.sourceView = vc.view
             popoverController.sourceRect = CGRect(x: vc.view.bounds.midX, y: vc.view.bounds.midY, width: 0, height: 0)
             popoverController.permittedArrowDirections = []

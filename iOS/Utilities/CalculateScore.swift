@@ -13,14 +13,14 @@ func getKanaTokenInfos(_ kanjiString: String, originalString: String = "", retry
     let promise = Promise<[[String]]>.pending()
     let parameters: Parameters = [
         "jpnStr": kanjiString,
-        "originalStr": originalString
+        "originalStr": originalString,
     ]
 
     #if os(iOS)
-    // try to lookup from local db
-    if kanaTokenInfosCacheDictionary[kanjiString] == nil {
-        loadTokenInfos(ja: kanjiString)
-    }
+        // try to lookup from local db
+        if kanaTokenInfosCacheDictionary[kanjiString] == nil {
+            loadTokenInfos(ja: kanjiString)
+        }
     #endif
 
     if let tokenInfos = kanaTokenInfosCacheDictionary[kanjiString] {
@@ -39,9 +39,7 @@ func getKanaTokenInfos(_ kanjiString: String, originalString: String = "", retry
         parameters: parameters
     ).responseJSON { response in
         // https://stackoverflow.com/questions/39984880/alamofire-result-failure-error-domain-nsurlerrordomain-code-999-cancelled
-        // swiftlint:disable redundant_discardable_let
-        let _ = sessionManager // for retain
-        // swiftlint:enable redundant_discardable_let
+        _ = sessionManager // for retain
 
         switch response.result {
         case .success:
@@ -53,12 +51,12 @@ func getKanaTokenInfos(_ kanjiString: String, originalString: String = "", retry
             kanaTokenInfosCacheDictionary[kanjiString] = tokenInfos
             promise.fulfill(tokenInfos)
 
-        case .failure(let error):
+        case let .failure(error):
             print(error)
             if retryCount < 5 {
                 getKanaTokenInfos(kanjiString,
-                                 originalString: originalString,
-                                 retryCount: retryCount + 1)
+                                  originalString: originalString,
+                                  retryCount: retryCount + 1)
                     .then { tokenInfos in
                         kanaTokenInfosCacheDictionary[kanjiString] = tokenInfos
                         promise.fulfill(tokenInfos)

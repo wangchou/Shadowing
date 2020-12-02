@@ -162,7 +162,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
                           waitSentenceScoresLoaded,
                           waitUserSaidSentencesLoaded,
                           waitDifficultyDBLoaded]).then { _ in
-                            changeLangButton.isUserInteractionEnabled = true
+                changeLangButton.isUserInteractionEnabled = true
                 self?.render()
             }
         }

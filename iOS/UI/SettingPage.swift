@@ -106,7 +106,7 @@ class SettingPage: UITableViewController {
         translatorNameLabel.text = translator?.name ?? i18n.defaultVoice
 
         gameLangSegmentControl.selectedSegmentIndex = gameLang == .ja ? 1 : 0
-        translationLanguageSegment.selectedSegmentIndex = setting.translationLang == .zh ? 1: 0
+        translationLanguageSegment.selectedSegmentIndex = setting.translationLang == .zh ? 1 : 0
         dailyGoalSegmentedControl.selectedSegmentIndex = dailyGoals.firstIndex(of: context.gameSetting.dailySentenceGoal) ?? 1
 
         gotoIOSSettingButton.setTitle(i18n.gotoIOSSettingButtonTitle, for: .normal)
@@ -130,7 +130,7 @@ class SettingPage: UITableViewController {
         }
         monitoringVolumeSlider.value = Float(setting.monitoringVolume)
 
-        monitoringVolumeLabel.text = (setting.monitoringVolume > 0 ? "+":"") + String(format: "%ddb", setting.monitoringVolume)
+        monitoringVolumeLabel.text = (setting.monitoringVolume > 0 ? "+" : "") + String(format: "%ddb", setting.monitoringVolume)
 
         showOptionSegmentControl.selectedSegmentIndex = setting.isShowTranslation ? 0 : 1
         showOptionLabel.text = i18n.showOptionLabel
@@ -144,6 +144,7 @@ class SettingPage: UITableViewController {
     }
 
     // MARK: - IBActions sorted by UI
+
     @IBAction func gameLangSegmentControlValueChanged(_: Any) {
         RootContainerViewController.isShowSetting = true
         if gameLangSegmentControl.selectedSegmentIndex == 1 {
@@ -181,7 +182,7 @@ class SettingPage: UITableViewController {
         render()
     }
 
-    @IBAction func showOptionSegmentControlValueChanged(_ sender: Any) {
+    @IBAction func showOptionSegmentControlValueChanged(_: Any) {
         context.gameSetting.isShowTranslation = showOptionSegmentControl.selectedSegmentIndex == 0
         saveGameSetting()
     }
@@ -198,10 +199,10 @@ class SettingPage: UITableViewController {
         saveGameSetting()
     }
 
-    @IBAction func monitoringVolumeSliderValueChanged(_ sender: Any) {
+    @IBAction func monitoringVolumeSliderValueChanged(_: Any) {
         let volume = Int(monitoringVolumeSlider.value)
         context.gameSetting.monitoringVolume = volume
-        monitoringVolumeLabel.text = (volume > 0 ? "+":"") + String(format: "%ddb", volume)
+        monitoringVolumeLabel.text = (volume > 0 ? "+" : "") + String(format: "%ddb", volume)
         saveGameSetting()
     }
 
@@ -273,7 +274,7 @@ class SettingPage: UITableViewController {
         }
     }
 
-    @IBAction func gotoAcknowledge(_ sender: Any) {
+    @IBAction func gotoAcknowledge(_: Any) {
         InfoPage.content = i18n.acknowledgement
         launchVC(InfoPage.id)
     }

@@ -75,15 +75,15 @@ class GameFlow {
             waitKanaInfoLoaded,
             waitDifficultyDBLoaded,
         ])
-        .then { _ in
-            return speakTitle()
-        }
-        .then(tryWait)
-        .then(speakInitialDescription)
-        .then(tryWait)
-        .always {
-            self.learnNextSentence()
-        }
+            .then { _ in
+                speakTitle()
+            }
+            .then(tryWait)
+            .then(speakInitialDescription)
+            .then(tryWait)
+            .always {
+                self.learnNextSentence()
+            }
     }
 
     // Flow for learn a sentence
@@ -167,8 +167,8 @@ extension GameFlow {
             self.timer?.invalidate()
             if let gr = context.gameRecord {
                 if context.gameMode == .infiniteChallengeMode {
-                    lastInfiniteChallengeSentences[gr.level] = context.sentences.map {s in
-                        return s.origin
+                    lastInfiniteChallengeSentences[gr.level] = context.sentences.map { s in
+                        s.origin
                     }
                 }
                 if context.gameMode == .medalMode {

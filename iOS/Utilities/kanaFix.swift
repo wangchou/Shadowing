@@ -93,7 +93,7 @@ let ttsGlobalFixes: [(String, String)] = [
     ("大地震", "おおじしん"),
     ("玩具", "おもちゃ"),
 
-    //old
+    // old
     ("明日", "あした"),
     ("に行って", "にいって"),
     ("に行った", "にいった"),
@@ -129,12 +129,13 @@ let ttsGlobalFixes: [(String, String)] = [
 func getUpdatedTextMap(
     map: [Int],
     ranges: [(lower: Int, upper: Int)],
-    fixString: String) -> [Int] {
+    fixString: String
+) -> [Int] {
     var newMap: [Int] = map
-    //replace from upper ranges
+    // replace from upper ranges
     ranges.reversed().forEach { range in
         newMap.replaceSubrange(range.lower ..< range.upper,
-                              with: repeatElement(map[range.upper - 1], count: fixString.count))
+                               with: repeatElement(map[range.upper - 1], count: fixString.count))
     }
     return newMap
 }
@@ -161,8 +162,8 @@ func getFixedTTSString(_ text: String, localFixes: [(String, String)], isJa: Boo
             let ranges = fixedText.ranges(of: kanji)
             if !ranges.isEmpty {
                 ttsToDisplayMap = getUpdatedTextMap(map: ttsToDisplayMap,
-                                                  ranges: ranges,
-                                                  fixString: fix)
+                                                    ranges: ranges,
+                                                    fixString: fix)
                 fixedText = fixedText.replacingOccurrences(of: kanji, with: fix)
             }
         }
@@ -180,11 +181,11 @@ extension StringProtocol {
         var result: [Range<String.Index>] = []
         var startIndex = self.startIndex
         while startIndex < endIndex,
-            let range = self[startIndex...]
-                .range(of: string, options: options) {
-                result.append(range)
-                startIndex = range.lowerBound < range.upperBound ? range.upperBound :
-                    index(range.lowerBound, offsetBy: 1, limitedBy: endIndex) ?? endIndex
+              let range = self[startIndex...]
+              .range(of: string, options: options) {
+            result.append(range)
+            startIndex = range.lowerBound < range.upperBound ? range.upperBound :
+                index(range.lowerBound, offsetBy: 1, limitedBy: endIndex) ?? endIndex
         }
         return result.map { range in
             let boundPair = (

@@ -111,7 +111,7 @@ class GameContext {
 
     // MARK: - Short-term context for a sentence, will be discarded after each sentence played
 
-    var score: Score = Score(value: 100)
+    var score = Score(value: 100)
 
     // Real duration in seconds of tts speaking
     var speakDuration: Float = 0
@@ -143,12 +143,12 @@ class GameContext {
     }
 
     var userSaidString: String {
-        return userSaidSentences[self.targetString] ?? ""
+        return userSaidSentences[targetString] ?? ""
     }
 
     // Calculated duration when guide voice off mode
     var calculatedSpeakDuration: Promise<Float> {
-        let duration: Promise<Float> = Promise<Float>.pending()
+        let duration = Promise<Float>.pending()
         if gameLang == .ja {
             getKana(targetString, originalString: nil).then { [unowned self] kana in
                 duration.fulfill(
@@ -186,8 +186,8 @@ extension GameContext {
     private func loadTopicSentence() {
         sentenceIndex = 0
         guard let selectedDataSet = dataSets[dataSetKey] else { return }
-        sentences = selectedDataSet.map {ja in
-            return getSentenceByString(ja)
+        sentences = selectedDataSet.map { ja in
+            getSentenceByString(ja)
         }
 
         let level = dataKeyToLevels[dataSetKey] ?? .lv0
@@ -240,8 +240,8 @@ extension GameContext {
         sentenceIndex = 0
         sentences = Array(getTodaySentenceSet()).sorted {
             (sentenceScores[$0]?.value ?? 0) < (sentenceScores[$1]?.value ?? 0)
-        }.map {str -> Sentence in
-            return getSentenceByString(str)
+        }.map { str -> Sentence in
+            getSentenceByString(str)
         }
 
         // This should not trigger network requests
@@ -254,7 +254,7 @@ extension GameContext {
                         _ = s.ja.furiganaAttributedString // load furigana
                     }
                     if let userSaidSentence = userSaidSentences[s.ja],
-                        kanaTokenInfosCacheDictionary[userSaidSentence] == nil {
+                       kanaTokenInfosCacheDictionary[userSaidSentence] == nil {
                         _ = userSaidSentence.furiganaAttributedString
                     }
                 }

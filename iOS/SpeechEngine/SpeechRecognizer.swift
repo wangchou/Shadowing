@@ -30,11 +30,11 @@ class SpeechRecognizer: NSObject {
         case .ja:
             return speechRecognizerJP
         default:
-            #if !(targetEnvironment(macCatalyst))
-            if let voice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher),
-                let recognizer = SFSpeechRecognizer(locale: Locale(identifier: voice.language.replacingOccurrences(of: "-", with: "_"))) {
-                return recognizer
-            }
+            #if !targetEnvironment(macCatalyst)
+                if let voice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher),
+                   let recognizer = SFSpeechRecognizer(locale: Locale(identifier: voice.language.replacingOccurrences(of: "-", with: "_"))) {
+                    return recognizer
+                }
             #endif
             return speechRecognizerEN
         }
@@ -146,7 +146,7 @@ class SpeechRecognizer: NSObject {
 
         if let error = error {
             if let userInfo = error._userInfo,
-                let desc = (userInfo["NSLocalizedDescription"] as? String) {
+               let desc = (userInfo["NSLocalizedDescription"] as? String) {
                 // Retry means didn't hear anything please say again
                 if desc == "Retry" {
                     promise.fulfill("")
@@ -204,9 +204,9 @@ class SpeechRecognizer: NSObject {
     // https://stackoverflow.com/questions/48749729/avaudiosession-interruption-on-declining-phone-call
     @objc func handleInterruption(notification: Notification) {
         guard let userInfo = notification.userInfo,
-            let interruptionTypeRawValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
-            let interruptionType = AVAudioSession.InterruptionType(rawValue: interruptionTypeRawValue),
-            let session = notification.object as? AVAudioSession else {
+              let interruptionTypeRawValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
+              let interruptionType = AVAudioSession.InterruptionType(rawValue: interruptionTypeRawValue),
+              let session = notification.object as? AVAudioSession else {
             print("Recorder - something went wrong")
             return
         }

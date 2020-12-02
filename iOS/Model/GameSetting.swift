@@ -13,6 +13,7 @@ private let context = GameContext.shared
 
 struct GameSetting: Codable {
     // MARK: - GameSetting Data fields
+
     var gameSpeed: Float = AVSpeechUtteranceDefaultSpeechRate * 0.85
     var practiceSpeed: Float = AVSpeechUtteranceDefaultSpeechRate * 0.7
     var isShowTranslationInPractice: Bool = false
@@ -22,6 +23,7 @@ struct GameSetting: Codable {
     var isShowOriginal: Bool {
         return !isShowTranslation
     }
+
     var isSpeakTranslation: Bool = false
     var isSpeakOriginal: Bool = true
 
@@ -42,6 +44,7 @@ struct GameSetting: Codable {
     var translatorZh: String = getDefaultVoiceId(language: Lang.zh.defaultCode)
 
     // MARK: - Computed Fields
+
     var translator: String {
         get {
             if translationLang == .zh {
@@ -74,6 +77,7 @@ struct GameSetting: Codable {
         }
         return speaker
     }
+
     // voice id ended
 
     init() {}
@@ -187,7 +191,6 @@ func getDefaultVoice(language: String,
 func getDefaultVoiceId(language: String,
                        isPreferMaleSiri: Bool = true,
                        isPreferEnhanced: Bool = true) -> String {
-
     guard let voice = getDefaultVoice(language: language, isPreferMaleSiri: isPreferMaleSiri, isPreferEnhanced: isPreferEnhanced) else {
         showMessage(i18n.defaultVoiceIsNotAvailable, isNeedConfirm: true)
         print("getDefaultVoiceId(\(language), \(isPreferMaleSiri), \(isPreferEnhanced) Failed. return unknown")

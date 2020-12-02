@@ -10,7 +10,7 @@ import Promises
 import UIKit
 
 class SplashScreenViewController: UIViewController {
-    var launched: Promise<Void> = Promise<Void>.pending()
+    var launched = Promise<Void>.pending()
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         launched.fulfill(())

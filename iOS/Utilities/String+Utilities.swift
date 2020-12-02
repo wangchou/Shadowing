@@ -37,7 +37,7 @@ extension String {
     }
 
     var jpnType: JpnType {
-        guard let kanjiRange = self.range(of: "[\\p{Han}\\d]*[\\p{Han}\\d]", options: .regularExpression) else { return JpnType.noKanjiAndNumber }
+        guard let kanjiRange = range(of: "[\\p{Han}\\d]*[\\p{Han}\\d]", options: .regularExpression) else { return JpnType.noKanjiAndNumber }
 
         if String(self[kanjiRange]).count == count {
             return JpnType.kanjiAndNumberOnly
@@ -46,7 +46,7 @@ extension String {
     }
 
     var isHasEn: Bool {
-        if self.range(of: "[a-zA-Z]*[a-zA-Z]", options: .regularExpression) != nil {
+        if range(of: "[a-zA-Z]*[a-zA-Z]", options: .regularExpression) != nil {
             return true
         }
         return false

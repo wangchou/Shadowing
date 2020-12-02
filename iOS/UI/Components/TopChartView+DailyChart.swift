@@ -51,8 +51,8 @@ extension TopChartView {
 
     func animateProgress() {
         guard context.gameSetting.icTopViewMode == .dailyGoal,
-            percent > 0,
-            percent < 1.0 else { return }
+              percent > 0,
+              percent < 1.0 else { return }
 
         // background
         layer.removeAllAnimations()

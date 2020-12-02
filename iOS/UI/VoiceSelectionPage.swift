@@ -53,7 +53,7 @@ class VoiceSelectionPage: UIViewController {
         }
         var voicesGrouped: [[AVSpeechSynthesisVoice]] = []
         let keys = !isZh ? voiceDictByLanguage.keys.sorted() :
-                           voiceDictByLanguage.keys.sorted().reversed() // Taiwan Top
+            voiceDictByLanguage.keys.sorted().reversed() // Taiwan Top
         for key in keys {
             voicesGrouped.append(
                 voiceDictByLanguage[key]!.sorted {
@@ -95,9 +95,9 @@ class VoiceSelectionPage: UIViewController {
                 }
             }
             return text.replacingOccurrences(of: "Otoya", with: " オトヤ ")
-                       .replacingOccurrences(of: "Kyoko", with: " 京子 ")
-                       .replaceRegex("\\(.*\\)", "") // no need to say  "(enchanced)" after name
-                       .replaceRegex("（.*）", "")
+                .replacingOccurrences(of: "Kyoko", with: " 京子 ")
+                .replaceRegex("\\(.*\\)", "") // no need to say  "(enchanced)" after name
+                .replaceRegex("（.*）", "")
         }
 
         print("Error: testSentence... should not reach here")
@@ -245,8 +245,8 @@ extension VoiceSelectionPage: UITableViewDelegate {
         }
 
         let speed = isWithPracticeSpeedSection ?
-                        context.gameSetting.practiceSpeed :
-                        AVSpeechUtteranceDefaultSpeechRate
+            context.gameSetting.practiceSpeed :
+            AVSpeechUtteranceDefaultSpeechRate
         _ = ttsSay(
             testSentence,
             speaker: selectedVoice?.identifier ?? "unknown",

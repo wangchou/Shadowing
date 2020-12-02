@@ -8,7 +8,7 @@
 import Foundation
 import Promises
 
-var targetIndex = 2000//rows.count - 1
+var targetIndex = 2000 // rows.count - 1
 var batchSize = 10
 func checkKanaFixes(rows: [[String]]) {
     var swiftKana: [String: String] = [:]
@@ -20,14 +20,14 @@ func checkKanaFixes(rows: [[String]]) {
         all([
             getKana(jpn0, isFuri: true, originalString: jpn0),
             getKana(jpn1, isFuri: true, originalString: jpn0),
-            getKana(jpn2, isFuri: true, originalString: jpn0)
+            getKana(jpn2, isFuri: true, originalString: jpn0),
         ])
-        .then { kanas in
-            swiftKana[jpn0] = kanas[0].kataganaToHiragana
-            swiftKana[jpn1] = kanas[1].kataganaToHiragana
-            swiftKana[jpn2] = kanas[2].kataganaToHiragana
-            finishedCount += 1
-        }
+            .then { kanas in
+                swiftKana[jpn0] = kanas[0].kataganaToHiragana
+                swiftKana[jpn1] = kanas[1].kataganaToHiragana
+                swiftKana[jpn2] = kanas[2].kataganaToHiragana
+                finishedCount += 1
+            }
 
         while finishedCount < r - batchSize {
             RunLoop.main.run(until: Date(timeIntervalSinceNow: 0.001))
