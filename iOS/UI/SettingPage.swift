@@ -26,8 +26,13 @@ class SettingPage: UITableViewController {
     @IBOutlet var gameSpeedFastLabel: UILabel!
     @IBOutlet var translationLanguageLabel: UILabel!
     @IBOutlet var translationLanguageSegment: UISegmentedControl!
+
     @IBOutlet var showTranslationLabel: UILabel!
     @IBOutlet var showTranslationSwitch: UISwitch!
+
+    @IBOutlet var showOriginalLabel: UILabel!
+    @IBOutlet var showOriginalSwitch: UISwitch!
+
     @IBOutlet var narratorLabel: UILabel!
     @IBOutlet var narratorSwitch: UISwitch!
     @IBOutlet var monitoringLabel: UILabel!
@@ -93,6 +98,7 @@ class SettingPage: UITableViewController {
         narratorLabel.text = i18n.narratorLabel
         translationLanguageLabel.text = i18n.translationLanguageLabel
         showTranslationLabel.text = i18n.showTranslationLabel
+        showOriginalLabel.text = i18n.showOriginalLabel
         monitoringLabel.text = i18n.monitoringLabel
         wantToSayLabel.text = i18n.wantToSayLabel
 
@@ -120,7 +126,7 @@ class SettingPage: UITableViewController {
             dailyGoalSegmentedControl.setTitle("\(dailyGoals[i])\(i18n.sentenceUnit)", forSegmentAt: i)
         }
 
-        narratorSwitch.isOn = setting.isUsingNarrator
+        narratorSwitch.isOn = setting.isSpeakInitialDescription
         monitoringSwitch.isOn = setting.isMointoring
         if setting.isMointoring {
             monitoringVolumeSlider.isEnabled = true
@@ -135,6 +141,8 @@ class SettingPage: UITableViewController {
 
         showTranslationSwitch.isEnabled = context.gameSetting.learningMode != .interpretation
         showTranslationLabel.textColor = context.gameSetting.learningMode != .interpretation ? .black : minorTextColor
+        showOriginalSwitch.isEnabled = context.gameSetting.learningMode != .interpretation
+        showOriginalLabel.textColor = context.gameSetting.learningMode != .interpretation ? .black : minorTextColor
 
         initLearningModeSegmentControl(label: learningModeLabel, control: learningModeSegmentControl)
     }
@@ -182,8 +190,13 @@ class SettingPage: UITableViewController {
         saveGameSetting()
     }
 
+    @IBAction func showOriginalSwitchValueChanged(_ sender: Any) {
+        context.gameSetting.isShowOriginal = showOriginalSwitch.isOn
+        saveGameSetting()
+    }
+
     @IBAction func narratorSwitchValueChanged(_: Any) {
-        context.gameSetting.isUsingNarrator = narratorSwitch.isOn
+        context.gameSetting.isSpeakInitialDescription = narratorSwitch.isOn
         saveGameSetting()
     }
 
@@ -314,14 +327,16 @@ func actOnLearningModeSegmentControlValueChanged(control: UISegmentedControl) {
     switch context.gameSetting.learningMode {
     case .meaningAndSpeaking:
         context.gameSetting.isSpeakTranslation = true
-        context.gameSetting.isUsingGuideVoice = true
+        context.gameSetting.isSpeakOriginal = true
     case .speakingOnly, .echoMethod:
         context.gameSetting.isSpeakTranslation = false
-        context.gameSetting.isUsingGuideVoice = true
+        context.gameSetting.isSpeakOriginal = true
     case .interpretation:
         context.gameSetting.isSpeakTranslation = true
-        context.gameSetting.isUsingGuideVoice = false
+        context.gameSetting.isSpeakOriginal = false
+        
         context.gameSetting.isShowTranslation = false
+        context.gameSetting.isShowOriginal = true
     }
     saveGameSetting()
 }

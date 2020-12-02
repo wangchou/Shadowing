@@ -37,6 +37,8 @@ class Messenger: UIViewController {
     @IBOutlet var speedLabel: UILabel!
     @IBOutlet var showTranslationLabel: UILabel!
     @IBOutlet var showTranslationSwitch: UISwitch!
+    @IBOutlet var showOriginalLabel: UILabel!
+    @IBOutlet var showOriginalSwitch: UISwitch!
     @IBOutlet var learningModeLabel: UILabel!
     @IBOutlet var learningModeSegmentControl: UISegmentedControl!
     @IBOutlet var repeatOneSwitchButton: UIButton!
@@ -115,6 +117,7 @@ class Messenger: UIViewController {
         let i18n = I18n.shared
 
         showTranslationLabel.text = i18n.showTranslationLabel
+        showOriginalLabel.text = i18n.showOriginalLabel
         speedLabel.text = i18n.speed
 
         speedSlider.minimumValue = AVSpeechUtteranceMinimumSpeechRate
@@ -123,6 +126,11 @@ class Messenger: UIViewController {
         showTranslationSwitch.isOn = context.gameSetting.isShowTranslation
         showTranslationSwitch.isEnabled = context.gameSetting.learningMode != .interpretation
         showTranslationLabel.textColor = context.gameSetting.learningMode != .interpretation ? .white : UIColor.white.withAlphaComponent(0.3)
+
+        showOriginalSwitch.isOn = context.gameSetting.isShowOriginal
+        showOriginalSwitch.isEnabled = context.gameSetting.learningMode != .interpretation
+        showOriginalLabel.textColor = context.gameSetting.learningMode != .interpretation ? .white : UIColor.white.withAlphaComponent(0.3)
+
         speedSlider.value = context.gameSetting.gameSpeed
         fastLabel.text = String(format: "%.2fx", context.gameSetting.gameSpeed * 2)
 
@@ -263,6 +271,11 @@ class Messenger: UIViewController {
 
     @IBAction func showTranslationSwitchValueChanged(_: Any) {
         context.gameSetting.isShowTranslation = showTranslationSwitch.isOn
+        saveGameSetting()
+        renderOverlayView()
+    }
+    @IBAction func showOriginalSwitchValueChanged(_ sender: Any) {
+        context.gameSetting.isShowOriginal = showOriginalSwitch.isOn
         saveGameSetting()
         renderOverlayView()
     }

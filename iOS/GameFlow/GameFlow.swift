@@ -13,8 +13,10 @@ enum GameError: Error {
     case forceStop
 }
 
-enum GameState {
+enum GameState: String {
     case justStarted
+    case speakTitle
+    case speakInitialDescription
     case speakingTranslation
     case speakingTargetString
     case echoMethod
@@ -77,7 +79,7 @@ class GameFlow {
             return speakTitle()
         }
         .then(tryWait)
-        .then(speakNarratorString)
+        .then(speakInitialDescription)
         .then(tryWait)
         .always {
             self.learnNextSentence()
@@ -134,9 +136,9 @@ extension GameFlow {
         }
     }
 
-    private func speakNarratorString() -> Promise<Void> {
-        if !context.gameSetting.isUsingNarrator { return fulfilledVoidPromise() }
-
+    private func speakInitialDescription() -> Promise<Void> {
+        if !context.gameSetting.isSpeakInitialDescription { return fulfilledVoidPromise() }
+        context.gameState = .speakInitialDescription
         return narratorSay(narratorString)
     }
 
@@ -224,8 +226,7 @@ extension GameFlow {
         if isNeedToStopPromiseChain { return rejectedVoidPromise() }
 
         context.gameState = .speakingTargetString
-        guard context.gameSetting.isUsingGuideVoice else {
-            postEvent(.sayStarted, string: context.targetString)
+        guard context.gameSetting.isSpeakOriginal else {
             return fulfilledVoidPromise()
         }
 
@@ -259,7 +260,7 @@ extension GameFlow {
 
     private func listenWrapped() -> Promise<String> {
         context.gameState = .listening
-        if context.gameSetting.isUsingGuideVoice {
+        if context.gameSetting.isSpeakOriginal {
             return engine
                 .listen(duration: Double(context.speakDuration + pauseDuration))
         }

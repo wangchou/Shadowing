@@ -66,19 +66,25 @@ class I18n {
     var narratorLabel: String {
         if isJa { return "挑戦の説明" }
         if isZh { return "挑戰的語音說明" }
-        return "Initial Descriptions"
+        return "Initial Description"
     }
 
     var translationLanguageLabel: String {
         if isJa { return "翻訳言語" }
         if isZh { return "翻譯語言" }
-        return "Translation Lang"
+        return "Translation Language"
     }
 
     var showTranslationLabel: String {
         if isJa { return "翻訳を表示する" }
-        if isZh { return "改顯示譯文" }
-        return "Show translation"
+        if isZh { return "顯示翻譯" }
+        return "Show Translation"
+    }
+
+    var showOriginalLabel: String {
+        if isJa { return "原文を表示する" }
+        if isZh { return "顯示原文" }
+        return "Show Original Sentence"
     }
 
     var monitoringLabel: String {

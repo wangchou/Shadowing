@@ -17,15 +17,15 @@ struct GameSetting: Codable {
     var practiceSpeed: Float = AVSpeechUtteranceDefaultSpeechRate * 0.7
     var isShowTranslationInPractice: Bool = false
 
-    // learning mode started
     var learningMode: LearningMode = .speakingOnly
     var isShowTranslation: Bool = false
+    var isShowOriginal: Bool = true
     var isSpeakTranslation: Bool = false
-    var isUsingGuideVoice: Bool = true
-    var translationLang: Lang = i18n.isZh ? .zh : (gameLang == .ja ? .en : .ja)
-    // learning mode ended
+    var isSpeakOriginal: Bool = true
 
-    var isUsingNarrator: Bool = true
+    var translationLang: Lang = i18n.isZh ? .zh : (gameLang == .ja ? .en : .ja)
+
+    var isSpeakInitialDescription: Bool = true
     var isMointoring: Bool = true
     var dailySentenceGoal: Int = 50
     var icTopViewMode: ICTopViewMode = .dailyGoal
@@ -92,12 +92,16 @@ struct GameSetting: Codable {
         isShowTranslationInPractice = try container.decodeIfPresent(Bool.self, forKey: .isShowTranslationInPractice) ?? isShowTranslationInPractice
 
         learningMode = try container.decodeIfPresent(LearningMode.self, forKey: .learningMode) ?? learningMode
+
         isShowTranslation = try container.decodeIfPresent(Bool.self, forKey: .isShowTranslation) ?? isShowTranslation
         isSpeakTranslation = try container.decodeIfPresent(Bool.self, forKey: .isSpeakTranslation) ?? isSpeakTranslation
-        isUsingGuideVoice = try container.decodeIfPresent(Bool.self, forKey: .isUsingGuideVoice) ?? isUsingGuideVoice
+
+        isShowOriginal = try container.decodeIfPresent(Bool.self, forKey: .isShowOriginal) ?? isShowOriginal
+        isSpeakOriginal = try container.decodeIfPresent(Bool.self, forKey: .isSpeakOriginal) ?? isSpeakOriginal
+
         translationLang = try container.decodeIfPresent(Lang.self, forKey: .translationLang) ?? translationLang
 
-        isUsingNarrator = try container.decodeIfPresent(Bool.self, forKey: .isUsingNarrator) ?? isUsingNarrator
+        isSpeakInitialDescription = try container.decodeIfPresent(Bool.self, forKey: .isSpeakInitialDescription) ?? isSpeakInitialDescription
         isMointoring = try container.decodeIfPresent(Bool.self, forKey: .isMointoring) ?? isMointoring
         dailySentenceGoal = try container.decodeIfPresent(Int.self, forKey: .dailySentenceGoal) ?? dailySentenceGoal
         icTopViewMode = try container.decodeIfPresent(ICTopViewMode.self, forKey: .icTopViewMode) ?? icTopViewMode

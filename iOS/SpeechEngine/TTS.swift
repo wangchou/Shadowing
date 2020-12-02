@@ -31,7 +31,7 @@ import Foundation
                  lang: Lang = .unset,
                  ttsFixes: [(String, String)] = []
         ) -> Promise<Void> {
-            print(text, voiceId, lang)
+            // print(text, voiceId, lang)
             stop()
             synthesizer.delegate = self
             let isJa = lang == .ja

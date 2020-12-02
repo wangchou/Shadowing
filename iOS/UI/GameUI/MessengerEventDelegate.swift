@@ -15,16 +15,29 @@ extension Messenger: GameEventDelegate {
     @objc func onEventHappened(_ notification: Notification) {
         guard let event = notification.object as? Event else { print("convert event fail"); return }
 
+        if let gameState = event.gameState {
+            print("\n == \(gameState.rawValue) ==")
+        } else if event.type != .willSpeakRange &&
+                  event.type != .playTimeUpdate {
+            print("\t",
+                  event.type,
+                  event.string ?? "",
+                  event.range ?? "",
+                  event.int ?? "",
+                  event.score ?? "")
+        }
+
         switch event.type {
         case .sayStarted:
             guard let text = event.string else { return }
-            if context.gameState == .justStarted {
+            if context.gameState == .speakTitle ||
+               context.gameState == .speakInitialDescription {
                 addLabel(rubyAttrStr(text))
             }
 
         case .willSpeakRange:
             guard let newRange = event.range else { return }
-            if !context.gameSetting.isShowTranslation,
+            if  context.gameSetting.isShowOriginal,
                 context.gameState == .speakingTargetString {
                 lastLabel.updateHighlightRange(newRange: newRange,
                                                targetString: context.targetString,
@@ -32,7 +45,7 @@ extension Messenger: GameEventDelegate {
             }
 
         case .speakEnded:
-            if !context.gameSetting.isShowTranslation,
+            if  context.gameSetting.isShowOriginal,
                 context.gameState == .speakingTargetString {
                 lastLabel.attributedText = context.targetAttrString
             }
@@ -90,14 +103,19 @@ extension Messenger: GameEventDelegate {
 
             if context.gameState == .speakingTranslation {
                 FuriganaLabel.clearHighlighRange()
-                var attrText: NSAttributedString
                 if context.gameSetting.isShowTranslation {
-                    attrText = rubyAttrStr(context.translation)
-                } else {
-                    attrText = context.targetAttrString
+                    let attrText = rubyAttrStr(context.translation)
+                    prescrolling(attrText)
+                    addLabel(attrText)
                 }
-                prescrolling(attrText)
-                addLabel(attrText)
+            }
+
+            if context.gameState == .speakingTargetString {
+                FuriganaLabel.clearHighlighRange()
+                if context.gameSetting.isShowOriginal {
+                    prescrolling(context.targetAttrString)
+                    addLabel(context.targetAttrString)
+                }
             }
 
             if context.gameState == .echoMethod {
@@ -115,7 +133,7 @@ extension Messenger: GameEventDelegate {
             attributed.append(rubyAttrStr(context.userSaidString))
         }
 
-        print("'\(context.userSaidString)'")
+        //print("'\(context.userSaidString)'")
 
         if attributed.string == "" {
             attributed.append(rubyAttrStr(i18n.iCannotHearYou))

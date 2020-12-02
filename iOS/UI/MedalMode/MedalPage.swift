@@ -68,8 +68,8 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
             self.addTextbackground()
             self.addTopBar(y: self.topPaddedY + 1)
 
-            self.addLangInfo(y: (self.yMax + 12) / 2 - 22 - 4)
-            self.addGoButton(x: 28, y: (self.yMax + 12) / 2 - 22 + 27, w: 18)
+            self.addLangInfo(y: (self.yMax + 12) / 2 - 22 - 7)
+            self.addGoButton(x: 28, y: (self.yMax + 12) / 2 - 22 + 24, w: 18)
             self.addBottomButtons()
         }
     }

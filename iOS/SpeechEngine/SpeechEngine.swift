@@ -242,6 +242,7 @@ extension SpeechEngine {
 }
 
 func speakTitle() -> Promise<Void> {
+    context.gameState = .speakTitle
     let title = context.gameTitleToSpeak
     if context.gameMode == .topicMode {
         let voiceId = context.gameSetting.translatorZh
@@ -275,10 +276,9 @@ func translatorSay(_ text: String) -> Promise<Void> {
         }
     }
 
-    print("translator:", voiceId, text)
     return engine.speak(text: text,
                         speaker: voiceId,
-                        rate: context.translatorFastRate,
+                        rate: context.translatorRate,
                         lang: context.gameSetting.translationLang)
 }
 
