@@ -19,6 +19,7 @@ class InfoPage: UIViewController {
         if let content = InfoPage.content {
             textView.text = content
         }
+        textView.dataDetectorTypes = []
     }
 
     @IBAction func onCloseButtonClicked(_: Any) {

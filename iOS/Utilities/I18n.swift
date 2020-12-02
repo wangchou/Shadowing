@@ -932,25 +932,31 @@ class I18n {
         if isZh {
             return """
             感謝，以下語言開放資源：
+
             Tanaka Corpus (英、日對照句子)
             Tatoeba.org (英、日、中句子)
             OpenCC (簡 -> 繁, 中文轉換)
             MeCab-neologd (日文自然語言處理)
             台灣大考中心六級英文單字表
 
+
             最後感謝，曾參與設計、測試問題的朋友：
+
             Amber Liu, Eason Chou, Jennifer Chen, kaminomi, msglight4874, Satolu, Sid Weng, Stella, Ruth Yuru Chen, 伯豪 & 小乖, 肉鬆, 歐頭
             """
         }
         return """
         Thanks for open data / free softwares：
+
         Tanaka Corpus (sentences)
         Tatoeba.org (sentences)
         OpenCC (simplified Chinese -> traditional Chinese)
         MeCab-neologd (nlp for Japanese)
         English vocabuly list from Taiwan College Entrance Center
 
+
         Thanks for people who help to design / test this app：
+
         Amber Liu, Eason Chou, Jennifer Chen, kaminomi, msglight4874, Satolu, Sid Weng, Stella, Ruth Yuru Chen, 伯豪 & 小乖, 肉鬆, 歐頭
         """
     }

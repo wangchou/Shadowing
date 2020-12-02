@@ -28,18 +28,6 @@ class SpeechEngine {
 
     private var speechRecognizer = SpeechRecognizer.shared
 
-    // two tts for preventing fullfill previous promise
-//    private var tts: TTS {
-//        switch currentTTSIdx % 3 {
-//        case 1:
-//            return tts1
-//        case 2:
-//            return tts2
-//        default:
-//            return tts0
-//        }
-//    }
-
     private var currentTTSIdx = 0
     private var tts0 = TTS() // teacher
     private var tts1 = TTS() // assistant

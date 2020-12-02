@@ -297,6 +297,8 @@ class SettingPage: UITableViewController {
             return i18n.micAndSpeechPermission
         case 8:
             return i18n.yourFeedbackMakeAppBetter
+        case 9:
+            return ""
 
         default:
             return "Other Setting"

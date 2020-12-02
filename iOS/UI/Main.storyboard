@@ -787,7 +787,7 @@ A: 作者的經驗，通常是</string>
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <mutableString key="content">，來把音訊傳給Apple 辨識。
+                                        <string key="content">，來把音訊傳給Apple 辨識。
 
 =&gt; 如果到 Apple 的網路不順，他們收到的就是很多雜訊的聲音，就會亂辨識。 
 另外，如果是音量的問題用 iPhone 附的有線耳麥會好很多。
@@ -810,7 +810,7 @@ Lv.1 (0~50徽章)：平均正確率 &gt; 60%，就會持續上升。
 Lv.2 (50~100徽章)：平均正確率 &gt; 70%，就會持續上升。
 ...
 Lv.10 (450~500徽章)：平均正確率 &gt; 85%，就會持續上升。
-</mutableString>
+</string>
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="18" name="PingFangTC-Regular"/>
@@ -916,7 +916,7 @@ Cg
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mgY-P7-HmR">
-                                <rect key="frame" x="349" y="49" width="50" height="50"/>
+                                <rect key="frame" x="349" y="44" width="50" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.29783818493150682" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Yuh-OD-h1I"/>
@@ -938,7 +938,7 @@ Cg
                             <constraint firstItem="2O6-9K-w0v" firstAttribute="bottom" secondItem="xxo-M8-yBK" secondAttribute="bottom" id="Nks-15-FFH"/>
                             <constraint firstItem="xxo-M8-yBK" firstAttribute="leading" secondItem="2O6-9K-w0v" secondAttribute="leading" constant="5" id="OdD-Ua-71g"/>
                             <constraint firstItem="2O6-9K-w0v" firstAttribute="trailing" secondItem="xxo-M8-yBK" secondAttribute="trailing" constant="5" id="QIl-vL-TYm"/>
-                            <constraint firstItem="mgY-P7-HmR" firstAttribute="top" secondItem="2O6-9K-w0v" secondAttribute="top" constant="5" id="Uie-LB-0RO"/>
+                            <constraint firstItem="mgY-P7-HmR" firstAttribute="top" secondItem="2O6-9K-w0v" secondAttribute="top" id="Uie-LB-0RO"/>
                             <constraint firstItem="xxo-M8-yBK" firstAttribute="top" secondItem="2O6-9K-w0v" secondAttribute="top" id="apH-vq-AUH"/>
                         </constraints>
                     </view>
