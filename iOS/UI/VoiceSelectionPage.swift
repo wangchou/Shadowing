@@ -76,24 +76,28 @@ class VoiceSelectionPage: UIViewController {
     var testSentence: String {
         if let voice = selectedVoice {
             let jaHello = "こんにちは、私の名前は\(voice.name)です。"
-                .replacingOccurrences(of: "Otoya", with: " オトヤ ")
-                .replacingOccurrences(of: "Kyoko", with: " 京子 ")
+
             let enHello = "Hello. My name is \(voice.name)."
             let zhHello = "你好，我的名字是\(voice.name)"
+            var text = ""
             switch selectingVoiceFor {
             case .teacher:
-                return gameLang == .ja ? jaHello : enHello
+                text = gameLang == .ja ? jaHello : enHello
             case .assisant:
-                return "\(Score(value: 100).text), \(Score(value: 80).text), \(Score(value: 60).text), \(Score(value: 0).text) "
+                text = "\(Score(value: 100).text), \(Score(value: 80).text), \(Score(value: 60).text), \(Score(value: 0).text) "
             case .translator:
                 if voice.language.contains("ja") {
-                    return jaHello
+                    text = jaHello
                 } else if voice.language.contains("en") {
-                    return enHello
+                    text = enHello
                 } else {
-                    return zhHello
+                    text = zhHello
                 }
             }
+            return text.replacingOccurrences(of: "Otoya", with: " オトヤ ")
+                       .replacingOccurrences(of: "Kyoko", with: " 京子 ")
+                       .replaceRegex("\\(.*\\)", "") // no need to say  "(enchanced)" after name
+                       .replaceRegex("（.*）", "")
         }
 
         print("Error: testSentence... should not reach here")
