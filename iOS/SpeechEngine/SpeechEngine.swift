@@ -28,6 +28,7 @@ class SpeechEngine {
 
     private var speechRecognizer = SpeechRecognizer.shared
 
+    // avoid initial tts delay in iOS 14
     private var currentTTSIdx = 0
     private var tts0 = TTS() // teacher
     private var tts1 = TTS() // assistant

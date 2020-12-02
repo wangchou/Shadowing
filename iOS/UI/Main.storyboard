@@ -1267,7 +1267,7 @@ Cg
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s5i-Qz-5IB">
-                                                    <rect key="frame" x="350" y="6.6666666666666679" width="51" height="31.000000000000004"/>
+                                                    <rect key="frame" x="348" y="6.6666666666666679" width="51" height="31.000000000000004"/>
                                                     <connections>
                                                         <action selector="narratorSwitchValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="jt9-iy-geY"/>
                                                         <action selector="showOriginalSwitchValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="5jS-iA-xdo"/>
@@ -1278,7 +1278,7 @@ Cg
                                                 <constraint firstItem="s5i-Qz-5IB" firstAttribute="centerY" secondItem="SjJ-7J-luo" secondAttribute="centerY" id="Ymy-Et-1tG"/>
                                                 <constraint firstItem="B29-BU-1Aw" firstAttribute="centerY" secondItem="SjJ-7J-luo" secondAttribute="centerY" id="d6z-4b-yH4"/>
                                                 <constraint firstItem="B29-BU-1Aw" firstAttribute="leading" secondItem="SjJ-7J-luo" secondAttribute="leadingMargin" id="fkn-Bd-dDn"/>
-                                                <constraint firstAttribute="trailing" secondItem="s5i-Qz-5IB" secondAttribute="trailing" constant="15" id="qxW-ai-Y18"/>
+                                                <constraint firstAttribute="trailing" secondItem="s5i-Qz-5IB" secondAttribute="trailing" constant="17" id="qxW-ai-Y18"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1296,7 +1296,7 @@ Cg
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A2c-xy-gei">
-                                                    <rect key="frame" x="350" y="6.6666666666666679" width="51" height="31.000000000000004"/>
+                                                    <rect key="frame" x="348" y="6.6666666666666679" width="51" height="31.000000000000004"/>
                                                     <connections>
                                                         <action selector="monitoringSwitchValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="hHT-Ci-ONT"/>
                                                     </connections>
@@ -1306,7 +1306,7 @@ Cg
                                                 <constraint firstItem="A2c-xy-gei" firstAttribute="centerY" secondItem="8St-tg-vh9" secondAttribute="centerY" id="NhI-Or-i0Z"/>
                                                 <constraint firstItem="g0m-WN-PUw" firstAttribute="centerY" secondItem="8St-tg-vh9" secondAttribute="centerY" id="RdS-qf-ET2"/>
                                                 <constraint firstItem="g0m-WN-PUw" firstAttribute="leading" secondItem="8St-tg-vh9" secondAttribute="leadingMargin" id="bLr-54-dgf"/>
-                                                <constraint firstAttribute="trailing" secondItem="A2c-xy-gei" secondAttribute="trailing" constant="15" id="bhC-o0-J9O"/>
+                                                <constraint firstAttribute="trailing" secondItem="A2c-xy-gei" secondAttribute="trailing" constant="17" id="bhC-o0-J9O"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>

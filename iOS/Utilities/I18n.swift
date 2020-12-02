@@ -677,15 +677,21 @@ class I18n {
         return "Challenge it tomorrow"
     }
 
+    var aboutTopicTranslation: String {
+        if isJa { return "注：テーマモードには中国語の翻訳のみです" }
+        if isZh { return "註：主題模式只有中文翻譯" }
+        return "For topic sentences, only Chinese translations are available"
+    }
+
     var purchaseViewTitle: String {
         if isJa { return "[体験版] 毎日\(dailyFreeLimit)文の挑戦制限" }
         if isZh { return "[試玩版] 已達每日\(dailyFreeLimit)句挑戰限制" }
-        return "[Trial version] Daily \(dailyFreeLimit) sentences limit"
+        return "[Trial version] Daily \(dailyFreeLimit) sentences limit is reached"
     }
 
     var purchaseViewMessage: String {
-        if isJa { return "\n今日もあなたにとって楽しい一日でありますように。\n\n〜 スタジオ大草原不可避 〜" }
-        if isZh { return "\n希望你今天也玩的很開心。 \n\n〜 大草原不可避工作室 〜" }
+        if isJa { return "楽しい時間はあっという間に。\n\n〜 スタジオ大草原不可避 〜" }
+        if isZh { return "\n希望你今天有玩的很開心。 \n\n〜 大草原不可避工作室 〜" }
         return "Hope you already have great fun today. \n\n〜 Studio 大草原不可避 〜"
     }
 

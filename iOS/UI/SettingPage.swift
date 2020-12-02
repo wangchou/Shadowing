@@ -309,6 +309,18 @@ class SettingPage: UITableViewController {
             return "Other Setting"
         }
     }
+
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        let i18n = I18n.shared
+        switch section {
+
+        case 5:
+            return gameLang == .ja ? i18n.aboutTopicTranslation : ""
+
+        default:
+            return ""
+        }
+    }
 }
 
 // MARK: - utility functions
