@@ -121,6 +121,7 @@ class Messenger: UIViewController {
 
     func start() {
         startEventObserving(self)
+        GameFlow.shared = GameFlow()
         GameFlow.shared.start()
         UIApplication.shared.isIdleTimerDisabled = true
         messengerBar.render()
