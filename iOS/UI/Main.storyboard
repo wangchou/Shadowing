@@ -1270,7 +1270,6 @@ Cg
                                                     <rect key="frame" x="348" y="6.6666666666666679" width="51" height="31.000000000000004"/>
                                                     <connections>
                                                         <action selector="narratorSwitchValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="jt9-iy-geY"/>
-                                                        <action selector="showOriginalSwitchValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="5jS-iA-xdo"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>

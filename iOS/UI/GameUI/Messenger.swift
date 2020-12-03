@@ -21,6 +21,7 @@ enum LabelPosition {
 // Prototype 8: messenger / line interface
 class Messenger: UIViewController {
     static let id = "MessengerGame"
+    static var lastInstance: Messenger?
     var lastLabel = FuriganaLabel()
 
     private var y: Int = 8
@@ -70,19 +71,13 @@ class Messenger: UIViewController {
         messengerBar.addTapGestureRecognizer(action: pauseContinueGame)
         messengerBar.pauseCountinueButton.addTarget(self, action: #selector(pauseContinueGame), for: .touchUpInside)
         messengerBar.skipNextButton.addTarget(self, action: #selector(skipNext), for: .touchUpInside)
+        Messenger.lastInstance = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        startEventObserving(self)
-        GameFlow.shared.start()
-        UIApplication.shared.isIdleTimerDisabled = true
-        messengerBar.render()
-        renderOverlayView()
-        if context.gameSetting.isMointoring {
-            SpeechEngine.shared.monitoringOn()
-        }
-        levelMeterValueBar.frame.size.height = 0
+
+        start()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -110,6 +105,29 @@ class Messenger: UIViewController {
         SpeechEngine.shared.monitoringOff()
         UIApplication.shared.isIdleTimerDisabled = false
         SpeechEngine.shared.stop()
+        Messenger.lastInstance = nil
+    }
+
+    // call this before dismiss game finished page
+    func prepareForRestart() {
+        stopEventObserving(self)
+        scrollView.removeAllSubviews()
+        scrollView.contentSize = scrollView.frame.size
+        scrollView.scrollTo(0)
+        previousY = 0
+        y = 8
+    }
+
+    func start() {
+        startEventObserving(self)
+        GameFlow.shared.start()
+        UIApplication.shared.isIdleTimerDisabled = true
+        messengerBar.render()
+        renderOverlayView()
+        if context.gameSetting.isMointoring {
+            SpeechEngine.shared.monitoringOn()
+        }
+        levelMeterValueBar.frame.size.height = 0
     }
 
     func renderOverlayView() {
@@ -241,15 +259,12 @@ class Messenger: UIViewController {
 
     @objc func skipNext() {
         // TODO: check next level is accessible for infiniteChallenge Mode
-
         postCommand(.forceStopGame)
-        dismiss(animated: true) {
-            if context.gameMode == .topicMode {
-                context.loadNextChallenge()
-                rootViewController.topicSwipablePage.detailPage?.render()
-            }
-            launchVC(Messenger.id, isOverCurrent: false)
+        prepareForRestart()
+        if context.gameMode == .topicMode {
+            context.loadNextChallenge()
         }
+        start()
     }
 
     @objc func continueGame() {

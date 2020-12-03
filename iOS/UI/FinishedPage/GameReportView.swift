@@ -71,9 +71,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
             if isPauseMode {
                 stopCountDown()
             } else {
-                dismissTwoVC(animated: false) {
-                    launchNextGame()
-                }
+                launchNextGame()
             }
         }
 
@@ -101,9 +99,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
             guard leftSeconds > 0 else {
                 countDownTimer?.invalidate()
                 if !isSimulator {
-                    dismissTwoVC(animated: false) {
-                        launchNextGame()
-                    }
+                    launchNextGame()
                 }
                 return
             }
@@ -115,7 +111,11 @@ class GameReportView: UIView, ReloadableView, GridLayout {
     func addBackButton() {
         let backButton = addButton(title: "", bgColor: .lightGray) {
             stopCountDown()
-            dismissTwoVC()
+            if let vc = Messenger.lastInstance?.presentingViewController {
+                vc.dismiss(animated: false)
+            } else {
+                dismissTwoVC()
+            }
             if context.gameMode == .infiniteChallengeMode {
                 if let icwPage = rootViewController.current as? InfiniteChallengeSwipablePage {
                     icwPage.detailPage?.tableView.reloadData()
@@ -138,11 +138,20 @@ class GameReportView: UIView, ReloadableView, GridLayout {
 }
 
 func launchNextGame() {
-    if context.gameMode == .topicMode, !context.gameSetting.isRepeatOne {
-        context.loadNextChallenge()
-        rootViewController.topicSwipablePage.detailPage?.render()
+    Messenger.lastInstance?.prepareForRestart()
+    SpeechEngine.shared.stopListeningAndSpeaking()
+    dismissVC(animated: true) {
+        if context.gameMode == .topicMode, !context.gameSetting.isRepeatOne {
+            context.loadNextChallenge()
+            rootViewController.topicSwipablePage.detailPage?.render()
+        }
+        if isUnderDailySentenceLimit() {
+            Messenger.lastInstance?.start()
+        } else {
+            if let vc = Messenger.lastInstance?.presentingViewController {
+                vc.dismiss(animated: true)
+            }
+        }
     }
-    if isUnderDailySentenceLimit() {
-        launchVC(Messenger.id, isOverCurrent: false)
-    }
+
 }

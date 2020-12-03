@@ -262,9 +262,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
     private func addActionButtons(y: Int) {
         let button = addButton(title: "", bgColor: .red) {
             SpeechEngine.shared.stopListeningAndSpeaking()
-            dismissTwoVC(animated: false) {
-                launchNextGame()
-            }
+            launchNextGame()
         }
 
         let countDownSecs = isJustReachDailyGoal ? 9 : 6
@@ -285,10 +283,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
             guard leftSeconds > 0 else {
                 countDownTimer?.invalidate()
                 if !isSimulator {
-                    dismissTwoVC(animated: true) {
-                        SpeechEngine.shared.stopListeningAndSpeaking()
-                        launchNextGame()
-                    }
+                    launchNextGame()
                 }
                 return
             }
@@ -296,7 +291,11 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
         let backButton = addButton(title: "", bgColor: .lightGray) {
             countDownTimer?.invalidate()
-            dismissTwoVC()
+            if let vc = Messenger.lastInstance?.presentingViewController {
+                vc.dismiss(animated: false)
+            } else {
+                dismissTwoVC()
+            }
         }
 
         backButton.setIconImage(named: "baseline_exit_to_app_black_48pt", title: "", tintColor: .white, isIconOnLeft: false)
