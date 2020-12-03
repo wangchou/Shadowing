@@ -194,7 +194,7 @@ class SpeechRecognizer: NSObject {
         postEvent(.listenStarted, string: "")
         Timer.scheduledTimer(withTimeInterval: stopAfterSeconds, repeats: false) { [weak self] _ in
             let fakeSuffix = ["", "", "西宮", "はは"]
-            let fakeSaidString = context.targetString + fakeSuffix[Int.random(in: 0 ..< fakeSuffix.count)]
+            let fakeSaidString = context.sentences[0].origin + fakeSuffix[Int.random(in: 0 ..< fakeSuffix.count)]
 
             self?.promise.fulfill(fakeSaidString)
         }
