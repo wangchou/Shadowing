@@ -94,7 +94,7 @@ class SpeechEngine {
     }
 
     func stop(isStopTTS: Bool = true) {
-        guard isEngineRunning else { return }
+        guard audioEngine.isRunning || isEngineRunning else { return }
 
         if isStopTTS {
             tts0.stop()

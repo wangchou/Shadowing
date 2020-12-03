@@ -107,6 +107,8 @@ class Messenger: UIViewController {
         UIApplication.shared.isIdleTimerDisabled = false
         SpeechEngine.shared.stop()
         Messenger.lastInstance = nil
+
+        print(#function, SpeechEngine.shared)
     }
 
     // call this before dismiss game finished page
