@@ -159,7 +159,7 @@ func loadGameSetting() {
 
         context.gameSetting.translatorJp = getDefaultVoiceId(language: Lang.ja.defaultCode)
         context.gameSetting.translatorEn = getDefaultVoiceId(language: Lang.en.defaultCode)
-        context.gameSetting.translatorZh = getDefaultVoiceId(language: Lang.zh.defaultCode)
+        context.gameSetting.translatorZh = getDefaultVoiceId(language: Lang.zh.defaultCode, isPreferEnhanced: false)
 
         print(context.gameSetting.teacher, context.gameSetting.assistant)
     }
@@ -185,6 +185,7 @@ func getDefaultVoice(language: String,
             return nil
         }
     }
+
     return voice
 }
 

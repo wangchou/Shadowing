@@ -63,7 +63,9 @@ class SettingPage: UITableViewController {
     }
 
     var translator: AVSpeechSynthesisVoice? {
-        return AVSpeechSynthesisVoice(identifier: context.gameSetting.translator) ?? getDefaultVoice(language: context.gameSetting.translationLang.defaultCode)
+        return AVSpeechSynthesisVoice(identifier: context.gameSetting.translator) ?? getDefaultVoice(
+            language: context.gameSetting.translationLang.defaultCode,
+            isPreferEnhanced: context.gameSetting.translationLang != .zh)
     }
 
     override func viewDidLoad() {
