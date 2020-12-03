@@ -43,7 +43,8 @@ class Messenger: UIViewController {
     @IBOutlet var learningModeSegmentControl: UISegmentedControl!
     @IBOutlet var repeatOneSwitchButton: UIButton!
     @IBOutlet var exitButton: UIButton!
-    @IBOutlet var fastLabel: UILabel!
+
+    @IBOutlet weak var speedNameLabel: UILabel!
 
     @IBOutlet var messengerBar: MessengerBar!
 
@@ -145,7 +146,8 @@ class Messenger: UIViewController {
         showOptionLabel.textColor = context.gameSetting.learningMode != .interpretation ? .white : UIColor.white.withAlphaComponent(0.3)
 
         speedSlider.value = context.gameSetting.gameSpeed
-        fastLabel.text = String(format: "%.2fx", context.gameSetting.gameSpeed * 2)
+        speedNameLabel.text = i18n.speed
+        speedLabel.text = String(format: "%.2fx", context.gameSetting.gameSpeed * 2)
 
         if context.gameMode == .topicMode {
             repeatOneSwitchButton.isHidden = false

@@ -2480,7 +2480,6 @@ Cg
                     </view>
                     <connections>
                         <outlet property="exitButton" destination="vBK-TF-3m9" id="d4p-l2-u4l"/>
-                        <outlet property="fastLabel" destination="NzW-b5-t7J" id="47g-mZ-txk"/>
                         <outlet property="learningModeLabel" destination="0My-oC-lXl" id="4oN-w4-5Z6"/>
                         <outlet property="learningModeSegmentControl" destination="qwA-mv-j1J" id="jFc-Sh-eli"/>
                         <outlet property="levelMeterHeightConstraint" destination="YGm-ea-gBV" id="tzt-YQ-eMp"/>
@@ -2493,6 +2492,7 @@ Cg
                         <outlet property="showOptionLabel" destination="fvZ-F5-Hi3" id="f8E-hB-GCR"/>
                         <outlet property="showOptionSegment" destination="qtR-58-nBP" id="EaD-0M-xYc"/>
                         <outlet property="speedLabel" destination="SgB-j0-oP6" id="P8H-uY-1k0"/>
+                        <outlet property="speedNameLabel" destination="NzW-b5-t7J" id="eOE-dy-yxF"/>
                         <outlet property="speedSlider" destination="5ov-3e-m3b" id="5Yh-Rz-tLj"/>
                     </connections>
                 </viewController>
