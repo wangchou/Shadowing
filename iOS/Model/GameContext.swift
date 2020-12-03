@@ -104,8 +104,7 @@ class GameContext {
         case .infiniteChallengeMode:
             return "[♾] \(infiniteChallengeLevel.title)"
         case .medalMode:
-            let isEn = !i18n.isZh && !i18n.isJa
-            return "[🏅\(isEn ? gameMedal.lowLevel.lvlTitle : "")] \(gameMedal.lowLevel.title)"
+            return "[🏅] \(gameMedal.lowLevel.title)"
         }
     }
 

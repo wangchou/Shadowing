@@ -25,7 +25,7 @@ struct GameMedal {
     }
 
     var count: Int {
-        // if isSimulator { return 235 }
+        if isSimulator { return 235 }
         return medalCount[gameLang] ?? 0
     }
 

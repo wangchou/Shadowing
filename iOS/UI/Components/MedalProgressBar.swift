@@ -11,11 +11,11 @@ import UIKit
 private let context = GameContext.shared
 
 class MedalProgressBar: UIView, GridLayout, ReloadableView {
-    var gridCount: Int = 34
+    var gridCount = 34
 
-    var medalCount: Int = 0
+    var medalCount = 0
 
-    var isFinishedPageMode: Bool = false
+    var isFinishedPageMode = false
 
     var timer: Timer?
 
@@ -63,7 +63,8 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
         }
 
         // lvl text
-        lvlLabel.attributedText = getStrokeText(lowLevel.title,
+        let lvTitle = lowLevel.title.replacingOccurrences(of: "Level", with: "Lv.")
+        lvlLabel.attributedText = getStrokeText(lvTitle,
                                                 .white,
                                                 strokeWidth: Float(-0.3 * step),
                                                 strokColor: .black,
