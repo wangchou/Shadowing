@@ -14,7 +14,7 @@ class FuriganaLabel: UILabel {
         return 10
     }
 
-    private var hasRuby: Bool {
+    var hasRuby: Bool {
         var foundRuby = false
         if let attributedText = attributedText {
             attributedText.enumerateAttribute(

@@ -90,13 +90,15 @@ class SentencesTableCell: UITableViewCell {
         ttsFixes = sentence.ttsFixes
         sentenceLabel.widthPadding = 4
         userSaidSentenceLabel.widthPadding = 4
-        translationTextView.textContainerInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
 
         if let tokenInfos = kanaTokenInfosCacheDictionary[sentence.origin] {
             sentenceLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
         } else {
             sentenceLabel.text = sentence.origin
         }
+
+        translationTextView.textContainerInset = sentenceLabel.hasRuby ?
+            UIEdgeInsets(top: 15, left: 0, bottom: -5, right: 0) : UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
 
         translationTextView.text = isTopicDetail ? sentence.cmn : sentence.translation
 
