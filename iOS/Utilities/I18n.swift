@@ -203,7 +203,7 @@ class I18n {
     var gameStartedWithGuideVoice: String {
         if isJa { return "私のあとに\(langToSpeak)を繰り返してください。" }
         if isZh { return "當我說完\(langToSpeak)後，請跟著說～" }
-        return "Please repeat \"\(langToSpeak) sentences\" after me."
+        return "Please repeat \"\(langToSpeak)\" after me."
     }
 
     var gameStartedWithEchoMethod: String {

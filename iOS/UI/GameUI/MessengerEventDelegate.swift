@@ -107,12 +107,7 @@ extension Messenger: GameEventDelegate {
                     let attrText = rubyAttrStr(context.translation)
                     prescrolling(attrText)
                     addLabel(attrText)
-                }
-            }
-
-            if context.gameState == .speakingTargetString {
-                FuriganaLabel.clearHighlighRange()
-                if context.gameSetting.isShowOriginal {
+                } else {
                     prescrolling(context.targetAttrString)
                     addLabel(context.targetAttrString)
                 }
