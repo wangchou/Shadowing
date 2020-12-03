@@ -36,16 +36,6 @@ class RootContainerViewController: UIViewController {
             self?.loadStartupData()
             self?.showInitialPage()
         }
-
-        // for tts in setting page
-        DispatchQueue.global().async {
-            configureAudioSession(isAskingPermission: false)
-        }
-
-//        for family in UIFont.familyNames.sorted() {
-//            let names = UIFont.fontNames(forFamilyName: family)
-//            print("Family: \(family) Font names: \(names)")
-//        }
     }
 
     private func loadStartupData() {

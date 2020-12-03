@@ -54,9 +54,6 @@ class SpeechRecognizer: NSObject {
                                                selector: #selector(handleInterruption(notification:)),
                                                name: AVAudioSession.interruptionNotification,
                                                object: session)
-        if !isSimulator {
-            authorize()
-        }
     }
 
     // MARK: - Public Methods
@@ -165,7 +162,8 @@ class SpeechRecognizer: NSObject {
         }
     }
 
-    private func authorize() {
+    func authorize() -> Promise<Void> {
+        let promise = Promise<Void>.pending()
         SFSpeechRecognizer.requestAuthorization { authStatus in
             switch authStatus {
             case .authorized:
@@ -186,7 +184,9 @@ class SpeechRecognizer: NSObject {
             @unknown default:
                 print("\n#### requestAuthorization unknown default ####\n")
             }
+            promise.fulfill(())
         }
+        return isSimulator ? fulfilledVoidPromise() : promise
     }
 
     private func fakeListening(stopAfterSeconds: Double = 5) -> Promise<String> {

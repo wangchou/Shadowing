@@ -14,8 +14,8 @@ private let context = GameContext.shared
 struct GameSetting: Codable {
     // MARK: - GameSetting Data fields
 
-    var gameSpeed: Float = AVSpeechUtteranceDefaultSpeechRate * 0.85
-    var practiceSpeed: Float = AVSpeechUtteranceDefaultSpeechRate * 0.7
+    var gameSpeed: Float = AVSpeechUtteranceDefaultSpeechRate * 0.70
+    var practiceSpeed: Float = AVSpeechUtteranceDefaultSpeechRate * 0.60
     var isShowTranslationInPractice: Bool = false
 
     var learningMode: LearningMode = .speakingOnly
@@ -41,7 +41,7 @@ struct GameSetting: Codable {
     var assistant: String = getDefaultVoiceId(language: gameLang.defaultCode, isPreferMaleSiri: gameLang != .ja)
     var translatorJp: String = getDefaultVoiceId(language: Lang.ja.defaultCode)
     var translatorEn: String = getDefaultVoiceId(language: Lang.en.defaultCode)
-    var translatorZh: String = getDefaultVoiceId(language: Lang.zh.defaultCode)
+    var translatorZh: String = getDefaultVoiceId(language: Lang.zh.defaultCode, isPreferEnhanced: false)
 
     // MARK: - Computed Fields
 
