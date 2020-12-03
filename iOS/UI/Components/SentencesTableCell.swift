@@ -54,6 +54,8 @@ class SentencesTableCell: UITableViewCell {
     }
 
     func practiceSentence() {
+        guard isUnderDailySentenceLimit() else { return }
+
         stopCountDown()
         guard SentencesTableCell.isPracticing != true else { return }
         startEventObserving(self)

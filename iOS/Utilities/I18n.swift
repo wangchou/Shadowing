@@ -422,16 +422,10 @@ class I18n {
     }
 
     func getRegion(region: String) -> String {
-        if region == "US" { return us }
-        if region == "GB" { return gb }
-        if region == "IE" { return ie }
-        if region == "AU" { return au }
-        if region == "ZA" { return za }
         if region == "TW" { return tw }
-        if region == "HK" { return hk }
         if region == "CN" { return cn }
-        if region == "JP" { return jp }
-        return region
+
+        return (Locale.current.localizedString(forRegionCode: region) ?? "") + " \(flag(region))"
     }
 
     var tw: String {
@@ -440,52 +434,10 @@ class I18n {
         return "Taiwan 🇹🇼"
     }
 
-    var hk: String {
-        if isJa { return "香港 🇭🇰" }
-        if isZh { return "香港 🇭🇰" }
-        return "Hong Kong 🇭🇰"
-    }
-
     var cn: String {
         if isJa { return "中国 🇨🇳" }
         if isZh { return "中國 🇨🇳" }
         return "China 🇨🇳"
-    }
-
-    var us: String {
-        if isJa { return "アメリカ 🇺🇸" }
-        if isZh { return "美國 🇺🇸" }
-        return "American 🇺🇸"
-    }
-
-    var gb: String {
-        if isJa { return "英国 🇬🇧" }
-        if isZh { return "英國 🇬🇧" }
-        return "United Kingdom 🇬🇧"
-    }
-
-    var au: String {
-        if isJa { return "アオースラリア 🇦🇺" }
-        if isZh { return "澳洲 🇦🇺" }
-        return "Australia 🇦🇺"
-    }
-
-    var ie: String {
-        if isJa { return "アイルランド 🇨🇮" }
-        if isZh { return "愛爾蘭 🇨🇮" }
-        return "Ireland 🇨🇮"
-    }
-
-    var za: String {
-        if isJa { return "南アフリカ 🇿🇦" }
-        if isZh { return "南非 🇿🇦" }
-        return "South Africa 🇿🇦"
-    }
-
-    var jp: String {
-        if isJa { return "日本 🇯🇵" }
-        if isZh { return "日本 🇯🇵" }
-        return "Japan 🇯🇵"
     }
 
     var syllablesCount: String {
@@ -1044,6 +996,15 @@ class I18n {
         return [tip1, tip2, tip3, tip4, tip5, tip6, tip7, tip8, tip9]
             .randomElement()!
     }
+}
+
+func flag(_ country: String) -> String {
+    let base: UInt32 = 127397
+    var s = ""
+    for v in country.unicodeScalars {
+        s.unicodeScalars.append(UnicodeScalar(base + v.value)!)
+    }
+    return String(s)
 }
 
 // swiftlint:enable file_length  type_body_length
