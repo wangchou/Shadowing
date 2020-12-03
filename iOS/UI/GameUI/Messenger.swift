@@ -172,6 +172,7 @@ class Messenger: UIViewController {
 
         if #available(iOS 13, *) {
             learningModeSegmentControl.backgroundColor = .lightGray
+            showOptionSegment.backgroundColor = .lightGray
         }
     }
 
