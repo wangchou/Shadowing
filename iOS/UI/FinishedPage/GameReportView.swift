@@ -140,16 +140,23 @@ class GameReportView: UIView, ReloadableView, GridLayout {
 func launchNextGame() {
     Messenger.lastInstance?.prepareForRestart()
     SpeechEngine.shared.stopListeningAndSpeaking()
-    dismissVC(animated: true) {
-        if context.gameMode == .topicMode, !context.gameSetting.isRepeatOne {
-            context.loadNextChallenge()
-            rootViewController.topicSwipablePage.detailPage?.render()
-        }
-        if isUnderDailySentenceLimit() {
+    if isUnderDailySentenceLimit(isShowPurchaseViewed: false) {
+        dismissVC(animated: true) {
+            if context.gameMode == .topicMode, !context.gameSetting.isRepeatOne {
+                context.loadNextChallenge()
+                rootViewController.topicSwipablePage.detailPage?.render()
+            }
+
             Messenger.lastInstance?.start()
+        }
+    } else {
+        if let vc = Messenger.lastInstance?.presentingViewController {
+            vc.dismiss(animated: false) {
+                IAPHelper.shared.showPurchaseView()
+            }
         } else {
-            if let vc = Messenger.lastInstance?.presentingViewController {
-                vc.dismiss(animated: true)
+            dismissTwoVC {
+                IAPHelper.shared.showPurchaseView()
             }
         }
     }

@@ -492,12 +492,13 @@ func getDateKey(date: Date) -> String {
         return Date() > gameExpirationDate
     }
 
-    func isUnderDailySentenceLimit() -> Bool {
+    func isUnderDailySentenceLimit(isShowPurchaseViewed: Bool = true) -> Bool {
         guard isFreeVersion() else { return true }
         let (said, _) = getAllLanguageTodaySentenceCount()
         if said < dailyFreeLimit { return true }
-
-        IAPHelper.shared.showPurchaseView()
+        if isShowPurchaseViewed {
+            IAPHelper.shared.showPurchaseView()
+        }
         return false
     }
 #endif
