@@ -19,13 +19,26 @@ struct GameSetting: Codable {
     var isShowTranslationInPractice: Bool = false
 
     var learningMode: LearningMode = .speakingOnly
-    var isShowTranslation: Bool = false
-    var isShowOriginal: Bool {
-        return !isShowTranslation
-    }
 
-    var isSpeakTranslation: Bool = false
+    var isShowTranslation: Bool {
+        get { learningMode == .interpretation || isShowTranslationRaw }
+        set { isShowTranslationRaw = newValue }
+    }
+    private var isShowTranslationRaw: Bool = false
+    var isShowOriginal: Bool { !isShowTranslationRaw }
+
+    var isSpeakTranslation: Bool {
+        get { learningMode == .interpretation || isSpeakTranslationRaw }
+        set { isSpeakTranslationRaw = newValue }
+    }
+    private var isSpeakTranslationRaw: Bool = false
     var isSpeakOriginal: Bool = true
+
+    var isEchoMethod: Bool {
+        get { learningMode != .interpretation && isEchoMethodRaw }
+        set { isEchoMethodRaw = newValue }
+    }
+    private var isEchoMethodRaw: Bool = false
 
     var translationLang: Lang = i18n.isZh ? .zh : (gameLang == .ja ? .en : .ja)
 
@@ -99,8 +112,10 @@ struct GameSetting: Codable {
 
         learningMode = try container.decodeIfPresent(LearningMode.self, forKey: .learningMode) ?? learningMode
 
-        isShowTranslation = try container.decodeIfPresent(Bool.self, forKey: .isShowTranslation) ?? isShowTranslation
-        isSpeakTranslation = try container.decodeIfPresent(Bool.self, forKey: .isSpeakTranslation) ?? isSpeakTranslation
+        isEchoMethodRaw = try container.decodeIfPresent(Bool.self, forKey: .isEchoMethodRaw) ?? isEchoMethodRaw
+
+        isShowTranslationRaw = try container.decodeIfPresent(Bool.self, forKey: .isShowTranslationRaw) ?? isShowTranslationRaw
+        isSpeakTranslationRaw = try container.decodeIfPresent(Bool.self, forKey: .isSpeakTranslationRaw) ?? isSpeakTranslationRaw
 
         isSpeakOriginal = try container.decodeIfPresent(Bool.self, forKey: .isSpeakOriginal) ?? isSpeakOriginal
 
@@ -130,13 +145,12 @@ enum ICTopViewMode: Int, Codable {
 enum LearningMode: Int, Codable {
     case meaningAndSpeaking = 0
     case speakingOnly = 1
-    case echoMethod = 2
-    case interpretation = 3
+    case interpretation = 2
 }
 
 // MARK: - save and load
 
-private let gameSettingKey = "GameSettingKey"
+private let gameSettingKey = "GameSettingKey 1.4.0"
 func saveGameSetting() {
     saveToUserDefault(object: context.gameSetting, key: gameSettingKey + gameLang.key)
 }

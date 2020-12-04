@@ -27,9 +27,10 @@ class SettingPage: UITableViewController {
     @IBOutlet var translationLanguageLabel: UILabel!
     @IBOutlet var translationLanguageSegment: UISegmentedControl!
 
-    @IBOutlet var showOptionLabel: UILabel!
-    @IBOutlet var showOptionSegmentControl: UISegmentedControl!
-
+    @IBOutlet weak var echoMethodNameLabel: UILabel!
+    @IBOutlet weak var echoMethodSwitch: UISwitch!
+    @IBOutlet weak var speakTranslationNameLabel: UILabel!
+    @IBOutlet weak var speakTranslationSwitch: UISwitch!
     @IBOutlet var narratorLabel: UILabel!
     @IBOutlet var narratorSwitch: UISwitch!
     @IBOutlet var monitoringLabel: UILabel!
@@ -134,13 +135,15 @@ class SettingPage: UITableViewController {
 
         monitoringVolumeLabel.text = (setting.monitoringVolume > 0 ? "+" : "") + String(format: "%ddb", setting.monitoringVolume)
 
-        showOptionSegmentControl.selectedSegmentIndex = setting.isShowTranslation ? 0 : 1
-        showOptionLabel.text = i18n.showOptionLabel
-        showOptionSegmentControl.setTitle(i18n.translated, forSegmentAt: 0)
-        showOptionSegmentControl.setTitle(i18n.original, forSegmentAt: 1)
+        echoMethodNameLabel.text = i18n.echoMethod
+        echoMethodSwitch.isOn = context.gameSetting.isEchoMethod
+        echoMethodSwitch.isEnabled = context.gameSetting.learningMode != .interpretation
+        echoMethodNameLabel.textColor = context.gameSetting.learningMode != .interpretation ? .black : minorTextColor
 
-        showOptionSegmentControl.isEnabled = context.gameSetting.learningMode != .interpretation
-        showOptionLabel.textColor = context.gameSetting.learningMode != .interpretation ? .black : minorTextColor
+        speakTranslationNameLabel.text = i18n.speakTranslation
+        speakTranslationSwitch.isOn = context.gameSetting.isSpeakTranslation
+        speakTranslationSwitch.isEnabled = context.gameSetting.learningMode != .interpretation
+        speakTranslationNameLabel.textColor = context.gameSetting.learningMode != .interpretation ? .black : minorTextColor
 
         initLearningModeSegmentControl(label: learningModeLabel, control: learningModeSegmentControl)
     }
@@ -184,8 +187,13 @@ class SettingPage: UITableViewController {
         render()
     }
 
-    @IBAction func showOptionSegmentControlValueChanged(_: Any) {
-        context.gameSetting.isShowTranslation = showOptionSegmentControl.selectedSegmentIndex == 0
+    @IBAction func echoMethodSwitchValueChanged(_ sender: Any) {
+        context.gameSetting.isEchoMethod = echoMethodSwitch.isOn
+        saveGameSetting()
+    }
+
+    @IBAction func speakTranslationSwitchValueChanged(_ sender: Any) {
+        context.gameSetting.isSpeakTranslation = speakTranslationSwitch.isOn
         saveGameSetting()
     }
 
@@ -328,20 +336,18 @@ class SettingPage: UITableViewController {
 // MARK: - utility functions
 
 func actOnLearningModeSegmentControlValueChanged(control: UISegmentedControl) {
-    context.gameSetting.learningMode = LearningMode(rawValue: control.selectedSegmentIndex) ?? .meaningAndSpeaking
+    context.gameSetting.learningMode = LearningMode(rawValue: control.selectedSegmentIndex) ?? .speakingOnly
 
     switch context.gameSetting.learningMode {
     case .meaningAndSpeaking:
-        context.gameSetting.isSpeakTranslation = true
+        context.gameSetting.isShowTranslation = true
         context.gameSetting.isSpeakOriginal = true
-    case .speakingOnly, .echoMethod:
-        context.gameSetting.isSpeakTranslation = false
+    case .speakingOnly:
+        context.gameSetting.isShowTranslation = false
         context.gameSetting.isSpeakOriginal = true
     case .interpretation:
-        context.gameSetting.isSpeakTranslation = true
-        context.gameSetting.isSpeakOriginal = false
-
         context.gameSetting.isShowTranslation = false
+        context.gameSetting.isSpeakOriginal = false
     }
     saveGameSetting()
 }
@@ -351,6 +357,5 @@ func initLearningModeSegmentControl(label: UILabel, control: UISegmentedControl)
     control.selectedSegmentIndex = context.gameSetting.learningMode.rawValue
     control.setTitle(i18n.meaningAndSpeaking, forSegmentAt: 0)
     control.setTitle(i18n.speakingOnly, forSegmentAt: 1)
-    control.setTitle(i18n.echoMethod, forSegmentAt: 2)
-    control.setTitle(i18n.interpretation, forSegmentAt: 3)
+    control.setTitle(i18n.interpretation, forSegmentAt: 2)
 }

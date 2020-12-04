@@ -36,8 +36,11 @@ class Messenger: UIViewController {
     @IBOutlet var overlayView: UIView!
     @IBOutlet var speedSlider: UISlider!
     @IBOutlet var speedLabel: UILabel!
-    @IBOutlet var showOptionLabel: UILabel!
-    @IBOutlet var showOptionSegment: UISegmentedControl!
+
+    @IBOutlet weak var echoMethodNameLabel: UILabel!
+    @IBOutlet weak var echoMethodSwitch: UISwitch!
+    @IBOutlet weak var speakTranslationNameLabel: UILabel!
+    @IBOutlet weak var speakTranslationSwitch: UISwitch!
 
     @IBOutlet var learningModeLabel: UILabel!
     @IBOutlet var learningModeSegmentControl: UISegmentedControl!
@@ -140,13 +143,15 @@ class Messenger: UIViewController {
         speedSlider.minimumValue = AVSpeechUtteranceMinimumSpeechRate
         speedSlider.maximumValue = AVSpeechUtteranceMaximumSpeechRate * 0.75
 
-        showOptionSegment.setTitle(i18n.translated, forSegmentAt: 0)
-        showOptionSegment.setTitle(i18n.original, forSegmentAt: 1)
+        echoMethodNameLabel.text = i18n.echoMethod
+        echoMethodSwitch.isOn = context.gameSetting.isEchoMethod
+        echoMethodNameLabel.textColor = context.gameSetting.learningMode != .interpretation ? .white : UIColor.white.withAlphaComponent(0.3)
+        echoMethodSwitch.isEnabled = context.gameSetting.learningMode != .interpretation
 
-        showOptionLabel.text = i18n.showOptionLabel
-        showOptionSegment.selectedSegmentIndex = context.gameSetting.isShowTranslation ? 0 : 1
-        showOptionSegment.isEnabled = context.gameSetting.learningMode != .interpretation
-        showOptionLabel.textColor = context.gameSetting.learningMode != .interpretation ? .white : UIColor.white.withAlphaComponent(0.3)
+        speakTranslationNameLabel.text = i18n.speakTranslation
+        speakTranslationSwitch.isOn = context.gameSetting.isSpeakTranslation
+        speakTranslationNameLabel.textColor = context.gameSetting.learningMode != .interpretation ? .white : UIColor.white.withAlphaComponent(0.3)
+        speakTranslationSwitch.isEnabled = context.gameSetting.learningMode != .interpretation
 
         speedSlider.value = context.gameSetting.gameSpeed
         speedNameLabel.text = i18n.speed
@@ -172,7 +177,10 @@ class Messenger: UIViewController {
 
         if #available(iOS 13, *) {
             learningModeSegmentControl.backgroundColor = .lightGray
-            showOptionSegment.backgroundColor = .lightGray
+            speakTranslationSwitch.backgroundColor = .lightGray
+            speakTranslationSwitch.layer.cornerRadius = 15.0
+            echoMethodSwitch.backgroundColor = .lightGray
+            echoMethodSwitch.layer.cornerRadius = 15.0
         }
     }
 
@@ -184,7 +192,7 @@ class Messenger: UIViewController {
         addLabel(text, isAddSubview: false)
 
         // center echo text
-        if context.gameSetting.learningMode == .echoMethod {
+        if context.gameSetting.isEchoMethod {
             let echoText = rubyAttrStr(i18n.listenToEcho)
             addLabel(echoText, pos: .center, isAddSubview: false)
         }
@@ -284,11 +292,14 @@ class Messenger: UIViewController {
         saveGameSetting()
         renderOverlayView()
     }
-
-    @IBAction func showOptionSegmentValueChanged(_: Any) {
-        context.gameSetting.isShowTranslation = showOptionSegment.selectedSegmentIndex == 0
+    @IBAction func echoMethodSwitchValueChanged(_ sender: Any) {
+        context.gameSetting.isEchoMethod = echoMethodSwitch.isOn
         saveGameSetting()
-        renderOverlayView()
+    }
+
+    @IBAction func speakTranslationSwitchValueChanged(_ sender: Any) {
+        context.gameSetting.isSpeakTranslation = speakTranslationSwitch.isOn
+        saveGameSetting()
     }
 
     @IBAction func learningModeSegmentControlValueChanged(_: Any) {

@@ -128,9 +128,8 @@ extension GameFlow {
     private var narratorString: String {
         switch context.gameSetting.learningMode {
         case .meaningAndSpeaking, .speakingOnly:
-            return i18n.gameStartedWithGuideVoice
-        case .echoMethod:
-            return i18n.gameStartedWithEchoMethod
+            return context.gameSetting.isEchoMethod ?
+                i18n.gameStartedWithEchoMethod : i18n.gameStartedWithGuideVoice
         case .interpretation:
             return i18n.gameStartedWithoutGuideVoice
         }
@@ -236,11 +235,11 @@ extension GameFlow {
     private func echoMethod() -> Promise<Void> {
         if isNeedToStopPromiseChain { return rejectedVoidPromise() }
 
-        if context.gameSetting.learningMode == .echoMethod {
-            context.gameState = .echoMethod
-            return pausePromise(Double(context.speakDuration))
+        guard context.gameSetting.isEchoMethod else {
+            return fulfilledVoidPromise()
         }
-        return fulfilledVoidPromise()
+        context.gameState = .echoMethod
+        return pausePromise(Double(context.speakDuration))
     }
 
     private func listenPart() -> Promise<Void> {

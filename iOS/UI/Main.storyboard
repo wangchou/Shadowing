@@ -1186,11 +1186,11 @@ Cg
                             </tableViewSection>
                             <tableViewSection headerTitle="遊戲設定" id="IQn-mK-qV8" userLabel="Game Options">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="83" id="bIj-os-8U8">
-                                        <rect key="frame" x="0.0" y="190.33333206176758" width="414" height="83"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="87" id="bIj-os-8U8">
+                                        <rect key="frame" x="0.0" y="190.33333206176758" width="414" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bIj-os-8U8" id="Nfg-Q8-yZF">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="83"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="87"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="遊戲模式" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VM1-q9-0NV">
@@ -1200,11 +1200,10 @@ Cg
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Jsc-nM-Doz">
-                                                    <rect key="frame" x="15" y="40.666666666666664" width="384" height="31.999999999999993"/>
+                                                    <rect key="frame" x="15" y="41" width="384" height="32"/>
                                                     <segments>
                                                         <segment title="意義、發音"/>
                                                         <segment title="發音"/>
-                                                        <segment title="回音法"/>
                                                         <segment title="口譯"/>
                                                     </segments>
                                                     <connections>
@@ -1216,45 +1215,69 @@ Cg
                                                 <constraint firstItem="VM1-q9-0NV" firstAttribute="leading" secondItem="Nfg-Q8-yZF" secondAttribute="leadingMargin" id="1QW-yX-aJu"/>
                                                 <constraint firstItem="Jsc-nM-Doz" firstAttribute="leading" secondItem="Nfg-Q8-yZF" secondAttribute="leading" constant="15" id="YTv-6a-hNZ"/>
                                                 <constraint firstAttribute="trailing" secondItem="Jsc-nM-Doz" secondAttribute="trailing" constant="15" id="fsG-b7-7x4"/>
-                                                <constraint firstAttribute="bottom" secondItem="Jsc-nM-Doz" secondAttribute="bottom" constant="11.5" id="kxD-fD-WhD"/>
+                                                <constraint firstAttribute="bottom" secondItem="Jsc-nM-Doz" secondAttribute="bottom" constant="15" id="kxD-fD-WhD"/>
                                                 <constraint firstItem="VM1-q9-0NV" firstAttribute="top" secondItem="Nfg-Q8-yZF" secondAttribute="topMargin" constant="0.5" id="yiT-U2-BXW"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="zNf-RV-CKz">
-                                        <rect key="frame" x="0.0" y="273.33333206176758" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="277.33333206176758" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zNf-RV-CKz" id="Y9H-fV-xjm">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="顯示文字" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbz-MR-1AO">
-                                                    <rect key="frame" x="20" y="11.666666666666664" width="70" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="回音法" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbz-MR-1AO">
+                                                    <rect key="frame" x="20" y="11.666666666666664" width="52" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="zFO-81-ccU">
-                                                    <rect key="frame" x="308" y="6.6666666666666679" width="91" height="32"/>
-                                                    <segments>
-                                                        <segment title="翻譯"/>
-                                                        <segment title="原文"/>
-                                                    </segments>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hAq-07-uWI">
+                                                    <rect key="frame" x="347" y="6.6666666666666679" width="51" height="31.000000000000004"/>
                                                     <connections>
-                                                        <action selector="showOptionSegmentControlValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="RM5-2H-Hrg"/>
+                                                        <action selector="echoMethodSwitchValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="Fd2-CC-a0A"/>
                                                     </connections>
-                                                </segmentedControl>
+                                                </switch>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="zFO-81-ccU" firstAttribute="centerY" secondItem="Y9H-fV-xjm" secondAttribute="centerY" id="HMw-yx-p6F"/>
                                                 <constraint firstItem="mbz-MR-1AO" firstAttribute="leading" secondItem="Y9H-fV-xjm" secondAttribute="leadingMargin" id="LxQ-1q-yx4"/>
-                                                <constraint firstAttribute="trailing" secondItem="zFO-81-ccU" secondAttribute="trailing" constant="15" id="ORi-QZ-ZqU"/>
                                                 <constraint firstItem="mbz-MR-1AO" firstAttribute="centerY" secondItem="Y9H-fV-xjm" secondAttribute="centerY" id="Onc-Db-4Oj"/>
+                                                <constraint firstItem="hAq-07-uWI" firstAttribute="centerY" secondItem="Y9H-fV-xjm" secondAttribute="centerY" id="eS4-My-LZF"/>
+                                                <constraint firstAttribute="trailing" secondItem="hAq-07-uWI" secondAttribute="trailing" constant="18" id="n62-Sk-23a"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="9Yk-o2-fJg">
+                                        <rect key="frame" x="0.0" y="321.33333206176758" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Yk-o2-fJg" id="GX7-14-V5r">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="唸翻譯" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gd3-0h-eDe">
+                                                    <rect key="frame" x="20" y="11.666666666666664" width="52" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VKq-Wd-Rv0">
+                                                    <rect key="frame" x="347" y="6.6666666666666679" width="51" height="31.000000000000004"/>
+                                                    <connections>
+                                                        <action selector="speakTranslationSwitchValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="bvf-63-ci5"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Gd3-0h-eDe" firstAttribute="centerY" secondItem="GX7-14-V5r" secondAttribute="centerY" id="XbL-O5-iMh"/>
+                                                <constraint firstAttribute="trailing" secondItem="VKq-Wd-Rv0" secondAttribute="trailing" constant="18" id="dnq-VP-i4j"/>
+                                                <constraint firstItem="Gd3-0h-eDe" firstAttribute="leading" secondItem="GX7-14-V5r" secondAttribute="leadingMargin" id="pSl-Mk-Zx3"/>
+                                                <constraint firstItem="VKq-Wd-Rv0" firstAttribute="centerY" secondItem="GX7-14-V5r" secondAttribute="centerY" id="z2B-A8-cw3"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="SVo-zW-z9X">
-                                        <rect key="frame" x="0.0" y="317.33333206176758" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="365.33333206176758" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SVo-zW-z9X" id="SjJ-7J-luo">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1282,7 +1305,7 @@ Cg
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="87W-7q-tDT">
-                                        <rect key="frame" x="0.0" y="361.33333206176758" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="409.33333206176758" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="87W-7q-tDT" id="8St-tg-vh9">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1310,7 +1333,7 @@ Cg
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="gF2-mE-hYL">
-                                        <rect key="frame" x="0.0" y="405.33333206176758" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="453.33333206176758" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gF2-mE-hYL" id="bMk-b5-iq8">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1343,7 +1366,7 @@ Cg
                             <tableViewSection headerTitle="遊戲時的速度" id="QOz-ta-82S">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="D0Q-yv-0vq">
-                                        <rect key="frame" x="0.0" y="505.33333206176758" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="553.33333206176758" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="D0Q-yv-0vq" id="kJc-iW-iCX">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1376,7 +1399,7 @@ Cg
                             <tableViewSection headerTitle="練習的速度" id="9LV-NJ-eAx">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="N1B-8V-GC1">
-                                        <rect key="frame" x="0.0" y="605.33333206176758" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="653.33333206176758" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="N1B-8V-GC1" id="rJY-Zn-kHi">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1409,7 +1432,7 @@ Cg
                             <tableViewSection headerTitle="語音合成" id="vhi-Sd-uwg" userLabel="Japanese Teacher">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" id="VMY-nf-tkP">
-                                        <rect key="frame" x="0.0" y="705.33333206176758" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="753.33333206176758" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VMY-nf-tkP" id="n4V-N7-Q05">
                                             <rect key="frame" x="0.0" y="0.0" width="382.66666666666669" height="44"/>
@@ -1437,7 +1460,7 @@ Cg
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" id="PZB-LK-yN0">
-                                        <rect key="frame" x="0.0" y="749.33333206176758" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="797.33333206176758" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PZB-LK-yN0" id="e7j-9m-oVm">
                                             <rect key="frame" x="0.0" y="0.0" width="382.66666666666669" height="44"/>
@@ -1469,7 +1492,7 @@ Cg
                             <tableViewSection headerTitle="翻譯" id="QyK-a3-SQx" userLabel="進階設定">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="eug-dv-l1R">
-                                        <rect key="frame" x="0.0" y="849.33333206176758" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="897.33333206176758" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eug-dv-l1R" id="ffN-ei-VXj">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1501,7 +1524,7 @@ Cg
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" id="4V3-ng-fuu">
-                                        <rect key="frame" x="0.0" y="893.33333206176758" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="941.33333206176758" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4V3-ng-fuu" id="vW3-tM-Iar">
                                             <rect key="frame" x="0.0" y="0.0" width="382.66666666666669" height="44"/>
@@ -1533,7 +1556,7 @@ Cg
                             <tableViewSection headerTitle="每天目標" id="ZE7-Qj-n8R" userLabel="dailyGoal">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="nFl-pK-cOK">
-                                        <rect key="frame" x="0.0" y="993.33333206176758" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="1041.3333320617676" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nFl-pK-cOK" id="SK2-te-SXm">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1565,7 +1588,7 @@ Cg
                             <tableViewSection headerTitle="麥克風與語音辨識權限" id="WdS-gh-bvX" userLabel="Go to IOS Setting">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="IVr-hM-UtT">
-                                        <rect key="frame" x="0.0" y="1093.3333320617676" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="1141.3333320617676" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IVr-hM-UtT" id="lal-hd-ERN">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1597,7 +1620,7 @@ Cg
                             <tableViewSection headerTitle="您的回饋是 App 成長的原動力" id="YWv-0Z-c84" userLabel="Go to IOS Setting">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="nvf-m6-gIi">
-                                        <rect key="frame" x="0.0" y="1193.3333320617676" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="1241.3333320617676" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nvf-m6-gIi" id="DtM-XQ-AHb">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1629,7 +1652,7 @@ Cg
                             <tableViewSection headerTitle="" id="ip6-UM-DL1" userLabel="Go to IOS Setting">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="XvQ-Tt-fqv">
-                                        <rect key="frame" x="0.0" y="1277.6666660308838" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="1325.6666660308838" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XvQ-Tt-fqv" id="pSk-qJ-Krk">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1668,6 +1691,8 @@ Cg
                         <outlet property="assisantLabel" destination="mX5-nJ-lM6" id="SMo-f1-cUW"/>
                         <outlet property="assistantNameLabel" destination="4EB-pP-lNR" id="Yqk-tK-JZ1"/>
                         <outlet property="dailyGoalSegmentedControl" destination="AOe-5M-E8u" id="EdE-M1-8cu"/>
+                        <outlet property="echoMethodNameLabel" destination="mbz-MR-1AO" id="vhM-ac-Kc0"/>
+                        <outlet property="echoMethodSwitch" destination="hAq-07-uWI" id="BCM-a5-bpL"/>
                         <outlet property="gameLangSegmentControl" destination="cZC-Zx-nez" id="un1-mf-nip"/>
                         <outlet property="gameSpeedFastLabel" destination="Igd-ll-31p" id="xFI-YR-zz7"/>
                         <outlet property="gameSpeedSlider" destination="W34-8M-0SC" id="FbG-6Z-PjZ"/>
@@ -1684,8 +1709,8 @@ Cg
                         <outlet property="narratorSwitch" destination="s5i-Qz-5IB" id="3vB-Tf-eGV"/>
                         <outlet property="practiceSpeedFastLabel" destination="Hja-pv-XQX" id="aIX-fH-bXV"/>
                         <outlet property="practiceSpeedSlider" destination="7Bm-n0-0qL" id="bJL-pM-izd"/>
-                        <outlet property="showOptionLabel" destination="mbz-MR-1AO" id="yDl-OT-5Rd"/>
-                        <outlet property="showOptionSegmentControl" destination="zFO-81-ccU" id="TmJ-uj-KFm"/>
+                        <outlet property="speakTranslationNameLabel" destination="Gd3-0h-eDe" id="nzd-LR-teg"/>
+                        <outlet property="speakTranslationSwitch" destination="VKq-Wd-Rv0" id="ZZW-Sw-NVx"/>
                         <outlet property="teacherLabel" destination="qFa-JW-PaT" id="Jmi-Oy-XQ8"/>
                         <outlet property="teacherNameLabel" destination="P9K-Mj-u99" id="rIj-5b-lc4"/>
                         <outlet property="topBarView" destination="aep-48-VVi" id="OXh-gN-rcA"/>
@@ -2366,11 +2391,10 @@ Cg
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="qwA-mv-j1J">
-                                        <rect key="frame" x="15" y="678.66666666666663" width="384" height="32"/>
+                                        <rect key="frame" x="15" y="633.66666666666663" width="384" height="32"/>
                                         <segments>
                                             <segment title="意義、發音"/>
                                             <segment title="發音"/>
-                                            <segment title="回音法"/>
                                             <segment title="口譯"/>
                                         </segments>
                                         <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2378,20 +2402,26 @@ Cg
                                             <action selector="learningModeSegmentControlValueChanged:" destination="nrb-Uw-BQq" eventType="valueChanged" id="xwY-im-WWT"/>
                                         </connections>
                                     </segmentedControl>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="751" text="顯示文字：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvZ-F5-Hi3">
-                                        <rect key="frame" x="15.000000000000007" y="724.66666666666663" width="121.66666666666669" height="28.666666666666629"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="751" text="回音法：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvZ-F5-Hi3">
+                                        <rect key="frame" x="15" y="679.66666666666663" width="97.333333333333329" height="28.666666666666629"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="751" text="說翻譯：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JSg-r9-J44">
+                                        <rect key="frame" x="15" y="723.33333333333337" width="97.333333333333329" height="28.666666666666629"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="751" text="遊戲模式：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0My-oC-lXl">
-                                        <rect key="frame" x="15.000000000000007" y="640" width="121.66666666666669" height="28.666666666666629"/>
+                                        <rect key="frame" x="15.000000000000007" y="595" width="121.66666666666669" height="28.666666666666629"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vBK-TF-3m9">
-                                        <rect key="frame" x="299" y="575" width="100" height="50"/>
+                                        <rect key="frame" x="299" y="530" width="100" height="50"/>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="9wA-fL-YYi"/>
@@ -2406,7 +2436,7 @@ Cg
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lpe-64-O87">
-                                        <rect key="frame" x="18" y="575" width="50" height="50"/>
+                                        <rect key="frame" x="18" y="530" width="50" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="UpI-gN-Kg6"/>
@@ -2419,16 +2449,19 @@ Cg
                                             <action selector="repeatOneSwitchButtonClicked:" destination="nrb-Uw-BQq" eventType="touchUpInside" id="1sL-BL-gUv"/>
                                         </connections>
                                     </button>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="qtR-58-nBP">
-                                        <rect key="frame" x="308" y="724.66666666666663" width="91" height="29.666666666666629"/>
-                                        <segments>
-                                            <segment title="翻譯"/>
-                                            <segment title="原文"/>
-                                        </segments>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ert-D8-47V">
+                                        <rect key="frame" x="348" y="678.66666666666663" width="51" height="31"/>
                                         <connections>
-                                            <action selector="showOptionSegmentValueChanged:" destination="nrb-Uw-BQq" eventType="valueChanged" id="FQg-j6-M7V"/>
+                                            <action selector="echoMethodSwitchValueChanged:" destination="nrb-Uw-BQq" eventType="valueChanged" id="VBt-gj-9HC"/>
                                         </connections>
-                                    </segmentedControl>
+                                    </switch>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QXI-CN-HOD">
+                                        <rect key="frame" x="348" y="722.33333333333337" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="echoMethodSwitchValueChanged:" destination="nrb-Uw-BQq" eventType="valueChanged" id="6Wh-pe-GmL"/>
+                                            <action selector="speakTranslationSwitchValueChanged:" destination="nrb-Uw-BQq" eventType="valueChanged" id="ICe-K3-Qf1"/>
+                                        </connections>
+                                    </switch>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.59725492290000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -2437,21 +2470,24 @@ Cg
                                     <constraint firstAttribute="bottom" secondItem="5ov-3e-m3b" secondAttribute="bottom" constant="15" id="4u6-pY-k19"/>
                                     <constraint firstAttribute="trailing" secondItem="qwA-mv-j1J" secondAttribute="trailing" constant="15" id="5Dg-b2-4qm"/>
                                     <constraint firstItem="0My-oC-lXl" firstAttribute="leading" secondItem="BXE-ef-qrw" secondAttribute="leading" constant="15" id="5v2-ek-zca"/>
+                                    <constraint firstAttribute="trailing" secondItem="QXI-CN-HOD" secondAttribute="trailing" constant="17" id="Bcb-ps-KjB"/>
                                     <constraint firstItem="fvZ-F5-Hi3" firstAttribute="top" secondItem="qwA-mv-j1J" secondAttribute="bottom" constant="15" id="Ber-8K-tW5"/>
                                     <constraint firstAttribute="bottom" secondItem="SgB-j0-oP6" secondAttribute="bottom" constant="15" id="DHM-ar-dWV"/>
-                                    <constraint firstAttribute="trailing" secondItem="qtR-58-nBP" secondAttribute="trailing" constant="15" id="HxB-My-Doc"/>
-                                    <constraint firstItem="qtR-58-nBP" firstAttribute="top" secondItem="qwA-mv-j1J" secondAttribute="bottom" constant="15" id="JoK-W5-lcs"/>
-                                    <constraint firstItem="NzW-b5-t7J" firstAttribute="top" secondItem="fvZ-F5-Hi3" secondAttribute="bottom" constant="15" id="QxQ-ZJ-efK"/>
+                                    <constraint firstItem="ert-D8-47V" firstAttribute="centerY" secondItem="fvZ-F5-Hi3" secondAttribute="centerY" id="M6J-k9-Eah"/>
                                     <constraint firstAttribute="bottom" secondItem="NzW-b5-t7J" secondAttribute="bottom" constant="15" id="UCK-NA-jZf"/>
                                     <constraint firstItem="5ov-3e-m3b" firstAttribute="leading" secondItem="NzW-b5-t7J" secondAttribute="trailing" constant="25" id="Vks-Yb-F0u"/>
                                     <constraint firstAttribute="trailing" secondItem="SgB-j0-oP6" secondAttribute="trailing" constant="15" id="X53-Ja-5hy"/>
+                                    <constraint firstItem="QXI-CN-HOD" firstAttribute="centerY" secondItem="JSg-r9-J44" secondAttribute="centerY" id="Xfh-Wb-mWu"/>
                                     <constraint firstItem="qwA-mv-j1J" firstAttribute="top" secondItem="0My-oC-lXl" secondAttribute="bottom" constant="10" id="dz6-SO-Rhs"/>
                                     <constraint firstItem="lpe-64-O87" firstAttribute="centerY" secondItem="vBK-TF-3m9" secondAttribute="centerY" id="e3F-id-fhG"/>
-                                    <constraint firstItem="fvZ-F5-Hi3" firstAttribute="centerY" secondItem="qtR-58-nBP" secondAttribute="centerY" id="fzX-YV-Q7g"/>
+                                    <constraint firstItem="JSg-r9-J44" firstAttribute="top" secondItem="fvZ-F5-Hi3" secondAttribute="bottom" constant="15" id="hm7-uH-bhf"/>
+                                    <constraint firstItem="JSg-r9-J44" firstAttribute="leading" secondItem="BXE-ef-qrw" secondAttribute="leading" constant="15" id="jCh-AG-0YG"/>
+                                    <constraint firstItem="5ov-3e-m3b" firstAttribute="top" secondItem="JSg-r9-J44" secondAttribute="bottom" constant="15" id="jYQ-tA-OtI"/>
                                     <constraint firstItem="SgB-j0-oP6" firstAttribute="leading" secondItem="5ov-3e-m3b" secondAttribute="trailing" constant="25" id="kzh-no-Cu0"/>
                                     <constraint firstItem="NzW-b5-t7J" firstAttribute="leading" secondItem="BXE-ef-qrw" secondAttribute="leading" constant="15" id="llM-Xd-9Mv"/>
                                     <constraint firstItem="fvZ-F5-Hi3" firstAttribute="leading" secondItem="BXE-ef-qrw" secondAttribute="leading" constant="15" id="qqb-Vf-GKk"/>
                                     <constraint firstItem="qwA-mv-j1J" firstAttribute="leading" secondItem="BXE-ef-qrw" secondAttribute="leading" constant="15" id="xiv-AL-CFP"/>
+                                    <constraint firstAttribute="trailing" secondItem="ert-D8-47V" secondAttribute="trailing" constant="17" id="yIg-2M-Flv"/>
                                     <constraint firstItem="lpe-64-O87" firstAttribute="leading" secondItem="BXE-ef-qrw" secondAttribute="leading" constant="18" id="yzG-p4-k5i"/>
                                 </constraints>
                             </view>
@@ -2479,6 +2515,8 @@ Cg
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="echoMethodNameLabel" destination="fvZ-F5-Hi3" id="8ja-me-8q8"/>
+                        <outlet property="echoMethodSwitch" destination="ert-D8-47V" id="ZSQ-p8-hHf"/>
                         <outlet property="exitButton" destination="vBK-TF-3m9" id="d4p-l2-u4l"/>
                         <outlet property="learningModeLabel" destination="0My-oC-lXl" id="4oN-w4-5Z6"/>
                         <outlet property="learningModeSegmentControl" destination="qwA-mv-j1J" id="jFc-Sh-eli"/>
@@ -2489,8 +2527,8 @@ Cg
                         <outlet property="overlayView" destination="BXE-ef-qrw" id="DT5-Y1-GCR"/>
                         <outlet property="repeatOneSwitchButton" destination="lpe-64-O87" id="UbV-nL-8gM"/>
                         <outlet property="scrollView" destination="WDC-AY-rcB" id="uSd-72-yvh"/>
-                        <outlet property="showOptionLabel" destination="fvZ-F5-Hi3" id="f8E-hB-GCR"/>
-                        <outlet property="showOptionSegment" destination="qtR-58-nBP" id="EaD-0M-xYc"/>
+                        <outlet property="speakTranslationNameLabel" destination="JSg-r9-J44" id="1d5-bS-L50"/>
+                        <outlet property="speakTranslationSwitch" destination="QXI-CN-HOD" id="AnN-JP-MMc"/>
                         <outlet property="speedLabel" destination="SgB-j0-oP6" id="P8H-uY-1k0"/>
                         <outlet property="speedNameLabel" destination="NzW-b5-t7J" id="eOE-dy-yxF"/>
                         <outlet property="speedSlider" destination="5ov-3e-m3b" id="5Yh-Rz-tLj"/>

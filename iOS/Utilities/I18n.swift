@@ -707,6 +707,12 @@ class I18n {
         return "Echo"
     }
 
+    var speakTranslation: String {
+        if isJa { return "翻訳を読む"}
+        if isZh { return "唸出翻譯" }
+        return "Speak Translation"
+    }
+
     var listenToEcho: String {
         if isJa { return "心のエコーを聞いて" }
         if isZh { return "聽心中回音" }
