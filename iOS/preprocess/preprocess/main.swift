@@ -36,7 +36,7 @@ print(rows.count)
 
 // checkKanaFixes(rows: rows)
 // checkTTSFixes(rows: rows)
-private var isCopyOnly = true
+private var isCopyOnly = false
 private var realm: Realm!
 
 func createWritableDB() {
@@ -47,6 +47,7 @@ func createWritableDB() {
             realm = try Realm(configuration: config)
         } else {
             realm = try Realm()
+            print(realm.configuration.fileURL)
         }
     } catch {
         print("db update error: \(error)")
@@ -208,7 +209,8 @@ func addSentencesTable() {
                     try realm.write {
                         realm.add(rmSentence)
                     }
-                    jpnDifficulty[jpn0] = kana.count
+                    // TODO: use real japan vocabulary difficulty
+                    jpnDifficulty[jpn0] = kana.count + Int(Double(enWordDifficulty) * 0.4)
 
                     updateIdWithListened(ja: jpn0,
                                          kanaCount: kana.count,
@@ -310,7 +312,6 @@ func addEnInfoTables() {
 func encryptDBAndCopy() {
     if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
         let fileURL = dir.appendingPathComponent("default.realm")
-        print(fileURL)
         do {
             // Generate 64 bytes of random data to serve as the encryption key
             let key = NSMutableData(length: 64)!
@@ -321,7 +322,11 @@ func encryptDBAndCopy() {
                 print("generate key failed")
                 return
             }
-            print((key as Data).hexadecimal)
+            let keyString = (key as Data).hexadecimal
+            print(keyString)
+            let keyFileURL = dir.appendingPathComponent("realmKeys.txt")
+            try "\(Date().description)\t\(keyString)\n".write(to: keyFileURL, atomically: true, encoding: .utf8)
+
             try realm.writeCopy(toFile: fileURL,
                                 encryptionKey: key as Data)
             print("copy and encrypted to fileURL: \(fileURL)")

@@ -11,8 +11,8 @@ import UIKit
 
 var avgKanaCountDict: [String: Float] = [:]
 // for ja
-private let minKanaCounts = [2, 7, 10, 12, 14, 16, 19, 23, 27, 31, 34, 37]
-private let maxKanaCounts = [6, 9, 11, 13, 15, 18, 22, 26, 30, 33, 36, 40]
+private let minKanaCounts = [2, 7, 10, 12, 14, 16, 19, 23, 27, 31, 35, 39]
+private let maxKanaCounts = [6, 9, 11, 13, 15, 18, 22, 26, 30, 34, 38, 43]
 // for en
 private let minSyllablesCounts = [1, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 27]
 private let maxSyllablesCounts = [5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 26, 31]

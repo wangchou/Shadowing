@@ -409,7 +409,17 @@ class I18n {
         let lang = pairs[0] == "ja" ? japanese : ((pairs[0] == "en") ? english : chinese)
         let region = getRegion(region: pairs[1])
         if region == "" { return lang }
-        return "\(lang) (\(region))"
+        if langAndRegion == "zh-HK" {
+            return "\(cantonese) (\(region))"
+        } else {
+            return "\(lang) (\(region))"
+        }
+    }
+
+    var cantonese: String {
+        if isJa { return "広東語" }
+        if isZh { return "廣東話" }
+        return "Cantonese"
     }
 
     func getLang(lang: String) -> String {
@@ -998,8 +1008,11 @@ class I18n {
         return "Practice at a quiet place with stable network"
     }
 
+    var isTip4Showed = false
+    var isTip1Showed = false
     func getRandTip() -> String {
-        return [tip1, tip2, tip3, tip4, tip5, tip6, tip7, tip8, tip9]
+        // higher accuracy for tip1 & tip4
+        return [tip1, tip1, tip2, tip3, tip4, tip4, tip5, tip6, tip7, tip8, tip9]
             .randomElement()!
     }
 }
