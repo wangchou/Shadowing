@@ -94,7 +94,7 @@ class I18n {
     }
 
     var monitoringLabel: String {
-        if isJa { return "モニタリング（有線イヤホンのみ）" }
+        if isJa { return "モニタリング（有線イヤホン）" }
         if isZh { return "即時監聽 (有線耳機 Only)" }
         return "Wired Monitroing"
     }
@@ -603,7 +603,7 @@ class I18n {
     }
 
     var speakingOnly: String {
-        if isJa { return "発音のみ" }
+        if isJa { return "発音" }
         if isZh { return "跟讀" }
         return "Shadowing"
     }
