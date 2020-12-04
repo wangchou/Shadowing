@@ -24,13 +24,11 @@ class RootContainerViewController: UIViewController {
 
         // swiftlint:disable force_cast
         splashScreen = (getVC("LaunchScreen") as! SplashScreenViewController)
+        transition(to: splashScreen)
+
         topicSwipablePage = TopicSwipablePage(transitionStyle: .scroll, navigationOrientation: .horizontal)
         infiniteChallengeSwipablePage = InfiniteChallengeSwipablePage(transitionStyle: .scroll, navigationOrientation: .horizontal)
         // swiftlint:enable force_cast
-
-        current = splashScreen
-
-        showVC(splashScreen)
 
         splashScreen.launched.always { [weak self] in
             self?.loadStartupData()
@@ -66,21 +64,17 @@ class RootContainerViewController: UIViewController {
 
     func showTopicPage(idx: Int) {
         guard current != topicSwipablePage else { return }
-        removeCurrent()
-        current = topicSwipablePage
         let sp: TopicSwipablePage! = topicSwipablePage
         if sp.isPagesReady {
             sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
         } else {
             TopicSwipablePage.initialIdx = idx
         }
-        showVC(current)
+        transition(to: sp)
     }
 
     func showInfiniteChallengePage(idx: Int) {
         guard current != infiniteChallengeSwipablePage else { return }
-        removeCurrent()
-        current = infiniteChallengeSwipablePage
         let sp: InfiniteChallengeSwipablePage! = infiniteChallengeSwipablePage
         if sp.isPagesReady {
             sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
@@ -88,7 +82,7 @@ class RootContainerViewController: UIViewController {
             InfiniteChallengeSwipablePage.initialIdx = idx
         }
 
-        showVC(current)
+        transition(to: sp)
     }
 
     func reloadTableData() {
@@ -131,16 +125,19 @@ class RootContainerViewController: UIViewController {
         }
     }
 
-    private func showVC(_ vc: UIViewController) {
+    func transition(to vc: UIViewController) {
+        // create new
         addChild(vc)
         vc.view.frame = view.bounds
         view.addSubview(vc.view)
         vc.didMove(toParent: self)
-    }
 
-    private func removeCurrent() {
-        current.willMove(toParent: nil)
-        current.view.removeFromSuperview()
-        current.removeFromParent()
+        // remove old
+        current?.willMove(toParent: nil)
+        current?.view.removeFromSuperview()
+        current?.removeFromParent()
+
+        // show new
+        current = vc
     }
 }

@@ -13,7 +13,7 @@ import Promises
 var jaDifficultyInfos: [Int: DifficultyInfo] = [:]
 var enDifficultyInfos: [Int: DifficultyInfo] = [:]
 
-var gameLang = Lang.ja
+var gameLang = i18n.isJa ? Lang.en :Lang.ja
 
 // TODO: fix Lang.ja to Lang.ja
 enum Lang: Int, Codable {
