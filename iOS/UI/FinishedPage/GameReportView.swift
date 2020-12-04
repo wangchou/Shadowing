@@ -111,7 +111,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
     func addBackButton() {
         let backButton = addButton(title: "", bgColor: .lightGray) {
             stopCountDown()
-            if let vc = Messenger.lastInstance?.presentingViewController {
+            if let vc = Messenger.last?.presentingViewController {
                 vc.dismiss(animated: false)
             } else {
                 dismissTwoVC()
@@ -138,7 +138,7 @@ class GameReportView: UIView, ReloadableView, GridLayout {
 }
 
 func launchNextGame() {
-    Messenger.lastInstance?.prepareForRestart()
+    Messenger.last?.prepareForRestart()
     SpeechEngine.shared.stopListeningAndSpeaking()
     if isUnderDailySentenceLimit(isShowPurchaseViewed: false) {
         dismissVC(animated: true) {
@@ -147,10 +147,10 @@ func launchNextGame() {
                 rootViewController.topicSwipablePage.detailPage?.render()
             }
 
-            Messenger.lastInstance?.start()
+            Messenger.last?.start()
         }
     } else {
-        if let vc = Messenger.lastInstance?.presentingViewController {
+        if let vc = Messenger.last?.presentingViewController {
             vc.dismiss(animated: false) {
                 IAPHelper.shared.showPurchaseView()
             }

@@ -18,6 +18,7 @@ extension Notification.Name {
 }
 
 class TopicsListPage: UIViewController {
+    static var last: TopicsListPage?
     @IBOutlet var sentencesTableView: UITableView!
     @IBOutlet var topArea: UIView!
     @IBOutlet var topChartView: TopChartView!
@@ -74,6 +75,7 @@ class TopicsListPage: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         sentencesTableView.reloadData()
+        TopicsListPage.last = self
     }
 
     @objc func reloadTopicSentences() {

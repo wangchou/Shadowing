@@ -21,7 +21,7 @@ enum LabelPosition {
 // Prototype 8: messenger / line interface
 class Messenger: UIViewController {
     static let id = "MessengerGame"
-    static var lastInstance: Messenger?
+    static var last: Messenger?
     var lastLabel = FuriganaLabel()
 
     private var y: Int = 8
@@ -75,7 +75,7 @@ class Messenger: UIViewController {
         messengerBar.addTapGestureRecognizer(action: pauseContinueGame)
         messengerBar.pauseCountinueButton.addTarget(self, action: #selector(pauseContinueGame), for: .touchUpInside)
         messengerBar.skipNextButton.addTarget(self, action: #selector(skipNext), for: .touchUpInside)
-        Messenger.lastInstance = self
+        Messenger.last = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -96,6 +96,9 @@ class Messenger: UIViewController {
             }
         } else if context.gameMode == .topicMode {
             DispatchQueue.main.async {
+                TopicsListPage.last?.sentencesTableView.reloadData()
+                TopicsListPage.last?.topChartView.render()
+                TopicsListPage.last?.topicFilterBarView.render()
                 TopicDetailPage.lastDisplayed?.render()
             }
         }
@@ -109,9 +112,7 @@ class Messenger: UIViewController {
         SpeechEngine.shared.monitoringOff()
         UIApplication.shared.isIdleTimerDisabled = false
         SpeechEngine.shared.stop()
-        Messenger.lastInstance = nil
-
-        print(#function, SpeechEngine.shared)
+        Messenger.last = nil
     }
 
     // call this before dismiss game finished page

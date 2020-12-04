@@ -291,7 +291,7 @@ class MedalGameFinishedPageView: UIView, ReloadableView, GridLayout {
 
         let backButton = addButton(title: "", bgColor: .lightGray) {
             countDownTimer?.invalidate()
-            if let vc = Messenger.lastInstance?.presentingViewController {
+            if let vc = Messenger.last?.presentingViewController {
                 vc.dismiss(animated: false)
             } else {
                 dismissTwoVC()
