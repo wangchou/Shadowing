@@ -61,7 +61,7 @@ class BottomBarView: UIView, XibView {
     @IBAction func onLeftButtonClicked(_: Any) {
         RootContainerViewController.isShowSetting = false
         context.bottomTab = .topics
-        rootViewController.showMainPage(idx: 2)
+        rootViewController.showTopicPage(idx: 2)
     }
 
     @IBAction func onRightButtonClicked(_: Any) {

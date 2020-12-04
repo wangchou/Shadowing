@@ -119,6 +119,9 @@ func changeGameLangTo(lang: Lang) {
         if gameLang == .en {
             GameContext.shared.bottomTab = .infiniteChallenge
             rootViewController.showInfiniteChallengePage(idx: 1)
+        } else {
+            GameContext.shared.bottomTab = .topics
+            rootViewController.showTopicPage(idx: 1)
         }
         rootViewController.reloadTableData()
         rootViewController.rerenderTopView(updateByRecords: true)

@@ -58,13 +58,13 @@ class RootContainerViewController: UIViewController {
 
     private func showInitialPage() {
         if gameLang.isSupportTopicMode {
-            showMainPage(idx: 1)
+            showTopicPage(idx: 1)
         } else {
             showInfiniteChallengePage(idx: 1)
         }
     }
 
-    func showMainPage(idx: Int) {
+    func showTopicPage(idx: Int) {
         guard current != topicSwipablePage else { return }
         removeCurrent()
         current = topicSwipablePage
