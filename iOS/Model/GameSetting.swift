@@ -21,7 +21,7 @@ struct GameSetting: Codable {
     var learningMode: LearningMode = .speakingOnly
 
     var isShowTranslation: Bool {
-        get { learningMode == .interpretation || isShowTranslationRaw }
+        get { learningMode != .interpretation && isShowTranslationRaw }
         set { isShowTranslationRaw = newValue }
     }
     private var isShowTranslationRaw: Bool = false
