@@ -152,19 +152,8 @@ class SettingPage: UITableViewController {
 
     @IBAction func gameLangSegmentControlValueChanged(_: Any) {
         RootContainerViewController.isShowSetting = true
-        if gameLangSegmentControl.selectedSegmentIndex == 1 {
-            changeGameLangTo(lang: .ja, fromSettingPage: true)
-        } else {
-            changeGameLangTo(lang: .en, fromSettingPage: true)
-        }
-
-        render()
-
-        if gameLang == .en {
-            context.bottomTab = .infiniteChallenge
-            rootViewController.showInfiniteChallengePage(idx: 1)
-        }
-        rootViewController.reloadTableData()
+        let lang: Lang =  gameLangSegmentControl.selectedSegmentIndex == 1 ? .ja : .en
+        changeGameLangTo(lang: lang, fromSettingPage: true)
     }
 
     // ---------------------------------------------------------------------------------
