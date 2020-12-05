@@ -67,16 +67,6 @@ class CircleView: UIView {
         super.init(coder: aDecoder)
     }
 
-    func toInitialState() {
-        circleLayer.removeAllAnimations()
-        // percent = 0
-    }
-
-    func toEndState() {
-        circleLayer.removeAllAnimations()
-        // percent = 1.0
-    }
-
     func animate(duration: TimeInterval) {
         circleLayer.removeAllAnimations()
         // We want to animate the strokeEnd property of the circleLayer

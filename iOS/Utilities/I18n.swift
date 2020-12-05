@@ -37,14 +37,6 @@ class I18n {
         return langCode == "zh"
     }
 
-    var isEn: Bool {
-        return langCode == "en"
-    }
-
-    var isTW: Bool {
-        return regionCode == "TW"
-    }
-
     var isHK: Bool {
         return regionCode == "HK"
     }
@@ -73,24 +65,6 @@ class I18n {
         if isJa { return "翻訳言語" }
         if isZh { return "翻譯語言" }
         return "Translation Lang"
-    }
-
-    var translated: String {
-        if isJa { return "翻訳" }
-        if isZh { return "翻譯" }
-        return "Translated"
-    }
-
-    var original: String {
-        if isJa { return "原文" }
-        if isZh { return "原文" }
-        return "Original"
-    }
-
-    var showOptionLabel: String {
-        if isJa { return "表示オプション" }
-        if isZh { return "顯示文字" }
-        return "Show"
     }
 
     var monitoringLabel: String {
@@ -164,12 +138,6 @@ class I18n {
         return "Game Setting"
     }
 
-    var settingSectionGameAdvancedSetting: String {
-        if isJa { return "ゲーム詳細設定" }
-        if isZh { return "遊戲進階設定" }
-        return "Game Advanced Setting"
-    }
-
     var settingSectionGameSpeed: String {
         if isJa { return "ゲーム速度" }
         if isZh { return "遊戲速度" }
@@ -180,12 +148,6 @@ class I18n {
         if isJa { return "練習速度" }
         if isZh { return "練習速度" }
         return "Practice Speed"
-    }
-
-    var gameSetting: String {
-        if isJa { return "ゲーム設定" }
-        if isZh { return "遊戲設定" }
-        return "Game Settings"
     }
 
     var micAndSpeechPermission: String {
@@ -270,12 +232,6 @@ class I18n {
         return "Translator"
     }
 
-    var enhancedVoice: String {
-        if isJa { return "(拡張)" }
-        if isZh { return "(高品質)" }
-        return "(Enhanced)"
-    }
-
     var cannotReachServer: String {
         return isJa ? "サーバーに接続できません" : "連不到主機"
     }
@@ -296,24 +252,6 @@ class I18n {
         if isJa { return "キャンセル" }
         if isZh { return "取消" }
         return "Cancel"
-    }
-
-    var speechErrorMessage: String {
-        if isJa { return "音声をAppleに送信中にエラーが発生しました。" }
-        if isZh { return "傳送聲音往Apple時，錯誤發生。" }
-        return "An error occurred when transmitting voice to Apple."
-    }
-
-    var continueGameButtonTitle: String {
-        if isJa { return "つづく" }
-        if isZh { return "繼續遊戲" }
-        return "Back to Game"
-    }
-
-    var finishGameButtonTitle: String {
-        if isJa { return "ゲームを終る" }
-        if isZh { return "結束遊戲" }
-        return "Stop Game"
     }
 
     var langToSpeak: String {
@@ -494,10 +432,6 @@ class I18n {
         return infiniteChallenge
     }
 
-    var languageInJa: String {
-        return gameLang == .ja ? "日本語" : "英語"
-    }
-
     var language: String {
         if gameLang == .ja {
             return japanese
@@ -634,12 +568,6 @@ class I18n {
         return "Speed is "
     }
 
-    var canChangeItLaterInSetting: String {
-        if isJa { return "後で、設定ページから変更することができます。" }
-        if isZh { return "之後可從設定頁面更改。" }
-        return "It could be changed from the settings page later."
-    }
-
     var restorePreviousPurchase: String {
         if isJa { return "購入記録を復元する" }
         if isZh { return "恢復購買紀錄" }
@@ -716,12 +644,6 @@ class I18n {
         if isJa { return "聞こえない" }
         if isZh { return "聽不清楚" }
         return "I cannot hear you"
-    }
-
-    var remaining: String {
-        if isJa { return "まだ" }
-        if isZh { return "還有" }
-        return "まだ"
     }
 
     var echoMethod: String {
@@ -1021,8 +943,6 @@ class I18n {
         return "Practice at a quiet place with stable network"
     }
 
-    var isTip4Showed = false
-    var isTip1Showed = false
     func getRandTip() -> String {
         // higher accuracy for tip1 & tip4
         return [tip1, tip1, tip2, tip3, tip4, tip4, tip5, tip6, tip7, tip8, tip9]

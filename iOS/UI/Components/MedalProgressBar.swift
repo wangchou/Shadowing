@@ -8,8 +8,6 @@
 
 import UIKit
 
-private let context = GameContext.shared
-
 class MedalProgressBar: UIView, GridLayout, ReloadableView {
     var gridCount = 34
 

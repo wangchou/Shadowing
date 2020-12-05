@@ -11,7 +11,6 @@ import Foundation
 import UIKit
 
 private let context = GameContext.shared
-private let engine = SpeechEngine.shared
 
 extension Notification.Name {
     static let topicFlagChanged = Notification.Name("topicFlagChanged")
@@ -26,7 +25,6 @@ class TopicsListPage: UIViewController {
     @IBOutlet var topicButtonAreaView: TopicButtonAreaView!
     @IBOutlet var topicFilterBarView: TopicFilterBarView!
 
-    var timelineSubviews: [String: UIView] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
         topBarView.rightButton.setIconImage(named: "outline_info_black_48pt", isIconOnLeft: false)

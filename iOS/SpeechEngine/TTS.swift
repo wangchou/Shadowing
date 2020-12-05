@@ -11,10 +11,6 @@ import Foundation
     import AVFoundation
     import Promises
 
-    enum TTSError: Error {
-        case TTSStop
-    }
-
     // input/displayed: 1日○○○○
     // after fix, we let tts say いちにち○○○○
     // ttsToDisplayMap will map willSpeakRange from いちにち○○○○ to 1日○○○○

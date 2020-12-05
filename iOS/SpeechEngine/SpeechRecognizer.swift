@@ -44,7 +44,6 @@ class SpeechRecognizer: NSObject {
     private var recognitionTask: SFSpeechRecognitionTask?
     private var isRunning: Bool = false
     private var isAuthorized: Bool = false
-    private var inputNode: AVAudioNode!
     private var promise = Promise<String>.pending()
 
     override init() {

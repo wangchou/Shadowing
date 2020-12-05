@@ -7,8 +7,6 @@
 //
 import UIKit
 
-private let context = GameContext.shared
-
 class ProgressCircleView: UIView, GridLayout, ReloadableView {
     var gridCount: Int = 24
 
@@ -16,7 +14,6 @@ class ProgressCircleView: UIView, GridLayout, ReloadableView {
 
     var frontCircle: CircleView!
     var percentLabel: UILabel!
-    var goalLabel: UILabel!
 
     var percent: Float = 1.0
     var color: UIColor {

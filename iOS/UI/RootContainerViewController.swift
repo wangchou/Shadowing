@@ -7,12 +7,9 @@
 //
 
 import Foundation
-import Promises
-import Speech
 import UIKit
 
 class RootContainerViewController: UIViewController {
-    static var isLoaded = Promise<Void>.pending()
     static var isShowSetting = false
 
     var current: UIViewController!
@@ -23,6 +20,7 @@ class RootContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         pt("rootVC \(#function) - \(#line)")
+
         // swiftlint:disable force_cast
         splashScreen = (getVC("LaunchScreen") as! SplashScreenViewController)
         transition(to: splashScreen)

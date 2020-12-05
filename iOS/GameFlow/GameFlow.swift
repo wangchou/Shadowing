@@ -21,7 +21,6 @@ enum GameState: String {
     case speakingTargetString
     case echoMethod
     case listening
-    case scoreCalculated
     case gameOver
 }
 

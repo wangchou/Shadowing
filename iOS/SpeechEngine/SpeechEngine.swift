@@ -24,7 +24,6 @@ class SpeechEngine {
     var isEngineRunning = false
     var isInstallTapSuceeced = false
     var audioEngine = AVAudioEngine()
-    private var audioPlayer: AVAudioPlayer?
 
     private var speechRecognizer = SpeechRecognizer.shared
 
@@ -317,18 +316,6 @@ func isHeadphonePlugged() -> Bool {
     for description in currentRoute.outputs {
         if description.portType == AVAudioSession.Port.headphones ||
             description.portType == AVAudioSession.Port.lineOut {
-            return true
-        }
-    }
-    return false
-}
-
-func isBluetooth() -> Bool {
-    let currentRoute = AVAudioSession.sharedInstance().currentRoute
-    for description in currentRoute.outputs {
-        if description.portType == AVAudioSession.Port.bluetoothA2DP ||
-            description.portType == AVAudioSession.Port.bluetoothLE ||
-            description.portType == AVAudioSession.Port.bluetoothHFP {
             return true
         }
     }

@@ -9,8 +9,6 @@
 import Foundation
 import Promises
 
-private let context = GameContext.shared
-
 // Global
 // look up table for last said sentence and its score
 var userSaidSentences: [String: String] = [:]
@@ -23,7 +21,6 @@ var kanaTokenInfosCacheDictionary: [String: [[String]]] = [:] // tokenInfo =[kan
 private let userSaidSentencesKey = "user said sentences key"
 private let sentenceScoreKey = "sentence score key"
 private let lastChallengeSenteceKey = "last challenge senteces key 1.4.0"
-private let lastEnChallengeSenteceKey = "last english challenge senteces key 1.4.0"
 private let kanaTokenInfosKey = "kanaTokenInfos key 1.4.0"
 
 func saveGameMiscData() {

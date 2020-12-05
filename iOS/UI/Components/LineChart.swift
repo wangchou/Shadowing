@@ -9,8 +9,6 @@
 import Charts
 import UIKit
 
-private let fontSize = screen.width * 12 / 320
-
 @IBDesignable
 class LineChart: LineChartView, ChartViewDelegate, ReloadableView {
     var lineColor: UIColor = .black

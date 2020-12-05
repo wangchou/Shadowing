@@ -23,10 +23,6 @@ let iconSize = isIPad ? "48pt" : "24pt"
 let normalRate = AVSpeechUtteranceDefaultSpeechRate
 let fastRate = AVSpeechUtteranceDefaultSpeechRate * 1.1
 
-// it's bad when monitoring at street
-// if in quite place. turn micOutVolume to 3
-let micOutVolume: Float = 0
-
 #if targetEnvironment(macCatalyst)
     var screen = CGRect(x: 0, y: 0, width: 480, height: 900)
 #else

@@ -27,8 +27,6 @@ class TopChartView: UIView, GridLayout, ReloadableView {
     var timelineYPadding: CGFloat = 0.3
     var timelineXPadding: CGFloat = -0.35
 
-    let animationSecs: TimeInterval = 0.5
-
     var percent: Float = 0
 
     var percentageText: String {

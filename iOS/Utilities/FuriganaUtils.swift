@@ -143,18 +143,6 @@ import Promises
         return attrStr
     }
 
-    extension NSRange {
-        // subRange from startIndex of old string
-        func subRange(startIndex: Int) -> NSRange? {
-            guard startIndex < upperBound else { return nil }
-
-            return NSRange(
-                location: max(lowerBound - startIndex, 0),
-                length: upperBound - startIndex
-            )
-        }
-    }
-
     // tokenInfo = [kanji, 詞性, furikana, yomikana]
     func getFuriganaString(tokenInfos: [[String]]) -> NSMutableAttributedString {
         let furiganaAttrStr = NSMutableAttributedString()

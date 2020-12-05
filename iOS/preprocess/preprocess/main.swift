@@ -319,7 +319,7 @@ func encryptDBAndCopy() {
             let keyString = (key as Data).hexadecimal
             print(keyString)
             let keyFileURL = dir.appendingPathComponent("realmKeys.txt")
-            let fileContent = String(contentsOf: keyFileURL, encoding: .utf8)
+            let fileContent = try String(contentsOf: keyFileURL, encoding: .utf8)
             try "\(fileContent)\(Date().description)\t\(keyString)\n"
                 .write(to: keyFileURL, atomically: true, encoding: .utf8)
 

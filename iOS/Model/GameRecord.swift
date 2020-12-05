@@ -30,13 +30,6 @@ struct GameRecord: Codable {
     var goodCount = 0
     var sentencesScore: [String: Score]
 
-    // func / computed field
-    var sentences: [Sentence] {
-        return sentencesScore.keys.map { str in
-            getSentenceByString(str)
-        }
-    }
-
     init(_ dataSetKey: String, sentencesCount: Int, level: Level) {
         self.dataSetKey = dataSetKey
         self.sentencesCount = sentencesCount

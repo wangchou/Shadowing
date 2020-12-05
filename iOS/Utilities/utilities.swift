@@ -62,15 +62,6 @@ import Promises
         return NSDate().timeIntervalSince1970
     }
 
-    extension Sequence {
-        /// Returns an array with the contents of this sequence, shuffled.
-        func shuffled() -> [Element] {
-            var result = Array(self)
-            result.shuffle()
-            return result
-        }
-    }
-
     // MARK: - Misc For Dev Only
 
     func dumpAvaliableVoices() {
@@ -104,17 +95,6 @@ import Promises
 
                 return false
             }
-    }
-
-    // measure performance
-    var startTime: Double = 0
-    func setStartTime(_ tag: String = "") {
-        startTime = NSDate().timeIntervalSince1970
-        print(tag)
-    }
-
-    func printDuration(_ tag: String = "") {
-        print(tag, (NSDate().timeIntervalSince1970 - startTime) * 1000, "ms")
     }
 
     // Promise Utilities
@@ -243,14 +223,6 @@ private class Array2D {
             matrix[cols * row + col] = newValue
         }
     }
-
-    func colCount() -> Int {
-        return cols
-    }
-
-    func rowCount() -> Int {
-        return rows
-    }
 }
 
 func distanceBetween(_ aStr: String, _ bStr: String) -> Int {
@@ -286,24 +258,6 @@ func distanceBetween(_ aStr: String, _ bStr: String) -> Int {
     }
 
     return dist[a.count, b.count]
-}
-
-// MARK: - Array Shuffle for calculate edit distance
-
-// https://stackoverflow.com/questions/24026510/how-do-i-shuffle-an-array-in-swift?noredirect=1&lq=1
-extension MutableCollection {
-    /// Shuffles the contents of this collection.
-    mutating func shuffle() {
-        let c = count
-        guard c > 1 else { return }
-
-        for (firstUnshuffled, unshuffledCount) in zip(indices, stride(from: c, to: 1, by: -1)) {
-            // Change `Int` in the next line to `IndexDistance` in < Swift 4.1
-            let d: Int = numericCast(arc4random_uniform(numericCast(unshuffledCount)))
-            let i = index(firstUnshuffled, offsetBy: d)
-            swapAt(firstUnshuffled, i)
-        }
-    }
 }
 
 // daily Records
