@@ -11,8 +11,8 @@ import UIKit
 
 private let context = GameContext.shared
 
-class InfiniteChallengePage: UIViewController {
-    static var lastDisplayed: InfiniteChallengePage?
+class InfiniteChallengeDetailPage: UIViewController {
+    static var last: InfiniteChallengeDetailPage?
     @IBOutlet var topBarView: TopBarView!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var blockView: UIView!
@@ -65,7 +65,17 @@ class InfiniteChallengePage: UIViewController {
 
         blockInfo.text = "「\(lastLevel.title)」< \(lastLevel.lockPercentage.i)%"
         tableView.reloadData()
-        InfiniteChallengePage.lastDisplayed = self
+        InfiniteChallengeDetailPage.last = self
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        InfiniteChallengeDetailPage.last = nil
+    }
+
+    func afterGameUpdate() {
+        infoView.render()
+        tableView.reloadData()
     }
 
     func updateUI() {
@@ -89,7 +99,7 @@ class InfiniteChallengePage: UIViewController {
     }
 }
 
-extension InfiniteChallengePage: UITableViewDataSource {
+extension InfiniteChallengeDetailPage: UITableViewDataSource {
     func numberOfSections(in _: UITableView) -> Int {
         return 1
     }
@@ -116,7 +126,7 @@ extension InfiniteChallengePage: UITableViewDataSource {
     }
 }
 
-extension InfiniteChallengePage: UITableViewDelegate {
+extension InfiniteChallengeDetailPage: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         if let cell = cell as? SentencesTableCell {

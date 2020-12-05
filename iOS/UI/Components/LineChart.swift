@@ -63,7 +63,7 @@ class LineChart: LineChartView, ChartViewDelegate, ReloadableView {
 
         legend.form = .none
 
-        animate(xAxisDuration: 0.8)
+        animate(xAxisDuration: 0.5)
     }
 
     func setDataCount(level: Level, dataPoints: [(x: Int, y: Int)]) {

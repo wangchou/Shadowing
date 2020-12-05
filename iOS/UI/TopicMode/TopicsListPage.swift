@@ -78,6 +78,17 @@ class TopicsListPage: UIViewController {
         TopicsListPage.last = self
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        TopicsListPage.last = nil
+    }
+
+    func afterGameUpdate() {
+        sentencesTableView.reloadData()
+        topChartView.render()
+        topicFilterBarView.render()
+    }
+
     @objc func reloadTopicSentences() {
         buildDataSets()
         sentencesTableView.reloadData()

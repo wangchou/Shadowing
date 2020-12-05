@@ -87,7 +87,7 @@
 		BEC2E92F217875C30095A65D /* RootContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC2E92E217875C30095A65D /* RootContainerViewController.swift */; };
 		BEC2E9312179BD090095A65D /* TopicFilterBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC2E9302179BD090095A65D /* TopicFilterBarView.swift */; };
 		BEC4CF0E219D727B00E1A54C /* TopChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC4CF0D219D727B00E1A54C /* TopChartView.swift */; };
-		BECAC3B5216B34FA001BBF49 /* InfiniteChanllengePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECAC3B4216B34FA001BBF49 /* InfiniteChanllengePage.swift */; };
+		BECAC3B5216B34FA001BBF49 /* InfiniteChanllengeDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECAC3B4216B34FA001BBF49 /* InfiniteChanllengeDetailPage.swift */; };
 		BECAC3BA216B8FE3001BBF49 /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECAC3B9216B8FE3001BBF49 /* BottomBarView.swift */; };
 		BECAC3BC216B904A001BBF49 /* BottomBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BECAC3BB216B904A001BBF49 /* BottomBarView.xib */; };
 		BECAC3BF216B9D19001BBF49 /* InfiniteChallengeSwipablePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECAC3BE216B9D19001BBF49 /* InfiniteChallengeSwipablePage.swift */; };
@@ -235,7 +235,7 @@
 		BEC2E92E217875C30095A65D /* RootContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootContainerViewController.swift; sourceTree = "<group>"; };
 		BEC2E9302179BD090095A65D /* TopicFilterBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicFilterBarView.swift; sourceTree = "<group>"; };
 		BEC4CF0D219D727B00E1A54C /* TopChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopChartView.swift; sourceTree = "<group>"; };
-		BECAC3B4216B34FA001BBF49 /* InfiniteChanllengePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteChanllengePage.swift; sourceTree = "<group>"; };
+		BECAC3B4216B34FA001BBF49 /* InfiniteChanllengeDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteChanllengeDetailPage.swift; sourceTree = "<group>"; };
 		BECAC3B9216B8FE3001BBF49 /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
 		BECAC3BB216B904A001BBF49 /* BottomBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomBarView.xib; sourceTree = "<group>"; };
 		BECAC3BE216B9D19001BBF49 /* InfiniteChallengeSwipablePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteChallengeSwipablePage.swift; sourceTree = "<group>"; };
@@ -519,7 +519,7 @@
 				BECAC3BE216B9D19001BBF49 /* InfiniteChallengeSwipablePage.swift */,
 				BECD9076219D279C00400FD3 /* InfiniteChallengeListPage.swift */,
 				BECD907A219D294100400FD3 /* InfiniteChallengeTableCell.swift */,
-				BECAC3B4216B34FA001BBF49 /* InfiniteChanllengePage.swift */,
+				BECAC3B4216B34FA001BBF49 /* InfiniteChanllengeDetailPage.swift */,
 				BE955E46216DAB8F00D424FA /* ICInfoView.swift */,
 			);
 			path = InfiniteChanllengeMode;
@@ -780,7 +780,7 @@
 				BEEC7FAF21550818001C2EFF /* TopBarView.swift in Sources */,
 				BEF4B14F219C093800B8E45E /* VoiceSelectionPage.swift in Sources */,
 				BEE665E220BA634600E4E322 /* Colors.swift in Sources */,
-				BECAC3B5216B34FA001BBF49 /* InfiniteChanllengePage.swift in Sources */,
+				BECAC3B5216B34FA001BBF49 /* InfiniteChanllengeDetailPage.swift in Sources */,
 				BE5D838920A80BD0002031BF /* TopicDetailPage.swift in Sources */,
 				BE3260CA21BFCF5E00A13C94 /* vocabulary2.swift in Sources */,
 				BE8E51E521CF7CD1007D29E6 /* GridLayout.swift in Sources */,

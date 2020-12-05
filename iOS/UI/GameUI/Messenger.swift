@@ -80,7 +80,6 @@ class Messenger: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         start()
     }
 
@@ -92,14 +91,12 @@ class Messenger: UIViewController {
             }
         } else if context.gameMode == .infiniteChallengeMode {
             DispatchQueue.main.async {
-                InfiniteChallengePage.lastDisplayed?.infoView?.render()
+                InfiniteChallengeDetailPage.last?.afterGameUpdate()
             }
         } else if context.gameMode == .topicMode {
             DispatchQueue.main.async {
-                TopicsListPage.last?.sentencesTableView.reloadData()
-                TopicsListPage.last?.topChartView.render()
-                TopicsListPage.last?.topicFilterBarView.render()
-                TopicDetailPage.lastDisplayed?.render()
+                TopicsListPage.last?.afterGameUpdate()
+                TopicDetailPage.last?.afterGameUpdate()
             }
         }
     }

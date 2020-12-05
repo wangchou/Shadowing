@@ -27,8 +27,8 @@ class InfiniteChallengeSwipablePage: UIPageViewController {
         return !isPagesReady ? nil : pages[2] as? InfiniteChallengeListPage
     }
 
-    var detailPage: InfiniteChallengePage? {
-        return !isPagesReady ? nil : pages[3] as? InfiniteChallengePage
+    var detailPage: InfiniteChallengeDetailPage? {
+        return !isPagesReady ? nil : pages[3] as? InfiniteChallengeDetailPage
     }
 
     override func viewDidLayoutSubviews() {
@@ -50,7 +50,7 @@ class InfiniteChallengeSwipablePage: UIPageViewController {
         addPage("SettingPage")
         addPage("MedalPage")
         addPage("InfiniteChallengeListPage")
-        addPage("InfiniteChallengePage")
+        addPage("InfiniteChallengeDetailPage")
         let idx = RootContainerViewController.isShowSetting ? 0 : InfiniteChallengeSwipablePage.initialIdx
         setViewControllers([pages[idx]], direction: .forward, animated: true, completion: nil)
 
