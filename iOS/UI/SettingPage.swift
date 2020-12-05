@@ -153,9 +153,9 @@ class SettingPage: UITableViewController {
     @IBAction func gameLangSegmentControlValueChanged(_: Any) {
         RootContainerViewController.isShowSetting = true
         if gameLangSegmentControl.selectedSegmentIndex == 1 {
-            changeGameLangTo(lang: .ja)
+            changeGameLangTo(lang: .ja, fromSettingPage: true)
         } else {
-            changeGameLangTo(lang: .en)
+            changeGameLangTo(lang: .en, fromSettingPage: true)
         }
 
         render()

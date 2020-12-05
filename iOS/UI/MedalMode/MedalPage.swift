@@ -157,7 +157,7 @@ class MedalPageView: UIView, ReloadableView, GridLayout {
 
         changeLangButton.addTapGestureRecognizer { [weak self] in
             changeLangButton.isUserInteractionEnabled = false
-            changeGameLangTo(lang: gameLang == .ja ? .en : .ja)
+            changeGameLangTo(lang: gameLang == .ja ? .en : .ja, fromSettingPage: false)
             Promises.all([waitKanaInfoLoaded,
                           waitSentenceScoresLoaded,
                           waitUserSaidSentencesLoaded,

@@ -110,7 +110,7 @@ func loadGameLang() {
     }
 }
 
-func changeGameLangTo(lang: Lang) {
+func changeGameLangTo(lang: Lang, fromSettingPage: Bool) {
     gameLang = lang
     saveGameLang()
     loadGameSetting()
@@ -118,10 +118,10 @@ func changeGameLangTo(lang: Lang) {
     DispatchQueue.main.async {
         if gameLang == .en {
             GameContext.shared.bottomTab = .infiniteChallenge
-            rootViewController.showInfiniteChallengePage(idx: 1)
+            rootViewController.showInfiniteChallengePage(idx: fromSettingPage ? 0 : 1)
         } else {
             GameContext.shared.bottomTab = .topics
-            rootViewController.showTopicPage(idx: 1)
+            rootViewController.showTopicPage(idx: fromSettingPage ? 0 : 1)
         }
         rootViewController.reloadTableData()
         rootViewController.rerenderTopView(updateByRecords: true)

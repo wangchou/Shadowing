@@ -12,6 +12,7 @@ import Speech
 import UIKit
 
 class RootContainerViewController: UIViewController {
+    static var isLoaded = Promise<Void>.pending()
     static var isShowSetting = false
 
     var current: UIViewController!
@@ -25,15 +26,19 @@ class RootContainerViewController: UIViewController {
         // swiftlint:disable force_cast
         splashScreen = (getVC("LaunchScreen") as! SplashScreenViewController)
         transition(to: splashScreen)
+        // swiftlint:enable force_cast
 
         topicSwipablePage = TopicSwipablePage(transitionStyle: .scroll, navigationOrientation: .horizontal)
         infiniteChallengeSwipablePage = InfiniteChallengeSwipablePage(transitionStyle: .scroll, navigationOrientation: .horizontal)
-        // swiftlint:enable force_cast
 
         splashScreen.launched.always { [weak self] in
             self?.loadStartupData()
             self?.showInitialPage()
         }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
 
     private func loadStartupData() {
@@ -86,8 +91,14 @@ class RootContainerViewController: UIViewController {
     }
 
     func reloadTableData() {
-        topicSwipablePage.listPage?.sentencesTableView.reloadData()
-        infiniteChallengeSwipablePage.listPage?.tableView.reloadData()
+        if let listPage = topicSwipablePage.listPage,
+           listPage.sentencesTableView != nil {
+            listPage.sentencesTableView.reloadData()
+        }
+        if let listPage = infiniteChallengeSwipablePage.listPage,
+           listPage.tableView != nil {
+            listPage.tableView.reloadData()
+        }
     }
 
     func rerenderTopView(updateByRecords: Bool = false) {
@@ -126,12 +137,12 @@ class RootContainerViewController: UIViewController {
         view.addSubview(vc.view)
         vc.didMove(toParent: self)
 
-        // remove old
-        current?.willMove(toParent: nil)
-        current?.view.removeFromSuperview()
-        current?.removeFromParent()
-
-        // show new
         current = vc
+
+        //print(children)
+        // remove old
+//        old?.willMove(toParent: nil)
+//        old?.view.removeFromSuperview()
+//        old?.removeFromParent()
     }
 }
