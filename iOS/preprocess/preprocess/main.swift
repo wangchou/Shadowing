@@ -11,10 +11,9 @@ import RealmSwift
 import SwiftSyllables
 
 func getSentences() -> [[String]] {
-    let file = "sentences.tsv"
     var rows: [[String]] = []
     if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-        let fileURL = dir.appendingPathComponent(file)
+        let fileURL = dir.appendingPathComponent("sentences.tsv")
         print(fileURL)
         do {
             rows = try String(contentsOf: fileURL, encoding: .utf8)
@@ -146,12 +145,7 @@ func addStringToIdTable() {
 func addSentencesTable() {
     do {
         for (id, row) in rows.enumerated() {
-            // if(i % 500 == 0) {
             print(id)
-            // }
-//            if(i > 2000) {
-//                break
-//            }
 
             let jpn0 = row[0]
             let eng0 = row[1]
@@ -325,7 +319,9 @@ func encryptDBAndCopy() {
             let keyString = (key as Data).hexadecimal
             print(keyString)
             let keyFileURL = dir.appendingPathComponent("realmKeys.txt")
-            try "\(Date().description)\t\(keyString)\n".write(to: keyFileURL, atomically: true, encoding: .utf8)
+            let fileContent = String(contentsOf: keyFileURL, encoding: .utf8)
+            try "\(fileContent)\(Date().description)\t\(keyString)\n"
+                .write(to: keyFileURL, atomically: true, encoding: .utf8)
 
             try realm.writeCopy(toFile: fileURL,
                                 encryptionKey: key as Data)

@@ -63,7 +63,7 @@ class MedalProgressBar: UIView, GridLayout, ReloadableView {
         }
 
         // lvl text
-        let lvTitle = lowLevel.title.replacingOccurrences(of: "Level", with: "Lv.")
+        let lvTitle = lowLevel.shortTitle
         lvlLabel.attributedText = getStrokeText(lvTitle,
                                                 .white,
                                                 strokeWidth: Float(-0.3 * step),

@@ -28,6 +28,7 @@ private let titles = ["入門一", "入門二", "初級一", "初級二",
 private let enTitles = ["Level 1", "Level 2", "Level 3", "Level 4",
                         "Level 5", "Level 6", "Level 7", "Level 8",
                         "Level 9", "Level 10", "Level 11", "Level 12"]
+
 let allLevels: [Level] = [.lv0, .lv1, .lv2, .lv3, .lv4, .lv5, .lv6, .lv7, .lv8, .lv9, .lv10, .lv11]
 
 enum Level: Int, Codable {
@@ -92,6 +93,13 @@ enum Level: Int, Codable {
             return titles[rawValue]
         }
         return enTitles[rawValue]
+    }
+
+    var shortTitle: String {
+        if i18n.isJa || i18n.isZh {
+            return titles[rawValue]
+        }
+        return enTitles[rawValue].replacingOccurrences(of: "Level", with: "Lv.")
     }
 
     var lvlTitle: String {

@@ -478,7 +478,7 @@ class I18n {
         if isZh || isJa {
             return "\(infiniteChallenge) (\(language))"
         }
-        return "\(infiniteChallenge) (\(gameLang == .ja ? jaAbbr : enAbbr))"
+        return infiniteChallenge
     }
 
     var languageInJa: String {
@@ -888,7 +888,7 @@ class I18n {
     var nextGame: String {
         if isJa { return "次の挑戦" }
         if isZh { return "下個挑戰" }
-        return "Next Game"
+        return screen.width > 750 ? "Next Game" : "Next"
     }
 
     var noScore: String {
