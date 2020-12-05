@@ -10,6 +10,14 @@ import Firebase
 import UIKit
 
 let rootViewController = AppDelegate.shared.rootViewController
+var launchT = getNow()
+
+func pt(_ key: String) {
+    #if DEBUG
+    let secs = String(format: "%.4f", getNow() - launchT)
+    print("\(secs)s   \(key)")
+    #endif
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,7 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-
+        launchT = getNow()
+        
         IAPHelper.shared.startListening()
         IAPHelper.shared.requsestProducts()
         loadGameExpirationDate()

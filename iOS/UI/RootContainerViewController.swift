@@ -22,7 +22,7 @@ class RootContainerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        pt("rootVC \(#function) - \(#line)")
         // swiftlint:disable force_cast
         splashScreen = (getVC("LaunchScreen") as! SplashScreenViewController)
         transition(to: splashScreen)
@@ -32,17 +32,19 @@ class RootContainerViewController: UIViewController {
         infiniteChallengeSwipablePage = InfiniteChallengeSwipablePage(transitionStyle: .scroll, navigationOrientation: .horizontal)
 
         splashScreen.launched.always { [weak self] in
+            pt("rootVC \(#function) - \(#line)")
             self?.loadStartupData()
             self?.showInitialPage()
+            pt("rootVC \(#function) - \(#line)")
         }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        pt("rootVC \(#function) - \(#line)")
     }
 
     private func loadStartupData() {
-        let t1 = getNow()
         initDB()
         loadGameLang()
         loadGameSetting()
@@ -56,7 +58,6 @@ class RootContainerViewController: UIViewController {
 
         loadGameHistory()
         loadGameMiscData(isLoadKana: true)
-        print("\nstartup load time: \(getNow() - t1)")
     }
 
     private func showInitialPage() {
