@@ -45,12 +45,15 @@ class InfiniteChallengeDetailPage: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         updateUI()
         infoView.level = level
         infoView.minKanaCount = minKanaCount
         infoView.maxKanaCount = maxKanaCount
         infoView.sentencesCount = getSentenceCount(minKanaCount: minKanaCount, maxKanaCount: maxKanaCount)
         infoView.render()
+        tableView.reloadData()
+        InfiniteChallengeDetailPage.last = self
 
         // add block screen
         blockView.isHidden = false
@@ -62,10 +65,7 @@ class InfiniteChallengeDetailPage: UIViewController {
            lastLevelBestRecord.p >= lastLevel.lockPercentage {
             blockView.isHidden = true
         }
-
         blockInfo.text = "「\(lastLevel.title)」< \(lastLevel.lockPercentage.i)%"
-        tableView.reloadData()
-        InfiniteChallengeDetailPage.last = self
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -79,7 +79,7 @@ class InfiniteChallengeDetailPage: UIViewController {
     }
 
     func updateUI() {
-        translationButton.setTitle(i18n.englishOrJapanese, for: .normal)
+        translationButton.setTitle(i18n.translationOrOriginal, for: .normal)
         translationButton.titleLabel?.font = getBottomButtonFont()
         if topBarRightText == "" {
             topBarView.rightButton.isHidden = true
@@ -119,7 +119,9 @@ extension InfiniteChallengeDetailPage: UITableViewDataSource {
             let sentences = strings.map { str -> Sentence in
                 getSentenceByString(str)
             }
-            contentCell.update(sentence: sentences[indexPath.row], isShowTranslate: context.gameSetting.isShowTranslationInPractice)
+            contentCell.update(sentence: sentences[indexPath.row],
+                               isShowTranslate: context.gameSetting.isShowTranslationInPractice,
+                               translationLang: context.gameSetting.translationLang)
         }
 
         return contentCell

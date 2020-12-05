@@ -73,7 +73,7 @@ class TopicDetailPage: UIViewController {
         guard isViewReady else { return }
         tableView?.tableHeaderView?.backgroundColor = darkBackground
         titleLabel.text = getDataSetTitle(dataSetKey: context.dataSetKey)
-        peekButton.setTitle(i18n.chineseOrJapanese, for: .normal)
+        peekButton.setTitle(i18n.japaneseOrChinese, for: .normal)
         peekButton.titleLabel?.font = getBottomButtonFont()
 
         if let gameRecord = findBestRecord(dataSetKey: context.dataSetKey) {
@@ -191,7 +191,7 @@ extension TopicDetailPage: UITableViewDataSource {
         let sentence = context.sentences[indexPath.row]
         contentCell.update(sentence: sentence,
                            isShowTranslate: context.gameSetting.isShowTranslationInPractice,
-                           isTopicDetail: true)
+                           translationLang: .zh)
 
         return contentCell
     }

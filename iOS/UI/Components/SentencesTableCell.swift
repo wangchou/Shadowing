@@ -85,7 +85,9 @@ class SentencesTableCell: UITableViewCell {
             }
     }
 
-    func update(sentence: Sentence, isShowTranslate: Bool = false, isTopicDetail: Bool = false) {
+    func update(sentence: Sentence,
+                isShowTranslate: Bool = false,
+                translationLang: Lang = .zh) {
         targetString = sentence.origin
         ttsFixes = sentence.ttsFixes
         sentenceLabel.widthPadding = 4
@@ -100,7 +102,16 @@ class SentencesTableCell: UITableViewCell {
         translationTextView.textContainerInset = sentenceLabel.hasRuby ?
             UIEdgeInsets(top: 15, left: 0, bottom: -5, right: 0) : UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
 
-        translationTextView.text = isTopicDetail ? sentence.cmn : sentence.translation
+        switch translationLang {
+        case .ja:
+            translationTextView.text = sentence.ja
+        case .en:
+            translationTextView.text = sentence.en
+        case .zh:
+            translationTextView.text = sentence.cmn
+        default:
+            translationTextView.text = sentence.translation
+        }
 
         if isShowTranslate, translationTextView.text != "" {
             sentenceLabel.alpha = 0

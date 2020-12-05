@@ -367,6 +367,19 @@ class I18n {
         return "English"
     }
 
+    var translationLang: String {
+        switch GameContext.shared.gameSetting.translationLang {
+        case .ja:
+            return japanese
+        case .en:
+            return english
+        case .zh:
+            return chinese
+        default:
+            return ""
+        }
+    }
+
     var translation: String {
         if isJa { return "翻訳" }
         if isZh { return "翻譯" }
@@ -389,12 +402,12 @@ class I18n {
         return "Ja"
     }
 
-    var englishOrJapanese: String {
-        return "\(english) / \(japanese)"
+    var translationOrOriginal: String {
+        return "\(langToSpeak) / \(translationLang)"
     }
 
-    var chineseOrJapanese: String {
-        return "\(chinese) / \(japanese)"
+    var japaneseOrChinese: String {
+        return "\(japanese) / \(chinese)"
     }
 
     var challenge: String {
