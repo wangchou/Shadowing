@@ -582,7 +582,7 @@ class I18n {
 
     var aboutTopicTranslation: String {
         if isJa { return "注：テーマモードには中国語の翻訳のみです" }
-        if isZh { return "註：主題模式只有中文翻譯" }
+        if isZh { return "註：主題模式僅有中文翻譯" }
         return "For topic sentences, only Chinese translations are available"
     }
 
@@ -792,10 +792,11 @@ class I18n {
         case .medalMode:
             guard let reward = reward else { return "" }
             let rewardText = reward >= 0 ? "plus \(reward)" : "\(reward)"
-            let rankText = rank.replacingOccurrences(of: "+", with: " plus")
+            let rankText = rank.replacingOccurrences(of: "+", with: " plus ")
+                               .replacingOccurrences(of: "-", with: " minus ")
 
             return gameLang == .ja ?
-                "\(percent)%。判定：\(rankText)。メダル：\(rewardText)。" :
+                "\(percent)%、判定：\(rankText)、メダル：\(rewardText)" :
                 "\(percent)% Completed. Rank: \(rankText)... Medal: \(rewardText)"
         default:
             if gameLang == .ja { return "完成率：\(percent)%、判定：\(rank)" }

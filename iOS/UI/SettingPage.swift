@@ -174,6 +174,7 @@ class SettingPage: UITableViewController {
         }
         saveGameSetting()
         render()
+        self.tableView.reloadData()
     }
 
     @IBAction func echoMethodSwitchValueChanged(_ sender: Any) {
@@ -314,7 +315,7 @@ class SettingPage: UITableViewController {
         switch section {
 
         case 5:
-            return gameLang == .ja ? i18n.aboutTopicTranslation : ""
+            return gameLang == .ja && context.gameSetting.translationLang != .zh ? i18n.aboutTopicTranslation : "  "
 
         default:
             return ""

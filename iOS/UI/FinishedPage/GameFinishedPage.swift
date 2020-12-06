@@ -82,7 +82,9 @@ extension GameFinishedPage: UITableViewDataSource {
         guard let finishedCell = cell as? SentencesTableCell else { print("detailCell convert error"); return cell }
         let sentence = context.sentences[indexPath.row]
 
-        finishedCell.update(sentence: sentence)
+        finishedCell.update(sentence: sentence,
+                            translationLang: context.gameMode == .topicMode ? .zh :
+                                context.gameSetting.translationLang)
 
         return finishedCell
     }

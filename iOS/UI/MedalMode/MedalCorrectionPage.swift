@@ -277,7 +277,8 @@ extension MedalCorrectionPageView: UITableViewDataSource {
         let sentence = sortedSentences[indexPath.row]
 
         cell.update(sentence: sentence,
-                    isShowTranslate: context.gameSetting.isShowTranslationInPractice)
+                    isShowTranslate: context.gameSetting.isShowTranslationInPractice,
+                    translationLang: context.gameSetting.translationLang)
 
         return cell
     }

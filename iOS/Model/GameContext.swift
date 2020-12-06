@@ -128,7 +128,7 @@ class GameContext {
     }
 
     var translation: String {
-        return targetSentence.translation
+        return gameMode == .topicMode ? targetSentence.cmn : targetSentence.translation
     }
 
     var targetAttrString: NSMutableAttributedString {
