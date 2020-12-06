@@ -160,7 +160,6 @@ func getFixedTTSString(_ text: String, localFixes: [(String, String)], isJa: Boo
         tokenInfos.forEach { tokenInfo in
             let token = tokenInfo[0]
             let isEnOrNum = token.isEnOrNum
-            print(token, token.isEnOrNum)
             if isEnOrNum && isPreviousEnOrNum {
                 fixedText += " "
             }

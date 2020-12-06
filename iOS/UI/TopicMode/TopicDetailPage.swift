@@ -74,7 +74,10 @@ class TopicDetailPage: UIViewController {
         tableView?.tableHeaderView?.backgroundColor = darkBackground
         titleLabel.text = getDataSetTitle(dataSetKey: context.dataSetKey)
         peekButton.setTitle(i18n.japaneseOrChinese, for: .normal)
+        peekButton.setTitleColor(.white, for: .highlighted)
+        peekButton.setTitle(i18n.japaneseOrChinese, for: .highlighted)
         peekButton.titleLabel?.font = getBottomButtonFont()
+        peekButton.showsTouchWhenHighlighted = true
 
         if let gameRecord = findBestRecord(dataSetKey: context.dataSetKey) {
             rankLabel.attributedText = getRankAttrText(rank: gameRecord.rank.rawValue, color: gameRecord.rank.color)

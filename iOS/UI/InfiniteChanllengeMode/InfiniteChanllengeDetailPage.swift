@@ -80,7 +80,10 @@ class InfiniteChallengeDetailPage: UIViewController {
 
     func updateUI() {
         translationButton.setTitle(i18n.translationOrOriginal, for: .normal)
+        translationButton.setTitle(i18n.translationOrOriginal, for: .highlighted)
         translationButton.titleLabel?.font = getBottomButtonFont()
+        translationButton.setTitleColor(.white, for: .highlighted)
+        translationButton.showsTouchWhenHighlighted = true
         if topBarRightText == "" {
             topBarView.rightButton.isHidden = true
         } else {

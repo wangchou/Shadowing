@@ -215,9 +215,9 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         button.backgroundColor = buttonGreen
         button.setTitle("\(i18n.language) / \(i18n.translation)", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(buttonForegroundGray, for: .highlighted)
         button.titleLabel?.font = bottomButtonFont
         button.addTarget(self, action: #selector(onPeekButtonClicked), for: .touchUpInside)
+        button.showsTouchWhenHighlighted = true
         addSubview(button)
 
         bgRect = UIView()
@@ -234,8 +234,8 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         button.titleLabel?.font = bottomButtonFont
         button.setTitle("X", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(UIColor.lightText.withAlphaComponent(0.5), for: .highlighted)
         button.addTarget(self, action: #selector(onCloseButtonClicked), for: .touchUpInside)
+        button.showsTouchWhenHighlighted = true
         addSubview(button)
 
         var line = addRect(x: 0, y: 0, w: 48, h: 1, color: .darkGray)

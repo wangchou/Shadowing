@@ -16,7 +16,7 @@ extension Messenger: GameEventDelegate {
         guard let event = notification.object as? Event else { print("convert event fail"); return }
         #if DEBUG
         if let gameState = event.gameState {
-            print("\n == \(gameState.rawValue) ==")
+            print("\n== \(gameState.rawValue) ==")
         } else if event.type != .willSpeakRange,
                   event.type != .playTimeUpdate,
                   event.type != .levelMeterUpdate {
