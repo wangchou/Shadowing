@@ -791,9 +791,9 @@ class I18n {
         switch context.gameMode {
         case .medalMode:
             guard let reward = reward else { return "" }
-            let rewardText = reward >= 0 ? "plus \(reward)" : "\(reward)"
+            let rewardText = (reward >= 0 ? "plus \(reward)" : "\(reward)")
+                                .replacingOccurrences(of: "-", with: " minus ")
             let rankText = rank.replacingOccurrences(of: "+", with: " plus ")
-                               .replacingOccurrences(of: "-", with: " minus ")
 
             return gameLang == .ja ?
                 "\(percent)%、判定：\(rankText)、メダル：\(rewardText)" :

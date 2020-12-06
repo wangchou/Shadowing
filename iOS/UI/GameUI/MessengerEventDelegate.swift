@@ -14,11 +14,12 @@ private let context = GameContext.shared
 extension Messenger: GameEventDelegate {
     @objc func onEventHappened(_ notification: Notification) {
         guard let event = notification.object as? Event else { print("convert event fail"); return }
-
+        #if DEBUG
         if let gameState = event.gameState {
             print("\n == \(gameState.rawValue) ==")
         } else if event.type != .willSpeakRange,
-                  event.type != .playTimeUpdate {
+                  event.type != .playTimeUpdate,
+                  event.type != .levelMeterUpdate {
             print("\t",
                   event.type,
                   event.string ?? "",
@@ -26,6 +27,7 @@ extension Messenger: GameEventDelegate {
                   event.int ?? "",
                   event.score ?? "")
         }
+        #endif
 
         switch event.type {
         case .sayStarted:

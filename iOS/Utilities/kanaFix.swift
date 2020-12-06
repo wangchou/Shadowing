@@ -140,6 +140,12 @@ func getUpdatedTextMap(
     return newMap
 }
 
+extension String {
+    var isEnOrNum: Bool {
+        return !self.matches(for: "^[a-zA-Z\\d ]+$").isEmpty
+    }
+}
+
 func getFixedTTSString(_ text: String, localFixes: [(String, String)], isJa: Bool = false) -> Promise<(String, [Int])> {
     let promise = Promise<(String, [Int])>.pending()
     guard isJa else {
@@ -150,8 +156,16 @@ func getFixedTTSString(_ text: String, localFixes: [(String, String)], isJa: Boo
     // need to tokenInfos to get displayed text
     var fixedText = ""
     getKanaTokenInfos(text, originalString: text).then { tokenInfos in
+        var isPreviousEnOrNum = false
         tokenInfos.forEach { tokenInfo in
-            fixedText += tokenInfo[0]
+            let token = tokenInfo[0]
+            let isEnOrNum = token.isEnOrNum
+            print(token, token.isEnOrNum)
+            if isEnOrNum && isPreviousEnOrNum {
+                fixedText += " "
+            }
+            fixedText += token
+            isPreviousEnOrNum = isEnOrNum
         }
 
         var allFixes = localFixes
