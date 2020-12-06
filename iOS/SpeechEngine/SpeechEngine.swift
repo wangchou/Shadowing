@@ -28,11 +28,8 @@ class SpeechEngine {
     private var speechRecognizer = SpeechRecognizer.shared
 
     // avoid initial tts delay in iOS 14
-    private var currentTTSIdx = 0
-    private var tts0 = TTS() // teacher
-    private var tts1 = TTS() // assistant
-    private var tts2 = TTS() // translator
-    private var tts3 = TTS() // narrator
+    private var tts0 = TTS() // teacher, narrator
+    private var tts1 = TTS() // assistant, translator
 
     // MARK: - Public Funtions
 
@@ -69,18 +66,8 @@ class SpeechEngine {
 
     func stopListeningAndSpeaking() {
         speechRecognizer.endAudio()
-        if tts0.synthesizer.isSpeaking {
-            tts0.stop()
-        }
-        if tts1.synthesizer.isSpeaking {
-            tts1.stop()
-        }
-        if tts2.synthesizer.isSpeaking {
-            tts2.stop()
-        }
-        if tts3.synthesizer.isSpeaking {
-            tts3.stop()
-        }
+        tts0.stop()
+        tts1.stop()
     }
 
     func monitoringOn() {
@@ -98,8 +85,6 @@ class SpeechEngine {
         if isStopTTS {
             tts0.stop()
             tts1.stop()
-            tts2.stop()
-            tts3.stop()
         }
 
         guard !isSimulator else { return }
@@ -219,24 +204,20 @@ private extension SpeechEngine {
             context.speakDuration = Float(getNow() - startTime)
             return fulfilledVoidPromise()
         }
-        currentTTSIdx += 1
 
         let tts: TTS!
+        // in game narrator -> translator -> teacher -> assistant
+        //         tts0        tts1          tts0       tts1
+        // this avoid iOS 14 speaking initial laggy with preload voice method
         switch speaker {
-        case context.gameSetting.teacher:
+        case context.gameSetting.teacher, context.gameSetting.narrator:
             tts = tts0
 
-        case context.gameSetting.assistant:
+        case context.gameSetting.assistant, context.gameSetting.translator:
             tts = tts1
 
-        case context.gameSetting.translator:
-            tts = tts2
-
-        case context.gameSetting.narrator:
-            tts = tts3
-
         default:
-            tts = tts3
+            tts = tts0
         }
         return tts.say(
             text,

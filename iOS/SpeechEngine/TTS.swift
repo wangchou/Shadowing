@@ -77,9 +77,7 @@ import Foundation
         }
 
         func stop() {
-            if synthesizer.isSpeaking {
-                synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
-            }
+            synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
         }
 
         func fixRange(characterRange: NSRange, ttsToDisplayMap: [Int]) -> NSRange {
