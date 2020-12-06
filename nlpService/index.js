@@ -32,7 +32,7 @@ var { nLocalFixes, correctKanas } = loadNLocal()
 var cache = (duration) => {
   return (req, res, next) => {
     if (!req.body || !req.body.jpnStr) return res.sendStatus(400)
-    let key = req.body.jpnStr
+    let key = req.body.jpnStr + "," + req.body.originalStr
     let cachedBody = mcache.get(key)
     if(cachedBody) {
       res.send(cachedBody)
