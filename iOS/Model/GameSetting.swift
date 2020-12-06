@@ -50,8 +50,8 @@ struct GameSetting: Codable {
     var monitoringVolume: Int = 0
 
     // voice id started
-    var teacher: String = getDefaultVoiceId(language: gameLang.defaultCode, isPreferMaleSiri: gameLang == .ja)
-    var assistant: String = getDefaultVoiceId(language: gameLang.defaultCode, isPreferMaleSiri: gameLang != .ja)
+    var teacher: String = getDefaultVoiceId(language: gameLang.defaultCode, isPreferMale: gameLang == .ja)
+    var assistant: String = getDefaultVoiceId(language: gameLang.defaultCode, isPreferMale: gameLang != .ja)
     var translatorJp: String = getDefaultVoiceId(language: Lang.ja.defaultCode)
     var translatorEn: String = getDefaultVoiceId(language: Lang.en.defaultCode)
     var translatorZh: String = getDefaultVoiceId(language: Lang.zh.defaultCode, isPreferEnhanced: false)
@@ -165,9 +165,9 @@ func loadGameSetting() {
 
         if gameLang == .ja {
             context.gameSetting.teacher = getDefaultVoiceId(language: langCode)
-            context.gameSetting.assistant = getDefaultVoiceId(language: langCode, isPreferMaleSiri: false)
+            context.gameSetting.assistant = getDefaultVoiceId(language: langCode, isPreferMale: false)
         } else {
-            context.gameSetting.teacher = getDefaultVoiceId(language: langCode, isPreferMaleSiri: false)
+            context.gameSetting.teacher = getDefaultVoiceId(language: langCode, isPreferMale: false)
             context.gameSetting.assistant = getDefaultVoiceId(language: langCode)
         }
 
@@ -179,20 +179,46 @@ func loadGameSetting() {
     }
 }
 
+private func getVoiceSortScore(v: AVSpeechSynthesisVoice,
+                               isPreferMale: Bool,
+                               isPreferEnhanced: Bool
+                               ) -> Int {
+
+    // priority for non en: gender(3) > siri(2) > enhanced(1)
+    //                  en: enhanced(100) > gender(3) > siri(2) iOS 14 en tts bug...
+    var score = 0
+    score += v.identifier.contains("siri") ? 2 : 0
+    if #available(iOS 13.0, *) {
+        score += v.gender == .male && isPreferMale ? 3 : 0
+        score += v.gender == .female && !isPreferMale ? 3 : 0
+    } else {
+        score += v.identifier.contains("male") && isPreferMale ? 3 : 0
+        score += v.identifier.contains("female") && !isPreferMale ? 3 : 0
+    }
+    if v.language.contains("en") { // avoid iOS 14 en compact tts speaking error
+        score += v.quality == .enhanced && isPreferEnhanced ? 100 : 0
+        score += v.quality == .default && !isPreferEnhanced ? 100 : 0
+    } else {
+        score += v.quality == .enhanced && isPreferEnhanced ? 1 : 0
+        score += v.quality == .default && !isPreferEnhanced ? 1 : 0
+    }
+    return score
+}
+
 func getDefaultVoice(language: String,
-                     isPreferMaleSiri: Bool = true,
+                     isPreferMale: Bool = true,
                      isPreferEnhanced: Bool = true) -> AVSpeechSynthesisVoice? {
     let voices = getAvailableVoice(language: language).sorted { v1, v2 in
-        if v2.identifier.range(of: isPreferMaleSiri ? "siri_male" : "siri_female") != nil { return true }
-        if v1.identifier.range(of: isPreferMaleSiri ? "siri_male" : "siri_female") != nil { return false }
-        if v2.identifier.range(of: "siri") != nil { return true }
-        if v1.identifier.range(of: "siri") != nil { return false }
-        if v2.quality == .enhanced { return isPreferEnhanced ? true : false }
-        if v1.quality == .enhanced { return isPreferEnhanced ? false : true }
-        return v1.identifier < v2.identifier
+        let score1 =  getVoiceSortScore(v: v1, isPreferMale: isPreferMale, isPreferEnhanced: isPreferEnhanced)
+        let score2 =  getVoiceSortScore(v: v2, isPreferMale: isPreferMale, isPreferEnhanced: isPreferEnhanced)
+        return score1 > score2
     }
+    //print(language, isPreferMaleSiri, isPreferEnhanced)
+//    voices.forEach {v in
+//        print(getVoiceSortScore(v: v, isPreferMale: isPreferMale, isPreferEnhanced: isPreferEnhanced), v)
+//    }
 
-    guard let voice = voices.last else {
+    guard let voice = voices.first else {
         if let voice = AVSpeechSynthesisVoice(language: language) {
             return voice
         } else {
@@ -204,11 +230,11 @@ func getDefaultVoice(language: String,
 }
 
 func getDefaultVoiceId(language: String,
-                       isPreferMaleSiri: Bool = true,
+                       isPreferMale: Bool = true,
                        isPreferEnhanced: Bool = true) -> String {
-    guard let voice = getDefaultVoice(language: language, isPreferMaleSiri: isPreferMaleSiri, isPreferEnhanced: isPreferEnhanced) else {
+    guard let voice = getDefaultVoice(language: language, isPreferMale: isPreferMale, isPreferEnhanced: isPreferEnhanced) else {
         showMessage(i18n.defaultVoiceIsNotAvailable, isNeedConfirm: true)
-        print("getDefaultVoiceId(\(language), \(isPreferMaleSiri), \(isPreferEnhanced) Failed. return unknown")
+        print("getDefaultVoiceId(\(language), \(isPreferMale), \(isPreferEnhanced) Failed. return unknown")
         return "unknown"
     }
     return voice.identifier
