@@ -15,13 +15,14 @@ extension Messenger: GameEventDelegate {
     @objc func onEventHappened(_ notification: Notification) {
         guard let event = notification.object as? Event else { print("convert event fail"); return }
         #if DEBUG
+        let watchTypes: [EventType] = [.sayStarted, .scoreCalculated]
         if let gameState = event.gameState {
-            print("\n== \(gameState.rawValue) ==")
-        } else if event.type != .willSpeakRange,
-                  event.type != .playTimeUpdate,
-                  event.type != .levelMeterUpdate {
-            print("\t",
-                  event.type,
+            // print("\n== \(gameState.rawValue) ==")
+            if gameState == .speakingTranslation {
+                print("\n---")
+            }
+        } else if watchTypes.contains(event.type) {
+            print(//event.type,
                   event.string ?? "",
                   event.range ?? "",
                   event.int ?? "",

@@ -138,6 +138,19 @@ class SpeechRecognizer: NSObject {
 
         if let result = result {
             promise.fulfill(result.bestTranscription.formattedString)
+            #if DEBUG
+            var str = ""
+            result.bestTranscription.segments.forEach {
+                if $0.alternativeSubstrings.isEmpty {
+                    str += "\($0.substring) "
+                } else {
+                    var arr = [$0.substring]
+                    arr.append(contentsOf: $0.alternativeSubstrings)
+                    str += "\(arr) "
+                }
+            }
+            print("segments:", str)
+            #endif
         }
 
         if let error = error {
@@ -167,7 +180,7 @@ class SpeechRecognizer: NSObject {
             switch authStatus {
             case .authorized:
                 self.isAuthorized = true
-                print("Speech Recogntion is authorized")
+                // print("Speech Recogntion is authorized")
 
             case .denied:
                 self.isAuthorized = false
