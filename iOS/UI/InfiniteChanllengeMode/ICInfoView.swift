@@ -61,20 +61,20 @@ class ICInfoView: UIView, GridLayout, ReloadableView {
 
     private var progressAttrText: NSAttributedString {
         let attrText = NSMutableAttributedString()
-        let font = MyFont.bold(ofSize: getFontSize(h: 11))
+        let font = MyFont.heavyDigit(ofSize: getFontSize(h: 11))
         if let string = bestProgress {
             attrText.append(getStrokeText(string.padWidthTo(3), .darkGray, font: font))
-            attrText.append(getStrokeText("%", .darkGray, strokeWidth: 0, strokColor: .black, font: UIFont.boldSystemFont(ofSize: 12)))
+            attrText.append(getStrokeText("%", .darkGray, strokeWidth: 0, strokColor: .black, font: MyFont.heavyDigit(ofSize: 12)))
             return attrText
         } else {
             attrText.append(getStrokeText(" ??", .lightText, font: font))
-            attrText.append(getStrokeText("%", .darkGray, strokeWidth: 0, strokColor: .black, font: UIFont.boldSystemFont(ofSize: 12)))
+            attrText.append(getStrokeText("%", .darkGray, strokeWidth: 0, strokColor: .black, font: MyFont.heavyDigit(ofSize: 12)))
             return attrText
         }
     }
 
     private var rankAttrText: NSAttributedString {
-        let font = MyFont.bold(ofSize: getFontSize(h: 11))
+        let font = MyFont.heavyDigit(ofSize: getFontSize(h: 11))
         if let bestRank = bestRank,
            let rank = Rank(rawValue: bestRank) {
             return getStrokeText(bestRank.padWidthTo(2), rank.color, font: font)

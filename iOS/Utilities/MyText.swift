@@ -117,7 +117,7 @@ func getAttrText(_ parts: [(text: String,
             color: part.color,
             strokeWidth: -1,
             strokeColor: .black,
-            font: MyFont.bold(ofSize: part.fontSize)
+            font: MyFont.heavyDigit(ofSize: part.fontSize)
         ))
     }
     return attrText
@@ -128,7 +128,7 @@ func getStrokeText(
     _ color: UIColor,
     strokeWidth: Float = -1.5,
     strokColor: UIColor = .black,
-    font: UIFont = UIFont.boldSystemFont(ofSize: 32)
+    font: UIFont = MyFont.heavyDigit(ofSize: 32)
 ) -> NSMutableAttributedString {
     let limitedWidth = max(-4, strokeWidth)
     return getText(text, color: color, strokeWidth: limitedWidth, strokeColor: strokColor, font: font)

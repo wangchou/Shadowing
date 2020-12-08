@@ -85,7 +85,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
                                      record.rank.color,
                                      strokeWidth: -1,
                                      strokColor: .black,
-                                     font: MyFont.bold(ofSize: getFontSize(h: 12)))
+                                     font: MyFont.heavyDigit(ofSize: getFontSize(h: 12)))
         label = addAttrText(x: 27, y: y + 1, h: 12,
                             text: rankText)
         label.slideIn(duration: 0.5)

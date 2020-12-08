@@ -128,7 +128,7 @@ class TopicDetailPage: UIViewController {
 
     func getProgressAttrText(progress: String) -> NSAttributedString {
         let attrText = NSMutableAttributedString()
-        attrText.append(getStrokeText(progress, .black, strokeWidth: -1.5, strokColor: .white, font: UIFont.boldSystemFont(ofSize: 60)))
+        attrText.append(getStrokeText(progress, .black, strokeWidth: -1.5, strokColor: .white, font: MyFont.heavyDigit(ofSize: 60)))
         attrText.append(getStrokeText("%", .white, strokeWidth: -1.5, strokColor: .black, font: UIFont.boldSystemFont(ofSize: 20)))
 
         return attrText
@@ -136,7 +136,7 @@ class TopicDetailPage: UIViewController {
 
     func getRankAttrText(rank: String, color: UIColor) -> NSAttributedString {
         let attrText = NSMutableAttributedString()
-        attrText.append(getStrokeText(rank, color, strokeWidth: -1.5, strokColor: .black, font: UIFont.boldSystemFont(ofSize: 60)))
+        attrText.append(getStrokeText(rank, color, strokeWidth: -1.5, strokColor: .black, font: MyFont.heavyDigit(ofSize: 60)))
 
         return attrText
     }
