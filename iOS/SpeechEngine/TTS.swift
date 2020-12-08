@@ -16,11 +16,13 @@ import Foundation
     // ttsToDisplayMap will map willSpeakRange from いちにち○○○○ to 1日○○○○
     // it looks like [1 1 1 1 2 3 4 5]
     class TTS: NSObject {
-        var synthesizer = AVSpeechSynthesizer()
+        var synths: [String: AVSpeechSynthesizer] = [:]
+        var lastSynth: AVSpeechSynthesizer?
         var ttsToDisplayMap: [Int] = []
         var promise = fulfilledVoidPromise()
         var lastString = ""
         var lastTTSString = ""
+        var isPreviousJP = false // jp -> en have some chance get wrong in iOS14
 
         func say(_ text: String,
                  voiceId: String,
@@ -32,7 +34,8 @@ import Foundation
             promise = Promise<Void>.pending()
             getFixedTTSString(text,
                               localFixes: ttsFixes,
-                              isJa: isJa).then { ttsString, ttsToDisplayMap in
+                              isJa: isJa).then { [weak self] ttsString, ttsToDisplayMap in
+                guard let self = self else { return }
                 self.lastString = text
                 self.lastTTSString = ttsString
                 self.ttsToDisplayMap = ttsToDisplayMap
@@ -58,10 +61,24 @@ import Foundation
                 }
 
                 postEvent(.sayStarted, string: text)
-                self.synthesizer.delegate = self
-                self.synthesizer.speak(utterance)
+                guard let voice = utterance.voice else {
+                    print("Error: utterance.voice is nil")
+                    self.promise.fulfill(())
+                    return
+                }
+                var synth: AVSpeechSynthesizer!
+                if self.isPreviousJP, voice.language.contains("en") { // for iOS14 tts bug
+                    synth = AVSpeechSynthesizer()
+                    self.synths[voice.identifier] = synth
+                } else {
+                    synth = self.synths[voice.identifier] ?? AVSpeechSynthesizer()
+                    self.synths[voice.identifier] = synth
+                }
+                self.lastSynth = synth
+                synth.delegate = self
+                synth.speak(utterance)
+                self.isPreviousJP = voice.language.contains("ja")
             }
-
             return promise
         }
 
@@ -72,12 +89,14 @@ import Foundation
                 utterance.voice = voice
                 utterance.rate = AVSpeechUtteranceMaximumSpeechRate
                 utterance.volume = 0
-                synthesizer.speak(utterance)
+                let synth = synths[voiceId] ?? AVSpeechSynthesizer()
+                synths[voiceId] = synth
+                synth.speak(utterance)
             }
         }
 
         func stop() {
-            synthesizer.stopSpeaking(at: AVSpeechBoundary.immediate)
+            lastSynth?.stopSpeaking(at: AVSpeechBoundary.immediate)
         }
 
         func fixRange(characterRange: NSRange, ttsToDisplayMap: [Int]) -> NSRange {

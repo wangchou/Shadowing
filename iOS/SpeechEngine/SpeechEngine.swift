@@ -27,9 +27,7 @@ class SpeechEngine {
 
     private var speechRecognizer = SpeechRecognizer.shared
 
-    // avoid initial tts delay in iOS 14
-    private var tts0 = TTS() // teacher, narrator
-    private var tts1 = TTS() // assistant, translator
+    private var tts = TTS()
 
     // MARK: - Public Funtions
 
@@ -49,8 +47,8 @@ class SpeechEngine {
 
     // elimiated delay
     func preloadTTSVoice() {
-        tts0.preloadVoice(voiceId: context.gameSetting.teacher)
-        tts1.preloadVoice(voiceId: context.gameSetting.assistant)
+        tts.preloadVoice(voiceId: context.gameSetting.teacher)
+        tts.preloadVoice(voiceId: context.gameSetting.assistant)
     }
 
     func restart() {
@@ -66,8 +64,7 @@ class SpeechEngine {
 
     func stopListeningAndSpeaking() {
         speechRecognizer.endAudio()
-        tts0.stop()
-        tts1.stop()
+        tts.stop()
     }
 
     func monitoringOn() {
@@ -83,8 +80,7 @@ class SpeechEngine {
         guard audioEngine.isRunning || isEngineRunning else { return }
 
         if isStopTTS {
-            tts0.stop()
-            tts1.stop()
+            tts.stop()
         }
 
         guard !isSimulator else { return }
@@ -205,20 +201,6 @@ private extension SpeechEngine {
             return fulfilledVoidPromise()
         }
 
-        let tts: TTS!
-        // in game narrator -> translator -> teacher -> assistant
-        //         tts0        tts1          tts0       tts1
-        // this avoid iOS 14 speaking initial laggy with preload voice method
-        switch speaker {
-        case context.gameSetting.teacher, context.gameSetting.narrator:
-            tts = tts0
-
-        case context.gameSetting.assistant, context.gameSetting.translator:
-            tts = tts1
-
-        default:
-            tts = tts0
-        }
         return tts.say(
             text,
             voiceId: speaker,
