@@ -140,6 +140,7 @@ extension GameFlow {
     }
 
     private func tryWait() -> Promise<Void> {
+        if isNeedToStopPromiseChain { return rejectedVoidPromise() }
         return wait
     }
 
@@ -150,7 +151,7 @@ extension GameFlow {
         timer?.invalidate()
         isPaused = false
         wait.reject(GameError.forceStop)
-        SpeechEngine.shared.stopListeningAndSpeaking()
+        SpeechEngine.shared.stop()
     }
 
     private func gameOver() {

@@ -59,9 +59,9 @@ class TTS: NSObject {
 //            if ttsString != text {
 //                print("tts:", ttsString)
 //            }
-            
+
             if isHeadphonePlugged() {
-                utterance.volume = 0.6
+                utterance.volume = 0.6 // adjust for wired monitoring
             } else {
                 utterance.volume = 1.0
             }
@@ -81,6 +81,15 @@ class TTS: NSObject {
                 self.synths[voice.identifier] = synth
             }
             self.lastSynth = synth
+
+            if #available(iOS 13, *) {
+                // if close app during speaking
+                // the next time recording indicator will appear
+                // so need to set this to false, but not sure what will happen anyway
+                // iOS 14 bug/feature?
+                synth.usesApplicationAudioSession = false
+            }
+
             synth.delegate = self
             synth.speak(utterance)
             self.isPreviousJP = voice.language.contains("ja")
@@ -161,4 +170,3 @@ extension TTS: AVSpeechSynthesizerDelegate {
         }
     }
 }
-

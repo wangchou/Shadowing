@@ -40,6 +40,7 @@ class SpeechEngine {
             buildNodeGraph()
             audioEngine.prepare()
             try audioEngine.start()
+            print("engine start running")
         } catch {
             print("Start Play through failed \(error)")
         }
@@ -87,6 +88,7 @@ class SpeechEngine {
         speechRecognizer.endAudio(isCanceling: true)
         audioEngine.stop()
         isEngineRunning = false
+        print("engine stopped")
     }
 
     // MARK: - Private

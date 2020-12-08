@@ -15,17 +15,6 @@ import Promises
 
     // MARK: - Audio Session
 
-    // for remove recording indicator on status bar
-    func setPlaybackAudioSession() {
-        let session = AVAudioSession.sharedInstance()
-        guard session.category != .playback else { return }
-        do {
-            try session.setCategory(AVAudioSession.Category.playback)
-        } catch {
-            print("set playback audio session => \(error.localizedDescription), current category: \(session.category)")
-        }
-    }
-
     func configureAudioSession(isAskingPermission: Bool = true) {
         let session = AVAudioSession.sharedInstance()
 
@@ -60,7 +49,9 @@ import Promises
         guard isAskingPermission else { return }
 
         session.requestRecordPermission { success in
-            if success { print("Record Permission Granted") } else {
+            if success {
+                print("Record Permission Granted")
+            } else {
                 print("Record Permission fail")
                 showGoToPermissionSettingAlert()
             }
