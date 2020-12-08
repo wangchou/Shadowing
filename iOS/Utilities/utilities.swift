@@ -14,22 +14,15 @@ import Promises
     import UIKit
 
     // MARK: - Audio Session
+
+    // for remove recording indicator on status bar
     func setPlaybackAudioSession() {
         let session = AVAudioSession.sharedInstance()
-        print("category before: \(session.category)")
         guard session.category != .playback else { return }
         do {
-            try session.setCategory(
-                AVAudioSession.Category.playback,
-                mode: AVAudioSession.Mode.default,
-                // if set both allowBluetooth and allowBluetoothA2DP here will
-                // cause installTap callback not be calling. Not sure why
-                options: [
-                    .mixWithOthers, .allowBluetoothA2DP, .allowAirPlay, .defaultToSpeaker, .allowBluetooth,
-                ]
-            )
+            try session.setCategory(AVAudioSession.Category.playback)
         } catch {
-            print("configuare audio session with \(error), current category: \(session.category)")
+            print("set playback audio session => \(error.localizedDescription), current category: \(session.category)")
         }
     }
 
