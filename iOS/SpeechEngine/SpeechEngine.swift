@@ -176,7 +176,9 @@ class SpeechEngine {
                 restart()
             }
         default: ()
-            print("unhandle route change notification:", reason.rawValue)
+            print("unhandle route change notification:",
+                  reason.rawValue,
+                  AVAudioSession.sharedInstance().category)
         }
     }
 }

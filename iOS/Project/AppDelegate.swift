@@ -80,6 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self?.rootViewController.updateWhenEnterForeground()
         }
         SpeechEngine.shared.stop()
+        setPlaybackAudioSession()
     }
 
     func applicationDidBecomeActive(_: UIApplication) {

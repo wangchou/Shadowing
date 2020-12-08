@@ -50,7 +50,7 @@ class GameFlow {
     private var wait = Promise<Void>.pending()
     private var gameSeconds: Int = 0
 
-    static var shared = GameFlow()
+    static var shared: GameFlow!
 
     init() {}
 

@@ -14,6 +14,23 @@ import Promises
     import UIKit
 
     // MARK: - Audio Session
+    func setPlaybackAudioSession() {
+        let session = AVAudioSession.sharedInstance()
+
+        do {
+            try session.setCategory(
+                AVAudioSession.Category.playback,
+                mode: AVAudioSession.Mode.default,
+                // if set both allowBluetooth and allowBluetoothA2DP here will
+                // cause installTap callback not be calling. Not sure why
+                options: [
+                    .mixWithOthers, .allowBluetoothA2DP, .allowAirPlay, .defaultToSpeaker, .allowBluetooth,
+                ]
+            )
+        } catch {
+            print("configuare audio session with \(error)")
+        }
+    }
 
     func configureAudioSession(isAskingPermission: Bool = true) {
         let session = AVAudioSession.sharedInstance()

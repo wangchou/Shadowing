@@ -50,10 +50,10 @@ import Foundation
 
                 utterance.rate = rate
 
-                print("ori:", text, utterance.voice?.identifier ?? "", rate)
-                if ttsString != text {
-                    print("tts:", ttsString)
-                }
+//                print("ori:", text, utterance.voice?.identifier ?? "", rate)
+//                if ttsString != text {
+//                    print("tts:", ttsString)
+//                }
                 if isHeadphonePlugged() {
                     utterance.volume = 0.6
                 } else {
