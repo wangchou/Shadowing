@@ -16,7 +16,8 @@ import Promises
     // MARK: - Audio Session
     func setPlaybackAudioSession() {
         let session = AVAudioSession.sharedInstance()
-
+        print("category before: \(session.category)")
+        guard session.category != .playback else { return }
         do {
             try session.setCategory(
                 AVAudioSession.Category.playback,
@@ -28,7 +29,7 @@ import Promises
                 ]
             )
         } catch {
-            print("configuare audio session with \(error)")
+            print("configuare audio session with \(error), current category: \(session.category)")
         }
     }
 

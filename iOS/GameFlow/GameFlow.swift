@@ -62,7 +62,6 @@ class GameFlow {
 
         startCommandObserving(self)
         SpeechEngine.shared.start()
-        SpeechEngine.shared.preloadTTSVoice()
         context.gameState = .justStarted
         context.gameRecord?.startedTime = Date()
 

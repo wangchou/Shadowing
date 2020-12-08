@@ -50,11 +50,11 @@ struct GameSetting: Codable {
     var monitoringVolume: Int = 0
 
     // voice id started
-    var teacher: String = getDefaultVoiceId(language: gameLang.defaultCode, isPreferMale: gameLang == .ja)
-    var assistant: String = getDefaultVoiceId(language: gameLang.defaultCode, isPreferMale: gameLang != .ja)
-    var translatorJp: String = getDefaultVoiceId(language: Lang.ja.defaultCode)
-    var translatorEn: String = getDefaultVoiceId(language: Lang.en.defaultCode)
-    var translatorZh: String = getDefaultVoiceId(language: Lang.zh.defaultCode, isPreferEnhanced: false)
+    var teacher: String = VoiceDefaults.teacher
+    var assistant: String = VoiceDefaults.assistant
+    var translatorJa: String = VoiceDefaults.translatorJa
+    var translatorEn: String = VoiceDefaults.translatorEn
+    var translatorZh: String = VoiceDefaults.translatorZh
 
     // MARK: - Computed Fields
 
@@ -65,7 +65,7 @@ struct GameSetting: Codable {
             } else if translationLang == .en {
                 return translatorEn
             } else {
-                return translatorJp
+                return translatorJa
             }
         }
         set {
@@ -74,7 +74,7 @@ struct GameSetting: Codable {
             } else if translationLang == .en {
                 translatorEn = newValue
             } else {
-                translatorJp = newValue
+                translatorJa = newValue
             }
         }
     }
@@ -82,7 +82,7 @@ struct GameSetting: Codable {
     var narrator: String {
         var speaker: String
         if i18n.isJa {
-            speaker = gameLang == .ja ? context.gameSetting.assistant : context.gameSetting.translatorJp
+            speaker = gameLang == .ja ? context.gameSetting.assistant : context.gameSetting.translatorJa
         } else if i18n.isZh {
             speaker = context.gameSetting.translatorZh
         } else {
@@ -130,7 +130,7 @@ struct GameSetting: Codable {
 
         teacher = try container.decodeIfPresent(String.self, forKey: .teacher) ?? teacher
         assistant = try container.decodeIfPresent(String.self, forKey: .assistant) ?? assistant
-        translatorJp = try container.decodeIfPresent(String.self, forKey: .translatorJp) ?? translatorJp
+        translatorJa = try container.decodeIfPresent(String.self, forKey: .translatorJa) ?? translatorJa
         translatorEn = try container.decodeIfPresent(String.self, forKey: .translatorEn) ?? assistant
         translatorZh = try container.decodeIfPresent(String.self, forKey: .translatorZh) ?? translatorZh
     }
@@ -171,11 +171,49 @@ func loadGameSetting() {
             context.gameSetting.assistant = getDefaultVoiceId(language: langCode)
         }
 
-        context.gameSetting.translatorJp = getDefaultVoiceId(language: Lang.ja.defaultCode)
+        context.gameSetting.translatorJa = getDefaultVoiceId(language: Lang.ja.defaultCode)
         context.gameSetting.translatorEn = getDefaultVoiceId(language: Lang.en.defaultCode)
         context.gameSetting.translatorZh = getDefaultVoiceId(language: Lang.zh.defaultCode, isPreferEnhanced: false)
 
         print(context.gameSetting.teacher, context.gameSetting.assistant)
+    }
+
+    VoiceDefaults.fixVoicesAvailablity()
+}
+
+class VoiceDefaults {
+    static var teacher: String { getDefaultVoiceId(language: gameLang.defaultCode, isPreferMale: gameLang == .ja) }
+    static var assistant: String { getDefaultVoiceId(language: gameLang.defaultCode, isPreferMale: gameLang != .ja) }
+    static var translatorJa: String { getDefaultVoiceId(language: Lang.ja.defaultCode) }
+    static var translatorEn: String { getDefaultVoiceId(language: Lang.en.defaultCode) }
+    static var translatorZh: String { getDefaultVoiceId(language: Lang.zh.defaultCode, isPreferEnhanced: false) }
+
+    // user / iOS update will make voice unavailable
+    // this will fix them, replace with available voice
+    static func fixVoicesAvailablity() {
+        var isTeacherOk = false
+        var isAssistantOk = false
+        var isTranslatorJaOK = false
+        var isTranslatorEnOk = false
+        var isTranslatorZhOk = false
+
+        for voice in AVSpeechSynthesisVoice.speechVoices() {
+            isTeacherOk = isTeacherOk || voice.identifier == context.gameSetting.teacher
+            isAssistantOk = isAssistantOk || voice.identifier == context.gameSetting.assistant
+            isTranslatorJaOK = isTranslatorJaOK || voice.identifier == context.gameSetting.translatorJa
+            isTranslatorEnOk = isTranslatorEnOk || voice.identifier == context.gameSetting.translatorEn
+            isTranslatorZhOk = isTranslatorZhOk || voice.identifier == context.gameSetting.translatorZh
+        }
+
+        if !(isTeacherOk && isAssistantOk && isTranslatorJaOK && isTranslatorEnOk && isTranslatorZhOk) {
+            print("fixing voice", isTeacherOk, isAssistantOk, isTranslatorJaOK, isTranslatorEnOk, isTranslatorZhOk)
+            if !isTeacherOk { context.gameSetting.teacher = VoiceDefaults.teacher }
+            if !isAssistantOk { context.gameSetting.assistant = VoiceDefaults.assistant }
+            if !isTranslatorJaOK { context.gameSetting.translatorJa = VoiceDefaults.translatorJa }
+            if !isTranslatorEnOk { context.gameSetting.translatorEn = VoiceDefaults.translatorEn }
+            if !isTranslatorZhOk { context.gameSetting.translatorZh = VoiceDefaults.translatorZh }
+            saveGameSetting()
+        }
     }
 }
 

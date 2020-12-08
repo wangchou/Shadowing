@@ -81,6 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         SpeechEngine.shared.stop()
         setPlaybackAudioSession()
+        VoiceDefaults.fixVoicesAvailablity()
     }
 
     func applicationDidBecomeActive(_: UIApplication) {

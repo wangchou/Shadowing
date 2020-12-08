@@ -27,7 +27,6 @@ class MedalPage: UIViewController {
         super.viewWillAppear(animated)
         medalPageView?.render()
         MedalPage.shared = self
-        setPlaybackAudioSession()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
