@@ -52,6 +52,14 @@ class SpeechEngine {
         tts.preloadVoice(voiceId: context.gameSetting.assistant)
     }
 
+    func pause() {
+        tts.pause()
+    }
+
+    func continueSpeaking() {
+        tts.continueSpeaking()
+    }
+
     func restart() {
         stop()
         start()

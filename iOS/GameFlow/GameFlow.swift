@@ -182,12 +182,14 @@ extension GameFlow {
 
     private func pause() {
         wait = Promise<Void>.pending()
+        engine.pause()
         isPaused = true
     }
 
     private func resume() {
         isPaused = false
         postEvent(.gameResume)
+        engine.continueSpeaking()
         wait.fulfill(())
     }
 

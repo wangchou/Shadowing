@@ -17,7 +17,9 @@ import Promises
 // it looks like [1 1 1 1 2 3 4 5]
 class TTS: NSObject {
     var synths: [String: AVSpeechSynthesizer] = [:]
+
     var lastSynth: AVSpeechSynthesizer?
+
     var ttsToDisplayMap: [Int] = []
     var promise = fulfilledVoidPromise()
     var lastString = ""
@@ -112,6 +114,18 @@ class TTS: NSObject {
             let synth = synths[voiceId] ?? AVSpeechSynthesizer()
             synths[voiceId] = synth
             synth.speak(utterance)
+        }
+    }
+
+    func pause() {
+        if lastSynth?.isSpeaking == true {
+            lastSynth?.pauseSpeaking(at: .immediate)
+        }
+    }
+
+    func continueSpeaking() {
+        if lastSynth?.isPaused == true {
+            lastSynth?.continueSpeaking()
         }
     }
 
