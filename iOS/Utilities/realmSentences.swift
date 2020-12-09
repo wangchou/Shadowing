@@ -1,5 +1,5 @@
 //
-//  sqliteSentences.swift
+//  Sentences.swift
 //  VoiceOnly
 //
 //  Created by Wangchou Lu on 10/11/30 H.
