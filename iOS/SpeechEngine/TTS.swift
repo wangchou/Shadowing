@@ -27,7 +27,7 @@ class TTS: NSObject {
     func say(_ text: String,
              voiceId: String,
              rate: Float = AVSpeechUtteranceDefaultSpeechRate, // 0.5, range 0 ~ 1.0,
-             lang: Lang = .unset,
+             lang: Lang,
              ttsFixes: [(String, String)] = []) -> Promise<Void> {
         stop()
         let isJa = lang == .ja
@@ -47,10 +47,8 @@ class TTS: NSObject {
             let utterance = AVSpeechUtterance(string: ttsString)
             if let voice = AVSpeechSynthesisVoice(identifier: voiceId) {
                 utterance.voice = voice
-            } else if lang != .unset { // fallback
-                utterance.voice = getDefaultVoice(language: lang.defaultCode)
             } else {
-                utterance.voice = getDefaultVoice(language: gameLang.defaultCode)
+                utterance.voice = getDefaultVoice(language: lang.defaultCode)
             }
 
             utterance.rate = rate
@@ -68,6 +66,7 @@ class TTS: NSObject {
 
             postEvent(.sayStarted, string: text)
             guard let voice = utterance.voice else {
+                showNoVoicePrompt(language: lang.defaultCode)
                 print("Error: utterance.voice is nil")
                 self.promise.fulfill(())
                 return

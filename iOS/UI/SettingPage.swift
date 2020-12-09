@@ -148,14 +148,10 @@ class SettingPage: UITableViewController {
         initLearningModeSegmentControl(label: learningModeLabel, control: learningModeSegmentControl)
     }
 
-    // MARK: - IBActions sorted by UI
-
     @IBAction func gameLangSegmentControlValueChanged(_: Any) {
         let lang: Lang =  gameLangSegmentControl.selectedSegmentIndex == 1 ? .ja : .en
         changeGameLangTo(lang: lang, fromSettingPage: true)
     }
-
-    // ---------------------------------------------------------------------------------
 
     @IBAction func learningModeSegmentControlValueChanged(_: Any) {
         actOnLearningModeSegmentControlValueChanged(control: learningModeSegmentControl)
@@ -173,7 +169,7 @@ class SettingPage: UITableViewController {
         }
         saveGameSetting()
         render()
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
 
     @IBAction func echoMethodSwitchValueChanged(_ sender: Any) {
@@ -205,29 +201,52 @@ class SettingPage: UITableViewController {
         saveGameSetting()
     }
 
-    // Game Speed ------------------------------------------------------------------
-
     @IBAction func gameSpeedSilderValueChanged(_: Any) {
         context.gameSetting.gameSpeed = gameSpeedSlider.value
-        saveGameSetting()
         gameSpeedFastLabel.text = String(format: "%.2fx", gameSpeedSlider.value * 2)
         let speedText = String(format: "%.2f", context.gameSetting.gameSpeed * 2)
         _ = teacherSay("\(i18n.speedIs)\(speedText)です",
                        rate: context.gameSetting.gameSpeed,
                        ttsFixes: [])
+        saveGameSetting()
     }
 
     @IBAction func practiceSpeedSliderValueChanged(_: Any) {
         context.gameSetting.practiceSpeed = practiceSpeedSlider.value
-        saveGameSetting()
         practiceSpeedFastLabel.text = String(format: "%.2fx", practiceSpeedSlider.value * 2)
         let speedText = String(format: "%.2f", context.gameSetting.practiceSpeed * 2)
         _ = teacherSay("\(i18n.speedIs)\(speedText)です",
                        rate: context.gameSetting.practiceSpeed,
                        ttsFixes: [])
+        saveGameSetting()
     }
 
-    // Change Voices
+    @IBAction func dailyGoalSegmentedControlValueChanged(_: Any) {
+        switch dailyGoalSegmentedControl.selectedSegmentIndex {
+        case 0, 1, 2, 3, 4:
+            context.gameSetting.dailySentenceGoal = dailyGoals[dailyGoalSegmentedControl.selectedSegmentIndex]
+        default:
+            context.gameSetting.dailySentenceGoal = 50
+        }
+        saveGameSetting()
+    }
+
+    @IBAction func goToSettingCenter(_: Any) {
+        goToIOSSettingCenter()
+    }
+
+    @IBAction func gotoAppStore(_: Any) {
+        if let url = URL(string: "https://itunes.apple.com/app/id1439727086"),
+           UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+
+    @IBAction func gotoAcknowledge(_: Any) {
+        InfoPage.content = i18n.acknowledgement
+        launchVC(InfoPage.id)
+    }
+
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 4 {
             if indexPath.row == 0 { // teacher voice
@@ -250,41 +269,9 @@ class SettingPage: UITableViewController {
         }
     }
 
-    // ----------------------- daily Goal -------------------------------------------
-    @IBAction func dailyGoalSegmentedControlValueChanged(_: Any) {
-        switch dailyGoalSegmentedControl.selectedSegmentIndex {
-        case 0, 1, 2, 3, 4:
-            context.gameSetting.dailySentenceGoal = dailyGoals[dailyGoalSegmentedControl.selectedSegmentIndex]
-        default:
-            context.gameSetting.dailySentenceGoal = 50
-        }
-        saveGameSetting()
-    }
-
-    @IBAction func goToSettingCenter(_: Any) {
-        goToIOSSettingCenter()
-    }
-
-    @IBAction func gotoAppStore(_: Any) {
-        if let url = URL(string: "https://itunes.apple.com/app/id1439727086") {
-            if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            }
-        }
-    }
-
-    @IBAction func gotoAcknowledge(_: Any) {
-        InfoPage.content = i18n.acknowledgement
-        launchVC(InfoPage.id)
-    }
-
-    // MARK: - Section Title
-
     override func tableView(_: UITableView, titleForHeaderInSection section: Int) -> String? {
         let i18n = I18n.shared
         switch section {
-        case 0:
-            return " "
         case 1:
             return i18n.settingSectionGameSetting
         case 2:
@@ -301,24 +288,16 @@ class SettingPage: UITableViewController {
             return i18n.micAndSpeechPermission
         case 8:
             return i18n.yourFeedbackMakeAppBetter
-        case 9:
-            return ""
-
         default:
-            return "Other Setting"
+            return " "
         }
     }
 
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        let i18n = I18n.shared
-        switch section {
-
-        case 5:
-            return gameLang == .ja && context.gameSetting.translationLang != .zh ? i18n.aboutTopicTranslation : "  "
-
-        default:
-            return ""
+        if section == 5 {
+            return gameLang == .ja && context.gameSetting.translationLang != .zh ? I18n.shared.aboutTopicTranslation : "  "
         }
+        return ""
     }
 }
 

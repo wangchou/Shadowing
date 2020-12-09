@@ -161,21 +161,6 @@ func loadGameSetting() {
     } else {
         print("[\(gameLang)] create new gameSetting")
         context.gameSetting = GameSetting()
-        let langCode = gameLang.defaultCode
-
-        if gameLang == .ja {
-            context.gameSetting.teacher = getDefaultVoiceId(language: langCode)
-            context.gameSetting.assistant = getDefaultVoiceId(language: langCode, isPreferMale: false)
-        } else {
-            context.gameSetting.teacher = getDefaultVoiceId(language: langCode, isPreferMale: false)
-            context.gameSetting.assistant = getDefaultVoiceId(language: langCode)
-        }
-
-        context.gameSetting.translatorJa = getDefaultVoiceId(language: Lang.ja.defaultCode)
-        context.gameSetting.translatorEn = getDefaultVoiceId(language: Lang.en.defaultCode)
-        context.gameSetting.translatorZh = getDefaultVoiceId(language: Lang.zh.defaultCode, isPreferEnhanced: false)
-
-        print(context.gameSetting.teacher, context.gameSetting.assistant)
     }
 
     VoiceDefaults.fixVoicesAvailablity()
@@ -246,34 +231,47 @@ private func getVoiceSortScore(v: AVSpeechSynthesisVoice,
 func getDefaultVoice(language: String,
                      isPreferMale: Bool = true,
                      isPreferEnhanced: Bool = true) -> AVSpeechSynthesisVoice? {
-    let voices = getAvailableVoice(language: language).sorted { v1, v2 in
+    var voices = getAvailableVoice(language: language)
+    if voices.isEmpty {
+        let prefix = language.components(separatedBy: "-")[0]
+        voices = getAvailableVoice(prefix: prefix)
+    }
+
+    voices = voices.sorted { v1, v2 in
         let score1 =  getVoiceSortScore(v: v1, isPreferMale: isPreferMale, isPreferEnhanced: isPreferEnhanced)
         let score2 =  getVoiceSortScore(v: v2, isPreferMale: isPreferMale, isPreferEnhanced: isPreferEnhanced)
         return score1 > score2
     }
-    //print(language, isPreferMaleSiri, isPreferEnhanced)
-//    voices.forEach {v in
-//        print(getVoiceSortScore(v: v, isPreferMale: isPreferMale, isPreferEnhanced: isPreferEnhanced), v)
-//    }
 
-    guard let voice = voices.first else {
-        if let voice = AVSpeechSynthesisVoice(language: language) {
-            return voice
-        } else {
-            return nil
-        }
+    if !voices.isEmpty {
+        return voices.first
     }
 
-    return voice
+    return nil
 }
 
 func getDefaultVoiceId(language: String,
                        isPreferMale: Bool = true,
                        isPreferEnhanced: Bool = true) -> String {
     guard let voice = getDefaultVoice(language: language, isPreferMale: isPreferMale, isPreferEnhanced: isPreferEnhanced) else {
-        showMessage(i18n.defaultVoiceIsNotAvailable, isNeedConfirm: true)
         print("getDefaultVoiceId(\(language), \(isPreferMale), \(isPreferEnhanced) Failed. return unknown")
         return "unknown"
     }
     return voice.identifier
+}
+
+func showNoVoicePrompt(language: String) {
+    let prefix = language.split(separator: "-")[0]
+    var langStr: String = ""
+    switch prefix {
+    case "ja":
+        langStr = i18n.japanese
+    case "en":
+        langStr = i18n.english
+    case "zh":
+        langStr = i18n.chinese
+    default:
+        langStr = "\"\(prefix.s)\""
+    }
+    showMessage(i18n.voiceIsNotAvailable(lang: langStr), isNeedConfirm: true)
 }

@@ -155,6 +155,18 @@ class VoiceSelectionPage: UIViewController {
         originPracticeSpeed = context.gameSetting.practiceSpeed
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        viewDidAppear(animated)
+        if voices.isEmpty {
+            switch selectingVoiceFor {
+            case .teacher, .assisant:
+                showNoVoicePrompt(language: gameLang.prefix)
+            case .translator:
+                showNoVoicePrompt(language: context.gameSetting.translationLang.prefix)
+            }
+        }
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         SpeechEngine.shared.stopListeningAndSpeaking()

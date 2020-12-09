@@ -32,7 +32,6 @@ class Messenger: UIViewController {
     @IBOutlet var levelMeterHeightConstraint: NSLayoutConstraint!
     @IBOutlet var scrollView: UIScrollView!
 
-    // pauseOverlay
     @IBOutlet var overlayView: UIView!
     @IBOutlet var speedSlider: UISlider!
     @IBOutlet var speedLabel: UILabel!
@@ -61,14 +60,12 @@ class Messenger: UIViewController {
             IAPHelper.shared.processReceipt()
         }
 
-        // UI Settings
         overlayView.isHidden = true
         exitButton.layer.cornerRadius = 5
         levelMeterView.isUserInteractionEnabled = false
         levelMeterValueBar.roundBorder(radius: 4.5)
         scrollView.delaysContentTouches = false
 
-        // actions
         speedSlider.addTapGestureRecognizer(action: nil)
         overlayView.addTapGestureRecognizer(action: continueGame)
         scrollView.addTapGestureRecognizer(action: pauseContinueGame)
@@ -85,16 +82,13 @@ class Messenger: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if context.gameMode == .medalMode {
-            DispatchQueue.main.async {
+        DispatchQueue.main.async {
+            switch context.gameMode {
+            case .medalMode:
                 MedalPage.shared?.medalPageView?.render()
-            }
-        } else if context.gameMode == .infiniteChallengeMode {
-            DispatchQueue.main.async {
+            case .infiniteChallengeMode:
                 InfiniteChallengeDetailPage.last?.afterGameUpdate()
-            }
-        } else if context.gameMode == .topicMode {
-            DispatchQueue.main.async {
+            case .topicMode:
                 TopicListPage.last?.afterGameUpdate()
                 TopicDetailPage.last?.afterGameUpdate()
             }

@@ -125,11 +125,10 @@ class I18n {
         return "Download more voices:\nGo to Settings > \(general)Accessibility > \(speechText) > Voices"
     }
 
-    var defaultVoiceIsNotAvailable: String {
-        let lang = gameLang == .ja ? japanese : english
+    func voiceIsNotAvailable(lang: String) -> String {
         if isJa { return "\(lang)の声をダウンロードしましょう\n「設定 > \(general)アクセシビリティ > \(speechText) > 声 > \(lang)」の順に選択しましょう。" }
         if isZh { return "找不到\(lang)語音：\n請前往手機的「設定 > \(general)輔助使用 > \(speechText) > 聲音 > \(lang)」下載" }
-        return "No TTS Voice found:\nGo to Settings > \(general)Accessibility > \(speechText) > Voices to Download"
+        return "No \(lang) Voice found:\nGo to Settings > \(general)Accessibility > \(speechText) > Voices to Download"
     }
 
     var settingSectionGameSetting: String {

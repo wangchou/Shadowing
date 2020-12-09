@@ -80,23 +80,12 @@ import Promises
 
     func getAvailableVoice(language: String) -> [AVSpeechSynthesisVoice] {
         return AVSpeechSynthesisVoice.speechVoices()
-            .filter { voice in
-                if voice.language == language {
-                    return true
-                }
-                return false
-            }
+            .filter { $0.language == language}
     }
 
     func getAvailableVoice(prefix: String) -> [AVSpeechSynthesisVoice] {
         return AVSpeechSynthesisVoice.speechVoices()
-            .filter { voice in
-                if voice.language.hasPrefix(prefix) {
-                    return true
-                }
-
-                return false
-            }
+            .filter { $0.language.hasPrefix(prefix) }
     }
 
     // Promise Utilities
