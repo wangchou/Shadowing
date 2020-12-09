@@ -117,9 +117,9 @@ class GameReportView: UIView, ReloadableView, GridLayout {
                 dismissTwoVC()
             }
             if context.gameMode == .infiniteChallengeMode {
-                if let icwPage = rootViewController.current as? InfiniteChallengeSwipablePage {
-                    icwPage.detailPage?.tableView.reloadData()
-                }
+                rootViewController.icDetailPage.tableView.reloadData()
+            } else {
+                rootViewController.topicDetailPage.tableView.reloadData()
             }
         }
         backButton.setIconImage(named: "baseline_exit_to_app_black_48pt", title: "", tintColor: .white, isIconOnLeft: false)
@@ -144,7 +144,7 @@ func launchNextGame() {
         dismissVC(animated: true) {
             if context.gameMode == .topicMode, !context.gameSetting.isRepeatOne {
                 context.loadNextChallenge()
-                rootViewController.topicSwipablePage.detailPage?.render()
+                rootViewController.topicDetailPage?.render()
             }
 
             Messenger.last?.start()

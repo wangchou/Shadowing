@@ -14,8 +14,7 @@ class RootContainerViewController: UIViewController {
 
     var current: UIViewController!
     var splashScreen: SplashScreenViewController!
-    var topicSwipablePage: TopicSwipablePage!
-    var infiniteChallengeSwipablePage: InfiniteChallengeSwipablePage!
+    var swipablePage: SwipablePage!
     var settingPage: SettingPage!
     var medalPage: MedalPage!
     var topicListPage: TopicListPage!
@@ -40,8 +39,7 @@ class RootContainerViewController: UIViewController {
         icDetailPage = getVC("InfiniteChallengeDetailPage") as? InfiniteChallengeDetailPage
         // swiftlint:enable force_cast
 
-        topicSwipablePage = TopicSwipablePage(transitionStyle: .scroll, navigationOrientation: .horizontal)
-        infiniteChallengeSwipablePage = InfiniteChallengeSwipablePage(transitionStyle: .scroll, navigationOrientation: .horizontal)
+        swipablePage = SwipablePage(transitionStyle: .scroll, navigationOrientation: .horizontal)
 
         splashScreen.launched.always { [weak self] in
             pt("rootVC \(#function) - \(#line)")
@@ -81,49 +79,63 @@ class RootContainerViewController: UIViewController {
     }
 
     func showTopicPage(idx: Int) {
-        guard current != topicSwipablePage else { return }
-        let sp: TopicSwipablePage! = topicSwipablePage
-        infiniteChallengeSwipablePage.clear()
-        sp.prepare()
-        if sp.isPagesReady {
+        var sp: SwipablePage! = swipablePage
+        SwipablePage.initialIdx = idx
+        GameContext.shared.bottomTab = .topics
+
+        if !sp.isPagesReady {
+            sp.prepareForTopic()
             sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
+            transition(to: sp)
+        } else if !sp.isTopic {
+            sp.clear()
+            sp = SwipablePage(transitionStyle: .scroll, navigationOrientation: .horizontal)
+            swipablePage = sp
+            sp.prepareForTopic()
+            sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
+            transition(to: sp)
+            print("brand new topic page")
         } else {
-            TopicSwipablePage.initialIdx = idx
+            sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: true, completion: nil)
         }
-        transition(to: sp)
     }
 
     func showInfiniteChallengePage(idx: Int) {
-        guard current != infiniteChallengeSwipablePage else { return }
-        let sp: InfiniteChallengeSwipablePage! = infiniteChallengeSwipablePage
-        topicSwipablePage.clear()
-        sp.prepare()
-        if sp.isPagesReady {
+        var sp: SwipablePage! = swipablePage
+        SwipablePage.initialIdx = idx
+        GameContext.shared.bottomTab = .infiniteChallenge
+        if !sp.isPagesReady {
+            sp.prepareForIC()
             sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
+            transition(to: sp)
+        } else if sp.isTopic {
+            sp.clear()
+            sp = SwipablePage(transitionStyle: .scroll, navigationOrientation: .horizontal)
+            swipablePage = sp
+            sp.prepareForIC()
+            sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
+            transition(to: sp)
+            print("brand new ic page")
         } else {
-            InfiniteChallengeSwipablePage.initialIdx = idx
+            sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: true, completion: nil)
         }
-
-        transition(to: sp)
     }
 
     func reloadTableData() {
-        if let listPage = topicSwipablePage.listPage,
-           listPage.sentencesTableView != nil {
-            listPage.sentencesTableView.reloadData()
+        if let listPage = topicListPage {
+            listPage.sentencesTableView?.reloadData()
         }
-        if let listPage = infiniteChallengeSwipablePage.listPage,
-           listPage.tableView != nil {
-            listPage.tableView.reloadData()
+        if let listPage = icListPage {
+            listPage.tableView?.reloadData()
         }
     }
 
     func rerenderTopView(updateByRecords: Bool = false) {
-        if let listPage = topicSwipablePage.listPage {
+        if let listPage = topicListPage {
             if updateByRecords { listPage.topChartView?.updateByRecords() }
             listPage.topChartView?.renderWithoutUpdateData()
         }
-        if let listPage = infiniteChallengeSwipablePage.listPage {
+        if let listPage = icListPage {
             if updateByRecords { listPage.topChartView?.updateByRecords() }
             listPage.topChartView?.renderWithoutUpdateData()
         }
@@ -154,13 +166,17 @@ class RootContainerViewController: UIViewController {
         view.addSubview(vc.view)
         vc.didMove(toParent: self)
 
-        //let old = current
+        let old = current
         current = vc
 
         //print(children)
         // remove old
-//        old?.willMove(toParent: nil)
-//        old?.view.removeFromSuperview()
-//        old?.removeFromParent()
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
+            DispatchQueue.main.async {
+                old?.willMove(toParent: nil)
+                old?.view.removeFromSuperview()
+                old?.removeFromParent()
+            }
+        }
     }
 }

@@ -120,17 +120,17 @@ func changeGameLangTo(lang: Lang, fromSettingPage: Bool) {
             GameContext.shared.bottomTab = .infiniteChallenge
             rootViewController.showInfiniteChallengePage(idx: fromSettingPage ? 0 : 1)
             if fromSettingPage {
-                rootViewController.infiniteChallengeSwipablePage.settingPage?.render()
+                rootViewController.settingPage?.render()
             } else {
-                rootViewController.infiniteChallengeSwipablePage.medalPage?.medalPageView?.render()
+                rootViewController.medalPage?.medalPageView?.render()
             }
         } else {
             GameContext.shared.bottomTab = .topics
             rootViewController.showTopicPage(idx: fromSettingPage ? 0 : 1)
             if fromSettingPage {
-                rootViewController.topicSwipablePage.settingPage?.render()
+                rootViewController.settingPage?.render()
             } else {
-                rootViewController.topicSwipablePage.medalPage?.medalPageView?.render()
+                rootViewController.medalPage?.medalPageView?.render()
             }
         }
         rootViewController.reloadTableData()

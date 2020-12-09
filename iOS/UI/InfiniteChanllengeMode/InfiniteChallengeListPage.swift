@@ -90,10 +90,7 @@ extension InfiniteChallengeListPage: UITableViewDataSource {
 
 extension InfiniteChallengeListPage: UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let swipablePage = rootViewController.current as? InfiniteChallengeSwipablePage,
-           let infiniteChallengePage = swipablePage.detailPage {
-            infiniteChallengePage.level = allLevels[indexPath.row]
-        }
+        rootViewController.icDetailPage.level = allLevels[indexPath.row]
 
         (rootViewController.current as? UIPageViewController)?.goToNextPage { _ in
             let cell = self.tableView.dequeueReusableCell(withIdentifier: "InfiniteChallengeTableCell", for: indexPath)

@@ -59,12 +59,14 @@ class BottomBarView: UIView, XibView {
     }
 
     @IBAction func onLeftButtonClicked(_: Any) {
+        print(#function, ".showTopicPage(idx: 2)")
         RootContainerViewController.isShowSetting = false
         context.bottomTab = .topics
         rootViewController.showTopicPage(idx: 2)
     }
 
     @IBAction func onRightButtonClicked(_: Any) {
+        print(#function, ".showInfiniteChallengePage(idx: 2)")
         RootContainerViewController.isShowSetting = false
         context.bottomTab = .infiniteChallenge
         rootViewController.showInfiniteChallengePage(idx: 2)
