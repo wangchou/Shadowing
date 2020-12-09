@@ -82,6 +82,7 @@ class TTS: NSObject {
             }
             self.lastSynth = synth
 
+            #if !targetEnvironment(macCatalyst)
             if #available(iOS 13, *) {
                 // if close app during speaking
                 // the next time recording indicator will appear
@@ -89,6 +90,11 @@ class TTS: NSObject {
                 // iOS 14 bug/feature?
                 synth.usesApplicationAudioSession = false
             }
+            #else
+            if #available(macCatalyst 14.0, *) {
+                synth.usesApplicationAudioSession = false
+            }
+            #endif
 
             synth.delegate = self
             synth.speak(utterance)
