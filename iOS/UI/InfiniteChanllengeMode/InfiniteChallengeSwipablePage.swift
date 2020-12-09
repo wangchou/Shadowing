@@ -40,17 +40,17 @@ class InfiniteChallengeSwipablePage: UIPageViewController {
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func clear() {
+        pages = []
+    }
 
-        // Do any additional setup after loading the view.
-        func addPage(_ storyboardId: String) {
-            pages.append(getVC(storyboardId))
-        }
-        addPage("SettingPage")
-        addPage("MedalPage")
-        addPage("InfiniteChallengeListPage")
-        addPage("InfiniteChallengeDetailPage")
+    func prepare() {
+        clear()
+        pages.append(rootViewController.settingPage)
+        pages.append(rootViewController.medalPage)
+        pages.append(rootViewController.icListPage)
+        pages.append(rootViewController.icDetailPage)
+
         let idx = RootContainerViewController.isShowSetting ? 0 : InfiniteChallengeSwipablePage.initialIdx
         setViewControllers([pages[idx]], direction: .forward, animated: true, completion: nil)
 

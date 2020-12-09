@@ -16,14 +16,28 @@ class RootContainerViewController: UIViewController {
     var splashScreen: SplashScreenViewController!
     var topicSwipablePage: TopicSwipablePage!
     var infiniteChallengeSwipablePage: InfiniteChallengeSwipablePage!
+    var settingPage: SettingPage!
+    var medalPage: MedalPage!
+    var topicListPage: TopicListPage!
+    var topicDetailPage: TopicDetailPage!
+    var icListPage: InfiniteChallengeListPage!
+    var icDetailPage: InfiniteChallengeDetailPage!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         pt("rootVC \(#function) - \(#line)")
 
         // swiftlint:disable force_cast
-        splashScreen = (getVC("LaunchScreen") as! SplashScreenViewController)
+        splashScreen = getVC("LaunchScreen") as? SplashScreenViewController
         transition(to: splashScreen)
+
+        settingPage = getVC("SettingPage") as? SettingPage
+        medalPage = getVC("MedalPage") as? MedalPage
+
+        topicListPage = getVC("TopicListPage") as? TopicListPage
+        topicDetailPage = getVC("TopicDetailPage") as? TopicDetailPage
+        icListPage = getVC("InfiniteChallengeListPage") as? InfiniteChallengeListPage
+        icDetailPage = getVC("InfiniteChallengeDetailPage") as? InfiniteChallengeDetailPage
         // swiftlint:enable force_cast
 
         topicSwipablePage = TopicSwipablePage(transitionStyle: .scroll, navigationOrientation: .horizontal)
@@ -69,6 +83,8 @@ class RootContainerViewController: UIViewController {
     func showTopicPage(idx: Int) {
         guard current != topicSwipablePage else { return }
         let sp: TopicSwipablePage! = topicSwipablePage
+        infiniteChallengeSwipablePage.clear()
+        sp.prepare()
         if sp.isPagesReady {
             sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
         } else {
@@ -80,6 +96,8 @@ class RootContainerViewController: UIViewController {
     func showInfiniteChallengePage(idx: Int) {
         guard current != infiniteChallengeSwipablePage else { return }
         let sp: InfiniteChallengeSwipablePage! = infiniteChallengeSwipablePage
+        topicSwipablePage.clear()
+        sp.prepare()
         if sp.isPagesReady {
             sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
         } else {

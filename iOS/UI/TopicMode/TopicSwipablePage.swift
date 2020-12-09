@@ -40,17 +40,16 @@ class TopicSwipablePage: UIPageViewController {
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        func addPage(_ storyboardId: String) {
-            pages.append(getVC(storyboardId))
-        }
-        addPage("SettingPage")
-        addPage("MedalPage")
-        addPage("TopicListPage")
-        addPage("TopicDetailPage")
+    func clear() {
+        pages = []
+    }
+    
+    func prepare() {
+        clear()
+        pages.append(rootViewController.settingPage)
+        pages.append(rootViewController.medalPage)
+        pages.append(rootViewController.topicListPage)
+        pages.append(rootViewController.topicDetailPage)
         let idx = RootContainerViewController.isShowSetting ? 0 : TopicSwipablePage.initialIdx
         setViewControllers([pages[idx]], direction: .forward, animated: true, completion: nil)
 
