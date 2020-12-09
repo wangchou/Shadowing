@@ -95,7 +95,7 @@ class Messenger: UIViewController {
             }
         } else if context.gameMode == .topicMode {
             DispatchQueue.main.async {
-                TopicsListPage.last?.afterGameUpdate()
+                TopicListPage.last?.afterGameUpdate()
                 TopicDetailPage.last?.afterGameUpdate()
             }
         }

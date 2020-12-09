@@ -16,8 +16,8 @@ extension Notification.Name {
     static let topicFlagChanged = Notification.Name("topicFlagChanged")
 }
 
-class TopicsListPage: UIViewController {
-    static var last: TopicsListPage?
+class TopicListPage: UIViewController {
+    static var last: TopicListPage?
     @IBOutlet var sentencesTableView: UITableView!
     @IBOutlet var topArea: UIView!
     @IBOutlet var topChartView: TopChartView!
@@ -73,12 +73,12 @@ class TopicsListPage: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         sentencesTableView.reloadData()
-        TopicsListPage.last = self
+        TopicListPage.last = self
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        TopicsListPage.last = nil
+        TopicListPage.last = nil
     }
 
     func afterGameUpdate() {
@@ -97,7 +97,7 @@ class TopicsListPage: UIViewController {
     }
 }
 
-extension TopicsListPage: UITableViewDataSource {
+extension TopicListPage: UITableViewDataSource {
     func numberOfSections(in _: UITableView) -> Int {
         return 1
     }
@@ -142,7 +142,7 @@ extension TopicsListPage: UITableViewDataSource {
     }
 }
 
-extension TopicsListPage: UITableViewDelegate {
+extension TopicListPage: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         context.dataSetKey = dataSetKeys[indexPath.row]
         context.loadLearningSentences()

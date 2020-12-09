@@ -1725,10 +1725,10 @@ Cg
             </objects>
             <point key="canvasLocation" x="-678.26086956521749" y="-852.45535714285711"/>
         </scene>
-        <!--Topics List Page-->
+        <!--Topic List Page-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ShadowingListPage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="TopicsListPage" customModule="hanashitai" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TopicListPage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="TopicListPage" customModule="hanashitai" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1944,7 +1944,7 @@ Cg
         <!--Topic Detail Page-->
         <scene sceneID="RaL-3G-WLz">
             <objects>
-                <viewController storyboardIdentifier="GameContentDetailPage" id="bWZ-C3-0jS" customClass="TopicDetailPage" customModule="hanashitai" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TopicDetailPage" id="bWZ-C3-0jS" customClass="TopicDetailPage" customModule="hanashitai" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Md9-bi-F96">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

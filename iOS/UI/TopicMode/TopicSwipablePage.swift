@@ -23,8 +23,8 @@ class TopicSwipablePage: UIPageViewController {
         return !isPagesReady ? nil : pages[1] as? MedalPage
     }
 
-    var listPage: TopicsListPage? {
-        return !isPagesReady ? nil : pages[2] as? TopicsListPage
+    var listPage: TopicListPage? {
+        return !isPagesReady ? nil : pages[2] as? TopicListPage
     }
 
     var detailPage: TopicDetailPage? {
@@ -49,8 +49,8 @@ class TopicSwipablePage: UIPageViewController {
         }
         addPage("SettingPage")
         addPage("MedalPage")
-        addPage("ShadowingListPage")
-        addPage("GameContentDetailPage")
+        addPage("TopicListPage")
+        addPage("TopicDetailPage")
         let idx = RootContainerViewController.isShowSetting ? 0 : TopicSwipablePage.initialIdx
         setViewControllers([pages[idx]], direction: .forward, animated: true, completion: nil)
 

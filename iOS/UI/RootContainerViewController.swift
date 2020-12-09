@@ -117,7 +117,7 @@ class RootContainerViewController: UIViewController {
                 if let vc = vc as? MedalPage {
                     vc.medalPageView?.render()
                 }
-                if let vc = vc as? TopicsListPage {
+                if let vc = vc as? TopicListPage {
                     vc.topChartView?.render()
                     vc.topChartView?.animateProgress()
                 }
@@ -136,6 +136,7 @@ class RootContainerViewController: UIViewController {
         view.addSubview(vc.view)
         vc.didMove(toParent: self)
 
+        //let old = current
         current = vc
 
         //print(children)
