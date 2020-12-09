@@ -21,7 +21,6 @@
 		BE3260CA21BFCF5E00A13C94 /* vocabulary2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3260C921BFCF5E00A13C94 /* vocabulary2.swift */; };
 		BE3A91422345E10300AEBE1B /* ヒラギノ角ゴシック W2.ttc in Resources */ = {isa = PBXBuildFile; fileRef = BE3A91412345E0FB00AEBE1B /* ヒラギノ角ゴシック W2.ttc */; };
 		BE439C6321DF3AF100C0BE14 /* grammarN4.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE439C6221DF3AF100C0BE14 /* grammarN4.swift */; };
-		BE50D1D92574B0310039CE87 /* SF-Pro-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = BE50D1D82574B0310039CE87 /* SF-Pro-Display-Black.otf */; };
 		BE50D2012574CD7A0039CE87 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE50D2002574CD7A0039CE87 /* RealmModel.swift */; };
 		BE596466215A0DE100E4AA0C /* travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596465215A0DE100E4AA0C /* travel.swift */; };
 		BE596468215A0DF200E4AA0C /* daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE596467215A0DF200E4AA0C /* daily.swift */; };
@@ -95,6 +94,7 @@
 		BECD907B219D294100400FD3 /* InfiniteChallengeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD907A219D294100400FD3 /* InfiniteChallengeTableCell.swift */; };
 		BED1BA53224A35FF009B68B6 /* MedalPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1BA52224A35FF009B68B6 /* MedalPage.swift */; };
 		BED1CC0921452A54004AE397 /* GameSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED1CC0821452A54004AE397 /* GameSetting.swift */; };
+		BED3D6632580C46C0045C796 /* SF-Pro-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = BED3D6622580C46C0045C796 /* SF-Pro-Display-Heavy.otf */; };
 		BEDB3685225EF61C00059997 /* UIView+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDB3684225EF61C00059997 /* UIView+Animation.swift */; };
 		BEDB3687225F3DB800059997 /* MedalProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDB3686225F3DB800059997 /* MedalProgressBar.swift */; };
 		BEDE674521ABD04A00DF78AD /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDE674421ABD04A00DF78AD /* IAPHelper.swift */; };
@@ -145,7 +145,6 @@
 		BE3A91412345E0FB00AEBE1B /* ヒラギノ角ゴシック W2.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ヒラギノ角ゴシック W2.ttc"; sourceTree = "<group>"; };
 		BE439C6221DF3AF100C0BE14 /* grammarN4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = grammarN4.swift; sourceTree = "<group>"; };
 		BE4558282344684D001ACF58 /* Amplitude.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Amplitude.framework; path = Carthage/Build/iOS/Amplitude.framework; sourceTree = "<group>"; };
-		BE50D1D82574B0310039CE87 /* SF-Pro-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Black.otf"; sourceTree = "<group>"; };
 		BE50D2002574CD7A0039CE87 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		BE596465215A0DE100E4AA0C /* travel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = travel.swift; sourceTree = "<group>"; };
 		BE596467215A0DF200E4AA0C /* daily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = daily.swift; sourceTree = "<group>"; };
@@ -243,6 +242,7 @@
 		BECD907A219D294100400FD3 /* InfiniteChallengeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteChallengeTableCell.swift; sourceTree = "<group>"; };
 		BED1BA52224A35FF009B68B6 /* MedalPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalPage.swift; sourceTree = "<group>"; };
 		BED1CC0821452A54004AE397 /* GameSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetting.swift; sourceTree = "<group>"; };
+		BED3D6622580C46C0045C796 /* SF-Pro-Display-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Heavy.otf"; sourceTree = "<group>"; };
 		BEDB3684225EF61C00059997 /* UIView+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Animation.swift"; sourceTree = "<group>"; };
 		BEDB3686225F3DB800059997 /* MedalProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalProgressBar.swift; sourceTree = "<group>"; };
 		BEDE674421ABD04A00DF78AD /* IAPHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
@@ -500,11 +500,11 @@
 			isa = PBXGroup;
 			children = (
 				BE6359A42575890C00171601 /* default.realm */,
-				BE50D1D82574B0310039CE87 /* SF-Pro-Display-Black.otf */,
 				BE67D2A821561A92007FE420 /* Assets.xcassets */,
 				BEBDEDCB208EF0A000C18520 /* Info.plist */,
 				BEBDEDBF208EF09F00C18520 /* AppDelegate.swift */,
 				BE7AFA9B21C9F85A00C41BF4 /* GoogleService-Info.plist */,
+				BED3D6622580C46C0045C796 /* SF-Pro-Display-Heavy.otf */,
 				BE3A91412345E0FB00AEBE1B /* ヒラギノ角ゴシック W2.ttc */,
 				BE8295D32345D129009DA354 /* ヒラギノ角ゴシック W0.ttc */,
 				BEBDEDBD208EF09F00C18520 /* Products */,
@@ -683,8 +683,8 @@
 				BE28B2C221A3EAB600088214 /* Main.storyboard in Resources */,
 				BE7AFA9C21C9F85A00C41BF4 /* GoogleService-Info.plist in Resources */,
 				BE824EEA257B300200DDFA26 /* Launch Screen.storyboard in Resources */,
-				BE50D1D92574B0310039CE87 /* SF-Pro-Display-Black.otf in Resources */,
 				BE6359A52575890C00171601 /* default.realm in Resources */,
+				BED3D6632580C46C0045C796 /* SF-Pro-Display-Heavy.otf in Resources */,
 				BE76F11F214F56F6004E130B /* SentencesTableCell.xib in Resources */,
 				BEB6F6C92182B89D0011E1C1 /* InfoPlist.strings in Resources */,
 				BEEC7FA92154C7AC001C2EFF /* TopBarView.xib in Resources */,
