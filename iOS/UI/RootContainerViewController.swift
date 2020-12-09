@@ -10,8 +10,6 @@ import Foundation
 import UIKit
 
 class RootContainerViewController: UIViewController {
-    static var isShowSetting = false
-
     var current: UIViewController!
     var splashScreen: SplashScreenViewController!
     var swipablePage: SwipablePage!
@@ -26,7 +24,6 @@ class RootContainerViewController: UIViewController {
         super.viewDidLoad()
         pt("rootVC \(#function) - \(#line)")
 
-        // swiftlint:disable force_cast
         splashScreen = getVC("LaunchScreen") as? SplashScreenViewController
         transition(to: splashScreen)
 
@@ -37,7 +34,6 @@ class RootContainerViewController: UIViewController {
         topicDetailPage = getVC("TopicDetailPage") as? TopicDetailPage
         icListPage = getVC("InfiniteChallengeListPage") as? InfiniteChallengeListPage
         icDetailPage = getVC("InfiniteChallengeDetailPage") as? InfiniteChallengeDetailPage
-        // swiftlint:enable force_cast
 
         swipablePage = SwipablePage(transitionStyle: .scroll, navigationOrientation: .horizontal)
 
@@ -71,51 +67,19 @@ class RootContainerViewController: UIViewController {
     }
 
     private func showInitialPage() {
-        if gameLang.isSupportTopicMode {
-            showTopicPage(idx: 1)
-        } else {
-            showInfiniteChallengePage(idx: 1)
-        }
+        showSwipablePage(idx: 1, tabMode: gameLang.isSupportTopicMode ? .topics : .infiniteChallenge)
     }
 
-    func showTopicPage(idx: Int) {
-        var sp: SwipablePage! = swipablePage
-        SwipablePage.initialIdx = idx
-        GameContext.shared.bottomTab = .topics
-
+    func showSwipablePage(idx: Int, tabMode: UITabMode) {
+        let sp: SwipablePage! = swipablePage
+        let isSameTabMode = GameContext.shared.bottomTab == tabMode
+        GameContext.shared.bottomTab = tabMode
         if !sp.isPagesReady {
-            sp.prepareForTopic()
-            sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
+            sp.prepare(idx: idx, mode: tabMode)
             transition(to: sp)
-        } else if !sp.isTopic {
-            sp.clear()
-            sp = SwipablePage(transitionStyle: .scroll, navigationOrientation: .horizontal)
-            swipablePage = sp
-            sp.prepareForTopic()
-            sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
-            transition(to: sp)
-            print("brand new topic page")
-        } else {
-            sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: true, completion: nil)
-        }
-    }
-
-    func showInfiniteChallengePage(idx: Int) {
-        var sp: SwipablePage! = swipablePage
-        SwipablePage.initialIdx = idx
-        GameContext.shared.bottomTab = .infiniteChallenge
-        if !sp.isPagesReady {
-            sp.prepareForIC()
-            sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
-            transition(to: sp)
-        } else if sp.isTopic {
-            sp.clear()
-            sp = SwipablePage(transitionStyle: .scroll, navigationOrientation: .horizontal)
-            swipablePage = sp
-            sp.prepareForIC()
-            sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: false, completion: nil)
-            transition(to: sp)
-            print("brand new ic page")
+        } else if !isSameTabMode {
+            sp.prepare(idx: idx, mode: tabMode)
+            sp.reload()
         } else {
             sp.setViewControllers([sp.pages[idx]], direction: .reverse, animated: true, completion: nil)
         }

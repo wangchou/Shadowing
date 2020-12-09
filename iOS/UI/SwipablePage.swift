@@ -10,7 +10,7 @@
 import UIKit
 
 class SwipablePage: UIPageViewController {
-    static var initialIdx = 1
+    //var idx = 1
     var isTopic = true
     var pages = [UIViewController]()
 
@@ -25,36 +25,24 @@ class SwipablePage: UIPageViewController {
         }
     }
 
-    func clear() {
-        pages = []
-    }
-
-    func prepareForTopic() {
-        pages = []
-        pages.append(rootViewController.settingPage)
-        pages.append(rootViewController.medalPage)
-        pages.append(rootViewController.topicListPage)
-        pages.append(rootViewController.topicDetailPage)
-        let idx = RootContainerViewController.isShowSetting ? 0 : SwipablePage.initialIdx
-        setViewControllers([pages[idx]], direction: .forward, animated: false, completion: nil)
-
+    func reload() {
+        dataSource = nil
         dataSource = self
-
-        // https://stackoverflow.com/questions/43416456/using-uislider-inside-uipageviewcontroller
-        for view in view.subviews where view is UIScrollView {
-            (view as? UIScrollView)?.delaysContentTouches = false
-        }
-        isTopic = true
     }
 
-    func prepareForIC() {
+    func prepare(idx: Int, mode: UITabMode) {
         pages = []
         pages.append(rootViewController.settingPage)
         pages.append(rootViewController.medalPage)
-        pages.append(rootViewController.icListPage)
-        pages.append(rootViewController.icDetailPage)
+        switch mode {
+        case .topics:
+            pages.append(rootViewController.topicListPage)
+            pages.append(rootViewController.topicDetailPage)
+        case .infiniteChallenge:
+            pages.append(rootViewController.icListPage)
+            pages.append(rootViewController.icDetailPage)
+        }
 
-        let idx = RootContainerViewController.isShowSetting ? 0 : SwipablePage.initialIdx
         setViewControllers([pages[idx]], direction: .forward, animated: false, completion: nil)
 
         dataSource = self

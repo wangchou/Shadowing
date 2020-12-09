@@ -117,16 +117,14 @@ func changeGameLangTo(lang: Lang, fromSettingPage: Bool) {
     loadGameMiscData(isLoadKana: false)
     DispatchQueue.main.async {
         if gameLang == .en {
-            GameContext.shared.bottomTab = .infiniteChallenge
-            rootViewController.showInfiniteChallengePage(idx: fromSettingPage ? 0 : 1)
+            rootViewController.showSwipablePage(idx: fromSettingPage ? 0 : 1, tabMode: .infiniteChallenge)
             if fromSettingPage {
                 rootViewController.settingPage?.render()
             } else {
                 rootViewController.medalPage?.medalPageView?.render()
             }
         } else {
-            GameContext.shared.bottomTab = .topics
-            rootViewController.showTopicPage(idx: fromSettingPage ? 0 : 1)
+            rootViewController.showSwipablePage(idx: fromSettingPage ? 0 : 1, tabMode: .topics)
             if fromSettingPage {
                 rootViewController.settingPage?.render()
             } else {

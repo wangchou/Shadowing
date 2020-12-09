@@ -1,6 +1,5 @@
 //
 //  UI.swift
-//  VoiceOnly
 //
 //  Created by Wangchou Lu on H30/05/23.
 //  Copyright © 平成30年 Lu, WangChou. All rights reserved.

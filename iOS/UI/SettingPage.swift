@@ -151,7 +151,6 @@ class SettingPage: UITableViewController {
     // MARK: - IBActions sorted by UI
 
     @IBAction func gameLangSegmentControlValueChanged(_: Any) {
-        RootContainerViewController.isShowSetting = true
         let lang: Lang =  gameLangSegmentControl.selectedSegmentIndex == 1 ? .ja : .en
         changeGameLangTo(lang: lang, fromSettingPage: true)
     }

@@ -15,7 +15,7 @@ enum GameFlowMode: String, Codable {
     case shadowing, chat
 }
 
-enum UITab {
+enum UITabMode {
     case topics, infiniteChallenge
 }
 
@@ -40,7 +40,7 @@ class GameContext {
 
     var gameSetting = GameSetting()
     var gameMedal = GameMedal()
-    var bottomTab: UITab = .topics
+    var bottomTab: UITabMode = .topics
 
     // MARK: - Medium-term context of current game
 

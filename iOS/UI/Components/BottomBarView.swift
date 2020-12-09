@@ -14,7 +14,7 @@ private let context = GameContext.shared
 @IBDesignable
 class BottomBarView: UIView, XibView {
     var contentView: UIView?
-    var contentTab: UITab = .topics {
+    var contentTab: UITabMode = .topics {
         didSet {
             updateContentTab()
         }
@@ -60,15 +60,11 @@ class BottomBarView: UIView, XibView {
 
     @IBAction func onLeftButtonClicked(_: Any) {
         print(#function, ".showTopicPage(idx: 2)")
-        RootContainerViewController.isShowSetting = false
-        context.bottomTab = .topics
-        rootViewController.showTopicPage(idx: 2)
+        rootViewController.showSwipablePage(idx: 2, tabMode: .topics)
     }
 
     @IBAction func onRightButtonClicked(_: Any) {
         print(#function, ".showInfiniteChallengePage(idx: 2)")
-        RootContainerViewController.isShowSetting = false
-        context.bottomTab = .infiniteChallenge
-        rootViewController.showInfiniteChallengePage(idx: 2)
+        rootViewController.showSwipablePage(idx: 2, tabMode: .infiniteChallenge)
     }
 }
