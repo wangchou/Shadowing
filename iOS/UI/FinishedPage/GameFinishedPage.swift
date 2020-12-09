@@ -12,6 +12,7 @@ import UIKit
 private let context = GameContext.shared
 
 class GameFinishedPage: UIViewController {
+    static var last: GameFinishedPage?
     static let vcName = "GameFinishedPage"
     @IBOutlet var reportView: GameReportView!
 
@@ -44,6 +45,7 @@ class GameFinishedPage: UIViewController {
         super.viewWillAppear(animated)
         sortSentenceByScore()
         reportView.render()
+        GameFinishedPage.last = self
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -55,6 +57,7 @@ class GameFinishedPage: UIViewController {
         super.viewWillDisappear(animated)
         SpeechEngine.shared.stopListeningAndSpeaking()
         reportView.viewDidDisappear()
+        GameFinishedPage.last = nil
     }
 
     func sortSentenceByScore() {

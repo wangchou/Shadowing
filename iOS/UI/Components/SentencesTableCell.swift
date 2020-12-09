@@ -54,7 +54,9 @@ class SentencesTableCell: UITableViewCell {
     }
 
     func practiceSentence() {
-        guard isUnderDailySentenceLimit() else { return }
+        guard MedalCorrectionPage.last != nil ||
+              GameFinishedPage.last != nil ||
+              isUnderDailySentenceLimit() else { return }
 
         stopCountDown()
         guard SentencesTableCell.isPracticing != true else { return }

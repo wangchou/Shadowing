@@ -14,6 +14,7 @@ import UIKit
 private let context = GameContext.shared
 
 class MedalCorrectionPage: UIViewController {
+    static var last: MedalCorrectionPage?
     static let id = "MedalCorrectionPage"
     var medalCorrectionPageView: MedalCorrectionPageView? {
         return (view as? MedalCorrectionPageView)
@@ -28,6 +29,11 @@ class MedalCorrectionPage: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         medalCorrectionPageView?.render()
+        MedalCorrectionPage.last = self
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        MedalCorrectionPage.last = nil
     }
 }
 
