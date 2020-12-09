@@ -25,6 +25,9 @@ class TTS: NSObject {
     var lastString = ""
     var lastTTSString = ""
     var isPreviousJP = false // jp -> en have some chance get wrong in iOS14
+    var lastUtterance: AVSpeechUtterance?
+    var isPaused = false
+    var startTime = getNow()
 
     func say(_ text: String,
              voiceId: String,
@@ -66,7 +69,6 @@ class TTS: NSObject {
                 utterance.volume = 1.0
             }
 
-            postEvent(.sayStarted, string: text)
             guard let voice = utterance.voice else {
                 showNoVoicePrompt(language: lang.defaultCode)
                 print("Error: utterance.voice is nil")
@@ -97,6 +99,8 @@ class TTS: NSObject {
             }
             #endif
 
+            self.lastUtterance = utterance
+            self.isPaused = false
             synth.delegate = self
             synth.speak(utterance)
             self.isPreviousJP = voice.language.contains("ja")
@@ -118,18 +122,20 @@ class TTS: NSObject {
     }
 
     func pause() {
-        if lastSynth?.isSpeaking == true {
-            lastSynth?.pauseSpeaking(at: .immediate)
-        }
+        // pauseSpeaking of AVSpeechSynthesizer causes "japanese didFinish not be called" bug
+        // so try to stop and speak whole utterance later
+        isPaused = true
+        lastSynth?.stopSpeaking(at: .immediate)
     }
 
     func continueSpeaking() {
-        if lastSynth?.isPaused == true {
-            lastSynth?.continueSpeaking()
+        if isPaused, let utterance = lastUtterance {
+            lastSynth?.speak(utterance)
         }
     }
 
     func stop() {
+        isPaused = false
         lastSynth?.stopSpeaking(at: AVSpeechBoundary.immediate)
     }
 
@@ -161,6 +167,9 @@ class TTS: NSObject {
 }
 
 extension TTS: AVSpeechSynthesizerDelegate {
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
+        postEvent(.sayStarted, string: lastString)
+    }
     func speechSynthesizer(_: AVSpeechSynthesizer,
                            didFinish utterance: AVSpeechUtterance) {
         // not sure why, but the delegate is called by other strings anyway. (bug? for iOS14 en only)
@@ -170,7 +179,7 @@ extension TTS: AVSpeechSynthesizerDelegate {
         }
     }
 
-    func speechSynthesizer(_: AVSpeechSynthesizer,
+    func speechSynthesizer(_ synth: AVSpeechSynthesizer,
                            willSpeakRangeOfSpeechString characterRange: NSRange,
                            utterance: AVSpeechUtterance) {
         if utterance.speechString == lastTTSString {
@@ -179,13 +188,18 @@ extension TTS: AVSpeechSynthesizerDelegate {
             let last = ttsToDisplayMap[fixedRange.upperBound - 1]
             postEvent(.willSpeakRange, range: NSRange(location: first,
                                                       length: last - first + 1))
+//            guard let rangeInString = Range(characterRange, in: utterance.speechString) else { return }
+//            print("Will speak: \(utterance.speechString[rangeInString])", synth.isSpeaking)
         }
     }
 
     func speechSynthesizer(_: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
         if utterance.speechString == lastTTSString {
-            postEvent(.speakEnded, string: utterance.speechString + " cancelled")
-            promise.fulfill(())
+            // for cancel not due to "pause by cancel utterance -> continue" action
+            if !isPaused {
+                postEvent(.speakEnded, string: utterance.speechString + " cancelled")
+                promise.fulfill(())
+            }
         }
     }
 }

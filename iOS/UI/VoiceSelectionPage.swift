@@ -156,7 +156,7 @@ class VoiceSelectionPage: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        viewDidAppear(animated)
+        super.viewDidAppear(animated)
         if voices.isEmpty {
             switch selectingVoiceFor {
             case .teacher, .assisant:

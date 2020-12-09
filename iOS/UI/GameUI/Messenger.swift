@@ -23,6 +23,7 @@ class Messenger: UIViewController {
     static let id = "MessengerGame"
     static var last: Messenger?
     var lastLabel = FuriganaLabel()
+    var speakStartTime = getNow()
 
     private var y: Int = 8
     private var previousY: Int = 0

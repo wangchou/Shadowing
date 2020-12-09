@@ -15,7 +15,7 @@ extension Messenger: GameEventDelegate {
     @objc func onEventHappened(_ notification: Notification) {
         guard let event = notification.object as? Event else { print("convert event fail"); return }
         #if DEBUG
-        let watchTypes: [EventType] = [.sayStarted, .scoreCalculated]
+        let watchTypes: [EventType] = [.sayStarted, .speakEnded, .scoreCalculated]
         if let gameState = event.gameState {
             // print("\n== \(gameState.rawValue) ==")
             if gameState == .speakingTranslation {
@@ -37,6 +37,7 @@ extension Messenger: GameEventDelegate {
                 context.gameState == .speakInitialDescription {
                 addLabel(rubyAttrStr(text))
             }
+            speakStartTime = getNow()
 
         case .willSpeakRange:
             guard let newRange = event.range else { return }
@@ -52,6 +53,8 @@ extension Messenger: GameEventDelegate {
                context.gameState == .speakingTargetString {
                 lastLabel.attributedText = context.targetAttrString
             }
+            context.speakDuration = Float(getNow() - speakStartTime)
+
         case .listenStarted:
             addLabel(rubyAttrStr("..."), pos: .right)
             FuriganaLabel.clearHighlighRange()
@@ -80,6 +83,11 @@ extension Messenger: GameEventDelegate {
             DispatchQueue.main.async {
                 let height = CGFloat(20.0 * micLevel.f / 100.0)
                 self.levelMeterHeightConstraint.constant = height
+            }
+
+        case .gamePaused:
+            if context.gameState == .speakingTargetString {
+                lastLabel.attributedText = context.targetAttrString
             }
 
         case .gameResume:

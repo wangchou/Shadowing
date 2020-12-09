@@ -19,6 +19,7 @@ enum EventType {
     case gameStateChanged
     case playTimeUpdate
     case levelMeterUpdate
+    case gamePaused
     case gameResume
 
     // for medal correction page

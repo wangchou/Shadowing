@@ -207,19 +207,13 @@ private extension SpeechEngine {
                rate: Float,
                lang: Lang,
                ttsFixes: [(String, String)] = []) -> Promise<Void> {
-        let startTime = getNow()
-        func updateSpeakDuration() -> Promise<Void> {
-            context.speakDuration = Float(getNow() - startTime)
-            return fulfilledVoidPromise()
-        }
-
         return tts.say(
             text,
             voiceId: speaker,
             rate: rate,
             lang: lang,
             ttsFixes: ttsFixes
-        ).then(updateSpeakDuration)
+        )
     }
 }
 

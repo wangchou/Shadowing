@@ -184,6 +184,7 @@ extension GameFlow {
         wait = Promise<Void>.pending()
         engine.pause()
         isPaused = true
+        postEvent(.gamePaused)
     }
 
     private func resume() {
