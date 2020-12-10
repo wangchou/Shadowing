@@ -65,9 +65,9 @@ class SpeechEngine {
         start()
     }
 
-    func listen(duration: Double) -> Promise<String> {
-        return speechRecognizer.authorize().then { _ -> Promise<String> in
-            self.speechRecognizer.listen(stopAfterSeconds: duration)
+    func listen(duration: Double, originalStr: String? = nil) -> Promise<[String]> {
+        return speechRecognizer.authorize().then { _ -> Promise<[String]> in
+            self.speechRecognizer.listen(stopAfterSeconds: duration, originalStr: originalStr)
         }
     }
 
@@ -264,7 +264,6 @@ func topicTranslatorSay(_ text: String) -> Promise<Void> {
                         speed: context.translatorSpeed,
                         lang: .zh)
 }
-
 
 func assisantSay(_ text: String) -> Promise<Void> {
     return engine.speak(text: text,

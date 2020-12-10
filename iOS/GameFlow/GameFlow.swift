@@ -254,34 +254,33 @@ extension GameFlow {
         }
 
         return listenWrapped()
-            .then(saveUserSaidString)
             .then(getScore)
             .then(speakScore)
     }
 
-    private func listenWrapped() -> Promise<String> {
+    private func listenWrapped() -> Promise<[String]> {
         context.gameState = .listening
         if context.gameSetting.isSpeakOriginal {
             return engine
-                .listen(duration: Double(context.speakDuration + pauseDuration))
+                .listen(
+                    duration: Double(context.speakDuration + pauseDuration),
+                    originalStr: context.targetString
+                )
         }
 
         return context
             .calculatedSpeakDuration
-            .then { speakDuration -> Promise<String> in
-                engine.listen(duration: Double(speakDuration + pauseDuration))
+            .then { speakDuration -> Promise<[String]> in
+                engine.listen(
+                    duration: Double(speakDuration + pauseDuration),
+                    originalStr: context.targetString
+                )
             }
     }
 
-    private func saveUserSaidString(userSaidString: String) -> Promise<Void> {
+    private func getScore(userSaidStrings: [String]) -> Promise<Void> {
         if isNeedToStopPromiseChain { return rejectedVoidPromise() }
-        userSaidSentences[context.targetString] = userSaidString
-        return fulfilledVoidPromise()
-    }
-
-    private func getScore() -> Promise<Void> {
-        if isNeedToStopPromiseChain { return rejectedVoidPromise() }
-        return calculateScore(context.targetString, context.userSaidString)
+        return calculateScore(context.targetString, userSaidStrings)
             .then(saveScore)
     }
 

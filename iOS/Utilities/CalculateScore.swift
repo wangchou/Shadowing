@@ -94,11 +94,14 @@ func getKana(_ kanjiString: String, isFuri: Bool = false, originalString: String
 
 func calculateScore(
     _ originalString: String,
-    _ recognizedString: String
+    _ recognizedStrings: [String]
 ) -> Promise<Score> {
+    let recognizedString = recognizedStrings[0]
+    userSaidSentences[originalString] = recognizedString
     #if os(iOS)
         if gameLang == .en { return calculateScoreEn(originalString, recognizedString) }
     #endif
+
     let promise = Promise<Score>.pending()
 
     func calcScore(_ str1: String, _ str2: String) -> Int {

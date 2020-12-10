@@ -182,7 +182,7 @@ extension SentencesTableCell {
         tableView?.endUpdates()
     }
 
-    private func listenPart() -> Promise<String> {
+    private func listenPart() -> Promise<[String]> {
         if !context.gameSetting.isShowTranslationInPractice {
             if let tokenInfos = kanaTokenInfosCacheDictionary[targetString] {
                 sentenceLabel.attributedText = getFuriganaString(tokenInfos: tokenInfos)
@@ -192,8 +192,8 @@ extension SentencesTableCell {
             FuriganaLabel.clearHighlighRange()
         }
         guard !isNeedToStopPromiseChain else {
-            let promise = Promise<String>.pending()
-            promise.fulfill("")
+            let promise = Promise<[String]>.pending()
+            promise.fulfill([""])
             return promise
         }
         stopEventObserving(self)
@@ -218,16 +218,15 @@ extension SentencesTableCell {
         prepareListening()
         updateUIAfterListeningFor(duration: duration)
         print("listen for \(targetString): ", duration)
-        return SpeechEngine.shared.listen(duration: duration)
+        return SpeechEngine.shared.listen(duration: duration, originalStr: targetString)
     }
 
-    private func calculateScorePart(userSaidSentence: String) -> Promise<Score> {
+    private func calculateScorePart(userSaidSentence: [String]) -> Promise<Score> {
         guard !isNeedToStopPromiseChain else {
             let promise = Promise<Score>.pending()
             promise.fulfill(Score(value: 0))
             return promise
         }
-        userSaidSentences[targetString] = userSaidSentence
         return calculateScore(targetString, userSaidSentence)
     }
 

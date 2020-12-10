@@ -44,7 +44,8 @@ class SpeechRecognizer: NSObject {
     private var recognitionTask: SFSpeechRecognitionTask?
     private var isRunning: Bool = false
     private var isAuthorized: Bool = false
-    private var promise = Promise<String>.pending()
+    private var originalStr: String?
+    private var promise = Promise<[String]>.pending()
 
     override init() {
         super.init()
@@ -57,16 +58,19 @@ class SpeechRecognizer: NSObject {
 
     // MARK: - Public Methods
 
-    func listen(stopAfterSeconds: Double = 5) -> Promise<String> {
+    func listen(
+        stopAfterSeconds: Double = 5,
+        originalStr: String?
+    ) -> Promise<[String]> {
         endAudio()
-        promise = Promise<String>.pending()
+        promise = Promise<[String]>.pending()
         // mocked start for simulator
         if isSimulator {
             return fakeListening(stopAfterSeconds: stopAfterSeconds)
         }
 
         guard engine.isEngineRunning else {
-            promise.fulfill("Error: SpeechEninge is not started")
+            promise.fulfill(["Error: SpeechEninge is not started"])
             return promise
         }
 
@@ -76,6 +80,8 @@ class SpeechRecognizer: NSObject {
             return promise
         }
 
+        self.originalStr = originalStr
+
         speechRecognizer.defaultTaskHint = .dictation
 
         recognitionTask?.cancel()
@@ -83,7 +89,7 @@ class SpeechRecognizer: NSObject {
 
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         guard let recognitionRequest = recognitionRequest else {
-            promise.fulfill("Error: cannot create recognitionRequest")
+            promise.fulfill(["Error: cannot create recognitionRequest"])
             return promise
         }
 
@@ -97,7 +103,7 @@ class SpeechRecognizer: NSObject {
         recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest, resultHandler: resultHandler)
 
         guard recognitionTask != nil else {
-            promise.fulfill("Error: cannot create recognitionTask")
+            promise.fulfill(["Error: cannot create recognitionTask"])
             return promise
         }
 
@@ -137,7 +143,7 @@ class SpeechRecognizer: NSObject {
         }
 
         if let result = result {
-            promise.fulfill(result.bestTranscription.formattedString)
+            promise.fulfill([result.bestTranscription.formattedString])
             #if DEBUG
             var str = ""
             result.bestTranscription.segments.forEach {
@@ -158,19 +164,19 @@ class SpeechRecognizer: NSObject {
                let desc = (userInfo["NSLocalizedDescription"] as? String) {
                 // Retry means didn't hear anything please say again
                 if desc == "Retry" {
-                    promise.fulfill("")
+                    promise.fulfill([""])
                     print(error, desc)
                 } else {
-                    promise.fulfill("")
+                    promise.fulfill([""])
                     _ = getKanaTokenInfos("\(error)")
                     print(error, desc)
                 }
-                promise.fulfill("")
+                promise.fulfill([""])
                 return
             }
             _ = getKanaTokenInfos("\(error)")
             print(error)
-            promise.fulfill("")
+            promise.fulfill([""])
         }
     }
 
@@ -201,14 +207,14 @@ class SpeechRecognizer: NSObject {
         return isSimulator ? fulfilledVoidPromise() : promise
     }
 
-    private func fakeListening(stopAfterSeconds: Double = 5) -> Promise<String> {
+    private func fakeListening(stopAfterSeconds: Double = 5) -> Promise<[String]> {
         isRunning = true
         postEvent(.listenStarted, string: "")
         Timer.scheduledTimer(withTimeInterval: stopAfterSeconds, repeats: false) { [weak self] _ in
             let fakeSuffix = ["", "", "西宮", "はは"]
             let fakeSaidString = context.sentences[0].origin + fakeSuffix[Int.random(in: 0 ..< fakeSuffix.count)]
 
-            self?.promise.fulfill(fakeSaidString)
+            self?.promise.fulfill([fakeSaidString])
         }
         return promise
     }
