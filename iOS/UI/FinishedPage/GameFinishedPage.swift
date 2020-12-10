@@ -87,7 +87,8 @@ extension GameFinishedPage: UITableViewDataSource {
 
         finishedCell.update(sentence: sentence,
                             translationLang: context.gameMode == .topicMode ? .zh :
-                                context.gameSetting.translationLang)
+                                context.gameSetting.translationLang,
+                            isFromGameFinishedPage: true)
 
         return finishedCell
     }

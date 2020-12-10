@@ -64,7 +64,7 @@ class TTS: NSObject {
 //            }
 
             if isHeadphonePlugged() {
-                utterance.volume = 0.6 // adjust for wired monitoring
+                utterance.volume = 0.75 // adjust for wired monitoring
             } else {
                 utterance.volume = 1.0
             }
