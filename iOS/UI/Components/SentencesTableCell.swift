@@ -92,9 +92,12 @@ class SentencesTableCell: UITableViewCell {
             }
     }
 
-    func update(sentence: Sentence,
-                isShowTranslate: Bool = false,
-                translationLang: Lang) {
+    func update(
+        sentence: Sentence,
+        isShowTranslate: Bool = false,
+        translationLang: Lang,
+        isFromGameFinishedPage: Bool = false
+    ) {
         targetString = sentence.origin
         ttsFixes = sentence.ttsFixes
         sentenceLabel.widthPadding = 4
@@ -122,6 +125,11 @@ class SentencesTableCell: UITableViewCell {
         }
         // topic sentence only provide cmn translation
         translationTextView.text = translation != "" ? translation : sentence.cmn
+
+        // translation view will not expand FuriganaLabel Height
+        if isFromGameFinishedPage {
+            translationTextView.text = " "
+        }
 
         if isShowTranslate, translationTextView.text != "" {
             sentenceLabel.alpha = 0
