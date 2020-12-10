@@ -126,14 +126,12 @@ class SettingPage: UITableViewController {
 
         narratorSwitch.isOn = setting.isSpeakInitialDescription
         monitoringSwitch.isOn = setting.isMointoring
-        if setting.isMointoring {
-            monitoringVolumeSlider.isEnabled = true
-        } else {
-            monitoringVolumeSlider.isEnabled = false
-        }
+
         monitoringVolumeSlider.value = Float(setting.monitoringVolume)
 
         monitoringVolumeLabel.text = (setting.monitoringVolume > 0 ? "+" : "") + String(format: "%ddb", setting.monitoringVolume)
+        monitoringVolumeSlider.isEnabled = setting.isMointoring
+        monitoringVolumeLabel.textColor = setting.isMointoring ? .black : minorTextColor
 
         echoMethodNameLabel.text = i18n.echoMethod
         echoMethodSwitch.isOn = context.gameSetting.isEchoMethod
@@ -190,7 +188,8 @@ class SettingPage: UITableViewController {
     @IBAction func monitoringSwitchValueChanged(_: Any) {
         context.gameSetting.isMointoring = monitoringSwitch.isOn
         monitoringVolumeSlider.isEnabled = monitoringSwitch.isOn
-        monitoringVolumeSlider.setNeedsDisplay()
+        monitoringVolumeLabel.textColor = monitoringSwitch.isOn ? .black : minorTextColor
+        monitoringVolumeSlider.setNeedsLayout()
         saveGameSetting()
     }
 
