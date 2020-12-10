@@ -23,6 +23,8 @@ class SentencesTableCell: UITableViewCell {
     @IBOutlet var practiceButton: UIButton!
     @IBOutlet var translationTextView: UITextView!
 
+    var isNeedToStopPromiseChain = false
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -61,6 +63,8 @@ class SentencesTableCell: UITableViewCell {
         stopCountDown()
         guard SentencesTableCell.isPracticing != true else { return }
         startEventObserving(self)
+        startCommandObserving(self)
+        isNeedToStopPromiseChain = false
         SentencesTableCell.isPracticing = true
         TopicDetailPage.isChallengeButtonDisabled = true
         isUserInteractionEnabled = false
@@ -84,6 +88,7 @@ class SentencesTableCell: UITableViewCell {
                 SpeechEngine.shared.stop(isStopTTS: false)
                 self.practiceButton.backgroundColor = self.buttonColor
                 stopEventObserving(self)
+                stopCommandObserving(self)
             }
     }
 
@@ -178,6 +183,11 @@ extension SentencesTableCell {
             }
             FuriganaLabel.clearHighlighRange()
         }
+        guard !isNeedToStopPromiseChain else {
+            let promise = Promise<String>.pending()
+            promise.fulfill("")
+            return promise
+        }
         stopEventObserving(self)
 
         func prepareListening() {
@@ -204,11 +214,19 @@ extension SentencesTableCell {
     }
 
     private func calculateScorePart(userSaidSentence: String) -> Promise<Score> {
+        guard !isNeedToStopPromiseChain else {
+            let promise = Promise<Score>.pending()
+            promise.fulfill(Score(value: 0))
+            return promise
+        }
         userSaidSentences[targetString] = userSaidSentence
         return calculateScore(targetString, userSaidSentence)
     }
 
     private func updateUIByScore(score: Score) -> Promise<Void> {
+        guard !isNeedToStopPromiseChain else {
+            return fulfilledVoidPromise()
+        }
         _ = assisantSay(score.text)
         SpeechEngine.shared.stop(isStopTTS: false)
 
@@ -231,5 +249,18 @@ extension SentencesTableCell {
         saveGameMiscData()
 
         return fulfilledVoidPromise()
+    }
+}
+
+// handler for commands posted from UI
+extension SentencesTableCell: GameCommandDelegate {
+    @objc func onCommandHappened(_ notification: Notification) {
+        guard let command = notification.object as? Command else { print("convert command fail"); return }
+        if command.type == .forceStopGame {
+            isNeedToStopPromiseChain = true
+            SpeechEngine.shared.stop()
+            stopEventObserving(self)
+            stopCommandObserving(self)
+        }
     }
 }
