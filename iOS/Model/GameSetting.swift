@@ -14,8 +14,8 @@ private let context = GameContext.shared
 struct GameSetting: Codable {
     // MARK: - GameSetting Data fields
 
-    var gameSpeed: Float = AVSpeechUtteranceDefaultSpeechRate * 0.70
-    var practiceSpeed: Float = AVSpeechUtteranceDefaultSpeechRate * 0.60
+    var gameSpeed: Float = 0.8
+    var practiceSpeed: Float = 0.7
     var isShowTranslationInPractice: Bool = false
 
     var learningMode: LearningMode = .speakingOnly

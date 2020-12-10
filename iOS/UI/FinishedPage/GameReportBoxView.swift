@@ -62,7 +62,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
 
         let statusText = i18n.getSpeakingStatus(percent: record.progress, rank: record.rank.rawValue, reward: record.medalReward)
         statusSpeakingPromise = teacherSay(statusText,
-                                           rate: context.assistantRate,
+                                           speed: context.assistantSpeed,
                                            ttsFixes: [])
     }
 
@@ -207,7 +207,7 @@ class GameReportBoxView: UIView, ReloadableView, GridLayout {
                 if startProgress < 1.0, endProgress == 1.0 {
                     _ = self.statusSpeakingPromise.then {
                         teacherSay(i18n.reachDailyGoal,
-                                   rate: GameContext.shared.assistantRate,
+                                   speed: GameContext.shared.assistantSpeed,
                                    ttsFixes: [])
                     }
                 }

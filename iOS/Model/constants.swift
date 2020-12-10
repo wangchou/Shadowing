@@ -20,8 +20,8 @@ let iconSize = isIPad ? "48pt" : "24pt"
     let dailyFreeLimit = 60
 #endif
 
-let normalRate = AVSpeechUtteranceDefaultSpeechRate
-let fastRate = AVSpeechUtteranceDefaultSpeechRate * 1.1
+let normalSpeed: Float = 1.0
+let fastSpeed = ttsRateToSpeed(rate: 0.55)
 
 #if targetEnvironment(macCatalyst)
     var screen = CGRect(x: 0, y: 0, width: 480, height: 900)

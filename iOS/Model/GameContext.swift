@@ -74,16 +74,16 @@ class GameContext {
         }
     }
 
-    var teachingRate: Float {
+    var teachingSpeed: Float {
         return gameSetting.gameSpeed
     }
 
-    var assistantRate: Float {
-        return teachingRate > fastRate ? teachingRate : fastRate
+    var assistantSpeed: Float {
+        return teachingSpeed > fastSpeed ? teachingSpeed : fastSpeed
     }
 
-    var translatorRate: Float {
-        return teachingRate > fastRate ? teachingRate : fastRate
+    var translatorSpeed: Float {
+        return teachingSpeed > fastSpeed ? teachingSpeed : fastSpeed
     }
 
     var gameTitleToSpeak: String {
@@ -153,7 +153,7 @@ class GameContext {
                 duration.fulfill(
                     1.0 +
                         kana.count.f * 0.13 /
-                        (self.teachingRate / AVSpeechUtteranceDefaultSpeechRate)
+                        (self.teachingSpeed)
                 )
             }
         } else {
@@ -161,7 +161,7 @@ class GameContext {
             duration.fulfill(
                 1.0 +
                     level.maxSyllablesCount.f * 0.13 /
-                    (teachingRate / AVSpeechUtteranceDefaultSpeechRate)
+                    (teachingSpeed)
             )
         }
         return duration

@@ -45,7 +45,7 @@ extension Messenger: GameEventDelegate {
                context.gameState == .speakingTargetString {
                 lastLabel.updateHighlightRange(newRange: newRange,
                                                targetString: context.targetString,
-                                               voiceRate: context.teachingRate)
+                                               voiceRate: context.teachingSpeed)
             }
 
         case .speakEnded:
@@ -86,7 +86,8 @@ extension Messenger: GameEventDelegate {
             }
 
         case .gamePaused:
-            if context.gameState == .speakingTargetString {
+            if context.gameState == .speakingTargetString,
+               context.gameSetting.isShowOriginal {
                 lastLabel.attributedText = context.targetAttrString
             }
 

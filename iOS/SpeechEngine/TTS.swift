@@ -31,7 +31,7 @@ class TTS: NSObject {
 
     func say(_ text: String,
              voiceId: String,
-             rate: Float = AVSpeechUtteranceDefaultSpeechRate, // 0.5, range 0 ~ 1.0,
+             speed: Float = 1.0,
              lang: Lang,
              ttsFixes: [(String, String)] = []) -> Promise<Void> {
         stop()
@@ -56,7 +56,7 @@ class TTS: NSObject {
                 utterance.voice = getDefaultVoice(language: lang.defaultCode)
             }
 
-            utterance.rate = rate
+            utterance.rate = speedToTTSRate(speed: speed)
 
 //            print("ori:", text, utterance.voice?.identifier ?? "", rate)
 //            if ttsString != text {
@@ -64,7 +64,7 @@ class TTS: NSObject {
 //            }
 
             if isHeadphonePlugged() {
-                utterance.volume = 0.6 // adjust for wired monitoring
+                utterance.volume = 0.75 // adjust for wired monitoring
             } else {
                 utterance.volume = 1.0
             }
@@ -131,8 +131,8 @@ class TTS: NSObject {
     func continueSpeaking() {
         if isPaused, let utterance = lastUtterance {
             lastSynth?.speak(utterance)
-            isPaused = false
         }
+        isPaused = false
     }
 
     func stop() {
