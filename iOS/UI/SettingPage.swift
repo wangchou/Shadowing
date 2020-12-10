@@ -93,7 +93,7 @@ class SettingPage: UITableViewController {
 
         gameSpeedSlider.isContinuous = false
         gameSpeedSlider.value = setting.gameSpeed
-        gameSpeedFastLabel.text = String(format: "%.2fx", setting.gameSpeed * 2)
+        gameSpeedFastLabel.text = String(format: "%.2fx", setting.gameSpeed)
 
         narratorLabel.text = i18n.narratorLabel
         translationLanguageLabel.text = i18n.translationLanguageLabel
@@ -118,7 +118,7 @@ class SettingPage: UITableViewController {
 
         practiceSpeedSlider.isContinuous = false
         practiceSpeedSlider.value = setting.practiceSpeed
-        practiceSpeedFastLabel.text = String(format: "%.2fx", setting.practiceSpeed * 2)
+        practiceSpeedFastLabel.text = String(format: "%.2fx", setting.practiceSpeed)
 
         for i in 0 ..< dailyGoals.count {
             dailyGoalSegmentedControl.setTitle("\(dailyGoals[i])\(i18n.sentenceUnit)", forSegmentAt: i)
@@ -202,20 +202,20 @@ class SettingPage: UITableViewController {
 
     @IBAction func gameSpeedSilderValueChanged(_: Any) {
         context.gameSetting.gameSpeed = gameSpeedSlider.value
-        gameSpeedFastLabel.text = String(format: "%.2fx", gameSpeedSlider.value * 2)
-        let speedText = String(format: "%.2f", context.gameSetting.gameSpeed * 2)
+        gameSpeedFastLabel.text = String(format: "%.2fx", gameSpeedSlider.value)
+        let speedText = String(format: "%.2f", context.gameSetting.gameSpeed)
         _ = teacherSay("\(i18n.speedIs)\(speedText)です",
-                       rate: context.gameSetting.gameSpeed,
+                       speed: context.gameSetting.gameSpeed,
                        ttsFixes: [])
         saveGameSetting()
     }
 
     @IBAction func practiceSpeedSliderValueChanged(_: Any) {
         context.gameSetting.practiceSpeed = practiceSpeedSlider.value
-        practiceSpeedFastLabel.text = String(format: "%.2fx", practiceSpeedSlider.value * 2)
-        let speedText = String(format: "%.2f", context.gameSetting.practiceSpeed * 2)
+        practiceSpeedFastLabel.text = String(format: "%.2fx", practiceSpeedSlider.value)
+        let speedText = String(format: "%.2f", context.gameSetting.practiceSpeed)
         _ = teacherSay("\(i18n.speedIs)\(speedText)です",
-                       rate: context.gameSetting.practiceSpeed,
+                       speed: context.gameSetting.practiceSpeed,
                        ttsFixes: [])
         saveGameSetting()
     }

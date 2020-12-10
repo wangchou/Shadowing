@@ -149,7 +149,7 @@ class VoiceSelectionPage: UIViewController {
         } else {
             practiceSpeedSlider.isContinuous = false
             practiceSpeedSlider.value = context.gameSetting.practiceSpeed
-            practiceSpeedValueLabel.text = String(format: "%.2fx", context.gameSetting.practiceSpeed * 2)
+            practiceSpeedValueLabel.text = String(format: "%.2fx", context.gameSetting.practiceSpeed)
             practiceSpeedLabel.text = i18n.settingSectionPracticeSpeed
         }
         originPracticeSpeed = context.gameSetting.practiceSpeed
@@ -188,10 +188,10 @@ class VoiceSelectionPage: UIViewController {
 
     @IBAction func practiceSpeedSliderValueChanged(_: Any) {
         context.gameSetting.practiceSpeed = practiceSpeedSlider.value
-        practiceSpeedValueLabel.text = String(format: "%.2fx", practiceSpeedSlider.value * 2)
-        let speedText = String(format: "%.2f", context.gameSetting.practiceSpeed * 2)
+        practiceSpeedValueLabel.text = String(format: "%.2fx", practiceSpeedSlider.value)
+        let speedText = String(format: "%.2f", context.gameSetting.practiceSpeed)
         _ = teacherSay("\(i18n.speedIs)\(speedText)です",
-                       rate: context.gameSetting.practiceSpeed,
+                       speed: context.gameSetting.practiceSpeed,
                        ttsFixes: [])
         doneButton.isEnabled = true
         isSpeedChanged = true
@@ -258,11 +258,11 @@ extension VoiceSelectionPage: UITableViewDelegate {
 
         let speed = isWithPracticeSpeedSection ?
             context.gameSetting.practiceSpeed :
-            AVSpeechUtteranceDefaultSpeechRate
+            normalSpeed
         _ = ttsSay(
             testSentence,
             speaker: selectedVoice?.identifier ?? "unknown",
-            rate: speed,
+            speed: speed,
             lang: selectingVoiceFor == .translator ? context.gameSetting.translationLang : gameLang
         )
         tableView.reloadData()

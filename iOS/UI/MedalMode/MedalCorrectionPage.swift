@@ -154,7 +154,7 @@ class MedalCorrectionPageView: UIView, GridLayout, ReloadableView, GameEventDele
         topView.addSubview(button)
 
         button = UIButton()
-        let title = String(format: "%.2fx", context.gameSetting.practiceSpeed * 2)
+        let title = String(format: "%.2fx", context.gameSetting.practiceSpeed)
         button.setStyle(style: .darkOption, step: step)
         button.setTitle(title, for: .normal)
         button.titleLabel?.font = MyFont.regular(ofSize: step * 2.8)

@@ -45,7 +45,7 @@ extension Messenger: GameEventDelegate {
                context.gameState == .speakingTargetString {
                 lastLabel.updateHighlightRange(newRange: newRange,
                                                targetString: context.targetString,
-                                               voiceRate: context.teachingRate)
+                                               voiceRate: context.teachingSpeed)
             }
 
         case .speakEnded:

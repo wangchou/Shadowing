@@ -166,7 +166,7 @@ extension SentencesTableCell {
         startTime = getNow()
         prepareForSpeaking()
         return teacherSay(targetString,
-                          rate: context.gameSetting.practiceSpeed,
+                          speed: context.gameSetting.practiceSpeed,
                           ttsFixes: ttsFixes)
     }
 

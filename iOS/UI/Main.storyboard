@@ -1019,7 +1019,7 @@ Cg
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qnt-8k-578">
                                             <rect key="frame" x="0.0" y="69" width="414" height="44"/>
                                             <subviews>
-                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="YHG-RG-JtR">
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.5" maxValue="1.3" translatesAutoresizingMaskIntoConstraints="NO" id="YHG-RG-JtR">
                                                     <rect key="frame" x="13" y="7.6666666666666714" width="343" height="30"/>
                                                     <connections>
                                                         <action selector="practiceSpeedSliderValueChanged:" destination="8Mb-6R-zoy" eventType="valueChanged" id="Jft-8W-osD"/>
@@ -1372,7 +1372,7 @@ Cg
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="W34-8M-0SC">
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.5" maxValue="1.3" translatesAutoresizingMaskIntoConstraints="NO" id="W34-8M-0SC">
                                                     <rect key="frame" x="13" y="7" width="328" height="31"/>
                                                     <connections>
                                                         <action selector="gameSpeedSilderValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="d3h-Lw-tvW"/>
@@ -1405,7 +1405,7 @@ Cg
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.375" minValue="0.0" maxValue="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="7Bm-n0-0qL">
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.5" maxValue="1.3" translatesAutoresizingMaskIntoConstraints="NO" id="7Bm-n0-0qL">
                                                     <rect key="frame" x="13" y="7" width="328" height="31"/>
                                                     <connections>
                                                         <action selector="practiceSpeedSliderValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="5F8-4p-6Xa"/>
@@ -2371,7 +2371,7 @@ Cg
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BXE-ef-qrw" userLabel="BlackView">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="812"/>
                                 <subviews>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="5ov-3e-m3b">
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.5" maxValue="1.3" translatesAutoresizingMaskIntoConstraints="NO" id="5ov-3e-m3b">
                                         <rect key="frame" x="86.666666666666671" y="767" width="232.66666666666663" height="31"/>
                                         <color key="tintColor" red="0.12549019610000001" green="0.74117647060000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>

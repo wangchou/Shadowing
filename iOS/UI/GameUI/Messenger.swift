@@ -134,8 +134,8 @@ class Messenger: UIViewController {
     func renderOverlayView() {
         let i18n = I18n.shared
 
-        speedSlider.minimumValue = AVSpeechUtteranceMinimumSpeechRate
-        speedSlider.maximumValue = AVSpeechUtteranceMaximumSpeechRate * 0.75
+        speedSlider.minimumValue = 0.5
+        speedSlider.maximumValue = 1.3
 
         echoMethodNameLabel.text = i18n.echoMethod
         echoMethodSwitch.isOn = context.gameSetting.isEchoMethod
@@ -149,7 +149,7 @@ class Messenger: UIViewController {
 
         speedSlider.value = context.gameSetting.gameSpeed
         speedNameLabel.text = i18n.speed
-        speedLabel.text = String(format: "%.2fx", context.gameSetting.gameSpeed * 2)
+        speedLabel.text = String(format: "%.2fx", context.gameSetting.gameSpeed)
 
         if context.gameMode == .topicMode {
             repeatOneSwitchButton.isHidden = false
