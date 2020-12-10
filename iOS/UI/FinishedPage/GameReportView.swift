@@ -117,9 +117,9 @@ class GameReportView: UIView, ReloadableView, GridLayout {
                 dismissTwoVC()
             }
             if context.gameMode == .infiniteChallengeMode {
-                rootViewController.icDetailPage.tableView.reloadData()
+                rootViewController.icDetailPage.tableView?.reloadData()
             } else {
-                rootViewController.topicDetailPage.tableView.reloadData()
+                rootViewController.topicDetailPage.tableView?.reloadData()
             }
         }
         backButton.setIconImage(named: "baseline_exit_to_app_black_48pt", title: "", tintColor: .white, isIconOnLeft: false)

@@ -86,7 +86,8 @@ extension Messenger: GameEventDelegate {
             }
 
         case .gamePaused:
-            if context.gameState == .speakingTargetString {
+            if context.gameState == .speakingTargetString,
+               context.gameSetting.isShowOriginal {
                 lastLabel.attributedText = context.targetAttrString
             }
 

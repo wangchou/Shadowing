@@ -214,13 +214,13 @@ extension GameFlow {
             return fulfilledVoidPromise()
         }
 
-        var translation = context.targetSentence.translation
+        var translation = context.gameMode == .topicMode ? context.targetSentence.cmn : context.targetSentence.translation
 
         // only speak the first meaning when multiple meanings are available
         if translation.range(of: "/") != nil {
             translation = translation.split(separator: "/")[0].s
         }
-        return translatorSay(translation)
+        return context.gameMode == .topicMode ? topicTranslatorSay(translation) : translatorSay(translation)
     }
 
     private func speakTargetString() -> Promise<Void> {

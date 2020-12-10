@@ -131,8 +131,8 @@ class TTS: NSObject {
     func continueSpeaking() {
         if isPaused, let utterance = lastUtterance {
             lastSynth?.speak(utterance)
-            isPaused = false
         }
+        isPaused = false
     }
 
     func stop() {
