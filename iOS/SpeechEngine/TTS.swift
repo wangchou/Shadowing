@@ -125,12 +125,13 @@ class TTS: NSObject {
         // pauseSpeaking of AVSpeechSynthesizer causes "japanese didFinish not be called" bug
         // so try to stop and speak whole utterance later
         isPaused = true
-        lastSynth?.stopSpeaking(at: .immediate)
+        lastSynth?.stopSpeaking(at: .word)
     }
 
     func continueSpeaking() {
         if isPaused, let utterance = lastUtterance {
             lastSynth?.speak(utterance)
+            isPaused = false
         }
     }
 
@@ -170,14 +171,6 @@ extension TTS: AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
         postEvent(.sayStarted, string: lastString)
     }
-    func speechSynthesizer(_: AVSpeechSynthesizer,
-                           didFinish utterance: AVSpeechUtterance) {
-        // not sure why, but the delegate is called by other strings anyway. (bug? for iOS14 en only)
-        if utterance.speechString == lastTTSString {
-            postEvent(.speakEnded, string: utterance.speechString + " did said")
-            promise.fulfill(())
-        }
-    }
 
     func speechSynthesizer(_ synth: AVSpeechSynthesizer,
                            willSpeakRangeOfSpeechString characterRange: NSRange,
@@ -193,12 +186,23 @@ extension TTS: AVSpeechSynthesizerDelegate {
         }
     }
 
+    func speechSynthesizer(_: AVSpeechSynthesizer,
+                           didFinish utterance: AVSpeechUtterance) {
+        // not sure why, but the delegate is called by other strings anyway. (bug? for iOS14 en only)
+        if utterance.speechString == lastTTSString {
+            postEvent(.speakEnded, string: utterance.speechString + " did said")
+            promise.fulfill(())
+            lastUtterance = nil
+        }
+    }
+
     func speechSynthesizer(_: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
         if utterance.speechString == lastTTSString {
             // for cancel not due to "pause by cancel utterance -> continue" action
             if !isPaused {
                 postEvent(.speakEnded, string: utterance.speechString + " cancelled")
                 promise.fulfill(())
+                lastUtterance = nil
             }
         }
     }
