@@ -93,7 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         VoiceDefaults.fixVoicesAvailablity()
         #if !targetEnvironment(macCatalyst)
-            SpeechEngine.shared.stop()
+            SpeechEngine.shared.fixRecordingIndicator()
         #else
             postCommand(.resume)
         #endif
