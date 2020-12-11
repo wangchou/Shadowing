@@ -76,15 +76,6 @@ class SpeechEngine {
         tts.stop()
     }
 
-    func monitoringOn() {
-        guard isHeadphonePlugged() else { return }
-        audioEngine.mainMixerNode.outputVolume = pow(2, Float(context.gameSetting.monitoringVolume) / 10 + 1.0)
-    }
-
-    func monitoringOff() {
-        audioEngine.mainMixerNode.outputVolume = 0
-    }
-
     func stop(isStopTTS: Bool = true) {
         guard audioEngine.isRunning || isEngineRunning else { return }
 
@@ -126,12 +117,20 @@ class SpeechEngine {
 
     private func buildNodeGraph() {
         isInstallTapSuceeced = false
-        let mainMixer = audioEngine.mainMixerNode
         let mic = audioEngine.inputNode // only for real device, simulator will crash
+        let micFormat = mic.inputFormat(forBus: 0)
+
+        if #available(iOS 13, *) {
+            do {
+                try mic.setVoiceProcessingEnabled(true)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
 
         #if !targetEnvironment(macCatalyst)
             mic.removeTap(onBus: 0)
-            mic.installTap(onBus: 0, bufferSize: 1024, format: nil) { [weak self] buffer, _ in
+            mic.installTap(onBus: 0, bufferSize: 1024, format: micFormat) { [weak self] buffer, _ in
                 guard let self = self,
                       let recognitionRequest = self.speechRecognizer.recognitionRequest else { return }
                 self.isInstallTapSuceeced = true
@@ -139,8 +138,22 @@ class SpeechEngine {
                 calculateMicLevel(buffer: buffer)
             }
 
-            audioEngine.connect(mic, to: mainMixer, format: nil)
-            mainMixer.outputVolume = 0
+            if isHeadphonePlugged() && context.gameSetting.isMointoring {
+                if #available(iOS 13, *) {
+                    mic.isVoiceProcessingAGCEnabled = false
+                }
+                let eq = AVAudioUnitEQ()
+                audioEngine.attach(eq)
+                eq.globalGain = context.gameSetting.monitoringVolume.f
+
+                let reverb = AVAudioUnitReverb()
+                audioEngine.attach(reverb)
+                reverb.loadFactoryPreset(.smallRoom)
+
+                audioEngine.connect(mic, to: reverb, format: micFormat)
+                audioEngine.connect(reverb, to: eq, format: micFormat)
+                audioEngine.connect(eq, to: audioEngine.mainMixerNode, format: micFormat)
+            }
         #else
             // mac catalyst
             // not knowing why... but need to convert to the same format in catalyst to

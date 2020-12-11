@@ -101,7 +101,6 @@ class Messenger: UIViewController {
         scrollView.removeAllSubviews()
         view.removeAllSubviews()
         stopEventObserving(self)
-        SpeechEngine.shared.monitoringOff()
         UIApplication.shared.isIdleTimerDisabled = false
         SpeechEngine.shared.stop()
         Messenger.last = nil
@@ -125,9 +124,6 @@ class Messenger: UIViewController {
         UIApplication.shared.isIdleTimerDisabled = true
         messengerBar.render()
         renderOverlayView()
-        if context.gameSetting.isMointoring {
-            SpeechEngine.shared.monitoringOn()
-        }
         levelMeterValueBar.frame.size.height = 0
     }
 

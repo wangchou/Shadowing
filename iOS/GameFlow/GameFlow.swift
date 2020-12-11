@@ -247,12 +247,6 @@ extension GameFlow {
     private func listenPart() -> Promise<Void> {
         if isNeedToStopPromiseChain { return rejectedVoidPromise() }
 
-        if context.gameSetting.isMointoring {
-            engine.monitoringOn()
-        } else {
-            engine.monitoringOff()
-        }
-
         return listenWrapped()
             .then(getScore)
             .then(speakScore)

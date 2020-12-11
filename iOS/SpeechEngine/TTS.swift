@@ -63,11 +63,7 @@ class TTS: NSObject {
 //                print("tts:", ttsString)
 //            }
 
-            if isHeadphonePlugged() {
-                utterance.volume = 0.75 // adjust for wired monitoring
-            } else {
-                utterance.volume = 1.0
-            }
+            utterance.volume = 1.0
 
             guard let voice = utterance.voice else {
                 showNoVoicePrompt(language: lang.defaultCode)
