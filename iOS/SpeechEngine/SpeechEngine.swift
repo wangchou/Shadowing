@@ -138,13 +138,14 @@ class SpeechEngine {
                 if #available(iOS 13, *) {
                     mic.isVoiceProcessingAGCEnabled = false
                 }
-
                 audioEngine.attach(eq)
                 eq.globalGain = context.gameSetting.monitoringVolume.f
-
                 audioEngine.connect(mic, to: eq, format: micFormat)
                 audioEngine.connect(eq, to: audioEngine.mainMixerNode, format: micFormat)
+            } else {
+                audioEngine.disconnectNodeInput(audioEngine.mainMixerNode)
             }
+
         #else
             // mac catalyst
             // not knowing why... but need to convert to the same format in catalyst to
