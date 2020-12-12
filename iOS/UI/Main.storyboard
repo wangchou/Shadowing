@@ -1339,7 +1339,7 @@ Cg
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-10" maxValue="24" translatesAutoresizingMaskIntoConstraints="NO" id="mr3-l7-tz9">
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-12" maxValue="24" translatesAutoresizingMaskIntoConstraints="NO" id="mr3-l7-tz9">
                                                     <rect key="frame" x="13" y="7" width="328" height="31"/>
                                                     <connections>
                                                         <action selector="monitoringVolumeSliderValueChanged:" destination="pxg-jG-gsh" eventType="valueChanged" id="u4h-se-zK2"/>

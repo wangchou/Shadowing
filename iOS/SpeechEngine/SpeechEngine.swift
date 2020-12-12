@@ -146,12 +146,7 @@ class SpeechEngine {
                 audioEngine.attach(eq)
                 eq.globalGain = context.gameSetting.monitoringVolume.f
 
-                let reverb = AVAudioUnitReverb()
-                audioEngine.attach(reverb)
-                reverb.loadFactoryPreset(.smallRoom)
-
-                audioEngine.connect(mic, to: reverb, format: micFormat)
-                audioEngine.connect(reverb, to: eq, format: micFormat)
+                audioEngine.connect(mic, to: eq, format: micFormat)
                 audioEngine.connect(eq, to: audioEngine.mainMixerNode, format: micFormat)
             }
         #else
