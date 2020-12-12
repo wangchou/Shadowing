@@ -143,19 +143,31 @@ class SpeechRecognizer: NSObject {
         }
 
         if let result = result {
-            promise.fulfill([result.bestTranscription.formattedString])
             #if DEBUG
+            var segs: [[String]] = []
             var str = ""
             result.bestTranscription.segments.forEach {
                 if $0.alternativeSubstrings.isEmpty {
                     str += "\($0.substring) "
+                    segs.append([str])
                 } else {
                     var arr = [$0.substring]
                     arr.append(contentsOf: $0.alternativeSubstrings)
                     str += "\(arr) "
+                    segs.append(arr)
                 }
             }
             print("segments:", str)
+            let bestCandidate = findCandidate(segs: segs, originalStr: originalStr ?? "")
+
+            var candidates = [result.bestTranscription.formattedString]
+            if bestCandidate != candidates[0] {
+                candidates.append(bestCandidate)
+            }
+
+            print(candidates)
+
+            promise.fulfill(candidates)
             #endif
         }
 

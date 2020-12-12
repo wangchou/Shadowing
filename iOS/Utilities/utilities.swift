@@ -477,4 +477,38 @@ func speedToTTSRate(speed: Float) -> Float {
     return 0.5 + (speed - 1.0) * 2 / 3
 }
 
+func findCandidate(segs: [[String]], originalStr: String) -> String {
+    let newSegs = segs.map { strings in
+        return strings.filter {
+            originalStr.contains($0) || $0 == strings.first
+        }
+    }
+
+    func calcScore(s1: String, s2: String) -> Int {
+        let len = max(s1.count, s2.count)
+        guard len > 0 else { return 0 }
+        let score = (len - distanceBetween(s1, s2)) * 100 / len
+        return score
+    }
+
+    var bestCandidate = ""
+    var highestScore = 0
+
+    var candidates = [""]
+    newSegs.forEach { strs in
+        candidates = strs.map { str in candidates.map { $0 + str } }
+                         .flatMap { $0 }
+    }
+
+    candidates.forEach { str in
+        let score = distanceBetween(str, originalStr)
+        if score > highestScore {
+            highestScore = score
+            bestCandidate = str
+        }
+    }
+    print("best candidate:", bestCandidate)
+    return bestCandidate
+}
+
 // swiftlint:enable file_length
