@@ -27,7 +27,7 @@ class HanashitaiTests: XCTestCase {
         do {
             let data1 = Data(history10317json.utf8)
             let history1 = try JSONDecoder().decode([GameRecord].self, from: data1)
-            // print(history1)
+            print(history1)
             XCTAssert(true)
         } catch {
             print(error)

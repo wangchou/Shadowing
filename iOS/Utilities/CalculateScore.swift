@@ -94,12 +94,12 @@ func getKana(_ kanjiString: String, isFuri: Bool = false, originalString: String
 
 func calculateScore(
     _ originalString: String,
-    _ recognizedStrings: [String]
+    _ candidates: [String]
 ) -> Promise<Score> {
-    let recognizedString = recognizedStrings[0]
-    userSaidSentences[originalString] = recognizedString
+    //let recognizedString = candidates[0]
+    //userSaidSentences[originalString] = recognizedString
     #if os(iOS)
-        if gameLang == .en { return calculateScoreEn(originalString, recognizedString) }
+        if gameLang == .en { return calculateScoreEn(originalString, candidates) }
     #endif
 
     let promise = Promise<Score>.pending()
@@ -116,23 +116,31 @@ func calculateScore(
             return 0
         }
         let score = (len - distanceBetween(trimedS1, trimedS2)) * 100 / len
-//        if score != 100 {
-//            print("-------")
-//            print("1>" ,str1)
-//            print("2>", str2, score)
-//        }
         return score
     }
 
-    all([
-        getKana(originalString, originalString: originalString),
-        getKana(recognizedString, originalString: originalString),
-    ]).then { kanas in
-        let score = calcScore(kanas[0].kataganaToHiragana, kanas[1].kataganaToHiragana)
+    var kanaPromises: [Promise<String>] = [getKana(originalString, originalString: originalString)]
+    kanaPromises.append(contentsOf: candidates.map { getKana($0, originalString: originalString) })
+
+    all(kanaPromises).then { kanas in
+        var bestScore = 0
+        var bestCandidate = ""
+        let oriKana = kanas[0]
+        let candidateKanas = kanas[1 ..< kanas.count]
+        candidateKanas.enumerated().forEach { index, candidateKana in
+            let score = calcScore(oriKana.kataganaToHiragana, candidateKana.kataganaToHiragana)
+            print("score:", score, candidates[index])
+            if score > bestScore {
+                bestScore = score
+                bestCandidate = candidates[index]
+            }
+        }
+
+        userSaidSentences[originalString] = bestCandidate
         #if os(iOS)
-            postEvent(.scoreCalculated, score: Score(value: score))
+            postEvent(.scoreCalculated, score: Score(value: bestScore))
         #endif
-        promise.fulfill(Score(value: score))
+        promise.fulfill(Score(value: bestScore))
     }.catch { error in
         promise.reject(error)
     }
@@ -143,8 +151,8 @@ func calculateScore(
 var nCache: [String: String] = [:]
 
 func calculateScoreEn(
-    _ sentence1: String,
-    _ sentence2: String
+    _ originalStr: String,
+    _ candidates: [String]
 ) -> Promise<Score> {
     let promise = Promise<Score>.pending()
     func calcScore(_ str1: String, _ str2: String) -> Int {
@@ -160,14 +168,26 @@ func calculateScoreEn(
         return score
     }
 
-    let normalizedText1 = nCache[sentence1] ?? normalizeEnglishText(sentence1)
-    let normalizedText2 = nCache[sentence2] ?? normalizeEnglishText(sentence2)
+    let normalizedOriginal = nCache[originalStr] ?? normalizeEnglishText(originalStr)
 
-    let score = calcScore(normalizedText1, normalizedText2)
+    var highestScore = 0
+    var bestCandidate = ""
+    candidates.forEach {
+        let normalizedText = nCache[$0] ?? normalizeEnglishText($0)
+        let score = calcScore(normalizedOriginal, normalizedText)
+        print("score:", score, $0)
+        if score > highestScore {
+            highestScore = score
+            bestCandidate = $0
+        }
+    }
+
+    userSaidSentences[originalStr] = bestCandidate
+
     #if os(iOS)
-        postEvent(.scoreCalculated, score: Score(value: score))
+        postEvent(.scoreCalculated, score: Score(value: highestScore))
     #endif
-    promise.fulfill(Score(value: score))
+    promise.fulfill(Score(value: highestScore))
     return promise
 }
 
