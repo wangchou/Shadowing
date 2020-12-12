@@ -29,6 +29,8 @@ class SpeechEngine {
 
     private var tts = TTS()
 
+    private let eq = AVAudioUnitEQ()
+
     // MARK: - Public Funtions
 
     func start() {
@@ -101,15 +103,9 @@ class SpeechEngine {
     // tried another workaround: make tts use independent audioSession will
     // cause mixOther/duck behaviors which makes the volume changes as tts speak
     func fixRecordingIndicator() {
-        audioEngine.reset()
-        audioEngine.prepare()
-        do {
-            try audioEngine.start()
-            isEngineRunning = true
-            audioEngine.stop()
-            isEngineRunning = false
-        } catch {
-            print(#function, error.localizedDescription)
+        if AVAudioSession.sharedInstance().recordPermission == .granted {
+            start()
+            stop()
         }
     }
 
@@ -142,7 +138,7 @@ class SpeechEngine {
                 if #available(iOS 13, *) {
                     mic.isVoiceProcessingAGCEnabled = false
                 }
-                let eq = AVAudioUnitEQ()
+
                 audioEngine.attach(eq)
                 eq.globalGain = context.gameSetting.monitoringVolume.f
 
