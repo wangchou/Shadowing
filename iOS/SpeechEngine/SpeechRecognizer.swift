@@ -60,7 +60,7 @@ class SpeechRecognizer: NSObject {
 
     func listen(
         stopAfterSeconds: Double = 5,
-        originalStr: String?
+        originalStr: String
     ) -> Promise<[String]> {
         endAudio()
         promise = Promise<[String]>.pending()
@@ -143,13 +143,12 @@ class SpeechRecognizer: NSObject {
         }
 
         if let result = result {
-            #if DEBUG
             var segs: [[String]] = []
             var str = ""
             result.bestTranscription.segments.forEach {
                 if $0.alternativeSubstrings.isEmpty {
                     str += "\($0.substring) "
-                    segs.append([str])
+                    segs.append([$0.substring])
                 } else {
                     var arr = [$0.substring]
                     arr.append(contentsOf: $0.alternativeSubstrings)
@@ -161,14 +160,13 @@ class SpeechRecognizer: NSObject {
             let bestCandidate = findCandidate(segs: segs, originalStr: originalStr ?? "")
 
             var candidates = [result.bestTranscription.formattedString]
-            if bestCandidate != candidates[0] {
+            if bestCandidate != candidates[0], bestCandidate != "" {
                 candidates.append(bestCandidate)
             }
 
-            print(candidates)
+            //print(candidates)
 
             promise.fulfill(candidates)
-            #endif
         }
 
         if let error = error {

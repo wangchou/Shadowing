@@ -40,5 +40,10 @@ class HanashitaiTests: XCTestCase {
         let originalStr1 = "10b今日の夜"
 
         XCTAssert(findCandidate(segs: segs1, originalStr: originalStr1) == "1abこx今日")
+
+        let segs2 = [["もちろん眠っていた", "もちろん眠ってた", "町の眠っていた"]]
+        let originalStr2 = "町は眠っていた。"
+
+        XCTAssert(findCandidate(segs: segs2, originalStr: originalStr2) == "町の眠っていた")
     }
 }

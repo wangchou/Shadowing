@@ -478,11 +478,19 @@ func speedToTTSRate(speed: Float) -> Float {
 }
 
 func findCandidate(segs: [[String]], originalStr: String) -> String {
-    let newSegs = segs.map { strings in
-        return strings.filter {
-            originalStr.contains($0) || $0 == strings.first
+    // print("segs:", segs, ", originalStr:", originalStr)
+    var newSegs = segs
+
+    // if candidates are too many => use naive filter first
+    if segs.count > 3 {
+        newSegs = segs.map { strings in
+            return strings.filter {
+                originalStr.contains($0) || $0 == strings.first
+            }
         }
     }
+
+    // print("newSegs", newSegs)
 
     func calcScore(s1: String, s2: String) -> Int {
         let len = max(s1.count, s2.count)
@@ -499,15 +507,18 @@ func findCandidate(segs: [[String]], originalStr: String) -> String {
         candidates = strs.map { str in candidates.map { $0 + str } }
                          .flatMap { $0 }
     }
-
+    // print("candidates:", candidates)
     candidates.forEach { str in
-        let score = distanceBetween(str, originalStr)
+        let len = max(str.count, originalStr.count)
+        let score = (len - distanceBetween(str, originalStr)) * 100 / len
+        // print(score, str)
+
         if score > highestScore {
             highestScore = score
             bestCandidate = str
         }
     }
-    print("best candidate:", bestCandidate)
+    // print("best candidate:", bestCandidate)
     return bestCandidate
 }
 

@@ -220,13 +220,13 @@ extension SentencesTableCell {
         return SpeechEngine.shared.listen(duration: duration, originalStr: targetString)
     }
 
-    private func calculateScorePart(userSaidSentence: [String]) -> Promise<Score> {
+    private func calculateScorePart(userSaidCandidates: [String]) -> Promise<Score> {
         guard !isNeedToStopPromiseChain else {
             let promise = Promise<Score>.pending()
             promise.fulfill(Score(value: 0))
             return promise
         }
-        return calculateScore(targetString, userSaidSentence)
+        return calculateScore(targetString, userSaidCandidates)
     }
 
     private func updateUIByScore(score: Score) -> Promise<Void> {

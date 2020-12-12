@@ -96,8 +96,7 @@ func calculateScore(
     _ originalString: String,
     _ candidates: [String]
 ) -> Promise<Score> {
-    //let recognizedString = candidates[0]
-    //userSaidSentences[originalString] = recognizedString
+    print("ori:", originalString, ", candidates:", candidates)
     #if os(iOS)
         if gameLang == .en { return calculateScoreEn(originalString, candidates) }
     #endif

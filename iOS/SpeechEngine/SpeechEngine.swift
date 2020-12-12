@@ -67,7 +67,7 @@ class SpeechEngine {
         start()
     }
 
-    func listen(duration: Double, originalStr: String? = nil) -> Promise<[String]> {
+    func listen(duration: Double, originalStr: String) -> Promise<[String]> {
         return speechRecognizer.authorize().then { _ -> Promise<[String]> in
             self.speechRecognizer.listen(stopAfterSeconds: duration, originalStr: originalStr)
         }
