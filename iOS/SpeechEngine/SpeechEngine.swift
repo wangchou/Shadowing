@@ -116,14 +116,6 @@ class SpeechEngine {
         let mic = audioEngine.inputNode // only for real device, simulator will crash
         let micFormat = mic.inputFormat(forBus: 0)
 
-        if #available(iOS 13, *) {
-            do {
-                try mic.setVoiceProcessingEnabled(true)
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-
         #if !targetEnvironment(macCatalyst)
             mic.removeTap(onBus: 0)
             mic.installTap(onBus: 0, bufferSize: 1024, format: micFormat) { [weak self] buffer, _ in
@@ -143,9 +135,11 @@ class SpeechEngine {
                 audioEngine.connect(mic, to: eq, format: micFormat)
                 audioEngine.connect(eq, to: audioEngine.mainMixerNode, format: micFormat)
             } else {
+                if #available(iOS 13, *) {
+                    mic.isVoiceProcessingAGCEnabled = true
+                }
                 audioEngine.disconnectNodeInput(audioEngine.mainMixerNode)
             }
-
         #else
             // mac catalyst
             // not knowing why... but need to convert to the same format in catalyst to
