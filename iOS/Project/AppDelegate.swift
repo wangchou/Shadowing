@@ -8,6 +8,7 @@
 
 import Firebase
 import UIKit
+import AVFoundation
 
 let rootViewController = AppDelegate.shared.rootViewController
 var launchT = getNow()
@@ -82,6 +83,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let messenger = UIApplication.getPresentedViewController() as? Messenger {
                 messenger.dismiss(animated: false)
             }
+
+            // this throws error but fixed the reopen recording indicator issue
+            do {
+                try AVAudioSession.sharedInstance().setActive(false, options: [])
+            } catch {
+                print(#function, error.localizedDescription)
+            }
         #endif
     }
 
@@ -92,9 +100,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self?.rootViewController.updateWhenEnterForeground()
         }
         VoiceDefaults.fixVoicesAvailablity()
+
+        do {
+            try AVAudioSession.sharedInstance().setActive(true, options: [])
+        } catch {
+            print(#function, error.localizedDescription)
+        }
+
         #if !targetEnvironment(macCatalyst)
-            SpeechEngine.shared.fixRecordingIndicator()
-        #else
             postCommand(.resume)
         #endif
     }

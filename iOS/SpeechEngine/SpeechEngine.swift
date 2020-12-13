@@ -93,22 +93,6 @@ class SpeechEngine {
         print("engine stopped")
     }
 
-    // Workaround for iOS 14 bug
-    // bug description:
-    //   if close app while tts is speaking, the recording indicator will
-    //   be showed when app is reopened
-    //
-    // in this fix, the indicator still will be showed up for 1 sec
-    //
-    // tried another workaround: make tts use independent audioSession will
-    // cause mixOther/duck behaviors which makes the volume changes as tts speak
-    func fixRecordingIndicator() {
-        if AVAudioSession.sharedInstance().recordPermission == .granted {
-            start()
-            stop()
-        }
-    }
-
     // MARK: - Private
 
     private func buildNodeGraph() {
