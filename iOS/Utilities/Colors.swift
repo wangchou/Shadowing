@@ -75,4 +75,20 @@ extension UIColor {
         print("withBrightness getHue fail")
         return self
     }
+
+    func whiteBlend(_ ratio: CGFloat) -> UIColor {
+        var r: CGFloat = 0
+        var g: CGFloat = 0
+        var b: CGFloat = 0
+        var a: CGFloat = 0
+        if getRed(&r, green: &g, blue: &b, alpha: &a) {
+            return UIColor(red: (1 - ratio) + r * ratio,
+                           green: (1 - ratio) + g * ratio,
+                           blue: (1 - ratio) + b * ratio,
+                           alpha: 1.0)
+        }
+
+        print("white blend fail")
+        return self
+    }
 }

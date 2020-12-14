@@ -49,7 +49,7 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
         let buttonFrame = CGRect(x: 6 + index * 50, y: 11, width: 40, height: 40)
 
         let backCircle = CircleView(frame: buttonFrame)
-        backCircle.lineWidth = 2
+        backCircle.lineWidth = 3
 
         addSubview(backCircle)
         let titleLabel = addText(x: 0, y: 0, w: 5, h: 1,
@@ -61,19 +61,32 @@ class TopicFilterBarView: UIScrollView, GridLayout, ReloadableView {
         let zhTitle = getZhTitle(str: title)
 
         let button = CircleView(frame: buttonFrame)
-        button.lineWidth = 2
+        button.lineWidth = 3
         button.percent = percent
+
+        var percentColor = UIColor.black
+        if  percent < 0.02 {
+            percentColor = .black
+        } else if percent < 0.3 {
+            percentColor = myRed
+        } else if percent < 0.6 {
+            percentColor = myOrange
+        } else if percent < 0.8 {
+            percentColor = myGreen
+        } else {
+            percentColor = myBlue
+        }
 
         if let isOn = isTopicOn[zhTitle],
            isOn {
-            backCircle.lineColor = myGray
-            backCircle.fillColor = myBlue.withAlphaComponent(0.3)
-            button.lineColor = .black
-            titleLabel.textColor = .black
+            backCircle.lineColor = percentColor.whiteBlend(0.3)
+            backCircle.fillColor = percentColor.whiteBlend(0.1)
+            button.lineColor = percentColor
+            titleLabel.textColor = darkBackground
         } else {
             backCircle.lineColor = myLightGray
             backCircle.fillColor = lightestGray
-            button.lineColor = rgb(100, 100, 100)
+            button.lineColor = percentColor
             titleLabel.textColor = darkBackground
         }
 
