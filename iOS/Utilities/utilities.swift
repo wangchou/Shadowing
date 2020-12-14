@@ -462,19 +462,19 @@ func arrayToPair(_ arr: [String]) -> [(String, String)] {
 }
 
 // rate can be approximate by reverse linear proprotional to spend time
-// speed = distance / time
-// speed is linear prorptional to 1 / (1 - rate)
+// test data of tts
+//
 // rate 0.2  => 4.4 s => 0.5x
 // rate 0.5  => 2.2 s => 1.0x
 // rate 0.7  => 1.1 s => 2.0x
 //
 // speed 1.0x == AVSpeechUtteranceDefaultSpeechRate (0.5) = 175bpm
 func ttsRateToSpeed(rate: Float) -> Float {
-    return 1.0 + (rate - 0.5) * 1.5
+    return pow(2, 3.33 * (rate - 0.5))
 }
 
 func speedToTTSRate(speed: Float) -> Float {
-    return 0.5 + (speed - 1.0) * 2 / 3
+    return 0.5 + log2(speed) * 0.3
 }
 
 func findCandidate(segs: [[String]], originalStr: String) -> String {
