@@ -50,20 +50,19 @@ class TTS: NSObject {
             self.ttsToDisplayMap = ttsToDisplayMap
 
             let utterance = AVSpeechUtterance(string: ttsString)
+            utterance.rate = speedToTTSRate(speed: speed)
+            utterance.volume = 1.0
             if let voice = AVSpeechSynthesisVoice(identifier: voiceId) {
                 utterance.voice = voice
+                utterance.volume = self.getNormalizedVolume(voice: voice)
             } else {
                 utterance.voice = getDefaultVoice(language: lang.defaultCode)
             }
 
-            utterance.rate = speedToTTSRate(speed: speed)
-
-//            print("ori:", text, utterance.voice?.identifier ?? "", rate)
+//            print("ori:", text, utterance.voice?.identifier ?? "", speed, utterance.volume)
 //            if ttsString != text {
 //                print("tts:", ttsString)
 //            }
-
-            utterance.volume = 1.0
 
             guard let voice = utterance.voice else {
                 showNoVoicePrompt(language: lang.defaultCode)
@@ -88,6 +87,28 @@ class TTS: NSObject {
             self.isPreviousJP = voice.language.contains("ja")
         }
         return promise
+    }
+
+    private func getNormalizedVolume(voice: AVSpeechSynthesisVoice) -> Float {
+        if voice.identifier == "com.apple.ttsbundle.Mei-Jia-compact" {
+            return 0.80
+        }
+        if voice.identifier == "com.apple.ttsbundle.Mei-Jia-premium" {
+            return 0.88
+        }
+        if voice.identifier == "com.apple.ttsbundle.Sin-Ji-compact" {
+            return 0.85
+        }
+        if voice.identifier == "com.apple.ttsbundle.Sin-Ji-premium" {
+            return 0.79
+        }
+        if voice.language.contains("en") && voice.quality == .enhanced {
+            return 0.88
+        }
+        if voice.language.contains("ja") && voice.quality == .enhanced {
+            return 0.88
+        }
+        return 1.0
     }
 
     // silent speak
