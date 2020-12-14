@@ -100,7 +100,7 @@ class IAPHelper: NSObject {
 
         // Create the actions
         let sortedProducts = products.sorted {
-            $0.price.doubleValue >= $1.price.doubleValue
+            $0.price.doubleValue <= $1.price.doubleValue
         }
         for product in sortedProducts {
             var priceString = ""
