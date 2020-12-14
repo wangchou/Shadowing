@@ -167,12 +167,12 @@ func calculateScoreEn(
         return score
     }
 
-    let normalizedOriginal = nCache[originalStr] ?? normalizeEnglishText(originalStr)
+    let normalizedOriginal = normalizeEnglishText(originalStr)
 
     var highestScore = 0
     var bestCandidate = ""
     candidates.forEach {
-        let normalizedText = nCache[$0] ?? normalizeEnglishText($0)
+        let normalizedText = normalizeEnglishText($0)
         let score = calcScore(normalizedOriginal, normalizedText)
         print("score:", score, $0)
         if score > highestScore {
@@ -196,6 +196,8 @@ func calculateScoreEn(
 // special abbreviations => "mt." : "Mount", "m: meters"
 
 func normalizeEnglishText(_ text: String) -> String {
+    guard nCache[text] == nil else { return nCache[text] ?? "" }
+
     let tagger = NSLinguisticTagger(
         tagSchemes: NSLinguisticTagger.availableTagSchemes(forLanguage: "en"),
         options: 0

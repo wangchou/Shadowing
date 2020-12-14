@@ -493,9 +493,11 @@ func findCandidate(segs: [[String]], originalStr: String) -> String {
     // print("newSegs", newSegs)
 
     func calcScore(s1: String, s2: String) -> Int {
-        let len = max(s1.count, s2.count)
+        let ns1 = gameLang == .ja ? s1 : normalizeEnglishText(s1)
+        let ns2 = gameLang == .ja ? s2 : normalizeEnglishText(s2)
+        let len = max(ns1.count, ns2.count)
         guard len > 0 else { return 0 }
-        let score = (len - distanceBetween(s1, s2)) * 100 / len
+        let score = (len - distanceBetween(ns1, ns2)) * 100 / len
         return score
     }
 
@@ -503,8 +505,9 @@ func findCandidate(segs: [[String]], originalStr: String) -> String {
     var highestScore = 0
 
     var candidates = [""]
+    let space = gameLang != .ja ? " " : ""
     newSegs.forEach { strs in
-        candidates = strs.map { str in candidates.map { $0 + str } }
+        candidates = strs.map { str in candidates.map { $0 + space + str } }
                          .flatMap { $0 }
     }
     // print("candidates:", candidates)
