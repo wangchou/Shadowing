@@ -24,7 +24,13 @@ class TTS: NSObject {
     var promise = fulfilledVoidPromise()
     var lastString = ""
     var lastTTSString = ""
-    var isPreviousJP = false // jp -> en have some chance get wrong in iOS14
+
+    // jp -> en have some chance get wrong in iOS14
+    var isPreviousJa = false
+    var isPreviousZh = false
+    var isPreviousJaExisted = false
+    var isMultipleJaExisted = false
+
     var lastUtterance: AVSpeechUtterance?
     var isPaused = false
     var startTime = getNow()
@@ -71,7 +77,8 @@ class TTS: NSObject {
                 return
             }
             var synth: AVSpeechSynthesizer!
-            if self.isPreviousJP, voice.language.contains("en") { // for iOS14 tts bug
+            if voice.language.contains("en"), // workaround for iOS14 tts bug
+               (self.isMultipleJaExisted || (self.isPreviousJaExisted && self.isPreviousZh)) {
                 synth = AVSpeechSynthesizer()
                 self.synths[voice.identifier] = synth
             } else {
@@ -84,7 +91,12 @@ class TTS: NSObject {
             self.isPaused = false
             synth.delegate = self
             synth.speak(utterance)
-            self.isPreviousJP = voice.language.contains("ja")
+
+            // workaound for iOS 14 bug
+            self.isPreviousJa = voice.language.contains("ja")
+            self.isPreviousZh = voice.language.contains("zh")
+            self.isPreviousJaExisted = (self.isPreviousJaExisted || self.isPreviousJa) && !voice.language.contains("en")
+            self.isMultipleJaExisted = (self.isPreviousJaExisted && self.isPreviousJa) && !voice.language.contains("en")
         }
         return promise
     }
@@ -121,6 +133,12 @@ class TTS: NSObject {
             let synth = synths[voiceId] ?? AVSpeechSynthesizer()
             synths[voiceId] = synth
             synth.speak(utterance)
+
+            // iOS 14 tts bug workaround
+            self.isPreviousJa = voice.language.contains("ja")
+            self.isPreviousZh = voice.language.contains("zh")
+            self.isPreviousJaExisted = (self.isPreviousJaExisted || self.isPreviousJa) && !voice.language.contains("en")
+            self.isMultipleJaExisted = (self.isPreviousJaExisted && self.isPreviousJa) && !voice.language.contains("en")
         }
     }
 
