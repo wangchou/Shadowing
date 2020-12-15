@@ -29,7 +29,6 @@ class TTS: NSObject {
     var isPreviousJa = false
     var isPreviousZh = false
     var isPreviousJaExisted = false
-    var isMultipleJaExisted = false
 
     var lastUtterance: AVSpeechUtterance?
     var isPaused = false
@@ -78,7 +77,7 @@ class TTS: NSObject {
             }
             var synth: AVSpeechSynthesizer!
             if voice.language.contains("en"), // workaround for iOS14 tts bug
-               (self.isMultipleJaExisted || (self.isPreviousJaExisted && self.isPreviousZh)) {
+               (self.isPreviousJa || (self.isPreviousJaExisted && self.isPreviousZh)) {
                 synth = AVSpeechSynthesizer()
                 self.synths[voice.identifier] = synth
             } else {
@@ -96,29 +95,31 @@ class TTS: NSObject {
             self.isPreviousJa = voice.language.contains("ja")
             self.isPreviousZh = voice.language.contains("zh")
             self.isPreviousJaExisted = (self.isPreviousJaExisted || self.isPreviousJa) && !voice.language.contains("en")
-            self.isMultipleJaExisted = (self.isPreviousJaExisted && self.isPreviousJa) && !voice.language.contains("en")
         }
         return promise
     }
 
     private func getNormalizedVolume(voice: AVSpeechSynthesisVoice) -> Float {
         if voice.identifier == "com.apple.ttsbundle.Mei-Jia-compact" {
-            return 0.80
+            return 0.76
         }
         if voice.identifier == "com.apple.ttsbundle.Mei-Jia-premium" {
-            return 0.88
-        }
-        if voice.identifier == "com.apple.ttsbundle.Sin-Ji-compact" {
             return 0.85
         }
+        if voice.identifier == "com.apple.ttsbundle.Sin-Ji-compact" {
+            return 0.82
+        }
         if voice.identifier == "com.apple.ttsbundle.Sin-Ji-premium" {
-            return 0.79
+            return 0.75
         }
         if voice.language.contains("en") && voice.quality == .enhanced {
-            return 0.88
+            return 0.86
+        }
+        if voice.language.contains("en") && voice.quality == .default {
+            return 0.96
         }
         if voice.language.contains("ja") && voice.quality == .enhanced {
-            return 0.88
+            return 0.86
         }
         return 1.0
     }
@@ -138,7 +139,6 @@ class TTS: NSObject {
             self.isPreviousJa = voice.language.contains("ja")
             self.isPreviousZh = voice.language.contains("zh")
             self.isPreviousJaExisted = (self.isPreviousJaExisted || self.isPreviousJa) && !voice.language.contains("en")
-            self.isMultipleJaExisted = (self.isPreviousJaExisted && self.isPreviousJa) && !voice.language.contains("en")
         }
     }
 

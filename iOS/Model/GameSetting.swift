@@ -14,8 +14,8 @@ private let context = GameContext.shared
 struct GameSetting: Codable {
     // MARK: - GameSetting Data fields
 
-    var gameSpeed: Float = 0.8
-    var practiceSpeed: Float = 0.7
+    var gameSpeed: Float = 0.75
+    var practiceSpeed: Float = 0.65
     var isShowTranslationInPractice: Bool = false
 
     var learningMode: LearningMode = .speakingOnly
