@@ -70,7 +70,10 @@ class SentencesTableCell: UITableViewCell {
         isUserInteractionEnabled = false
         practiceButton.isEnabled = false
         practiceButton.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
-        SpeechEngine.shared.start()
+        SpeechEngine.shared.start(
+            isMonitoring: context.gameSetting.isMointoring,
+            monitoringVolume: context.gameSetting.monitoringVolume.f
+        )
 
         speakPart()
             .then(listenPart)
@@ -217,7 +220,9 @@ extension SentencesTableCell {
         prepareListening()
         updateUIAfterListeningFor(duration: duration)
         print("listen for \(targetString): ", duration)
-        return SpeechEngine.shared.listen(duration: duration, originalStr: targetString)
+        return SpeechEngine.shared.listen(duration: duration,
+                                          localeId: context.gameSetting.teacherLocaleId,
+                                          originalStr: targetString)
     }
 
     private func calculateScorePart(userSaidCandidates: [String]) -> Promise<Score> {

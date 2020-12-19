@@ -10,7 +10,6 @@ import Foundation
 import Promises
 import Speech
 
-private let context = GameContext.shared
 private let engine = SpeechEngine.shared
 
 enum SpeechRecognitionError: Error {
@@ -21,23 +20,19 @@ enum SpeechRecognitionError: Error {
 class SpeechRecognizer: NSObject {
     // Singleton
     static let shared = SpeechRecognizer()
+    var localeId: String = ""
 
-    private let speechRecognizerJP: SFSpeechRecognizer! = SFSpeechRecognizer(locale: Locale(identifier: "ja_JP"))
-    private let speechRecognizerEN: SFSpeechRecognizer! = SFSpeechRecognizer(locale: Locale(identifier: "en_US"))
+    private var speechRecognizers: [String: SFSpeechRecognizer] = [
+        "ja_JP": SFSpeechRecognizer(locale: Locale(identifier: "ja_JP"))!,
+        "en_US": SFSpeechRecognizer(locale: Locale(identifier: "en_US"))!
+    ]
 
     private var speechRecognizer: SFSpeechRecognizer {
-        switch gameLang {
-        case .ja:
-            return speechRecognizerJP
-        default:
-            #if !targetEnvironment(macCatalyst)
-                if let voice = AVSpeechSynthesisVoice(identifier: context.gameSetting.teacher),
-                   let recognizer = SFSpeechRecognizer(locale: Locale(identifier: voice.language.replacingOccurrences(of: "-", with: "_"))) {
-                    return recognizer
-                }
-            #endif
-            return speechRecognizerEN
+        if let recognizer = speechRecognizers[localeId] ?? SFSpeechRecognizer(locale: Locale(identifier: localeId)) {
+            speechRecognizers[localeId] = recognizer
+            return recognizer
         }
+        return speechRecognizers["en_US"]!
     }
 
     var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
@@ -60,7 +55,8 @@ class SpeechRecognizer: NSObject {
 
     func listen(
         stopAfterSeconds: Double = 5,
-        originalStr: String
+        localeId: String,
+        originalStr: String? = nil
     ) -> Promise<[String]> {
         endAudio()
         promise = Promise<[String]>.pending()
@@ -222,7 +218,7 @@ class SpeechRecognizer: NSObject {
         postEvent(.listenStarted, string: "")
         Timer.scheduledTimer(withTimeInterval: stopAfterSeconds, repeats: false) { [weak self] _ in
             let fakeSuffix = ["", "", "西宮", "はは"]
-            let fakeSaidString = context.sentences[0].origin + fakeSuffix[Int.random(in: 0 ..< fakeSuffix.count)]
+            let fakeSaidString = (self?.originalStr ?? "") + fakeSuffix[Int.random(in: 0 ..< fakeSuffix.count)]
 
             self?.promise.fulfill([fakeSaidString])
         }

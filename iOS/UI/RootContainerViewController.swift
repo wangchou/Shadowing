@@ -55,7 +55,10 @@ class RootContainerViewController: UIViewController {
         loadGameLang()
         loadGameSetting()
 
-        SpeechEngine.shared.preloadTTSVoice()
+        SpeechEngine.shared.preloadTTSVoice(voiceIds: [
+            GameContext.shared.gameSetting.teacher,
+            GameContext.shared.gameSetting.assistant
+        ])
 
         loadMedalCount()
         loadTopicSentenceDB()

@@ -38,64 +38,59 @@ class TTS: NSObject {
              voiceId: String,
              speed: Float = 1.0,
              lang: Lang,
-             ttsFixes: [(String, String)] = []) -> Promise<Void> {
+             ttsString: String,
+             ttsToDisplayMap: [Int]
+    ) -> Promise<Void> {
         stop()
-        let isJa = lang == .ja
+
         promise = Promise<Void>.pending()
-        getFixedTTSString(
-            text,
-            localFixes: ttsFixes,
-            isJa: isJa
-        ).then { [weak self] ttsString, ttsToDisplayMap in
-            guard let self = self else { return }
 
-            // for text highlight
-            self.lastString = text
-            self.lastTTSString = ttsString
-            self.ttsToDisplayMap = ttsToDisplayMap
+        // for text highlight
+        lastString = text
+        lastTTSString = ttsString
+        self.ttsToDisplayMap = ttsToDisplayMap
 
-            let utterance = AVSpeechUtterance(string: ttsString)
-            utterance.rate = speedToTTSRate(speed: speed)
-            utterance.volume = 1.0
-            if let voice = AVSpeechSynthesisVoice(identifier: voiceId) {
-                utterance.voice = voice
-                utterance.volume = self.getNormalizedVolume(voice: voice)
-            } else {
-                utterance.voice = getDefaultVoice(language: lang.defaultCode)
-            }
-
-//            print("ori:", text, utterance.voice?.identifier ?? "", speed, utterance.volume)
-//            if ttsString != text {
-//                print("tts:", ttsString)
-//            }
-
-            guard let voice = utterance.voice else {
-                showNoVoicePrompt(language: lang.defaultCode)
-                print("Error: utterance.voice is nil")
-                self.promise.fulfill(())
-                return
-            }
-            var synth: AVSpeechSynthesizer!
-            if voice.language.contains("en"), // workaround for iOS14 tts bug
-               (self.isPreviousJa || (self.isPreviousJaExisted && self.isPreviousZh)) {
-                synth = AVSpeechSynthesizer()
-                self.synths[voice.identifier] = synth
-            } else {
-                synth = self.synths[voice.identifier] ?? AVSpeechSynthesizer()
-                self.synths[voice.identifier] = synth
-            }
-            self.lastSynth = synth
-
-            self.lastUtterance = utterance
-            self.isPaused = false
-            synth.delegate = self
-            synth.speak(utterance)
-
-            // workaound for iOS 14 bug
-            self.isPreviousJa = voice.language.contains("ja")
-            self.isPreviousZh = voice.language.contains("zh")
-            self.isPreviousJaExisted = (self.isPreviousJaExisted || self.isPreviousJa) && !voice.language.contains("en")
+        let utterance = AVSpeechUtterance(string: ttsString)
+        utterance.rate = speedToTTSRate(speed: speed)
+        utterance.volume = 1.0
+        if let voice = AVSpeechSynthesisVoice(identifier: voiceId) {
+            utterance.voice = voice
+            utterance.volume = getNormalizedVolume(voice: voice)
+        } else {
+            utterance.voice = getDefaultVoice(language: lang.defaultCode)
         }
+
+//        print("ori:", text, utterance.voice?.identifier ?? "", speed, utterance.volume)
+//        if ttsString != text {
+//            print("tts:", ttsString)
+//        }
+
+        guard let voice = utterance.voice else {
+            showNoVoicePrompt(language: lang.defaultCode)
+            print("Error: utterance.voice is nil")
+            return fulfilledVoidPromise()
+        }
+        var synth: AVSpeechSynthesizer!
+        if voice.language.contains("en"), // workaround for iOS14 tts bug
+           (isPreviousJa || (isPreviousJaExisted && isPreviousZh)) {
+            synth = AVSpeechSynthesizer()
+            synths[voice.identifier] = synth
+        } else {
+            synth = synths[voice.identifier] ?? AVSpeechSynthesizer()
+            synths[voice.identifier] = synth
+        }
+        lastSynth = synth
+
+        lastUtterance = utterance
+        isPaused = false
+        synth.delegate = self
+        synth.speak(utterance)
+
+        // workaound for iOS 14 bug
+        isPreviousJa = voice.language.contains("ja")
+        isPreviousZh = voice.language.contains("zh")
+        isPreviousJaExisted = (isPreviousJaExisted || isPreviousJa) && !voice.language.contains("en")
+
         return promise
     }
 

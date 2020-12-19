@@ -11,9 +11,6 @@ import Foundation
 import Promises
 import Speech
 
-private let context = GameContext.shared
-private let engine = SpeechEngine.shared
-
 // MARK: - SpeechEngine
 
 // A wrapper of AVAudioEngine, SpeechRecognizer and TTS
@@ -24,6 +21,8 @@ class SpeechEngine {
     var isEngineRunning = false
     var isInstallTapSuceeced = false
     var audioEngine = AVAudioEngine()
+    var isMonitoring: Bool = false
+    var monitoringVolume: Float = 0
 
     private var speechRecognizer = SpeechRecognizer.shared
 
@@ -33,9 +32,11 @@ class SpeechEngine {
 
     // MARK: - Public Funtions
 
-    func start() {
+    func start(isMonitoring: Bool? = nil, monitoringVolume: Float? = nil) {
         guard !isEngineRunning else { return }
         isEngineRunning = true
+        self.isMonitoring = isMonitoring ?? self.isMonitoring
+        self.monitoringVolume = monitoringVolume ?? self.monitoringVolume
         guard !isSimulator else { return }
         do {
             configureAudioSession()
@@ -49,9 +50,10 @@ class SpeechEngine {
     }
 
     // elimiated delay
-    func preloadTTSVoice() {
-        tts.preloadVoice(voiceId: context.gameSetting.teacher)
-        tts.preloadVoice(voiceId: context.gameSetting.assistant)
+    func preloadTTSVoice(voiceIds: [String]) {
+        voiceIds.forEach {
+            tts.preloadVoice(voiceId: $0)
+        }
     }
 
     func pause() {
@@ -67,10 +69,18 @@ class SpeechEngine {
         start()
     }
 
-    func listen(duration: Double, originalStr: String) -> Promise<[String]> {
-        return speechRecognizer.authorize().then { _ -> Promise<[String]> in
-            self.speechRecognizer.listen(stopAfterSeconds: duration, originalStr: originalStr)
+    func listen(duration: Double, localeId: String, originalStr: String? = nil ) -> Promise<[String]> {
+        return speechRecognizer.authorize().then {
+            self.speechRecognizer.listen(
+                stopAfterSeconds: duration,
+                localeId: localeId,
+                originalStr: originalStr
+            )
         }
+    }
+
+    func say(_ text: String, voiceId: String, speed: Float, lang: Lang, ttsString: String, ttsToDisplayMap: [Int]) -> Promise<Void> {
+        return tts.say(text, voiceId: voiceId, speed: speed, lang: lang, ttsString: ttsString, ttsToDisplayMap: ttsToDisplayMap)
     }
 
     func stopListeningAndSpeaking() {
@@ -110,12 +120,12 @@ class SpeechEngine {
                 calculateMicLevel(buffer: buffer)
             }
 
-            if isHeadphonePlugged() && context.gameSetting.isMointoring {
+            if isHeadphonePlugged() && isMonitoring {
                 if #available(iOS 13, *) {
                     mic.isVoiceProcessingAGCEnabled = false
                 }
                 audioEngine.attach(eq)
-                eq.globalGain = context.gameSetting.monitoringVolume.f
+                eq.globalGain = monitoringVolume
                 audioEngine.connect(mic, to: eq, format: micFormat)
                 audioEngine.connect(eq, to: audioEngine.mainMixerNode, format: micFormat)
             } else {
@@ -197,98 +207,6 @@ class SpeechEngine {
                   AVAudioSession.sharedInstance().category)
         }
     }
-}
-
-// MARK: - Wrappers of engine.speak
-
-// narratorSay      speak intitial instructions
-// translatorSay    speak translation
-// teacherSay       speak the text for repeating
-// assisantSay      speak correct, good, wrong...
-// ttsSay           speak sample text in voiceSelection Page
-
-private extension SpeechEngine {
-    func speak(text: String,
-               speaker: String,
-               speed: Float,
-               lang: Lang,
-               ttsFixes: [(String, String)] = []) -> Promise<Void> {
-        return tts.say(
-            text,
-            voiceId: speaker,
-            speed: speed,
-            lang: lang,
-            ttsFixes: ttsFixes
-        )
-    }
-}
-
-func speakTitle() -> Promise<Void> {
-    context.gameState = .speakTitle
-    let title = context.gameTitleToSpeak
-    if context.gameMode == .topicMode {
-        let voiceId = context.gameSetting.translatorZh
-        return engine.speak(text: title, speaker: voiceId, speed: normalSpeed, lang: .zh)
-    }
-
-    return narratorSay(title)
-}
-
-func narratorSay(_ text: String) -> Promise<Void> {
-    return engine.speak(text: text,
-                        speaker: context.gameSetting.narrator,
-                        speed: context.assistantSpeed,
-                        lang: i18n.lang)
-}
-
-func translatorSay(_ text: String) -> Promise<Void> {
-    var voiceId = context.gameSetting.translator
-
-    if AVSpeechSynthesisVoice(identifier: voiceId) == nil {
-        switch context.gameSetting.translationLang {
-        case .ja:
-            voiceId = VoiceDefaults.translatorJa
-        case .en:
-            voiceId = VoiceDefaults.translatorEn
-        case .zh:
-            voiceId = VoiceDefaults.translatorZh
-        default:
-            print("\(context.gameSetting.translationLang.key) should not be translation lang")
-            voiceId = "unknown"
-        }
-    }
-
-    return engine.speak(text: text,
-                        speaker: voiceId,
-                        speed: context.translatorSpeed,
-                        lang: context.gameSetting.translationLang)
-}
-
-func topicTranslatorSay(_ text: String) -> Promise<Void> {
-    return engine.speak(text: text,
-                        speaker: context.gameSetting.translatorZh,
-                        speed: context.translatorSpeed,
-                        lang: .zh)
-}
-
-func assisantSay(_ text: String) -> Promise<Void> {
-    return engine.speak(text: text,
-                        speaker: context.gameSetting.assistant,
-                        speed: context.assistantSpeed,
-                        lang: gameLang)
-}
-
-func teacherSay(_ text: String, speed: Float = context.teachingSpeed, ttsFixes: [(String, String)]) -> Promise<Void> {
-    return engine.speak(text: text,
-                        speaker: context.gameSetting.teacher,
-                        speed: speed,
-                        lang: gameLang,
-                        ttsFixes: ttsFixes)
-}
-
-// only for voice selection page
-func ttsSay(_ text: String, speaker: String, speed: Float = context.teachingSpeed, lang: Lang) -> Promise<Void> {
-    return engine.speak(text: text, speaker: speaker, speed: speed, lang: lang)
 }
 
 // MARK: - Utilities

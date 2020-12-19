@@ -302,9 +302,9 @@
 			isa = PBXGroup;
 			children = (
 				BE8283B32133DAE2008BC875 /* SpeechEngine.swift */,
-				BE8F747E2176E258005546DC /* kanaFix.swift */,
 				BEBDEDD5208EF15E00C18520 /* SpeechRecognizer.swift */,
 				BEBDEDD2208EF15E00C18520 /* TTS.swift */,
+				BE8F747E2176E258005546DC /* kanaFix.swift */,
 			);
 			path = SpeechEngine;
 			sourceTree = "<group>";

@@ -61,7 +61,9 @@ class GameFlow {
         wait = fulfilledVoidPromise()
 
         startCommandObserving(self)
-        SpeechEngine.shared.start()
+        SpeechEngine.shared.start(
+            isMonitoring: context.gameSetting.isMointoring,
+            monitoringVolume: context.gameSetting.monitoringVolume.f)
         context.gameState = .justStarted
         context.gameRecord?.startedTime = Date()
 
@@ -258,6 +260,7 @@ extension GameFlow {
             return engine
                 .listen(
                     duration: Double(context.speakDuration + pauseDuration),
+                    localeId: context.gameSetting.teacherLocaleId,
                     originalStr: context.targetString
                 )
         }
@@ -267,6 +270,7 @@ extension GameFlow {
             .then { speakDuration -> Promise<[String]> in
                 engine.listen(
                     duration: Double(speakDuration + pauseDuration),
+                    localeId: context.gameSetting.teacherLocaleId,
                     originalStr: context.targetString
                 )
             }

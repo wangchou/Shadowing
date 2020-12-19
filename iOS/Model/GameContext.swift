@@ -320,3 +320,106 @@ extension GameContext {
         loadLearningSentences()
     }
 }
+
+// MARK: - Wrappers of engine.speak
+
+// narratorSay      speak intitial instructions
+// translatorSay    speak translation
+// teacherSay       speak the text for repeating
+// assisantSay      speak correct, good, wrong...
+// ttsSay           speak sample text in voiceSelection Page
+
+private extension SpeechEngine {
+    func speak(text: String,
+               speaker: String,
+               speed: Float,
+               lang: Lang,
+               ttsFixes: [(String, String)] = []) -> Promise<Void> {
+
+        return getFixedTTSString(
+            text,
+            localFixes: ttsFixes,
+            isJa: lang == .ja
+        ).then { ttsString, ttsToDisplayMap in
+            self.say(
+                text,
+                voiceId: speaker,
+                speed: speed,
+                lang: lang,
+                ttsString: ttsString,
+                ttsToDisplayMap: ttsToDisplayMap
+            )
+        }
+    }
+}
+
+private let context = GameContext.shared
+private let engine = SpeechEngine.shared
+
+func speakTitle() -> Promise<Void> {
+    context.gameState = .speakTitle
+    let title = context.gameTitleToSpeak
+    if context.gameMode == .topicMode {
+        let voiceId = context.gameSetting.translatorZh
+        return engine.speak(text: title, speaker: voiceId, speed: normalSpeed, lang: .zh)
+    }
+
+    return narratorSay(title)
+}
+
+func narratorSay(_ text: String) -> Promise<Void> {
+    return engine.speak(text: text,
+                        speaker: context.gameSetting.narrator,
+                        speed: context.assistantSpeed,
+                        lang: i18n.lang)
+}
+
+func translatorSay(_ text: String) -> Promise<Void> {
+    var voiceId = context.gameSetting.translator
+
+    if AVSpeechSynthesisVoice(identifier: voiceId) == nil {
+        switch context.gameSetting.translationLang {
+        case .ja:
+            voiceId = VoiceDefaults.translatorJa
+        case .en:
+            voiceId = VoiceDefaults.translatorEn
+        case .zh:
+            voiceId = VoiceDefaults.translatorZh
+        default:
+            print("\(context.gameSetting.translationLang.key) should not be translation lang")
+            voiceId = "unknown"
+        }
+    }
+
+    return engine.speak(text: text,
+                        speaker: voiceId,
+                        speed: context.translatorSpeed,
+                        lang: context.gameSetting.translationLang)
+}
+
+func topicTranslatorSay(_ text: String) -> Promise<Void> {
+    return engine.speak(text: text,
+                        speaker: context.gameSetting.translatorZh,
+                        speed: context.translatorSpeed,
+                        lang: .zh)
+}
+
+func assisantSay(_ text: String) -> Promise<Void> {
+    return engine.speak(text: text,
+                        speaker: context.gameSetting.assistant,
+                        speed: context.assistantSpeed,
+                        lang: gameLang)
+}
+
+func teacherSay(_ text: String, speed: Float = context.teachingSpeed, ttsFixes: [(String, String)]) -> Promise<Void> {
+    return engine.speak(text: text,
+                        speaker: context.gameSetting.teacher,
+                        speed: speed,
+                        lang: gameLang,
+                        ttsFixes: ttsFixes)
+}
+
+// only for voice selection page
+func ttsSay(_ text: String, speaker: String, speed: Float = context.teachingSpeed, lang: Lang) -> Promise<Void> {
+    return engine.speak(text: text, speaker: speaker, speed: speed, lang: lang)
+}

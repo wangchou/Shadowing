@@ -91,6 +91,20 @@ struct GameSetting: Codable {
         return speaker
     }
 
+    var teacherLocaleId: String {
+        switch gameLang {
+        case .ja:
+            return "ja_JP"
+        default:
+            #if !targetEnvironment(macCatalyst)
+            if let voice = AVSpeechSynthesisVoice(identifier: teacher) {
+                    return voice.language.replacingOccurrences(of: "-", with: "_")
+                }
+            #endif
+            return "en_US"
+        }
+    }
+
     // voice id ended
 
     init() {}
