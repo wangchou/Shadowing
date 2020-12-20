@@ -11,35 +11,34 @@ import Foundation
 import AVFoundation
 import Promises
 
-// input/displayed: 1日○○○○
-// after fix, we let tts say いちにち○○○○
-// ttsToDisplayMap will map willSpeakRange from いちにち○○○○ to 1日○○○○
-// it looks like [1 1 1 1 2 3 4 5]
 class TTS: NSObject {
-    var synths: [String: AVSpeechSynthesizer] = [:]
+    private var synths: [String: AVSpeechSynthesizer] = [:]
+    private var lastSynth: AVSpeechSynthesizer?
 
-    var lastSynth: AVSpeechSynthesizer?
+    // input/displayed: 1日○○○○
+    // after fix, we let tts say いちにち○○○○
+    // ttsToDisplayMap will map willSpeakRange from いちにち○○○○ to 1日○○○○
+    // it looks like [1 1 1 1 2 3 4 5]
+    private var ttsToDisplayMap: [Int] = []
+    private var promise = fulfilledVoidPromise()
+    private var lastString = ""
+    private var lastTTSString = ""
 
-    var ttsToDisplayMap: [Int] = []
-    var promise = fulfilledVoidPromise()
-    var lastString = ""
-    var lastTTSString = ""
+    // for workaround, jp -> en have some chance get wrong in iOS14
+    private var isPreviousJa = false
+    private var isPreviousZh = false
+    private var isPreviousJaExisted = false
 
-    // jp -> en have some chance get wrong in iOS14
-    var isPreviousJa = false
-    var isPreviousZh = false
-    var isPreviousJaExisted = false
-
-    var lastUtterance: AVSpeechUtterance?
-    var isPaused = false
-    var startTime = getNow()
+    private var lastUtterance: AVSpeechUtterance?
+    private var isPaused = false
+    private var startTime = getNow()
 
     func say(_ text: String,
              voiceId: String,
              speed: Float = 1.0,
              lang: Lang,
-             ttsString: String,
-             ttsToDisplayMap: [Int]
+             ttsString: String? = nil,
+             ttsToDisplayMap: [Int]? = nil
     ) -> Promise<Void> {
         stop()
 
@@ -47,10 +46,10 @@ class TTS: NSObject {
 
         // for text highlight
         lastString = text
-        lastTTSString = ttsString
-        self.ttsToDisplayMap = ttsToDisplayMap
+        lastTTSString = ttsString ?? lastString
+        self.ttsToDisplayMap = ttsToDisplayMap ?? Array(0 ..< lastTTSString.count)
 
-        let utterance = AVSpeechUtterance(string: ttsString)
+        let utterance = AVSpeechUtterance(string: lastTTSString)
         utterance.rate = speedToTTSRate(speed: speed)
         utterance.volume = 1.0
         if let voice = AVSpeechSynthesisVoice(identifier: voiceId) {
@@ -94,31 +93,6 @@ class TTS: NSObject {
         return promise
     }
 
-    private func getNormalizedVolume(voice: AVSpeechSynthesisVoice) -> Float {
-        if voice.identifier == "com.apple.ttsbundle.Mei-Jia-compact" {
-            return 0.76
-        }
-        if voice.identifier == "com.apple.ttsbundle.Mei-Jia-premium" {
-            return 0.85
-        }
-        if voice.identifier == "com.apple.ttsbundle.Sin-Ji-compact" {
-            return 0.82
-        }
-        if voice.identifier == "com.apple.ttsbundle.Sin-Ji-premium" {
-            return 0.75
-        }
-        if voice.language.contains("en") && voice.quality == .enhanced {
-            return 0.86
-        }
-        if voice.language.contains("en") && voice.quality == .default {
-            return 0.96
-        }
-        if voice.language.contains("ja") && voice.quality == .enhanced {
-            return 0.86
-        }
-        return 1.0
-    }
-
     // silent speak
     func preloadVoice(voiceId: String) {
         if let voice = AVSpeechSynthesisVoice(identifier: voiceId) {
@@ -156,7 +130,7 @@ class TTS: NSObject {
         lastSynth?.stopSpeaking(at: AVSpeechBoundary.immediate)
     }
 
-    func fixRange(characterRange: NSRange, ttsToDisplayMap: [Int]) -> NSRange {
+    private func fixRange(characterRange: NSRange, ttsToDisplayMap: [Int]) -> NSRange {
         let min = 0
         let max = ttsToDisplayMap.count
         var lowerBound = characterRange.lowerBound
@@ -180,6 +154,31 @@ class TTS: NSObject {
         }
 
         return NSRange(location: lowerBound, length: upperBound - lowerBound)
+    }
+
+    private func getNormalizedVolume(voice: AVSpeechSynthesisVoice) -> Float {
+        if voice.identifier == "com.apple.ttsbundle.Mei-Jia-compact" {
+            return 0.76
+        }
+        if voice.identifier == "com.apple.ttsbundle.Mei-Jia-premium" {
+            return 0.85
+        }
+        if voice.identifier == "com.apple.ttsbundle.Sin-Ji-compact" {
+            return 0.82
+        }
+        if voice.identifier == "com.apple.ttsbundle.Sin-Ji-premium" {
+            return 0.75
+        }
+        if voice.language.contains("en") && voice.quality == .enhanced {
+            return 0.86
+        }
+        if voice.language.contains("en") && voice.quality == .default {
+            return 0.96
+        }
+        if voice.language.contains("ja") && voice.quality == .enhanced {
+            return 0.86
+        }
+        return 1.0
     }
 }
 

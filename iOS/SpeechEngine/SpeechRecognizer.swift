@@ -18,9 +18,9 @@ enum SpeechRecognitionError: Error {
 }
 
 class SpeechRecognizer: NSObject {
-    // Singleton
-    static let shared = SpeechRecognizer()
-    var localeId: String = ""
+    var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+
+    private var localeId: String = ""
 
     private var speechRecognizers: [String: SFSpeechRecognizer] = [
         "ja_JP": SFSpeechRecognizer(locale: Locale(identifier: "ja_JP"))!,
@@ -35,7 +35,6 @@ class SpeechRecognizer: NSObject {
         return speechRecognizers["en_US"]!
     }
 
-    var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private var isRunning: Bool = false
     private var isAuthorized: Bool = false
@@ -130,9 +129,36 @@ class SpeechRecognizer: NSObject {
         postEvent(.listenStopped, string: "")
     }
 
+    func authorize() -> Promise<Void> {
+        let promise = Promise<Void>.pending()
+        SFSpeechRecognizer.requestAuthorization { authStatus in
+            switch authStatus {
+            case .authorized:
+                self.isAuthorized = true
+                // print("Speech Recogntion is authorized")
+
+            case .denied:
+                self.isAuthorized = false
+                print("User denied access to speech recognition")
+
+            case .restricted:
+                self.isAuthorized = false
+                print("Speech recognition restricted on this device")
+
+            case .notDetermined:
+                self.isAuthorized = false
+                print("Speech recognition not yet authorized")
+            @unknown default:
+                print("\n#### requestAuthorization unknown default ####\n")
+            }
+            promise.fulfill(())
+        }
+        return isSimulator ? fulfilledVoidPromise() : promise
+    }
+
     // MARK: - Private Methods
 
-    func resultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
+    private func resultHandler(result: SFSpeechRecognitionResult?, error: Error?) {
         guard engine.isEngineRunning else {
             promise.reject(SpeechRecognitionError.engineStopped)
             return
@@ -186,33 +212,7 @@ class SpeechRecognizer: NSObject {
         }
     }
 
-    func authorize() -> Promise<Void> {
-        let promise = Promise<Void>.pending()
-        SFSpeechRecognizer.requestAuthorization { authStatus in
-            switch authStatus {
-            case .authorized:
-                self.isAuthorized = true
-                // print("Speech Recogntion is authorized")
-
-            case .denied:
-                self.isAuthorized = false
-                print("User denied access to speech recognition")
-
-            case .restricted:
-                self.isAuthorized = false
-                print("Speech recognition restricted on this device")
-
-            case .notDetermined:
-                self.isAuthorized = false
-                print("Speech recognition not yet authorized")
-            @unknown default:
-                print("\n#### requestAuthorization unknown default ####\n")
-            }
-            promise.fulfill(())
-        }
-        return isSimulator ? fulfilledVoidPromise() : promise
-    }
-
+    // for simulator
     private func fakeListening(stopAfterSeconds: Double = 5) -> Promise<[String]> {
         isRunning = true
         postEvent(.listenStarted, string: "")
@@ -226,7 +226,7 @@ class SpeechRecognizer: NSObject {
     }
 
     // https://stackoverflow.com/questions/48749729/avaudiosession-interruption-on-declining-phone-call
-    @objc func handleInterruption(notification: Notification) {
+    @objc private func handleInterruption(notification: Notification) {
         guard let userInfo = notification.userInfo,
               let interruptionTypeRawValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
               let interruptionType = AVAudioSession.InterruptionType(rawValue: interruptionTypeRawValue),

@@ -15,19 +15,17 @@ import Speech
 
 // A wrapper of AVAudioEngine, SpeechRecognizer and TTS
 class SpeechEngine {
-    // Singleton
     static let shared = SpeechEngine()
 
     var isEngineRunning = false
     var isInstallTapSuceeced = false
-    var audioEngine = AVAudioEngine()
-    var isMonitoring: Bool = false
-    var monitoringVolume: Float = 0
 
-    private var speechRecognizer = SpeechRecognizer.shared
+    private var audioEngine = AVAudioEngine()
+    private var isMonitoring: Bool = false
+    private var monitoringVolume: Float = 0
 
+    private var speechRecognizer = SpeechRecognizer()
     private var tts = TTS()
-
     private let eq = AVAudioUnitEQ()
 
     // MARK: - Public Funtions
@@ -105,6 +103,11 @@ class SpeechEngine {
 
     // MARK: - Private
 
+    private init() {
+        guard !isSimulator else { return }
+        setupNotifications()
+    }
+
     private func buildNodeGraph() {
         isInstallTapSuceeced = false
         let mic = audioEngine.inputNode // only for real device, simulator will crash
@@ -177,11 +180,6 @@ class SpeechEngine {
 
     // MARK: - Handle Route Change
 
-    private init() {
-        guard !isSimulator else { return }
-        setupNotifications()
-    }
-
     private func setupNotifications() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(handleRouteChange),
@@ -189,7 +187,7 @@ class SpeechEngine {
                                                object: AVAudioSession.sharedInstance())
     }
 
-    @objc func handleRouteChange(_ notification: Notification) {
+    @objc private func handleRouteChange(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
               let reasonValue = userInfo[AVAudioSessionRouteChangeReasonKey] as? UInt,
               let reason = AVAudioSession.RouteChangeReason(rawValue: reasonValue) else {
@@ -207,17 +205,15 @@ class SpeechEngine {
                   AVAudioSession.sharedInstance().category)
         }
     }
-}
 
-// MARK: - Utilities
-
-func isHeadphonePlugged() -> Bool {
-    let currentRoute = AVAudioSession.sharedInstance().currentRoute
-    for description in currentRoute.outputs {
-        if description.portType == AVAudioSession.Port.headphones ||
-            description.portType == AVAudioSession.Port.lineOut {
-            return true
+    private func isHeadphonePlugged() -> Bool {
+        let currentRoute = AVAudioSession.sharedInstance().currentRoute
+        for description in currentRoute.outputs {
+            if description.portType == AVAudioSession.Port.headphones ||
+                description.portType == AVAudioSession.Port.lineOut {
+                return true
+            }
         }
+        return false
     }
-    return false
 }
