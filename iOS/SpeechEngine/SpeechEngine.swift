@@ -77,7 +77,7 @@ class SpeechEngine {
         }
     }
 
-    func say(_ text: String, voiceId: String, speed: Float, lang: Lang, ttsString: String, ttsToDisplayMap: [Int]) -> Promise<Void> {
+    func say(_ text: String, voiceId: String, speed: Float, lang: Lang, ttsString: String? = nil, ttsToDisplayMap: [Int]? = nil) -> Promise<Void> {
         return tts.say(text, voiceId: voiceId, speed: speed, lang: lang, ttsString: ttsString, ttsToDisplayMap: ttsToDisplayMap)
     }
 
@@ -176,6 +176,51 @@ class SpeechEngine {
                 calculateMicLevel(buffer: convertedBuffer)
             }
         #endif
+    }
+
+    // MARK: - Audio Session
+
+    private func configureAudioSession(isAskingPermission: Bool = true) {
+        let session = AVAudioSession.sharedInstance()
+
+        do {
+            try session.setCategory(
+                AVAudioSession.Category.playAndRecord,
+                mode: AVAudioSession.Mode.default,
+                // if set both allowBluetooth and allowBluetoothA2DP here will
+                // cause installTap callback not be calling. Not sure why
+                options: [
+                    .mixWithOthers, .allowBluetoothA2DP, .allowAirPlay, .defaultToSpeaker, .allowBluetooth,
+                ]
+            )
+
+            // turn the measure mode will crash bluetooh, duckOthers and mixWithOthers
+            // try session.setMode(AVAudioSessionModeMeasurement)
+
+            // per ioBufferDuration delay, for live monitoring
+            // default  23ms | 1024 frames | <1% CPU (iphone SE)
+            // 0.001   0.7ms |   32 frames |  8% CPU
+            // 0.008   5.6ms |  256 frames |  1% CPU
+
+            // Important Warning
+            // if bufferDuration is too low (0.004) => dyanmic installTap failure on default mic (iPhone 8 and later)
+            // if bufferDuration is too high (0.04) => tts be muted through bluetooth
+
+            try session.setPreferredIOBufferDuration(0.008)
+        } catch {
+            print("configuare audio session with \(error)")
+        }
+
+        guard isAskingPermission else { return }
+
+        session.requestRecordPermission { success in
+            if success {
+                print("Record Permission Granted")
+            } else {
+                print("Record Permission fail")
+                showGoToPermissionSettingAlert()
+            }
+        }
     }
 
     // MARK: - Handle Route Change

@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:voicePrototype/voicePrototype.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:hanashitai.xcodeproj">
    </FileRef>
    <FileRef

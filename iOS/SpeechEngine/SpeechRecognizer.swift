@@ -20,19 +20,20 @@ enum SpeechRecognitionError: Error {
 class SpeechRecognizer: NSObject {
     var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
 
-    private var localeId: String = ""
+    private var localeId: String?
 
     private var speechRecognizers: [String: SFSpeechRecognizer] = [
-        "ja_JP": SFSpeechRecognizer(locale: Locale(identifier: "ja_JP"))!,
-        "en_US": SFSpeechRecognizer(locale: Locale(identifier: "en_US"))!
+        Lang.ja.defaultCode: SFSpeechRecognizer(locale: Locale(identifier: Lang.ja.defaultCode))!,
+        Lang.en.defaultCode: SFSpeechRecognizer(locale: Locale(identifier: Lang.en.defaultCode))!
     ]
 
     private var speechRecognizer: SFSpeechRecognizer {
-        if let recognizer = speechRecognizers[localeId] ?? SFSpeechRecognizer(locale: Locale(identifier: localeId)) {
+        if let localeId = localeId,
+           let recognizer = speechRecognizers[localeId] ?? SFSpeechRecognizer(locale: Locale(identifier: localeId)) {
             speechRecognizers[localeId] = recognizer
             return recognizer
         }
-        return speechRecognizers["en_US"]!
+        return speechRecognizers[Lang.en.defaultCode]!
     }
 
     private var recognitionTask: SFSpeechRecognitionTask?
@@ -58,6 +59,7 @@ class SpeechRecognizer: NSObject {
         originalStr: String? = nil
     ) -> Promise<[String]> {
         endAudio()
+        self.localeId = localeId
         promise = Promise<[String]>.pending()
         // mocked start for simulator
         if isSimulator {

@@ -4,6 +4,7 @@
 workspace 'hanashitai.xcworkspace'
 project 'hanashitai.xcodeproj'
 project 'preprocess/preprocess.xcodeproj'
+project 'voicePrototype/voicePrototype.xcodeproj'
 
 use_frameworks!
 inhibit_all_warnings!
@@ -27,6 +28,13 @@ target 'preprocess' do
   pod 'Alamofire', '4.8.2'
   pod 'PromisesSwift'
   pod 'RealmSwift'
+end
+
+target 'voicePrototype' do
+  platform :ios, '10.0'
+  project 'voicePrototype/voicePrototype.xcodeproj'
+  pod 'Alamofire',               '4.8.2'
+  pod 'PromisesSwift'
 end
 
 # https://github.com/CocoaPods/CocoaPods/issues/3707#issuecomment-354754864
