@@ -110,7 +110,7 @@ class I18n {
     var isCN: Bool {
         return regionCode == "CN"
     }
-    
+
     var pts: String {
         if isZh { return "分" }
         if isJa { return "点" }
@@ -174,7 +174,6 @@ func getDefaultVoiceId(language: String,
     }
     return voice.identifier
 }
-
 
 private func getVoiceSortScore(v: AVSpeechSynthesisVoice,
                                isPreferMale: Bool,

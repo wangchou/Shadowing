@@ -120,7 +120,8 @@ class TTS: NSObject {
 
     func continueSpeaking() {
         if isPaused, let utterance = lastUtterance {
-            lastSynth?.speak(utterance)
+            // deepCopy to avoid utterance be enqueued twice crash
+            lastSynth?.speak(utterance.deepCopy)
         }
         isPaused = false
     }
@@ -220,5 +221,15 @@ extension TTS: AVSpeechSynthesizerDelegate {
                 lastUtterance = nil
             }
         }
+    }
+}
+
+extension AVSpeechUtterance {
+    var deepCopy: AVSpeechUtterance {
+        let utterance = AVSpeechUtterance(string: self.speechString)
+        utterance.voice = self.voice
+        utterance.rate = self.rate
+        utterance.volume = self.volume
+        return utterance
     }
 }
