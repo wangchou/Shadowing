@@ -109,13 +109,23 @@ class SpeechEngine {
     }
 
     private func buildNodeGraph() {
+        print("\n==", #function, "==\n")
+
+        // iOS bug?
+        // it returns wrong outputFormat of inputNode after connecting/disconnecting bluetooth
+        if !audioEngine.inputNode.outputFormat(forBus: 0).isEqual(audioEngine.inputNode.inputFormat(forBus: 0)) {
+            // showRouteDetails()
+            audioEngine = AVAudioEngine()
+        } else {
+            print("format is the same, reuse audioEngine")
+        }
+
         isInstallTapSuceeced = false
         let mic = audioEngine.inputNode // only for real device, simulator will crash
-        let micFormat = mic.inputFormat(forBus: 0)
 
         #if !targetEnvironment(macCatalyst)
             mic.removeTap(onBus: 0)
-            mic.installTap(onBus: 0, bufferSize: 1024, format: micFormat) { [weak self] buffer, _ in
+            mic.installTap(onBus: 0, bufferSize: 1024, format: nil) { [weak self] buffer, _ in
                 guard let self = self,
                       let recognitionRequest = self.speechRecognizer.recognitionRequest else { return }
                 self.isInstallTapSuceeced = true
@@ -124,6 +134,7 @@ class SpeechEngine {
             }
 
             if isHeadphonePlugged() && isMonitoring {
+                let micFormat = mic.outputFormat(forBus: 0)
                 if #available(iOS 13, *) {
                     mic.isVoiceProcessingAGCEnabled = false
                 }
@@ -131,11 +142,13 @@ class SpeechEngine {
                 eq.globalGain = monitoringVolume
                 audioEngine.connect(mic, to: eq, format: micFormat)
                 audioEngine.connect(eq, to: audioEngine.mainMixerNode, format: micFormat)
+                audioEngine.mainMixerNode.outputVolume = 1
             } else {
                 if #available(iOS 13, *) {
                     mic.isVoiceProcessingAGCEnabled = true
                 }
                 audioEngine.disconnectNodeInput(audioEngine.mainMixerNode)
+                audioEngine.mainMixerNode.outputVolume = 0
             }
         #else
             // mac catalyst
@@ -261,5 +274,24 @@ class SpeechEngine {
             }
         }
         return false
+    }
+
+    private func showRouteDetails() {
+        let route = AVAudioSession.sharedInstance().currentRoute
+        print("\n== isRunning \(audioEngine.isRunning) ==")
+        print("Outputs:")
+        route.outputs.forEach {
+            print("\t", $0.portName, $0.portType, $0)
+        }
+        print("Inputs:")
+        route.inputs.forEach {
+            print("\t", $0.portName, $0.portType, $0)
+        }
+        print("-")
+        print("inputNode outputFormat bus 0", audioEngine.inputNode.outputFormat(forBus: 0))
+        print("inputNode inputFormat bus 0", audioEngine.inputNode.inputFormat(forBus: 0))
+        print("-")
+        print("isHeadphonePlugged = \(isHeadphonePlugged()), isMonitoring=\(isMonitoring)")
+        print("======================\n")
     }
 }
