@@ -207,6 +207,7 @@ class SpeechEngine {
             // if bufferDuration is too high (0.04) => tts be muted through bluetooth
 
             try session.setPreferredIOBufferDuration(0.008)
+            try session.setActive(true)
         } catch {
             print("configuare audio session with \(error)")
         }

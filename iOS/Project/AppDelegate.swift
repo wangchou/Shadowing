@@ -86,7 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             // this throws error but fixed the reopen recording indicator issue
             do {
-                try AVAudioSession.sharedInstance().setActive(false, options: [])
+                try AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
             } catch {
                 print(#function, error.localizedDescription)
             }
@@ -102,7 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         VoiceDefaults.fixVoicesAvailablity()
 
         do {
-            try AVAudioSession.sharedInstance().setActive(true, options: [])
+            try AVAudioSession.sharedInstance().setActive(true)
         } catch {
             print(#function, error.localizedDescription)
         }

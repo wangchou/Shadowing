@@ -1011,7 +1011,7 @@
 				CODE_SIGN_ENTITLEMENTS = hanashitai.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ETE87474CU;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1027,7 +1027,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.1;
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1055,7 +1055,7 @@
 				CODE_SIGN_ENTITLEMENTS = hanashitai.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = ETE87474CU;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1071,7 +1071,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
